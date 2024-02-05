@@ -42,6 +42,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="" element={<Register />} />
+        <Route path="/login" element={<Login />} />
 
         <Route path="collage/dashboard">
           <Route path="" element={<Home />} />

@@ -1,4 +1,4 @@
-import React, { useRef, useState, Component } from "react";
+import React, { useRef, useState, Component, useEffect } from "react";
 import { CgClipboard, CgAwards, CgTrending } from "react-icons/cg";
 import { TbBriefcase2 } from "react-icons/tb";
 import { MdOutlinedFlag } from "react-icons/md";
@@ -16,29 +16,47 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperSlideRight from "./SwiperSlideRight";
 import ChartComp from "./Chart";
 
+import { getStudent,getCompany, getAssessment,getTotalJobs,getPlacedStudents } from "../../../../redux/features/dashboard/dashboardSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+
+
 export default function Dashboard() {
-  const [companies, setcompanies] = useState([
-    {
-      image:
-        "https://images.pexels.com/photos/1337384/pexels-photo-1337384.jpeg?auto=compress&cs=tinysrgb&w=600",
-      name: "sample",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/1337384/pexels-photo-1337384.jpeg?auto=compress&cs=tinysrgb&w=600",
-      name: "sample",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/1337388/pexels-photo-1337388.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      name: "sample",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/1337388/pexels-photo-1337388.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      name: "sample",
-    },
-  ]);
+  const dispatch = useDispatch();
+  const { students ,companies,assessments,jobs,placedStudents} = useSelector((state) => state.dashboard);
+useEffect(() => {
+  dispatch(getStudent());
+  dispatch(getCompany());
+  dispatch(getAssessment());
+  dispatch(getTotalJobs());
+  dispatch(getPlacedStudents());
+
+  // console.log("students : ",students);
+}, [dispatch])
+
+
+  // const [companies, setcompanies] = useState([
+  //   {
+  //     image:
+  //       "https://images.pexels.com/photos/1337384/pexels-photo-1337384.jpeg?auto=compress&cs=tinysrgb&w=600",
+  //     name: "sample",
+  //   },
+  //   {
+  //     image:
+  //       "https://images.pexels.com/photos/1337384/pexels-photo-1337384.jpeg?auto=compress&cs=tinysrgb&w=600",
+  //     name: "sample",
+  //   },
+  //   {
+  //     image:
+  //       "https://images.pexels.com/photos/1337388/pexels-photo-1337388.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  //     name: "sample",
+  //   },
+  //   {
+  //     image:
+  //       "https://images.pexels.com/photos/1337388/pexels-photo-1337388.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  //     name: "sample",
+  //   },
+  // ]);
 
   const navigate = useNavigate();
   return (
@@ -55,7 +73,9 @@ export default function Dashboard() {
               <div className="rounded-lg bg-gray-100 w-10 h-10 flex justify-center mx-auto mt-4 mb-2 ">
                 <CgClipboard className="text-[#5243AA] self-center w-6 h-6 " />
               </div>
-              <h2 className="text-2xl text-center font-bold mt-2">1.2K</h2>
+              <h2 className="text-2xl text-center font-bold mt-2">
+                {students.length}
+              </h2>
               <h2 className="text-gray-400 text-center font-semibold text-xs mt-2 ">
                 Students
               </h2>
@@ -68,7 +88,7 @@ export default function Dashboard() {
               <div className="rounded-lg bg-gray-100 w-10 h-10 flex justify-center mx-auto mt-4 mb-2">
                 <CgAwards className="text-green-600 self-center w-6 h-6 " />
               </div>
-              <h2 className="text-2xl text-center font-bold mt-2">55</h2>
+              <h2 className="text-2xl text-center font-bold mt-2">{companies.length}</h2>
               <h2 className="text-gray-400 text-center font-semibold text-xs mt-2 ">
                 Companies
               </h2>
@@ -81,7 +101,9 @@ export default function Dashboard() {
               <div className="rounded-lg bg-gray-100 w-10 h-10 flex justify-center mx-auto mt-4 mb-2">
                 <CgTrending className="text-[#FF991F] self-center w-6 h-6 " />
               </div>
-              <h2 className="text-2xl text-center font-bold mt-2">10</h2>
+              <h2 className="text-2xl text-center font-bold mt-2">
+                {placedStudents.length}
+              </h2>
               <h2 className="text-gray-400 text-center font-semibold text-xs mt-2 ">
                 Students Placed
               </h2>
@@ -94,7 +116,9 @@ export default function Dashboard() {
               <div className="rounded-lg bg-gray-100 w-10 h-10 flex justify-center mx-auto mt-4 mb-2">
                 <TbBriefcase2 className="text-blued self-center w-6 h-6 " />
               </div>
-              <h2 className="text-2xl text-center font-bold mt-2">120</h2>
+              <h2 className="text-2xl text-center font-bold mt-2">
+                {jobs.length}
+              </h2>
               <h2 className="text-gray-400 text-center font-semibold text-xs mt-2 ">
                 Total Jobs
               </h2>
@@ -110,7 +134,10 @@ export default function Dashboard() {
               <div className="rounded-lg bg-gray-100 w-10 h-10 flex justify-center mx-auto mt-4 mb-2">
                 <MdOutlinedFlag className="text-blue-700 self-center w-6 h-6 " />
               </div>
-              <h2 className="text-2xl text-center font-bold mt-2">10</h2>
+              <h2 className="text-2xl text-center font-bold mt-2">
+                {assessments.length}
+              
+              </h2>
               <h2 className="text-gray-400 text-center font-semibold text-xs mt-2 ">
                 Available Assessment
               </h2>

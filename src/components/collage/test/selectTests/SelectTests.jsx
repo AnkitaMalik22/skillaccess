@@ -1,11 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import { Progress } from "./Progress";
 import { FiPlusCircle } from "react-icons/fi";
-
 import Inputs from "./Inputs";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setTest,
+  setSections,
+  removeSections,
+} from "../../../../redux/features/test/testSlice";
 
 const SelectTests = () => {
+  const dispatch = useDispatch();
+  const { sections, selectedSections } = useSelector((state) => state.test);
+
+  // const [selected, setselected] = useState([]);
+
+  // const addSection = (section) => {
+  //   const updatedSections = [...selected, section];
+  //   setselected(updatedSections);
+  //   dispatch(setTest({
+  //     sections: updatedSections
+  //   }));
+
+  //   dispatch(setSections(sections.filter((s) => s !== section)));
+
+  //   console.log(updatedSections);
+  // }
+
+  // const removeSection = (section) => {
+  //   const updatedSections = selected.filter((s) => s !== section);
+  //   setselected(updatedSections);
+  //   dispatch(setTest({
+  //     sections: updatedSections
+  //   }));
+
+  //   // Don't let the user add the same section again
+  //   dispatch(setSections([...sections, section]));
+
+  //   console.log(updatedSections);
+  // }
+
+  const addSection = (section) => {
+    const updatedSections = [...selectedSections, section];
+    // console.log(selectedSections,section);
+    dispatch(setSections(section));
+    console.log(selectedSections);
+
+    dispatch(
+      setTest({
+        sections: selectedSections,
+      })
+    );
+    // dispatch(setSections(sections.filter((s) => s !== section)));
+    // console.log(updatedSections);
+  };
+
+  const removeSection = (section) => {
+    const updatedSections = selectedSections.filter((s) => s !== section);
+    dispatch(setSections(updatedSections));
+    // Don't let the user add the same section again
+    // dispatch(setSections([...sections, section]));
+    // console.log(updatedSections);
+  };
+
   return (
     <div className="font-dmSans text-sm font-bold">
       <Header />
@@ -77,9 +135,30 @@ const SelectTests = () => {
         </div>
 
         <Inputs />
-        <div className="flex flex-wrap gap-4 font-dmSans">
-          {/* card */}
-          <div className="card w-[310px] h-[378px] bg-gray-100 ">
+        <div className="flex flex-wrap gap-2 justify-center">
+          {sections.map((section) => (
+            <div className="card w-96 bg-base-100 shadow-xl">
+              <div className="card-body">
+                <h2 className="card-title">{section.name}</h2>
+                <p>{section.desription}</p>
+                <div className="card-actions justify-end">
+                  <button
+                    onClick={() => addSection(section)}
+                    className="btn btn-primary"
+                  >
+                    Add
+                  </button>
+                  <button
+                    onClick={() => removeSection(section)}
+                    className="btn btn-primary"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+          {/* <div className="card w-96 bg-base-100 shadow-xl">
             <div className="card-body">
               <h2 className="text-xl font-bold mb-4">UX Test - Basics</h2>
               <p className="text-sm leading-[26px] text-[#8F92A1]">
@@ -97,7 +176,7 @@ const SelectTests = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </div>{" "} */}
         </div>
       </div>
     </div>

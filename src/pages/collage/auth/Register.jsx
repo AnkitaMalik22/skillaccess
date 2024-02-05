@@ -53,7 +53,9 @@ const Register = () => {
         setCredentials({});
         navigate("/collage/dashboard");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <form action="" className="font-dmSans">
@@ -225,7 +227,7 @@ const Register = () => {
           >
             Create Account
           </button>
-          <h3 className="text-lGray text-center text-bold text-xs mt-1">OR</h3>
+          <h3 className=" text-center text-lGray text-bold text-xs mt-1">OR</h3>
           <button
             className="btn btn-primary rounded-xl border-none  mt-2 focus:outline-none  w-full max-w-xs  mx-auto bg-snow  "
             onClick={() => navigate("/collage/dashboard")}
@@ -235,7 +237,7 @@ const Register = () => {
           </button>
           <span className="text-lGray text-center text-sm font-semibold">
             Already have an account?{" "}
-            <Link to="/" className="text-blue-600 ">
+            <Link to="/login" className="text-blue-600 ">
               {" "}
               SignIn
             </Link>
