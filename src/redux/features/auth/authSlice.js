@@ -51,6 +51,67 @@ export const loginCollage = createAsyncThunk(
   }
 );
 
+export const  logoutCollage = createAsyncThunk(
+  "collageAuth/logoutCollage",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("logout");
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/college/logout`,
+        { withCredentials: true }
+      );
+      const res = req.data;
+      localStorage.removeItem("auth-token");
+      return res.data;
+    } catch (error) {
+      console.log("catch");
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+
+export const googleLoginCollage = createAsyncThunk( 
+  "collageAuth/googleLoginCollage",
+  async (accessToken, { rejectWithValue }) => {
+    try {
+      console.log("google login");
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/college/login`,
+        {  googleAccessToken: accessToken }
+      );
+      const res = req.data;
+      localStorage.setItem("auth-token", res.token);
+      return res.data;
+    } catch (error) {
+      console.log("catch");
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const googleRegisterCollage = createAsyncThunk(
+  "collageAuth/googleRegisterCollage",
+  async (accessToken, { rejectWithValue }) => {
+    try {
+      console.log("google register");
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/college/register`,
+        {  googleAccessToken: accessToken }
+      );
+      const res = req.data;
+      localStorage.setItem("auth-token", res.token);
+      return res.data;
+    } catch (error) {
+      console.log("catch");
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+
+
+
 const collageAuthSlice = createSlice({
   name: "collageAuth",
   initialState: collageState,

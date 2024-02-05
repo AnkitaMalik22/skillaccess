@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { registerCollage } from "../../../redux/features/auth/authSlice";
+import { googleRegisterCollage, registerCollage } from "../../../redux/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import {useGoogleLogin} from '@react-oauth/google';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -57,6 +58,16 @@ const Register = () => {
       console.log(error);
     }
   };
+
+  function handleGoogleLoginSuccess(tokenResponse) {
+
+    const accessToken = tokenResponse.access_token;
+
+    dispatch(googleRegisterCollage(accessToken));
+
+}
+
+  const login = useGoogleLogin({onSuccess: handleGoogleLoginSuccess});
   return (
     <form action="" className="">
       <div className=" bg-base-100 shadow-xl h-full   font-dmSans grid grid-cols-5 ">
@@ -220,7 +231,9 @@ const Register = () => {
           </button>
           <h3 className="text-lGray text-center text-bold text-xs mt-1">OR</h3>
           <button className="btn btn-primary rounded-xl border-none  mt-2 focus:outline-none  w-full max-w-xs  mx-auto bg-snow  ">
-            <h3 className="opacity-100">Continue with google</h3>
+            <h3 className="opacity-100"
+              onClick={login}
+            >Continue with google</h3>
           </button>
           <span className="text-lGray text-center">
             Already have an account?{" "}
