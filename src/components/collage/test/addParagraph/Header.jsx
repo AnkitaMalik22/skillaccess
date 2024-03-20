@@ -2,9 +2,29 @@ import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import {
+  addFindAns,
+  addFindAnsToTopic,
+  addQuestionToTopic,
+} from "../../../../redux/collage/test/testSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const Header = () => {
+const Header = ({
+  question,
+  setQuestion,
+  id,
+
+  addType,
+  save,
+  section,
+}) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleSave = () => {
+    save("save");
+  };
+
   return (
     <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">
       <div className="h-fit self-center">
@@ -26,10 +46,17 @@ const Header = () => {
 
       <div className=" rounded-xl mx-2   h-12 flex my-2 font-dmSans ">
         <div className=" flex gap-2">
-          <button className="self-center w-24  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white">
+          <button
+            className="self-center w-24  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white"
+            onClick={() => navigate(-1)}
+          >
             Cancel
           </button>
-          <button className="self-center w-32 justify-center flex bg-blue-700 py-2 font-bold px-4 rounded-xl gap-2 text-white">
+          <button
+            className="self-center w-32 justify-center flex bg-blue-700 py-2 font-bold px-4 rounded-xl gap-2 text-white"
+            onClick={handleSave}
+            // onClick={() => navigate("/collage/test/preview")}
+          >
             Save
           </button>
         </div>

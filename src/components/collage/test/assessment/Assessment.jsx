@@ -6,8 +6,11 @@ import { LiaStopwatchSolid } from "react-icons/lia";
 import { PiPencilSimpleLine } from "react-icons/pi";
 import { RxCross1 } from "react-icons/rx";
 import Chart from "react-apexcharts";
+import { useNavigate } from "react-router-dom";
 
 const Assessment = () => {
+  const navigate = useNavigate();
+  const assessment = JSON.parse(localStorage.getItem("assessment"));
   const [settings, setSettings] = useState({
     options: {
       chart: {
@@ -47,7 +50,7 @@ const Assessment = () => {
   });
   return (
     <div className="font-dmSans text-sm font-bold">
-      <Header />
+      <Header name={assessment.name} />
       <span className="flex gap-2 w-[97%] mx-auto px-2 ">
         <FaFolder className="text-blued w-5 h-5" />
         <h2 className="text-xs">Beginner Level</h2>
@@ -119,44 +122,59 @@ const Assessment = () => {
         </div>
       </div> */}
 
-      {/* larger screens */}
       <div className="  w-[95.6%] mx-auto rounded-lg tracking-wide justify-between flex font-dmSans  mt-8">
-        <div className="md:w-[58%] grid grid-cols-6 row-span-2 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
-          {" "}
-          <div className="col-span-2 ">
-            <h2 className="self-center text-xs sm:text-sm">UX-Test Basics</h2>
-          </div>
-          <div className="col-span-2 ">
-            <span className="flex gap-1">
-              <ImFileText className="text-blued self-center " />
-              <p className="self-center text-xs text-gray-500   sm:text-sm">
-                Multiple Choice Questions
-              </p>
-            </span>
-          </div>
-          <div className="col-span-1 ">
-            <div className="flex gap-1 ">
-              <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
-              <p className="text-gray-400 text-xs self-center">10 mins</p>
+        <div className="md:w-[58%] ">
+          {assessment?.topics?.map((topic, index) => (
+            <div className="w-full grid grid-cols-6 row-span-2 my-4 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
+              {" "}
+              <div className="col-span-2 ">
+                <h2 className="self-center text-xs sm:text-sm">
+                  {topic.Heading}
+                </h2>
+              </div>
+              <div className="col-span-2 ">
+                <span className="flex gap-1">
+                  <ImFileText className="text-blued self-center " />
+                  <p className="self-center text-xs text-gray-500   sm:text-sm">
+                    {topic.Type === "mcq" && "Multiple Choice Questions"}
+                    {topic.Type === "findAnswer" && "Comprehension"}
+                    {topic.Type === "compiler" && "Code"}
+                    {topic.Type === "essay" && "Essay"}
+                    {topic.Type === "video" && "Video"}
+                  </p>
+                </span>
+              </div>
+              <div className="col-span-1 ">
+                <div className="flex gap-1 ">
+                  <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
+                  <p className="text-gray-400 text-xs self-center">
+                    {topic.Time} mins
+                  </p>
+                </div>
+              </div>
+              <div className="col-span-1  flex justify-center">
+                <RxCross1 className="self-center text-red-600 w-5 h-5" />
+              </div>
+              <div className="col-span-4 line-clamp-2 text-xs font-normal text-gray-400 ">
+                <p className="line-clamp-2">{topic.Description}</p>
+              </div>
+              <div className="col-span-1  flex">
+                <button
+                  className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs"
+                  onClick={() =>
+                    navigate(
+                      `/collage/test/details/${index}?question=${topic.Type}&type=assessment`
+                    )
+                  }
+                >
+                  Details
+                </button>
+              </div>
+              <div className="col-span-1  flex justify-center">
+                <PiPencilSimpleLine className="self-center text-blued w-5 h-5" />
+              </div>
             </div>
-          </div>
-          <div className="col-span-1  flex justify-center">
-            <RxCross1 className="self-center text-red-600 w-5 h-5" />
-          </div>
-          <div className="col-span-4 line-clamp-2 text-xs font-normal text-gray-400 ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-            rerum praesentium sapiente consectetur deserunt qui non eius, nam,
-            quia, odit facere? Quia, iste! Totam sunt, nulla nostrum fuga enim
-            repudiandae.
-          </div>
-          <div className="col-span-1  flex">
-            <button className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs">
-              Details
-            </button>
-          </div>
-          <div className="col-span-1  flex justify-center">
-            <PiPencilSimpleLine className="self-center text-blued w-5 h-5" />
-          </div>
+          ))}
         </div>
 
         <div className="  hidden md:block w-[40%] ">
@@ -276,6 +294,8 @@ const Assessment = () => {
           </div>
         </div>
       </div>
+
+      {/* larger screens */}
     </div>
   );
 };

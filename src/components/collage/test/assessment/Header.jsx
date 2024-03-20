@@ -3,7 +3,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ name }) => {
   const navigate = useNavigate();
   return (
     <div className="flex w-[97%] mx-auto justify-between mb-2">
@@ -12,7 +12,7 @@ const Header = () => {
         onClick={() => navigate(-1)}
       >
         <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
-        <h2 className="sm:text-xl  font-bold self-center">Assessment</h2>
+        <h2 className="sm:text-xl  font-bold self-center">{name}</h2>
       </button>
       <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
         <FaSearch className="self-center w-1/4 sm:w-1/3 h-1/3 text-gray-400" />

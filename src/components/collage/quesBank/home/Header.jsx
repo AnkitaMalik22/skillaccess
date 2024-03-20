@@ -24,23 +24,23 @@ const Header = () => {
         <input
           type="text"
           placeholder="Search"
-          className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96 max-w-md mx-auto  "
+          className="input border-none self-center bg-gray-100 focus:outline-none input-md  max-w-md mx-auto  "
         />
       </div>
 
       <span className="flex gap-2">
         <button
-          className="self-center justify-center flex bg-[#F8F8F9] py-3  rounded-xl w-32 font-bold gap-2 "
+          className="self-center justify-center flex bg-[#F8F8F9] py-3 px-5 rounded-xl  font-bold gap-2 "
           // onClick={() => navigate("/collage/test/addMcq")}
         >
           <FiPlus className="self-center text-lg " /> Add
         </button>
 
         <button
-          className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
-          onClick={() => navigate("/collage/test/addMcq")}
+          className="self-center justify-center flex bg-blue-700 py-3 px-5 rounded-xl  text-white  gap-2 "
+          onClick={() => navigate("/collage/quesBank/upload")}
         >
-          <FiUpload className="self-center text-lg " /> Upload New
+          <FiUpload className="self-center text-lg " /> Upload Questions
         </button>
         <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />

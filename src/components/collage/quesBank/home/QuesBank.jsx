@@ -12,11 +12,11 @@ const QuesBank = () => {
       </div>
       <Topic />
 
-      <div className="flex justify-between gap-8 mt-8">
-        <div className="3xl:w-[821px] w-[62%]">
+      <div className="flex justify-between  mt-8">
+        <div className=" w-[60%]">
           <Recent />
         </div>
-        <div className="3xl:w-[821px] w-[38%%]">
+        <div className="w-[38%%]">
           <BookMark />
         </div>
       </div>

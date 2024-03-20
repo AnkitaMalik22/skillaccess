@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import { TbFileDownload } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { getStudent } from "../../../../redux/collage/dashboard/dashboardSlice";
 
 const Students = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { students } = useSelector((state) => state.dashboard);
+
+ useEffect(() => {
+  dispatch(getStudent())
+  console.log(students)
+
+ }, [dispatch])
+ 
   return (
     <div>
       <Header />

@@ -10,13 +10,13 @@ const Selected = () => {
           <h2>Name and Profile</h2>
         </div>
         <div className="bg-[#0052CC] bg-opacity-5 p-2">
-          <h2>Experience</h2>
+          <h2>Date</h2>
         </div>
         <div className="bg-[#0052CC] bg-opacity-5 p-2">
-          <h2>Level</h2>{" "}
+          <h2>Status</h2>{" "}
         </div>
         <div className="bg-[#0052CC]  bg-opacity-5 p-2">
-          <h2>Assessment Performance</h2>
+          <h2>Assessment Performance(Mcq &Code)</h2>
         </div>
         <div className="bg-[#0052CC] bg-opacity-5 p-2 rounded-e-lg">
           <h2>Review</h2>
@@ -28,7 +28,7 @@ const Selected = () => {
         <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}
-          <div className={` flex `}>
+          {/* <div className={` flex `}>
             <div className="flex self-center">
               <div className=" min-w-[3rem]  h-12 self-center bg-red-600 mr-2  "></div>
               <span className="break-words min-w-0 pt-1 ">
@@ -41,25 +41,25 @@ const Selected = () => {
                 </h2>
               </span>
             </div>
-          </div>
+          </div> */}
           {/*  */}
-          <div className="flex justify-center mr-16 ">
+          {/* <div className="flex justify-center mr-16 ">
             <div className=" self-center h-fit ">
               <span>
                 <h2 className="font-dmSans  sm:text-sm ">1 Year</h2>
               </span>
             </div>
-          </div>
+          </div> */}
           {/*  */}
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <div className=" self-center h-fit">
               <span>
                 <h2 className="font-dmSans  sm:text-sm">Senior</h2>
               </span>
             </div>
-          </div>
+          </div> */}
           {/*  */}
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
                 <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
@@ -71,15 +71,15 @@ const Selected = () => {
                 </h2>
               </span>
             </div>
-          </div>
+          </div> */}
           {/*  */}
-          <div className="flex justify-end mr-3">
+          {/* <div className="flex justify-end mr-3">
             <span className="self-center ">
               <h2 className="font-dmSans  text-sm sm:text-base text-blue-500   ">
                 Assessment Review
               </h2>
             </span>
-          </div>
+          </div> */}
         </div>
       ))}
     </div>

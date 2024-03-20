@@ -1,9 +1,34 @@
-import React from "react";
+import { useSelect } from "@mui/base";
+import React, { useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
+import { getAllTests } from "../../../../redux/collage/test/testSlice";
 
 const List = () => {
-  const arr = [2, 1, 1, 1, 1];
+  // const arr = [2, 1, 1, 1, 1];
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const assessments = useSelector((state) => state.test.assessments);
+  const beginner = useSelector((state) => state.test.assessments.beginner);
+
+  // asessments ={beginner: Array(2), intermediate: Array(0), advanced: Array(0)} write in one array
+
+  let arr = assessments.beginner.concat(
+    assessments.intermediate,
+    assessments.advanced
+  );
+
+  let totalStudentsAppeared = 0;
+  let totalStudentsSelected = 0;
+  let overallPerformance = 0;
+
+  useEffect(() => {
+    // dispatch(getCollege());
+    dispatch(getAllTests());
+  }, [dispatch]);
+
   return (
     <div className="w-full mx-auto">
       {/* legend */}
@@ -26,14 +51,16 @@ const List = () => {
       </div>
 
       {/* list to be iterated */}
-      {arr.map(() => (
+      {arr.map((assessment) => (
         <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}
           <div className={` flex `}>
             <div className="flex self-center">
               <span>
-                <h2 className="font-dmSans  sm:text-sm">Google Analytics</h2>
+                <h2 className="font-dmSans  sm:text-sm">{assessment.name}</h2>
+
+                {/* <h2 className="font-dmSans  sm:text-sm"> */}
               </span>
             </div>
           </div>
@@ -41,7 +68,9 @@ const List = () => {
           <div className="flex justify-center ">
             <div className=" self-center h-fit">
               <span>
-                <h2 className="font-dmSans  sm:text-sm">356</h2>
+                <h2 className="font-dmSans  sm:text-sm">
+                  {assessment.studentResponses.length}
+                </h2>
               </span>
             </div>
           </div>
@@ -49,7 +78,7 @@ const List = () => {
           <div className="flex justify-center">
             <div className=" self-center h-fit">
               <span>
-                <h2 className="font-dmSans  sm:text-sm">256</h2>
+                <h2 className="font-dmSans  sm:text-sm">{0}</h2>
               </span>
             </div>
           </div>
@@ -71,7 +100,11 @@ const List = () => {
           <div className="flex justify-end mr-3">
             <span
               className="self-center hover:cursor-pointer "
-              onClick={() => navigate("/collage/results/overview")}
+              onClick={() =>
+                navigate(
+                  `/collage/results/overview?level=beginner&assessment=${assessment._id}`
+                )
+              }
             >
               <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
                 View Details

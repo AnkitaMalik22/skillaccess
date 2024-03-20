@@ -16,24 +16,29 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperSlideRight from "./SwiperSlideRight";
 import ChartComp from "./Chart";
 
-import { getStudent,getCompany, getAssessment,getTotalJobs,getPlacedStudents } from "../../../../redux/features/dashboard/dashboardSlice";
+import {
+  getStudent,
+  getCompany,
+  getAssessment,
+  getTotalJobs,
+  getPlacedStudents,
+} from "../../../../redux/collage/dashboard/dashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
-
-
+import { getCollege } from "../../../../redux/collage/auth/authSlice";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
-  const { students ,companies,assessments,jobs,placedStudents} = useSelector((state) => state.dashboard);
-useEffect(() => {
-  dispatch(getStudent());
-  dispatch(getCompany());
-  dispatch(getAssessment());
-  dispatch(getTotalJobs());
-  dispatch(getPlacedStudents());
+  const { students, companies, assessments, jobs, placedStudents } =
+    useSelector((state) => state.dashboard);
+  useEffect(() => {
+    dispatch(getStudent());
+    dispatch(getCompany());
+    dispatch(getAssessment());
+    dispatch(getTotalJobs());
+    dispatch(getPlacedStudents());
 
-  // console.log("students : ",students);
-}, [dispatch])
-
+    // console.log("students : ",students);
+  }, [dispatch]);
 
   // const [companies, setcompanies] = useState([
   //   {
@@ -58,6 +63,10 @@ useEffect(() => {
   //   },
   // ]);
 
+  useEffect(() => {
+    dispatch(getCollege());
+    console.log("get collaeg");
+  }, []);
   const navigate = useNavigate();
   return (
     <>
@@ -88,7 +97,9 @@ useEffect(() => {
               <div className="rounded-lg bg-gray-100 w-10 h-10 flex justify-center mx-auto mt-4 mb-2">
                 <CgAwards className="text-green-600 self-center w-6 h-6 " />
               </div>
-              <h2 className="text-2xl text-center font-bold mt-2">{companies.length}</h2>
+              <h2 className="text-2xl text-center font-bold mt-2">
+                {companies.length}
+              </h2>
               <h2 className="text-gray-400 text-center font-semibold text-xs mt-2 ">
                 Companies
               </h2>
@@ -136,7 +147,6 @@ useEffect(() => {
               </div>
               <h2 className="text-2xl text-center font-bold mt-2">
                 {assessments.length}
-              
               </h2>
               <h2 className="text-gray-400 text-center font-semibold text-xs mt-2 ">
                 Available Assessment

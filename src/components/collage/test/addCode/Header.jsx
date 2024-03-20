@@ -3,8 +3,14 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ handleSave }) => {
   const navigate = useNavigate();
+
+  const save = () => {
+    handleSave("save");
+    // navigate(-1);
+  };
+
   return (
     <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">
       <div className="h-fit self-center">
@@ -26,10 +32,13 @@ const Header = () => {
 
       <div className=" rounded-xl mx-2   h-12 flex my-2 font-dmSans ">
         <div className=" flex gap-2">
-          <button className="self-center w-24  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white">
+          <button className="self-center w-24  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white"   onClick={() => navigate(-1)}>
             Cancel
           </button>
-          <button className="self-center w-32 justify-center flex bg-blue-700 py-2 font-bold px-4 rounded-xl gap-2 text-white">
+          <button
+            className="self-center w-32 justify-center flex bg-blue-700 py-2 font-bold px-4 rounded-xl gap-2 text-white"
+            onClick={save}
+          >
             Save
           </button>
         </div>

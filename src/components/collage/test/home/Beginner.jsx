@@ -9,15 +9,17 @@ import "swiper/css";
 import { Bin } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import Card from "./common/Card";
+import { useSelector } from "react-redux";
 
 const Beginner = () => {
-  const arr = [
-    { attempts: 10, progress: 1 },
-    { attempts: 12, progress: 2 },
-    { attempts: 18, progress: 3 },
-    { attempts: 20, progress: 4 },
-    { attempts: 28, progress: 4 },
-  ];
+  const beginner = useSelector((state) => state.test.assessments.beginner);
+
+  // const uniqueIds = new Set();
+
+  // const filteredBeginnerAssessments = assessments?.beginner?.filter(
+  //   (item) => !uniqueIds.has(item?._id) && uniqueIds.add(item?._id)
+  // );
+
   const navigate = useNavigate();
   return (
     <div className="flex bg-[#F8F8F9] w-full gap-2">
@@ -25,7 +27,7 @@ const Beginner = () => {
         <div className=" self-center w-fit h-fit ">
           <div
             className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center hover:cursor-pointer "
-            onClick={() => navigate("/collage/test/name")}
+            onClick={() => navigate("/collage/test/name?level=beginner")}
           >
             <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
           </div>
@@ -70,18 +72,19 @@ const Beginner = () => {
           },
         }}
       >
-        {arr.map((item, i) => (
-          <SwiperSlide className="w-full">
+        {beginner?.map((item, index) => (
+          <SwiperSlide key={`${item._id}-${index}`} className="w-full">
             <Card
-              heading={"Create the first Things for Your Platform"}
-              desc={
-                "Your platform is made up of 4 main elements, and the importance of your platform is unparalleled because"
-              }
-              attempts={18}
-              progress={item.progress}
+              key={`${item._id}-${index}`}
+              assessment={item}
+              // heading={item.name}
+              // desc={item.description}
+              // attempts={item.totalAttempts}
+              progress={4}
             />
           </SwiperSlide>
         ))}
+        <SwiperSlide></SwiperSlide>
 
         <span className="absolute top-1/2 right-0 z-20 h-fit w-fit">
           <SlideNextButton />

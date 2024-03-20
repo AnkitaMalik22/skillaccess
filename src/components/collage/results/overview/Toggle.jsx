@@ -3,8 +3,10 @@ import Selected from "./Selected";
 import Appeared from "./Appeared";
 import Performance from "./Performance";
 
-const Toggle = () => {
-  const [toggle, setToggle] = useState(1);
+
+const Toggle = ({ assessment }) => {
+
+  const [toggle, setToggle] = useState(2);
   return (
     <div className="bg-gray-50 p-4 mt-4 rounded-lg ">
       <span className="grid grid-cols-3 text-xs font-bold border-b border-spacing-0 border-gray-200 mb-4">
@@ -37,7 +39,9 @@ const Toggle = () => {
       {toggle === 1 ? (
         <Selected />
       ) : toggle === 2 ? (
-        <Appeared />
+
+        <Appeared assessment={assessment} />
+
       ) : toggle === 3 ? (
         <Performance />
       ) : (

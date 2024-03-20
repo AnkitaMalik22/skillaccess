@@ -1,12 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { loginCollage } from "../../../redux/features/auth/authSlice";
+import { loginCollage } from "../../../redux/collage/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { LuEye } from "react-icons/lu";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
+  // cosnt[(error, setError)] = useState();
+
+  const { Error } = useSelector((state) => state.collageAuth);
+  const [type, setType] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [Credentials, setCredentials] = useState({
@@ -30,35 +35,37 @@ const Login = () => {
   }, []);
 
   const handleSubmit = async (e) => {
- 
     e.preventDefault();
 
-    const { Email, Password ,confirmPassword} =
-      Credentials;
+    const { Email, Password, confirmPassword } = Credentials;
     const data = {
       Email,
       Password,
-      confirmPassword
+      confirmPassword,
     };
     try {
       const ch = await dispatch(loginCollage(data));
       if (ch.meta.requestStatus === "fulfilled") {
-  
         setCredentials({});
         navigate("/collage/dashboard");
       }
- 
     } catch (error) {
       console.log(error);
     }
   };
+  const handleCheckboxChange = () => {
+    setChecked(!checked); // Toggle checkbox status
+  };
+  const isLoginDisabled = !checked || !Credentials.Email || !Credentials.Password;
   return (
-    <form>
-      <div className="card card-side bg-base-100 shadow-xl h-full lg:h-[900px]  font-dmSans   ">
-        <figure className="w-1/2 h-full bg-login bg-no-repeat bg-cover bg-center !hidden  lg:!flex !flex-row "></figure>
+    <form action="" className="font-dmSans">
+      <div className=" bg-base-100 shadow-xl h-full min-h-[100vh]  font-dmSans grid grid-cols-5 ">
+        <figure className="w-full h-full bg-login bg-no-repeat bg-cover bg-center !hidden  lg:!block col-span-2 ">
+          {/* <img src="./images/loginBg.jpg" alt="" className="w-full h-full" /> */}
+        </figure>
 
         {/* right half */}
-        <div className="card-body my-auto !mt-20 sm:mt-0">
+        <div className="card-body my-auto !mt-20 sm:mt-0 col-span-3">
           {/* skill access group */}
           <div className="flex gap-2 justify-center">
             <svg
@@ -86,35 +93,56 @@ const Login = () => {
           </h2>
 
           <input
-           onChange={changeHandler}
-           value={Credentials.Email}
-           name="Email"
-           type="email"
+            onChange={changeHandler}
+            value={Credentials.Email}
+            name="Email"
+            type="email"
             placeholder="Email Address"
             className="input rounded-xl border-none  md:mt-6 mt-4 focus:outline-none input-md w-full max-w-xs  mx-auto bg-snow "
           />
-          <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 ">
+          <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 rounded-xl  bg-snow ">
             <input
-            name="Password"
-            onChange={changeHandler}
-            value={Credentials.Password}
-            type="password"
-              placeholder="Password"
-              className="input rounded-xl border-none  focus:outline-none input-md w-full max-w-xs  mx-auto bg-snow  "
-            />
-            <button className="btn btn-primary bg-snow">S</button>
-          </div>
-          <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 ">
-            <input
-              name="confirmPassword"
+              name="Password"
               onChange={changeHandler}
-              value={Credentials.confirmPassword}
-              type="password"
-              placeholder="Confirm Password"
-              className="input rounded-xl border-none  focus:outline-none input-md w-full max-w-xs  mx-auto bg-snow  "
+              value={Credentials.Password}
+              type={type}
+              placeholder="Password"
+              className="input  border-none  focus:outline-none input-md w-full max-w-xs  bg-snow  mx-auto "
             />
-            <button className="btn btn-primary bg-snow">S</button>
+            <button
+              className="btn !shadow-none bg-snow border-none"
+              onClick={(e) => {
+                e.preventDefault();
+                type === "text" ? setType("password") : setType("text");
+              }}
+            >
+              <LuEye className="text-gray-400 text-2xl" />
+            </button>
           </div>
+
+          <div
+            className=" flex gap-2  px-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto justify-end cursor-pointer"
+            onClick={() => navigate("/forgotPassword")}
+          >
+            <h1 className="text-blue-700 font-bold">Forgot Password</h1>
+          </div>
+
+          {Error.length > 0 &&
+            Error.map((error) => (
+              <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 rounded-xl  ">
+                <input
+                  type="checkbox"
+                  defaultChecked={true}
+                  onClick={(e) => e.preventDefault()}
+                  placeholder="Confirm Password"
+                  disabled={true}
+                  className="  border-none w-4 h-4 focus:outline-none  rounded-full bg-gray-400  mx-auto  checked:bg-gray-400 mt-2 mr-2 hover:!bg-red-500"
+                />
+                <h1 className="text-gray-400 self-center w-full">
+                  {error.message}
+                </h1>
+              </div>
+            ))}
 
           <div className=" flex gap-2  p-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto ">
             {" "}
@@ -130,32 +158,40 @@ const Login = () => {
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
           </div>
 
-          <label className=" flex gap-2 cursor-pointer mx-auto w-full max-w-xs">
+          <label className=" flex  gap-2 cursor-pointer mx-auto w-full max-w-xs">
             <input
               type="checkbox"
-              checked="false"
+              checked={checked}
               className="checkbox checkbox-primary bg-secondary opacity-20 w-6 h-6"
+              onChange={handleCheckboxChange}
             />
             <span className="text-lGray">
               By creating an account, you agree to our{" "}
-              <Link to="/"> Term and Conditions</Link>
+              <Link className="text-blue-600" to="/terms&policies"> Terms-Policies.</Link>
             </span>
           </label>
 
-          <button className="btn btn-accent rounded-xl border-none  md:mt-6 mt-4 focus:outline-none  w-full max-w-xs  mx-auto bg-secondary text-white"
-          onClick={handleSubmit}
+          <button
+             className={`btn hover:bg-blue-500 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto bg-secondary text-white ${
+              isLoginDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={handleSubmit}
+            disabled={isLoginDisabled}
           >
-           Login
+            Login
           </button>
-          <h3 className="text-lGray text-center text-bold text-xs mt-1">OR</h3>
-          <button className="btn btn-primary rounded-xl border-none  mt-2 focus:outline-none  w-full max-w-xs  mx-auto bg-snow  ">
+          {/* <h3 className="text-lGray text-center text-bold text-xs mt-1">OR</h3>
+          <button
+            className="btn btn-primary rounded-xl border-none  mt-2 focus:outline-none  w-full max-w-xs  mx-auto bg-snow  "
+            onClick={() => navigate("/collage/dashboard")}
+          >
+            <FcGoogle className="text-lg mr-2" />
             <h3 className="opacity-100">Continue with google</h3>
-          </button>
+          </button> */}
           <span className="text-lGray text-center">
-            Already have an account?{" "}
-            <Link to="/" className="text-secondary">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-secondary">
               {" "}
-              SignIn
+              SignUp
             </Link>
           </span>
         </div>

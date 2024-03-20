@@ -1,12 +1,17 @@
 import React from "react";
 import Folder from "./icon/Folder";
+import { useNavigate } from "react-router-dom";
 
 const Topic = () => {
+  const navigate = useNavigate();
   return (
     <div className=" w-full bg-[#F8F8F9] rounded-3xl py-8 px-12 ">
       <span className="flex justify-between mb-7">
         <h2 className="font-bold text-xl">Choose a Topic</h2>
-        <button className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-2 px-3">
+        <button
+          className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-2 px-3"
+          onClick={() => navigate("/collage/quesBank/topic")}
+        >
           View All
         </button>
       </span>

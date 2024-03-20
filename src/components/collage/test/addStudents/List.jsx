@@ -10,7 +10,7 @@ const List = () => {
           <div className=" min-w-[2.5rem]  h-10 self-center bg-red-600 mr-2 rounded-lg "></div>
 
           <h2 className="font-dmSans font-bold text-sm sm:text-lg self-center ">
-            Name
+            Jhon Doe
           </h2>
         </div>
       </div>

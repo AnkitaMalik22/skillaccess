@@ -35,21 +35,21 @@ const Details = () => {
 
       {/* second section */}
       <div className="border-b px-6  grid grid-cols-4 text-xs font-bold text-center py-4 bg-gray-50 ">
-        <span className="text-left">
+        <span className="text-center">
           <h2 className="text-gray-400 my-1 capitalize">EMAIL ADDRESS</h2>
-          <h2>3-5 Years</h2>
+          <h2>example@gmail.com</h2>
         </span>
         <span>
           <h2 className="text-gray-400 my-1">PHONE NUMBER</h2>
-          <h2>Medium Level</h2>
+          <h2>(+91)98989384234</h2>
         </span>
         <span>
           <h2 className="text-gray-400 my-1">ADDRESS</h2>
-          <h2>Full-Time</h2>
+          <h2>Bhopal.India</h2>
         </span>
-        <span className="text-right">
+        <span className="text-center">
           <h2 className="text-gray-400 my-1">WEBSITE</h2>
-          <h2>$90-100K</h2>
+          <h2 className="text-blue-700">wwww.google.com</h2>
         </span>
       </div>
 
@@ -59,9 +59,9 @@ const Details = () => {
         <h2 className="self-center">Software Knowledge</h2>
         <span className="flex gap-2 flex-wrap">
           <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " />
+          {/* <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " />
           <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " />
-          <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " />
-          <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " />
+          <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " /> */}
         </span>
       </div>
 
@@ -76,7 +76,7 @@ const Details = () => {
             View Certificates
           </button>
           <button className="py-2 text-white rounded-xl w-24 bg-blue-700 font-bold">
-            Contact
+            Approve Request
           </button>
         </span>
       </div>

@@ -10,11 +10,44 @@ import { CgUnavailable } from "react-icons/cg";
 import Advanced from "./Advanced";
 import Intermediate from "./Intermediate";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+import {
+  getAllTests,
+  setTestBasicDetails,
+  setTestSelectedTopics,
+} from "../../../../redux/collage/test/testSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Test = () => {
-  const arr = [<Beginner />, <Intermediate />, <Advanced />];
+  const dispatch = useDispatch();
+  const beginner = useSelector((state) => state.test.assessments.beginner);
+  const intermediate = useSelector((state) => state.test.assessments.intermediate);
+  const advanced = useSelector((state) => state.test.assessments.advanced);
+  
   const navigate = useNavigate();
   const asses = [1, 2, 3, 4, 5];
+
+  const { status } = useSelector((state) => state.collageAuth);
+  useEffect(
+    () => {
+      dispatch(
+        setTestBasicDetails({
+          name: "",
+          description: "",
+          totalAttempts: null,
+          totalQuestions: null,
+        })
+      );
+      dispatch(setTestSelectedTopics([]));
+      dispatch(getAllTests());
+    },
+    [],
+    status
+  );
+
+  const arr = [<Beginner />, <Intermediate />, <Advanced />];
+
   return (
     <div className="">
       {/* search bar */}
@@ -30,55 +63,59 @@ export const Test = () => {
                   {({ open }) => (
                     <div className="mb-4">
                       <div className="flex w-full justify-between rounded-t-lg border-b-2 border-gray-200 bg-[#F8F8F9] px-4 py-2 text-left text-sm font-medium  hover:bg-purple-200 focus:outline-none  ">
-                        <Disclosure.Button className="flex gap-2 w-10/12">
-                          <FaCaretDown
-                            className={`${
-                              open ? "" : ""
-                            } h-5 w-5 text-gray-300`}
-                          />
+                        <div className="flex gap-2 w-full justify-between">
                           <h2>
                             {i === 0 ? (
                               <>
                                 Beginner level{" "}
                                 <p className="inline-block text-gray-400">
-                                  &#40;3&#41;
+                                  &#40;{beginner.length}&#41;
                                 </p>{" "}
                               </>
                             ) : i === 1 ? (
                               <>
                                 For Intermediate{" "}
                                 <p className="inline-block text-gray-400">
-                                  &#40;83&#41;
+                                  &#40;{intermediate.length}&#41;
                                 </p>{" "}
                               </>
                             ) : (
                               <>
                                 For Advanced{" "}
                                 <p className="inline-block text-gray-400">
-                                  &#40;143&#41;
+                                  &#40;{advanced.length}&#41;
                                 </p>{" "}
                               </>
                             )}
                           </h2>{" "}
-                        </Disclosure.Button>
-                        <CiSettings
+
+                          <Disclosure.Button>
+                            <FaCaretDown
+                              className={`${
+                                open ? "" : ""
+                              } h-5 w-5 text-gray-300`}
+                            />
+                          </Disclosure.Button>
+                          {/* <CiSettings
                           className="w-5 h-5 text-gray-500 hover:cursor-pointer"
                           onClick={() => navigate("/collage/test/assessment")}
-                        />
+                        /> */}
+                        </div>
+
                       </div>
 
-                      <Transition
-                        enter="transition duration-300 "
-                        enterFrom="transform scale-95 ease-in opacity-0"
-                        enterTo="transform scale-100   duration-700 opacity-100"
+                      {/* <Transition
+                        enter=" "
+                        enterFrom=""
+                        enterTo=""
                         leave="transition duration-300 ease-out"
                         leaveFrom="transform scale-100  opacity-100"
                         leaveTo="transform scale-95 opacity-0"
-                      >
-                        <Disclosure.Panel className="bg-gray-100 rounded-b-lg pb-2 mb-2 pt-4 text-sm text-gray-500">
-                          {comp}
-                        </Disclosure.Panel>
-                      </Transition>
+                      > */}
+                      <Disclosure.Panel className="bg-gray-100 rounded-b-lg pb-2 mb-2 pt-4 text-sm text-gray-500">
+                        {comp}
+                      </Disclosure.Panel>
+                      {/* </Transition> */}
                     </div>
                   )}
                 </Disclosure>

@@ -1,9 +1,15 @@
 import React from "react";
 import Editor from "@monaco-editor/react";
 
-const Verification = () => {
+const Verification = ({
+  question,
+  handleChanges,
+  handleQuestionChange,
+  setQuestion,
+}) => {
   function handleEditorChange(value, event) {
     // here is the current value
+    handleChanges({ target: { name: "verificationCode", value } });
   }
 
   function handleEditorDidMount(editor, monaco) {
@@ -29,6 +35,8 @@ const Verification = () => {
         defaultValue="export function undefined( undefined ) {
             // Insert your code here 
         }"
+        name="verificationCode"
+        value={question.verificationCode}
         onChange={handleEditorChange}
         onMount={handleEditorDidMount}
         beforeMount={handleEditorWillMount}

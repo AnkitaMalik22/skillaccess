@@ -1,0 +1,4 @@
+Collage 
+ Layout 
+    1) Will designs for mobile devices be made or the website only for pcs
+    2) Some pages have a text editor for text input in the page itself 

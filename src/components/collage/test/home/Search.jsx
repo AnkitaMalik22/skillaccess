@@ -34,7 +34,7 @@ const Search = () => {
         </div>
         <div className="w-8 h-8"></div>
         <div className="rounded-full w-8 h-8 self-end">
-          <IoSettingsOutline className="text-gray-400 w-full h-full" />
+          {/* <IoSettingsOutline className="text-gray-400 w-full h-full" /> */}
         </div>
       </div>
     </div>

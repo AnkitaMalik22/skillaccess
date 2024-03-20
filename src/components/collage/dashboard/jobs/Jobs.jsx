@@ -7,16 +7,16 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getTotalJobs } from "../../../../redux/features/dashboard/dashboardSlice";
+import { getTotalJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
 import BackIcon from "../../../buttons/BackIcon";
 import { IoIosSearch } from "react-icons/io";
 
 const Jobs = () => {
-  // const [jobs, setJobs] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
+  const [jobs, setJobs] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { jobs } = useSelector((state) => state.dashboard);
+  // const { jobs } = useSelector((state) => state.dashboard);
 
   useEffect(() => {
     dispatch(getTotalJobs());
@@ -58,11 +58,11 @@ const Jobs = () => {
                   </h2>
                   <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
                     {" "}
-                    {job.JobTitle}
+                    {job.JobTitle || "title"}
                   </h2>
                   <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
                     {" "}
-                    {job.CloseByDate}
+                    {job.CloseByDate || "date"}
                   </h2>
                 </span>
               </div>
@@ -70,14 +70,14 @@ const Jobs = () => {
                 <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
                 <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
                   {" "}
-                  {job.JobLocation}
+                  {job.JobLocation || "location"}
                 </h2>
                 <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
                   {" "}
-                  {job.WorkplaceType}
+                  {job.WorkplaceType || "WOrktype"}
                 </h2>
                 <button className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center ">
-                  {job.EmploymentType}
+                  {job.EmploymentType || "employmentType"}
                 </button>
                 <FaArrowRight className="text-gray-400 self-center" />
               </div>

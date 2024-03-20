@@ -4,11 +4,19 @@ import Initial from "./Initial";
 import TestCases from "./TestCases";
 import Verification from "./Verification";
 
-const Code = () => {
-  const [toggle, setToggle] = useState(1);
+const Code = ({
+  toggle,
+  setToggle,
+  question,
+  handleChanges,
+  handleQuestionChange,
+  setQuestion,
+}) => {
   return (
     <div className="font-dmSans">
-      <h2 className="font-bold mb-3 text-xl">Coding Language: Java</h2>
+      <h2 className="font-bold mb-3 text-xl">
+        Coding Language: {question.codeLanguage || "please select a language"}{" "}
+      </h2>
 
       {/* toggler */}
       <div className="p-2 mt-4 rounded-lg">
@@ -71,13 +79,23 @@ const Code = () => {
         </span>
 
         {toggle === 1 ? (
-          <Signature />
+          <Signature
+            question={question}
+            handleChanges={handleChanges}
+            handleQuestionChange={handleQuestionChange}
+            setQuestion={setQuestion}
+          />
         ) : toggle === 2 ? (
-          <Initial />
+          <Initial question={question} handleChanges={handleChanges} />
         ) : toggle === 3 ? (
-          <TestCases />
+          <TestCases
+            question={question}
+            handleChanges={handleChanges}
+            handleQuestionChange={handleQuestionChange}
+            setQuestion={setQuestion}
+          />
         ) : (
-          <Verification />
+          <Verification question={question} handleChanges={handleChanges} />
         )}
       </div>
     </div>

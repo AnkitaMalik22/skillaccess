@@ -1,9 +1,13 @@
 import React from "react";
-import AddMcq from "../../../components/collage/test/addMcq/AddMcq";
 import CollageLayout from "../../../layout/Collage";
+import AddMcq from "../../../components/collage/test/addMcq/AddMcq";
 
 const AddMcqPage = () => {
-  return <AddMcq />;
+  return (
+    <>
+      <AddMcq />
+    </>
+  );
 };
 
 export default AddMcqPage;
