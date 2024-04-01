@@ -102,7 +102,7 @@ console.log(phone);
     !Credentials.FirstName ||
     !Credentials.LastName ||
     !Credentials.University ||
-    !Credentials.Phone;
+    !(phone.length>5);
 
   return (
     <form action="" className="font-dmSans">
@@ -303,7 +303,7 @@ console.log(phone);
           <></>
           <button
             className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
-              isCreateAccountDisabled ? "opacity-50 cursor-not-allowed" : ""
+              isCreateAccountDisabled ? "bg-blued cursor-not-allowed" : ""
             }`}
             onClick={handleSubmit}
             disabled={isCreateAccountDisabled}

@@ -34,7 +34,7 @@ const ForgotPassword = () => {
   useEffect(() => {
     // console.log(sel);
   }, []);
-
+const isSenddisable=!Credentials.Email;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,15 +43,21 @@ const ForgotPassword = () => {
       email: Email,
     };
     try {
-      const ch = await dispatch(forgotPassword(data));
-      if (ch.meta.requestStatus === "fulfilled") {
-       toast.success("Password reset link has been sent to your email.");
-       
-        setCredentials({});
-      } else{
-        setError(true);
-        toast.error('Invalid Email');
-      } 
+       dispatch(forgotPassword(data))
+      .then((ch)=>
+      {
+        if (ch.meta.requestStatus === "fulfilled") {
+          toast.success("Password reset link has been sent to your email.");
+          
+           
+         } else{
+           setError(true);
+           toast.error('Invalid Email');
+         } 
+      }
+
+      )
+      setCredentials({Email:''});
     } catch (error) {
       setError(true);
       
@@ -119,10 +125,13 @@ const ForgotPassword = () => {
             </div>
           )} */}
           <button
-            className="py-2 bg-blue-700 hover:bg-blue-700  rounded-xl border-none  md:mt-6 mt-4 focus:outline-none  w-full max-w-xs  mx-auto  text-white"
+             className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
+              isSenddisable? " bg-blued cursor-not-allowed" : ""
+            }`}
             onClick={handleSubmit}
+            disabled={isSenddisable}
           >
-            Send link
+            Send Link
           </button>
         </div>
       </div>

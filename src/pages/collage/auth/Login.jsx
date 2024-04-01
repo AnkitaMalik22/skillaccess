@@ -152,11 +152,11 @@ const Login = () => {
               <LuEye className="text-gray-400 text-2xl" />
             </button> */}
                <button
-              className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
-              onClick={(e) => {
-                e.preventDefault();
-                type === "text" ? setType("password") : setType("text");
-              }}
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    type === "text" ? setType("password") : setType("text");
+                  }}
             >
               <LuEye className="text-gray-400 text-2xl" />
             </button>
@@ -216,13 +216,13 @@ const Login = () => {
               </Link>
             </span>
           </label> */}
-
+ 
           <button
-            className={`btn hover:bg-blue-500 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto bg-secondary text-white ${
-              isLoginDisabled ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+         className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
+          isLoginDisabled ? "bg-blued cursor-not-allowed" : ""
+        }`}
             onClick={handleSubmit}
-            // disabled={isLoginDisabled}
+            disabled={isLoginDisabled}
           >
             Login
           </button>

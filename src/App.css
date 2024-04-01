@@ -55,12 +55,12 @@ body {
   font-size: 0.9rem;
 }
 
-/* iframe {
+iframe {
   display: none;
 }
 iframe#webpack-dev-server-client-overlay {
   display: none;
-} */
+}
 /* 
 .VIpgJd-ZVi9od-ORHb-OEVmcd{
     display: none;
@@ -68,11 +68,3 @@ iframe#webpack-dev-server-client-overlay {
 /* iframe{
     display: none;
 } */
-
-
-/* hide the side bar scorllbar */
-
-::-webkit-scrollbar {
-  display: none;
-}
-
