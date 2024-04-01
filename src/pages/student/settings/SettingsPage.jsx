@@ -1,8 +1,8 @@
 import React from "react";
-import Profile from "../../../components/student/profile/profile";
+import Settings from "../../../components/student/settings/home/Settings";
 import StudentLayout from "../../../layout/Student";
 
-const ProfilePage = () => {
+const SettingsPage = () => {
   React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
@@ -46,12 +46,11 @@ const ProfilePage = () => {
       }
     };
   }, []);
-
   return (
     <StudentLayout>
-      <Profile />
+      <Settings />
     </StudentLayout>
   );
 };
 
-export default ProfilePage;
+export default SettingsPage;

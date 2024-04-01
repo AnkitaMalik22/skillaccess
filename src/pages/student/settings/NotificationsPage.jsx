@@ -1,8 +1,8 @@
 import React from "react";
-import Profile from "../../../components/student/profile/profile";
 import StudentLayout from "../../../layout/Student";
+import Notifiactions from "../../../components/student/settings/notifications/Notifiactions";
 
-const ProfilePage = () => {
+const NotificationsPage = () => {
   React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
@@ -46,12 +46,11 @@ const ProfilePage = () => {
       }
     };
   }, []);
-
   return (
     <StudentLayout>
-      <Profile />
+      <Notifiactions />
     </StudentLayout>
   );
 };
 
-export default ProfilePage;
+export default NotificationsPage;

@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
-import { setSelected, selected } from "../redux/student/sidebar/sideSlice";
+import {
+  setSelected,
+  selected,
+  selectedStudent,
+} from "../redux/student/sidebar/sideSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setTestBasicDetails,
@@ -9,11 +13,10 @@ import {
 } from "../redux/collage/test/testSlice";
 import TestHeader from "../components/student/test/start/TestHeader";
 
-
 const StudentTestLayout = ({ children }) => {
   const navigate = useNavigate();
 
-  const selection = useSelector(selected);
+  const selection = useSelector(selectedStudent);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
@@ -45,27 +48,25 @@ const StudentTestLayout = ({ children }) => {
     },
 
     {
-        name: "UX Test - Basics",
-        path: "/StudentTest/2",
-        icon: (
-          <svg
-            width="18"
-            height="21"
-            viewBox="0 0 18 21"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M6.06351 5.50037C6.06351 7.15729 7.32052 8.50006 8.87053 8.50006C10.4205 8.50006 11.6767 7.15729 11.6767 5.50037C11.6767 3.84351 10.4205 2.50068 8.87053 2.50068C7.32052 2.50068 6.06351 3.84351 6.06351 5.50037ZM4.19273 5.50037C4.19273 2.7392 6.28663 0.5 8.87053 0.5C11.4536 0.5 13.5475 2.7392 13.5475 5.50037C13.5475 8.2616 11.4536 10.4999 8.87053 10.4999C6.28663 10.4999 4.19273 8.2616 4.19273 5.50037ZM15.4183 19.4999V17.5001C15.4183 15.8432 14.1621 14.5004 12.6121 14.5004H5.12812C3.57812 14.5004 2.32195 15.8432 2.32195 17.5001V19.4999C2.32195 20.0525 1.90267 20.4998 1.38656 20.4998C0.869614 20.4998 0.451172 20.0525 0.451172 19.4999V17.5001C0.451172 14.7389 2.54507 12.4997 5.12812 12.4997H12.6121C15.1951 12.4997 17.2899 14.7389 17.2899 17.5001V19.4999C17.2899 20.0525 16.8706 20.4998 16.3545 20.4998C15.8375 20.4998 15.4183 20.0525 15.4183 19.4999Z"
-              fill={`${selection === 7 ? "#171717" : "white"}`}
-            />
-          </svg>
-        ),
-      },
-
-
+      name: "UX Test - Basics",
+      path: "/StudentTest/2",
+      icon: (
+        <svg
+          width="18"
+          height="21"
+          viewBox="0 0 18 21"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M6.06351 5.50037C6.06351 7.15729 7.32052 8.50006 8.87053 8.50006C10.4205 8.50006 11.6767 7.15729 11.6767 5.50037C11.6767 3.84351 10.4205 2.50068 8.87053 2.50068C7.32052 2.50068 6.06351 3.84351 6.06351 5.50037ZM4.19273 5.50037C4.19273 2.7392 6.28663 0.5 8.87053 0.5C11.4536 0.5 13.5475 2.7392 13.5475 5.50037C13.5475 8.2616 11.4536 10.4999 8.87053 10.4999C6.28663 10.4999 4.19273 8.2616 4.19273 5.50037ZM15.4183 19.4999V17.5001C15.4183 15.8432 14.1621 14.5004 12.6121 14.5004H5.12812C3.57812 14.5004 2.32195 15.8432 2.32195 17.5001V19.4999C2.32195 20.0525 1.90267 20.4998 1.38656 20.4998C0.869614 20.4998 0.451172 20.0525 0.451172 19.4999V17.5001C0.451172 14.7389 2.54507 12.4997 5.12812 12.4997H12.6121C15.1951 12.4997 17.2899 14.7389 17.2899 17.5001V19.4999C17.2899 20.0525 16.8706 20.4998 16.3545 20.4998C15.8375 20.4998 15.4183 20.0525 15.4183 19.4999Z"
+            fill={`${selection === 7 ? "#171717" : "white"}`}
+          />
+        </svg>
+      ),
+    },
 
     // {
     //   name: "Test",
@@ -287,7 +288,6 @@ const StudentTestLayout = ({ children }) => {
     //   ),
     // },
   ];
- 
 
   useEffect(() => {
     // bottom.current.scrollIntoView();
@@ -351,21 +351,18 @@ const StudentTestLayout = ({ children }) => {
       setDown(11);
     }
   }, []);
-  
 
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
       <TestHeader />
       <div className=" h-full bg-blued relative">
-        
         <div className="flex  justify-start ">
           <aside
-   
             className={` px-4 h-[90vh] transition-width max-w-[15rem] overflow-x-hidden bg-secondary fixed left-0 z-30  scrollbar overflow-y-scroll ${
               open ? "w-1/2" : "w-14 lg:w-full "
             }`}
-            style={{marginTop :"1rem"}}
+            style={{ marginTop: "1rem" }}
           >
             {" "}
             <ul className="list-none">
@@ -399,10 +396,12 @@ const StudentTestLayout = ({ children }) => {
                         dispatch(setTestSelectedTopics([]));
                         setOpen(false);
                         setDown(i);
-    window.scrollTo({
-      top: window.scrollY + bottom.current.getBoundingClientRect().top,
-      behavior: "smooth",
-    });
+                        window.scrollTo({
+                          top:
+                            window.scrollY +
+                            bottom.current.getBoundingClientRect().top,
+                          behavior: "smooth",
+                        });
                         return navigate(el.path);
                       }}
                     >
@@ -415,9 +414,12 @@ const StudentTestLayout = ({ children }) => {
                      ${
                        open ? "w-full " : " "
                      }   shadow-none text-white rounded-xl  border-none  mt-2 focus:outline-none  max-w-xs hover:bg-white hover:text-black mx-auto 
-                     ${selection === i ? "bg-white !text-black w-[15rem]" : "bg-blued" }
+                     ${
+                       selection === i
+                         ? "bg-white !text-black w-[15rem]"
+                         : "bg-blued"
+                     }
                      hover:w-[15rem]  `}
-                    
                       >
                         <div className="w-4 ml-[-10px] ">{el.icon}</div>
 
@@ -440,14 +442,17 @@ const StudentTestLayout = ({ children }) => {
             </ul>
           </aside>
           {/* rounded-3xl */}
-          <div className="bg-white  h-full min-h-[95vh] w-full p-4 mx-4 ml-14 lg:ml-60 mt-6"
-           style={{borderTopLeftRadius : "0rem !important", borderBottomLeftRadius : "0rem"}}
+          <div
+            className="bg-white  h-full min-h-[95vh] w-full p-4 mx-4 ml-14 lg:ml-60 mt-6"
+            style={{
+              borderTopLeftRadius: "0rem !important",
+              borderBottomLeftRadius: "0rem",
+            }}
           >
             {children}
           </div>
         </div>
       </div>
-      
     </>
   );
 };

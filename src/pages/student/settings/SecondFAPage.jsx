@@ -1,8 +1,7 @@
 import React from "react";
-import Profile from "../../../components/student/profile/profile";
-import StudentLayout from "../../../layout/Student";
+import SecurityApp from "../../../components/student/settings/security/SecondFA";
 
-const ProfilePage = () => {
+const SecondFAPage = () => {
   React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
@@ -46,12 +45,7 @@ const ProfilePage = () => {
       }
     };
   }, []);
-
-  return (
-    <StudentLayout>
-      <Profile />
-    </StudentLayout>
-  );
+  return <SecurityApp />;
 };
 
-export default ProfilePage;
+export default SecondFAPage;

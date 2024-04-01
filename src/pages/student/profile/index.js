@@ -12,11 +12,11 @@ const Portfolio = lazy(() => import("./Portfolio"));
 const ProfileRoutes = () => {
   return (
     <Route path="student/profile">
+      <Route path="" element={<ProfilePersonalPage />} />
       <Route path="final" element={<ProfileFinal />} />
       <Route path="skills" element={<Skills />} />
       <Route path="portfolio" element={<Portfolio />} />
-      <Route path="" element={<Profile />}></Route>
-      <Route path="personal" element={<ProfilePersonalPage />}></Route>
+      {/* <Route path="personal" element={<ProfilePersonalPage />}></Route> */}
       <Route path="education" element={<ProfileEducationPage />}></Route>
     </Route>
   );

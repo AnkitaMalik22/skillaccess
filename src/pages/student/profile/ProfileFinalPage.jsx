@@ -1,6 +1,6 @@
 import React from "react";
 
-import CollageLayout from "../../../layout/Collage";
+import StudentLayout from "../../../layout/Student";
 import ProfileFinal from "../../../components/student/profile/ProfileFinal/ProfileFinal";
 
 const ProfileFinalPage = () => {
@@ -48,9 +48,9 @@ const ProfileFinalPage = () => {
     };
   }, []);
   return (
-    <CollageLayout>
+    <StudentLayout>
       <ProfileFinal />
-    </CollageLayout>
+    </StudentLayout>
   );
 };
 

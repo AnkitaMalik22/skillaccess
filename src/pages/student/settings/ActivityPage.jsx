@@ -1,8 +1,8 @@
 import React from "react";
-import Profile from "../../../components/student/profile/profile";
 import StudentLayout from "../../../layout/Student";
+import Activity from "../../../components/student/settings/activity/Activity";
 
-const ProfilePage = () => {
+const ActivityPage = () => {
   React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
@@ -46,12 +46,11 @@ const ProfilePage = () => {
       }
     };
   }, []);
-
   return (
     <StudentLayout>
-      <Profile />
+      <Activity />
     </StudentLayout>
   );
 };
 
-export default ProfilePage;
+export default ActivityPage;

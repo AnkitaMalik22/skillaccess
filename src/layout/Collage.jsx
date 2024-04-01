@@ -261,7 +261,6 @@ const CollageLayout = ({ children }) => {
       ),
     },
   ];
- 
 
   useEffect(() => {
     // bottom.current.scrollIntoView();
@@ -325,7 +324,6 @@ const CollageLayout = ({ children }) => {
       setDown(11);
     }
   }, []);
-  
 
   return (
     <>
@@ -369,10 +367,12 @@ const CollageLayout = ({ children }) => {
                         dispatch(setTestSelectedTopics([]));
                         setOpen(false);
                         setDown(i);
-    window.scrollTo({
-      top: window.scrollY + bottom.current.getBoundingClientRect().top,
-      behavior: "smooth",
-    });
+                        window.scrollTo({
+                          top:
+                            window.scrollY +
+                            bottom.current.getBoundingClientRect().top,
+                          behavior: "smooth",
+                        });
                         return navigate(el.path);
                       }}
                     >
@@ -409,7 +409,7 @@ const CollageLayout = ({ children }) => {
             </ul>
           </aside>
 
-          <div className="bg-white rounded-3xl h-full min-h-[95vh] w-full p-4 mx-4 ml-14 lg:ml-60 mt-9">
+          <div className="bg-white rounded-3xl h-full min-h-[95vh] w-full p-4 mx-4 ml-14 lg:ml-60 mt-9 font-dmSans">
             {children}
           </div>
         </div>
