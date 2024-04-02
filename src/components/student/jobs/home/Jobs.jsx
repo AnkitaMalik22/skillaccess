@@ -36,7 +36,7 @@ const Jobs = () => {
     }));
   };
   return(
-    <div className="flex gap-5">
+    <div className="flex gap-5 px-10">
     <div className="w-1/4">
         <div className="mb-4 ">
           <div className="flex justify-between items-center cursor-pointer mb-2" onClick={() => setIsEmploymentTypeExpanded(!isEmploymentTypeExpanded)}>
@@ -45,7 +45,7 @@ const Jobs = () => {
           </div>
           {isEmploymentTypeExpanded && (
             <div>
-              <div className="w-full flex justify-between pt-1">
+              <div className="w-full flex justify-between pt-5">
               <label className="flex items-center mb-2 cursor-pointer">
                 <input
                   type="checkbox"
@@ -58,7 +58,7 @@ const Jobs = () => {
               </label>
               <p className={employmentType.permanentFullTime ? 'bg-gray-200 p-2 text-blue-700 text-[12px] rounded' : 'text-[12px] bg-gray-200 rounded p-2 text-gray-400'}>344</p>
               </div>
-              <div className="w-full flex justify-between pt-1">
+              <div className="w-full flex justify-between pt-5">
               <label className="flex items-center mb-2 cursor-pointer">
                 <input
                   type="checkbox"
@@ -70,7 +70,7 @@ const Jobs = () => {
               </label>
               <p className={employmentType.partTime ? 'bg-gray-200 p-2 text-blue-700 text-[12px] rounded' : 'text-[12px] rounded bg-gray-200 p-2 text-gray-400'}>344</p>
               </div>
-              <div className="w-full flex justify-between pt-1">
+              <div className="w-full flex justify-between pt-5">
               <label className="flex items-center mb-2 cursor-pointer">
                 <input
                   type="checkbox"
@@ -82,7 +82,7 @@ const Jobs = () => {
               </label>
               <p className={employmentType.casualVacation ? 'bg-gray-200 p-2 text-blue-700 text-[12px] rounded' : 'text-[12px] rounded bg-gray-200 p-2 text-gray-400'}>344</p>
               </div>
-              <div className="w-full flex justify-between pt-1">
+              <div className="w-full flex justify-between pt-5">
               <label className="flex items-center mb-2 cursor-pointer">
                 <input
                   type="checkbox"
@@ -94,7 +94,7 @@ const Jobs = () => {
               </label>
               <p className={employmentType.contact ? 'bg-gray-200 p-2 text-blue-700 text-[12px] rounded' : 'text-[12px] rounded bg-gray-200 p-2 text-gray-400'}>344</p>
               </div>
-              <div className="w-full flex justify-between pt-1">
+              <div className="w-full flex justify-between pt-5">
               <label className="flex items-center mb-2 cursor-pointer">
                 <input
                   type="checkbox"
@@ -109,7 +109,7 @@ const Jobs = () => {
             </div>
           )}
         </div>
-        <div className="mb-4">
+        <div className="mb-4 pt-5">
           <div className="flex justify-between items-center cursor-pointer mb-2" onClick={() => setIsSalaryRangeExpanded(!isSalaryRangeExpanded)}>
             <h2 className="text-base font-bold">Salary Range</h2>
             <button>{isSalaryRangeExpanded ? <img src="../../images/icons/down.png"></img>:<img src="../../images/icons/UPP.png"></img>}</button>
@@ -132,7 +132,7 @@ const Jobs = () => {
             </div>
           )}
         </div>
-        <div className="mb-4">
+        <div className="mb-4 pt-5">
           <div className="flex justify-between items-center cursor-pointer mb-2" onClick={() => setIsLocationExpanded(!isLocationExpanded)}>
             <h2 className="text-base font-bold">Location</h2>
             <button>{isLocationExpanded ? <img src="../../images/icons/down.png"></img>:<img src="../../images/icons/UPP.png"></img>}</button>
@@ -140,35 +140,35 @@ const Jobs = () => {
           {isLocationExpanded && (
             <div>
               {/* Checkbox options for locations */}
-              <label className="flex items-center mb-2 cursor-pointer">
+              <label className="flex items-center mb-2 cursor-pointer pt-5">
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4 text-indigo-600"
                 />
                 <span className="ml-2">Sydney</span>
               </label>
-              <label className="flex items-center mb-2 cursor-pointer">
+              <label className="flex items-center mb-2 cursor-pointer pt-5">
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4 text-indigo-600"
                 />
                 <span className="ml-2">United States</span>
               </label>
-              <label className="flex items-center mb-2 cursor-pointer">
+              <label className="flex items-center mb-2 cursor-pointer pt-5">
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4 text-indigo-600"
                 />
                 <span className="ml-2">Vietnam</span>
               </label>
-              <label className="flex items-center mb-2 cursor-pointer">
+              <label className="flex items-center mb-2 cursor-pointer pt-5">
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4 text-indigo-600"
                 />
                 <span className="ml-2">Germany</span>
               </label>
-              <label className="flex items-center mb-2 cursor-pointer">
+              <label className="flex items-center mb-2 cursor-pointer pt-5">
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4 text-indigo-600"
@@ -186,7 +186,7 @@ const Jobs = () => {
           {isSeniorityLevelExpanded && (
             <div>
               {/* Checkbox options for seniority levels */}
-              <label className="flex items-center mb-2 cursor-pointer">
+              <label className="flex items-center mb-2 cursor-pointer pt-5">
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4 text-indigo-600"
@@ -195,7 +195,7 @@ const Jobs = () => {
                 />
                 <span className="ml-2">Entry Level</span>
               </label>
-              <label className="flex items-center mb-2 cursor-pointer">
+              <label className="flex items-center mb-2 cursor-pointer pt-5">
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4 text-indigo-600"
@@ -204,7 +204,7 @@ const Jobs = () => {
                 />
                 <span className="ml-2">Mid Level</span>
               </label>
-              <label className="flex items-center mb-2 cursor-pointer">
+              <label className="flex items-center mb-2 cursor-pointer pt-5">
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4 text-indigo-600"
@@ -217,7 +217,7 @@ const Jobs = () => {
           )}
         </div>
       </div>
-     <div className="flex flex-wrap mx-1 w-fit justify-between ">
+     <div className="flex flex-wrap mx-1 w-fit justify-center gap-4 ">
         <ActiveTests progress={2} />  <ActiveTests progress={0} />
         <ActiveTests progress={4} />
         <ActiveTests progress={3} />

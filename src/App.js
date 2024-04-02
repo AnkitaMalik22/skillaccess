@@ -49,6 +49,7 @@ import AccountingPage from "./pages/collage/accounting/AccountingPage";
 import ProfilePage from "./pages/collage/profile/ProfilePage";
 
 import CompaniesRoute from "./pages/collage/companies";
+import StudentCompaniesRoute from "./pages/student/companies";
 import Loader from "./Loader";
 import ForgotPassword from "./pages/collage/auth/ForgotPassword";
 import ResetPassword from "./pages/collage/auth/ResetPassword";
@@ -188,6 +189,7 @@ export default function App() {
           {StudentInboxRoute()}
           {StudentTestRoute()}
           {StudentResultsRoute()}
+          {StudentCompaniesRoute()}
           {/* .......................................................................................................................... */}
         </Routes>
       </Suspense>
