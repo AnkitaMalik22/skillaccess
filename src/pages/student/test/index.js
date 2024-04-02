@@ -12,6 +12,7 @@ const StudentTestRoute = () => {
   return (
     <Route>
       <Route path="student/test" element={<TestPage />} />
+      <Route path="student/test/section/:id" element={<TestHome />} />
       <Route path="student/test/:testId" element={<TestOverview />} />
       <Route path="student/test/:testId/start" element={<TestHome />} />
 

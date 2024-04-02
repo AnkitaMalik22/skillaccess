@@ -4,9 +4,45 @@ import { FiPlus, FiUpload } from "react-icons/fi";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import StudentPoP from "../../../PopUps/StudentPoP";
+import { useRef } from "react";
+import { toast } from "react-hot-toast";
+
+
 
 const Header = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const upload = useRef(null);
+
+
+  // const handleFile = (e) => {
+  //   setVisible(true);
+  //   const types = [
+  //     "application/vnd.ms-excel",
+  //     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  //     "application/vnd.openxmlformats-officedocument.spreadsheetml.template",
+  //     "application/vnd.ms-excel.sheet.macroEnabled.12",
+  //     "application/vnd.ms-excel.template.macroEnabled.12",
+  //     "application/vnd.ms-excel.addin.macroEnabled.12",
+  //     "application/vnd.ms-excel.sheet.binary.macroEnabled.12",
+  //   ];
+  //   let file = e.target.files[0];
+  //   if (file && types.includes(file.type)) {
+  //     let reader = new FileReader();
+  //     reader.readAsArrayBuffer(file);
+  //     reader.onload = (e) => {
+  //       setExcel(e.target.result);
+  //     };
+  //   } else {
+  //     toast.error("invalid file type");
+  //   }
+  // };
+
+
+
+
+
+
+
 
   const handleAddTeamClick = () => {
     setShowPopup(true);
@@ -15,6 +51,10 @@ const Header = () => {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
+const handleUploadClick = () => {
+  console.log("upload")
+  }
+
   const navigate = useNavigate();
   return (
     <div className="flex w-[95%] mx-auto justify-between mb-2 font-dmSans">
@@ -43,7 +83,9 @@ const Header = () => {
           <FiPlus className="self-center text-lg " /> Add
         </button>
         {showPopup && <StudentPoP onClose={handleClosePopup} />}
-        <button className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 ">
+        <button className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
+        onClick={handleUploadClick}
+        >
           <FiUpload className="self-center text-lg " /> Upload New
         </button>
         <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">

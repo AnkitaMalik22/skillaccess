@@ -1,9 +1,33 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { TbFileDownload } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getRegisteredTeams } from "../../../../redux/collage/teams/teamSlice";
+
+
 
 const List = () => {
   const Navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { approvedTeams } = useSelector(state => state.teamCollege);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleAddTeamClick = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
+  useEffect(() => {
+    dispatch(getRegisteredTeams());
+    console.log("Teams", approvedTeams);
+
+  }, [])
+
+
   return (
     <div className="w-full">
       {/* legend */}
@@ -32,76 +56,88 @@ const List = () => {
       </div>
 
       {/* list to be iterated */}
-      <div className=" grid-cols-7 rounded-lg my-2 py-2 pl-2 text-center w-full mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-snow">
-        {" "}
-        {/* row-2 */}
-        <div className={` flex `}>
-          <div className="flex self-center">
-            <div className=" min-w-[3rem]  h-12 self-center bg-red-600 mr-2  "></div>
-            <span
-              className="break-words min-w-0 pt-1 self-center hover:cursor-pointer hover:text-blued"
-              onClick={() => Navigate("/collage/teams/profile")}
-            >
-              <h2 className="font-dmSans font-medium text-sm sm:text-base">
-                name of user
-              </h2>
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center ">
-          <div className=" self-center h-fit">
-            <span className="self-center">
-              <h2 className="font-dmSans font-medium text-xs sm:text-base inline text-blue-500">
-                {" "}
-                example@mail.com
-              </h2>
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className=" self-center h-fit">
-            <span>
-              <h2 className="font-dmSans font-medium text-sm sm:text-base">
-                UI/UX Design
-              </h2>
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className=" self-center h-fit">
-            <span>
-              <h2 className="font-dmSans font-medium text-sm sm:text-base">
-                Assistant Professor
-              </h2>
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className=" self-center h-fit">
-            <span>
-              <h2 className="font-dmSans font-medium text-sm sm:text-base">
-                Handling profiles
-              </h2>
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className=" self-center h-fit">
-            <span>
-              <img src="../../pic.png" alt="" />
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className=" self-center h-fit">
-            <span>
-              <h2 className="font-dmSans font-medium text-sm sm:text-base">
-                2.5 Years
-              </h2>
-            </span>
-          </div>
-        </div>
-      </div>
+     {
+approvedTeams  && approvedTeams?.map((team, index) => (
+  <div className=" grid-cols-7 rounded-lg my-2 py-2 pl-2 text-center w-full mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-snow">
+  {" "}
+  {/* row-2 */}
+  <div className={` flex `}>
+    <div className="flex self-center">
+      <div className=" min-w-[3rem]  h-12 self-center bg-red-600 mr-2  "></div>
+      <span
+        className="break-words min-w-0 pt-1 self-center hover:cursor-pointer hover:text-blued"
+        onClick={() => Navigate("/collage/teams/profile")}
+      >
+        <h2 className="font-dmSans font-medium text-sm sm:text-base">
+       {
+            team?.Name
+       }
+        </h2>
+      </span>
+    </div>
+  </div>
+  <div className="flex justify-center ">
+    <div className=" self-center h-fit">
+      <span className="self-center">
+        <h2 className="font-dmSans font-medium text-xs sm:text-base inline text-blue-500">
+          {" "}
+      {
+            team?.Email
+      }
+        </h2>
+      </span>
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <div className=" self-center h-fit">
+      <span>
+        <h2 className="font-dmSans font-medium text-sm sm:text-base">
+        {
+            team?.Profile
+        }
+        </h2>
+      </span>
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <div className=" self-center h-fit">
+      <span>
+        <h2 className="font-dmSans font-medium text-sm sm:text-base">
+         {
+            team?.Designation
+         }
+        </h2>
+      </span>
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <div className=" self-center h-fit">
+      <span>
+        <h2 className="font-dmSans font-medium text-sm sm:text-base">
+          Handling profiles
+        </h2>
+      </span>
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <div className=" self-center h-fit">
+      <span>
+        <img src="../../pic.png" alt="" />
+      </span>
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <div className=" self-center h-fit">
+      <span>
+        <h2 className="font-dmSans font-medium text-sm sm:text-base">
+         {team?.Experience} Years
+        </h2>
+      </span>
+    </div>
+  </div>
+</div>
+))
+     }
     </div>
   );
 };

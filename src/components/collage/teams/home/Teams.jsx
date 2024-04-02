@@ -4,7 +4,7 @@ import List from "./List";
 import AddTeamPoP from "../../../PopUps/AddTeamPoP";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getTeams } from "../../../../redux/collage/teams/teamSlice";
+import { getInvitedTeams } from "../../../../redux/collage/teams/teamSlice";
 import TeamCard from "./TeamCard";
 const Teams = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Teams = () => {
   };
 
   useEffect(() => {
-    dispatch(getTeams());
+    dispatch(getInvitedTeams());
     console.log("Teams", teams);
   }, [])
 
