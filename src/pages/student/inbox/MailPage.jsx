@@ -1,8 +1,8 @@
 import React from "react";
 import StudentLayout from "../../../layout/Student";
-import Results from "../../../components/student/results/home/Results";
+import Mail from "../../../components/student/inbox/mail/Mail";
 
-const JobsPage = () => {
+const MailPage = () => {
   React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
@@ -48,9 +48,9 @@ const JobsPage = () => {
   }, []);
   return (
     <StudentLayout>
-      <Results />
+      <Mail />
     </StudentLayout>
   );
 };
 
-export default JobsPage;
+export default MailPage;

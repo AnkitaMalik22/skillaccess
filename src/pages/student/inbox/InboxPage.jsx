@@ -1,8 +1,8 @@
 import React from "react";
+import Inbox from "../../../components/student/inbox/home/Inbox";
 import StudentLayout from "../../../layout/Student";
-import Results from "../../../components/student/results/home/Results";
 
-const JobsPage = () => {
+const InboxPage = () => {
   React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
@@ -48,9 +48,9 @@ const JobsPage = () => {
   }, []);
   return (
     <StudentLayout>
-      <Results />
+      <Inbox />
     </StudentLayout>
   );
 };
 
-export default JobsPage;
+export default InboxPage;

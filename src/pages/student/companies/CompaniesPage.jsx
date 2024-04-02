@@ -1,9 +1,9 @@
 import React from "react";
+import Companies from "../../../components/student/companies/home/Companies";
 import StudentLayout from "../../../layout/Student";
-import Results from "../../../components/student/results/home/Results";
-
-const JobsPage = () => {
-  React.useEffect(() => {
+const CompaniesPage = () => {
+   React.useEffect(() => {
+   
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
     console.log(currentPageLanguage + " " + navigator.language);
@@ -31,26 +31,28 @@ const JobsPage = () => {
       }
     };
 
-    if (navigator.language !== navigator.currentPageLanguage) {
-      console.log("Language is different");
-      loadGoogleTranslateScript();
+
+if(navigator.language !== navigator.currentPageLanguage) {
+  console.log("Language is different");
+  loadGoogleTranslateScript();
+}
+
+// loadGoogleTranslateScript();
+
+
+  return () => {
+    // Clean up script when component unmounts
+    if (scriptLoaded) {
+      document.body.removeChild(script);
+      scriptLoaded = false;
     }
-
-    // loadGoogleTranslateScript();
-
-    return () => {
-      // Clean up script when component unmounts
-      if (scriptLoaded) {
-        document.body.removeChild(script);
-        scriptLoaded = false;
-      }
-    };
-  }, []);
+  };
+}, []);
   return (
     <StudentLayout>
-      <Results />
+      <Companies />
     </StudentLayout>
   );
 };
 
-export default JobsPage;
+export default CompaniesPage;

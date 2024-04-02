@@ -1,8 +1,9 @@
 import React from "react";
 import StudentLayout from "../../../layout/Student";
-import Results from "../../../components/student/results/home/Results";
 
-const JobsPage = () => {
+import ResultsOverview from "../../../components/student/results/overview/ResultsOverview";
+
+const OverViewPage = () => {
   React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
@@ -48,9 +49,9 @@ const JobsPage = () => {
   }, []);
   return (
     <StudentLayout>
-      <Results />
+      <ResultsOverview />
     </StudentLayout>
   );
 };
 
-export default JobsPage;
+export default OverViewPage;
