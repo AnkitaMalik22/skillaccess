@@ -5,16 +5,16 @@ import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import AddTeamPoP from "../../../PopUps/AddTeamPoP";
 
-const Header = () => {
-  const [showPopup, setShowPopup] = useState(false);
+const Header = ({handleAddTeamClick}) => {
+  // const [showPopup, setShowPopup] = useState(false);
 
-  const handleAddTeamClick = () => {
-    setShowPopup(true);
-  };
+  // const handleAddTeamClick = () => {
+  //   setShowPopup(true);
+  // };
 
-  const handleClosePopup = () => {
-    setShowPopup(false);
-  };
+  // const handleClosePopup = () => {
+  //   setShowPopup(false);
+  // };
   const navigate = useNavigate();
   return (
     // <div className="flex  mx-auto justify-between font-dmSans">
@@ -62,7 +62,7 @@ const Header = () => {
         >
           Add Teams
         </button>
-        {showPopup && <AddTeamPoP onClose={handleClosePopup} />}
+        {/* {showPopup && <AddTeamPoP onClose={handleClosePopup} />} */}
     </div>
   );
 };

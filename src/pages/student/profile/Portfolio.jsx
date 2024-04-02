@@ -1,6 +1,6 @@
 import React from "react";
 
-import CollageLayout from "../../../layout/Collage";
+import StudentLayout from "../../../layout/Student";
 import Skills from "../../../components/student/profile/Skills/Skills";
 import Portfolio from "../../../components/student/profile/Portfolio/Portfolio";
 
@@ -49,9 +49,9 @@ const PortfolioPage = () => {
     };
   }, []);
   return (
-    <CollageLayout>
+    <StudentLayout>
       <Portfolio />
-    </CollageLayout>
+    </StudentLayout>
   );
 };
 

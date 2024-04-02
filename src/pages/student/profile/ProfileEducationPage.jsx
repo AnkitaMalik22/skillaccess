@@ -1,16 +1,14 @@
-import React from 'react'
-import CollageLayout from '../../../layout/Collage'
-import ProfileEducation from '../../../components/student/profile/ProfileEducation'
-const profileEducationPage= () => {
+import React from "react";
+import StudentLayout from "../../../layout/Student";
+import ProfileEducation from "../../../components/student/profile/Education/ProfileEducation";
+const profileEducationPage = () => {
   return (
     <div>
-    <CollageLayout>
-      <ProfileEducation/>
-    </CollageLayout>
-     
-    
-</div>
-  )
-}
+      <StudentLayout>
+        <ProfileEducation />
+      </StudentLayout>
+    </div>
+  );
+};
 
-export default profileEducationPage
+export default profileEducationPage;

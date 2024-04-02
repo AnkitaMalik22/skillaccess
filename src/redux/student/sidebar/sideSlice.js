@@ -3,16 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const studentSideSlice = createSlice({
   name: "studentSide",
   initialState: {
-    selected: 0,
+    selected: localStorage.getItem("StudentSide")
+      ? JSON.parse(localStorage.getItem("StudentSide"))
+      : "",
   },
   reducers: {
     setSelected: (state, action) => {
       state.selected = action.payload;
+      localStorage.setItem("StudentSide", JSON.stringify(action.payload));
     },
   },
 });
 
-export const selected = (state) => state.studentSide.selected;
+export const selectedStudent = (state) => state.studentSide.selected;
 
 export const { setSelected } = studentSideSlice.actions;
 
