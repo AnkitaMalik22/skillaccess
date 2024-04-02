@@ -56,6 +56,10 @@ import { Toaster } from "react-hot-toast";
 import StudentProfileRoutes from "./pages/student/profile";
 import StudentTestRoute from "./pages/student/test";
 import StudentSettingsRoute from "./pages/student/settings";
+import StudentJobsRoute from "./pages/student/jobs";
+import StudentDashRoute from "./pages/student/dash";
+import StudentInboxRoute from "./pages/student/inbox";
+import StudentResultsRoute from "./pages/student/results";
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
 const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
@@ -195,7 +199,11 @@ export default function App() {
           {StudentProfileRoutes()}
           {StudentTestRoute()}
           {StudentSettingsRoute()}
-
+          {StudentJobsRoute()}
+          {StudentDashRoute()}
+          {StudentInboxRoute()}
+          {StudentTestRoute()}
+          {StudentResultsRoute()}
           {/* .......................................................................................................................... */}
         </Routes>
       </Suspense>
