@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const TestHeader = () => {
     const navigate = useNavigate();
   return (
-    <div className="flex w-[98%] mx-auto justify-between" style={{marginTop :"5rem"}}>
+    <div className="flex w-[98%] mx-auto justify-between " style={{marginTop :"5rem"}}>
     <div className="h-fit self-center">
       {/* <button className="flex self-center ml-2 rounded-lg  gap-2">
         <button
@@ -25,7 +25,15 @@ const TestHeader = () => {
     </div>
 
     <div className=" rounded-xl mx-2   h-12 flex my-2 font-dmSans ">
-      <div className=" flex gap-2">
+
+      <div className=" flex gap-3">
+      <button
+          className="self-center w-32  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white"
+          onClick={() => navigate(-1)}
+        >
+        <img src='../../../images/icons/CombinedShape.png' alt="" className="self-center w-6 h-6" />
+        <p className="text-lg font-bold self-center text-[#E45B39] ">00:59:33</p>
+        </button>
         <button
           className="self-center w-24  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white"
           onClick={() => navigate(-1)}

@@ -187,8 +187,8 @@ export const updateCollege = createAsyncThunk(
   }
 );
 
-export const getCollege = createAsyncThunk(
-  "studentAuth/getCollege",
+export const getStudent = createAsyncThunk(
+  "studentAuth/getStudent",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${REACT_APP_API_URL}/api/student/me`, {
@@ -198,7 +198,8 @@ export const getCollege = createAsyncThunk(
         },
       });
 
-      return response.data.college;
+      return response.data.student;
+      console.log(response.data.student);
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -329,12 +330,12 @@ export const googleLoginStudent = createAsyncThunk(
 
 export const googleRegisterStudent = createAsyncThunk(
   "studentAuth/googleRegisterStudent",
-  async (accessToken, { rejectWithValue }) => {
+  async ({accessToken,collegeId ,inviteLink}, { rejectWithValue }) => {
     try {
       const ip = await getIp();
       console.log("google register");
       const req = await axios.post(
-        `${REACT_APP_API_URL}/api/student/register`,
+        `${REACT_APP_API_URL}/api/student/register?CollegeId=${collegeId}&inviteLink=${inviteLink}`,
         { googleAccessToken: accessToken, ip: ip }
       );
       const res = req.data;
@@ -484,15 +485,15 @@ const studentAuthSlice = createSlice({
         state.user = user;
         switch (user.authType) {
           case "qr":
-            window.location.href = "/collage/settings/security/securityApp";
+            window.location.href = "/student/settings/security/securityApp";
             break;
           case "otp":
-            window.location.href = "/collage/settings/security/secondFA";
+            window.location.href = "/student/settings/security/secondFA";
             break;
           default:
             state.status = "done";
             state.isLoggedIn = true;
-            window.location.href = "/collage/dashboard";
+            window.location.href = "/student/dash";
             break;
         }
       })
@@ -515,18 +516,20 @@ const studentAuthSlice = createSlice({
         // window.location.reload(true);
         console.log("rejected update profile");
       })
-      .addCase(getCollege.pending, (state, action) => {
+      .addCase(getStudent.pending, (state, action) => {
         // state.status = "loading";
         console.log("pending");
       })
-      .addCase(getCollege.fulfilled, (state, action) => {
+      .addCase(getStudent.fulfilled, (state, action) => {
+
+        console.log(action.payload);
         state.isLoggedIn = true;
         state.user = action.payload;
 
         // Add any fetched posts to the array
         console.log("fullfilled get college");
       })
-      .addCase(getCollege.rejected, (state, action) => {
+      .addCase(getStudent.rejected, (state, action) => {
         // state.logoutError = action.payload;
         state.isLoggedIn = false;
         // alert("You are logged out! Please login again");
@@ -556,7 +559,7 @@ const studentAuthSlice = createSlice({
         state.uploadImg = true;
         state.user.avatar = action.payload.college.avatar;
 
-        // getCollege();
+        // getStudent();
         // Add any fetched posts to the array
         console.log("fullfilled avatar");
       })
@@ -596,7 +599,7 @@ const studentAuthSlice = createSlice({
         // state.user = action.payload.user;
         // localStorage.removeItem("auth-token");
 
-        // getCollege();
+        // getStudent();
         // localStorage.setItem("auth-token", action.payload.token);
       })
       .addCase(updatePassword.rejected, (state, action) => {
@@ -613,15 +616,15 @@ const studentAuthSlice = createSlice({
         localStorage.setItem("auth-token", action.payload.token);
         switch (state.user.authType) {
           case "qr":
-            window.location.href = "/collage/settings/security/securityApp";
+            window.location.href = "/student/settings/security/securityApp";
             break;
           case "otp":
-            window.location.href = "/collage/settings/security/secondFA";
+            window.location.href = "/student/settings/security/secondFA";
             break;
           default:
             state.status = "done";
             state.isLoggedIn = true;
-            window.location.href = "/collage/dashboard";
+            window.location.href = "/student/profile";
             break;
         }
       })
@@ -629,7 +632,7 @@ const studentAuthSlice = createSlice({
         // console.log(action.payload);
         toast.error(action.payload);
         // window.alert(action.payload);
-        window.location.href = "/";
+        window.location.href = "/student";
       })
       .addCase(googleRegisterStudent.pending, (state, action) => {
         state.status = "loading";
@@ -640,7 +643,7 @@ const studentAuthSlice = createSlice({
         state.isLoggedIn = true;
         state.user = action.payload.user;
         localStorage.setItem("auth-token", action.payload.token);
-        window.location.href = "/collage/dashboard";
+        window.location.href = "/student/profile";
         // Add any fetched posts to the array
         console.log("fullfilled");
       })
@@ -651,7 +654,7 @@ const studentAuthSlice = createSlice({
         toast.error(action.payload);
 
         // window.alert(action.payload);
-        window.location.href = "/";
+        window.location.href = "/student";
       })
       .addCase(getLoggedInUsers.pending, (state, action) => {
         state.status = "loading";

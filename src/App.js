@@ -60,6 +60,9 @@ import StudentJobsRoute from "./pages/student/jobs";
 import StudentDashRoute from "./pages/student/dash";
 import StudentInboxRoute from "./pages/student/inbox";
 import StudentResultsRoute from "./pages/student/results";
+import { use } from "i18next";
+import { getStudent } from "./redux/student/auth/studentAuthSlice";
+
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
 const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
@@ -91,8 +94,12 @@ export default function App() {
   );
 
   useEffect(() => {
-    dispatch(getCollege());
+      dispatch(getCollege())
   }, []);
+
+  useEffect(() => {
+    dispatch(getStudent());
+}, []);
 
   useEffect(() => {
     console.log(logoutError);

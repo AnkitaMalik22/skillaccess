@@ -31,11 +31,12 @@ console.log(collegeId, inviteLink);
   const [Credentials, setCredentials] = useState({
     Email: "",
     Password: "",
-
+    From: "",
+    To: "",
     Phone: null,
     FirstName: "",
     LastName: "",
-
+    Major: "",
     University: "",
   });
   const [checked, setChecked] = useState(false);
@@ -78,7 +79,10 @@ console.log(phone);
       Password,
       FirstName,
       LastName,
-      CollegeName: University,
+      Major: Credentials.Major,
+      From: Credentials.From,
+      To: Credentials.To,
+      // CollegeName: University,
       CollegeId: collegeId,
       inviteLink: inviteLink,
       registrationLink :inviteLink
@@ -87,7 +91,7 @@ console.log(phone);
       const ch = await dispatch(registerStudent(data));
       if (ch.meta.requestStatus === "fulfilled") {
         setCredentials({});
-        navigate("/student/dashboard");
+        navigate("/student/profile");
       }
     } catch (error) {
       console.log("Reject" + error);
@@ -99,8 +103,8 @@ console.log(phone);
   function handleGoogleLoginSuccess(tokenResponse) {
     const accessToken = tokenResponse.access_token;
 
-    dispatch(googleRegisterStudent(accessToken));
-    navigate("/student/dashboard");
+    dispatch(googleRegisterStudent({accessToken, collegeId, inviteLink}));
+    navigate("/student/profile");
     // .then((res) => {
     //   if (res.meta.requestStatus === "fulfilled") {
     //
@@ -116,7 +120,9 @@ console.log(phone);
     !Credentials.Password ||
     !Credentials.FirstName ||
     !Credentials.LastName ||
-    !Credentials.University ||
+    !Credentials.Major ||
+    !Credentials.From ||
+    !Credentials.To ||
     !(phone.length>5);
 
   return (
@@ -185,14 +191,46 @@ console.log(phone);
           />
 
           {/* university */}
-          <input
+          {/* <input
             name="University"
             value={Credentials.University}
             onChange={changeHandler}
             type="text"
             placeholder="Your Institute/University"
             className="input rounded-xl border-none  md:mt-6 mt-4 focus:outline-none input-md w-full max-w-xl  mx-auto bg-snow "
-          />
+          /> */}
+
+          {/* major form to  */}
+          <div className="w-full max-w-xl  mx-auto flex md:mt-6 mt-4 ">
+            {/* major */}
+            <input
+              name="Major"
+              value={Credentials.Major}
+              onChange={changeHandler}
+              type="text"
+              placeholder="Major"
+              className="input rounded-xl border-none  focus:outline-none input-md w-1/2  mx-auto bg-snow  "
+            />
+            <span className="w-1/2 flex gap-4 ml-2">
+              <input
+                name="From"
+                value={Credentials.From}
+                onChange={changeHandler}
+                type="date"
+                placeholder="From"
+                className="input rounded-xl border-none  focus:outline-none input-md w-1/2  mx-auto bg-snow  "
+              />
+
+              <input
+                name="To"
+                value={Credentials.To}
+                onChange={changeHandler}
+                type="date"
+                placeholder="To"
+                className="input rounded-xl border-none  focus:outline-none input-md w-1/2  mx-auto bg-snow  "
+              />
+            </span>
+          </div>
 
           {/* dates */}
           <div className="w-full max-w-xl  mx-auto flex md:mt-6 mt-4 ">

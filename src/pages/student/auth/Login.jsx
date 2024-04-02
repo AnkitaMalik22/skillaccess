@@ -70,7 +70,7 @@ const Login = () => {
 
     dispatch(googleLoginStudent(accessToken));
 
-    navigate("/student/dashboard");
+    navigate("/student/dash");
   }
 
   const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
