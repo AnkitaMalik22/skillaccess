@@ -60,6 +60,16 @@ const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
 const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
 
+const RegisterStudent = lazy(() => import("./pages/student/auth/Register"));
+const LoginStudent = lazy(() => import("./pages/student/auth/Login"));
+
+
+
+
+
+
+
+
 export default function App() {
   //  AnkitaMalik22-ankita-dev
   const dispatch = useDispatch();
@@ -130,7 +140,13 @@ export default function App() {
     <React.Fragment>
       <Suspense fallback={<Loader />}>
         <Routes>
+          {/* ------------------------------------- student --------------------------------------------------- */}
+
+          <Route path="/student" element={<RegisterStudent />} />
+          <Route path="/student/login" element={<LoginStudent/>} />
+
           {/* ----------------------------------------collage-------------------------------------------------------------- */}
+
           <Route path="" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/terms&policies" element={<TermsPolicies />} />
