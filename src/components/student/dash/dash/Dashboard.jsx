@@ -26,6 +26,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getCollege } from "../../../../redux/collage/auth/authSlice";
 import List from "./List";
+import ApplyPoPup from "../../../PopUps/ApplyPoPup";
+import CompleteProfile from "../../../PopUps/CompleteProfile";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -69,9 +71,18 @@ export default function Dashboard() {
     console.log("get collaeg");
   }, []);
   const navigate = useNavigate();
+
+  const [showPoPup, setShowPoPup] = useState(true);
+  const handleShow = () => {
+    setShowPoPup(true);
+  };
+  const handleClose = () => {
+    setShowPoPup(false);
+  };
   return (
     <>
       <div className=" w-11/12 mx-auto font-dmSans">
+        {showPoPup && <CompleteProfile onCancel={handleClose} />}
         {/* chart */}
         <ChartComp />
         {/* top dashboard */}
