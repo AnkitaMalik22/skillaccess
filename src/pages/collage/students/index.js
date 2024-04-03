@@ -6,7 +6,7 @@ const StudentsProfilePage = lazy(() => import("./StudentsProfilePage"));
 export default function StudentRoute() {
   return (
     <Route path="/collage/students">
-      <Route path="" element={<StudentsMainPage />} />
+      <Route path="" element={<StudentsMainPage />}  />
       <Route path="profile" element={<StudentsProfilePage />} />
     </Route>
   );
