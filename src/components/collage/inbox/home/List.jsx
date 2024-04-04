@@ -6,19 +6,36 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 import { TfiClip } from "react-icons/tfi";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCollege,
+  getInbox,
+  getMail,
+  getSentEmails,
+} from "../../../../redux/collage/auth/authSlice";
 
 const List = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const user = useSelector(getInbox);
   const [arr, setArr] = useState([
-    { id: 1, isChecked: false },
-    { id: 2, isChecked: false },
-    { id: 3, isChecked: false },
-    { id: 4, isChecked: false },
+    // { id: 1, isChecked: false },
+    // { id: 2, isChecked: false },
+    // { id: 3, isChecked: false },
+    // { id: 4, isChecked: false },
   ]);
 
-  //   useEffect(() => {
-  //     setArr(arr);
-  //   }, []);
+  useEffect(() => {
+    dispatch(getMail());
+  }, []);
+
+  useEffect(() => {
+    if (JSON.stringify(user) !== JSON.stringify(arr)) {
+      console.log(user);
+      setArr(user);
+    }
+  }, [user]);
 
   const handleCheckbox = (e) => {
     const { checked, id, name } = e.target;
@@ -95,15 +112,12 @@ const List = () => {
                 className="text-sm font-medium hover:cursor-pointer"
                 onClick={() => navigate("/collage/inbox/mail/:view")}
               >
-                Fanny Chapman
+                {el.to}
               </p>
               <p className="text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6">
-                Product Review for UI8 asdsad
+                {el.subject}
               </p>
-              <p className="text-sm text-gray-400">
-                Hey man, I'm finalizing my presentation for tomorrow's workshop.
-                I feel something{" "}
-              </p>
+              <p className="text-sm text-gray-400 line-clamp-2">{el.message}</p>
             </div>
 
             <div className="flex gap-4 pr-4">

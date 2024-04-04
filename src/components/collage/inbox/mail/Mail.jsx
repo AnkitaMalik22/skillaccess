@@ -1,22 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Left from "./Left";
 import View from "./View";
 import { useParams } from "react-router-dom";
 import Compose from "./Compose";
 import { PiArrowCounterClockwiseBold } from "react-icons/pi";
-import { FaSortDown } from "react-icons/fa";
-import { FiTrash } from "react-icons/fi";
-import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
-import { FiCornerUpLeft, FiCornerUpRight } from "react-icons/fi";
-import { BsArrowsAngleExpand } from "react-icons/bs";
-import { RxCross1 } from "react-icons/rx";
+
 import ViewBar from "./ViewBar";
 import ComposeBar from "./ComposeBar";
+import {
+  getCollege,
+  getInbox,
+  getSentEmails,
+} from "../../../../redux/collage/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Mail = () => {
+  const dispatch = useDispatch();
   let { type } = useParams();
 
+  const user = useSelector(getInbox);
+
+  const { sendMailLoading } = useSelector((state) => state.collageAuth);
+  const [arr, setArr] = useState([]);
+
+  useEffect(() => {
+    if (JSON.stringify(user) !== JSON.stringify(arr)) {
+      console.log(user);
+      setArr(user);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    dispatch(getCollege());
+  }, [sendMailLoading]);
   return (
     <div className="w-11/12 mx-auto font-dmSans">
       <Header />
@@ -49,9 +66,9 @@ const Mail = () => {
         </div>
         <div className="h-[70vh] w-full flex gap-4">
           <div className="w-1/4 bg-white p-2 overflow-y-scroll rounded-lg">
-            <Left />
-            <Left />
-            <Left />
+            {arr.map((data) => (
+              <Left data={data} />
+            ))}
           </div>
           <div className="w-3/4 bg-white rounded-lg">
             {type === ":view" ? <View /> : <Compose />}
