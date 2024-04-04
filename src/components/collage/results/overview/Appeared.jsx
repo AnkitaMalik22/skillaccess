@@ -11,7 +11,7 @@ const Appeared = ({ assessment  }) => {
 
   const {  testDataResponse ,response} =useSelector((state) => state.test);
 
-
+console.log(assessment);
   useEffect(() => {
     dispatch(getTestResultPage(assessment._id));
   }, [dispatch, assessment._id]);
@@ -57,8 +57,7 @@ const Appeared = ({ assessment  }) => {
     // });
     
 
-    console.log(testDataResponse.studentResponses);
-    console.log(assessment.studentResponses);
+   
     let copy = [...testDataResponse];
 
 
@@ -75,9 +74,11 @@ const Appeared = ({ assessment  }) => {
     //   return updatedStudent;
     // });
     let arr = copy?.map((student) => {
-      let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
-      student.studentResponses.forEach((resId) => {
-          console.log("resId", resId);
+      let updatedStudent = { ...student }; 
+      
+      // Create a new object with the same properties as the student object
+      student?.studentResponses?.forEach((resId) => {
+         
           const responseId = assessment?.studentResponses?.find((response) => response._id === resId._id);
 
           console.log("responseId", responseId);
@@ -85,14 +86,36 @@ const Appeared = ({ assessment  }) => {
           // updatedStudent.responseId = responseId;
           updatedStudent.responseId = resId;
           updatedStudent.response = response;
-          console.log("updatedStudent", updatedStudent);
+          
       });
       return updatedStudent;
   }).filter((student) => student?.studentTests?.includes(assessment._id.toString()));
   
-  console.log("arr", arr);
-  
+ 
 
+  const getProgressBarColor = (percentage) => {
+    if (percentage === 0) {
+      return ""; // Return empty string for transparent
+    } else if (percentage > 0 && percentage < 33.33) {
+      return "bg-red-600"; // Red color
+    } else if (percentage >= 33.33 && percentage < 66.66) {
+      return "bg-blue-600"; // Blue color
+    } else {
+      return "bg-green-600"; // Green color
+    }
+  };
+  const getProgressBarWidth = (percentage) => {
+    if (percentage === 0) {
+      return 0; // Width is 0 when percentage is 0
+    } else if (percentage < 33.33) {
+      return 40; // 2/5 width
+    } else if (percentage < 66.66) {
+      return 60; // 3/5 width
+    } else {
+      return 100; // Full width
+    }
+  };
+  
   return (
     <div className="w-full mx-auto">
       {/* legend */}
@@ -167,9 +190,12 @@ arr?.map((student, index) => (
             <div className=" self-center">
               <span className="flex gap-2">
                 <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
-                  <div
-                    className={`w-3/5 bg-[#DE350B] bg-opacity-70 h-full rounded-lg`}
-                  ></div>
+                <div
+          className={`h-full rounded-lg ${getProgressBarColor(
+            student?.response?.percentage
+          )}`}
+          style={{ width: `${student?.response?.percentage}%` }}
+        ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}

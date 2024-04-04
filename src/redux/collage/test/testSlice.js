@@ -93,6 +93,8 @@ const testState = {
         Time: 0,
         Heading: "",
         Description: "",
+        duration_from:"",
+        duration_to:"",
         CreatedByAdmin: false,
         Student: [],
         Timeline: "",
