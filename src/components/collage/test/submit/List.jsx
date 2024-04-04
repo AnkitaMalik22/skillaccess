@@ -52,12 +52,13 @@ const List = ({ question, number }) => {
                 leaveTo="transform scale-95 opacity-0"
               > */}
               <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
-                {question.Options?.map((question) => (
+                {question.Options?.map((question,index) => (
                   <div className="flex gap-2 z-10 relative rounded-lg p-3">
-                    <div className="w-6">
+                    <div className="w-6" key={index}>
                       <input
                         type="radio"
                         name="answer"
+                        // value={index===question.AnswerIndex-1}
                         id="answer"
                         className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                       />
