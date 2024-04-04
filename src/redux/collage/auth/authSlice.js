@@ -24,7 +24,60 @@ const collageState = {
   uploadImg: false,
   loggedInUsers: null,
   logoutError: null,
+  sendMailLoading: false,
+  mail: {
+    emailsReceived: [],
+    emailsSent: [],
+  },
 };
+
+export const sendMail = createAsyncThunk(
+  "collageAuth/sendMail",
+  async (data, { rejectWithValue }) => {
+    try {
+      const req = await axios.post(
+        `${REACT_APP_API_URL}/api/college/inbox/sendMail/college`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const getMail = createAsyncThunk(
+  "collageAuth/getMail",
+  async (_, { rejectWithValue }) => {
+    try {
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/college/inbox/Mail`,
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+
+      return res;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 export const getSecretQr = createAsyncThunk(
   "collageAuth/getSecretQr",
@@ -429,6 +482,21 @@ const collageAuthSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      .addCase(getMail.fulfilled, (state, action) => {
+        if (action.payload.mail) {
+          state.mail = action.payload.mail;
+        }
+      })
+      .addCase(sendMail.pending, (state, action) => {
+        state.sendMailLoading = true;
+      })
+      .addCase(sendMail.fulfilled, (state, action) => {
+        state.sendMailLoading = false;
+      })
+      .addCase(sendMail.rejected, (state, action) => {
+        state.sendMailLoading = false;
+      })
       .addCase(selectAuth.fulfilled, (state, action) => {
         switch (action.payload.college.authType) {
           case "otp":
@@ -723,6 +791,17 @@ const collageAuthSlice = createSlice({
   },
 });
 
+export const getSentEmails = (state) => {
+  return state.collageAuth.user.emailsSent.map((value) => {
+    return { ...value, isChecked: false };
+  });
+};
+
+export const getInbox = (state) => {
+  return state.collageAuth.mail.emailsReceived?.map((value) => {
+    return { ...value, isChecked: false };
+  });
+};
 //
 export const { setUploadImg, clearLogoutError } = collageAuthSlice.actions;
 export default collageAuthSlice.reducer;

@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TfiClip } from "react-icons/tfi";
+import { useSelector } from "react-redux";
+import { getInbox } from "../../../../redux/collage/auth/authSlice";
 
-const Left = () => {
+const Left = ({ data }) => {
+  const user = useSelector(getInbox);
+  const [arr, setArr] = useState([
+    // { id: 1, isChecked: false },
+    // { id: 2, isChecked: false },
+    // { id: 3, isChecked: false },
+    // { id: 4, isChecked: false },
+  ]);
+
+  useEffect(() => {
+    if (JSON.stringify(user) !== JSON.stringify(arr)) {
+      console.log(user);
+      setArr(user);
+    }
+  }, [user]);
   return (
     <div className={`rounded-lg hover:bg-[#0052CC] hover:bg-opacity-5 p-3`}>
       <div className="flex justify-between">
@@ -9,11 +25,11 @@ const Left = () => {
           <div className="w-10 h-10 rounded-lg bg-gray-300 self-center"></div>
           <div className="self-center">
             <p className="leading-[16px] text-xs font-medium text-gray-400">
-              Barbara Buchanan
+              {data.from?.CollegeName}
             </p>
             <p className="leading-[16px] text-sm font-medium mt-2">
               {" "}
-              UX Research for Product
+              {data.subject}
             </p>
           </div>
         </div>
@@ -26,9 +42,7 @@ const Left = () => {
         <div className="w-10 flex justify-center self-center">
           <TfiClip className="rotate-180 text-xl font-extrabold text-gray-400 ml-1" />
         </div>
-        <p className=" text-xs text-gray-400 line-clamp-2">
-          Hey man, I'm finalizing my presentation for tomorrow's worksh
-        </p>
+        <p className=" text-xs text-gray-400 line-clamp-2">{data.message}</p>
       </div>
     </div>
   );
