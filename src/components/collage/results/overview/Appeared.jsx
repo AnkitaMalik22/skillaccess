@@ -79,8 +79,11 @@ const Appeared = ({ assessment  }) => {
       student.studentResponses.forEach((resId) => {
           console.log("resId", resId);
           const responseId = assessment?.studentResponses?.find((response) => response._id === resId._id);
+
+          console.log("responseId", responseId);
           // add the responseId to the updatedStudent object
-          updatedStudent.responseId = responseId;
+          // updatedStudent.responseId = responseId;
+          updatedStudent.responseId = resId;
           updatedStudent.response = response;
           console.log("updatedStudent", updatedStudent);
       });
