@@ -11,7 +11,7 @@ export const addTeam = createAsyncThunk(
     async (data, { rejectWithValue }) => {
         try {
         const response = await axios.post(
-            `${REACT_APP_API_URL}/api/college/teams/add`,
+            `${REACT_APP_API_URL}/api/college/teams/invite`,
             data,
             {
               headers: {
@@ -79,18 +79,28 @@ export const getInvitedTeams = createAsyncThunk(
           approvedTeams: [],
           status: null,
           error: null,
+          teamloading: false,
+        },
+        reducers:{
+          setLoading: (state, action) => {
+            state.teamloading= action.payload;
+        }
         },
         extraReducers: (builder) => {
          builder.addCase(addTeam.pending, (state, action) => {
             state.status = "loading";
+            state.teamloading = true;
           })
          .addCase(addTeam.fulfilled, (state, action) => {
             state.status = "success";
+            state.teamloading = false;
             // state.teams = action.payload;
             toast.success("Team member added successfully");
+
           })
          .addCase(addTeam.rejected, (state, action) => {
             state.status = "failed";
+            state.teamloading = false;
             state.error = action.payload;
             toast.error("Failed to add team member");
           })
@@ -119,6 +129,8 @@ export const getInvitedTeams = createAsyncThunk(
           })
         },
         });
+
+        export  const {setLoading} = teamSlice.actions;
 
         export default teamSlice.reducer;
 

@@ -63,7 +63,7 @@ approvedTeams  && approvedTeams?.map((team, index) => (
   {/* row-2 */}
   <div className={` flex `}>
     <div className="flex self-center">
-      <div className=" min-w-[3rem]  h-12 self-center bg-red-600 mr-2  "></div>
+    <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center ">  <img src="../../images/student.png" alt="" width="50px" height="50px"/></div>
       <span
         className="break-words min-w-0 pt-1 self-center hover:cursor-pointer hover:text-blued"
         onClick={() => Navigate("/collage/teams/profile")}
