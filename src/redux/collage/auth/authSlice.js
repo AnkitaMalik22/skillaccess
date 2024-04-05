@@ -671,7 +671,9 @@ const collageAuthSlice = createSlice({
         // localStorage.setItem("auth-token", action.payload.token);
       })
       .addCase(updatePassword.rejected, (state, action) => {
-        alert(action.payload.message);
+        console.log(action.payload)
+        toast.error(action.payload)
+        // alert(action.payload.message);
       })
       .addCase(googleLoginCollage.pending, (state, action) => {
         state.status = "loading";
