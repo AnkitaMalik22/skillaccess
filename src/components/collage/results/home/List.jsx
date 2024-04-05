@@ -78,25 +78,14 @@ const List = () => {
           <div className="flex justify-center">
             <div className=" self-center h-fit">
               <span>
-                <h2 className="font-dmSans  sm:text-sm">{0}</h2>
-              </span>
-            </div>
-          </div>
-          {/*  */}
-          {/* <div className="flex justify-center">
-            <div className=" self-center">
-              <span className="flex gap-2">
-                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
-                  {/* <div className={`w-3/5 bg-green-700 h-full rounded-lg`}></div> */}
-                </div>
-                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+              <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
                   0%
                 </h2>
               </span>
             </div>
-          </div> */}
-          {/*  */}
+          </div>
+      
           <div className="flex justify-end mr-3">
             <span
               className="self-center hover:cursor-pointer "
