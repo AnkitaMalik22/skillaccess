@@ -487,7 +487,6 @@ const collageAuthSlice = createSlice({
         if (action.payload.mail) {
           state.mail = action.payload.mail;
         }
-
       })
       .addCase(sendMail.pending, (state, action) => {
         state.sendMailLoading = true;
@@ -499,6 +498,7 @@ const collageAuthSlice = createSlice({
       .addCase(sendMail.rejected, (state, action) => {
         state.sendMailLoading = false;
         toast.error("Error sending mail");
+
       })
       .addCase(selectAuth.fulfilled, (state, action) => {
         switch (action.payload.college.authType) {
