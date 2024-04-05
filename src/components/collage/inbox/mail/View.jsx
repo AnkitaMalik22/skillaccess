@@ -1,33 +1,33 @@
 import { Disclosure } from "@headlessui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaSortDown, FaX } from "react-icons/fa6";
 import { FiDownload } from "react-icons/fi";
 import { GrExpand } from "react-icons/gr";
 import { TfiClip } from "react-icons/tfi";
 import { BsEmojiSmile } from "react-icons/bs";
 import { FiTrash } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { getMail } from "../../../../redux/collage/auth/authSlice";
 
-const View = () => {
+const View = ({ index }) => {
+  const dispatch = useDispatch();
+
+  const { mail } = useSelector((state) => state.collageAuth);
+  const Email = mail.emailsReceived[index];
+  console.log(Email);
+  useEffect(() => {
+    dispatch(getMail());
+  }, []);
   return (
     <div className="w-full h-full p-5 font-dmSans">
-      <h1 className="mt-4 mb-6 text-xl font-bold">UX Research for Product</h1>
-      <p className="whitespace-pre-wrap text-sm h-[30vh] overflow-y-scroll">
-        Hi Linh,
-        <br />
-        <br />
-        Lauren Good afternoon, I was checking your work on dribble. We are
-        creating a start up related to airport services and we need a beautiful
-        landing page and mobile app. As we have previous experience in creating
-        this kind of projects, we have the wireframes ready.We are looking for
-        something minimalistic and clean with a quirky touch (with nice
-        illustrations) and looking at your projects I am confident you would do
-        the job fantastically.
-        <br />
-        <br />
-        Have a lovely day.
+      <h1 className="mt-4 mb-6 text-xl font-bold break-words">
+        {Email.subject}
+      </h1>
+      <p className="break-words  text-sm h-[30vh] max-w-[60vw]">
+        {Email.message}
       </p>
 
-      <div className="flex gap-4">
+      {/* <div className="flex gap-4">
         <div className="bg-[#0052CC] p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
           <div className="flex gap-2">
             <img src="../../images/icons/fileBlue.png" alt="" />
@@ -53,7 +53,7 @@ const View = () => {
             <FiDownload className="text-lg text-gray-400" />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="w-full bg-[#8F92A1] bg-opacity-5 p-4 mt-4 rounded-lg">
         {/* Reply to */}
@@ -73,9 +73,9 @@ const View = () => {
                   <>
                     <Disclosure.Button className="flex w-full sm:w-96 justify-between rounded-lg bg-[#8F92A1] bg-opacity-20 px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                       <span className="text-xs font-bold text-[#8F92A1]">
-                        Barbara Buchanan (barbarabuchanan@carrotlabs.co
+                        {Email.from.Email}
                       </span>
-                      <FaX className={`w-4 h-4 text-gray-400`} />
+                      {/* <FaX className={`w-4 h-4 text-gray-400`} /> */}
                     </Disclosure.Button>
                     <Disclosure.Panel className="px-4 pb-2 pt-4 text-sm text-gray-500 absolute"></Disclosure.Panel>
                   </>

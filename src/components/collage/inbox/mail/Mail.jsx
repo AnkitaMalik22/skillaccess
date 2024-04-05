@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Left from "./Left";
 import View from "./View";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import Compose from "./Compose";
 import { PiArrowCounterClockwiseBold } from "react-icons/pi";
 
@@ -11,17 +11,19 @@ import ComposeBar from "./ComposeBar";
 import {
   getCollege,
   getInbox,
+  getMail,
   getSentEmails,
 } from "../../../../redux/collage/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Mail = () => {
   const dispatch = useDispatch();
-  let { type } = useParams();
 
+  const [searchParams, setSearchParams] = useSearchParams();
   const user = useSelector(getInbox);
-
-  const { sendMailLoading } = useSelector((state) => state.collageAuth);
+  const index = searchParams.get("index");
+  const type = searchParams.get("type");
+  const { sendMailLoading, mail } = useSelector((state) => state.collageAuth);
   const [arr, setArr] = useState([]);
 
   useEffect(() => {
@@ -32,13 +34,13 @@ const Mail = () => {
   }, [user]);
 
   useEffect(() => {
-    dispatch(getCollege());
+    dispatch(getMail());
   }, [sendMailLoading]);
   return (
     <div className="w-11/12 mx-auto font-dmSans">
       <Header />
 
-      <div className="bg-lGray bg-opacity-5  p-4 rounded-lg ">
+      <div className="bg-lGray bg-opacity-5  p-4 rounded-lg max-w-[80vw]">
         <div className="w-full bg-white flex mb-2 rounded-xl">
           <div className="w-1/4 h-[4.5rem] flex justify-between px-2">
             <select
@@ -64,14 +66,14 @@ const Mail = () => {
             )}
           </div>
         </div>
-        <div className="h-[70vh] w-full flex gap-4">
+        <div className="min-h-[70vh] w-full flex gap-4">
           <div className="w-1/4 bg-white p-2 overflow-y-scroll rounded-lg">
-            {arr.map((data) => (
-              <Left data={data} />
+            {arr.map((data, index) => (
+              <Left data={data} index={index} />
             ))}
           </div>
           <div className="w-3/4 bg-white rounded-lg">
-            {type === ":view" ? <View /> : <Compose />}
+            {type === "view" ? <View index={index} /> : <Compose />}
           </div>
         </div>
       </div>
