@@ -3,7 +3,7 @@ import Header from "./Header";
 import { TbFileDownload } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
-import { getStudents,approveStudent } from "../../../../redux/collage/student/studentSlice";
+import { getStudents,approveStudent, setLoading } from "../../../../redux/collage/student/studentSlice";
 import  PopUp  from "./PopUp";
 
 const Students = () => {
@@ -11,7 +11,7 @@ const Students = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = React.useState(false);
   const [sId , setSId] = React.useState(null)
-  const { uploadedStudents,approvedStudents,pendingStudents} = useSelector((state) => state.collegeStudents);
+  const { uploadedStudents,approvedStudents,pendingStudents,loading} = useSelector((state) => state.collegeStudents);
 
   const {user } = useSelector((state) => state.collageAuth);
  useEffect(() => {
@@ -19,6 +19,15 @@ const Students = () => {
   // console.log(students)
 
  }, [dispatch])
+
+
+ useEffect(() => {
+if (!loading) {
+  dispatch(getStudents({id: user?._id}))
+  dispatch(setLoading(false))
+}
+
+  }, [loading])
 
 
 

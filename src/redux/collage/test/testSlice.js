@@ -571,7 +571,8 @@ export const getRecentUsedQuestions = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${REACT_APP_API_URL}/api/assessments/recent/questions`,
+        // `${REACT_APP_API_URL}/api/assessments/recent/questions`,
+        `${REACT_APP_API_URL}/api/qb/recent/questions`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -589,6 +590,28 @@ export const getRecentUsedQuestions = createAsyncThunk(
   }
 );
 
+
+export const deleteRecentUsedQuestion = createAsyncThunk(
+  "test/deleteRecentUsedQuestion",
+  async (data, { rejectWithValue }) => {
+    try {
+      const req = await axios.delete(
+        `${REACT_APP_API_URL}/api/qb/recent/question/${data.id}?type=${data.type}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res.topics;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 
 
@@ -1210,11 +1233,24 @@ const testSlice = createSlice({
         state.status = "pending";
       })
       .addCase(getRecentUsedQuestions.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.recentUsedQuestions = action.payload;
       })
       .addCase(getRecentUsedQuestions.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.recentUsedQuestions = [];
+      })
+      .addCase(deleteRecentUsedQuestion.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(deleteRecentUsedQuestion.fulfilled, (state, action) => {
+        state.recentUsedQuestions = action.payload;
+        toast.success("Question removed from recent used questions");
+      })
+      .addCase(deleteRecentUsedQuestion.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        toast.error("Error removing question from recent used questions");
+        // state.recentUsedQuestions = [];
       });
 
 

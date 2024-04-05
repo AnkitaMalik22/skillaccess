@@ -12,6 +12,11 @@ const Compose = () => {
     });
     console.log(email);
   };
+
+  const handleSubmit = () => {
+    dispatch(sendMail(email));
+    setEmail({ Email: "", Message: "", Subject: "" });
+  }
   return (
     <div className="p-4 flex flex-col gap-3">
       <input
@@ -56,7 +61,7 @@ const Compose = () => {
         <div>
           <button
             className="bg-blue-700 text-sm font-bold text-white rounded-xl px-4 py-2"
-            onClick={() => dispatch(sendMail(email))}
+            onClick={() => handleSubmit()}
           >
             Send
           </button>

@@ -487,15 +487,18 @@ const collageAuthSlice = createSlice({
         if (action.payload.mail) {
           state.mail = action.payload.mail;
         }
+
       })
       .addCase(sendMail.pending, (state, action) => {
         state.sendMailLoading = true;
       })
       .addCase(sendMail.fulfilled, (state, action) => {
         state.sendMailLoading = false;
+        toast.success("Mail sent successfully");
       })
       .addCase(sendMail.rejected, (state, action) => {
         state.sendMailLoading = false;
+        toast.error("Error sending mail");
       })
       .addCase(selectAuth.fulfilled, (state, action) => {
         switch (action.payload.college.authType) {
@@ -743,6 +746,10 @@ const collageAuthSlice = createSlice({
         state.status = "success";
         // state.user = action.payload;
         state.loggedInUsers = action.payload;
+        state.mail = {
+          emailsReceived: [],
+          emailsSent: [],
+        }
         console.log("fullfilled");
       })
       .addCase(logoutAUser.rejected, (state, action) => {

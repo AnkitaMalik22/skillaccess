@@ -18,9 +18,14 @@ const Appeared = ({ assessment  }) => {
 
   const getResponse = (responseId) => {
     dispatch(getStudentResponse(responseId));
-  };
+  }
 
 
+
+
+  // useEffect(()=>{
+  //   dispatch(getTestResultPage(assessment._id));
+  // },[])
 
   
   // const arr = [2, 1, 1, 1, 1];
@@ -76,7 +81,7 @@ const Appeared = ({ assessment  }) => {
     // });
     let arr = copy?.map((student) => {
       let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
-      student.studentResponses.forEach((resId) => {
+      student?.studentResponses?.forEach((resId) => {
           console.log("resId", resId);
           const responseId = assessment?.studentResponses?.find((response) => response._id === resId._id);
 
@@ -85,10 +90,12 @@ const Appeared = ({ assessment  }) => {
           // updatedStudent.responseId = responseId;
           updatedStudent.responseId = resId;
           updatedStudent.response = response;
+
+          // updatedStudent.percent = student?.response?.percentage;
           console.log("updatedStudent", updatedStudent);
       });
       return updatedStudent;
-  }).filter((student) => student?.studentTests?.includes(assessment._id.toString()));
+  }).filter((student) => student?.studentTests?.includes(assessment?._id?.toString()));
   
   console.log("arr", arr);
   

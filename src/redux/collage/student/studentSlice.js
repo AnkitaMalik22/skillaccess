@@ -39,6 +39,7 @@ export const getStudents = createAsyncThunk(
 export const uploadStudents = createAsyncThunk( 
     "student/uploadStudents",
     async (students, { rejectWithValue }) => {
+        console.log(students, "students");
         try {
         const response = await axios.post(`${REACT_APP_API_URL}/api/college/upload/students`, 
         {students},
@@ -91,6 +92,9 @@ export const studentSlice = createSlice({
         setApprovedStudents: (state, action) => {
             state.approvedStudents = action.payload;
         },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -113,12 +117,15 @@ export const studentSlice = createSlice({
             .addCase(uploadStudents.pending, (state) => {
                 state.loading = true;
                 state.error = false;
+        
+
             })
             .addCase(uploadStudents.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = false;
                 console.log(action.payload, "action.payload");
                 getStudents();
+                toast.success("Students Uploaded Successfully");
                 // state.uploadedStudents = action.payload.uploadedStudents;
                 // state.invitedStudents = action.payload.invitedStudents;
                 // state.approvedStudents = action.payload.approvedStudents;
@@ -126,6 +133,7 @@ export const studentSlice = createSlice({
             .addCase(uploadStudents.rejected, (state) => {
                 state.loading = false;
                 state.error = true;
+                toast.error("An error occurred while uploading the students");
             })
             .addCase(approveStudent.pending, (state) => {
                 state.loading = true;
@@ -148,6 +156,6 @@ export const studentSlice = createSlice({
 
 
 
-export const { setUploadedStudents, setInvitedStudents, setApprovedStudents } = studentSlice.actions;
+export const { setUploadedStudents, setInvitedStudents, setApprovedStudents ,setLoading} = studentSlice.actions;
 
 export default studentSlice.reducer;

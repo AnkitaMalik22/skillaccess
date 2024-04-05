@@ -20,16 +20,16 @@ const Header = () => {
         </h2>
       </span>
       <div className="bg-gray-100 rounded-xl mx-2  sm:h-12 h-10 flex my-2 px-4 w-fit">
-        <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
+        {/* <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
         <input
           type="text"
           placeholder="Search"
           className="input border-none self-center bg-gray-100 focus:outline-none input-md  max-w-md mx-auto  "
-        />
+        /> */}
       </div>
 
       <span className="flex gap-2">
-        <button
+        {/* <button
           className="self-center justify-center flex bg-[#F8F8F9] py-3 px-5 rounded-xl  font-bold gap-2 "
           // onClick={() => navigate("/collage/test/addMcq")}
         >
@@ -44,7 +44,7 @@ const Header = () => {
         </button>
         <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
-        </button>
+        </button> */}
       </span>
     </div>
   );
