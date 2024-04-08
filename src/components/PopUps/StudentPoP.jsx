@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch } from 'react-redux';
 import { uploadStudents } from '../../redux/collage/student/studentSlice';
+import toast from 'react-hot-toast';
 
 
 
@@ -11,6 +12,12 @@ const StudentPoP = ({ onClose }) => {
     LastName : "",
     Email : ""
   })
+
+  // const [fnErr , setFNErr]=useState("");
+  // const [lnErr , setLNErr]=useState("");
+  // const [emailErr , setEmailErr] = useState("");
+
+
   const dispatch = useDispatch();
 const [showPopup, setShowPopup] = useState(false);
 
@@ -26,18 +33,29 @@ console.log(e.target.value , "pop")
 
 const handleSaveInvite = () => {
 
-console.log(student , "pop")
+if (!student.FirstName) {
+  toast.error("First Name is required");
+  return;
+} else if (!student.LastName) {
+  toast.error("Last Name is required");
+  return;
+} else if (!student.Email) {
+  toast.error("Email is required");
+  return;
+} else if (!/\S+@\S+\.\S+/.test(student.Email)) {
+  toast.error("Invalid Email format");
+  return
+} else {
+  console.log(student, "pop");
+  dispatch(uploadStudents([student]));
 
-  dispatch(uploadStudents(
-[student]
-  ));
   setStudent({
     FirstName : "",
     LastName : "",
     Email : ""
   })
 onClose();
-
+}
 }
 
 

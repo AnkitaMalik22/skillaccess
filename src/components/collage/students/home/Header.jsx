@@ -61,22 +61,39 @@ const Header = () => {
         const headers = jsonData[0];
         const students = [];
   
-        if (headers.length !== 3 || headers[0] !== 'FirstName' || headers[1] !== 'LastName' || headers[2] !== 'Email') {
+        // if (headers.length !== 3 || headers[0] !== 'FirstName' || headers[1] !== 'LastName' || headers[2] !== 'Email') {
+        //   toast.error('Invalid file format');
+        //   return;
+        // }
+
+      if (headers.length !== 3 || headers[0] !== 'FirstName' || headers[1] !== 'LastName' || headers[2] !== 'Email'){
           toast.error('Invalid file format');
-          return;
-        }
-  
+            return;
+          }
+   
         for (let i = 1; i < jsonData.length; i++) {
           const row = jsonData[i];
-          students.push({
-            FirstName: row[0],
-            LastName: row[1],
-            Email: row[2]
-          });
+
+          if (!row[0]) {
+            toast.error(`First Name is Required at Row ${i}`);  setLoading(false);
+            return;
+          }
+         else if (!row[1]) {
+            toast.error(`Last Name is Required at Row ${i} `);  setLoading(false);
+            return;
+          }
+        else  if (!row[2]) {
+            toast.error(`Email is Required at Row ${i}`);  setLoading(false);
+            return;
+          }
+          else {
+            students.push({
+              FirstName: row[0],
+              LastName: row[1],
+              Email: row[2]
+            });
+          }
         }
-  
-        // Dispatch an action to add the students to the store
-        // dispatch(addStudents(students));
 
         dispatch(uploadStudents(students));
 
@@ -84,6 +101,8 @@ const Header = () => {
   
         setLoading(false);
         setVisible(false);
+        
+  
       } catch (error) {
         setLoading(false);
         toast.error('An error occurred while processing the file');
