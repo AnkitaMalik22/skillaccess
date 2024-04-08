@@ -23,7 +23,7 @@ const testState = {
   testName: "",
   testDescription: "",
   testAttempts: "",
-
+  testId : "",
   // testStatus : "",
   assessments: {
     beginner: [],
@@ -617,6 +617,33 @@ export const deleteRecentUsedQuestion = createAsyncThunk(
 
 
 
+// INVITE STUDENTS TO ASSESSMENTS 
+
+export const inviteToTest =createAsyncThunk(
+  'test/inviteToTest',
+  async (data,{rejectWithValue})=>{
+    try {
+      console.log(data);
+      const req = await axios.post(
+        `${REACT_APP_API_URL}/api/assessments/invite/students/${data.testId}`,
+        data.students,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
+
+
 
 
 
@@ -1097,6 +1124,7 @@ const testSlice = createSlice({
       })
       .addCase(createTest.fulfilled, (state, action) => {
         console.log(action.payload);
+        state.testId = action.payload._id;
         state.testName = action.payload.name;
         state.testDescription = action.payload.description;
         state.testAttempts = action.payload.totalAttempts;
@@ -1253,8 +1281,21 @@ const testSlice = createSlice({
         console.error("Error fetching test results:", action.payload);
         toast.error("Error removing question from recent used questions");
         // state.recentUsedQuestions = [];
-      });
+      })
+      .addCase(inviteToTest.pending,(state,action)=>{
+        state.status ="pending";
+      })
+      .addCase(inviteToTest.fulfilled,(state,action)=>{
+        state.status ="fulfilled";
+        toast.success("Students Invited Successfully!");
+        console.log(action.payload)
 
+      })
+      .addCase(inviteToTest.rejected,(state,action)=>{
+state.status = "rejected"
+toast.error("Error Inviting Students!")
+console.log(action.payload)
+      })
 
 
      
