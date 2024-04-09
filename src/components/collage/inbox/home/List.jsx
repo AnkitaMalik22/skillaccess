@@ -137,12 +137,12 @@ const List = () => {
               </p>
               <p
                 className="text-sm text-gray-400 line-clamp-1 h-6 cursor-pointer max-w-[40vw] self-center"
+                dangerouslySetInnerHTML={{ __html:el.mail?.message }}
                 onClick={() =>
                   navigate(`/collage/inbox/mail?index=${i}&type=view`)
                 }
-              >
-                {el.mail?.message}
-              </p>
+              />
+          
             </div>
 
             <div className="flex gap-4 pr-4">

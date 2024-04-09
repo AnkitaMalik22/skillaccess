@@ -22,34 +22,7 @@ const Products=[ {
 
 
 const Top = () => {
-  const creditPayment=async()=>{
-    const customerName = "John Doe"; // Example name
-  const customerAddress = "123 Main Street, City, Country";
-    const stripe = await loadStripe('pk_test_51P3BiVSCjAdB08hyaznd4s3bdbDsVYNIVAb8wqjJzelXQyn866IoIfzAdaKZ3f5dHuu7bFuEq0YKlOCN1Svv4MOx00MjiXgBlz');
-    const body = {
-      products: Products,
-      customerName: customerName,
-      customerAddress: customerAddress
-    };
-  const headers = {
-      "Content-Type":"application/json"
-  }
-  const response = await fetch("http://localhost:4000/create-checkout-session",{
-      method:"POST",
-      headers:headers,
-      body:JSON.stringify(body)
-  });
-
-  const session = await response.json();
-
-  const result = stripe.redirectToCheckout({
-      sessionId:session.id
-  });
-  
-  if(result.error){
-      console.log(result.error);
-  }
-  }
+ 
   return (
     <div className=" w-full grid grid-cols-2 gap-8">
       {/* left pannel */}
@@ -102,7 +75,7 @@ const Top = () => {
         <div className="mb-4 flex justify-between">
           <div className="text-2xl font-bold">Payments</div>
           <div className="flex gap-4">
-            <button className="py-3 text-white rounded-2xl text-xs  bg-[#0052CC] font-bold flex gap-2 px-7 " onClick={creditPayment}>
+            <button className="py-3 text-white rounded-2xl text-xs  bg-[#0052CC] font-bold flex gap-2 px-7 ">
               <p>Pay Now</p>
             </button>
           </div>

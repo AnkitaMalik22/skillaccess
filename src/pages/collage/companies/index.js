@@ -7,6 +7,7 @@ const CompanyJobOverviewPage = lazy(() => import("./CompanyJobOverviewPage"));
 
 export default function CompaniesRoute() {
   return (
+    
     <Route path="collage/companies">
       <Route path="" element={<CompaniesPage />} />
       <Route path="profile/:id" element={<CompanyProfilePage />} />
