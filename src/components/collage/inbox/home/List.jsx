@@ -14,12 +14,13 @@ import {
   getSentEmails,
 } from "../../../../redux/collage/auth/authSlice";
 import socketIOClient from "socket.io-client";
+import convertDate from "../../../../util/getDate";
 
 const ENDPOINT = "http://localhost:4000"; // Socket.IO server endpoint
 const List = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [queries, setQueries] = useState({ limit: 50, skip: 0 });
   const user = useSelector(getInbox);
   const [arr, setArr] = useState([
     // { id: 1, isChecked: false },
@@ -28,22 +29,44 @@ const List = () => {
     // { id: 4, isChecked: false },
   ]);
   const email = useSelector((state) => state.collageAuth.user.Email);
+  const total = useSelector((state) => state.collageAuth.mail.total);
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
     console.log("email");
-    dispatch(getMail());
+    dispatch(getMail(queries));
     socket.emit("joinRoom", email);
 
     socket.on("message", (roomName, message) => {
-      dispatch(getMail());
+      dispatch(getMail(queries));
     });
     return () => {
       socket.disconnect();
     };
   }, []);
+
+  const handleLeft = () => {
+    if (queries.skip < queries.limit) {
+      return;
+    }
+    setQueries((prev) => {
+      let skip = prev.skip - prev.limit;
+      return { ...prev, skip: skip };
+    });
+    getMail(queries);
+  };
+  const handleRight = () => {
+    if (queries.skip > queries.total) {
+      return;
+    }
+    setQueries((prev) => {
+      let skip = prev.skip + prev.limit;
+      return { ...prev, skip: skip };
+    });
+    getMail(queries);
+  };
 
   useEffect(() => {
     if (JSON.stringify(user) !== JSON.stringify(arr)) {
@@ -87,9 +110,16 @@ const List = () => {
           <HiDotsVertical className="self-center text-sm  text-gray-400" />
         </div>
         <div className="flex gap-2 self-center">
-          <p className="text-gray-400 text-xs font-bold">1-50 of 4,792</p>
-          <FaChevronLeft />
-          <FaChevronRight />
+          <p className="text-gray-400 text-xs font-bold">
+            {queries.skip % queries.limit}-
+            {total < queries.limit ? total : queries.limit} of {total}
+          </p>
+          {queries.skip > queries.limit && (
+            <FaChevronLeft onClick={handleLeft} />
+          )}
+          {queries.skip < queries.total && (
+            <FaChevronRight onCkick={handleRight} />
+          )}
         </div>
       </div>
       <div className="p-4 font-medium text-gray-400">
@@ -97,6 +127,7 @@ const List = () => {
       </div>
 
       {arr.map((el, i) => {
+        console.log(el);
         return (
           <div className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto ">
             <div className="flex gap-4 ">
@@ -146,8 +177,18 @@ const List = () => {
             </div>
 
             <div className="flex gap-4 pr-4">
-              <TfiClip className="rotate-180 text-2xl text-gray-400" />
-              <p className="text-sm font-medium text-gray-400">8:56 PM</p>
+              {el.mail.attachments?.length > 0 && (
+                <TfiClip
+                  className="rotate-180 text-2xl text-gray-400 cursor-pointer"
+                  onClick={() =>
+                    navigate(`/collage/inbox/mail?index=${i}&type=view`)
+                  }
+                />
+              )}
+
+              <p className="text-sm font-medium text-gray-400">
+                {convertDate(el.mail.Date)}
+              </p>
             </div>
           </div>
         );

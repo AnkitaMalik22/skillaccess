@@ -10,6 +10,7 @@ import {
 import { FaSortDown } from "react-icons/fa6";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import SearchForm from "../mail/SearchForm";
 
 const Header = () => {
   const refButton = useRef(null);
@@ -73,7 +74,7 @@ const Header = () => {
                   toggle ? "bg-white" : "bg-gray-100"
                 }`}
               >
-                hey
+                <SearchForm setToggle={setToggle} refButton={refButton} />
               </Disclosure.Panel>
             </div>
           )}

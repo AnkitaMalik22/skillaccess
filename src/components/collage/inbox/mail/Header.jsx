@@ -74,7 +74,7 @@ const Header = () => {
                   toggle ? "bg-white" : "bg-gray-100"
                 }`}
               >
-                <SearchForm />
+                <SearchForm setToggle={setToggle} refButton={refButton} />
               </Disclosure.Panel>
             </div>
           )}

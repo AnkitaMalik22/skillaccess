@@ -26,11 +26,34 @@ const collageState = {
   logoutError: null,
   sendMailLoading: false,
   mail: {
+    total: 0,
     attachments: [],
     emailsReceived: [],
     emailsSent: [],
   },
 };
+
+export const searchMail = createAsyncThunk(
+  "collageAuth/searchMail",
+  async (data, { rejectWithValue }) => {
+    try {
+      const req = await axios.post(
+        `${REACT_APP_API_URL}/api/college/inbox/search`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 export const sendReply = createAsyncThunk(
   "collageAuth/sendMail",
@@ -111,10 +134,10 @@ export const sendMail = createAsyncThunk(
 
 export const getMail = createAsyncThunk(
   "collageAuth/getMail",
-  async (_, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${REACT_APP_API_URL}/api/college/inbox/Mail`,
+        `${REACT_APP_API_URL}/api/college/inbox/Mail?skip=${data.skip}&limit=${data.limit}`,
 
         {
           headers: {
@@ -535,6 +558,13 @@ const collageAuthSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(searchMail.fulfilled, (state, action) => {
+        const mails = action.payload.map((value) => {
+          return { mail: value };
+        });
+        state.mail.emailsReceived = mails;
+        // state.mail = { ...state.mail, attachments: action.payload };
+      })
       .addCase(uploadAttachment.fulfilled, (state, action) => {
         state.mail = { ...state.mail, attachments: action.payload };
       })
@@ -543,7 +573,7 @@ const collageAuthSlice = createSlice({
       })
       .addCase(getMail.fulfilled, (state, action) => {
         if (action.payload.mail) {
-          state.mail = action.payload.mail;
+          state.mail = { ...action.payload.mail, total: action.payload.total };
         }
       })
       .addCase(sendMail.pending, (state, action) => {
