@@ -13,7 +13,9 @@ import {
   getMail,
   getSentEmails,
 } from "../../../../redux/collage/auth/authSlice";
+import socketIOClient from "socket.io-client";
 
+const ENDPOINT = "http://localhost:4000"; // Socket.IO server endpoint
 const List = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,9 +27,22 @@ const List = () => {
     // { id: 3, isChecked: false },
     // { id: 4, isChecked: false },
   ]);
+  const email = useSelector((state) => state.collageAuth.user.Email);
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+    setSocket(socket);
+    console.log("email");
     dispatch(getMail());
+    socket.emit("joinRoom", email);
+
+    socket.on("message", (roomName, message) => {
+      dispatch(getMail());
+    });
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -47,7 +62,7 @@ const List = () => {
       setArr(copy);
     } else {
       let copy = arr.map((item) => {
-        return item.id == id ? { ...item, isChecked: checked } : item;
+        return item._id == id ? { ...item, isChecked: checked } : item;
       });
       console.log(copy);
       setArr(copy);
@@ -97,7 +112,7 @@ const List = () => {
                 key={i}
                 type="checkbox"
                 checked={el?.isChecked || false}
-                id={el.id}
+                id={el._id}
                 className={`border-none bg-[#DEEBFF] rounded self-center`}
               />
 
@@ -109,15 +124,25 @@ const List = () => {
 
               <div className="w-5 h-5 rounded-full bg-blued self-center"></div>
               <p
-                className="text-sm font-medium hover:cursor-pointer"
-                onClick={() => navigate("/collage/inbox/mail/:view")}
+                className="text-sm font-medium cursor-pointer"
+                // onClick={() => navigate("/collage/inbox/mail?type=view")}
+                onClick={() =>
+                  navigate(`/collage/inbox/mail?index=${i}&type=view`)
+                }
               >
-                {el.to}
+                {el.mail?.from?.FirstName}
               </p>
-              <p className="text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6">
-                {el.subject}
+              <p className="text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer">
+                {el.mail?.subject}
               </p>
-              <p className="text-sm text-gray-400 line-clamp-2">{el.message}</p>
+              <p
+                className="text-sm text-gray-400 line-clamp-1 h-6 cursor-pointer max-w-[40vw] self-center"
+                onClick={() =>
+                  navigate(`/collage/inbox/mail?index=${i}&type=view`)
+                }
+              >
+                {el.mail?.message}
+              </p>
             </div>
 
             <div className="flex gap-4 pr-4">
