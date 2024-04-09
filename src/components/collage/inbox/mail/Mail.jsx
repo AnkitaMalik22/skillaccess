@@ -35,7 +35,7 @@ const Mail = () => {
 
   useEffect(() => {
     console.log("get amil");
-    dispatch(getMail());
+    dispatch(getMail({ limit: 50, skip: 0 }));
   }, [sendMailLoading, ""]);
 
   return (
@@ -57,7 +57,7 @@ const Mail = () => {
           <div className="w-1 bg-opacity-10 bg-blued rounded  h-14 my-auto"></div>
 
           <div className="w-3/4 h-[4.5rem] flex px-3">
-            {type === ":view" ? (
+            {type === "view" ? (
               <>
                 <ViewBar />
               </>

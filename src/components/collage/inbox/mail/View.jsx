@@ -22,7 +22,7 @@ const View = ({ index }) => {
   const Email = mail.emailsReceived[index];
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    dispatch(getMail());
+    dispatch(getMail({ limit: 50, skip: 0 }));
   }, []);
   const [email, setEmail] = useState({ Message: "" });
   const handleChange = (e) => {
@@ -54,7 +54,7 @@ const View = ({ index }) => {
                     <img src="../../images/icons/image.png" alt="" />
                   )}
                   <div className="self-center">
-                    <p className="text-sm font-bold">{ClipboardItem.name}</p>
+                    <p className="text-sm font-bold">{item.name}</p>
                     <p className="text-xs font-medium">{item.size / 1e6} MB</p>
                   </div>
                 </div>
