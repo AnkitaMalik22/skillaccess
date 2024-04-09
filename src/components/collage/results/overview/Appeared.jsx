@@ -12,15 +12,22 @@ const Appeared = ({ assessment  }) => {
   const {  testDataResponse ,response} =useSelector((state) => state.test);
 
 console.log(assessment);
+console.log(testDataResponse);
+console.log(response);
   useEffect(() => {
     dispatch(getTestResultPage(assessment._id));
   }, [dispatch, assessment._id]);
 
   const getResponse = (responseId) => {
     dispatch(getStudentResponse(responseId));
-  };
+  }
 
 
+
+
+  // useEffect(()=>{
+  //   dispatch(getTestResultPage(assessment._id));
+  // },[])
 
   
   // const arr = [2, 1, 1, 1, 1];
@@ -74,22 +81,37 @@ console.log(assessment);
     //   return updatedStudent;
     // });
     let arr = copy?.map((student) => {
-      let updatedStudent = { ...student }; 
-      
-      // Create a new object with the same properties as the student object
+// <<<<<<< bug-fix-test
+      let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
       student?.studentResponses?.forEach((resId) => {
+          // console.log("resId", resId);
+// =======
+//       let updatedStudent = { ...student }; 
+      
+//       // Create a new object with the same properties as the student object
+//       student?.studentResponses?.forEach((resId) => {
          
+// >>>>>>> saveMain
           const responseId = assessment?.studentResponses?.find((response) => response._id === resId._id);
+
+          // console.log("responseId", responseId);
           // add the responseId to the updatedStudent object
-          updatedStudent.responseId = responseId;
+          // updatedStudent.responseId = responseId;
+          updatedStudent.responseId = resId;
           updatedStudent.response = response;
+// <<<<<<< bug-fix-test
+
+//           // updatedStudent.percent = student?.response?.percentage;
+//           console.log("updatedStudent", updatedStudent);
+// =======
           
+// >>>>>>> saveMain
       });
       return updatedStudent;
-  }).filter((student) => student?.studentTests?.includes(assessment._id.toString()));
+  }).filter((student) => student?.studentTests?.includes(assessment?._id?.toString()));
   
  
-
+console.log(assessment);
   const getProgressBarColor = (percentage) => {
     if (percentage === 0) {
       return ""; // Return empty string for transparent
@@ -112,7 +134,7 @@ console.log(assessment);
       return 100; // Full width
     }
   };
-  
+  console.log(arr)
   return (
     <div className="w-full mx-auto">
       {/* legend */}
