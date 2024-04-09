@@ -39,7 +39,7 @@ const Compose = () => {
     socket.on("emailSent", (data) => {
       // Handle email sent event
       console.log("ems");
-      dispatch(getMail());
+      dispatch(getMail({ limit: 50, skip: 0 }));
     });
 
     return () => {
@@ -107,7 +107,7 @@ const Compose = () => {
                   <img src="../../images/icons/image.png" alt="" />
                 )}
                 <div className="self-center">
-                  <p className="text-sm font-bold">{files[i].name}</p>
+                  <p className="text-sm font-bold">{item.name}</p>
                   <p className="text-xs font-medium">{item.size / 1e6} MB</p>
                 </div>
               </div>

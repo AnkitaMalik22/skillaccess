@@ -11,6 +11,7 @@ import teamCollegeReducer from "../redux/collage/teams/teamSlice.js";
 import { thunk } from "redux-thunk";
 import studentAuthReducer from "./student/auth/studentAuthSlice.js";
 import collegeStudentsReducer from "./collage/student/studentSlice.js";
+import paymentReducer from "./collage/account/paymentSlice.js";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     studentSide :studentSideReducer,
     studentAuth : studentAuthReducer,
     collegeStudents : collegeStudentsReducer,
+    payment : paymentReducer,
   },
 });
 
