@@ -10,7 +10,8 @@ import toast from "react-hot-toast";
 import { FiDownload } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import socketIOClient from "socket.io-client";
-
+import ReactQuill from "react-quill"; // Import ReactQuill
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
 const Compose = () => {
   const [socket, setSocket] = useState(null);
   const ENDPOINT = process.env.REACT_APP_API_URL;
@@ -83,10 +84,13 @@ const Compose = () => {
         type="text"
         className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
       /> */}
-      <textarea
-        onChange={handleChange}
+      <ReactQuill
+      name="Message"
+        onChange={(value)=>setEmail(prev => {
+          return { ...prev, Message: value };
+        })}
         value={email.Message}
-        name="Message"
+        
         className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg h-[30vh] placeholder-gray-400"
         placeholder="Type Something ..."
       />

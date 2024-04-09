@@ -37,9 +37,8 @@ const View = ({ index }) => {
       <h1 className="mt-4 mb-6 text-xl font-bold break-words">
         {Email?.mail.subject}
       </h1>
-      <p className="break-words  text-sm h-[30vh] max-w-[60vw]">
-        {Email?.mail.message}
-      </p>
+      <p className="break-words  text-sm h-[30vh] max-w-[60vw]" dangerouslySetInnerHTML={{ __html:Email?.mail.message }}/>
+    
 
       <div className="flex gap-4">
         <div className="flex gap-4">

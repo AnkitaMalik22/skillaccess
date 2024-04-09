@@ -59,6 +59,7 @@ const Plans = [
 
 
 const Top = () => {
+
   const dispatch = useDispatch();
 
   const { payments,status } = useSelector((state) => state.payment);
@@ -127,6 +128,7 @@ const Top = () => {
     const d = new Date(date);
     return d.toDateString();
   };
+
   return (
     <div className=" w-full grid grid-cols-2 gap-8">
       {/* left pannel */}
@@ -207,6 +209,7 @@ const Top = () => {
         <div className="mb-4 flex justify-between">
           <div className="text-2xl font-bold">Payments</div>
           <div className="flex gap-4">
+
             <button className="py-3 text-white rounded-2xl text-xs  bg-[#0052CC] font-bold flex gap-2 px-7 "
               onClick={creditPayment}
               type="button"
