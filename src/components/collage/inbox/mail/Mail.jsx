@@ -34,8 +34,10 @@ const Mail = () => {
   }, [user]);
 
   useEffect(() => {
+    console.log("get amil");
     dispatch(getMail());
-  }, [sendMailLoading]);
+  }, [sendMailLoading, ""]);
+
   return (
     <div className="w-11/12 mx-auto font-dmSans">
       <Header />
@@ -69,7 +71,7 @@ const Mail = () => {
         <div className="min-h-[70vh] w-full flex gap-4">
           <div className="w-1/4 bg-white p-2 overflow-y-scroll rounded-lg">
             {arr.map((data, index) => (
-              <Left data={data} index={index} />
+              <Left data={data.mail} index={index} />
             ))}
           </div>
           <div className="w-3/4 bg-white rounded-lg">

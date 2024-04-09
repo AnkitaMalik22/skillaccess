@@ -112,6 +112,7 @@ const SearchForm = () => {
           <input
             type="date"
             className="rounded-lg bg-lGray bg-opacity-5 my-2 py-4 border-none text-gray-400"
+            onChange={(e) => console.log(e.target.value)}
           />
         </div>
       </div>

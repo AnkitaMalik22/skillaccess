@@ -26,10 +26,63 @@ const collageState = {
   logoutError: null,
   sendMailLoading: false,
   mail: {
+    attachments: [],
     emailsReceived: [],
     emailsSent: [],
   },
 };
+
+export const sendReply = createAsyncThunk(
+  "collageAuth/sendMail",
+  async (data, { rejectWithValue }) => {
+    try {
+      const req = await axios.post(
+        `${REACT_APP_API_URL}/api/college/inbox/reply`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const uploadAttachment = createAsyncThunk(
+  "collageAuth/uploadAttachment",
+  async (data, { rejectWithValue }) => {
+    try {
+      let formData = new FormData();
+      data.forEach((file, index) => {
+        formData.append(`file${index}`, file);
+      });
+
+      const req = await axios.post(
+        `${REACT_APP_API_URL}/api/college/inbox/file`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 export const sendMail = createAsyncThunk(
   "collageAuth/sendMail",
@@ -482,7 +535,12 @@ const collageAuthSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
+      .addCase(uploadAttachment.fulfilled, (state, action) => {
+        state.mail = { ...state.mail, attachments: action.payload };
+      })
+      .addCase(uploadAttachment.rejected, (state, action) => {
+        toast.error("files not selected");
+      })
       .addCase(getMail.fulfilled, (state, action) => {
         if (action.payload.mail) {
           state.mail = action.payload.mail;
