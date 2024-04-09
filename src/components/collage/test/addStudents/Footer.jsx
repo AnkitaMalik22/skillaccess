@@ -3,16 +3,35 @@ import toast from "react-hot-toast";
 
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { inviteToTest } from "../../../../redux/collage/test/testSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Footer = ({ students}) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { testId } = useSelector((state)=>state.test);
+
+
+
   const handleSendInvite = () => {
     if (students.length === 0) {
       toast.error("Select at least one student to send an invite.");
-    } else {
+    }
+    else if(!testId){
+      console.log(testId)
+      toast.error("Invalid Test Id")
+    } 
+    else {
+console.log(testId,students)
+      dispatch(inviteToTest({
+        testId : testId,
+        students
+      }))
+
       localStorage.removeItem("testDetails");
       localStorage.removeItem("totalTime");
-      toast.success("Invite sent");
+      // toast.success("Invite sent");
       navigate("/collage/test");
     }
   };

@@ -35,8 +35,9 @@ const List = ({ question, number }) => {
             <div className="mb-4">
               <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
                 <div>
-                  <p className="text-sm">{question.Title}</p>
+                  <p className="text-sm" dangerouslySetInnerHTML={{ __html: question.Title}}/>
                 </div>
+                
                 <div className="flex gap-2 self-center">
                   <Disclosure.Button className="flex gap-2 w-10/12 self-center">
                     <FaCaretDown

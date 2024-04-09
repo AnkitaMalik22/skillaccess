@@ -175,7 +175,7 @@ const AddQuestions = () => {
                     className="col-span-1 col-start-10  flex justify-center"
                     onClick={() => removeTopic(index)}
                   >
-                    <RxCross1 className="self-center text-red-600 w-5 h-5" />
+                    <RxCross1 className="self-center text-red-600 w-5 h-5 cursor-pointer" />
                   </div>
                   <div className="col-span-8 line-clamp-2 text-xs font-normal text-[#8F92A1] ">
                     {topic.Description.length > 100
@@ -200,7 +200,7 @@ const AddQuestions = () => {
                   </div>
                   <div className="col-span-1  flex justify-center">
                     <PiPencilSimpleLine
-                      className="self-center text-blued w-5 h-5"
+                      className="self-center text-blued w-5 h-5 cursor-pointer"
                       onClick={() =>
                         navigate(
                           `/collage/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true`

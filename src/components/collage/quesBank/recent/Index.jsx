@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { CgFolder } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecentUsedQuestions } from "../../../../redux/collage/test/testSlice";
+import { getRecentUsedQuestions, deleteRecentUsedQuestion} from "../../../../redux/collage/test/testSlice";
+
 
 
 const Recent = () => {
@@ -42,6 +43,16 @@ switch (topic?.Type) {
 }
 
   return total;
+}
+
+
+
+const handleDelete = (type,id) => {
+  console.log("Delete", id);
+
+  dispatch(deleteRecentUsedQuestion({type,id}));
+
+
 }
 
   return (
@@ -136,14 +147,14 @@ switch (topic?.Type) {
             </div>
             {/*  */}
             <div className="flex justify-center gap-3 ">
-              <div className=" self-center ">
+              {/* <div className=" self-center ">
                 {" "}
                 <img src="../../images/icons/clip.png" alt="" />{" "}
-              </div>
-              <div className=" self-center">
+              </div> */}
+              {/* <div className=" self-center">
                 <img src="../../images/icons/pencil.png" alt="" />
-              </div>
-              <div className=" self-center ">
+              </div> */}
+              <div className=" self-center cursor-pointer" onClick={()=>handleDelete( topic?.Type, topic._id)}>
                 <img src="../../images/icons/cross.png" alt="" />
               </div>
             </div>

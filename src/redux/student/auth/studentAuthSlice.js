@@ -11,7 +11,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 //initial state
 
-const collageState = {
+const studentState = {
   qr: {
     secret: "",
     code: "",
@@ -24,120 +24,14 @@ const collageState = {
   uploadImg: false,
   loggedInUsers: null,
   logoutError: null,
-  sendMailLoading: false,
-  mail: {
-    attachments: [],
-    emailsReceived: [],
-    emailsSent: [],
-  },
 };
 
-export const sendReply = createAsyncThunk(
-  "collageAuth/sendMail",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/inbox/reply`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res;
-    } catch (error) {
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
-export const uploadAttachment = createAsyncThunk(
-  "collageAuth/uploadAttachment",
-  async (data, { rejectWithValue }) => {
-    try {
-      let formData = new FormData();
-      data.forEach((file, index) => {
-        formData.append(`file${index}`, file);
-      });
-
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/inbox/file`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-
-      console.log(res);
-      return res;
-    } catch (error) {
-      console.log(error);
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
-export const sendMail = createAsyncThunk(
-  "collageAuth/sendMail",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/inbox/sendMail/college`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-
-      console.log(res);
-      return res;
-    } catch (error) {
-      console.log(error);
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
-export const getMail = createAsyncThunk(
-  "collageAuth/getMail",
-  async (_, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/college/inbox/Mail`,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-
-      return res;
-    } catch (error) {
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
 export const getSecretQr = createAsyncThunk(
-  "collageAuth/getSecretQr",
+  "studentAuth/getSecretQr",
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${REACT_APP_API_URL}/api/college/2fa/getSecretQr`,
+        `${REACT_APP_API_URL}/api/student/2fa/getSecretQr`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -156,11 +50,11 @@ export const getSecretQr = createAsyncThunk(
   }
 );
 export const selectAuth = createAsyncThunk(
-  "collageAuth/selectAuth",
+  "studentAuth/selectAuth",
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/selectAuth`,
+        `${REACT_APP_API_URL}/api/student/selectAuth`,
         { type: data.type },
         {
           headers: {
@@ -180,11 +74,11 @@ export const selectAuth = createAsyncThunk(
 );
 
 export const verifyQr = createAsyncThunk(
-  "collageAuth/verifyQr",
+  "studentAuth/verifyQr",
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/2fa/verifyQr`,
+        `${REACT_APP_API_URL}/api/student/2fa/verifyQr`,
         { secret: data.secret, token: data.token },
         {
           headers: {
@@ -203,15 +97,15 @@ export const verifyQr = createAsyncThunk(
   }
 );
 
-export const registerCollage = createAsyncThunk(
-  "collageAuth/registerCollage",
+export const registerStudent = createAsyncThunk(
+  "studentAuth/registerStudent",
   async (data, { rejectWithValue }) => {
     try {
-      const ip = getIp();
+      const ip = await getIp();
       console.log("registering", ip);
       // console.log(process.env);
       const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/register`,
+        `${REACT_APP_API_URL}/api/student/register?CollegeId=${data.CollegeId}&inviteLink=${data.inviteLink}`,
         { ...data, ip },
         { withCredentials: true }
       );
@@ -224,14 +118,14 @@ export const registerCollage = createAsyncThunk(
     }
   }
 );
-export const loginCollage = createAsyncThunk(
-  "collageAuth/loginCollage",
+export const loginStudent = createAsyncThunk(
+  "studentAuth/loginStudent",
   async (data, { rejectWithValue }) => {
     try {
       const ip = await getIp();
       console.log("login", ip);
       const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/login`,
+        `${REACT_APP_API_URL}/api/student/login`,
         { ...data, ip },
         { withCredentials: true }
       );
@@ -247,11 +141,11 @@ export const loginCollage = createAsyncThunk(
 );
 
 export const forgotPassword = createAsyncThunk(
-  "collageAuth/forgotPassword",
+  "studentAuth/forgotPassword",
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/password/forgot`,
+        `${REACT_APP_API_URL}/api/student/password/forgot`,
         data,
         { withCredentials: true }
       );
@@ -266,12 +160,12 @@ export const forgotPassword = createAsyncThunk(
 );
 
 export const updateCollege = createAsyncThunk(
-  "collageAuth/updateCollege",
+  "studentAuth/updateCollege",
   async (data, { rejectWithValue }) => {
     try {
       console.log("updating", localStorage.getItem("auth-token"));
       const req = await axios.put(
-        `${REACT_APP_API_URL}/api/college/update`,
+        `${REACT_APP_API_URL}/api/student/update`,
         data,
 
         {
@@ -293,18 +187,19 @@ export const updateCollege = createAsyncThunk(
   }
 );
 
-export const getCollege = createAsyncThunk(
-  "collageAuth/getCollege",
+export const getStudent = createAsyncThunk(
+  "studentAuth/getStudent",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${REACT_APP_API_URL}/api/college/me`, {
+      const response = await axios.get(`${REACT_APP_API_URL}/api/student/me`, {
         withCredentials: true,
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
         },
       });
 
-      return response.data.college;
+      return response.data.student;
+      console.log(response.data.student);
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -312,12 +207,12 @@ export const getCollege = createAsyncThunk(
 );
 
 export const updateAvatar = createAsyncThunk(
-  "collageAuth/updateAvatar",
+  "studentAuth/updateAvatar",
   async (data, { rejectWithValue }) => {
     try {
       console.log("updating", localStorage.getItem("auth-token"));
       const req = await axios.put(
-        `${REACT_APP_API_URL}/api/college/update/avatar`,
+        `${REACT_APP_API_URL}/api/student/update/avatar`,
         data,
 
         {
@@ -338,11 +233,11 @@ export const updateAvatar = createAsyncThunk(
 );
 
 export const logoutCollage = createAsyncThunk(
-  "collageAuth/logoutCollage",
+  "studentAuth/logoutCollage",
   async (_, { rejectWithValue }) => {
     try {
       console.log("logout");
-      const req = await axios.get(`${REACT_APP_API_URL}/api/college/logout`, {
+      const req = await axios.get(`${REACT_APP_API_URL}/api/student/logout`, {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
         },
@@ -359,14 +254,14 @@ export const logoutCollage = createAsyncThunk(
 );
 
 export const resetPassword = createAsyncThunk(
-  "collageAuth/resetPassword",
+  "studentAuth/resetPassword",
 
   async (data, { rejectWithValue }) => {
     try {
       const ip = await getIp();
       console.log("updating", localStorage.getItem("auth-token"));
       const req = await axios.put(
-        `${REACT_APP_API_URL}/api/college/password/reset/${data.token}`,
+        `${REACT_APP_API_URL}/api/student/password/reset/${data.token}`,
         { password: data.password, confirmPassword: data.confirmPassword, ip },
 
         {
@@ -386,7 +281,7 @@ export const resetPassword = createAsyncThunk(
 );
 
 export const updatePassword = createAsyncThunk(
-  "collageAuth/updatePassword",
+  "studentAuth/updatePassword",
 
   async (data, { rejectWithValue }) => {
     try {
@@ -394,7 +289,7 @@ export const updatePassword = createAsyncThunk(
 
       console.log("updating", localStorage.getItem("auth-token"));
       const req = await axios.put(
-        `${REACT_APP_API_URL}/api/college/password/update`,
+        `${REACT_APP_API_URL}/api/student/password/update`,
         { ...data, ip },
 
         {
@@ -413,13 +308,13 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
-export const googleLoginCollage = createAsyncThunk(
-  "collageAuth/googleLoginCollage",
+export const googleLoginStudent = createAsyncThunk(
+  "studentAuth/googleLoginStudent",
   async (accessToken, { rejectWithValue }) => {
     try {
       const ip = await getIp();
       console.log("google login");
-      const req = await axios.post(`${REACT_APP_API_URL}/api/college/login`, {
+      const req = await axios.post(`${REACT_APP_API_URL}/api/student/login`, {
         googleAccessToken: accessToken,
         ip,
       });
@@ -433,14 +328,14 @@ export const googleLoginCollage = createAsyncThunk(
   }
 );
 
-export const googleRegisterCollage = createAsyncThunk(
-  "collageAuth/googleRegisterCollage",
-  async (accessToken, { rejectWithValue }) => {
+export const googleRegisterStudent = createAsyncThunk(
+  "studentAuth/googleRegisterStudent",
+  async ({accessToken,collegeId ,inviteLink}, { rejectWithValue }) => {
     try {
       const ip = await getIp();
       console.log("google register");
       const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/register`,
+        `${REACT_APP_API_URL}/api/student/register?CollegeId=${collegeId}&inviteLink=${inviteLink}`,
         { googleAccessToken: accessToken, ip: ip }
       );
       const res = req.data;
@@ -455,11 +350,11 @@ export const googleRegisterCollage = createAsyncThunk(
 );
 
 export const getLoggedInUsers = createAsyncThunk(
-  "collageAuth/getLoggedInUsers",
+  "studentAuth/getLoggedInUsers",
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${REACT_APP_API_URL}/api/college/loggedin/users`,
+        `${REACT_APP_API_URL}/api/student/loggedin/users`,
         {
           headers: {
             "auth-token": localStorage.getItem("auth-token"),
@@ -477,11 +372,11 @@ export const getLoggedInUsers = createAsyncThunk(
 );
 
 export const logoutAUser = createAsyncThunk(
-  "collageAuth/logoutAUser",
+  "studentAuth/logoutAUser",
   async (token, { rejectWithValue }) => {
     try {
       const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/logout/user/${token}`,
+        `${REACT_APP_API_URL}/api/student/logout/user/${token}`,
         {},
         {
           headers: {
@@ -500,11 +395,11 @@ export const logoutAUser = createAsyncThunk(
 );
 
 export const removeLoggedOutUser = createAsyncThunk(
-  "collageAuth/removeLoggedOutUser",
+  "studentAuth/removeLoggedOutUser",
   async (token, { rejectWithValue }) => {
     try {
       const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/remove/logout/user/${token}`,
+        `${REACT_APP_API_URL}/api/student/remove/logout/user/${token}`,
         {},
         {
           headers: {
@@ -522,9 +417,9 @@ export const removeLoggedOutUser = createAsyncThunk(
   }
 );
 
-const collageAuthSlice = createSlice({
+const studentAuthSlice = createSlice({
   name: "collageAuth",
-  initialState: collageState,
+  initialState: studentState,
   reducers: {
     setUploadImg: (state, action) => {
       state.uploadImg = action.payload;
@@ -535,29 +430,6 @@ const collageAuthSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(uploadAttachment.fulfilled, (state, action) => {
-        state.mail = { ...state.mail, attachments: action.payload };
-      })
-      .addCase(uploadAttachment.rejected, (state, action) => {
-        toast.error("files not selected");
-      })
-      .addCase(getMail.fulfilled, (state, action) => {
-        if (action.payload.mail) {
-          state.mail = action.payload.mail;
-        }
-      })
-      .addCase(sendMail.pending, (state, action) => {
-        state.sendMailLoading = true;
-      })
-      .addCase(sendMail.fulfilled, (state, action) => {
-        state.sendMailLoading = false;
-        toast.success("Mail sent successfully");
-      })
-      .addCase(sendMail.rejected, (state, action) => {
-        state.sendMailLoading = false;
-        toast.error("Error sending mail");
-
-      })
       .addCase(selectAuth.fulfilled, (state, action) => {
         switch (action.payload.college.authType) {
           case "otp":
@@ -583,18 +455,18 @@ const collageAuthSlice = createSlice({
         state.qr.code = action.payload.qr;
       })
       .addCase(forgotPassword.fulfilled, (state, action) => {})
-      .addCase(registerCollage.pending, (state, action) => {
+      .addCase(registerStudent.pending, (state, action) => {
         state.status = "loading";
         console.log("pending");
       })
-      .addCase(registerCollage.fulfilled, (state, action) => {
+      .addCase(registerStudent.fulfilled, (state, action) => {
         // state.status = action.payload
         state.isLoggedIn = true;
         state.user = action.payload;
         // Add any fetched posts to the array
         console.log("fullfilled");
       })
-      .addCase(registerCollage.rejected, (state, action) => {
+      .addCase(registerStudent.rejected, (state, action) => {
         console.log(action.payload);
 
         // <<<<<<< AnkitaMalik22-ankita-dev
@@ -603,29 +475,29 @@ const collageAuthSlice = createSlice({
 
         toast.error(action.payload || "invalid credentials");
       })
-      .addCase(loginCollage.pending, (state, action) => {
+      .addCase(loginStudent.pending, (state, action) => {
         state.status = "loading";
         console.log("pending");
       })
-      .addCase(loginCollage.fulfilled, (state, action) => {
+      .addCase(loginStudent.fulfilled, (state, action) => {
         // state.status = action.payload
         const { user } = action.payload;
         state.user = user;
         switch (user.authType) {
           case "qr":
-            window.location.href = "/collage/settings/security/securityApp";
+            window.location.href = "/student/settings/security/securityApp";
             break;
           case "otp":
-            window.location.href = "/collage/settings/security/secondFA";
+            window.location.href = "/student/settings/security/secondFA";
             break;
           default:
             state.status = "done";
             state.isLoggedIn = true;
-            window.location.href = "/collage/dashboard";
+            window.location.href = "/student/dash";
             break;
         }
       })
-      .addCase(loginCollage.rejected, (state, action) => {
+      .addCase(loginStudent.rejected, (state, action) => {
         state.Error = [action.payload];
       })
       .addCase(updateCollege.pending, (state, action) => {
@@ -642,21 +514,22 @@ const collageAuthSlice = createSlice({
         // console.log(action.payload);
         // window.alert(action.payload);
         // window.location.reload(true);
-        toast.error(action.payload.message)
         console.log("rejected update profile");
       })
-      .addCase(getCollege.pending, (state, action) => {
+      .addCase(getStudent.pending, (state, action) => {
         // state.status = "loading";
         console.log("pending");
       })
-      .addCase(getCollege.fulfilled, (state, action) => {
+      .addCase(getStudent.fulfilled, (state, action) => {
+
+        console.log(action.payload);
         state.isLoggedIn = true;
         state.user = action.payload;
 
         // Add any fetched posts to the array
         console.log("fullfilled get college");
       })
-      .addCase(getCollege.rejected, (state, action) => {
+      .addCase(getStudent.rejected, (state, action) => {
         // state.logoutError = action.payload;
         state.isLoggedIn = false;
         // alert("You are logged out! Please login again");
@@ -686,7 +559,7 @@ const collageAuthSlice = createSlice({
         state.uploadImg = true;
         state.user.avatar = action.payload.college.avatar;
 
-        // getCollege();
+        // getStudent();
         // Add any fetched posts to the array
         console.log("fullfilled avatar");
       })
@@ -726,64 +599,62 @@ const collageAuthSlice = createSlice({
         // state.user = action.payload.user;
         // localStorage.removeItem("auth-token");
 
-        // getCollege();
+        // getStudent();
         // localStorage.setItem("auth-token", action.payload.token);
       })
       .addCase(updatePassword.rejected, (state, action) => {
-        console.log(action.payload)
-        toast.error(action.payload)
-        // alert(action.payload.message);
+        alert(action.payload.message);
       })
-      .addCase(googleLoginCollage.pending, (state, action) => {
+      .addCase(googleLoginStudent.pending, (state, action) => {
         state.status = "loading";
         console.log("pending google login");
       })
-      .addCase(googleLoginCollage.fulfilled, (state, action) => {
+      .addCase(googleLoginStudent.fulfilled, (state, action) => {
         console.log("fuillfilled google login");
         state.user = action.payload.user;
         state.status = action.payload;
         localStorage.setItem("auth-token", action.payload.token);
         switch (state.user.authType) {
           case "qr":
-            window.location.href = "/collage/settings/security/securityApp";
+            window.location.href = "/student/settings/security/securityApp";
             break;
           case "otp":
-            window.location.href = "/collage/settings/security/secondFA";
+            window.location.href = "/student/settings/security/secondFA";
             break;
           default:
             state.status = "done";
             state.isLoggedIn = true;
-            window.location.href = "/collage/dashboard";
+            window.location.href = "/student/profile";
             break;
         }
       })
-      .addCase(googleLoginCollage.rejected, (state, action) => {
+      .addCase(googleLoginStudent.rejected, (state, action) => {
         // console.log(action.payload);
         toast.error(action.payload);
         // window.alert(action.payload);
-        window.location.href = "/";
+        window.location.href = "/student";
       })
-      .addCase(googleRegisterCollage.pending, (state, action) => {
+      .addCase(googleRegisterStudent.pending, (state, action) => {
         state.status = "loading";
         console.log("pending");
       })
-      .addCase(googleRegisterCollage.fulfilled, (state, action) => {
+      .addCase(googleRegisterStudent.fulfilled, (state, action) => {
         state.status = action.payload;
         state.isLoggedIn = true;
         state.user = action.payload.user;
         localStorage.setItem("auth-token", action.payload.token);
-        window.location.href = "/collage/dashboard";
+        window.location.href = "/student/profile";
         // Add any fetched posts to the array
         console.log("fullfilled");
       })
-      .addCase(googleRegisterCollage.rejected, (state, action) => {
+      .addCase(googleRegisterStudent.rejected, (state, action) => {
         // console.log(action.payload);
 
         state.error = action.payload;
         toast.error(action.payload);
 
         // window.alert(action.payload);
-        window.location.href = "/";
+        window.location.href = "/student";
       })
       .addCase(getLoggedInUsers.pending, (state, action) => {
         state.status = "loading";
@@ -807,10 +678,6 @@ const collageAuthSlice = createSlice({
         state.status = "success";
         // state.user = action.payload;
         state.loggedInUsers = action.payload;
-        state.mail = {
-          emailsReceived: [],
-          emailsSent: [],
-        }
         console.log("fullfilled");
       })
       .addCase(logoutAUser.rejected, (state, action) => {
@@ -859,17 +726,6 @@ const collageAuthSlice = createSlice({
   },
 });
 
-export const getSentEmails = (state) => {
-  return state.collageAuth.user.emailsSent.map((value) => {
-    return { ...value, isChecked: false };
-  });
-};
-
-export const getInbox = (state) => {
-  return state.collageAuth.mail.emailsReceived?.map((value) => {
-    return { ...value, isChecked: false };
-  });
-};
 //
-export const { setUploadImg, clearLogoutError } = collageAuthSlice.actions;
-export default collageAuthSlice.reducer;
+export const { setUploadImg, clearLogoutError } = studentAuthSlice.actions;
+export default studentAuthSlice.reducer;

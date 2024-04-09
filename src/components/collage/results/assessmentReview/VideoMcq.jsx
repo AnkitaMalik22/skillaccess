@@ -11,10 +11,11 @@ const VideoMcq = ({ Number, mcq  , AnswerIndex , StudentAnswerIndex}) => {
   return (
     <div className="mx-6 flex bg-white rounded-lg justify-between my-4">
       <div className="w-11/12 flex flex-col gap-2">
-        <h2 className="px-4 font-semibold pt-3 text-base">
-          {Number + 1} &nbsp; {mcq.Title}
-        </h2>
-
+        
+        <h2 className="flex px-4 gap-3 font-semibold pt-3 text-base "   >
+            <div className="" >{Number + 1}. </div>
+            <div className="" dangerouslySetInnerHTML={{ __html: mcq.Title}}></div>
+          </h2>
         <div className="px-5 pb-4 flex flex-col gap-4">
 
         {mcq.Options?.map((question, index) => (
