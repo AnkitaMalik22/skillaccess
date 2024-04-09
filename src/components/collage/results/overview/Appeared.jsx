@@ -23,7 +23,9 @@ console.log(response);
   }
 
 
-
+  // useEffect(()=>{
+  //   dispatch(getTestResultPage(assessment._id));
+  // },[])
 
   // useEffect(()=>{
   //   dispatch(getTestResultPage(assessment._id));
@@ -84,7 +86,9 @@ console.log(response);
 // <<<<<<< bug-fix-test
       let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
       student?.studentResponses?.forEach((resId) => {
+
           // console.log("resId", resId);
+
 // =======
 //       let updatedStudent = { ...student }; 
       
@@ -94,7 +98,11 @@ console.log(response);
 // >>>>>>> saveMain
           const responseId = assessment?.studentResponses?.find((response) => response._id === resId._id);
 
+
           // console.log("responseId", responseId);
+
+          console.log("responseId", responseId);
+
           // add the responseId to the updatedStudent object
           // updatedStudent.responseId = responseId;
           updatedStudent.responseId = resId;

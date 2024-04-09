@@ -1,0 +1,11 @@
+.apexcharts-grid-borders {
+  display: block !important ;
+}
+
+.apexcharts-xaxis-tick {
+  display: none !important;
+}
+
+/* line {
+  stroke: #8f92a15c !important;
+} */

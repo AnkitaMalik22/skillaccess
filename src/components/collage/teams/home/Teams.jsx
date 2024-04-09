@@ -4,11 +4,17 @@ import List from "./List";
 import AddTeamPoP from "../../../PopUps/AddTeamPoP";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getTeams } from "../../../../redux/collage/teams/teamSlice";
+import { getInvitedTeams,setLoading } from "../../../../redux/collage/teams/teamSlice";
 import TeamCard from "./TeamCard";
+
+
+
+
+
+
 const Teams = () => {
   const dispatch = useDispatch();
-  const { teams } = useSelector(state => state.teamCollege);
+  const { teams ,teamloading } = useSelector(state => state.teamCollege);
   const [showPopup, setShowPopup] = useState(false);
 
   const handleAddTeamClick = () => {
@@ -20,9 +26,20 @@ const Teams = () => {
   };
 
   useEffect(() => {
-    dispatch(getTeams());
+    dispatch(getInvitedTeams());
     console.log("Teams", teams);
   }, [])
+
+  useEffect(() => {
+    if(teamloading){
+      dispatch(getInvitedTeams());
+    }else{
+      dispatch(setLoading(false));
+    }
+    return () => {
+      dispatch(setLoading(false));
+    }
+  }, [teamloading])
 
   return (
     <div className="w-11/12 mx-auto pt-6">

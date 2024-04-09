@@ -2,9 +2,25 @@ import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Header = ({ Q }) => {
   const navigate = useNavigate();
+  const [search, setSearch] = useSearchParams();
+  const page = search.get("page");
+
+  console.log("page", page);
+const handleNext = () => {
+  
+  if(page=== 'qb'){
+    navigate(`/collage/quesBank/topic`)
+  }else{
+  
+    navigate("/collage/test/select");
+  }
+
+  };
 
   return (
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
@@ -48,7 +64,7 @@ const Header = ({ Q }) => {
         <div className=" flex">
           <button
             className="self-center justify-center flex bg-[#0052CC] py-3 px-8 rounded-2xl text-xs gap-2 text-white"
-            onClick={() => navigate("/collage/test/select")}
+            onClick={() => handleNext()}
           >
             Next Step{" "}
             <FaArrowRightLong className="self-center text-lg text-white ml-4" />

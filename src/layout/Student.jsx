@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import Navbar from "../components/navbar/Navbar";
+import Navbar from "../components/navbar/StudentNavbar";
 import {
   setSelected,
   selectedStudent,

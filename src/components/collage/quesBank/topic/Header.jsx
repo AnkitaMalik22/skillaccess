@@ -4,7 +4,7 @@ import { PiSlidersHorizontalLight } from "react-icons/pi";
 import BackIcon from "../../../buttons/BackIcon";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({handleFilter}) => {
   const navigate = useNavigate();
   return (
     <div className="flex w-full mx-auto justify-between mb-2">
@@ -19,7 +19,9 @@ const Header = () => {
           <IoIosSearch className="self-center w-10 h-10 bg-gray-100 rounded-s-lg text-gray-400 py-2 " />
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search..."
+            name="search"
+            onChange={handleFilter}
             className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
           />
         </span>

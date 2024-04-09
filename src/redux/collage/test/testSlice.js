@@ -23,7 +23,7 @@ const testState = {
   testName: "",
   testDescription: "",
   testAttempts: "",
-
+  testId : "",
   // testStatus : "",
   assessments: {
     beginner: [],
@@ -573,7 +573,8 @@ export const getRecentUsedQuestions = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${REACT_APP_API_URL}/api/assessments/recent/questions`,
+        // `${REACT_APP_API_URL}/api/assessments/recent/questions`,
+        `${REACT_APP_API_URL}/api/qb/recent/questions`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -592,9 +593,78 @@ export const getRecentUsedQuestions = createAsyncThunk(
 );
 
 
+export const deleteRecentUsedQuestion = createAsyncThunk(
+  "test/deleteRecentUsedQuestion",
+  async (data, { rejectWithValue }) => {
+    try {
+      const req = await axios.delete(
+        `${REACT_APP_API_URL}/api/qb/recent/question/${data.id}?type=${data.type}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res.topics;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 
 
+// INVITE STUDENTS TO ASSESSMENTS 
+
+export const inviteToTest =createAsyncThunk(
+  'test/inviteToTest',
+  async (data,{rejectWithValue})=>{
+    try {
+      console.log(data);
+      const req = await axios.post(
+        `${REACT_APP_API_URL}/api/assessments/invite/students/${data.testId}`,
+        data.students,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+)
+
+
+const getTopicByIdQB = createAsyncThunk(
+  "test/getTopicByIdQB",
+  async (id, { rejectWithValue }) => {
+    try {
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/assessment/section/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res.section;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 
 
@@ -1074,6 +1144,7 @@ const testSlice = createSlice({
       })
       .addCase(createTest.fulfilled, (state, action) => {
         console.log(action.payload);
+        state.testId = action.payload._id;
         state.testName = action.payload.name;
         state.testDescription = action.payload.description;
         state.testAttempts = action.payload.totalAttempts;
@@ -1212,11 +1283,50 @@ const testSlice = createSlice({
         state.status = "pending";
       })
       .addCase(getRecentUsedQuestions.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.recentUsedQuestions = action.payload;
       })
       .addCase(getRecentUsedQuestions.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.recentUsedQuestions = [];
+      })
+      .addCase(deleteRecentUsedQuestion.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(deleteRecentUsedQuestion.fulfilled, (state, action) => {
+        state.recentUsedQuestions = action.payload;
+        toast.success("Question removed from recent used questions");
+      })
+      .addCase(deleteRecentUsedQuestion.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        toast.error("Error removing question from recent used questions");
+        // state.recentUsedQuestions = [];
+      })
+      .addCase(inviteToTest.pending,(state,action)=>{
+        state.status ="pending";
+      })
+      .addCase(inviteToTest.fulfilled,(state,action)=>{
+        state.status ="fulfilled";
+        toast.success("Students Invited Successfully!");
+        console.log(action.payload)
+
+      })
+      .addCase(inviteToTest.rejected,(state,action)=>{
+state.status = "rejected"
+toast.error("Error Inviting Students!")
+console.log(action.payload)
+      })
+      .addCase(getTopicByIdQB.pending, (state, action) => {
+        state.status = "pending";
+      }
+      )
+      .addCase(getTopicByIdQB.fulfilled, (state, action) => {
+        state.currentTopic = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(getTopicByIdQB.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.currentTopic = {};
       });
 
 

@@ -1,7 +1,6 @@
 import React from "react";
 import StudentLayout from "../../../layout/Student";
-import Jobs from "../../../components/student/jobs/home/Jobs";
-import Results from "../../../components/collage/students/profile/Results";
+import Results from "../../../components/student/results/home/Results";
 
 const JobsPage = () => {
   React.useEffect(() => {
