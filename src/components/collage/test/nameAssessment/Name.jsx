@@ -286,7 +286,9 @@ const Name = () => {
 
         <input
           type="text"
-          className="w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-12 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border-none placeholder-gray-400"
+          className={`w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-12  rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
+            errors.name ? "border-red-500" : "border-none"
+          }`}
           placeholder="Name of the Assessment"
           name="name"
           value={testDetails.name}
@@ -296,7 +298,9 @@ const Name = () => {
         <input
           type="number"
           name="totalAttempts"
-          className="w-full bg-gray-100 h-16 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border-none placeholder-gray-400"
+          className={`w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
+            errors.totalAttempts ? "border-red-500" : "border-none"
+          }`}          
           placeholder="No. of Attempts"
           value={testDetails.totalAttempts}
           onChange={handleChange}
@@ -305,7 +309,9 @@ const Name = () => {
         <input
           name="totalQuestions"
           type="number"
-          className="w-full bg-gray-100 h-16 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border-none placeholder-gray-400"
+          className={`w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
+            errors.totalQuestions? "border-red-500" : "border-none"
+          }`}          
           placeholder="No. of Questions"
           value={testDetails.totalQuestions}
           onChange={handleChange}
@@ -329,7 +335,9 @@ const Name = () => {
               name="duration_from"
               value={testDetails?.duration_from?.slice(0, 16)}
               onChange={handleChange}
-              className="border-none"
+              className={`border-none ${
+                errors.duration ? "border-red-500" : ""
+              }`}
               required
               fullWidth
             />
@@ -343,7 +351,9 @@ const Name = () => {
               name="duration_to"
               value={testDetails?.duration_to?.slice(0, 16)}
               onChange={handleChange}
-              className="border-none"
+              className={`border-none ${
+                errors.duration ? "border-red-500" : ""
+              }`}
               required
               fullWidth
             />
@@ -369,8 +379,9 @@ const Name = () => {
           </label>
         </div>
         <textarea
-          className="w-full bg-gray-100 h-48 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border-none placeholder-gray-400"
-          placeholder="Add Description"
+className={`w-full bg-gray-100 h-48 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${
+            errors.description ? "border-red-500" : "border-none"
+          }`}          placeholder="Add Description"
           name="description"
           value={testDetails.description}
           onChange={handleChange}

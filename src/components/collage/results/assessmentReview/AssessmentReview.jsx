@@ -27,7 +27,7 @@ const responseId = searchParams.get("responseId");
   const dispatch = useDispatch();
 
   const {response ,} = useSelector((state) => state.test);
-
+console.log(response);
   // const {
   //   level,
   //   name,

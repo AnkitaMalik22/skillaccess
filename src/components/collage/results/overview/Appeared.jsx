@@ -12,6 +12,8 @@ const Appeared = ({ assessment  }) => {
   const {  testDataResponse ,response} =useSelector((state) => state.test);
 
 console.log(assessment);
+console.log(testDataResponse);
+console.log(response);
   useEffect(() => {
     dispatch(getTestResultPage(assessment._id));
   }, [dispatch, assessment._id]);
@@ -21,7 +23,9 @@ console.log(assessment);
   }
 
 
-
+  // useEffect(()=>{
+  //   dispatch(getTestResultPage(assessment._id));
+  // },[])
 
   // useEffect(()=>{
   //   dispatch(getTestResultPage(assessment._id));
@@ -82,7 +86,9 @@ console.log(assessment);
 // <<<<<<< bug-fix-test
       let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
       student?.studentResponses?.forEach((resId) => {
-          console.log("resId", resId);
+
+          // console.log("resId", resId);
+
 // =======
 //       let updatedStudent = { ...student }; 
       
@@ -92,7 +98,11 @@ console.log(assessment);
 // >>>>>>> saveMain
           const responseId = assessment?.studentResponses?.find((response) => response._id === resId._id);
 
+
+          // console.log("responseId", responseId);
+
           console.log("responseId", responseId);
+
           // add the responseId to the updatedStudent object
           // updatedStudent.responseId = responseId;
           updatedStudent.responseId = resId;
@@ -109,7 +119,7 @@ console.log(assessment);
   }).filter((student) => student?.studentTests?.includes(assessment?._id?.toString()));
   
  
-
+console.log(assessment);
   const getProgressBarColor = (percentage) => {
     if (percentage === 0) {
       return ""; // Return empty string for transparent
@@ -132,7 +142,7 @@ console.log(assessment);
       return 100; // Full width
     }
   };
-  
+  console.log(arr)
   return (
     <div className="w-full mx-auto">
       {/* legend */}

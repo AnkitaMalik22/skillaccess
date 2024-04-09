@@ -1,7 +1,55 @@
 import React from "react";
 import { BsChevronRight } from "react-icons/bs";
+import {loadStripe} from '@stripe/stripe-js';
+
+const Products=[ {
+  id: 1,
+  dish: "punjabi",
+  address: "North Indian, Biryani, Mughlai",
+  somedata: " 1175 + order placed from here recently",
+  qnty:1,
+  price: 25,
+},
+{
+  id: 2,
+  dish: "Jugaadi Adda vadapav",
+  address: "Street Food",
+  somedata: " 2525 + order placed from here recently",
+  qnty:1,
+  price: 25,
+ 
+}]
+
 
 const Top = () => {
+  const creditPayment=async()=>{
+    const customerName = "John Doe"; // Example name
+  const customerAddress = "123 Main Street, City, Country";
+    const stripe = await loadStripe('pk_test_51P3BiVSCjAdB08hyaznd4s3bdbDsVYNIVAb8wqjJzelXQyn866IoIfzAdaKZ3f5dHuu7bFuEq0YKlOCN1Svv4MOx00MjiXgBlz');
+    const body = {
+      products: Products,
+      customerName: customerName,
+      customerAddress: customerAddress
+    };
+  const headers = {
+      "Content-Type":"application/json"
+  }
+  const response = await fetch("http://localhost:4000/create-checkout-session",{
+      method:"POST",
+      headers:headers,
+      body:JSON.stringify(body)
+  });
+
+  const session = await response.json();
+
+  const result = stripe.redirectToCheckout({
+      sessionId:session.id
+  });
+  
+  if(result.error){
+      console.log(result.error);
+  }
+  }
   return (
     <div className=" w-full grid grid-cols-2 gap-8">
       {/* left pannel */}
@@ -54,7 +102,7 @@ const Top = () => {
         <div className="mb-4 flex justify-between">
           <div className="text-2xl font-bold">Payments</div>
           <div className="flex gap-4">
-            <button className="py-3 text-white rounded-2xl text-xs  bg-[#0052CC] font-bold flex gap-2 px-7 ">
+            <button className="py-3 text-white rounded-2xl text-xs  bg-[#0052CC] font-bold flex gap-2 px-7 " onClick={creditPayment}>
               <p>Pay Now</p>
             </button>
           </div>
@@ -62,7 +110,9 @@ const Top = () => {
         {/*  */}
 
         {/* conatiner */}
-        <div className="rounded-xl bg-white p-6 flex justify-between my-4">
+        <div className="rounded-xl bg-white p-6 flex justify-between my-4 cursor-pointer"
+          
+        >
           {/* left*/}
           <div className="flex gap-8 object-cover">
             <div className="w-fit self-center">
@@ -85,11 +135,11 @@ const Top = () => {
           {/* left*/}
           <div className="flex gap-8 object-cover">
             <div className="w-fit self-center">
-              <img src="../../images/credit-card.png" alt="" />
+              <img src="../../images/Bitmap.png" alt="" />
             </div>
 
             <div>
-              <h1 className="text-2xl font-bold"> Credit Card / Debit Card</h1>
+              <h1 className="text-2xl font-bold"> Google Pay</h1>
               <h1 className="text-xl">Pay using your credit cards</h1>
             </div>
           </div>
@@ -104,11 +154,11 @@ const Top = () => {
           {/* left*/}
           <div className="flex gap-8 object-cover">
             <div className="w-fit self-center">
-              <img src="../../images/credit-card.png" alt="" />
+              <img src="../../images/credit-card-_1_.png" alt="" />
             </div>
 
             <div>
-              <h1 className="text-2xl font-bold"> Credit Card / Debit Card</h1>
+              <h1 className="text-2xl font-bold"> UPI IDs</h1>
               <h1 className="text-xl">Pay using your credit cards</h1>
             </div>
           </div>
