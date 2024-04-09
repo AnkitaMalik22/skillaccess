@@ -51,7 +51,8 @@ export const uploadStudents = createAsyncThunk(
           },);
         return response.data;
         } catch (error) {
-        return rejectWithValue(error.message);
+            console.log(error, "error.message");
+        return rejectWithValue(error?.response?.data?.message);
         }
     }
     );
@@ -130,10 +131,11 @@ export const studentSlice = createSlice({
                 // state.invitedStudents = action.payload.invitedStudents;
                 // state.approvedStudents = action.payload.approvedStudents;
             })
-            .addCase(uploadStudents.rejected, (state) => {
+            .addCase(uploadStudents.rejected, (state,action) => {
                 state.loading = false;
                 state.error = true;
-                toast.error("An error occurred while uploading the students");
+                console.log("error",action.payload);
+                toast.error(action.payload);
             })
             .addCase(approveStudent.pending, (state) => {
                 state.loading = true;

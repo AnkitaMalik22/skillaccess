@@ -644,7 +644,27 @@ export const inviteToTest =createAsyncThunk(
 )
 
 
-
+const getTopicByIdQB = createAsyncThunk(
+  "test/getTopicByIdQB",
+  async (id, { rejectWithValue }) => {
+    try {
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/assessment/section/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res.section;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 
 
@@ -1296,6 +1316,19 @@ state.status = "rejected"
 toast.error("Error Inviting Students!")
 console.log(action.payload)
       })
+      .addCase(getTopicByIdQB.pending, (state, action) => {
+        state.status = "pending";
+      }
+      )
+      .addCase(getTopicByIdQB.fulfilled, (state, action) => {
+        state.currentTopic = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(getTopicByIdQB.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.currentTopic = {};
+      });
+
 
 
      
