@@ -33,6 +33,28 @@ const collageState = {
   },
 };
 
+export const deleteMail = createAsyncThunk(
+  "collageAuth/searchMail",
+  async (data, { rejectWithValue }) => {
+    try {
+      const req = await axios.delete(
+        `${REACT_APP_API_URL}/api/college/inbox/delete/${data}`,
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const searchMail = createAsyncThunk(
   "collageAuth/searchMail",
   async (data, { rejectWithValue }) => {
@@ -586,7 +608,6 @@ const collageAuthSlice = createSlice({
       .addCase(sendMail.rejected, (state, action) => {
         state.sendMailLoading = false;
         toast.error("Error sending mail");
-
       })
       .addCase(selectAuth.fulfilled, (state, action) => {
         switch (action.payload.college.authType) {
@@ -672,7 +693,7 @@ const collageAuthSlice = createSlice({
         // console.log(action.payload);
         // window.alert(action.payload);
         // window.location.reload(true);
-        toast.error(action.payload.message)
+        toast.error(action.payload.message);
         console.log("rejected update profile");
       })
       .addCase(getCollege.pending, (state, action) => {
@@ -760,8 +781,8 @@ const collageAuthSlice = createSlice({
         // localStorage.setItem("auth-token", action.payload.token);
       })
       .addCase(updatePassword.rejected, (state, action) => {
-        console.log(action.payload)
-        toast.error(action.payload)
+        console.log(action.payload);
+        toast.error(action.payload);
         // alert(action.payload.message);
       })
       .addCase(googleLoginCollage.pending, (state, action) => {
@@ -840,7 +861,7 @@ const collageAuthSlice = createSlice({
         state.mail = {
           emailsReceived: [],
           emailsSent: [],
-        }
+        };
         console.log("fullfilled");
       })
       .addCase(logoutAUser.rejected, (state, action) => {
