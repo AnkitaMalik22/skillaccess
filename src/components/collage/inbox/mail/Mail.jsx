@@ -70,7 +70,7 @@ const Mail = () => {
         </div>
         <div className="min-h-[70vh] w-full flex gap-4">
           <div className="w-1/4 bg-white p-2 overflow-y-scroll rounded-lg">
-            {arr.map((data, index) => (
+            {arr?.map((data, index) => (
               <Left data={data.mail} index={index} />
             ))}
           </div>
