@@ -63,35 +63,36 @@ const Top = () => {
   const [paymentMethod, setPaymentMethod] = React.useState("");
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
-  const creditPayment = async () => {
-    console.log("payment done");
-    const customerName = "John Doe"; // Example name
-    const customerAddress = "123 Main Street, City, Country";
-    const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-    let body = {
-      products: Plans,
-      customerName: customerName,
-      customerAddress: customerAddress,
-    };
-    const headers = {
-      "Content-Type": "application/json",
-      "auth-token": localStorage.getItem("auth-token"),
-  
-    };
+  // const creditPayment = async () => {
+  //   console.log("payment done");
+  //   const customerName = "John Doe"; // Example name
+  //   const customerAddress = "123 Main Street, City, Country";
+  //   const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+  //   let body = {
+  //     products: Plans,
+  //     customerName: customerName,
+  //     customerAddress: customerAddress,
+  //   };
+  //   const headers = {
+  //     "Content-Type": "application/json",
+  //     "auth-token": localStorage.getItem("auth-token"),
+  //     'Access-Control-Allow-Origin' : 'https://skillaccessclient.netlify.app'
+  //   };
 
-body = JSON.stringify(body);
+
+//body = JSON.stringify(body);
    
 
-    const response = await axios.post(
-      `${REACT_APP_API_URL}/api/payment/make-payment`,
-      body,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("auth-token"),
-        },
-      }
-    );
+   // const response = await axios.post(
+    //  `${REACT_APP_API_URL}/api/payment/make-payment`,
+     // body,
+     // {
+      //  headers: {
+      //    "Content-Type": "application/json",
+      //    "auth-token": localStorage.getItem("auth-token"),
+       // },
+    //  }
+   /// );
 
     // dispatch(makePayment(body))
 
@@ -111,16 +112,55 @@ body = JSON.stringify(body);
     //   console.log(err);
     // });
 
-    const session = await response.json();
+  //  const session = await response.json();
 
-    const result = stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+  //  const result = stripe.redirectToCheckout({
+  //    sessionId: session.id,
+ //   });
 
-    if (result.error) {
-      console.log(result.error);
+   // if (result.error) {
+    //  console.log(result.error);
+    ///}
+ // };
+
+
+
+  const creditPayment = async () => {
+    console.log("payment done");
+    const customerName = "John Doe";
+    const customerAddress = "123 Main Street, City, Country";
+    const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+    
+    let body = {
+      products: Plans,
+      customerName: customerName,
+      customerAddress: customerAddress,
+    };
+    
+    const headers = {
+      "Content-Type": "application/json",
+      "auth-token": localStorage.getItem("auth-token"),
+    };
+    
+    body = JSON.stringify(body);
+  
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/payment/make-payment`, body, { headers });
+  
+      const session = response.data; // Accessing the session ID from response
+  
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+  
+      if (result.error) {
+        console.log(result.error.message);
+      }
+    } catch (error) {
+      console.error("Payment Error: ", error.response?.data || error.message);
     }
   };
+  
 
   const covertToDateFormat = (date) => {
     const d = new Date(date);
