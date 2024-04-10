@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import { makePayment } from "../../../../redux/collage/account/paymentSlice";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 // const Products = [{
 //   id: 1,
@@ -67,7 +68,7 @@ const Top = () => {
     const customerName = "John Doe"; // Example name
     const customerAddress = "123 Main Street, City, Country";
     const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-    const body = {
+    let body = {
       products: Plans,
       customerName: customerName,
       customerAddress: customerAddress,
@@ -75,13 +76,20 @@ const Top = () => {
     const headers = {
       "Content-Type": "application/json",
       "auth-token": localStorage.getItem("auth-token"),
+  
     };
-    const response = await fetch(
+
+body = JSON.stringify(body);
+   
+
+    const response = await axios.post(
       `${REACT_APP_API_URL}/api/payment/make-payment`,
+      body,
       {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token"),
+        },
       }
     );
 
