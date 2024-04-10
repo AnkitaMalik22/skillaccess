@@ -20,6 +20,7 @@ const ENDPOINT = "http://localhost:4000"; // Socket.IO server endpoint
 const List = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [type, setType] = useState("all");
   const [queries, setQueries] = useState({ limit: 50, skip: 0 });
   const user = useSelector(getInbox);
   const [arr, setArr] = useState([
@@ -168,16 +169,15 @@ const List = () => {
               </p>
               <p
                 className="text-sm text-gray-400 line-clamp-1 h-6 cursor-pointer max-w-[40vw] self-center"
-                dangerouslySetInnerHTML={{ __html:el.mail?.message }}
+                dangerouslySetInnerHTML={{ __html: el.mail?.message }}
                 onClick={() =>
                   navigate(`/collage/inbox/mail?index=${i}&type=view`)
                 }
               />
-          
             </div>
 
             <div className="flex gap-4 pr-4">
-              {el.mail.attachments?.length > 0 && (
+              {el.mail?.attachments?.length > 0 && (
                 <TfiClip
                   className="rotate-180 text-2xl text-gray-400 cursor-pointer"
                   onClick={() =>
@@ -187,7 +187,7 @@ const List = () => {
               )}
 
               <p className="text-sm font-medium text-gray-400">
-                {convertDate(el.mail.Date)}
+                {el.mail?.Date && convertDate(el.mail?.Date)}
               </p>
             </div>
           </div>
