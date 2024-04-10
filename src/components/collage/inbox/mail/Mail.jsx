@@ -13,6 +13,7 @@ import {
   getInbox,
   getMail,
   getSentEmails,
+  searchMail,
 } from "../../../../redux/collage/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,11 +21,29 @@ const Mail = () => {
   const dispatch = useDispatch();
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const show = searchParams.get("show");
   const user = useSelector(getInbox);
   const index = searchParams.get("index");
   const type = searchParams.get("type");
   const { sendMailLoading, mail } = useSelector((state) => state.collageAuth);
   const [arr, setArr] = useState([]);
+
+  const Email = mail.emailsReceived[index];
+  const [filter, setFilter] = useState({
+    type:
+      searchParams.get("typeFilter") === "null"
+        ? null
+        : searchParams.get("typeFilter"),
+    within:
+      searchParams.get("within") === "null" ? null : searchParams.get("within"),
+    keyword:
+      searchParams.get("keyword") === "null"
+        ? null
+        : searchParams.get("keyword"),
+    from: searchParams.get("from") === "null" ? null : searchParams.get("from"),
+    to: searchParams.get("to") === "null" ? null : searchParams.get("to"),
+    date: searchParams.get("date") === "null" ? null : searchParams.get("date"),
+  });
 
   useEffect(() => {
     if (JSON.stringify(user) !== JSON.stringify(arr)) {
@@ -34,8 +53,11 @@ const Mail = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log("get amil");
-    dispatch(getMail({ limit: 50, skip: 0 }));
+    if (show !== "search") {
+      dispatch(getMail({ limit: 50, skip: 0 }));
+    } else {
+      dispatch(searchMail(filter));
+    }
   }, [sendMailLoading, ""]);
 
   return (
@@ -59,7 +81,7 @@ const Mail = () => {
           <div className="w-3/4 h-[4.5rem] flex px-3">
             {type === "view" ? (
               <>
-                <ViewBar />
+                <ViewBar filter={filter} Email={Email} />
               </>
             ) : (
               <>
@@ -75,7 +97,11 @@ const Mail = () => {
             ))}
           </div>
           <div className="w-3/4 bg-white rounded-lg">
-            {type === "view" ? <View index={index} /> : <Compose />}
+            {type === "view" ? (
+              <View index={index} filter={filter} />
+            ) : (
+              <Compose />
+            )}
           </div>
         </div>
       </div>

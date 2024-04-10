@@ -9,21 +9,30 @@ import { FiTrash } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getMail,
+  searchMail,
   sendReply,
   uploadAttachment,
 } from "../../../../redux/collage/auth/authSlice";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const View = ({ index }) => {
+const View = ({ index, filter }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const show = searchParams.get("show");
   const dispatch = useDispatch();
   const upload = useRef();
   const { mail } = useSelector((state) => state.collageAuth);
   const Email = mail.emailsReceived[index];
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    dispatch(getMail({ limit: 50, skip: 0 }));
+    console.log(show);
+    if (show === "all") {
+      dispatch(getMail({ limit: 50, skip: 0 }));
+    } else {
+      dispatch(searchMail(filter));
+    }
   }, []);
+
   const [email, setEmail] = useState({ Message: "" });
   const handleChange = (e) => {
     console.log(e.target);
@@ -35,14 +44,16 @@ const View = ({ index }) => {
   return (
     <div className="w-full h-full p-5 font-dmSans">
       <h1 className="mt-4 mb-6 text-xl font-bold break-words">
-        {Email?.mail.subject}
+        {Email?.mail?.subject}
       </h1>
-      <p className="break-words  text-sm h-[30vh] max-w-[60vw]" dangerouslySetInnerHTML={{ __html:Email?.mail.message }}/>
-    
+      <p
+        className="break-words  text-sm h-[30vh] max-w-[60vw]"
+        dangerouslySetInnerHTML={{ __html: Email?.mail?.message }}
+      />
 
       <div className="flex gap-4">
         <div className="flex gap-4">
-          {Email?.mail.attachments?.map((item, i) => {
+          {Email?.mail?.attachments?.map((item, i) => {
             return (
               <div className="bg-[#0052CC] p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
                 <div className="flex gap-2">
@@ -69,7 +80,7 @@ const View = ({ index }) => {
         </div>
       </div>
 
-      {Email?.mail.replies?.map((reply) => {
+      {Email?.mail?.replies?.map((reply) => {
         return (
           <>
             {" "}
@@ -79,7 +90,7 @@ const View = ({ index }) => {
             </p>
             <div className="flex gap-4">
               <div className="flex gap-4">
-                {reply.attachments?.map((item, i) => {
+                {reply?.attachments?.map((item, i) => {
                   return (
                     <div className="bg-[#0052CC] p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
                       <div className="flex gap-2">
@@ -129,7 +140,7 @@ const View = ({ index }) => {
                   <>
                     <Disclosure.Button className="flex w-full sm:w-96 justify-between rounded-lg bg-[#8F92A1] bg-opacity-20 px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                       <span className="text-xs font-bold text-[#8F92A1]">
-                        {Email?.mail.from?.Email}
+                        {Email?.mail?.from?.Email}
                       </span>
                       {/* <FaX className={`w-4 h-4 text-gray-400`} /> */}
                     </Disclosure.Button>

@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { FaSortDown } from "react-icons/fa";
 import { searchMail } from "../../../../redux/collage/auth/authSlice";
 import { useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
-const SearchForm = ({ setToggle, refButton }) => {
+const SearchForm = ({ setToggle, refButton, show, setShow }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({
     type: "All Emails",
@@ -23,7 +25,16 @@ const SearchForm = ({ setToggle, refButton }) => {
   const handleSave = (e) => {
     e.preventDefault();
     dispatch(searchMail(filter));
-    console.log(filter);
+    setShow("search");
+    setSearchParams({
+      show: "search",
+      within: filter.within,
+      keyword: filter.keyword,
+      from: filter.from,
+      to: filter.to,
+      date: filter.date,
+      typeFilter: filter.type,
+    });
     // setFilter({
     //   type: "All Emails",
     //   within: null,
