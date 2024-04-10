@@ -137,7 +137,7 @@ const List = ({ show }) => {
         <h1>Today</h1>
       </div>
 
-      {arr.map((el, i) => {
+      {arr?.map((el, i) => {
         console.log(el);
         return (
           <div className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto ">
@@ -186,7 +186,9 @@ const List = ({ show }) => {
             </div>
 
             <div className="flex gap-4 pr-4">
-              {el.mail?.attachments?.length > 0 && (
+
+              {el?.mail?.attachments?.length > 0 && (
+
                 <TfiClip
                   className="rotate-180 text-2xl text-gray-400 cursor-pointer"
                   onClick={() => handleNav(i)}
@@ -194,7 +196,9 @@ const List = ({ show }) => {
               )}
 
               <p className="text-sm font-medium text-gray-400">
-                {el.mail?.Date && convertDate(el.mail?.Date)}
+
+                {el?.mail?.Date && convertDate(el?.mail?.Date)}
+
               </p>
             </div>
           </div>
