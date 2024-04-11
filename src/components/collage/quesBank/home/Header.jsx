@@ -19,14 +19,14 @@ const Header = () => {
           Question Bank
         </h2>
       </span>
-      <div className="bg-gray-100 rounded-xl mx-2  sm:h-12 h-10 flex my-2 px-4 w-fit">
-        {/* <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
+       {/*   <div className="bg-gray-100 rounded-xl mx-2  sm:h-12 h-10 flex my-2 px-4 w-fit">
+     <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
         <input
           type="text"
           placeholder="Search"
           className="input border-none self-center bg-gray-100 focus:outline-none input-md  max-w-md mx-auto  "
-        /> */}
-      </div>
+        /> 
+      </div>*/}
 
       {/* <span className="flex gap-2">
         <button
