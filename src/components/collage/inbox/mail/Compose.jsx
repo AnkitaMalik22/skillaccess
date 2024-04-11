@@ -51,7 +51,14 @@ const Compose = () => {
 // <<<<<<< bug-fix-test
 
   const handleSubmit = () => {
-    dispatch(sendMail(email));
+    if (!loading) {
+      dispatch(sendMail({ ...email, attachments })).then(() => {
+        socket.emit("joinRoom", email.Email);
+        socket.emit("message", email.Email, "new Mail");
+      });
+    } else {
+      toast.error("please wait! uploading files...");
+    }
     setEmail({ Email: "", Message: "", Subject: "" });
   }
 // =======
@@ -150,16 +157,7 @@ const Compose = () => {
             className={`${
               loading ? "disabled !bg-gray-700 " : "bg-blue-700 "
             } text-sm font-bold text-white rounded-xl px-4 py-2`}
-            onClick={() => {
-              if (!loading) {
-                dispatch(sendMail({ ...email, attachments })).then(() => {
-                  socket.emit("joinRoom", email.Email);
-                  socket.emit("message", email.Email, "new Mail");
-                });
-              } else {
-                toast.error("please wait! uploading files...");
-              }
-            }}
+            onClick={handleSubmit}
 
           >
             Send

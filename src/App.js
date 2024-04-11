@@ -63,6 +63,7 @@ import StudentInboxRoute from "./pages/student/inbox";
 import StudentResultsRoute from "./pages/student/results";
 import { use } from "i18next";
 import { getStudent } from "./redux/student/auth/studentAuthSlice";
+import NotAuth from "./components/PopUps/NotAuth";
 
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
@@ -179,7 +180,8 @@ export default function App() {
               {TeamsRoute()}
             </>
           ) : (
-            <Route path="*" element={<Loader />} />
+            <Route path="*" element={ <NotAuth />} />
+           
           )}
           {/* 
           {Rote()}
