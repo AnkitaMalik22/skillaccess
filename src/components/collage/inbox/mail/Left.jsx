@@ -49,10 +49,12 @@ const Left = ({ data, index }) => {
         <div className="w-10 flex justify-center self-center">
           <TfiClip className="rotate-180 text-xl font-extrabold text-gray-400 ml-1 max-w-36" />
         </div>
+
         <p
           className=" text-xs text-gray-400 line-clamp-2"
           dangerouslySetInnerHTML={{ __html: data?.message }}
         ></p>
+
       </div>
     </div>
   );
