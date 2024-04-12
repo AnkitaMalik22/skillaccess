@@ -56,8 +56,10 @@ const AssessmentReview = () => {
     if (response?.topics && response?.topics.length > 0) {
       if (response?.topics[0]) {
         console.log(response);
-        console.log("response?.topics[0].", response?.topics[0].Type);
-        console.log("response?.topics[1]", response?.topics[1].Type);
+
+        console.log("response?.topics[0].", response?.topics[0]?.Type);
+        console.log("response?.topics[1]", response?.topics[1]?.Type);
+
         switch (response?.topics[0].Type) {
           case "essay":
             section1 = response?.topics[0].essay;
@@ -306,30 +308,33 @@ const AssessmentReview = () => {
                     video={question}
                   />
                 )}
-                {question.questions ||
-                (question.Options &&
-                  !question.codeQuestion &&
-                  !question.videoFile)
-                  ? //  &&
-                    //   (question.AnswerIndex !== undefined
 
-                    !question.videoFile && (
-                      <List
-                        question={question}
-                        number={(selected - 1) * 10 + 1 + i}
-                      />
-                    )
-                  : !question.codeQuestion &&
-                    !question.videoFile &&
-                    !question.questions &&
-                    !question.Options && (
-                      <Essay
-                        question={question}
-                        number={(selected - 1) * 10 + 1 + i}
-                      />
-                    )
+                {
+                  question.questions ||
+                  (question.Options &&
+                    !question.codeQuestion &&
+                    !question.videoFile)
+                    ? //  &&
+                      //   (question.AnswerIndex !== undefined
 
-                    // )
+                      !question.videoFile && (
+                        <List
+                          question={question}
+                          number={(selected - 1) * 10 + 1 + i}
+                        />
+                      )
+                    : !question.codeQuestion &&
+                      !question.videoFile &&
+                      !question.questions &&
+                      !question.Options && (
+                        <Essay
+                          question={question}
+                          number={(selected - 1) * 10 + 1 + i}
+                        />
+                      )
+
+                  // )
+
                 }
               </div>
             );

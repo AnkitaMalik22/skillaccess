@@ -33,7 +33,6 @@ const collageState = {
   },
   LOGIN_LOADING: false,
   USER_LOADING: false,
-  
 };
 
 export const deleteMail = createAsyncThunk(
@@ -640,20 +639,16 @@ const collageAuthSlice = createSlice({
       .addCase(registerCollage.pending, (state, action) => {
         state.status = "loading";
         console.log("pending");
-        state.USER_LOADING = true;
       })
       .addCase(registerCollage.fulfilled, (state, action) => {
         // state.status = action.payload
         state.isLoggedIn = true;
-        state.USER_LOADING = false;
         state.user = action.payload;
         // Add any fetched posts to the array
         console.log("fullfilled");
       })
       .addCase(registerCollage.rejected, (state, action) => {
-
         console.log(action.payload);
-        state.USER_LOADING = false;
 
         // <<<<<<< AnkitaMalik22-ankita-dev
         //   alert(action.payload);
@@ -664,12 +659,10 @@ const collageAuthSlice = createSlice({
       .addCase(loginCollage.pending, (state, action) => {
         state.status = "loading";
         console.log("pending");
-        state.USER_LOADING = true;
       })
       .addCase(loginCollage.fulfilled, (state, action) => {
         // state.status = action.payload
         const { user } = action.payload;
-        state.USER_LOADING = false;
         state.user = user;
         switch (user.authType) {
           case "qr":
@@ -686,9 +679,7 @@ const collageAuthSlice = createSlice({
         }
       })
       .addCase(loginCollage.rejected, (state, action) => {
-
         state.Error = [action.payload];
-        state.USER_LOADING = false;
       })
       .addCase(updateCollege.pending, (state, action) => {
         // state.status = "loading";
