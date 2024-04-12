@@ -11,6 +11,7 @@ const Appeared = ({ assessment }) => {
 
   const { testDataResponse, response } = useSelector((state) => state.test);
 
+
   console.log(assessment);
   console.log(testDataResponse);
   console.log(response);
@@ -78,9 +79,11 @@ const Appeared = ({ assessment }) => {
   //   });
   //   return updatedStudent;
   // });
+
   let arr = [assessment?.studentResponses];
 
   console.log(arr);
+
   const getProgressBarColor = (percentage) => {
     if (percentage === 0) {
       return ""; // Return empty string for transparent
@@ -127,7 +130,9 @@ const Appeared = ({ assessment }) => {
 
       {/* list to be iterated */}
 
+
       {arr[0]?.map((student, index) => (
+
         <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}
@@ -179,6 +184,7 @@ const Appeared = ({ assessment }) => {
                       student?.percentage
                     )}`}
                     style={{ width: `${student?.percentage}%` }}
+
                   ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">

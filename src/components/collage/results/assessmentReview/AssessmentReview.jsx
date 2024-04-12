@@ -56,8 +56,10 @@ const AssessmentReview = () => {
     if (response?.topics && response?.topics.length > 0) {
       if (response?.topics[0]) {
         console.log(response);
+
         console.log("response?.topics[0].", response?.topics[0]?.Type);
         console.log("response?.topics[1]", response?.topics[1]?.Type);
+
         switch (response?.topics[0].Type) {
           case "essay":
             section1 = response?.topics[0].essay;
@@ -306,6 +308,7 @@ const AssessmentReview = () => {
                     video={question}
                   />
                 )}
+
                 {
                   question.questions ||
                   (question.Options &&
@@ -331,6 +334,7 @@ const AssessmentReview = () => {
                       )
 
                   // )
+
                 }
               </div>
             );
