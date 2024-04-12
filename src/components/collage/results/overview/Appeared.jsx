@@ -11,9 +11,11 @@ const Appeared = ({ assessment }) => {
 
   const { testDataResponse, response } = useSelector((state) => state.test);
 
+
   console.log(assessment);
   console.log(testDataResponse);
   console.log(response);
+
   useEffect(() => {
     dispatch(getTestResultPage(assessment._id));
   }, [dispatch, assessment._id]);
@@ -77,47 +79,11 @@ const Appeared = ({ assessment }) => {
   //   });
   //   return updatedStudent;
   // });
-  let arr = copy
-    ?.map((student) => {
-      // <<<<<<< bug-fix-test
-      let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
-      student?.studentResponses?.forEach((resId) => {
-        // console.log("resId", resId);
 
-        // =======
-        //       let updatedStudent = { ...student };
+  let arr = [assessment?.studentResponses];
 
-        //       // Create a new object with the same properties as the student object
-        //       student?.studentResponses?.forEach((resId) => {
+  console.log(arr);
 
-        // >>>>>>> saveMain
-        const responseId = assessment?.studentResponses?.find(
-          (response) => response._id === resId._id
-        );
-
-        // console.log("responseId", responseId);
-
-        console.log("responseId", responseId);
-
-        // add the responseId to the updatedStudent object
-        // updatedStudent.responseId = responseId;
-        updatedStudent.responseId = resId;
-        updatedStudent.response = response;
-        // <<<<<<< bug-fix-test
-
-        //           // updatedStudent.percent = student?.response?.percentage;
-        //           console.log("updatedStudent", updatedStudent);
-        // =======
-
-        // >>>>>>> saveMain
-      });
-      return updatedStudent;
-    })
-    .filter((student) =>
-      student?.studentTests?.includes(assessment?._id?.toString())
-    );
-
-  console.log(assessment);
   const getProgressBarColor = (percentage) => {
     if (percentage === 0) {
       return ""; // Return empty string for transparent
@@ -164,7 +130,9 @@ const Appeared = ({ assessment }) => {
 
       {/* list to be iterated */}
 
-      {arr?.map((student, index) => (
+
+      {arr[0]?.map((student, index) => (
+
         <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}
@@ -175,7 +143,7 @@ const Appeared = ({ assessment }) => {
               </div>
               <span className="break-words min-w-0 pt-1 self-center">
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                  {student.FirstName}
+                  {student?.studentId?.FirstName}
                 </h2>
               </span>
             </div>
@@ -213,14 +181,15 @@ const Appeared = ({ assessment }) => {
                 <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                   <div
                     className={`h-full rounded-lg ${getProgressBarColor(
-                      student?.response?.percentage
+                      student?.percentage
                     )}`}
-                    style={{ width: `${student?.response?.percentage}%` }}
+                    style={{ width: `${student?.percentage}%` }}
+
                   ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
-                  {student?.response?.percentage?.toFixed(2)}%
+                  {student?.percentage?.toFixed(2)}%
                 </h2>
               </span>
             </div>
@@ -231,7 +200,7 @@ const Appeared = ({ assessment }) => {
               className="self-center cursor-pointer"
               onClick={() =>
                 navigate(
-                  `/collage/results/assessmentReview?studentId=${student._id}&assessmentId=${assessment._id}&responseId=${student.responseId}`
+                  `/collage/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
                 )
               }
             >
