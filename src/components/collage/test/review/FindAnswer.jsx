@@ -6,12 +6,13 @@ import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { CiBookmarkMinus } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+
+import toast from "react-hot-toast";
+import { addBookmark } from "../../../../redux/collage/test/thunks/question";
 import {
   editQuestion,
   removeQuestion,
-  addBookmark,
 } from "../../../../redux/collage/test/testSlice";
-import toast from "react-hot-toast";
 
 const FindAnswer = ({ Title, Options, Number, id, type, view, question }) => {
   const dispatch = useDispatch();
@@ -49,22 +50,22 @@ const FindAnswer = ({ Title, Options, Number, id, type, view, question }) => {
     }
   };
 
-
-const handleBookmark = () => {
+  const handleBookmark = () => {
     console.log("bookmark");
     // console.log(question);
-dispatch(addBookmark({
-  Title: question.Title,
-  questions: question.questions,
-  Options: question.Options,
-  Number: question.Number,
-  id: question.id,
-  AnswerIndex : question.AnswerIndex,
-  questionId : question._id,
-  Type: "findAnswer"
-}));
+    dispatch(
+      addBookmark({
+        Title: question.Title,
+        questions: question.questions,
+        Options: question.Options,
+        Number: question.Number,
+        id: question.id,
+        AnswerIndex: question.AnswerIndex,
+        questionId: question._id,
+        Type: "findAnswer",
+      })
+    );
   };
-
 
   const handleDelete = () => {
     dispatch(
@@ -160,9 +161,10 @@ dispatch(addBookmark({
             className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
             onClick={handleDelete}
           />
-            <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" 
-          onClick={handleBookmark}
-          /> 
+          <CiBookmarkMinus
+            className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center"
+            onClick={handleBookmark}
+          />
           {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
           {/* <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
         <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}

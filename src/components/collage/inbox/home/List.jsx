@@ -16,7 +16,7 @@ import {
 import socketIOClient from "socket.io-client";
 import convertDate from "../../../../util/getDate";
 
-const ENDPOINT = "http://localhost:4000"; // Socket.IO server endpoint
+const ENDPOINT = process.env.REACT_APP_API_URL; // Socket.IO server endpoint
 const List = ({ show }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -102,7 +102,6 @@ const List = ({ show }) => {
     }
   };
 
-  console.log(show);
   return (
     <div className="bg-[#8F92A1] bg-opacity-5 rounded-t-xl pb-4">
       <div className="flex border-b border-gray-200 p-4 justify-between rounded-t-xl w-[99.9%] mx-auto">

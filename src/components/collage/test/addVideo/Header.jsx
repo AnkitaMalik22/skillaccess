@@ -6,13 +6,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
-import {
-  addQuestionToTopic,
-  addVideo,
-  addVideoToTopic,
-} from "../../../../redux/collage/test/testSlice";
-
 import { useDispatch, useSelector } from "react-redux";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const Header = () => {
   const dispatch = useDispatch();

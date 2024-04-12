@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteRecentUsedQuestion, getRecentUsedQuestions } from "../../../../redux/collage/test/testSlice";
 
+import {
+  deleteRecentUsedQuestion,
+  getRecentUsedQuestions,
+} from "../../../../redux/collage/test/thunks/question";
 
 const Recent = () => {
   const arr = [2, 1, 1, 1, 1];
@@ -13,17 +16,13 @@ const Recent = () => {
   useEffect(() => {
     dispatch(getRecentUsedQuestions());
     console.log(recentUsedQuestions);
-
   }, []);
 
-
-  const handleDelete = (type,id) => {
+  const handleDelete = (type, id) => {
     console.log("Delete", id);
 
-    dispatch(deleteRecentUsedQuestion({type,id}));
-
-
-  }
+    dispatch(deleteRecentUsedQuestion({ type, id }));
+  };
 
   return (
     <div className="w-full mx-auto bg-[#F8F8F9] lg:px-8 lg:pt-7 pb-4 rounded-3xl">
@@ -59,9 +58,7 @@ const Recent = () => {
             <div className="flex self-center ">
               <span>
                 <h2 className="font-dmSans text-center  sm:text-sm">
-                 {
-                    topic?.Heading
-                 }
+                  {topic?.Heading}
                 </h2>
               </span>
             </div>
@@ -71,15 +68,13 @@ const Recent = () => {
             <div className=" self-center h-fit">
               <span>
                 <h2 className="font-dmSans font-normal sm:text-sm">
-                {
-                  topic?.Type
-                }
+                  {topic?.Type}
                 </h2>
               </span>
             </div>
           </div>
           {/*  */}
-{/* <<<<<<< bug-fix-test */}
+          {/* <<<<<<< bug-fix-test */}
           <div className="flex justify-center gap-1 ">
             {/* <div className=" self-center ">
 //=======
@@ -93,11 +88,13 @@ const Recent = () => {
               <img src="../../images/icons/pencil.png" alt="" />
             </div> */}
 
-
-             <div className=" self-center cursor-pointer" onClick={()=>handleDelete( topic?.Type, topic._id)}>
+            <div
+              className=" self-center cursor-pointer"
+              onClick={() => handleDelete(topic?.Type, topic._id)}
+            >
               <img src="../../images/icons/cross.png" alt="" />
             </div>
-          </div> 
+          </div>
         </div>
       ))}
     </div>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Header from "./Header";
-import { createTopic } from "../../../../redux/collage/test/testSlice";
+
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { createTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const CreateTopic = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const CreateTopic = () => {
     } else {
       setIsNameEmpty(false);
     }
-    
+
     if (!topic.Description.trim()) {
       setIsDescEmpty(true);
       // toast.error("Please enter a description for the topic.");
@@ -43,7 +44,7 @@ const CreateTopic = () => {
     } else {
       setIsDescEmpty(false);
     }
-    
+
     dispatch(createTopic(topic)).then((res) => {
       if (res.payload._id) {
         navigate(`/collage/test/typeOfQuestions/${res.payload._id}`);
@@ -67,7 +68,8 @@ const CreateTopic = () => {
       <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">
         <h2 className="w-full font-medium  text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-lg mb-10 sm:mb-1 text-lg">
           Add up to 10 custom questions to your assessment (optional). You can
-          use five question types: multiple-choice, essay, video ,code and find answer.
+          use five question types: multiple-choice, essay, video ,code and find
+          answer.
         </h2>
 
         <input
@@ -80,7 +82,9 @@ const CreateTopic = () => {
           }`}
           placeholder="Name of the Topic"
         />
-        {isNameEmpty && <p className="text-red-500 ml-4 ">Please fill in the name.</p>}
+        {isNameEmpty && (
+          <p className="text-red-500 ml-4 ">Please fill in the name.</p>
+        )}
 
         <textarea
           onChange={changeHandler}
@@ -91,7 +95,9 @@ const CreateTopic = () => {
           }`}
           placeholder="Add Description"
         />
-        {isDescEmpty && <p className="text-red-500 ml-4">Please fill in the description.</p>}
+        {isDescEmpty && (
+          <p className="text-red-500 ml-4">Please fill in the description.</p>
+        )}
       </div>
     </div>
   );

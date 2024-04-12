@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import Folder from "./icon/Folder";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllTopics,setCurrentTopic } from "../../../../redux/collage/test/testSlice";
+import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
+import { setCurrentTopic } from "../../../../redux/collage/test/testSlice";
 
 const Topic = () => {
   const navigate = useNavigate();
@@ -65,36 +66,38 @@ const Topic = () => {
       </span>
 
       <div className="flex flex-wrap 3xl:gap-10 gap-3">
-        {sections?.map((section, index) => (
-          index < 4 && (
-            <div
-              key={section.id}
-              className="3xl:w-72 w-[24%] h-64 bg-white rounded-3xl  "
-              onClick={() => {
-                dispatch(
-                  setCurrentTopic({
-                    topic: section
+        {sections?.map(
+          (section, index) =>
+            index < 4 && (
+              <div
+                key={section.id}
+                className="3xl:w-72 w-[24%] h-64 bg-white rounded-3xl  "
+                onClick={() => {
+                  dispatch(
+                    setCurrentTopic({
+                      topic: section,
                       // Type: questionType || "mcq",
-                    ,
-                  })
-                );
-                localStorage.setItem("TopicDetails", JSON.stringify(section));
-                navigate(`/collage/quesBank/topic/${section._id}`);
-              }}
-            >
-              <figure className="h-[155.5px] w-full object-cover">
-                <img src={randomImage()} alt="" />
-              </figure>
-              <h2 className="text-lg font-bold ml-4 mt-4">{section.Heading}</h2>
-              <div className="ml-4 mt-4 flex gap-2">
-                <Folder />
-                <p className="text-[#95ACFA] text-sm">
-                  {getTotalQuestions(section)} Files
-                </p>
+                    })
+                  );
+                  localStorage.setItem("TopicDetails", JSON.stringify(section));
+                  navigate(`/collage/quesBank/topic/${section._id}`);
+                }}
+              >
+                <figure className="h-[155.5px] w-full object-cover">
+                  <img src={randomImage()} alt="" />
+                </figure>
+                <h2 className="text-lg font-bold ml-4 mt-4">
+                  {section.Heading}
+                </h2>
+                <div className="ml-4 mt-4 flex gap-2">
+                  <Folder />
+                  <p className="text-[#95ACFA] text-sm">
+                    {getTotalQuestions(section)} Files
+                  </p>
+                </div>
               </div>
-            </div>
-          )
-        ))}
+            )
+        )}
       </div>
     </div>
   );

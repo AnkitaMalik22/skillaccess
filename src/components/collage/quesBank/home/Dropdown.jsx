@@ -4,13 +4,12 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { FaChevronDown } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeBookmark } from "../../../../redux/collage/test/testSlice";
+import { removeBookmark } from "../../../../redux/collage/test/thunks/question";
 
-const Dropdown = ({bookmark,index}) => {
+const Dropdown = ({ bookmark, index }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
- 
   return (
     <Disclosure>
       {({ open }) => (
@@ -19,11 +18,14 @@ const Dropdown = ({bookmark,index}) => {
             <div>
               <p className="text-sm">
                 <span>{index}. </span>
-              {bookmark.Title}
+                {bookmark.Title}
               </p>
             </div>
             <div className="flex gap-2 self-center">
-              <RiBookmark2Fill className="text-[#95ACFA] h-7 w-7 self-center"  onClick={()=> dispatch(removeBookmark(bookmark._id))}/>
+              <RiBookmark2Fill
+                className="text-[#95ACFA] h-7 w-7 self-center"
+                onClick={() => dispatch(removeBookmark(bookmark._id))}
+              />
 
               <Disclosure.Button className="flex gap-2 w-10/12 self-center">
                 <FaChevronDown
@@ -58,23 +60,20 @@ const Dropdown = ({bookmark,index}) => {
                 <label className="text-blacktext-sm"></label>
               </div> */}
 
-              {
-                bookmark.Options.map((option, index) => (
-                  <div className="flex gap-2  rounded-lg p-3">
-                    <div className="w-6">
-                      <input
-                        type="radio"
-                        name="answer"
-                        id="answer"
-                        className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                      />
-                    </div>
-
-                    <label className="text-blacktext-sm">{option}</label>
+              {bookmark.Options.map((option, index) => (
+                <div className="flex gap-2  rounded-lg p-3">
+                  <div className="w-6">
+                    <input
+                      type="radio"
+                      name="answer"
+                      id="answer"
+                      className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
+                    />
                   </div>
-                ))
-              }
-           
+
+                  <label className="text-blacktext-sm">{option}</label>
+                </div>
+              ))}
             </Disclosure.Panel>
           </Transition>
         </div>
