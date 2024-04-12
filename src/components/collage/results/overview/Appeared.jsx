@@ -12,9 +12,9 @@ const Appeared = ({ assessment }) => {
   const { testDataResponse, response } = useSelector((state) => state.test);
 
 
-  console.log(assessment);
-  console.log(testDataResponse);
-  console.log(response);
+console.log(assessment);
+console.log(testDataResponse);
+console.log(response);
 
   useEffect(() => {
     dispatch(getTestResultPage(assessment._id));
