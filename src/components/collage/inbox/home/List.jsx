@@ -13,6 +13,7 @@ import {
   getMail,
   getSentEmails,
 } from "../../../../redux/collage/auth/authSlice";
+import { bookmarkMail } from "../../../../redux/collage/Inbox/inboxSlice";
 import socketIOClient from "socket.io-client";
 import convertDate from "../../../../util/getDate";
 
@@ -92,7 +93,7 @@ const List = () => {
       setArr(copy);
     }
   };
-
+console.log(arr);
   return (
     <div className="bg-[#8F92A1] bg-opacity-5 rounded-t-xl pb-4">
       <div className="flex border-b border-gray-200 p-4 justify-between rounded-t-xl w-[99.9%] mx-auto">
@@ -133,7 +134,9 @@ const List = () => {
           <div className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto ">
             <div className="flex gap-4 ">
               {el.isChecked ? (
-                <div className=" border-l-blue-700 border-2 border-white"></div>
+                <div className=" border-l-blue-700 border-2 border-white"
+                
+                ></div>
               ) : (
                 <div className="  border-2 border-white"></div>
               )}
@@ -149,9 +152,20 @@ const List = () => {
               />
 
               {el.isChecked ? (
-                <TiStarFullOutline className="self-center" />
+                <TiStarFullOutline className="self-center"
+                  // onClick={()=>{
+                  //   dispatch(bookmarkMail(el._id));
+                  // }
+                    
+                  // }
+                />
               ) : (
-                <TiStarOutline className="self-center" />
+                <TiStarOutline className="self-center"
+                onClick={()=>{
+                  dispatch(bookmarkMail(el._id));
+                }
+              }
+                />
               )}
 
               <div className="w-5 h-5 rounded-full bg-blued self-center"></div>

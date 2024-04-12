@@ -13,6 +13,7 @@ const Appeared = ({ assessment  }) => {
 
 console.log(assessment);
 console.log(testDataResponse);
+
 console.log(response);
   useEffect(() => {
     dispatch(getTestResultPage(assessment._id));
