@@ -3,11 +3,9 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addMcqToTopic,
-  addQuestionToTopic,
-} from "../../../../redux/collage/test/testSlice";
+
 import toast from "react-hot-toast";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const Header = ({ question, setQuestion, id, type }) => {
   const navigate = useNavigate();
@@ -15,31 +13,25 @@ const Header = ({ question, setQuestion, id, type }) => {
   const { test } = useSelector((state) => state.test);
 
   const handleSave = () => {
-    if (question.Title === "" ) {
+    if (question.Title === "") {
       toast.error("Please enter question");
       return;
-    }
-    else if (question.Options &&  question.Options.length < 4) {
-
+    } else if (question.Options && question.Options.length < 4) {
       toast.error("Please enter atleast 4 options");
       return;
-    }
-    else if(question.Duration==0){
+    } else if (question.Duration == 0) {
       toast.error("Please enter required time");
       return;
-    }
-    else if(question.AnswerIndex===null){
+    } else if (question.AnswerIndex === null) {
       toast.error("Please select correct answer");
       return;
-    }
-    else {
+    } else {
       dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-      setQuestion({ Title: "", Options: [] , Duration : 0 ,AnswerIndex:null});
+      setQuestion({ Title: "", Options: [], Duration: 0, AnswerIndex: null });
       navigate(-1);
     }
 
     // api call to push questions to topic
-   
   };
   // useEffect(() => {
   //   dispatch(setTest({questions}));

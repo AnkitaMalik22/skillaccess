@@ -7,9 +7,10 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import * as XLSX from "xlsx";
 import PopUp from "../../../PopUps/PopUp";
 import { useDispatch, useSelector } from "react-redux";
-import { addQuestionToTopic } from "../../../../redux/collage/test/testSlice";
+
 import Loader from "../addVideo/Loader";
 import toast, { Toaster } from "react-hot-toast";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const Header = ({
   name,

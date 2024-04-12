@@ -4,16 +4,13 @@ import { Progress } from "./Progress";
 import List from "./List";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createTest,
-  setTestBasicDetails,
-  setTestSelectedTopics,
-} from "../../../../redux/collage/test/testSlice";
+
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Code from "./Code";
 import Video from "./Video";
 import toast from "react-hot-toast";
+import { createTest } from "../../../../redux/collage/test/thunks/test";
 
 const Submit = () => {
   const navigate = useNavigate();
@@ -343,42 +340,48 @@ const Submit = () => {
       </div>
 
       <div className="absolute bottom-2 mt-20 flex gap-2 w-full justify-center">
-  <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-    <FaChevronLeft
-      className={`rotate-45 text-lg self-center ${selected === 1 && "disabled"}`}
-      onClick={() => selected !== 1 && setSelected(selected - 1)}
-    />
-  </div>
-
-  {Array.from({ length: Math.ceil(max) }).map((_, index) => {
-    const pageNumber = index + 1;
-    const hasQuestions = (pageNumber - 1) * 10 < questions.length;
-console.log(questions.length)
-console.log(Math.ceil(max));
-    return (
-      hasQuestions && (
-        <div
-          key={pageNumber}
-          className={`rounded-lg h-10 w-10 flex justify-center ${
-            selected === pageNumber ? "bg-blue-700 text-white" : "bg-gray-100"
-          }`}
-          onClick={() => setSelected(pageNumber)}
-        >
-          <p className="self-center">{pageNumber}</p>
+        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+          <FaChevronLeft
+            className={`rotate-45 text-lg self-center ${
+              selected === 1 && "disabled"
+            }`}
+            onClick={() => selected !== 1 && setSelected(selected - 1)}
+          />
         </div>
-      )
-    );
-  })}
 
-  <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-    <FaChevronRight
-      className={`rotate-45 text-lg self-center ${selected === Math.ceil(max) && "disabled"}`}
-      onClick={() => selected !==Math.ceil(max) && setSelected(selected + 1)}
-    />
-  </div>
-</div>
+        {Array.from({ length: Math.ceil(max) }).map((_, index) => {
+          const pageNumber = index + 1;
+          const hasQuestions = (pageNumber - 1) * 10 < questions.length;
+          console.log(questions.length);
+          console.log(Math.ceil(max));
+          return (
+            hasQuestions && (
+              <div
+                key={pageNumber}
+                className={`rounded-lg h-10 w-10 flex justify-center ${
+                  selected === pageNumber
+                    ? "bg-blue-700 text-white"
+                    : "bg-gray-100"
+                }`}
+                onClick={() => setSelected(pageNumber)}
+              >
+                <p className="self-center">{pageNumber}</p>
+              </div>
+            )
+          );
+        })}
 
-
+        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+          <FaChevronRight
+            className={`rotate-45 text-lg self-center ${
+              selected === Math.ceil(max) && "disabled"
+            }`}
+            onClick={() =>
+              selected !== Math.ceil(max) && setSelected(selected + 1)
+            }
+          />
+        </div>
+      </div>
     </div>
   );
 };

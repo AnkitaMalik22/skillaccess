@@ -6,12 +6,13 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+
+import toast from "react-hot-toast";
 import {
-  addQuestionToTopic,
   addVideoToSection,
   clearTopicToBeAdded,
 } from "../../../../../redux/collage/test/testSlice";
-import toast from "react-hot-toast";
+import { addQuestionToTopic } from "../../../../../redux/collage/test/thunks/topic";
 
 const Header = ({ selectQuestionType }) => {
   const { id } = useParams();
@@ -39,34 +40,31 @@ const Header = ({ selectQuestionType }) => {
       },
     };
     let mcq;
-    if(topicToBeAdded.video.questions?.length>0){
-       mcq = topicToBeAdded.video.questions.reduce((acc, question) => {
+    if (topicToBeAdded.video.questions?.length > 0) {
+      mcq = topicToBeAdded.video.questions.reduce((acc, question) => {
         return acc + parseInt(question.Duration);
       }, 0);
+    } else {
+      mcq = 0;
     }
-    else{
-      mcq=0;
+    let long;
+    if (topicToBeAdded.video.long?.length > 0) {
+      long = topicToBeAdded.video?.long?.reduce((acc, question) => {
+        return acc + parseInt(question.Duration);
+      }, 0);
+    } else {
+      long = 0;
     }
-    let long ;
-    if(topicToBeAdded.video.long?.length>0){
-    long = topicToBeAdded.video?.long?.reduce((acc, question) => {
-      return acc + parseInt(question.Duration);
-    }, 0);
-  }
-  else{
-    long=0;
-  }
-  let short;
-  if(topicToBeAdded.video.long?.length>0){
-     short = topicToBeAdded.video?.short?.reduce((acc, question) => {
-      return acc + parseInt(question.Duration);
-    }, 0);
-  }
-  else{
-    short=0;
-  }
+    let short;
+    if (topicToBeAdded.video.long?.length > 0) {
+      short = topicToBeAdded.video?.short?.reduce((acc, question) => {
+        return acc + parseInt(question.Duration);
+      }, 0);
+    } else {
+      short = 0;
+    }
     let Duration = mcq + long + short;
-console.log(Duration);
+    console.log(Duration);
     const vid = {
       ...topicToBeAdded.video,
       Duration: Duration,

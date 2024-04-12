@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
-import {
-  // paragrapgh
-  addFindAns,
-  addFindAnsToTopic,
-  addQuestionToTopic,
-  editQuestionById,
-} from "../../../../redux/collage/test/testSlice";
+
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import {
+  addFindAns,
+  addFindAnsToTopic,
+} from "../../../../redux/collage/test/testSlice";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const AddParagraph = () => {
   const MAX_QUESTIONS = 3;
@@ -113,8 +113,12 @@ const AddParagraph = () => {
             id: ID + Date.now(),
           });
         } else {
-          dispatch(addFindAnsToTopic({ data: question, id: id, type: 'findAnswer' }));
-          dispatch(addQuestionToTopic({ data: question, id: id, type: 'findAnswer' }));
+          dispatch(
+            addFindAnsToTopic({ data: question, id: id, type: "findAnswer" })
+          );
+          dispatch(
+            addQuestionToTopic({ data: question, id: id, type: "findAnswer" })
+          );
           setQuestion({
             Title: "",
             section: ID,

@@ -7,12 +7,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-
-import {
-  addMcq,
-  createTest,
-  addVideo,
-} from "../../../../../redux/collage/test/testSlice";
+import { createTest } from "../../../../../redux/collage/test/thunks/test";
 
 const Header = ({ question, setQuestion, handleSave }) => {
   const navigate = useNavigate();

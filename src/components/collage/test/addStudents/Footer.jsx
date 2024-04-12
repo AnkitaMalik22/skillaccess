@@ -3,31 +3,30 @@ import toast from "react-hot-toast";
 
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { inviteToTest } from "../../../../redux/collage/test/testSlice";
-import { useDispatch, useSelector } from "react-redux";
 
-const Footer = ({ students}) => {
+import { useDispatch, useSelector } from "react-redux";
+import { inviteToTest } from "../../../../redux/collage/test/thunks/student";
+
+const Footer = ({ students }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { testId } = useSelector((state)=>state.test);
-
-
+  const { testId } = useSelector((state) => state.test);
 
   const handleSendInvite = () => {
     if (students.length === 0) {
       toast.error("Select at least one student to send an invite.");
-    }
-    else if(!testId){
-      console.log(testId)
-      toast.error("Invalid Test Id")
-    } 
-    else {
-console.log(testId,students)
-      dispatch(inviteToTest({
-        testId : testId,
-        students
-      }))
+    } else if (!testId) {
+      console.log(testId);
+      toast.error("Invalid Test Id");
+    } else {
+      console.log(testId, students);
+      dispatch(
+        inviteToTest({
+          testId: testId,
+          students,
+        })
+      );
 
       localStorage.removeItem("testDetails");
       localStorage.removeItem("totalTime");
@@ -40,7 +39,7 @@ console.log(testId,students)
       <div className=" absolute right-0">
         {" "}
         <div className=" flex gap-2">
-        <button
+          <button
             className={`self-center justify-center flex bg-blue-700 rounded-lg text-sm font-bold gap-2 px-10 py-3 ${
               students.length === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}

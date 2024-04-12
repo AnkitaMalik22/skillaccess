@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import {
-  editQuestion,
-  removeQuestion,
-  addBookmark,
-} from "../../../../redux/collage/test/testSlice";
+
 import ReactPlayer from "react-player";
 import { RxCross1 } from "react-icons/rx";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
@@ -13,6 +9,11 @@ import { CiBookmarkMinus } from "react-icons/ci";
 import { useSearchParams } from "react-router-dom";
 import VideoMcq from "./VideoMcq";
 import VideoEssay from "./VideoEssay";
+import {
+  editQuestion,
+  removeQuestion,
+} from "../../../../redux/collage/test/testSlice";
+import { addBookmark } from "../../../../redux/collage/test/thunks/question";
 
 const Video = ({ Number, id, video, type, view }) => {
   const [search, setSearch] = useSearchParams();
@@ -31,15 +32,16 @@ const Video = ({ Number, id, video, type, view }) => {
   const [videoState, setVideoState] = useState(video);
   console.log(videoState);
 
-
   const handleBookmark = () => {
     console.log("bookmark");
     // console.log(question);
-dispatch(addBookmark({
- ...video,
-  questionId : video._id,
-  Type: "video"
-}));
+    dispatch(
+      addBookmark({
+        ...video,
+        questionId: video._id,
+        Type: "video",
+      })
+    );
   };
 
   // const [mcq, setMcq] = useState(question);
@@ -108,9 +110,10 @@ dispatch(addBookmark({
             className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
             onClick={handleDelete}
           />
-                <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" 
-          onClick={handleBookmark}
-          /> 
+          <CiBookmarkMinus
+            className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center"
+            onClick={handleBookmark}
+          />
           {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
           {/* <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
 <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
@@ -148,7 +151,6 @@ dispatch(addBookmark({
         video.questions.map((question, index) => {
           return (
             <VideoMcq
-             
               Index={index}
               id={id}
               // handleDelete={handleDelete}

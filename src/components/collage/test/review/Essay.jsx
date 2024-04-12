@@ -2,20 +2,17 @@ import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { CiBookmarkMinus } from "react-icons/ci";
-import {
-  editQuestion,
-  removeQuestion,
-  addBookmark
-} from "../../../../redux/collage/test/testSlice";
+
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import {
+  editQuestion,
+  removeQuestion,
+} from "../../../../redux/collage/test/testSlice";
+import { addBookmark } from "../../../../redux/collage/test/thunks/question";
 
-
-
-
-
-const Essay = ({ Title, Number, id , question ,type,view}) => {
+const Essay = ({ Title, Number, id, question, type, view }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useSearchParams();
   const [essay, setEssay] = useState(question);
@@ -28,11 +25,14 @@ const Essay = ({ Title, Number, id , question ,type,view}) => {
         return { ...prev, [name]: [value] };
       });
     }
-    
   };
   const handleDelete = () => {
     dispatch(
-      removeQuestion({ selfIndex: Number, topicIndex: id, questionType: "essay" })
+      removeQuestion({
+        selfIndex: Number,
+        topicIndex: id,
+        questionType: "essay",
+      })
     );
   };
 
@@ -49,24 +49,24 @@ const Essay = ({ Title, Number, id , question ,type,view}) => {
   const handleBookmark = () => {
     console.log("bookmark");
     // console.log(question);
-dispatch(addBookmark({
-  Title: question.Title,
-  Number: question.Number,
-  id: question.id,
-  questionId : question._id,
-  Type: "essay"
-}));
+    dispatch(
+      addBookmark({
+        Title: question.Title,
+        Number: question.Number,
+        id: question.id,
+        questionId: question._id,
+        Type: "essay",
+      })
+    );
   };
 
-
-
-  const handleEdit =()=>{
+  const handleEdit = () => {
     console.log(essay);
-    if(essay.Title[0] === ""){
+    if (essay.Title[0] === "") {
       toast.error("Please fill all the fields");
 
       return;
-    }else{
+    } else {
       search.set(`${Number}`, "false");
       setSearch(search);
       dispatch(
@@ -78,14 +78,12 @@ dispatch(addBookmark({
         })
       );
     }
-  
-  }
-
+  };
 
   return (
     <div className="mx-6 flex bg-white rounded-lg justify-between mb-2">
       <div className="w-11/12 flex flex-col gap-2 ">
-      {search.get(`${Number}`) !== "true" ? (
+        {search.get(`${Number}`) !== "true" ? (
           <h2 className="px-4 font-semibold pt-3 text-base">
             {Number + 1} &nbsp; {Title}
           </h2>
@@ -116,21 +114,18 @@ dispatch(addBookmark({
           ))} */}
         </div>
       </div>
-  
+
       {/* <div className="w-[5%] flex flex-col gap-4 text-blued justify-center border-s-2 py-1">
         <RxCross1
           className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
           onClick={handleDelete}
         /> */}
 
-
-        
-        {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
+      {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
         <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
         <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
         <PiPencilSimpleLineBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
       {/* </div> */}
-
 
       {type !== "topic" && view !== "false" && (
         <div className="w-[5%] flex flex-col gap-4 text-blued border-s-2 py-1">
@@ -138,9 +133,10 @@ dispatch(addBookmark({
             className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
             onClick={handleDelete}
           />
-            <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" 
-          onClick={handleBookmark}
-          /> 
+          <CiBookmarkMinus
+            className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center"
+            onClick={handleBookmark}
+          />
           {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
           {/* <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
         <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
@@ -161,8 +157,6 @@ dispatch(addBookmark({
           )}
         </div>
       )}
-
-
     </div>
   );
 };

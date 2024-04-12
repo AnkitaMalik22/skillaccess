@@ -3,16 +3,16 @@ import Header from "./Header";
 
 import { FaX } from "react-icons/fa6";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
-import {
-  // paragrapgh
-  addQuestionToTopic,
-  addEssay,
-  addEssayToTopic,
-  editQuestionById,
-} from "../../../../redux/collage/test/testSlice";
+
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import {
+  addEssay,
+  addEssayToTopic,
+} from "../../../../redux/collage/test/testSlice";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const AddEssay = () => {
   const { id } = useParams();
