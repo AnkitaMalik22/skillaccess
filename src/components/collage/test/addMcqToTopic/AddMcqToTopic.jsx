@@ -8,12 +8,10 @@ import ReactQuill from "react-quill"; // Import ReactQuill
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
 
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import {
-  addMcqToTopic,
-  addQuestionToTopic,
-  editQuestionById,
-} from "../../../../redux/collage/test/testSlice";
+
 import toast from "react-hot-toast";
+import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const AddMcqToTopic = () => {
   const { currentTopic } = useSelector((state) => state.test);
@@ -35,7 +33,7 @@ const AddMcqToTopic = () => {
 
   // section Id
   const { sectionId } = useParams();
-  
+
   const [step, setStep] = useState(1);
 
   const handlePrev = () => {
@@ -126,10 +124,10 @@ const AddMcqToTopic = () => {
     console.log(currentTopic);
     setCountDetail(currentTopic.questions.length - 1);
   }, [currentTopic]);
-const stripHtml = (html) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
+  const stripHtml = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
-  }
+  };
   // console.log(question);
   return (
     <div>
@@ -160,14 +158,15 @@ const stripHtml = (html) => {
 
             <ReactQuill
               value={question.Title}
-              onChange={(value) =>   setQuestion((prev) => {
-                // console.log({ ...prev, Title: e.target.value });
-                return { ...prev, Title:value };
-              })}
+              onChange={(value) =>
+                setQuestion((prev) => {
+                  // console.log({ ...prev, Title: e.target.value });
+                  return { ...prev, Title: value };
+                })
+              }
               className="bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
               placeholder="Enter Question Here"
               name="Title"
-            
             />
           </span>
           <span className="w-[49%]">
@@ -394,13 +393,10 @@ const stripHtml = (html) => {
                 } else if (question.Options && question.Options.length < 4) {
                   toast.error("Please enter atleast 4 options");
                   return;
-                } 
-                else if (question.AnswerIndex === null) {
+                } else if (question.AnswerIndex === null) {
                   toast.error("Please select correct answer");
                   return;
-                }
-                
-                else if (
+                } else if (
                   question.Options.some((option) => option.trim() === "")
                 ) {
                   toast.error("Please enter all options");

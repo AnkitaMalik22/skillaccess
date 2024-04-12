@@ -1,23 +1,22 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import HeaderSelect from "./HeaderSelect";
 
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { addQuestionToTopic } from "../../../../redux/collage/test/testSlice";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 import { useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 import PopUp from "../../../PopUps/PopUp";
 import Loader from "../../test/addVideo/Loader";
 import { FiUpload } from "react-icons/fi";
 
-
 const AddQuestionsSelect = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {currentTopic} = useSelector((state) => state.test);
+  const { currentTopic } = useSelector((state) => state.test);
 
   const [selectQuestionType, setSelectQuestionType] = useState("");
   const [visible, setVisible] = useState(false);
@@ -58,7 +57,6 @@ const AddQuestionsSelect = () => {
   };
   const handleUpload = async () => {
     try {
-
       if (excel !== "" && excel !== undefined) {
         setLoading(true);
 
@@ -73,8 +71,8 @@ const AddQuestionsSelect = () => {
         let jsonData = [];
         let headers = [];
         // switch (currentTopic.Type) {
-          // switch (type) {
-          switch (selectQuestionType) {
+        // switch (type) {
+        switch (selectQuestionType) {
           case "mcq":
             try {
               for (let colNum = range.s.c; colNum <= range.e.c; colNum++) {
@@ -527,7 +525,6 @@ const AddQuestionsSelect = () => {
     }
   };
 
-
   const NavHandler = () => {
     switch (selectQuestionType) {
       case "mcq":
@@ -562,13 +559,9 @@ const AddQuestionsSelect = () => {
     }
   };
 
-
-
-
-  
   return (
     <div className="font-dmSans text-sm font-bold">
-        {visible && (
+      {visible && (
         <PopUp
           visible={visible}
           handleSave={handleUpload}
@@ -795,29 +788,26 @@ const AddQuestionsSelect = () => {
             New Question
           </button> */}
 
-      
-        
-     
-<button
-          className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
-          onClick={() => {
-            upload.current.click();
-          }}
-        >
-          <input
-            type="file"
-            ref={upload}
-            className="hidden"
-            onChange={handleFile}
-          />
-          {loading ? (
-            <Loader />
-          ) : (
-            <FiUpload className="self-center text-lg " />
-          )}{" "}
-          Upload Questions
-        </button>
-      
+          <button
+            className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
+            onClick={() => {
+              upload.current.click();
+            }}
+          >
+            <input
+              type="file"
+              ref={upload}
+              className="hidden"
+              onChange={handleFile}
+            />
+            {loading ? (
+              <Loader />
+            ) : (
+              <FiUpload className="self-center text-lg " />
+            )}{" "}
+            Upload Questions
+          </button>
+
           {/* <button className="self-center justify-center flex bg-white border border-blue-500 py-3 px-8 rounded-xl text-xs gap-2 text-blue-500">
             Copy question from another assessment
           </button> */}

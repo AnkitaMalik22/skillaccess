@@ -5,7 +5,7 @@ import { HiDotsVertical } from "react-icons/hi";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 import { TfiClip } from "react-icons/tfi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCollege,
@@ -17,11 +17,11 @@ import { bookmarkMail } from "../../../../redux/collage/Inbox/inboxSlice";
 import socketIOClient from "socket.io-client";
 import convertDate from "../../../../util/getDate";
 
-const ENDPOINT = "http://localhost:4000"; // Socket.IO server endpoint
-const List = () => {
+const ENDPOINT = process.env.REACT_APP_API_URL; // Socket.IO server endpoint
+const List = ({ show }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [type, setType] = useState("all");
+
   const [queries, setQueries] = useState({ limit: 50, skip: 0 });
   const user = useSelector(getInbox);
   const [arr, setArr] = useState([
@@ -33,7 +33,7 @@ const List = () => {
   const email = useSelector((state) => state.collageAuth.user.Email);
   const total = useSelector((state) => state.collageAuth.mail.total);
   const [socket, setSocket] = useState(null);
-
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
@@ -48,7 +48,16 @@ const List = () => {
       socket.disconnect();
     };
   }, []);
-
+  const handleNav = (i) =>
+    navigate(
+      `/collage/inbox/mail?index=${i}&type=view&show=${show}&within=${searchParams.get(
+        "within"
+      )}&keyword=${searchParams.get("keyword")}&from=${searchParams.get(
+        "from"
+      )}&to=${searchParams.get("to")}&date=${searchParams.get(
+        "date"
+      )}&typeFilter=${searchParams.get("typeFilter")}`
+    );
   const handleLeft = () => {
     if (queries.skip < queries.limit) {
       return;
@@ -57,7 +66,7 @@ const List = () => {
       let skip = prev.skip - prev.limit;
       return { ...prev, skip: skip };
     });
-    getMail(queries);
+    dispatch(getMail(queries));
   };
   const handleRight = () => {
     if (queries.skip > queries.total) {
@@ -67,7 +76,7 @@ const List = () => {
       let skip = prev.skip + prev.limit;
       return { ...prev, skip: skip };
     });
-    getMail(queries);
+    dispatch(getMail(queries));
   };
 
   useEffect(() => {
@@ -172,21 +181,20 @@ console.log(arr);
               <p
                 className="text-sm font-medium cursor-pointer"
                 // onClick={() => navigate("/collage/inbox/mail?type=view")}
-                onClick={() =>
-                  navigate(`/collage/inbox/mail?index=${i}&type=view`)
-                }
+                onClick={() => handleNav(i)}
               >
                 {el.mail?.from?.FirstName}
               </p>
-              <p className="text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer">
+              <p
+                className="text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer"
+                onClick={() => handleNav(i)}
+              >
                 {el.mail?.subject}
               </p>
               <p
                 className="text-sm text-gray-400 line-clamp-1 h-6 cursor-pointer max-w-[40vw] self-center"
                 dangerouslySetInnerHTML={{ __html: el.mail?.message }}
-                onClick={() =>
-                  navigate(`/collage/inbox/mail?index=${i}&type=view`)
-                }
+                onClick={() => handleNav(i)}
               />
             </div>
 
@@ -196,9 +204,7 @@ console.log(arr);
 
                 <TfiClip
                   className="rotate-180 text-2xl text-gray-400 cursor-pointer"
-                  onClick={() =>
-                    navigate(`/collage/inbox/mail?index=${i}&type=view`)
-                  }
+                  onClick={() => handleNav(i)}
                 />
               )}
 

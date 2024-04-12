@@ -335,7 +335,7 @@ const Name = () => {
               name="duration_from"
               value={testDetails?.duration_from?.slice(0, 16)}
               onChange={handleChange}
-              className={`border-none ${
+              className={`border-none bg-gray-100 ${
                 errors.duration ? "border-red-500" : ""
               }`}
               required
@@ -351,7 +351,7 @@ const Name = () => {
               name="duration_to"
               value={testDetails?.duration_to?.slice(0, 16)}
               onChange={handleChange}
-              className={`border-none ${
+              className={`border-none bg-gray-100 ${
                 errors.duration ? "border-red-500" : ""
               }`}
               required
@@ -365,7 +365,7 @@ const Name = () => {
         <div className="mt-3 flex items-center gap-2 text-lg pl-4">
           <label
             htmlFor="isNegativeMarking"
-            className="flex items-center gap-3"
+            className="flex items-center gap-3 text-gray-400"
           >
             <input
               id="isNegativeMarking"

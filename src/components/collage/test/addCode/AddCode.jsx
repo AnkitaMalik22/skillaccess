@@ -4,15 +4,16 @@ import { FaX } from "react-icons/fa6";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
 import Question from "./Question";
 import Code from "./rightBlock/Index";
-import {
-  addCompiler,
-  addCompilerToTopic,
-  addQuestionToTopic,
-  editQuestionById,
-} from "../../../../redux/collage/test/testSlice";
+
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import {
+  addCompiler,
+  addCompilerToTopic,
+} from "../../../../redux/collage/test/testSlice";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
 
 const AddCode = () => {
   const { id } = useParams();

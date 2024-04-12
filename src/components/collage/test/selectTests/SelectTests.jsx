@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import toast from "react-hot-toast"
+import toast from "react-hot-toast";
 import Header from "./Header";
 
 import { Progress } from "./Progress";
@@ -10,18 +10,14 @@ import Inputs from "./Inputs";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  setTest,
-  setSections,
-  removeSections,
-  getAllTopics,
-  setTestSelectedTopics,
-  setCurrentTopic,
-} from "../../../../redux/collage/test/testSlice";
-
 import { FaPlus } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
+import {
+  setCurrentTopic,
+  setTestSelectedTopics,
+} from "../../../../redux/collage/test/testSlice";
+import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
 
 const SelectTests = () => {
   const [questionType, setQuestionType] = useState("");
@@ -337,7 +333,7 @@ const SelectTests = () => {
                         className="w-[90px] h-[40px] bg-[#8F92A120] rounded-xl"
                         onClick={() => {
                           if (!questionType) {
-                          toast.error("Please select a question type first.");
+                            toast.error("Please select a question type first.");
                             return;
                           }
                           dispatch(

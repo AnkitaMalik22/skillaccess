@@ -9,8 +9,36 @@ import {
 } from "./reducerFunctions/question";
 import { getAllTestFulfilled } from "./reducerFunctions/test";
 import toast from "react-hot-toast";
+import {
+  getResponseByTestandStudent,
+  getStudentResponse,
+  inviteToTest,
+} from "./thunks/student";
 
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+import {
+  createTest,
+  getAllTests,
+  getTest,
+  getTestResultPage,
+} from "./thunks/test";
+
+import {
+  addQuestionToTopic,
+  createTopic,
+  getAllTopics,
+  getTopicById,
+} from "./thunks/topic";
+
+import {
+  addBookmark,
+  deleteRecentUsedQuestion,
+  editQuestionById,
+  getAllBookmarks,
+  getBookmarkById,
+  getRecentUsedQuestions,
+  removeBookmark,
+  getTopicByIdQB,
+} from "./thunks/question";
 
 const testState = {
   recentUsedQuestions: [],
@@ -23,7 +51,7 @@ const testState = {
   testName: "",
   testDescription: "",
   testAttempts: "",
-  testId : "",
+  testId: "",
   // testStatus : "",
   assessments: {
     beginner: [],
@@ -34,7 +62,6 @@ const testState = {
   sections: [],
 
   selectedSections: [],
-
 
   test: {
     testName: "",
@@ -93,8 +120,8 @@ const testState = {
         Time: 0,
         Heading: "",
         Description: "",
-        duration_from:"",
-        duration_to:"",
+        duration_from: "",
+        duration_to: "",
         CreatedByAdmin: false,
         Student: [],
         Timeline: "",
@@ -137,265 +164,6 @@ const testState = {
       },
 };
 
-export const getTest = createAsyncThunk(
-  "test/getTest",
-  async (id, { rejectWithValue }) => {
-    try {
-      console.log(`get test ${id}`);
-      const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments/${id}`,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      // console.log(res);
-      return res;
-    } catch (error) {
-      console.log(error);
-
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const getStudentResponse = createAsyncThunk(
-  "test/studentResponse",
-  async (id, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/studentDummy/response/${id}`,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-
-      const res = req.data;
-
-      console.log(res);
-
-      return res.studentResponse;
-    } catch (error) {
-      console.log("catch", error.response.data);
-
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const getTestResultPage = createAsyncThunk(
-  "test/getTestResultPage",
-  async (id, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/studentDummy/get/test-details/${id}`,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-
-      const res = req.data;
-
-      console.log(res);
-
-      return res.students;
-    } catch (error) {
-      console.log("catch", error.response.data);
-
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const getAllTests = createAsyncThunk(
-  "test/getAllTests",
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      console.log(`get tests`);
-      const req = await axios.get(`${REACT_APP_API_URL}/api/assessments`, {
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("auth-token"),
-        },
-      });
-
-      const res = req.data;
-      // console.log(res);
-      return res;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const createTest = createAsyncThunk(
-  "test/createTest",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/assessments/create`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-
-      return res.assessment;
-    } catch (error) {
-      console.log("catch");
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
-export const addQuestionToTopic = createAsyncThunk(
-  "test/addQuestionToTopic",
-  async (data, { rejectWithValue, dispatch }) => {
-    try {
-      let req;
-      if (data.isMultiple === true) {
-        req = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/college/add-questions/${data.id}/${data.type}`,
-          { questions: data.data },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("auth-token"),
-            },
-          }
-        );
-      } else {
-        req = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/college/add-questions/${data.id}/${data.type}`,
-          { questions: [data.data] },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("auth-token"),
-            },
-          }
-        );
-      }
-
-      const res = req.data;
-
-      // if (data.index) return { question: res.questions[0] };
-      return {
-        questions: res.questions,
-        type: data.type,
-        isMultiple: data.isMultiple,
-      };
-    } catch (error) {
-      console.log("catch");
-      return rejectWithValue(error?.response?.data?.message || "");
-    }
-  }
-);
-
-export const getAllTopics = createAsyncThunk(
-  "test/getAllTopics",
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/college/topics/all`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.topics;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const getTopicById = createAsyncThunk(
-  "test/getTopicById",
-  async (id, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/admin/topic/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.section;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const createTopic = createAsyncThunk(
-  "test/createTopic",
-
-  async (data, { rejectWithValue }) => {
-    //   {
-
-    //     "Heading": "DevOps 5",
-
-    //     "Description": "The DevOps test assesses candidates' knowledge of DevOps concepts and practices and whether they can apply that knowledge to improve infrastructure, achieve faster time to market, and lower failure rates of new releases.",
-
-    //     "Time": 10,
-
-    //     "TotalQuestions": 10
-
-    // }
-
-    try {
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/topics/create`,
-
-        data,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-
-      const res = req.data;
-
-      return res.section;
-    } catch (error) {
-      console.log("catch", error.response.data);
-
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
 // export const getStudentResponse = createAsyncThunk("test/studentResponse",
 // async (id, { rejectWithValue }) => {
 
@@ -425,248 +193,6 @@ export const createTopic = createAsyncThunk(
 //   }
 // }
 // );
-
-export const getResponseByTestandStudent = createAsyncThunk(
-  "test/getResponseByTestandStudent",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/studentDummy/test/student?testId=${data.testId}&studentId=${data.studentId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      console.log(res.studentResponse[0]);
-      return res.studentResponse[0];
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const editQuestionById = createAsyncThunk(
-  "test/editQuestionById",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.put(
-        `${REACT_APP_API_URL}/api/assessments/question/${data.id}?type=${data.type}`,
-        data.question,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return { res: res, index: data.index, type: data.type };
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-
-// ===================================== BOOKMARKS START =====================================
-
-export const addBookmark = createAsyncThunk(
-  "test/addBookmark",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/assessments/bookmarks/add`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.bookmark;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const removeBookmark = createAsyncThunk(
-  "test/removeBookmark",
-  async (id, { rejectWithValue }) => {
-    try {
-      const req = await axios.delete(
-        `${REACT_APP_API_URL}/api/assessments/bookmarks/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.bookmarks;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const getAllBookmarks = createAsyncThunk(
-  "test/getAllBookmarks",
-  async (_, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/assessments/get/bookmarks`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.bookmarks;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-
-export const getBookmarkById = createAsyncThunk(
-  "test/getBookmarkById",
-  async (id, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/college/bookmarks/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.bookmark;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-
-);
-
-
-
-export const getRecentUsedQuestions = createAsyncThunk(
-  "test/recentUsedQuestions",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        // `${REACT_APP_API_URL}/api/assessments/recent/questions`,
-        `${REACT_APP_API_URL}/api/qb/recent/questions`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        } 
-      );
-      const res = req.data;
-      console.log(res);
-      return res.topics;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-
-export const deleteRecentUsedQuestion = createAsyncThunk(
-  "test/deleteRecentUsedQuestion",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.delete(
-        `${REACT_APP_API_URL}/api/qb/recent/question/${data.id}?type=${data.type}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.topics;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-
-
-// INVITE STUDENTS TO ASSESSMENTS 
-
-export const inviteToTest =createAsyncThunk(
-  'test/inviteToTest',
-  async (data,{rejectWithValue})=>{
-    try {
-      console.log(data);
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/assessments/invite/students/${data.testId}`,
-        data.students,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-)
-
-
-const getTopicByIdQB = createAsyncThunk(
-  "test/getTopicByIdQB",
-  async (id, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/assessment/section/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.section;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-
 
 const testSlice = createSlice({
   initialState: testState,
@@ -1074,8 +600,6 @@ const testSlice = createSlice({
     //   );
     // },
 
-
-
     // ===============================  BOOKMARKS END   ===============================
   },
   extraReducers: (builder) => {
@@ -1241,7 +765,6 @@ const testSlice = createSlice({
         state.bookmarks = action.payload;
 
         toast.success("Bookmark added successfully");
-
       })
       .addCase(addBookmark.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
@@ -1252,8 +775,8 @@ const testSlice = createSlice({
         state.status = "pending";
       })
       .addCase(removeBookmark.fulfilled, (state, action) => {
-      toast.success("Bookmark removed successfully");
-      state.bookmarks = action.payload;
+        toast.success("Bookmark removed successfully");
+        state.bookmarks = action.payload;
       })
       .addCase(removeBookmark.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
@@ -1302,24 +825,22 @@ const testSlice = createSlice({
         toast.error("Error removing question from recent used questions");
         // state.recentUsedQuestions = [];
       })
-      .addCase(inviteToTest.pending,(state,action)=>{
-        state.status ="pending";
+      .addCase(inviteToTest.pending, (state, action) => {
+        state.status = "pending";
       })
-      .addCase(inviteToTest.fulfilled,(state,action)=>{
-        state.status ="fulfilled";
+      .addCase(inviteToTest.fulfilled, (state, action) => {
+        state.status = "fulfilled";
         toast.success("Students Invited Successfully!");
-        console.log(action.payload)
-
+        console.log(action.payload);
       })
-      .addCase(inviteToTest.rejected,(state,action)=>{
-state.status = "rejected"
-toast.error("Error Inviting Students!")
-console.log(action.payload)
+      .addCase(inviteToTest.rejected, (state, action) => {
+        state.status = "rejected";
+        toast.error("Error Inviting Students!");
+        console.log(action.payload);
       })
       .addCase(getTopicByIdQB.pending, (state, action) => {
         state.status = "pending";
-      }
-      )
+      })
       .addCase(getTopicByIdQB.fulfilled, (state, action) => {
         state.currentTopic = action.payload;
         console.log(action.payload);
@@ -1328,12 +849,6 @@ console.log(action.payload)
         console.error("Error fetching test results:", action.payload);
         state.currentTopic = {};
       });
-
-
-
-     
-
-
   },
 });
 

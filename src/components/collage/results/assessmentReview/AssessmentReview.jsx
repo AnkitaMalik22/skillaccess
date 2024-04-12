@@ -4,30 +4,25 @@ import { Progress } from "./Progress";
 import List from "./List";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createTest,
-  getResponseByTestandStudent,
-  getStudentResponse,
-  setTestBasicDetails,
-  setTestSelectedTopics,
-} from "../../../../redux/collage/test/testSlice";
+
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Code from "./Code";
 import Video from "./Video";
 import Essay from "./Essay";
 import HeaderMarks from "./HeaderMarks";
+import { getStudentResponse } from "../../../../redux/collage/test/thunks/student";
 
 const AssessmentReview = () => {
   const searchParams = new URLSearchParams(window.location.search);
   const testId = searchParams.get("assessmentId");
-const studentId = searchParams.get("studentId");
-const responseId = searchParams.get("responseId");
+  const studentId = searchParams.get("studentId");
+  const responseId = searchParams.get("responseId");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {response ,} = useSelector((state) => state.test);
-console.log(response);
+  const { response } = useSelector((state) => state.test);
+  console.log(response);
   // const {
   //   level,
   //   name,
@@ -38,77 +33,70 @@ console.log(response);
   //   totalDuration,
   // } = useSelector((state) => state.test);
 
+  useEffect(() => {
+    // dispatch(getResponseByTestandStudent({
+    //   testId,
+    //   studentId
+    // }));
 
+    dispatch(getStudentResponse(responseId));
+  }, [testId, studentId]);
 
-useEffect(() => {
-// dispatch(getResponseByTestandStudent({
-//   testId,
-//   studentId
-// }));
+  console.log("testId", testId, studentId, response);
 
-dispatch(getStudentResponse(responseId))
+  const [questions, setQuestions] = useState();
+  let section1 = [];
+  let section2 = [];
+  let section3 = [];
+  let section4 = [];
+  let section5 = [];
 
-
-}, [testId, studentId]);
-
-console.log("testId",testId,studentId, response);
-
-const [questions, setQuestions] = useState();
-let section1 = [];
-let section2 = [];
-let section3 = [];
-let section4 = [];
-let section5 = [];
-
-let topics = response?.topics;
-useEffect(() => {
-  if (response?.topics && response?.topics.length > 0) {
-   if(response?.topics[0]){
-    console.log(response)
-    console.log("response?.topics[0].",response?.topics[0].Type);
-    console.log("response?.topics[1]",response?.topics[1].Type);
-    switch (response?.topics[0].Type) {
-
-      case "essay":
-        section1 = response?.topics[0].essay;
-        break;
-      case "video":
-        section1 = response?.topics[0].video;
-        break;
-      case "compiler":
-        section1 = response?.topics[0].compiler;
-        break;
-      case "findAnswer":
-        section1 = response?.topics[0].findAnswers;
-        break;
-      default:
-        section1 =response?.topics[0].questions;
-        break;
-    }
-   }
-  
-
-     if (response?.topics[1]){
-      switch (response?.topics[1].Type) {
-        case "essay":
-          section2 = response?.topics[1].essay;
-          break;
-        case "video":
-          section2 = response?.topics[1].video;
-          break;
-        case "compiler":
-          section2 = response?.topics[1].compiler;
-          break;
-        case "findAnswer":
-          section2 = response?.topics[1].findAnswers;
-          break;
-        default:
-          section2 = response?.topics[1].questions;
-          break;
+  let topics = response?.topics;
+  useEffect(() => {
+    if (response?.topics && response?.topics.length > 0) {
+      if (response?.topics[0]) {
+        console.log(response);
+        console.log("response?.topics[0].", response?.topics[0].Type);
+        console.log("response?.topics[1]", response?.topics[1].Type);
+        switch (response?.topics[0].Type) {
+          case "essay":
+            section1 = response?.topics[0].essay;
+            break;
+          case "video":
+            section1 = response?.topics[0].video;
+            break;
+          case "compiler":
+            section1 = response?.topics[0].compiler;
+            break;
+          case "findAnswer":
+            section1 = response?.topics[0].findAnswers;
+            break;
+          default:
+            section1 = response?.topics[0].questions;
+            break;
+        }
       }
 
-     }
-       
+      if (response?.topics[1]) {
+        switch (response?.topics[1].Type) {
+          case "essay":
+            section2 = response?.topics[1].essay;
+            break;
+          case "video":
+            section2 = response?.topics[1].video;
+            break;
+          case "compiler":
+            section2 = response?.topics[1].compiler;
+            break;
+          case "findAnswer":
+            section2 = response?.topics[1].findAnswers;
+            break;
+          default:
+            section2 = response?.topics[1].questions;
+            break;
+        }
+      }
+
       if (response?.topics[2])
         switch (response?.topics[2].Type) {
           case "essay":
@@ -166,25 +154,17 @@ useEffect(() => {
             break;
         }
 
-        console.log(section1, section2, section3, section4, section5);
+      console.log(section1, section2, section3, section4, section5);
 
-        setQuestions([
-          ...section1,
-          ...section2,
-          ...section3,
-          ...section4,
-          ...section5,
-        ]);
-
-      }
-
-
-
-
- 
-}, [response, ""]);
-
-
+      setQuestions([
+        ...section1,
+        ...section2,
+        ...section3,
+        ...section4,
+        ...section5,
+      ]);
+    }
+  }, [response, ""]);
 
   //   useEffect(() => {
   //     if (topics[0])
@@ -300,13 +280,11 @@ useEffect(() => {
 
   const [sections, setSections] = useState(response?.topics);
 
-
   return (
     <div className="w-11/12 mx-auto relative    min-h-[90vh] pb-20">
       {/* <Header page={"final"} handleSubmit={handleSubmit} /> */}
 
-      <HeaderMarks response={response}  totalQuestions={questions?.length}/>
-
+      <HeaderMarks response={response} totalQuestions={questions?.length} />
 
       <div className="mt-16">
         {questions
@@ -322,34 +300,37 @@ useEffect(() => {
                     number={(selected - 1) * 10 + 1 + i}
                   />
                 )}
-                  {question.videoFile && (
+                {question.videoFile && (
                   <Video
                     Number={(selected - 1) * 10 + 1 + i}
                     video={question}
                   />
                 )}
-                {( question.questions) || (question.Options) && (!question.codeQuestion) && (!question.videoFile) 
-                //  &&
-                //   (question.AnswerIndex !== undefined 
-                    
-                    ? (   !question.videoFile &&
-                    <List
-                      question={question}
-                      number={(selected - 1) * 10 + 1 + i}
-                    />
-                  ) : (
-                  
-                    !question.codeQuestion && !question.videoFile && !question.questions && !question.Options && (
+                {question.questions ||
+                (question.Options &&
+                  !question.codeQuestion &&
+                  !question.videoFile)
+                  ? //  &&
+                    //   (question.AnswerIndex !== undefined
+
+                    !question.videoFile && (
+                      <List
+                        question={question}
+                        number={(selected - 1) * 10 + 1 + i}
+                      />
+                    )
+                  : !question.codeQuestion &&
+                    !question.videoFile &&
+                    !question.questions &&
+                    !question.Options && (
                       <Essay
                         question={question}
                         number={(selected - 1) * 10 + 1 + i}
                       />
                     )
 
-                  
-                  // )
-                  )}
-              
+                    // )
+                }
               </div>
             );
           })}
@@ -357,42 +338,49 @@ useEffect(() => {
         {/* iterate this list */}
       </div>
 
-      
       <div className="absolute bottom-2 mt-20 flex gap-2 w-full justify-center">
-  <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-    <FaChevronLeft
-      className={`rotate-45 text-lg self-center ${selected === 1 && "disabled"}`}
-      onClick={() => selected !== 1 && setSelected(selected - 1)}
-    />
-  </div>
-
-  {Array.from({ length: Math.ceil(max) }).map((_, index) => {
-    const pageNumber = index + 1;
-    const hasQuestions = (pageNumber - 1) * 10 < questions.length;
-console.log(questions.length)
-console.log(Math.ceil(max));
-    return (
-      hasQuestions && (
-        <div
-          key={pageNumber}
-          className={`rounded-lg h-10 w-10 flex justify-center ${
-            selected === pageNumber ? "bg-blue-700 text-white" : "bg-gray-100"
-          }`}
-          onClick={() => setSelected(pageNumber)}
-        >
-          <p className="self-center">{pageNumber}</p>
+        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+          <FaChevronLeft
+            className={`rotate-45 text-lg self-center ${
+              selected === 1 && "disabled"
+            }`}
+            onClick={() => selected !== 1 && setSelected(selected - 1)}
+          />
         </div>
-      )
-    );
-  })}
 
-  <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-    <FaChevronRight
-      className={`rotate-45 text-lg self-center ${selected === Math.ceil(max) && "disabled"}`}
-      onClick={() => selected !==Math.ceil(max) && setSelected(selected + 1)}
-    />
-  </div>
-</div>
+        {Array.from({ length: Math.ceil(max) }).map((_, index) => {
+          const pageNumber = index + 1;
+          const hasQuestions = (pageNumber - 1) * 10 < questions.length;
+          console.log(questions.length);
+          console.log(Math.ceil(max));
+          return (
+            hasQuestions && (
+              <div
+                key={pageNumber}
+                className={`rounded-lg h-10 w-10 flex justify-center ${
+                  selected === pageNumber
+                    ? "bg-blue-700 text-white"
+                    : "bg-gray-100"
+                }`}
+                onClick={() => setSelected(pageNumber)}
+              >
+                <p className="self-center">{pageNumber}</p>
+              </div>
+            )
+          );
+        })}
+
+        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+          <FaChevronRight
+            className={`rotate-45 text-lg self-center ${
+              selected === Math.ceil(max) && "disabled"
+            }`}
+            onClick={() =>
+              selected !== Math.ceil(max) && setSelected(selected + 1)
+            }
+          />
+        </div>
+      </div>
     </div>
   );
 };

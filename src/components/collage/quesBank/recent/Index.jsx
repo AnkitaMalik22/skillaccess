@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { CgFolder } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecentUsedQuestions, deleteRecentUsedQuestion} from "../../../../redux/collage/test/testSlice";
-
-
+import {
+  getRecentUsedQuestions,
+  deleteRecentUsedQuestion,
+} from "../../../../redux/collage/test/thunks/question";
 
 const Recent = () => {
   // const arr = [2, 1, 1, 1, 1];
@@ -16,44 +17,38 @@ const Recent = () => {
   useEffect(() => {
     dispatch(getRecentUsedQuestions());
     console.log(recentUsedQuestions);
-
   }, []);
 
+  const getTotalQuestions = (topic) => {
+    let total = 0;
+    switch (topic?.Type) {
+      case "mcq":
+        total = topic?.questions?.length;
+        break;
+      case "video":
+        total = topic?.video?.length;
+        break;
+      case "compiler":
+        total = topic?.compiler?.length;
+        break;
+      case "essay":
+        total = topic?.essay?.length;
+        break;
+      case "findAnswer":
+        total = topic?.findAnswers?.length;
+        break;
+      default:
+        break;
+    }
 
-const getTotalQuestions = (topic) => {
-  let total = 0;
-switch (topic?.Type) {
-  case "mcq":
-    total = topic?.questions?.length;
-    break;
-  case "video":
-    total = topic?.video?.length;
-    break;
-  case "compiler":
-    total = topic?.compiler?.length;
-    break;
-  case "essay":
-    total = topic?.essay?.length;
-    break;
-    case "findAnswer":
-      total = topic?.findAnswers?.length;
-      break;
-  default:
-    break;
-}
+    return total;
+  };
 
-  return total;
-}
+  const handleDelete = (type, id) => {
+    console.log("Delete", id);
 
-
-
-const handleDelete = (type,id) => {
-  console.log("Delete", id);
-
-  dispatch(deleteRecentUsedQuestion({type,id}));
-
-
-}
+    dispatch(deleteRecentUsedQuestion({ type, id }));
+  };
 
   return (
     <div className="w-11/12 mx-auto mt-4 font-dmSans">
@@ -105,7 +100,7 @@ const handleDelete = (type,id) => {
                 </span>
                 <span>
                   <h2 className="font-dmSans text-center  sm:text-sm">
-                   {topic?.Heading}
+                    {topic?.Heading}
                   </h2>
                 </span>
               </div>
@@ -115,9 +110,7 @@ const handleDelete = (type,id) => {
               <div className=" self-center h-fit">
                 <span>
                   <h2 className="font-dmSans font-normal sm:text-sm">
-                  {
-                    topic?.Type
-                  }
+                    {topic?.Type}
                   </h2>
                 </span>
               </div>
@@ -127,10 +120,9 @@ const handleDelete = (type,id) => {
             <div className="flex justify-center ">
               <div className=" self-center h-fit">
                 <span>
-                  <h2 className="font-dmSans font-normal sm:text-sm">{
-
-                    getTotalQuestions(topic)
-                  }</h2>
+                  <h2 className="font-dmSans font-normal sm:text-sm">
+                    {getTotalQuestions(topic)}
+                  </h2>
                 </span>
               </div>
             </div>
@@ -154,7 +146,10 @@ const handleDelete = (type,id) => {
               {/* <div className=" self-center">
                 <img src="../../images/icons/pencil.png" alt="" />
               </div> */}
-              <div className=" self-center cursor-pointer" onClick={()=>handleDelete( topic?.Type, topic._id)}>
+              <div
+                className=" self-center cursor-pointer"
+                onClick={() => handleDelete(topic?.Type, topic._id)}
+              >
                 <img src="../../images/icons/cross.png" alt="" />
               </div>
             </div>

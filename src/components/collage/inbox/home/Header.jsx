@@ -12,7 +12,7 @@ import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import SearchForm from "../mail/SearchForm";
 
-const Header = () => {
+const Header = ({ show, setShow }) => {
   const refButton = useRef(null);
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
@@ -74,7 +74,12 @@ const Header = () => {
                   toggle ? "bg-white" : "bg-gray-100"
                 }`}
               >
-                <SearchForm setToggle={setToggle} refButton={refButton} />
+                <SearchForm
+                  setToggle={setToggle}
+                  refButton={refButton}
+                  show={show}
+                  setShow={setShow}
+                />
               </Disclosure.Panel>
             </div>
           )}
