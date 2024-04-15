@@ -25,7 +25,7 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
   const handleSave = (e) => {
     e.preventDefault();
     dispatch(searchMail(filter));
-    setShow("search");
+    // setShow("search");
     setSearchParams({
       show: "search",
       within: filter.within,
@@ -35,6 +35,8 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
       date: filter.date,
       typeFilter: filter.type,
     });
+    setToggle(true);
+    refButton.current.click();
     // setFilter({
     //   type: "All Emails",
     //   within: null,
