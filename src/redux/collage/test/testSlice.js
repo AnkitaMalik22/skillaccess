@@ -842,6 +842,7 @@ const testSlice = createSlice({
         state.status = "pending";
       })
       .addCase(getTopicByIdQB.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.currentTopic = action.payload;
         console.log(action.payload);
       })
