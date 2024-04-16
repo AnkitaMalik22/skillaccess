@@ -122,7 +122,8 @@ const AddMcq = () => {
   };
 
   const handleAddQuestion = (type) => {
-    if (question.Title === "") {
+    console.log(question.Title, question.Title ==="" , question.Title.trim() === "" , question.Title=== null, );
+    if (!question.Title || question.Title.trim() === "" || question.Title === "<p><br></p>") {
       toast.error("Please enter question");
       return;
     } else if (question.Options && question.Options.length < 4) {

@@ -47,7 +47,7 @@ const Header = () => {
           className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
           // onClick={() => navigate("/collage/test/addMcq")}
         >
-          <FiUpload className="self-center text-lg " /> Upload Questions
+          <FiUpload className="self-center text-lg " /> Upload New
         </button>
         <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />

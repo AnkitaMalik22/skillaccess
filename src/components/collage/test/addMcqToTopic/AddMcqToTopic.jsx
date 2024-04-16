@@ -120,6 +120,60 @@ const AddMcqToTopic = () => {
     }
   };
 
+
+  const handleQuestionSave = () => {
+    if (!question.Title || question.Title.trim() === "" || question.Title === "<p><br></p>") {
+      toast.error("Please enter question");
+      return;
+    }  else if (question.Options && question.Options.length < 4) {
+      toast.error("Please enter atleast 4 options");
+      return;
+    } else if (question.AnswerIndex === null) {
+      toast.error("Please select correct answer");
+      return;
+    } else if (
+      question.Options.some((option) => option.trim() === "")
+    ) {
+      toast.error("Please enter all options");
+      return;
+    } else if (question.Duration == 0) {
+      toast.error("Please enter required time");
+      return;
+    } else {
+      if (isPrev) {
+        //api call
+        setIsPrev(false);
+        setCountDetail(currentTopic.questions.length - 1);
+        dispatch(
+          editQuestionById({
+            index: countDetail + 1,
+            type: "mcq",
+            id: question._id,
+            question: question,
+          })
+        );
+        setQuestion({
+          Title: "",
+          Options: [],
+          id: id + Date.now(),
+          Duration: 0,
+        });
+      } else {
+        setIsPrev(false);
+        setCountDetail(currentTopic.questions.length - 1);
+        dispatch(
+          addQuestionToTopic({ data: question, id: id, type: type })
+        );
+        setQuestion({
+          Title: "",
+          Options: [],
+          id: id + Date.now(),
+          Duration: 0,
+        });
+      }
+    }
+  };
+
   useEffect(() => {
     console.log(currentTopic);
     setCountDetail(currentTopic.questions.length - 1);
@@ -381,63 +435,7 @@ const AddMcqToTopic = () => {
             <button
               className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
               // onClick={addQuestion}
-              onClick={() => {
-                // dispatch(
-                //   addQuestionToTopic({ data: question, id: id, type: type })
-                // );
-                // setQuestion({ Title: "", Options: [], id: "aaa" , Duration: 0 });
-
-                if (question.Title === "") {
-                  toast.error("Please enter question");
-                  return;
-                } else if (question.Options && question.Options.length < 4) {
-                  toast.error("Please enter atleast 4 options");
-                  return;
-                } else if (question.AnswerIndex === null) {
-                  toast.error("Please select correct answer");
-                  return;
-                } else if (
-                  question.Options.some((option) => option.trim() === "")
-                ) {
-                  toast.error("Please enter all options");
-                  return;
-                } else if (question.Duration == 0) {
-                  toast.error("Please enter required time");
-                  return;
-                } else {
-                  if (isPrev) {
-                    //api call
-                    setIsPrev(false);
-                    setCountDetail(currentTopic.questions.length - 1);
-                    dispatch(
-                      editQuestionById({
-                        index: countDetail + 1,
-                        type: "mcq",
-                        id: question._id,
-                        question: question,
-                      })
-                    );
-                    setQuestion({
-                      Title: "",
-                      Options: [],
-                      id: id + Date.now(),
-                      Duration: 0,
-                    });
-                  } else {
-                    setIsPrev(false);
-                    setCountDetail(currentTopic.questions.length - 1);
-                    dispatch(
-                      addQuestionToTopic({ data: question, id: id, type: type })
-                    );
-                    setQuestion({
-                      Title: "",
-                      Options: [],
-                      id: id + Date.now(),
-                      Duration: 0,
-                    });
-                  }
-                }
-              }}
+              onClick={handleQuestionSave}
             >
               <FaPlus className="self-center" /> Add Next Question
             </button>
