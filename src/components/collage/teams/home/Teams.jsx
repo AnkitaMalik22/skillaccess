@@ -44,7 +44,7 @@ const Teams = () => {
   return (
     <div className="w-11/12 mx-auto pt-6">
       <Header handleAddTeamClick={handleAddTeamClick} />
-      <div className="flex gap-4 my-3">
+      <div className="flex gap-4 my-3 flex-wrap justify-evenly">
         {
           teams?.map((team, index) => (
             <TeamCard key={index} Name={team.Name} Email={team.Email} Phone={team.Phone} Role={team.Role} />
