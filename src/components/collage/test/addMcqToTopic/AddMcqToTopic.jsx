@@ -120,20 +120,21 @@ const AddMcqToTopic = () => {
     }
   };
 
-
   const handleQuestionSave = () => {
-    if (!question.Title || question.Title.trim() === "" || question.Title === "<p><br></p>") {
+    if (
+      !question.Title ||
+      question.Title.trim() === "" ||
+      question.Title === "<p><br></p>"
+    ) {
       toast.error("Please enter question");
       return;
-    }  else if (question.Options && question.Options.length < 4) {
+    } else if (question.Options && question.Options.length < 4) {
       toast.error("Please enter atleast 4 options");
       return;
     } else if (question.AnswerIndex === null) {
       toast.error("Please select correct answer");
       return;
-    } else if (
-      question.Options.some((option) => option.trim() === "")
-    ) {
+    } else if (question.Options.some((option) => option.trim() === "")) {
       toast.error("Please enter all options");
       return;
     } else if (question.Duration == 0) {
@@ -161,9 +162,7 @@ const AddMcqToTopic = () => {
       } else {
         setIsPrev(false);
         setCountDetail(currentTopic.questions.length - 1);
-        dispatch(
-          addQuestionToTopic({ data: question, id: id, type: type })
-        );
+        dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
         setQuestion({
           Title: "",
           Options: [],
