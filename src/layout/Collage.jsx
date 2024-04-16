@@ -7,6 +7,7 @@ import {
   setTestBasicDetails,
   setTestSelectedTopics,
 } from "../redux/collage/test/testSlice";
+import { getCollege } from "../redux/collage/auth/authSlice";
 
 const CollageLayout = ({ children }) => {
   const navigate = useNavigate();
@@ -263,12 +264,13 @@ const CollageLayout = ({ children }) => {
   ];
 
   useEffect(() => {
+    dispatch(getCollege());
     // //// window.scrollTo({
-                        //   top:
-                        //     window.scrollY +
-                        //     bottom.current.getBoundingClientRect().top,
-                        //   behavior: "smooth",
-                        // });
+    //   top:
+    //     window.scrollY +
+    //     bottom.current.getBoundingClientRect().top,
+    //   behavior: "smooth",
+    // });
     if (location.pathname.match(/\/collage\/dashboard*/)) {
       dispatch(setSelected(0));
       setDown(0);
@@ -301,55 +303,55 @@ const CollageLayout = ({ children }) => {
 
     if (location.pathname.match(/\/collage\/profile*/)) {
       //// window.scrollTo({
-                        //   top:
-                        //     window.scrollY +
-                        //     bottom.current.getBoundingClientRect().top,
-                        //   behavior: "smooth",
-                        // });
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(7));
       setDown(7);
     }
 
     if (location.pathname.match(/\/collage\/inbox*/)) {
       //// window.scrollTo({
-                        //   top:
-                        //     window.scrollY +
-                        //     bottom.current.getBoundingClientRect().top,
-                        //   behavior: "smooth",
-                        // });
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(8));
       setDown(8);
     }
 
     if (location.pathname.match(/\/collage\/teams*/)) {
       //// window.scrollTo({
-                        //   top:
-                        //     window.scrollY +
-                        //     bottom.current.getBoundingClientRect().top,
-                        //   behavior: "smooth",
-                        // });
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(9));
       setDown(9);
     }
 
     if (location.pathname.match(/\/collage\/accounting*/)) {
       //// window.scrollTo({
-                        //   top:
-                        //     window.scrollY +
-                        //     bottom.current.getBoundingClientRect().top,
-                        //   behavior: "smooth",
-                        // });
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(10));
       setDown(10);
     }
 
     if (location.pathname.match(/\/collage\/settings*/)) {
       //// window.scrollTo({
-                        //   top:
-                        //     window.scrollY +
-                        //     bottom.current.getBoundingClientRect().top,
-                        //   behavior: "smooth",
-                        // });
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(11));
       setDown(11);
     }
@@ -404,9 +406,7 @@ const CollageLayout = ({ children }) => {
                         //   behavior: "smooth",
                         // });
                         return navigate(el.path);
-                      }
-                    
-                    }
+                      }}
                     >
                       <button
                         className={` ml-[-10px] sm:ml-[5px] flex gap-4 mb-10  h-fit  py-2 justify-start ${

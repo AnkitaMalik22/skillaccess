@@ -72,13 +72,6 @@ const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
 const RegisterStudent = lazy(() => import("./pages/student/auth/Register"));
 const LoginStudent = lazy(() => import("./pages/student/auth/Login"));
 
-
-
-
-
-
-
-
 export default function App() {
   //  AnkitaMalik22-ankita-dev
   const dispatch = useDispatch();
@@ -91,17 +84,17 @@ export default function App() {
   //   }, [dispatch]);
   // >>>>>>> saveMain
 
-  const { user, isLoggedIn, logoutError } = useSelector(
+  const { user, isLoggedIn, logoutError, USER_LOADING } = useSelector(
     (state) => state.collageAuth
   );
 
-  useEffect(() => {
-      dispatch(getCollege())
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCollege());
+  // }, []);
 
   useEffect(() => {
     dispatch(getStudent());
-}, []);
+  }, []);
 
   useEffect(() => {
     console.log(logoutError);
@@ -156,7 +149,7 @@ export default function App() {
           {/* ------------------------------------- student --------------------------------------------------- */}
 
           <Route path="/student" element={<RegisterStudent />} />
-          <Route path="/student/login" element={<LoginStudent/>} />
+          <Route path="/student/login" element={<LoginStudent />} />
 
           {/* ----------------------------------------collage-------------------------------------------------------------- */}
 
@@ -165,24 +158,21 @@ export default function App() {
           <Route path="/terms&policies" element={<TermsPolicies />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/password/reset/:id" element={<ResetPassword />} />
+          <Route path="collage/me/failed" element={<NotAuth />} />
           {/* <Route path="loader" element={<Loader />} /> */}
 
-          {isLoggedIn ? (
-            <>
-              {Rote()}
-              {TestRoute()}
-              {StudentRoute()}
-              {QuesRoute()}
-              {CompaniesRoute()}
-              {ResultsRoute()}
-              {InboxRoute()}
-              {SettingsRoute()}
-              {TeamsRoute()}
-            </>
-          ) : (
-            <Route path="*" element={ <NotAuth />} />
-           
-          )}
+          <>
+            {Rote()}
+            {TestRoute()}
+            {StudentRoute()}
+            {QuesRoute()}
+            {CompaniesRoute()}
+            {ResultsRoute()}
+            {InboxRoute()}
+            {SettingsRoute()}
+            {TeamsRoute()}
+          </>
+
           {/* 
           {Rote()}
           {TestRoute()}
