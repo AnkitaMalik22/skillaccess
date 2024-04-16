@@ -23,7 +23,7 @@ const Header = ({
 
   const handleSave = () => {
     save("save");
-    navigate(-1);
+    
   };
 
   return (

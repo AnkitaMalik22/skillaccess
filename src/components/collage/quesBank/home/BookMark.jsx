@@ -22,7 +22,7 @@ const BookMark = () => {
       <span className="flex justify-between mb-6 ">
         <span className="flex gap-2 self-center">
           <LuBookmarkMinus className="self-center text-2xl text-[#95ACFA]" />
-          <h2 className="font-bold text-xl self-center mr-2">
+          <h2 className="font-bold text-base self-center mr-2">
             Bookmark questions
           </h2>
         </span>

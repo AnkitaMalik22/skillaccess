@@ -12,8 +12,8 @@ const Appeared = ({ assessment }) => {
   const { testDataResponse, response } = useSelector((state) => state.test);
 
 
-console.log(assessment);
-console.log(testDataResponse);
+// console.log(assessment);
+// console.log(testDataResponse);
 console.log(response);
 
   useEffect(() => {
