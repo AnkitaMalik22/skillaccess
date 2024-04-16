@@ -124,8 +124,11 @@ const Students = () => {
             </span>
           </div>
         </div>
-        <div className="flex justify-center">
-          <span className="flex justify-center h-fit self-center gap-2">
+        <div className="flex justify-center " >
+          <span className="flex justify-center h-fit self-center gap-2 cursor-pointer"
+           onClick={()=>{
+          navigate('profile');}
+        }>
             <h2 className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg">
               View CV
             </h2>
