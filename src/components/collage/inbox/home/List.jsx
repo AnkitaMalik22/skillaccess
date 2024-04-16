@@ -13,7 +13,10 @@ import {
   getMail,
   getSentEmails,
 } from "../../../../redux/collage/auth/authSlice";
-import { bookmarkMail } from "../../../../redux/collage/Inbox/inboxSlice";
+import {
+  bookmarkMail,
+  removeBookmarkedMail,
+} from "../../../../redux/collage/Inbox/inboxSlice";
 import socketIOClient from "socket.io-client";
 import convertDate from "../../../../util/getDate";
 
@@ -102,7 +105,12 @@ const List = ({ show }) => {
       setArr(copy);
     }
   };
-console.log(arr);
+
+  // useEffect(() => {
+  //   dispatch(getMail(queries));
+  // }, [queries]);
+
+  console.log(arr);
   return (
     <div className="bg-[#8F92A1] bg-opacity-5 rounded-t-xl pb-4">
       <div className="flex border-b border-gray-200 p-4 justify-between rounded-t-xl w-[99.9%] mx-auto">
@@ -140,14 +148,32 @@ console.log(arr);
       {arr?.map((el, i) => {
         console.log(el);
         return (
-          <div className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto ">
+          <div
+            className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto "
+            onClick={() => handleNav(i)}
+          >
+            
             <div className="flex gap-4 ">
               {el.isChecked ? (
-                <div className=" border-l-blue-700 border-2 border-white"
-                
-                ></div>
+                <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center ">
+                  {" "}
+                  {/* <img
+                    src={el.mail.from.avatar.url}
+                    alt=""
+                    width="10px"
+                    height="10px"
+                  /> */}
+                </div>
               ) : (
-                <div className="  border-2 border-white"></div>
+                <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center ">
+                  {" "}
+                  {/* <img
+                    src={el.mail.from.avatar.url}
+                    alt=""
+                    width="10px"
+                    height="10px"
+                  /> */}
+                </div>
               )}
 
               <input
@@ -160,58 +186,58 @@ console.log(arr);
                 className={`border-none bg-[#DEEBFF] rounded self-center`}
               />
 
-              {el.isChecked ? (
-                <TiStarFullOutline className="self-center"
-                  // onClick={()=>{
-                  //   dispatch(bookmarkMail(el._id));
-                  // }
-                    
-                  // }
+              {el?.mail?.bookmarked ? (
+                <TiStarFullOutline
+                  className="self-center"
+                  onClick={async () => {
+                    await dispatch(removeBookmarkedMail(el?.mail?._id));
+                    await dispatch(getMail(queries));
+                  }}
                 />
               ) : (
-                <TiStarOutline className="self-center"
-                onClick={()=>{
-                  dispatch(bookmarkMail(el._id));
-                }
-              }
+                <TiStarOutline
+                  className="self-center"
+                  onClick={async () => {
+                    await dispatch(bookmarkMail(el?.mail?._id));
+                    await dispatch(getMail(queries));
+                  }}
                 />
               )}
 
-              <div className="w-5 h-5 rounded-full bg-blued self-center"></div>
+              <div  className="w-5 h-5 rounded-full bg-blued self-center inline-flex justify-center items-center">
+        <img src={el.mail.from.avatar.url} alt="" width="10px" height="10px"/>
+
+              </div>
               <p
-                className="text-sm font-medium cursor-pointer"
+                className="text-sm font-medium cursor-pointer self-center"
                 // onClick={() => navigate("/collage/inbox/mail?type=view")}
-                onClick={() => handleNav(i)}
+                // onClick={() => handleNav(i)}
               >
                 {el.mail?.from?.FirstName}
               </p>
               <p
-                className="text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer"
-                onClick={() => handleNav(i)}
+                className="text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer "
+                // onClick={() => handleNav(i)}
               >
                 {el.mail?.subject}
               </p>
               <p
-                className="text-sm text-gray-400 line-clamp-1 h-6 cursor-pointer max-w-[40vw] self-center"
+                className="text-sm text-gray-400 line-clamp-1  cursor-pointer max-w-[40vw] self-center"
                 dangerouslySetInnerHTML={{ __html: el.mail?.message }}
-                onClick={() => handleNav(i)}
+                // onClick={() => handleNav(i)}
               />
             </div>
 
             <div className="flex gap-4 pr-4">
-
               {el?.mail?.attachments?.length > 0 && (
-
                 <TfiClip
                   className="rotate-180 text-2xl text-gray-400 cursor-pointer"
-                  onClick={() => handleNav(i)}
+                  // onClick={() => handleNav(i)}
                 />
               )}
 
               <p className="text-sm font-medium text-gray-400">
-
                 {el?.mail?.Date && convertDate(el?.mail?.Date)}
-
               </p>
             </div>
           </div>

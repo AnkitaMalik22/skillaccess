@@ -34,6 +34,33 @@ export const bookmarkMail =createAsyncThunk(
     }
 )
 
+
+export const removeBookmarkedMail =createAsyncThunk(
+    "inbox/removeBookmarkMail",
+    async(mailId,{rejectWithValue})=>{
+        try{
+            const req = await axios.delete(
+                `${REACT_APP_API_URL}/api/college/inbox/bookmark/${mailId}`,
+              
+                {
+                  headers: {
+                    "auth-token": localStorage.getItem("auth-token"),
+                  },
+                  withCredentials: true,
+                }
+              );
+              const res = req.data;
+              return res.data;
+            } catch (error) {
+              console.log("catch");
+              return rejectWithValue(error.response.data);
+            }
+       
+    }
+)
+
+
+
 const inboxSlice=createSlice(
     {
         name:"inbox",
@@ -52,6 +79,16 @@ const inboxSlice=createSlice(
               })
               .addCase(bookmarkMail.rejected, (state, action) => {
                 console.log("bookmarkr",action.payload);
+              })
+              .addCase(removeBookmarkedMail.pending, (state, action) => {
+                console.log("removebookmarkload");
+              })
+              .addCase(removeBookmarkedMail.fulfilled, (state, action) => {
+                console.log("removebookmarkf",action.payload);
+
+              })
+              .addCase(removeBookmarkedMail.rejected, (state, action) => {
+                console.log("removebookmarkr",action.payload);
               })
               
             

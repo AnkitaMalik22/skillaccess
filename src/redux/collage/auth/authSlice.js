@@ -353,7 +353,7 @@ export const getCollege = createAsyncThunk(
 
       return response.data.college;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error);
     }
   }
 );
@@ -379,7 +379,7 @@ export const updateAvatar = createAsyncThunk(
       return res;
     } catch (error) {
       console.log(error);
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error);
     }
   }
 );
@@ -711,8 +711,10 @@ const collageAuthSlice = createSlice({
       })
       .addCase(getCollege.rejected, (state, action) => {
         // state.logoutError = action.payload;
+        console.log("rej");
         state.isLoggedIn = false;
         // alert("You are logged out! Please login again");
+        window.location.href = "/collage/me/failed";
 
         if (
           action.payload.message == "Token is blacklisted. Please login again"

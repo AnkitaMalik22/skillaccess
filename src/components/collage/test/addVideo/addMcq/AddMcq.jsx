@@ -66,7 +66,12 @@ const AddMcq = () => {
     if (question.Title === "") {
       toast.error("Please enter question");
       return;
-    } else if (question.Options && question.Options.length < 4) {
+    } else if (
+      !question.Options[0] ||
+      !question.Options[1] ||
+      !question.Options[2] ||
+      !question.Options[3]
+    ) {
       toast.error("Please enter atleast 4 options");
       return;
     } else if (question.Duration == 0) {
@@ -263,16 +268,17 @@ const AddMcq = () => {
               onChange={handleChanges}
               value={question.Title}
             ></textarea> */}
-             <ReactQuill
+            <ReactQuill
               value={question.Title}
-              onChange={(value) =>   setQuestion((prev) => {
-                // console.log({ ...prev, Title: e.target.value });
-                return { ...prev, Title:value };
-              })}
+              onChange={(value) =>
+                setQuestion((prev) => {
+                  // console.log({ ...prev, Title: e.target.value });
+                  return { ...prev, Title: value };
+                })
+              }
               className="bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
               placeholder="Enter Question Here"
               name="Title"
-            
             />
           </span>
 

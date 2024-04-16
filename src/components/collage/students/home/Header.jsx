@@ -15,7 +15,9 @@ import { uploadStudents } from "../../../../redux/collage/student/studentSlice";
 
 
 
-const Header = () => {
+const Header = ({
+  handleFilter,
+}) => {
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [excel, setExcel] = useState("");
@@ -156,7 +158,8 @@ const Header = () => {
         <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search..."
+          onChange={handleFilter}
           className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96 max-w-md mx-auto  "
         />
       </div>

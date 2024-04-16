@@ -11,6 +11,7 @@ import Advanced from "./Advanced";
 import Intermediate from "./Intermediate";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { FaFolder } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -66,9 +67,11 @@ export const Test = () => {
                     <div className="mb-4">
                       <div className="flex w-full justify-between rounded-t-lg border-b-2 border-gray-200 bg-[#F8F8F9] px-4 py-2 text-left text-sm font-medium  hover:bg-purple-200 focus:outline-none  ">
                         <div className="flex gap-2 w-full justify-between">
-                          <h2>
+                          <h2 className="flex gap-2">
                             {i === 0 ? (
                               <>
+                            
+                                <FaFolder className="text-blued w-5 h-5 " />
                                 Beginner level{" "}
                                 <p className="inline-block text-gray-400">
                                   &#40;{beginner.length}&#41;
@@ -76,6 +79,7 @@ export const Test = () => {
                               </>
                             ) : i === 1 ? (
                               <>
+                              <FaFolder className="text-blued w-5 h-5" />
                                 For Intermediate{" "}
                                 <p className="inline-block text-gray-400">
                                   &#40;{intermediate.length}&#41;
@@ -83,6 +87,7 @@ export const Test = () => {
                               </>
                             ) : (
                               <>
+                                <FaFolder className="text-blued w-5 h-5" />
                                 For Advanced{" "}
                                 <p className="inline-block text-gray-400">
                                   &#40;{advanced.length}&#41;
