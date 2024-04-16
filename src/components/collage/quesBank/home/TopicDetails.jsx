@@ -17,6 +17,7 @@ const TopicDetails = () => {
   const { sections } = useSelector((state) => state.test);
 
   const currentTopic = useSelector((state) => state.test.currentTopic);
+  const [questions, setQuestions] = useState([]);
   const id = useParams().id;
 
   useEffect(() => {
@@ -26,19 +27,28 @@ const TopicDetails = () => {
   //
   // all questions in the topic
 
-  const questions = [
-    ...currentTopic.questions,
-    ...currentTopic.findAnswers,
-    ...currentTopic.essay,
-    ...currentTopic.video,
-    ...currentTopic.compiler,
-  ];
+//  let questions = [ ];
 
   // const topicDetails = JSON.parse(localStorage.getItem(JSON.stringify(currentTopic)))
 
-  console.log(currentTopic);
+  // console.log(questions);
 
-  const max = sections?.length / 10;
+  useEffect(() => {
+
+      if (currentTopic && currentTopic?.questions) {
+        setQuestions([  ...currentTopic.questions,
+          ...currentTopic.findAnswers,
+          ...currentTopic.essay,
+          ...currentTopic.video,
+          ...currentTopic.compiler])
+            }
+    },[currentTopic, ""])
+ 
+
+
+
+
+  const max = questions?.length / 10;
   const [selected, setSelected] = useState(1);
 
   return (
@@ -53,10 +63,10 @@ const TopicDetails = () => {
         {/* //   ?.slice((selected - 1) * 10, selected * 10)
         //   .map((question, i) => { */}
         {/* //     return ( */}
-        {questions?.map((question, i) => {
+        {questions?.slice((selected - 1) * 10, selected * 10).map((question, i) => {
           return (
             <div className="my-2">
-              {
+              {!question.code && !question.video && 
                 <List
                   question={question}
                   number={(selected - 1) * 10 + 1 + i}
@@ -150,11 +160,11 @@ const TopicDetails = () => {
 
         {Array.from({ length: Math.ceil(max) }).map((_, index) => {
           const pageNumber = index + 1;
-          const hasbookmarks = (pageNumber - 1) * 10 < sections.length;
-          //    console.log(bookmarks.length)
+          const hasQuestions = (pageNumber - 1) * 10 < questions.length;
+          console.log(questions.length);
           console.log(Math.ceil(max));
           return (
-            hasbookmarks && (
+            hasQuestions && (
               <div
                 key={pageNumber}
                 className={`rounded-lg h-10 w-10 flex justify-center ${

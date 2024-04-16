@@ -12,6 +12,7 @@ import { thunk } from "redux-thunk";
 import studentAuthReducer from "./student/auth/studentAuthSlice.js";
 import collegeStudentsReducer from "./collage/student/studentSlice.js";
 import paymentReducer from "./collage/account/paymentSlice.js";
+import inboxSlice from "./collage/Inbox/inboxSlice.js";
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     side: sideReducer,
     company : companyReducer,
     teamCollege : teamCollegeReducer,
+    inbox:inboxSlice,
     // ----------------- STUDENT -----------------
     studentSide :studentSideReducer,
     studentAuth : studentAuthReducer,

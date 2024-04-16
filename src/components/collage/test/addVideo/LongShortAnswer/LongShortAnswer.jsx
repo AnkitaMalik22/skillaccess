@@ -71,7 +71,7 @@ const LongShortAnswer = () => {
     console.log(question);
 
     if (LongShort === "short") {
-      if (question.Title == "") {
+      if (question.Title == "" || question.Title.trim() === "" || question.Title === "<p><br></p>") {
         toast.error("Please enter the question");
       } else if (question.Duration == 0) {
         toast.error("Please enter required time");

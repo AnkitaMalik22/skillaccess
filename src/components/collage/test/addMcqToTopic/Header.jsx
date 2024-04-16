@@ -13,10 +13,10 @@ const Header = ({ question, setQuestion, id, type }) => {
   const { test } = useSelector((state) => state.test);
 
   const handleSave = () => {
-    if (question.Title === "") {
+    if (!question.Title || question.Title.trim() === "" || question.Title === "<p><br></p>") {
       toast.error("Please enter question");
       return;
-    } else if (question.Options && question.Options.length < 4) {
+    }  else if (question.Options && question.Options.length < 4) {
       toast.error("Please enter atleast 4 options");
       return;
     } else if (question.Duration == 0) {
