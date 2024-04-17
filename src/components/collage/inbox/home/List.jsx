@@ -33,8 +33,8 @@ const List = ({ show }) => {
     // { id: 3, isChecked: false },
     // { id: 4, isChecked: false },
   ]);
-  const email = useSelector((state) => state.collageAuth.user.Email);
-  const total = useSelector((state) => state.collageAuth.mail.total);
+  const email = useSelector((state) => state.collageAuth?.user?.Email);
+  const total = useSelector((state) => state.collageAuth?.mail?.total);
   const [socket, setSocket] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
@@ -152,7 +152,6 @@ const List = ({ show }) => {
             className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto "
             onClick={() => handleNav(i)}
           >
-            
             <div className="flex gap-4 ">
               {el.isChecked ? (
                 <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center ">
@@ -204,9 +203,13 @@ const List = ({ show }) => {
                 />
               )}
 
-              <div  className="w-5 h-5 rounded-full bg-blued self-center inline-flex justify-center items-center">
-        <img src={el.mail.from.avatar.url} alt="" width="10px" height="10px"/>
-
+              <div className="w-5 h-5 rounded-full bg-blued self-center inline-flex justify-center items-center">
+                <img
+                  src={el?.mail?.from?.avatar?.url}
+                  alt=""
+                  width="10px"
+                  height="10px"
+                />
               </div>
               <p
                 className="text-sm font-medium cursor-pointer self-center"

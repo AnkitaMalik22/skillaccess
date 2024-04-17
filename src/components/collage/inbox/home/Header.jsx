@@ -46,7 +46,7 @@ const Header = ({ show, setShow }) => {
         >
           {({ open }) => (
             <div className="relative">
-              <div className=" mx-2  sm:h-12 h-10 my-2 px-4 w-fit ">
+              <div className=" mx-2  h-8 my-2 px-4 w-fit flex">
                 <div className="flex justify-between">
                   <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
                   <input
@@ -58,7 +58,7 @@ const Header = ({ show, setShow }) => {
                   />
                   <Disclosure.Button
                     ref={refButton}
-                    className=""
+                    className="self-center"
                     onClick={() => {
                       setToggle(!toggle);
                       console.log(toggle);

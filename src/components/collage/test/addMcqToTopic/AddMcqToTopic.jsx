@@ -128,7 +128,12 @@ const AddMcqToTopic = () => {
     ) {
       toast.error("Please enter question");
       return;
-    } else if (question.Options && question.Options.length < 4) {
+    } else if (
+      !question.Options[0] ||
+      !question.Options[1] ||
+      !question.Options[2] ||
+      !question.Options[3]
+    ) {
       toast.error("Please enter atleast 4 options");
       return;
     } else if (question.AnswerIndex === null) {
@@ -236,6 +241,7 @@ const AddMcqToTopic = () => {
                       name="Answer"
                       id="option1"
                       value={0}
+                      checked={parseInt(question.AnswerIndex) === 0}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}
@@ -280,6 +286,7 @@ const AddMcqToTopic = () => {
                       name="Answer"
                       id="option3"
                       value={1}
+                      checked={parseInt(question.AnswerIndex) === 1}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}
@@ -324,6 +331,7 @@ const AddMcqToTopic = () => {
                       name="Answer"
                       id="option3"
                       value={2}
+                      checked={parseInt(question.AnswerIndex) === 2}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}
@@ -368,6 +376,7 @@ const AddMcqToTopic = () => {
                       name="Answer"
                       id="option3"
                       value={3}
+                      checked={parseInt(question.AnswerIndex) === 3}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}

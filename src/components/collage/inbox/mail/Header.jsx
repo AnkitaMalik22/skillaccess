@@ -46,7 +46,7 @@ const Header = () => {
         >
           {({ open }) => (
             <div className="relative">
-              <div className=" mx-2  sm:h-12 h-10 my-2 px-4 w-fit ">
+              <div className=" mx-2  h-8  my-2 px-4 w-fit flex self-center">
                 <div className="flex justify-between">
                   <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
                   <input
