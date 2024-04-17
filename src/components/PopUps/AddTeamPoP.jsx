@@ -39,7 +39,16 @@ const AddTeamPoP = ({ onClose }) => {
   const handleSendInvite = () => {
     if (Name === '' || Email === '' || Phone === '' || Role === '') {
      toast.error('Please fill all the fields')
+    
+    }
+    else if(!Email.includes('@') || !Email.includes('.com') || Email.length < 6){
+      toast.error('Please enter a valid email address')
+    }
+    else if(Phone.length !== 10 || isNaN(Phone) ){
+      toast.error('Please enter a valid phone number'
+      )
     }else{
+      console.log(team);
       
     dispatch(addTeam(team))
 
@@ -54,7 +63,7 @@ const AddTeamPoP = ({ onClose }) => {
   return (
     <div>
       <div
-        className="w-full  min-w-full h-full min-h-[100vh] bg-black absolute z-[9999] flex left-0 top-0 bg-opacity-30 "
+        className="w-full  min-w-full  h-[100vh] bg-black absolute z-[9999] flex left-0 top-0 bg-opacity-30 "
       >
         <div className="py-12 bg-white shadow-md w-[500px] h-auto  mx-auto self-center rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-2 relative">
           <h3 className="text-xl font-semibold mb-4">Add Team</h3>
@@ -75,7 +84,8 @@ const AddTeamPoP = ({ onClose }) => {
             onChange={handleChange}
           />
           <input
-            type="tel"
+            type="number"
+            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
             placeholder="Mobile Number"
             className="bg-gray-200  rounded-md w-full  p-2 border-none"
             name='Phone'

@@ -182,7 +182,7 @@ const AddParagraph = () => {
   };
 
   useEffect(() => {
-    setCountDetail(currentTopic.findAnswers.length - 1);
+    setCountDetail(currentTopic?.findAnswers?.length - 1);
   }, [currentTopic]);
   return (
     <div>
