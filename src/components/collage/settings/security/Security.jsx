@@ -33,6 +33,7 @@ const Security = () => {
     console.log("update");
 
     dispatch(updatePassword(password));
+    
   };
   useEffect(() => {
     if (user.authType === "qr") {
