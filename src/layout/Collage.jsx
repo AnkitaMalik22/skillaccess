@@ -7,6 +7,7 @@ import {
   setTestBasicDetails,
   setTestSelectedTopics,
 } from "../redux/collage/test/testSlice";
+import { getCollege } from "../redux/collage/auth/authSlice";
 
 const CollageLayout = ({ children }) => {
   const navigate = useNavigate();
@@ -263,7 +264,13 @@ const CollageLayout = ({ children }) => {
   ];
 
   useEffect(() => {
-    // bottom.current.scrollIntoView();
+    dispatch(getCollege());
+    // //// window.scrollTo({
+    //   top:
+    //     window.scrollY +
+    //     bottom.current.getBoundingClientRect().top,
+    //   behavior: "smooth",
+    // });
     if (location.pathname.match(/\/collage\/dashboard*/)) {
       dispatch(setSelected(0));
       setDown(0);
@@ -295,31 +302,56 @@ const CollageLayout = ({ children }) => {
     }
 
     if (location.pathname.match(/\/collage\/profile*/)) {
-      bottom.current.scrollIntoView();
+      //// window.scrollTo({
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(7));
       setDown(7);
     }
 
     if (location.pathname.match(/\/collage\/inbox*/)) {
-      bottom.current.scrollIntoView();
+      //// window.scrollTo({
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(8));
       setDown(8);
     }
 
     if (location.pathname.match(/\/collage\/teams*/)) {
-      bottom.current.scrollIntoView();
+      //// window.scrollTo({
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(9));
       setDown(9);
     }
 
     if (location.pathname.match(/\/collage\/accounting*/)) {
-      bottom.current.scrollIntoView();
+      //// window.scrollTo({
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(10));
       setDown(10);
     }
 
     if (location.pathname.match(/\/collage\/settings*/)) {
-      bottom.current.scrollIntoView();
+      //// window.scrollTo({
+      //   top:
+      //     window.scrollY +
+      //     bottom.current.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
       dispatch(setSelected(11));
       setDown(11);
     }
@@ -340,7 +372,7 @@ const CollageLayout = ({ children }) => {
               {arr.map((el, i) => {
                 return (
                   <>
-                    {selection === i && <div className="" ref={bottom}></div>}
+                    {/* {selection === i && <div className="" ref={bottom}></div>} */}
                     {el.name === "Notifications" && (
                       <div
                         className={`${
@@ -367,12 +399,12 @@ const CollageLayout = ({ children }) => {
                         dispatch(setTestSelectedTopics([]));
                         setOpen(false);
                         setDown(i);
-                        window.scrollTo({
-                          top:
-                            window.scrollY +
-                            bottom.current.getBoundingClientRect().top,
-                          behavior: "smooth",
-                        });
+                        // window.scrollTo({
+                        //   top:
+                        //     window.scrollY +
+                        //     bottom.current.getBoundingClientRect().top,
+                        //   behavior: "smooth",
+                        // });
                         return navigate(el.path);
                       }}
                     >

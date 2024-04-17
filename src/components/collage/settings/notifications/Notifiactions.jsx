@@ -105,7 +105,7 @@ const Notifiactions = () => {
 
       <div className="flex gap-40 mt-10">
         <div className="sm:w-2/6">
-          <h1 className="text-lg font-bold">Email Notification</h1>
+          <h1 className="text-lg font-bold">Push Notifiaction</h1>
           <p className="text-gray-400">
             Get Emails to find out what’s going on when you are not online. You
             can turn these offs

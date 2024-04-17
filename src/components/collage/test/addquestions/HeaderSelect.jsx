@@ -25,7 +25,7 @@ const handleNext = () => {
   return (
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
-        <button className="flex self-center ml-2 rounded-lg  gap-2">
+        <button className="flex self-center ml-2 rounded-lg  gap-2 items-center">
           <button
             className="bg-[#D9E1E7]  self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-14"
             onClick={() => navigate(-1)}
@@ -33,7 +33,7 @@ const handleNext = () => {
             <img src="../../../../images/icons/back.png" alt="" srcset="" />
           </button>
 
-          <div className="">
+          <div className="flex items-center">
             <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans ">
               Create Topic
             </h2>

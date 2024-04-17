@@ -1,5 +1,6 @@
-import React, { lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { Route } from "react-router-dom";
+import Loader from "../../../Loader";
 const Home = lazy(() => import("./Home"));
 const CompanyPage = lazy(() => import("./CompanyPage"));
 const JobsPage = lazy(() => import("./JobsPage"));

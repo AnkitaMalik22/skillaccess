@@ -82,6 +82,7 @@ export const getTopicById = createAsyncThunk(
         }
       );
       const res = req.data;
+      // console.log("res", res);
       return res.section;
     } catch (error) {
       console.log("catch", error.response.data);

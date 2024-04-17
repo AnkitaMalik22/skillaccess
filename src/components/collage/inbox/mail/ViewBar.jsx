@@ -1,7 +1,7 @@
-import React from "react";
+import React,{useState} from "react";
 import { FaSortDown } from "react-icons/fa";
 import { FiCornerUpLeft, FiCornerUpRight, FiTrash } from "react-icons/fi";
-import { TiStarOutline } from "react-icons/ti";
+import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 import convertDate from "../../../../util/getDate";
 import { useDispatch } from "react-redux";
 import {
@@ -9,10 +9,12 @@ import {
   getMail,
   searchMail,
 } from "../../../../redux/collage/auth/authSlice";
+import { bookmarkMail, removeBookmarkedMail } from "../../../../redux/collage/Inbox/inboxSlice";
 import { useSearchParams } from "react-router-dom";
 
 const ViewBar = ({ filter, Email }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [queries, setQueries] = useState({ limit: 50, skip: 0 });
   const show = searchParams.get("show");
   const dispatch = useDispatch();
   const handleDelete = () => {
@@ -49,7 +51,24 @@ const ViewBar = ({ filter, Email }) => {
             className="text-lg self-center text-gray-400 cursor-pointer"
             onClick={handleDelete}
           />
-          <TiStarOutline className="text-lg self-center" />
+         {Email?.mail?.bookmarked ? (
+                <TiStarFullOutline className="self-center"
+                  onClick={async()=>{
+                    await dispatch(removeBookmarkedMail(Email?.mail._id));
+                    await dispatch(getMail(queries));
+                  }
+                    
+                  }
+                />
+              ) : (
+                <TiStarOutline className="self-center"
+                onClick={async ()=>{
+              await dispatch(bookmarkMail(Email?.mail._id));
+              await dispatch(getMail(queries));
+                }
+              }
+                />
+              )}
           <FiCornerUpLeft className="text-lg self-center text-gray-400" />
           <FiCornerUpRight className="text-lg self-center text-gray-400" />
 
