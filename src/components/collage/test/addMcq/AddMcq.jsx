@@ -122,8 +122,17 @@ const AddMcq = () => {
   };
 
   const handleAddQuestion = (type) => {
-    console.log(question.Title, question.Title ==="" , question.Title.trim() === "" , question.Title=== null, );
-    if (!question.Title || question.Title.trim() === "" || question.Title === "<p><br></p>") {
+    console.log(
+      question.Title,
+      question.Title === "",
+      question.Title.trim() === "",
+      question.Title === null
+    );
+    if (
+      !question.Title ||
+      question.Title.trim() === "" ||
+      question.Title === "<p><br></p>"
+    ) {
       toast.error("Please enter question");
       return;
     } else if (
@@ -232,6 +241,7 @@ const AddMcq = () => {
                       name="Answer"
                       id="option1"
                       value={0}
+                      checked={parseInt(question.AnswerIndex) === 0}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}
@@ -275,6 +285,7 @@ const AddMcq = () => {
                       type="radio"
                       name="Answer"
                       id="option3"
+                      checked={parseInt(question.AnswerIndex) === 1}
                       value={1}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
@@ -319,6 +330,7 @@ const AddMcq = () => {
                       type="radio"
                       name="Answer"
                       id="option3"
+                      checked={parseInt(question.AnswerIndex) === 2}
                       value={2}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
@@ -360,6 +372,7 @@ const AddMcq = () => {
                   {/* radio button */}
                   <div className="flex w-5 justify-center">
                     <input
+                      checked={parseInt(question.AnswerIndex) === 3}
                       type="radio"
                       name="Answer"
                       id="option3"

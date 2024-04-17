@@ -19,10 +19,24 @@ const Security = () => {
     newPassword: "",
     confirmPassword: "",
   });
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(
+    user?.authType === "qr"
+      ? "securityApp"
+      : user?.authType === "otp"
+      ? "textMessage"
+      : "none"
+  );
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
+    if (selectedOption === "securityApp") {
+      dispatch(selectAuth({ type: "qr" }));
+    } else if (selectedOption === "textMessage") {
+      dispatch(selectAuth({ type: "otp" }));
+      // navigate("/collage/settings/security/secondFA");
+    } else {
+      dispatch(selectAuth({ type: "none" }));
+    }
   };
   console.log(selectedOption);
   const handleChnage = (e) => {
@@ -35,30 +49,30 @@ const Security = () => {
     dispatch(updatePassword(password));
     
   };
-  useEffect(() => {
-    if (user.authType === "qr") {
-      setSelectedOption("securityApp");
-      return;
-    }
-    if (user.authType === "otp") {
-      setSelectedOption("textMessage");
-      return;
-    }
-    if (user.authType === "none") {
-      setSelectedOption("none");
-      return;
-    }
-  }, []);
-  useEffect(() => {
-    if (selectedOption === "securityApp") {
-      dispatch(selectAuth({ type: "qr" }));
-    } else if (selectedOption === "textMessage") {
-      dispatch(selectAuth({ type: "otp" }));
-      // navigate("/collage/settings/security/secondFA");
-    } else {
-      dispatch(selectAuth({ type: "none" }));
-    }
-  }, [selectedOption]);
+  // useEffect(() => {
+  //   if (user.authType === "qr") {
+  //     setSelectedOption("securityApp");
+  //     return;
+  //   }
+  //   if (user.authType === "otp") {
+  //     setSelectedOption("textMessage");
+  //     return;
+  //   }
+  //   if (user.authType === "none") {
+  //     setSelectedOption("none");
+  //     return;
+  //   }
+  // }, []);
+  // useEffect(() => {
+  //   if (selectedOption === "securityApp") {
+  //     dispatch(selectAuth({ type: "qr" }));
+  //   } else if (selectedOption === "textMessage") {
+  //     dispatch(selectAuth({ type: "otp" }));
+  //     // navigate("/collage/settings/security/secondFA");
+  //   } else {
+  //     dispatch(selectAuth({ type: "none" }));
+  //   }
+  // }, [selectedOption]);
   // const handleVerificationClick = () => {
   //   if (selectedOption === "securityApp") {
   //     dispatch(selectAuth({ type: "qr" }));
