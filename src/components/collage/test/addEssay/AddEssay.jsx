@@ -131,7 +131,7 @@ const AddEssay = () => {
   };
 
   useEffect(() => {
-    setCountDetail(currentTopic.essay.length - 1);
+    setCountDetail(currentTopic?.essay?.length - 1);
   }, [currentTopic]);
 
   return (
