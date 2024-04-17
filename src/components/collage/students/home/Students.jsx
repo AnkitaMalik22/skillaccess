@@ -12,25 +12,59 @@ const Students = () => {
   const [visible, setVisible] = React.useState(false);
   const [sId , setSId] = React.useState(null)
   const [filteredStudents, setFilteredStudents] = React.useState([]);
-  const { uploadedStudents,approvedStudents,pendingStudents,loading} = useSelector((state) => state.collegeStudents);
+  const { uploadedStudents,approvedStudents,pendingStudents,loading,GET_STUDENT_LOADING} = useSelector((state) => state.collegeStudents);
 
   const {user } = useSelector((state) => state.collageAuth);
- useEffect(() => {
-  dispatch(getStudents({id: user?._id}))
-  // console.log(students)
+//  useEffect(() => {
+// async()=>{
+//  await dispatch(getStudents({id: user?._id}))
 
- }, [dispatch])
+// setFilteredStudents(uploadedStudents)
+// }
+
+// console.log(filteredStudents, "filteredStudents")
+
+//   // console.log(students)
+
+//  }, [])
 
 
- useEffect(() => {
-if (!loading) {
-  dispatch(getStudents({id: user?._id}))
-  dispatch(setLoading(false))
-  setFilteredStudents(uploadedStudents)
-}
+//  useEffect(() => {
+// if (!loading)
+// {
+//   console.log("loading", loading, user?._id,user)
+//  //await dispatch(getStudents({id: user?._id}))
+//   //await  setFilteredStudents(uploadedStudents)
+  
+//   dispatch(setLoading(false))
 
-  }, [loading])
+// }
 
+
+// console.log(filteredStudents, "filteredStudents")
+// //if (user) {
+//  // setFilteredStudents(uploadedStudents)
+// //}
+
+//   }, [loading,])
+
+useEffect(() => {
+  const fetchData = async () => {
+    if (user?._id) {
+      await dispatch(getStudents({ id: user._id }));
+    }
+  };
+
+  fetchData();
+}, [dispatch, user]);
+
+useEffect(() => {
+  // Update filtered students when uploadedStudents changes
+  // For simplicity, assuming uploadedStudents is the same as filteredStudents initially
+  setFilteredStudents(uploadedStudents);
+}, [uploadedStudents]);
+
+console.log(filteredStudents, "filteredStudents");
 
 
  const handleApprove = (studentId) => {
