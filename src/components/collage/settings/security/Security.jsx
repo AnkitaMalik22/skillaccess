@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 
 import {
   selectAuth,
@@ -14,6 +15,9 @@ const Security = () => {
   const { user, isLoggedIn } = useSelector((state) => state.collageAuth);
 
   const navigate = useNavigate();
+  const [type, setType] = useState("password");
+  const [type1, setType1] = useState("password");
+  const [type2, setType2] = useState("password");
   const [password, setPassword] = useState({
     oldPassword: "",
     newPassword: "",
@@ -47,7 +51,6 @@ const Security = () => {
     console.log("update");
 
     dispatch(updatePassword(password));
-    
   };
   // useEffect(() => {
   //   if (user.authType === "qr") {
@@ -88,7 +91,7 @@ const Security = () => {
 
       <div className="flex gap-40 mt-20">
         <div className="sm:w-2/6">
-          <h1 className="text-lg font-bold">Email Notification</h1>
+          <h1 className="text-lg font-bold">Two-Factor Authentication</h1>
           <p className="text-gray-400">
             We'll ask for a security code when we need to confirm that it's you
             logging in.
@@ -96,12 +99,12 @@ const Security = () => {
         </div>
         <div>
           {/* toggle 1 */}
-          <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center gap-4 mb-4 ">
             <input
               type="radio"
               name="option"
               id="textMessage"
-              className="bg-[#DEEBFF] rounded-full border-none outline-none focus:outline-0 focus:ring-0 h-6 self-center w-6"
+              className="bg-[#DEEBFF] rounded-full border-none outline-none focus:outline-0 focus:ring-0 h-6 self-center w-6 cursor-pointer"
               checked={selectedOption === "textMessage"}
               onChange={() => handleOptionChange("textMessage")}
             />
@@ -127,12 +130,12 @@ const Security = () => {
               type="radio"
               name="option"
               id="securityApp"
-              className="bg-[#DEEBFF] rounded-full border-none outline-none focus:outline-0 focus:ring-0 h-6 self-center w-6"
+              className="bg-[#DEEBFF] rounded-full border-none outline-none focus:outline-0 focus:ring-0 h-6 self-center w-6 cursor-pointer"
               checked={selectedOption === "securityApp"}
               onChange={() => handleOptionChange("securityApp")}
             />
             <div>
-              <h1 className="text-lg font-bold">Security app</h1>
+              <h1 className="text-lg font-bold">Authentication App</h1>
               <p className="text-gray-400 whitespace-pre-wrap">
                 You'll get a code from your<br></br> security app.
               </p>
@@ -153,7 +156,7 @@ const Security = () => {
               type="radio"
               name="option"
               id="securityApp"
-              className="bg-[#DEEBFF] rounded-full border-none outline-none focus:outline-0 focus:ring-0 h-6 self-center w-6"
+              className="bg-[#DEEBFF] rounded-full border-none outline-none focus:outline-0 focus:ring-0 h-6 self-center w-6 cursor-pointer"
               checked={selectedOption === "none"}
               onChange={() => handleOptionChange("none")}
             />
@@ -184,42 +187,76 @@ const Security = () => {
         </div>
         <div className="">
           {/* toggle 1 */}
-          <div className="flex gap-2 flex-col mb-4">
+          <div className="flex gap-2 flex-col mb-4 ">
             <h1 className="text-gray-400">Type your current password*</h1>
-            <input
-              type="password"
-              name="oldPassword"
-              value={password.oldPassword}
-              onChange={handleChnage}
-              className="py-3 rounded-xl border-none bg-lGray bg-opacity-5 w-96 placeholder:text-sm placeholder:text-gray-400 font-medium"
-              placeholder="Current password"
-            />
+            <div className="flex relative">
+              <input
+                type={type}
+                name="oldPassword"
+                value={password.oldPassword}
+                onChange={handleChnage}
+                className="py-3 rounded-xl border-none bg-lGray bg-opacity-5 w-96 placeholder:text-sm placeholder:text-gray-400 font-medium"
+                placeholder="Current password"
+              />
+              <button
+                className="flex items-center pr-3 focus:outline-none absolute right-0 top-0 h-full "
+                onClick={(e) => {
+                  e.preventDefault();
+                  type === "text" ? setType("password") : setType("text");
+                }}
+              >
+           {  type === "text" ?    <LuEye className="text-gray-400 text-2xl" /> : <LuEyeOff className="text-gray-400 text-2xl" />}
+              </button>
+            </div>
           </div>
 
           {/* toggle 1 */}
           <div className="flex gap-2 flex-col mb-4">
             <h1 className="text-gray-400">Type your new password*</h1>
-            <input
-              type="password"
-              name="newPassword"
-              value={password.newPassword}
-              onChange={handleChnage}
-              className="py-3 rounded-xl border-none bg-lGray bg-opacity-5 w-96 placeholder:text-sm placeholder:text-gray-400 font-medium"
-              placeholder="New password"
-            />
+            <div className="flex relative">
+              <input
+                type={type1}
+                name="newPassword"
+                value={password.newPassword}
+                onChange={handleChnage}
+                className="py-3 rounded-xl border-none bg-lGray bg-opacity-5 w-96 placeholder:text-sm placeholder:text-gray-400 font-medium"
+                placeholder="New password"
+              />
+              <button
+                className="flex items-center pr-3 focus:outline-none absolute right-0 top-0 h-full z-10 "
+                onClick={(e) => {
+                  e.preventDefault();
+                  type1 === "text" ? setType1("password") : setType1("text");
+                }}
+              >
+           {  type1 === "text" ?    <LuEye className="text-gray-400 text-2xl" /> : <LuEyeOff className="text-gray-400 text-2xl" />}
+              </button>
+            </div>
           </div>
 
           {/* toggle 1 */}
           <div className="flex gap-2 flex-col mb-4">
             <h1 className="text-gray-400">Retype your new password*</h1>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={password.confirmPassword}
-              onChange={handleChnage}
-              className="py-3 rounded-xl border-none bg-lGray bg-opacity-5 w-96 placeholder:text-sm placeholder:text-gray-400 font-medium"
-              placeholder="Retype password"
-            />
+
+            <div className="flex relative">
+              <input
+                type={type2}
+                name="confirmPassword"
+                value={password.confirmPassword}
+                onChange={handleChnage}
+                className="py-3 rounded-xl border-none bg-lGray bg-opacity-5 w-96 placeholder:text-sm placeholder:text-gray-400 font-medium"
+                placeholder="Retype password"
+              />
+              <button
+                className="flex items-center pr-3 focus:outline-none absolute right-0 top-0 h-full z-10 "
+                onClick={(e) => {
+                  e.preventDefault();
+                  type2 === "text" ? setType2("password") : setType2("text");
+                }}
+              >
+           {  type2 === "text" ?    <LuEye className="text-gray-400 text-2xl" /> : <LuEyeOff className="text-gray-400 text-2xl" />}
+              </button>
+            </div>
           </div>
 
           <button

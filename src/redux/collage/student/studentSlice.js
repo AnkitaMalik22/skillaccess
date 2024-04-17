@@ -15,6 +15,7 @@ const initialState = {
   pendingStudents: [],
     loading: false,
     error: false,
+    GET_STUDENT_LOADING: false,
     };
 
 export const getStudents = createAsyncThunk(
@@ -102,6 +103,7 @@ export const studentSlice = createSlice({
             .addCase(getStudents.pending, (state) => {
                 state.loading = true;
                 state.error = false;
+                state.GET_STUDENT_LOADING = true;
             })
             .addCase(getStudents.fulfilled, (state, action) => {
                 state.loading = false;
@@ -110,10 +112,12 @@ export const studentSlice = createSlice({
                 state.invitedStudents = action.payload.invitedStudents;
                 state.approvedStudents = action.payload.approvedStudents;
                 state.pendingStudents = action.payload.pendingStudents;
+                state.GET_STUDENT_LOADING = false;
             })
             .addCase(getStudents.rejected, (state) => {
                 state.loading = false;
                 state.error = true;
+                state.GET_STUDENT_LOADING = false;
             })
             .addCase(uploadStudents.pending, (state) => {
                 state.loading = true;
