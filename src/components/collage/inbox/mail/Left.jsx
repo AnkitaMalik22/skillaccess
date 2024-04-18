@@ -3,6 +3,7 @@ import { TfiClip } from "react-icons/tfi";
 import { useSelector } from "react-redux";
 import { getInbox } from "../../../../redux/collage/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import convertDate from "../../../../util/getDate";
 
 const Left = ({ data, index }) => {
   const navigate = useNavigate();
@@ -34,14 +35,14 @@ const Left = ({ data, index }) => {
             <p className="leading-[16px] text-xs font-medium text-gray-400">
               {data?.from?.CollegeName}
             </p>
-            <p className="leading-[16px] text-sm font-medium mt-2 max-w-20 line-clamp-1 break-words">
+            <p className="leading-[16px] text-sm mt-2 max-w-20 font-bold line-clamp-1 break-words">
               {" "}
               {data?.subject}
             </p>
           </div>
         </div>
         <p className="leading-[16px] text-xs font-medium text-gray-400">
-          10:48 PM
+          {data?.Date && convertDate(data?.Date)}
         </p>
       </div>
 
@@ -51,10 +52,9 @@ const Left = ({ data, index }) => {
         </div>
 
         <p
-          className=" text-xs text-gray-400 line-clamp-2"
+          className=" text-xs text-gray-400 line-clamp-2 "
           dangerouslySetInnerHTML={{ __html: data?.message }}
         ></p>
-
       </div>
     </div>
   );

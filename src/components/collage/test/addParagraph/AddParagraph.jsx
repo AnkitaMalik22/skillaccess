@@ -20,12 +20,15 @@ const AddParagraph = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
   const type = searchParams.get("type");
+  const level = searchParams.get("level");
+
   const addType = searchParams.get("addType");
   let ID;
   searchParams.get("topicId") !== null
     ? (ID = searchParams.get("topicId"))
     : (ID = id);
   const [question, setQuestion] = useState({
+    QuestionLevel: level,
     section: ID,
     id: ID + Date.now(),
     Title: "",
@@ -83,7 +86,11 @@ const AddParagraph = () => {
 
   const handleSave = (type) => {
     if (addType === "topic") {
-      if (!question.Title || question.Title.trim() === "" || question.Title === "<p><br></p>") {
+      if (
+        !question.Title ||
+        question.Title.trim() === "" ||
+        question.Title === "<p><br></p>"
+      ) {
         toast.error("Please enter the question");
       } else if (question.Duration == 0) {
         toast.error("Please enter required time");
@@ -106,6 +113,7 @@ const AddParagraph = () => {
           );
 
           setQuestion({
+            QuestionLevel: level,
             Title: "",
             section: ID,
             questions: [{ question: "" }],
@@ -120,6 +128,7 @@ const AddParagraph = () => {
             addQuestionToTopic({ data: question, id: id, type: "findAnswer" })
           );
           setQuestion({
+            QuestionLevel: level,
             Title: "",
             section: ID,
             questions: [{ question: "" }],
@@ -150,6 +159,7 @@ const AddParagraph = () => {
           );
           setCount(topics[id].findAnswers.length - 1);
           setQuestion({
+            QuestionLevel: level,
             id: ID + Date.now(),
             Title: "",
             questions: [],
@@ -170,6 +180,7 @@ const AddParagraph = () => {
           if (type === "save") navigate(-1);
           // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
           setQuestion({
+            QuestionLevel: level,
             id: ID + Date.now(),
             Title: "",
             questions: [],

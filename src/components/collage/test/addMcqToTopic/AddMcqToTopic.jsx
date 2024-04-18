@@ -22,7 +22,9 @@ const AddMcqToTopic = () => {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
+  const level = searchParams.get("level");
   const [question, setQuestion] = useState({
+    QuestionLevel: level,
     Duration: 0,
     id: id + Date.now(),
     Title: "",
@@ -169,6 +171,7 @@ const AddMcqToTopic = () => {
         setCountDetail(currentTopic.questions.length - 1);
         dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
         setQuestion({
+          QuestionLevel: level,
           Title: "",
           Options: [],
           id: id + Date.now(),

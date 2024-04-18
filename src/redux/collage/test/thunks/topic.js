@@ -48,10 +48,10 @@ export const addQuestionToTopic = createAsyncThunk(
 
 export const getAllTopics = createAsyncThunk(
   "test/getAllTopics",
-  async (_, { rejectWithValue, getState }) => {
+  async (data, { rejectWithValue, getState }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/college/topics/all`,
+        `${process.env.REACT_APP_API_URL}/api/college/topics/all?level=${data.level}`,
         {
           headers: {
             "Content-Type": "application/json",

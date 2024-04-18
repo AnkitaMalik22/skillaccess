@@ -29,7 +29,7 @@ const Header = ({ show, setShow }) => {
       <span className="flex gap-4">
         <button
           className=" self-center ml-2 rounded-lg "
-          onClick={() => navigate(-1)}
+          // onClick={() => navigate(-1)}
         >
           <img
             src="./../../images/icons/inbox.png"

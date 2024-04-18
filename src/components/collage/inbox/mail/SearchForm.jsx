@@ -50,7 +50,7 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
     <form action="" className="p-3 font-dmSans">
       {/* 1 */}
       <div className="w-full flex flex-col">
-        <label className="pl-2 text-xs font-bold text-gray-400">Search</label>
+        <label className="pl-2 text-xs font-bold text-gray-400">SEARCH</label>
         <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
           {({ open, close }) => (
             <div className="relative">
@@ -93,7 +93,7 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
 
       {/* 2*/}
       <div className="w-full flex flex-col">
-        <label className="pl-2 text-xs font-bold text-gray-400">From</label>
+        <label className="pl-2 text-xs font-bold text-gray-400">FROM</label>
         <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
           {({ open }) => (
             <div className="relative">
@@ -118,7 +118,7 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
 
       {/* 3*/}
       <div className="w-full flex flex-col">
-        <label className="pl-2 text-xs font-bold text-gray-400">To</label>
+        <label className="pl-2 text-xs font-bold text-gray-400">TO</label>
         <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
           {({ open }) => (
             <div className="relative">
@@ -143,8 +143,8 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
 
       {/* {4} */}
       <div className="w-full flex flex-col">
-        <label className="pl-2 text-xs font-bold text-gray-400">
-          Has Keywords
+        <label className="pl-2 text-xs  font-bold text-gray-400">
+          HAS KEYWORDS
         </label>
         <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
           {({ open }) => (
@@ -172,7 +172,7 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
         {/* 5.1 */}
         <div className="w-1/2 flex flex-col">
           <label className="pl-2 text-xs font-bold text-gray-400">
-            Daten Within
+            DATE WITHIN
           </label>
           <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
             {({ open, close }) => (

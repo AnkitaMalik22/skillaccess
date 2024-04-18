@@ -64,6 +64,7 @@ import StudentResultsRoute from "./pages/student/results";
 import { use } from "i18next";
 import { getStudent } from "./redux/student/auth/studentAuthSlice";
 import NotAuth from "./components/PopUps/NotAuth";
+import PopUpAdaptive from "./components/PopUps/PopUpAdaptive";
 
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
@@ -144,6 +145,9 @@ export default function App() {
 
   return (
     <React.Fragment>
+
+
+      {/* <PopUpAdaptive/> */}
       <Suspense fallback={<Loader />}>
         <Routes>
           {/* ------------------------------------- student --------------------------------------------------- */}

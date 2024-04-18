@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import Header from "./Header";
 
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { createTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const CreateTopic = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  const level = searchParams.get("level");
   const [topic, setTopic] = useState({
     Heading: "",
     Description: "",
@@ -47,7 +49,9 @@ const CreateTopic = () => {
 
     dispatch(createTopic(topic)).then((res) => {
       if (res.payload._id) {
-        navigate(`/collage/test/typeOfQuestions/${res.payload._id}`);
+        navigate(
+          `/collage/test/typeOfQuestions/${res.payload._id}?level=${level}`
+        );
       } else {
         toast.error("Invalid or duplicate values");
         return;

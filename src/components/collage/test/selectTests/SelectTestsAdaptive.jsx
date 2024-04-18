@@ -12,7 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { FaPlus } from "react-icons/fa";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useSearchParams } from "react-router-dom";
+
 import {
   setCurrentTopic,
   setTestSelectedTopics,
@@ -30,6 +31,8 @@ const SelectTests = () => {
   // for filter the sections
 
   const [filteredSections, setFilteredSections] = useState(sections);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const level = searchParams.get("level");
 
   const handleFilterSections = (e) => {
     const value = e.target.value;
@@ -116,7 +119,9 @@ const SelectTests = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllTopics());
+    dispatch(getAllTopics({
+      level: level,
+    }));
 
     if (sections) {
       setFilteredSections(sections);
