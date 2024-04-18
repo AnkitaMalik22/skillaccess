@@ -24,7 +24,7 @@ const AddMcqToTopic = () => {
   const type = searchParams.get("type");
   const level = searchParams.get("level");
   const [question, setQuestion] = useState({
-    QuestionLevel: level,
+    QuestionLevel:  (level==="adaptive"?'beginner':level),
     Duration: 0,
     id: id + Date.now(),
     Title: "",
@@ -161,6 +161,7 @@ const AddMcqToTopic = () => {
           })
         );
         setQuestion({
+          QuestionLevel: (level==="adaptive"?'beginner':level),
           Title: "",
           Options: [],
           id: id + Date.now(),
@@ -171,7 +172,7 @@ const AddMcqToTopic = () => {
         setCountDetail(currentTopic.questions.length - 1);
         dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
         setQuestion({
-          QuestionLevel: level,
+          QuestionLevel: (level==="adaptive"?'beginner':level),
           Title: "",
           Options: [],
           id: id + Date.now(),
@@ -207,7 +208,7 @@ const AddMcqToTopic = () => {
               onChange={handleChanges}
               value={question.Duration}
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              className={`${level==='adaptive'?'w-1/2':'w-full'} rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
             >
               <option value={0}>Time to answer the question</option>
 
@@ -216,6 +217,21 @@ const AddMcqToTopic = () => {
               <option value={3}>3 minutes</option>
               <option value={4}>4 minutes</option>
             </select>
+            {level==='adaptive' && <select
+              name="Level"
+              // onChange={handleChanges}
+              // value={question.Duration}
+              id=""
+              className="w-1/2 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+            >
+              <option value=''>Level</option>
+
+              <option value={'beginner'}>Beginner</option>
+              <option value={'intermediate'}>Intermediate</option>
+              <option value={'advanced'}>Advanced</option>
+              
+            </select>
+            }
 
             <ReactQuill
               value={question.Title}

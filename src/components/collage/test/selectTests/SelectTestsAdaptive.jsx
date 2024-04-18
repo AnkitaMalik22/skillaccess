@@ -257,7 +257,7 @@ const SelectTests = () => {
             <div className=" self-center w-fit h-fit ">
               <div
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
-                onClick={() => Navigate("/collage/test/createTopicAdaptive")}
+                onClick={() => Navigate("/collage/test/createTopicAdaptive?level=adaptive")}
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
               </div>
@@ -361,7 +361,7 @@ const SelectTests = () => {
                           );
 
                           Navigate(
-                            `/collage/test/details/${index}?type=topic&question=${questionType}`
+                            `/collage/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
                           );
                         }}
                       >
