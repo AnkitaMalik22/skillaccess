@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
 import { setCurrentTopic } from "../../../../redux/collage/test/testSlice";
+import { useSearchParams } from "react-router-dom";
 
 const Topic = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const level = searchParams.get("level");
   const { sections } = useSelector((state) => state.test);
   let topics = localStorage.getItem("topics")
     ? JSON.parse(localStorage.getItem("topics"))
@@ -38,7 +41,9 @@ const Topic = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllTopics());
+    dispatch(getAllTopics({
+      level: level,
+    }));
 
     // if (sections) {
     //   setFilteredSections(sections);

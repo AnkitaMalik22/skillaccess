@@ -58,6 +58,7 @@ const testState = {
     beginner: [],
     intermediate: [],
     advanced: [],
+    adaptive: [],
   },
   //all topics
   sections: [],
@@ -240,6 +241,7 @@ const testSlice = createSlice({
         beginner: [],
         intermediate: [],
         advanced: [],
+        adaptive: [],
       };
     },
     addMcqToTopic: (state, action) => {

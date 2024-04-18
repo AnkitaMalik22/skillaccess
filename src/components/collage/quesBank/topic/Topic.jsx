@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -14,6 +15,8 @@ const Topic = () => {
   const dispatch = useDispatch();
   const [topics, settopics] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
   const { sections } = useSelector((state) => state.test);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const level = searchParams.get("level");
 
   const getTotalQuestions = (topic) => {
     let total = 0;
@@ -61,7 +64,9 @@ const Topic = () => {
     }
   };
   useEffect(() => {
-    dispatch(getAllTopics());
+    dispatch(getAllTopics({
+      level: level,
+    }));
 
     // if (sections) {
     //   setFilteredSections(sections);

@@ -16,12 +16,15 @@ const Invite = () => {
 
   const { uploadedStudents,loading} = useSelector((state) => state.collegeStudents);
   const {user } = useSelector((state) => state.collageAuth);
- useEffect(() => {
-  dispatch(getStudents({id: user?._id}))
-  // console.log(students)
-
- }, [dispatch])
-
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user?._id) {
+        await dispatch(getStudents({ id: user._id }));
+      }
+    };
+  
+    fetchData();
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (!loading) {

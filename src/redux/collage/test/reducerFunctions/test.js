@@ -12,11 +12,18 @@ export const getAllTestFulfilled = (state, action) => {
         (obj) => obj._id === assessment._id
       );
       !isObjectPresent && state.assessments.intermediate.push(assessment);
-    } else {
+    } 
+    else if (assessment.level === "advanced") {
       const isObjectPresent = state.assessments.advanced.some(
         (obj) => obj._id === assessment._id
       );
       !isObjectPresent && state.assessments.advanced.push(assessment);
+    }else{
+      console.log(assessment.level , "assessment.level")
+      const isObjectPresent = state.assessments?.adaptive?.some(
+        (obj) => obj._id === assessment._id
+      );
+       !isObjectPresent && state.assessments.adaptive.push(assessment);
     }
   });
 };
