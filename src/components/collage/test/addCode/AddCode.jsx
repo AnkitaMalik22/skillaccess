@@ -304,7 +304,7 @@ const AddCode = () => {
     console.log(question);
   };
   useEffect(() => {
-    setCountDetail(currentTopic?.compiler.length - 1);
+    setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
 
   return (

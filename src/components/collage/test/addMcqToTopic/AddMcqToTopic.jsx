@@ -180,7 +180,7 @@ const AddMcqToTopic = () => {
 
   useEffect(() => {
     console.log(currentTopic);
-    setCountDetail(currentTopic.questions.length - 1);
+    setCountDetail(currentTopic?.questions?.length - 1);
   }, [currentTopic]);
   const stripHtml = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");

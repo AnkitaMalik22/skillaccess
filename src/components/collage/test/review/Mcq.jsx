@@ -67,11 +67,11 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
 
   const handleEdit = () => {
     if (
-      mcq.Title === "" ||
-      mcq.Options[0] === "" ||
-      mcq.Options[1] === "" ||
-      mcq.Options[2] === "" ||
-      mcq.Options[3] === ""
+      !mcq.Title  || mcq.Title === "<p><br></p>" ||
+      !mcq.Options[0] ||
+      !mcq.Options[1] ||
+      !mcq.Options[2] ||
+      !mcq.Options[3] 
     ) {
       toast.error("Please fill all the fields");
 

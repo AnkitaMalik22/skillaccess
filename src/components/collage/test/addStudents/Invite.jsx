@@ -27,6 +27,7 @@ const Invite = () => {
     if (!loading) {
       dispatch(getStudents({id: user?._id}))
       dispatch(setLoading(false))
+      setFilteredStudents(uploadedStudents);
     }
     
       }, [loading])

@@ -27,7 +27,17 @@ const List = () => {
     // dispatch(getCollege());
     dispatch(getAllTests());
   }, [dispatch]);
-
+  const getProgressBarColor = (percentage) => {
+    if (percentage === 0) {
+      return ""; // Return empty string for transparent
+    } else if (percentage > 0 && percentage < 33.33) {
+      return "bg-red-600"; // Red color
+    } else if (percentage >= 33.33 && percentage < 66.66) {
+      return "bg-blue-600"; // Blue color
+    } else {
+      return "bg-green-600"; // Green color
+    }
+  };
   return (
     <div className="w-full mx-auto">
       {/* legend */}
@@ -84,6 +94,26 @@ const List = () => {
               </span>
             </div>
           </div>
+          {/* <div className="flex justify-center">
+            <div className=" self-center">
+              <span className="flex gap-2">
+                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                  <div
+                    className={`h-full rounded-lg ${getProgressBarColor(
+                      10
+                    )}`}
+                    style={{ width:10}}
+
+                  ></div>
+                </div>
+                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                  {" "}
+                  {student?.percentage?.toFixed(2)}%
+                  10%
+                </h2>
+              </span>
+            </div>
+          </div> */}
           <div className="flex justify-end mr-3">
             <span
               className="self-center hover:cursor-pointer "

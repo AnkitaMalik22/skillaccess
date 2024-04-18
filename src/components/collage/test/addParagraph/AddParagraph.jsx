@@ -182,7 +182,7 @@ const AddParagraph = () => {
   };
 
   useEffect(() => {
-    setCountDetail(currentTopic.findAnswers.length - 1);
+    setCountDetail(currentTopic?.findAnswers?.length - 1);
   }, [currentTopic]);
   return (
     <div>
@@ -252,8 +252,10 @@ const AddParagraph = () => {
                 onClick={() => {
                   if (question.questions.some((q) => q.question === "")) {
                     toast.error("Please enter all questions");
+                    return;
                   } else if (question.questions.length >= MAX_QUESTIONS) {
                     toast.error("You can't add more than 3 questions");
+                    return;
                   } else {
                     setQuestion({
                       ...question,

@@ -22,7 +22,7 @@ export const addTeam = createAsyncThunk(
         );
         return response.data;
         } catch (err) {
-        return rejectWithValue(err.response.data);
+        return rejectWithValue(err.response.data.message);
         }
     }
     );
@@ -102,7 +102,8 @@ export const getInvitedTeams = createAsyncThunk(
             state.status = "failed";
             state.teamloading = false;
             state.error = action.payload;
-            toast.error("Failed to add team member");
+            toast.error( action.payload)
+            // toast.error("Failed to add team member");
           })
          .addCase(getInvitedTeams.pending, (state, action) => {
             state.status = "loading";
@@ -113,6 +114,7 @@ export const getInvitedTeams = createAsyncThunk(
           })
          .addCase(getInvitedTeams.rejected, (state, action) => {
             state.status = "failed";
+         
             state.error = action.payload;
           })
           .addCase(getRegisteredTeams.pending, (state, action) => {

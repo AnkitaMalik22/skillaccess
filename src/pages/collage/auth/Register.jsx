@@ -292,7 +292,7 @@ console.log(phone);
             />
             <span className="text-lGray font-bold text-xs">
               By creating an account, you agree to our{" "}
-              <Link className="text-blue-600" to="/terms&policies">
+              <Link className="text-blue-600" to="/terms&policies" target="_blank">
                 Terms-Policies.{" "}
               </Link>
               {/* and, <Link>Notification Settings</Link> */}

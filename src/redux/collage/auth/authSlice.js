@@ -33,6 +33,7 @@ const collageState = {
   },
   LOGIN_LOADING: false,
   USER_LOADING: false,
+  dummyUser : null
 };
 
 export const deleteMail = createAsyncThunk(
@@ -283,7 +284,7 @@ export const loginCollage = createAsyncThunk(
         { withCredentials: true }
       );
       const res = req.data;
-      localStorage.setItem("auth-token", res.token);
+
       console.log(res);
       return res;
     } catch (error) {
@@ -626,6 +627,7 @@ const collageAuthSlice = createSlice({
       })
       .addCase(verifyQr.fulfilled, (state, action) => {
         toast.success("verified");
+    
         window.location.href = "/collage/dashboard";
       })
       .addCase(verifyQr.rejected, (state, action) => {
@@ -662,11 +664,12 @@ const collageAuthSlice = createSlice({
       })
       .addCase(loginCollage.fulfilled, (state, action) => {
         // state.status = action.payload
-        const { user } = action.payload;
-        state.user = user;
+        const { user ,token} = action.payload;
+
         switch (user.authType) {
           case "qr":
             window.location.href = "/collage/settings/security/securityApp";
+
             break;
           case "otp":
             window.location.href = "/collage/settings/security/secondFA";
@@ -677,6 +680,10 @@ const collageAuthSlice = createSlice({
             window.location.href = "/collage/dashboard";
             break;
         }
+
+        state.user = user;
+        localStorage.setItem("auth-token", token);
+    
       })
       .addCase(loginCollage.rejected, (state, action) => {
         state.Error = [action.payload];
