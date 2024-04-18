@@ -14,7 +14,9 @@ const AddQuestionsSelect = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  const level = searchParams.get("level");
   const [selectQuestionType, setSelectQuestionType] = useState("");
   console.log(id);
   // useEffect(() => {
@@ -24,24 +26,34 @@ const AddQuestionsSelect = () => {
   const NavHandler = () => {
     switch (selectQuestionType) {
       case "mcq":
-        navigate(`/collage/test/addMcqToTopic/${id}?type=mcq&addType=topic`);
+        navigate(
+          `/collage/test/addMcqToTopic/${id}?type=mcq&addType=topic&level=${level}`
+        );
         break;
 
       case "code":
-        navigate(`/collage/test/code/${id}?type=compiler&addType=topic`);
+        navigate(
+          `/collage/test/code/${id}?type=compiler&addType=topic&level=${level}`
+        );
         break;
 
       case "video":
-        navigate(`/collage/test/video/${id}?type=video&addType=topic`);
+        navigate(
+          `/collage/test/video/${id}?type=video&addType=topic&level=${level}`
+        );
 
         break;
 
       case "findAnswer":
-        navigate(`/collage/test/find-ans/${id}?type=findAnswer&addType=topic`);
+        navigate(
+          `/collage/test/find-ans/${id}?type=findAnswer&addType=topic&level=${level}`
+        );
         break;
 
       case "essay":
-        navigate(`/collage/test/essay/${id}?type=essay&addType=topic`);
+        navigate(
+          `/collage/test/essay/${id}?type=essay&addType=topic&level=${level}`
+        );
         break;
 
       default:

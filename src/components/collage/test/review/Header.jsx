@@ -29,6 +29,7 @@ const Header = ({
   const [excelJSON, setExcelJSON] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const ques = searchParams.get("question");
+  const level = searchParams.get("level");
 
   const { currentTopic } = useSelector((state) => state.test);
   const handleFile = (e) => {
@@ -538,7 +539,7 @@ const Header = ({
           <button
             onClick={() => {
               type === "section" && navigate("/collage/test/questions");
-              type === "topic" && navigate("/collage/test/select");
+              type === "topic" && navigate(-1);
               type === "assessment" && navigate(-1);
             }}
             className="mt-2 mr-3"
@@ -576,7 +577,9 @@ const Header = ({
                           : "addMcq"
                       }/${id}?addType=test&topicId=${topicId}`
                     )
-                  : navigate(`/collage/test/typeOfQuestions/${sectionId}`)
+                  : navigate(
+                      `/collage/test/typeOfQuestions/${sectionId}?level=${level}`
+                    )
               }
             >
               <FiPlus className="self-center text-lg " /> Add

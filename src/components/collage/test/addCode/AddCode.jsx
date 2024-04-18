@@ -53,6 +53,8 @@ const AddCode = () => {
   const [validate, setValidate] = useState(false);
 
   const type = searchParams.get("type");
+  const level = searchParams.get("level");
+
   const addType = searchParams.get("addType");
   const [toggle, setToggle] = useState(1);
 
@@ -81,7 +83,7 @@ const AddCode = () => {
   const [question, setQuestion] = useState({
     section: ID,
     id: ID + Date.now(),
-
+    QuestionLevel: level,
     Duration: 0,
     code: "",
     codeQuestion: "",
@@ -164,6 +166,8 @@ const AddCode = () => {
 
           setIsPrev(false);
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             section: ID,
             code: "",
@@ -184,6 +188,8 @@ const AddCode = () => {
           dispatch(addCompilerToTopic({ data: question, id: id, type: type }));
           dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             section: ID,
             code: "",
@@ -255,6 +261,8 @@ const AddCode = () => {
           setCount(topics[id].compiler.length - 1);
           setIsPrev(false);
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             section: ID,
             code: "",
@@ -276,6 +284,8 @@ const AddCode = () => {
           );
           // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             section: ID,
             code: "",

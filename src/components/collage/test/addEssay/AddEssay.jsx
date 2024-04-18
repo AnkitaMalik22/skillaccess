@@ -45,7 +45,7 @@ const AddEssay = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const level = searchParams.get("level");
   const type = searchParams.get("type");
   const addType = searchParams.get("addType");
   let ID;
@@ -53,6 +53,7 @@ const AddEssay = () => {
     ? (ID = searchParams.get("topicId"))
     : (ID = id);
   const [question, setQuestion] = useState({
+    QuestionLevel: level,
     section: ID,
     id: ID + Date.now(),
     Title: "",
@@ -65,7 +66,11 @@ const AddEssay = () => {
 
   const handleSave = () => {
     if (addType === "topic") {
-      if (!question.Title || question.Title.trim() === "" || question.Title === "<p><br></p>") {
+      if (
+        !question.Title ||
+        question.Title.trim() === "" ||
+        question.Title === "<p><br></p>"
+      ) {
         toast.error("Please enter the question");
       } else if (question.Duration == 0) {
         toast.error("Please enter required time");
@@ -82,11 +87,22 @@ const AddEssay = () => {
             })
           );
           setCountDetail(currentTopic.essay.length - 1);
-          setQuestion({ Title: "", Duration: 0, id: id + Date.now() });
+
+          setQuestion({
+            Title: "",
+            Duration: 0,
+            id: id + Date.now(),
+            QuestionLevel: level,
+          });
         } else {
           dispatch(addEssayToTopic({ data: question, id: id, type: type }));
           dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({ Title: "", Duration: 0, id: id + Date.now() });
+          setQuestion({
+            Title: "",
+            Duration: 0,
+            id: id + Date.now(),
+            QuestionLevel: level,
+          });
         }
       }
     } else {
@@ -108,6 +124,8 @@ const AddEssay = () => {
           );
           setCount(topics[id].essay.length - 1);
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             Title: "",
             Duration: 0,
@@ -120,6 +138,8 @@ const AddEssay = () => {
           setIsPrev(false);
           setCount(topics[id].essay.length - 1);
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             Title: "",
             Duration: 0,
