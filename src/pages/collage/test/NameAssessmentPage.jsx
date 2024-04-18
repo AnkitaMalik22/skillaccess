@@ -6,16 +6,11 @@ import NameAdaptive from "../../../components/collage/test/nameAssessment/NameAd
 import CollageLayout from "../../../layout/Collage";
 
 const NameAssessmentPage = () => {
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const type = searchParams.get("level");
 
-
-
-
-   React.useEffect(() => {
-   
+  React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
     console.log(currentPageLanguage + " " + navigator.language);
@@ -43,26 +38,24 @@ const NameAssessmentPage = () => {
       }
     };
 
-
-if(navigator.language !== navigator.currentPageLanguage) {
-  console.log("Language is different");
-  loadGoogleTranslateScript();
-}
-
-// loadGoogleTranslateScript();
-
-
-  return () => {
-    // Clean up script when component unmounts
-    if (scriptLoaded) {
-      document.body.removeChild(script);
-      scriptLoaded = false;
+    if (navigator.language !== navigator.currentPageLanguage) {
+      console.log("Language is different");
+      loadGoogleTranslateScript();
     }
-  };
-}, []);
+
+    // loadGoogleTranslateScript();
+
+    return () => {
+      // Clean up script when component unmounts
+      if (scriptLoaded) {
+        document.body.removeChild(script);
+        scriptLoaded = false;
+      }
+    };
+  }, []);
   return (
     <CollageLayout>
-   {type !== "adaptive" ? <Name /> : <NameAdaptive />}
+      {type !== "adaptive" ? <Name /> : <NameAdaptive />}
     </CollageLayout>
   );
 };

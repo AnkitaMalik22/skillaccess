@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { FaPlus } from "react-icons/fa";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   setCurrentTopic,
   setTestSelectedTopics,
@@ -20,6 +20,8 @@ import {
 import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
 
 const SelectTests = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const level = searchParams.get("level");
   const [questionType, setQuestionType] = useState("");
 
   const Navigate = useNavigate();
@@ -116,7 +118,7 @@ const SelectTests = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllTopics());
+    dispatch(getAllTopics({ level: level }));
 
     if (sections) {
       setFilteredSections(sections);
@@ -243,7 +245,7 @@ const SelectTests = () => {
           questionType={questionType}
           setQuestionType={setQuestionType}
           handleFilter={handleFilterSections}
-          type={''}
+          type={""}
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
@@ -251,7 +253,9 @@ const SelectTests = () => {
             <div className=" self-center w-fit h-fit ">
               <div
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
-                onClick={() => Navigate("/collage/test/createTopic")}
+                onClick={() =>
+                  Navigate(`/collage/test/createTopic?level=${level}`)
+                }
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
               </div>
@@ -355,7 +359,7 @@ const SelectTests = () => {
                           );
 
                           Navigate(
-                            `/collage/test/details/${index}?type=topic&question=${questionType}`
+                            `/collage/test/details/${index}?type=topic&question=${questionType}&level=${level}`
                           );
                         }}
                       >
