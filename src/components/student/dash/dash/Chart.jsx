@@ -169,7 +169,7 @@ const ChartComp = () => {
             className="text-blue-500 hover:cursor-pointer"
             onClick={() => navigate("/student/dashboard/assessment")}
           >
-            See all
+            See All
           </h1>
         </span>
 

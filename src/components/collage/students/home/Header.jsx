@@ -149,7 +149,7 @@ const Header = ({
       <span className="flex gap-4">
         <button
           className=" self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16"
-          onClick={() => navigate(-1)}
+          
         >
           <img src="../../images/icons/reports.png" alt="" />
         </button>
@@ -193,7 +193,7 @@ const Header = ({
                   {loading ? (
                     <Loader />
                   ) : (
-                    <FiUpload className="self-center text-lg " />
+                    <FiUpload className="self-center text-lg font-bold " />
                   )}{" "}
                   Upload Student
                 </button>

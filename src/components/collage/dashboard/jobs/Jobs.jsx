@@ -36,7 +36,7 @@ const Jobs = () => {
             <IoIosSearch className="self-center w-10 h-10 bg-gray-100 rounded-s-lg text-gray-400 py-2 " />
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search..."
               className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
             />
           </span>

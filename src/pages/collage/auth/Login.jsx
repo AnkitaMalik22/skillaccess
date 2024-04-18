@@ -110,7 +110,7 @@ const Login = () => {
             Getting Started
           </h2>
           <h2 className="text-sm font-normal text-center text-lGray">
-            Create an account to continue
+          Welcome back
           </h2>
           {logoutError && (
             <p className=" border-l-4 pl-4  rounded-[4px] border-[#dc2626] w-full max-w-xs py-3  mx-auto text-sm text-[#dc2626] bg-[#fee2e2]">
