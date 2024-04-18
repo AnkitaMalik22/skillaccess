@@ -62,7 +62,7 @@ if(navigator.language !== navigator.currentPageLanguage) {
 }, []);
   return (
     <CollageLayout>
-   {type === "adaptive" ? <Name /> : <NameAdaptive />}
+   {type !== "adaptive" ? <Name /> : <NameAdaptive />}
     </CollageLayout>
   );
 };

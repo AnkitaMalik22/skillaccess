@@ -41,6 +41,7 @@ import {
 } from "./thunks/question";
 
 const testState = {
+  totalSelectedQuestions: 0,
   recentUsedQuestions: [],
   bookmarks: [],
   currentBookmark: {},
@@ -198,6 +199,10 @@ const testSlice = createSlice({
   initialState: testState,
   name: "test",
   reducers: {
+    setTotalSelectedQuestions: (state, action) => {
+      state.totalSelectedQuestions = action.payload;
+    },
+
     setCurrentTopic: (state, action) => {
       state.currentTopic = action.payload.topic;
       localStorage.setItem("currentTopic", JSON.stringify(state.currentTopic));
@@ -854,6 +859,7 @@ const testSlice = createSlice({
 });
 
 export const {
+  setTotalSelectedQuestions,
   setCurrentTopic,
   clearTopicToBeAdded,
   editQuestion,
