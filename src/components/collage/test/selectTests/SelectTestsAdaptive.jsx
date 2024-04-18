@@ -20,7 +20,7 @@ import {
 import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
 
 const SelectTests = () => {
-  const [questionType, setQuestionType] = useState("");
+  const [questionType, setQuestionType] = useState("mcq");
 
   const Navigate = useNavigate();
 
@@ -134,6 +134,7 @@ const SelectTests = () => {
   useEffect(() => {
     if (sections) {
       setFilteredSections(sections);
+
     }
   }, [sections]);
 
@@ -243,7 +244,7 @@ const SelectTests = () => {
           questionType={questionType}
           setQuestionType={setQuestionType}
           handleFilter={handleFilterSections}
-          type={''}
+          type = {"adaptive"}
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
@@ -251,7 +252,7 @@ const SelectTests = () => {
             <div className=" self-center w-fit h-fit ">
               <div
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
-                onClick={() => Navigate("/collage/test/createTopic")}
+                onClick={() => Navigate("/collage/test/createTopicAdaptive")}
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
               </div>
@@ -333,10 +334,10 @@ const SelectTests = () => {
                       <button
                         className="w-[90px] h-[40px] bg-[#8F92A120] rounded-xl"
                         onClick={() => {
-                          if (!questionType) {
-                            toast.error("Please select a question type first.");
-                            return;
-                          }
+                          // if (!questionType) {
+                          //   toast.error("Please select a question type first.");
+                          //   return;
+                          // }
                           dispatch(
                             setCurrentTopic({
                               topic: {

@@ -19,6 +19,7 @@ import {
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
 import { getAllTests } from "../../../../redux/collage/test/thunks/test";
+import Adaptive from "./Adaptive";
 
 export const Test = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export const Test = () => {
     (state) => state.test.assessments.intermediate
   );
   const advanced = useSelector((state) => state.test.assessments.advanced);
+  const adaptive = useSelector((state) => state.test.assessments.adaptive);
 
   const navigate = useNavigate();
   const asses = [1, 2, 3, 4, 5];
@@ -49,7 +51,7 @@ export const Test = () => {
     status
   );
 
-  const arr = [<Beginner />, <Intermediate />, <Advanced />];
+  const arr = [<Adaptive />,<Beginner />, <Intermediate />, <Advanced />,];
 
   return (
     <div className="">
@@ -72,12 +74,20 @@ export const Test = () => {
                               <>
                             
                                 <FaFolder className="text-blued w-5 h-5 " />
+                               Adaptive level{" "}
+                                <p className="inline-block text-gray-400">
+                                  &#40;{adaptive?.length}&#41;
+                                </p>{" "}
+                              </>
+                            ) : i === 1 ? (
+                              <>
+                              <FaFolder className="text-blued w-5 h-5 " />
                                 Beginner level{" "}
                                 <p className="inline-block text-gray-400">
                                   &#40;{beginner.length}&#41;
                                 </p>{" "}
                               </>
-                            ) : i === 1 ? (
+                            ) :  i === 2 ? (
                               <>
                               <FaFolder className="text-blued w-5 h-5" />
                                 For Intermediate{" "}
@@ -85,7 +95,7 @@ export const Test = () => {
                                   &#40;{intermediate.length}&#41;
                                 </p>{" "}
                               </>
-                            ) : (
+                            ) :(
                               <>
                                 <FaFolder className="text-blued w-5 h-5" />
                                 For Advanced{" "}
