@@ -26,7 +26,7 @@ const Details = () => {
               Bhopal India
             </p>
           </span>
-          <div className="text-sm flex justify-end gap-1">
+          <div className="text-sm flex justify-end text-black gap-1">
             4.5/5
             <FaStar className="self-center text-[#FF991F]" />
           </div>

@@ -244,7 +244,7 @@ pendingStudents?.map((student, index) => (
           <h2>Education</h2>
         </div>
         <div className="bg-[#0052cc1f] p-2">
-          <h2>Latest Assessment</h2>{" "}
+          <h2>Last Assessment</h2>{" "}
         </div>
         <div className="bg-[#0052cc1f] p-2">
           <h2>Current Assessment</h2>
@@ -262,7 +262,7 @@ pendingStudents?.map((student, index) => (
       
       {
           approvedStudents?.map((student, index) => (
-      <div className=" grid-cols-6 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-200">
+      <div className=" grid-cols-6 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-100 ">
         {" "}
         {/* row-2 */}
 

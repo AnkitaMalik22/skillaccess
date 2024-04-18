@@ -116,7 +116,7 @@ export default function Dashboard() {
                 {placedStudents.length}
               </h2>
               <h2 className="text-gray-400 text-center font-semibold text-xs mt-2 ">
-                Students Placed
+                Student Placed
               </h2>
               <h2 className="text-green-600 text-center font-medium text-base my-4 ">
                 14.34%
@@ -155,7 +155,7 @@ export default function Dashboard() {
                 className="flex my-4 gap-2 justify-center hover:cursor-pointer"
                 onClick={() => navigate("/collage/test")}
               >
-                <h2 className="text-blue-700 font-medium text-center  text-base  ">
+                <h2 className="text-blue-700 font-bold text-center  text-base  ">
                   Create New
                 </h2>
                 <FaArrowRight className="text-blue-700 self-center" />
@@ -178,7 +178,7 @@ export default function Dashboard() {
                 className="text-blue-500"
                 onClick={() => navigate("/collage/dashboard/companies")}
               >
-                See all
+                See  All
               </button>
             </span>
 
@@ -197,7 +197,7 @@ export default function Dashboard() {
                 className="text-blue-500"
                 onClick={() => navigate("/collage/dashboard/jobs")}
               >
-                See all
+                See All
               </button>
             </span>
             <SwiperSlideRight />
