@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import { setTotalSelectedQuestions } from "../../redux/collage/test/testSlice";
 import { useDispatch } from "react-redux";
 
-const PopUpAdaptive = ({  handleOverlay }) => {
+const PopUpAdaptive = ({  handleOverlay ,section , handleSave}) => {
 const dispatch = useDispatch();
 const [noOfQuestions, setNoOfQuestions] = useState(0);
 
 
-const handleSave = () => {
-  dispatch(setTotalSelectedQuestions(noOfQuestions));
+const handleSubmit = async() => {
+  console.log("noOfQuestions", noOfQuestions , section);
+ await dispatch(setTotalSelectedQuestions(noOfQuestions))
+ await handleSave(section);
+
+ await handleOverlay();
 
 
 };
@@ -19,7 +23,7 @@ const handleSave = () => {
   return (
     <div
       className="w-full  min-w-full h-full min-h-[100vh] bg-black absolute z-[9999] flex left-0 top-0 bg-opacity-30 "
-      onClick={handleOverlay}
+      // onClick={handleOverlay}
     >
       <div className="bg-white shadow-md w-80 h-44 mx-auto self-center rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-4">
         <h1 className="text-center">Enter No Of Questions You want to select</h1>
@@ -40,9 +44,9 @@ const handleSave = () => {
           </button>
           <button
             className="self-center justify-center flex bg-blue-700 border border-blue-700 py-3 px-8 rounded-xl text-xs gap-2 text-white"
-            onClick={handleSave}
+            onClick={handleSubmit}
           >
-            Upload
+            Select
           </button>
         </div>
       </div>

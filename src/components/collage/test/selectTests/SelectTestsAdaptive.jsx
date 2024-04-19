@@ -19,15 +19,17 @@ import {
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
 import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
+import PopUpAdaptive from "../../../PopUps/PopUpAdaptive";
 
 const SelectTests = () => {
   const [questionType, setQuestionType] = useState("mcq");
-
+  const [visible, setVisible] = useState(false);
+  const [section, setSection] = useState({});
   const Navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const { sections } = useSelector((state) => state.test);
+  const { sections,totalSelectedQuestions} = useSelector((state) => state.test);
   // for filter the sections
 
   const [filteredSections, setFilteredSections] = useState(sections);
@@ -61,6 +63,7 @@ const SelectTests = () => {
   const [selectedSections, setSelectedSections] = useState(topics);
 
   const addSection = (section) => {
+    console.log(section, "section");
     if (!questionType) {
       toast.error("Please select a question type first.");
       return;
@@ -84,9 +87,43 @@ const SelectTests = () => {
 
       let sectionCopy = { ...section, Type: questionType };
 
-      // sectionCopy[Type] ="mcq";
+      const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          // for (let i = totalSelectedQuestions; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      };
+      
+      // Group questions by level
+      const questionsByLevel = section?.questions?.reduce((acc, question) => {
+        acc[question.QuestionLevel] = acc[question.QuestionLevel] || [];
+        acc[question.QuestionLevel].push(question);
+        return acc;
+      }, {});
+      
+      // Shuffle questions for each level
+      // Object.values(questionsByLevel).forEach(shuffleArray);
+      
+      // Shuffle questions for each level
+      Object.values(questionsByLevel).forEach((questions) => shuffleArray(questions));
+      
+      // Select random questions from each level
+      const mixedQuestions = Object.values(questionsByLevel).flatMap((questions) => {
+        const numQuestionsAvailable = Math.min(parseInt(totalSelectedQuestions/3), questions.length);
 
-      console.log(sectionCopy);
+        return questions.slice(0, numQuestionsAvailable);
+      });
+
+
+      
+      // Output the mixed questions array
+      console.log(mixedQuestions, mixedQuestions.length , "mixedQuestions",totalSelectedQuestions);
+
+      sectionCopy.questions = mixedQuestions;
+      
+
+      // console.log(sectionCopy);
 
       setSelectedSections([...selectedSections, sectionCopy]);
 
@@ -149,8 +186,25 @@ const SelectTests = () => {
     dispatch(setTestSelectedTopics(selectedSections));
   }, [addSection, removeSection, selectedSections]);
 
+
+
+
+
+
   return (
     <div className="font-dmSans text-sm font-bold">
+{visible && (
+       <PopUpAdaptive 
+          visible={visible}
+          handleSave={addSection}
+          handleOverlay={() => {
+      
+            setVisible(false);
+          }}
+          section={section}
+        />
+      )}
+      
       <Header />
 
       <div className="w-4/5 mx-auto">
@@ -371,7 +425,10 @@ const SelectTests = () => {
 
                     <button
                       className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white "
-                      onClick={() => addSection(section)}
+                      onClick={() => {
+                        setVisible(true);
+                        setSection(section);
+                      }}
                     >
                       Add
                     </button>

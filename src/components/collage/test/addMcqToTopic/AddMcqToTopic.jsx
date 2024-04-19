@@ -17,6 +17,7 @@ const AddMcqToTopic = () => {
   const { currentTopic } = useSelector((state) => state.test);
   const [isPrev, setIsPrev] = useState(false);
   const [countDetail, setCountDetail] = useState(-1);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -60,6 +61,10 @@ const AddMcqToTopic = () => {
     } else if (e.target.name === "Duration") {
       setQuestion((prev) => {
         return { ...prev, Duration: e.target.value };
+      });
+    } else if (e.target.name === "QuestionLevel") {
+      setQuestion((prev) => {
+        return { ...prev, QuestionLevel: e.target.value };
       });
     } else {
       switch (e.target.name) {
@@ -218,10 +223,9 @@ const AddMcqToTopic = () => {
               <option value={4}>4 minutes</option>
             </select>
             {level==='adaptive' && <select
-              name="Level"
-              // onChange={handleChanges}
-              // value={question.Duration}
-              id=""
+              name="QuestionLevel"
+              onChange={handleChanges}
+              value={question.QuestionLevel}
               className="w-1/2 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
             >
               <option value=''>Level</option>
