@@ -184,7 +184,7 @@ const Assessment = () => {
             */}
             <div className="bg-gray-100 rounded-2xl p-2 mb-6">
               <span className="flex justify-between px-2 font-bold text-base ">
-                <h2>Number of Students Placed</h2>{" "}
+                <h2>Number of Student Placed</h2>{" "}
                 <h2 className="text-sm text-gray-400">Updated 5 min ago</h2>
               </span>
               <div className="flex">

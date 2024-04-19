@@ -81,11 +81,11 @@ const ChartComp = () => {
     },
     series: [
       {
-        name: "Placements",
+        name: "Students",
         data: [30, 40, 45, 50, 49, 60, 70, 91, 19, 100, 55, 20],
       },
       {
-        name: "Students",
+        name: "Placements",
         data: [5, 15, 55, 50, 69, 70, 74, 96, 100, 55, 33, 77],
       },
     ],
@@ -152,11 +152,11 @@ const ChartComp = () => {
           <div className="flex gap-4 my-4">
             <span className="flex gap-1">
               <FaCircle className="text-blue-400" />{" "}
-              <h2 className="font-bold text-xs">Placements</h2>
+              <h2 className="font-bold text-xs">Students</h2>
             </span>
             <span className="flex gap-1">
               <FaCircle className="text-green-400" />{" "}
-              <h2 className="font-bold text-xs">Students</h2>
+              <h2 className="font-bold text-xs">Placements</h2>
             </span>
           </div>
         </div>
@@ -169,7 +169,7 @@ const ChartComp = () => {
             className="text-blue-500 hover:cursor-pointer"
             onClick={() => navigate("/collage/dashboard/students")}
           >
-            See all
+            See All
           </h1>
         </span>
 

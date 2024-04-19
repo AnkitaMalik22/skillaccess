@@ -101,7 +101,7 @@ export default function Dashboard() {
                 className="text-blue-500"
                 onClick={() => navigate("/student/dashboard/jobs")}
               >
-                See all
+                See All
               </button>
             </span>
 
@@ -120,7 +120,7 @@ export default function Dashboard() {
                 className="text-blue-500"
                 onClick={() => navigate("/student/dashboard/jobs")}
               >
-                See all
+                See All
               </button>
             </span>
             <SwiperSlideRight />

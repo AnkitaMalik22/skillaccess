@@ -263,7 +263,7 @@ const Name = () => {
     }
     if (!flag) {
       dispatch(setTestBasicDetails(testDetails));
-      navigate("/collage/test/selectAdaptive");
+      navigate("/collage/test/selectAdaptive?level=adaptive");
      
     }
   

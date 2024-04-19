@@ -26,7 +26,7 @@ const Education = () => {
               <span className="flex gap-1 ">
                 {" "}
                 <LuClock3 className="self-center " />{" "}
-                <p className="self-center text-xs font-medium">
+                <p className="self-center text-xs font-bold">
                   August 12 2014 to July 8 2018
                 </p>
               </span>
@@ -36,7 +36,7 @@ const Education = () => {
               <span className="flex gap-1">
                 {" "}
                 <CgPinAlt className="self-center text-lg font-bold" />{" "}
-                <p className="self-center text-xs">Bhopal India</p>
+                <p className="self-center text-xs font-bold">Bhopal India</p>
               </span>
             </div>
             {/*  */}
