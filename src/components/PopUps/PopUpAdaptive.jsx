@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react";
 import { setTotalSelectedQuestions } from "../../redux/collage/test/testSlice";
 import { useDispatch } from "react-redux";
 
-const PopUpAdaptive = ({  handleOverlay ,section , handleSave}) => {
-const dispatch = useDispatch();
-const [noOfQuestions, setNoOfQuestions] = useState(0);
+const PopUpAdaptive = ({
+  handleOverlay,
+  section,
+  handleSave,
+  setTotalQ,
+  addSection,
+}) => {
+  const dispatch = useDispatch();
+  const [noOfQuestions, setNoOfQuestions] = useState(0);
 
+  const handleSubmit = async () => {
+    console.log("noOfQuestions", noOfQuestions, section);
+    await dispatch(setTotalSelectedQuestions(noOfQuestions));
+    await handleSave(section);
 
-const handleSubmit = async() => {
-  console.log("noOfQuestions", noOfQuestions , section);
- await dispatch(setTotalSelectedQuestions(noOfQuestions))
- await handleSave(section);
-
- await handleOverlay();
-
-
-};
-
-
-
+    await handleOverlay();
+  };
 
   return (
     <div
@@ -26,11 +26,13 @@ const handleSubmit = async() => {
       // onClick={handleOverlay}
     >
       <div className="bg-white shadow-md w-80 h-44 mx-auto self-center rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-4">
-        <h1 className="text-center">Enter No Of Questions You want to select</h1>
+        <h1 className="text-center">
+          Enter No Of Questions You want to select
+        </h1>
         <input
           type="number"
           name="noOfQuestions"
-          onChange={(e) => setNoOfQuestions(e.target.value)}
+          onChange={(e) => setTotalQ(e.target.value)}
           className="w-full h-10 rounded-lg bg-gray-100 focus:outline-none border-none"
           placeholder="Enter No of Questions"
         />
@@ -44,7 +46,10 @@ const handleSubmit = async() => {
           </button>
           <button
             className="self-center justify-center flex bg-blue-700 border border-blue-700 py-3 px-8 rounded-xl text-xs gap-2 text-white"
-            onClick={handleSubmit}
+            onClick={() => {
+              addSection(section);
+              handleOverlay();
+            }}
           >
             Select
           </button>
