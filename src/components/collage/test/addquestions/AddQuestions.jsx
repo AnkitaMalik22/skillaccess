@@ -192,8 +192,8 @@ const AddQuestions = () => {
                       // }
                       onClick={() =>
                         navigate(
-                          `/collage/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false`
-                        )
+                        `/collage/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
+                      )
                       }
                     >
                       Details

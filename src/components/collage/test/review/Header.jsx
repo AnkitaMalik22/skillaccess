@@ -538,8 +538,8 @@ const Header = ({
         <button className="flex self-center  rounded-lg  gap-2">
           <button
             onClick={() => {
-              type === "section" && navigate("/collage/test/questions");
-              type === "topic" && navigate(-1);
+              type === "section" && (level==="adaptive" ? navigate("/collage/test/questions?level=adaptive"):navigate("/collage/test/questions"));
+              type === "topic" && (level==="adaptive" ? navigate("/collage/test/select?level=adaptive"):navigate(-1));
               type === "assessment" && navigate(-1);
               
             }}

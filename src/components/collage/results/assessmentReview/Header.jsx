@@ -1,15 +1,17 @@
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useSearchParams} from "react-router-dom";
 
 const Header = ({ handleSubmit }) => {
   const navigate = useNavigate();
+  const searchParams = useSearchParams();
+  const level = searchParams.get("level");
   return (
     <div className="flex  mx-auto justify-between mb-2 mt-5">
       <div>
         <button className="flex self-center  rounded-lg  gap-2">
-          <button onClick={() => navigate(-1)} className="mt-2 mr-3">
+          <button onClick={() =>  level  === 'adaptive' ? navigate("/collage/test/selectAdaptive?level=adaptive") : navigate(-1)} className="mt-2 mr-3">
             <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
           </button>
 
