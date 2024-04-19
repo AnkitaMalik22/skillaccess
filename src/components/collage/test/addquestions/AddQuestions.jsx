@@ -11,7 +11,7 @@ import {
   setTest,
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const AddQuestions = () => {
   const topics = useSelector((state) => state.test.topics);
@@ -23,7 +23,8 @@ const AddQuestions = () => {
   //   console.log(topics, "topics");
   // }, [topics]);
   const dispatch = useDispatch();
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const level = searchParams.get("level");
   const removeTopic = (index) => {
     let topicsCopy = [...topics];
     topicsCopy.splice(index, 1);
@@ -203,7 +204,7 @@ const AddQuestions = () => {
                       className="self-center text-blued w-5 h-5 cursor-pointer"
                       onClick={() =>
                         navigate(
-                          `/collage/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true`
+                          `/collage/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}`
                         )
                       }
                     />

@@ -541,6 +541,7 @@ const Header = ({
               type === "section" && navigate("/collage/test/questions");
               type === "topic" && navigate(-1);
               type === "assessment" && navigate(-1);
+              
             }}
             className="mt-2 mr-3"
           >
@@ -575,9 +576,12 @@ const Header = ({
                           : qt === "video"
                           ? "video"
                           : "addMcq"
-                      }/${id}?addType=test&topicId=${topicId}`
+                      }/${id}?addType=test&topicId=${topicId}&level=${level}`
+                      
                     )
-                  : navigate(
+                  : level==="adaptive" ?navigate(
+                    `/collage/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
+                  ):navigate(
                       `/collage/test/typeOfQuestions/${sectionId}?level=${level}`
                     )
               }
