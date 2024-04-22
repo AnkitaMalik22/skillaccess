@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Folder from "./icon/Folder";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
+import { getAllTopics, getAllTopicsQB } from "../../../../redux/collage/test/thunks/topic";
 import { setCurrentTopic } from "../../../../redux/collage/test/testSlice";
 import { useSearchParams } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const Topic = () => {
     : [];
 
   const getTotalQuestions = (topic) => {
+    console.log("topics", topic);
     let total = 0;
     total =
       topic?.questions?.length +
@@ -24,9 +25,11 @@ const Topic = () => {
       topic?.compiler?.length +
       topic?.essay?.length +
       topic?.findAnswers?.length;
+      
 
     return total;
   };
+
 
   const randomImage = () => {
     const images = [
@@ -41,9 +44,11 @@ const Topic = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllTopics({
-      level: level,
-    }));
+    // dispatch(getAllTopics({
+    //   level: level,
+    // }));
+
+    dispatch(getAllTopicsQB() );
 
     // if (sections) {
     //   setFilteredSections(sections);

@@ -161,11 +161,11 @@ export const Test = () => {
                     </div>
                   </div>
                   <div className="flex px-3 pb-3 mt-2 justify-between">
-                    <div className="flex gap-6">
-                      <button className="rounded-lg bg-gray-100 p-1 text-base font-dmSans font-base">
+                    <div className="flex gap-3">
+                      <button className="rounded-lg bg-gray-100 p-2 text-base font-dmSans font-base">
                         View
                       </button>
-                      <button className="rounded-lg p-1  bg-gray-100 self-center">
+                      <button className="rounded-lg p-3  bg-gray-100 self-center">
                         <CgUnavailable className="text-gray-400 text-lg" />
                       </button>
                     </div>

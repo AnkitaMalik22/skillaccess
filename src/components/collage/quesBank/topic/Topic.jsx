@@ -6,7 +6,7 @@ import { useEffect } from "react";
 // import { getCompany } from "../../../../redux/collage/dashboard/dashboardSlice";
 import Folder from "../home/icon/Folder";
 import Header from "./Header";
-import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
+import { getAllTopics, getAllTopicsQB } from "../../../../redux/collage/test/thunks/topic";
 import { useNavigate } from "react-router-dom";
 import { setCurrentTopic } from "../../../../redux/collage/test/testSlice";
 
@@ -14,6 +14,7 @@ const Topic = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [topics, settopics] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
+  const [selectedSections, setSelectedSections] = useState([]);
   const { sections } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");
@@ -64,9 +65,7 @@ const Topic = () => {
     }
   };
   useEffect(() => {
-    dispatch(getAllTopics({
-      level: level,
-    }));
+    dispatch(getAllTopicsQB());
 
     // if (sections) {
     //   setFilteredSections(sections);
@@ -81,13 +80,29 @@ const Topic = () => {
     // console.log("hello tests",sections);
   }, [dispatch]);
 
+
+  const handleSelect = (e, id) => {
+    if (e.target.checked) {
+      setSelectedSections([...selectedSections, id]);
+    }
+  }
+
+  const handleDiselect = (e, id) => {
+    if (!e.target.checked) {
+      setSelectedSections(selectedSections.filter((section) => section !== id));
+    }
+  }
+
+
+
+
   return (
     <div className="w-[95%] mx-auto font-dmSans">
       <Header handleFilter={handleFilterSections} />
       <div className="flex flex-wrap gap-4 w-full justify-center bg-gray-100 px-3 py-6 rounded-3xl ">
         <div className="w-full flex justify-between px-6 mb-2">
           <h2 className="font-bold text-xl">Choose a Topic</h2>{" "}
-          <div className="flex">
+          {/* <div className="flex self-center"> */}
             {" "}
             {/* <input
             type="text"
@@ -96,8 +111,23 @@ const Topic = () => {
             onChange={handleFilterSections}
             className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
           /> */}
+           {/* <input
+              name="select"
+              type="checkbox"
+              className="rounded bg-[#DEEBFF] border-none mr-1"
+            />{" "}
             <label className="text-sm pl-1 self-center">Delete Selected</label>
-          </div>
+          </div> */}
+              <button className="">
+            <input
+              name="select"
+              type="checkbox"
+              className="rounded bg-[#DEEBFF] border-none"
+            />{" "}
+            <label for="select" className="text-sm pl-1">
+              Delete Selected
+            </label>
+          </button>
         </div>
 
         {filteredSections?.map((section, index) => {

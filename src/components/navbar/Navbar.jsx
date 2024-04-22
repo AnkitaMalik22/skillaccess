@@ -52,19 +52,19 @@ const Navbar = (props) => {
   
   
   return (
-    <div className="border border-y-1 sorder border-gray-500 bg-white w-full z-[9999] m-0 fixed top-0"   >
+    <div className="border border-y-1 sorder border-gray-400 bg-white w-full z-[9999] m-0 fixed top-0"   >
       <div className="navbar flex justify-between ">
         {/* left */}
         <div>
           {/* mobile only */}
           <button
-            className="btn btn-primary sm:hidden "
+            className="btn btn-primary sm:hidden  "
             onClick={() => props.setOpen(!props.open)}
           >
             hamb
           </button>
 
-          <div className="">
+          <div className="ml-3">
             {" "}
             <img src="../../../images/logo.png" alt="" />
           </div>
