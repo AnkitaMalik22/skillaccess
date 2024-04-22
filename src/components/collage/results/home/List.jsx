@@ -39,7 +39,7 @@ const List = () => {
     }
   };
   return (
-    <div className="w-full mx-auto">
+    <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 p-4">
       {/* legend */}
       <div className=" grid-cols-4  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid">
         <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg p-2 ">
@@ -61,10 +61,10 @@ const List = () => {
 
       {/* list to be iterated */}
       {arr.map((assessment) => (
-        <div className=" grid-cols-4 rounded-lg my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
+        <div className=" grid-cols-4 rounded-lg my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
           {" "}
           {/* row-2 */}
-          <div className={` flex `}>
+          <div className={` flex justify-center `}>
             <div className="flex self-center">
               <span>
                 <h2 className="font-dmSans  sm:text-sm">{assessment.name}</h2>
@@ -114,7 +114,7 @@ const List = () => {
               </span>
             </div>
           </div> */}
-          <div className="flex justify-end mr-3">
+          <div className="flexjustify-center mr-3">
             <span
               className="self-center hover:cursor-pointer "
               onClick={() =>

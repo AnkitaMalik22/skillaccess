@@ -159,6 +159,7 @@ const AddParagraph = () => {
           );
           setCount(topics[id].findAnswers.length - 1);
           setQuestion({
+            questions: [{ question: "" }],
             QuestionLevel: level,
             id: ID + Date.now(),
             Title: "",
@@ -180,6 +181,7 @@ const AddParagraph = () => {
           if (type === "save") navigate(-1);
           // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
           setQuestion({
+            questions: [{ question: "" }],
             QuestionLevel: level,
             id: ID + Date.now(),
             Title: "",

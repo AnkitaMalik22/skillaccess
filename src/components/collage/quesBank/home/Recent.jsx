@@ -26,7 +26,7 @@ const Recent = () => {
   return (
     <div className="w-full mx-auto bg-[#F8F8F9] lg:px-8 lg:pt-7 pb-4 rounded-3xl">
       <span className="flex justify-between ">
-        <h2 className="font-bold text-base ">Recent used question</h2>
+        <h2 className="font-bold text-base ">Recent used questions</h2>
         <button
           className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-2 px-3"
           onClick={() => navigate("/collage/quesBank/recent")}
@@ -67,7 +67,9 @@ const Recent = () => {
             <div className=" self-center h-fit">
               <span>
                 <h2 className="font-dmSans font-normal sm:text-sm">
-                  {topic?.Type}
+                  {topic?.Type === "mcq"
+                    ? "Multiple Choice Question"
+                    : topic?.Type}
                 </h2>
               </span>
             </div>

@@ -64,7 +64,7 @@ const Login = () => {
   //   setChecked(!checked); // Toggle checkbox status
   // };
   const isLoginDisabled =
-    // !checked || 
+    // !checked ||
     !Credentials.Email || !Credentials.Password;
   // GOOGlE LOGIN
 
@@ -72,8 +72,6 @@ const Login = () => {
     const accessToken = tokenResponse.access_token;
 
     dispatch(googleLoginCollage(accessToken));
-
-    navigate("/collage/dashboard");
   }
 
   const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
@@ -110,7 +108,7 @@ const Login = () => {
             Getting Started
           </h2>
           <h2 className="text-sm font-normal text-center text-lGray">
-          Welcome back
+            Welcome back
           </h2>
           {logoutError && (
             <p className=" border-l-4 pl-4  rounded-[4px] border-[#dc2626] w-full max-w-xs py-3  mx-auto text-sm text-[#dc2626] bg-[#fee2e2]">
@@ -151,16 +149,15 @@ const Login = () => {
             >
               <LuEye className="text-gray-400 text-2xl" />
             </button> */}
-               <button
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    type === "text" ? setType("password") : setType("text");
-                  }}
+            <button
+              className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+              onClick={(e) => {
+                e.preventDefault();
+                type === "text" ? setType("password") : setType("text");
+              }}
             >
               <LuEye className="text-gray-400 text-2xl" />
             </button>
-          
           </div>
 
           <div
@@ -187,7 +184,7 @@ const Login = () => {
               </div>
             ))} */}
 
-       <div className=" flex gap-2  p-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto ">
+          <div className=" flex gap-2  p-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto ">
             {" "}
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
@@ -200,7 +197,7 @@ const Login = () => {
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
           </div>
-   {/* 
+          {/* 
           <label className=" flex  gap-2 cursor-pointer mx-auto w-full max-w-xs">
             <input
               type="checkbox"
@@ -216,11 +213,11 @@ const Login = () => {
               </Link>
             </span>
           </label> */}
- 
+
           <button
-         className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
-          isLoginDisabled ? "bg-blued cursor-not-allowed" : ""
-        }`}
+            className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
+              isLoginDisabled ? "bg-blued cursor-not-allowed" : ""
+            }`}
             onClick={handleSubmit}
             disabled={isLoginDisabled}
           >

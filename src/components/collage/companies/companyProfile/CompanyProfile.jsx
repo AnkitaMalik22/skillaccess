@@ -187,7 +187,7 @@ const CompanyProfile = () => {
             />
             <div className=" absolute -bottom-7  left-5 bg-white w-14 h-14 flex justify-center rounded-lg">
               <img
-                src="../../images/companyLogo.png"
+                src="../../../images/companyLogo.png"
                 className="w-10 h-10 rounded-lg self-center"
                 alt=""
               />
