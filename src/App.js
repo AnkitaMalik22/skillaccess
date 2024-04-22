@@ -89,9 +89,9 @@ export default function App() {
     (state) => state.collageAuth
   );
 
-  useEffect(() => {
-    dispatch(getCollege());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCollege());
+  // }, []);
 
   useEffect(() => {
     dispatch(getStudent());
