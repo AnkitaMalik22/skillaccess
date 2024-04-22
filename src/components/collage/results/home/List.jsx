@@ -41,7 +41,7 @@ const List = () => {
   return (
     <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 p-4">
       {/* legend */}
-      <div className=" grid-cols-4  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid">
+      <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid">
         <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg p-2 ">
           <h2>Test Name</h2>
         </div>
@@ -51,9 +51,9 @@ const List = () => {
         <div className="bg-[#0052CC] bg-opacity-5 p-2">
           <h2>Total Students Selected</h2>{" "}
         </div>
-        {/* <div className="bg-[#0052CC]  bg-opacity-5 p-2">
+        <div className="bg-[#0052CC]  bg-opacity-5 p-2">
           <h2>Overall Performance</h2>
-        </div> */}
+        </div>
         <div className="bg-[#0052CC] bg-opacity-5 p-2 rounded-e-lg">
           <h2>Details</h2>
         </div>
@@ -61,7 +61,9 @@ const List = () => {
 
       {/* list to be iterated */}
       {arr.map((assessment) => (
+
         <div className=" grid-cols-4 rounded-lg my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
+
           {" "}
           {/* row-2 */}
           <div className={` flex justify-center `}>
@@ -94,27 +96,29 @@ const List = () => {
               </span>
             </div>
           </div>
-          {/* <div className="flex justify-center">
+          <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
                 <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                   <div
                     className={`h-full rounded-lg ${getProgressBarColor(
-                      10
+                      20
                     )}`}
-                    style={{ width:10}}
+                    style={{ width:20}}
 
                   ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
-                  {student?.percentage?.toFixed(2)}%
+                  {/* {student?.percentage?.toFixed(2)}% */}
                   10%
                 </h2>
               </span>
             </div>
+
           </div> */}
           <div className="flexjustify-center mr-3">
+
             <span
               className="self-center hover:cursor-pointer "
               onClick={() =>

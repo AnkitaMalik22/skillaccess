@@ -27,6 +27,7 @@ import {
   createTopic,
   getAllTopics,
   getTopicById,
+  getAllTopicsQB,
 } from "./thunks/topic";
 
 import {
@@ -856,6 +857,16 @@ const testSlice = createSlice({
       .addCase(getTopicByIdQB.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.currentTopic = {};
+      })
+      .addCase(getAllTopicsQB.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getAllTopicsQB.fulfilled, (state, action) => {
+        state.sections = action.payload;
+      })
+      .addCase(getAllTopicsQB.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.sections = [];
       });
   },
 });
