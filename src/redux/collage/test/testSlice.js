@@ -41,7 +41,7 @@ import {
 } from "./thunks/question";
 
 const testState = {
-  totalSelectedQuestions: 0,
+  totalSelectedQuestions: 5,
   recentUsedQuestions: [],
   bookmarks: [],
   currentBookmark: {},
@@ -201,7 +201,7 @@ const testSlice = createSlice({
   name: "test",
   reducers: {
     setTotalSelectedQuestions: (state, action) => {
-      state.totalSelectedQuestions = action.payload;
+      state.totalSelectedQuestions = parseInt(action.payload);
     },
 
     setCurrentTopic: (state, action) => {

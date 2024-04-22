@@ -12,16 +12,20 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { FaPlus } from "react-icons/fa";
 
-import { useNavigate,useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import {
   setCurrentTopic,
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
 import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
+import PopUpAdaptive from "../../../PopUps/PopUpAdaptive";
 
 const SelectTests = () => {
   const [questionType, setQuestionType] = useState("mcq");
+  const [visible, setVisible] = useState(false);
+  const [section, setSection] = useState({});
+  const [totalQ, setTotalQ] = useState(0);
 
   const Navigate = useNavigate();
 
@@ -61,6 +65,7 @@ const SelectTests = () => {
   const [selectedSections, setSelectedSections] = useState(topics);
 
   const addSection = (section) => {
+    console.log(section, "section");
     if (!questionType) {
       toast.error("Please select a question type first.");
       return;
@@ -84,9 +89,52 @@ const SelectTests = () => {
 
       let sectionCopy = { ...section, Type: questionType };
 
-      // sectionCopy[Type] ="mcq";
+      const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          // for (let i = totalQ; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      };
 
-      console.log(sectionCopy);
+      // Group questions by level
+      const questionsByLevel = section?.questions?.reduce((acc, question) => {
+        acc[question.QuestionLevel] = acc[question.QuestionLevel] || [];
+        acc[question.QuestionLevel].push(question);
+        return acc;
+      }, {});
+
+      // Shuffle questions for each level
+      // Object.values(questionsByLevel).forEach(shuffleArray);
+
+      // Shuffle questions for each level
+      Object.values(questionsByLevel).forEach((questions) =>
+        shuffleArray(questions)
+      );
+      console.log(questionsByLevel);
+      // Select random questions from each level
+      const mixedQuestions = Object.values(questionsByLevel).flatMap(
+        (questions) => {
+          const numQuestionsAvailable = Math.min(
+            Math.ceil(parseInt(totalQ) / 3),
+            questions.length
+          );
+          console.log("length:" + questions.length, parseInt(totalQ));
+          return questions.slice(0, numQuestionsAvailable);
+        }
+      );
+
+      // Output the mixed questions array
+      console.log(
+        mixedQuestions.slice(0, totalQ),
+        mixedQuestions.length,
+        "mixedQuestions",
+        totalQ
+      );
+
+      sectionCopy.questions = mixedQuestions.slice(0, totalQ);
+
+      // console.log(sectionCopy);
 
       setSelectedSections([...selectedSections, sectionCopy]);
 
@@ -119,9 +167,11 @@ const SelectTests = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllTopics({
-      level: level,
-    }));
+    dispatch(
+      getAllTopics({
+        level: level,
+      })
+    );
 
     if (sections) {
       setFilteredSections(sections);
@@ -139,7 +189,6 @@ const SelectTests = () => {
   useEffect(() => {
     if (sections) {
       setFilteredSections(sections);
-
     }
   }, [sections]);
 
@@ -150,7 +199,20 @@ const SelectTests = () => {
   }, [addSection, removeSection, selectedSections]);
 
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <div className={`font-dmSans text-sm font-bold ${visible ? 'h-screen overflow-hidden' : ''}`}>
+      {visible && (
+        <PopUpAdaptive
+          visible={visible}
+          handleSave={addSection}
+          handleOverlay={() => {
+            setVisible(false);
+          }}
+          addSection={addSection}
+          section={section}
+          setTotalQ={setTotalQ}
+        />
+      )}
+
       <Header />
 
       <div className="w-4/5 mx-auto">
@@ -249,7 +311,7 @@ const SelectTests = () => {
           questionType={questionType}
           setQuestionType={setQuestionType}
           handleFilter={handleFilterSections}
-          type = {"adaptive"}
+          type={"adaptive"}
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
@@ -257,7 +319,9 @@ const SelectTests = () => {
             <div className=" self-center w-fit h-fit ">
               <div
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
-                onClick={() => Navigate("/collage/test/createTopicAdaptive")}
+                onClick={() =>
+                  Navigate("/collage/test/createTopicAdaptive?level=adaptive")
+                }
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
               </div>
@@ -361,7 +425,7 @@ const SelectTests = () => {
                           );
 
                           Navigate(
-                            `/collage/test/details/${index}?type=topic&question=${questionType}`
+                            `/collage/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
                           );
                         }}
                       >
@@ -371,7 +435,10 @@ const SelectTests = () => {
 
                     <button
                       className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white "
-                      onClick={() => addSection(section)}
+                      onClick={() => {
+                        setVisible(true);
+                        setSection(section);
+                      }}
                     >
                       Add
                     </button>

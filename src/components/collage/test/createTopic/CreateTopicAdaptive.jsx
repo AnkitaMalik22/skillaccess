@@ -48,7 +48,7 @@ const CreateTopic = () => {
     dispatch(createTopic(topic)).then((res) => {
       if (res.payload._id) {
         //navigate(`/collage/test/typeOfQuestions/${res.payload._id}`);
-        navigate(`/collage/test/addMcqToTopic/${res.payload._id}?type=mcq&addType=topic`);
+        navigate(`/collage/test/addMcqToTopic/${res.payload._id}?type=mcq&addType=topic&level=adaptive`);
       } else {
         toast.error("Error in creating topic. Please try again.");
         return;

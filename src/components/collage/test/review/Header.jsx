@@ -538,9 +538,10 @@ const Header = ({
         <button className="flex self-center  rounded-lg  gap-2">
           <button
             onClick={() => {
-              type === "section" && navigate("/collage/test/questions");
-              type === "topic" && navigate(-1);
+              type === "section" && ( navigate(`/collage/test/questions?level=${level}`));
+              type === "topic" && (level=== 'adaptive' ? navigate(`/collage/test/selectAdaptive?level=${level}`) : navigate(`/collage/test/select?level=${level}`));
               type === "assessment" && navigate(-1);
+              
             }}
             className="mt-2 mr-3"
           >
@@ -575,9 +576,12 @@ const Header = ({
                           : qt === "video"
                           ? "video"
                           : "addMcq"
-                      }/${id}?addType=test&topicId=${topicId}`
+                      }/${id}?addType=test&topicId=${topicId}&level=${level}`
+                      
                     )
-                  : navigate(
+                  : level==="adaptive" ?navigate(
+                    `/collage/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
+                  ):navigate(
                       `/collage/test/typeOfQuestions/${sectionId}?level=${level}`
                     )
               }

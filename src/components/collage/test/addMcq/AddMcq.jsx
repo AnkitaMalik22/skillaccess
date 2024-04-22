@@ -26,9 +26,12 @@ const AddMcq = () => {
   const [search, setSearch] = useSearchParams();
 
   const section = search.get("topicId");
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  const level = searchParams.get("level");
   console.log(section);
   const [question, setQuestion] = useState({
+    QuestionLevel:  (level==="adaptive"?'beginner':level),
     id: search.get("topicId") + Date.now(),
     section: search.get("topicId"),
     Duration: 0,
@@ -159,6 +162,7 @@ const AddMcq = () => {
         );
         setIsPrev(false);
         setQuestion({
+          QuestionLevel:  (level==="adaptive"?'beginner':level),
           id: search.get("topicId") + Date.now(),
           Title: "",
           Options: [],
@@ -171,6 +175,7 @@ const AddMcq = () => {
       } else {
         dispatch(addMcq({ question: question, id: id, prev: false }));
         setQuestion({
+          QuestionLevel:  (level==="adaptive"?'beginner':level),
           id: search.get("topicId") + Date.now(),
           Title: "",
           Options: [],
@@ -204,7 +209,7 @@ const AddMcq = () => {
               onChange={handleChanges}
               value={question.Duration}
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              className={`${level==='adaptive'?'w-1/2':'w-full'} rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
             >
               <option value={0}>Time to answer the question</option>
 
@@ -213,7 +218,21 @@ const AddMcq = () => {
               <option value={3}>3 minutes</option>
               <option value={4}>4 minutes</option>
             </select>
+            {level==='adaptive' && <select
+              name="Level"
+              // onChange={handleChanges}
+              // value={question.Duration}
+              id=""
+              className="w-1/2 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+            >
+              <option value=''>Level</option>
 
+              <option value={'beginner'}>Beginner</option>
+              <option value={'intermediate'}>Intermediate</option>
+              <option value={'advanced'}>Advanced</option>
+              
+            </select>
+}
             <ReactQuill
               value={question.Title}
               onChange={(value) =>
