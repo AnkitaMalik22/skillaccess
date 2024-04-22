@@ -62,7 +62,7 @@ const List = () => {
       {/* list to be iterated */}
       {arr.map((assessment) => (
 
-        <div className=" grid-cols-4 rounded-lg my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
+        <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
 
           {" "}
           {/* row-2 */}
