@@ -116,7 +116,7 @@ const List = () => {
               </span>
             </div>
 
-          </div> */}
+          </div> 
           <div className="flexjustify-center mr-3">
 
             <span
