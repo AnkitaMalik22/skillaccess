@@ -145,8 +145,6 @@ export default function App() {
 
   return (
     <React.Fragment>
-
-
       {/* <PopUpAdaptive/> */}
       <Suspense fallback={<Loader />}>
         <Routes>

@@ -20,14 +20,19 @@ const Filter = () => {
         <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search..."
           className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96 max-w-md mx-auto  "
         />
       </div>
 
       <span className="flex gap-2">
         <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
-          <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
+          <img
+            src="../../../images/icons/Filter.png"
+            alt=""
+            srcset=""
+            className="mx-auto"
+          />
         </button>
       </span>
     </div>

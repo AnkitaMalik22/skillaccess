@@ -13,11 +13,7 @@ import PopUp from "../../../PopUps/PopUp";
 import Loader from "../../test/addVideo/Loader";
 import { uploadStudents } from "../../../../redux/collage/student/studentSlice";
 
-
-
-const Header = ({
-  handleFilter,
-}) => {
+const Header = ({ handleFilter }) => {
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [excel, setExcel] = useState("");
@@ -27,7 +23,6 @@ const Header = ({
 
   const upload = useRef(null);
   const dispatch = useDispatch();
-
 
   const handleFile = (e) => {
     setVisible(true);
@@ -53,46 +48,50 @@ const Header = ({
   };
 
   const handleStudentUpload = async () => {
-
     if (excel) {
       setLoading(true);
       try {
-        const workbook = XLSX.read(excel, { type: 'binary' });
+        const workbook = XLSX.read(excel, { type: "binary" });
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
         const headers = jsonData[0];
         const students = [];
-  
+
         // if (headers.length !== 3 || headers[0] !== 'FirstName' || headers[1] !== 'LastName' || headers[2] !== 'Email') {
         //   toast.error('Invalid file format');
         //   return;
         // }
 
-      if (headers.length !== 3 || headers[0] !== 'FirstName' || headers[1] !== 'LastName' || headers[2] !== 'Email'){
-          toast.error('Invalid file format');
-            return;
-          }
-   
+        if (
+          headers.length !== 3 ||
+          headers[0] !== "FirstName" ||
+          headers[1] !== "LastName" ||
+          headers[2] !== "Email"
+        ) {
+          toast.error("Invalid file format");
+          return;
+        }
+
         for (let i = 1; i < jsonData.length; i++) {
           const row = jsonData[i];
 
           if (!row[0]) {
-            toast.error(`First Name is Required at Row ${i}`);  setLoading(false);
+            toast.error(`First Name is Required at Row ${i}`);
+            setLoading(false);
             return;
-          }
-         else if (!row[1]) {
-            toast.error(`Last Name is Required at Row ${i} `);  setLoading(false);
+          } else if (!row[1]) {
+            toast.error(`Last Name is Required at Row ${i} `);
+            setLoading(false);
             return;
-          }
-        else  if (!row[2]) {
-            toast.error(`Email is Required at Row ${i}`);  setLoading(false);
+          } else if (!row[2]) {
+            toast.error(`Email is Required at Row ${i}`);
+            setLoading(false);
             return;
-          }
-          else {
+          } else {
             students.push({
               FirstName: row[0],
               LastName: row[1],
-              Email: row[2]
+              Email: row[2],
             });
           }
         }
@@ -100,24 +99,17 @@ const Header = ({
         dispatch(uploadStudents(students));
 
         // console.log(students);
-  
+
         setLoading(false);
         setVisible(false);
-        
-  
       } catch (error) {
         setLoading(false);
-        toast.error('An error occurred while processing the file');
+        toast.error("An error occurred while processing the file");
       }
     } else {
-      toast.error('No file selected');
+      toast.error("No file selected");
     }
   };
-
-
-
-
-
 
   const handleAddTeamClick = () => {
     setShowPopup(true);
@@ -126,16 +118,14 @@ const Header = ({
   const handleClosePopup = () => {
     setShowPopup(false);
   };
-// const handleUploadClick = () => {
-// handleStudentUpload();
-//   }
+  // const handleUploadClick = () => {
+  // handleStudentUpload();
+  //   }
 
   const navigate = useNavigate();
   return (
     <div className="flex w-[95%] mx-auto justify-between mb-2 font-dmSans">
-
-
-{visible && (
+      {visible && (
         <PopUp
           visible={visible}
           handleSave={handleStudentUpload}
@@ -147,10 +137,7 @@ const Header = ({
       )}
 
       <span className="flex gap-4">
-        <button
-          className=" self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16"
-          
-        >
+        <button className=" self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16">
           <img src="../../images/icons/reports.png" alt="" />
         </button>
       </span>
@@ -178,27 +165,25 @@ const Header = ({
   
         </button> */}
 
-<button
-                  className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
-                  onClick={() => {
-                    upload.current.click();
-                  }}
-                >
-                  <input
-                    type="file"
-                    ref={upload}
-                    className="hidden"
-                    onChange={handleFile}
-                  />
-                  {loading ? (
-                    <Loader />
-                  ) : (
-                    <FiUpload className="self-center text-lg font-bold " />
-                  )}{" "}
-                  Upload Student
-                </button>
-
-
+        <button
+          className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
+          onClick={() => {
+            upload.current.click();
+          }}
+        >
+          <input
+            type="file"
+            ref={upload}
+            className="hidden"
+            onChange={handleFile}
+          />
+          {loading ? (
+            <Loader />
+          ) : (
+            <FiUpload className="self-center text-lg font-bold " />
+          )}{" "}
+          Upload New
+        </button>
 
         <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />

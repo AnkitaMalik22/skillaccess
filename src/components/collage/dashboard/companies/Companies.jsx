@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa6";
-import { PiSlidersHorizontalLight } from "react-icons/pi";
+import {
+  PiSlidersHorizontal,
+  PiSlidersHorizontalBold,
+  PiSlidersHorizontalLight,
+} from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getCompany } from "../../../../redux/collage/dashboard/dashboardSlice";
@@ -38,8 +42,12 @@ const Companies = () => {
           </span>
         </div>
 
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
-          <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
+        <button className="bg-gray-100  self-center  rounded-lg h-10 w-8 sm:h-16 sm:w-14">
+          <img
+            src="../../../images/icons/Filter.png"
+            alt=""
+            className="mx-auto"
+          />
         </button>
       </div>
       <div className="flex flex-wrap gap-4 w-fit justify-center">

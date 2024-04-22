@@ -29,7 +29,7 @@ export const Progress = () => {
           <div className="w-1/3  bg-[#CCDCF5] h-1/3 self-center "></div>
           <div className="relative">
             <figure className="w-3 h-3 p-3 rounded-full bg-[#CCDCF5] z-50"></figure>
-            <h2 className="absolute -bottom-10 w-44 -left-10">
+            <h2 className="absolute -bottom-10 w-44 -left-10 font-normal">
               Review & Submit
             </h2>
           </div>
