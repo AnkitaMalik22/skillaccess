@@ -17,6 +17,7 @@ const Header = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const type = searchParams.get("type");
+  const level = searchParams.get("level");
 
   const addType = searchParams.get("addType");
 
@@ -90,7 +91,7 @@ const Header = () => {
             "TopicToBeAdded",
             JSON.stringify(updatedTopicToBeAdded)
           );
-          navigate("/collage/test/select");
+          navigate(`/collage/test/select?level=${level}`);
         });
       }
     } else {

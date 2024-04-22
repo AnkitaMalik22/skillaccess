@@ -14,7 +14,8 @@ const Header = ({ Q, page }) => {
       <div>
         <button className="flex self-center ml-2 rounded-lg  gap-2">
           <button
-            onClick={() =>  level === "adaptive" ?  navigate("/collage/test/selectAdaptive?level=adaptive") : navigate("/collage/test/select")}
+            onClick={() =>   level === 'adaptive' ? navigate(`/collage/test/selectAdaptive?level=${level}`) : navigate(`/collage/test/select?level=${level}`)
+            }
             className="mt-2 mr-3"
           >
             <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />

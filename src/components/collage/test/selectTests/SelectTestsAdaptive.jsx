@@ -199,7 +199,7 @@ const SelectTests = () => {
   }, [addSection, removeSection, selectedSections]);
 
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <div className={`font-dmSans text-sm font-bold ${visible ? 'h-screen overflow-hidden' : ''}`}>
       {visible && (
         <PopUpAdaptive
           visible={visible}

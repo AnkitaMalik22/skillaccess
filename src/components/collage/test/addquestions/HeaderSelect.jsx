@@ -19,8 +19,7 @@ const handleNext = () => {
   }else{
 
     console.log("level", level);
-  
- level === "adaptive" ?  navigate("/collage/test/selectAdaptive?level=adaptive") : navigate("/collage/test/select");
+   level === 'adaptive' ? navigate(`/collage/test/selectAdaptive?level=${level}`) : navigate(`/collage/test/select?level=${level}`)
   }
 
   };
