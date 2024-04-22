@@ -67,6 +67,27 @@ export const getAllTopics = createAsyncThunk(
     }
   }
 );
+export const getAllTopicsQB = createAsyncThunk(
+  "test/getAllTopicsQB",
+  async (data, { rejectWithValue, getState }) => {
+    try {
+      const req = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/qb/topics/all`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return res.topics;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const getTopicById = createAsyncThunk(
   "test/getTopicById",

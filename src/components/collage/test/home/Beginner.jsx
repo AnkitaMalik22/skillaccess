@@ -35,7 +35,7 @@ const Beginner = () => {
             Add New Assessment
           </h2>
           <h2 className="text-center text-xs my-2 w-20 md:w-60">
-            Create New Assessment
+            Create new Assessment
           </h2>
         </div>
       </div>
