@@ -1,5 +1,6 @@
 import React from "react";
-import Accounting from "../../../components/collage/accounting/home/Accounting";
+// import Accounting from "../../../components/collage/accounting/home/Accounting";
+import Acounting from "../../../components/collage/accounting/home/Acounting";
 import CollageLayout from "../../../layout/Collage";
 
 const AccountingPage = () => {
@@ -51,7 +52,7 @@ if(navigator.language !== navigator.currentPageLanguage) {
 }, []);
   return (
     <CollageLayout>
-      <Accounting />
+      <Acounting />
     </CollageLayout>
   );
 };

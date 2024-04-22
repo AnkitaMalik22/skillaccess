@@ -16,9 +16,9 @@ const Dropdown = ({ bookmark, index }) => {
         <div className="mb-4">
           <div className="flex w-full justify-between rounded-t-lg bg-white pl-4 py-2 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
             <div>
-              <p className="text-sm">
+              <p className="text-sm flex">
                 <span>{index}. </span>
-                {bookmark.Title}
+                <span className=""   dangerouslySetInnerHTML={{ __html:bookmark.Title }}></span>
               </p>
             </div>
             <div className="flex gap-2 self-center">
