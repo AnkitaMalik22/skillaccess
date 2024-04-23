@@ -32,17 +32,22 @@ const Security = () => {
   );
 
   const handleOptionChange = (option) => {
+
     setSelectedOption(option);
-    if (selectedOption === "securityApp") {
+    console.log(option);
+    if (option === "securityApp") {
+      console.log("securityApp clicked");
       dispatch(selectAuth({ type: "qr" }));
-    } else if (selectedOption === "textMessage") {
+    } else if (option === "textMessage") {
+      console.log("textMessage clicked");
       dispatch(selectAuth({ type: "otp" }));
       // navigate("/collage/settings/security/secondFA");
     } else {
+      console.log("none clicked");
       dispatch(selectAuth({ type: "none" }));
     }
   };
-  console.log(selectedOption);
+
   const handleChnage = (e) => {
     setPassword({ ...password, [e.target.name]: e.target.value });
   };
@@ -102,7 +107,7 @@ const Security = () => {
           <div className="flex items-center gap-4 mb-4 ">
             <input
               type="radio"
-              name="option"
+              name="textMessage"
               id="textMessage"
               className="bg-[#DEEBFF] rounded-full border-none outline-none focus:outline-0 focus:ring-0 h-6 self-center w-6 cursor-pointer"
               checked={selectedOption === "textMessage"}
@@ -128,7 +133,7 @@ const Security = () => {
           <div className="flex items-center gap-4 mb-4">
             <input
               type="radio"
-              name="option"
+              name="securityApp"
               id="securityApp"
               className="bg-[#DEEBFF] rounded-full border-none outline-none focus:outline-0 focus:ring-0 h-6 self-center w-6 cursor-pointer"
               checked={selectedOption === "securityApp"}
@@ -154,8 +159,8 @@ const Security = () => {
           <div className="flex items-center gap-4 mb-4">
             <input
               type="radio"
-              name="option"
-              id="securityApp"
+              name="none"
+              id="none"
               className="bg-[#DEEBFF] rounded-full border-none outline-none focus:outline-0 focus:ring-0 h-6 self-center w-6 cursor-pointer"
               checked={selectedOption === "none"}
               onChange={() => handleOptionChange("none")}
