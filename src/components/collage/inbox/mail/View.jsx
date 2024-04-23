@@ -16,14 +16,21 @@ import {
 import { Link, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const View = ({ index, filter }) => {
+const View = ({ index, filter, inboxType }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const show = searchParams.get("show");
   const dispatch = useDispatch();
   const upload = useRef();
   const { mail } = useSelector((state) => state.collageAuth);
-  const Email = mail.emailsReceived[index];
+  // const Email = mail.emailsReceived[index];
+
   const [loading, setLoading] = useState(false);
+  const [Email, setEMail] = useState(
+    inboxType === "Received"
+      ? mail.emailsReceived[index]
+      : mail.emailsSent[index]
+  );
+
   useEffect(() => {
     console.log(show);
     if (show === "all") {
@@ -31,7 +38,12 @@ const View = ({ index, filter }) => {
     } else {
       dispatch(searchMail(filter));
     }
-  }, []);
+    if (inboxType === "Received") {
+      setEMail(mail?.emailsReceived[index]);
+    } else {
+      setEMail(mail?.emailsSent[index]);
+    }
+  }, ["", inboxType]);
 
   const [email, setEmail] = useState({ Message: "" });
   const handleChange = (e) => {

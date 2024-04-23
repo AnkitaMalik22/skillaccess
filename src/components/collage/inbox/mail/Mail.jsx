@@ -27,7 +27,7 @@ const Mail = () => {
   const type = searchParams.get("type");
   const { sendMailLoading, mail } = useSelector((state) => state.collageAuth);
   const [arr, setArr] = useState([]);
-
+  const [inboxType, setInboxType] = useState(searchParams.get("inboxType"));
   const Email = mail.emailsReceived[index];
   const [filter, setFilter] = useState({
     type:
@@ -48,9 +48,22 @@ const Mail = () => {
   useEffect(() => {
     if (JSON.stringify(user) !== JSON.stringify(arr)) {
       console.log(user);
-      setArr(user);
+      if (inboxType === "Received") {
+        setArr(user.received);
+      } else {
+        setArr(user.sent);
+      }
     }
   }, [user]);
+
+  useEffect(() => {
+    console.log(user);
+    if (inboxType === "Received") {
+      setArr(user.received);
+    } else {
+      setArr(user.sent);
+    }
+  }, [inboxType]);
 
   useEffect(() => {
     if (show !== "search") {
@@ -71,8 +84,13 @@ const Mail = () => {
               name=""
               id=""
               className="w-1/2 self-center select text-sm font-bold"
+              onChange={(e) => {
+                setInboxType(e.target.value);
+              }}
             >
-              <option value="Primary">Primary</option>
+              <option value={inboxType}>{inboxType}</option>
+              <option value="Sent">Sent</option>
+              <option value="Received">Primary</option>
             </select>
             <PiArrowCounterClockwiseBold className="self-center text-sm  text-gray-400 ml-4" />
           </div>
@@ -93,12 +111,12 @@ const Mail = () => {
         <div className="min-h-[70vh] w-full flex gap-4">
           <div className="w-1/4 bg-white p-2 overflow-y-scroll rounded-lg">
             {arr?.map((data, index) => (
-              <Left data={data.mail} index={index} />
+              <Left data={data.mail} index={index} inboxType={inboxType} />
             ))}
           </div>
           <div className="w-3/4 bg-white rounded-lg">
             {type === "view" ? (
-              <View index={index} filter={filter} />
+              <View index={index} filter={filter} inboxType={inboxType} />
             ) : (
               <Compose />
             )}

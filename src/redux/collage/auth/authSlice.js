@@ -927,9 +927,13 @@ export const getSentEmails = (state) => {
 };
 
 export const getInbox = (state) => {
-  return state.collageAuth.mail.emailsReceived?.map((value) => {
+  const received = state.collageAuth.mail.emailsReceived?.map((value) => {
     return { ...value, isChecked: false };
   });
+  const sent = state.collageAuth.mail.emailsSent?.map((value) => {
+    return { ...value, isChecked: false };
+  });
+  return { received, sent };
 };
 //
 export const { setUploadImg, clearLogoutError } = collageAuthSlice.actions;
