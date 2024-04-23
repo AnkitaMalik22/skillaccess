@@ -9,7 +9,7 @@ const Header = () => {
       <span className="flex gap-4">
         <button
           className="bg-[#D9E1E7]  self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-14"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/collage/teams')}
         >
           <img src="../../images/icons/back.png" alt="" srcset="" />
         </button>
