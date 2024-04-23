@@ -111,6 +111,30 @@ export const getTopicById = createAsyncThunk(
     }
   }
 );
+export const deleteTopics = createAsyncThunk(
+  "test/deleteTopics",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data", data)
+      const req = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/assessments/sections`,
+        {data},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      // console.log("res", res);
+      return res.sections;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const createTopic = createAsyncThunk(
   "test/createTopic",
