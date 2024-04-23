@@ -115,7 +115,7 @@ const Students = () => {
       )}
       <div className="w-11/12 flex justify-between mx-auto gap-1">
         {/* New students joined */}
-        <div className="h-96 w-[40%] bg-gray-100 overflow-y-scroll scroll rounded-lg">
+        <div className="h-96 w-auto bg-gray-100 overflow-y-scroll scroll rounded-lg">
           <span className="flex justify-between font-bold text-sm px-4 py-2">
             <h2>New Students Joined</h2>
             <h2 className="text-gray-400">...</h2>
@@ -184,7 +184,7 @@ const Students = () => {
         </div>
 
         {/* Pending request */}
-        <div className="h-96 w-[59%] bg-gray-100 overflow-y-scroll rounded-lg">
+        <div className="h-96 w-[50%] bg-gray-100 overflow-y-scroll rounded-lg">
           <span className="flex justify-between font-bold text-sm px-4 py-2">
             <h2>Pending Request</h2>
             <h2 className="text-gray-400">...</h2>
