@@ -5,7 +5,7 @@ import { getInbox } from "../../../../redux/collage/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import convertDate from "../../../../util/getDate";
 
-const Left = ({ data, index }) => {
+const Left = ({ data, index, inboxType }) => {
   const navigate = useNavigate();
   const user = useSelector(getInbox);
   const [arr, setArr] = useState([
@@ -18,14 +18,20 @@ const Left = ({ data, index }) => {
   useEffect(() => {
     if (JSON.stringify(user) !== JSON.stringify(arr)) {
       console.log(user);
-      setArr(user);
+      if (inboxType === "Received") {
+        setArr(user.received);
+      } else {
+        setArr(user.sent);
+      }
     }
   }, [user]);
   return (
     <div
       className={`rounded-lg hover:bg-[#0052CC] hover:bg-opacity-5 p-3`}
       onClick={() =>
-        navigate(`/collage/inbox/mail?index=${index}&type=view&show=all`)
+        navigate(
+          `/collage/inbox/mail?index=${index}&type=view&show=all&inboxType=${inboxType}`
+        )
       }
     >
       <div className="flex justify-between">

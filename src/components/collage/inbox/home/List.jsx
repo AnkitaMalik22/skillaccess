@@ -26,6 +26,8 @@ const List = ({ show }) => {
   const navigate = useNavigate();
 
   const [queries, setQueries] = useState({ limit: 50, skip: 0 });
+  const [inboxType, setInboxType] = useState("Received");
+
   const user = useSelector(getInbox);
   const [arr, setArr] = useState([
     // { id: 1, isChecked: false },
@@ -33,8 +35,9 @@ const List = ({ show }) => {
     // { id: 3, isChecked: false },
     // { id: 4, isChecked: false },
   ]);
+
   const email = useSelector((state) => state.collageAuth?.user?.Email);
-  const total = useSelector((state) => state.collageAuth?.mail?.total);
+  const [total, setTotal] = useState(0);
   const [socket, setSocket] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
@@ -51,9 +54,10 @@ const List = ({ show }) => {
       socket.disconnect();
     };
   }, []);
+
   const handleNav = (i) =>
     navigate(
-      `/collage/inbox/mail?index=${i}&type=view&show=${show}&within=${searchParams.get(
+      `/collage/inbox/mail?index=${i}&inboxType=${inboxType}&type=view&show=${show}&within=${searchParams.get(
         "within"
       )}&keyword=${searchParams.get("keyword")}&from=${searchParams.get(
         "from"
@@ -72,7 +76,7 @@ const List = ({ show }) => {
     dispatch(getMail(queries));
   };
   const handleRight = () => {
-    if (queries.skip > queries.total) {
+    if (queries.skip > total) {
       return;
     }
     setQueries((prev) => {
@@ -85,9 +89,28 @@ const List = ({ show }) => {
   useEffect(() => {
     if (JSON.stringify(user) !== JSON.stringify(arr)) {
       console.log(user);
-      setArr(user);
+      if (inboxType === "Received") {
+        setArr(user.received);
+        setTotal(user.received.length);
+      } else {
+        setArr(user.sent);
+        setTotal(user.sent.length);
+      }
     }
   }, [user]);
+
+  useEffect(() => {
+    console.log(user);
+    if (inboxType === "Received") {
+      setArr(user.received);
+      setTotal(user.received.length);
+      console.log("total : ", total);
+    } else {
+      setArr(user.sent);
+      setTotal(user.sent.length);
+      console.log("total : ", total);
+    }
+  }, [inboxType]);
 
   const handleCheckbox = (e) => {
     const { checked, id, name } = e.target;
@@ -113,6 +136,21 @@ const List = ({ show }) => {
   console.log(arr);
   return (
     <div className="bg-[#8F92A1] bg-opacity-5 rounded-t-xl pb-4">
+      {/* You can open the modal using document.getElementById('ID').showModal() method */}
+
+      {/* <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+       
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+        </div>
+      </dialog> */}
+
       <div className="flex border-b border-gray-200 p-4 justify-between rounded-t-xl w-[99.9%] mx-auto">
         <div className="flex gap-2 self-center">
           <input
@@ -122,8 +160,22 @@ const List = ({ show }) => {
             checked={arr.filter((item) => item?.isChecked !== true).length < 1}
             className="border-none bg-[#DEEBFF] rounded self-center"
           />
-          <div className="h-4  self-center mb-2">
-            <FaSortDown className=" text-gray-400 h-full self-center " />
+          <div className="h-4  flex self-center ">
+            {/* <FaSortDown
+              className=" text-gray-400 h-full self-center "
+              // onClick={() => document.getElementById("my_modal_3").showModal()}
+            /> */}
+
+            <select
+              className="w-fit mx-auto select focus:!outline-none h-fit focus:border-0 text-sm font-dmSans self-center bg-transparent text-gray-400 font-bold"
+              onChange={(e) => {
+                setInboxType(e.target.value);
+              }}
+            >
+              <option value={inboxType}>{inboxType}</option>
+              <option value="Sent">Sent</option>
+              <option value="Received">Received</option>
+            </select>
           </div>
           <PiArrowCounterClockwiseBold className="self-center text-sm  text-gray-400 ml-4" />
           <HiDotsVertical className="self-center text-sm  text-gray-400" />
