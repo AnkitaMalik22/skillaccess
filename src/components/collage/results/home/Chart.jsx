@@ -77,7 +77,7 @@ const ChartComp = () => {
       {/* chart component */}
       <div className="w-full  rounded-s sm:px-6 mt-2">
         <div className="md:p-2 flex justify-between">
-          <h2 className="font-extrabold text-lg ">RESULTS OVERVIEW</h2>{" "}
+          <h2 className="font-extrabold text-lg ">Result Overview</h2>{" "}
           <span className="flex gap-4 text-sm font-bold">
             <button
               className={`border-2 border-x-transparent border-transparent ${

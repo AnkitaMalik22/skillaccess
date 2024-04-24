@@ -6,12 +6,22 @@ import SlideNextButton from "../../dashboard/buttons";
 // Import Swiper styles
 import "swiper/css";
 import Card from "./common/Card";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getAllTests } from "../../../../redux/collage/test/thunks/test";
 
 const Adaptive = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const Adaptive = useSelector((state) => state.test.assessments.adaptive);
+  const {testLoading} = useSelector((state) => state.test);
+
+  React.useEffect(() => {
+ if(testLoading){
+   dispatch(getAllTests())
+  }
+  
+  }, [testLoading]);
   return (
     <div className="flex bg-[#F8F8F9] w-full gap-2">
       <div className=" w-[242px] h-[312px] bg-[#8F92A1] bg-opacity-5  my-3 ml-8 rounded-2xl flex justify-center">

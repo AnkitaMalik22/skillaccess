@@ -65,6 +65,7 @@ import { use } from "i18next";
 import { getStudent } from "./redux/student/auth/studentAuthSlice";
 import NotAuth from "./components/PopUps/NotAuth";
 import PopUpAdaptive from "./components/PopUps/PopUpAdaptive";
+import AccountRoute from "./pages/collage/accounting/AccountRoutes";
 
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
@@ -173,6 +174,7 @@ export default function App() {
             {InboxRoute()}
             {SettingsRoute()}
             {TeamsRoute()}
+            {AccountRoute()}
           </>
 
           {/* 
@@ -186,9 +188,9 @@ export default function App() {
           {SettingsRoute()}
           {TeamsRoute()} */}
 
-          <Route path="collage/accounting">
+          {/* <Route path="collage/accounting">
             <Route path="" element={<AccountingPage />} />
-          </Route>
+          </Route> */}
 
           <Route path="/collage/profile">
             <Route path="" element={<ProfilePage />} />

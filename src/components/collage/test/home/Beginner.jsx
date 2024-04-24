@@ -9,7 +9,8 @@ import "swiper/css";
 import { Bin } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import Card from "./common/Card";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch} from "react-redux";
+import { getAllTests } from "../../../../redux/collage/test/thunks/test";
 
 const Beginner = () => {
   const beginner = useSelector((state) => state.test.assessments.beginner);
@@ -19,6 +20,17 @@ const Beginner = () => {
   // const filteredBeginnerAssessments = assessments?.beginner?.filter(
   //   (item) => !uniqueIds.has(item?._id) && uniqueIds.add(item?._id)
   // );
+  const dispatch = useDispatch();
+
+  const {testLoading} = useSelector((state) => state.test);
+
+  React.useEffect(() => {
+ if(!testLoading){
+   dispatch(getAllTests())
+  }
+  console.log("testLoading",testLoading)
+  
+  }, [testLoading]);
 
   const navigate = useNavigate();
   return (
@@ -75,18 +87,22 @@ const Beginner = () => {
           1600: { slidesPerView: 2.5 },
         }}
       >
-        {beginner?.map((item, index) => (
-          <SwiperSlide key={`${item._id}-${index}`} className="w-full">
-            <Card
-              key={`${item._id}-${index}`}
-              assessment={item}
-              // heading={item.name}
-              // desc={item.description}
-              // attempts={item.totalAttempts}
-              progress={4}
-            />
-          </SwiperSlide>
-        ))}
+        {testLoading ? (
+        <h1>Loading</h1>)  : (
+          beginner?.map((item, index) => (
+            <SwiperSlide key={`${item._id}-${index}`} className="w-full">
+              <Card
+                key={`${item._id}-${index}`}
+                assessment={item}
+                // heading={item.name}
+                // desc={item.description}
+                // attempts={item.totalAttempts}
+                progress={4}
+              />
+            </SwiperSlide>
+          ))
+        )
+        }
         <SwiperSlide></SwiperSlide>
 
         <span className="absolute top-1/2 right-0 z-20 h-fit w-fit">

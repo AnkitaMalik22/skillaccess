@@ -173,30 +173,30 @@ const SelectTests = () => {
               {/* {console.log(section, "section")} */}
 
               <span className="self-center">
-                <h2 className="text-xl font-bold mb-4">{section?.Heading}</h2>
+                <h2 className="text-xl font-bold px-2">{section?.Heading}</h2>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 px-2">
                   <img
                     src="../../images/icons/menu-boxed.png"
                     alt=""
                     className="self-center"
                   />
 
-                  <h2 className="font-bold text-xs text-gray-400 self-center">
+                  <h2 className="font-bold text-xs text-gray-400 self-center ">
                     {section?.Type}
                   </h2>
                 </div>
 
                 <div className="flex justify-between mt-1">
                   {" "}
-                  <div className="flex gap-2 w-full">
+                  <div className="flex gap-2 w-full px-2">
                     <img
                       src="../../images/icons/stopwatch.png"
                       alt=""
                       className="w-6 h-6 self-center"
                     />
 
-                    <h2 className="font-bold text-xs text-gray-400 self-center">
+                    <h2 className="font-bold text-xs text-gray-400 self-center px-2">
                       {section?.Time}
                     </h2>
                   </div>

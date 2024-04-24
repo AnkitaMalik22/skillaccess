@@ -115,7 +115,7 @@ const Students = () => {
       )}
       <div className="w-11/12 flex justify-between mx-auto gap-1">
         {/* New students joined */}
-        <div className="h-96 w-auto bg-gray-100 overflow-y-scroll scroll rounded-lg">
+        <div className="h-96 w-1/2 bg-gray-100 overflow-y-scroll scroll rounded-lg">
           <span className="flex justify-between font-bold text-sm px-4 py-2">
             <h2>New Students Joined</h2>
             <h2 className="text-gray-400">...</h2>
@@ -134,7 +134,7 @@ const Students = () => {
                       height="50px"
                     />
                   </div>
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base text-start">
                     {student?.FirstName + " " + student?.LastName}
                   </h2>
 
@@ -149,8 +149,8 @@ const Students = () => {
                 </span> */}
                 </div>
               </div>
-              <div className="flex justify-center items-center ">
-                <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
+              <div className="flex justify-center items-center  " >
+                <h2 className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-3/4" style={{ wordWrap: 'break-word'}} >
                   {student?.Email}
                 </h2>
                 <div className=" self-center h-fit">
