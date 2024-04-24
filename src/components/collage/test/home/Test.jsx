@@ -34,22 +34,19 @@ export const Test = () => {
   const asses = [1, 2, 3, 4, 5];
 
   const { status } = useSelector((state) => state.collageAuth);
-  useEffect(
-    () => {
-      dispatch(
-        setTestBasicDetails({
-          name: "",
-          description: "",
-          totalAttempts: null,
-          totalQuestions: null,
-        })
-      );
-      dispatch(setTestSelectedTopics([]));
-      dispatch(getAllTests());
-    },
-    [],
-    status
-  );
+  useEffect(() => {
+    dispatch(
+      setTestBasicDetails({
+        name: "",
+        description: "",
+        totalAttempts: null,
+        totalQuestions: null,
+      })
+    );
+    dispatch(setTestSelectedTopics([]));
+
+    dispatch(getAllTests());
+  }, []);
 
   const arr = [<Adaptive />, <Beginner />, <Intermediate />, <Advanced />];
 

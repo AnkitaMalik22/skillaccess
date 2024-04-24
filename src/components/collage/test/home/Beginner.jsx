@@ -9,7 +9,7 @@ import "swiper/css";
 import { Bin } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import Card from "./common/Card";
-import { useSelector,useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getAllTests } from "../../../../redux/collage/test/thunks/test";
 
 const Beginner = () => {
@@ -22,15 +22,15 @@ const Beginner = () => {
   // );
   const dispatch = useDispatch();
 
-  const {testLoading} = useSelector((state) => state.test);
+  const { testLoading } = useSelector((state) => state.test);
 
-  React.useEffect(() => {
- if(!testLoading){
-   dispatch(getAllTests())
-  }
-  console.log("testLoading",testLoading)
-  
-  }, [testLoading]);
+  //   React.useEffect(() => {
+  //  if(!testLoading){
+  //    dispatch(getAllTests())
+  //   }
+  //   console.log("testLoading",testLoading)
+
+  //   }, [testLoading]);
 
   const navigate = useNavigate();
   return (
@@ -88,7 +88,8 @@ const Beginner = () => {
         }}
       >
         {testLoading ? (
-        <h1>Loading</h1>)  : (
+          <h1>Loading</h1>
+        ) : (
           beginner?.map((item, index) => (
             <SwiperSlide key={`${item._id}-${index}`} className="w-full">
               <Card
@@ -101,8 +102,7 @@ const Beginner = () => {
               />
             </SwiperSlide>
           ))
-        )
-        }
+        )}
         <SwiperSlide></SwiperSlide>
 
         <span className="absolute top-1/2 right-0 z-20 h-fit w-fit">

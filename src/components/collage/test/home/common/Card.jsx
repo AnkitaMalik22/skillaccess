@@ -2,14 +2,22 @@ import React from "react";
 import { PiPencilSimpleLine } from "react-icons/pi";
 import { Bin } from "../../../../icons";
 import { useNavigate } from "react-router-dom";
-import { useDispatch ,useSelector} from "react-redux";
-import { deleteTest, getAllTests } from "../../../../../redux/collage/test/thunks/test";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteTest,
+  getAllTests,
+} from "../../../../../redux/collage/test/thunks/test";
 
 const Card = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-
+  const deleteHandler = (id) => {
+    dispatch(deleteTest(id)).then((res) => {
+      if (res.meta.requestStatus === "fulfilled") {
+        dispatch(getAllTests());
+      }
+    });
+  };
   return (
     <div className="w-[242px] h-[312px] bg-white my-3 text-start font-bold text-black rounded sm:p-2 p-1 font-dmSans">
       <h2 className="mb-2 line-clamp-2 ">{props.assessment?.name}</h2>
@@ -80,8 +88,7 @@ const Card = (props) => {
           <button
             className="bg-transparent border-none "
             onClick={(e) => {
-            dispatch(deleteTest(props.assessment._id));
-          
+              deleteHandler(props.assessment._id);
             }}
           >
             <Bin className="cursor-pointer " />

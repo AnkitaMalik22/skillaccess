@@ -876,12 +876,10 @@ const testSlice = createSlice({
       .addCase(getAllTopicsQB.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.sections = [];
-      
       })
       .addCase(deleteTopics.pending, (state, action) => {
         state.status = "pending";
-      }
-      )
+      })
       .addCase(deleteTopics.fulfilled, (state, action) => {
         console.log(action.payload);
         state.sections = action.payload;
@@ -895,12 +893,11 @@ const testSlice = createSlice({
       .addCase(deleteTest.pending, (state, action) => {
         state.status = "pending";
         state.testLoading = true;
-      }
-      )
+      })
       .addCase(deleteTest.fulfilled, (state, action) => {
         state.testLoading = false;
         console.log(action.payload);
-        getAllTestFulfilled(state, action);
+        // getAllTestFulfilled(state, action);
 
         toast.success("Test Deleted Successfully!");
       })
@@ -909,8 +906,6 @@ const testSlice = createSlice({
         console.error("Error fetching test results:", action.payload);
         toast.error("Error Deleting Test!");
       });
-
-
   },
 });
 
@@ -941,7 +936,7 @@ export const {
   addVideoToSection,
   addCompilerToTopic,
   setAssessments,
-  setFilteredSections
+  setFilteredSections,
 } = testSlice.actions;
 
 export default testSlice.reducer;
