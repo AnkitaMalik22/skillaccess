@@ -60,11 +60,12 @@ const Topic = () => {
     if (value === "" || value.trim() === "") {
       console.log("empty");
       console.log(filteredSections, "filtered");
-      dispatch(setFilteredSections(sections));
+  dispatch(setFilteredSections(sections));
 
       return;
     } else {
-      dispatch();
+      // dispatch();\
+      dispatch(setFilteredSections(sections.filter((section) => section.Heading.toLowerCase().includes(value.toLowerCase()))));
 
       console.log(filteredSections, "filtered--", value);
     }

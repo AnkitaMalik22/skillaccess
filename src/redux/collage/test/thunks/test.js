@@ -104,3 +104,29 @@ export const createTest = createAsyncThunk(
     }
   }
 );
+
+export const deleteTest = createAsyncThunk(
+  "test/deleteTest",
+  async (id, { rejectWithValue }) => {
+    try {
+      console.log(`get test ${id}`);
+      const req = await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/assessments/${id}`,
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      // console.log(res);
+      return res;
+    } catch (error) {
+      console.log(error);
+
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

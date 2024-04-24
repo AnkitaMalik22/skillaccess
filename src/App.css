@@ -69,3 +69,20 @@ iframe #webpack-dev-server-client-overlay {
 /* iframe{
     display: none;
 } */
+.nav-item {
+  transition: background-color 0.3s, color 0.3s;
+}
+.nav-item:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* CSS for animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
