@@ -53,8 +53,8 @@ const SwiperSlideLeft = () => {
 
       {
         companies.map((company) => (
-          <SwiperSlide>
-          <div className="companies-dash bg-white  w-32 h-36 rounded-lg p-2">
+          <SwiperSlide className="flex ">
+          <div className="companies-dash bg-white  w-[80px] xl:w-[120px]  2xl:w-32 h-36px rounded-lg p-2  ">
             <figure className="bg-green-500 w-full h-24 mx-auto rounded-lg">
               <img
                 src="../intel.png"
@@ -63,8 +63,8 @@ const SwiperSlideLeft = () => {
               /> 
             </figure>
             <span>
-              <h3 className="text-sm text-gray-400 font-semibold text-center break-words h-full">
-                company name
+              <h3 className="text-xs text-gray-400 font-bold text-center break-words h-full">
+                Company Name
               </h3>
             </span>
           </div>

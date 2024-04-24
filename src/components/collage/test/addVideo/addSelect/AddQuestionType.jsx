@@ -75,7 +75,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "mcq" && "border-blued "
+              selectQuestionType === "mcq"?'border-blued':'opacity-70'
             }`}
             onClick={() => setSelectQuestionType("mcq")}
           >
@@ -118,7 +118,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "short" && "border-blued "
+              selectQuestionType === "short"?'border-blued':'opacity-70'
             }`}
             onClick={() => setSelectQuestionType("short")}
           >
@@ -153,7 +153,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "long" && "border-blued "
+              selectQuestionType === "long"?'border-blued':'opacity-70'
             }`}
             onClick={() => setSelectQuestionType("long")}
           >
