@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 const Card = (props) => {
   const navigate = useNavigate();
   return (
-    <div className="w-60 h-64 bg-white my-3 text-start font-bold text-black rounded sm:p-2 p-1 font-dmSans">
+    <div className="w-[242px] h-[312px] bg-white my-3 text-start font-bold text-black rounded sm:p-2 p-1 font-dmSans">
       <h2 className="mb-2 line-clamp-2 ">{props.assessment?.name}</h2>
-      <p className="font-normal text-gray-400  line-clamp-4 sm:mb-2 mb-1 h-1/2">
+      <p className="font-normal text-gray-400 text-xs line-clamp-4 sm:mb-2 mb-1 h-[48%]">
         {props.assessment?.description}
       </p>
-      <h2 className="text-gray-400 font-medium text-base font-dmSans sm:mb-2">
+      <h2 className="text-gray-400  text-xs tracking-[1px] font-dmSans sm:mb-2">
         ATTEMPTS
       </h2>
-       <div className="grid grid-cols-4 w-full px-2 gap-2 mb-4">
+      <div className="grid grid-cols-4 w-full px-2 gap-2 mb-4">
         <div
           className={`${
             props.progress === 1
@@ -23,7 +23,7 @@ const Card = (props) => {
               ? "bg-blue-600"
               : props.progress === 3
               ? "bg-amber-500"
-              : "bg-green-500"
+              : "bg-green-600"
           } w-full h-1 rounded`}
         ></div>
         <div
@@ -34,7 +34,7 @@ const Card = (props) => {
               ? "bg-blue-600"
               : props.progress === 3
               ? "bg-amber-500"
-              : "bg-green-500"
+              : "bg-green-600"
           } w-full h-1 rounded`}
         ></div>
         <div
@@ -44,8 +44,8 @@ const Card = (props) => {
               : props.progress === 2
               ? "bg-gray-200"
               : props.progress === 3
-              ? "bg-amber-500"
-              : "bg-green-500"
+              ? "bg-amber-600"
+              : "bg-green-600"
           } w-full h-1 rounded`}
         ></div>
         <div
@@ -56,9 +56,9 @@ const Card = (props) => {
               ? "bg-gray-200"
               : props.progress === 3
               ? "bg-gray-200"
-              : "bg-green-500"
+              : "bg-green-600"
           } w-full h-1 rounded`}
-        ></div> 
+        ></div>
       </div>
 
       <div className="flex justify-between ">
@@ -66,7 +66,7 @@ const Card = (props) => {
           <div className="w-8 h-8 bg-blue-500  rounded"></div>
           <div className="w-8 h-8 bg-blue-900 rounded -ml-3"></div>
           <div className="w-8 h-8 bg-blue-100 rounded -ml-3"></div>
-          <div className="w-8  rounded  font-dmSans text-gray-400 font-normal self-center ">
+          <div className="w-8  rounded  font-dmSans text-gray-400 font-normal self-center text-xs pl-2">
             +{props.assessment?.totalAttempts}
           </div>
         </div>

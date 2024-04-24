@@ -40,7 +40,7 @@ module.exports = {
         "gray-100": "#F8F8F9",
       },
       fontFamily: {
-        dmSans: ["DM Sans", "sans-serif"],
+        dmSans: ["DM Sans"],
       },
     },
   },
