@@ -162,23 +162,38 @@ const Name = () => {
     duration: "",
   });
 
-    const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value, checked } = e.target;
-
+  
     // Check if the selected time is before the current time and date
     const currentTime = new Date().toISOString().slice(0, 16); // Get current time and date
     if (
       (name === "duration_from" || name === "duration_to") &&
       value < currentTime
     ) {
-      toast.error("Please select a time and date after the current time and date.");
+      toast.error(
+        "Please select a time and date after the current time and date."
+      );
       return; // Prevent updating state if the selected time is before the current time and date
     }
-
-    setTestDetails({
-      ...testDetails,
-      [name]: name === "isNegativeMarking" ? checked : value,
-    });
+  
+    // Check if the entered value is negative
+    if ((name === "totalAttempts" || name === "totalQuestions") && parseFloat(value) < 0) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "Please enter a positive number.",
+      }));
+      return;
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "", // Clear the error message if the value is valid
+      }));
+      setTestDetails({
+        ...testDetails,
+        [name]: name === "isNegativeMarking" ? checked : value,
+      });
+    }
   };
 
   const handleSubmit = () => {

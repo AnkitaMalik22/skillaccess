@@ -47,8 +47,8 @@ const SwiperSlideRight = () => {
       {
         jobs.map((job) => (
           <SwiperSlide>
-          <div className=" bg-white  w-44 h-36 rounded-lg p-3">
-            <figure className="bg-white-500 w-28 h-[60%] mx-auto rounded-lg flex justify-center">
+          <div className=" bg-white  w-28 xl:w-44 h-36 rounded-lg p-3">
+            <figure className="bg-white-500  mx-auto rounded-lg flex justify-center">
               <img
                 src="../intel.png"
                 alt="img not loaded"
@@ -56,10 +56,10 @@ const SwiperSlideRight = () => {
               />
             </figure>
             <span className="">
-              <h3 className="text-xs  font-semibold text-center break-words mb-2">
+              <h3 className="text-xs  font-bold text-center break-words xl:mb-2">
                 Midweight UI/UX Designer
               </h3>
-              <p className="text-xs  font-semibold text-center break-words  ">
+              <p className="text-xs  font-bold text-center break-words  ">
                 Mailchimp{" "}
                 <em className="not-italic text-gray-400">in, London, UK</em>
               </p>

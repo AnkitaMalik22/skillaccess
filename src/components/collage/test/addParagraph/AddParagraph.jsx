@@ -229,7 +229,7 @@ const AddParagraph = () => {
           </div>
 
           <textarea
-            className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0placeholder-gray-400 mb-6"
+            className="resize-none w-full h-[247px] text-lg bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0placeholder-gray-400 mb-6"
             placeholder="Enter Paragraph"
             name="Title"
             onChange={handleChanges}

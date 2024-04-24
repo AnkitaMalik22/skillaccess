@@ -1,5 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
 
+import { PiVideoCamera } from "react-icons/pi";
+
 import { useDropzone } from "react-dropzone";
 
 import { GrUploadOption } from "react-icons/gr";
@@ -276,7 +278,7 @@ const AddVideo = () => {
           <Header />
 
           <div className="flex flex-col items-center justify-center h-full pt-16">
-            {!recording && <p className="text-base font-bold">Upload </p>}
+            {!recording && <p className="text-base font-bold">Upload video </p>}
 
             {!recording && (
               <div
@@ -310,24 +312,32 @@ const AddVideo = () => {
             <div className="flex gap-4 mt-10">
               {!recording && (
                 <button
-                  className="self-center justify-center flex bg-[#0052CC] py-3 px-4 rounded-2xl text-xs gap-2 text-white"
+                  className="self-center justify-center flex items-center bg-[#0052CC] w-[196px] h-[56px] px-4 rounded-2xl text-xs gap-2 text-white"
                   {...getRootProps()}
                 >
-                  <GrUploadOption className="self-center text-lg text-white" />
+                  <GrUploadOption className=" w-[22px] h-[22px] text-white" />
                   Upload
                 </button>
               )}
             </div>
 
-            {!recording && <p className="text-center pt-6">OR</p>}
+            {!recording && 
+              <div className="flex items-center gap-12  pt-6">
+                <hr className="w-[400px] h-[2px]"/>
+                <p className="text-center  text-[#8f92a1] font-medium text-[20px]">Or</p>
+                <hr className="w-[400px] [2px]"/>
+              </div>
+              
+              
+              }
 
             <div className="flex mt-10">
               {!recording && (
                 <button
-                  className="self-center justify-center flex bg-[#0052CC] py-3 px-4 rounded-2xl text-xs gap-2 text-white"
+                  className="self-center justify-center border-2 border-[#0052cc] font-medium flex items-center bg-blue-100 px-4 rounded-2xl text-[20px] gap-2 h-[60px] w-[685px] text-[#0052cc]"
                   onClick={handleStartRecording}
                 >
-                  Record a Video
+                <PiVideoCamera className="h-[40px] w-[40px]" />  Record a Video
                 </button>
               )}
             </div>
