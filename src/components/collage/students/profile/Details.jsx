@@ -45,7 +45,7 @@ const Details = () => {
         </span>
         <span>
           <h2 className="text-gray-400 my-1">ADDRESS</h2>
-          <h2>Bhopal.India</h2>
+          <h2>Bhopal,India</h2>
         </span>
         <span className="text-center">
           <h2 className="text-gray-400 my-1">WEBSITE</h2>

@@ -192,11 +192,9 @@ export default function App() {
             <Route path="" element={<AccountingPage />} />
           </Route> */}
 
-          {isLoggedIn && (
-            <Route path="/collage/profile">
-              <Route path="" element={<ProfilePage />} />
-            </Route>
-          )}
+          <Route path="/collage/profile">
+            <Route path="" element={<ProfilePage />} />
+          </Route>
 
           {/* =============================== student routes ============================== */}
 

@@ -76,9 +76,9 @@ const List = ({ editable, setEditable }) => {
       </div>
 
       {/* legend */}
-      <div className=" grid-cols-4  text-center mt-6 mb-1 mx-auto  font-dmSans font-bold text-base grid">
+      <div className=" grid-cols-4  text-center mt-6 mb-1 mx-auto  font-dmSans font-bold text-base grid ">
         <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg py-2  text-left pl-14">
-          <h2>Data Name</h2>
+          <h2 className="text-base">Data Name</h2>
         </div>
 
         <div className="bg-[#0052CC] bg-opacity-5 p-2">
@@ -98,7 +98,7 @@ const List = ({ editable, setEditable }) => {
           {" "}
           {/* row-2 */}
           <div className={` flex pl-7`}>
-            <div className="flex self-center gap-2 ">
+            <div className="flex self-center gap-2  ">
               {el.icon}
 
               <span className="self-center">
