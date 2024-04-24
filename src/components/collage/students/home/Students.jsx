@@ -134,7 +134,7 @@ const Students = () => {
                       height="50px"
                     />
                   </div>
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base text-start">
                     {student?.FirstName + " " + student?.LastName}
                   </h2>
 

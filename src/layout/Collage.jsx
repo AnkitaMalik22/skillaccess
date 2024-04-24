@@ -418,7 +418,7 @@ const CollageLayout = ({ children }) => {
                         }
                      ${
                        open ? "w-full " : "w-1 sm:w-full"
-                     }   shadow-none text-white rounded-xl border-none  mt-2 focus:outline-none  max-w-xs hover:bg-white hover:text-black mx-auto 
+                     }   shadow-none text-white rounded-xl border-none  mt-2 focus:outline-none  max-w-xs hover:bg-white hover:bg-opacity-50 hover:text-black mx-auto 
                      ${
                        temp === i || selection === i
                          ? "bg-white !text-black"

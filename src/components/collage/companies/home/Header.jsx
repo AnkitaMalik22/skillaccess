@@ -14,7 +14,7 @@ const Header = () => {
       <span className="flex gap-2">
         <button
           className="  self-center object-center  rounded-lg h-10 w-10 "
-          onClick={() => navigate(-1)}
+          // onClick={() => navigate('collage/companies')}
         >
           <img src="../../images/icons/sales.jpg" alt="" />
         </button>

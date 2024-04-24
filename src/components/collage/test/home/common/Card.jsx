@@ -2,9 +2,14 @@ import React from "react";
 import { PiPencilSimpleLine } from "react-icons/pi";
 import { Bin } from "../../../../icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch ,useSelector} from "react-redux";
+import { deleteTest, getAllTests } from "../../../../../redux/collage/test/thunks/test";
 
 const Card = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
   return (
     <div className="w-60 h-64 bg-white my-3 text-start font-bold text-black rounded sm:p-2 p-1 font-dmSans">
       <h2 className="mb-2 line-clamp-2 ">{props.assessment?.name}</h2>
@@ -14,7 +19,7 @@ const Card = (props) => {
       <h2 className="text-gray-400 font-medium text-base font-dmSans sm:mb-2">
         ATTEMPTS
       </h2>
-       <div className="grid grid-cols-4 w-full px-2 gap-2 mb-4">
+      <div className="grid grid-cols-4 w-full px-2 gap-2 mb-4">
         <div
           className={`${
             props.progress === 1
@@ -58,7 +63,7 @@ const Card = (props) => {
               ? "bg-gray-200"
               : "bg-green-500"
           } w-full h-1 rounded`}
-        ></div> 
+        ></div>
       </div>
 
       <div className="flex justify-between ">
@@ -72,9 +77,18 @@ const Card = (props) => {
         </div>
 
         <div className="flex justify-between px-2 gap-3 mt-2">
-          {/* <Bin /> */}
+          <button
+            className="bg-transparent border-none "
+            onClick={(e) => {
+            dispatch(deleteTest(props.assessment._id));
+          
+            }}
+          >
+            <Bin className="cursor-pointer " />
+          </button>
+
           <PiPencilSimpleLine
-            className="w-6 h-5 text-blued"
+            className="w-6 h-5 text-blued cursor-pointer"
             onClick={() => {
               localStorage.setItem(
                 "assessment",

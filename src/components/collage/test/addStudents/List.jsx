@@ -84,10 +84,10 @@ const List = ({ uploadedStudents, setStudents, students }) => {
                   height="50px"
                 />
               </div>
-              <h2 className="font-dmSans font-bold text-sm sm:text-lg self-center ">
+              <h2 className="font-dmSans font-bold text-sm sm:text-lg text-start w-[30%]">
                 {student.FirstName} {student.LastName}
               </h2>
-              <h2 className="font-dmSans  sm:text-lg text-gray-400 ">
+              <h2 className="font-dmSans  sm:text-lg text-gray-400 w-[30%] ">
                 {student.Email}
               </h2>
 
