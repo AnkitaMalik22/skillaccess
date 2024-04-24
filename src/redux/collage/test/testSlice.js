@@ -28,6 +28,7 @@ import {
   getAllTopics,
   getTopicById,
   getAllTopicsQB,
+  deleteTopics,
 } from "./thunks/topic";
 
 import {
@@ -62,9 +63,10 @@ const testState = {
     adaptive: [],
   },
   //all topics
-  sections: [],
+  sections: null,
 
   selectedSections: [],
+  filteredSections: [],
 
   test: {
     testName: "",
@@ -585,6 +587,10 @@ const testSlice = createSlice({
       localStorage.setItem("topics", JSON.stringify(action.payload));
     },
 
+    setFilteredSections: (state, action) => {
+      state.filteredSections = action.payload;
+    },
+
     // =============================== BOOKMARKS START ===============================
 
     // addBookmark: (state, action) => {
@@ -863,11 +869,28 @@ const testSlice = createSlice({
       })
       .addCase(getAllTopicsQB.fulfilled, (state, action) => {
         state.sections = action.payload;
+        state.filteredSections = action.payload;
       })
       .addCase(getAllTopicsQB.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.sections = [];
+      
+      })
+      .addCase(deleteTopics.pending, (state, action) => {
+        state.status = "pending";
+      }
+      )
+      .addCase(deleteTopics.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.sections = action.payload;
+        state.filteredSections = action.payload;
+        toast.success("Topic Deleted Successfully!");
+      })
+      .addCase(deleteTopics.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        toast.error("Error Deleting Topic!");
       });
+
   },
 });
 
@@ -898,6 +921,7 @@ export const {
   addVideoToSection,
   addCompilerToTopic,
   setAssessments,
+  setFilteredSections
 } = testSlice.actions;
 
 export default testSlice.reducer;

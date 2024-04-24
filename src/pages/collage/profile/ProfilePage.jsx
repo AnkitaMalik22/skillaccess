@@ -2,9 +2,11 @@ import React from "react";
 import Profile from "../../../components/collage/profile/home/Profile";
 import CollageLayout from "../../../layout/Collage";
 
+
 const ProfilePage = () => {
+
   React.useEffect(() => {
-   
+
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
     console.log(currentPageLanguage + " " + navigator.language);

@@ -48,7 +48,7 @@ const Header = ({handleAddTeamClick}) => {
       <span className="flex gap-4">
         <button
           className=" self-center ml-2 rounded-lg h-10 w-5"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/collage/teams')}
         >
           <img src="../../images/icons/list.png" alt="" />
         </button>

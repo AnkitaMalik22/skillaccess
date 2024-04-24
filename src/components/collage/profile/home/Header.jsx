@@ -138,7 +138,8 @@ const Header = ({
               className="py-2 text-white rounded-xl  bg-blue-700 font-bold flex gap-2 px-4"
               onClick={() => {
                 localStorage.setItem("editable", true);
-                window.location.reload(true);
+                setEditable(true);
+                // window.location.reload(true);
               }}
             >
               <img src="../../images/icons/pen.png" alt="" />{" "}
