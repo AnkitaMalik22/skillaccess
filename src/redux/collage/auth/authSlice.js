@@ -60,6 +60,7 @@ const collageState = {
   LOGIN_LOADING: false,
   USER_LOADING: false,
   dummyUser: null,
+  credit : {}
 };
 
 export const deleteMail = createAsyncThunk(
@@ -378,7 +379,7 @@ export const getCollege = createAsyncThunk(
         },
       });
 
-      return response.data.college;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -736,7 +737,9 @@ const collageAuthSlice = createSlice({
       })
       .addCase(getCollege.fulfilled, (state, action) => {
         state.isLoggedIn = true;
-        state.user = action.payload;
+        state.user = action.payload.college;
+        state.credit =action.payload.credit
+        localStorage.setItem("userId" , action.payload.college._id)
 
         // Add any fetched posts to the array
         console.log("fullfilled get college");

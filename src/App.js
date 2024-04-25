@@ -66,6 +66,7 @@ import { getStudent } from "./redux/student/auth/studentAuthSlice";
 import NotAuth from "./components/PopUps/NotAuth";
 import PopUpAdaptive from "./components/PopUps/PopUpAdaptive";
 import AccountRoute from "./pages/collage/accounting/AccountRoutes";
+import { getCreditDetails } from "./redux/collage/dummySlice";
 
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
@@ -144,9 +145,16 @@ export default function App() {
   //   // };
   // }, []);
 
+
+
+
+
+
+
   return (
     <React.Fragment>
       {/* <PopUpAdaptive/> */}
+    
       <Suspense fallback={<Loader />}>
         <Routes>
           {/* ------------------------------------- student --------------------------------------------------- */}
@@ -210,6 +218,7 @@ export default function App() {
           {/* .......................................................................................................................... */}
         </Routes>
       </Suspense>
+      
     </React.Fragment>
   );
 }

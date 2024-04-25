@@ -31,7 +31,9 @@ const Header = ({
   const ques = searchParams.get("question");
   const level = searchParams.get("level");
 
-  const { currentTopic } = useSelector((state) => state.test);
+  const { currentTopic, currentQuestionCount, totalQuestions } = useSelector(
+    (state) => state.test
+  );
   const handleFile = (e) => {
     setVisible(true);
     const types = [
@@ -108,7 +110,7 @@ const Header = ({
 
               headers.forEach((header) => {
                 if (
-                  !["Title", "Duration", "option", "AnswerIndex"].includes(
+                  !["Title", "Duration", "option", "AnswerIndex","QuestionLevel"].includes(
                     header
                   )
                 ) {
@@ -117,10 +119,11 @@ const Header = ({
                   return;
                 }
               });
+console.log("count",count)
 
-              if (count !== 7) {
+              if (count !== 8) {
                 setLoading(false);
-                toast.error("invalid no. of fields");
+                toast.error("invalid no. of fields",count);
                 return;
               }
               for (let colNum = range.s.c; colNum <= count; colNum++) {
@@ -136,7 +139,7 @@ const Header = ({
                       header.v !== "option" &&
                       header.v !== "AnswerIndex" &&
                       header.v !== "Duration" &&
-                      header.v !== "Title"
+                      header.v !== "Title" && header.v !== "QuestionLevel"
                     ) {
                       toast.error("Invalid Headers");
                       setLoading(false);
@@ -162,7 +165,8 @@ const Header = ({
                     } else if (
                       header.v === "AnswerIndex" ||
                       header.v === "Duration" ||
-                      header.v === "Title"
+                      header.v === "Title" ||
+                      header.v === "QuestionLevel"
                     ) {
                       if (header.v === "AnswerIndex") {
                         if (row) {
@@ -297,13 +301,13 @@ const Header = ({
                 }
               }
 
-              if (count > 5) {
+              if (count > 6) {
                 setLoading(false);
                 toast.error("invalid no. of fields");
                 return;
               }
               headers.forEach((header) => {
-                if (!["Title", "Duration", "question"].includes(header)) {
+                if (!["Title", "Duration", "question","QuestionLevel"].includes(header)) {
                   setLoading(false);
 
                   toast.error(header + " is incorrect");
@@ -331,7 +335,7 @@ const Header = ({
                     if (
                       header.v !== "question" &&
                       header.v !== "Duration" &&
-                      header.v !== "Title"
+                      header.v !== "Title" && header.v !=="QuestionLevel"
                     ) {
                       setLoading(false);
                       setError(true);
@@ -348,7 +352,8 @@ const Header = ({
                       }
                     } else if (
                       header.v === "Duration" ||
-                      header.v === "Title"
+                      header.v === "Title" ||
+                      header.v === "QuestionLevel"
                     ) {
                       if (header.v === "Duration") {
                         if (row) {
@@ -456,7 +461,7 @@ const Header = ({
               }
 
               if (
-                !["Title", "Duration"].every((header) =>
+                !["Title", "Duration","QuestionLevel"].every((header) =>
                   headers.includes(header)
                 )
               ) {
@@ -472,7 +477,7 @@ const Header = ({
                   let header =
                     worksheet[XLSX.utils.encode_cell({ r: 0, c: colNum })];
 
-                  if (header.v !== "Duration" && header.v !== "Title") {
+                  if (header.v !== "Duration" && header.v !== "Title" && header.v !== "QuestionLevel") {
                     setLoading(false);
                     toast.error("invalid header");
                     return;
@@ -521,6 +526,38 @@ const Header = ({
       window.location.reload(true);
     }
   };
+
+  const handleNav = () => {
+    if (type === "section") {
+      if (currentQuestionCount > totalQuestions) {
+        toast.error("too many questions");
+      } else {
+        navigate(
+          `/collage/test/${
+            qt === "mcq"
+              ? "addMcq"
+              : qt === "findAnswer"
+              ? "find-ans"
+              : qt === "compiler"
+              ? "code"
+              : qt === "essay"
+              ? "essay"
+              : qt === "video"
+              ? "video"
+              : "addMcq"
+          }/${id}?addType=test&topicId=${topicId}&level=${level}`
+        );
+      }
+    } else {
+      if (level === "adaptive") {
+        navigate(
+          `/collage/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
+        );
+      } else {
+        navigate(`/collage/test/typeOfQuestions/${sectionId}?level=${level}`);
+      }
+    }
+  };
   return (
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       {visible && (
@@ -538,10 +575,13 @@ const Header = ({
         <button className="flex self-center  rounded-lg  gap-2">
           <button
             onClick={() => {
-              type === "section" && ( navigate(`/collage/test/questions?level=${level}`));
-              type === "topic" && (level=== 'adaptive' ? navigate(`/collage/test/selectAdaptive?level=${level}`) : navigate(`/collage/test/select?level=${level}`));
+              type === "section" &&
+                navigate(`/collage/test/questions?level=${level}`);
+              type === "topic" &&
+                (level === "adaptive"
+                  ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+                  : navigate(`/collage/test/select?level=${level}`));
               type === "assessment" && navigate(-1);
-              
             }}
             className="mt-2 mr-3"
           >
@@ -561,30 +601,7 @@ const Header = ({
           <div className=" flex gap-2">
             <button
               className="self-center justify-center flex bg-[#F8F8F9] py-3  rounded-xl w-32  gap-2 "
-              onClick={() =>
-                type === "section"
-                  ? navigate(
-                      `/collage/test/${
-                        qt === "mcq"
-                          ? "addMcq"
-                          : qt === "findAnswer"
-                          ? "find-ans"
-                          : qt === "compiler"
-                          ? "code"
-                          : qt === "essay"
-                          ? "essay"
-                          : qt === "video"
-                          ? "video"
-                          : "addMcq"
-                      }/${id}?addType=test&topicId=${topicId}&level=${level}`
-                      
-                    )
-                  : level==="adaptive" ?navigate(
-                    `/collage/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
-                  ):navigate(
-                      `/collage/test/typeOfQuestions/${sectionId}?level=${level}`
-                    )
-              }
+              onClick={handleNav}
             >
               <FiPlus className="self-center text-lg " /> Add
             </button>

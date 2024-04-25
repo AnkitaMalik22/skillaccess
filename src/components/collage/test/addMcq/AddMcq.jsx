@@ -27,11 +27,11 @@ const AddMcq = () => {
 
   const section = search.get("topicId");
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   const level = searchParams.get("level");
   console.log(section);
   const [question, setQuestion] = useState({
-    QuestionLevel:  (level==="adaptive"?'beginner':level),
+    QuestionLevel: level === "adaptive" ? "beginner" : level,
     id: search.get("topicId") + Date.now(),
     section: search.get("topicId"),
     Duration: 0,
@@ -162,7 +162,7 @@ const AddMcq = () => {
         );
         setIsPrev(false);
         setQuestion({
-          QuestionLevel:  (level==="adaptive"?'beginner':level),
+          QuestionLevel: level === "adaptive" ? "beginner" : level,
           id: search.get("topicId") + Date.now(),
           Title: "",
           Options: [],
@@ -175,7 +175,7 @@ const AddMcq = () => {
       } else {
         dispatch(addMcq({ question: question, id: id, prev: false }));
         setQuestion({
-          QuestionLevel:  (level==="adaptive"?'beginner':level),
+          QuestionLevel: level === "adaptive" ? "beginner" : level,
           id: search.get("topicId") + Date.now(),
           Title: "",
           Options: [],
@@ -203,13 +203,15 @@ const AddMcq = () => {
       <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
         <div className="flex flex-wrap gap-2 sm:w-[95.7%] mx-auto ">
           <span className="w-[49%] ">
-            <h2 className="font-bold">Question</h2>
+            <h2 className="font-bold mb-2">Question</h2>
             <select
               name="Duration"
               onChange={handleChanges}
               value={question.Duration}
               id=""
-              className={`${level==='adaptive'?'w-1/2':'w-full'} rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
+              className={`${
+                level === "adaptive" ? "w-1/2" : "w-full"
+              } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
             >
               <option value={0}>Time to answer the question</option>
 
@@ -218,21 +220,21 @@ const AddMcq = () => {
               <option value={3}>3 minutes</option>
               <option value={4}>4 minutes</option>
             </select>
-            {level==='adaptive' && <select
-              name="Level"
-              // onChange={handleChanges}
-              // value={question.Duration}
-              id=""
-              className="w-1/2 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
-            >
-              <option value=''>Level</option>
+            {level === "adaptive" && (
+              <select
+                name="Level"
+                // onChange={handleChanges}
+                // value={question.Duration}
+                id=""
+                className="w-1/2 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              >
+                <option value="">Level</option>
 
-              <option value={'beginner'}>Beginner</option>
-              <option value={'intermediate'}>Intermediate</option>
-              <option value={'advanced'}>Advanced</option>
-              
-            </select>
-}
+                <option value={"beginner"}>Beginner</option>
+                <option value={"intermediate"}>Intermediate</option>
+                <option value={"advanced"}>Advanced</option>
+              </select>
+            )}
             <ReactQuill
               value={question.Title}
               onChange={(value) =>
@@ -247,7 +249,7 @@ const AddMcq = () => {
             />
           </span>
           <span className="w-[49%]">
-            <h2 className="font-bold">Test Description</h2>
+            <h2 className="font-bold mb-2">Test description</h2>
             <div className="w-11/12 flex flex-col gap-2">
               <div className="px-5 pb-4 flex flex-col gap-4">
                 {/* mcq option wrapper */}

@@ -15,6 +15,7 @@ import { FaPlus } from "react-icons/fa";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import {
+  setCurrentQuestionCount,
   setCurrentTopic,
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
@@ -26,12 +27,16 @@ const SelectTests = () => {
   const [visible, setVisible] = useState(false);
   const [section, setSection] = useState({});
   const [totalQ, setTotalQ] = useState(0);
-
+  // const [totalQuestions, setTotalQuestions] = useState(
+  //   parseInt(JSON.parse(localStorage.getItem("currentTotal")) || "0")
+  // );
   const Navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const { sections } = useSelector((state) => state.test);
+  const { sections, currentQuestionCount, totalQuestions } = useSelector(
+    (state) => state.test
+  );
   // for filter the sections
 
   const [filteredSections, setFilteredSections] = useState(sections);
@@ -65,7 +70,20 @@ const SelectTests = () => {
   const [selectedSections, setSelectedSections] = useState(topics);
 
   const addSection = (section) => {
-    console.log(section, "section");
+    // setTotalQuestions((prev) => {
+    //   return prev + totalQ;
+    // });
+
+    // localStorage.setItem("currentTotal", totalQuestions);
+    // console.log(section, "section");
+
+    // console.log(currentQuestionCount + parseInt(totalQ));
+
+    if (currentQuestionCount > totalQuestions) {
+      toast.error("too many questions");
+      return;
+    }
+
     if (!questionType) {
       toast.error("Please select a question type first.");
       return;
@@ -135,8 +153,16 @@ const SelectTests = () => {
       sectionCopy.questions = mixedQuestions.slice(0, totalQ);
 
       // console.log(sectionCopy);
-
-      setSelectedSections([...selectedSections, sectionCopy]);
+      if (mixedQuestions.length < totalQ) {
+        toast.error("insufficient number of questions");
+        return;
+      } else {
+        dispatch(
+          setCurrentQuestionCount(currentQuestionCount + parseInt(totalQ))
+        );
+        setSelectedSections([...selectedSections, sectionCopy]);
+        dispatch(setTestSelectedTopics(selectedSections));
+      }
 
       //   dispatch(
 
@@ -147,8 +173,6 @@ const SelectTests = () => {
       //     })
 
       //   );
-
-      dispatch(setTestSelectedTopics(selectedSections));
     }
 
     // dispatch(setSections(sections.filter((s) => s !== section)));
@@ -159,6 +183,11 @@ const SelectTests = () => {
   const removeSection = (section, index) => {
     const updatedSections = [...selectedSections];
 
+    dispatch(
+      setCurrentQuestionCount(
+        currentQuestionCount - selectedSections[index].questions.length
+      )
+    );
     updatedSections.splice(index, 1);
 
     setSelectedSections(updatedSections);
@@ -199,7 +228,11 @@ const SelectTests = () => {
   }, [addSection, removeSection, selectedSections]);
 
   return (
-    <div className={`font-dmSans text-sm font-bold ${visible ? 'h-screen overflow-hidden' : ''}`}>
+    <div
+      className={`font-dmSans text-sm font-bold ${
+        visible ? "h-screen overflow-hidden" : ""
+      }`}
+    >
       {visible && (
         <PopUpAdaptive
           visible={visible}
@@ -209,7 +242,10 @@ const SelectTests = () => {
           }}
           addSection={addSection}
           section={section}
+          totalQ={totalQ}
           setTotalQ={setTotalQ}
+          // setTotalQuestions={setTotalQuestions}
+          // totalQuestions={totalQuestions}
         />
       )}
 

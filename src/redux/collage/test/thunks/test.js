@@ -97,7 +97,6 @@ export const createTest = createAsyncThunk(
         }
       );
       const res = req.data;
-
       return res.assessment;
     } catch (error) {
       console.log("catch");

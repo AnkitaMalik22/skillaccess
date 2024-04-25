@@ -49,13 +49,13 @@ body {
 .goog-te-gadget .goog-te-combo {
   margin: 4px 0;
   font-weight: bold;
-  font-family: DM Sans, sans-serif;
+  font-family: DM Sans;
   font-style: italic;
   color: #161616;
   font-size: 0.9rem;
 }
 
- iframe {
+iframe {
   display: none;
 }
 

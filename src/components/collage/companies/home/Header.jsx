@@ -49,8 +49,8 @@ const Header = () => {
         >
           <FiUpload className="self-center text-lg " /> Upload New
         </button>
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
-          <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
+        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
+          <img src="../../images/icons/Filter.png" className="w-7 h-7" />
         </button>
       </span>
     </div>

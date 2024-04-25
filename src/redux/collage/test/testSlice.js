@@ -107,6 +107,9 @@ const testState = {
   totalQuestions: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).totalQuestions
     : null,
+  currentQuestionCount: localStorage.getItem("currentQuestionCount")
+    ? JSON.parse(localStorage.getItem("currentQuestionCount"))
+    : null,
   duration_from: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).duration_from
     : "",
@@ -208,7 +211,11 @@ const testSlice = createSlice({
     setTotalSelectedQuestions: (state, action) => {
       state.totalSelectedQuestions = parseInt(action.payload);
     },
-
+    setCurrentQuestionCount: (state, action) => {
+      console.log(action.payload, "pay");
+      localStorage.setItem("currentQuestionCount", action.payload);
+      state.currentQuestionCount = action.payload;
+    },
     setCurrentTopic: (state, action) => {
       state.currentTopic = action.payload.topic;
       localStorage.setItem("currentTopic", JSON.stringify(state.currentTopic));
@@ -695,11 +702,14 @@ const testSlice = createSlice({
         state.currentTopic = {};
 
         console.log("fullfilled");
+      
+
 
         getAllTests();
       })
       .addCase(createTest.rejected, (state, action) => {
         // console.log(action.payload);
+        toast.error(action.payload)
         console.log(action.payload);
 
         // window.alert(action.payload);
@@ -876,12 +886,10 @@ const testSlice = createSlice({
       .addCase(getAllTopicsQB.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.sections = [];
-      
       })
       .addCase(deleteTopics.pending, (state, action) => {
         state.status = "pending";
-      }
-      )
+      })
       .addCase(deleteTopics.fulfilled, (state, action) => {
         console.log(action.payload);
         state.sections = action.payload;
@@ -895,14 +903,11 @@ const testSlice = createSlice({
       .addCase(deleteTest.pending, (state, action) => {
         state.status = "pending";
         state.testLoading = true;
-      }
-      )
+      })
       .addCase(deleteTest.fulfilled, (state, action) => {
         state.testLoading = false;
         console.log(action.payload);
-        
-        getAllTestFulfilled(state, action);
-
+        // getAllTestFulfilled(state, action);
         toast.success("Test Deleted Successfully!");
       })
       .addCase(deleteTest.rejected, (state, action) => {
@@ -910,12 +915,11 @@ const testSlice = createSlice({
         console.error("Error fetching test results:", action.payload);
         toast.error("Error Deleting Test!");
       });
-
-
   },
 });
 
 export const {
+  setCurrentQuestionCount,
   setTotalSelectedQuestions,
   setCurrentTopic,
   clearTopicToBeAdded,
@@ -942,7 +946,7 @@ export const {
   addVideoToSection,
   addCompilerToTopic,
   setAssessments,
-  setFilteredSections
+  setFilteredSections,
 } = testSlice.actions;
 
 export default testSlice.reducer;

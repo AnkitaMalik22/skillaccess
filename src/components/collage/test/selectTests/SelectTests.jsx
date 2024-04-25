@@ -14,25 +14,32 @@ import { FaPlus } from "react-icons/fa";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
+  setCurrentQuestionCount,
   setCurrentTopic,
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
 import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
+import PopUpAdaptive from "../../../PopUps/PopUpAdaptive";
 
 const SelectTests = () => {
+  const [visible, setVisible] = useState(false);
+  const [totalQ, setTotalQ] = useState(0);
+  const [qType, setQType] = useState("questions");
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");
   const [questionType, setQuestionType] = useState("");
+  const [section, setSection] = useState({});
 
   const Navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const { sections } = useSelector((state) => state.test);
+  const { sections, currentQuestionCount, totalQuestions } = useSelector(
+    (state) => state.test
+  );
   // for filter the sections
 
   const [filteredSections, setFilteredSections] = useState(sections);
-  
 
   const handleFilterSections = (e) => {
     const value = e.target.value;
@@ -61,6 +68,10 @@ const SelectTests = () => {
   const [selectedSections, setSelectedSections] = useState(topics);
 
   const addSection = (section) => {
+    if (currentQuestionCount > totalQuestions) {
+      toast.error("too many questions");
+      return;
+    }
     if (!questionType) {
       toast.error("Please select a question type first.");
       return;
@@ -85,10 +96,49 @@ const SelectTests = () => {
       let sectionCopy = { ...section, Type: questionType };
 
       // sectionCopy[Type] ="mcq";
+      // console.log(section);
+      // console.log(sectionCopy);
+      switch (questionType) {
+        case "mcq":
+          setQType("questions");
+          break;
+        case "essay":
+          setQType("essay");
+          break;
+        case "findAnswer":
+          setQType("findAnswers");
+          break;
+        case "video":
+          setQType("video");
+          break;
+        case "compiler":
+          setQType("compiler");
+          break;
+        default:
+          break;
+      }
+      const shuffleArray = (array) => {
+        let arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          // for (let i = totalQ; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      };
 
-      console.log(sectionCopy);
-
-      setSelectedSections([...selectedSections, sectionCopy]);
+      if (sectionCopy[qType]?.length < totalQ) {
+        toast.error("insufficient number of questions");
+        return;
+      } else {
+        sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(0, totalQ);
+        dispatch(
+          setCurrentQuestionCount(currentQuestionCount + parseInt(totalQ))
+        );
+        setSelectedSections([...selectedSections, sectionCopy]);
+        dispatch(setTestSelectedTopics(selectedSections));
+      }
+      // setSelectedSections([...selectedSections, sectionCopy]);
 
       //   dispatch(
 
@@ -100,7 +150,7 @@ const SelectTests = () => {
 
       //   );
 
-      dispatch(setTestSelectedTopics(selectedSections));
+      // dispatch(setTestSelectedTopics(selectedSections));
     }
 
     // dispatch(setSections(sections.filter((s) => s !== section)));
@@ -109,6 +159,27 @@ const SelectTests = () => {
   };
 
   const removeSection = (section, index) => {
+    let Qt;
+    console.log(selectedSections[index].Type);
+    switch (selectedSections[index].Type) {
+      case "mcq":
+        Qt = "questions";
+        break;
+      case "essay":
+        Qt = "essay";
+        break;
+      case "findAnswer":
+        Qt = "findAnswers";
+        break;
+      case "video":
+        Qt = "video";
+        break;
+      case "compiler":
+        Qt = "compiler";
+        break;
+      default:
+        break;
+    }
     const updatedSections = [...selectedSections];
 
     updatedSections.splice(index, 1);
@@ -116,6 +187,11 @@ const SelectTests = () => {
     setSelectedSections(updatedSections);
 
     dispatch(setTestSelectedTopics(updatedSections));
+    dispatch(
+      setCurrentQuestionCount(
+        currentQuestionCount - selectedSections[index][Qt].length
+      )
+    );
   };
 
   useEffect(() => {
@@ -148,6 +224,21 @@ const SelectTests = () => {
 
   return (
     <div className="font-dmSans text-sm font-bold">
+      {visible && (
+        <PopUpAdaptive
+          section={section}
+          visible={visible}
+          handleSave={addSection}
+          handleOverlay={() => {
+            setVisible(false);
+          }}
+          addSection={addSection}
+          totalQ={totalQ}
+          setTotalQ={setTotalQ}
+          // setTotalQuestions={setTotalQuestions}
+          // totalQuestions={totalQuestions}
+        />
+      )}
       <Header />
 
       <div className="w-4/5 mx-auto">
@@ -373,7 +464,11 @@ const SelectTests = () => {
 
                     <button
                       className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white "
-                      onClick={() => addSection(section)}
+                      onClick={() => {
+                        // console.log(section);
+                        setSection(section);
+                        setVisible(true);
+                      }}
                     >
                       Add
                     </button>

@@ -25,7 +25,7 @@ const AddMcqToTopic = () => {
   const type = searchParams.get("type");
   const level = searchParams.get("level");
   const [question, setQuestion] = useState({
-    QuestionLevel:  (level==="adaptive"?'beginner':level),
+    QuestionLevel: level === "adaptive" ? "beginner" : level,
     Duration: 0,
     id: id + Date.now(),
     Title: "",
@@ -166,7 +166,7 @@ const AddMcqToTopic = () => {
           })
         );
         setQuestion({
-          QuestionLevel: (level==="adaptive"?'beginner':level),
+          QuestionLevel: level === "adaptive" ? "beginner" : level,
           Title: "",
           Options: [],
           id: id + Date.now(),
@@ -177,7 +177,7 @@ const AddMcqToTopic = () => {
         setCountDetail(currentTopic.questions.length - 1);
         dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
         setQuestion({
-          QuestionLevel: (level==="adaptive"?'beginner':level),
+          QuestionLevel: level === "adaptive" ? "beginner" : level,
           Title: "",
           Options: [],
           id: id + Date.now(),
@@ -207,13 +207,15 @@ const AddMcqToTopic = () => {
       <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
         <div className="flex flex-wrap gap-2 sm:w-[95.7%] mx-auto ">
           <span className="w-[49%] ">
-            <h2 className="font-bold">Question</h2>
+            <h2 className="font-bold mb-2">Question</h2>
             <select
               name="Duration"
               onChange={handleChanges}
               value={question.Duration}
               id=""
-              className={`${level==='adaptive'?'w-1/2':'w-full'} rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
+              className={`${
+                level === "adaptive" ? "w-1/2" : "w-full"
+              } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
             >
               <option value={0}>Time to answer the question</option>
 
@@ -222,20 +224,20 @@ const AddMcqToTopic = () => {
               <option value={3}>3 minutes</option>
               <option value={4}>4 minutes</option>
             </select>
-            {level==='adaptive' && <select
-              name="QuestionLevel"
-              onChange={handleChanges}
-              value={question.QuestionLevel}
-              className="w-1/2 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
-            >
-              <option value=''>Level</option>
+            {level === "adaptive" && (
+              <select
+                name="QuestionLevel"
+                onChange={handleChanges}
+                value={question.QuestionLevel}
+                className="w-1/2 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              >
+                <option value="">Level</option>
 
-              <option value={'beginner'}>Beginner</option>
-              <option value={'intermediate'}>Intermediate</option>
-              <option value={'advanced'}>Advanced</option>
-              
-            </select>
-            }
+                <option value={"beginner"}>Beginner</option>
+                <option value={"intermediate"}>Intermediate</option>
+                <option value={"advanced"}>Advanced</option>
+              </select>
+            )}
 
             <ReactQuill
               value={question.Title}
@@ -251,7 +253,7 @@ const AddMcqToTopic = () => {
             />
           </span>
           <span className="w-[49%]">
-            <h2 className="font-bold">Test Description</h2>
+            <h2 className="font-bold mb-2">Test description</h2>
             <div className="w-11/12 flex flex-col gap-2">
               <div className="px-5 pb-4 flex flex-col gap-4">
                 {/* mcq option wrapper */}

@@ -13,6 +13,7 @@ import studentAuthReducer from "./student/auth/studentAuthSlice.js";
 import collegeStudentsReducer from "./collage/student/studentSlice.js";
 import paymentReducer from "./collage/account/paymentSlice.js";
 import inboxSlice from "./collage/Inbox/inboxSlice.js";
+import dummySlice from "./collage/dummySlice.js";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
     company : companyReducer,
     teamCollege : teamCollegeReducer,
     inbox:inboxSlice,
+    dummy :dummySlice,
     // ----------------- STUDENT -----------------
     studentSide :studentSideReducer,
     studentAuth : studentAuthReducer,

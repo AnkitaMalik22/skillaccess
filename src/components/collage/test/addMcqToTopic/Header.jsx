@@ -3,6 +3,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
 import toast from "react-hot-toast";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
@@ -11,6 +12,9 @@ const Header = ({ question, setQuestion, id, type }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { test } = useSelector((state) => state.test);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const level = searchParams.get("level");
 
   const handleSave = () => {
     if (
@@ -37,7 +41,10 @@ const Header = ({ question, setQuestion, id, type }) => {
     } else {
       dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
       setQuestion({ Title: "", Options: [], Duration: 0, AnswerIndex: null });
-      navigate(-1);
+
+      level === "adaptive"
+        ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+        : navigate(`/collage/test/select?level=${level}`);
     }
 
     // api call to push questions to topic
@@ -50,7 +57,11 @@ const Header = ({ question, setQuestion, id, type }) => {
       <div className="h-fit self-center">
         <button className="flex self-center ml-2 rounded-lg  gap-2">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() =>
+              level === "adaptive"
+                ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+                : navigate(`/collage/test/select?level=${level}`)
+            }
             className=" mr-3 self-center bg-white rounded-lg "
           >
             <FaChevronLeft className=" p-3  h-10 w-10 self-center " />
@@ -68,7 +79,11 @@ const Header = ({ question, setQuestion, id, type }) => {
         <div className=" flex gap-2">
           <button
             className="self-center w-24  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white"
-            onClick={() => navigate(-1)}
+            onClick={() =>
+              level === "adaptive"
+                ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+                : navigate(`/collage/test/select?level=${level}`)
+            }
           >
             Cancel
           </button>
