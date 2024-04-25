@@ -5,6 +5,7 @@ import CollageLayout from "../../../layout/Collage";
 
 const ProfilePage = () => {
 
+
   React.useEffect(() => {
 
     let scriptLoaded = false;
@@ -53,6 +54,7 @@ if(navigator.language !== navigator.currentPageLanguage) {
 }, []);
   return (
     <CollageLayout>
+
       <Profile />
     </CollageLayout>
   );

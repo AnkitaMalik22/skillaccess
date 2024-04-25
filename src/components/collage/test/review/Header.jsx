@@ -31,7 +31,9 @@ const Header = ({
   const ques = searchParams.get("question");
   const level = searchParams.get("level");
 
-  const { currentTopic } = useSelector((state) => state.test);
+  const { currentTopic, currentQuestionCount, totalQuestions } = useSelector(
+    (state) => state.test
+  );
   const handleFile = (e) => {
     setVisible(true);
     const types = [
@@ -524,6 +526,38 @@ console.log("count",count)
       window.location.reload(true);
     }
   };
+
+  const handleNav = () => {
+    if (type === "section") {
+      if (currentQuestionCount > totalQuestions) {
+        toast.error("too many questions");
+      } else {
+        navigate(
+          `/collage/test/${
+            qt === "mcq"
+              ? "addMcq"
+              : qt === "findAnswer"
+              ? "find-ans"
+              : qt === "compiler"
+              ? "code"
+              : qt === "essay"
+              ? "essay"
+              : qt === "video"
+              ? "video"
+              : "addMcq"
+          }/${id}?addType=test&topicId=${topicId}&level=${level}`
+        );
+      }
+    } else {
+      if (level === "adaptive") {
+        navigate(
+          `/collage/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
+        );
+      } else {
+        navigate(`/collage/test/typeOfQuestions/${sectionId}?level=${level}`);
+      }
+    }
+  };
   return (
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       {visible && (
@@ -541,10 +575,13 @@ console.log("count",count)
         <button className="flex self-center  rounded-lg  gap-2">
           <button
             onClick={() => {
-              type === "section" && ( navigate(`/collage/test/questions?level=${level}`));
-              type === "topic" && (level=== 'adaptive' ? navigate(`/collage/test/selectAdaptive?level=${level}`) : navigate(`/collage/test/select?level=${level}`));
+              type === "section" &&
+                navigate(`/collage/test/questions?level=${level}`);
+              type === "topic" &&
+                (level === "adaptive"
+                  ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+                  : navigate(`/collage/test/select?level=${level}`));
               type === "assessment" && navigate(-1);
-              
             }}
             className="mt-2 mr-3"
           >
@@ -564,30 +601,7 @@ console.log("count",count)
           <div className=" flex gap-2">
             <button
               className="self-center justify-center flex bg-[#F8F8F9] py-3  rounded-xl w-32  gap-2 "
-              onClick={() =>
-                type === "section"
-                  ? navigate(
-                      `/collage/test/${
-                        qt === "mcq"
-                          ? "addMcq"
-                          : qt === "findAnswer"
-                          ? "find-ans"
-                          : qt === "compiler"
-                          ? "code"
-                          : qt === "essay"
-                          ? "essay"
-                          : qt === "video"
-                          ? "video"
-                          : "addMcq"
-                      }/${id}?addType=test&topicId=${topicId}&level=${level}`
-                      
-                    )
-                  : level==="adaptive" ?navigate(
-                    `/collage/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
-                  ):navigate(
-                      `/collage/test/typeOfQuestions/${sectionId}?level=${level}`
-                    )
-              }
+              onClick={handleNav}
             >
               <FiPlus className="self-center text-lg " /> Add
             </button>

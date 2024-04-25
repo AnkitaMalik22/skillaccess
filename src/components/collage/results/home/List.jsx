@@ -39,10 +39,10 @@ const List = () => {
     }
   };
   return (
-    <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 p-4">
+    <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 rounded-2xl p-8">
       {/* legend */}
       <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid">
-        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg p-2 ">
+        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-2xl p-2 ">
           <h2>Test Name</h2>
         </div>
         <div className="bg-[#0052CC] bg-opacity-5 p-2">
@@ -54,16 +54,14 @@ const List = () => {
         <div className="bg-[#0052CC]  bg-opacity-5 p-2">
           <h2>Overall Performance</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2 rounded-e-lg">
+        <div className="bg-[#0052CC] bg-opacity-5 p-2 rounded-e-2xl">
           <h2>Details</h2>
         </div>
       </div>
 
       {/* list to be iterated */}
       {arr.map((assessment) => (
-
-        <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
-
+        <div className=" grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
           {" "}
           {/* row-2 */}
           <div className={` flex justify-center `}>
@@ -101,11 +99,8 @@ const List = () => {
               <span className="flex gap-2">
                 <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                   <div
-                    className={`h-full rounded-lg ${getProgressBarColor(
-                      20
-                    )}`}
-                    style={{ width:20}}
-
+                    className={`h-full rounded-lg ${getProgressBarColor(20)}`}
+                    style={{ width: 20 }}
                   ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
@@ -115,10 +110,8 @@ const List = () => {
                 </h2>
               </span>
             </div>
-
-          </div> 
+          </div>
           <div className="flexjustify-center mr-3">
-
             <span
               className="self-center hover:cursor-pointer "
               onClick={() =>

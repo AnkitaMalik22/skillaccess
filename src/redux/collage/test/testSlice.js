@@ -107,6 +107,9 @@ const testState = {
   totalQuestions: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).totalQuestions
     : null,
+  currentQuestionCount: localStorage.getItem("currentQuestionCount")
+    ? JSON.parse(localStorage.getItem("currentQuestionCount"))
+    : null,
   duration_from: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).duration_from
     : "",
@@ -208,7 +211,11 @@ const testSlice = createSlice({
     setTotalSelectedQuestions: (state, action) => {
       state.totalSelectedQuestions = parseInt(action.payload);
     },
-
+    setCurrentQuestionCount: (state, action) => {
+      console.log(action.payload, "pay");
+      localStorage.setItem("currentQuestionCount", action.payload);
+      state.currentQuestionCount = action.payload;
+    },
     setCurrentTopic: (state, action) => {
       state.currentTopic = action.payload.topic;
       localStorage.setItem("currentTopic", JSON.stringify(state.currentTopic));
@@ -695,11 +702,14 @@ const testSlice = createSlice({
         state.currentTopic = {};
 
         console.log("fullfilled");
+      
+
 
         getAllTests();
       })
       .addCase(createTest.rejected, (state, action) => {
         // console.log(action.payload);
+        toast.error(action.payload)
         console.log(action.payload);
 
         // window.alert(action.payload);
@@ -910,6 +920,7 @@ const testSlice = createSlice({
 });
 
 export const {
+  setCurrentQuestionCount,
   setTotalSelectedQuestions,
   setCurrentTopic,
   clearTopicToBeAdded,
