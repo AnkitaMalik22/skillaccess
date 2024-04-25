@@ -84,9 +84,9 @@ const Card = (props) => {
           </div>
         </div>
 
-        <div className="flex justify-between px-2 gap-3 mt-2">
+        <div className="flex justify-between px-2 gap-3 mt-2 self-center">
           <button
-            className="bg-transparent border-none "
+            className="bg-transparent border-none self-center "
             onClick={(e) => {
               deleteHandler(props.assessment._id);
             }}
