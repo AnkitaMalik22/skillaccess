@@ -124,7 +124,7 @@ const Header = ({ handleFilter }) => {
 
   const navigate = useNavigate();
   return (
-    <div className="flex w-[95%] mx-auto justify-between mb-2 font-dmSans">
+    <div className="flex w-11/12 mx-auto justify-between mb-2 font-dmSans">
       {visible && (
         <PopUp
           visible={visible}
