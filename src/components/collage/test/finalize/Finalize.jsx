@@ -54,9 +54,9 @@ const Finalize = () => {
 
     // dispatch(
     //   createTest({
-    //     name: testDetails.name,
-    //     description: testDetails.description,
-    //     totalAttempts: testDetails.totalQuestions,
+    //     name: testDetails?.name,
+    //     description: testDetails?.description,
+    //     totalAttempts: testDetails?.totalQuestions,
 
     //     topics,
     //   })
@@ -77,18 +77,18 @@ const Finalize = () => {
               id=""
               className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 py-3 px-7 font-bold text-2xl"
             >
-              {testDetails.name}
+              {testDetails?.name}
             </div>
           </div>
 
           <p className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg  px-7 pt-3 pb-8 focus:ring-0placeholder-gray-400 mb-6">
-            {testDetails.description}
+            {testDetails?.description}
           </p>
           {/* Need to all these details below from sections */}
           <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-lg flex justify-between px-7 py-4">
             <p>Total duration of test</p>
             <p className="text-[#0052CC]  font-bold">
-              {/* {testDetails.totalDuration}mins */}
+              {/* {testDetails?.totalDuration}mins */}
               {totalTime} mins
             </p>
             {/* {totalTime}  */}
@@ -97,14 +97,14 @@ const Finalize = () => {
           <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-lg flex justify-between px-7 py-4">
             <p>Total number of questions</p>
             <p className="text-[#0052CC]  font-bold">
-              {testDetails.totalQuestions}
+              {testDetails?.totalQuestions}
             </p>
           </div>
 
           <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-lg flex justify-between px-7 py-4">
             <p>Total attempts allowed</p>
             <p className="text-[#0052CC]  font-bold">
-              {testDetails.totalAttempts}
+              {testDetails?.totalAttempts}
             </p>
           </div>
         </div>
