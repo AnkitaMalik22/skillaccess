@@ -107,7 +107,7 @@ const AddQuestionsSelect = () => {
 
               headers.forEach((header) => {
                 if (
-                  !["Title", "Duration", "option", "AnswerIndex"].includes(
+                  !["Title", "Duration", "option", "AnswerIndex","QuestionLevel"].includes(
                     header
                   )
                 ) {
@@ -117,7 +117,7 @@ const AddQuestionsSelect = () => {
                 }
               });
 
-              if (count !== 7) {
+              if (count !== 8) {
                 setLoading(false);
                 toast.error("invalid no. of fields");
                 return;
@@ -135,7 +135,7 @@ const AddQuestionsSelect = () => {
                       header.v !== "option" &&
                       header.v !== "AnswerIndex" &&
                       header.v !== "Duration" &&
-                      header.v !== "Title"
+                      header.v !== "Title" && header.v !== "QuestionLevel"
                     ) {
                       toast.error("Invalid Headers");
                       setLoading(false);
@@ -161,7 +161,7 @@ const AddQuestionsSelect = () => {
                     } else if (
                       header.v === "AnswerIndex" ||
                       header.v === "Duration" ||
-                      header.v === "Title"
+                      header.v !== "Title" || header.v !== "QuestionLevel"
                     ) {
                       if (header.v === "AnswerIndex") {
                         if (row) {
@@ -296,13 +296,13 @@ const AddQuestionsSelect = () => {
                 }
               }
 
-              if (count > 5) {
+              if (count > 6) {
                 setLoading(false);
                 toast.error("invalid no. of fields");
                 return;
               }
               headers.forEach((header) => {
-                if (!["Title", "Duration", "question"].includes(header)) {
+                if (!["Title", "Duration", "question","QuestionLevel"].includes(header)) {
                   setLoading(false);
 
                   toast.error(header + " is incorrect");
@@ -330,7 +330,7 @@ const AddQuestionsSelect = () => {
                     if (
                       header.v !== "question" &&
                       header.v !== "Duration" &&
-                      header.v !== "Title"
+                      header.v !== "Title" && header.v !=="QuestionLevel"
                     ) {
                       setLoading(false);
                       setError(true);
@@ -347,7 +347,8 @@ const AddQuestionsSelect = () => {
                       }
                     } else if (
                       header.v === "Duration" ||
-                      header.v === "Title"
+                      header.v === "Title" ||
+                      header.v === "QuestionLevel"
                     ) {
                       if (header.v === "Duration") {
                         if (row) {
@@ -471,8 +472,8 @@ const AddQuestionsSelect = () => {
                   let header =
                     worksheet[XLSX.utils.encode_cell({ r: 0, c: colNum })];
 
-                  if (header.v !== "Duration" && header.v !== "Title") {
-                    setLoading(false);
+                    if (header.v !== "Duration" && header.v !== "Title" && header.v !== "QuestionLevel") {
+                      setLoading(false);
                     toast.error("Wrong Question Type");
                     return;
                   } else {
