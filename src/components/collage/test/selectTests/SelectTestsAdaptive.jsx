@@ -21,6 +21,7 @@ import {
 } from "../../../../redux/collage/test/testSlice";
 import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
 import PopUpAdaptive from "../../../PopUps/PopUpAdaptive";
+import Intermediate from "../home/Intermediate";
 
 const SelectTests = () => {
   const [questionType, setQuestionType] = useState("mcq");
@@ -78,9 +79,13 @@ const SelectTests = () => {
     // console.log(section, "section");
 
     // console.log(currentQuestionCount + parseInt(totalQ));
-
-    if (currentQuestionCount > totalQuestions) {
-      toast.error("too many questions");
+    console.log(
+      currentQuestionCount,
+      totalQuestions,
+      currentQuestionCount > totalQuestions
+    );
+    if (currentQuestionCount > totalQuestions || totalQ > totalQuestions) {
+      toast.error("max questions reached");
       return;
     }
 
@@ -154,7 +159,7 @@ const SelectTests = () => {
 
       // console.log(sectionCopy);
       if (mixedQuestions.length < totalQ) {
-        toast.error("insufficient number of questions");
+        toast.error("insufficient number of questions ");
         return;
       } else {
         dispatch(
@@ -274,7 +279,9 @@ const SelectTests = () => {
               {/* {console.log(section, "section")} */}
 
               <span className="self-center">
-                <h2 className="text-xl font-bold mb-4 line-clamp-2 break-words">{section?.Heading}</h2>
+                <h2 className="text-xl font-bold mb-4 line-clamp-2 break-words">
+                  {section?.Heading}
+                </h2>
 
                 <div className="flex gap-2">
                   <img
@@ -413,16 +420,18 @@ const SelectTests = () => {
             // </div>
 
             <div className="w-full h-64 rounded-lg bg-gray-100  relative">
-                <div className="card-body overflow-y-auto h-52">
-                <h2 className="text-xl font-bold mb-4 break-words">{section.Heading}</h2>
+              <div className="card-body overflow-y-auto h-52">
+                <h2 className="text-xl font-bold mb-4 break-words">
+                  {section.Heading}
+                </h2>
 
                 <p className="text-sm leading-[26px] text-[#8F92A1] break-words">
                   {
-                  // section.Description.length > 60
-                  //   ? section.Description.substring(0, 60) + "..."
-                  //   : 
+                    // section.Description.length > 60
+                    //   ? section.Description.substring(0, 60) + "..."
+                    //   :
                     section.Description
-                    }
+                  }
                 </p>
 
                 <div>

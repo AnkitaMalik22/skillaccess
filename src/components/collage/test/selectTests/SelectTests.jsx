@@ -68,7 +68,10 @@ const SelectTests = () => {
   const [selectedSections, setSelectedSections] = useState(topics);
 
   const addSection = (section) => {
-    if (currentQuestionCount > totalQuestions) {
+    if (
+      currentQuestionCount > parseInt(totalQuestions) ||
+      totalQ > totalQuestions
+    ) {
       toast.error("too many questions");
       return;
     }
@@ -264,7 +267,9 @@ const SelectTests = () => {
               {/* {console.log(section, "section")} */}
 
               <span className="self-center">
-                <h2 className="text-xl font-bold px-2 line-clamp-2 break-words">{section?.Heading}</h2>
+                <h2 className="text-xl font-bold px-2 line-clamp-2 break-words">
+                  {section?.Heading}
+                </h2>
 
                 <div className="flex gap-2 px-2">
                   <img
@@ -404,15 +409,17 @@ const SelectTests = () => {
 
             <div className="w-full h-64 rounded-lg bg-gray-100  relative ">
               <div className="card-body overflow-y-auto h-52">
-                <h2 className="text-xl font-bold mb-4 break-words">{section.Heading}</h2>
+                <h2 className="text-xl font-bold mb-4 break-words">
+                  {section.Heading}
+                </h2>
 
                 <p className="text-sm leading-[26px] text-[#8F92A1] break-words">
                   {
-                  // section.Description.length > 60
-                  //   ? section.Description.substring(0, 60) + "..."
-                  //   : 
+                    // section.Description.length > 60
+                    //   ? section.Description.substring(0, 60) + "..."
+                    //   :
                     section.Description
-                    }
+                  }
                 </p>
 
                 <div>
