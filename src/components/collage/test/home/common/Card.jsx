@@ -81,7 +81,7 @@ const Card = (props) => {
             className="bg-transparent border-none "
             onClick={(e) => {
             dispatch(deleteTest(props.assessment._id));
-          
+             
             }}
           >
             <Bin className="cursor-pointer " />

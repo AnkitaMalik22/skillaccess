@@ -150,8 +150,8 @@ const AddQuestions = () => {
               <div className=" sm:mt-5 rounded-lg tracking-wide justify-between  ">
                 <div className=" grid grid-cols-10 row-span-2 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-lg border border-blued h-28 w-[64vw] mx-auto">
                   {" "}
-                  <div className="col-span-2 ">
-                    <h2 className="self-center text-xs sm:text-sm">
+                  <div className="col-span-4 ">
+                    <h2 className="self-center text-xs sm:text-sm line-clamp-2">
                       {topic.Heading}
                     </h2>
                   </div>
@@ -178,7 +178,7 @@ const AddQuestions = () => {
                   >
                     <RxCross1 className="self-center text-red-600 w-5 h-5 cursor-pointer" />
                   </div>
-                  <div className="col-span-8 line-clamp-2 text-xs font-normal text-[#8F92A1] ">
+                  <div className="col-span-4 line-clamp-2 text-xs font-normal text-[#8F92A1] ">
                     {topic.Description.length > 100
                       ? topic.Description.slice(0, 100) + "..."
                       : topic.Description}

@@ -72,7 +72,8 @@ export const getAllTests = createAsyncThunk(
       );
 
       const res = req.data;
-      // console.log(res);
+       console.log(res);
+
       return res;
     } catch (error) {
       console.log("catch", error.response.data);
@@ -122,6 +123,7 @@ export const deleteTest = createAsyncThunk(
       );
       const res = req.data;
       // console.log(res);
+
       return res;
     } catch (error) {
       console.log(error);

@@ -900,6 +900,7 @@ const testSlice = createSlice({
       .addCase(deleteTest.fulfilled, (state, action) => {
         state.testLoading = false;
         console.log(action.payload);
+        
         getAllTestFulfilled(state, action);
 
         toast.success("Test Deleted Successfully!");

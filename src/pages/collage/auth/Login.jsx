@@ -184,7 +184,7 @@ const Login = () => {
               </div>
             ))} */}
 
-          <div className=" flex gap-2  p-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto ">
+          {/* <div className=" flex gap-2  p-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto ">
             {" "}
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
@@ -196,7 +196,7 @@ const Login = () => {
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
-          </div>
+          </div> */}
           {/* 
           <label className=" flex  gap-2 cursor-pointer mx-auto w-full max-w-xs">
             <input
