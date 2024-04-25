@@ -292,8 +292,9 @@ const Submit = () => {
       //   setTestBasicDetails({ name: "", description: "", totalAttempts: null ,totalQuestions:0})
       // );
       dispatch(getCollege())
+      console.log(res)
 
-if(res.success){
+if(res.type ==='test/createTest/fulfilled'){
   navigate("/collage/test/final");
 }
     });
