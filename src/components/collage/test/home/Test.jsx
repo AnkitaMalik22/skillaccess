@@ -15,6 +15,7 @@ import { FaFolder } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setCurrentQuestionCount,
   setTestBasicDetails,
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
@@ -44,7 +45,7 @@ export const Test = () => {
       })
     );
     dispatch(setTestSelectedTopics([]));
-
+    dispatch(setCurrentQuestionCount(0));
     dispatch(getAllTests());
   }, []);
 
