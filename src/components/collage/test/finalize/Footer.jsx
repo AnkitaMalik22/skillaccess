@@ -7,7 +7,7 @@ const Footer = ({ handleNext }) => {
   const Navigate = useNavigate();
   return (
     <div className="pt-1 relative pb-20">
-      <div className=" absolute right-0">
+      <div className=" absolute right-7">
         {" "}
         <div className=" flex gap-2">
           <button

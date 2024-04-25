@@ -46,7 +46,7 @@ console.log("type " , type)
           id=""
           value="MCQ"
           // onChange={(e) => setQuestionType(e.target.value)}
-          className="select text-gray-400 focus:outline-none focus:ring-1 focus:ring-blued bg-gray-100 sm:w-1/3   w-1/2 rounded-lg self-center"
+          className="select text-[#171717] font-bold text-sm focus:outline-none focus:ring-1 focus:ring-blued bg-gray-100 w-[250px] xl:w-[320px] h-[56px] rounded-lg self-center"
         >
           {/* <option value="">Question Type</option> */}
 
@@ -67,7 +67,7 @@ console.log("type " , type)
   id=""
   value={questionType}
   onChange={(e) => setQuestionType(e.target.value)}
-  className="select text-gray-400 focus:outline-none focus:ring-1 focus:ring-blued bg-gray-100 sm:w-1/3   w-1/2 rounded-lg self-center"
+  className="select text-[#171717]  font-bold text-sm focus:outline-none focus:ring-1 focus:ring-blued bg-gray-100 w-[250px] xl:w-[320px] h-[56px] rounded-lg self-center"
 >
   <option value="">Question Type</option>
 

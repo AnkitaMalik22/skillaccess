@@ -158,7 +158,7 @@ export const Test = () => {
                     </div>
                   </div>
                   <div className="flex px-3 pb-3 mt-2 justify-between">
-                    <div className="flex gap-3">
+                    <div className="flex gap-1">
                       <button className="rounded-lg bg-gray-100 p-2 text-base font-dmSans font-base">
                         View
                       </button>

@@ -908,7 +908,6 @@ const testSlice = createSlice({
         state.testLoading = false;
         console.log(action.payload);
         // getAllTestFulfilled(state, action);
-
         toast.success("Test Deleted Successfully!");
       })
       .addCase(deleteTest.rejected, (state, action) => {

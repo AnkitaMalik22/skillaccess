@@ -16,7 +16,7 @@ const Transactions = () => {
       {
         transactions.map((transaction) => (
             <div className="grid grid-cols-3 items-center justify-between bg-white w-full p-3 mb-3 rounded-lg">
-                <div>12/12/2021</div>
+                <div>12 Dec 2021</div>
                 <div>Basic Plan</div>
                 <div>100</div>
             </div>
