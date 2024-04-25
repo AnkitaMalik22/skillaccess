@@ -1,15 +1,9 @@
 import React from "react";
 import Profile from "../../../components/collage/profile/home/Profile";
 import CollageLayout from "../../../layout/Collage";
-import { getCreditDetails } from "../../../redux/collage/dummySlice";
-import { useDispatch ,useSelector} from "react-redux";
 
 
 const ProfilePage = () => {
-  const dispatch = useDispatch();
-  const { user, isLoggedIn, logoutError, USER_LOADING } = useSelector(
-    (state) => state.collageAuth
-  );
 
 
   React.useEffect(() => {
@@ -60,7 +54,7 @@ if(navigator.language !== navigator.currentPageLanguage) {
 }, []);
   return (
     <CollageLayout>
-      <button onClick={()=>dispatch(getCreditDetails(user._id))}>click</button>
+
       <Profile />
     </CollageLayout>
   );
