@@ -695,11 +695,14 @@ const testSlice = createSlice({
         state.currentTopic = {};
 
         console.log("fullfilled");
+      
+
 
         getAllTests();
       })
       .addCase(createTest.rejected, (state, action) => {
         // console.log(action.payload);
+        toast.error(action.payload)
         console.log(action.payload);
 
         // window.alert(action.payload);

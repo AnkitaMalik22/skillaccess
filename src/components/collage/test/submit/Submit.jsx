@@ -11,6 +11,7 @@ import Code from "./Code";
 import Video from "./Video";
 import toast from "react-hot-toast";
 import { createTest } from "../../../../redux/collage/test/thunks/test";
+import { getCollege } from "../../../../redux/collage/auth/authSlice";
 
 const Submit = () => {
   const navigate = useNavigate();
@@ -286,12 +287,15 @@ const Submit = () => {
         // totalDuration,
         topics,
       })
-    ).then(() => {
+    ).then((res) => {
       // dispatch(
       //   setTestBasicDetails({ name: "", description: "", totalAttempts: null ,totalQuestions:0})
       // );
+      dispatch(getCollege())
 
-      navigate("/collage/test/final");
+if(res.success){
+  navigate("/collage/test/final");
+}
     });
   };
 

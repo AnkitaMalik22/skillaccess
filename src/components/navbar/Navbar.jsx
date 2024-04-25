@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
 import {useSelector } from "react-redux";
+import { FaCoins } from "react-icons/fa";
 
 const Navbar = (props) => {
   const navigate = useNavigate(); 
@@ -69,13 +70,22 @@ const Navbar = (props) => {
             <img src="../../../images/logo.png" alt="" />
           </div>
         </div>
+
+      
     
         {/* right */}
-        <div className="flex gap-3">
-          {/* noifiaction */}
-          <button className="border-2 border-gray-400  text-gray-400 rounded-lg p-2 relative">
+        <div className="flex gap-4">
+        <button className="border-2 border-gray-400  text-gray-400 rounded-lg p-2 relative">
             <FiBell className="text-lg" />{" "}
             <div className="rounded-full h-2 w-2 bg-[#0090FF]  absolute top-1 right-2"></div>
+          </button>
+
+          {/* noifiaction */}
+          <button className="border-2 border-gray-400  text-blue-400 rounded-lg p-[0.3rem] relative flex items-center ">
+            {/* <FiBell className="text-lg" />{" "} */}
+            <FaCoins/>
+            <h1 className="text-blue px-2">{userDetails?.credit?.credit  ?  userDetails?.credit?.credit : 0}</h1>
+            {/* <div className="rounded-full h-2 w-2 bg-[#0090FF]  absolute top-1 right-2"></div> */}
           </button>
 
           {/* noifiaction */}
