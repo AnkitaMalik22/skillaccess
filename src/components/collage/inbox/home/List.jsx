@@ -172,9 +172,8 @@ const List = ({ show }) => {
                 setInboxType(e.target.value);
               }}
             >
-              <option value={inboxType}>{inboxType}</option>
-              <option value="Sent">Sent</option>
               <option value="Received">Received</option>
+              <option value="Sent">Sent</option>
             </select>
           </div>
           <PiArrowCounterClockwiseBold className="self-center text-sm  text-gray-400 ml-4" />

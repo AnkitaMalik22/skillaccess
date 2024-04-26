@@ -2,14 +2,19 @@ import { Disclosure, Transition } from "@headlessui/react";
 import React, { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { RiBookmark2Fill } from "react-icons/ri";
-import { useDispatch } from "react-redux";
-import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeQuestionById,
+  setCurrentQuestionCount,
+} from "../../../../redux/collage/test/testSlice";
 
 const List = ({ question, number }) => {
   const [type, setType] = useState();
 
+  const { currentQuestionCount } = useSelector((state) => state.test);
   const dispatch = useDispatch();
   const handleDelete = ({ sectionId, questionId }) => {
+    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
     dispatch(
       removeQuestionById({
         sectionId,

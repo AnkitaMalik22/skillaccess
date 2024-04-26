@@ -2,11 +2,16 @@ import { Disclosure, Transition } from "@headlessui/react";
 import React from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { RiBookmark2Fill } from "react-icons/ri";
-import { useDispatch } from "react-redux";
-import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeQuestionById,
+  setCurrentQuestionCount,
+} from "../../../../redux/collage/test/testSlice";
 
 const List = ({ Title, number, code, question }) => {
   const dispatch = useDispatch();
+  const { currentQuestionCount } = useSelector((state) => state.test);
+
   const handleDelete = ({ sectionId, questionId }) => {
     dispatch(
       removeQuestionById({
@@ -15,6 +20,7 @@ const List = ({ Title, number, code, question }) => {
         questionType: "compiler",
       })
     );
+    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
   };
   return (
     <div className="flex justify-between gap-2 font-dmSans relative z-10">

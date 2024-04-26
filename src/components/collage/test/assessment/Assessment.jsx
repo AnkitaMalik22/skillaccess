@@ -127,11 +127,13 @@ const Assessment = () => {
           {assessment?.topics?.map((topic, index) => (
             <div className="w-full grid grid-cols-6 row-span-2 my-4 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
               {" "}
+              {/* heading */}
               <div className="col-span-2 ">
                 <h2 className="self-center text-xs sm:text-sm">
                   {topic.Heading}
                 </h2>
               </div>
+              {/* type */}
               <div className="col-span-2 ">
                 <span className="flex gap-1">
                   <ImFileText className="text-blued self-center " />
@@ -144,7 +146,8 @@ const Assessment = () => {
                   </p>
                 </span>
               </div>
-              <div className="col-span-1 ">
+              {/* time */}
+              <div className="col-span-2 flex justify-end ">
                 <div className="flex gap-1 ">
                   <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
                   <p className="text-gray-400 text-xs self-center">
@@ -152,13 +155,16 @@ const Assessment = () => {
                   </p>
                 </div>
               </div>
-              <div className="col-span-1  flex justify-center">
+              {/* cross */}
+              {/* <div className="col-span-1  flex justify-center">
                 <RxCross1 className="self-center text-red-600 w-5 h-5" />
-              </div>
+              </div> */}
+              {/* desc */}
               <div className="col-span-4 line-clamp-2 text-xs font-normal text-gray-400 ">
                 <p className="line-clamp-2">{topic.Description}</p>
               </div>
-              <div className="col-span-1  flex">
+              {/* details */}
+              <div className="col-span-2  flex  justify-end">
                 <button
                   className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs"
                   onClick={() =>
@@ -170,7 +176,8 @@ const Assessment = () => {
                   Details
                 </button>
               </div>
-              <div className="col-span-1  flex justify-center">
+              {/* edit */}
+              {/* <div className="col-span-1  flex justify-center">
                 <PiPencilSimpleLine
                   className="self-center text-blued w-5 h-5"
                   onClick={() =>
@@ -179,7 +186,7 @@ const Assessment = () => {
                     )
                   }
                 />
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

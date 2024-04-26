@@ -3,10 +3,15 @@ import ReactPlayer from "react-player";
 import VideoMcq from "./VideoMcq";
 import VideoEssay from "./VideoEssay";
 import { Disclosure } from "@headlessui/react";
-import { useDispatch } from "react-redux";
-import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeQuestionById,
+  setCurrentQuestionCount,
+} from "../../../../redux/collage/test/testSlice";
 
 const Video = ({ video, Number }) => {
+  const { currentQuestionCount } = useSelector((state) => state.test);
+
   const dispatch = useDispatch();
   const handleDelete = ({ sectionId, questionId }) => {
     dispatch(
@@ -16,6 +21,7 @@ const Video = ({ video, Number }) => {
         questionType: "video",
       })
     );
+    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
   };
   return (
     <Disclosure>
