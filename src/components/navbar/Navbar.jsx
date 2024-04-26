@@ -13,6 +13,8 @@ const Navbar = (props) => {
   const userDetails = useSelector(
     (state) => state.collageAuth
   );
+
+  console.log(userDetails)
  
   //   let scriptLoaded = false;
   
