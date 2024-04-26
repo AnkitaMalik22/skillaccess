@@ -1,7 +1,8 @@
 import React from "react";
 import AddCode from "../../../components/collage/test/addCode/AddCode";
 
-const AddCodePage = () => {
+const AddCodePage = () => { 
+  
      React.useEffect(() => {
    
     let scriptLoaded = false;
