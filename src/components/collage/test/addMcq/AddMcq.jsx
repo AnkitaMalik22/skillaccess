@@ -204,13 +204,14 @@ const AddMcq = () => {
         <div className="flex flex-wrap gap-2 sm:w-[95.7%] mx-auto ">
           <span className="w-[49%] ">
             <h2 className="font-bold mb-2">Question</h2>
+            <div className="flex w-full justify-between">
             <select
               name="Duration"
               onChange={handleChanges}
               value={question.Duration}
               id=""
               className={`${
-                level === "adaptive" ? "w-1/2" : "w-full"
+                level === "adaptive" ? "w-[65%]" : "w-full"
               } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
             >
               <option value={0}>Time to answer the question</option>
@@ -226,7 +227,7 @@ const AddMcq = () => {
                 // onChange={handleChanges}
                 // value={question.Duration}
                 id=""
-                className="w-1/2 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
               >
                 <option value="">Level</option>
 
@@ -235,6 +236,7 @@ const AddMcq = () => {
                 <option value={"advanced"}>Advanced</option>
               </select>
             )}
+            </div>
             <ReactQuill
               value={question.Title}
               onChange={(value) =>

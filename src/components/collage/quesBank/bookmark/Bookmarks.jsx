@@ -13,7 +13,7 @@ const Bookmarks = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { bookmarks } = useSelector((state) => state.test);
-
+console.log(bookmarks);
 
 
  

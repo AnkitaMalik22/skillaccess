@@ -107,8 +107,8 @@ const Login = () => {
           <h2 className="font-bold text-2xl text-center  md:mt-6 mt-4">
             Getting Started
           </h2>
-          <h2 className="text-sm font-normal text-center text-lGray">
-            Welcome back
+          <h2 className="text-sm font-bold text-center text-lGray">
+            Welcome back!
           </h2>
           {logoutError && (
             <p className=" border-l-4 pl-4  rounded-[4px] border-[#dc2626] w-full max-w-xs py-3  mx-auto text-sm text-[#dc2626] bg-[#fee2e2]">
