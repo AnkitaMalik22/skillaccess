@@ -46,6 +46,10 @@ const collageState = {
     otpVerified: false,
     authType: "qr",
     createdAt: "2024-04-03T11:49:22.756Z",
+    loginActivity: [],
+
+    emailsSent: [],
+    __v: 12,
   },
   uploadImg: false,
   loggedInUsers: null,
@@ -60,7 +64,6 @@ const collageState = {
   LOGIN_LOADING: false,
   USER_LOADING: false,
   dummyUser: null,
-  credit : {}
 };
 
 export const deleteMail = createAsyncThunk(
@@ -379,7 +382,7 @@ export const getCollege = createAsyncThunk(
         },
       });
 
-      return response.data;
+      return response.data.college;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -618,7 +621,14 @@ const collageAuthSlice = createSlice({
         // state.mail = { ...state.mail, attachments: action.payload };
       })
       .addCase(uploadAttachment.fulfilled, (state, action) => {
-        state.mail = { ...state.mail, attachments: action.payload };
+        let atach = [];
+        if (state.mail.attachments) {
+          atach = [...state.mail.attachments];
+        }
+        state.mail = {
+          ...state.mail,
+          attachments: [...atach, ...action.payload],
+        };
       })
       .addCase(uploadAttachment.rejected, (state, action) => {
         toast.error("files not selected");
@@ -633,6 +643,7 @@ const collageAuthSlice = createSlice({
       })
       .addCase(sendMail.fulfilled, (state, action) => {
         state.sendMailLoading = false;
+        state.mail.attachments = [];
         toast.success("Mail sent successfully");
       })
       .addCase(sendMail.rejected, (state, action) => {
@@ -737,9 +748,7 @@ const collageAuthSlice = createSlice({
       })
       .addCase(getCollege.fulfilled, (state, action) => {
         state.isLoggedIn = true;
-        state.user = action.payload.college;
-        state.credit =action.payload.credit
-        localStorage.setItem("userId" , action.payload.college._id)
+        state.user = action.payload;
 
         // Add any fetched posts to the array
         console.log("fullfilled get college");

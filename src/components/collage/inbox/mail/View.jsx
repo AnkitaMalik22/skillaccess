@@ -43,7 +43,7 @@ const View = ({ index, filter, inboxType }) => {
     } else {
       setEMail(mail?.emailsSent[index]);
     }
-  }, ["", inboxType]);
+  }, ["", inboxType, index]);
 
   const [email, setEmail] = useState({ Message: "" });
   const handleChange = (e) => {

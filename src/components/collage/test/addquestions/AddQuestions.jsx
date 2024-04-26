@@ -7,6 +7,7 @@ import { PiPencilSimpleLine } from "react-icons/pi";
 import { ImFileText } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setCurrentQuestionCount,
   setQuesions,
   setTest,
   setTestSelectedTopics,
@@ -14,7 +15,7 @@ import {
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const AddQuestions = () => {
-  const topics = useSelector((state) => state.test.topics);
+  const { topics, currentQuestionCount } = useSelector((state) => state.test);
 
   const navigate = useNavigate();
   // question of the topic
@@ -26,6 +27,30 @@ const AddQuestions = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");
   const removeTopic = (index) => {
+    let Qt;
+
+    switch (topics[index].Type) {
+      case "mcq":
+        Qt = "questions";
+        break;
+      case "essay":
+        Qt = "essay";
+        break;
+      case "findAnswer":
+        Qt = "findAnswers";
+        break;
+      case "video":
+        Qt = "video";
+        break;
+      case "compiler":
+        Qt = "compiler";
+        break;
+      default:
+        break;
+    }
+    dispatch(
+      setCurrentQuestionCount(currentQuestionCount - topics[index][Qt].length)
+    );
     let topicsCopy = [...topics];
     topicsCopy.splice(index, 1);
     dispatch(setTestSelectedTopics(topicsCopy));
@@ -38,7 +63,7 @@ const AddQuestions = () => {
   //       totalVideo = 0,
   //       totalCompiler = 0,
   //       totalFindAnswer = 0;
-  
+
   //     if (topic.Type === "essay") {
   //       totalEssay = topic.essay?.reduce((acc, curr) => {
   //         return acc + parseInt(curr.Duration);
@@ -59,7 +84,7 @@ const AddQuestions = () => {
   //         return acc + parseInt(curr.Duration);
   //       }, 0);
   //     }
-  
+
   //     if (topic.Type === "mcq") {
   //       totalMcq = topic.questions?.reduce((acc, curr) => {
   //         return acc + parseInt(curr.Duration);
@@ -67,13 +92,15 @@ const AddQuestions = () => {
   //     }
   const handleCalculateTime = () => {
     const topicTimes = topics.reduce((acc, topic) => {
-      const existingIndex = acc.findIndex(item => item.type === topic.Type && item.Heading === topic.Heading);
+      const existingIndex = acc.findIndex(
+        (item) => item.type === topic.Type && item.Heading === topic.Heading
+      );
       let totalMcq = 0,
         totalEssay = 0,
         totalVideo = 0,
         totalCompiler = 0,
         totalFindAnswer = 0;
-  
+
       if (topic.Type === "essay") {
         totalEssay = topic.essay?.reduce((acc, curr) => {
           return acc + parseInt(curr.Duration);
@@ -94,41 +121,47 @@ const AddQuestions = () => {
           return acc + parseInt(curr.Duration);
         }, 0);
       }
-  
+
       if (topic.Type === "mcq") {
         totalMcq = topic.questions?.reduce((acc, curr) => {
           return acc + parseInt(curr.Duration);
         }, 0);
       }
-  
+
       if (existingIndex !== -1) {
         // If entry exists, add to existing total
-        acc[existingIndex].total += totalMcq + totalEssay + totalVideo + totalCompiler + totalFindAnswer;
+        acc[existingIndex].total +=
+          totalMcq + totalEssay + totalVideo + totalCompiler + totalFindAnswer;
       } else {
         // If entry doesn't exist, push a new entry
         acc.push({
           type: topic.Type,
           Heading: topic.Heading,
-          total: totalMcq + totalEssay + totalVideo + totalCompiler + totalFindAnswer,
+          total:
+            totalMcq +
+            totalEssay +
+            totalVideo +
+            totalCompiler +
+            totalFindAnswer,
         });
       }
-  
+
       return acc;
     }, []);
-  
+
     return topicTimes;
   };
-  
+
   //     return {
   //       type: topic.Type,
   //       Heading:topic.Heading,
   //       total: totalMcq + totalEssay + totalVideo + totalCompiler + totalFindAnswer,
   //     };
   //   });
-  
+
   //   return topicTimes;
   // };
-  
+
   const totalTime = handleCalculateTime();
   console.log(totalTime);
   return (
@@ -143,8 +176,9 @@ const AddQuestions = () => {
         <div className="   my-2 rounded-lg tracking-wide justify-between  ">
           <div className="grid grid-rows-1 w-[65vw]">
             <h2 className="font-normal text-xs sm:text-sm text-gray-400  mt-8 tracking-wide [word-spacing:4px] ">
-            Add up to 10 custom questions to your assessment (optional). You can
-          use five question types: multiple-choice, essay, video ,code and find answer.
+              Add up to 10 custom questions to your assessment (optional). You
+              can use five question types: multiple-choice, essay, video ,code
+              and find answer.
             </h2>
             {topics?.map((topic, index) => (
               <div className=" sm:mt-5 rounded-lg tracking-wide justify-between  ">
@@ -164,14 +198,20 @@ const AddQuestions = () => {
                     </span>
                   </div>
                   <div className="col-span-1 col-start-9">
-        <div className="flex gap-1">
-          <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
-          <p className="text-gray-400 text-xs self-center">
-            {totalTime.find(timeObj => timeObj.type === topic.Type && timeObj.Heading===topic.Heading)?.total} mins
-          </p>
-        </div>
-      </div>
-
+                    <div className="flex gap-1">
+                      <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
+                      <p className="text-gray-400 text-xs self-center">
+                        {
+                          totalTime.find(
+                            (timeObj) =>
+                              timeObj.type === topic.Type &&
+                              timeObj.Heading === topic.Heading
+                          )?.total
+                        }{" "}
+                        mins
+                      </p>
+                    </div>
+                  </div>
                   <div
                     className="col-span-1 col-start-10  flex justify-center"
                     onClick={() => removeTopic(index)}
@@ -192,8 +232,8 @@ const AddQuestions = () => {
                       // }
                       onClick={() =>
                         navigate(
-                        `/collage/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
-                      )
+                          `/collage/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
+                        )
                       }
                     >
                       Details

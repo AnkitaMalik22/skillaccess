@@ -130,11 +130,15 @@ const SelectTests = () => {
         return arr;
       };
 
-      if (sectionCopy[qType]?.length < totalQ) {
+      if (sectionCopy[qType]?.length < parseInt(totalQ)) {
         toast.error("insufficient number of questions");
         return;
       } else {
-        sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(0, totalQ);
+        sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(
+          0,
+          parseInt(totalQ)
+        );
+        console.log(sectionCopy, totalQ);
         dispatch(
           setCurrentQuestionCount(currentQuestionCount + parseInt(totalQ))
         );
@@ -188,7 +192,7 @@ const SelectTests = () => {
     updatedSections.splice(index, 1);
 
     setSelectedSections(updatedSections);
-
+    // console.log(selectedSections[index][Qt].length);
     dispatch(setTestSelectedTopics(updatedSections));
     dispatch(
       setCurrentQuestionCount(

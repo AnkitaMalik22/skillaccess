@@ -31,7 +31,6 @@ const Compose = () => {
     console.log(email);
   };
 
-
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
@@ -47,8 +46,7 @@ const Compose = () => {
     };
   }, []);
 
-
-// <<<<<<< bug-fix-test
+  // <<<<<<< bug-fix-test
 
   const handleSubmit = () => {
     if (!loading) {
@@ -60,9 +58,9 @@ const Compose = () => {
       toast.error("please wait! uploading files...");
     }
     setEmail({ Email: "", Message: "", Subject: "" });
-  }
-// =======
-// >>>>>>> saveMain
+  };
+  // =======
+  // >>>>>>> saveMain
 
   return (
     <div className="p-4 flex flex-col gap-3">
@@ -92,12 +90,13 @@ const Compose = () => {
         className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
       /> */}
       <ReactQuill
-      name="Message"
-        onChange={(value)=>setEmail(prev => {
-          return { ...prev, Message: value };
-        })}
+        name="Message"
+        onChange={(value) =>
+          setEmail((prev) => {
+            return { ...prev, Message: value };
+          })
+        }
         value={email.Message}
-        
         className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg h-[30vh] placeholder-gray-400"
         placeholder="Type Something ..."
       />
@@ -119,7 +118,7 @@ const Compose = () => {
                 </div>
               </div>
               <div className="self-center">
-                <Link to={item.url}>
+                <Link to={item.url} target="_blank">
                   {" "}
                   <FiDownload className="text-lg text-gray-400" />
                 </Link>
@@ -153,12 +152,10 @@ const Compose = () => {
 
         <div>
           <button
-
             className={`${
               loading ? "disabled !bg-gray-700 " : "bg-blue-700 "
             } text-sm font-bold text-white rounded-xl px-4 py-2`}
             onClick={handleSubmit}
-
           >
             Send
           </button>

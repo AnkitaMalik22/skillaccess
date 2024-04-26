@@ -82,15 +82,15 @@ const Mail = () => {
           <div className="w-1/4 h-[4.5rem] flex justify-between px-2">
             <select
               name=""
+              value={inboxType}
               id=""
               className="w-1/2 self-center select text-sm font-bold"
               onChange={(e) => {
                 setInboxType(e.target.value);
               }}
             >
-              <option value={inboxType}>{inboxType}</option>
-              <option value="Sent">Sent</option>
               <option value="Received">Primary</option>
+              <option value="Sent">Sent</option>
             </select>
             <PiArrowCounterClockwiseBold className="self-center text-sm  text-gray-400 ml-4" />
           </div>
