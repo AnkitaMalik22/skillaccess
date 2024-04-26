@@ -14,7 +14,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const AddMcq = () => {
-  const { topics } = useSelector((state) => state.test);
+  const { topics,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -159,7 +159,8 @@ const AddMcq = () => {
       if (isPrev) {
         dispatch(
           addMcq({ question: question, id: id, prev: true, index: count + 1 })
-        );
+        ).then(() => {
+
         setIsPrev(false);
         setQuestion({
           QuestionLevel: level === "adaptive" ? "beginner" : level,
@@ -169,11 +170,25 @@ const AddMcq = () => {
           Duration: 0,
           AnswerIndex: null,
           section: search.get("topicId"),
+        })
+        setCount(topics[id].questions.length - 1)
+        if (type === "save") {
+          level === "adaptive"
+            ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+            : navigate(`/collage/test/select?level=${level}`);
+        }
         });
-        setCount(topics[id].questions.length - 1);
-        if (type === "save") navigate(-1);
+        
       } else {
-        dispatch(addMcq({ question: question, id: id, prev: false }));
+        dispatch(addMcq({ question: question, id: id, prev: false })).then(()=>{
+          console.log("calling 2 --" , ADD_QUESTION_LOADING)
+          if (type === "save") 
+          {
+          level === "adaptive"
+            ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+            : navigate(`/collage/test/select?level=${level}`);
+          }
+        })
         setQuestion({
           QuestionLevel: level === "adaptive" ? "beginner" : level,
           id: search.get("topicId") + Date.now(),
@@ -183,10 +198,34 @@ const AddMcq = () => {
           AnswerIndex: null,
           section: search.get("topicId"),
         });
-        if (type === "save") navigate(-1);
+       
+        //   if(!ADD_QUESTION_LOADING){
+        //    navigate(-1);
+        //  }
+        // console.log("ADD_QUESTION_LOADING",ADD_QUESTION_LOADING)
+      
+      
+   
       }
     }
   };
+
+
+  // useEffect(() => {
+  //   console.log("ADD_QUESTION_LOADING 1",ADD_QUESTION_LOADING)
+  // if(!ADD_QUESTION_LOADING){
+  //       navigate(-1); 
+  // }
+
+  //   return () => {
+  //     //navigate(-1);
+  //   }
+  // }
+  // , [ADD_QUESTION_LOADING]);
+    
+
+
+
 
   return (
     <div>

@@ -70,21 +70,21 @@ const testState = {
   selectedSections: [],
   filteredSections: [],
 
-  test: {
-    testName: "",
-    questionType: "",
-    // testStatus : "",
-    sections: [],
-    questions: [
-      {
-        Duration: 0,
-        QuestionType: "mcq",
-        Title: "",
-        Options: [],
-        AnswerIndex: 0,
-      },
-    ],
-  },
+  // test: {
+  //   testName: "",
+  //   questionType: "",
+  //   // testStatus : "",
+  //   sections: [],
+  //   questions: [
+  //     {
+  //       Duration: 0,
+  //       QuestionType: "mcq",
+  //       Title: "",
+  //       Options: [],
+  //       AnswerIndex: 0,
+  //     },
+  //   ],
+  // },
   level: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).level
     : "",
@@ -172,6 +172,10 @@ const testState = {
 
         compiler: [],
       },
+
+
+      ADD_QUESTION_LOADING : false,
+      GET_TOPICS_LOADING : false,
 };
 
 // export const getStudentResponse = createAsyncThunk("test/studentResponse",
@@ -655,16 +659,30 @@ const testSlice = createSlice({
           JSON.stringify(state.currentTopic)
         );
       })
+      .addCase(addQuestionToTopic.pending, (state, action) => {
+       
+        state.ADD_QUESTION_LOADING = true;
+        
+        console.log("pending");
+     
+      })
       .addCase(addQuestionToTopic.fulfilled, (state, action) => {
         console.log("fulf");
         addQuesFunc(state, action);
+        state.ADD_QUESTION_LOADING = false;
+      })
+      .addCase(addQuestionToTopic.rejected, (state, action) => {
+        console.log("rejected");
+        state.ADD_QUESTION_LOADING = false;
       })
       .addCase(getTest.pending, (state, action) => {
         state.status = "loading";
+
         console.log("pending");
       })
       .addCase(getTest.fulfilled, (state, action) => {
         state.test = action.payload;
+
 
         console.log("fullfilled", state.test);
       })
@@ -716,14 +734,19 @@ const testSlice = createSlice({
       })
       .addCase(getAllTopics.pending, (state, action) => {
         state.status = "loading";
+        state.GET_TOPICS_LOADING = true
+
         console.log("pending");
       })
       .addCase(getAllTopics.fulfilled, (state, action) => {
         state.sections = action.payload;
+        state.GET_TOPICS_LOADING = false;
+        
         console.log("fullfilled");
       })
       .addCase(getAllTopics.rejected, (state, action) => {
         console.error("Error fetching topics:", action.payload);
+        state.GET_TOPICS_LOADING = false;
         state.status = "failed";
         state.error = action.payload;
       })

@@ -36,7 +36,7 @@ const AddParagraph = () => {
     questions: [{ question: "" }],
   });
 
-  const { topics, currentTopic } = useSelector((state) => state.test);
+  const { topics, currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const [isPrev, setIsPrev] = useState(false);
 
   const [count, setCount] = useState(topics[id]?.findAnswers.length - 1);
@@ -84,7 +84,7 @@ const AddParagraph = () => {
   //   console.log(question);
   // }, [question]);
 
-  const handleSave = (type) => {
+  const handleSave = (saveType) => {
     if (addType === "topic") {
       if (
         !question.Title ||
@@ -123,18 +123,22 @@ const AddParagraph = () => {
         } else {
           dispatch(
             addFindAnsToTopic({ data: question, id: id, type: "findAnswer" })
-          );
+          ) 
           dispatch(
             addQuestionToTopic({ data: question, id: id, type: "findAnswer" })
-          );
-          setQuestion({
-            QuestionLevel: level,
-            Title: "",
-            section: ID,
-            questions: [{ question: "" }],
-            Duration: 0,
-            id: ID + Date.now(),
-          });
+          ).then(()=>{
+            setQuestion({
+              QuestionLevel: level,
+              Title: "",
+              section: ID,
+              questions: [{ question: "" }],
+              Duration: 0,
+              id: ID + Date.now(),
+            })
+            if(!ADD_QUESTION_LOADING){
+              if (saveType === "save") navigate(-1);
+            }
+          })
         }
       }
     } else {
@@ -156,8 +160,8 @@ const AddParagraph = () => {
               prev: true,
               index: count + 1,
             })
-          );
-          setCount(topics[id].findAnswers.length - 1);
+          ).then(()=>{
+            setCount(topics[id].findAnswers.length - 1);
           setQuestion({
             questions: [{ question: "" }],
             QuestionLevel: level,
@@ -167,7 +171,11 @@ const AddParagraph = () => {
             Duration: 0,
             section: ID,
           });
-          if (type === "save") navigate(-1);
+          if(!ADD_QUESTION_LOADING){
+            if (saveType === "save") navigate(-1);
+          }
+          })
+          
         } else {
           dispatch(
             addFindAns({
@@ -177,23 +185,31 @@ const AddParagraph = () => {
               prev: false,
               index: count + 1,
             })
-          );
-          if (type === "save") navigate(-1);
-          // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({
-            questions: [{ question: "" }],
-            QuestionLevel: level,
-            id: ID + Date.now(),
-            Title: "",
-            questions: [],
-            Duration: 0,
-            section: ID,
+          ).then(() => {
+            
+            setQuestion({
+              questions: [{ question: "" }],
+              QuestionLevel: level,
+              id: ID + Date.now(),
+              Title: "",
+              questions: [],
+              Duration: 0,
+              section: ID,
+            })
+            if (!ADD_QUESTION_LOADING) {
+              if (saveType === "save") navigate(-1);
+            }
           });
+          // if (type === "save") navigate(-1);
+          // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
+          
         }
       }
     }
   };
 
+
+    
   useEffect(() => {
     setCountDetail(currentTopic?.findAnswers?.length - 1);
   }, [currentTopic]);

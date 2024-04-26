@@ -20,6 +20,7 @@ import {
 } from "../../../../redux/collage/test/testSlice";
 import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
 import PopUpAdaptive from "../../../PopUps/PopUpAdaptive";
+import Loader from "../../../loaders/Loader";
 
 const SelectTests = () => {
   const [visible, setVisible] = useState(false);
@@ -34,7 +35,7 @@ const SelectTests = () => {
 
   const dispatch = useDispatch();
 
-  const { sections, currentQuestionCount, totalQuestions } = useSelector(
+  const { sections, currentQuestionCount, totalQuestions ,GET_TOPICS_LOADING } = useSelector(
     (state) => state.test
   );
   // for filter the sections
@@ -85,14 +86,6 @@ const SelectTests = () => {
           if (selectedSections[i].Type === questionType) {
             return;
           }
-
-          // else{
-
-          //   selectedSections[i].Type = questionType;
-
-          //   return;
-
-          // }
         }
       }
 
@@ -134,11 +127,16 @@ const SelectTests = () => {
         toast.error("insufficient number of questions");
         return;
       } else {
+// <<<<<<< saveMainCopy
         sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(
           0,
           parseInt(totalQ)
         );
         console.log(sectionCopy, totalQ);
+// =======
+//         console.log("totalQ : ", totalQ)
+//         sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(0, totalQ);
+// >>>>>>> saveMain
         dispatch(
           setCurrentQuestionCount(currentQuestionCount + parseInt(totalQ))
         );
@@ -248,9 +246,11 @@ const SelectTests = () => {
       )}
       <Header />
 
+
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>
+   
 
       {/* larger screens */}
 
@@ -350,6 +350,7 @@ const SelectTests = () => {
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
+        
           <div className="w-full h-64 bg-gray-100 rounded-lg flex justify-center">
             <div className=" self-center w-fit h-fit ">
               <div
@@ -370,48 +371,12 @@ const SelectTests = () => {
               </h2>
             </div>
           </div>
+          {GET_TOPICS_LOADING  &&   <div className="w-[50vw] h-64 rounded-lg flex items-center  justify-center  z-10 "><Loader size="md" /></div>}
           {filteredSections?.map((section, index) => (
-            // <div className="card w-96 bg-base-100 shadow-xl">
-
-            //   <div className="card-body">
-
-            //     <h2 className="card-title">{section.name}</h2>
-
-            //     <p> {section.desription}</p>
-
-            //     <div className="card-actions justify-end">
-
-            //       <button
-
-            //         onClick={() => addSection(section)}
-
-            //         className="btn btn-primary"
-
-            //       >
-
-            //         Add
-
-            //       </button>
-
-            //       <button
-
-            //         onClick={() => removeSection(section)}
-
-            //         className="btn btn-primary"
-
-            //       >
-
-            //         Remove
-
-            //       </button>
-
-            //     </div>
-
-            //   </div>
-
-            // </div>
+          
 
             <div className="w-full h-64 rounded-lg bg-gray-100  relative ">
+               
               <div className="card-body overflow-y-auto h-52">
                 <h2 className="text-xl font-bold mb-4 break-words">
                   {section.Heading}
@@ -429,17 +394,6 @@ const SelectTests = () => {
                 <div>
                   <div className="flex justify-between absolute bottom-0 w-3/4 mb-2">
                     <div>
-                      {/* <span className="flex gap-1 mb-1">
-                        <img
-                          src="./../../images/icons/stopwatch.png"
-                          alt=""
-                          className="w-7 h-7"
-                        />{" "}
-                        <p className="text-gray-400 self-center">
-                          {section.Time}
-                        </p>
-                      </span> */}
-
                       <button
                         className="w-[90px] h-[40px] bg-[#8F92A120] rounded-xl"
                         onClick={() => {
@@ -486,6 +440,7 @@ const SelectTests = () => {
                   </div>
                 </div>
               </div>
+
             </div>
           ))}{" "}
         </div>

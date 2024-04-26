@@ -4,6 +4,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addMcq, createTest } from "../../../../redux/collage/test/testSlice";
+import Loader from "../../../loaders/Loader";
 
 const Header = ({
   search,
@@ -18,7 +19,7 @@ const Header = ({
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { test } = useSelector((state) => state.test);
+  const { test ,ADD_QUESTION_LOADING}= useSelector((state) => state.test);
 
   // const handleCreateTest = () => {
   //   console.log("test", test);
@@ -71,7 +72,8 @@ const Header = ({
 
             onClick={handleSaveNext}
           >
-            Save
+             {ADD_QUESTION_LOADING ? "Saving" : "Save"}
+            {ADD_QUESTION_LOADING && <Loader size="sm" />}
           </button>
         </div>
       </div>
