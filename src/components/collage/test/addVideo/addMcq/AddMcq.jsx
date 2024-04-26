@@ -63,7 +63,9 @@ const AddMcq = () => {
   };
 
   const handleSave = (type) => {
-    if (question.Title === "") {
+    if ( !question.Title ||
+      question.Title.trim() === "" ||
+      question.Title === "<p><br></p>") {
       toast.error("Please enter question");
       return;
     } else if (
@@ -80,7 +82,14 @@ const AddMcq = () => {
     } else if (question.AnswerIndex === null) {
       toast.error("Please select the correct answer");
       return;
-    } else {
+    } else if (question.Options.some((option) => option.trim() === "")) {
+      toast.error("Please enter all options");
+      return;
+    } else if (question.Duration == 0) {
+      toast.error("Please enter required time");
+      return;
+    }
+    else {
       if (isPrev) {
         dispatch(
           addVideo({

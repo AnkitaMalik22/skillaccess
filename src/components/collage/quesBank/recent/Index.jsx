@@ -13,7 +13,7 @@ const Recent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { recentUsedQuestions } = useSelector((state) => state.test);
-
+  console.log(recentUsedQuestions);
   useEffect(() => {
     dispatch(getRecentUsedQuestions());
     console.log(recentUsedQuestions);
@@ -99,7 +99,11 @@ const Recent = () => {
                   <CgFolder className="text-blued" />
                 </span>
                 <span>
-                  <h2 className="font-dmSans text-center  sm:text-sm">
+                  <h2 className="font-dmSans text-center  sm:text-sm"
+                      onClick={()=>{
+                        navigate(`/collage/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`);
+                      }}
+                  >
                     {topic?.Heading}
                   </h2>
                 </span>

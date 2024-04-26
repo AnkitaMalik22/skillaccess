@@ -56,7 +56,11 @@ const Recent = () => {
           <div className={` flex justify-center`}>
             <div className="flex self-center ">
               <span>
-                <h2 className="font-dmSans text-center  sm:text-sm">
+                <h2 className="font-dmSans text-center  sm:text-sm"
+                 onClick={()=>{
+                  navigate(`/collage/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`);
+                }}
+                >
                   {topic?.Heading}
                 </h2>
               </span>

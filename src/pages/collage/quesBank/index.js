@@ -7,6 +7,7 @@ const UploadPage = lazy(() => import("./UploadPage"));
 const QuesBankPage = lazy(() => import("./QuesBankPage"));
 const BookmarkPage = lazy(() => import("./BookmarkPage"));
 const TopicDetailsPage = lazy(() => import("./TopicDetailsPage"));
+const  RecentAllPage= lazy(() => import("./RecentAllPage"));
 const UploadTopic = lazy(() => import("./UploadTopic"));
 
 function QuesRoute() {
@@ -16,6 +17,7 @@ function QuesRoute() {
     <Route path="collage/quesBank">
       <Route path="" element={<QuesBankPage />} />
       <Route path="recent" element={<RecentPage />} />
+      <Route path="recentAll" element={<RecentAllPage />} />
       <Route path="topic" element={<TopicPage />} />
       <Route path="topic/:id" element={<TopicDetailsPage />} />
       <Route path="topic/upload/:id" element={<UploadTopic />} />
