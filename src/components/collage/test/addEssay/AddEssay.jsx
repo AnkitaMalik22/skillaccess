@@ -17,7 +17,7 @@ import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic"
 const AddEssay = () => {
   const { id } = useParams();
   //prev count
-  const { topics, currentTopic } = useSelector((state) => state.test);
+  const { topics, currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const [isPrev, setIsPrev] = useState(false);
   const [countDetail, setCountDetail] = useState(-1);
   const [count, setCount] = useState(topics[id]?.essay.length - 1);
@@ -64,7 +64,7 @@ const AddEssay = () => {
     setQuestion({ ...question, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {
+  const handleSave = (saveType) => {
     if (addType === "topic") {
       if (
         !question.Title ||
@@ -85,24 +85,29 @@ const AddEssay = () => {
               id: question._id,
               question: question,
             })
-          );
-          setCountDetail(currentTopic.essay.length - 1);
+          ).then(() =>{setCountDetail(currentTopic.essay.length - 1);
 
-          setQuestion({
-            Title: "",
-            Duration: 0,
-            id: id + Date.now(),
-            QuestionLevel: level,
-          });
+            setQuestion({
+              Title: "",
+              Duration: 0,
+              id: id + Date.now(),
+              QuestionLevel: level,
+            })})
+          ;
         } else {
           dispatch(addEssayToTopic({ data: question, id: id, type: type }));
-          dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({
-            Title: "",
-            Duration: 0,
-            id: id + Date.now(),
-            QuestionLevel: level,
-          });
+          dispatch(addQuestionToTopic({ data: question, id: id, type: type })).then(()=>{
+            setQuestion({
+              Title: "",
+              Duration: 0,
+              id: id + Date.now(),
+              QuestionLevel: level,
+            })
+            if(!ADD_QUESTION_LOADING){
+              if (saveType === "save") navigate(-1);
+            }
+          })
+          
         }
       }
     } else {
@@ -121,8 +126,8 @@ const AddEssay = () => {
               prev: true,
               index: count + 1,
             })
-          );
-          setCount(topics[id].essay.length - 1);
+          ).then(()=>{
+            setCount(topics[id].essay.length - 1);
           setQuestion({
             QuestionLevel: level,
 
@@ -130,12 +135,17 @@ const AddEssay = () => {
             Title: "",
             Duration: 0,
             section: ID,
-          });
+          })
+          if (!ADD_QUESTION_LOADING) {
+            if (saveType === "save") navigate(-1);
+          }
+          })
+          ;
         } else {
           dispatch(
             addEssay({ data: question, id: id, type: type, prev: false })
-          );
-          setIsPrev(false);
+          ).then(() => {
+            setIsPrev(false);
           setCount(topics[id].essay.length - 1);
           setQuestion({
             QuestionLevel: level,
@@ -144,7 +154,12 @@ const AddEssay = () => {
             Title: "",
             Duration: 0,
             section: ID,
-          });
+          })
+          if (!ADD_QUESTION_LOADING) {
+            if (saveType === "save") navigate(-1);
+          }
+          })
+          
         }
       }
     }
