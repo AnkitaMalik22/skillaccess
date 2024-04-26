@@ -29,7 +29,10 @@ const List = ({ question, number }) => {
             <div className="mb-4">
               <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
                 <div>
-                  <p className="text-sm pl-4"dangerouslySetInnerHTML={{ __html: question.Title}}/>
+                  <p
+                    className="text-sm pl-4"
+                    dangerouslySetInnerHTML={{ __html: question.Title }}
+                  />
                 </div>
                 <div className="flex gap-2 self-center">
                   <Disclosure.Button className="flex gap-2 w-10/12 self-center">
@@ -52,7 +55,7 @@ const List = ({ question, number }) => {
                 leaveTo="transform scale-95 opacity-0"
               > */}
               <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
-                {question.Options?.map((question,index) => (
+                {question.Options?.map((question, index) => (
                   <div className="flex gap-2 z-10 relative rounded-lg p-3">
                     <div className="w-6" key={index}>
                       <input

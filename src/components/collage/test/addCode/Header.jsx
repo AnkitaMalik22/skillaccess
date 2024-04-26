@@ -2,10 +2,12 @@ import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../../loaders/Loader";
 
 const Header = ({ handleSave }) => {
   const navigate = useNavigate();
-
+  const { ADD_QUESTION_LOADING}= useSelector((state) => state.test);
   const save = () => {
     handleSave("save");
     // navigate(-1);
@@ -39,7 +41,8 @@ const Header = ({ handleSave }) => {
             className="self-center w-32 justify-center flex bg-blue-700 py-2 font-bold px-4 rounded-xl gap-2 text-white"
             onClick={save}
           >
-            Save
+         {ADD_QUESTION_LOADING ? "Saving" : "Save"}
+            {ADD_QUESTION_LOADING && <Loader size="sm" />}
           </button>
         </div>
       </div>

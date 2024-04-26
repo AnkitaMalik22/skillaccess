@@ -163,7 +163,7 @@ const Assessment = () => {
                   className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs"
                   onClick={() =>
                     navigate(
-                      `/collage/test/details/${index}?question=${topic.Type}&type=assessment`
+                      `/collage/test/details/${index}?question=${topic.Type}&type=assessment&view=false`
                     )
                   }
                 >
@@ -171,7 +171,14 @@ const Assessment = () => {
                 </button>
               </div>
               <div className="col-span-1  flex justify-center">
-                <PiPencilSimpleLine className="self-center text-blued w-5 h-5" />
+                <PiPencilSimpleLine
+                  className="self-center text-blued w-5 h-5"
+                  onClick={() =>
+                    navigate(
+                      `/collage/test/details/${index}?question=${topic.Type}&type=assessment`
+                    )
+                  }
+                />
               </div>
             </div>
           ))}

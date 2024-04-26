@@ -51,7 +51,7 @@ const AddCode = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const [validate, setValidate] = useState(false);
-
+  const { ADD_QUESTION_LOADING}= useSelector((state) => state.test);
   const type = searchParams.get("type");
   const level = searchParams.get("level");
 
@@ -257,8 +257,8 @@ const AddCode = () => {
               prev: true,
               index: count + 1,
             })
-          );
-          setCount(topics[id].compiler.length - 1);
+          ).then(() => {
+            setCount(topics[id].compiler.length - 1);
           setIsPrev(false);
           setQuestion({
             QuestionLevel: level,
@@ -277,36 +277,45 @@ const AddCode = () => {
             ],
             testcase: [{ input: "", expectedOutput: "" }],
             output: [""],
-          });
+          })
+        });
+          ;
         } else {
           dispatch(
             addCompiler({ data: question, id: id, type: type, prev: false })
-          );
+          ).then(()=>{
+            setQuestion({
+              QuestionLevel: level,
+  
+              id: ID + Date.now(),
+              section: ID,
+              code: "",
+              Duration: 0,
+              codeQuestion: "",
+              codeLanguage: "",
+              parameters: [
+                {
+                  paramName: "",
+                  type: "String",
+                },
+              ],
+              testcase: [{ input: "", expectedOutput: "" }],
+              output: [""],
+            })
+            if(!ADD_QUESTION_LOADING){
+              setToggle(1);
+            if (component === "save") {
+              navigate(-1);
+            }
+            }
+
+            
+          })
           // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({
-            QuestionLevel: level,
-
-            id: ID + Date.now(),
-            section: ID,
-            code: "",
-            Duration: 0,
-            codeQuestion: "",
-            codeLanguage: "",
-            parameters: [
-              {
-                paramName: "",
-                type: "String",
-              },
-            ],
-            testcase: [{ input: "", expectedOutput: "" }],
-            output: [""],
-          });
+          ;
         }
 
-        setToggle(1);
-        if (component === "save") {
-          navigate(-1);
-        }
+       
       } else {
         toast.error("Please fill all the fields");
       }

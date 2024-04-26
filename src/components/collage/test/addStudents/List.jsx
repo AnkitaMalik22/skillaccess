@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-
 const List = ({ uploadedStudents, setStudents, students }) => {
   // const { uploadedStudents} = useSelector((state) => state.collegeStudents);
 
   // const [students,setStudents]=useState([])
 
   const [isChecked, setIsChecked] = useState(false);
-  const { credit } = useSelector(
-    (state) => state.collageAuth
-  );
+  const { credit } = useSelector((state) => state.collageAuth);
   //   setIsChecked((prev) => !prev); // Toggle based on previous state
 
   //   // Determine if the student is already in the 'students' array
@@ -39,42 +36,40 @@ const List = ({ uploadedStudents, setStudents, students }) => {
     setCheckedState((prevState) => {
       const isCurrentlyChecked = !!prevState[id];
       const newCheckedState = { ...prevState, [id]: !isCurrentlyChecked };
-  
+
       if (isCurrentlyChecked) {
-        // Remove the student 
+        // Remove the student
         setStudents((prevStudents) =>
           prevStudents.filter((student) => student._id !== id)
         );
       } else {
         const stdToAdd = uploadedStudents.find((student) => student._id === id);
         if (stdToAdd) {
-          if (credit.limit <= students.length) {
+          if (credit?.limit <= students.length) {
             // Credit limit reached
             toast.error(
               "Your current plan only supports inviting " +
-                credit.limit +
+                credit?.limit +
                 " students"
             );
-            return prevState; 
+            return prevState;
           } else {
             // Add the student
             setStudents((prevStudents) => [...prevStudents, stdToAdd]);
           }
         }
       }
-  
+
       console.log(students);
       return newCheckedState;
     });
   };
-  
-
 
   // const handleCheckboxChange = (id) => {
   //   console.log(credit.limit-1 , students.length)
   //    if(credit.limit-1<students.length){
   //     toast.error("Your current plan only support inviting " + credit.limit + " students" ,students.length);
-    
+
   //   setCheckedState((prevState) => {
   //     const isCurrentlyChecked = !!prevState[id];
   //   })
@@ -84,7 +79,7 @@ const List = ({ uploadedStudents, setStudents, students }) => {
   //       const isCurrentlyChecked = !!prevState[id];
   //       // Toggle the current state for the checkbox
   //       const newCheckedState = { ...prevState, [id]: !isCurrentlyChecked };
-  
+
   //       // Determine whether to add or remove the student based on the new checked state
   //       if (!isCurrentlyChecked) {
   //         // Add the student to the list

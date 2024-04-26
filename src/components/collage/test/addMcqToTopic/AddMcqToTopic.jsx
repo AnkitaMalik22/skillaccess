@@ -14,12 +14,13 @@ import { editQuestionById } from "../../../../redux/collage/test/thunks/question
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const AddMcqToTopic = () => {
-  const { currentTopic } = useSelector((state) => state.test);
+  const { currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const [isPrev, setIsPrev] = useState(false);
   const [countDetail, setCountDetail] = useState(-1);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
@@ -175,14 +176,20 @@ const AddMcqToTopic = () => {
       } else {
         setIsPrev(false);
         setCountDetail(currentTopic.questions.length - 1);
-        dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-        setQuestion({
-          QuestionLevel: level === "adaptive" ? "beginner" : level,
-          Title: "",
-          Options: [],
-          id: id + Date.now(),
-          Duration: 0,
-        });
+        dispatch(addQuestionToTopic({ data: question, id: id, type: type })).then(()=>{
+          // if(!ADD_QUESTION_LOADING){
+          //   navigate(-1);
+          // }
+          setQuestion({
+            QuestionLevel: level === "adaptive" ? "beginner" : level,
+            Title: "",
+            Options: [],
+            id: id + Date.now(),
+            Duration: 0,
+          });
+        })
+       
+        // navigate(-1);
       }
     }
   };
@@ -191,6 +198,21 @@ const AddMcqToTopic = () => {
     console.log(currentTopic);
     setCountDetail(currentTopic?.questions?.length - 1);
   }, [currentTopic]);
+
+  // useEffect(() => {
+  //   if(!ADD_QUESTION_LOADING){
+  //         navigate(-1); 
+  //   }
+  
+  //     return () => {
+  //       //navigate(-1);
+  //     }
+  //   }
+  //   , [ADD_QUESTION_LOADING]);
+
+
+
+
   const stripHtml = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";

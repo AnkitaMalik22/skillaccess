@@ -12,10 +12,7 @@ const Footer = ({ students }) => {
   const dispatch = useDispatch();
 
   const { testId } = useSelector((state) => state.test);
-  const { credit } = useSelector(
-    (state) => state.collageAuth
-  );
-
+  const { credit } = useSelector((state) => state.collageAuth);
 
   const handleSendInvite = () => {
     if (students.length === 0) {
@@ -23,11 +20,11 @@ const Footer = ({ students }) => {
     } else if (!testId) {
       console.log(testId);
       toast.error("Invalid Test Id");
-    }
-    else if(credit.limit-1<students.length){
-      toast.error("Your current plan only support inviting " + credit.limit + " students");
-    }
-    else {
+    } else if (credit?.limit - 1 < students.length) {
+      toast.error(
+        "Your current plan only support inviting " + credit?.limit + " students"
+      );
+    } else {
       console.log(testId, students);
       dispatch(
         inviteToTest({
