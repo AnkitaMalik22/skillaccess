@@ -90,20 +90,19 @@ const Recent = () => {
 
         {/* list to be iterated */}
         {recentUsedQuestions?.map((topic) => (
-          <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid bg-white py-3 mb-3 rounded-xl">
+          <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid bg-white py-3 mb-3 rounded-xl"
+          >
             {" "}
             {/* row-2 */}
-            <div className={` flex justify-center`}>
+            <div className={` flex justify-center cursor-pointer`}    onClick={()=>{
+            navigate(`/collage/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`);
+          }}>
               <div className="flex self-center gap-2 ">
                 <span>
                   <CgFolder className="text-blued" />
                 </span>
                 <span>
-                  <h2 className="font-dmSans text-center  sm:text-sm"
-                      onClick={()=>{
-                        navigate(`/collage/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`);
-                      }}
-                  >
+                  <h2 className="font-dmSans text-center  sm:text-sm">
                     {topic?.Heading}
                   </h2>
                 </span>

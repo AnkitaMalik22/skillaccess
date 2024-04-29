@@ -30,7 +30,7 @@ const Info = ({ user, assessment }) => {
         <div className="self-center">
           <h2 className="text-xs font-bold text-gray-400 mb-2">TIME PERIOD</h2>
 
-          <h2 className="text-sm font-bold ">{assessment.totalTime} mins</h2>
+          <h2 className="text-sm font-bold ">{assessment?.totalTime} mins</h2>
 
         </div>
 
@@ -53,7 +53,7 @@ const Info = ({ user, assessment }) => {
         <div className="self-center">
           <h2 className="text-xs font-bold text-gray-400 mb-2">ATTEMPTS</h2>
 
-          <h2 className="text-sm font-bold ">{assessment.totalAttempts}</h2>
+          <h2 className="text-sm font-bold ">{assessment?.totalAttempts}</h2>
 
         </div>
       </div>

@@ -17,8 +17,8 @@ const Appeared = ({ assessment }) => {
 console.log(response);
 
   useEffect(() => {
-    dispatch(getTestResultPage(assessment._id));
-  }, [dispatch, assessment._id]);
+    dispatch(getTestResultPage(assessment?._id));
+  }, [dispatch, assessment?._id]);
 
   const getResponse = (responseId) => {
     dispatch(getStudentResponse(responseId));

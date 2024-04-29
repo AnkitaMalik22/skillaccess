@@ -84,7 +84,7 @@ const SelectTests = () => {
       totalQuestions,
       currentQuestionCount > totalQuestions
     );
-    if (currentQuestionCount > totalQuestions || totalQ > totalQuestions) {
+    if (parseInt(currentQuestionCount) > parseInt(totalQuestions) || parseInt(totalQ) > parseInt(totalQuestions)) {
       toast.error("max questions reached");
       return;
     }
@@ -135,14 +135,29 @@ const SelectTests = () => {
         shuffleArray(questions)
       );
       console.log(questionsByLevel);
+      let errText = "";
       // Select random questions from each level
       const mixedQuestions = Object.values(questionsByLevel).flatMap(
-        (questions) => {
+        (questions ,index) => {
           const numQuestionsAvailable = Math.min(
             Math.ceil(parseInt(totalQ) / 3),
             questions.length
           );
-          console.log("length:" + questions.length, parseInt(totalQ));
+
+          console.log("questionsByLevel[index].length" , questionsByLevel );
+          if( Math.ceil(parseInt(totalQ) / 3) > questionsByLevel["beginner"].length){
+           errText = "Insufficient Beginner questions";
+            return;
+          }
+          if( Math.ceil(parseInt(totalQ) / 3) > questionsByLevel["intermediate"].length){
+            errText = "Insufficient Intermediate questions";
+            return;
+          }
+          if( Math.ceil(parseInt(totalQ) / 3) > questionsByLevel["advanced"].length){
+            errText = "Insufficient Advanced questions";
+            return;
+          }
+          console.log("length:" + questions.length, parseInt(totalQ) , "numQuestionsAvailable:" + numQuestionsAvailable);
           return questions.slice(0, numQuestionsAvailable);
         }
       );
@@ -154,6 +169,10 @@ const SelectTests = () => {
         "mixedQuestions",
         totalQ
       );
+      if(errText){
+        toast.error(errText);
+        return;
+      }
 
       sectionCopy.questions = mixedQuestions.slice(0, totalQ);
 

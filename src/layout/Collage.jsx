@@ -374,7 +374,7 @@ const CollageLayout = ({ children }) => {
                 return (
                   <>
                     {/* {temp === i  ||  selection ===  i && <div className="" ref={bottom}></div>} */}
-                    {el.name === "Notifications" && (
+                    {/* {el.name === "Notifications" && (
                       <div
                         className={`${
                           open ? "w-full " : "w-1 sm:w-full"
@@ -382,8 +382,9 @@ const CollageLayout = ({ children }) => {
                       >
                         NOTIFICATIONS
                       </div>
-                    )}
+                    )} */}
                     <li
+                className={`btn-transition ${temp === i || selection === i ? 'active-li' : ''} `}
                       onMouseOver={() => setTemp(i)}
                       onMouseOut={() => setTemp(down)}
                       onMouseDown={(e) => {
@@ -410,38 +411,26 @@ const CollageLayout = ({ children }) => {
                         return navigate(el.path);
                       }}
                     >
-                      <button
-                        className={` ml-[-10px] sm:ml-[5px] flex gap-4 mb-10  h-fit  py-2 justify-start ${
-                          el.name === "Notifications"
-                            ? "ml-[-20px] hidden"
-                            : "btn "
-                        }
-                     ${
-                       open ? "w-full " : "w-1 sm:w-full"
-                     }   shadow-none text-white rounded-xl border-none  mt-2 focus:outline-none  max-w-xs hover:bg-white hover:bg-opacity-50 hover:text-black mx-auto 
-                     ${
-                       temp === i || selection === i
-                         ? "bg-white !text-black"
-                         : "bg-blued"
-                     }
-                       `}
-                      >
-                        <div className="w-4 ml-[-10px] ">{el.icon}</div>
-
-                        <h3
-                          className={`text-xl font-dmSans ${
-                            open ? "" : "lg:block hidden"
-                          } w-fit h-fit`}
-                        >
-                          {el.name}
-                        </h3>
-                      </button>
+          <button
+        className={`ml-[-10px] sm:ml-[5px] flex gap-4 mb-10 h-fit py-2 justify-start ${el.name === "Notifications" ? "ml-[-20px] hidden" : "btn hover-li"} ${
+          open ? "w-full" : "w-1 sm:w-full"
+        } shadow-none text-white rounded-xl border-none mt-2 focus:outline-none max-w-xs mx-auto ${
+          temp === i || selection === i ? "bg-white !text-black" : "bg-blued"
+        }`}
+      >
+        <div className="w-4 ml-[-10px]">{el.icon}</div>
+        <h3
+          className={`text-xl font-dmSans ${open ? "" : "lg:block hidden"} w-fit h-fit`}
+        >
+          {el.name}
+        </h3>
+      </button>
                     </li>
                   </>
                 );
               })}
 
-              <li className="mb-5 pl-8 font-dmSans text-sm font-bold">
+              <li className="mb-5 pl-8 font-dmSans text-sm font-bold text-white">
                 <h2>© 2022 skillassess</h2>
               </li>
             </ul>
