@@ -162,6 +162,13 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
           )}
         </div>
       )}
+
+      <div className="level ">
+       
+        {question.QuestionLevel == 'beginner' && (<p className="rounded-2xl m-3 py-1.5 bg-cyan-500 text-white w-8 h-8 text-center font-extrabold  ">L1</p>)}
+        {question.QuestionLevel == 'intermediate' && (<p className="rounded-2xl m-3 py-1.5 bg-green-500 text-white w-8 h-8 text-center font-extrabold  ">L2</p>)}
+        {question.QuestionLevel == 'advanced' && (<p className="rounded-2xl m-3 py-1.5 bg-red-500 text-white w-8 h-8 text-center font-extrabold  ">L3</p>)}
+      </div>
     </div>
   );
 };
