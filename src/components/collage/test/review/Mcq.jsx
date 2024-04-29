@@ -107,7 +107,7 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
             name="Title"
           />
         )}
-        <div className="px-5 pb-4 flex flex-col gap-4 pt-10">
+        <div className="px-5 pb-4 flex flex-col gap-4 pt-4">
           {mcq.Options.map((ques, index) => (
             <span className="flex gap-2">
               <div className="flex w-5 justify-center">
