@@ -49,8 +49,8 @@ const ResultsOverview = () => {
       <Header />
       <Info user={user} assessment={assessment} />
 
-      <About Description={assessment.description} />
-      <Description topics={assessment.topics} />
+      <About Description={assessment?.description} />
+      <Description topics={assessment?.topics} />
 
       <Toggle assessment={assessment} />
     </div>
