@@ -1,7 +1,14 @@
-import React from 'react'
+import React,{useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllTransactions } from '../../../../redux/collage/account/paymentSlice';
 
 const Transactions = () => {
     const transactions = [1,2,3,4,5,6,]
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getAllTransactions());
+    }, [dispatch]);
+
   return (
     <section className="transactions flex flex-col w-full p-6 ]">
         <h2 className='font-dmSans font-bold mb-3 text-xl'>Previous Transactions</h2>

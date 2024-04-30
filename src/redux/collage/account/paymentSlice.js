@@ -53,14 +53,78 @@ export const getPayments = createAsyncThunk(
     }
     );
 
+export const getAllPlans = createAsyncThunk(
+    "payment/getAllPlans",
+    async (data, { rejectWithValue }) => {
+        try {
+        const response = await axios.get(
+            `${REACT_APP_API_URL}/api/admin/all-plans`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem("auth-token"),
+              },
+            }
+        );
+      
+        return response.data.plans;
+        } catch (err) {
+        return rejectWithValue(err.response.data);
+        }
+    }
+    );
+
+    export const getAllTransactions = createAsyncThunk(
+        "payment/getAllTransactions ",
+        async (data, { rejectWithValue }) => {
+            try {
+            const response = await axios.get(
+                `${REACT_APP_API_URL}/api/admin/all-transactions`,
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("auth-token"),
+                  },
+                }
+            );
+          
+            return response.data.transactions;
+            } catch (err) {
+            return rejectWithValue(err.response.data);
+            }
+        }
+        );
+export const selectAPlan = createAsyncThunk(
+    "payment/selectAPlan",
+    async (data, { rejectWithValue }) => {
+        try {
+        const response = await axios.post(
+            `${REACT_APP_API_URL}/api/admin/select-plan/${data.planId}`,
+            data,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem("auth-token"),
+              },
+            }
+        );
+      
+        return response.data;
+        } catch (err) {
+        return rejectWithValue(err.response.data);
+        }
+    }
+    );
 
 
 
 
 export const paymentSlice = createSlice({
     initialState: {
+        plans: [],
         payment: [],
         payments: [],
+        transactions: [],
         status: null,
     },
     name: "payment",
@@ -98,7 +162,42 @@ export const paymentSlice = createSlice({
         });
         builder.addCase(getPayments.rejected, (state, action) => {
             state.status = "failed";
+        })
+        builder.addCase(getAllPlans.pending, (state, action) => {
+            state.status = "loading";
+        }
+        );
+        builder.addCase(getAllPlans.fulfilled, (state, { payload }) => {
+            state.plans = payload;
+            state.status = "success";
         });
+        builder.addCase(getAllPlans.rejected, (state, action) => {
+            state.status = "failed";
+        })
+        builder.addCase(selectAPlan.pending, (state, action) => {
+            state.status = "loading";
+        }
+        );
+        builder.addCase(selectAPlan.fulfilled, (state, { payload }) => {
+            state.status = "success";
+            toast.success("Plan selected successfully");
+        });
+        builder.addCase(selectAPlan.rejected, (state, action) => {
+            state.status = "failed";
+        })
+        builder.addCase(getAllTransactions.pending, (state, action) => {
+            state.status = "loading";
+        }
+        )
+        builder.addCase(getAllTransactions.fulfilled, (state, { payload }) => {
+            state.transactions = payload;
+            console.log(payload);
+            state.status = "success";
+        });
+        builder.addCase(getAllTransactions.rejected, (state, action) => {
+            state.status = "failed";
+        })
+
     },
 });
 

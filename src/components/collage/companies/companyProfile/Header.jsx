@@ -10,7 +10,7 @@ const Header = () => {
       <span className="flex gap-4">
         <button
           className="bg-gray-200  self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16"
-          // onClick={() => navigate(-1)}
+          onClick={() => navigate(-1)}
         >
           <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
         </button>
