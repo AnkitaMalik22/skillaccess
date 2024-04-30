@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { FaArrowRightLong } from "react-icons/fa6";
 import {
+  getSecretQr,
   selectAuth,
   updatePassword,
 } from "../../../../redux/collage/auth/authSlice";
@@ -12,6 +13,8 @@ import toast from "react-hot-toast";
 import QrPop from "../../../PopUps/QrPop";
 
 const Security = () => {
+  const { qr } = useSelector((state) => state.collageAuth);
+
   const dispatch = useDispatch();
   const { user, isLoggedIn } = useSelector((state) => state.collageAuth);
 
@@ -33,10 +36,11 @@ const Security = () => {
   );
 
   const handleOptionChange = (option) => {
-
     setSelectedOption(option);
     console.log(option);
     if (option === "securityApp") {
+      setSelectedOption("securityApp");
+      setShowQR(true);
       console.log("securityApp clicked");
       dispatch(selectAuth({ type: "qr" }));
     } else if (option === "textMessage") {
@@ -91,6 +95,11 @@ const Security = () => {
   //   }
   // };
   const [showQR, setShowQR] = useState(false);
+
+  useEffect(() => {
+    console.log("ue");
+    dispatch(getSecretQr());
+  }, []);
   return (
     <div className="w-11/12 mx-auto pt-4">
       <Header />
@@ -172,7 +181,7 @@ const Security = () => {
                 {/* You'll get a code from your<br></br> security app. */}
               </p>
             </div>
-           
+
             {/* {selectedOption === "securityApp" && (
               <button
                 onClick={handleVerificationClick}
@@ -183,16 +192,17 @@ const Security = () => {
             )} */}
           </div>
           <div className="">
-          <button
-                
+            {selectedOption === "securityApp" && (
+              <button
                 className="flex gap-2 text-xs font-bold px-6 py-2 text-[#fff]  rounded-[12px] bg-blue-700"
                 onClick={() => setShowQR(true)}
               >
-                Show Qr Code <FaArrowRightLong className="self-center text-lg text-white ml-4" />
+                Show Qr Code{" "}
+                <FaArrowRightLong className="self-center text-lg text-white ml-4" />
               </button>
-              </div>
+            )}
+          </div>
         </div>
-     
       </div>
 
       <div className="flex gap-40 mt-10">
@@ -222,7 +232,11 @@ const Security = () => {
                   type === "text" ? setType("password") : setType("text");
                 }}
               >
-           {  type === "text" ?    <LuEye className="text-gray-400 text-2xl" /> : <LuEyeOff className="text-gray-400 text-2xl" />}
+                {type === "text" ? (
+                  <LuEye className="text-gray-400 text-2xl" />
+                ) : (
+                  <LuEyeOff className="text-gray-400 text-2xl" />
+                )}
               </button>
             </div>
           </div>
@@ -246,7 +260,11 @@ const Security = () => {
                   type1 === "text" ? setType1("password") : setType1("text");
                 }}
               >
-           {  type1 === "text" ?    <LuEye className="text-gray-400 text-2xl" /> : <LuEyeOff className="text-gray-400 text-2xl" />}
+                {type1 === "text" ? (
+                  <LuEye className="text-gray-400 text-2xl" />
+                ) : (
+                  <LuEyeOff className="text-gray-400 text-2xl" />
+                )}
               </button>
             </div>
           </div>
@@ -271,7 +289,11 @@ const Security = () => {
                   type2 === "text" ? setType2("password") : setType2("text");
                 }}
               >
-           {  type2 === "text" ?    <LuEye className="text-gray-400 text-2xl" /> : <LuEyeOff className="text-gray-400 text-2xl" />}
+                {type2 === "text" ? (
+                  <LuEye className="text-gray-400 text-2xl" />
+                ) : (
+                  <LuEyeOff className="text-gray-400 text-2xl" />
+                )}
               </button>
             </div>
           </div>
@@ -283,9 +305,7 @@ const Security = () => {
             Update Password
           </button>
         </div>
-        {showQR && (
-          < QrPop/>
-        )}
+        {showQR && <QrPop onCancel={() => setShowQR(false)} qr={qr} />}
       </div>
     </div>
   );

@@ -215,7 +215,9 @@ export const getSecretQr = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${REACT_APP_API_URL}/api/college/2fa/getSecretQr`,
+        `${REACT_APP_API_URL}/api/college/2fa/getSecretQr/${localStorage.getItem(
+          "userId"
+        )}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -749,8 +751,8 @@ const collageAuthSlice = createSlice({
       .addCase(getCollege.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.user = action.payload.college;
-        state.credit =action.payload.credit
-        localStorage.setItem("userId" , action.payload.college._id)
+        state.credit = action.payload.credit;
+        localStorage.setItem("userId", action.payload.college._id);
 
         // Add any fetched posts to the array
         console.log("fullfilled get college");
