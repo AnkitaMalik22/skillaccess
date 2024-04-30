@@ -29,7 +29,9 @@ const AddMcq = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const level = searchParams.get("level");
-  console.log(section);
+  const addType = searchParams.get("addType");
+
+
   const [question, setQuestion] = useState({
     QuestionLevel: level === "adaptive" ? "beginner" : level,
     id: search.get("topicId") + Date.now(),
@@ -124,7 +126,7 @@ const AddMcq = () => {
     }
   };
 
-  const handleAddQuestion = (type) => {
+  const handleAddQuestion = async(type) => {
     console.log(
       question.Title,
       question.Title === "",
@@ -157,12 +159,14 @@ const AddMcq = () => {
       return;
     } else {
       if (isPrev) {
-        dispatch(
+        console.log("calling 1 --" , addType)
+       await dispatch(
           addMcq({ question: question, id: id, prev: true, index: count + 1 })
-        ).then(() => {
+        )
+        // .then(() => {
 
-        setIsPrev(false);
-        setQuestion({
+        await setIsPrev(false);
+        await setQuestion({
           QuestionLevel: level === "adaptive" ? "beginner" : level,
           id: search.get("topicId") + Date.now(),
           Title: "",
@@ -171,25 +175,32 @@ const AddMcq = () => {
           AnswerIndex: null,
           section: search.get("topicId"),
         })
-        setCount(topics[id].questions.length - 1)
-        if (type === "save") {
+        await setCount(topics[id].questions.length - 1)
+        if (type === "save" && addType !== 'test') {
           level === "adaptive"
             ? navigate(`/collage/test/selectAdaptive?level=${level}`)
             : navigate(`/collage/test/select?level=${level}`);
+        }else{
+          navigate(-1);
         }
-        });
+        // });
         
       } else {
-        dispatch(addMcq({ question: question, id: id, prev: false })).then(()=>{
-          console.log("calling 2 --" , ADD_QUESTION_LOADING)
-          if (type === "save") 
+        dispatch(addMcq({ question: question, id: id, prev: false }))
+        // .then(()=>{
+          console.log("calling 2 --" , addType)
+          if (type === "save" && addType !== 'test')
           {
           level === "adaptive"
             ? navigate(`/collage/test/selectAdaptive?level=${level}`)
             : navigate(`/collage/test/select?level=${level}`);
+          }else if (type !== "save" && addType == 'test'){
+           
+          }else{
+            navigate(-1);
           }
-        })
-        setQuestion({
+        // })
+        await setQuestion({
           QuestionLevel: level === "adaptive" ? "beginner" : level,
           id: search.get("topicId") + Date.now(),
           Title: "",

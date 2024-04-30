@@ -64,7 +64,7 @@ const AddEssay = () => {
     setQuestion({ ...question, [e.target.name]: e.target.value });
   };
 
-  const handleSave = (saveType) => {
+  const handleSave =async (saveType) => {
     if (addType === "topic") {
       if (
         !question.Title ||
@@ -78,26 +78,27 @@ const AddEssay = () => {
       } else {
         if (isPrev) {
           //dispatch api call to update by ID
-          dispatch(
+          await dispatch(
             editQuestionById({
               index: countDetail + 1,
               type: "essay",
               id: question._id,
               question: question,
             })
-          ).then(() =>{setCountDetail(currentTopic.essay.length - 1);
+          )
+          await setCountDetail(currentTopic.essay.length - 1);
 
-            setQuestion({
+          await setQuestion({
               Title: "",
               Duration: 0,
               id: id + Date.now(),
               QuestionLevel: level,
-            })})
+            })
           ;
         } else {
-          dispatch(addEssayToTopic({ data: question, id: id, type: type }));
-          dispatch(addQuestionToTopic({ data: question, id: id, type: type })).then(()=>{
-            setQuestion({
+          await dispatch(addEssayToTopic({ data: question, id: id, type: type }));
+          await dispatch(addQuestionToTopic({ data: question, id: id, type: type }))
+          await setQuestion({
               Title: "",
               Duration: 0,
               id: id + Date.now(),
@@ -106,7 +107,7 @@ const AddEssay = () => {
             if(!ADD_QUESTION_LOADING){
               if (saveType === "save") navigate(-1);
             }
-          })
+
           
         }
       }
@@ -142,12 +143,12 @@ const AddEssay = () => {
           })
           ;
         } else {
-          dispatch(
+         await dispatch(
             addEssay({ data: question, id: id, type: type, prev: false })
-          ).then(() => {
-            setIsPrev(false);
-          setCount(topics[id].essay.length - 1);
-          setQuestion({
+          )
+          await setIsPrev(false);
+          await setCount(topics[id].essay.length - 1);
+          await setQuestion({
             QuestionLevel: level,
 
             id: ID + Date.now(),
@@ -158,7 +159,7 @@ const AddEssay = () => {
           if (!ADD_QUESTION_LOADING) {
             if (saveType === "save") navigate(-1);
           }
-          })
+        
           
         }
       }

@@ -84,7 +84,7 @@ const AddParagraph = () => {
   //   console.log(question);
   // }, [question]);
 
-  const handleSave = (saveType) => {
+  const handleSave =async (saveType) => {
     if (addType === "topic") {
       if (
         !question.Title ||
@@ -121,13 +121,14 @@ const AddParagraph = () => {
             id: ID + Date.now(),
           });
         } else {
-          dispatch(
+         await dispatch(
             addFindAnsToTopic({ data: question, id: id, type: "findAnswer" })
           ) 
-          dispatch(
+         await dispatch(
             addQuestionToTopic({ data: question, id: id, type: "findAnswer" })
-          ).then(()=>{
-            setQuestion({
+          )
+          // .then(()=>{
+         await   setQuestion({
               QuestionLevel: level,
               Title: "",
               section: ID,
@@ -138,7 +139,7 @@ const AddParagraph = () => {
             if(!ADD_QUESTION_LOADING){
               if (saveType === "save") navigate(-1);
             }
-          })
+          // })
         }
       }
     } else {
@@ -152,7 +153,7 @@ const AddParagraph = () => {
         return;
       } else {
         if (isPrev) {
-          dispatch(
+          await dispatch(
             addFindAns({
               data: question,
               id: id,
@@ -160,9 +161,10 @@ const AddParagraph = () => {
               prev: true,
               index: count + 1,
             })
-          ).then(()=>{
-            setCount(topics[id].findAnswers.length - 1);
-          setQuestion({
+          )
+          // .then(()=>{
+          await  setCount(topics[id].findAnswers.length - 1);
+          await setQuestion({
             questions: [{ question: "" }],
             QuestionLevel: level,
             id: ID + Date.now(),
@@ -174,7 +176,7 @@ const AddParagraph = () => {
           if(!ADD_QUESTION_LOADING){
             if (saveType === "save") navigate(-1);
           }
-          })
+          // })
           
         } else {
           dispatch(
@@ -185,9 +187,10 @@ const AddParagraph = () => {
               prev: false,
               index: count + 1,
             })
-          ).then(() => {
+          )
+          // .then(() => {
             
-            setQuestion({
+          await setQuestion({
               questions: [{ question: "" }],
               QuestionLevel: level,
               id: ID + Date.now(),
@@ -199,7 +202,7 @@ const AddParagraph = () => {
             if (!ADD_QUESTION_LOADING) {
               if (saveType === "save") navigate(-1);
             }
-          });
+          // });
           // if (type === "save") navigate(-1);
           // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
           
