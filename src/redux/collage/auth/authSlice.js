@@ -828,6 +828,8 @@ const collageAuthSlice = createSlice({
       .addCase(updatePassword.fulfilled, (state, action) => {
         state.status = action.payload;
         toast.success("Password Updated");
+        localStorage.removeItem("auth-token");
+        window.location.replace('/');
         // state.status = action.payload
         // state.isLoggedIn = false;
         // state.user = action.payload.user;

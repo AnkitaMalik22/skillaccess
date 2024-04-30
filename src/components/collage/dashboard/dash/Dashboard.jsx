@@ -119,7 +119,7 @@ export default function Dashboard() {
                 Student Placed
               </h2>
               <h2 className="text-green-600 text-center font-bold text-[17px] my-4 ">
-                14.34%
+                0%
               </h2>
             </div>
 
@@ -137,7 +137,7 @@ export default function Dashboard() {
                 className="text-green-600 text-center  my-4 font-bold text-[17px] hover:cursor-pointer"
                 onClick={() => navigate("/collage/dashboard/jobs")}
               >
-                35.34%
+                0%
               </h2>
             </div>
 

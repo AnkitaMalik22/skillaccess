@@ -176,6 +176,7 @@ const AddMcq = () => {
           level === "adaptive"
             ? navigate(`/collage/test/selectAdaptive?level=${level}`)
             : navigate(`/collage/test/select?level=${level}`);
+          
         }
         });
         
@@ -187,6 +188,7 @@ const AddMcq = () => {
           level === "adaptive"
             ? navigate(`/collage/test/selectAdaptive?level=${level}`)
             : navigate(`/collage/test/select?level=${level}`);
+          
           }
         })
         setQuestion({

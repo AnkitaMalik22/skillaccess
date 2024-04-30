@@ -18,7 +18,7 @@ const Header = () => {
         >
           <img src="../../images/icons/sales.jpg" alt="" />
         </button>
-        <h2 className="text-[28px] leading-[36px] font-bold self-center font-dmSans">
+        <h2 className="text-[24px] leading-[36px] font-bold self-center font-dmSans">
           Companies
         </h2>
       </span>
