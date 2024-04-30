@@ -35,6 +35,7 @@ const Header = ({
 
   const handleSaveNext = () => {
     handleSave("save");
+    
   };
   // useEffect(() => {
   //   dispatch(setTest({questions}));

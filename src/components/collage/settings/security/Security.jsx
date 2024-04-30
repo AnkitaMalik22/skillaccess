@@ -3,12 +3,13 @@ import Header from "./Header";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LuEye, LuEyeOff } from "react-icons/lu";
-
+import { FaArrowRightLong } from "react-icons/fa6";
 import {
   selectAuth,
   updatePassword,
 } from "../../../../redux/collage/auth/authSlice";
 import toast from "react-hot-toast";
+import QrPop from "../../../PopUps/QrPop";
 
 const Security = () => {
   const dispatch = useDispatch();
@@ -89,7 +90,7 @@ const Security = () => {
   //     // navigate("/collage/settings/security/secondFA");
   //   }
   // };
-
+  const [showQR, setShowQR] = useState(false);
   return (
     <div className="w-11/12 mx-auto pt-4">
       <Header />
@@ -171,6 +172,7 @@ const Security = () => {
                 {/* You'll get a code from your<br></br> security app. */}
               </p>
             </div>
+           
             {/* {selectedOption === "securityApp" && (
               <button
                 onClick={handleVerificationClick}
@@ -180,7 +182,17 @@ const Security = () => {
               </button>
             )} */}
           </div>
+          <div className="">
+          <button
+                
+                className="flex gap-2 text-xs font-bold px-6 py-2 text-[#fff]  rounded-[12px] bg-blue-700"
+                onClick={() => setShowQR(true)}
+              >
+                Show Qr Code <FaArrowRightLong className="self-center text-lg text-white ml-4" />
+              </button>
+              </div>
         </div>
+     
       </div>
 
       <div className="flex gap-40 mt-10">
@@ -271,6 +283,9 @@ const Security = () => {
             Update Password
           </button>
         </div>
+        {showQR && (
+          < QrPop/>
+        )}
       </div>
     </div>
   );

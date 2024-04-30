@@ -23,6 +23,7 @@ const Review = () => {
   // console.log(questionType);
   const { currentTopic, topics } = useSelector((state) => state.test);
   useEffect(() => {
+  
     if (type === "section") {
       // const topics = JSON.parse(localStorage.getItem("topics"));
       setName(topics[id].Heading);
@@ -63,6 +64,7 @@ const Review = () => {
           JSON.parse(localStorage.getItem("assessment")).topics[id].compiler
         );
     }
+    
   }, [topics, "", currentTopic]);
   console.log(currentTopic);
 
@@ -210,24 +212,36 @@ const Review = () => {
         {noQuestionsMessage && (
           <div className="text-red-500 text-center">{noQuestionsMessage}</div>
         )}
-        {questionType === "mcq" ? (
-          questions?.length > 0 ? (
-            questions.map((question, i) => {
-              // console.log(question);
-              return (
-                <Mcq
-                  view={view}
-                  type={type}
-                  id={id}
-                  Number={i}
-                  question={question}
-                  Title={question.Title}
-                  Options={question.Options}
-                  AnswerIndex={question.AnswerIndex}
-                />
-              );
-            })
-          ) : (
+     {questionType === "mcq" ? (
+  questions?.length > 0 ? (
+    [...questions] // Create a copy of the questions array
+      // Sort questions based on level
+      .sort((a, b) => {
+        // Define the order of levels
+        const levelsOrder = ['beginner', 'intermediate', 'advanced'];
+
+        // Compare the levels of questions
+        const levelAIndex = levelsOrder.indexOf(a.QuestionLevel);
+        const levelBIndex = levelsOrder.indexOf(b.QuestionLevel);
+
+        // Return the comparison result
+        return levelAIndex - levelBIndex;
+      })
+      // Map over sorted questions
+      .map((question, i) => (
+        <Mcq
+          key={i}
+          view={view}
+          type={type}
+          id={id}
+          Number={i}
+          question={question}
+          Title={question.Title}
+          Options={question.Options}
+          AnswerIndex={question.AnswerIndex}
+        />
+      ))
+  ): (
             <></>
           )
         ) : questionType === "findAnswer" ? (
