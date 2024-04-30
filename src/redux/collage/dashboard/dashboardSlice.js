@@ -246,7 +246,7 @@ const dashboardSlice = createSlice({
       .addCase(getNewCompanies.fulfilled, (state, action) => {
         state.status = "success";
         state.newCompanies = action.payload;
-        console.log(state.newCompanies);
+        console.log(state.newCompanies , "new companies");
       })
       .addCase(getNewCompanies.rejected, (state, action) => {
         state.status = "failed";
