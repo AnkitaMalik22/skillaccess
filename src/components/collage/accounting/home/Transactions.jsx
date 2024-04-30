@@ -3,11 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllTransactions } from '../../../../redux/collage/account/paymentSlice';
 
 const Transactions = () => {
-    const transactions = [1,2,3,4,5,6,]
+    // const transactions = [1,2,3,4,5,6,];
     const dispatch = useDispatch();
+    const {transactions,fetch_loading} = useSelector((state) => state.payment);
     useEffect(() => {
       dispatch(getAllTransactions());
     }, [dispatch]);
+
+
+    const covertToDateFormat = (date) => {
+      const d = new Date(date);
+      return d.toDateString();
+    };
 
   return (
     <section className="transactions flex flex-col w-full p-6 ]">
@@ -20,16 +27,20 @@ const Transactions = () => {
 
         </div>
         <div className="acc-table  flex flex-col w-full rounded-lg font-dmSans font-medium">
-      {
-        transactions.map((transaction) => (
-            <div className="grid grid-cols-3 items-center justify-between bg-white w-full p-3 mb-3 rounded-lg">
-                <div>12 Dec 2021</div>
-                <div>Basic Plan</div>
-                <div>100</div>
-            </div>
-        ))
-      }
-        
+          {
+            fetch_loading && <div>Loading...</div>
+          }
+          {!fetch_loading && transactions?.length > 0 ? (
+            transactions?.map((transaction) => (
+              <div className="grid grid-cols-3 items-center justify-between bg-white w-full p-3 mb-3 rounded-lg">
+                <div>{covertToDateFormat(transaction.Date)}</div>
+                <div>{transaction.planName}</div>
+                <div>{transaction.credit}</div>
+              </div>
+            ))
+          ) : (
+            <div>{!fetch_loading && 'No transactions found.'}</div>
+          )}
         </div>
         </div>
         

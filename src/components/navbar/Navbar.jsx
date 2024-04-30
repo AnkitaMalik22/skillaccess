@@ -86,7 +86,7 @@ const Navbar = (props) => {
           <button className="border-2 border-gray-400  text-blue-400 rounded-lg p-[0.3rem] relative flex items-center ">
             {/* <FiBell className="text-lg" />{" "} */}
             <FaCoins/>
-            <h1 className="text-blue px-2">{userDetails?.credit?.credit  ?  userDetails?.credit?.credit : 0}</h1>
+            <h1 className="text-blue px-2">{userDetails?.balance?.credit  ?  userDetails?.balance?.credit : 0}</h1>
             {/* <div className="rounded-full h-2 w-2 bg-[#0090FF]  absolute top-1 right-2"></div> */}
           </button>
 
