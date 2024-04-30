@@ -118,6 +118,30 @@ export const selectAPlan = createAsyncThunk(
 
 
 
+export const cancelAPlan = createAsyncThunk(
+    "payment/cancelAPlan",
+    async (data, { rejectWithValue }) => {
+        try {
+        const response = await axios.post(
+            `${REACT_APP_API_URL}/api/admin/cancel-plan/${data.planId}`,
+            data,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem("auth-token"),
+              },
+            }
+        );
+
+        return response.data;
+        } catch (err) {
+        return rejectWithValue(err.response.data);
+        }
+    }   
+    );
+
+
+
 
 export const paymentSlice = createSlice({
     initialState: {
@@ -126,6 +150,9 @@ export const paymentSlice = createSlice({
         payments: [],
         transactions: [],
         status: null,
+       select_loading : false,
+       fetch_loading : false,
+       cancel_loading : false,
     },
     name: "payment",
     reducers: {
@@ -176,27 +203,51 @@ export const paymentSlice = createSlice({
         })
         builder.addCase(selectAPlan.pending, (state, action) => {
             state.status = "loading";
+            state.select_loading = true;
         }
         );
         builder.addCase(selectAPlan.fulfilled, (state, { payload }) => {
             state.status = "success";
+            state.select_loading = false;
             toast.success("Plan selected successfully");
         });
         builder.addCase(selectAPlan.rejected, (state, action) => {
             state.status = "failed";
+            state.select_loading = false;
+            toast.error("Failed to select plan");
         })
         builder.addCase(getAllTransactions.pending, (state, action) => {
             state.status = "loading";
+            state.fetch_loading = true;
         }
         )
         builder.addCase(getAllTransactions.fulfilled, (state, { payload }) => {
             state.transactions = payload;
             console.log(payload);
             state.status = "success";
-        });
+            state.fetch_loading = false;
+        })
         builder.addCase(getAllTransactions.rejected, (state, action) => {
             state.status = "failed";
+            state.fetch_loading = false;
+            
         })
+        builder.addCase(cancelAPlan.pending, (state, action) => {
+            state.status = "loading";
+            state.cancel_loading = true;
+        }
+        )
+        builder.addCase(cancelAPlan.fulfilled, (state, { payload }) => {
+            state.status = "success";
+            state.cancel_loading = false;
+            toast.success("Plan cancelled successfully");
+        })
+        builder.addCase(cancelAPlan.rejected, (state, action) => {
+            state.status = "failed";
+            state.cancel_loading = false;
+            toast.error("Failed to cancel plan");
+        })
+
 
     },
 });
