@@ -36,7 +36,7 @@ const Header = ({ show, setShow }) => {
             className="mx-auto sm:h-6 sm:w-6 h-4 w-4"
           />
         </button>
-        <h2 className="text-xl font-bold self-center">Inbox</h2>
+        <h2 className="text-2xl font-bold self-center">Inbox</h2>
 
         <Disclosure
           as={"div"}

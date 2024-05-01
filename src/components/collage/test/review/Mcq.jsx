@@ -22,6 +22,9 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   const [mcq, setMcq] = useState(question);
   console.log(question);
   const dispatch = useDispatch();
+
+  console.log(question);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
 

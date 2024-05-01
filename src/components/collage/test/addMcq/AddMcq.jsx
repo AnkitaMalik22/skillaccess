@@ -194,10 +194,12 @@ const AddMcq = () => {
           level === "adaptive"
             ? navigate(`/collage/test/selectAdaptive?level=${level}`)
             : navigate(`/collage/test/select?level=${level}`);
+
           }else if (type !== "save" && addType == 'test'){
            
           }else{
             navigate(-1);
+
           }
         // })
         await setQuestion({
