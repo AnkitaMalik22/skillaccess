@@ -65,6 +65,7 @@ const collageState = {
   USER_LOADING: false,
   dummyUser: null,
   selectedPlan: null,
+  balance: 0,
 };
 
 export const deleteMail = createAsyncThunk(
@@ -751,11 +752,11 @@ const collageAuthSlice = createSlice({
         state.isLoggedIn = true;
         state.user = action.payload.college;
         state.credit ={
-          credit: action.payload.credit[0].credit,
-          limit: action.payload.credit[0].limit,
+          credit: action.payload?.credit[0]?.credit,
+          limit: action.payload?.credit[0]?.limit,
         }
-        
-        state.selectedPlan = action.payload.credit[0];
+        state.balance = action.payload?.balance;
+        state.selectedPlan = action.payload?.credit[0];
         localStorage.setItem("userId" , action.payload.college._id)
 
         // Add any fetched posts to the array
