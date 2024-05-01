@@ -48,6 +48,70 @@ const Assessment = () => {
       },
     },
   });
+  console.log(assessment);
+  const handleCalculateTime = () => {
+    const topicTimes = assessment.topics.reduce((acc, topic) => {
+      const existingIndex = acc.findIndex(
+        (item) => item.type === topic.Type && item.Heading === topic.Heading
+      );
+      let totalMcq = 0,
+        totalEssay = 0,
+        totalVideo = 0,
+        totalCompiler = 0,
+        totalFindAnswer = 0;
+
+      if (topic.Type === "essay") {
+        totalEssay = topic.essay?.reduce((acc, curr) => {
+          return acc + parseInt(curr.Duration);
+        }, 0);
+      }
+      if (topic.Type === "video") {
+        totalVideo = topic.video?.reduce((acc, curr) => {
+          return acc + parseInt(curr.Duration);
+        }, 0);
+      }
+      if (topic.Type === "compiler") {
+        totalCompiler = topic.compiler?.reduce((acc, curr) => {
+          return acc + parseInt(curr.Duration);
+        }, 0);
+      }
+      if (topic.Type === "findAnswer") {
+        totalFindAnswer = topic.findAnswers?.reduce((acc, curr) => {
+          return acc + parseInt(curr.Duration);
+        }, 0);
+      }
+
+      if (topic.Type === "mcq") {
+        totalMcq = topic.questions?.reduce((acc, curr) => {
+          return acc + parseInt(curr.Duration);
+        }, 0);
+      }
+
+      if (existingIndex !== -1) {
+        // If entry exists, add to existing total
+        acc[existingIndex].total +=
+          totalMcq + totalEssay + totalVideo + totalCompiler + totalFindAnswer;
+      } else {
+        // If entry doesn't exist, push a new entry
+        acc.push({
+          type: topic.Type,
+          Heading: topic.Heading,
+          total:
+            totalMcq +
+            totalEssay +
+            totalVideo +
+            totalCompiler +
+            totalFindAnswer,
+        });
+      }
+
+      return acc;
+    }, []);
+
+    return topicTimes;
+  };
+  const totalTime = handleCalculateTime();
+  console.log(totalTime);
   return (
     <div className="font-dmSans text-sm font-bold">
       <Header name={assessment.name} />
@@ -125,16 +189,13 @@ const Assessment = () => {
       <div className="  w-[95.6%] mx-auto rounded-lg tracking-wide justify-between flex font-dmSans  mt-8">
         <div className="md:w-[58%] ">
           {assessment?.topics?.map((topic, index) => (
-            <div className="w-full grid grid-cols-6 row-span-2 my-4 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
+            <div className="w-full  my-4 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
               {" "}
               {/* heading */}
-              <div className="col-span-2 ">
+              <div className="flex justify-between px-4 ">
                 <h2 className="self-center text-xs sm:text-sm">
                   {topic.Heading}
                 </h2>
-              </div>
-              {/* type */}
-              <div className="col-span-2 ">
                 <span className="flex gap-1">
                   <ImFileText className="text-blued self-center " />
                   <p className="self-center text-xs text-gray-500   sm:text-sm">
@@ -145,26 +206,28 @@ const Assessment = () => {
                     {topic.Type === "video" && "Video"}
                   </p>
                 </span>
-              </div>
-              {/* time */}
-              <div className="col-span-2 flex justify-end ">
                 <div className="flex gap-1 ">
                   <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
                   <p className="text-gray-400 text-xs self-center">
-                    {topic.Time} mins
+                  {
+                          totalTime.find(
+                            (timeObj) =>
+                              timeObj.type === topic.Type &&
+                              timeObj.Heading === topic.Heading
+                          )?.total
+                        }{" "} mins
                   </p>
                 </div>
               </div>
+              {/* type */}
+          
               {/* cross */}
               {/* <div className="col-span-1  flex justify-center">
                 <RxCross1 className="self-center text-red-600 w-5 h-5" />
               </div> */}
               {/* desc */}
-              <div className="col-span-4 line-clamp-2 text-xs font-normal text-gray-400 ">
+              <div className="flex px-4 justify-between mt-4 text-xs font-normal text-gray-400 ">
                 <p className="line-clamp-2">{topic.Description}</p>
-              </div>
-              {/* details */}
-              <div className="col-span-2  flex  justify-end">
                 <button
                   className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs"
                   onClick={() =>
@@ -176,6 +239,8 @@ const Assessment = () => {
                   Details
                 </button>
               </div>
+              {/* details */}
+          
               {/* edit */}
               {/* <div className="col-span-1  flex justify-center">
                 <PiPencilSimpleLine
