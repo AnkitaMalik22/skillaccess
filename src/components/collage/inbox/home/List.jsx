@@ -21,12 +21,11 @@ import socketIOClient from "socket.io-client";
 import convertDate from "../../../../util/getDate";
 
 const ENDPOINT = process.env.REACT_APP_API_URL; // Socket.IO server endpoint
-const List = ({ show }) => {
+const List = ({ show, inboxType, setInboxType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [queries, setQueries] = useState({ limit: 50, skip: 0 });
-  const [inboxType, setInboxType] = useState("Received");
 
   const user = useSelector(getInbox);
   const [arr, setArr] = useState([

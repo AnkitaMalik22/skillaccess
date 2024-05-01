@@ -35,15 +35,11 @@ const Compose = () => {
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
 
-    socket.on("emailSent", (data) => {
+    socket.on("message", (data) => {
       // Handle email sent event
       console.log("ems");
       dispatch(getMail({ limit: 50, skip: 0 }));
     });
-
-    return () => {
-      socket.disconnect();
-    };
   }, []);
 
   // <<<<<<< bug-fix-test
