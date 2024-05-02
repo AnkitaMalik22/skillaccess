@@ -311,7 +311,7 @@ const Name = () => {
         />
 {errors.name && <span className="text-red-500 ml-5 pt-2">{errors.name}</span>}
         <input
-          type="number"
+          type="tel"
           name="totalAttempts"
           className={`w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
             errors.totalAttempts ? "border-red-500" : "border-none"
@@ -323,7 +323,7 @@ const Name = () => {
          {errors.totalAttempts && <span className="text-red-500 ml-5 pt-2">{errors.totalAttempts}</span>}
         <input
           name="totalQuestions"
-          type="number"
+          type="tel"
           className={`w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
             errors.totalQuestions? "border-red-500" : "border-none"
           }`}          

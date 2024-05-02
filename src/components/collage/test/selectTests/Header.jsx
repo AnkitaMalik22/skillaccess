@@ -51,7 +51,7 @@ const Header = () => {
                   className=" object-scale-down"
                 />
               </span>
-              <h3>Add Questions</h3>
+              <h3>MINS</h3>
             </div>
           </div>
         </button>
