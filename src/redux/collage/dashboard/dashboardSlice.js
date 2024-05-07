@@ -10,6 +10,7 @@ const initialState = {
   newCompanies: [],
   newJobs: [],
   recentPlacements: [],
+  jobDetails: {},
 };
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -130,6 +131,7 @@ export const getTotalJobs = createAsyncThunk(
         }
       );
       const res = req.data;
+      console.log(res.jobs);
       return res.jobs;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -168,6 +170,22 @@ export const getNewJobs = createAsyncThunk(
         `${REACT_APP_API_URL}/api/student/dashboard/newjobs`
       );
       const res = req.data;
+      return res.jobs;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getJobById = createAsyncThunk(
+  "dashboard/jobDetails",
+  async (jobId, { rejectWithValue }) => {
+    try {
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/company/jobs/${jobId}`
+      );
+      const res = req.data;
+      console.log(res);
       return res.jobs;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -246,7 +264,7 @@ const dashboardSlice = createSlice({
       .addCase(getNewCompanies.fulfilled, (state, action) => {
         state.status = "success";
         state.newCompanies = action.payload;
-        console.log(state.newCompanies , "new companies");
+        console.log(state.newCompanies, "new companies");
       })
       .addCase(getNewCompanies.rejected, (state, action) => {
         state.status = "failed";
@@ -258,11 +276,23 @@ const dashboardSlice = createSlice({
       .addCase(getNewJobs.fulfilled, (state, action) => {
         state.status = "success";
         state.newJobs = action.payload;
+        
       })
       .addCase(getNewJobs.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(getJobById.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(getJobById.fulfilled, (state, action) => {
+        state.jobDetails = action.payload;
+      })
+      .addCase(getJobById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
+      
   },
 });
 

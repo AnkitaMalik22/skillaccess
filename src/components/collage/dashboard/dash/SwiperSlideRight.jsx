@@ -11,8 +11,8 @@ const SwiperSlideRight = () => {
   useEffect(() => {
     dispatch(getNewJobs());
   }, [dispatch]);
-
-  const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+console.log(newJobs);
+   const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <Swiper
@@ -45,23 +45,23 @@ const SwiperSlideRight = () => {
 
 
       {
-        jobs.map((job) => (
+        newJobs.map((job) => (
           <SwiperSlide>
           <div className=" bg-white  w-28 xl:w-44 h-36 rounded-lg p-3">
             <figure className="bg-white-500  mx-auto rounded-lg flex justify-center">
               <img
-                src="../intel.png"
+                src={job?.company?.basic?.logo}
                 alt="img not loaded"
-                className="w-2/3 h-2/3 self-center rounded-lg"
+                className="w-1/2 h-1/2 self-center rounded-lg"
               />
             </figure>
             <span className="">
               <h3 className="text-xs  font-bold text-center break-words xl:mb-2">
-                Midweight UI/UX Designer
+                {job.JobTitle}
               </h3>
               <p className="text-xs  font-bold text-center break-words  ">
-                Mailchimp{" "}
-                <em className="not-italic text-gray-400">in, London, UK</em>
+                {job?.company?.location?.address}{" "}
+                <em className="not-italic text-gray-400">{job.JobLocation}</em>
               </p>
             </span>
           </div>

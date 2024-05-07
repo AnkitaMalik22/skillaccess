@@ -430,8 +430,8 @@ const CollageLayout = ({ children }) => {
                 );
               })}
 
-              <li className="mb-5 pl-8 font-dmSans text-sm font-bold text-white">
-                <h2>© 2022 skillassess</h2>
+              <li className="mb-5 pl-8 font-dmSans text-sm font-bold ">
+                <h2 className="text-[#06152B]">© 2022 skillassess</h2>
               </li>
             </ul>
           </aside>
