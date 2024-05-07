@@ -130,6 +130,7 @@ export const getTotalJobs = createAsyncThunk(
         }
       );
       const res = req.data;
+      console.log(res.jobs);
       return res.jobs;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -246,7 +247,7 @@ const dashboardSlice = createSlice({
       .addCase(getNewCompanies.fulfilled, (state, action) => {
         state.status = "success";
         state.newCompanies = action.payload;
-        console.log(state.newCompanies , "new companies");
+        console.log(state.newCompanies, "new companies");
       })
       .addCase(getNewCompanies.rejected, (state, action) => {
         state.status = "failed";

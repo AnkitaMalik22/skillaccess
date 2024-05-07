@@ -17,7 +17,7 @@ const Jobs = () => {
   const dispatch = useDispatch();
 
   // const { jobs } = useSelector((state) => state.dashboard);
-
+  console.log(jobs);
   useEffect(() => {
     dispatch(getTotalJobs());
   }, [dispatch]);
