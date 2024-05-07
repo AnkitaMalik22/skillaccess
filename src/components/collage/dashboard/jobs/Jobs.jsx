@@ -12,12 +12,12 @@ import BackIcon from "../../../buttons/BackIcon";
 import { IoIosSearch } from "react-icons/io";
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
+  // const [jobs, setJobs] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const { jobs } = useSelector((state) => state.dashboard);
-
+  const { jobs } = useSelector((state) => state.dashboard);
+console.log(jobs);
   useEffect(() => {
     dispatch(getTotalJobs());
   }, [dispatch]);
