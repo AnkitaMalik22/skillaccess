@@ -17,13 +17,21 @@ const Jobs = () => {
   const dispatch = useDispatch();
 
   const { jobs } = useSelector((state) => state.dashboard);
-console.log(jobs);
+
   useEffect(() => {
     dispatch(getTotalJobs());
   }, [dispatch]);
 
+  const calculateDaysAgo = (createdDate) => {
+    const currentDate = new Date();
+    const differenceMs = currentDate - new Date(createdDate);
+ 
+    const differenceDays = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
+   
+    return differenceDays === 0? "Today" : `${differenceDays} day${differenceDays > 1 ? "s" : ""} ago`;
+  };
   return (
-    <div>
+    <div className="mx-4">
       <div className="flex w-full mx-auto justify-between mb-2">
         <button
           className="  self-center  rounded-lg h-10 w-10 "
@@ -48,21 +56,28 @@ console.log(jobs);
       </div>
       <div className="flex flex-col gap-4  items-center  ">
         {jobs?.map((job, index) => {
+          
           return (
             <div className="flex justify-between w-[99%]" key={index}>
               <div className="sm:flex">
-                <div className=" sm:h-10 sm:w-10  w-6 h-6 self-center bg-red-600 mr-2"></div>
+              <div className="  flex justify-center rounded-lg mr-8">
+                        <img
+                          src={job?.company?.basic?.logo}
+                          className="w-10 h-10 rounded-lg self-center"
+                          alt=""
+                        />
+                      </div>
                 <span className="">
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                    Role
+                  {job.JobTitle || "title"}
                   </h2>
-                  <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
+                  <h2 className="font-dmSans font-bold text-[.6rem] sm:text-xs inline">
                     {" "}
-                    {job.JobTitle || "title"}
+                    {job?.company?.basic?.companyName}
                   </h2>
                   <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
                     {" "}
-                    {job.CloseByDate || "date"}
+                    {calculateDaysAgo(job.createdAt)}
                   </h2>
                 </span>
               </div>

@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import { VscCircleFilled } from "react-icons/vsc";
 import { CiLocationOn } from "react-icons/ci";
 import { FaArrowRight } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import ChartComp from "./ChartComp";
+import { getJobById } from "../../../../redux/collage/dashboard/dashboardSlice";
 const JobOverview = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  console.log(id);
+  const dispatch = useDispatch();
+
+  const { jobDetails } = useSelector((state) => state.dashboard);
+
+  console.log("ankita",jobDetails);
+
+  useEffect(() => {
+    dispatch(getJobById(id));
+    console.log("hi",jobDetails)
+  }, []);
+
   return (
     <div>
       <div className="mt-4">
@@ -12,7 +29,12 @@ const JobOverview = () => {
       </div>
 
       <div className="sm:flex w-[95%] mx-auto justify-between mb-2 font-dmSans mt-8">
-        <div className="sm:w-[45%]">
+        {
+          jobDetails && jobDetails?.map((job,index)=>{
+
+          
+            return (
+            <div className="sm:w-[45%]" key={index}>
           <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
             <img
               src="../../images/job.png"
@@ -22,7 +44,7 @@ const JobOverview = () => {
           </div>
           <div className="w-full bg-gray-100 flex justify-between pt-14 pb-6 pr-10 pl-5">
             <div>
-              <h2 className="font-bold text-lg">UX UI Designer</h2>
+              <h2 className="font-bold text-lg">{job.JobTitle}</h2>
               <h2 className="text-xs font-medium mt-1">Google, Bengaluru</h2>
               <h2 className="text-xs font-medium mt-2 text-gray-400">
                 Posted 1 week ago
@@ -122,6 +144,11 @@ const JobOverview = () => {
             </span>
           </div>
         </div>
+            
+          )}
+        )
+        }
+        
 
         <div className="sm:w-[50%] ">
           <div className=" w-full relative bg-gray-100 p-4 rounded-lg">

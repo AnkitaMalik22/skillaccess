@@ -11,7 +11,7 @@ export default function CompaniesRoute() {
     <Route path="collage/companies">
       <Route path="" element={<CompaniesPage />} />
       <Route path="profile/:id" element={<CompanyProfilePage />} />
-      <Route path="jobOverview" element={<CompanyJobOverviewPage />} />
+      <Route path="jobOverview/:id" element={<CompanyJobOverviewPage />} />
     </Route>
   );
 }
