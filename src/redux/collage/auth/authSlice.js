@@ -64,6 +64,8 @@ const collageState = {
   LOGIN_LOADING: false,
   USER_LOADING: false,
   dummyUser: null,
+  selectedPlan: null,
+  balance: 0,
 };
 
 export const deleteMail = createAsyncThunk(
@@ -751,7 +753,12 @@ const collageAuthSlice = createSlice({
       .addCase(getCollege.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.user = action.payload.college;
-        state.credit = action.payload.credit;
+        state.credit = {
+          credit: action.payload?.credit[0]?.credit,
+          limit: action.payload?.credit[0]?.limit,
+        };
+        state.balance = action.payload?.balance;
+        state.selectedPlan = action.payload?.credit[0];
         localStorage.setItem("userId", action.payload.college._id);
 
         // Add any fetched posts to the array
@@ -824,6 +831,8 @@ const collageAuthSlice = createSlice({
       .addCase(updatePassword.fulfilled, (state, action) => {
         state.status = action.payload;
         toast.success("Password Updated");
+        localStorage.removeItem("auth-token");
+        window.location.replace("/");
         // state.status = action.payload
         // state.isLoggedIn = false;
         // state.user = action.payload.user;

@@ -1,43 +1,61 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { cancelAPlan, getAllPlans,selectAPlan } from "../../../../redux/collage/account/paymentSlice";
+import { getCollege } from "../../../../redux/collage/auth/authSlice";
 
 const Acounting = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {plans ,select_loading,cancel_loading} = useSelector((state) => state.payment);
+  const {selectedPlan,credit} = useSelector((state) => state.collageAuth);
 
-  const payments = [
-    {
-      planName: "Basic",
-      price: "49.99",
-      credit: 100,
-      limit: 10,
-      charges: "Not Allowed",
-      active: true,
-    },
-    {
-      planName: "Plus",
-      price: "99.99",
-      credit: 200,
-      limit: 20,
-      charges: "Not Allowed",
-      active: false,
-    },
-    {
-      planName: "Business",
-      price: "149.99",
-      credit: 400,
-      limit: 40,
-      charges: "Not Allowed",
-      active: false,
-    },
-    {
-      planName: "Exclusive",
-      price: "199.99",
-      credit: 400,
-      limit: 400,
-      charges: "50 Cents",
-      active: false,
-    },
-  ];
+  useEffect(() => {
+    dispatch(getAllPlans());
+  }, [dispatch]);
+
+
+//   useEffect(() => {
+// if(!cancel_loading){
+//   dispatch(getCollege());
+// }
+//   }, [cancel_loading]);
+
+
+  // const payments = [
+  //   {
+  //     planName: "Basic",
+  //     price: "49.99",
+  //     credit: 100,
+  //     limit: 10,
+  //     charges: "Not Allowed",
+  //     active: true,
+  //   },
+  //   {
+  //     planName: "Plus",
+  //     price: "99.99",
+  //     credit: 200,
+  //     limit: 20,
+  //     charges: "Not Allowed",
+  //     active: false,
+  //   },
+  //   {
+  //     planName: "Business",
+  //     price: "149.99",
+  //     credit: 400,
+  //     limit: 40,
+  //     charges: "Not Allowed",
+  //     active: false,
+  //   },
+  //   {
+  //     planName: "Exclusive",
+  //     price: "199.99",
+  //     credit: 400,
+  //     limit: 400,
+  //     charges: "50 Cents",
+  //     active: false,
+  //   },
+  // ];
   return (
     <div className="w-11/12 mx-auto font-dmSans">
       <div className="w-full flex justify-between items-center">
@@ -49,12 +67,13 @@ const Acounting = () => {
           Transactions
         </button>
       </div>
+      {select_loading && <div className="fixed top-20 font-bold">Upgrading...</div>}
 
       {
         // !payments[0] && <div className="text-lg text-gray-400  font-bold my-2 py-2 pl-2"> No Transaction found </div>
-        payments.map((plan) => (
+       plans?.map((plan) => (
           <>
-            <div className="shadow-sm py-4 mt-6 px-7 rounded-[20px] flex items-center gap-16 border">
+            <div key={plan._id} className={`shadow-sm py-4 mt-6 px-7 rounded-[20px] flex items-center gap-16 border ${plan._id == selectedPlan?._id ? 'border-2 border-[#007AFF]' : ''}`}>
               <div className="flex flex-col justify-center gap-5">
                 <div className="flex item-center gap-5">
                   <img
@@ -77,9 +96,44 @@ const Acounting = () => {
                 </div>
 
                 <div className="">
-                  <button className="self-center  bg-[#007AFF]  rounded-xl px-16 py-3 text-white">
-                    {plan.active ? "Cancel Plan" : "Upgrade Plan"}
-                  </button>
+                  
+                {
+        
+        plan._id == selectedPlan?._id && credit.credit !== 0 ? (
+          <button className="self-center  bg-[#007AFF]  rounded-xl px-16 py-3 text-white"
+          onClick={() => {
+            dispatch(cancelAPlan({ planId: plan._id})).then(() => {
+              console.log(plan);
+              dispatch(getCollege());
+            }
+          )
+        }
+          }
+          >
+           Cancel Plan    
+           
+          </button>
+        ) : (
+          <button
+            className="self-center  bg-[#007AFF]  rounded-xl px-16 py-3 text-white"
+            onClick={() => {
+              console.log(plan);
+              dispatch(selectAPlan({ planId: plan._id})).then(() => {
+                dispatch(getCollege());
+              }
+            )
+            }}
+          >
+           
+      
+            Upgrade Plan
+          </button>
+        )
+          
+      }
+
+
+               
                 </div>
               </div>
               <div className="w-[380px] flex flex-col gap-5">

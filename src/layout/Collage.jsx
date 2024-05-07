@@ -364,7 +364,7 @@ const CollageLayout = ({ children }) => {
       <div className=" h-full bg-blued relative">
         <div className="flex  justify-start pt-20 ">
           <aside
-            className={` px-4 h-[90vh] transition-width max-w-[15rem] overflow-x-hidden bg-secondary fixed left-0 z-30  scrollbar overflow-y-scroll ${
+            className={`-mt-2 px-4 h-[90vh] transition-width max-w-[15rem] overflow-x-hidden bg-secondary fixed left-0 z-30  scrollbar overflow-y-scroll ${
               open ? "w-1/2" : "w-14 lg:w-full "
             }`}
           >
@@ -436,7 +436,7 @@ const CollageLayout = ({ children }) => {
             </ul>
           </aside>
 
-          <div className="bg-white rounded-3xl h-[88lvh] overflow-y-scroll w-full p-4 mx-4 ml-14 lg:ml-60 mt-9 font-dmSans mb-6">
+          <div className="bg-white rounded-3xl h-[88vh] overflow-y-scroll w-full p-4 mx-4 ml-14 lg:ml-60  font-dmSans ">
             {children}
           </div>
         </div>

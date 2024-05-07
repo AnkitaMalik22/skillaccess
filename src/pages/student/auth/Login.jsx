@@ -13,7 +13,7 @@ import { googleLoginStudent, loginStudent } from "../../../redux/student/auth/st
 const Login = () => {
   // cosnt[(error, setError)] = useState();
 
-  const { Error, logoutError } = useSelector((state) => state.collageAuth);
+  const { Error, logoutError } = useSelector((state) => state.studentAuth);
   const [type, setType] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();

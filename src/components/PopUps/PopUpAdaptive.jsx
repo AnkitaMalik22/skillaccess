@@ -31,9 +31,11 @@ const PopUpAdaptive = ({
         <input
           type="number"
           name="noOfQuestions"
-          onChange={(e) => setTotalQ(e.target.value)}
+          onChange={(e) => setTotalQ(Math.max(1, e.target.value))}
           className="w-full h-10 rounded-lg bg-gray-100 focus:outline-none border-none"
           placeholder="Enter No of Questions"
+          min="1"
+          
         />
 
         <div className="w-full flex justify-between">

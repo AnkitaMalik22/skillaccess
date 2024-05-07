@@ -52,19 +52,20 @@ const SwiperSlideLeft = () => {
    
 
       {
-        companies.map((company) => (
+        newCompanies.map((company) => (
           <SwiperSlide className="flex ">
           <div className="companies-dash bg-white  w-[80px] xl:w-[120px]  2xl:w-32 h-36px rounded-lg p-2  ">
-            <figure className="bg-green-500 w-full h-24 mx-auto rounded-lg">
+            <figure className="bg-gray-100 w-full h-24 mx-auto rounded-lg">
               <img
-                src="../intel.png"
-                alt="img not loaded"
+                // src="../intel.png"
+                src={company?.basic?.logo === ""  ? "../intel.png" : company?.basic?.logo}
+                alt="Img"
                 className="w-full h-full"
               /> 
             </figure>
             <span>
-              <h3 className="text-xs text-gray-400 font-bold text-center break-words h-full">
-                Company Name
+              <h3 className="text-xs text-gray-400 font-bold text-center break-words h-full mt-1">
+               {company?.basic?.companyName}
               </h3>
             </span>
           </div>
