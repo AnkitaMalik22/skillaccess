@@ -85,7 +85,7 @@ const Companies = () => {
                   <div className="card-actions justify-end">
                     <button
                       className="px-4 py-2 hover:bg-blue-900 bg-[#0052CC] text-xs font-dmSans font-bold rounded-xl text-white"
-                      onClick={() => navigate("/collage/companies/profile/:0")}
+                      onClick={() => navigate(`/collage/companies/profile/${company._id}`)}
                     >
                       View Details
                     </button>

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { TfiClip } from "react-icons/tfi";
+import EmojiPicker from 'emoji-picker-react';
+
 import {
   getMail,
   sendMail,
@@ -18,6 +20,8 @@ const Compose = () => {
   const attachments = useSelector(
     (state) => state.collageAuth.mail.attachments
   );
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
 
   const upload = useRef();
   const dispatch = useDispatch();
@@ -30,7 +34,14 @@ const Compose = () => {
     });
     console.log(email);
   };
-
+  const handleEmojiClick = (event, emoji) => {
+    console.log(event.emoji);
+    setEmail((prev) => {
+      return { ...prev, Message: `${prev.Message}  ${event.emoji}` };
+    });
+  };
+  
+  
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
@@ -90,6 +101,7 @@ const Compose = () => {
         className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
       /> */}
       <ReactQuill
+     
         name="Message"
         onChange={(value) =>
           setEmail((prev) => {
@@ -97,9 +109,11 @@ const Compose = () => {
           })
         }
         value={email.Message}
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg h-[30vh] placeholder-gray-400"
+        className="w-full flex border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg h-[30vh] placeholder-gray-400"
         placeholder="Type Something ..."
+        style={{ display: 'inline-block' }}
       />
+      
 
       <div className="flex gap-4">
         {attachments?.map((item, i) => {
@@ -144,17 +158,29 @@ const Compose = () => {
               setLoading(false);
             }}
           ></input>
-          <TfiClip
-            className="rotate-180 text-2xl text-gray-400 self-center"
+        <div className="flex gap-2 mt-4 ml-2">
+        {showEmojiPicker && (
+        <EmojiPicker onEmojiClick={handleEmojiClick} disableSearchBar />
+      )}
+      <button
+        className=""
+        onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+      >
+        😊
+      </button>
+           <TfiClip
+            className="rotate-180 text-2xl text-gray-400 self-center "
             onClick={() => upload.current.click()}
           />
+        
+      </div> 
         </div>
 
         <div>
           <button
             className={`${
               loading ? "disabled !bg-gray-700 " : "bg-blue-700 "
-            } text-sm font-bold text-white rounded-xl px-4 py-2`}
+            } text-sm font-bold text-white rounded-xl px-4 py-2 mt-4`}
             onClick={handleSubmit}
           >
             Send
