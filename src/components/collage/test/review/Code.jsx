@@ -4,7 +4,7 @@ import { PiFileTextBold } from "react-icons/pi";
 import { IoSwapVerticalSharp } from "react-icons/io5";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { CiBookmarkMinus } from "react-icons/ci";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -12,11 +12,12 @@ import toast from "react-hot-toast";
 import {
   editQuestion,
   removeQuestion,
+  setCurrentQuestionCount,
 } from "../../../../redux/collage/test/testSlice";
 import { addBookmark } from "../../../../redux/collage/test/thunks/question";
 const Code = ({ Title, code, Number, id, question, type, view }) => {
   const dispatch = useDispatch();
-
+  const { currentQuestionCount } = useSelector((state) => state.test);
   const [search, setSearch] = useSearchParams();
   const [compiler, setCompiler] = useState(question);
   console.log(compiler);
@@ -51,6 +52,7 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
   };
 
   const handleDelete = () => {
+    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
     dispatch(
       removeQuestion({
         selfIndex: Number,

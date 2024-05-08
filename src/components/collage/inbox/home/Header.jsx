@@ -12,7 +12,7 @@ import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import SearchForm from "../mail/SearchForm";
 
-const Header = ({ show, setShow }) => {
+const Header = ({ show, setShow, inboxType, setInboxType }) => {
   const refButton = useRef(null);
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
@@ -91,7 +91,7 @@ const Header = ({ show, setShow }) => {
       <button
         className="bg-blue-700 py-2 px-3 self-center mr-2 rounded-lg flex gap-2 text-white"
         onClick={() => {
-          navigate("/collage/inbox/mail?type=compose");
+          navigate(`/collage/inbox/mail?type=compose&inboxType=${inboxType}`);
         }}
       >
         <FaPlus className="self-center" />{" "}

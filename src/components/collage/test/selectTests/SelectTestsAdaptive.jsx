@@ -74,7 +74,10 @@ const SelectTests = () => {
     // setTotalQuestions((prev) => {
     //   return prev + totalQ;
     // });
-
+    let Total =
+      Math.ceil((2 / 6) * parseInt(totalQ)) +
+      Math.ceil((2 / 3) * parseInt(totalQ)) +
+      parseInt(totalQ);
     // localStorage.setItem("currentTotal", totalQuestions);
     // console.log(section, "section");
 
@@ -84,7 +87,10 @@ const SelectTests = () => {
       totalQuestions,
       currentQuestionCount > totalQuestions
     );
-    if (parseInt(currentQuestionCount) > parseInt(totalQuestions) || parseInt(totalQ) > parseInt(totalQuestions)) {
+    if (
+      parseInt(currentQuestionCount) > parseInt(totalQuestions) ||
+      parseInt(Total) > parseInt(totalQuestions)
+    ) {
       toast.error("max questions reached");
       return;
     }
@@ -138,52 +144,62 @@ const SelectTests = () => {
       let errText = "";
       // Select random questions from each level
       const mixedQuestions = Object.values(questionsByLevel).flatMap(
-        (questions ,index) => {
+        (questions, index) => {
           const numQuestionsAvailable = Math.min(
-            Math.ceil(parseInt(totalQ) / 3),
+            Math.ceil(parseInt(totalQ)),
             questions.length
           );
 
-          console.log("questionsByLevel[index].length" , questionsByLevel );
-          if( Math.ceil(parseInt(totalQ) / 3) > questionsByLevel["beginner"].length){
-           errText = "Insufficient Beginner questions";
+          console.log(questions);
+          if (
+            Math.ceil(parseInt(totalQ)) > questionsByLevel["beginner"].length
+          ) {
+            errText = "Insufficient Beginner questions";
             return;
           }
-          if( Math.ceil(parseInt(totalQ) / 3) > questionsByLevel["intermediate"].length){
+          if (
+            Math.ceil(parseInt(totalQ) - parseInt(totalQ) / 3) >
+            questionsByLevel["intermediate"].length
+          ) {
             errText = "Insufficient Intermediate questions";
             return;
           }
-          if( Math.ceil(parseInt(totalQ) / 3) > questionsByLevel["advanced"].length){
+          if (
+            parseInt(totalQ) - 2 * (parseInt(totalQ) / 6) >
+            questionsByLevel["advanced"].length
+          ) {
             errText = "Insufficient Advanced questions";
             return;
           }
-          console.log("length:" + questions.length, parseInt(totalQ) , "numQuestionsAvailable:" + numQuestionsAvailable);
+          console.log(
+            "length:" + questions.length,
+            parseInt(totalQ),
+            "numQuestionsAvailable:" + numQuestionsAvailable
+          );
           return questions.slice(0, numQuestionsAvailable);
         }
       );
 
       // Output the mixed questions array
       console.log(
-        mixedQuestions.slice(0, totalQ),
+        mixedQuestions.slice(0, Total),
         mixedQuestions.length,
         "mixedQuestions",
-        totalQ
+        Total
       );
-      if(errText){
+      if (errText) {
         toast.error(errText);
         return;
       }
 
-      sectionCopy.questions = mixedQuestions.slice(0, totalQ);
+      sectionCopy.questions = mixedQuestions.slice(0, Total);
 
       // console.log(sectionCopy);
       if (mixedQuestions.length < totalQ) {
         toast.error("insufficient number of questions ");
         return;
       } else {
-        dispatch(
-          setCurrentQuestionCount(currentQuestionCount + parseInt(totalQ))
-        );
+        dispatch(setCurrentQuestionCount(currentQuestionCount + Total));
         setSelectedSections([...selectedSections, sectionCopy]);
         dispatch(setTestSelectedTopics(selectedSections));
       }
@@ -206,12 +222,8 @@ const SelectTests = () => {
 
   const removeSection = (section, index) => {
     const updatedSections = [...selectedSections];
-
-    dispatch(
-      setCurrentQuestionCount(
-        currentQuestionCount - selectedSections[index].questions.length
-      )
-    );
+    let QsCount = Math.ceil(selectedSections[index].questions.length / 3);
+    dispatch(setCurrentQuestionCount(currentQuestionCount - QsCount));
     updatedSections.splice(index, 1);
 
     setSelectedSections(updatedSections);

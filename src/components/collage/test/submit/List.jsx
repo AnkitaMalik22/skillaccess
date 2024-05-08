@@ -13,13 +13,13 @@ const List = ({ question, number }) => {
 
   const { currentQuestionCount } = useSelector((state) => state.test);
   const dispatch = useDispatch();
-  const handleDelete = ({ sectionId, questionId }) => {
+  const handleDelete = ({ sectionId, questionId, questionType }) => {
     dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
     dispatch(
       removeQuestionById({
         sectionId,
         questionId,
-        questionType: type,
+        questionType,
       })
     );
   };
@@ -116,17 +116,28 @@ const List = ({ question, number }) => {
           onClick={() => {
             if (question.AnswerIndex) {
               setType("mcq");
+              handleDelete({
+                sectionId: question.section,
+                questionId: question.id,
+                questionType: "mcq",
+              });
             } else if (question.questions) {
               setType("findAnswer");
+              handleDelete({
+                sectionId: question.section,
+                questionId: question.id,
+                questionType: "findAnswer",
+              });
             } else {
               setType("essay");
+              handleDelete({
+                sectionId: question.section,
+                questionId: question.id,
+                questionType: "essay",
+              });
             }
+
             console.log(type);
-            handleDelete({
-              sectionId: question.section,
-              questionId: question.id,
-              questionType: type,
-            });
           }}
         />
       </div>

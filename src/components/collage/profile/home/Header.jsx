@@ -66,7 +66,7 @@ const Header = ({
         <div className="flex gap-2 px-3 py-1 mt-2">
           {editable ? (
             <div className="w-14 h-14 bg-blued self-center rounded-lg relative">
-              <img src={avatar} alt="" width="56px"  className="rounded-lg"/>
+              <img src={avatar} alt="" width="56px" className="rounded-lg" />
 
               <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-blue-700 bg-opacity-80">
                 <img
@@ -86,7 +86,7 @@ const Header = ({
               />
             </div>
           ) : (
-            <div className="relative w-14 h-14 bg-blued self-center rounded-lg flex justify-center items-center ">
+            <div className="relative w-14 h-14 bg-blued self-center rounded-lg flex justify-center items-center">
               <img
                 src={
                   college && college.avatar && college.avatar.url
@@ -123,9 +123,9 @@ const Header = ({
                   className="bg-transparent border-none focus:outline-none w-full min-w-[30vw]  text-[20px] font-extrabold   "
                 />
               ) : college && college.CollegeName ? (
-      <p className="text-[20px] font-extrabold  py-1  ">
-        {          college.CollegeName}
-      </p>
+                <p className="text-[20px] font-extrabold  py-1  ">
+                  {college.CollegeName}
+                </p>
               ) : (
                 ""
               )}
@@ -158,7 +158,7 @@ const Header = ({
           <div className="text-sm  font-medium mt-2">
             {editable && college ? (
               <textarea
-                className=" rounded-lg mt-2 text-sm bg-[#f4f5f6] border-none focus:outline-none w-full max-w-[80vw] h-full min-h-[25vh] leading-loose text-gray-500"
+                className="mt-2 bg-transparent border-none focus:outline-none w-full max-w-[80vw]"
                 type="text"
                 value={
                   college && college.Description ? college.Description : ""
@@ -168,7 +168,7 @@ const Header = ({
                 }
               />
             ) : college && college.Description ? (
-             <p className="text-sm  font-medium mt-2 leading-loose text-gray-500">
+              <p className="text-sm  font-medium mt-2 leading-loose text-gray-500">
                 {college.Description}
               </p>
             ) : (
@@ -196,7 +196,7 @@ const Header = ({
           </div>
         )}
       </div>
-      <div className="px-6  py-8 bg-gray-50 font-dmSans flex sm:gap-16 text-sm font-medium " >
+      <div className="px-6  py-8 bg-gray-50 font-dmSans flex sm:gap-16 text-sm font-medium ">
         <div className="flex gap-2 ">
           <div className="w-10 h-10 rounded-2xl bg-gray-200 flex justify-center">
             <MdOutlineEmail className="self-center text-2xl" />
@@ -214,8 +214,10 @@ const Header = ({
                   placeholder="Add Email"
                 />
               ) : college && college.Email ? (
-                <p className=" text-gray-500 bg-transparent text-sm"> { college.Email}</p>
-              
+                <p className=" text-gray-500 bg-transparent text-sm">
+                  {" "}
+                  {college.Email}
+                </p>
               ) : (
                 ""
               )}
@@ -327,13 +329,13 @@ const Header = ({
                 placeholder="College Address"
               />
             ) : (
-              <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center text-gray-500  bg-transparent">
+              <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center">
                 {college && college.Address ? college.Address : ""}
               </p>
             )}
           </>
         ) : (
-          <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center ">
+          <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center">
             No Address Available
           </p>
         )}

@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ChartComp from "./ChartComp";
 import { getJobById } from "../../../../redux/collage/dashboard/dashboardSlice";
+import calculateDaysAgo from "../../../../util/calculateDaysAgo";
 const JobOverview = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -15,11 +16,11 @@ const JobOverview = () => {
 
   const { jobDetails } = useSelector((state) => state.dashboard);
 
-  console.log("ankita",jobDetails);
+  console.log("ankita", jobDetails);
 
   useEffect(() => {
     dispatch(getJobById(id));
-    console.log("hi",jobDetails)
+    console.log("hi", jobDetails);
   }, []);
 
   return (
@@ -29,12 +30,7 @@ const JobOverview = () => {
       </div>
 
       <div className="sm:flex w-[95%] mx-auto justify-between mb-2 font-dmSans mt-8">
-        {
-          jobDetails && jobDetails?.map((job,index)=>{
-
-          
-            return (
-            <div className="sm:w-[45%]" key={index}>
+        <div className="sm:w-[45%]">
           <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
             <img
               src="../../images/job.png"
@@ -44,10 +40,12 @@ const JobOverview = () => {
           </div>
           <div className="w-full bg-gray-100 flex justify-between pt-14 pb-6 pr-10 pl-5">
             <div>
-              <h2 className="font-bold text-lg">{job.JobTitle}</h2>
-              <h2 className="text-xs font-medium mt-1">Google, Bengaluru</h2>
+              <h2 className="font-bold text-lg">{jobDetails.JobTitle}</h2>
+              <h2 className="text-xs font-medium mt-1">
+                {jobDetails.JobLocation}
+              </h2>
               <h2 className="text-xs font-medium mt-2 text-gray-400">
-                Posted 1 week ago
+                {calculateDaysAgo(jobDetails.createdAt)}
               </h2>
             </div>
             <div className="self-center">
@@ -61,19 +59,23 @@ const JobOverview = () => {
           <div className="bg-gray-100 mt-2 px-6 grid grid-cols-4 text-xs font-bold text-center p-4 ">
             <span>
               <h2 className="text-gray-400 my-1">EXPERIENCE</h2>
-              <h2>3-5 Years</h2>
+              <h2>
+                {jobDetails.ExperienceFrom}-{jobDetails.ExperienceTo} Years
+              </h2>
             </span>
             <span>
               <h2 className="text-gray-400 my-1">SENIORITY LEVEL</h2>
-              <h2>Medium Level</h2>
+              <h2>{jobDetails.SeniorityLevel}</h2>
             </span>
             <span>
               <h2 className="text-gray-400 my-1">EMPLOYMENT</h2>
-              <h2>Full-Time</h2>
+              <h2>{jobDetails.EmploymentType}</h2>
             </span>
             <span>
               <h2 className="text-gray-400 my-1">SALARY</h2>
-              <h2>$90-100K</h2>
+              <h2>
+                {jobDetails.SalaryFrom}-{jobDetails.SalaryTo}
+              </h2>
             </span>
           </div>
           {/* Role Overview */}
@@ -81,26 +83,19 @@ const JobOverview = () => {
             <span className="">
               <h2 className="text-base font-bold pt-6 ">Role Overview</h2>
               <p className=" mt-2 text-sm text-gray-400 pb-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                consectetur, blanditiis, rerum temporibus magnam illum maxime
-                porro iste eum distinctio quisquam repudiandae assumenda atque
-                sed vitae adipisci, iure nemo culpa?Lorem ipsum, dolor sit amet
-                consectetur adipisicing elit. Molestias porro ratione saepe
-                voluptatem atque distinctio quo voluptatum eius, officiis odio
-                in et eaque excepturi ex repellat perferendis deserunt tempora
-                esse. voluptatem atque distinctio quo voluptatum eius, officiis
-                odio in et eaque excepturi ex repellat perferendis deserunt
-                tempora esse.
+                {jobDetails.RoleOverview}
               </p>
             </span>
           </div>
 
           {/* bullets */}
           <div className="bg-gray-100 mt-2 px-6 pb-6 rounded-b-lg">
-            <span className="">
-              <h2 className="text-base font-bold pt-6 mb-4">
-                Duties & Responsibilities
-              </h2>
+            <h2 className="text-base font-bold pt-6 mb-4">
+              Duties & Responsibilities
+            </h2>
+            {jobDetails.DutiesResponsibility}
+            {/* <span className="">
+              
               <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
                 <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
                 <p>
@@ -141,14 +136,9 @@ const JobOverview = () => {
                   consectetur, blanditiis, rerum temporibus magnam illum maxime
                 </p>
               </span>
-            </span>
+            </span> */}
           </div>
         </div>
-            
-          )}
-        )
-        }
-        
 
         <div className="sm:w-[50%] ">
           <div className=" w-full relative bg-gray-100 p-4 rounded-lg">

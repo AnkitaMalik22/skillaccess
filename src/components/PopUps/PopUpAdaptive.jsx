@@ -16,7 +16,6 @@ const PopUpAdaptive = ({
     console.log("noOfQuestions", noOfQuestions, section);
     await dispatch(setTotalSelectedQuestions(noOfQuestions));
     await handleSave(section);
-
     await handleOverlay();
   };
 

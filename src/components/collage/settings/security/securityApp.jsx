@@ -11,10 +11,7 @@ const SecurityApp = () => {
   const dispatch = useDispatch();
 
   const { qr } = useSelector((state) => state.collageAuth);
-  useEffect(() => {
-    console.log("ue");
-    dispatch(getSecretQr({ non: "" }));
-  }, []);
+
   const [code, setCode] = useState(null);
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -82,11 +79,11 @@ const SecurityApp = () => {
           placeholder="Enter Secret Key"
         />
       </div>
-      <div className="px-4 flex gap-10 items-center pt-6">
+      {/* <div className="px-4 flex gap-10 items-center pt-6">
         <p className="font-semibold">Qr Code:</p>
 
         <img src={qr.code} alt="" />
-      </div>
+      </div> */}
     </div>
   );
 };

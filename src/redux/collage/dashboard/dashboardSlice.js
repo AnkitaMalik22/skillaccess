@@ -186,7 +186,7 @@ export const getJobById = createAsyncThunk(
       );
       const res = req.data;
       console.log(res);
-      return res.jobs;
+      return res.job;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -276,7 +276,6 @@ const dashboardSlice = createSlice({
       .addCase(getNewJobs.fulfilled, (state, action) => {
         state.status = "success";
         state.newJobs = action.payload;
-        
       })
       .addCase(getNewJobs.rejected, (state, action) => {
         state.status = "failed";
@@ -292,7 +291,6 @@ const dashboardSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       });
-      
   },
 });
 

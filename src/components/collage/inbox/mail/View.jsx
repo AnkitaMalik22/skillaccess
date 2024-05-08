@@ -15,8 +15,11 @@ import {
 } from "../../../../redux/collage/auth/authSlice";
 import { Link, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import socketIOClient from "socket.io-client";
 
 const View = ({ index, filter, inboxType }) => {
+  const [socket, setSocket] = useState(null);
+  const ENDPOINT = process.env.REACT_APP_API_URL;
   const [searchParams, setSearchParams] = useSearchParams();
   const show = searchParams.get("show");
   const dispatch = useDispatch();
@@ -32,18 +35,34 @@ const View = ({ index, filter, inboxType }) => {
   );
 
   useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+    setSocket(socket);
+
+    socket.on("message", (data) => {
+      // Handle email sent event
+      console.log("ems");
+      dispatch(getMail({ limit: 50, skip: 0 }));
+    });
+
+    // return () => {
+    //   socket.disconnect();
+    // };
+  }, []);
+
+  useEffect(() => {
     console.log(show);
     if (show === "all") {
-      dispatch(getMail({ limit: 50, skip: 0 }));
+      dispatch(getMail({ limit: 50, skip: 0 })).then(() => {
+        if (inboxType === "Received") {
+          setEMail(mail?.emailsReceived[index]);
+        } else {
+          setEMail(mail?.emailsSent[index]);
+        }
+      });
     } else {
       dispatch(searchMail(filter));
     }
-    if (inboxType === "Received") {
-      setEMail(mail?.emailsReceived[index]);
-    } else {
-      setEMail(mail?.emailsSent[index]);
-    }
-  }, ["", inboxType, index]);
+  }, ["", inboxType, index, dispatch]);
 
   const [email, setEmail] = useState({ Message: "" });
   const handleChange = (e) => {
@@ -92,7 +111,9 @@ const View = ({ index, filter, inboxType }) => {
         </div>
       </div>
 
-      {Email?.mail?.replies?.map((reply) => {
+      {mail?.[inboxType === "Received" ? "emailsReceived" : "emailsSent"][
+        index
+      ].replies?.map((reply) => {
         return (
           <>
             {" "}
@@ -225,7 +246,11 @@ const View = ({ index, filter, inboxType }) => {
                       attachments: mail.attachments ? mail.attachments : [],
                       id: Email.mail._id,
                     })
-                  );
+                  ).then(() => {
+                    dispatch(getMail({ limit: 50, skip: 0 }));
+                    socket.emit("joinRoom", Email?.mail?.from?.Email);
+                    socket.emit("message", email.Email, "new Mail");
+                  });
                   setEmail({ Message: "" });
                 } else {
                   toast.error("please wait! uploading files...");

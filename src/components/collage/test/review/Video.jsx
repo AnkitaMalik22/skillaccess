@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ReactPlayer from "react-player";
 import { RxCross1 } from "react-icons/rx";
@@ -12,13 +12,18 @@ import VideoEssay from "./VideoEssay";
 import {
   editQuestion,
   removeQuestion,
+  setCurrentQuestionCount,
 } from "../../../../redux/collage/test/testSlice";
 import { addBookmark } from "../../../../redux/collage/test/thunks/question";
 
 const Video = ({ Number, id, video, type, view }) => {
+  const { currentQuestionCount } = useSelector((state) => state.test);
+
   const [search, setSearch] = useSearchParams();
   const dispatch = useDispatch();
   const handleDelete = () => {
+    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
+
     dispatch(
       removeQuestion({
         selfIndex: Number,
