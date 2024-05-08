@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getNewJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
-
+import { useNavigate } from "react-router-dom";
 const SwiperSlideRight = () => {
   const dispatch = useDispatch();
   const { newJobs, loading } = useSelector((state) => state.dashboard);
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getNewJobs());
   }, [dispatch]);
@@ -48,7 +48,11 @@ console.log(newJobs);
         newJobs.map((job) => (
           <SwiperSlide>
           <div className=" bg-white  w-28 xl:w-44 h-36 rounded-lg p-3">
-            <figure className="bg-white-500  mx-auto rounded-lg flex justify-center">
+            <figure className="bg-white-500  mx-auto rounded-lg flex justify-center cursor-pointer"
+             onClick={() =>
+              navigate(`/collage/companies/jobOverview/${job._id}`)
+            }
+            >
               <img
                 src={job?.company?.basic?.logo}
                 alt="img not loaded"
