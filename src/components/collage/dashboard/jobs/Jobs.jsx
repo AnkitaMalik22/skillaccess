@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getTotalJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
 import BackIcon from "../../../buttons/BackIcon";
 import { IoIosSearch } from "react-icons/io";
+import calculateDaysAgo from "../../../../util/calculateDaysAgo";
 
 const Jobs = () => {
   // const [jobs, setJobs] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
@@ -22,14 +23,6 @@ const Jobs = () => {
     dispatch(getTotalJobs());
   }, [dispatch]);
 
-  const calculateDaysAgo = (createdDate) => {
-    const currentDate = new Date();
-    const differenceMs = currentDate - new Date(createdDate);
- 
-    const differenceDays = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
-   
-    return differenceDays === 0? "Today" : `${differenceDays} day${differenceDays > 1 ? "s" : ""} ago`;
-  };
   return (
     <div className="mx-4">
       <div className="flex w-full mx-auto justify-between mb-2">
@@ -56,20 +49,19 @@ const Jobs = () => {
       </div>
       <div className="flex flex-col gap-4  items-center  ">
         {jobs?.map((job, index) => {
-          
           return (
             <div className="flex justify-between w-[99%]" key={index}>
               <div className="sm:flex">
-              <div className="  flex justify-center rounded-lg mr-8">
-                        <img
-                          src={job?.company?.basic?.logo}
-                          className="w-10 h-10 rounded-lg self-center"
-                          alt=""
-                        />
-                      </div>
+                <div className="  flex justify-center rounded-lg mr-8">
+                  <img
+                    src={job?.company?.basic?.logo}
+                    className="w-10 h-10 rounded-lg self-center"
+                    alt=""
+                  />
+                </div>
                 <span className="">
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                  {job.JobTitle || "title"}
+                    {job.JobTitle || "title"}
                   </h2>
                   <h2 className="font-dmSans font-bold text-[.6rem] sm:text-xs inline">
                     {" "}
