@@ -129,13 +129,22 @@ const SelectTests = () => {
       };
 
       // Group questions by level
-      const questionsByLevel = section?.questions?.reduce((acc, question) => {
-        acc[question.QuestionLevel] = acc[question.QuestionLevel] || [];
-        acc[question.QuestionLevel].push(question);
-        return acc;
-      }, {});
+      // const questionsByLevel = section?.questions?.reduce((acc, question) => {
+      //   acc[question.QuestionLevel] = acc[question.QuestionLevel] || [];
+      //   acc[question.QuestionLevel].push(question);
+      //   return acc;
+      // }, {});
 
-      console.log(questionsByLevel, "level");
+      let questionsByLevel = {
+        beginner: [],
+        intermediate: [],
+        advanced: [],
+      };
+      section?.questions?.forEach((question) => {
+        questionsByLevel[question.QuestionLevel].push(question);
+      });
+
+      // console.log(questionsByLevel, "level");
 
       // Shuffle questions for each level
       // Object.values(questionsByLevel).forEach(shuffleArray);
@@ -144,7 +153,7 @@ const SelectTests = () => {
       Object.values(questionsByLevel).forEach((questions) =>
         shuffleArray(questions)
       );
-      console.log(questionsByLevel);
+      // console.log(questionsByLevel);
       let errText = "";
 
       questionsByLevel.intermediate = questionsByLevel.intermediate.slice(
