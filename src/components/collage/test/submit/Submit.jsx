@@ -231,7 +231,7 @@ const Submit = () => {
       return;
     }
 
-    if (totalQuestions > questions.length) {
+    if (totalQuestions*2 > questions.length) {
       console.log(totalQuestions, questions.length);
       toast.error(
         `Add ${
@@ -240,7 +240,7 @@ const Submit = () => {
       );
       return;
     }
-    if (totalQuestions < questions.length) {
+    if (totalQuestions*2 < questions.length) {
       console.log(totalQuestions, questions.length);
       window.alert(
         `Remove ${
