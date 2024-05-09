@@ -89,7 +89,7 @@ const SelectTests = () => {
     );
     if (
       parseInt(currentQuestionCount) > parseInt(totalQuestions) ||
-      parseInt(Total) > parseInt(totalQuestions)
+      parseInt(Total) > parseInt(totalQuestions) * 2
     ) {
       toast.error("max questions reached");
       return;

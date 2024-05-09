@@ -284,6 +284,8 @@ const Submit = () => {
         totalAttempts,
         totalQuestions,
         totalDuration: totalTimeCal,
+        startDate: duration_from,
+        endDate: duration_to,
         // totalDuration,
         topics,
       })
@@ -291,12 +293,12 @@ const Submit = () => {
       // dispatch(
       //   setTestBasicDetails({ name: "", description: "", totalAttempts: null ,totalQuestions:0})
       // );
-      dispatch(getCollege())
-      console.log(res)
+      dispatch(getCollege());
+      console.log(res);
 
-if(res.type ==='test/createTest/fulfilled'){
-  navigate("/collage/test/final");
-}
+      if (res.type === "test/createTest/fulfilled") {
+        navigate("/collage/test/final");
+      }
     });
   };
 
