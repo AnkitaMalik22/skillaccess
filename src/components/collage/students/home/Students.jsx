@@ -82,7 +82,7 @@ const Students = () => {
       console.log("empty");
 
       setFilteredStudents(uploadedStudents);
-
+         console.log(uploadedStudents);
       return;
     } else {
       setFilteredStudents(

@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { useNavigate } from "react-router-dom";
 import { getNewCompanies } from "../../../../redux/collage/dashboard/dashboardSlice";
 
 const SwiperSlideLeft = () => {
   const dispatch = useDispatch();
   const { newCompanies, loading } = useSelector((state) => state.dashboard);
-
+  const navigate = useNavigate();
   useSelector((state) => console.log("state : ", state.dashboard));
 
   useEffect(() => {
@@ -55,7 +55,9 @@ const SwiperSlideLeft = () => {
         newCompanies.map((company) => (
           <SwiperSlide className="flex ">
           <div className="companies-dash bg-white  w-[80px] xl:w-[120px]  2xl:w-32 h-36px rounded-lg p-2  ">
-            <figure className="bg-gray-100 w-full h-24 mx-auto rounded-lg">
+            <figure className="bg-gray-100 w-full h-24 mx-auto rounded-lg cursor-pointer"
+              onClick={() => navigate(`/collage/companies/profile/${company._id}`)}
+            >
               <img
                 // src="../intel.png"
                 src={company?.basic?.logo === ""  ? "../intel.png" : company?.basic?.logo}
