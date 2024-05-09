@@ -19,7 +19,6 @@ const StudentPoP = ({ onClose }) => {
 
 
   const dispatch = useDispatch();
-const [showPopup, setShowPopup] = useState(false);
 
 
 const handleChange = (e) => {

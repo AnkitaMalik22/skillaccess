@@ -45,7 +45,7 @@ const Header = ({ question, setQuestion, id, type }) => {
           console.log("calling 2 --" , ADD_QUESTION_LOADING)
           level === "adaptive"
             ? navigate(`/collage/test/selectAdaptive?level=${level}`)
-            : navigate(`/collage/test/select?level=${level}`);
+            : navigate(-1);
         }
       })
       setQuestion({ Title: "", Options: [], Duration: 0, AnswerIndex: null });

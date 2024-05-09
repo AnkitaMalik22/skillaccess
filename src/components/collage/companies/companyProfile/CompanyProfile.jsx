@@ -184,7 +184,7 @@ const CompanyProfile = () => {
   return (
     <div>
       <div className="mt-4">
-        <Header />
+        <Header CompanyName={companyDetails?.basic?.companyName}/>
       </div>
 
       <div className="sm:flex w-[95%] mx-auto justify-between mb-2 font-dmSans mt-8">
@@ -252,7 +252,9 @@ const CompanyProfile = () => {
           {/*  */}
           <div className="flex justify-between mb-7">
             <h2 className="font-bold">Available jobs</h2>
-            <h2 className="font-bold underline underline-offset-2 text-blued">
+            <h2 className="font-bold underline underline-offset-2 text-blued"
+            onClick={()=>{navigate('/collage/dashboard/jobs')}}
+            >
               See All
             </h2>
           </div>
