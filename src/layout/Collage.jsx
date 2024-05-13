@@ -263,15 +263,16 @@ const CollageLayout = ({ children }) => {
       ),
     },
   ];
-
+  
   useEffect(() => {
     dispatch(getCollege());
-    // //// window.scrollTo({
+    //  window.scrollTo({
     //   top:
     //     window.scrollY +
     //     bottom.current.getBoundingClientRect().top,
     //   behavior: "smooth",
     // });
+    bottom.current.scrollIntoView();
     if (location.pathname.match(/\/collage\/dashboard*/)) {
       dispatch(setSelected(0));
       setDown(0);
@@ -295,15 +296,17 @@ const CollageLayout = ({ children }) => {
     if (location.pathname.match(/\/collage\/results*/)) {
       dispatch(setSelected(4));
       setDown(4);
+      
     }
 
     if (location.pathname.match(/\/collage\/quesBank*/)) {
       dispatch(setSelected(5));
       setDown(5);
+      
     }
 
     if (location.pathname.match(/\/collage\/profile*/)) {
-      //// window.scrollTo({
+      // // window.scrollTo({
       //   top:
       //     window.scrollY +
       //     bottom.current.getBoundingClientRect().top,
@@ -311,6 +314,7 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(7));
       setDown(7);
+      
     }
 
     if (location.pathname.match(/\/collage\/inbox*/)) {
@@ -322,6 +326,7 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(8));
       setDown(8);
+      
     }
 
     if (location.pathname.match(/\/collage\/teams*/)) {
@@ -333,6 +338,7 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(9));
       setDown(9);
+    
     }
 
     if (location.pathname.match(/\/collage\/accounting*/)) {
@@ -344,6 +350,7 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(10));
       setDown(10);
+      
     }
 
     if (location.pathname.match(/\/collage\/settings*/)) {
@@ -355,6 +362,7 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(11));
       setDown(11);
+      
     }
   }, []);
 
@@ -383,6 +391,7 @@ const CollageLayout = ({ children }) => {
                         NOTIFICATIONS
                       </div>
                     )} */}
+                    {selection === i && <div className="" ref={bottom}></div>}
                     <li
                 className={`btn-transition ${temp === i || selection === i ? 'active-li' : ''} `}
                       onMouseOver={() => setTemp(i)}
@@ -401,7 +410,7 @@ const CollageLayout = ({ children }) => {
                         dispatch(setTestSelectedTopics([]));
                         setOpen(false);
                         setDown(i);
-
+                        
                         // window.scrollTo({
                         //   top:
                         //     window.scrollY +
