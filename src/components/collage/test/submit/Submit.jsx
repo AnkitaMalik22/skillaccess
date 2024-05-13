@@ -5,7 +5,7 @@ import List from "./List";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import Code from "./Code";
 import Video from "./Video";
@@ -28,6 +28,8 @@ const Submit = () => {
     duration_from,
     duration_to,
   } = useSelector((state) => state.test);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const testType = searchParams.get("level");
 
   const [questions, setQuestions] = useState();
   let section1 = [];
@@ -230,7 +232,8 @@ const Submit = () => {
       toast.error("Please select atleast one topic");
       return;
     }
-
+    console.log("adaapt", testType, );
+   if(testType === "adaptive"){
     if (totalQuestions*2 > questions.length) {
       console.log(totalQuestions, questions.length);
       toast.error(
@@ -251,6 +254,27 @@ const Submit = () => {
       return;
     }
 
+   }else{
+    if (totalQuestions > questions.length) {
+      console.log(totalQuestions, questions.length);
+      toast.error(
+        `Add ${
+          totalQuestions - questions.length
+        } more questions to complete the test`
+      );
+      return;
+    }
+    if (totalQuestions < questions.length) {
+      console.log(totalQuestions, questions.length);
+      window.alert(
+        `Remove ${
+          questions.length - totalQuestions
+        } questions to complete the test`
+      );
+
+      return;
+    }
+   }
     let totalTimeCal = handleCalculateTime();
 
     // totalTimeCal = totalTimeCal.reduce((acc, curr) => {
