@@ -19,9 +19,32 @@ const Jobs = () => {
 
   const { jobs } = useSelector((state) => state.dashboard);
 
+  const [filtered, setFiltered] =React.useState([]);
   useEffect(() => {
     dispatch(getTotalJobs());
   }, [dispatch]);
+  const handleFilterStudents = (e) => {
+    const value = e.target.value;
+    if (value === "" || value.trim() === "") {
+      console.log("empty");
+
+      setFiltered(jobs);
+       
+      return;
+    } else {
+      setFiltered(
+        jobs.filter((Jobs) => {
+          const regex = new RegExp(value, "i");
+          return (
+            regex.test(Jobs.JobTitle)
+          );
+        })
+      )
+    }
+  };
+  useEffect(()=>{
+    setFiltered(jobs);
+  },[jobs]);
 
   return (
     <div className="mx-4">
@@ -38,6 +61,7 @@ const Jobs = () => {
             <input
               type="text"
               placeholder="Search..."
+              onChange={handleFilterStudents}
               className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
             />
           </span>
@@ -48,7 +72,7 @@ const Jobs = () => {
         </button>
       </div>
       <div className="flex flex-col gap-4  items-center  ">
-        {jobs?.map((job, index) => {
+        {filtered?.map((job, index) => {
           return (
             <div className="flex justify-between w-[99%]" key={index}>
               <div className="sm:flex">
@@ -83,7 +107,11 @@ const Jobs = () => {
                   {" "}
                   {job.WorkplaceType || "WOrktype"}
                 </h2>
-                <button className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center ">
+                <button className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
+                onClick={() =>
+                  navigate(`/collage/companies/jobOverview/${job._id}`)
+                }
+                >
                   {job.EmploymentType || "employmentType"}
                 </button>
                 <FaArrowRight className="text-gray-400 self-center" />

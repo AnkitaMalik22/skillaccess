@@ -1,7 +1,8 @@
 @tailwind base;
 
 /* Firefox */
-* {
+* 
+{
   scrollbar-width: 5px;
   scrollbar-color: rgb(243 244 246);
   font-family: 'DM Sans', sans-serif;
