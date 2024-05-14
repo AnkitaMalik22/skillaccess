@@ -23,7 +23,7 @@ const Jobs = () => {
   useEffect(() => {
     dispatch(getTotalJobs());
   }, [dispatch]);
-  const handleFilterStudents = (e) => {
+  const handleFilterJobs = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
       console.log("empty");
@@ -61,7 +61,7 @@ const Jobs = () => {
             <input
               type="text"
               placeholder="Search..."
-              onChange={handleFilterStudents}
+              onChange={handleFilterJobs}
               className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
             />
           </span>

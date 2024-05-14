@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 
 import Header from "./Header";
 
@@ -9,14 +9,30 @@ import Skills from "./Skills";
 import Results from "./Results";
 import Portfolio from "./Portfolio";
 
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getStudentCV
+} from "../../../../redux/collage/student/studentSlice";
 const Profile = () => {
+  const { id } = useParams();
   const [toggle, setToggle] = useState(1);
+  const dispatch = useDispatch();
+  const {
+    studentCV
+  } = useSelector((state) => state.collegeStudents);
+
+  useEffect(() => {
+    dispatch(getStudentCV(id));
+  }, [dispatch,id]);
+
+  console.log(studentCV);
   return (
     <div className="">
       <Header />
       <div className="grid grid-cols-12 w-[96%] mt-1 mx-auto border-gray-200  ">
         <div className="col-span-9 rounded-lg mt-3  ">
-          <Details />
+          <Details student={studentCV} />
           {/* toggler */}
           <div className="bg-gray-50 p-4 mt-4 rounded-lg">
             <span className="grid grid-cols-4 text-xs font-bold border-b border-spacing-0 border-gray-200">
@@ -55,13 +71,13 @@ const Profile = () => {
             </span>
 
             {toggle === 1 ? (
-              <Education />
+              <Education Education={studentCV?.Education}/>
             ) : toggle === 2 ? (
-              <Skills />
+              <Skills  skills={studentCV?.Skills}/>
             ) : toggle === 3 ? (
               <Results />
             ) : (
-              <Portfolio />
+              <Portfolio Portfolio={studentCV?.Portfolio} />
             )}
           </div>
         </div>

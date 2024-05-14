@@ -13,6 +13,7 @@ const initialState = {
   invitedStudents: [],
   approvedStudents: [],
   pendingStudents: [],
+  studentCV:[],
     loading: false,
     error: false,
     GET_STUDENT_LOADING: false,
@@ -79,7 +80,27 @@ export const approveStudent = createAsyncThunk(
     }
     );
 
-
+    export const getStudentCV = createAsyncThunk(
+        "student/studentCV",
+        async (studentId, { rejectWithValue }) => {
+          try {
+            const req = await axios.get(
+              `${REACT_APP_API_URL}/api/college/student/${studentId}`,
+              {
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("auth-token"),
+                },
+            },
+            );
+            const res = req.data;
+            console.log(res);
+            return res.student;
+          } catch (error) {
+            return rejectWithValue(error.response.data);
+          }
+        }
+      );
 
 export const studentSlice = createSlice({
     name: "student",
@@ -88,6 +109,7 @@ export const studentSlice = createSlice({
         setUploadedStudents: (state, action) => {
             state.uploadedStudents = action.payload;
         },
+       
         setInvitedStudents: (state, action) => {
             state.invitedStudents = action.payload;
         },
@@ -155,7 +177,17 @@ export const studentSlice = createSlice({
                 state.loading = false;
                 state.error = true;
                 toast.error("An error occurred while approving the student");
-            });
+            })
+            .addCase(getStudentCV.pending, (state, action) => {
+                state.status = "loading";
+              })
+              .addCase(getStudentCV.fulfilled, (state, action) => {
+                state.studentCV = action.payload;
+              })
+              .addCase(getStudentCV.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
+              });
 
     },
 });
