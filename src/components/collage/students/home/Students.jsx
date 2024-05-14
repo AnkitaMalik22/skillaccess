@@ -25,6 +25,8 @@ const Students = () => {
   } = useSelector((state) => state.collegeStudents);
 
   const { user } = useSelector((state) => state.collageAuth);
+
+  console.log(pendingStudents);
   //  useEffect(() => {
   // async()=>{
   //  await dispatch(getStudents({id: user?._id}))
@@ -115,13 +117,13 @@ const Students = () => {
       )}
       <div className="w-11/12 flex justify-between mx-auto gap-1">
         {/* New students joined */}
-        <div className="h-96 w-1/2 bg-gray-100 overflow-y-scroll scroll rounded-lg">
+        <div className="h-96 w-1/3 bg-gray-100 overflow-y-scroll scroll rounded-lg">
           <span className="flex justify-between font-bold text-sm px-4 py-2">
-            <h2>New Students Joined</h2>
+            <h2>Invited Students</h2>
             <h2 className="text-gray-400">...</h2>
           </span>
           {filteredStudents?.map((student, index) => (
-            <div className=" grid-cols-3 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
+            <div className=" grid-cols-2 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
               {" "}
               {/* row-2 */}
               <div className={` flex `}>
@@ -165,38 +167,26 @@ const Students = () => {
                 </span> */}
                 </div>
               </div>
-              <div className="flex justify-center">
-                <span className="flex justify-center h-fit self-center gap-2">
-                  <h2
-                    className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
-                    onClick={() => navigate("/collage/students/profile")}
-                  >
-                    View CV
-                  </h2>
-
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center">
-                    <TbFileDownload className="text-gray-400 h-6 w-6" />
-                  </h2>
-                </span>
-              </div>{" "}
+              
             </div>
           ))}
         </div>
 
         {/* Pending request */}
-        <div className="h-96 w-[50%] bg-gray-100 overflow-y-scroll rounded-lg">
+        <div className="h-96 w-2/3 bg-gray-100 overflow-y-scroll rounded-lg">
           <span className="flex justify-between font-bold text-sm px-4 py-2">
             <h2>Pending Request</h2>
             <h2 className="text-gray-400">...</h2>
           </span>
 
           {pendingStudents?.map((student, index) => (
+            
             <div className=" grid-cols-3 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
               {" "}
               {/* row-2 */}
               <div className={` flex `}>
                 <div className="flex self-center">
-                  <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center ">
+                  <div className=" min-w-[3rem]  h-12 self-center gap-2  mr-2  flex items-center justify-center ">
                     {" "}
                     <img
                       src="../../images/student.png"
@@ -204,10 +194,11 @@ const Students = () => {
                       width="50px"
                       height="50px"
                     />
-                  </div>
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
+                    <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
                     {student?.FirstName + " " + student?.LastName}
                   </h2>
+                  </div>
+                  
 
                   {/* <span className="break-words min-w-0 pt-1 ">
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
@@ -221,11 +212,12 @@ const Students = () => {
                 </div>
               </div>
               <div className="flex justify-center ">
-                <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
+              <h2 className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-3/4" style={{ wordWrap: 'break-word'}} >
                   {student?.Email}
                 </h2>
                 <div className=" self-center h-fit"></div>
               </div>
+              <div className="flex item-center gap-2">
               <button
                 className="flex justify-center"
                 onClick={() => {
@@ -237,6 +229,20 @@ const Students = () => {
                   Approve Request
                 </span>
               </button>
+              
+                <span className="flex justify-center h-fit self-center gap-2">
+                  <h2
+                    className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
+                    onClick={() => navigate(`/collage/students/profile/${student._id}`)}
+                  >
+                    View CV
+                  </h2>
+
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
+                    <TbFileDownload className="text-gray-400 h-6 w-6" />
+                  </h2>
+                </span>
+              </div>{" "}
             </div>
           ))}
 
