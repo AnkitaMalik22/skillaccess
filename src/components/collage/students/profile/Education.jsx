@@ -23,7 +23,7 @@ const Education = ({Education}) => {
            <div className="ml-1 mt-1">
              <h2 className="  font-bold  py-1 ">{education.School}</h2>
              <h2 className="font-normal  text-sm pb-2">
-               {education.Degree}
+               {education?.Degree}
              </h2>
            </div>
          </div>
@@ -59,14 +59,18 @@ const Education = ({Education}) => {
      </section>
     
      <section className="px-3 text-xs font-bold mt-5">
-       <h2>Acheivements (1)</h2>
-       <div className="flex flex-wrap mt-4 border-b-2 pb-5">
-         <img
-           src="../../images/cert.png"
-           alt=""
-           className="w-60 h-40 object-cover rounded-lg"
-         />
-       </div>
+       <h2>Achievements ({education?.Media?.length})</h2>
+    { education?.Media?.map((media,index)=>
+      (
+          <div className="flex flex-wrap mt-4 border-b-2 pb-5" key={index}>
+                  <img
+                    src={media.url}
+                    alt=""
+                    className="w-60 h-40 object-cover rounded-lg"
+                  />
+          </div>
+      )
+    )  }
      </section>
      
    </div>
