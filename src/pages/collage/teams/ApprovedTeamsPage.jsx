@@ -51,7 +51,8 @@ if(navigator.language !== navigator.currentPageLanguage) {
 }, []);
   return (
     <CollageLayout>
-      <ApprovedTeams />
+      {/* <ApprovedTeams /> */}
+      <h1 className="flex justify-center items-center w-full h-[80vh] text-5xl text-red-500">Coming Soon...</h1>
     </CollageLayout>
   );
 };

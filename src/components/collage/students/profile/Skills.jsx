@@ -12,7 +12,7 @@ const Skills = ({skills}) => {
               {software}
             </span>
           ))} */}
-          {skills.SoftwareKnowledge.join(', ')}
+          {skills?.SoftwareKnowledge?.join(', ')}
         </span>
       </div>
 

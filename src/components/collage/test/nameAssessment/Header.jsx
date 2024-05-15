@@ -9,7 +9,7 @@ const Header = ({ handleNext }) => {
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
         <button className="flex self-center ml-2 rounded-lg  gap-2">
-          <button onClick={() => navigate(-1)} className="mt-2 mr-3">
+          <button onClick={() => navigate('/collage/test')} className="mt-2 mr-3">
             <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
           </button>
 

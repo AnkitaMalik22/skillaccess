@@ -2,13 +2,41 @@ import React from "react";
 import { CgPinAlt } from "react-icons/cg";
 import { FaStar } from "react-icons/fa";
 import { SiAdobephotoshop } from "react-icons/si";
+import PopUp from "./PopUp";
+import PopUpReject from "./PopUpReject";
 const Details = ({student}) => {
   const handleViewCV = () => {
     window.open(student.Cv.url, '_blank');
   };
+  const handleApprove = (studentId) => {};
+  const [visible, setVisible] = React.useState(false);
+  const [show, setShow] = React.useState(false);
+  const [sId, setSId] = React.useState(null);
+console.log(student?.approved)
   return (
     // {/* profile container */}
     <section>
+        {visible && (
+        <PopUp
+          visible={visible}
+          handleSave={handleApprove}
+          studentId={sId}
+          handleOverlay={() => {
+            setVisible(false);
+          }}
+        />
+      )}
+
+{show && (
+        <PopUpReject
+          visible={show}
+          handleSave={handleApprove}
+          studentId={sId}
+          handleOverlay={() => {
+            setShow(false);
+          }}
+        />
+      )}
       {/* first section */}
       <div className=" flex justify-between border-b  bg-gray-50 rounded-t-lg">
         {/* profile photo */}
@@ -81,12 +109,25 @@ const Details = ({student}) => {
         </button>
 
         <span className="flex gap-2">
+        {!student?.approved && <button className="py-3  rounded-xl px-3 text-[#DE350B] border-2 border-[#DE350B] font-bold"
+         onClick={() => {
+          setShow(true);
+          setSId(student?._id);
+        }}
+        >
+            Reject Request
+          </button>}
           <button className="py-3  rounded-xl px-3 bg-[#8f92a11d] font-bold">
             View Certificates
           </button>
-          <button className="py-2 text-white rounded-xl px-4 bg-blue-700 font-bold">
+         {!student?.approved &&  <button className="py-2 text-white rounded-xl px-4 bg-blue-700 font-bold"
+                  onClick={() => {
+                    setVisible(true);
+                    setSId(student?._id);
+                  }}
+          >
             Approve Request
-          </button>
+          </button>}
         </span>
       </div>
     </section>

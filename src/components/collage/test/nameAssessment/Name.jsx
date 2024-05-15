@@ -313,7 +313,7 @@ const Name = () => {
         )}
         <input
           type="tel"
-        
+          
           name="totalAttempts"
           className={` w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
             errors.totalAttempts ? "border-red-500" : "border-none"
@@ -329,6 +329,7 @@ const Name = () => {
         )}
         <input
           name="totalQuestions"
+          
           type="tel"
           className={` w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
             errors.totalQuestions ? "border-red-500" : "border-none"
