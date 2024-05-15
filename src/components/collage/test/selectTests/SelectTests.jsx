@@ -35,9 +35,8 @@ const SelectTests = () => {
 
   const dispatch = useDispatch();
 
-  const { sections, currentQuestionCount, totalQuestions ,GET_TOPICS_LOADING } = useSelector(
-    (state) => state.test
-  );
+  const { sections, currentQuestionCount, totalQuestions, GET_TOPICS_LOADING } =
+    useSelector((state) => state.test);
   // for filter the sections
 
   const [filteredSections, setFilteredSections] = useState(sections);
@@ -94,6 +93,7 @@ const SelectTests = () => {
       // sectionCopy[Type] ="mcq";
       // console.log(section);
       // console.log(sectionCopy);
+
       switch (questionType) {
         case "mcq":
           setQType("questions");
@@ -113,6 +113,14 @@ const SelectTests = () => {
         default:
           break;
       }
+      let typeIf;
+      if (questionType === "mcq") {
+        typeIf = "questions";
+      } else if (questionType === "findAnswer") {
+        typeIf = "findAnswers";
+      } else {
+        typeIf = questionType;
+      }
       const shuffleArray = (array) => {
         let arr = [...array];
         for (let i = arr.length - 1; i > 0; i--) {
@@ -122,21 +130,26 @@ const SelectTests = () => {
         }
         return arr;
       };
-
-      if (sectionCopy[qType]?.length < parseInt(totalQ)) {
-        toast.error("insufficient number of questions");
+      console.log(
+        sectionCopy[qType]?.length,
+        parseInt(totalQ),
+        qType,
+        questionType
+      );
+      if (sectionCopy[typeIf]?.length < parseInt(totalQ)) {
+        toast.error("insufficient number of questions s");
         return;
       } else {
-// <<<<<<< saveMainCopy
-        sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(
+        // <<<<<<< saveMainCopy
+        sectionCopy[typeIf] = shuffleArray(sectionCopy[typeIf]).slice(
           0,
           parseInt(totalQ)
         );
         console.log(sectionCopy, totalQ);
-// =======
-//         console.log("totalQ : ", totalQ)
-//         sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(0, totalQ);
-// >>>>>>> saveMain
+        // =======
+        //         console.log("totalQ : ", totalQ)
+        //         sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(0, totalQ);
+        // >>>>>>> saveMain
         dispatch(
           setCurrentQuestionCount(currentQuestionCount + parseInt(totalQ))
         );
@@ -246,11 +259,9 @@ const SelectTests = () => {
       )}
       <Header />
 
-
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>
-   
 
       {/* larger screens */}
 
@@ -350,7 +361,6 @@ const SelectTests = () => {
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
-        
           <div className="w-full h-64 bg-gray-100 rounded-lg flex justify-center">
             <div className=" self-center w-fit h-fit ">
               <div
@@ -371,12 +381,13 @@ const SelectTests = () => {
               </h2>
             </div>
           </div>
-          {GET_TOPICS_LOADING  &&   <div className="w-[50vw] h-64 rounded-lg flex items-center  justify-center  z-10 "><Loader size="md" /></div>}
+          {GET_TOPICS_LOADING && (
+            <div className="w-[50vw] h-64 rounded-lg flex items-center  justify-center  z-10 ">
+              <Loader size="md" />
+            </div>
+          )}
           {filteredSections?.map((section, index) => (
-          
-
             <div className="w-full h-64 rounded-lg bg-gray-100  relative ">
-               
               <div className="card-body overflow-y-auto h-52">
                 <h2 className="text-xl font-bold mb-4 break-words">
                   {section.Heading}
@@ -440,7 +451,6 @@ const SelectTests = () => {
                   </div>
                 </div>
               </div>
-
             </div>
           ))}{" "}
         </div>
