@@ -324,7 +324,7 @@ const Students = () => {
                   height="50px"
                 />
               </div>
-              <span className="break-words min-w-0 pt-1 ">
+              <span className="break-words min-w-0 pt-1 flex items-center ">
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
                   {student?.FirstName + " " + student?.LastName}
                 </h2>

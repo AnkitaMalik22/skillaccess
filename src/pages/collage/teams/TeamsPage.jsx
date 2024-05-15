@@ -52,6 +52,7 @@ if(navigator.language !== navigator.currentPageLanguage) {
   return (
     <CollageLayout>
       <Teams />
+      
     </CollageLayout>
   );
 };

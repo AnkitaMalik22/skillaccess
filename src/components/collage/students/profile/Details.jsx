@@ -2,20 +2,17 @@ import React from "react";
 import { CgPinAlt } from "react-icons/cg";
 import { FaStar } from "react-icons/fa";
 import { SiAdobephotoshop } from "react-icons/si";
-import { useDispatch, useSelector } from "react-redux";
 import PopUp from "./PopUp";
-import { approveStudent } from "../../../../redux/collage/student/studentSlice";
+import PopUpReject from "./PopUpReject";
 const Details = ({student}) => {
   const handleViewCV = () => {
     window.open(student.Cv.url, '_blank');
   };
   const handleApprove = (studentId) => {};
   const [visible, setVisible] = React.useState(false);
+  const [show, setShow] = React.useState(false);
   const [sId, setSId] = React.useState(null);
-
-  const {
-    approvedStudents,
-  } = useSelector((state) => state.collegeStudents);
+console.log(student?.approved)
   return (
     // {/* profile container */}
     <section>
@@ -26,6 +23,17 @@ const Details = ({student}) => {
           studentId={sId}
           handleOverlay={() => {
             setVisible(false);
+          }}
+        />
+      )}
+
+{show && (
+        <PopUpReject
+          visible={show}
+          handleSave={handleApprove}
+          studentId={sId}
+          handleOverlay={() => {
+            setShow(false);
           }}
         />
       )}
@@ -101,20 +109,25 @@ const Details = ({student}) => {
         </button>
 
         <span className="flex gap-2">
-        <button className="py-3  rounded-xl px-3 text-[#DE350B] border-2 border-[#DE350B] font-bold">
+        {!student?.approved && <button className="py-3  rounded-xl px-3 text-[#DE350B] border-2 border-[#DE350B] font-bold"
+         onClick={() => {
+          setShow(true);
+          setSId(student?._id);
+        }}
+        >
             Reject Request
-          </button>
+          </button>}
           <button className="py-3  rounded-xl px-3 bg-[#8f92a11d] font-bold">
             View Certificates
           </button>
-          <button className="py-2 text-white rounded-xl px-4 bg-blue-700 font-bold"
+         {!student?.approved &&  <button className="py-2 text-white rounded-xl px-4 bg-blue-700 font-bold"
                   onClick={() => {
                     setVisible(true);
                     setSId(student?._id);
                   }}
           >
             Approve Request
-          </button>
+          </button>}
         </span>
       </div>
     </section>
