@@ -16,7 +16,8 @@ const List = () => {
 
   let arr = assessments.beginner.concat(
     assessments.intermediate,
-    assessments.advanced
+    assessments.advanced,
+    assessments.adaptive
   );
 
   let totalStudentsAppeared = 0;

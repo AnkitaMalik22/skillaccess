@@ -75,7 +75,7 @@ const SelectTests = () => {
     //   return prev + totalQ;
     // });
     let Total =
-      Math.ceil((2 / 6) * parseInt(totalQ)) +
+      Math.floor((2 / 6) * parseInt(totalQ)) +
       Math.ceil((2 / 3) * parseInt(totalQ)) +
       parseInt(totalQ);
     // localStorage.setItem("currentTotal", totalQuestions);
@@ -90,8 +90,8 @@ const SelectTests = () => {
 
     // let totalInAdv = parseInt(Total)-parseInt(totalQ);
     if (
-      parseInt(currentQuestionCount) > parseInt(totalQuestions) ||
-      parseInt(totalQ) > parseInt(totalQuestions)
+      parseInt(currentQuestionCount) > parseInt(totalQuestions)*2 ||
+      parseInt(totalQ) > parseInt(totalQuestions)*2
     ) {
       toast.error("max questions reached");
       return;
@@ -129,11 +129,22 @@ const SelectTests = () => {
       };
 
       // Group questions by level
-      const questionsByLevel = section?.questions?.reduce((acc, question) => {
-        acc[question.QuestionLevel] = acc[question.QuestionLevel] || [];
-        acc[question.QuestionLevel].push(question);
-        return acc;
-      }, {});
+      // const questionsByLevel = section?.questions?.reduce((acc, question) => {
+      //   acc[question.QuestionLevel] = acc[question.QuestionLevel] || [];
+      //   acc[question.QuestionLevel].push(question);
+      //   return acc;
+      // }, {});
+
+      let questionsByLevel = {
+        beginner: [],
+        intermediate: [],
+        advanced: [],
+      };
+      section?.questions?.forEach((question) => {
+        questionsByLevel[question.QuestionLevel].push(question);
+      });
+
+      // console.log(questionsByLevel, "level");
 
       // Shuffle questions for each level
       // Object.values(questionsByLevel).forEach(shuffleArray);
@@ -142,34 +153,46 @@ const SelectTests = () => {
       Object.values(questionsByLevel).forEach((questions) =>
         shuffleArray(questions)
       );
-      console.log(questionsByLevel);
+      // console.log(questionsByLevel);
       let errText = "";
+
+      questionsByLevel.intermediate = questionsByLevel.intermediate.slice(
+        0,
+        Math.floor((2 * parseInt(totalQ)) / 3)
+      );
+
+      questionsByLevel.beginner = questionsByLevel.beginner.slice(
+        0,
+        Math.floor(parseInt(totalQ))
+      );
+      questionsByLevel.advanced = questionsByLevel.advanced.slice(
+        0,
+        Math.ceil(parseInt(totalQ) / 3)
+      );
       // Select random questions from each level
+
       const mixedQuestions = Object.values(questionsByLevel).flatMap(
         (questions, index) => {
           const numQuestionsAvailable = Math.min(
-            Math.ceil(parseInt(totalQ)),
+            Math.floor(parseInt(totalQ)),
             questions.length
           );
 
           console.log(questions);
           if (
-            Math.ceil(parseInt(totalQ)) > questionsByLevel["beginner"].length
+            Math.floor(parseInt(totalQ)) > questionsByLevel["beginner"].length
           ) {
             errText = "Insufficient Beginner questions";
             return;
           }
           if (
-            Math.ceil(parseInt(totalQ) - parseInt(totalQ) / 3) >
+            Math.floor((2 * parseInt(totalQ)) / 3) >
             questionsByLevel["intermediate"].length
           ) {
             errText = "Insufficient Intermediate questions";
             return;
           }
-          if (
-            parseInt(totalQ) - 2 * (parseInt(totalQ) / 6) >
-            questionsByLevel["advanced"].length
-          ) {
+          if ( Math.ceil(parseInt(totalQ) / 3) > questionsByLevel["advanced"].length) {
             errText = "Insufficient Advanced questions";
             return;
           }
@@ -184,7 +207,7 @@ const SelectTests = () => {
 
       // Output the mixed questions array
       console.log(
-        mixedQuestions.slice(0, Total),
+        mixedQuestions.slice(0),
         mixedQuestions.length,
         "mixedQuestions",
         Total
@@ -224,7 +247,7 @@ const SelectTests = () => {
 
   const removeSection = (section, index) => {
     const updatedSections = [...selectedSections];
-    let QsCount = Math.ceil(selectedSections[index].questions.length / 3);
+    let QsCount = Math.floor(selectedSections[index].questions.length);
     dispatch(setCurrentQuestionCount(currentQuestionCount - QsCount));
     updatedSections.splice(index, 1);
 
