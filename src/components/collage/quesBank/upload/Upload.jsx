@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import toast from "react-hot-toast";
 
 const Upload = () => {
   const handleDragOver = (e) => {
@@ -9,7 +10,7 @@ const Upload = () => {
   const handleDrop = (e) => {
     e.preventDefault();
     // console.log(e.dataTransfer.files);
-    window.alert("file dropped");
+    toast.success("file dropped");
   };
 
   const handleClick = (e) => {

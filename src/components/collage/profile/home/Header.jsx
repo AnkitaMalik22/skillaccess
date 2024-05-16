@@ -66,7 +66,7 @@ const Header = ({
         <div className="flex gap-2 px-3 py-1 mt-2">
           {editable ? (
             <div className="w-14 h-14 bg-blued self-center rounded-lg relative">
-              <img src={avatar} alt="" width="50px" />
+              <img src={avatar} alt="" width="56px" className="rounded-lg" />
 
               <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-blue-700 bg-opacity-80">
                 <img
@@ -94,8 +94,8 @@ const Header = ({
                     : ""
                 }
                 alt="avatar"
-                width="50px"
-                className="relative top[-50%]  "
+                width="56px"
+                className="relative top[-50%]  rounded-lg "
               />
               {/* {editable && (
                 <div className="absolute bottom-2 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-blue-700 bg-opacity-80">
@@ -110,7 +110,7 @@ const Header = ({
           )}
 
           <div className="ml-1 mt-1">
-            <h2 className="text-2xl  font-bold  py-1  ">
+            <h2 className="3xl:text-[28px] text-[20px] font-extrabold  py-1  ">
               {editable && college ? (
                 <input
                   type="text"
@@ -120,10 +120,12 @@ const Header = ({
                   onChange={(e) =>
                     setCollege({ ...college, CollegeName: e.target.value })
                   }
-                  className="bg-transparent border-none focus:outline-none"
+                  className="bg-transparent border-none focus:outline-none w-full min-w-[30vw]  text-[20px] font-extrabold   "
                 />
               ) : college && college.CollegeName ? (
-                college.CollegeName
+                <p className="text-[20px] font-extrabold  py-1  ">
+                  {college.CollegeName}
+                </p>
               ) : (
                 ""
               )}
@@ -138,7 +140,8 @@ const Header = ({
               className="py-2 text-white rounded-xl  bg-blue-700 font-bold flex gap-2 px-4"
               onClick={() => {
                 localStorage.setItem("editable", true);
-                window.location.reload(true);
+                setEditable(true);
+                // window.location.reload(true);
               }}
             >
               <img src="../../images/icons/pen.png" alt="" />{" "}
@@ -152,9 +155,10 @@ const Header = ({
       <div className="border-b px-6  py-8 bg-gray-50 font-dmSans">
         <h1 className="text-lg font-bold">Overview</h1>
         {college && college.Description ? (
-          <p className="text-sm  font-medium mt-2">
+          <div className="text-sm  font-medium mt-2">
             {editable && college ? (
               <textarea
+                className="mt-2 bg-transparent border-none focus:outline-none w-full max-w-[80vw]"
                 type="text"
                 value={
                   college && college.Description ? college.Description : ""
@@ -162,16 +166,17 @@ const Header = ({
                 onChange={(e) =>
                   setCollege({ ...college, Description: e.target.value })
                 }
-                className="bg-transparent border-none focus:outline-none"
               />
             ) : college && college.Description ? (
-              college.Description
+              <p className="text-sm  font-medium mt-2 leading-loose text-gray-500">
+                {college.Description}
+              </p>
             ) : (
               ""
             )}
-          </p>
+          </div>
         ) : (
-          <p className="text-sm  font-medium mt-2">
+          <div className="text-sm  font-medium mt-2 text-gray-500  rounded-lg">
             {editable && college ? (
               <textarea
                 type="text"
@@ -181,20 +186,19 @@ const Header = ({
                 onChange={(e) =>
                   setCollege({ ...college, Description: e.target.value })
                 }
-                className={`border-none focus:outline-none ${
-                  !college.Description ? 'bg-gray-200' : 'bg-transparent'
-                }`}
+                className={`rounded-lg mt-2 border-none focus:outline-none w-full max-w-[80vw]  h-full min-h-[25vh]  text-gray-500 bg-[#f4f5f6]
+                `}
                 placeholder="Add Description"
               />
             ) : (
               "No Description Available"
             )}
-          </p>
+          </div>
         )}
       </div>
-      <div className="px-6  py-8 bg-gray-50 font-dmSans flex sm:gap-32 text-sm font-medium">
-        <div className="flex gap-2">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 flex justify-center">
+      <div className="px-6  py-8 bg-gray-50 font-dmSans flex sm:gap-16 text-sm font-medium ">
+        <div className="flex gap-2 ">
+          <div className="w-10 h-10 rounded-2xl bg-gray-200 flex justify-center">
             <MdOutlineEmail className="self-center text-2xl" />
           </div>
           {college && college.Email ? (
@@ -206,13 +210,14 @@ const Header = ({
                   onChange={(e) =>
                     setCollege({ ...college, Email: e.target.value })
                   }
-                  className={`border-none focus:outline-none ${
-                    !college.Email ? 'bg-gray-200' : 'bg-transparent'
-                  }`}
+                  className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6]  `}
                   placeholder="Add Email"
                 />
               ) : college && college.Email ? (
-                college.Email
+                <p className=" text-gray-500 bg-transparent text-sm">
+                  {" "}
+                  {college.Email}
+                </p>
               ) : (
                 ""
               )}
@@ -225,35 +230,39 @@ const Header = ({
         </div>
 
         <div className="flex gap-2">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 flex justify-center">
+          <div className="w-10 h-10 rounded-2xl bg-gray-200 flex justify-center">
             <BsPhone className="self-center text-2xl" />
           </div>
 
           {/* {!college.Phone ?? <p className="self-center">No Phone Available</p>} */}
 
-          <p className="self-center">
+          <div className="self-center font-medium">
             {editable && college ? (
               <input
-                type="text"
+                type="tel" // Set input type to "tel" for telephone number
+                maxLength={10} // Set maximum length to 10 digits
                 value={college && college.Phone ? college.Phone : ""}
-                onChange={(e) =>
-                  setCollege({ ...college, Phone: e.target.value })
-                }
-                className={`border-none focus:outline-none ${
-                  !college.Phone ? 'bg-gray-200' : 'bg-transparent'
-                }`}
+                onChange={(e) => {
+                  // Ensure the entered value doesn't exceed 10 digits
+                  if (e.target.value.length <= 10) {
+                    setCollege({ ...college, Phone: e.target.value });
+                  }
+                }}
+                className={` rounded-lg border-none focus:outline-none appearance-none bg-[#f4f5f6] text-sm `}
                 placeholder="Add Phone Number"
               />
             ) : college && college.Phone ? (
-              college.Phone
+              <p className="text-gray-500 bg-transparent text-sm">
+                {college.Phone}
+              </p>
             ) : (
               ""
             )}
-          </p>
+          </div>
         </div>
 
-        <div className="flex gap-2 font-dmSans">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 flex justify-center">
+        <div className="flex gap-2 font-dmSans font-medium">
+          <div className="w-10 h-10 rounded-2xl bg-gray-200 flex justify-center">
             {" "}
             <PiLinkSimple className="self-center text-2xl" />
           </div>
@@ -272,14 +281,12 @@ const Header = ({
                   onChange={(e) =>
                     setCollege({ ...college, Website: e.target.value })
                   }
-                  className={`border-none focus:outline-none ${
-                    !college.Website ? 'bg-gray-200' : 'bg-transparent'
-                  }`}
+                  className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6]`}
                   placeholder="Add College Website"
                 />
               ) : (
                 <a
-                  className="self-center text-blue-400 underline"
+                  className="self-center text-blue-400 underline bg-transparent font-medium"
                   href={college && college.Website ? college.Website : ""}
                   target="_blank"
                   rel="noreferrer"
@@ -294,8 +301,8 @@ const Header = ({
         </div>
       </div>
 
-      <div className="px-6 flex gap-2  pb-8">
-        <div className="w-10 h-10  rounded-lg bg-gray-200 flex justify-center">
+      <div className="px-6 flex gap-2  pb-8 ">
+        <div className="w-10 h-10  rounded-2xl bg-gray-200 flex justify-center">
           {" "}
           <CgPinAlt className="self-center text-3xl" />
         </div>
@@ -318,9 +325,7 @@ const Header = ({
                 onChange={(e) =>
                   setCollege({ ...college, Address: e.target.value })
                 }
-                className={`border-none focus:outline-none ${
-                  !college.Address ? 'bg-gray-200' : 'bg-transparent'
-                }`}
+                className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6] break-words  w-full max-w-[416px]`}
                 placeholder="College Address"
               />
             ) : (

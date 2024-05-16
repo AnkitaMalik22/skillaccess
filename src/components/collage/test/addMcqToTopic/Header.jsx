@@ -1,54 +1,93 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addMcqToTopic,
-  addQuestionToTopic,
-} from "../../../../redux/collage/test/testSlice";
+import { useSearchParams } from "react-router-dom";
+import Loader from "../../../loaders/Loader";
+import toast from "react-hot-toast";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+
 
 const Header = ({ question, setQuestion, id, type }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { test } = useSelector((state) => state.test);
+  const { test ,ADD_QUESTION_LOADING} = useSelector((state) => state.test);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const level = searchParams.get("level");
 
   const handleSave = () => {
-    if (question.Title === "" ) {
-      window.alert("Please enter question");
+    if (
+      !question.Title ||
+      question.Title.trim() === "" ||
+      question.Title === "<p><br></p>"
+    ) {
+      toast.error("Please enter question");
       return;
-    }
-    else if (question.Options &&  question.Options.length < 4) {
+    } else if (
+      !question.Options[0] ||
+      !question.Options[1] ||
+      !question.Options[2] ||
+      !question.Options[3]
+    ) {
+      toast.error("Please enter atleast 4 options");
+      return;
+    } else if (question.Duration == 0) {
+      toast.error("Please enter required time");
+      return;
+    } else if (question.AnswerIndex === null) {
+      toast.error("Please select correct answer");
+      return;
+    } else {
+      dispatch(addQuestionToTopic({ data: question, id: id, type: type })).then(()=>{
+        if(!ADD_QUESTION_LOADING){
+          console.log("calling 2 --" , ADD_QUESTION_LOADING)
+          level === "adaptive"
+            ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+            : navigate(-1);
+        }
+      })
+      setQuestion({ Title: "", Options: [], Duration: 0, AnswerIndex: null });
 
-      window.alert("Please enter atleast 4 options");
-      return;
-    }
-    else if(question.Duration==0){
-      window.alert("Please enter required time");
-      return;
-    }
-    else if(question.AnswerIndex===null){
-      window.alert("Please select correct answer");
-      return;
-    }
-    else {
-      dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-      setQuestion({ Title: "", Options: [] , Duration : 0 ,AnswerIndex:null});
-      navigate(-1);
-    }
+      // level === "adaptive"
+      //       ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+      //       : navigate(`/collage/test/select?level=${level}`);
 
     // api call to push questions to topic
-   
   };
-  // useEffect(() => {
-  //   dispatch(setTest({questions}));
-  // }, [questions]);
+}
+
+
+// useEffect(() => {
+//   console.log("calling --" , ADD_QUESTION_LOADING)
+//   if(!ADD_QUESTION_LOADING){
+//     console.log("calling 2 --" , ADD_QUESTION_LOADING)
+//     level === "adaptive"
+//       ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+//       : navigate(`/collage/test/select?level=${level}`);
+//   }else{
+//     console.log("loading")
+//   }
+
+//     return () => {
+//       //navigate(-1);
+//     }
+//   }
+//   , [ADD_QUESTION_LOADING]);
+
+
+
   return (
     <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">
       <div className="h-fit self-center">
         <button className="flex self-center ml-2 rounded-lg  gap-2">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() =>
+              level === "adaptive"
+                ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+                : navigate(`/collage/test/select?level=${level}`)
+            }
             className=" mr-3 self-center bg-white rounded-lg "
           >
             <FaChevronLeft className=" p-3  h-10 w-10 self-center " />
@@ -66,7 +105,11 @@ const Header = ({ question, setQuestion, id, type }) => {
         <div className=" flex gap-2">
           <button
             className="self-center w-24  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white"
-            onClick={() => navigate(-1)}
+            onClick={() =>
+              level === "adaptive"
+                ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+                : navigate(`/collage/test/select?level=${level}`)
+            }
           >
             Cancel
           </button>
@@ -76,7 +119,8 @@ const Header = ({ question, setQuestion, id, type }) => {
 
             onClick={handleSave}
           >
-            Save
+            {ADD_QUESTION_LOADING ? "Saving" : "Save"}
+            {ADD_QUESTION_LOADING && <Loader size="sm" />}
           </button>
         </div>
       </div>

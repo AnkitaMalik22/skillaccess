@@ -2,19 +2,24 @@ import { Disclosure, Transition } from "@headlessui/react";
 import React, { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { RiBookmark2Fill } from "react-icons/ri";
-import { useDispatch } from "react-redux";
-import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeQuestionById,
+  setCurrentQuestionCount,
+} from "../../../../redux/collage/test/testSlice";
 
 const List = ({ question, number }) => {
   const [type, setType] = useState();
 
+  const { currentQuestionCount } = useSelector((state) => state.test);
   const dispatch = useDispatch();
-  const handleDelete = ({ sectionId, questionId }) => {
+  const handleDelete = ({ sectionId, questionId, questionType }) => {
+    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
     dispatch(
       removeQuestionById({
         sectionId,
         questionId,
-        questionType: type,
+        questionType,
       })
     );
   };
@@ -29,7 +34,10 @@ const List = ({ question, number }) => {
             <div className="mb-4">
               <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
                 <div>
-                  <p className="text-sm">{question.Title}</p>
+                  <p
+                    className="text-sm pl-4"
+                    dangerouslySetInnerHTML={{ __html: question.Title }}
+                  />
                 </div>
                 <div className="flex gap-2 self-center">
                   <Disclosure.Button className="flex gap-2 w-10/12 self-center">
@@ -52,12 +60,13 @@ const List = ({ question, number }) => {
                 leaveTo="transform scale-95 opacity-0"
               > */}
               <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
-                {question.Options?.map((question) => (
+                {question.Options?.map((question, index) => (
                   <div className="flex gap-2 z-10 relative rounded-lg p-3">
-                    <div className="w-6">
+                    <div className="w-6" key={index}>
                       <input
                         type="radio"
                         name="answer"
+                        // value={index===question.AnswerIndex-1}
                         id="answer"
                         className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                       />
@@ -107,17 +116,28 @@ const List = ({ question, number }) => {
           onClick={() => {
             if (question.AnswerIndex) {
               setType("mcq");
+              handleDelete({
+                sectionId: question.section,
+                questionId: question.id,
+                questionType: "mcq",
+              });
             } else if (question.questions) {
               setType("findAnswer");
+              handleDelete({
+                sectionId: question.section,
+                questionId: question.id,
+                questionType: "findAnswer",
+              });
             } else {
               setType("essay");
+              handleDelete({
+                sectionId: question.section,
+                questionId: question.id,
+                questionType: "essay",
+              });
             }
+
             console.log(type);
-            handleDelete({
-              sectionId: question.section,
-              questionId: question.id,
-              questionType: type,
-            });
           }}
         />
       </div>

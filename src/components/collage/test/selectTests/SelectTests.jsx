@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import toast from "react-hot-toast";
 import Header from "./Header";
 
 import { Progress } from "./Progress";
@@ -10,27 +10,33 @@ import Inputs from "./Inputs";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  setTest,
-  setSections,
-  removeSections,
-  getAllTopics,
-  setTestSelectedTopics,
-  setCurrentTopic,
-} from "../../../../redux/collage/test/testSlice";
-
 import { FaPlus } from "react-icons/fa";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  setCurrentQuestionCount,
+  setCurrentTopic,
+  setTestSelectedTopics,
+} from "../../../../redux/collage/test/testSlice";
+import { getAllTopics } from "../../../../redux/collage/test/thunks/topic";
+import PopUpAdaptive from "../../../PopUps/PopUpAdaptive";
+import Loader from "../../../loaders/Loader";
 
 const SelectTests = () => {
+  const [visible, setVisible] = useState(false);
+  const [totalQ, setTotalQ] = useState(0);
+  const [qType, setQType] = useState("questions");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const level = searchParams.get("level");
   const [questionType, setQuestionType] = useState("");
+  const [section, setSection] = useState({});
 
   const Navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const { sections } = useSelector((state) => state.test);
+  const { sections, currentQuestionCount, totalQuestions, GET_TOPICS_LOADING } =
+    useSelector((state) => state.test);
   // for filter the sections
 
   const [filteredSections, setFilteredSections] = useState(sections);
@@ -62,8 +68,15 @@ const SelectTests = () => {
   const [selectedSections, setSelectedSections] = useState(topics);
 
   const addSection = (section) => {
+    if (
+      currentQuestionCount > parseInt(totalQuestions) ||
+      totalQ > totalQuestions
+    ) {
+      toast.error("too many questions");
+      return;
+    }
     if (!questionType) {
-      window.alert("Please select a question type first.");
+      toast.error("Please select a question type first.");
       return;
     }
     if (selectedSections?.length < 5 || !selectedSections) {
@@ -72,24 +85,78 @@ const SelectTests = () => {
           if (selectedSections[i].Type === questionType) {
             return;
           }
-
-          // else{
-
-          //   selectedSections[i].Type = questionType;
-
-          //   return;
-
-          // }
         }
       }
 
       let sectionCopy = { ...section, Type: questionType };
 
       // sectionCopy[Type] ="mcq";
+      // console.log(section);
+      // console.log(sectionCopy);
 
-      console.log(sectionCopy);
-
-      setSelectedSections([...selectedSections, sectionCopy]);
+      switch (questionType) {
+        case "mcq":
+          setQType("questions");
+          break;
+        case "essay":
+          setQType("essay");
+          break;
+        case "findAnswer":
+          setQType("findAnswers");
+          break;
+        case "video":
+          setQType("video");
+          break;
+        case "compiler":
+          setQType("compiler");
+          break;
+        default:
+          break;
+      }
+      let typeIf;
+      if (questionType === "mcq") {
+        typeIf = "questions";
+      } else if (questionType === "findAnswer") {
+        typeIf = "findAnswers";
+      } else {
+        typeIf = questionType;
+      }
+      const shuffleArray = (array) => {
+        let arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          // for (let i = totalQ; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      };
+      console.log(
+        sectionCopy[qType]?.length,
+        parseInt(totalQ),
+        qType,
+        questionType
+      );
+      if (sectionCopy[typeIf]?.length < parseInt(totalQ)) {
+        toast.error("insufficient number of questions s");
+        return;
+      } else {
+        // <<<<<<< saveMainCopy
+        sectionCopy[typeIf] = shuffleArray(sectionCopy[typeIf]).slice(
+          0,
+          parseInt(totalQ)
+        );
+        console.log(sectionCopy, totalQ);
+        // =======
+        //         console.log("totalQ : ", totalQ)
+        //         sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(0, totalQ);
+        // >>>>>>> saveMain
+        dispatch(
+          setCurrentQuestionCount(currentQuestionCount + parseInt(totalQ))
+        );
+        setSelectedSections([...selectedSections, sectionCopy]);
+        dispatch(setTestSelectedTopics(selectedSections));
+      }
+      // setSelectedSections([...selectedSections, sectionCopy]);
 
       //   dispatch(
 
@@ -101,7 +168,7 @@ const SelectTests = () => {
 
       //   );
 
-      dispatch(setTestSelectedTopics(selectedSections));
+      // dispatch(setTestSelectedTopics(selectedSections));
     }
 
     // dispatch(setSections(sections.filter((s) => s !== section)));
@@ -110,17 +177,43 @@ const SelectTests = () => {
   };
 
   const removeSection = (section, index) => {
+    let Qt;
+    console.log(selectedSections[index].Type);
+    switch (selectedSections[index].Type) {
+      case "mcq":
+        Qt = "questions";
+        break;
+      case "essay":
+        Qt = "essay";
+        break;
+      case "findAnswer":
+        Qt = "findAnswers";
+        break;
+      case "video":
+        Qt = "video";
+        break;
+      case "compiler":
+        Qt = "compiler";
+        break;
+      default:
+        break;
+    }
     const updatedSections = [...selectedSections];
 
     updatedSections.splice(index, 1);
 
     setSelectedSections(updatedSections);
-
+    // console.log(selectedSections[index][Qt].length);
     dispatch(setTestSelectedTopics(updatedSections));
+    dispatch(
+      setCurrentQuestionCount(
+        currentQuestionCount - selectedSections[index][Qt].length
+      )
+    );
   };
 
   useEffect(() => {
-    dispatch(getAllTopics());
+    dispatch(getAllTopics({ level: level }));
 
     if (sections) {
       setFilteredSections(sections);
@@ -149,6 +242,21 @@ const SelectTests = () => {
 
   return (
     <div className="font-dmSans text-sm font-bold">
+      {visible && (
+        <PopUpAdaptive
+          section={section}
+          visible={visible}
+          handleSave={addSection}
+          handleOverlay={() => {
+            setVisible(false);
+          }}
+          addSection={addSection}
+          totalQ={totalQ}
+          setTotalQ={setTotalQ}
+          // setTotalQuestions={setTotalQuestions}
+          // totalQuestions={totalQuestions}
+        />
+      )}
       <Header />
 
       <div className="w-4/5 mx-auto">
@@ -174,30 +282,32 @@ const SelectTests = () => {
               {/* {console.log(section, "section")} */}
 
               <span className="self-center">
-                <h2 className="text-xl font-bold mb-4">{section?.Heading}</h2>
+                <h2 className="text-xl font-bold px-2 line-clamp-2 break-words">
+                  {section?.Heading}
+                </h2>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 px-2">
                   <img
                     src="../../images/icons/menu-boxed.png"
                     alt=""
                     className="self-center"
                   />
 
-                  <h2 className="font-bold text-xs text-gray-400 self-center">
+                  <h2 className="font-bold text-xs text-gray-400 self-center ">
                     {section?.Type}
                   </h2>
                 </div>
 
                 <div className="flex justify-between mt-1">
                   {" "}
-                  <div className="flex gap-2 w-full">
+                  <div className="flex gap-2 w-full px-2">
                     <img
                       src="../../images/icons/stopwatch.png"
                       alt=""
                       className="w-6 h-6 self-center"
                     />
 
-                    <h2 className="font-bold text-xs text-gray-400 self-center">
+                    <h2 className="font-bold text-xs text-gray-400 self-center px-2">
                       {section?.Time}
                     </h2>
                   </div>
@@ -247,6 +357,7 @@ const SelectTests = () => {
           questionType={questionType}
           setQuestionType={setQuestionType}
           handleFilter={handleFilterSections}
+          type={""}
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
@@ -254,7 +365,9 @@ const SelectTests = () => {
             <div className=" self-center w-fit h-fit ">
               <div
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
-                onClick={() => Navigate("/collage/test/createTopic")}
+                onClick={() =>
+                  Navigate(`/collage/test/createTopic?level=${level}`)
+                }
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
               </div>
@@ -268,83 +381,56 @@ const SelectTests = () => {
               </h2>
             </div>
           </div>
+          {GET_TOPICS_LOADING && (
+            <div className="w-[50vw] h-64 rounded-lg flex items-center  justify-center  z-10 ">
+              <Loader size="md" />
+            </div>
+          )}
           {filteredSections?.map((section, index) => (
-            // <div className="card w-96 bg-base-100 shadow-xl">
-
-            //   <div className="card-body">
-
-            //     <h2 className="card-title">{section.name}</h2>
-
-            //     <p> {section.desription}</p>
-
-            //     <div className="card-actions justify-end">
-
-            //       <button
-
-            //         onClick={() => addSection(section)}
-
-            //         className="btn btn-primary"
-
-            //       >
-
-            //         Add
-
-            //       </button>
-
-            //       <button
-
-            //         onClick={() => removeSection(section)}
-
-            //         className="btn btn-primary"
-
-            //       >
-
-            //         Remove
-
-            //       </button>
-
-            //     </div>
-
-            //   </div>
-
-            // </div>
-
-            <div className="w-full h-64 rounded-lg bg-gray-100  relative">
-              <div className="card-body">
-                <h2 className="text-xl font-bold mb-4">{section.Heading}</h2>
+            <div className="w-full h-64 rounded-lg bg-gray-100  relative ">
+              <div className="card-body overflow-y-auto h-52">
+                <h2 className="text-xl font-bold mb-4 break-words">
+                  {section.Heading}
+                </h2>
 
                 <p className="text-sm leading-[26px] text-[#8F92A1] break-words">
-                  {section.Description.length > 60
-                    ? section.Description.substring(0, 60) + "..."
-                    : section.Description}
+                  {
+                    // section.Description.length > 60
+                    //   ? section.Description.substring(0, 60) + "..."
+                    //   :
+                    section.Description
+                  }
                 </p>
 
                 <div>
                   <div className="flex justify-between absolute bottom-0 w-3/4 mb-2">
                     <div>
-                      <span className="flex gap-1 mb-1">
-                        <img
-                          src="./../../images/icons/stopwatch.png"
-                          alt=""
-                          className="w-7 h-7"
-                        />{" "}
-                        <p className="text-gray-400 self-center">
-                          {section.Time}
-                        </p>
-                      </span>
-
                       <button
                         className="w-[90px] h-[40px] bg-[#8F92A120] rounded-xl"
                         onClick={() => {
-                          dispatch(setCurrentTopic({ topic: section }));
+                          if (!questionType) {
+                            toast.error("Please select a question type first.");
+                            return;
+                          }
+                          dispatch(
+                            setCurrentTopic({
+                              topic: {
+                                ...section,
+                                Type: questionType || "mcq",
+                              },
+                            })
+                          );
                           localStorage.setItem(
                             "Details",
 
-                            JSON.stringify(section)
+                            JSON.stringify({
+                              ...section,
+                              Type: questionType || "mcq",
+                            })
                           );
 
                           Navigate(
-                            `/collage/test/details/${index}?type=topic&question=${questionType}`
+                            `/collage/test/details/${index}?type=topic&question=${questionType}&level=${level}`
                           );
                         }}
                       >
@@ -353,8 +439,12 @@ const SelectTests = () => {
                     </div>
 
                     <button
-                      className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white mt-8"
-                      onClick={() => addSection(section)}
+                      className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white "
+                      onClick={() => {
+                        // console.log(section);
+                        setSection(section);
+                        setVisible(true);
+                      }}
                     >
                       Add
                     </button>

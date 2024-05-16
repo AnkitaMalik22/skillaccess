@@ -3,7 +3,7 @@ import { FaAngleLeft, FaChevronLeft, FaPlus, FaSearch } from "react-icons/fa";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({CompanyName}) => {
   const navigate = useNavigate();
   return (
     <div className="flex w-[95%] mx-auto justify-between mb-2 font-dmSans">
@@ -14,13 +14,13 @@ const Header = () => {
         >
           <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
         </button>
-        <h2 className="text-xl font-bold self-center">Company Name</h2>
+        <h2 className="text-xl font-bold self-center">{CompanyName}</h2>
       </span>
       <div className="bg-gray-100 rounded-xl mx-2  sm:h-12 h-10 flex my-2 px-4 w-fit">
         <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search..."
           className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96 max-w-md mx-auto  "
         />
       </div>

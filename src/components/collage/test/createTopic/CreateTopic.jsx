@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import Header from "./Header";
-import { createTopic } from "../../../../redux/collage/test/testSlice";
+
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { createTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const CreateTopic = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  const level = searchParams.get("level");
   const [topic, setTopic] = useState({
     Heading: "",
     Description: "",
     Time: null,
     TotalQuestions: null,
   });
+  const [isNameEmpty, setIsNameEmpty] = useState(false);
+  const [isDescEmpty, setIsDescEmpty] = useState(false);
 
   const changeHandler = (e) => {
     const name = e.target.name;
@@ -25,21 +31,40 @@ const CreateTopic = () => {
   };
 
   const handleNext = () => {
+    if (!topic.Heading.trim()) {
+      setIsNameEmpty(true);
+      // toast.error("Please enter a name for the topic.");
+      return;
+    } else {
+      setIsNameEmpty(false);
+    }
+
+    if (!topic.Description.trim()) {
+      setIsDescEmpty(true);
+      // toast.error("Please enter a description for the topic.");
+      return;
+    } else {
+      setIsDescEmpty(false);
+    }
+
     dispatch(createTopic(topic)).then((res) => {
+      if (res.payload._id) {
+        navigate(
+          `/collage/test/typeOfQuestions/${res.payload._id}?level=${level}`
+        );
+      } else {
+        toast.error("Invalid or duplicate values");
+        return;
+      }
       setTopic({
         Heading: "",
         Description: "",
         Time: null,
         TotalQuestions: null,
       });
-      // console.log(res);
-      if (res.payload._id) {
-        navigate(`/collage/test/typeOfQuestions/${res.payload._id}`);
-      } else {
-        window.alert("invalid or duplicate values");
-      }
     });
   };
+
   return (
     <div className="pt-8 w-11/12 mx-auto font-dmSans">
       <Header next={handleNext} />
@@ -47,7 +72,8 @@ const CreateTopic = () => {
       <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">
         <h2 className="w-full font-medium  text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-lg mb-10 sm:mb-1 text-lg">
           Add up to 10 custom questions to your assessment (optional). You can
-          use five question types: multiple-choice, essay, video ,code and find answer.
+          use five question types: multiple-choice, essay, video ,code and find
+          answer.
         </h2>
 
         <input
@@ -55,33 +81,27 @@ const CreateTopic = () => {
           name="Heading"
           value={topic.Heading}
           type="text"
-          className="w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-12 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border-none placeholder-gray-400"
+          className={`w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-12 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
+            isNameEmpty ? "border-red-500" : "border-none"
+          }`}
           placeholder="Name of the Topic"
         />
+        {isNameEmpty && (
+          <p className="text-red-500 ml-4 ">Please fill in the name.</p>
+        )}
 
-        {/* <input
-          onChange={changeHandler}
-          name="TotalQuestions"
-          value={topic.TotalQuestions}
-          type="text"
-          className="w-full bg-gray-100 h-16 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border-none placeholder-gray-400"
-          placeholder="No. of Questions"
-        />
-        <input
-          onChange={changeHandler}
-          name="Time"
-          value={topic.Time}
-          type="text"
-          className="w-full bg-gray-100 h-16 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border-none placeholder-gray-400"
-          placeholder="Set Duration"
-        /> */}
         <textarea
           onChange={changeHandler}
           name="Description"
           value={topic.Description}
-          className="w-full bg-gray-100 h-48 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border-none placeholder-gray-400"
+          className={`w-full bg-gray-100 h-48 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${
+            isDescEmpty ? "border-red-500" : "border-none"
+          }`}
           placeholder="Add Description"
         />
+        {isDescEmpty && (
+          <p className="text-red-500 ml-4">Please fill in the description.</p>
+        )}
       </div>
     </div>
   );

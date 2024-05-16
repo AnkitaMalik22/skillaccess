@@ -48,6 +48,7 @@ const ChartComp = () => {
           right: 20,
         },
         xaxis: {
+          
           borderColor: "#00FFFFFF",
           lines: {
             show: true, //or just here to disable only x axis grids
@@ -81,11 +82,11 @@ const ChartComp = () => {
     },
     series: [
       {
-        name: "Placements",
+        name: "Students",
         data: [30, 40, 45, 50, 49, 60, 70, 91, 19, 100, 55, 20],
       },
       {
-        name: "Students",
+        name: "Placements",
         data: [5, 15, 55, 50, 69, 70, 74, 96, 100, 55, 33, 77],
       },
     ],
@@ -95,10 +96,10 @@ const ChartComp = () => {
       {/* chart component */}
       <div className=" w-3/4  rounded-s sm:px-6 mt-2">
         <div className="md:p-2 flex justify-between">
-          <h2 className="font-extrabold text-lg ">RESULTS OVERVIEW</h2>{" "}
+          <h2 className="font-bold text-sm 2xl:text-base ">RESULTS OVERVIEW</h2>{" "}
           <span className="flex gap-8 text-sm font-bold">
             <button
-              className={`border-2 border-x-transparent border-transparent ${
+              className={`border-2 border-x-transparent border-transparent text-bold ${
                 toggle === 0 && " text-blue-600 border-b-blue-700"
               }`}
               onClick={() => setToggle(0)}
@@ -106,7 +107,7 @@ const ChartComp = () => {
               Week
             </button>
             <button
-              className={`border-2 border-x-transparent border-transparent ${
+              className={`border-2 border-x-transparent border-transparent text-bold ${
                 toggle === 1 && " text-blue-600 border-b-blue-700"
               }`}
               onClick={() => setToggle(1)}
@@ -114,7 +115,7 @@ const ChartComp = () => {
               Month
             </button>
             <button
-              className={`border-2 border-x-transparent border-transparent ${
+              className={`border-2 border-x-transparent border-transparent text-bold ${
                 toggle === 2 && " text-blue-600 border-b-blue-700"
               }`}
               onClick={() => setToggle(2)}
@@ -122,7 +123,7 @@ const ChartComp = () => {
               Quarter
             </button>
             <button
-              className={`border-2 border-x-transparent border-transparent ${
+              className={`border-2 border-x-transparent border-transparent text-bold ${
                 toggle === 3 && " text-blue-600 border-b-blue-700"
               }`}
               onClick={() => setToggle(3)}
@@ -132,10 +133,10 @@ const ChartComp = () => {
           </span>
         </div>
 
-        <div className="h-[25rem] w-[52vw] ml-2">
+        <div className="h-[25rem] w-[46vw] xl:w-[52vw] ml-2">
           <Chart
             id="dash"
-            className="bg-white shadow-md mt-2 rounded-lg  "
+            className="bg-white shadow-md mt-2 rounded-lg text-[#8F92A1] "
             options={settings.options}
             series={settings.series}
             type="line"
@@ -152,11 +153,11 @@ const ChartComp = () => {
           <div className="flex gap-4 my-4">
             <span className="flex gap-1">
               <FaCircle className="text-blue-400" />{" "}
-              <h2 className="font-bold text-xs">Placements</h2>
+              <h2 className="font-medium text-xs text-[#8F92A1]">Student</h2>
             </span>
             <span className="flex gap-1">
               <FaCircle className="text-green-400" />{" "}
-              <h2 className="font-bold text-xs">Students</h2>
+              <h2 className="font-medium text-xs text-[#8F92A1]">Placement</h2>
             </span>
           </div>
         </div>
@@ -164,19 +165,19 @@ const ChartComp = () => {
       {/* placements */}
       <div className=" sm:w-[20%]  bg-gray-100 rounded-e  mr-2  font-dmSans">
         <span className="flex justify-between sm:px-2 mb-4 mt-4 ">
-          <h1 className="font-extrabold text-lg ">Recent Placements</h1>
+          <h1 className="font-bold text-sm 2xl:text-base ">Recent Placements</h1>
           <h1
-            className="text-blue-500 hover:cursor-pointer"
+            className="text-blue-500 hover:cursor-pointer text-sm"
             onClick={() => navigate("/collage/dashboard/students")}
           >
-            See all
+            See All
           </h1>
         </span>
 
         <div className="bg-white  overflow-y-scroll h-[27rem] mb-10 rounded-lg ">
           {placements?.map((placement) => {
             return (
-              <div className="card card-side shadow-sm mb-1 h-20 p-2 ">
+              <div className="card card-side shadow-sm mb-1 h-auto p-2 ">
                 <figure className="w-14 h-14 rounded mt-2">
                   <img
                     src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
@@ -184,11 +185,11 @@ const ChartComp = () => {
                   />
                 </figure>
                 <div className="ml-2">
-                  <h2 className=""></h2>
-                  <p className="text-base">name</p>
-                  <p className="text-xs text-gray-400">company</p>
-                  <FaStar className="inline-block text-sm text-amber-500" />
-                  <p className="inline-block pl-2 text-sm ">date</p>
+                  
+                  <p className="text-sm font-bold">Name</p>
+                  <p className="text-xs text-gray-400">Company</p>
+                  <FaStar className="inline-block text-xs 2xl:text-sm text-amber-500" />
+                  <p className="inline-block pl-2 text-xs 2xl:text-sm ">24-08-22</p>
                 </div>
               </div>
             );

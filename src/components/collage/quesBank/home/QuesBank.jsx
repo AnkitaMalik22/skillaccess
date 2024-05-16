@@ -16,7 +16,7 @@ const QuesBank = () => {
         <div className=" w-[60%]">
           <Recent />
         </div>
-        <div className="w-[38%%]">
+        <div className="w-[38%]">
           <BookMark />
         </div>
       </div>

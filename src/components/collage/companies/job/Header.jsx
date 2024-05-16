@@ -3,7 +3,7 @@ import { FaAngleLeft, FaChevronLeft, FaPlus, FaSearch } from "react-icons/fa";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({Role,companyName}) => {
   const navigate = useNavigate();
   return (
     <div className="flex w-[95%] mx-auto justify-between mb-2 font-dmSans">
@@ -14,7 +14,7 @@ const Header = () => {
         >
           <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
         </button>
-        <h2 className="text-xl font-bold self-center">ROle, Company Name</h2>
+        <h2 className="text-xl font-bold self-center">{Role}, {companyName}</h2>
       </span>
     </div>
   );

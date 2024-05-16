@@ -8,7 +8,7 @@ const List = ({ editable, setEditable }) => {
   const arr = [
     {
       number: 200,
-      dir: "down",
+      stats: "down",
       per: 30,
       name: "Total Students",
       icon: (
@@ -19,7 +19,7 @@ const List = ({ editable, setEditable }) => {
     },
     {
       number: 200,
-      dir: "down",
+      stats: "down",
       per: 30,
       name: "Companies",
       icon: (
@@ -30,7 +30,7 @@ const List = ({ editable, setEditable }) => {
     },
     {
       number: 200,
-      dir: "up",
+      stats: "up",
       per: 30,
       name: "Students Placed",
       icon: (
@@ -41,7 +41,7 @@ const List = ({ editable, setEditable }) => {
     },
     {
       number: 200,
-      dir: "down",
+      stats: "down",
       per: 30,
       name: "Performance",
       icon: (
@@ -52,7 +52,7 @@ const List = ({ editable, setEditable }) => {
     },
     {
       number: 200,
-      dir: "up",
+      stats: "up",
       per: 30,
       name: "Average Package",
       icon: (
@@ -77,43 +77,35 @@ const List = ({ editable, setEditable }) => {
 
       {/* legend */}
       <div className=" grid-cols-4  text-center mt-6 mb-1 mx-auto  font-dmSans font-bold text-base grid">
-        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg py-2  text-left pl-14">
-          <h2>Data Name</h2>
+        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-2xl py-2  text-left pl-14">
+          <h2>Icon</h2>
         </div>
 
         <div className="bg-[#0052CC] bg-opacity-5 p-2">
-          <h2>Number</h2>
+          <h2>Data Name</h2>
         </div>
         <div className="bg-[#0052CC] bg-opacity-5 p-2 ">
-          <h2>Increment/Decrement</h2>
+          <h2>Statistics</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5  p-2 ">
-          <h2>Detail</h2>
+        <div className="bg-[#0052CC] bg-opacity-5  p-2 rounded-e-2xl">
+          <h2>Performance</h2>
         </div>
       </div>
 
       {/* list to be iterated */}
       {arr.map((el) => (
-        <div className=" grid-cols-4 text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid bg-white py-3 rounded-xl mb-2 ">
+        <div className=" grid-cols-4 text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid bg-white py-2 rounded-xl mt-5 ">
           {" "}
           {/* row-2 */}
-          <div className={` flex pl-7`}>
-            <div className="flex self-center gap-2 ">
-              {el.icon}
-
-              <span className="self-center">
-                <h2 className="font-dmSans text-center  sm:text-sm text-lg font-bold opacity-60">
-                  {el.name}
-                </h2>
-              </span>
-            </div>
+          <div className={` flex pl-14`}>
+            <div className="flex self-center gap-2 ">{el.icon}</div>
           </div>
           {/*  */}
           <div className="flex justify-center ">
             <div className=" self-center h-fit">
-              <span>
-                <h2 className="font-dmSans text-center  sm:text-sm text-lg font-bold opacity-60">
-                  {el.number}
+              <span className="self-center">
+                <h2 className="font-dmSans text-center font-normal text-base  opacity-60">
+                  {el.name}
                 </h2>
               </span>
             </div>
@@ -122,26 +114,17 @@ const List = ({ editable, setEditable }) => {
           {/* */}
           <div className="flex justify-center ">
             <div className=" self-center h-fit">
-              <span className="flex gap-2">
-                <div
-                  className={` flex gap-2 font-dmSans text-center  sm:text-sm text-lg font-bold text-[#00875A ] ${
-                    el.dir === "down" ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  {el.dir === "down" ? <FaArrowDown /> : <FaArrowUp />}
-                  <h1>{" " + el.per + "%"}</h1>
-                </div>
+              <span className="flex gap-2 font-normal text-base  opacity-60">
+                {el.stats}
               </span>
             </div>
           </div>
           {/*  */}
           {/*  */}
           <div className="flex justify-center ">
-            <div className=" self-center h-fit">
+            <div className=" self-center h-fit font-normal text-base  opacity-60">
               <span>
-                <h2 className="font-dmSans font-normal sm:text-sm text-[#0052CC]">
-                  View Details
-                </h2>
+                <h1>{" " + el.per}</h1>
               </span>
             </div>
           </div>

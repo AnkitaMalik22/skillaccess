@@ -87,35 +87,68 @@ export const removeQfunc = (state, action) => {
 };
 
 export const addQuesFunc = (state, action) => {
-  const { type, questions } = action.payload;
-  switch (type) {
-    case "essay":
-      state.currentTopic.essay = [...state.currentTopic.essay, questions[0]];
-      break;
+  const { type, questions, isMultiple } = action.payload;
+  console.log(action.payload);
+  if (isMultiple) {
+    switch (type) {
+      case "essay":
+        state.currentTopic.essay = [...state.currentTopic.essay, ...questions];
+        break;
 
-    case "findAnswer":
-      state.currentTopic.findAnswers = [
-        ...state.currentTopic.findAnswers,
-        questions[0],
-      ];
-      break;
+      case "findAnswer":
+        state.currentTopic.findAnswers = [
+          ...state.currentTopic.findAnswers,
+          ...questions,
+        ];
+        break;
 
-    case "mcq":
-      state.currentTopic.questions = [
-        ...state.currentTopic.questions,
-        questions[0],
-      ];
-      break;
+      case "mcq":
+        state.currentTopic.questions = [
+          ...state.currentTopic.questions,
+          ...questions,
+        ];
+        break;
 
-    case "compiler":
-      state.currentTopic.compiler = [
-        ...state.currentTopic.compiler,
-        questions[0],
-      ];
-      break;
+      case "compiler":
+        state.currentTopic.compiler = [
+          ...state.currentTopic.compiler,
+          ...questions,
+        ];
+        break;
 
-    default:
-      break;
+      default:
+        break;
+    }
+  } else {
+    switch (type) {
+      case "essay":
+        state.currentTopic.essay = [...state.currentTopic.essay, questions[0]];
+        break;
+
+      case "findAnswer":
+        state.currentTopic.findAnswers = [
+          ...state.currentTopic.findAnswers,
+          questions[0],
+        ];
+        break;
+
+      case "mcq":
+        state.currentTopic.questions = [
+          ...state.currentTopic.questions,
+          questions[0],
+        ];
+        break;
+
+      case "compiler":
+        state.currentTopic.compiler = [
+          ...state.currentTopic.compiler,
+          questions[0],
+        ];
+        break;
+
+      default:
+        break;
+    }
   }
   localStorage.setItem("currentTopic", JSON.stringify(state.currentTopic));
 };

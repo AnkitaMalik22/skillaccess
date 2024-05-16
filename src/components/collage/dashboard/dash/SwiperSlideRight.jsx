@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getNewJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
-
+import { useNavigate } from "react-router-dom";
 const SwiperSlideRight = () => {
   const dispatch = useDispatch();
   const { newJobs, loading } = useSelector((state) => state.dashboard);
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getNewJobs());
   }, [dispatch]);
+console.log(newJobs);
+   const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <Swiper
@@ -30,91 +32,46 @@ const SwiperSlideRight = () => {
           slidesPerView: 2,
         },
         1000: {
-          slidesPerView: 2.2,
+          slidesPerView: 2.5,
+        },
+        1500: {
+          slidesPerView: 3,
+        },
+        1920: {
+          slidesPerView: 3,
         },
       }}
     >
-      <SwiperSlide>
-        <div className=" bg-white  w-44 h-36 rounded-lg p-2">
-          <figure className="bg-white-500 w-28 h-24 mx-auto rounded-lg flex justify-center">
-            <img
-              src="../intel.png"
-              alt="img not loaded"
-              className="w-1/2 h-1/2 self-center rounded-lg"
-            />
-          </figure>
-          <span className="">
-            <h3 className="text-xs  font-semibold text-center break-words">
-              Midweight UI/UX Designer
-            </h3>
-            <p className="text-xs  font-semibold text-center break-words  ">
-              Mailchimp{" "}
-              <em className="not-italic text-gray-400">in, London, UK</em>
-            </p>
-          </span>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className=" bg-white  w-44 h-36 rounded-lg p-2">
-          <figure className="bg-white-500 w-28 h-24 mx-auto rounded-lg flex justify-center">
-            <img
-              src="../intel.png"
-              alt="img not loaded"
-              className="w-1/2 h-1/2 self-center rounded-lg"
-            />
-          </figure>
-          <span className="">
-            <h3 className="text-xs  font-semibold text-center break-words">
-              Midweight UI/UX Designer
-            </h3>
-            <p className="text-xs  font-semibold text-center break-words  ">
-              Mailchimp{" "}
-              <em className="not-italic text-gray-400">in, London, UK</em>
-            </p>
-          </span>
-        </div>
-      </SwiperSlide>
 
-      <SwiperSlide>
-        <div className=" bg-white  w-44 h-36 rounded-lg p-2">
-          <figure className="bg-white-500 w-28 h-24 mx-auto rounded-lg flex justify-center">
-            <img
-              src="../intel.png"
-              alt="img not loaded"
-              className="w-1/2 h-1/2 self-center rounded-lg"
-            />
-          </figure>
-          <span className="">
-            <h3 className="text-xs  font-semibold text-center break-words">
-              Midweight UI/UX Designer
-            </h3>
-            <p className="text-xs  font-semibold text-center break-words  ">
-              Mailchimp{" "}
-              <em className="not-italic text-gray-400">in, London, UK</em>
-            </p>
-          </span>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className=" bg-white  w-44 h-36 rounded-lg p-2">
-          <figure className="bg-white-500 w-28 h-24 mx-auto rounded-lg flex justify-center">
-            <img
-              src="../intel.png"
-              alt="img not loaded"
-              className="w-1/2 h-1/2 self-center rounded-lg"
-            />
-          </figure>
-          <span className="">
-            <h3 className="text-xs  font-semibold text-center break-words">
-              Midweight UI/UX Designer
-            </h3>
-            <p className="text-xs  font-semibold text-center break-words  ">
-              Mailchimp{" "}
-              <em className="not-italic text-gray-400">in, London, UK</em>
-            </p>
-          </span>
-        </div>
-      </SwiperSlide>
+
+      {
+        newJobs.map((job) => (
+          <SwiperSlide>
+          <div className=" bg-white  w-28 xl:w-44 h-36 rounded-lg p-3">
+            <figure className="bg-white-500  mx-auto rounded-lg flex justify-center cursor-pointer"
+             onClick={() =>
+              navigate(`/collage/companies/jobOverview/${job._id}`)
+            }
+            >
+              <img
+                src={job?.company?.basic?.logo}
+                alt="img not loaded"
+                className="w-1/2 h-1/2 self-center rounded-lg"
+              />
+            </figure>
+            <span className="">
+              <h3 className="text-xs  font-bold text-center break-words xl:mb-2">
+                {job.JobTitle}
+              </h3>
+              <p className="text-xs  font-bold text-center break-words  ">
+                {job?.company?.location?.address}{" "}
+                <em className="not-italic text-gray-400">{job.JobLocation}</em>
+              </p>
+            </span>
+          </div>
+        </SwiperSlide>
+        ))
+      }
 
       {/* {newJobs &&
         newJobs.map((job) => (

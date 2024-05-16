@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 
-import { useDispatch } from "react-redux";
-import {
-  editQuestion,
-  removeQuestion,
-} from "../../../../redux/collage/test/testSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import ReactPlayer from "react-player";
 import { RxCross1 } from "react-icons/rx";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
+import { CiBookmarkMinus } from "react-icons/ci";
 import { useSearchParams } from "react-router-dom";
 import VideoMcq from "./VideoMcq";
 import VideoEssay from "./VideoEssay";
+import {
+  editQuestion,
+  removeQuestion,
+  setCurrentQuestionCount,
+} from "../../../../redux/collage/test/testSlice";
+import { addBookmark } from "../../../../redux/collage/test/thunks/question";
 
 const Video = ({ Number, id, video, type, view }) => {
+  const { currentQuestionCount } = useSelector((state) => state.test);
+
   const [search, setSearch] = useSearchParams();
   const dispatch = useDispatch();
   const handleDelete = () => {
+    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
+
     dispatch(
       removeQuestion({
         selfIndex: Number,
@@ -28,6 +36,18 @@ const Video = ({ Number, id, video, type, view }) => {
 
   const [videoState, setVideoState] = useState(video);
   console.log(videoState);
+
+  const handleBookmark = () => {
+    console.log("bookmark");
+    // console.log(question);
+    dispatch(
+      addBookmark({
+        ...video,
+        questionId: video._id,
+        Type: "video",
+      })
+    );
+  };
 
   // const [mcq, setMcq] = useState(question);
 
@@ -95,6 +115,10 @@ const Video = ({ Number, id, video, type, view }) => {
             className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
             onClick={handleDelete}
           />
+          <CiBookmarkMinus
+            className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center"
+            onClick={handleBookmark}
+          />
           {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
           {/* <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
 <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
@@ -132,7 +156,6 @@ const Video = ({ Number, id, video, type, view }) => {
         video.questions.map((question, index) => {
           return (
             <VideoMcq
-              key={index}
               Index={index}
               id={id}
               // handleDelete={handleDelete}

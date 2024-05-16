@@ -3,8 +3,15 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 
 import { IoIosSearch } from "react-icons/io";
+// import { useSearchParams } from "react-router-dom";
 
-const Inputs = ({ questionType, setQuestionType,handleFilter }) => {
+const Inputs = ({ questionType, setQuestionType,handleFilter,type }) => {
+  // const [searchParams, setSearchParams] = useSearchParams();
+
+  // const type = searchParams.get("level");
+
+console.log("type " , type)
+
   return (
     <div className=" mx-auto  my-2 rounded-lg sm:flex justify-between">
       {" "}
@@ -31,24 +38,50 @@ const Inputs = ({ questionType, setQuestionType,handleFilter }) => {
           <option value="">Topic</option>
         </select> */}
 
-        <select
+
+        {
+          type === 'adaptive' && (
+            <select
           name=""
           id=""
-          value={questionType}
-          onChange={(e) => setQuestionType(e.target.value)}
-          className="select text-gray-400 focus:outline-none focus:ring-1 focus:ring-blued bg-gray-100 sm:w-1/3   w-1/2 rounded-lg self-center"
+          value="MCQ"
+          // onChange={(e) => setQuestionType(e.target.value)}
+          className="select text-[#171717] font-bold text-sm focus:outline-none focus:ring-1 focus:ring-blued bg-gray-100 w-[250px] xl:w-[320px] h-[56px] rounded-lg self-center"
         >
-          <option value="">Question Type</option>
+          {/* <option value="">Question Type</option> */}
 
           <option value="mcq">MCQ</option>
 
-          <option value="findAnswer">find Answer</option>
+          {/* <option value="findAnswer">find Answer</option>
 
           <option value="essay">essay</option>
 
           <option value="video">video</option>
-          <option value="compiler">code</option>
+          <option value="compiler">code</option> */}
         </select>
+          ) }
+
+{
+  type !== 'adaptive' && <select
+  name=""
+  id=""
+  value={questionType}
+  onChange={(e) => setQuestionType(e.target.value)}
+  className="select text-[#171717]  font-bold text-sm focus:outline-none focus:ring-1 focus:ring-blued bg-gray-100 w-[250px] xl:w-[320px] h-[56px] rounded-lg self-center"
+>
+  <option value="">Question Type</option>
+
+  <option value="mcq">MCQ</option>
+
+  <option value="findAnswer">find Answer</option>
+
+  <option value="essay">essay</option>
+
+  <option value="video">video</option>
+  <option value="compiler">code</option>
+  </select>
+}
+        
       </div>
     </div>
   );

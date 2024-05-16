@@ -4,14 +4,16 @@ import { FaX } from "react-icons/fa6";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
 import Question from "./Question";
 import Code from "./rightBlock/Index";
+
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 import {
   addCompiler,
   addCompilerToTopic,
-  addQuestionToTopic,
-  editQuestionById,
 } from "../../../../redux/collage/test/testSlice";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
 
 const AddCode = () => {
   const { id } = useParams();
@@ -49,8 +51,10 @@ const AddCode = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const [validate, setValidate] = useState(false);
-
+  const { ADD_QUESTION_LOADING}= useSelector((state) => state.test);
   const type = searchParams.get("type");
+  const level = searchParams.get("level");
+
   const addType = searchParams.get("addType");
   const [toggle, setToggle] = useState(1);
 
@@ -79,7 +83,7 @@ const AddCode = () => {
   const [question, setQuestion] = useState({
     section: ID,
     id: ID + Date.now(),
-
+    QuestionLevel: level,
     Duration: 0,
     code: "",
     codeQuestion: "",
@@ -125,27 +129,27 @@ const AddCode = () => {
         question.verificationCode != ""
       ) {
         if (question.code === "") {
-          alert("Please fill the code");
+          toast.error("Please fill the code");
 
           return;
         }
         if (question.verificationCode === "") {
-          alert("Please fill the code");
+          toast.error("Please fill the code");
 
           return;
         }
         if (question.Duration == 0) {
-          alert("Please fill the duration");
+          toast.error("Please fill the duration");
 
           return;
         }
         if (question.codeQuestion === "") {
-          alert("Please fill the question");
+          toast.error("Please fill the question");
 
           return;
         }
         if (question.codeLanguage === "") {
-          alert("Please fill the codelanguage");
+          toast.error("Please fill the codelanguage");
 
           return;
         }
@@ -162,6 +166,8 @@ const AddCode = () => {
 
           setIsPrev(false);
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             section: ID,
             code: "",
@@ -182,6 +188,8 @@ const AddCode = () => {
           dispatch(addCompilerToTopic({ data: question, id: id, type: type }));
           dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             section: ID,
             code: "",
@@ -206,7 +214,7 @@ const AddCode = () => {
 
         setToggle(1);
       } else {
-        alert("Please fill all the fields");
+        toast.error("Please fill all the fields");
       }
     } else {
       if (
@@ -217,26 +225,26 @@ const AddCode = () => {
         question.verificationCode != ""
       ) {
         if (question.code === "") {
-          alert("Please fill the code");
+          toast.error("Please fill the code");
 
           return;
         }
         if (question.codeQuestion === "") {
-          alert("Please add the question");
+          toast.error("Please add the question");
           return;
         }
         if (question.verificationCode === "") {
-          alert("Please fill the code");
+          toast.error("Please fill the code");
 
           return;
         }
 
         if (question.Duration == 0) {
-          alert("Please fill the duration");
+          toast.error("Please fill the duration");
           return;
         }
         if (question.codeLanguage === "") {
-          alert("Please fill the langugage");
+          toast.error("Please fill the langugage");
 
           return;
         }
@@ -249,10 +257,12 @@ const AddCode = () => {
               prev: true,
               index: count + 1,
             })
-          );
-          setCount(topics[id].compiler.length - 1);
+          ).then(() => {
+            setCount(topics[id].compiler.length - 1);
           setIsPrev(false);
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             section: ID,
             code: "",
@@ -267,42 +277,53 @@ const AddCode = () => {
             ],
             testcase: [{ input: "", expectedOutput: "" }],
             output: [""],
-          });
+          })
+        });
+          ;
         } else {
           dispatch(
             addCompiler({ data: question, id: id, type: type, prev: false })
-          );
+          ).then(()=>{
+            setQuestion({
+              QuestionLevel: level,
+  
+              id: ID + Date.now(),
+              section: ID,
+              code: "",
+              Duration: 0,
+              codeQuestion: "",
+              codeLanguage: "",
+              parameters: [
+                {
+                  paramName: "",
+                  type: "String",
+                },
+              ],
+              testcase: [{ input: "", expectedOutput: "" }],
+              output: [""],
+            })
+            if(!ADD_QUESTION_LOADING){
+              setToggle(1);
+            if (component === "save") {
+              navigate(-1);
+            }
+            }
+
+            
+          })
           // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({
-            id: ID + Date.now(),
-            section: ID,
-            code: "",
-            Duration: 0,
-            codeQuestion: "",
-            codeLanguage: "",
-            parameters: [
-              {
-                paramName: "",
-                type: "String",
-              },
-            ],
-            testcase: [{ input: "", expectedOutput: "" }],
-            output: [""],
-          });
+          ;
         }
 
-        setToggle(1);
-        if (component === "save") {
-          navigate(-1);
-        }
+       
       } else {
-        alert("Please fill all the fields");
+        toast.error("Please fill all the fields");
       }
     }
     console.log(question);
   };
   useEffect(() => {
-    setCountDetail(currentTopic?.compiler.length - 1);
+    setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
 
   return (

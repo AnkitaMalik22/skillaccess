@@ -6,17 +6,66 @@ import { PiFileTextBold } from "react-icons/pi";
 import { IoSwapVerticalSharp } from "react-icons/io5";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { CiBookmarkMinus } from "react-icons/ci";
-const VideoMcq = ({ Number, mcq }) => {
+const VideoMcq = ({ Number, mcq  , AnswerIndex , StudentAnswerIndex}) => {
   const dispatch = useDispatch();
   return (
     <div className="mx-6 flex bg-white rounded-lg justify-between my-4">
       <div className="w-11/12 flex flex-col gap-2">
-        <h2 className="px-4 font-semibold pt-3 text-base">
-          {Number + 1} &nbsp; {mcq.Title}
-        </h2>
-
+        
+        <h2 className="flex px-4 gap-3 font-semibold pt-3 text-base "   >
+            <div className="" >{Number + 1}. </div>
+            <div className="" dangerouslySetInnerHTML={{ __html: mcq.Title}}></div>
+          </h2>
         <div className="px-5 pb-4 flex flex-col gap-4">
-          <span className="flex gap-2">
+
+        {mcq.Options?.map((question, index) => (
+                  <div className="flex gap-2 z-10 relative rounded-lg p-3">
+                    <div className="w-6">
+                      {AnswerIndex === StudentAnswerIndex ? (
+                        index === AnswerIndex ? (
+                          <img
+                            src="../../../images/icons/greenDotSelected.png"
+                            alt="greensel"
+                          />
+                        ) : (
+                          <img
+                            src="../../../images/icons/blueDot.png"
+                            alt="greensel"
+                          />
+                        )
+                      ) : index === StudentAnswerIndex ? (
+                        <img src="../../../images/icons/redDot.png" alt="red" />
+                      ) : index === AnswerIndex ? (
+                        <img
+                          src="../../../images/icons/greenDot.png"
+                          alt="green"
+                        />
+                      ) : (
+                        <img
+                          src="../../../images/icons/blueDot.png"
+                          alt="blue"
+                        />
+                      )}
+                    </div>
+
+                    <label
+                      className={` text-sm ${
+                        AnswerIndex === index
+                          ? "text-green"
+                          : StudentAnswerIndex === index
+                          ? "text-red-500"
+                          : "text-black"
+                      }`}
+                    >
+                      {question
+                        ? question.question
+                          ? question.question
+                          : question
+                        : ""}
+                    </label>
+                  </div>
+                ))}
+          {/* <span className="flex gap-2">
             <div className="flex w-5 justify-center">
               <input
                 type="radio"
@@ -73,7 +122,7 @@ const VideoMcq = ({ Number, mcq }) => {
               {" "}
               {mcq.Options[3]}
             </label>
-          </span>
+          </span> */}
         </div>
       </div>
       {/* {type !== "topic" && view !== "false" && (

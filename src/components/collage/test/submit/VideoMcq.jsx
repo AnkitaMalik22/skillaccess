@@ -11,8 +11,9 @@ const VideoMcq = ({ Number, mcq }) => {
   return (
     <div className="mx-6 flex bg-white rounded-lg justify-between my-4">
       <div className="w-11/12 flex flex-col gap-2">
-        <h2 className="px-4 font-semibold pt-3 text-base">
-          {Number + 1} &nbsp; {mcq.Title}
+        <h2 className="flex gap-2 px-4 font-semibold pt-3 text-base">
+         <p className="text-sm">{Number + 1}. </p> 
+          <p className="text-sm"dangerouslySetInnerHTML={{ __html: mcq.Title}}/>
         </h2>
 
         <div className="px-5 pb-4 flex flex-col gap-4">

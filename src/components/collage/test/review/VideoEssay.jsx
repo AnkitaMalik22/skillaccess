@@ -11,6 +11,7 @@ import {
   removeQuestion,
 } from "../../../../redux/collage/test/testSlice";
 import { useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
 // import { type } from "@testing-library/user-event/dist/type";
 
 const VideoEssay = ({
@@ -47,7 +48,7 @@ const VideoEssay = ({
   const handleSubmit = () => {
     if (essay.Title.trim() === "") {
       handleAlertDismiss();
-      alert("Please fill in the Title for the essay.");
+      toast.error("Please fill in the Title for the essay.");
       return;
     }
 

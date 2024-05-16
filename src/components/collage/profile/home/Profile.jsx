@@ -20,7 +20,7 @@ const Profile = () => {
   useEffect(() => {
     const value = localStorage.getItem("editable");
     if (value === "true") {
-      setEditable(true);
+      // setEditable(true);
     }
   }, []);
 

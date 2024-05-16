@@ -89,8 +89,11 @@ const Video = ({ video, Number }) => {
                   return (
                     <VideoMcq
                       //   handleDelete={handleDelete}
+                      key = {mcq._id}
                       mcq={mcq}
                       Number={index}
+                      AnswerIndex={mcq.AnswerIndex}
+                      StudentAnswerIndex={mcq.StudentAnswerIndex}
                     />
                   );
                 })}
@@ -98,12 +101,12 @@ const Video = ({ video, Number }) => {
               <h1>{video?.long.length > 0 && "Long answer questions"}</h1>
               {video?.long?.length > 0 &&
                 video.long.map((question, index) => (
-                  <VideoEssay Title={question.Title} Number={index} />
+                  <VideoEssay Title={question.Title} Number={index} Answer={question.studentAnswer} />
                 ))}
               <h1> {video?.short.length > 0 && "Short answer questions"}</h1>
               {video?.short?.length > 0 &&
                 video.short.map((question, index) => (
-                  <VideoEssay Title={question.Title} Number={index} />
+                  <VideoEssay Title={question.Title} Number={index}  Answer={question.studentAnswer} />
                 ))}
             </div>
           </Disclosure.Panel>

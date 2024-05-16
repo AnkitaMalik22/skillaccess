@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { useNavigate } from "react-router-dom";
 import { getNewCompanies } from "../../../../redux/collage/dashboard/dashboardSlice";
 
 const SwiperSlideLeft = () => {
   const dispatch = useDispatch();
   const { newCompanies, loading } = useSelector((state) => state.dashboard);
-
+  const navigate = useNavigate();
   useSelector((state) => console.log("state : ", state.dashboard));
 
   useEffect(() => {
@@ -16,10 +16,14 @@ const SwiperSlideLeft = () => {
     console.log("newCompanies : ", newCompanies);
   }, [dispatch]);
 
+  const companies = [
+    1,2,3,4,5,6,7,8,9,10
+  ];
+
   return (
     <Swiper
       className="relative "
-      spaceBetween={50}
+      spaceBetween={30}
       loop={true}
       breakpoints={{
         0: {
@@ -37,80 +41,39 @@ const SwiperSlideLeft = () => {
         1000: {
           slidesPerView: 3.5,
         },
+        1500: {
+          slidesPerView: 4,
+        },
+        1920: {
+          slidesPerView: 5,
+        },
       }}
     >
-      <SwiperSlide>
-        <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
-            <img
-              src="../intel.png"
-              alt="img not loaded"
-              className="w-full h-full"
-            />
-          </figure>
-          <span>
-            <h3 className="text-sm text-gray-400 font-semibold text-center break-words h-full">
-              company name
-            </h3>
-          </span>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
-            <img
-              src="../company2.png"
-              alt="img not loaded"
-              className="w-full h-full"
-            />
-          </figure>
-          <h3 className="text-sm text-gray-400 font-semibold text-center break-words h-full">
-            company name
-          </h3>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
-            <img
-              src="../intel.png"
-              alt="img not loaded"
-              className="w-full h-full"
-            />
-          </figure>
-          <h3 className="text-sm text-gray-400 font-semibold text-center break-words h-full">
-            company name
-          </h3>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className=" bg-white  w-32  h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
-            <img
-              src="../intel.png"
-              alt="img not loaded"
-              className="w-full h-full"
-            />
-          </figure>
-          <h3 className="text-sm text-gray-400 font-semibold text-center break-words h-full">
-            company name
-          </h3>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
-            <img
-              src="../intel.png"
-              alt="img not loaded"
-              className="w-full h-full"
-            />
-          </figure>
-          <h3 className="text-sm text-gray-400 font-semibold text-center break-words h-full">
-            company name
-          </h3>
-        </div>
-      </SwiperSlide>
+   
+
+      {
+        newCompanies.map((company) => (
+          <SwiperSlide className="flex ">
+          <div className="companies-dash bg-white  w-[80px] xl:w-[120px]  2xl:w-32 h-36px rounded-lg p-2  ">
+            <figure className="bg-gray-100 w-full h-24 mx-auto rounded-lg cursor-pointer"
+              onClick={() => navigate(`/collage/companies/profile/${company._id}`)}
+            >
+              <img
+                // src="../intel.png"
+                src={company?.basic?.logo === ""  ? "../intel.png" : company?.basic?.logo}
+                alt="Img"
+                className="w-full h-full"
+              /> 
+            </figure>
+            <span>
+              <h3 className="text-xs text-gray-400 font-bold text-center break-words h-full mt-1">
+               {company?.basic?.companyName}
+              </h3>
+            </span>
+          </div>
+        </SwiperSlide>
+        ))
+      }
 
       {loading && <h1>Loading...</h1>}
 

@@ -14,11 +14,11 @@ const Header = () => {
       <span className="flex gap-2">
         <button
           className="  self-center object-center  rounded-lg h-10 w-10 "
-          onClick={() => navigate(-1)}
+          // onClick={() => navigate('collage/companies')}
         >
           <img src="../../images/icons/sales.jpg" alt="" />
         </button>
-        <h2 className="text-[28px] leading-[36px] font-bold self-center font-dmSans">
+        <h2 className="text-[24px] leading-[36px] font-bold self-center font-dmSans">
           Companies
         </h2>
       </span>
@@ -29,7 +29,7 @@ const Header = () => {
           <IoIosSearch className="self-center w-10 h-10 bg-gray-100 rounded-s-lg text-gray-400 py-2 " />
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search..."
             className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
           />
         </span>
@@ -47,10 +47,10 @@ const Header = () => {
           className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
           // onClick={() => navigate("/collage/test/addMcq")}
         >
-          <FiUpload className="self-center text-lg " /> Upload Questions
+          <FiUpload className="self-center text-lg " /> Upload New
         </button>
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
-          <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
+        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
+          <img src="../../images/icons/Filter.png" className="w-7 h-7" />
         </button>
       </span>
     </div>

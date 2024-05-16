@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuEye } from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
+import toast from "react-hot-toast";
 
 const ResetPassword = () => {
   const [error, setError] = useState(false);
@@ -42,7 +43,7 @@ const ResetPassword = () => {
     const { Password, confirmPassword } = Credentials;
 
     if (Password !== confirmPassword) {
-      setError(true);
+      toast.error("Password does not match");
       return;
     }
     const data = {
@@ -53,13 +54,14 @@ const ResetPassword = () => {
     try {
       const ch = await dispatch(resetPassword(data));
       if (ch.meta.requestStatus === "fulfilled") {
+        toast.success("Password changed");
         setCredentials({});
         navigate("/");
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
+  const isConfirmDisabled =
+    !Credentials.confirmPassword || !Credentials.Password;
   return (
     <form action="" className="font-dmSans">
       <div className=" bg-base-100 shadow-xl h-full min-h-[100vh]  font-dmSans grid grid-cols-5 ">
@@ -92,7 +94,7 @@ const ResetPassword = () => {
             Reset Password
           </h2>
 
-          <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 rounded-xl  bg-snow ">
+          <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 rounded-xl  bg-snow relative ">
             <input
               name="Password"
               onChange={changeHandler}
@@ -102,7 +104,7 @@ const ResetPassword = () => {
               className="input  border-none  focus:outline-none input-md w-full max-w-xs  bg-snow  mx-auto "
             />
             <button
-              className="btn !shadow-none bg-snow border-none"
+              className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
               onClick={(e) => {
                 e.preventDefault();
                 type === "text" ? setType("password") : setType("text");
@@ -111,7 +113,7 @@ const ResetPassword = () => {
               <LuEye className="text-gray-400 text-2xl" />
             </button>
           </div>
-          <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 rounded-xl  bg-snow ">
+          <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 rounded-xl  bg-snow relative ">
             <input
               name="confirmPassword"
               onChange={changeHandler}
@@ -121,7 +123,7 @@ const ResetPassword = () => {
               className="input  border-none  focus:outline-none input-md w-full max-w-xs  bg-snow  mx-auto "
             />
             <button
-              className="btn !shadow-none bg-snow border-none"
+              className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
               onClick={(e) => {
                 e.preventDefault();
                 typeConfirm === "text"
@@ -133,25 +135,65 @@ const ResetPassword = () => {
             </button>
           </div>
 
-          {error && (
-            <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 rounded-xl  ">
-              <input
-                type="checkbox"
-                defaultChecked={true}
-                onClick={(e) => e.preventDefault()}
-                placeholder="Confirm Password"
-                disabled={true}
-                className="  border-none w-4 h-4 focus:outline-none  rounded-full bg-gray-400  mx-auto  checked:bg-gray-400 mt-2 mr-2 hover:!bg-red-500"
-              />
-              <h1 className="text-gray-400 self-center w-full">
-                Passwords don't match
-              </h1>
-            </div>
-          )}
+          <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 rounded-xl  ">
+            <input
+              type="checkbox"
+              defaultChecked={true}
+              onClick={(e) => e.preventDefault()}
+              placeholder="Confirm Password"
+              disabled={true}
+              className={` border-none w-4 h-4 focus:outline-none  rounded-full   mx-auto  checked:bg-gray-400 mt-2 mr-2  `}
+            />
+            <h1 className="text-gray-400 self-center w-full">
+              At least one capital letter
+            </h1>
+          </div>
+          <div className="w-full max-w-xs  mx-auto flex md:mt-3 mt-2 rounded-xl  ">
+            <input
+              type="checkbox"
+              defaultChecked={true}
+              onClick={(e) => e.preventDefault()}
+              placeholder="Confirm Password"
+              disabled={true}
+              className="  border-none w-4 h-4 focus:outline-none  rounded-full bg-gray-400  mx-auto  checked:bg-gray-400 mt-2 mr-2 hover:!bg-red-500"
+            />
+            <h1 className="text-gray-400 self-center w-full">
+              At least one lowercase letter
+            </h1>
+          </div>
+          <div className="w-full max-w-xs  mx-auto flex md:mt-3 mt-2 rounded-xl  ">
+            <input
+              type="checkbox"
+              defaultChecked={true}
+              onClick={(e) => e.preventDefault()}
+              placeholder="Confirm Password"
+              disabled={true}
+              className="  border-none w-4 h-4 focus:outline-none  rounded-full bg-gray-400  mx-auto  checked:bg-gray-400 mt-2 mr-2 hover:!bg-red-500"
+            />
+            <h1 className="text-gray-400 self-center w-full">
+              At least one number
+            </h1>
+          </div>
+          <div className="w-full max-w-xs  mx-auto flex md:mt-3 mt-2 rounded-xl  ">
+            <input
+              type="checkbox"
+              defaultChecked={true}
+              onClick={(e) => e.preventDefault()}
+              placeholder="Confirm Password"
+              disabled={true}
+              className="  border-none w-4 h-4 focus:outline-none  rounded-full bg-gray-400  mx-auto  checked:bg-gray-400 mt-2 mr-2 hover:!bg-red-500"
+            />
+            <h1 className="text-gray-400 self-center w-full">
+              Minimum character length is 8 characters
+            </h1>
+          </div>
 
           <button
-            className="btn hover:bg-blue-500  rounded-xl border-none  md:mt-6 mt-4 focus:outline-none  w-full max-w-xs  mx-auto bg-blue-700 text-white"
+            className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
+              isConfirmDisabled ? "bg-blued cursor-not-allowed" : ""
+            }`}
             onClick={handleSubmit}
+            disabled={isConfirmDisabled}
           >
             Save
           </button>

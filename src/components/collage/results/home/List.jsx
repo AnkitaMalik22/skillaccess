@@ -1,10 +1,9 @@
-import { useSelect } from "@mui/base";
 import React, { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
-import { getAllTests } from "../../../../redux/collage/test/testSlice";
+import { getAllTests } from "../../../../redux/collage/test/thunks/test";
 
 const List = () => {
   // const arr = [2, 1, 1, 1, 1];
@@ -17,7 +16,8 @@ const List = () => {
 
   let arr = assessments.beginner.concat(
     assessments.intermediate,
-    assessments.advanced
+    assessments.advanced,
+    assessments.adaptive
   );
 
   let totalStudentsAppeared = 0;
@@ -28,12 +28,26 @@ const List = () => {
     // dispatch(getCollege());
     dispatch(getAllTests());
   }, [dispatch]);
+<<<<<<< HEAD
 
+=======
+  const getProgressBarColor = (percentage) => {
+    if (percentage === 0) {
+      return ""; // Return empty string for transparent
+    } else if (percentage > 0 && percentage < 33.33) {
+      return "bg-red-600"; // Red color
+    } else if (percentage >= 33.33 && percentage < 66.66) {
+      return "bg-blue-600"; // Blue color
+    } else {
+      return "bg-green-600"; // Green color
+    }
+  };
+>>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
   return (
-    <div className="w-full mx-auto">
+    <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 rounded-2xl p-8">
       {/* legend */}
       <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid">
-        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg p-2 ">
+        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-2xl p-2 ">
           <h2>Test Name</h2>
         </div>
         <div className="bg-[#0052CC] bg-opacity-5 p-2">
@@ -45,17 +59,17 @@ const List = () => {
         <div className="bg-[#0052CC]  bg-opacity-5 p-2">
           <h2>Overall Performance</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2 rounded-e-lg">
+        <div className="bg-[#0052CC] bg-opacity-5 p-2 rounded-e-2xl">
           <h2>Details</h2>
         </div>
       </div>
 
       {/* list to be iterated */}
       {arr.map((assessment) => (
-        <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
+        <div className=" grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
           {" "}
           {/* row-2 */}
-          <div className={` flex `}>
+          <div className={` flex justify-center `}>
             <div className="flex self-center">
               <span>
                 <h2 className="font-dmSans  sm:text-sm">{assessment.name}</h2>
@@ -78,6 +92,7 @@ const List = () => {
           <div className="flex justify-center">
             <div className=" self-center h-fit">
               <span>
+<<<<<<< HEAD
                 <h2 className="font-dmSans  sm:text-sm">{0}</h2>
               </span>
             </div>
@@ -89,15 +104,33 @@ const List = () => {
                 <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                   <div className={`w-3/5 bg-green-700 h-full rounded-lg`}></div>
                 </div>
+=======
+>>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
-                  70%
+                  0%
                 </h2>
               </span>
             </div>
           </div>
-          {/*  */}
-          <div className="flex justify-end mr-3">
+          <div className="flex justify-center">
+            <div className=" self-center">
+              <span className="flex gap-2">
+                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                  <div
+                    className={`h-full rounded-lg ${getProgressBarColor(20)}`}
+                    style={{ width: 20 }}
+                  ></div>
+                </div>
+                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                  {" "}
+                  {/* {student?.percentage?.toFixed(2)}% */}
+                  10%
+                </h2>
+              </span>
+            </div>
+          </div>
+          <div className="flexjustify-center mr-3">
             <span
               className="self-center hover:cursor-pointer "
               onClick={() =>

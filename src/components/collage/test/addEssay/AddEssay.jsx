@@ -3,20 +3,21 @@ import Header from "./Header";
 
 import { FaX } from "react-icons/fa6";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
-import {
-  // paragrapgh
-  addQuestionToTopic,
-  addEssay,
-  addEssayToTopic,
-  editQuestionById,
-} from "../../../../redux/collage/test/testSlice";
+
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import {
+  addEssay,
+  addEssayToTopic,
+} from "../../../../redux/collage/test/testSlice";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const AddEssay = () => {
   const { id } = useParams();
   //prev count
-  const { topics, currentTopic } = useSelector((state) => state.test);
+  const { topics, currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const [isPrev, setIsPrev] = useState(false);
   const [countDetail, setCountDetail] = useState(-1);
   const [count, setCount] = useState(topics[id]?.essay.length - 1);
@@ -44,7 +45,7 @@ const AddEssay = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const level = searchParams.get("level");
   const type = searchParams.get("type");
   const addType = searchParams.get("addType");
   let ID;
@@ -52,6 +53,7 @@ const AddEssay = () => {
     ? (ID = searchParams.get("topicId"))
     : (ID = id);
   const [question, setQuestion] = useState({
+    QuestionLevel: level,
     section: ID,
     id: ID + Date.now(),
     Title: "",
@@ -62,37 +64,58 @@ const AddEssay = () => {
     setQuestion({ ...question, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {
+  const handleSave =async (saveType) => {
     if (addType === "topic") {
-      if (question.Title == "") {
-        window.alert("Please enter the question");
+      if (
+        !question.Title ||
+        question.Title.trim() === "" ||
+        question.Title === "<p><br></p>"
+      ) {
+        toast.error("Please enter the question");
       } else if (question.Duration == 0) {
-        window.alert("Please enter required time");
+        toast.error("Please enter required time");
         return;
       } else {
         if (isPrev) {
           //dispatch api call to update by ID
-          dispatch(
+          await dispatch(
             editQuestionById({
               index: countDetail + 1,
               type: "essay",
               id: question._id,
               question: question,
             })
-          );
-          setCountDetail(currentTopic.essay.length - 1);
-          setQuestion({ Title: "", Duration: 0, id: id + Date.now() });
+          )
+          await setCountDetail(currentTopic.essay.length - 1);
+
+          await setQuestion({
+              Title: "",
+              Duration: 0,
+              id: id + Date.now(),
+              QuestionLevel: level,
+            })
+          ;
         } else {
-          dispatch(addEssayToTopic({ data: question, id: id, type: type }));
-          dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({ Title: "", Duration: 0, id: id + Date.now() });
+          await dispatch(addEssayToTopic({ data: question, id: id, type: type }));
+          await dispatch(addQuestionToTopic({ data: question, id: id, type: type }))
+          await setQuestion({
+              Title: "",
+              Duration: 0,
+              id: id + Date.now(),
+              QuestionLevel: level,
+            })
+            if(!ADD_QUESTION_LOADING){
+              if (saveType === "save") navigate(-1);
+            }
+
+          
         }
       }
     } else {
       if (question.Title == "") {
-        window.alert("Please enter the question");
+        toast.error("Please enter the question");
       } else if (question.Duration == 0) {
-        window.alert("Please enter required time");
+        toast.error("Please enter required time");
         return;
       } else {
         if (isPrev) {
@@ -104,33 +127,47 @@ const AddEssay = () => {
               prev: true,
               index: count + 1,
             })
-          );
-          setCount(topics[id].essay.length - 1);
+          ).then(()=>{
+            setCount(topics[id].essay.length - 1);
           setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             Title: "",
             Duration: 0,
             section: ID,
-          });
+          })
+          if (!ADD_QUESTION_LOADING) {
+            if (saveType === "save") navigate(-1);
+          }
+          })
+          ;
         } else {
-          dispatch(
+         await dispatch(
             addEssay({ data: question, id: id, type: type, prev: false })
-          );
-          setIsPrev(false);
-          setCount(topics[id].essay.length - 1);
-          setQuestion({
+          )
+          await setIsPrev(false);
+          await setCount(topics[id].essay.length - 1);
+          await setQuestion({
+            QuestionLevel: level,
+
             id: ID + Date.now(),
             Title: "",
             Duration: 0,
             section: ID,
-          });
+          })
+          if (!ADD_QUESTION_LOADING) {
+            if (saveType === "save") navigate(-1);
+          }
+        
+          
         }
       }
     }
   };
 
   useEffect(() => {
-    setCountDetail(currentTopic.essay.length - 1);
+    setCountDetail(currentTopic?.essay?.length - 1);
   }, [currentTopic]);
 
   return (

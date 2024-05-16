@@ -1,9 +1,11 @@
 @tailwind base;
 
 /* Firefox */
-* {
+* 
+{
   scrollbar-width: 5px;
   scrollbar-color: rgb(243 244 246);
+  font-family: 'DM Sans', sans-serif;
 }
 
 /* Chrome, Edge, and Safari */
@@ -20,7 +22,7 @@
   background-color: rgb(107, 107, 198);
 
   border-radius: 14px;
-  border: 3px solid var(--primary);
+  /* border: 3px solid var(--primary); */
 }
 
 .apexcharts-yaxis-texts-g {
@@ -34,3 +36,38 @@
 
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* Sidebar Css */
+
+.btn-transition-c {
+  transition: all 0.3s ease-in-out;
+}
+
+.active-li-c {
+  background-color: white;
+  color: black; /* Active state */
+}
+
+.hover-li-c:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black; /* Hover state */
+}
+
+.btn-transition {
+  @apply transition-all duration-300 ease-in-out ;
+}
+
+.active-li {
+  @apply bg-white text-black rounded-lg; /* Active state */
+}
+
+.hover-li:hover {
+  @apply bg-white bg-opacity-20 text-black rounded-lg ; /* Hover state */
+}
+
+
+#\:0\.targetLanguage select:not(:first-child) {
+  display: none;
+}

@@ -4,23 +4,29 @@ import Header from "./Header";
 import { FaX } from "react-icons/fa6";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import ReactQuill from "react-quill"; // Import ReactQuill
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
 
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import {
-  addMcqToTopic,
-  addQuestionToTopic,
-  editQuestionById,
-} from "../../../../redux/collage/test/testSlice";
+
+import toast from "react-hot-toast";
+import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const AddMcqToTopic = () => {
-  const { currentTopic } = useSelector((state) => state.test);
+  const { currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const [isPrev, setIsPrev] = useState(false);
   const [countDetail, setCountDetail] = useState(-1);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const type = searchParams.get("type");
+  const level = searchParams.get("level");
   const [question, setQuestion] = useState({
+    QuestionLevel: level === "adaptive" ? "beginner" : level,
     Duration: 0,
     id: id + Date.now(),
     Title: "",
@@ -31,7 +37,7 @@ const AddMcqToTopic = () => {
 
   // section Id
   const { sectionId } = useParams();
-  const type = searchParams.get("type");
+
   const [step, setStep] = useState(1);
 
   const handlePrev = () => {
@@ -56,6 +62,10 @@ const AddMcqToTopic = () => {
     } else if (e.target.name === "Duration") {
       setQuestion((prev) => {
         return { ...prev, Duration: e.target.value };
+      });
+    } else if (e.target.name === "QuestionLevel") {
+      setQuestion((prev) => {
+        return { ...prev, QuestionLevel: e.target.value };
       });
     } else {
       switch (e.target.name) {
@@ -118,10 +128,95 @@ const AddMcqToTopic = () => {
     }
   };
 
+  const handleQuestionSave = () => {
+    if (
+      !question.Title ||
+      question.Title.trim() === "" ||
+      question.Title === "<p><br></p>"
+    ) {
+      toast.error("Please enter question");
+      return;
+    } else if (
+      !question.Options[0] ||
+      !question.Options[1] ||
+      !question.Options[2] ||
+      !question.Options[3]
+    ) {
+      toast.error("Please enter atleast 4 options");
+      return;
+    } else if (question.AnswerIndex === null) {
+      toast.error("Please select correct answer");
+      return;
+    } else if (question.Options.some((option) => option.trim() === "")) {
+      toast.error("Please enter all options");
+      return;
+    } else if (question.Duration == 0) {
+      toast.error("Please enter required time");
+      return;
+    } else {
+      if (isPrev) {
+        //api call
+        setIsPrev(false);
+        setCountDetail(currentTopic.questions.length - 1);
+        dispatch(
+          editQuestionById({
+            index: countDetail + 1,
+            type: "mcq",
+            id: question._id,
+            question: question,
+          })
+        );
+        setQuestion({
+          QuestionLevel: level === "adaptive" ? "beginner" : level,
+          Title: "",
+          Options: [],
+          id: id + Date.now(),
+          Duration: 0,
+        });
+      } else {
+        setIsPrev(false);
+        setCountDetail(currentTopic.questions.length - 1);
+        dispatch(addQuestionToTopic({ data: question, id: id, type: type })).then(()=>{
+          // if(!ADD_QUESTION_LOADING){
+          //   navigate(-1);
+          // }
+          setQuestion({
+            QuestionLevel: level === "adaptive" ? "beginner" : level,
+            Title: "",
+            Options: [],
+            id: id + Date.now(),
+            Duration: 0,
+          });
+        })
+       
+        // navigate(-1);
+      }
+    }
+  };
+
   useEffect(() => {
     console.log(currentTopic);
-    setCountDetail(currentTopic.questions.length - 1);
+    setCountDetail(currentTopic?.questions?.length - 1);
   }, [currentTopic]);
+
+  // useEffect(() => {
+  //   if(!ADD_QUESTION_LOADING){
+  //         navigate(-1); 
+  //   }
+  
+  //     return () => {
+  //       //navigate(-1);
+  //     }
+  //   }
+  //   , [ADD_QUESTION_LOADING]);
+
+
+
+
+  const stripHtml = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  };
   // console.log(question);
   return (
     <div>
@@ -134,13 +229,16 @@ const AddMcqToTopic = () => {
       <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
         <div className="flex flex-wrap gap-2 sm:w-[95.7%] mx-auto ">
           <span className="w-[49%] ">
-            <h2 className="font-bold">Question</h2>
+            <h2 className="font-bold mb-2">Question</h2>
+            <div className="flex w-full justify-between">
             <select
               name="Duration"
               onChange={handleChanges}
               value={question.Duration}
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              className={`${
+                level === "adaptive" ? "w-[65%]" : "w-full"
+              } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
             >
               <option value={0}>Time to answer the question</option>
 
@@ -149,17 +247,36 @@ const AddMcqToTopic = () => {
               <option value={3}>3 minutes</option>
               <option value={4}>4 minutes</option>
             </select>
+            {level === "adaptive" && (
+              <select
+                name="QuestionLevel"
+                onChange={handleChanges}
+                value={question.QuestionLevel}
+                className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              >
+                <option value="">Level</option>
 
-            <textarea
-              className="resize-none w-full h-full bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+                <option value={"beginner"}>Beginner</option>
+                <option value={"intermediate"}>Intermediate</option>
+                <option value={"advanced"}>Advanced</option>
+              </select>
+            )}
+        </div>
+            <ReactQuill
+              value={question.Title}
+              onChange={(value) =>
+                setQuestion((prev) => {
+                  // console.log({ ...prev, Title: e.target.value });
+                  return { ...prev, Title: value };
+                })
+              }
+              className="bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
               placeholder="Enter Question Here"
               name="Title"
-              onChange={handleChanges}
-              value={question.Title}
-            ></textarea>
+            />
           </span>
           <span className="w-[49%]">
-            <h2 className="font-bold">Test Description</h2>
+            <h2 className="font-bold mb-2">Test description</h2>
             <div className="w-11/12 flex flex-col gap-2">
               <div className="px-5 pb-4 flex flex-col gap-4">
                 {/* mcq option wrapper */}
@@ -172,6 +289,7 @@ const AddMcqToTopic = () => {
                       name="Answer"
                       id="option1"
                       value={0}
+                      checked={parseInt(question.AnswerIndex) === 0}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}
@@ -216,6 +334,7 @@ const AddMcqToTopic = () => {
                       name="Answer"
                       id="option3"
                       value={1}
+                      checked={parseInt(question.AnswerIndex) === 1}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}
@@ -260,6 +379,7 @@ const AddMcqToTopic = () => {
                       name="Answer"
                       id="option3"
                       value={2}
+                      checked={parseInt(question.AnswerIndex) === 2}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}
@@ -304,6 +424,7 @@ const AddMcqToTopic = () => {
                       name="Answer"
                       id="option3"
                       value={3}
+                      checked={parseInt(question.AnswerIndex) === 3}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}
@@ -370,60 +491,7 @@ const AddMcqToTopic = () => {
             <button
               className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
               // onClick={addQuestion}
-              onClick={() => {
-                // dispatch(
-                //   addQuestionToTopic({ data: question, id: id, type: type })
-                // );
-                // setQuestion({ Title: "", Options: [], id: "aaa" , Duration: 0 });
-
-                if (question.Title === "") {
-                  window.alert("Please enter question");
-                  return;
-                } else if (question.Options && question.Options.length < 4) {
-                  window.alert("Please enter atleast 4 options");
-                  return;
-                } else if (
-                  question.Options.some((option) => option.trim() === "")
-                ) {
-                  window.alert("Please enter all options");
-                  return;
-                } else if (question.Duration == 0) {
-                  window.alert("Please enter required time");
-                  return;
-                } else {
-                  if (isPrev) {
-                    //api call
-                    setIsPrev(false);
-                    setCountDetail(currentTopic.questions.length - 1);
-                    dispatch(
-                      editQuestionById({
-                        index: countDetail + 1,
-                        type: "mcq",
-                        id: question._id,
-                        question: question,
-                      })
-                    );
-                    setQuestion({
-                      Title: "",
-                      Options: [],
-                      id: id + Date.now(),
-                      Duration: 0,
-                    });
-                  } else {
-                    setIsPrev(false);
-                    setCountDetail(currentTopic.questions.length - 1);
-                    dispatch(
-                      addQuestionToTopic({ data: question, id: id, type: type })
-                    );
-                    setQuestion({
-                      Title: "",
-                      Options: [],
-                      id: id + Date.now(),
-                      Duration: 0,
-                    });
-                  }
-                }
-              }}
+              onClick={handleQuestionSave}
             >
               <FaPlus className="self-center" /> Add Next Question
             </button>

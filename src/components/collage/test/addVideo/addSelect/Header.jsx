@@ -6,15 +6,18 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+
+import toast from "react-hot-toast";
 import {
-  addQuestionToTopic,
   addVideoToSection,
   clearTopicToBeAdded,
 } from "../../../../../redux/collage/test/testSlice";
+import { addQuestionToTopic } from "../../../../../redux/collage/test/thunks/topic";
 
 const Header = ({ selectQuestionType }) => {
   const { id } = useParams();
   const [searchParam, setSearchParam] = useSearchParams();
+  const level = searchParam.get("level");
   const dispatch = useDispatch();
   let ID;
   searchParam.get("topicId") !== null
@@ -38,34 +41,31 @@ const Header = ({ selectQuestionType }) => {
       },
     };
     let mcq;
-    if(topicToBeAdded.video.questions?.length>0){
-       mcq = topicToBeAdded.video.questions.reduce((acc, question) => {
+    if (topicToBeAdded.video.questions?.length > 0) {
+      mcq = topicToBeAdded.video.questions.reduce((acc, question) => {
         return acc + parseInt(question.Duration);
       }, 0);
+    } else {
+      mcq = 0;
     }
-    else{
-      mcq=0;
+    let long;
+    if (topicToBeAdded.video.long?.length > 0) {
+      long = topicToBeAdded.video?.long?.reduce((acc, question) => {
+        return acc + parseInt(question.Duration);
+      }, 0);
+    } else {
+      long = 0;
     }
-    let long ;
-    if(topicToBeAdded.video.long?.length>0){
-    long = topicToBeAdded.video?.long?.reduce((acc, question) => {
-      return acc + parseInt(question.Duration);
-    }, 0);
-  }
-  else{
-    long=0;
-  }
-  let short;
-  if(topicToBeAdded.video.long?.length>0){
-     short = topicToBeAdded.video?.short?.reduce((acc, question) => {
-      return acc + parseInt(question.Duration);
-    }, 0);
-  }
-  else{
-    short=0;
-  }
+    let short;
+    if (topicToBeAdded.video.long?.length > 0) {
+      short = topicToBeAdded.video?.short?.reduce((acc, question) => {
+        return acc + parseInt(question.Duration);
+      }, 0);
+    } else {
+      short = 0;
+    }
     let Duration = mcq + long + short;
-
+    console.log(Duration);
     const vid = {
       ...topicToBeAdded.video,
       Duration: Duration,
@@ -82,7 +82,7 @@ const Header = ({ selectQuestionType }) => {
     if (searchParam.get("section") !== "null") {
       dispatch(addVideoToSection({ data: vid, index: id }));
       if (totalLength === 0) {
-        window.alert("no questions");
+        toast.error("no questions");
       } else {
         navigate(
           `/collage/test/details/${id}?type=section&question=video&topicId=${searchParam.get(
@@ -104,7 +104,7 @@ const Header = ({ selectQuestionType }) => {
         );
         console.log(res);
         if (totalLength === 0) {
-          alert("Please add questions to the assessment");
+          toast.error("Please add questions to the assessment");
           return;
         } else {
           navigate(`/collage/test/typeOfQuestions/${id}`);
@@ -164,7 +164,7 @@ const Header = ({ selectQuestionType }) => {
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
         <button className="flex self-center ml-2 rounded-lg  gap-2">
-          <button onClick={() => navigate(-1)} className="mt-2 mr-3">
+          <button onClick={() =>  level  === 'adaptive' ? navigate("/collage/test/selectAdaptive?level=adaptive") : navigate(-1)} className="mt-2 mr-3">
             <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
           </button>
 

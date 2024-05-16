@@ -1,13 +1,47 @@
+<<<<<<< HEAD
 import React from "react";
 import { useDispatch } from "react-redux";
+=======
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+>>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
 import { useNavigate } from "react-router-dom";
-// import { getStudentResponse } from "../../../../redux/collage/test/testSlice";
 
+<<<<<<< HEAD
+=======
+import { getTestResultPage } from "../../../../redux/collage/test/thunks/test";
+import { getStudentResponse } from "../../../../redux/collage/test/thunks/student";
+
+>>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
 const Appeared = ({ assessment }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const arr = [2, 1, 1, 1, 1];
+  const { testDataResponse, response } = useSelector((state) => state.test);
+
+
+// console.log(assessment);
+// console.log(testDataResponse);
+console.log(response);
+
+  useEffect(() => {
+    dispatch(getTestResultPage(assessment?._id));
+  }, [dispatch, assessment?._id]);
+
+  const getResponse = (responseId) => {
+    dispatch(getStudentResponse(responseId));
+  };
+
+  // useEffect(()=>{
+  //   dispatch(getTestResultPage(assessment._id));
+  // },[])
+
+  // useEffect(()=>{
+  //   dispatch(getTestResultPage(assessment._id));
+  // },[])
+
+  // const arr = [2, 1, 1, 1, 1];
+
   // let arr = assessment.studentResponses.map((responseId) => {
   //   // console.log(student);
   //   dispatch(getStudentResponse(responseId))
@@ -19,8 +53,71 @@ const Appeared = ({ assessment }) => {
   // dispatch(getStudentResponse(responseId))
   //   })
 
-  //   console.log(response)
+  // console.log("studentResponses",assessment.studentResponses);
 
+<<<<<<< HEAD
+=======
+  // const responses = assessment.studentResponses.map((responseId) => {
+  //   // console.log(student);
+  //   dispatch(getStudentResponse(responseId))
+
+  // }
+  // );
+
+  // let arr = testDataResponse?.map((student) => {
+  //   student.studentResponses.forEach((resId) => {
+  //     console.log("resId", resId);
+  //     const responseId = assessment.studentResponses.find((response) => response._id === resId._id);
+  //     // add the responseId to the student object
+  //     student.responseId = responseId;
+  //     console.log("student", student);
+  //   });
+  //   return student;
+  // });
+
+  let copy = [...testDataResponse];
+
+  // let arr = copy?.map((student) => {
+  //   let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
+  //   student.studentResponses.forEach((resId) => {
+  //     console.log("resId", resId);
+  //     const responseId = assessment?.studentResponses?.find((response) => response._id === resId._id);
+  //     // add the responseId to the updatedStudent object
+  //     updatedStudent.responseId = responseId;
+  //     updatedStudent.response = response;
+  //     console.log("updatedStudent", updatedStudent);
+  //   });
+  //   return updatedStudent;
+  // });
+
+  let arr = [assessment?.studentResponses];
+
+  console.log(arr);
+
+  const getProgressBarColor = (percentage) => {
+    if (percentage === 0) {
+      return ""; // Return empty string for transparent
+    } else if (percentage > 0 && percentage < 33.33) {
+      return "bg-red-600"; // Red color
+    } else if (percentage >= 33.33 && percentage < 66.66) {
+      return "bg-blue-600"; // Blue color
+    } else {
+      return "bg-green-600"; // Green color
+    }
+  };
+  const getProgressBarWidth = (percentage) => {
+    if (percentage === 0) {
+      return 0; // Width is 0 when percentage is 0
+    } else if (percentage < 33.33) {
+      return 40; // 2/5 width
+    } else if (percentage < 66.66) {
+      return 60; // 3/5 width
+    } else {
+      return 100; // Full width
+    }
+  };
+  console.log(arr);
+>>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
   return (
     <div className="w-full mx-auto">
       {/* legend */}
@@ -43,7 +140,10 @@ const Appeared = ({ assessment }) => {
       </div>
 
       {/* list to be iterated */}
-      {arr.map((student) => (
+
+
+      {arr[0]?.map((student, index) => (
+
         <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}
@@ -54,7 +154,11 @@ const Appeared = ({ assessment }) => {
               </div>
               <span className="break-words min-w-0 pt-1 self-center">
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
+<<<<<<< HEAD
                   {student.FirstName}
+=======
+                  {student?.studentId?.FirstName}
+>>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
                 </h2>
               </span>
             </div>
@@ -91,12 +195,16 @@ const Appeared = ({ assessment }) => {
               <span className="flex gap-2">
                 <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                   <div
-                    className={`w-3/5 bg-[#DE350B] bg-opacity-70 h-full rounded-lg`}
+                    className={`h-full rounded-lg ${getProgressBarColor(
+                      student?.percentage
+                    )}`}
+                    style={{ width: `${student?.percentage}%` }}
+
                   ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
-                  70%
+                  {student?.percentage?.toFixed(2)}%
                 </h2>
               </span>
             </div>
@@ -105,7 +213,11 @@ const Appeared = ({ assessment }) => {
           <div className="flex justify-end mr-3">
             <span
               className="self-center cursor-pointer"
-              onClick={() => navigate("/collage/results/assessmentReview/0")}
+              onClick={() =>
+                navigate(
+                  `/collage/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                )
+              }
             >
               <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
                 Assessment Review

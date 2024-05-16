@@ -10,20 +10,44 @@ import { useSelector, useDispatch } from "react-redux";
 import { getTotalJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
 import BackIcon from "../../../buttons/BackIcon";
 import { IoIosSearch } from "react-icons/io";
+import calculateDaysAgo from "../../../../util/calculateDaysAgo";
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
+  // const [jobs, setJobs] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const { jobs } = useSelector((state) => state.dashboard);
+  const { jobs } = useSelector((state) => state.dashboard);
 
+  const [filtered, setFiltered] =React.useState([]);
   useEffect(() => {
     dispatch(getTotalJobs());
   }, [dispatch]);
+  const handleFilterJobs = (e) => {
+    const value = e.target.value;
+    if (value === "" || value.trim() === "") {
+      console.log("empty");
+
+      setFiltered(jobs);
+       
+      return;
+    } else {
+      setFiltered(
+        jobs.filter((Jobs) => {
+          const regex = new RegExp(value, "i");
+          return (
+            regex.test(Jobs.JobTitle)
+          );
+        })
+      )
+    }
+  };
+  useEffect(()=>{
+    setFiltered(jobs);
+  },[jobs]);
 
   return (
-    <div>
+    <div className="mx-4">
       <div className="flex w-full mx-auto justify-between mb-2">
         <button
           className="  self-center  rounded-lg h-10 w-10 "
@@ -36,7 +60,8 @@ const Jobs = () => {
             <IoIosSearch className="self-center w-10 h-10 bg-gray-100 rounded-s-lg text-gray-400 py-2 " />
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search..."
+              onChange={handleFilterJobs}
               className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
             />
           </span>
@@ -47,22 +72,28 @@ const Jobs = () => {
         </button>
       </div>
       <div className="flex flex-col gap-4  items-center  ">
-        {jobs?.map((job, index) => {
+        {filtered?.map((job, index) => {
           return (
             <div className="flex justify-between w-[99%]" key={index}>
               <div className="sm:flex">
-                <div className=" sm:h-10 sm:w-10  w-6 h-6 self-center bg-red-600 mr-2"></div>
+                <div className="  flex justify-center rounded-lg mr-8">
+                  <img
+                    src={job?.company?.basic?.logo}
+                    className="w-10 h-10 rounded-lg self-center"
+                    alt=""
+                  />
+                </div>
                 <span className="">
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                    Role
-                  </h2>
-                  <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
-                    {" "}
                     {job.JobTitle || "title"}
+                  </h2>
+                  <h2 className="font-dmSans font-bold text-[.6rem] sm:text-xs inline">
+                    {" "}
+                    {job?.company?.basic?.companyName}
                   </h2>
                   <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
                     {" "}
-                    {job.CloseByDate || "date"}
+                    {calculateDaysAgo(job.createdAt)}
                   </h2>
                 </span>
               </div>
@@ -76,7 +107,11 @@ const Jobs = () => {
                   {" "}
                   {job.WorkplaceType || "WOrktype"}
                 </h2>
-                <button className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center ">
+                <button className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
+                onClick={() =>
+                  navigate(`/collage/companies/jobOverview/${job._id}`)
+                }
+                >
                   {job.EmploymentType || "employmentType"}
                 </button>
                 <FaArrowRight className="text-gray-400 self-center" />

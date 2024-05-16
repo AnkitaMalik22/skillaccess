@@ -8,50 +8,83 @@ import {
   removeQfunc,
 } from "./reducerFunctions/question";
 import { getAllTestFulfilled } from "./reducerFunctions/test";
+import toast from "react-hot-toast";
+import {
+  getResponseByTestandStudent,
+  getStudentResponse,
+  inviteToTest,
+} from "./thunks/student";
 
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+import {
+  createTest,
+  deleteTest,
+  getAllTests,
+  getTest,
+  getTestResultPage,
+} from "./thunks/test";
+
+import {
+  addQuestionToTopic,
+  createTopic,
+  getAllTopics,
+  getTopicById,
+  getAllTopicsQB,
+  deleteTopics,
+} from "./thunks/topic";
+
+import {
+  addBookmark,
+  deleteRecentUsedQuestion,
+  editQuestionById,
+  getAllBookmarks,
+  getBookmarkById,
+  getRecentUsedQuestions,
+  removeBookmark,
+  getTopicByIdQB,
+} from "./thunks/question";
 
 const testState = {
+  testLoading: false,
+  totalSelectedQuestions: 5,
+  recentUsedQuestions: [],
+  bookmarks: [],
+  currentBookmark: {},
+  localBookmarks: [],
+  studentResponse: [],
+  response: [],
+  testDataResponse: [],
   testName: "",
   testDescription: "",
   testAttempts: "",
-
+  testId: "",
   // testStatus : "",
   assessments: {
     beginner: [],
     intermediate: [],
     advanced: [],
+    adaptive: [],
   },
   //all topics
-  sections: [],
+  sections: null,
 
   selectedSections: [],
+  filteredSections: [],
 
-  questions: [
-    {
-      question: "question 1",
-      options: ["option 1", "option 2", "option 3", "option 4"],
-    },
-    {
-      question: "question 2",
-      options: ["option 1", "option 2", "option 3", "option 4"],
-    },
-  ],
-  test: {
-    testName: "",
-    questionType: "",
-    // testStatus : "",
-    sections: [],
-    questions: [
-      {
-        Duration: 0,
-        QuestionType: "mcq",
-        Title: "",
-        Options: [],
-        AnswerIndex: 0,
-      },
-    ],
-  },
+  // test: {
+  //   testName: "",
+  //   questionType: "",
+  //   // testStatus : "",
+  //   sections: [],
+  //   questions: [
+  //     {
+  //       Duration: 0,
+  //       QuestionType: "mcq",
+  //       Title: "",
+  //       Options: [],
+  //       AnswerIndex: 0,
+  //     },
+  //   ],
+  // },
   level: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).level
     : "",
@@ -74,6 +107,9 @@ const testState = {
   totalQuestions: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).totalQuestions
     : null,
+  currentQuestionCount: localStorage.getItem("currentQuestionCount")
+    ? JSON.parse(localStorage.getItem("currentQuestionCount"))
+    : null,
   duration_from: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).duration_from
     : "",
@@ -94,6 +130,8 @@ const testState = {
         Time: 0,
         Heading: "",
         Description: "",
+        duration_from: "",
+        duration_to: "",
         CreatedByAdmin: false,
         Student: [],
         Timeline: "",
@@ -134,251 +172,54 @@ const testState = {
 
         compiler: [],
       },
+
+
+      ADD_QUESTION_LOADING : false,
+      GET_TOPICS_LOADING : false,
 };
 
-export const getTest = createAsyncThunk(
-  "test/getTest",
-  async (id, { rejectWithValue }) => {
-    try {
-      console.log(`get test ${id}`);
-      const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments/${id}`,
+// export const getStudentResponse = createAsyncThunk("test/studentResponse",
+// async (id, { rejectWithValue }) => {
 
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+//   try {
+//     const req = await axios.get(
+//       `${REACT_APP_API_URL}/api/studentDummy/response/${id}`,
 
-      );
-      const res = req.data;
-      // console.log(res);
-      return res;
-    } catch (error) {
-      console.log(error);
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
 
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
+//           "auth-token": localStorage.getItem("auth-token"),
+//         },
+//       }
+//     );
 
-export const getStudentResponse = createAsyncThunk(
-  "test/studentResponse",
-  async (id, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/studentDummy/response/${id}`,
+//     const res = req.data;
 
-        {
-          headers: {
-            "Content-Type": "application/json",
+//     console.log(res)
 
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
+//     return res.studentResponses;
 
-      const res = req.data;
+//   } catch (error) {
+//     console.log("catch", error.response.data);
 
-      console.log(res);
-
-      return res.studentResponses;
-    } catch (error) {
-      console.log("catch", error.response.data);
-
-
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const getAllTests = createAsyncThunk(
-  "test/getAllTests",
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      console.log(`get tests`);
-      const req = await axios.get(`${REACT_APP_API_URL}/api/assessments`, {
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("auth-token"),
-        },
-      });
-
-      const res = req.data;
-      // console.log(res);
-      return res;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const createTest = createAsyncThunk(
-  "test/createTest",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/assessments/create`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-
-      return res.assessment;
-    } catch (error) {
-      console.log("catch");
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
-export const addQuestionToTopic = createAsyncThunk(
-  "test/addQuestionToTopic",
-  async (data, { rejectWithValue, dispatch }) => {
-    try {
-      const req = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/college/add-questions/${data.id}/${data.type}`,
-        { questions: [data.data] },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-
-      // if (data.index) return { question: res.questions[0] };
-      return { questions: res.questions, type: data.type };
-    } catch (error) {
-      console.log("catch");
-      return rejectWithValue(error?.response?.data?.message || "");
-    }
-  }
-);
-
-export const getAllTopics = createAsyncThunk(
-  "test/getAllTopics",
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/college/topics/all`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.topics;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const getTopicById = createAsyncThunk(
-  "test/getTopicById",
-  async (id, { rejectWithValue }) => {
-    try {
-      const req = await axios.get(
-        `${REACT_APP_API_URL}/api/admin/topic/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return res.section;
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const createTopic = createAsyncThunk(
-  "test/createTopic",
-
-  async (data, { rejectWithValue }) => {
-    //   {
-
-    //     "Heading": "DevOps 5",
-
-    //     "Description": "The DevOps test assesses candidates' knowledge of DevOps concepts and practices and whether they can apply that knowledge to improve infrastructure, achieve faster time to market, and lower failure rates of new releases.",
-
-    //     "Time": 10,
-
-    //     "TotalQuestions": 10
-
-    // }
-
-    try {
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/topics/create`,
-
-        data,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-
-      const res = req.data;
-
-      return res.section;
-    } catch (error) {
-      console.log("catch", error.response.data);
-
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-
-export const editQuestionById = createAsyncThunk(
-  "test/editQuestionById",
-  async (data, { rejectWithValue }) => {
-    try {
-      const req = await axios.put(
-        `${REACT_APP_API_URL}/api/assessments/question/${data.id}?type=${data.type}`,
-        data.question,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
-      );
-      const res = req.data;
-      return { res: res, index: data.index, type: data.type };
-    } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
+//     return rejectWithValue(error.response.data);
+//   }
+// }
+// );
 
 const testSlice = createSlice({
   initialState: testState,
   name: "test",
   reducers: {
+    setTotalSelectedQuestions: (state, action) => {
+      state.totalSelectedQuestions = parseInt(action.payload);
+    },
+    setCurrentQuestionCount: (state, action) => {
+      console.log(action.payload, "pay");
+      localStorage.setItem("currentQuestionCount", action.payload);
+      state.currentQuestionCount = action.payload;
+    },
     setCurrentTopic: (state, action) => {
       state.currentTopic = action.payload.topic;
       localStorage.setItem("currentTopic", JSON.stringify(state.currentTopic));
@@ -416,6 +257,7 @@ const testSlice = createSlice({
         beginner: [],
         intermediate: [],
         advanced: [],
+        adaptive: [],
       };
     },
     addMcqToTopic: (state, action) => {
@@ -757,6 +599,35 @@ const testSlice = createSlice({
       // );
       localStorage.setItem("topics", JSON.stringify(action.payload));
     },
+
+    setFilteredSections: (state, action) => {
+      state.filteredSections = action.payload;
+    },
+
+    // =============================== BOOKMARKS START ===============================
+
+    // addBookmark: (state, action) => {
+    //   // state.bookmarks = [...state.bookmarks, action.payload];
+    //   state.bookmarks = action.payload;
+    // },
+
+    // removeBookmark: (state, action) => {
+    //   state.bookmarks = state.bookmarks.filter(
+    //     (bookmark) => bookmark.id !== action.payload
+    //   );
+    // },
+
+    // addLocalBookmark: (state, action) => {
+    //   state.localBookmarks = [...state.localBookmarks, action.payload];
+    // },
+
+    // removeLocalBookmark: (state, action) => {
+    //   state.localBookmarks = state.localBookmarks.filter(
+    //     (bookmark) => bookmark.id !== action.payload
+    //   );
+    // },
+
+    // ===============================  BOOKMARKS END   ===============================
   },
   extraReducers: (builder) => {
     builder
@@ -788,17 +659,32 @@ const testSlice = createSlice({
           JSON.stringify(state.currentTopic)
         );
       })
+      .addCase(addQuestionToTopic.pending, (state, action) => {
+       
+        state.ADD_QUESTION_LOADING = true;
+        
+        console.log("pending");
+     
+      })
       .addCase(addQuestionToTopic.fulfilled, (state, action) => {
+        console.log("fulf");
         addQuesFunc(state, action);
+        state.ADD_QUESTION_LOADING = false;
+      })
+      .addCase(addQuestionToTopic.rejected, (state, action) => {
+        console.log("rejected");
+        state.ADD_QUESTION_LOADING = false;
       })
       .addCase(getTest.pending, (state, action) => {
         state.status = "loading";
+
         console.log("pending");
       })
       .addCase(getTest.fulfilled, (state, action) => {
         state.test = action.payload;
 
-        console.log("fullfilled",state.test);
+
+        console.log("fullfilled", state.test);
       })
       .addCase(getTest.rejected, (state, action) => {
         console.log(action.payload);
@@ -823,6 +709,7 @@ const testSlice = createSlice({
       })
       .addCase(createTest.fulfilled, (state, action) => {
         console.log(action.payload);
+        state.testId = action.payload._id;
         state.testName = action.payload.name;
         state.testDescription = action.payload.description;
         state.testAttempts = action.payload.totalAttempts;
@@ -833,25 +720,33 @@ const testSlice = createSlice({
         state.currentTopic = {};
 
         console.log("fullfilled");
+      
+
 
         getAllTests();
       })
       .addCase(createTest.rejected, (state, action) => {
         // console.log(action.payload);
+        toast.error(action.payload)
         console.log(action.payload);
 
         // window.alert(action.payload);
       })
       .addCase(getAllTopics.pending, (state, action) => {
         state.status = "loading";
+        state.GET_TOPICS_LOADING = true
+
         console.log("pending");
       })
       .addCase(getAllTopics.fulfilled, (state, action) => {
         state.sections = action.payload;
+        state.GET_TOPICS_LOADING = false;
+        
         console.log("fullfilled");
       })
       .addCase(getAllTopics.rejected, (state, action) => {
         console.error("Error fetching topics:", action.payload);
+        state.GET_TOPICS_LOADING = false;
         state.status = "failed";
         state.error = action.payload;
       })
@@ -883,16 +778,172 @@ const testSlice = createSlice({
         state.status = "pending";
       })
       .addCase(getStudentResponse.fulfilled, (state, action) => {
-        state.studentResponses = action.payload;
+        // state.studentResponse = action.payload;
+        state.response = action.payload;
       })
       .addCase(getStudentResponse.rejected, (state, action) => {
+        state.response = [];
         console.error("Error fetching student responses:", action.payload);
-      });
+      })
+      .addCase(getTestResultPage.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getTestResultPage.fulfilled, (state, action) => {
+        state.testDataResponse = action.payload;
+      })
+      .addCase(getTestResultPage.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.testDataResponse = [];
+      })
+      .addCase(getResponseByTestandStudent.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getResponseByTestandStudent.fulfilled, (state, action) => {
+        state.response = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(getResponseByTestandStudent.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.response = [];
+      })
+      .addCase(addBookmark.pending, (state, action) => {
+        state.status = "pending";
+      })
 
+      .addCase(addBookmark.fulfilled, (state, action) => {
+        state.bookmarks = action.payload;
+
+        toast.success("Bookmark added successfully");
+      })
+      .addCase(addBookmark.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        toast.error("Error adding bookmark");
+        // state.bookmarks = [];
+      })
+      .addCase(removeBookmark.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(removeBookmark.fulfilled, (state, action) => {
+        toast.success("Bookmark removed successfully");
+        state.bookmarks = action.payload;
+      })
+      .addCase(removeBookmark.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        // state.bookmarks = [];
+      })
+      .addCase(getBookmarkById.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getBookmarkById.fulfilled, (state, action) => {
+        state.currentBookmark = action.payload;
+      })
+      .addCase(getBookmarkById.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.currentBookmark = {};
+      })
+      .addCase(getAllBookmarks.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getAllBookmarks.fulfilled, (state, action) => {
+        state.bookmarks = action.payload;
+      })
+      .addCase(getAllBookmarks.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.bookmarks = [];
+      })
+      .addCase(getRecentUsedQuestions.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getRecentUsedQuestions.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.recentUsedQuestions = action.payload;
+      })
+      .addCase(getRecentUsedQuestions.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.recentUsedQuestions = [];
+      })
+      .addCase(deleteRecentUsedQuestion.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(deleteRecentUsedQuestion.fulfilled, (state, action) => {
+        state.recentUsedQuestions = action.payload;
+        toast.success("Question removed from recent used questions");
+      })
+      .addCase(deleteRecentUsedQuestion.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        toast.error("Error removing question from recent used questions");
+        // state.recentUsedQuestions = [];
+      })
+      .addCase(inviteToTest.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(inviteToTest.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        toast.success("Students Invited Successfully!");
+        console.log(action.payload);
+      })
+      .addCase(inviteToTest.rejected, (state, action) => {
+        state.status = "rejected";
+        toast.error("Error Inviting Students!");
+        console.log(action.payload);
+      })
+      .addCase(getTopicByIdQB.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getTopicByIdQB.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.currentTopic = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(getTopicByIdQB.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.currentTopic = {};
+      })
+      .addCase(getAllTopicsQB.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getAllTopicsQB.fulfilled, (state, action) => {
+        state.sections = action.payload;
+        state.filteredSections = action.payload;
+      })
+      .addCase(getAllTopicsQB.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        state.sections = [];
+      })
+      .addCase(deleteTopics.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(deleteTopics.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.sections = action.payload;
+        state.filteredSections = action.payload;
+        toast.success("Topic Deleted Successfully!");
+      })
+      .addCase(deleteTopics.rejected, (state, action) => {
+        console.error("Error fetching test results:", action.payload);
+        toast.error("Error Deleting Topic!");
+      })
+      .addCase(deleteTest.pending, (state, action) => {
+        state.status = "pending";
+        state.testLoading = true;
+      })
+      .addCase(deleteTest.fulfilled, (state, action) => {
+        state.testLoading = false;
+        console.log(action.payload);
+        // getAllTestFulfilled(state, action);
+        toast.success("Test Deleted Successfully!");
+      })
+      .addCase(deleteTest.rejected, (state, action) => {
+        state.testLoading = false;
+        console.error("Error fetching test results:", action.payload);
+        toast.error("Error Deleting Test!");
+      });
   },
 });
 
 export const {
+  setCurrentQuestionCount,
+  setTotalSelectedQuestions,
   setCurrentTopic,
   clearTopicToBeAdded,
   editQuestion,
@@ -918,6 +969,7 @@ export const {
   addVideoToSection,
   addCompilerToTopic,
   setAssessments,
+  setFilteredSections,
 } = testSlice.actions;
 
 export default testSlice.reducer;

@@ -4,15 +4,14 @@ import { Progress } from "./Progress";
 import List from "./List";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createTest,
-  setTestBasicDetails,
-  setTestSelectedTopics,
-} from "../../../../redux/collage/test/testSlice";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import Code from "./Code";
 import Video from "./Video";
+import toast from "react-hot-toast";
+import { createTest } from "../../../../redux/collage/test/thunks/test";
+import { getCollege } from "../../../../redux/collage/auth/authSlice";
 
 const Submit = () => {
   const navigate = useNavigate();
@@ -29,6 +28,8 @@ const Submit = () => {
     duration_from,
     duration_to,
   } = useSelector((state) => state.test);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const testType = searchParams.get("level");
 
   const [questions, setQuestions] = useState();
   let section1 = [];
@@ -228,13 +229,35 @@ const Submit = () => {
       return;
     }
     if (!topics[0]) {
-      window.alert("Please select atleast one topic");
+      toast.error("Please select atleast one topic");
+      return;
+    }
+    console.log("adaapt", testType, );
+   if(testType === "adaptive"){
+    if (totalQuestions*2 > questions.length) {
+      console.log(totalQuestions, questions.length);
+      toast.error(
+        `Add ${
+          totalQuestions - questions.length
+        } more questions to complete the test`
+      );
+      return;
+    }
+    if (totalQuestions*2 < questions.length) {
+      console.log(totalQuestions, questions.length);
+      window.alert(
+        `Remove ${
+          questions.length - totalQuestions
+        } questions to complete the test`
+      );
+
       return;
     }
 
+   }else{
     if (totalQuestions > questions.length) {
       console.log(totalQuestions, questions.length);
-      window.alert(
+      toast.error(
         `Add ${
           totalQuestions - questions.length
         } more questions to complete the test`
@@ -251,7 +274,7 @@ const Submit = () => {
 
       return;
     }
-
+   }
     let totalTimeCal = handleCalculateTime();
 
     // totalTimeCal = totalTimeCal.reduce((acc, curr) => {
@@ -285,15 +308,21 @@ const Submit = () => {
         totalAttempts,
         totalQuestions,
         totalDuration: totalTimeCal,
+        startDate: duration_from,
+        endDate: duration_to,
         // totalDuration,
         topics,
       })
-    ).then(() => {
+    ).then((res) => {
       // dispatch(
       //   setTestBasicDetails({ name: "", description: "", totalAttempts: null ,totalQuestions:0})
       // );
+      dispatch(getCollege());
+      console.log(res);
 
-      navigate("/collage/test/final");
+      if (res.type === "test/createTest/fulfilled") {
+        navigate("/collage/test/final");
+      }
     });
   };
 
@@ -345,63 +374,42 @@ const Submit = () => {
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
           <FaChevronLeft
             className={`rotate-45 text-lg self-center ${
-              selected === max && "disabled"
+              selected === 1 && "disabled"
             }`}
             onClick={() => selected !== 1 && setSelected(selected - 1)}
           />
         </div>
 
-        <div
-          className={`rounded-lg h-10 w-10 flex justify-center ${
-            selected === 1 ? "bg-blue-700 text-white" : "bg-gray-100 "
-          }`}
-          onClick={() => setSelected(1)}
-        >
-          <p className="self-center">1</p>
-        </div>
-        <div
-          className={`rounded-lg h-10 w-10 flex justify-center ${
-            selected === 2 ? "bg-blue-700 text-white" : "bg-gray-100 "
-          }`}
-          onClick={() => setSelected(2)}
-        >
-          <p className="self-center">2</p>
-        </div>
-        <div
-          className={`rounded-lg h-10 w-10 flex justify-center ${
-            selected > 2 && selected < max
-              ? "bg-blue-700 text-white"
-              : "bg-gray-100 "
-          }`}
-          onClick={() => {
-            selected !== 3 && setSelected(3);
-          }}
-        >
-          <p className="self-center">
-            {selected >= 3 && selected < max ? selected : 3}
-          </p>
-        </div>
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-          <p className="self-center">...</p>
-        </div>
-
-        {max > 3 && (
-          <div
-            className={`rounded-lg h-10 w-10 flex justify-center ${
-              selected === max ? "bg-blue-700 text-white" : "bg-gray-100 "
-            }`}
-            onClick={() => setSelected(max)}
-          >
-            <p className="self-center">{max}</p>
-          </div>
-        )}
+        {Array.from({ length: Math.ceil(max) }).map((_, index) => {
+          const pageNumber = index + 1;
+          const hasQuestions = (pageNumber - 1) * 10 < questions.length;
+          console.log(questions.length);
+          console.log(Math.ceil(max));
+          return (
+            hasQuestions && (
+              <div
+                key={pageNumber}
+                className={`rounded-lg h-10 w-10 flex justify-center ${
+                  selected === pageNumber
+                    ? "bg-blue-700 text-white"
+                    : "bg-gray-100"
+                }`}
+                onClick={() => setSelected(pageNumber)}
+              >
+                <p className="self-center">{pageNumber}</p>
+              </div>
+            )
+          );
+        })}
 
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
           <FaChevronRight
             className={`rotate-45 text-lg self-center ${
-              selected === max && "disabled"
+              selected === Math.ceil(max) && "disabled"
             }`}
-            onClick={() => selected !== max && setSelected(selected + 1)}
+            onClick={() =>
+              selected !== Math.ceil(max) && setSelected(selected + 1)
+            }
           />
         </div>
       </div>

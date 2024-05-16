@@ -10,7 +10,7 @@ export default function ResultsRoute() {
     <Route path="collage/results">
       <Route path="" element={<ResultsPage />} />
       <Route path="overview" element={<ResultsOverviewPage />} />
-      <Route path="assessmentReview/:id" element={<AssessmentReviewPage />} />
+      <Route path="assessmentReview" element={<AssessmentReviewPage />} />
     </Route>
   );
 }

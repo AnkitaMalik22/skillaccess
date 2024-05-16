@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
-
+import ReactQuill from "react-quill"; // Import ReactQuill
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import { FaX } from "react-icons/fa6";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,9 +11,10 @@ import {
   addMcq,
 } from "../../../../redux/collage/test/testSlice";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const AddMcq = () => {
-  const { topics } = useSelector((state) => state.test);
+  const { topics,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,9 +26,14 @@ const AddMcq = () => {
   const [search, setSearch] = useSearchParams();
 
   const section = search.get("topicId");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(section);
+  const level = searchParams.get("level");
+  const addType = searchParams.get("addType");
+
+
   const [question, setQuestion] = useState({
+    QuestionLevel: level === "adaptive" ? "beginner" : level,
     id: search.get("topicId") + Date.now(),
     section: search.get("topicId"),
     Duration: 0,
@@ -119,41 +126,84 @@ const AddMcq = () => {
     }
   };
 
-  const handleAddQuestion = (type) => {
-    if (question.Title === "") {
-      window.alert("Please enter question");
+  const handleAddQuestion = async(type) => {
+    console.log(
+      question.Title,
+      question.Title === "",
+      question.Title.trim() === "",
+      question.Title === null
+    );
+    if (
+      !question.Title ||
+      question.Title.trim() === "" ||
+      question.Title === "<p><br></p>"
+    ) {
+      toast.error("Please enter question");
       return;
-    } else if (question.Options && question.Options.length < 4) {
-      window.alert("Please enter atleast 4 options");
+    } else if (
+      !question.Options[0] ||
+      !question.Options[1] ||
+      !question.Options[2] ||
+      !question.Options[3]
+    ) {
+      toast.error("Please enter atleast 4 options");
       return;
     } else if (question.Options.some((option) => option.trim() === "")) {
-      window.alert("Please enter all options");
+      toast.error("Please enter all options");
       return;
     } else if (question.Duration == 0) {
-      window.alert("Please enter required time");
+      toast.error("Please enter required time");
       return;
     } else if (question.AnswerIndex === null) {
-      window.alert("Please select correct answer");
+      toast.error("Please select correct answer");
       return;
     } else {
       if (isPrev) {
-        dispatch(
+        console.log("calling 1 --" , addType)
+       await dispatch(
           addMcq({ question: question, id: id, prev: true, index: count + 1 })
-        );
-        setIsPrev(false);
-        setQuestion({
+        )
+        // .then(() => {
+
+        await setIsPrev(false);
+        await setQuestion({
+          QuestionLevel: level === "adaptive" ? "beginner" : level,
           id: search.get("topicId") + Date.now(),
           Title: "",
           Options: [],
           Duration: 0,
           AnswerIndex: null,
           section: search.get("topicId"),
-        });
-        setCount(topics[id].questions.length - 1);
-        if (type === "save") navigate(-1);
+        })
+        await setCount(topics[id].questions.length - 1)
+        if (type === "save" && addType !== 'test') {
+          level === "adaptive"
+            ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+            : navigate(`/collage/test/select?level=${level}`);
+        }else{
+          navigate(-1);
+        }
+        // });
+        
       } else {
-        dispatch(addMcq({ question: question, id: id, prev: false }));
-        setQuestion({
+        dispatch(addMcq({ question: question, id: id, prev: false }))
+        // .then(()=>{
+          console.log("calling 2 --" , addType)
+          if (type === "save" && addType !== 'test')
+          {
+          level === "adaptive"
+            ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+            : navigate(`/collage/test/select?level=${level}`);
+
+          }else if (type !== "save" && addType == 'test'){
+           
+          }else{
+            navigate(-1);
+
+          }
+        // })
+        await setQuestion({
+          QuestionLevel: level === "adaptive" ? "beginner" : level,
           id: search.get("topicId") + Date.now(),
           Title: "",
           Options: [],
@@ -161,10 +211,34 @@ const AddMcq = () => {
           AnswerIndex: null,
           section: search.get("topicId"),
         });
-        if (type === "save") navigate(-1);
+       
+        //   if(!ADD_QUESTION_LOADING){
+        //    navigate(-1);
+        //  }
+        // console.log("ADD_QUESTION_LOADING",ADD_QUESTION_LOADING)
+      
+      
+   
       }
     }
   };
+
+
+  // useEffect(() => {
+  //   console.log("ADD_QUESTION_LOADING 1",ADD_QUESTION_LOADING)
+  // if(!ADD_QUESTION_LOADING){
+  //       navigate(-1); 
+  // }
+
+  //   return () => {
+  //     //navigate(-1);
+  //   }
+  // }
+  // , [ADD_QUESTION_LOADING]);
+    
+
+
+
 
   return (
     <div>
@@ -181,13 +255,16 @@ const AddMcq = () => {
       <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
         <div className="flex flex-wrap gap-2 sm:w-[95.7%] mx-auto ">
           <span className="w-[49%] ">
-            <h2 className="font-bold">Question</h2>
+            <h2 className="font-bold mb-2">Question</h2>
+            <div className="flex w-full justify-between">
             <select
               name="Duration"
               onChange={handleChanges}
               value={question.Duration}
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              className={`${
+                level === "adaptive" ? "w-[65%]" : "w-full"
+              } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
             >
               <option value={0}>Time to answer the question</option>
 
@@ -196,17 +273,37 @@ const AddMcq = () => {
               <option value={3}>3 minutes</option>
               <option value={4}>4 minutes</option>
             </select>
+            {level === "adaptive" && (
+              <select
+                name="Level"
+                // onChange={handleChanges}
+                // value={question.Duration}
+                id=""
+                className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              >
+                <option value="">Level</option>
 
-            <textarea
-              className="resize-none w-full h-full bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+                <option value={"beginner"}>Beginner</option>
+                <option value={"intermediate"}>Intermediate</option>
+                <option value={"advanced"}>Advanced</option>
+              </select>
+            )}
+            </div>
+            <ReactQuill
+              value={question.Title}
+              onChange={(value) =>
+                setQuestion((prev) => {
+                  // console.log({ ...prev, Title: e.target.value });
+                  return { ...prev, Title: value };
+                })
+              }
+              className="bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
               placeholder="Enter Question Here"
               name="Title"
-              onChange={handleChanges}
-              value={question.Title}
-            ></textarea>
+            />
           </span>
           <span className="w-[49%]">
-            <h2 className="font-bold">Test Description</h2>
+            <h2 className="font-bold mb-2">Test description</h2>
             <div className="w-11/12 flex flex-col gap-2">
               <div className="px-5 pb-4 flex flex-col gap-4">
                 {/* mcq option wrapper */}
@@ -219,6 +316,7 @@ const AddMcq = () => {
                       name="Answer"
                       id="option1"
                       value={0}
+                      checked={parseInt(question.AnswerIndex) === 0}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
                     />{" "}
@@ -262,6 +360,7 @@ const AddMcq = () => {
                       type="radio"
                       name="Answer"
                       id="option3"
+                      checked={parseInt(question.AnswerIndex) === 1}
                       value={1}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
@@ -306,6 +405,7 @@ const AddMcq = () => {
                       type="radio"
                       name="Answer"
                       id="option3"
+                      checked={parseInt(question.AnswerIndex) === 2}
                       value={2}
                       onChange={handleChanges}
                       className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
@@ -347,6 +447,7 @@ const AddMcq = () => {
                   {/* radio button */}
                   <div className="flex w-5 justify-center">
                     <input
+                      checked={parseInt(question.AnswerIndex) === 3}
                       type="radio"
                       name="Answer"
                       id="option3"

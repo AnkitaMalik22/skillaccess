@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
-import {
-  // paragrapgh
-  addFindAns,
-  addFindAnsToTopic,
-  addQuestionToTopic,
-  editQuestionById,
-} from "../../../../redux/collage/test/testSlice";
+
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import {
+  addFindAns,
+  addFindAnsToTopic,
+} from "../../../../redux/collage/test/testSlice";
+import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const AddParagraph = () => {
   const MAX_QUESTIONS = 3;
@@ -19,20 +20,23 @@ const AddParagraph = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
   const type = searchParams.get("type");
+  const level = searchParams.get("level");
+
   const addType = searchParams.get("addType");
   let ID;
   searchParams.get("topicId") !== null
     ? (ID = searchParams.get("topicId"))
     : (ID = id);
   const [question, setQuestion] = useState({
-    section: searchParams.get("topicId"),
+    QuestionLevel: level,
+    section: ID,
     id: ID + Date.now(),
     Title: "",
     Duration: 0,
     questions: [{ question: "" }],
   });
 
-  const { topics, currentTopic } = useSelector((state) => state.test);
+  const { topics, currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const [isPrev, setIsPrev] = useState(false);
 
   const [count, setCount] = useState(topics[id]?.findAnswers.length - 1);
@@ -80,15 +84,19 @@ const AddParagraph = () => {
   //   console.log(question);
   // }, [question]);
 
-  const handleSave = (type) => {
+  const handleSave =async (saveType) => {
     if (addType === "topic") {
-      if (question.Title == "") {
-        window.alert("Please enter the question");
+      if (
+        !question.Title ||
+        question.Title.trim() === "" ||
+        question.Title === "<p><br></p>"
+      ) {
+        toast.error("Please enter the question");
       } else if (question.Duration == 0) {
-        window.alert("Please enter required time");
+        toast.error("Please enter required time");
         return;
       } else if (question.questions.some((q) => q.question === "")) {
-        window.alert("Please enter all questions");
+        toast.error("Please enter all questions");
         return;
       } else {
         if (isPrev) {
@@ -105,6 +113,7 @@ const AddParagraph = () => {
           );
 
           setQuestion({
+            QuestionLevel: level,
             Title: "",
             section: ID,
             questions: [{ question: "" }],
@@ -112,29 +121,39 @@ const AddParagraph = () => {
             id: ID + Date.now(),
           });
         } else {
-          dispatch(addFindAnsToTopic({ data: question, id: id, type: type }));
-          dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({
-            Title: "",
-            section: ID,
-            questions: [{ question: "" }],
-            Duration: 0,
-            id: ID + Date.now(),
-          });
+         await dispatch(
+            addFindAnsToTopic({ data: question, id: id, type: "findAnswer" })
+          ) 
+         await dispatch(
+            addQuestionToTopic({ data: question, id: id, type: "findAnswer" })
+          )
+          // .then(()=>{
+         await   setQuestion({
+              QuestionLevel: level,
+              Title: "",
+              section: ID,
+              questions: [{ question: "" }],
+              Duration: 0,
+              id: ID + Date.now(),
+            })
+            if(!ADD_QUESTION_LOADING){
+              if (saveType === "save") navigate(-1);
+            }
+          // })
         }
       }
     } else {
       if (question.Title == "") {
-        window.alert("Please enter the question");
+        toast.error("Please enter the question");
       } else if (question.Duration == 0) {
-        window.alert("Please enter required time");
+        toast.error("Please enter required time");
         return;
       } else if (question.questions.some((q) => q.question === "")) {
-        window.alert("Please enter all questions");
+        toast.error("Please enter all questions");
         return;
       } else {
         if (isPrev) {
-          dispatch(
+          await dispatch(
             addFindAns({
               data: question,
               id: id,
@@ -142,16 +161,23 @@ const AddParagraph = () => {
               prev: true,
               index: count + 1,
             })
-          );
-          setCount(topics[id].findAnswers.length - 1);
-          setQuestion({
+          )
+          // .then(()=>{
+          await  setCount(topics[id].findAnswers.length - 1);
+          await setQuestion({
+            questions: [{ question: "" }],
+            QuestionLevel: level,
             id: ID + Date.now(),
             Title: "",
             questions: [],
             Duration: 0,
             section: ID,
           });
-          if (type === "save") navigate(-1);
+          if(!ADD_QUESTION_LOADING){
+            if (saveType === "save") navigate(-1);
+          }
+          // })
+          
         } else {
           dispatch(
             addFindAns({
@@ -161,23 +187,34 @@ const AddParagraph = () => {
               prev: false,
               index: count + 1,
             })
-          );
-          if (type === "save") navigate(-1);
+          )
+          // .then(() => {
+            
+          await setQuestion({
+              questions: [{ question: "" }],
+              QuestionLevel: level,
+              id: ID + Date.now(),
+              Title: "",
+              questions: [],
+              Duration: 0,
+              section: ID,
+            })
+            if (!ADD_QUESTION_LOADING) {
+              if (saveType === "save") navigate(-1);
+            }
+          // });
+          // if (type === "save") navigate(-1);
           // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({
-            id: ID + Date.now(),
-            Title: "",
-            questions: [],
-            Duration: 0,
-            section: ID,
-          });
+          
         }
       }
     }
   };
 
+
+    
   useEffect(() => {
-    setCountDetail(currentTopic.findAnswers.length - 1);
+    setCountDetail(currentTopic?.findAnswers?.length - 1);
   }, [currentTopic]);
   return (
     <div>
@@ -211,7 +248,7 @@ const AddParagraph = () => {
           </div>
 
           <textarea
-            className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0placeholder-gray-400 mb-6"
+            className="resize-none w-full h-[247px] text-lg bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0placeholder-gray-400 mb-6"
             placeholder="Enter Paragraph"
             name="Title"
             onChange={handleChanges}
@@ -246,9 +283,11 @@ const AddParagraph = () => {
                 className="self-center justify-center flex bg-[#8F92A1] bg-opacity-10  py-3 px-4 rounded-xl text-sm font-bold gap-2 "
                 onClick={() => {
                   if (question.questions.some((q) => q.question === "")) {
-                    window.alert("Please enter all questions");
+                    toast.error("Please enter all questions");
+                    return;
                   } else if (question.questions.length >= MAX_QUESTIONS) {
-                    window.alert("You can't add more than 3 questions");
+                    toast.error("You can't add more than 3 questions");
+                    return;
                   } else {
                     setQuestion({
                       ...question,

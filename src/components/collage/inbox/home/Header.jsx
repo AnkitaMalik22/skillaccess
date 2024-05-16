@@ -10,8 +10,9 @@ import {
 import { FaSortDown } from "react-icons/fa6";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import SearchForm from "../mail/SearchForm";
 
-const Header = () => {
+const Header = ({ show, setShow, inboxType, setInboxType }) => {
   const refButton = useRef(null);
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
@@ -28,14 +29,14 @@ const Header = () => {
       <span className="flex gap-4">
         <button
           className=" self-center ml-2 rounded-lg "
-          onClick={() => navigate(-1)}
+          // onClick={() => navigate(-1)}
         >
           <img
             src="./../../images/icons/inbox.png"
             className="mx-auto sm:h-6 sm:w-6 h-4 w-4"
           />
         </button>
-        <h2 className="text-xl font-bold self-center">Inbox</h2>
+        <h2 className="text-2xl font-bold self-center">Inbox</h2>
 
         <Disclosure
           as={"div"}
@@ -45,7 +46,7 @@ const Header = () => {
         >
           {({ open }) => (
             <div className="relative">
-              <div className=" mx-2  sm:h-12 h-10 my-2 px-4 w-fit ">
+              <div className=" mx-2  h-8 my-2 px-4 w-fit flex">
                 <div className="flex justify-between">
                   <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
                   <input
@@ -57,7 +58,7 @@ const Header = () => {
                   />
                   <Disclosure.Button
                     ref={refButton}
-                    className=""
+                    className="self-center"
                     onClick={() => {
                       setToggle(!toggle);
                       console.log(toggle);
@@ -73,7 +74,12 @@ const Header = () => {
                   toggle ? "bg-white" : "bg-gray-100"
                 }`}
               >
-                hey
+                <SearchForm
+                  setToggle={setToggle}
+                  refButton={refButton}
+                  show={show}
+                  setShow={setShow}
+                />
               </Disclosure.Panel>
             </div>
           )}
@@ -85,7 +91,7 @@ const Header = () => {
       <button
         className="bg-blue-700 py-2 px-3 self-center mr-2 rounded-lg flex gap-2 text-white"
         onClick={() => {
-          navigate("/collage/inbox/mail/:compose");
+          navigate(`/collage/inbox/mail?type=compose&inboxType=${inboxType}`);
         }}
       >
         <FaPlus className="self-center" />{" "}

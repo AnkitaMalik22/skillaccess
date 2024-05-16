@@ -8,6 +8,7 @@ import {
   addQuestionToTopic,
 } from "../../../../redux/collage/test/testSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../../loaders/Loader";
 
 const Header = ({
   question,
@@ -20,9 +21,10 @@ const Header = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { test ,ADD_QUESTION_LOADING}= useSelector((state) => state.test);
   const handleSave = () => {
     save("save");
+    
   };
 
   return (
@@ -54,10 +56,11 @@ const Header = ({
           </button>
           <button
             className="self-center w-32 justify-center flex bg-blue-700 py-2 font-bold px-4 rounded-xl gap-2 text-white"
-            onClick={handleSave}
+            onClick={()=>handleSave("save")}
             // onClick={() => navigate("/collage/test/preview")}
           >
-            Save
+           {ADD_QUESTION_LOADING ? "Saving" : "Save"}
+            {ADD_QUESTION_LOADING && <Loader size="sm" />}
           </button>
         </div>
       </div>

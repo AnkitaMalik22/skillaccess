@@ -6,6 +6,9 @@ import { PiFileTextBold } from "react-icons/pi";
 import { IoSwapVerticalSharp } from "react-icons/io5";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { CiBookmarkMinus } from "react-icons/ci";
+import ReactQuill from "react-quill"; // Import ReactQuill
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
+import toast from "react-hot-toast";
 
 const VideoMcq = ({
   Number,
@@ -66,7 +69,7 @@ const VideoMcq = ({
   const handleSubmit = () => {
     if (mcq.Title.trim() === "" || mcq.Options.some(option => option.trim() === "")) {
       handleAlertDismiss();
-      alert("Please fill in all fields for the MCQ.");
+      toast.error("Please fill in all fields for the MCQ.");
       return;
     }
   
@@ -108,19 +111,21 @@ const VideoMcq = ({
     <div className="mx-6 flex bg-white rounded-lg justify-between my-4">
       <div className="w-11/12 flex flex-col gap-2">
         {search.get(`${Number}`) !== "true" ? (
-          <h2 className="px-4 font-semibold pt-3 text-base">
-            {Index + 1}&nbsp;{mcq.Title}
-          </h2>
+          <h2 className="flex px-4 font-semibold pt-3 text-base "   >
+          <div className="" >{Index + 1}. </div>
+          <div className="" dangerouslySetInnerHTML={{ __html: mcq.Title}}></div>
+        </h2>
         ) : (
-          <input
-            className={`${!save && "border-none"}`}
-            onChange={handleChange}
-            placeholder="enter new question"
-            name="Title"
-            value={mcq.Title}
-          />
+          <ReactQuill
+          value={mcq.Title}
+          onChange={(value) => setMcq({ ...mcq, Title: value })}
+          className="border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+          placeholder="Enter Question Here"
+          name="Title"
+        
+        />
         )}
-        <div className="px-5 pb-4 flex flex-col gap-4">
+        <div className="px-5 pb-4 flex flex-col gap-4 mt-8">
           {search.get(Number) === "true" && (
             <button
               onClick={ handleSubmit

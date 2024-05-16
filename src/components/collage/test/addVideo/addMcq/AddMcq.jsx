@@ -7,7 +7,8 @@ import { FaX } from "react-icons/fa6";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
-
+import ReactQuill from "react-quill"; // Import ReactQuill
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import {
   setTest,
   setMcq,
@@ -16,6 +17,7 @@ import {
 } from "../../../../../redux/collage/test/testSlice";
 
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const AddMcq = () => {
   const { TopicToBeAdded } = useSelector((state) => state.test);
@@ -61,19 +63,33 @@ const AddMcq = () => {
   };
 
   const handleSave = (type) => {
-    if (question.Title === "") {
-      window.alert("Please enter question");
+    if ( !question.Title ||
+      question.Title.trim() === "" ||
+      question.Title === "<p><br></p>") {
+      toast.error("Please enter question");
       return;
-    } else if (question.Options && question.Options.length < 4) {
-      window.alert("Please enter atleast 4 options");
+    } else if (
+      !question.Options[0] ||
+      !question.Options[1] ||
+      !question.Options[2] ||
+      !question.Options[3]
+    ) {
+      toast.error("Please enter atleast 4 options");
       return;
     } else if (question.Duration == 0) {
-      window.alert("Please enter required time");
+      toast.error("Please enter required time");
       return;
     } else if (question.AnswerIndex === null) {
-      window.alert("Please select the correct answer");
+      toast.error("Please select the correct answer");
       return;
-    } else {
+    } else if (question.Options.some((option) => option.trim() === "")) {
+      toast.error("Please enter all options");
+      return;
+    } else if (question.Duration == 0) {
+      toast.error("Please enter required time");
+      return;
+    }
+    else {
       if (isPrev) {
         dispatch(
           addVideo({
@@ -254,13 +270,25 @@ const AddMcq = () => {
               <option value={4}>4 minutes</option>
             </select>
 
-            <textarea
+            {/* <textarea
               className="resize-none w-full h-full bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
               placeholder="Enter Question Here"
               name="Title"
               onChange={handleChanges}
               value={question.Title}
-            ></textarea>
+            ></textarea> */}
+            <ReactQuill
+              value={question.Title}
+              onChange={(value) =>
+                setQuestion((prev) => {
+                  // console.log({ ...prev, Title: e.target.value });
+                  return { ...prev, Title: value };
+                })
+              }
+              className="bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+              placeholder="Enter Question Here"
+              name="Title"
+            />
           </span>
 
           <span className="w-[49%]">

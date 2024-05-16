@@ -4,23 +4,28 @@ import { PiFileTextBold } from "react-icons/pi";
 import { IoSwapVerticalSharp } from "react-icons/io5";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { CiBookmarkMinus } from "react-icons/ci";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+
+import toast from "react-hot-toast";
+import { addBookmark } from "../../../../redux/collage/test/thunks/question";
 import {
   editQuestion,
   removeQuestion,
+  setCurrentQuestionCount,
 } from "../../../../redux/collage/test/testSlice";
 
-
-const FindAnswer = ({ Title, Options, Number, id ,type , view , question }) => {
+const FindAnswer = ({ Title, Options, Number, id, type, view, question }) => {
   const dispatch = useDispatch();
-const [search, setSearch] = useSearchParams();
+  const { currentQuestionCount } = useSelector((state) => state.test);
+
+  const [search, setSearch] = useSearchParams();
   const [findAnswer, setFindAnswer] = useState(question);
   const handleChange = (e) => {
     const { name, value, key } = e.target;
     if (name === "Title") {
       setFindAnswer({ ...findAnswer, Title: value });
-    }else{
+    } else {
       // setFindAnswer((prev) => {
       //   return {
       //     ...prev,
@@ -33,7 +38,6 @@ const [search, setSearch] = useSearchParams();
       // });
 
       setFindAnswer((prev) => {
-       
         return {
           ...prev,
           questions: [
@@ -49,9 +53,26 @@ const [search, setSearch] = useSearchParams();
     }
   };
 
-
+  const handleBookmark = () => {
+    console.log("bookmark");
+    // console.log(question);
+    dispatch(
+      addBookmark({
+        Title: question.Title,
+        questions: question.questions,
+        Options: question.Options,
+        Number: question.Number,
+        id: question.id,
+        AnswerIndex: question.AnswerIndex,
+        questionId: question._id,
+        Type: "findAnswer",
+      })
+    );
+  };
 
   const handleDelete = () => {
+    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
+
     dispatch(
       removeQuestion({
         selfIndex: Number,
@@ -61,41 +82,39 @@ const [search, setSearch] = useSearchParams();
     );
   };
 
-
   // React.useEffect(() => {
 
   //  setFindAnswer(question);
   // }
   // ,[question])
 
-
-  const handleEdit =()=>{
-
-    if(findAnswer.Title === "" || findAnswer.questions.some((ques) => ques.question === "")){
-     alert("Please fill all the fields");
+  const handleEdit = () => {
+    if (
+      findAnswer.Title === "" ||
+      findAnswer.questions.some((ques) => ques.question === "")
+    ) {
+      toast.error("Please fill all the fields");
 
       return;
-    }else{
+    } else {
       search.set(`${Number}`, "false");
       setSearch(search);
-  
-    dispatch(
-      editQuestion({
-        topicIndex: id,
-        selfIndex: Number,
-        questionType: "findAnswer",
-        question: findAnswer,
-      })
-    );
-    }
-  
-  }
 
+      dispatch(
+        editQuestion({
+          topicIndex: id,
+          selfIndex: Number,
+          questionType: "findAnswer",
+          question: findAnswer,
+        })
+      );
+    }
+  };
 
   return (
     <div className="mx-6 flex bg-white rounded-lg justify-between mb-2">
       <div className="w-11/12 flex flex-col gap-2">
-      {search.get(`${Number}`) !== "true" ? (
+        {search.get(`${Number}`) !== "true" ? (
           <h2 className="px-4 font-semibold pt-3 text-base">
             {Number + 1} &nbsp; {Title}
           </h2>
@@ -108,42 +127,29 @@ const [search, setSearch] = useSearchParams();
           />
         )}
         <div className="px-5 pb-4 flex flex-col gap-4">
-          {Options.map((ques,index) => (
+          {Options.map((ques, index) => (
             <span className="flex gap-2">
-           
-              <div className="flex w-5 justify-center">
-                <input
-                  type="radio"
-                  name="answer"
-                  id="answer"
-                  className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                />{" "}
-              </div>
+              <div className="flex w-5 justify-center"></div>
               <label htmlFor="answer" className="self-center">
                 {" "}
-                {
-                  
-                  search.get(`${Number}`) !== "true" ? (
-                    findAnswer.questions[index].question
-                
-                  ) : (
-                    <>
-                      <input
-                        name={index}
-                        value={findAnswer.questions[index].question}
-                        onChange={handleChange}
-                        placeholder="enter new question"
-                      />
-                    </>
-                  )
-                }
+                {search.get(`${Number}`) !== "true" ? (
+                  findAnswer.questions[index].question
+                ) : (
+                  <>
+                    <input
+                      name={index}
+                      value={findAnswer.questions[index].question}
+                      onChange={handleChange}
+                      placeholder="enter new question"
+                    />
+                  </>
+                )}
               </label>
             </span>
           ))}
         </div>
       </div>
 
-      
       {/* <div className="w-[5%] flex flex-col gap-4 text-blued justify-center border-s-2 py-1">
         <RxCross1
           className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
@@ -154,11 +160,15 @@ const [search, setSearch] = useSearchParams();
         <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
         <PiPencilSimpleLineBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
       </div> */}
-       {type !== "topic" && view !== "false" && (
+      {type !== "topic" && view !== "false" && (
         <div className="w-[5%] flex flex-col gap-4 text-blued border-s-2 py-1">
           <RxCross1
             className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
             onClick={handleDelete}
+          />
+          <CiBookmarkMinus
+            className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center"
+            onClick={handleBookmark}
           />
           {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
           {/* <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
