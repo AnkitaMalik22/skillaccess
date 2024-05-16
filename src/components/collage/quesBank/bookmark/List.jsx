@@ -7,7 +7,7 @@ import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
 
 const List = ({ question, number }) => {
   const [type, setType] = useState();
-
+console.log(question);
   const dispatch = useDispatch();
   const handleDelete = ({ sectionId, questionId }) => {
     dispatch(
@@ -28,8 +28,25 @@ const List = ({ question, number }) => {
           {({ open }) => (
             <div className="mb-4">
               <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
-                <div>
+                <div className="flex justify-between items-center w-full">
                   <p className="text-sm pl-4" dangerouslySetInnerHTML={{ __html: question.Title}}></p>
+                  <div className="level ">
+        {question.QuestionLevel == "beginner" && (
+          <p className="rounded-2xl mr-4 py-1.5 bg-cyan-500 text-white w-8 h-8 text-center font-extrabold  ">
+            L1
+          </p>
+        )}
+        {question.QuestionLevel == "intermediate" && (
+          <p className="rounded-2xl mr-4   py-1.5 bg-green-500 text-white w-8 h-8 text-center font-extrabold  ">
+            L2
+          </p>
+        )}
+        {question.QuestionLevel == "advanced" && (
+          <p className="rounded-2xl mr-4   py-1.5 bg-red-500 text-white w-8 h-8 text-center font-extrabold  ">
+            L3
+          </p>
+        )}
+       </div>
                 </div>
                 <div className="flex gap-2 self-center">
                   <Disclosure.Button className="flex gap-2 w-10/12 self-center">
