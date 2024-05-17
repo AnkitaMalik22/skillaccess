@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-import React from "react";
-import { useDispatch } from "react-redux";
-=======
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
->>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
 import { useNavigate } from "react-router-dom";
 
-<<<<<<< HEAD
-=======
 import { getTestResultPage } from "../../../../redux/collage/test/thunks/test";
 import { getStudentResponse } from "../../../../redux/collage/test/thunks/student";
 
->>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
 const Appeared = ({ assessment }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,8 +47,6 @@ console.log(response);
 
   // console.log("studentResponses",assessment.studentResponses);
 
-<<<<<<< HEAD
-=======
   // const responses = assessment.studentResponses.map((responseId) => {
   //   // console.log(student);
   //   dispatch(getStudentResponse(responseId))
@@ -117,7 +107,6 @@ console.log(response);
     }
   };
   console.log(arr);
->>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
   return (
     <div className="w-full mx-auto">
       {/* legend */}
@@ -154,11 +143,7 @@ console.log(response);
               </div>
               <span className="break-words min-w-0 pt-1 self-center">
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-<<<<<<< HEAD
-                  {student.FirstName}
-=======
                   {student?.studentId?.FirstName}
->>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
                 </h2>
               </span>
             </div>
