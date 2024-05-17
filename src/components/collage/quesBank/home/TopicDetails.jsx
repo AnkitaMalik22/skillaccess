@@ -50,7 +50,7 @@ const TopicDetails = () => {
 
   const max = questions?.length / 10;
   const [selected, setSelected] = useState(1);
-
+console.log(questions);
   return (
     <div className="w-11/12 mx-auto relative    min-h-[90vh] pb-20">
       {/* <Header page={"final"} /> */}
@@ -66,7 +66,7 @@ const TopicDetails = () => {
         {questions?.slice((selected - 1) * 10, selected * 10).map((question, i) => {
           return (
             <div className="my-2">
-              {!question.code && !question.video && 
+              {!question.code && !question.videoFile && 
                 <List
                   question={question}
                   number={(selected - 1) * 10 + 1 + i}
@@ -80,7 +80,7 @@ const TopicDetails = () => {
                   number={(selected - 1) * 10 + 1 + i}
                 />
               )}
-              {question.video && (
+              {question.videoFile && (
                 <Video Number={(selected - 1) * 10 + 1 + i} video={question} />
               )}
             </div>

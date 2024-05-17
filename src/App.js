@@ -95,9 +95,9 @@ export default function App() {
   //   dispatch(getCollege());
   // }, []);
 
-  // useEffect(() => {
-  //   dispatch(getStudent());
-  // }, []);
+  useEffect(() => {
+    dispatch(getStudent());
+  }, []);
 
   useEffect(() => {
     console.log(logoutError);
