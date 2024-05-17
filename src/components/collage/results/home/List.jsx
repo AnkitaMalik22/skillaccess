@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllTests } from "../../../../redux/collage/test/thunks/test";
 
-const List = () => {
+const List = ({FilterdStudents}) => {
   // const arr = [2, 1, 1, 1, 1];
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,9 +28,7 @@ const List = () => {
     // dispatch(getCollege());
     dispatch(getAllTests());
   }, [dispatch]);
-<<<<<<< HEAD
 
-=======
   const getProgressBarColor = (percentage) => {
     if (percentage === 0) {
       return ""; // Return empty string for transparent
@@ -42,7 +40,7 @@ const List = () => {
       return "bg-green-600"; // Green color
     }
   };
->>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
+
   return (
     <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 rounded-2xl p-8">
       {/* legend */}
@@ -65,7 +63,7 @@ const List = () => {
       </div>
 
       {/* list to be iterated */}
-      {arr.map((assessment) => (
+      {FilterdStudents.map((assessment) => (
         <div className=" grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
           {" "}
           {/* row-2 */}
@@ -92,27 +90,26 @@ const List = () => {
           <div className="flex justify-center">
             <div className=" self-center h-fit">
               <span>
-<<<<<<< HEAD
+
                 <h2 className="font-dmSans  sm:text-sm">{0}</h2>
               </span>
             </div>
           </div>
           {/*  */}
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
                 <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                   <div className={`w-3/5 bg-green-700 h-full rounded-lg`}></div>
                 </div>
-=======
->>>>>>> 49a4088386ad98220a4381733aff2e99397ff903
+
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
                   0%
                 </h2>
               </span>
             </div>
-          </div>
+          </div> */}
           <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
