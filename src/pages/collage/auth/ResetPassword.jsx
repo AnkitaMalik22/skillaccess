@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { LuEye } from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
+import Layout from "./Layout";
 
 const ResetPassword = () => {
   const [error, setError] = useState(false);
@@ -63,14 +64,11 @@ const ResetPassword = () => {
   const isConfirmDisabled =
     !Credentials.confirmPassword || !Credentials.Password;
   return (
-    <form action="" className="font-dmSans">
-      <div className=" bg-base-100 shadow-xl h-full min-h-[100vh]  font-dmSans grid grid-cols-5 ">
-        <figure className="w-full h-full bg-login bg-no-repeat bg-cover bg-center !hidden  lg:!block col-span-2 ">
-          {/* <img src="./images/loginBg.jpg" alt="" className="w-full h-full" /> */}
-        </figure>
-
+    <Layout>
+    <form action="" className="w-full">
+      <div className="font-dmSans">
         {/* right half */}
-        <div className="card-body my-auto !mt-20 sm:mt-0 col-span-3">
+        <div className="card-body">
           {/* skill access group */}
           <div className="flex gap-2 justify-center">
             <svg
@@ -199,7 +197,7 @@ const ResetPassword = () => {
           </button>
         </div>
       </div>
-    </form>
+    </form></Layout>
   );
 };
 

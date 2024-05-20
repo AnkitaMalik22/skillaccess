@@ -10,6 +10,7 @@ import { LuEye } from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import Layout from "./Layout";
 // import 'react-phone-input-2/lib/bootstrap.css'
 const Register = () => {
   const navigate = useNavigate();
@@ -104,14 +105,12 @@ const Register = () => {
     !(phone.length > 5);
 
   return (
-    <form action="" className="font-dmSans">
-      <div className=" bg-base-100 shadow-xl h-full   font-dmSans grid grid-cols-5 ">
-        <figure className="w-full h-full bg-login bg-no-repeat bg-cover bg-center !hidden  lg:!block col-span-2 ">
-          {/* <img src="./images/loginBg.jpg" alt="" className="w-full h-full" /> */}
-        </figure>
-
+    <Layout>
+    <form action="" className="w-full">
+      <div className="font-dmSans">
+        
         {/* right half */}
-        <div className="card-body my-auto !mt-20 sm:mt-0 col-span-3">
+        <div className="card-body">
           {/* skill access group */}
           <div className="flex gap-2 justify-center">
             <svg
@@ -328,7 +327,7 @@ const Register = () => {
           </span>
         </div>
       </div>
-    </form>
+    </form></Layout>
   );
 };
 
