@@ -618,10 +618,9 @@ const collageAuthSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(searchMail.fulfilled, (state, action) => {
-        const mails = action.payload.map((value) => {
-          return { mail: value };
-        });
-        state.mail.emailsReceived = mails;
+        state.mail.emailsReceived = action.payload.emailsReceived;
+        state.mail.emailsSent = action.payload.emailsSent;
+
         // state.mail = { ...state.mail, attachments: action.payload };
       })
       .addCase(uploadAttachment.fulfilled, (state, action) => {
