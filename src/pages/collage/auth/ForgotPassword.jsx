@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Layout from "./Layout";
 
 const ForgotPassword = () => {
   const [error, setError] = useState(false);
@@ -65,15 +66,13 @@ const isSenddisable=!Credentials.Email;
     }
   };
   return (
-    <form action="" className="font-dmSans">
+    <Layout>
+    <form action="" className="w-full">
       
-      <div className=" bg-base-100 shadow-xl h-full min-h-[100vh]  font-dmSans grid grid-cols-5 ">
-        <figure className="w-full h-full bg-login bg-no-repeat bg-cover bg-center !hidden  lg:!block col-span-2 ">
-          {/* <img src="./images/loginBg.jpg" alt="" className="w-full h-full" /> */}
-        </figure>
-
+      <div className="font-dmSans">
+       
         {/* right half */}
-        <div className="card-body my-auto !mt-20 sm:mt-0 col-span-3">
+        <div className="card-body">
           {/* skill access group */}
           <div className="flex gap-2 justify-center">
             <svg
@@ -135,7 +134,7 @@ const isSenddisable=!Credentials.Email;
           </button>
         </div>
       </div>
-    </form>
+    </form></Layout>
   );
 };
 
