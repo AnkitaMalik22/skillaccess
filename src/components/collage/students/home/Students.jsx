@@ -61,7 +61,7 @@ const Students = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (user?._id) {
-        await dispatch(getStudents({ id: user._id }));
+        await dispatch(getStudents({ id: user?._id }));
       }
     };
 

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllTests } from "../../../../redux/collage/test/thunks/test";
 
-const List = () => {
+const List = ({FilterdStudents}) => {
   // const arr = [2, 1, 1, 1, 1];
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const List = () => {
       </div>
 
       {/* list to be iterated */}
-      {arr.map((assessment) => (
+      {FilterdStudents.map((assessment) => (
         <div className=" grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
           {" "}
           {/* row-2 */}
@@ -88,13 +88,12 @@ const List = () => {
           <div className="flex justify-center">
             <div className=" self-center h-fit">
               <span>
-                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
-                  {" "}
-                  0%
-                </h2>
+
+                <h2 className="font-dmSans  sm:text-sm">{0}</h2>
               </span>
             </div>
           </div>
+     
           <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
