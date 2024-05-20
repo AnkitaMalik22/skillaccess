@@ -6,7 +6,7 @@ import { FiPlus, FiUpload } from "react-icons/fi";
 
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ handleFilter }) => {
   const navigate = useNavigate();
   return (
     <div className="flex w-full mx-auto justify-between mb-6">
@@ -30,6 +30,7 @@ const Header = () => {
           <input
             type="text"
             placeholder="Search..."
+            onChange={handleFilter}
             className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
           />
         </span>

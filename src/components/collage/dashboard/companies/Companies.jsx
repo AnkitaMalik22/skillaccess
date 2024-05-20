@@ -20,7 +20,27 @@ const Companies = () => {
   useEffect(() => {
     dispatch(getCompany());
   }, [dispatch]);
+  const [filtered, setFiltered] = React.useState([]);
+  const handleFilterCompanies = (e) => {
+    const value = e.target.value;
+    if (value === "" || value.trim() === "") {
+      console.log("empty");
 
+      setFiltered(companies);
+
+      return;
+    } else {
+      setFiltered(
+        companies.filter((company) => {
+          const regex = new RegExp(value, "i");
+          return regex.test(company.basic.companyName);
+        })
+      );
+    }
+  };
+  useEffect(() => {
+    setFiltered(companies);
+  }, [companies]);
   const navigate = useNavigate();
   return (
     <div className="w-11/12 mx-auto">
@@ -36,6 +56,7 @@ const Companies = () => {
             <IoIosSearch className="self-center w-10 h-10 bg-gray-100 rounded-s-lg text-gray-400 py-2 " />
             <input
               type="text"
+              onChange={handleFilterCompanies}
               placeholder="Search..."
               className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
             />
@@ -51,8 +72,8 @@ const Companies = () => {
         </button>
       </div>
       <div className="flex flex-wrap gap-4 w-fit justify-center">
-        {companies &&
-          companies?.map((company, index) => {
+        {filtered &&
+          filtered?.map((company, index) => {
             return (
               <div
                 className="card card-compact w-[18rem] md:w-[18rem] xl:w-[16rem]  mb-4 bg-gray-100 rounded-none"
@@ -61,7 +82,8 @@ const Companies = () => {
                 <figure>
                   <img
                     src={
-                      company.basic?.coverPhoto===''  || "../../images/CompanyBg.png"
+                      company.basic?.coverPhoto === "" ||
+                      "../../images/CompanyBg.png"
                     }
                     // src="../../images/CompanyBg.png"
                     alt="cover photo"
@@ -80,12 +102,16 @@ const Companies = () => {
                     {company.basic?.companyName || "Name"}
                   </h2>
                   <p className="min-h-[5rem]">
-                    {company.about?.description.substring(0,150) || "description"}{"..."}
+                    {company.about?.description.substring(0, 150) ||
+                      "description"}
+                    {"..."}
                   </p>
                   <div className="card-actions justify-end">
                     <button
                       className="px-4 py-2 hover:bg-blue-900 bg-[#0052CC] text-xs font-dmSans font-bold rounded-xl text-white"
-                      onClick={() => navigate(`/collage/companies/profile/${company._id}`)}
+                      onClick={() =>
+                        navigate(`/collage/companies/profile/${company._id}`)
+                      }
                     >
                       View Details
                     </button>
