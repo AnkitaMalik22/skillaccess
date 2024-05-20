@@ -69,11 +69,11 @@ const collageState = {
 };
 
 export const deleteMail = createAsyncThunk(
-  "collageAuth/searchMail",
+  "collageAuth/deleteMail",
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.delete(
-        `${REACT_APP_API_URL}/api/college/inbox/delete/${data}`,
+        `${REACT_APP_API_URL}/api/college/inbox/delete/${data.id}?type=${data.type}`,
 
         {
           headers: {
