@@ -12,9 +12,8 @@ const Header = ({ Q }) => {
   const level = search.get("level");
 
   console.log("page", page);
-const handleNext = () => {
+  const handleNext = () => {
     navigate(`/collage/quesBank/topic`);
-    toast.success("Topic Created Successfully")
   };
 
   return (
