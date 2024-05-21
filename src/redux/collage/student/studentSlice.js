@@ -31,7 +31,9 @@ export const getStudents = createAsyncThunk(
             },
           }
         );
+        console.log(response.data);
         return response.data;
+        
         } catch (error) {
         return rejectWithValue(error.message);
         }
@@ -98,6 +100,28 @@ export const approveStudent = createAsyncThunk(
             return res.student;
           } catch (error) {
             return rejectWithValue(error.response.data);
+          }
+        }
+      );
+
+      export const rejectRequest = createAsyncThunk(
+        "student/reject",
+        async (studentId, { rejectWithValue }) => {
+          try {
+            const response = await axios.post(
+              `${REACT_APP_API_URL}/api/college/student/reject/${studentId}`,
+              {},
+              {
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("auth-token"),
+                },
+            },
+            );
+          
+            return response;
+          } catch (error) {
+            return rejectWithValue(error.message);
           }
         }
       );
@@ -170,8 +194,9 @@ export const studentSlice = createSlice({
             .addCase(approveStudent.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = false;
-             toast.success("Student Approved Successfully");
+                toast.success("Student Approved Successfully");
                 getStudents();
+                window.location.replace("/collage/students")
             })
             .addCase(approveStudent.rejected, (state) => {
                 state.loading = false;
@@ -187,7 +212,22 @@ export const studentSlice = createSlice({
               .addCase(getStudentCV.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.error.message;
-              });
+              })
+              .addCase(rejectRequest.pending, (state) => {
+                state.loading = true;
+                state.error = false;
+            })
+            .addCase(rejectRequest.fulfilled, (state, action) => {
+                state.loading = false;
+                state.error = false;
+                toast.success("Student Rejected Successfully");
+                window.location.replace("/collage/students")
+            })
+            .addCase(rejectRequest.rejected, (state) => {
+                state.loading = false;
+                state.error = true;
+                toast.error("An error occurred while rejecting the student");
+            });
 
     },
 });

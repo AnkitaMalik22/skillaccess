@@ -61,7 +61,7 @@ const Students = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (user?._id) {
-        await dispatch(getStudents({ id: user._id }));
+        await dispatch(getStudents({ id: user?._id }));
       }
     };
 
@@ -105,7 +105,7 @@ const Students = () => {
   return (
     <div>
       <Header handleFilter={handleFilterStudents} />
-      {visible && (
+      {/* {visible && (
         <PopUp
           visible={visible}
           handleSave={handleApprove}
@@ -114,7 +114,7 @@ const Students = () => {
             setVisible(false);
           }}
         />
-      )}
+      )} */}
       <div className="w-11/12 flex justify-between mx-auto gap-1">
         {/* New students joined */}
         <div className="h-96 w-1/3 bg-gray-100 overflow-y-scroll scroll rounded-lg">
@@ -212,13 +212,13 @@ const Students = () => {
                 </div>
               </div>
               <div className="flex justify-center ">
-              <h2 className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-3/4" style={{ wordWrap: 'break-word'}} >
+              <h2 className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-full" style={{ wordWrap: 'break-word'}} >
                   {student?.Email}
                 </h2>
                 <div className=" self-center h-fit"></div>
               </div>
-              <div className="flex item-center gap-2">
-              <button
+              {/* <div className="flex item-center gap-2"> */}
+              {/* <button
                 className="flex justify-center"
                 onClick={() => {
                   setVisible(true);
@@ -228,9 +228,9 @@ const Students = () => {
                 <span className="flex justify-center h-fit self-center gap-2 bg-[#DE350B66] bg-opacity-40 text-white text-xs font-semibold px-4 py-2 rounded-xl hover:cursor-pointer">
                   Approve Request
                 </span>
-              </button>
+              </button> */}
               
-                <span className="flex justify-center h-fit self-center gap-2">
+                <span className="flex  h-fit self-center gap-2 ml-8">
                   <h2
                     className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
                     onClick={() => navigate(`/collage/students/profile/${student._id}`)}
@@ -242,7 +242,7 @@ const Students = () => {
                     <TbFileDownload className="text-gray-400 h-6 w-6" />
                   </h2>
                 </span>
-              </div>{" "}
+              {/* </div>{" "} */}
             </div>
           ))}
 
@@ -324,7 +324,7 @@ const Students = () => {
                   height="50px"
                 />
               </div>
-              <span className="break-words min-w-0 pt-1 ">
+              <span className="break-words min-w-0 pt-1 flex items-center ">
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
                   {student?.FirstName + " " + student?.LastName}
                 </h2>
@@ -339,11 +339,12 @@ const Students = () => {
             <div className=" self-center h-fit">
               <span>
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
-                  Year
+                  {student?.Education[0]?.EndDate.substring(0,4)}
                 </h2>
                 <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blue-500">
                   {" "}
-                  Degree
+                  {student?.Education[0]?.Degree}
+
                 </h2>
               </span>
             </div>
@@ -395,7 +396,7 @@ const Students = () => {
             <span className="flex justify-center h-fit self-center gap-2">
               <h2
                 className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
-                onClick={() => navigate("/collage/students/profile")}
+                onClick={() => navigate(`/collage/students/profile/${student._id}`)}
               >
                 View CV
               </h2>
