@@ -16,9 +16,7 @@ const SwiperSlideLeft = () => {
     console.log("newCompanies : ", newCompanies);
   }, [dispatch]);
 
-  const companies = [
-    1,2,3,4,5,6,7,8,9,10
-  ];
+  const companies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <Swiper
@@ -49,31 +47,34 @@ const SwiperSlideLeft = () => {
         },
       }}
     >
-   
-
-      {
-        newCompanies.map((company) => (
-          <SwiperSlide className="flex ">
-          <div className="companies-dash bg-white  w-[80px] xl:w-[120px]  2xl:w-32 h-36px rounded-lg p-2  ">
-            <figure className="bg-gray-100 w-full h-24 mx-auto rounded-lg cursor-pointer"
-              onClick={() => navigate(`/collage/companies/profile/${company._id}`)}
+      {newCompanies.map((company) => (
+        <SwiperSlide className="flex ">
+          <div className="companies-dash bg-white  w-[100px] xl:w-[140px] p-4 rounded-2xl  ">
+            <figure
+              className="bg-gray-100 w-full h-20 mb-4 mx-auto cursor-pointer rounded-lg"
+              onClick={() =>
+                navigate(`/collage/companies/profile/${company._id}`)
+              }
             >
               <img
                 // src="../intel.png"
-                src={company?.basic?.logo === ""  ? "../intel.png" : company?.basic?.logo}
+                src={
+                  company?.basic?.logo === ""
+                    ? "../intel.png"
+                    : company?.basic?.logo
+                }
                 alt="Img"
-                className="w-full h-full"
-              /> 
+                className="w-full h-full rounded-lg"
+              />
             </figure>
             <span>
-              <h3 className="text-xs text-gray-400 font-bold text-center break-words h-full mt-1">
-               {company?.basic?.companyName}
+              <h3 className="text-xs text-[#8F92A1] font-bold text-center break-words ">
+                {company?.basic?.companyName}
               </h3>
             </span>
           </div>
         </SwiperSlide>
-        ))
-      }
+      ))}
 
       {loading && <h1>Loading...</h1>}
 

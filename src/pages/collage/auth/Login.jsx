@@ -82,9 +82,9 @@ const Login = () => {
       <form action="" className="w-full">
         <div className="font-dmSans">
           {/* right half */}
-          <div className="card-body">
+          <div className="card-body ">
             {/* skill access group */}
-            <div className="flex gap-2 justify-center">
+            <div className="flex gap-2 justify-center mb-4 md:mb-8">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="43"
@@ -102,25 +102,25 @@ const Login = () => {
               <h1 className="font-bold text-[22px]">Skill Access</h1>
             </div>
 
-            <h2 className="font-bold text-2xl text-center  md:mt-6 mt-4 text-[#171717]">
+            <h2 className="font-bold text-2xl text-center text-[#171717] mb-2">
               Getting Started
             </h2>
-            <h2 className="font-bold text-center text-[#8F92A1] text-xl">
+            <h2 className="font-bold text-center text-[#8F92A1] text-xl mb-8">
               Welcome back!
             </h2>
             {logoutError && (
-              <p className=" border-l-4 pl-4  rounded-[4px] border-[#dc2626] w-full max-w-xs py-3  mx-auto text-sm text-[#dc2626] bg-[#fee2e2]">
+              <p className=" border-l-4 pl-4  rounded-[4px] border-[#dc2626] w-full max-w-sm py-3  mx-auto text-sm text-[#dc2626] bg-[#fee2e2]">
                 Oops!You're logged out. Please login again.
               </p>
             )}
 
             {Error.length > 0 && (
-              <p className=" border-l-4 pl-4  rounded-[4px] border-[#dc2626] w-full max-w-xs py-3  mx-auto text-sm text-[#dc2626] bg-[#fee2e2]">
+              <p className=" border-l-4 pl-4  rounded-[4px] border-[#dc2626] w-full max-w-sm py-3  mx-auto text-sm text-[#dc2626] bg-[#fee2e2]">
                 Oops! It seems like your email or password is incorrect. Please
                 double-check and try again.
               </p>
             )}
-            <div className="w-full mx-auto flex rounded-2xl  relative max-w-sm">
+            <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
               <input
                 onChange={changeHandler}
                 value={Credentials.Email}
@@ -130,7 +130,7 @@ const Login = () => {
                 className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
               />
             </div>
-            <div className="w-full mx-auto flex rounded-2xl relative max-w-sm">
+            <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
               <input
                 name="Password"
                 onChange={changeHandler}
@@ -160,7 +160,7 @@ const Login = () => {
             </div>
 
             <div
-              className=" flex gap-2  px-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto justify-end cursor-pointer"
+              className=" flex gap-2  px-2  w-full max-w-sm  mx-auto justify-end cursor-pointer mb-4 md:mb-8"
               onClick={() => navigate("/forgotPassword")}
             >
               <h1 className="text-blue-700 font-bold">Forgot Password</h1>
@@ -183,65 +183,35 @@ const Login = () => {
               </div>
             ))} */}
 
-            {/* <div className=" flex gap-2  p-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto ">
-            {" "}
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-            <hr className="w-1/12 border-2 border-lGray opacity-20" />
-          </div> */}
-            {/* 
-          <label className=" flex  gap-2 cursor-pointer mx-auto w-full max-w-xs">
-            <input
-              type="checkbox"
-              checked={checked}
-              className="checkbox checkbox-primary bg-secondary opacity-20 w-6 h-6"
-              onChange={handleCheckboxChange}
-            />
-            <span className="text-lGray">
-              By creating an account, you agree to our{" "}
-              <Link className="text-blue-600" to="/terms&policies">
-                {" "}
-                Terms-Policies.
-              </Link>
-            </span>
-          </label> */}
-
             <button
-              className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
-                isLoginDisabled ? "bg-blued cursor-not-allowed" : ""
+              className={`btn hover:bg-[#0052CC] bg-[#0052CC] rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${
+                isLoginDisabled ? "bg-[#99baeb] cursor-not-allowed" : ""
               }`}
               onClick={handleSubmit}
               disabled={isLoginDisabled}
             >
               Login
             </button>
-            <h3 className="text-lGray text-center text-bold text-xs mt-1">
+            <h3 className="text-lGray text-center text-bold text-xs mb-2">
               OR
             </h3>
             <button
-              className="btn btn-primary rounded-xl border-none  mt-2 focus:outline-none  w-full max-w-xs  mx-auto bg-snow  "
+              className="btn btn-primary rounded-xl border-none  mt-2 focus:outline-none  w-full max-w-sm mb-2  mx-auto bg-[#F3F6F8] "
               // onClick={() => navigate("/collage/dashboard")}
               onClick={login}
               type="button"
             >
               <FcGoogle className="text-lg mr-2" />
               <h3
-                className="opacity-100"
+                className="opacity-100 text-[#171717]"
                 // onClick={login}
               >
                 Continue with google
               </h3>
             </button>
-            <span className="text-lGray text-center text-sm font-semibold">
+            <span className="text-[#8F92A1] text-center text-sm font-semibold">
               Don't have an account?{" "}
-              <Link to="/register" className=" text-blue-600">
+              <Link to="/register" className=" text-[#0052CC]">
                 {" "}
                 Sign Up
               </Link>
