@@ -8,6 +8,7 @@ import { BsEmojiSmile } from "react-icons/bs";
 import { FiTrash } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getInbox,
   getMail,
   searchMail,
   sendReply,
@@ -26,7 +27,7 @@ const View = ({ index, filter, inboxType }) => {
   const upload = useRef();
   const { mail } = useSelector((state) => state.collageAuth);
   // const Email = mail.emailsReceived[index];
-
+  const user = useSelector(getInbox);
   const [loading, setLoading] = useState(false);
   const [Email, setEMail] = useState(
     inboxType === "Received"
@@ -59,10 +60,21 @@ const View = ({ index, filter, inboxType }) => {
           setEMail(mail?.emailsSent[index]);
         }
       });
+      setEmail(
+        mail[inboxType === "Received" ? "emailsReceived" : "emailsSent"][index]
+      );
     } else {
       dispatch(searchMail(filter));
     }
   }, ["", inboxType, index, dispatch]);
+
+  useEffect(() => {
+    toast.success("del");
+
+    setEMail(
+      mail[inboxType === "Received" ? "emailsReceived" : "emailsSent"][index]
+    );
+  }, [user, mail]);
 
   const [email, setEmail] = useState({ Message: "" });
   const handleChange = (e) => {
@@ -70,7 +82,6 @@ const View = ({ index, filter, inboxType }) => {
     setEmail((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-    console.log(email);
   };
   return (
     <div className="w-full h-full p-5 font-dmSans">
@@ -113,7 +124,7 @@ const View = ({ index, filter, inboxType }) => {
 
       {mail?.[inboxType === "Received" ? "emailsReceived" : "emailsSent"][
         index
-      ].replies?.map((reply) => {
+      ]?.replies?.map((reply) => {
         return (
           <>
             {" "}
@@ -193,7 +204,7 @@ const View = ({ index, filter, inboxType }) => {
           <textarea
             type="text"
             name="Message"
-            value={email.Message}
+            value={email?.Message}
             onChange={handleChange}
             placeholder="message"
             id=""
