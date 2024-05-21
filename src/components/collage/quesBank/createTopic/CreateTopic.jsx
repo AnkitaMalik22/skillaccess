@@ -49,9 +49,8 @@ const CreateTopic = () => {
 
     dispatch(createTopic(topic)).then((res) => {
       if (res.payload._id) {
-        navigate(
-          `/collage/quesBank/typeOfQuestions/${res.payload._id}`
-        );
+        navigate(`/collage/quesBank/typeOfQuestions/${res.payload._id}`);
+        toast.success("Topic Created Successfully");
       } else {
         toast.error("Invalid or duplicate values");
         return;

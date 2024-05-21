@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FiPlus, FiUpload } from "react-icons/fi";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 
-
-const Header = ({Heading,sectionId}) => {
+const Header = ({ Heading, sectionId }) => {
   const navigate = useNavigate();
   return (
     <div className="flex  mx-auto justify-between mb-2 mt-5">
@@ -18,7 +17,7 @@ const Header = ({Heading,sectionId}) => {
 
           <div className="self-center flex ">
             <h2 className="sm:text-xl mt-2 text-left font-bold self-center text-3xl font-dmSans ">
-          {Heading}
+              {Heading}
             </h2>
             {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
               <h3 className="mr-2">Untitiled Assessments</h3>
@@ -39,8 +38,6 @@ const Header = ({Heading,sectionId}) => {
               </span>
               <h3>Add Questions</h3>
             </div> */}
-
- 
           </div>
         </button>
       </div>
@@ -48,24 +45,30 @@ const Header = ({Heading,sectionId}) => {
       {/* bg-gray-100 */}
       <div className=" rounded-xl mx-2   h-12 flex my-2 ">
         <div className=" flex">
-        <span className="flex gap-2">
-        <button
-          className="self-center justify-center flex bg-[#F8F8F9] py-3 px-5 rounded-xl  font-bold gap-2 "
-          onClick={() => navigate(`/collage/test/typeOfQuestions/${sectionId}?page=qb`)}
-        >
-          <FiPlus className="self-center text-lg " /> Add
-        </button>
+          <span className="flex gap-2">
+            <button
+              className="self-center justify-center flex bg-[#F8F8F9] py-3 px-5 rounded-xl  font-bold gap-2 "
+              onClick={() =>
+                navigate(
+                  `/collage/quesBank/typeOfQuestions/${sectionId}?page=qb`
+                )
+              }
+            >
+              <FiPlus className="self-center text-lg " /> Add
+            </button>
 
-        <button
-          className="self-center justify-center flex bg-blue-700 py-3 px-5 rounded-xl  text-white  gap-2 "
-          onClick={() => navigate(`/collage/quesBank/topic/upload/${sectionId}`)}
-        >
-          <FiUpload className="self-center text-lg " /> Upload Questions
-        </button>
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
-          <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
-        </button>
-      </span>
+            <button
+              className="self-center justify-center flex bg-blue-700 py-3 px-5 rounded-xl  text-white  gap-2 "
+              onClick={() =>
+                navigate(`/collage/quesBank/topic/upload/${sectionId}`)
+              }
+            >
+              <FiUpload className="self-center text-lg " /> Upload Questions
+            </button>
+            <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+              <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
+            </button>
+          </span>
         </div>
       </div>
     </div>

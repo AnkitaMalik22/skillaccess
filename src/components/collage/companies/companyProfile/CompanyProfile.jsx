@@ -159,32 +159,54 @@ import { FaArrowRight } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompanyDetails } from "../../../../redux/features/company/companySlice";
-import { getCompany,getTotalJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
+import {
+  getCompany,
+  getTotalJobs,
+} from "../../../../redux/collage/dashboard/dashboardSlice";
 
 const CompanyProfile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   const { companyDetails } = useSelector((state) => state.company);
-  
 
-  
   const { jobs } = useSelector((state) => state.dashboard);
-  console.log(jobs);
-    useEffect(() => {
-      dispatch(getTotalJobs());
-    }, [dispatch]);
-  
+  const [filtered, setFiltered] = React.useState([]);
+  useEffect(() => {
+    dispatch(getTotalJobs());
+  }, [dispatch]);
+  const handleFilterJobs = (e) => {
+    const value = e.target.value;
+    if (value === "" || value.trim() === "") {
+      console.log("empty");
+
+      setFiltered(jobs);
+
+      return;
+    } else {
+      setFiltered(
+        jobs.filter((Jobs) => {
+          const regex = new RegExp(value, "i");
+          return regex.test(Jobs.JobTitle);
+        })
+      );
+    }
+  };
+  useEffect(() => {
+    setFiltered(jobs);
+  }, [jobs]);
 
   useEffect(() => {
     dispatch(getCompanyDetails(id));
-    
   }, [dispatch, id]);
- 
+
   return (
     <div>
       <div className="mt-4">
-        <Header CompanyName={companyDetails?.basic?.companyName}/>
+        <Header
+          CompanyName={companyDetails?.basic?.companyName}
+          handleFilter={handleFilterJobs}
+        />
       </div>
 
       <div className="sm:flex w-[95%] mx-auto justify-between mb-2 font-dmSans mt-8">
@@ -252,16 +274,18 @@ const CompanyProfile = () => {
           {/*  */}
           <div className="flex justify-between mb-7">
             <h2 className="font-bold">Available jobs</h2>
-            <h2 className="font-bold underline underline-offset-2 text-blued"
-            onClick={()=>{navigate('/collage/dashboard/jobs')}}
+            <h2
+              className="font-bold underline underline-offset-2 text-blued"
+              onClick={() => {
+                navigate("/collage/dashboard/jobs");
+              }}
             >
               See All
             </h2>
           </div>
-          {
-            jobs?.filter(
-              ((job)=>job?.company?._id===id)
-            )?.map((job, index) => {
+          {filtered
+            ?.filter((job) => job?.company?._id === id)
+            ?.map((job, index) => {
               return (
                 <div
                   className="flex justify-between w-[98%]  mt-4 bg-gray-100 rounded-lg p-4"
@@ -278,7 +302,7 @@ const CompanyProfile = () => {
                       </div>
                       <span className="">
                         <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                        {job.JobTitle || "title"}
+                          {job.JobTitle || "title"}
                         </h2>
                         <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline mr-2">
                           {" "}
@@ -292,7 +316,7 @@ const CompanyProfile = () => {
                           {" "}
                           in{" "}
                           <em className="not-italic text-black">
-                          {job.WorkplaceType || "WOrktype"}
+                            {job.WorkplaceType || "WOrktype"}
                           </em>
                         </h2>
                       </span>
@@ -305,7 +329,7 @@ const CompanyProfile = () => {
                         }
                       >
                         <p className="text-[#0052CC] -ml-8 font-dmSans text-sm font-medium  ">
-                        {job.EmploymentType || "employmentType"}
+                          {job.EmploymentType || "employmentType"}
                         </p>
                       </button>
                       <FaArrowRight className="text-gray-400 self-center" />
