@@ -21,6 +21,8 @@ import {
   getAllTests,
   getTest,
   getTestResultPage,
+  selectStudentTest,
+  getselectedStudents,
 } from "./thunks/test";
 
 import {
@@ -51,6 +53,7 @@ const testState = {
   currentBookmark: {},
   localBookmarks: [],
   studentResponse: [],
+  selectedStudents: [],
   response: [],
   testDataResponse: [],
   testName: "",
@@ -173,9 +176,8 @@ const testState = {
         compiler: [],
       },
 
-
-      ADD_QUESTION_LOADING : false,
-      GET_TOPICS_LOADING : false,
+  ADD_QUESTION_LOADING: false,
+  GET_TOPICS_LOADING: false,
 };
 
 // export const getStudentResponse = createAsyncThunk("test/studentResponse",
@@ -660,11 +662,9 @@ const testSlice = createSlice({
         );
       })
       .addCase(addQuestionToTopic.pending, (state, action) => {
-       
         state.ADD_QUESTION_LOADING = true;
-        
+
         console.log("pending");
-     
       })
       .addCase(addQuestionToTopic.fulfilled, (state, action) => {
         console.log("fulf");
@@ -682,7 +682,6 @@ const testSlice = createSlice({
       })
       .addCase(getTest.fulfilled, (state, action) => {
         state.test = action.payload;
-
 
         console.log("fullfilled", state.test);
       })
@@ -720,28 +719,26 @@ const testSlice = createSlice({
         state.currentTopic = {};
 
         console.log("fullfilled");
-      
-
 
         getAllTests();
       })
       .addCase(createTest.rejected, (state, action) => {
         // console.log(action.payload);
-        toast.error(action.payload)
+        toast.error(action.payload);
         console.log(action.payload);
 
         // window.alert(action.payload);
       })
       .addCase(getAllTopics.pending, (state, action) => {
         state.status = "loading";
-        state.GET_TOPICS_LOADING = true
+        state.GET_TOPICS_LOADING = true;
 
         console.log("pending");
       })
       .addCase(getAllTopics.fulfilled, (state, action) => {
         state.sections = action.payload;
         state.GET_TOPICS_LOADING = false;
-        
+
         console.log("fullfilled");
       })
       .addCase(getAllTopics.rejected, (state, action) => {
@@ -937,6 +934,20 @@ const testSlice = createSlice({
         state.testLoading = false;
         console.error("Error fetching test results:", action.payload);
         toast.error("Error Deleting Test!");
+      })
+
+      .addCase(selectStudentTest.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        console.log(action.payload);
+      })
+      .addCase(getselectedStudents.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getselectedStudents.fulfilled, (state, action) => {
+        state.selectedStudents = action.payload;
+      })
+      .addCase(getselectedStudents.rejected, (state, action) => {
+        console.error(action.payload);
       });
   },
 });
