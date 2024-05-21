@@ -3,7 +3,7 @@ import { FaAngleLeft, FaChevronLeft, FaPlus, FaSearch } from "react-icons/fa";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({CompanyName}) => {
+const Header = ({ CompanyName, handleFilter }) => {
   const navigate = useNavigate();
   return (
     <div className="flex w-[95%] mx-auto justify-between mb-2 font-dmSans">
@@ -21,6 +21,7 @@ const Header = ({CompanyName}) => {
         <input
           type="text"
           placeholder="Search..."
+          onChange={handleFilter}
           className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96 max-w-md mx-auto  "
         />
       </div>

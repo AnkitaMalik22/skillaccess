@@ -13,14 +13,34 @@ const Companies = () => {
   useEffect(() => {
     dispatch(getCompany());
   }, [dispatch]);
+  const [filtered, setFiltered] = React.useState([]);
+  const handleFilterCompanies = (e) => {
+    const value = e.target.value;
+    if (value === "" || value.trim() === "") {
+      console.log("empty");
 
+      setFiltered(companies);
+
+      return;
+    } else {
+      setFiltered(
+        companies.filter((company) => {
+          const regex = new RegExp(value, "i");
+          return regex.test(company.basic.companyName);
+        })
+      );
+    }
+  };
+  useEffect(() => {
+    setFiltered(companies);
+  }, [companies]);
   const navigate = useNavigate();
   return (
     <div className="w-11/12 mx-auto">
-      <Header />
+      <Header handleFilter={handleFilterCompanies} />
       <div className="flex flex-wrap mx-1 w-fit justify-between">
-        {companies &&
-          companies?.map((company, index) => {
+        {filtered &&
+          filtered?.map((company, index) => {
             return (
               <div
                 className="card card-compact  w-[18rem] md:w-[18rem] xl:w-[16rem] mb-4 bg-gray-100 rounded-none m-2"

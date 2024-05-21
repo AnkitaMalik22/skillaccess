@@ -5,7 +5,7 @@ import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import StudentPoP from "../../../PopUps/StudentPoP";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 import * as XLSX from "xlsx";
@@ -13,7 +13,8 @@ import PopUp from "../../../PopUps/PopUp";
 import Loader from "../../test/addVideo/Loader";
 import { uploadStudents } from "../../../../redux/collage/student/studentSlice";
 
-const Header = ({ handleFilter }) => {
+const Header = ({ handleFilter, setFilteredStudents }) => {
+  const { uploadedStudents } = useSelector((state) => state.collegeStudents);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [excel, setExcel] = useState("");

@@ -44,14 +44,17 @@ const List = ({ show, inboxType, setInboxType }) => {
     setSocket(socket);
     console.log("email");
     dispatch(getMail(queries));
+
+    //join room with  you mail as room id
     socket.emit("joinRoom", email);
 
+    //listen for messages to your room
     socket.on("message", (roomName, message) => {
       dispatch(getMail(queries));
     });
-    return () => {
-      socket.disconnect();
-    };
+    // return () => {
+    //   socket.disconnect();
+    // };
   }, []);
 
   const handleNav = (i) =>
@@ -198,10 +201,7 @@ const List = ({ show, inboxType, setInboxType }) => {
       {arr?.map((el, i) => {
         console.log(el);
         return (
-          <div
-            className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto "
-            onClick={() => handleNav(i)}
-          >
+          <div className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto ">
             <div className="flex gap-4 ">
               {el.isChecked ? (
                 <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center ">
@@ -270,7 +270,7 @@ const List = ({ show, inboxType, setInboxType }) => {
               </p>
               <p
                 className="text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer "
-                // onClick={() => handleNav(i)}
+                onClick={() => handleNav(i)}
               >
                 {el.mail?.subject}
               </p>

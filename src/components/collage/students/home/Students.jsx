@@ -26,7 +26,6 @@ const Students = () => {
 
   const { user } = useSelector((state) => state.collageAuth);
 
-  console.log(pendingStudents);
   //  useEffect(() => {
   // async()=>{
   //  await dispatch(getStudents({id: user?._id}))
@@ -69,12 +68,8 @@ const Students = () => {
   }, [dispatch, user]);
 
   useEffect(() => {
-    // Update filtered students when uploadedStudents changes
-    // For simplicity, assuming uploadedStudents is the same as filteredStudents initially
     setFilteredStudents(uploadedStudents);
   }, [uploadedStudents]);
-
-  console.log(filteredStudents, "filteredStudents");
 
   const handleApprove = (studentId) => {};
 
@@ -84,7 +79,7 @@ const Students = () => {
       console.log("empty");
 
       setFilteredStudents(uploadedStudents);
-         console.log(uploadedStudents);
+      console.log(uploadedStudents);
       return;
     } else {
       setFilteredStudents(
@@ -101,7 +96,7 @@ const Students = () => {
       console.log(filteredStudents, "filtered--", value);
     }
   };
-
+  console.log(uploadedStudents);
   return (
     <div>
       <Header handleFilter={handleFilterStudents} />
@@ -151,8 +146,11 @@ const Students = () => {
                 </span> */}
                 </div>
               </div>
-              <div className="flex justify-center items-center  " >
-                <h2 className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-3/4" style={{ wordWrap: 'break-word'}} >
+              <div className="flex justify-center items-center  ">
+                <h2
+                  className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-3/4"
+                  style={{ wordWrap: "break-word" }}
+                >
                   {student?.Email}
                 </h2>
                 <div className=" self-center h-fit">
@@ -167,7 +165,6 @@ const Students = () => {
                 </span> */}
                 </div>
               </div>
-              
             </div>
           ))}
         </div>
@@ -180,7 +177,6 @@ const Students = () => {
           </span>
 
           {pendingStudents?.map((student, index) => (
-            
             <div className=" grid-cols-3 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
               {" "}
               {/* row-2 */}
@@ -195,10 +191,9 @@ const Students = () => {
                       height="50px"
                     />
                     <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                    {student?.FirstName + " " + student?.LastName}
-                  </h2>
+                      {student?.FirstName + " " + student?.LastName}
+                    </h2>
                   </div>
-                  
 
                   {/* <span className="break-words min-w-0 pt-1 ">
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
@@ -212,7 +207,10 @@ const Students = () => {
                 </div>
               </div>
               <div className="flex justify-center ">
-              <h2 className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-full" style={{ wordWrap: 'break-word'}} >
+                <h2
+                  className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-full"
+                  style={{ wordWrap: "break-word" }}
+                >
                   {student?.Email}
                 </h2>
                 <div className=" self-center h-fit"></div>
@@ -229,19 +227,20 @@ const Students = () => {
                   Approve Request
                 </span>
               </button> */}
-              
-                <span className="flex  h-fit self-center gap-2 ml-8">
-                  <h2
-                    className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
-                    onClick={() => navigate(`/collage/students/profile/${student._id}`)}
-                  >
-                    View CV
-                  </h2>
+              <span className="flex  h-fit self-center gap-2 ml-8">
+                <h2
+                  className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
+                  onClick={() =>
+                    navigate(`/collage/students/profile/${student._id}`)
+                  }
+                >
+                  View CV
+                </h2>
 
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
-                    <TbFileDownload className="text-gray-400 h-6 w-6" />
-                  </h2>
-                </span>
+                <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
+                  <TbFileDownload className="text-gray-400 h-6 w-6" />
+                </h2>
+              </span>
               {/* </div>{" "} */}
             </div>
           ))}
@@ -339,12 +338,11 @@ const Students = () => {
             <div className=" self-center h-fit">
               <span>
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
-                  {student?.Education[0]?.EndDate.substring(0,4)}
+                  {student?.Education[0]?.EndDate.substring(0, 4)}
                 </h2>
                 <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blue-500">
                   {" "}
                   {student?.Education[0]?.Degree}
-
                 </h2>
               </span>
             </div>
@@ -396,7 +394,9 @@ const Students = () => {
             <span className="flex justify-center h-fit self-center gap-2">
               <h2
                 className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
-                onClick={() => navigate(`/collage/students/profile/${student._id}`)}
+                onClick={() =>
+                  navigate(`/collage/students/profile/${student._id}`)
+                }
               >
                 View CV
               </h2>
