@@ -28,7 +28,8 @@ const Mail = () => {
   const { sendMailLoading, mail } = useSelector((state) => state.collageAuth);
   const [arr, setArr] = useState([]);
   const [inboxType, setInboxType] = useState(searchParams.get("inboxType"));
-  const Email = mail.emailsReceived[index];
+  const Email =
+    mail[inboxType === "received" ? "emailsReceived" : "emailsSent"][index];
   const [filter, setFilter] = useState({
     type:
       searchParams.get("typeFilter") === "null"
@@ -99,7 +100,12 @@ const Mail = () => {
           <div className="w-3/4 h-[4.5rem] flex px-3">
             {type === "view" ? (
               <>
-                <ViewBar filter={filter} Email={Email} />
+                <ViewBar
+                  filter={filter}
+                  Email={Email}
+                  index={index}
+                  inboxType={inboxType}
+                />
               </>
             ) : (
               <>

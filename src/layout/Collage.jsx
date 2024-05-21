@@ -263,7 +263,7 @@ const CollageLayout = ({ children }) => {
       ),
     },
   ];
-  
+
   useEffect(() => {
     dispatch(getCollege());
     //  window.scrollTo({
@@ -296,13 +296,11 @@ const CollageLayout = ({ children }) => {
     if (location.pathname.match(/\/collage\/results*/)) {
       dispatch(setSelected(4));
       setDown(4);
-      
     }
 
     if (location.pathname.match(/\/collage\/quesBank*/)) {
       dispatch(setSelected(5));
       setDown(5);
-      
     }
 
     if (location.pathname.match(/\/collage\/profile*/)) {
@@ -314,7 +312,6 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(7));
       setDown(7);
-      
     }
 
     if (location.pathname.match(/\/collage\/inbox*/)) {
@@ -326,7 +323,6 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(8));
       setDown(8);
-      
     }
 
     if (location.pathname.match(/\/collage\/teams*/)) {
@@ -338,7 +334,6 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(9));
       setDown(9);
-    
     }
 
     if (location.pathname.match(/\/collage\/accounting*/)) {
@@ -350,7 +345,6 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(10));
       setDown(10);
-      
     }
 
     if (location.pathname.match(/\/collage\/settings*/)) {
@@ -362,18 +356,17 @@ const CollageLayout = ({ children }) => {
       // });
       dispatch(setSelected(11));
       setDown(11);
-      
     }
   }, []);
 
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
-      <div className=" h-full bg-blued relative">
-        <div className="flex  justify-start pt-20 ">
+      <div className=" h-full bg-[#95ACFA] relative">
+        <div className="flex h-screen  justify-start pt-20 ">
           <aside
-            className={`-mt-2 px-4 h-[90vh] transition-width max-w-[15rem] overflow-x-hidden bg-secondary fixed left-0 z-30  scrollbar overflow-y-scroll ${
-              open ? "w-1/2" : "w-14 lg:w-full "
+            className={`px-2 sm:px-4 block transition-width overflow-x-hidden bg-secondary z-30  scrollbar overflow-y-scroll ${
+              open ? "w-1/2" : "lg:w-[260px] w-20"
             }`}
           >
             {" "}
@@ -393,7 +386,9 @@ const CollageLayout = ({ children }) => {
                     )} */}
                     {selection === i && <div className="" ref={bottom}></div>}
                     <li
-                className={`btn-transition ${temp === i || selection === i ? 'active-li' : ''} `}
+                      className={`btn-transition ${
+                        temp === i || selection === i ? "active-li" : ""
+                      } `}
                       onMouseOver={() => setTemp(i)}
                       onMouseOut={() => setTemp(down)}
                       onMouseDown={(e) => {
@@ -410,7 +405,7 @@ const CollageLayout = ({ children }) => {
                         dispatch(setTestSelectedTopics([]));
                         setOpen(false);
                         setDown(i);
-                        
+
                         // window.scrollTo({
                         //   top:
                         //     window.scrollY +
@@ -420,32 +415,40 @@ const CollageLayout = ({ children }) => {
                         return navigate(el.path);
                       }}
                     >
-          <button
-        className={`ml-[-10px] sm:ml-[5px] flex gap-4 mb-10 h-fit py-2 justify-start ${el.name === "Notifications" ? "ml-[-20px] hidden" : "btn hover-li"} ${
-          open ? "w-full" : "w-1 sm:w-full"
-        } shadow-none text-white rounded-xl border-none mt-2 focus:outline-none max-w-xs mx-auto ${
-          temp === i || selection === i ? "bg-white !text-black" : "bg-blued"
-        }`}
-      >
-        <div className="w-4 ml-[-10px]">{el.icon}</div>
-        <h3
-          className={`text-xl font-dmSans ${open ? "" : "lg:block hidden"} w-fit h-fit`}
-        >
-          {el.name}
-        </h3>
-      </button>
+                      <button
+                        className={`flex gap-4 mb-8 h-fit py-2 justify-start ${
+                          el.name === "Notifications"
+                            ? "ml-[-20px] hidden"
+                            : "btn hover-li"
+                        } ${
+                          open ? "w-full" : "lg:w-full"
+                        } shadow-none text-white rounded-2xl border-none focus:outline-none max-w-xs mx-auto ${
+                          temp === i || selection === i
+                            ? "bg-white !text-[#171717]"
+                            : "bg-[#95ACFA]"
+                        }`}
+                      >
+                        <div className="">{el.icon}</div>
+                        <h3
+                          className={`text-lg font-bold font-dmSans ${
+                            open ? "" : "lg:block hidden"
+                          } w-fit h-fit`}
+                        >
+                          {el.name}
+                        </h3>
+                      </button>
                     </li>
                   </>
                 );
               })}
 
-              <li className="mb-5 pl-8 font-dmSans text-sm font-bold ">
+              <li className="mb-5 text-center font-dmSans text-lg font-bold ">
                 <h2 className="text-[#06152B]">© 2022 skillassess</h2>
               </li>
             </ul>
           </aside>
 
-          <div className="bg-white rounded-3xl h-[88vh] overflow-y-scroll w-full p-4 mx-4 ml-14 lg:ml-60  font-dmSans ">
+          <div className="bg-white rounded-3xl h-[90vh] overflow-y-scroll w-full flex-1  font-dmSans mr-5 ">
             {children}
           </div>
         </div>

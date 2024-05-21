@@ -1,30 +1,41 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { FaSortDown } from "react-icons/fa";
 import { FiCornerUpLeft, FiCornerUpRight, FiTrash } from "react-icons/fi";
 import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 import convertDate from "../../../../util/getDate";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   deleteMail,
   getMail,
   searchMail,
 } from "../../../../redux/collage/auth/authSlice";
-import { bookmarkMail, removeBookmarkedMail } from "../../../../redux/collage/Inbox/inboxSlice";
+import {
+  bookmarkMail,
+  removeBookmarkedMail,
+} from "../../../../redux/collage/Inbox/inboxSlice";
 import { useSearchParams } from "react-router-dom";
 
-const ViewBar = ({ filter, Email }) => {
+const ViewBar = ({ filter, index, inboxType }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [queries, setQueries] = useState({ limit: 50, skip: 0 });
   const show = searchParams.get("show");
   const dispatch = useDispatch();
   const handleDelete = () => {
-    dispatch(deleteMail(Email.mail._id));
+    dispatch(deleteMail({ id: Email.mail._id, type: inboxType }));
     if (show === "all") {
       dispatch(getMail({ limit: 50, skip: 0 }));
     } else {
       dispatch(searchMail(filter));
     }
+    setEmail(
+      mail[inboxType === "Received" ? "emailsReceived" : "emailsSent"][index]
+    );
   };
+  const { mail } = useSelector((state) => state.collageAuth);
+  const [Email, setEmail] = useState(
+    mail[inboxType === "received" ? "emailsReceived" : "emailsSent"][index]
+  );
+
   return (
     <div className="flex w-full">
       <div className="w-full flex justify-between self-center">
@@ -51,24 +62,23 @@ const ViewBar = ({ filter, Email }) => {
             className="text-lg self-center text-gray-400 cursor-pointer"
             onClick={handleDelete}
           />
-         {Email?.mail?.bookmarked ? (
-                <TiStarFullOutline className="self-center"
-                  onClick={async()=>{
-                    await dispatch(removeBookmarkedMail(Email?.mail._id));
-                    await dispatch(getMail(queries));
-                  }
-                    
-                  }
-                />
-              ) : (
-                <TiStarOutline className="self-center"
-                onClick={async ()=>{
-              await dispatch(bookmarkMail(Email?.mail._id));
-              await dispatch(getMail(queries));
-                }
-              }
-                />
-              )}
+          {Email?.mail?.bookmarked ? (
+            <TiStarFullOutline
+              className="self-center"
+              onClick={async () => {
+                await dispatch(removeBookmarkedMail(Email?.mail._id));
+                await dispatch(getMail(queries));
+              }}
+            />
+          ) : (
+            <TiStarOutline
+              className="self-center"
+              onClick={async () => {
+                await dispatch(bookmarkMail(Email?.mail._id));
+                await dispatch(getMail(queries));
+              }}
+            />
+          )}
           <FiCornerUpLeft className="text-lg self-center text-gray-400" />
           <FiCornerUpRight className="text-lg self-center text-gray-400" />
 

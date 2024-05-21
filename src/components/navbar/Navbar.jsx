@@ -1,29 +1,27 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { FaCoins } from "react-icons/fa";
 
 const Navbar = (props) => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const goToProfile = () => {
     // Function to navigate to profile page
     navigate("/collage/profile"); // Use navigate function to navigate to desired URL
   };
-  const userDetails = useSelector(
-    (state) => state.collageAuth
-  );
+  const userDetails = useSelector((state) => state.collageAuth);
 
-  console.log(userDetails)
- 
+  console.log(userDetails);
+
   //   let scriptLoaded = false;
-  
+
   //   const loadGoogleTranslateScript = () => {
   //     if (!scriptLoaded) {
   //       const script = document.createElement('script');
   //       script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
   //       script.async = true;
-  
+
   //       // Use a closure to maintain access to the script variable
   //       script.onload = () => {
   //         window.googleTranslateElementInit = () => {
@@ -36,14 +34,14 @@ const Navbar = (props) => {
   //           );
   //         };
   //       };
-  
+
   //       document.body.appendChild(script);
   //       scriptLoaded = true;
   //     }
   //   };
-  
+
   //   loadGoogleTranslateScript();
-  
+
   //   return () => {
   //     // Clean up script when component unmounts
   //     if (scriptLoaded) {
@@ -52,10 +50,9 @@ const Navbar = (props) => {
   //     }
   //   };
   // }, []);
-  
-  
+
   return (
-    <div className="border border-y-1 sorder border-gray-400 bg-white w-full z-[9999] m-0 fixed top-0"   >
+    <div className="border border-y-1 sorder border-gray-400 bg-white w-full z-[9999] m-0 fixed top-0">
       <div className="navbar flex justify-between ">
         {/* left */}
         <div>
@@ -73,36 +70,41 @@ const Navbar = (props) => {
           </div>
         </div>
 
-      
-    
         {/* right */}
         <div className="flex gap-4">
-        <button className="border-2 border-gray-400  text-gray-400 rounded-lg p-2 relative">
+          <button className="border-2 border-[#D9E1E7]  text-[#D9E1E7] rounded-lg px-3 py-3 relative">
             <FiBell className="text-lg" />{" "}
             <div className="rounded-full h-2 w-2 bg-[#0090FF]  absolute top-1 right-2"></div>
           </button>
 
           {/* noifiaction */}
-          <button className="border-2 border-gray-400  text-blue-400 rounded-lg p-[0.3rem] relative flex items-center ">
+          <button className="border border-[#D9E1E7] text-[#0090FF] rounded-lg px-2 py-3 relative flex items-center">
             {/* <FiBell className="text-lg" />{" "} */}
-            <FaCoins/>
-            <h1 className="text-blue px-2">{userDetails?.balance?.credit  ?  userDetails?.balance?.credit : 0}</h1>
+            <FaCoins />
+            <h1 className="text-[#0090FF] px-2">
+              {userDetails?.balance?.credit ? userDetails?.balance?.credit : 0}
+            </h1>
             {/* <div className="rounded-full h-2 w-2 bg-[#0090FF]  absolute top-1 right-2"></div> */}
           </button>
 
           {/* noifiaction */}
-          <button className="border-2 border-gray-400  rounded-lg p-1 relative flex gap-2 "
-          style={{marginRight :'12rem'}}
-          onClick={goToProfile}
+          <button
+            className="border border-[#D9E1E7]  rounded-lg p-2 relative flex gap-3 "
+            style={{ marginRight: "12rem" }}
+            onClick={goToProfile}
           >
-            <img src={userDetails?.user?.avatar?.url} alt="" className="h-7 w-7" />{" "}
+            <img
+              src={userDetails?.user?.avatar?.url}
+              alt=""
+              className="h-8 w-8"
+            />{" "}
             <h2 className="pr-2 text-sm font-bold self-center font-dmSans italic">
-             Hello {userDetails?.user?.FirstName}
+              Hello {userDetails?.user?.FirstName}
             </h2>
           </button>
 
           {/* noifiaction */}
-         
+
           {/* noifiaction */}
           {/* <button className="border-none   rounded-lg p-2 relative"> */}
           {/* <div className="border-2 border-gray-400  text-gray-400 rounded-lg p-1 relative">
@@ -113,9 +115,9 @@ const Navbar = (props) => {
             </div>
           </div> */}
 
-            {/* <FaAngleDown className="" /> */}
-            <div id="google_translate_element" className="google-div"></div>
-            {/* <select
+          {/* <FaAngleDown className="" /> */}
+          <div id="google_translate_element" className="google-div"></div>
+          {/* <select
             
               className="border-none bg-transparent"
               onChange={(e) => changeLanguage(e.target.value)}

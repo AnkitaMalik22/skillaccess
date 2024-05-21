@@ -11,8 +11,8 @@ const SwiperSlideRight = () => {
   useEffect(() => {
     dispatch(getNewJobs());
   }, [dispatch]);
-console.log(newJobs);
-   const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  console.log(newJobs);
+  const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <Swiper
@@ -42,36 +42,31 @@ console.log(newJobs);
         },
       }}
     >
-
-
-      {
-        newJobs.map((job) => (
-          <SwiperSlide>
-          <div className=" bg-white  w-28 xl:w-44 h-36 rounded-lg p-3">
-            <figure className="bg-white-500  mx-auto rounded-lg flex justify-center cursor-pointer"
-             onClick={() =>
-              navigate(`/collage/companies/jobOverview/${job._id}`)
-            }
+      {newJobs.map((job) => (
+        <SwiperSlide>
+          <div className=" bg-white  w-28 xl:w-[182px] h-[148px] rounded-2xl p-4">
+            <figure
+              className="bg-white-500  mx-auto rounded-lg flex justify-center cursor-pointer mb-4"
+              onClick={() =>
+                navigate(`/collage/companies/jobOverview/${job._id}`)
+              }
             >
               <img
                 src={job?.company?.basic?.logo}
                 alt="img not loaded"
-                className="w-1/2 h-1/2 self-center rounded-lg"
+                className="w-[52px] h-[52px] self-center rounded-lg"
               />
             </figure>
-            <span className="">
-              <h3 className="text-xs  font-bold text-center break-words xl:mb-2">
-                {job.JobTitle}
-              </h3>
-              <p className="text-xs  font-bold text-center break-words  ">
-                {job?.company?.location?.address}{" "}
-                <em className="not-italic text-gray-400">{job.JobLocation}</em>
-              </p>
-            </span>
+            <h3 className="text-xs  font-bold text-center break-words mb-2">
+              {job.JobTitle}
+            </h3>
+            <p className="text-xs font-medium text-center break-words  ">
+              {job?.company?.location?.address}{" "}
+              <span className=" text-[#8F92A1]">{job.JobLocation}</span>
+            </p>
           </div>
         </SwiperSlide>
-        ))
-      }
+      ))}
 
       {/* {newJobs &&
         newJobs.map((job) => (
