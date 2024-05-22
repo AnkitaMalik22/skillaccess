@@ -72,7 +72,7 @@ export const getAllTests = createAsyncThunk(
       );
 
       const res = req.data;
-       console.log(res);
+      console.log(res);
 
       return res;
     } catch (error) {
@@ -126,6 +126,56 @@ export const deleteTest = createAsyncThunk(
       return res;
     } catch (error) {
       console.log(error);
+
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const selectStudentTest = createAsyncThunk(
+  "test/select",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/college/test/status/${data.testId}/${data.responseId}`,
+        { status: data.status },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+
+      console.log(response, "response");
+      return response;
+    } catch (error) {
+      console.log(error, "error.message");
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const getselectedStudents = createAsyncThunk(
+  "test/getselectedStudents",
+  async (id, { rejectWithValue }) => {
+    try {
+      const req = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/college/test/students/selected/${id}`,
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+
+      const res = req.data;
+
+      console.log(res);
+
+      return res.selectedStudents;
+    } catch (error) {
+      console.log("catch", error.response.data);
 
       return rejectWithValue(error.response.data);
     }

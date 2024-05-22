@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllTests } from "../../../../redux/collage/test/thunks/test";
 
-const List = ({FilterdStudents}) => {
+const List = ({ FilterdStudents }) => {
   // const arr = [2, 1, 1, 1, 1];
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const List = ({FilterdStudents}) => {
   let totalStudentsAppeared = 0;
   let totalStudentsSelected = 0;
   let overallPerformance = 0;
-
+  console.log(FilterdStudents);
   useEffect(() => {
     // dispatch(getCollege());
     dispatch(getAllTests());
@@ -88,12 +88,12 @@ const List = ({FilterdStudents}) => {
           <div className="flex justify-center">
             <div className=" self-center h-fit">
               <span>
-
-                <h2 className="font-dmSans  sm:text-sm">{0}</h2>
+                <h2 className="font-dmSans  sm:text-sm">
+                  {assessment.selectedStudents.length}
+                </h2>
               </span>
             </div>
           </div>
-     
           <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">

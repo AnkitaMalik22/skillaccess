@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import {
+  getAllTests,
+  getTest,
+  selectStudentTest,
+} from "../../../../redux/collage/test/thunks/test";
 import { getTestResultPage } from "../../../../redux/collage/test/thunks/test";
 import { getStudentResponse } from "../../../../redux/collage/test/thunks/student";
 
@@ -9,12 +13,18 @@ const Appeared = ({ assessment }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const handleStatusChange = (testId, responseId) => async (event) => {
+    const status = event.target.value;
+    await dispatch(selectStudentTest({ testId, responseId, status }));
+    dispatch(getTest(testId));
+    // dispatch(getTestResultPage(testId));
+  };
+
   const { testDataResponse, response } = useSelector((state) => state.test);
 
-
-// console.log(assessment);
-// console.log(testDataResponse);
-console.log(response);
+  // console.log(assessment);
+  // console.log(testDataResponse);
+  console.log(response);
 
   useEffect(() => {
     dispatch(getTestResultPage(assessment?._id));
@@ -130,9 +140,7 @@ console.log(response);
 
       {/* list to be iterated */}
 
-
       {arr[0]?.map((student, index) => (
-
         <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}
@@ -163,13 +171,13 @@ console.log(response);
             <div className=" self-center h-fit">
               <span>
                 <select
-                  name=""
-                  id=""
                   className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
+                  onChange={handleStatusChange(assessment._id, student._id)}
+                  value={student.status}
                 >
-                  <option>pending</option>
-                  <option>rejected</option>
-                  <option>selected</option>
+                  <option value="">pending</option>
+                  <option value="rejected">rejected</option>
+                  <option value="selected">selected</option>
                 </select>
               </span>
             </div>
@@ -184,7 +192,6 @@ console.log(response);
                       student?.percentage
                     )}`}
                     style={{ width: `${student?.percentage}%` }}
-
                   ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">

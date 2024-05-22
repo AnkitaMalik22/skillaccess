@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SlideNextButton from "../../dashboard/buttons";
@@ -8,17 +8,32 @@ import "swiper/css";
 import Card from "./common/Card";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import CreditPopUp from "../../../PopUps/CreditPopUp";
 
 const Advanced = () => {
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const advanced = useSelector((state) => state.test.assessments.advanced);
+  const { credit } = useSelector((state) => state.collageAuth);
+  console.log(credit);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleFunc = () => {
+    if (credit.credit) {
+      navigate("/collage/test/name?level=advanced");
+    } else {
+      setShow(true);
+    }
+  };
   return (
     <div className="flex bg-[#F8F8F9] w-full gap-2">
       <div className="  w-[242px] h-[312px] bg-[#8F92A1] bg-opacity-5  my-3 ml-8 rounded-2xl flex justify-center">
         <div className=" self-center w-full h-fit ">
           <div
             className="bg-white sm:w-[64px] sm:h-[64px] w-10 h-10 rounded-2xl mx-auto flex justify-center"
-            onClick={() => navigate("/collage/test/name?level=advanced")}
+            onClick={handleFunc}
           >
             <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
           </div>
@@ -77,6 +92,7 @@ const Advanced = () => {
           <SlideNextButton />
         </span>
       </Swiper>
+      {show && <CreditPopUp onCancel={handleClose} />}
     </div>
   );
 };
