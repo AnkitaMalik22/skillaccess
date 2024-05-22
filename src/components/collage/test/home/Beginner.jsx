@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SlideNextButton from "../../dashboard/buttons";
 import { FaPlus } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 import Card from "./common/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllTests } from "../../../../redux/collage/test/thunks/test";
+import CreditPopUp from "../../../PopUps/CreditPopUp";
 
 const Beginner = () => {
   const beginner = useSelector((state) => state.test.assessments.beginner);
-
+  const [show, setShow] = useState(false);
   // const uniqueIds = new Set();
 
   // const filteredBeginnerAssessments = assessments?.beginner?.filter(
@@ -23,7 +24,19 @@ const Beginner = () => {
   const dispatch = useDispatch();
 
   const { testLoading } = useSelector((state) => state.test);
+  const { credit } = useSelector((state) => state.collageAuth);
+  console.log(credit);
 
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleFunc = () => {
+    if (credit.credit) {
+      navigate("/collage/test/name?level=beginner");
+    } else {
+      setShow(true);
+    }
+  };
   //   React.useEffect(() => {
   //  if(!testLoading){
   //    dispatch(getAllTests())
@@ -39,7 +52,7 @@ const Beginner = () => {
         <div className=" self-center w-full h-fit ">
           <div
             className="bg-white sm:w-[64px] sm:h-[64px] w-10 h-10 rounded-2xl mx-auto flex justify-center hover:cursor-pointer "
-            onClick={() => navigate("/collage/test/name?level=beginner")}
+            onClick={handleFunc}
           >
             <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
           </div>
@@ -109,6 +122,7 @@ const Beginner = () => {
           <SlideNextButton />
         </span>
       </Swiper>
+      {show && <CreditPopUp onCancel={handleClose} />}
     </div>
   );
 };

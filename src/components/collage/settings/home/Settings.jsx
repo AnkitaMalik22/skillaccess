@@ -28,22 +28,28 @@ const Settings = () => {
   };
   const Navigate = useNavigate();
   return (
-    <div className="w-11/12 mx-auto font-dmSans">
+    <div className="font-dmSans p-5 md:px-24 md:py-16 w-3/4 ">
       <Header />
 
       <div className="w-full mt-16 flex-col gap-4 flex">
         {/* notis */}
         <div className="flex flex-col">
           <div
-            className="flex cursor-pointer justify-between px-5 py-4 bg-lGray bg-opacity-5 rounded-2xl sm:w-1/2"
+            className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
             onClick={() => Navigate("/collage/settings/notifications")}
           >
-            <div className="flex gap-6 ">
-              <img src="../../images/icons/bellDot.png" alt="" srcset="" />
-              <p className="text-lg">Notifications</p>
+            <div className="flex gap-6 items-center">
+              <img
+                src="../../images/icons/bellDot.png"
+                alt="bell-icon"
+                srcset=""
+              />
+              <p className="text-lg m-0 text-[#171717] font-medium">
+                Notifications
+              </p>
             </div>
             <div className="flex self-center">
-              <FaChevronRight className="text-gray-500 self-center text-2xl" />
+              <FaChevronRight className="text-[#17171799] self-center text-xl" />
             </div>
           </div>
         </div>
@@ -52,15 +58,17 @@ const Settings = () => {
         {/* security*/}
         <div className="flex flex-col">
           <div
-            className="flex cursor-pointer justify-between px-5 py-4 bg-lGray bg-opacity-5 rounded-2xl sm:w-1/2"
+            className="flex cursor-pointer justify-between  px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
             onClick={() => Navigate("/collage/settings/security")}
           >
-            <div className="flex gap-6 ">
-              <img src="../../images/icons/lock.png" alt="" />
-              <p className="text-lg">Privacy and Security</p>
+            <div className="flex gap-6 items-center">
+              <img src="../../images/icons/lock.png" alt="lock-icon" />
+              <p className="text-lg font-medium text-[#171717]">
+                Privacy and Security
+              </p>
             </div>
             <div className="flex self-center">
-              <FaChevronRight className="text-gray-500 self-center text-2xl" />
+              <FaChevronRight className="text-[#17171799] self-center text-xl" />
             </div>
           </div>
         </div>
@@ -69,46 +77,49 @@ const Settings = () => {
         {/* Login Activity*/}
         <div className="flex flex-col">
           <div
-            className="flex cursor-pointer justify-between px-5 py-4 bg-lGray bg-opacity-5 rounded-2xl sm:w-1/2"
+            className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
             onClick={() => Navigate("/collage/settings/activity")}
           >
-            <div className="flex gap-6 ">
-              <img src="../../images/icons/location.png" alt="" />
-              <p className="text-lg">Login Activity</p>
+            <div className="flex gap-6 items-center">
+              <img src="../../images/icons/location.png" alt="location-icon" />
+              <p className="text-lg font-medium text-[#171717]">
+                Login Activity
+              </p>
             </div>
             <div className="flex self-center">
-              <FaChevronRight className="text-gray-500 self-center text-2xl" />
+              <FaChevronRight className="text-[#17171799] self-center text-xl" />
             </div>
           </div>
         </div>
         {/*  */}
 
         {/* Visibility*/}
-        <div className="flex flex-col">
-          <div className="flex cursor-pointer justify-between px-5 py-4 bg-lGray bg-opacity-5 rounded-2xl sm:w-1/2"
-           onClick={() => Navigate("/collage/settings/visibility")}
-          >
-            <div className="flex gap-6 ">
-              <img src="../../images/icons/eye.png" alt="" />
-              <p className="text-lg">Visibility</p>
-            </div>
-            <div className="flex self-center">
-              <FaChevronRight className="text-gray-500 self-center text-2xl" />
-            </div>
-          </div>
-        </div>
-        {/*  */}
-
-        {/* Visibility*/}
-        
         <div className="flex flex-col">
           <div
-            className="flex cursor-pointer justify-between px-5 py-4 bg-[#DE350B] bg-opacity-5 rounded-2xl sm:w-1/2"
+            className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
+            onClick={() => Navigate("/collage/settings/visibility")}
+          >
+            <div className="flex gap-6 items-center">
+              <img src="../../images/icons/eye.png" alt="eye-icon" />
+              <p className="text-lg font-medium text-[#171717]">Visibility</p>
+            </div>
+            <div className="flex self-center">
+              <FaChevronRight className="text-[#17171799]  self-center text-xl" />
+            </div>
+          </div>
+        </div>
+        {/*  */}
+
+        {/* Visibility*/}
+
+        <div className="flex flex-col">
+          <div
+            className="flex cursor-pointer justify-between px-6 py-3 bg-[#DE350B] bg-opacity-5 rounded-2xl"
             onClick={() => setShowLogoutPopup(true)}
           >
-            <div className="flex gap-6 ">
-              <img src="../../images/icons/del.png" alt="" />
-              <p className="text-lg text-[#DE350B]">Log Out</p>
+            <div className="flex gap-6 items-center">
+              <img src="../../images/icons/del.png" alt="del-icon" />
+              <p className="text-lg text-[#DE350B] font-medium">Log Out</p>
             </div>
             {/* <div className="flex self-center">
               <FaChevronRight className="text-gray-500 self-center text-2xl" />
