@@ -33,18 +33,18 @@ const HeaderMarks = ({ response, totalQuestions }) => {
           <div className="w-1/2">
             <p className="text-lg">Time taken</p>
 
-            <p className="font-bold text-[28px]">{assessment?.totalTime}mins</p>
+            <p className="font-bold text-[28px]">{response?.timeTaken} mins</p>
           </div>
           <div className="w-1/2 ">
             <p className="text-lg">Questions Attempted</p>
-            <p className="font-bold text-[28px]">{totalQuestions}</p>
+            <p className="font-bold text-[28px]">{response?.totalQuestionsAttempted || 0} </p>
           </div>
         </div>
         <div className="flex justify-between ">
           <div className="w-1/2">
             <p className="text-lg">Correct Answers</p>
 
-            <p className="font-bold text-[28px]">{response?.marks}</p>
+            <p className="font-bold text-[28px]">{response?.correctAnswers}</p>
           </div>
           <div className="w-1/2">
             <p className="text-lg">Overall Result</p>
@@ -56,7 +56,7 @@ const HeaderMarks = ({ response, totalQuestions }) => {
       </div>
       <div class="mr-10 w-[200px] h-[200px] flex flex-row justify-center items-center gap-10 mt-22 mb-23  px-12 py-30 rounded-full shadow-md border border-solid border-black border-opacity-25 bg-gradient-to-b from-white to-white  border-[radial-gradient(circle at 100% 85%, #2fd790, rgba(47, 215, 144, 0) 100%)]">
         <p className="text-[32px] font-bold text-[#2fd790]">
-          {response.marks + "/" + response.totalMarks}
+          {response?.totalMarks + "/" + response?.marks}
         </p>
       </div>
     </div>
