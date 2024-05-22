@@ -9,31 +9,33 @@ const Header = () => {
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   return (
-    <div className="flex w-full mx-auto justify-between mb-2 font-dmSans">
-      <div
+    <>
+      {/* <div className="mx-auto justify-between mb-2 font-dmSans"> */}
+      {/* <div
         className={`fixed -left-[100px] w-[200vw] h-screen bg-black ${
           !toggle ? "-z-20" : "z-[99]"
         }  bg-opacity-10 top-0 `}
         onClick={() => {
           refButton.current.click();
         }}
-      ></div>
-      <span className="flex gap-4 justify-between w-3/4">
+      ></div> */}
+      <div className="flex gap-4 justify-between md:mb-16 mb-5">
         <div className="flex gap-2">
-        <button
-          className=" self-center ml-2 rounded-lg "
-          // onClick={() => navigate(-1)}
-        >
-          {/* <img
+          <button
+            className=" self-center ml-2 rounded-lg "
+            // onClick={() => navigate(-1)}
+          >
+            {/* <img
             src="../../../images/icons/inbox.png"
             className="mx-auto sm:h-6 sm:w-6 h-4 w-4"
           /> */}
-          {/* setting icon */}
-         <IoSettingsOutline className="h-8 w-8" />
-        </button>
-        <h2 className="text-2xl font-bold self-center font-dmSans">Settings</h2>
+            {/* setting icon */}
+            <IoSettingsOutline className="h-8 w-8" />
+          </button>
+          <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
+            Settings
+          </h2>
         </div>
-    
 
         <Disclosure
           as={"div"}
@@ -43,13 +45,13 @@ const Header = () => {
         >
           {({ open }) => (
             <div className="relative">
-              <div className=" mx-2  sm:h-12 h-10 my-2 px-4 w-fit ">
+              <div className="py-2 px-4">
                 <div className="flex justify-between">
                   <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
                   <input
                     type="text"
                     placeholder="Search..."
-                    className={`input border-none self-center focus:outline-none input-md sm:w-96 max-w-md mx-auto ${
+                    className={`input border-none focus:outline-none sm:w-96 ${
                       open ? "bg-white" : "bg-gray-100"
                     } `}
                   />
@@ -60,8 +62,9 @@ const Header = () => {
         </Disclosure>
 
         {/*  */}
-      </span>
-    </div>
+      </div>
+      {/* </div> */}
+    </>
   );
 };
 

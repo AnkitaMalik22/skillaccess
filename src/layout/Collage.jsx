@@ -425,7 +425,7 @@ const CollageLayout = ({ children }) => {
                         } shadow-none text-white rounded-2xl border-none focus:outline-none max-w-xs mx-auto ${
                           temp === i || selection === i
                             ? "bg-white !text-[#171717]"
-                            : "bg-[#95ACFA]"
+                            : " bg-transparent"
                         }`}
                       >
                         <div className="">{el.icon}</div>
@@ -443,7 +443,7 @@ const CollageLayout = ({ children }) => {
               })}
 
               <li className="mb-5 text-center font-dmSans text-lg font-bold ">
-                <h2 className="text-[#06152B]">© 2022 skillassess</h2>
+                <h2 className="text-[#06152B]">© 2024 skillaccess</h2>
               </li>
             </ul>
           </aside>
