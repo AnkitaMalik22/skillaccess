@@ -1,12 +1,8 @@
-import React from 'react'
-import CollageLayout from '../../../layout/Collage'
-import RecentAll from '../../../components/collage/quesBank/recentAll/recentAll'
+import RecentAll from "../../../components/collage/quesBank/recentAll/recentAll";
+import useTranslate from "../../../hooks/useTranslate";
 const RecentAllPage = () => {
-  return (
-    <CollageLayout>
-    < RecentAll/>
- </CollageLayout>
-  )
-}
+  useTranslate();
+  return <RecentAll />;
+};
 
-export default RecentAllPage
+export default RecentAllPage;

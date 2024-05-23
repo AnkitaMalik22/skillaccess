@@ -10,7 +10,7 @@ import {
 
 const List = ({ question, number }) => {
   const [type, setType] = useState();
-
+  const [AnswerIndex, setAnswerIndex] = useState(question.AnswerIndex);
   const { currentQuestionCount } = useSelector((state) => state.test);
   const dispatch = useDispatch();
   const handleDelete = ({ sectionId, questionId, questionType }) => {
@@ -59,7 +59,7 @@ const List = ({ question, number }) => {
                 leaveFrom="transform scale-100  opacity-100"
                 leaveTo="transform scale-95 opacity-0"
               > */}
-              <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
+              {/* <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
                 {question.Options?.map((question, index) => (
                   <div className="flex gap-2 z-10 relative rounded-lg p-3">
                     <div className="w-6" key={index}>
@@ -99,6 +99,68 @@ const List = ({ question, number }) => {
                           ? question.question
                           : question
                         : ""}
+                    </label>
+                  </div>
+                ))}
+              </Disclosure.Panel> */}
+              <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
+                {question.Options?.map((question, index) => (
+                  <div className="flex gap-2 z-10 relative rounded-lg p-3">
+                    <div className="w-6">
+                      {index === AnswerIndex ? (
+                        <img
+                          src="../../../images/icons/greenDotSelected.png"
+                          alt="greensel"
+                        />
+                      ) : (
+                        <img
+                          src="../../../images/icons/blueDot.png"
+                          alt="greensel"
+                        />
+                      )}
+                    </div>
+
+                    <label
+                      className={` text-sm ${
+                        AnswerIndex === index ? "text-green" : "text-black"
+                      }`}
+                    >
+                      {question
+                        ? question.question
+                          ? question.question
+                          : question
+                        : ""}
+                    </label>
+                  </div>
+                ))}
+
+                {question.questions?.map((question) => (
+                  <div className="flex gap-2  z-10 relative rounded-lg p-3">
+                    <div className="w-6">
+                      <input
+                        type="radio"
+                        name="answer"
+                        id="answer"
+                        className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
+                      />
+                    </div>
+
+                    <label className="text-blacktext-sm">
+                      {question ? (
+                        question.question ? (
+                          <>
+                            {" "}
+                            <div>
+                              <h3>{question.question}</h3>
+                              <p>{question.studentAnswer}</p>
+                            </div>
+                          </>
+                        ) : (
+                          question
+                        )
+                      ) : (
+                        ""
+                      )}
                     </label>
                   </div>
                 ))}

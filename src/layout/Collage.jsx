@@ -272,6 +272,7 @@ const CollageLayout = ({ children }) => {
   ];
 
   useEffect(() => {
+<<<<<<< HEAD
     if (change) {
       navigate(path);
     }
@@ -287,6 +288,15 @@ const CollageLayout = ({ children }) => {
     //     bottom.current.getBoundingClientRect().top,
     //   behavior: "smooth",
     // });
+=======
+    // dispatch(getCollege());
+    // //  window.scrollTo({
+    // //   top:
+    // //     window.scrollY +
+    // //     bottom.current.getBoundingClientRect().top,
+    // //   behavior: "smooth",
+    // // });
+>>>>>>> 4fc4b0d30d0e24c0d41774e3f664602a1ef74205
     bottom.current.scrollIntoView();
     if (location.pathname.match(/\/collage\/dashboard*/)) {
       dispatch(setSelected(0));
@@ -478,7 +488,7 @@ const CollageLayout = ({ children }) => {
             </ul>
           </aside>
 
-          <div className="bg-white rounded-3xl h-[90vh] overflow-y-scroll w-full flex-1  font-dmSans mr-5 ">
+          <div className="bg-[#FEFEFE] rounded-3xl h-[90vh] overflow-y-scroll w-full flex-1  font-dmSans mr-5 ">
             {children}
           </div>
         </div>
