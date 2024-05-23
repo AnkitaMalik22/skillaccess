@@ -80,25 +80,12 @@ export default function App() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  // =======
-  //   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     dispatch(getCollege());
-  //   }, [dispatch]);
-  // >>>>>>> saveMain
 
   const { user, isLoggedIn, logoutError, USER_LOADING } = useSelector(
     (state) => state.collageAuth
   );
 
-  // useEffect(() => {
-  //   dispatch(getCollege());
-  // }, []);
-
-  useEffect(() => {
-    dispatch(getStudent());
-  }, []);
-
+  
   useEffect(() => {
     console.log(logoutError);
     if (logoutError) {
@@ -107,49 +94,7 @@ export default function App() {
     }
   }, [logoutError]);
 
-  // useEffect(() => {
-  //   try {
-  //     let scriptLoaded = false;
-
-  //     let script = document.createElement("script");
-  //     const loadGoogleTranslateScript = () => {
-  //       if (!scriptLoaded) {
-  //         script.src =
-  //           "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-  //         script.async = true;
-  //         script.onload = () => {
-  //           window.googleTranslateElementInit = () => {
-  //             new window.google.translate.TranslateElement(
-  //               {
-  //                 pageLanguage: "en",
-  //                 includedLanguages: "en,hi,bn,ta,te,mr,gu,kn,ur,pa,ml,or", // Add more languages as needed
-  //               },
-  //               "google_translate_element"
-  //             );
-  //           };
-  //         };
-
-  //         document.body.appendChild(script);
-  //         scriptLoaded = true;
-  //       }
-  //     };
-  //     loadGoogleTranslateScript();
-  //   } catch (error) {}
-
-  //   // return () => {
-  //   //   // Clean up script when component unmounts
-  //   //   if (scriptLoaded) {
-  //   //     document.body.removeChild(script);
-  //   //     scriptLoaded = false;
-  //   //   }
-  //   // };
-  // }, []);
-
-
-
-
-
-
+ 
 
   return (
     <React.Fragment>
