@@ -56,7 +56,7 @@ const HeaderMarks = ({ response, totalQuestions }) => {
       </div>
       <div class="mr-10 w-[200px] h-[200px] flex flex-row justify-center items-center gap-10 mt-22 mb-23  px-12 py-30 rounded-full shadow-md border border-solid border-black border-opacity-25 bg-gradient-to-b from-white to-white  border-[radial-gradient(circle at 100% 85%, #2fd790, rgba(47, 215, 144, 0) 100%)]">
         <p className="text-[32px] font-bold text-[#2fd790]">
-          {response?.totalMarks + "/" + response?.marks}
+          {response?.totalMarks + "/" + assessment?.totalMarks}
         </p>
       </div>
     </div>
