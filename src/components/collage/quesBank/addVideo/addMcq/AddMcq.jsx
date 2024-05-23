@@ -18,10 +18,12 @@ import {
 
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { editBankQuestionById } from "../../../../../redux/collage/test/thunks/question";
 
 const AddMcq = () => {
   const { TopicToBeAdded } = useSelector((state) => state.test);
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const addType = searchParams.get("addType");
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -39,6 +41,7 @@ const AddMcq = () => {
   let index = null;
 
   const [search, setSearch] = useSearchParams();
+  const Number = searchParams.get("index");
 
   console.log(search.get("topicId"));
   const [question, setQuestion] = useState({
@@ -61,63 +64,86 @@ const AddMcq = () => {
       return -1;
     });
   };
+  const [vide, setVide] = useState({});
+  useEffect(() => {
+    if (addType === "edit") {
+      let ques = JSON.parse(localStorage.getItem("qbQues"));
+      setQuestion(ques.questions[Number]);
+      setVide(ques);
+      console.log(ques);
+    }
+  }, []);
 
   const handleSave = (type) => {
-    if ( !question.Title ||
-      question.Title.trim() === "" ||
-      question.Title === "<p><br></p>") {
-      toast.error("Please enter question");
-      return;
-    } else if (
-      !question.Options[0] ||
-      !question.Options[1] ||
-      !question.Options[2] ||
-      !question.Options[3]
-    ) {
-      toast.error("Please enter atleast 4 options");
-      return;
-    } else if (question.Duration == 0) {
-      toast.error("Please enter required time");
-      return;
-    } else if (question.AnswerIndex === null) {
-      toast.error("Please select the correct answer");
-      return;
-    } else if (question.Options.some((option) => option.trim() === "")) {
-      toast.error("Please enter all options");
-      return;
-    } else if (question.Duration == 0) {
-      toast.error("Please enter required time");
-      return;
-    }
-    else {
-      if (isPrev) {
-        dispatch(
-          addVideo({
-            question: question,
-            index: count + 1,
-            prev: true,
-          })
-        );
-        setCount(TopicToBeAdded.video.questions.length - 1);
-        setQuestion({
-          Title: "",
-          Options: [],
-          Duration: 0,
-          AnswerIndex: null,
-        });
-        setIsPrev(false);
-        if (type === "save") navigate(-1);
+    if (addType !== "edit") {
+      if (
+        !question.Title ||
+        question.Title.trim() === "" ||
+        question.Title === "<p><br></p>"
+      ) {
+        toast.error("Please enter question");
+        return;
+      } else if (
+        !question.Options[0] ||
+        !question.Options[1] ||
+        !question.Options[2] ||
+        !question.Options[3]
+      ) {
+        toast.error("Please enter atleast 4 options");
+        return;
+      } else if (question.Duration == 0) {
+        toast.error("Please enter required time");
+        return;
+      } else if (question.AnswerIndex === null) {
+        toast.error("Please select the correct answer");
+        return;
+      } else if (question.Options.some((option) => option.trim() === "")) {
+        toast.error("Please enter all options");
+        return;
+      } else if (question.Duration == 0) {
+        toast.error("Please enter required time");
+        return;
       } else {
-        dispatch(addVideo({ question: question, prev: false }));
+        if (isPrev) {
+          dispatch(
+            addVideo({
+              question: question,
+              index: count + 1,
+              prev: true,
+            })
+          );
+          setCount(TopicToBeAdded.video.questions.length - 1);
+          setQuestion({
+            Title: "",
+            Options: [],
+            Duration: 0,
+            AnswerIndex: null,
+          });
+          setIsPrev(false);
+          if (type === "save") navigate(-1);
+        } else {
+          dispatch(addVideo({ question: question, prev: false }));
 
-        setQuestion({
-          Title: "",
-          Options: [],
-          Duration: 0,
-          AnswerIndex: null,
-        });
-        if (type === "save") navigate(-1);
+          setQuestion({
+            Title: "",
+            Options: [],
+            Duration: 0,
+            AnswerIndex: null,
+          });
+          if (type === "save") navigate(-1);
+        }
       }
+    } else {
+      vide.questions[Number] = question;
+
+      dispatch(
+        editBankQuestionById({
+          type: "video",
+          id: vide._id,
+          question: vide,
+        })
+      );
+      navigate(-1);
     }
   };
   const handleChanges = (e) => {
@@ -229,6 +255,7 @@ const AddMcq = () => {
         question={question}
         setQuestion={setQuestion}
         handleSave={handleSave}
+        addType={addType}
       />
 
       <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
@@ -536,14 +563,16 @@ const AddMcq = () => {
             )}
           </div>
           <div className=" flex">
-            <button
-              className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
-              // onClick={addQuestion}
+            {addType !== "edit" && (
+              <button
+                className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+                // onClick={addQuestion}
 
-              onClick={handleSave}
-            >
-              <FaPlus className="self-center" /> Add Next Question
-            </button>
+                onClick={handleSave}
+              >
+                <FaPlus className="self-center" /> Add Next Question
+              </button>
+            )}
           </div>
         </div>
       </div>

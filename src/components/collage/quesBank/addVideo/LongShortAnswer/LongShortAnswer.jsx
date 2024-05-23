@@ -12,6 +12,7 @@ import { FaChevronLeft, FaPlus } from "react-icons/fa";
 
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { editBankQuestionById } from "../../../../../redux/collage/test/thunks/question";
 
 const LongShortAnswer = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const LongShortAnswer = () => {
   const dispatch = useDispatch();
 
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const Number = searchParams.get("index");
   const { id } = useParams();
 
   const type = searchParams.get("type");
@@ -35,6 +36,7 @@ const LongShortAnswer = () => {
 
     Duration: 0,
   });
+
   const [count, setCount] = useState(-1);
   useEffect(() => {
     if (LongShort === "short") {
@@ -66,70 +68,135 @@ const LongShortAnswer = () => {
       });
     }
   };
-
+  const [vide, setVide] = useState({});
+  useEffect(() => {
+    if (addType === "edit" && LongShort === "short") {
+      let ques = JSON.parse(localStorage.getItem("qbQues"));
+      setQuestion(ques.short[Number]);
+      setVide(ques);
+      console.log(ques);
+    } else if (addType === "edit" && LongShort === "long") {
+      let ques = JSON.parse(localStorage.getItem("qbQues"));
+      setQuestion(ques.short[Number]);
+      setVide(ques);
+      console.log(ques);
+    }
+  }, []);
   const handleSave = () => {
-    console.log(question);
-
-    if (LongShort === "short") {
-      if (question.Title == "" || question.Title.trim() === "" || question.Title === "<p><br></p>") {
-        toast.error("Please enter the question");
-      } else if (question.Duration == 0) {
-        toast.error("Please enter required time");
-        return;
-      } else {
-        if (isPrev) {
-          dispatch(addVideo({ short: question, prev: true, index: count + 1 }));
-          setIsPrev(false);
-          setCount(TopicToBeAdded.video.short.length - 1);
-          setQuestion({
-            id: `${Date.now()}`,
-
-            Title: "",
-
-            Duration: 0,
-          });
+    if (addType !== "edit") {
+      if (LongShort === "short") {
+        if (
+          question.Title == "" ||
+          question.Title.trim() === "" ||
+          question.Title === "<p><br></p>"
+        ) {
+          toast.error("Please enter the question");
+        } else if (question.Duration == 0) {
+          toast.error("Please enter required time");
+          return;
         } else {
-          dispatch(addVideo({ short: question, prev: false }));
+          if (isPrev) {
+            dispatch(
+              addVideo({ short: question, prev: true, index: count + 1 })
+            );
+            setIsPrev(false);
+            setCount(TopicToBeAdded.video.short.length - 1);
+            setQuestion({
+              id: `${Date.now()}`,
 
-          setQuestion({
-            id: `${Date.now()}`,
+              Title: "",
 
-            Title: "",
+              Duration: 0,
+            });
+          } else {
+            dispatch(addVideo({ short: question, prev: false }));
 
-            Duration: 0,
-          });
+            setQuestion({
+              id: `${Date.now()}`,
+
+              Title: "",
+
+              Duration: 0,
+            });
+          }
+        }
+      } else {
+        if (question.Title == "") {
+          toast.error("Please enter the question");
+        } else if (question.Duration == 0) {
+          toast.error("Please enter required time");
+          return;
+        } else {
+          if (isPrev) {
+            dispatch(
+              addVideo({ long: question, prev: true, index: count + 1 })
+            );
+            setIsPrev(false);
+            setCount(TopicToBeAdded.video.long.length - 1);
+            setQuestion({
+              id: `${Date.now()}`,
+
+              Title: "",
+
+              Duration: 0,
+            });
+          } else {
+            dispatch(addVideo({ long: question, prev: false }));
+
+            // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
+
+            setQuestion({
+              id: `${Date.now()}`,
+
+              Title: "",
+
+              Duration: 0,
+            });
+          }
         }
       }
     } else {
-      if (question.Title == "") {
-        toast.error("Please enter the question");
-      } else if (question.Duration == 0) {
-        toast.error("Please enter required time");
-        return;
-      } else {
-        if (isPrev) {
-          dispatch(addVideo({ long: question, prev: true, index: count + 1 }));
-          setIsPrev(false);
-          setCount(TopicToBeAdded.video.long.length - 1);
-          setQuestion({
-            id: `${Date.now()}`,
-
-            Title: "",
-
-            Duration: 0,
-          });
+      if (LongShort === "short") {
+        if (
+          question.Title == "" ||
+          question.Title.trim() === "" ||
+          question.Title === "<p><br></p>"
+        ) {
+          toast.error("Please enter the question");
+        } else if (question.Duration == 0) {
+          toast.error("Please enter required time");
+          return;
         } else {
-          dispatch(addVideo({ long: question, prev: false }));
+          vide.short[Number] = question;
 
-          // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
+          dispatch(
+            editBankQuestionById({
+              type: "video",
+              id: vide._id,
+              question: vide,
+            })
+          );
+        }
+      } else {
+        if (
+          question.Title == "" ||
+          question.Title.trim() === "" ||
+          question.Title === "<p><br></p>"
+        ) {
+          toast.error("Please enter the question");
+        } else if (question.Duration == 0) {
+          toast.error("Please enter required time");
+          return;
+        } else {
+          vide.long[Number] = question;
 
-          setQuestion({
-            id: `${Date.now()}`,
-
-            Title: "",
-
-            Duration: 0,
-          });
+          dispatch(
+            editBankQuestionById({
+              type: "video",
+              id: vide._id,
+              question: vide,
+            })
+          );
         }
       }
     }
@@ -190,12 +257,14 @@ const LongShortAnswer = () => {
             )}
           </div>
           <div className=" flex">
-            <button
-              className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
-              onClick={handleSave}
-            >
-              <FaPlus className="self-center" /> Add Next Question
-            </button>
+            {addType !== "edit" && (
+              <button
+                className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+                onClick={handleSave}
+              >
+                <FaPlus className="self-center" /> Add Next Question
+              </button>
+            )}
           </div>
         </div>
       </div>

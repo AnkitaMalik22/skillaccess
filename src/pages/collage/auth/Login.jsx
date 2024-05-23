@@ -13,11 +13,15 @@ import {
 import { useGoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
 import Layout from "./Layout";
+import Loader from "../../../Loader";
+import CircularLoader from "../../../components/CircularLoader";
 
 const Login = () => {
   // cosnt[(error, setError)] = useState();
 
   const { Error, logoutError } = useSelector((state) => state.collageAuth);
+  const [loader, setLoader] = useState(false);
+
   const [type, setType] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,6 +46,7 @@ const Login = () => {
   }, []);
 
   const handleSubmit = async (e) => {
+    setLoader(true);
     e.preventDefault();
 
     const { Email, Password, confirmPassword } = Credentials;
@@ -55,9 +60,12 @@ const Login = () => {
       if (ch.meta.requestStatus === "fulfilled") {
         toast.success("Logged in successfully");
         setCredentials({});
+        navigate("/collage/dashboard");
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -190,7 +198,7 @@ const Login = () => {
               onClick={handleSubmit}
               disabled={isLoginDisabled}
             >
-              Login
+              Login {loader && <CircularLoader />}
             </button>
             <h3 className="text-lGray text-center text-bold text-xs mb-2">
               OR
@@ -200,6 +208,7 @@ const Login = () => {
               // onClick={() => navigate("/collage/dashboard")}
               onClick={login}
               type="button"
+              lo
             >
               <FcGoogle className="text-lg mr-2" />
               <h3

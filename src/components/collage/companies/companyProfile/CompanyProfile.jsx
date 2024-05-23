@@ -201,15 +201,13 @@ const CompanyProfile = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
-      <div className="mt-4">
-        <Header
-          CompanyName={companyDetails?.basic?.companyName}
-          handleFilter={handleFilterJobs}
-        />
-      </div>
+    <div className="w-11/12 mx-auto py-5 md:py-10">
+      <Header
+        CompanyName={companyDetails?.basic?.companyName}
+        handleFilter={handleFilterJobs}
+      />
 
-      <div className="sm:flex w-[95%] mx-auto justify-between mb-2 font-dmSans mt-8">
+      <div className="sm:flex justify-between mb-2 font-dmSans mt-8">
         <div className="sm:w-[45%]">
           <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
             <img

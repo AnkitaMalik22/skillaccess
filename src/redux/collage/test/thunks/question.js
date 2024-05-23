@@ -164,6 +164,30 @@ export const editQuestionById = createAsyncThunk(
   }
 );
 
+export const editBankQuestionById = createAsyncThunk(
+  "test/editBankQuestionById",
+  async (data, { rejectWithValue }) => {
+    console.log("ok");
+    try {
+      const req = await axios.put(
+        `${REACT_APP_API_URL}/api/assessments/question/${data.id}?type=${data.type}`,
+        data.question,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+      const res = req.data;
+      return { res: res, type: data.type };
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const getTopicByIdQB = createAsyncThunk(
   "test/getTopicByIdQB",
   async (id, { rejectWithValue }) => {
