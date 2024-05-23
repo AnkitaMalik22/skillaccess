@@ -2,7 +2,7 @@ import React from "react";
 import toast from "react-hot-toast";
 
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { inviteToTest } from "../../../../redux/collage/test/thunks/student";
@@ -11,9 +11,9 @@ const Footer = ({ students }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { testId } = useSelector((state) => state.test);
+  const [searchParams, setSearchParams] = useSearchParams();
   const { credit } = useSelector((state) => state.collageAuth);
-
+  const testId = searchParams.get("testId");
   const handleSendInvite = () => {
     if (students.length === 0) {
       toast.error("Select at least one student to send an invite.");
@@ -22,7 +22,7 @@ const Footer = ({ students }) => {
       toast.error("Invalid Test Id");
     } else if (credit?.limit - 1 < students.length) {
       toast.error(
-        "Your current plan only support inviting " + credit?.limit + " students"
+        "Your current plan only support inviting " + credit?.limit + "students"
       );
     } else {
       console.log(testId, students);

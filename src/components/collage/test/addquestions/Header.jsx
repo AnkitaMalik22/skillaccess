@@ -1,14 +1,14 @@
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate ,useSearchParams} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Header = ({ Q, page }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useSearchParams();
   const topics = JSON.parse(localStorage.getItem("topics"));
-  const {name} = useSelector((state) => state.test);
+  const { name } = useSelector((state) => state.test);
   const level = search.get("level");
 
   return (
@@ -16,7 +16,10 @@ const Header = ({ Q, page }) => {
       <div>
         <button className="flex self-center ml-2 rounded-lg  gap-2">
           <button
-            onClick={() =>   level === 'adaptive' ? navigate(`/collage/test/selectAdaptive?level=${level}`) : navigate(`/collage/test/select?level=${level}`)
+            onClick={() =>
+              level === "adaptive"
+                ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+                : navigate(`/collage/test/select?level=${level}`)
             }
             className="mt-2 mr-3"
           >
@@ -36,8 +39,10 @@ const Header = ({ Q, page }) => {
                   className="w-4 h-4"
                 />
               </span>
-              <h3 className="mr-2"> {topics && topics.length ? topics.length : 0
-              } Topics</h3>{" "}
+              <h3 className="mr-2">
+                {" "}
+                {topics && topics.length ? topics.length : 0} Topics
+              </h3>{" "}
               <span className="w-2 h-2">
                 <img
                   src="../../images/icons/hourglass.png"
@@ -57,7 +62,7 @@ const Header = ({ Q, page }) => {
             className="self-center justify-center flex bg-blue-800 py-3 px-4 rounded-lg text-xs gap-2 text-white"
             onClick={() =>
               page == "submit"
-                ? navigate("/collage/test/submit")
+                ? navigate(`/collage/test/submit?level=${level}`)
                 : navigate("/collage/test/final")
             }
           >

@@ -12,6 +12,7 @@ import {
   getInbox,
   getMail,
   getSentEmails,
+  searchMail,
 } from "../../../../redux/collage/auth/authSlice";
 import {
   bookmarkMail,
@@ -25,38 +26,65 @@ const List = ({ show, inboxType, setInboxType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [queries, setQueries] = useState({ limit: 50, skip: 0 });
-
   const user = useSelector(getInbox);
-  const [arr, setArr] = useState([
-    // { id: 1, isChecked: false },
-    // { id: 2, isChecked: false },
-    // { id: 3, isChecked: false },
-    // { id: 4, isChecked: false },
-  ]);
+  const [arr, setArr] = useState([]);
+
+  const { total, totalSent } = useSelector((state) => state.collageAuth?.mail);
 
   const email = useSelector((state) => state.collageAuth?.user?.Email);
-  const [total, setTotal] = useState(0);
+  const [Total, setTotal] = useState(0);
+  const [totalmails, setTotalmails] = useState(
+    inboxType === "Sent" ? totalSent : total
+  );
+
   const [socket, setSocket] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [queries, setQueries] = useState({
+    limit: 5,
+    skip: parseInt(searchParams.get("skip")) || 0,
+  });
+  const [filter, setFilter] = useState({
+    type:
+      searchParams.get("typeFilter") === "null"
+        ? null
+        : searchParams.get("typeFilter"),
+    within:
+      searchParams.get("within") === "null" ? null : searchParams.get("within"),
+    keyword:
+      searchParams.get("keyword") === "null"
+        ? null
+        : searchParams.get("keyword"),
+    from: searchParams.get("from") === "null" ? null : searchParams.get("from"),
+    to: searchParams.get("to") === "null" ? null : searchParams.get("to"),
+    date: searchParams.get("date") === "null" ? null : searchParams.get("date"),
+  });
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
     console.log("email");
-    dispatch(getMail(queries));
+    getMails();
 
     //join room with  you mail as room id
     socket.emit("joinRoom", email);
 
     //listen for messages to your room
     socket.on("message", (roomName, message) => {
-      dispatch(getMail(queries));
+      getMails();
     });
     // return () => {
     //   socket.disconnect();
     // };
   }, []);
 
+  const getMails = () => {
+    if (searchParams.get("show") === "search") {
+      dispatch(
+        searchMail({ ...filter, limit: queries.limit, skip: queries.skip })
+      );
+    } else {
+      dispatch(getMail(queries));
+    }
+  };
   const handleNav = (i) =>
     navigate(
       `/collage/inbox/mail?index=${i}&inboxType=${inboxType}&type=view&show=${show}&within=${searchParams.get(
@@ -68,25 +96,64 @@ const List = ({ show, inboxType, setInboxType }) => {
       )}&typeFilter=${searchParams.get("typeFilter")}`
     );
   const handleLeft = () => {
-    if (queries.skip < queries.limit) {
+    if (queries.skip <= 0) {
       return;
     }
+    let skip = queries.skip - queries.limit;
+    setSearchParams({ skip: skip });
     setQueries((prev) => {
       let skip = prev.skip - prev.limit;
       return { ...prev, skip: skip };
     });
-    dispatch(getMail(queries));
+    if (searchParams.get("show") === "search") {
+      dispatch(
+        searchMail({
+          ...filter,
+          limit: queries.limit,
+          skip: queries.skip - queries.limit,
+        })
+      );
+    } else {
+      dispatch(
+        dispatch(
+          getMail({ limit: queries.limit, skip: queries.skip - queries.limit })
+        )
+      );
+    }
   };
   const handleRight = () => {
-    if (queries.skip > total) {
+    if (queries.skip > totalmails) {
       return;
     }
+    let skip = queries.skip + queries.limit;
+
+    setSearchParams({ ...Object.fromEntries(searchParams), skip });
     setQueries((prev) => {
-      let skip = prev.skip + prev.limit;
-      return { ...prev, skip: skip };
+      let skipCopy = prev.skip + prev.limit;
+      return { ...prev, skip: skipCopy };
     });
-    dispatch(getMail(queries));
+
+    if (searchParams.get("show") === "search") {
+      dispatch(
+        searchMail({
+          ...filter,
+          limit: queries.limit,
+          skip: queries.skip + queries.limit,
+        })
+      );
+    } else {
+      dispatch(
+        getMail({ limit: queries.limit, skip: queries.skip + queries.limit })
+      );
+    }
   };
+  useEffect(() => {
+    if (inboxType === "Sent") {
+      setTotalmails(totalSent);
+    } else {
+      setTotalmails(total);
+    }
+  }, [total, totalSent]);
 
   useEffect(() => {
     if (JSON.stringify(user) !== JSON.stringify(arr)) {
@@ -172,6 +239,12 @@ const List = ({ show, inboxType, setInboxType }) => {
               className="w-fit mx-auto select focus:!outline-none h-fit focus:border-0 text-sm font-dmSans self-center bg-transparent text-gray-400 font-bold"
               onChange={(e) => {
                 setInboxType(e.target.value);
+                setQueries({ skip: 0, limit: queries.limit });
+                if (e.target.value === "Sent") {
+                  setTotalmails(totalSent);
+                } else {
+                  setTotalmails(total);
+                }
               }}
             >
               <option value="Received">Received</option>
@@ -183,15 +256,11 @@ const List = ({ show, inboxType, setInboxType }) => {
         </div>
         <div className="flex gap-2 self-center">
           <p className="text-gray-400 text-xs font-bold">
-            {queries.skip % queries.limit}-
-            {total < queries.limit ? total : queries.limit} of {total}
+            {queries.skip}-{queries.skip + Total} of {totalmails}
           </p>
-          {queries.skip > queries.limit && (
-            <FaChevronLeft onClick={handleLeft} />
-          )}
-          {queries.skip < queries.total && (
-            <FaChevronRight onCkick={handleRight} />
-          )}
+          {queries.skip > 0 && <FaChevronLeft onClick={handleLeft} />}
+
+          {Total < totalmails && <FaChevronRight onClick={handleRight} />}
         </div>
       </div>
       <div className="p-4 font-medium text-gray-400">
