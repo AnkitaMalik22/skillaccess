@@ -1,13 +1,9 @@
-import React from 'react'
-import CollageLayout from '../../../layout/Collage'
-import AddQuestionsSelect from '../../../components/collage/quesBank/home/UploadQuestionsSelect'
+import AddQuestionsSelect from "../../../components/collage/quesBank/home/UploadQuestionsSelect";
+import useTranslate from "../../../hooks/useTranslate";
 
 const UploadTopic = () => {
-  return (
-  <CollageLayout>
-  <AddQuestionsSelect />
-    </CollageLayout>
-  )
-}
+  useTranslate();
+  return <AddQuestionsSelect />;
+};
 
-export default UploadTopic
+export default UploadTopic;

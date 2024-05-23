@@ -5,7 +5,9 @@ const Home = lazy(() => import("./Home"));
 const CompanyPage = lazy(() => import("./CompanyPage"));
 const JobsPage = lazy(() => import("./JobsPage"));
 const StudentsPage = lazy(() => import("./StudentsPage"));
-const StudentsProfilePage = lazy(() => import("../students/StudentsProfilePage"));
+const StudentsProfilePage = lazy(() =>
+  import("../students/StudentsProfilePage")
+);
 const DashboardRoutes = () => {
   return (
     <Route path="collage/dashboard">

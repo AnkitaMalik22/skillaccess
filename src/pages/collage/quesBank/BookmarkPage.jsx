@@ -1,13 +1,9 @@
-import React from 'react'
-import CollageLayout from '../../../layout/Collage'
-import Bookmarks from '../../../components/collage/quesBank/bookmark/Bookmarks'
+import Bookmarks from "../../../components/collage/quesBank/bookmark/Bookmarks";
+import useTranslate from "../../../hooks/useTranslate";
 
 const BookmarkPage = () => {
-  return (
-   <CollageLayout>
-       <Bookmarks />
-    </CollageLayout>
-  )
-}
+  useTranslate();
+  return <Bookmarks />;
+};
 
-export default BookmarkPage
+export default BookmarkPage;

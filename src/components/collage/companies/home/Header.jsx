@@ -18,42 +18,42 @@ const Header = ({ handleFilter }) => {
         >
           <img src="../../images/icons/sales.jpg" alt="" />
         </button>
-        <h2 className="text-[24px] leading-[36px] font-bold self-center font-dmSans">
+        <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Companies
         </h2>
       </span>
 
       {/* search */}
-      <div className=" rounded-xl mx-2 w-full sm:h-12 h-10 flex my-2 ">
-        <span className="w-fit mx-auto flex self-center">
-          <IoIosSearch className="self-center w-10 h-10 bg-gray-100 rounded-s-lg text-gray-400 py-2 " />
+      <div className=" rounded-xl w-full sm:h-12 h-10 flex">
+        <span className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
+          <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400 " />
           <input
             type="text"
             placeholder="Search..."
             onChange={handleFilter}
-            className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
+            className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
           />
         </span>
       </div>
 
-      <span className="flex gap-2">
+      <div className="flex gap-3">
         <button
-          className="self-center justify-center flex bg-[#F8F8F9] py-3  rounded-xl w-32  gap-2 "
+          className="self-center justify-center flex bg-[#8f92a11a] px-7 py-3 rounded-2xl gap-2 text-sm text-[#171717] font-bold "
           // onClick={() => navigate("/collage/test/addMcq")}
         >
           <FiPlus className="self-center text-lg " /> Add
         </button>
 
         <button
-          className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
+          className="self-center justify-center flex bg-[#0052CC] px-5 py-3  rounded-2xl text-white  gap-2 text-md font-bold w-40"
           // onClick={() => navigate("/collage/test/addMcq")}
         >
           <FiUpload className="self-center text-lg " /> Upload New
         </button>
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
+        <button className="bg-[#8f92a11a]  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
           <img src="../../images/icons/Filter.png" className="w-7 h-7" />
         </button>
-      </span>
+      </div>
     </div>
   );
 };

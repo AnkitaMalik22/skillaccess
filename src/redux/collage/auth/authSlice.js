@@ -718,7 +718,7 @@ const collageAuthSlice = createSlice({
           default:
             state.status = "done";
             state.isLoggedIn = true;
-            window.location.href = "/collage/dashboard";
+            // window.location.href = "/collage/dashboard";
             break;
         }
 
@@ -768,7 +768,7 @@ const collageAuthSlice = createSlice({
         console.log("rej");
         state.isLoggedIn = false;
         // alert("You are logged out! Please login again");
-        window.location.href = "/collage/me/failed";
+        // window.location.href = "/";
 
         if (
           action.payload.message == "Token is blacklisted. Please login again"
