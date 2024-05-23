@@ -232,49 +232,48 @@ const Submit = () => {
       toast.error("Please select atleast one topic");
       return;
     }
-    console.log("adaapt", testType, );
-   if(testType === "adaptive"){
-    if (totalQuestions*2 > questions.length) {
-      console.log(totalQuestions, questions.length);
-      toast.error(
-        `Add ${
-          totalQuestions - questions.length
-        } more questions to complete the test`
-      );
-      return;
-    }
-    if (totalQuestions*2 < questions.length) {
-      console.log(totalQuestions, questions.length);
-      window.alert(
-        `Remove ${
-          questions.length - totalQuestions
-        } questions to complete the test`
-      );
+    console.log("adaapt", testType);
+    if (testType === "adaptive") {
+      if (parseInt(totalQuestions) * 2 > questions.length) {
+        console.log(totalQuestions, questions.length);
+        toast.error(
+          `Add ${
+            totalQuestions - questions.length
+          } more questions to complete the test`
+        );
+        return;
+      }
+      if (parseInt(totalQuestions) * 2 < questions.length) {
+        console.log(totalQuestions, questions.length);
+        window.alert(
+          `Remove ${
+            questions.length - totalQuestions
+          } questions to complete the test`
+        );
 
-      return;
-    }
+        return;
+      }
+    } else {
+      if (totalQuestions > questions.length) {
+        console.log(totalQuestions, questions.length);
+        toast.error(
+          `Add ${
+            totalQuestions - questions.length
+          } more questions to complete the test`
+        );
+        return;
+      }
+      if (totalQuestions < questions.length) {
+        console.log(totalQuestions, questions.length);
+        window.alert(
+          `Remove ${
+            questions.length - totalQuestions
+          } questions to complete the test`
+        );
 
-   }else{
-    if (totalQuestions > questions.length) {
-      console.log(totalQuestions, questions.length);
-      toast.error(
-        `Add ${
-          totalQuestions - questions.length
-        } more questions to complete the test`
-      );
-      return;
+        return;
+      }
     }
-    if (totalQuestions < questions.length) {
-      console.log(totalQuestions, questions.length);
-      window.alert(
-        `Remove ${
-          questions.length - totalQuestions
-        } questions to complete the test`
-      );
-
-      return;
-    }
-   }
     let totalTimeCal = handleCalculateTime();
 
     // totalTimeCal = totalTimeCal.reduce((acc, curr) => {
@@ -321,7 +320,9 @@ const Submit = () => {
       console.log(res);
 
       if (res.type === "test/createTest/fulfilled") {
-        navigate("/collage/test/final");
+        navigate(
+          `/collage/test/final?testId=${res.payload._id}&name=${res.payload.name}&duration=${res.payload.totalTime}&attepmts=${res.payload.totalAttempts}&total=${res.payload.totalQuestionsCount}`
+        );
       }
     });
   };

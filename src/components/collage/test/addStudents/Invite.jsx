@@ -12,7 +12,6 @@ import {
 const Invite = () => {
   const dispatch = useDispatch();
   const [students, setStudents] = useState([]);
-  const testDetails = JSON.parse(localStorage.getItem("testDetails"));
   const [filteredStudents, setFilteredStudents] = useState([]);
 
   const { approvedStudents: uploadedStudents, loading } = useSelector(
@@ -74,7 +73,9 @@ const Invite = () => {
               id=""
               className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 py-3 px-7 font-bold text-2xl"
             >
-              {testName.substring(1, testName.length - 1)}
+              {localStorage
+                .getItem("testName")
+                .substring(1, testName.length - 1)}
             </div>
           </div>
 

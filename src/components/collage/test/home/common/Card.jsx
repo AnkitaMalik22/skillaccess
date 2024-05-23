@@ -75,12 +75,24 @@ const Card = (props) => {
       </div>
 
       <div className="flex justify-between ">
-        <div className="flex ">
+        <div
+          className="flex cursor-pointer "
+          onClick={() => {
+            // localStorage.setItem("testDetails", {
+            //   testId: props.assessment._id,
+            //   name: props.assessment.name,
+            //   duration: props.assessment.totalTime,
+            //   attempts: props.assessment.totalAttempts,
+            //   total: props.assessment.totalQuestionsCount,
+            // });
+            navigate(`/collage/test/invite?testId=${props.assessment._id}`);
+          }}
+        >
           <div className="w-8 h-8 bg-blue-500  rounded"></div>
           <div className="w-8 h-8 bg-blue-900 rounded -ml-3"></div>
           <div className="w-8 h-8 bg-blue-100 rounded -ml-3"></div>
           <div className="w-8  rounded  font-dmSans text-gray-400 font-normal self-center text-xs pl-2">
-            +{props.assessment?.totalAttempts}
+            +{props.assessment?.invitedStudents.length}
           </div>
         </div>
 
