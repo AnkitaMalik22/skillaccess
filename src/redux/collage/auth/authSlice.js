@@ -74,7 +74,6 @@ export const deleteMail = createAsyncThunk(
     try {
       const req = await axios.delete(
         `${REACT_APP_API_URL}/api/college/inbox/delete/${data.id}?type=${data.type}`,
-
         {
           headers: {
             "Content-Type": "application/json",
@@ -620,6 +619,8 @@ const collageAuthSlice = createSlice({
       .addCase(searchMail.fulfilled, (state, action) => {
         state.mail.emailsReceived = action.payload.emailsReceived;
         state.mail.emailsSent = action.payload.emailsSent;
+        state.mail.total = action.payload.total;
+        state.mail.totalSent = action.payload.totalSent;
 
         // state.mail = { ...state.mail, attachments: action.payload };
       })
@@ -638,7 +639,11 @@ const collageAuthSlice = createSlice({
       })
       .addCase(getMail.fulfilled, (state, action) => {
         if (action.payload.mail) {
-          state.mail = { ...action.payload.mail, total: action.payload.total };
+          state.mail = {
+            ...action.payload.mail,
+            total: action.payload.total,
+            totalSent: action.payload.totalSent,
+          };
         }
       })
       .addCase(sendMail.pending, (state, action) => {

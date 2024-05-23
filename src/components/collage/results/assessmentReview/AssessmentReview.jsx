@@ -281,7 +281,7 @@ const AssessmentReview = () => {
   const [selected, setSelected] = useState(1);
 
   const [sections, setSections] = useState(response?.topics);
-
+  console.log(questions);
   return (
     <div className="w-11/12 mx-auto relative    min-h-[90vh] pb-20">
       {/* <Header page={"final"} handleSubmit={handleSubmit} /> */}

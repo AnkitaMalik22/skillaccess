@@ -38,6 +38,7 @@ import {
   addBookmark,
   deleteRecentUsedQuestion,
   editQuestionById,
+  editBankQuestionById,
   getAllBookmarks,
   getBookmarkById,
   getRecentUsedQuestions,
@@ -634,6 +635,34 @@ const testSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(editQuestionById.fulfilled, (state, action) => {
+        console.log(action.payload);
+        switch (action.payload.type) {
+          case "essay":
+            state.currentTopic.essay[action.payload.index] =
+              action.payload.res.question;
+            break;
+          case "mcq":
+            state.currentTopic.questions[action.payload.index] =
+              action.payload.res.question;
+            break;
+
+          case "findAnswer":
+            state.currentTopic.findAnswers[action.payload.index] =
+              action.payload.res.question;
+            break;
+          case "code":
+            state.currentTopic.compiler[action.payload.index] =
+              action.payload.res.question;
+            break;
+          default:
+            break;
+        }
+        localStorage.setItem(
+          "currentTopic",
+          JSON.stringify(state.currentTopic)
+        );
+      })
+      .addCase(editBankQuestionById.fulfilled, (state, action) => {
         console.log(action.payload);
         switch (action.payload.type) {
           case "essay":

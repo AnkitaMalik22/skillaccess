@@ -181,3 +181,54 @@ export const getselectedStudents = createAsyncThunk(
     }
   }
 );
+
+export const getRecentTests = createAsyncThunk(
+  "test/getRecentTests",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const req = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/assessments/recent`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+
+      const res = req.data;
+      console.log(res);
+
+      return res;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const removeFromRecent = createAsyncThunk(
+  "test/getAllTests",
+  async (_, { rejectWithValue, getState, dispatch }) => {
+    try {
+      console.log(`get tests`);
+      const req = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/assessments`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+
+      const res = req.data;
+
+      dispatch(getRecentTests());
+      return res;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
