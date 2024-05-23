@@ -5,10 +5,14 @@ import List from "../bookmark/List";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import FindAnswer from "../qb/FindAnswer";
+import Essay from "../qb/Essay";
+import Mcq from "../qb/Mcq";
+import Code from "../qb/Code";
+import Video from "../qb/Video";
 import { useNavigate } from "react-router-dom";
-import Code from "../bookmark/Code";
-import Video from "../bookmark/Video";
+// import Code from "../bookmark/Code";
+// import Video from "../bookmark/Video";
 import { getTopicById } from "../../../../redux/collage/test/thunks/topic";
 
 const TopicDetails = () => {
@@ -27,30 +31,27 @@ const TopicDetails = () => {
   //
   // all questions in the topic
 
-//  let questions = [ ];
+  //  let questions = [ ];
 
   // const topicDetails = JSON.parse(localStorage.getItem(JSON.stringify(currentTopic)))
 
   // console.log(questions);
 
   useEffect(() => {
-
-      if (currentTopic && currentTopic?.questions) {
-        setQuestions([  ...currentTopic.questions,
-          ...currentTopic.findAnswers,
-          ...currentTopic.essay,
-          ...currentTopic.video,
-          ...currentTopic.compiler])
-            }
-    },[currentTopic, ""])
- 
-
-
-
+    if (currentTopic && currentTopic?.questions) {
+      setQuestions([
+        ...currentTopic.questions,
+        ...currentTopic.findAnswers,
+        ...currentTopic.essay,
+        ...currentTopic.video,
+        ...currentTopic.compiler,
+      ]);
+    }
+  }, [currentTopic, ""]);
 
   const max = questions?.length / 10;
   const [selected, setSelected] = useState(1);
-console.log(questions);
+  console.log(questions);
   return (
     <div className="w-11/12 mx-auto relative    min-h-[90vh] pb-20">
       {/* <Header page={"final"} /> */}
@@ -63,10 +64,12 @@ console.log(questions);
         {/* //   ?.slice((selected - 1) * 10, selected * 10)
         //   .map((question, i) => { */}
         {/* //     return ( */}
-        {questions?.slice((selected - 1) * 10, selected * 10).map((question, i) => {
-          return (
-            <div className="my-2">
-              {!question.code && !question.videoFile && 
+        {questions
+          ?.slice((selected - 1) * 10, selected * 10)
+          .map((question, i) => {
+            return (
+              <div className="my-2">
+                {/* {!question.code && !question.videoFile && 
                 <List
                   question={question}
                   number={(selected - 1) * 10 + 1 + i}
@@ -82,10 +85,46 @@ console.log(questions);
               )}
               {question.videoFile && (
                 <Video Number={(selected - 1) * 10 + 1 + i} video={question} />
-              )}
-            </div>
-          );
-        })}
+              )} */}
+                {question.Options && (
+                  <Mcq
+                    question={question}
+                    number={(selected - 1) * 10 + 1 + i}
+                  />
+                )}
+                {question.questions && (
+                  <FindAnswer
+                    question={question}
+                    number={(selected - 1) * 10 + 1 + i}
+                  />
+                )}
+
+                {!question.Options &&
+                  !question.questions &&
+                  !question.code &&
+                  !question.videoFile && (
+                    <Essay
+                      question={question}
+                      number={(selected - 1) * 10 + 1 + i}
+                    />
+                  )}
+                {question.code && (
+                  <Code
+                    question={question}
+                    Title={question.codeQuestion}
+                    code={question.code}
+                    number={(selected - 1) * 10 + 1 + i}
+                  />
+                )}
+                {question.videoFile && (
+                  <Video
+                    Number={(selected - 1) * 10 + 1 + i}
+                    video={question}
+                  />
+                )}
+              </div>
+            );
+          })}
 
         {/* 
 

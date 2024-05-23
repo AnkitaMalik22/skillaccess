@@ -6,7 +6,10 @@ import { FaChevronLeft, FaPlus } from "react-icons/fa";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import {
+  editBankQuestionById,
+  editQuestionById,
+} from "../../../../redux/collage/test/thunks/question";
 import {
   addFindAns,
   addFindAnsToTopic,
@@ -20,9 +23,9 @@ const AddParagraph = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
   const type = searchParams.get("type");
+  const addType = searchParams.get("addType");
   const level = searchParams.get("level");
 
-  const addType = searchParams.get("addType");
   let ID;
   searchParams.get("topicId") !== null
     ? (ID = searchParams.get("topicId"))
@@ -36,7 +39,9 @@ const AddParagraph = () => {
     questions: [{ question: "" }],
   });
 
-  const { topics, currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
+  const { topics, currentTopic, ADD_QUESTION_LOADING } = useSelector(
+    (state) => state.test
+  );
   const [isPrev, setIsPrev] = useState(false);
 
   const [count, setCount] = useState(topics[id]?.findAnswers.length - 1);
@@ -71,7 +76,6 @@ const AddParagraph = () => {
 
   const handleChanges = (e) => {
     setQuestion({ ...question, [e.target.name]: e.target.value });
-  
   };
 
   const handleQuestionChange = (e, index) => {
@@ -85,8 +89,14 @@ const AddParagraph = () => {
   //   console.log(question);
   // }, [question]);
 
-  const handleSave =async (saveType) => {
-   
+  useEffect(() => {
+    if (addType === "edit") {
+      const ques = JSON.parse(localStorage.getItem("qbQues"));
+      setQuestion(ques);
+    }
+  }, []);
+  const handleSave = async (saveType) => {
+    if (addType === "topic") {
       if (
         !question.Title ||
         question.Title.trim() === "" ||
@@ -122,32 +132,53 @@ const AddParagraph = () => {
             id: ID + Date.now(),
           });
         } else {
-         await dispatch(
+          await dispatch(
             addFindAnsToTopic({ data: question, id: id, type: "findAnswer" })
-          ) 
-         await dispatch(
+          );
+          await dispatch(
             addQuestionToTopic({ data: question, id: id, type: "findAnswer" })
-          )
+          );
           // .then(()=>{
-         await   setQuestion({
-              QuestionLevel: "beginner",
-              Title: "",
-              section: ID,
-              questions: [{ question: "" }],
-              Duration: 0,
-              id: ID + Date.now(),
-            })
-            if(!ADD_QUESTION_LOADING){
-              if (saveType === "save") navigate(-1);
-            }
+          await setQuestion({
+            QuestionLevel: "beginner",
+            Title: "",
+            section: ID,
+            questions: [{ question: "" }],
+            Duration: 0,
+            id: ID + Date.now(),
+          });
+          if (!ADD_QUESTION_LOADING) {
+            if (saveType === "save") navigate(-1);
+          }
           // })
         }
       }
-    
+    } else {
+      if (
+        !question.Title ||
+        question.Title.trim() === "" ||
+        question.Title === "<p><br></p>"
+      ) {
+        toast.error("Please enter the question");
+      } else if (question.Duration == 0) {
+        toast.error("Please enter required time");
+        return;
+      } else if (question.questions.some((q) => q.question === "")) {
+        toast.error("Please enter all questions");
+        return;
+      } else {
+        dispatch(
+          editBankQuestionById({
+            type: "findAnswer",
+            id: question._id,
+            question: question,
+          })
+        );
+        navigate(-1);
+      }
+    }
   };
 
-
-    
   useEffect(() => {
     setCountDetail(currentTopic?.findAnswers?.length - 1);
   }, [currentTopic]);
@@ -167,22 +198,21 @@ const AddParagraph = () => {
           <div className="w-[49%]">
             <h2 className="font-bold mb-2">Question</h2>
             <div className="flex w-full justify-between">
-            <select
-              name="Duration"
-              onChange={handleChanges}
-              value={question.Duration}
-              id=""
-              className="w-[65%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
-               
-            >
-              <option value={0}>Time to answer the question</option>
+              <select
+                name="Duration"
+                onChange={handleChanges}
+                value={question.Duration}
+                id=""
+                className="w-[65%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              >
+                <option value={0}>Time to answer the question</option>
 
-              <option value={1}>1 minute</option>
-              <option value={2}>2 minutes</option>
-              <option value={3}>3 minutes</option>
-              <option value={4}>4 minutes</option>
-            </select>
-           
+                <option value={1}>1 minute</option>
+                <option value={2}>2 minutes</option>
+                <option value={3}>3 minutes</option>
+                <option value={4}>4 minutes</option>
+              </select>
+
               <select
                 name="QuestionLevel"
                 onChange={handleChanges}
@@ -195,8 +225,7 @@ const AddParagraph = () => {
                 <option value={"intermediate"}>Intermediate</option>
                 <option value={"advanced"}>Advanced</option>
               </select>
-            
-        </div>
+            </div>
           </div>
 
           <textarea
@@ -277,12 +306,14 @@ const AddParagraph = () => {
               )}
             </div>
             <div className=" flex">
-              <button
-                className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
-                onClick={() => handleSave()}
-              >
-                <FaPlus className="self-center" /> Add Next Question
-              </button>
+              {addType === "topic" && (
+                <button
+                  className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+                  onClick={() => handleSave()}
+                >
+                  <FaPlus className="self-center" /> Add Next Question
+                </button>
+              )}
             </div>
           </div>
         </div>
