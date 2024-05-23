@@ -24,7 +24,7 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
   };
   const handleSave = (e) => {
     e.preventDefault();
-    dispatch(searchMail(filter));
+    dispatch(searchMail({ ...filter, limit: 5 }));
     // setShow("search");
     setSearchParams({
       show: "search",
