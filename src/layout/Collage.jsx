@@ -4,12 +4,19 @@ import Navbar from "../components/navbar/Navbar";
 import { setSelected, selected } from "../redux/collage/sidebar/sideSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setInTest,
   setTestBasicDetails,
   setTestSelectedTopics,
 } from "../redux/collage/test/testSlice";
 import { getCollege } from "../redux/collage/auth/authSlice";
+import PopUp from "../components/PopUps/PopUp";
+import { toast } from "react-hot-toast";
 
 const CollageLayout = ({ children }) => {
+  const [visible, setVisible] = useState(false);
+  const [change, setChange] = useState(false);
+  const [path, setPath] = useState("");
+
   const navigate = useNavigate();
 
   const selection = useSelector(selected);
@@ -265,6 +272,14 @@ const CollageLayout = ({ children }) => {
   ];
 
   useEffect(() => {
+    if (change) {
+      navigate(path);
+    }
+
+    // toast.success(path);
+  }, [change]);
+
+  useEffect(() => {
     dispatch(getCollege());
     //  window.scrollTo({
     //   top:
@@ -361,6 +376,16 @@ const CollageLayout = ({ children }) => {
 
   return (
     <>
+      {visible && (
+        <PopUp
+          handleSave={() => {
+            setChange(true);
+          }}
+          handleOverlay={() => setVisible(false)}
+          message={"Test data will be lost. Are you sure you want to exit ?"}
+          saveText={"Continue"}
+        />
+      )}
       <Navbar open={open} setOpen={setOpen} />
       <div className=" h-full bg-[#95ACFA] relative">
         <div className="flex h-screen  justify-start pt-20 ">
@@ -393,18 +418,6 @@ const CollageLayout = ({ children }) => {
                       onMouseOut={() => setTemp(down)}
                       onMouseDown={(e) => {
                         e.preventDefault();
-                        dispatch(setSelected(i));
-                        dispatch(
-                          setTestBasicDetails({
-                            name: "",
-                            description: "",
-                            totalAttempts: null,
-                            totalQuestions: 0,
-                          })
-                        );
-                        dispatch(setTestSelectedTopics([]));
-                        setOpen(false);
-                        setDown(i);
 
                         // window.scrollTo({
                         //   top:
@@ -412,7 +425,24 @@ const CollageLayout = ({ children }) => {
                         //     bottom.current.getBoundingClientRect().top,
                         //   behavior: "smooth",
                         // });
-                        return navigate(el.path);
+                        if (!location.pathname.match(/\/collage\/test\/*/)) {
+                          dispatch(setSelected(i));
+                          dispatch(
+                            setTestBasicDetails({
+                              name: "",
+                              description: "",
+                              totalAttempts: null,
+                              totalQuestions: 0,
+                            })
+                          );
+                          dispatch(setTestSelectedTopics([]));
+                          setOpen(false);
+                          setDown(i);
+                          return navigate(el.path);
+                        } else {
+                          setVisible(true);
+                          setPath(el.path);
+                        }
                       }}
                     >
                       <button

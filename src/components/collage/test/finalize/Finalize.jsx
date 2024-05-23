@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createTest,
@@ -26,7 +26,7 @@ const Finalize = () => {
   const totalTime = localStorage.getItem("totalTime");
 
   const dispatch = useDispatch();
-
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     //  console.log(test);
   }, []);
@@ -62,7 +62,7 @@ const Finalize = () => {
     //   })
     // );
 
-    navigate("/collage/test/invite");
+    navigate(`/collage/test/invite?testId=${searchParams.get("testId")}`);
     // localStorage.removeItem("testDetails");
     // localStorage.removeItem("totalTime");
   };

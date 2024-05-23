@@ -14,7 +14,7 @@ const Footer = ({ students }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { credit } = useSelector((state) => state.collageAuth);
   const testId = searchParams.get("testId");
-  const handleSendInvite = () => {
+  const handleSendInvite = async () => {
     if (students.length === 0) {
       toast.error("Select at least one student to send an invite.");
     } else if (!testId) {
@@ -26,7 +26,7 @@ const Footer = ({ students }) => {
       );
     } else {
       console.log(testId, students);
-      dispatch(
+      await dispatch(
         inviteToTest({
           testId: testId,
           students,

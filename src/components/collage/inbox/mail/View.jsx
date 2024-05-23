@@ -69,8 +69,6 @@ const View = ({ index, filter, inboxType }) => {
   }, ["", inboxType, index, dispatch]);
 
   useEffect(() => {
-    toast.success("del");
-
     setEMail(
       mail[inboxType === "Received" ? "emailsReceived" : "emailsSent"][index]
     );
