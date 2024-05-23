@@ -34,12 +34,14 @@ const Header = ({
     <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">
       <div className="h-fit self-center">
         <button className="flex self-center ml-2 rounded-lg  gap-2">
-          <button
-            onClick={() => navigate(-1)}
-            className=" mr-3 self-center bg-white rounded-lg "
-          >
-            <FaChevronLeft className=" p-3  h-10 w-10 self-center " />
-          </button>
+          {addType !== "edit" && (
+            <button
+              onClick={() => navigate(-1)}
+              className=" mr-3 self-center bg-white rounded-lg "
+            >
+              <FaChevronLeft className=" p-3  h-10 w-10 self-center " />
+            </button>
+          )}
 
           <div className="self-center">
             <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans   ">

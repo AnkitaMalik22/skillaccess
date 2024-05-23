@@ -18,7 +18,7 @@ const HeaderMarks = ({ response, totalQuestions }) => {
     dispatch(getTest(assessmentId));
     dispatch(getTestResultPage(assessmentId));
   }, [dispatch, assessmentId]);
-
+  console.log(response);
   return (
     <div className="w-full flex justify-between items-center bg-[#8f92a1] bg-opacity-5  rounded-[24px] py-7 mt-4">
       <div className="flex flex-col pl-12 w-2/3">
@@ -37,7 +37,9 @@ const HeaderMarks = ({ response, totalQuestions }) => {
           </div>
           <div className="w-1/2 ">
             <p className="text-lg">Questions Attempted</p>
-            <p className="font-bold text-[28px]">{response?.totalQuestionsAttempted || 0} </p>
+            <p className="font-bold text-[28px]">
+              {response?.totalQuestionsAttempted || 0}{" "}
+            </p>
           </div>
         </div>
         <div className="flex justify-between ">

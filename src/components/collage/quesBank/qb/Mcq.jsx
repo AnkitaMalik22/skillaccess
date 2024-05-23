@@ -7,10 +7,12 @@ import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 import toast from "react-hot-toast";
 import { editBankQuestionById } from "../../../../redux/collage/test/thunks/question";
-const List = ({ question, number }) => {
+import { useNavigate } from "react-router-dom";
+const Mcq = ({ question, number }) => {
   const [type, setType] = useState();
   const [AnswerIndex, setAnswerIndex] = useState(question.AnswerIndex);
   console.log(question);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleDelete = ({ sectionId, questionId }) => {
     dispatch(
@@ -65,7 +67,15 @@ const List = ({ question, number }) => {
                   <div className="level flex items-center gap-2 ">
                     <PiPencilSimpleLineBold
                       className=" w-6 h-6 p-1 rounded-lg  self-center cursor-pointer"
-                      // onClick={handleEdit}
+                      onClick={() => {
+                        navigate(
+                          `/collage/quesBank/addMcqToTopic/${question._id}?type=mcq&addType=edit`
+                        );
+                        localStorage.setItem(
+                          "qbQues",
+                          JSON.stringify(question)
+                        );
+                      }}
                     />
                     {question.QuestionLevel == "beginner" && (
                       <p className="rounded-2xl mr-4 py-1.5 bg-cyan-500 text-white w-8 h-8 text-center font-extrabold  ">
@@ -96,57 +106,6 @@ const List = ({ question, number }) => {
                 </div>
               </div>
 
-              {/* <Transition
-                enter="transition duration-300 "
-                enterFrom="transform scale-95 ease-in opacity-0"
-                enterTo="transform scale-100   duration-700 opacity-100"
-                leave="transition duration-300 ease-out"
-                leaveFrom="transform scale-100  opacity-100"
-                leaveTo="transform scale-95 opacity-0"
-              > */}
-              {/* <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
-                {question.Options?.map((question) => (
-                  <div className="flex gap-2 z-10 relative rounded-lg p-3">
-                    <div className="w-6">
-                      <input
-                        type="radio"
-                        name="answer"
-                        id="answer"
-                        className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                      />
-                    </div>
-
-                    <label className="text-black text-sm">
-                      {question
-                        ? question.question
-                          ? question.question
-                          : question
-                        : ""}
-                    </label>
-                  </div>
-                ))}
-
-                {question.questions?.map((question) => (
-                  <div className="flex gap-2  z-10 relative rounded-lg p-3">
-                    <div className="w-6">
-                      <input
-                        type="radio"
-                        name="answer"
-                        id="answer"
-                        className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                      />
-                    </div>
-
-                    <label className="text-blacktext-sm">
-                      {question
-                        ? question.question
-                          ? question.question
-                          : question
-                        : ""}
-                    </label>
-                  </div>
-                ))}
-              </Disclosure.Panel> */}
               <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
                 {question.Options?.map((question, index) => (
                   <div className="flex gap-2 z-10 relative rounded-lg p-3">
@@ -177,37 +136,6 @@ const List = ({ question, number }) => {
                     </label>
                   </div>
                 ))}
-
-                {question.questions?.map((question) => (
-                  <div className="flex gap-2  z-10 relative rounded-lg p-3">
-                    <div className="w-6">
-                      <input
-                        type="radio"
-                        name="answer"
-                        id="answer"
-                        className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                      />
-                    </div>
-
-                    <label className="text-blacktext-sm">
-                      {question ? (
-                        question.question ? (
-                          <>
-                            {" "}
-                            <div>
-                              <h3>{question.question}</h3>
-                              <p>{question.studentAnswer}</p>
-                            </div>
-                          </>
-                        ) : (
-                          question
-                        )
-                      ) : (
-                        ""
-                      )}
-                    </label>
-                  </div>
-                ))}
               </Disclosure.Panel>
               {/* </Transition> */}
             </div>
@@ -218,4 +146,4 @@ const List = ({ question, number }) => {
   );
 };
 
-export default List;
+export default Mcq;

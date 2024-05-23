@@ -51,7 +51,7 @@ const AddCode = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const [validate, setValidate] = useState(false);
-  const { ADD_QUESTION_LOADING}= useSelector((state) => state.test);
+  const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const type = searchParams.get("type");
   const level = searchParams.get("level");
 
@@ -62,24 +62,7 @@ const AddCode = () => {
   searchParams.get("topicId") !== null
     ? (ID = searchParams.get("topicId"))
     : (ID = id);
-  // Format of the question object
-  // "code": "printf('hello world')",
-  // "codeQuestion": "Write a program to print 'hello world'",
-  // "codeLanguage": "c",
-  // "parameters": "int",
-  // "testcase": [
-  // {
-  //   "input": "5",
-  //   "expectedOutput": "5"
-  // },
-  // {
-  //   "input": "10",
-  //   "expectedOutput": "10"
-  // }
-  // ],
-  // "output": [
-  // "hello world"
-  // ]
+
   const [question, setQuestion] = useState({
     section: ID,
     id: ID + Date.now(),
@@ -119,8 +102,14 @@ const AddCode = () => {
     }
   };
 
+  useEffect(() => {
+    if (addType === "edit") {
+      const ques = JSON.parse(localStorage.getItem("qbQues"));
+      setQuestion(ques);
+    }
+  }, []);
   const handleSave = (component) => {
-    
+    if (addType === "topic") {
       if (
         question.codeQuestion != "" ||
         question.code != "" ||
@@ -216,8 +205,18 @@ const AddCode = () => {
       } else {
         toast.error("Please fill all the fields");
       }
-    
-    console.log(question);
+
+      console.log(question);
+    } else {
+      dispatch(
+        editQuestionById({
+          type: "code",
+          id: question._id,
+          question: question,
+        })
+      );
+      navigate(-1);
+    }
   };
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
@@ -237,6 +236,7 @@ const AddCode = () => {
               handleChanges={handleChanges}
               handleQuestionChange={handleQuestionChange}
               handleSave={handleSave}
+              addType={addType}
             />
           </span>
           <span className="w-[49%]">
@@ -278,12 +278,14 @@ const AddCode = () => {
               )}
             </div>
             <div className=" flex">
-              <button
-                className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
-                onClick={() => handleSave("next")}
-              >
-                <FaPlus className="self-center" /> Add Next Question
-              </button>
+              {addType === "topic" && (
+                <button
+                  className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+                  onClick={() => handleSave("next")}
+                >
+                  <FaPlus className="self-center" /> Add Next Question
+                </button>
+              )}
             </div>
           </div>
         </div>
