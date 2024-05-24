@@ -19,8 +19,17 @@ import {
   setTestBasicDetails,
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
-import { getAllTests } from "../../../../redux/collage/test/thunks/test";
+import {
+  getAllTests,
+  getRecentTests,
+  removeFromRecent,
+} from "../../../../redux/collage/test/thunks/test";
 import Adaptive from "./Adaptive";
+import Assessment from "../assessment/Assessment";
+
+import calculateDaysAgo from "../../../../util/calculateDaysAgo";
+import calculateDaysAndWeeks from "../../../../util/daysAndWeeks";
+import { getStudents } from "../../../../redux/collage/student/studentSlice";
 
 export const Test = () => {
   const dispatch = useDispatch();
@@ -34,7 +43,10 @@ export const Test = () => {
   const navigate = useNavigate();
   const asses = [1, 2, 3, 4, 5];
 
-  const { status } = useSelector((state) => state.collageAuth);
+  const { recentAssessments } = useSelector((state) => state.test);
+  const { user } = useSelector((state) => state.collageAuth);
+  const { approvedStudents } = useSelector((state) => state.collegeStudents);
+
   useEffect(() => {
     dispatch(
       setTestBasicDetails({
@@ -44,6 +56,8 @@ export const Test = () => {
         totalQuestions: null,
       })
     );
+    dispatch(getStudents({ id: user?._id }));
+    dispatch(getRecentTests());
     dispatch(setTestSelectedTopics([]));
     dispatch(setCurrentQuestionCount(0));
     dispatch(getAllTests());
@@ -54,7 +68,7 @@ export const Test = () => {
   return (
     <div className="">
       {/* search bar */}
-      <Search />
+      <Search students={approvedStudents} />
 
       <div className="flex mt-2  w-[98.3%] rounded-lg  flex-wrap justify-center relative">
         {/* left block */}
@@ -142,33 +156,45 @@ export const Test = () => {
             <h2 className="text-base border-b-2 border-gray-200 font-bold text-center py-3  px-2">
               Recent Assessments Completed
             </h2>
-            {asses.map(() => {
+            {recentAssessments.map((assessment) => {
               return (
                 <>
                   <div className="flex gap-2 px-3 py-1 mt-2">
                     <div className="min-w-[2.5rem] h-10 bg-amber-500 self-center rounded-lg"></div>
                     <div className="ml-1 mt-1">
                       <h2 className="text-sm  font-bold  py-1 ">
-                        Software Engineer
+                        {assessment.name}
                       </h2>
                       <h2 className="text-sm  font-normal  pb-2">
-                        Google{" "}
-                        <p className="text-gray-400 inline">in Pune,India</p>
+                        {assessment.description}
+                        {/* <p className="text-gray-400 inline">in Pune,India</p> */}
                       </h2>
                     </div>
                   </div>
                   <div className="flex px-3 pb-3 mt-2 justify-between">
                     <div className="flex gap-1">
-                      <button className="rounded-lg bg-gray-100 p-2 text-base font-dmSans font-base">
+                      <button
+                        className="rounded-lg bg-gray-100 p-2 text-base font-dmSans font-base"
+                        onClick={() => {
+                          navigate(
+                            `/collage/results/overview?level=${assessment.level}&assessment=${assessment._id}`
+                          );
+                        }}
+                      >
                         View
                       </button>
-                      <button className="rounded-lg p-3  bg-gray-100 self-center">
+                      <button
+                        className="rounded-lg p-3  bg-gray-100 self-center"
+                        onClick={() =>
+                          dispatch(removeFromRecent(assessment._id))
+                        }
+                      >
                         <CgUnavailable className="text-gray-400 text-lg" />
                       </button>
                     </div>
 
                     <p className="text-sm  font-normal text-gray-400">
-                      1 week ago
+                      {calculateDaysAndWeeks(assessment.endDate)}
                     </p>
                   </div>
                 </>

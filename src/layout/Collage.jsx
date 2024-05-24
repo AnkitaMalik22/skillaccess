@@ -300,69 +300,40 @@ const CollageLayout = ({ children }) => {
       }
 
       if (path.match(/\/collage\/profile*/)) {
-        // // window.scrollTo({
-        //   top:
-        //     window.scrollY +
-        //     bottom.current.getBoundingClientRect().top,
-        //   behavior: "smooth",
-        // });
         dispatch(setSelected(7));
       }
 
       if (path.match(/\/collage\/inbox*/)) {
-        //// window.scrollTo({
-        //   top:
-        //     window.scrollY +
-        //     bottom.current.getBoundingClientRect().top,
-        //   behavior: "smooth",
-        // });
         dispatch(setSelected(8));
       }
 
       if (path.match(/\/collage\/teams*/)) {
-        //// window.scrollTo({
-        //   top:
-        //     window.scrollY +
-        //     bottom.current.getBoundingClientRect().top,
-        //   behavior: "smooth",
-        // });
         dispatch(setSelected(9));
       }
 
       if (path.match(/\/collage\/accounting*/)) {
-        //// window.scrollTo({
-        //   top:
-        //     window.scrollY +
-        //     bottom.current.getBoundingClientRect().top,
-        //   behavior: "smooth",
-        // });
         dispatch(setSelected(10));
       }
 
       if (location.pathname.match(/\/collage\/settings*/)) {
-        //// window.scrollTo({
-        //   top:
-        //     window.scrollY +
-        //     bottom.current.getBoundingClientRect().top,
-        //   behavior: "smooth",
-        // });
         dispatch(setSelected(11));
       }
 
       setChange(false);
       navigate(path);
     }
+
+    // toast.success(path);
   }, [change]);
 
   useEffect(() => {
-    // dispatch(getCollege());
-    // //  window.scrollTo({
-    // //   top:
-    // //     window.scrollY +
-    // //     bottom.current.getBoundingClientRect().top,
-    // //   behavior: "smooth",
-    // // });
-
+    dispatch(getCollege());
+    //  window.scrollTo({
+    //   top:
+    //     window.scrollY +
+    //     bottom.current.getBoundingClientRect().top,
+    //   behavior: "smooth",
+    // });
     bottom.current.scrollIntoView();
     if (location.pathname.match(/\/collage\/dashboard*/)) {
       dispatch(setSelected(0));
@@ -554,7 +525,7 @@ const CollageLayout = ({ children }) => {
             </ul>
           </aside>
 
-          <div className="bg-[#FEFEFE] rounded-3xl h-[90vh] overflow-y-scroll w-full flex-1  font-dmSans mr-5 ">
+          <div className="bg-white rounded-3xl h-[90vh] overflow-y-scroll w-full flex-1  font-dmSans mr-5 ">
             {children}
           </div>
         </div>
