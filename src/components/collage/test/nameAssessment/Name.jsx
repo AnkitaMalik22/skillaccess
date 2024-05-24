@@ -5,6 +5,7 @@ import { Progress } from "./Progress";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getAllTests,
+  setInTest,
   setTest,
   setTestBasicDetails,
 } from "../../../../redux/collage/test/testSlice";
@@ -154,6 +155,12 @@ const Name = () => {
   //     toast.error("duplicate name");
   //   }
   // };
+
+  // ------------------------------------------------------ TIMER ------------------------------------------------
+
+  useEffect(() => {
+    dispatch(setInTest(true));
+  }, []);
   const [errors, setErrors] = useState({
     name: "",
     totalAttempts: "",
@@ -164,7 +171,7 @@ const Name = () => {
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
-  
+
     // Check if the selected time is before the current time and date
     const currentTime = new Date().toISOString().slice(0, 16); // Get current time and date
     if (
@@ -176,9 +183,12 @@ const Name = () => {
       );
       return; // Prevent updating state if the selected time is before the current time and date
     }
-  
+
     // Check if the entered value is negative
-    if ((name === "totalAttempts" || name === "totalQuestions") && parseFloat(value) < 0) {
+    if (
+      (name === "totalAttempts" || name === "totalQuestions") &&
+      parseFloat(value) < 0
+    ) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         [name]: "Please enter a positive number.",
@@ -195,7 +205,6 @@ const Name = () => {
       });
     }
   };
-  
 
   const handleSubmit = () => {
     let flag = false;
@@ -282,7 +291,7 @@ const Name = () => {
       navigate(`/collage/test/select?level=${level}`);
     }
   };
-  
+
   return (
     <div className="font-dmSans text-sm font-bold">
       <Header handleNext={handleSubmit} />
@@ -313,23 +322,19 @@ const Name = () => {
         )}
         <input
           type="tel"
-          
           name="totalAttempts"
           className={` w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
             errors.totalAttempts ? "border-red-500" : "border-none"
           }`}
           placeholder="No. of Attempts"
           value={testDetails.totalAttempts}
-       
           onChange={handleChange}
-    
         />
         {errors.totalAttempts && (
           <span className="text-red-500 ml-5 pt-2">{errors.totalAttempts}</span>
         )}
         <input
           name="totalQuestions"
-          
           type="tel"
           className={` w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
             errors.totalQuestions ? "border-red-500" : "border-none"
@@ -337,7 +342,7 @@ const Name = () => {
           placeholder="No. of Questions"
           value={testDetails.totalQuestions}
           onChange={handleChange}
-       />
+        />
         {errors.totalQuestions && (
           <span className="text-red-500 ml-5 pt-2">
             {errors.totalQuestions}

@@ -8,7 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const topics = JSON.parse(localStorage.getItem("topics"));
-  const {name} = useSelector((state) => state.test);
+  const { name } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");
   const handleSubmit = () => {
@@ -19,13 +19,14 @@ const Header = () => {
     navigate(`/collage/test/questions?level=${level}`);
   };
 
-
-
   return (
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
         <button className="flex self-center ml-2 rounded-lg  gap-2">
-          <button onClick={() => navigate(`/collage/test/name?level=${level}`)} className="mt-2 mr-3">
+          <button
+            onClick={() => navigate(`/collage/test/name?level=${level}`)}
+            className="mt-2 mr-3"
+          >
             <FaChevronLeft className=" p-5 rounded-lg h-14 w-14 self-center bg-gray-200 text-gray-500" />
           </button>
 
@@ -42,8 +43,10 @@ const Header = () => {
                   className="w-4 h-4"
                 />
               </span>
-              <h3 className="mr-2"> {topics && topics.length ? topics.length : 0
-              } Topics</h3>{" "}
+              <h3 className="mr-2">
+                {" "}
+                {topics && topics.length ? topics.length : 0} Topics
+              </h3>{" "}
               <span className="w-2 h-2">
                 <img
                   src="../../images/icons/hourglass.png"
