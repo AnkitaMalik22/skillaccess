@@ -4,12 +4,19 @@ import Navbar from "../components/navbar/Navbar";
 import { setSelected, selected } from "../redux/collage/sidebar/sideSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setInTest,
   setTestBasicDetails,
   setTestSelectedTopics,
 } from "../redux/collage/test/testSlice";
 import { getCollege } from "../redux/collage/auth/authSlice";
+import PopUp from "../components/PopUps/PopUp";
+import { toast } from "react-hot-toast";
 
 const CollageLayout = ({ children }) => {
+  const [visible, setVisible] = useState(false);
+  const [change, setChange] = useState(false);
+  const [path, setPath] = useState("");
+
   const navigate = useNavigate();
 
   const selection = useSelector(selected);
@@ -265,6 +272,89 @@ const CollageLayout = ({ children }) => {
   ];
 
   useEffect(() => {
+    setTemp(null);
+    setDown(null);
+    if (change === true) {
+      if (path.match(/\/collage\/dashboard*/)) {
+        dispatch(setSelected(0));
+      }
+
+      if (path.match(/\/collage\/test*/)) {
+        dispatch(setSelected(1));
+      }
+
+      if (path.match(/\/collage\/companies*/)) {
+        dispatch(setSelected(2));
+      }
+
+      if (path.match(/\/collage\/students*/)) {
+        dispatch(setSelected(3));
+      }
+
+      if (path.match(/\/collage\/results*/)) {
+        dispatch(setSelected(4));
+      }
+
+      if (path.match(/\/collage\/quesBank*/)) {
+        dispatch(setSelected(5));
+      }
+
+      if (path.match(/\/collage\/profile*/)) {
+        // // window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(7));
+      }
+
+      if (path.match(/\/collage\/inbox*/)) {
+        //// window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(8));
+      }
+
+      if (path.match(/\/collage\/teams*/)) {
+        //// window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(9));
+      }
+
+      if (path.match(/\/collage\/accounting*/)) {
+        //// window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(10));
+      }
+
+      if (location.pathname.match(/\/collage\/settings*/)) {
+        //// window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(11));
+      }
+
+      setChange(false);
+      navigate(path);
+    }
+  }, [change]);
+
+  useEffect(() => {
     // dispatch(getCollege());
     // //  window.scrollTo({
     // //   top:
@@ -272,6 +362,7 @@ const CollageLayout = ({ children }) => {
     // //     bottom.current.getBoundingClientRect().top,
     // //   behavior: "smooth",
     // // });
+
     bottom.current.scrollIntoView();
     if (location.pathname.match(/\/collage\/dashboard*/)) {
       dispatch(setSelected(0));
@@ -361,6 +452,16 @@ const CollageLayout = ({ children }) => {
 
   return (
     <>
+      {visible && (
+        <PopUp
+          handleSave={() => {
+            setChange(true);
+          }}
+          handleOverlay={() => setVisible(false)}
+          message={"Test data will be lost. Are you sure you want to exit ?"}
+          saveText={"Continue"}
+        />
+      )}
       <Navbar open={open} setOpen={setOpen} />
       <div className=" h-full bg-[#95ACFA] relative">
         <div className="flex h-screen  justify-start pt-20 ">
@@ -393,18 +494,6 @@ const CollageLayout = ({ children }) => {
                       onMouseOut={() => setTemp(down)}
                       onMouseDown={(e) => {
                         e.preventDefault();
-                        dispatch(setSelected(i));
-                        dispatch(
-                          setTestBasicDetails({
-                            name: "",
-                            description: "",
-                            totalAttempts: null,
-                            totalQuestions: 0,
-                          })
-                        );
-                        dispatch(setTestSelectedTopics([]));
-                        setOpen(false);
-                        setDown(i);
 
                         // window.scrollTo({
                         //   top:
@@ -412,7 +501,24 @@ const CollageLayout = ({ children }) => {
                         //     bottom.current.getBoundingClientRect().top,
                         //   behavior: "smooth",
                         // });
-                        return navigate(el.path);
+                        if (!location.pathname.match(/\/collage\/test\/*/)) {
+                          dispatch(setSelected(i));
+                          dispatch(
+                            setTestBasicDetails({
+                              name: "",
+                              description: "",
+                              totalAttempts: null,
+                              totalQuestions: 0,
+                            })
+                          );
+                          dispatch(setTestSelectedTopics([]));
+                          setOpen(false);
+                          setDown(i);
+                          return navigate(el.path);
+                        } else {
+                          setVisible(true);
+                          setPath(el.path);
+                        }
                       }}
                     >
                       <button

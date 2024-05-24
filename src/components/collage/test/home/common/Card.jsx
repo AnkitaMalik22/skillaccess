@@ -85,7 +85,9 @@ const Card = (props) => {
             //   attempts: props.assessment.totalAttempts,
             //   total: props.assessment.totalQuestionsCount,
             // });
-            navigate(`/collage/test/invite?testId=${props.assessment._id}`);
+            localStorage.setItem("testId", props.assessment._id);
+            props.assessment &&
+              navigate(`/collage/test/invite?testId=${props.assessment._id}`);
           }}
         >
           <div className="w-8 h-8 bg-blue-500  rounded"></div>

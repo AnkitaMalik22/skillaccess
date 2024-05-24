@@ -8,8 +8,14 @@ import {
   getStudents,
   setLoading,
 } from "../../../../redux/collage/student/studentSlice";
+import { getStudentsForTest } from "../../../../redux/collage/test/thunks/test";
+import { useSearchParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Invite = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { credit } = useSelector((state) => state.collageAuth);
+  const testId = searchParams.get("testId");
   const dispatch = useDispatch();
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
@@ -17,36 +23,30 @@ const Invite = () => {
   const { approvedStudents: uploadedStudents, loading } = useSelector(
     (state) => state.collegeStudents
   );
+  const { students: studentList } = useSelector((state) => state.test);
   const { user } = useSelector((state) => state.collageAuth);
-  useEffect(() => {
-    const fetchData = async () => {
-      if (user?._id) {
-        await dispatch(getStudents({ id: user._id }));
-      }
-    };
-
-    fetchData();
-  }, [dispatch, user]);
 
   useEffect(() => {
-    if (!loading) {
-      dispatch(getStudents({ id: user?._id }));
-      dispatch(setLoading(false));
-      setFilteredStudents(uploadedStudents);
-    }
-  }, [loading]);
+    dispatch(getStudentsForTest(testId)).then((res) => {
+      setFilteredStudents(studentList);
+    });
+  }, [user]);
+
+  useEffect(() => {
+    setFilteredStudents(studentList);
+  }, [studentList]);
 
   const handleFilterStudents = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
       console.log("empty");
 
-      setFilteredStudents(uploadedStudents);
+      setFilteredStudents(studentList);
 
       return;
     } else {
       setFilteredStudents(
-        uploadedStudents.filter((student) => {
+        studentList.filter((student) => {
           const regex = new RegExp(value, "i");
           return (
             regex.test(student.FirstName) ||
