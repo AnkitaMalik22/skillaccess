@@ -23,6 +23,7 @@ import {
   getTestResultPage,
   selectStudentTest,
   getselectedStudents,
+  getStudentsForTest,
 } from "./thunks/test";
 
 import {
@@ -47,6 +48,7 @@ import {
 } from "./thunks/question";
 
 const testState = {
+  inTest: false,
   testLoading: false,
   totalSelectedQuestions: 5,
   recentUsedQuestions: [],
@@ -70,7 +72,7 @@ const testState = {
   },
   //all topics
   sections: null,
-
+  students: [],
   selectedSections: [],
   filteredSections: [],
 
@@ -215,6 +217,9 @@ const testSlice = createSlice({
   initialState: testState,
   name: "test",
   reducers: {
+    setInTest: (state, action) => {
+      state.inTest = action.payload;
+    },
     setTotalSelectedQuestions: (state, action) => {
       state.totalSelectedQuestions = parseInt(action.payload);
     },
@@ -977,11 +982,15 @@ const testSlice = createSlice({
       })
       .addCase(getselectedStudents.rejected, (state, action) => {
         console.error(action.payload);
+      })
+      .addCase(getStudentsForTest.fulfilled, (state, action) => {
+        state.students = action.payload.students;
       });
   },
 });
 
 export const {
+  setInTest,
   setCurrentQuestionCount,
   setTotalSelectedQuestions,
   setCurrentTopic,

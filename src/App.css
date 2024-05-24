@@ -42,7 +42,7 @@ body {
   display: none;
 }
 .goog-te-gadget {
-  display: block !important;
+  display: none !important;
   color: transparent !important;
 }
 

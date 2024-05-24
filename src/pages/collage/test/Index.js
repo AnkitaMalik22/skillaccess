@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 const NameAssessmentPage = lazy(() => import("./NameAssessmentPage"));
 const SelectTestsPage = lazy(() => import("./SelectTestsPage"));
-const SelectTestsAdaptivePage = lazy(()=>import("./SelectTestsAdaptivePage"))
+const SelectTestsAdaptivePage = lazy(() => import("./SelectTestsAdaptivePage"));
 const AddQuestionsPage = lazy(() => import("./AddQuestionsPage"));
 const ReviewPage = lazy(() => import("./ReviewPage"));
 const AddMcqPage = lazy(() => import("./AddMcqPage"));
@@ -33,12 +33,12 @@ export default function () {
       <Route path="assessment" element={<AssessmentPage />} />
       <Route path="name" element={<NameAssessmentPage />} />
       <Route path="select" element={<SelectTestsPage />} />
-      <Route path="selectAdaptive" element={<SelectTestsAdaptivePage/>} />
+      <Route path="selectAdaptive" element={<SelectTestsAdaptivePage />} />
       <Route path="submit" element={<SubmitPage />} />
       {/* <Route path="preview" element={<AddQuestionsSelectPage />} /> */}
       <Route path="questions" element={<AddQuestionsPage />} />
       <Route path="typeOfQuestions/:id" element={<AddQuestionsSelectPage />} />
-        {/* <Route path="mcq/:id" element={<AddMcqPage />} /> */}
+      {/* <Route path="mcq/:id" element={<AddMcqPage />} /> */}
       {/* <Route path="preview" element={<AddQuestionsPage />} /> */}
       <Route path="createTopic" element={<CreateTopicPage />} />
       <Route path="createTopicAdaptive" element={<CreateTopicAdaptivePage />} />
