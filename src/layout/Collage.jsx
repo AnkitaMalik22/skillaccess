@@ -272,23 +272,89 @@ const CollageLayout = ({ children }) => {
   ];
 
   useEffect(() => {
-<<<<<<< HEAD
-    if (change) {
+    setTemp(null);
+    setDown(null);
+    if (change === true) {
+      if (path.match(/\/collage\/dashboard*/)) {
+        dispatch(setSelected(0));
+      }
+
+      if (path.match(/\/collage\/test*/)) {
+        dispatch(setSelected(1));
+      }
+
+      if (path.match(/\/collage\/companies*/)) {
+        dispatch(setSelected(2));
+      }
+
+      if (path.match(/\/collage\/students*/)) {
+        dispatch(setSelected(3));
+      }
+
+      if (path.match(/\/collage\/results*/)) {
+        dispatch(setSelected(4));
+      }
+
+      if (path.match(/\/collage\/quesBank*/)) {
+        dispatch(setSelected(5));
+      }
+
+      if (path.match(/\/collage\/profile*/)) {
+        // // window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(7));
+      }
+
+      if (path.match(/\/collage\/inbox*/)) {
+        //// window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(8));
+      }
+
+      if (path.match(/\/collage\/teams*/)) {
+        //// window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(9));
+      }
+
+      if (path.match(/\/collage\/accounting*/)) {
+        //// window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(10));
+      }
+
+      if (location.pathname.match(/\/collage\/settings*/)) {
+        //// window.scrollTo({
+        //   top:
+        //     window.scrollY +
+        //     bottom.current.getBoundingClientRect().top,
+        //   behavior: "smooth",
+        // });
+        dispatch(setSelected(11));
+      }
+
+      setChange(false);
       navigate(path);
     }
-
-    // toast.success(path);
   }, [change]);
 
   useEffect(() => {
-    dispatch(getCollege());
-    //  window.scrollTo({
-    //   top:
-    //     window.scrollY +
-    //     bottom.current.getBoundingClientRect().top,
-    //   behavior: "smooth",
-    // });
-=======
     // dispatch(getCollege());
     // //  window.scrollTo({
     // //   top:
@@ -296,7 +362,7 @@ const CollageLayout = ({ children }) => {
     // //     bottom.current.getBoundingClientRect().top,
     // //   behavior: "smooth",
     // // });
->>>>>>> 4fc4b0d30d0e24c0d41774e3f664602a1ef74205
+
     bottom.current.scrollIntoView();
     if (location.pathname.match(/\/collage\/dashboard*/)) {
       dispatch(setSelected(0));
