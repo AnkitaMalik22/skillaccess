@@ -47,9 +47,9 @@ export const getCompany = createAsyncThunk(
   "dashboard/getCompany",
   async (data, { rejectWithValue }) => {
     try {
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/dashboard/companies`,
-        data,
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/college/dashboard/companies/${data.collegeId}`,
+     
         {
           headers: {
             "Content-Type": "application/json",
@@ -120,9 +120,8 @@ export const getTotalJobs = createAsyncThunk(
 
   async (data, { rejectWithValue }) => {
     try {
-      const req = await axios.post(
+      const req = await axios.get(
         `${REACT_APP_API_URL}/api/college/dashboard/jobs`,
-        data,
         {
           headers: {
             "Content-Type": "application/json",
@@ -143,9 +142,8 @@ export const getNewCompanies = createAsyncThunk(
   "dashboard/newCompanies",
   async (data, { rejectWithValue }) => {
     try {
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/dashboard/companies/new`,
-        data,
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/college/dashboard/companies/new/${data.collegeId}`,
         {
           headers: {
             "Content-Type": "application/json",

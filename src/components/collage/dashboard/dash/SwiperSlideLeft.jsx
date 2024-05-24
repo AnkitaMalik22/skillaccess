@@ -10,11 +10,16 @@ const SwiperSlideLeft = () => {
   const { newCompanies, loading } = useSelector((state) => state.dashboard);
   const navigate = useNavigate();
   useSelector((state) => console.log("state : ", state.dashboard));
+  const {user} =useSelector(
+    (state) => state.collageAuth
+  );
 
   useEffect(() => {
-    dispatch(getNewCompanies());
+if(user){
+  dispatch(getNewCompanies({collegeId : user?._id}));
+}
     console.log("newCompanies : ", newCompanies);
-  }, [dispatch]);
+  }, [dispatch,user]);
 
   const companies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
