@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FaSearch } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa6";
@@ -7,11 +7,48 @@ import { TbFileDownload } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import BackIcon from "../../../buttons/BackIcon";
 import { IoIosSearch } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { getPlacedStudents } from "../../../../redux/collage/dashboard/dashboardSlice";
 
 const Students = () => {
-  const [students, setStudents] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [items, setItems] = useState(true);
+  const { placedStudents } = useSelector((state) => state.dashboard);
+  const { user, isLoggedIn, uploadImg } = useSelector(
+    (state) => state.collageAuth
+  );
+  console.log(user);
+  useEffect(() => {
+    dispatch(getPlacedStudents(user?._id));
+  }, []);
+
+  const [filtered, setFiltered] = React.useState([]);
+
+  const handleFilter = (e) => {
+    const value = e.target.value;
+    if (value === "" || value.trim() === "") {
+      console.log("empty");
+
+      setFiltered(placedStudents);
+
+      return;
+    } else {
+      setFiltered(
+        placedStudents.filter((student) => {
+          const regex = new RegExp(value, "i");
+          return (
+            regex.test(student.FirstName) ||
+            regex.test(student.JobPlaced.JobTitle)
+          );
+        })
+      );
+    }
+  };
+  useEffect(() => {
+    setFiltered(placedStudents);
+  }, [placedStudents]);
   return (
     <div className="w-11/12 mx-auto">
       <div className="flex w-full mx-auto justify-between mb-4">
@@ -26,6 +63,7 @@ const Students = () => {
             <IoIosSearch className="self-center w-10 h-10 bg-gray-100 rounded-s-lg text-gray-400 py-2 " />
             <input
               type="text"
+              onChange={handleFilter}
               placeholder="Search..."
               className="placeholder pl-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
             />
@@ -60,85 +98,96 @@ const Students = () => {
       </div>
 
       {/* list to be iterated */}
-      <div className=" grid-cols-6 rounded-lg my-2 py-2 pl-2 text-center  mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-200">
-        {" "}
-        {/* row-2 */}
-        <div className={` flex `}>
-          <div className="flex self-center">
-            <div className=" min-w-[3rem]  h-12 self-center bg-red-600 mr-2  "></div>
-            <span className="break-words min-w-0 pt-1 ">
-              <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                Role
-              </h2>
-              <h2 className="font-dmSans font-medium text-xs break-words text-gray-400">
-                {" "}
-                CompanyName
-              </h2>
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center ">
-          <div className=" self-center h-fit">
-            <span>
-              <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
-                Year
-              </h2>
-              <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blue-500">
-                {" "}
-                Degree
-              </h2>
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className=" self-center h-fit">
-            <span>
-              <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                Designation
-              </h2>
-              <h2 className="font-dmSans font-medium text-xs sm:text-xs inline">
-                {" "}
-                City in{" "}
-                <h3 className="inline break-words text-gray-400">Country</h3>
-              </h2>
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <span className="self-center ">
-            <h2 className="font-dmSans font-semibold text-sm sm:text-base text-green-500   ">
-              300/<h2 className="inline text-black">500</h2>
-            </h2>
-          </span>
-        </div>
-        <div className="flex justify-center">
-          <div className=" self-center">
-            <span>
-              <div className="min-w-[4rem] bg-gray-300 rounded-lg h-2 mx-auto">
-                <div className="w-3/4 bg-green-600 h-full rounded-lg"></div>
+      {filtered?.map((student, index) => {
+        return (
+          <div className=" grid-cols-6 rounded-lg my-2 py-2 pl-2 text-center  mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-200">
+            <div className={` flex `}>
+              <div className="flex self-center">
+                <div className="  flex h-14 w-14">
+                  <img
+                    src={student?.avatar.url}
+                    className="w-10 h-10 rounded-lg self-center"
+                    alt=""
+                  />
+                </div>
+                <span className="break-words min-w-0 pt-1 ">
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
+                    {student.FirstName} {student.LastName}
+                  </h2>
+                  <h2 className="font-dmSans font-medium text-xs break-words text-gray-400">
+                    {student.Address}{" "}
+                  </h2>
+                </span>
               </div>
-              <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
-                {" "}
-                Good
-              </h2>
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-center " >
-          <span className="flex justify-center h-fit self-center gap-2 cursor-pointer"
-           onClick={()=>{
-          navigate('profile');}
-        }>
-            <h2 className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg">
-              View CV
-            </h2>
+            </div>
+            <div className="flex justify-center ">
+              <div className=" self-center h-fit">
+                <span>
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
+                    {student?.To?.substring(0, 4)}
+                  </h2>
+                  <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blue-500">
+                    {" "}
+                    {student?.Major}
+                  </h2>
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className=" self-center h-fit">
+                <span>
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base">
+                    {student.JobPlaced.JobTitle}
+                  </h2>
+                  <h2 className="font-dmSans font-medium text-xs sm:text-xs inline">
+                    {" "}
+                    {student.JobPlaced.JobLocation} in{" "}
+                    <h3 className="inline break-words text-gray-400">
+                      {student?.CompanyPlaced?.location?.country}
+                    </h3>
+                  </h2>
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <span className="self-center ">
+                <h2 className="font-dmSans font-semibold text-sm sm:text-base text-green-500   ">
+                  300/<h2 className="inline text-black">500</h2>
+                </h2>
+              </span>
+            </div>
+            <div className="flex justify-center">
+              <div className=" self-center">
+                <span>
+                  <div className="min-w-[4rem] bg-gray-300 rounded-lg h-2 mx-auto">
+                    <div className="w-3/4 bg-green-600 h-full rounded-lg"></div>
+                  </div>
+                  <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                    {" "}
+                    Good
+                  </h2>
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-center ">
+              <span className="flex justify-center h-fit self-center gap-2 cursor-pointer">
+                <h2
+                  className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
+                  onClick={() =>
+                    navigate(`/collage/students/profile/${student._id}`)
+                  }
+                >
+                  View CV
+                </h2>
 
-            <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center">
-              <TbFileDownload className="text-gray-400 h-6 w-6" />
-            </h2>
-          </span>
-        </div>{" "}
-      </div>
+                <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center">
+                  <TbFileDownload className="text-gray-400 h-6 w-6" />
+                </h2>
+              </span>
+            </div>
+          </div>
+        );
+      })}
 
       {/* smaller screen legend */}
       <div className=" grid-cols-3  text-center w-[98%] mx-auto  font-dmSans font-semibold sm:text-base text-xs md:hidden grid">
