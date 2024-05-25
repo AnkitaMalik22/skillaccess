@@ -25,7 +25,8 @@ const AddQuestionType = () => {
   const dispatch = useDispatch();
 
   const [selectQuestionType, setSelectQuestionType] = useState("");
-
+  const [searchParam, setSearchParam] = useSearchParams();
+  const level = searchParam.get("level");
   // useEffect(() => {
 
   //   dispatch(setTest({ questionType: selectQuestionType }));
@@ -35,17 +36,21 @@ const AddQuestionType = () => {
   const NavHandler = () => {
     switch (selectQuestionType) {
       case "mcq":
-        navigate(`/collage/test/video/${id}/addmcq`);
+        navigate(`/collage/test/video/${id}/addmcq?level=${level}`);
 
         break;
 
       case "short":
-        navigate(`/collage/test/video/shortlong/${id}?length=short`);
+        navigate(
+          `/collage/test/video/shortlong/${id}?length=short?level=${level}`
+        );
 
         break;
 
       case "long":
-        navigate(`/collage/test/video/shortlong/${id}?length=long`);
+        navigate(
+          `/collage/test/video/shortlong/${id}?length=long?level=${level}`
+        );
 
         break;
 
@@ -75,7 +80,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "mcq"?'border-blued':'opacity-70'
+              selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("mcq")}
           >
@@ -118,7 +123,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "short"?'border-blued':'opacity-70'
+              selectQuestionType === "short" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("short")}
           >
@@ -153,7 +158,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "long"?'border-blued':'opacity-70'
+              selectQuestionType === "long" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("long")}
           >

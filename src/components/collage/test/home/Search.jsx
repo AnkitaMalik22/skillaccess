@@ -3,7 +3,7 @@ import { FiPieChart } from "react-icons/fi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 
-const Search = () => {
+const Search = ({ students }) => {
   return (
     <div className="flex w-[97%] mx-auto justify-between mb-2 ">
       <button className="flex self-center ml-2 rounded-lg h-10 w-10 sm:h-fit sm:w-fit gap-2">
@@ -22,16 +22,24 @@ const Search = () => {
       </div>
 
       <div className="flex gap-2">
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-gray-200 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end text-xs font-bold flex justify-center">
-          <p className="self-center text-gray-400">+99</p>
-        </div>
+        {students.slice(0, 5).map((student) => {
+          return (
+            <div className="rounded-full xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end">
+              <img
+                src={student.avatar.url}
+                alt=""
+                srcset=""
+                className="rounded-full"
+              />
+            </div>
+          );
+        })}
+
+        {students.length - 5 > 0 && (
+          <div className="rounded-full bg-gray-200 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end text-xs font-bold flex justify-center">
+            <p className="self-center text-gray-400">{students.length - 5}</p>
+          </div>
+        )}
         <div className="xl:w-8 xl:h-8 lg:w-2 lg:h-5"></div>
         <div className="rounded-full xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end">
           {/* <IoSettingsOutline className="text-gray-400 w-full h-full" /> */}

@@ -27,10 +27,8 @@ const Invite = () => {
   const { user } = useSelector((state) => state.collageAuth);
 
   useEffect(() => {
-    dispatch(getStudentsForTest(testId)).then((res) => {
-      setFilteredStudents(studentList);
-    });
-  }, [user]);
+    dispatch(getStudentsForTest(testId));
+  }, []);
 
   useEffect(() => {
     setFilteredStudents(studentList);
