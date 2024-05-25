@@ -40,7 +40,7 @@ const AddVideo = () => {
   const dispatch = useDispatch();
   const [searchParam, setSearchParam] = useSearchParams();
   const { id } = useParams();
-
+  const level = searchParam.get("level");
   const navigate = useNavigate();
 
   const [recording, setRecording] = useState(false);
@@ -54,7 +54,6 @@ const AddVideo = () => {
   const [file, setFile] = useState(null);
 
   const [videoLink, setVideoLink] = useState("");
-
 
   const [loading, setLoading] = useState(false);
 
@@ -247,12 +246,11 @@ const AddVideo = () => {
       navigate(
         `/collage/test/video/${id}/selectType?section=${searchParam.get(
           "topicId"
-        )}`
+        )}&level=${level}`
       );
     } catch (error) {
       console.error("Error uploading video:", error);
-    }
-    finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -321,15 +319,15 @@ const AddVideo = () => {
               )}
             </div>
 
-            {!recording && 
+            {!recording && (
               <div className="flex items-center gap-12  pt-6">
-                <hr className="w-[400px] h-[2px]"/>
-                <p className="text-center  text-[#8f92a1] font-medium text-[20px]">Or</p>
-                <hr className="w-[400px] [2px]"/>
+                <hr className="w-[400px] h-[2px]" />
+                <p className="text-center  text-[#8f92a1] font-medium text-[20px]">
+                  Or
+                </p>
+                <hr className="w-[400px] [2px]" />
               </div>
-              
-              
-              }
+            )}
 
             <div className="flex mt-10">
               {!recording && (
@@ -337,7 +335,7 @@ const AddVideo = () => {
                   className="self-center justify-center border-2 border-[#0052cc] font-medium flex items-center bg-blue-100 px-4 rounded-2xl text-[20px] gap-2 h-[60px] w-[685px] text-[#0052cc]"
                   onClick={handleStartRecording}
                 >
-                <PiVideoCamera className="h-[40px] w-[40px]" />  Record a Video
+                  <PiVideoCamera className="h-[40px] w-[40px]" /> Record a Video
                 </button>
               )}
             </div>
@@ -420,14 +418,12 @@ const AddVideo = () => {
 
               onClick={handleFileUpload}
             >
-
               Add Questions{" "}
               {loading === false ? (
                 <FaPlus className="self-center" />
               ) : (
                 <Loader />
               )}
-
             </button>
           </div>
         </div>

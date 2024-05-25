@@ -19,8 +19,17 @@ import {
   setTestBasicDetails,
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
-import { getAllTests } from "../../../../redux/collage/test/thunks/test";
+import {
+  getAllTests,
+  getRecentTests,
+  removeFromRecent,
+} from "../../../../redux/collage/test/thunks/test";
 import Adaptive from "./Adaptive";
+import Assessment from "../assessment/Assessment";
+
+import calculateDaysAgo from "../../../../util/calculateDaysAgo";
+import calculateDaysAndWeeks from "../../../../util/daysAndWeeks";
+import { getStudents } from "../../../../redux/collage/student/studentSlice";
 
 export const Test = () => {
   const dispatch = useDispatch();
@@ -34,7 +43,10 @@ export const Test = () => {
   const navigate = useNavigate();
   const asses = [1, 2, 3, 4, 5];
 
-  const { status } = useSelector((state) => state.collageAuth);
+  const { recentAssessments } = useSelector((state) => state.test);
+  const { user } = useSelector((state) => state.collageAuth);
+  const { approvedStudents } = useSelector((state) => state.collegeStudents);
+
   useEffect(() => {
     dispatch(
       setTestBasicDetails({
@@ -44,6 +56,8 @@ export const Test = () => {
         totalQuestions: null,
       })
     );
+    dispatch(getStudents({ id: user?._id }));
+    dispatch(getRecentTests());
     dispatch(setTestSelectedTopics([]));
     dispatch(setCurrentQuestionCount(0));
     dispatch(getAllTests());
@@ -54,7 +68,7 @@ export const Test = () => {
   return (
     <div className="w-11/12 mx-auto py-5 md:py-10">
       {/* search bar */}
-      <Header />
+      <Header students={approvedStudents} />
 
       <div className="flex rounded-lg  md:flex-nowrap justify-center relative gap-3 md:gap-8">
         {/* left block */}
@@ -143,7 +157,7 @@ export const Test = () => {
               Recent Assessments Completed
             </h2>
             <div className="p-3 ">
-              {asses.map(() => {
+              {recentAssessments.map((assessment) => {
                 return (
                   <div className="flex flex-col md:gap-8">
                     <div className="flex gap-3 items-center">
@@ -156,28 +170,40 @@ export const Test = () => {
                       </div>
                       <div>
                         <h2 className="text-xs  font-bold text-[#171717] ">
-                          Software Engineer
+                          {assessment.name}
                         </h2>
                         <h2 className="text-xs  font-normal">
-                          Google{" "}
-                          <span className="text-[#8F92A1] inline">
+                          {assessment.description}
+                          {/* <span className="text-[#8F92A1] inline">
                             in Pune,India
-                          </span>
+                          </span> */}
                         </h2>
                       </div>
                     </div>
                     <div className="flex  mb-5 gap-2 justify-between">
                       <div className="flex gap-2">
-                        <button className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base">
+                        <button
+                          className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
+                          onClick={() => {
+                            navigate(
+                              `/collage/results/overview?level=${assessment.level}&assessment=${assessment._id}`
+                            );
+                          }}
+                        >
                           View
                         </button>
-                        <button className="rounded-lg p-3  bg-[#8F92A1] bg-opacity-5 self-center">
+                        <button
+                          className="rounded-lg p-3  bg-[#8F92A1] bg-opacity-5 self-center"
+                          onClick={() =>
+                            dispatch(removeFromRecent(assessment._id))
+                          }
+                        >
                           <CgUnavailable className="text-[#8F92A1] text-lg" />
                         </button>
                       </div>
 
                       <p className="text-xs  font-normal text-[#8F92A1]">
-                        1 week ago
+                        {calculateDaysAndWeeks(assessment.endDate)}
                       </p>
                     </div>
                   </div>

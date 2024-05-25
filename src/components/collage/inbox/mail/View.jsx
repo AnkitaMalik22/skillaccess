@@ -120,9 +120,7 @@ const View = ({ index, filter, inboxType }) => {
         </div>
       </div>
 
-      {mail?.[inboxType === "Received" ? "emailsReceived" : "emailsSent"][
-        index
-      ]?.replies?.map((reply) => {
+      {Email?.mail.replies?.map((reply) => {
         return (
           <>
             {" "}

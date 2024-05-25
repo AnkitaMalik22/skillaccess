@@ -37,7 +37,7 @@ const Video = ({ video, Number }) => {
             <Disclosure.Button className="w-full bg-gray-100 ">
               Click to Expand{" "}
             </Disclosure.Button>
-            <div className="level flex items-center gap-2 bg-gray-100 ">
+            {/* <div className="level flex items-center gap-2 bg-gray-100 ">
               {video.QuestionLevel == "beginner" && (
                 <p className="rounded-2xl mr-4 py-1.5 bg-cyan-500 text-white w-8 h-8 text-center font-extrabold  ">
                   L1
@@ -53,7 +53,7 @@ const Video = ({ video, Number }) => {
                   L3
                 </p>
               )}
-            </div>
+            </div> */}
           </div>
 
           <Disclosure.Panel>

@@ -3,7 +3,7 @@ import { FiPieChart } from "react-icons/fi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 
-const Header = () => {
+const Header = ({ students }) => {
   return (
     <div className="flex w-full mx-auto justify-between mb-6 gap-2">
       {/* comp */}
@@ -33,16 +33,24 @@ const Header = () => {
       </div>
 
       <div className="flex gap-2 items-center">
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-blue-500 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end"></div>
-        <div className="rounded-full bg-gray-200 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end text-xs font-bold flex justify-center">
-          <p className="self-center text-gray-400">+99</p>
-        </div>
+        {students.slice(0, 5).map((student) => {
+          return (
+            <div className="rounded-full xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end">
+              <img
+                src={student.avatar.url}
+                alt=""
+                srcset=""
+                className="rounded-full"
+              />
+            </div>
+          );
+        })}
+
+        {students.length - 5 > 0 && (
+          <div className="rounded-full bg-gray-200 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end text-xs font-bold flex justify-center">
+            <p className="self-center text-gray-400">{students.length - 5}</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -27,6 +27,7 @@ const LongShortAnswer = () => {
   const addType = searchParams.get("addType");
 
   const LongShort = searchParams.get("length");
+  const level = searchParams.get("level");
 
   const [question, setQuestion] = useState({
     id: `${Date.now()}`,
@@ -71,7 +72,11 @@ const LongShortAnswer = () => {
     console.log(question);
 
     if (LongShort === "short") {
-      if (question.Title == "" || question.Title.trim() === "" || question.Title === "<p><br></p>") {
+      if (
+        question.Title == "" ||
+        question.Title.trim() === "" ||
+        question.Title === "<p><br></p>"
+      ) {
         toast.error("Please enter the question");
       } else if (question.Duration == 0) {
         toast.error("Please enter required time");
@@ -138,6 +143,7 @@ const LongShortAnswer = () => {
   return (
     <div>
       <Header
+        level={level}
         handleSave={handleSave}
         question={question}
         setQuestion={setQuestion}
