@@ -33,6 +33,12 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const { students, companies, assessments, jobs, placedStudents } =
     useSelector((state) => state.dashboard);
+    const {user} =useSelector(
+      (state) => state.collageAuth
+    );
+  
+
+
   useEffect(() => {
     dispatch(getStudent());
     dispatch(getCompany());

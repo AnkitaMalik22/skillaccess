@@ -9,6 +9,10 @@ const Companies = () => {
   const [companies, setcompanies] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
   const dispatch = useDispatch();
   // const { companies } = useSelector((state) => state.dashboard);
+  const {user} =useSelector(
+    (state) => state.collageAuth
+  );
+
 
   useEffect(() => {
     dispatch(getCompany());
