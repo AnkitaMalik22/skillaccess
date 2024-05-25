@@ -5,6 +5,7 @@ import axios from "axios";
 import {
   addQuesFunc,
   editQuestionFun,
+  removeQById,
   removeQfunc,
 } from "./reducerFunctions/question";
 import { getAllTestFulfilled } from "./reducerFunctions/test";
@@ -24,6 +25,8 @@ import {
   selectStudentTest,
   getselectedStudents,
   getStudentsForTest,
+  getRecentTests,
+  removeFromRecent,
 } from "./thunks/test";
 
 import {
@@ -48,6 +51,7 @@ import {
 } from "./thunks/question";
 
 const testState = {
+  recentAssessments: [],
   inTest: false,
   testLoading: false,
   totalSelectedQuestions: 5,
@@ -392,88 +396,7 @@ const testSlice = createSlice({
     },
 
     removeQuestionById: (state, action) => {
-      //questionType, topicIndex ,selfIndex
-      const { sectionId, questionId, questionType } = action.payload;
-      let copy = [];
-      let topicIndex, selfIndex;
-      console.log(action.payload);
-      state.topics.forEach((topic, index) => {
-        console.log(topic.Type, questionType);
-        console.log(topic._id === sectionId && topic.Type === questionType);
-        if (topic._id === sectionId && topic.Type === questionType)
-          topicIndex = index;
-      });
-
-      switch (questionType) {
-        case "mcq":
-          state.topics[topicIndex].questions.forEach((question, index) => {
-            console.log(question.id, questionId);
-            if (question.id === questionId) {
-              selfIndex = index;
-            }
-          });
-          console.log(selfIndex);
-          copy = [...state.topics[topicIndex].questions];
-          state.topics[topicIndex].questions = copy.filter((ques, index) => {
-            return index !== selfIndex;
-          });
-
-          break;
-
-        case "essay":
-          localStorage.setItem("bug", JSON.stringify(state.topics[topicIndex]));
-          state.topics[topicIndex].essay.map((question, index) => {
-            if (question.id === questionId) {
-              console.log(question.id);
-              selfIndex = index;
-            }
-          });
-          copy = [...state.topics[topicIndex].essay];
-
-          state.topics[topicIndex].essay = copy.filter((ques, index) => {
-            return index !== selfIndex;
-          });
-          break;
-
-        case "compiler":
-          state.topics[topicIndex].compiler.map((question, index) => {
-            if (question.id === questionId) {
-              selfIndex = index;
-            }
-          });
-          copy = [...state.topics[topicIndex].compiler];
-          state.topics[topicIndex].compiler = copy.filter((ques, index) => {
-            return index !== selfIndex;
-          });
-          break;
-        case "findAnswer":
-          state.topics[topicIndex].findAnswers.map((question, index) => {
-            if (question.id === questionId) {
-              selfIndex = index;
-            }
-          });
-          copy = [...state.topics[topicIndex].findAnswers];
-          state.topics[topicIndex].findAnswers = copy.filter((ques, index) => {
-            return index !== selfIndex;
-          });
-          break;
-
-        case "video":
-          state.topics[topicIndex].video.map((question, index) => {
-            if (question.id === questionId) {
-              selfIndex = index;
-            }
-          });
-          copy = [...state.topics[topicIndex].video];
-          state.topics[topicIndex].video = copy.filter((ques, index) => {
-            return index !== selfIndex;
-          });
-          break;
-        default:
-          break;
-      }
-
-      localStorage.setItem("topics", JSON.stringify(state.topics));
+      removeQById(state, action);
     },
 
     editQuestion: (state, action) => {
@@ -950,6 +873,10 @@ const testSlice = createSlice({
         state.filteredSections = action.payload;
         toast.success("Topic Deleted Successfully!");
       })
+      .addCase(getRecentTests.fulfilled, (state, action) => {
+        state.recentAssessments = action.payload.assessment;
+      })
+      .addCase(removeFromRecent.fulfilled, (state, action) => {})
       .addCase(deleteTopics.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         toast.error("Error Deleting Topic!");

@@ -68,6 +68,7 @@ const Header = ({ selectQuestionType }) => {
     console.log(Duration);
     const vid = {
       ...topicToBeAdded.video,
+      QuestionLevel: level,
       Duration: Duration,
       id: ID,
       section:
@@ -87,7 +88,7 @@ const Header = ({ selectQuestionType }) => {
         navigate(
           `/collage/test/details/${id}?type=section&question=video&topicId=${searchParam.get(
             "section"
-          )}&view=false`
+          )}&view=false&level=${level}`
         );
       }
     } else {
@@ -107,7 +108,7 @@ const Header = ({ selectQuestionType }) => {
           toast.error("Please add questions to the assessment");
           return;
         } else {
-          navigate(`/collage/test/typeOfQuestions/${id}`);
+          navigate(`/collage/test/typeOfQuestions/${id}?level=${level}`);
         }
         //           navigate(`/collage/test/select`);
       });
@@ -164,7 +165,14 @@ const Header = ({ selectQuestionType }) => {
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
         <button className="flex self-center ml-2 rounded-lg  gap-2">
-          <button onClick={() =>  level  === 'adaptive' ? navigate("/collage/test/selectAdaptive?level=adaptive") : navigate(-1)} className="mt-2 mr-3">
+          <button
+            onClick={() =>
+              level === "adaptive"
+                ? navigate("/collage/test/selectAdaptive?level=adaptive")
+                : navigate(-1)
+            }
+            className="mt-2 mr-3"
+          >
             <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
           </button>
 

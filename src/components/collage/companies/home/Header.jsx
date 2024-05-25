@@ -11,17 +11,17 @@ const Header = ({ handleFilter }) => {
   return (
     <div className="flex w-full mx-auto justify-between mb-6">
       {/* comp */}
-      <span className="flex gap-2">
+      <div className="flex gap-2">
         <button
           className="  self-center object-center  rounded-lg h-10 w-10 "
           // onClick={() => navigate('collage/companies')}
         >
-          <img src="../../images/icons/sales.jpg" alt="" />
+          <img src="../../images/icons/sales.jpg" alt="icon" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Companies
         </h2>
-      </span>
+      </div>
 
       {/* search */}
       <div className=" rounded-xl w-full sm:h-12 h-10 flex">

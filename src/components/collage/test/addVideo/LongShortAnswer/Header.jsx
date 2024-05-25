@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addVideo } from "../../../../../redux/collage/test/testSlice";
 
 const Header = ({
+  level,
   question,
   setQuestion,
   id,

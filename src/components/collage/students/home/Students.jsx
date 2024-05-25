@@ -98,40 +98,30 @@ const Students = () => {
   };
   console.log(uploadedStudents);
   return (
-    <div>
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header handleFilter={handleFilterStudents} />
-      {/* {visible && (
-        <PopUp
-          visible={visible}
-          handleSave={handleApprove}
-          studentId={sId}
-          handleOverlay={() => {
-            setVisible(false);
-          }}
-        />
-      )} */}
-      <div className="w-11/12 flex justify-between mx-auto gap-1">
+
+      <div className="w-full flex justify-between md:gap-10 gap-5 flex-wrap md:flex-nowrap md:mb-10 mb-5">
         {/* New students joined */}
-        <div className="h-96 w-1/3 bg-gray-100 overflow-y-scroll scroll rounded-lg">
-          <span className="flex justify-between font-bold text-sm px-4 py-2">
+        <div className="h-96 w-2/3 bg-[#F8F8F9] overflow-y-scroll scroll rounded-3xl py-8 px-5">
+          <span className="flex justify-between items-center font-bold text-base text-[#171717] mb-5 md:mb-8">
             <h2>Invited Students</h2>
-            <h2 className="text-gray-400">...</h2>
+            <h2 className="text-[#8F92A1] text-xl tracking-[4px]">...</h2>
           </span>
           {filteredStudents?.map((student, index) => (
-            <div className=" grid-cols-2 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
+            <div className="flex rounded-2xl justify-between items-center  text-center mx-auto  font-dmSans font-semibold text-base bg-white mb-3 p-4 flex-wrap">
               {" "}
               {/* row-2 */}
-              <div className={` flex `}>
-                <div className="flex self-center items-center">
-                  <div className=" min-w-[3rem]  h-12 self-center  mr-2 flex items-center justify-center text-xl ">
+              <div className="flex justify-between gap-2">
+                <div className="flex self-center items-center gap-3">
+                  <div className="w-11  h-11 self-center  flex items-center justify-center text-xl ">
                     <img
-                      src="../../images/student.png"
-                      alt=""
-                      width="50px"
-                      height="50px"
+                      src="../../images/teams.png"
+                      alt=" user-icon"
+                      className=" rounded-lg w-11 h-11"
                     />
                   </div>
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base text-start">
+                  <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
                     {student?.FirstName + " " + student?.LastName}
                   </h2>
 
@@ -146,51 +136,34 @@ const Students = () => {
                 </span> */}
                 </div>
               </div>
-              <div className="flex justify-center items-center  ">
-                <h2
-                  className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-3/4"
-                  style={{ wordWrap: "break-word" }}
-                >
-                  {student?.Email}
-                </h2>
-                <div className=" self-center h-fit">
-                  {/* <span>
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
-                    Year
-                  </h2>
-                  <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blue-500">
-                    {" "}
-                    Degree
-                  </h2>
-                </span> */}
-                </div>
+              <div className="font-dmSans font-semibold text-sm text-[#7F7F7F] lowercase break-words">
+                {student?.Email}
               </div>
             </div>
           ))}
         </div>
 
         {/* Pending request */}
-        <div className="h-96 w-2/3 bg-gray-100 overflow-y-scroll rounded-lg">
-          <span className="flex justify-between font-bold text-sm px-4 py-2">
-            <h2>Pending Request</h2>
-            <h2 className="text-gray-400">...</h2>
+        <div className="h-96 w-2/3 bg-[#F8F8F9] overflow-y-scroll scroll rounded-3xl py-8 px-5">
+          <span className="flex justify-between items-center font-bold text-base text-[#171717] mb-5 md:mb-8">
+            <h2>Pending Requests</h2>
+            <h2 className="text-[#8F92A1] text-xl tracking-[4px]">...</h2>
           </span>
 
           {pendingStudents?.map((student, index) => (
-            <div className=" grid-cols-3 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
+            <div className="flex rounded-2xl justify-between items-center  text-center mx-auto  font-dmSans font-semibold text-base bg-white mb-3 p-4 gap-3 flex-wrap xl:flex-nowrap ">
               {" "}
               {/* row-2 */}
-              <div className={` flex `}>
+              <div className="flex">
                 <div className="flex self-center">
-                  <div className=" min-w-[3rem]  h-12 self-center gap-2  mr-2  flex items-center justify-center ">
+                  <div className="self-center gap-3 flex items-center justify-between">
                     {" "}
                     <img
-                      src="../../images/student.png"
-                      alt=""
-                      width="50px"
-                      height="50px"
+                      src="../../images/teams.png"
+                      alt=" user-icon"
+                      className=" rounded-lg w-11 h-11"
                     />
-                    <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
+                    <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
                       {student?.FirstName + " " + student?.LastName}
                     </h2>
                   </div>
@@ -206,14 +179,8 @@ const Students = () => {
                 </span> */}
                 </div>
               </div>
-              <div className="flex justify-center ">
-                <h2
-                  className="font-dmSans font-semibold text-sm    sm:text-base text-gray-400 w-full"
-                  style={{ wordWrap: "break-word" }}
-                >
-                  {student?.Email}
-                </h2>
-                <div className=" self-center h-fit"></div>
+              <div className="font-dmSans font-semibold text-sm text-[#7F7F7F] lowercase break-words">
+                {student?.Email}
               </div>
               {/* <div className="flex item-center gap-2"> */}
               {/* <button
@@ -227,9 +194,9 @@ const Students = () => {
                   Approve Request
                 </span>
               </button> */}
-              <span className="flex  h-fit self-center gap-2 ml-8">
+              <div className="flex  self-center gap-3">
                 <h2
-                  className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
+                  className="font-dmSans text-xs font-bold text-white bg-[#95ACFA] p-2 rounded-lg cursor-pointer"
                   onClick={() =>
                     navigate(`/collage/students/profile/${student._id}`)
                   }
@@ -238,150 +205,81 @@ const Students = () => {
                 </h2>
 
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
-                  <TbFileDownload className="text-gray-400 h-6 w-6" />
+                  <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
                 </h2>
-              </span>
+              </div>
               {/* </div>{" "} */}
             </div>
           ))}
-
-          {/* <div className=" grid-cols-3 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
-            {" "}
-            {/* row-2 */}
-          {/* <div className={` flex `}>
-              <div className="flex self-center">
-                <div className=" min-w-[3rem]  h-12 self-center bg-red-600 mr-2  "></div>
-                <span className="break-words min-w-0 pt-1 ">
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                    Role
-                  </h2>
-                  <h2 className="font-dmSans font-medium text-xs break-words text-gray-400">
-                    {" "}
-                    CompanyName
-                  </h2>
-                </span>
-              </div>
-            </div>
-            <div className="flex justify-center ">
-              <div className=" self-center h-fit">
-                <span>
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
-                    Year
-                  </h2>
-                  <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blue-500">
-                    {" "}
-                    Degree
-                  </h2>
-                </span>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <span className="flex justify-center h-fit self-center gap-2 bg-[#DE350B66] bg-opacity-40 text-white text-xs font-semibold px-4 py-2 rounded-xl hover:cursor-pointer">
-                Approve Request
-              </span>
-            </div>{" "}
-          </div> */}
         </div>
       </div>
 
       {/* lower half */}
       {/* legend */}
-      <div className=" grid-cols-6  text-center w-11/12 mx-auto mt-4 font-dmSans font-semibold text-base hidden md:grid">
-        <div className="bg-[#0052cc1f] rounded-s-lg p-2 ">
+      <div className="text-center mb-6  mx-auto font-dmSans font-bold text-base bg-[#0052cc0d] px-2 py-3 rounded-xl">
+        <div className="grid-cols-6 md:grid">
           <h2>Name of the Student</h2>
-        </div>
-        <div className="bg-[#0052cc1f] p-2">
           <h2>Education</h2>
-        </div>
-        <div className="bg-[#0052cc1f] p-2">
-          <h2>Last Assessment</h2>{" "}
-        </div>
-        <div className="bg-[#0052cc1f] p-2">
-          <h2>Current Assessment</h2>
-        </div>
-        <div className="bg-[#0052cc1f] p-2">
+          <h2>Last Assessment</h2> <h2>Current Assessment</h2>
           <h2>Performance</h2>
-        </div>
-        <div className="bg-[#0052cc1f] p-2 rounded-e-lg">
           <h2>Resume</h2>
         </div>
       </div>
 
       {/* list to be iterated */}
-
+      {console.log(approvedStudents)}
       {approvedStudents?.map((student, index) => (
-        <div className=" grid-cols-6 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-100 ">
+        <div className=" grid-cols-6 rounded-2xl  p-2 text-center mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-100 mb-4 ">
           {" "}
           {/* row-2 */}
-          <div className={` flex `}>
-            <div className="flex self-center">
-              <div className=" min-w-[3rem]  h-12 self-center mr-2  flex items-center justify-center">
-                <img
-                  src="../../images/student.png"
-                  alt=""
-                  width="50px"
-                  height="50px"
-                />
-              </div>
-              <span className="break-words min-w-0 pt-1 flex items-center ">
-                <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                  {student?.FirstName + " " + student?.LastName}
-                </h2>
-                {/* <h2 className="font-dmSans font-medium text-xs break-words text-gray-400">
-                {" "}
-                CompanyName
-              </h2> */}
-              </span>
+          <div className="flex gap-3 items-center justify-center">
+            <div className="w-11  h-11 self-center  flex items-center justify-center text-xl ">
+              <img
+                src="../../images/teams.png"
+                alt=" user-icon"
+                className=" rounded-lg w-11 h-11"
+              />
             </div>
+            <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
+              {student?.FirstName + " " + student?.LastName}
+            </h2>
           </div>
-          <div className="flex justify-center ">
-            <div className=" self-center h-fit">
-              <span>
-                <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
-                  {student?.Education[0]?.EndDate.substring(0, 4)}
-                </h2>
-                <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blue-500">
-                  {" "}
-                  {student?.Education[0]?.Degree}
-                </h2>
+          <div className="flex justify-center flex-col">
+            <h2 className="font-dmSans font-normal text-sm text-[#7F7F7F]">
+              {student?.Education[0]?.EndDate.substring(0, 4)}
+            </h2>
+            <h2 className="font-dmSans font-bold text-sm inline text-[#0052CC]">
+              {" "}
+              {student?.Education[0]?.Degree}
+            </h2>
+          </div>
+          <div className="flex justify-center flex-col">
+            <h2 className="font-dmSans font-normal text-sm text-[#171717]">
+              Midweight UI/UX Designer
+            </h2>
+            <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
+              Mailchimp
+              <span className="inline font-normal break-words text-[#8F92A1]">
+                , in London, UK
               </span>
-            </div>
+            </h2>
           </div>
-          <div className="flex justify-center">
-            <div className=" self-center h-fit">
-              <span>
-                <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                  Midweight UI/UX Designer
-                </h2>
-                <h2 className="font-dmSans font-medium text-xs sm:text-xs inline">
-                  {" "}
-                  Mailchimp{" "}
-                  <h3 className="inline break-words text-gray-400">
-                    in London, UK
-                  </h3>
-                </h2>
+          <div className="flex justify-center flex-col">
+            <h2 className="font-dmSans font-normal text-sm text-[#171717]">
+              Midweight UI/UX Designer
+            </h2>
+            <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
+              Mailchimp
+              <span className="inline font-normal break-words text-[#8F92A1]">
+                , in London, UK
               </span>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <span>
-              <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                Midweight UI/UX Designer
-              </h2>
-              <h2 className="font-dmSans font-medium text-xs sm:text-xs inline">
-                {" "}
-                Mailchimp{" "}
-                <h3 className="inline break-words text-gray-400">
-                  in London, UK
-                </h3>
-              </h2>
-            </span>
+            </h2>
           </div>
           <div className="flex justify-center">
             <div className=" self-center">
               <span>
                 <div className="min-w-[4rem] bg-gray-300 rounded-lg h-2 mx-auto">
-                  <div className="w-3/4 bg-green-600 h-full rounded-lg"></div>
+                  <div className="w-3/4 bg-[#00875A] h-full rounded-lg"></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
@@ -390,22 +288,20 @@ const Students = () => {
               </span>
             </div>
           </div>
-          <div className="flex justify-center">
-            <span className="flex justify-center h-fit self-center gap-2">
-              <h2
-                className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg cursor-pointer"
-                onClick={() =>
-                  navigate(`/collage/students/profile/${student._id}`)
-                }
-              >
-                View CV
-              </h2>
+          <div className="flex justify-center items-center gap-3">
+            <h2
+              className="font-dmSans text-xs font-bold text-white bg-[#95ACFA] p-2 rounded-lg cursor-pointer"
+              onClick={() =>
+                navigate(`/collage/students/profile/${student._id}`)
+              }
+            >
+              View CV
+            </h2>
 
-              <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center">
-                <TbFileDownload className="text-gray-400 h-6 w-6" />
-              </h2>
-            </span>
-          </div>{" "}
+            <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
+              <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
+            </h2>
+          </div>
         </div>
       ))}
     </div>

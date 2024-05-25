@@ -2,7 +2,7 @@ import React from "react";
 import { CiSettings } from "react-icons/ci";
 import { Disclosure, Transition } from "@headlessui/react";
 import { FiPieChart } from "react-icons/fi";
-import Search from "./Search";
+import Header from "./Header";
 import Beginner from "./Beginner";
 import { FaCaretDown } from "react-icons/fa";
 
@@ -19,8 +19,17 @@ import {
   setTestBasicDetails,
   setTestSelectedTopics,
 } from "../../../../redux/collage/test/testSlice";
-import { getAllTests } from "../../../../redux/collage/test/thunks/test";
+import {
+  getAllTests,
+  getRecentTests,
+  removeFromRecent,
+} from "../../../../redux/collage/test/thunks/test";
 import Adaptive from "./Adaptive";
+import Assessment from "../assessment/Assessment";
+
+import calculateDaysAgo from "../../../../util/calculateDaysAgo";
+import calculateDaysAndWeeks from "../../../../util/daysAndWeeks";
+import { getStudents } from "../../../../redux/collage/student/studentSlice";
 
 export const Test = () => {
   const dispatch = useDispatch();
@@ -34,7 +43,10 @@ export const Test = () => {
   const navigate = useNavigate();
   const asses = [1, 2, 3, 4, 5];
 
-  const { status } = useSelector((state) => state.collageAuth);
+  const { recentAssessments } = useSelector((state) => state.test);
+  const { user } = useSelector((state) => state.collageAuth);
+  const { approvedStudents } = useSelector((state) => state.collegeStudents);
+
   useEffect(() => {
     dispatch(
       setTestBasicDetails({
@@ -44,6 +56,8 @@ export const Test = () => {
         totalQuestions: null,
       })
     );
+    dispatch(getStudents({ id: user?._id }));
+    dispatch(getRecentTests());
     dispatch(setTestSelectedTopics([]));
     dispatch(setCurrentQuestionCount(0));
     dispatch(getAllTests());
@@ -52,51 +66,51 @@ export const Test = () => {
   const arr = [<Adaptive />, <Beginner />, <Intermediate />, <Advanced />];
 
   return (
-    <div className="">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       {/* search bar */}
-      <Search />
+      <Header students={approvedStudents} />
 
-      <div className="flex mt-2  w-[98.3%] rounded-lg  flex-wrap justify-center relative">
+      <div className="flex rounded-lg  md:flex-nowrap justify-center relative gap-3 md:gap-8">
         {/* left block */}
-        <div className=" lg:w-[70%] xl:w-3/4 w-full rounded-lg">
-          <div className="w-full px-4 pt-8">
-            <div className="mx-auto w-full  rounded-2xl bg-white p-2">
+        <div className="w-3/4 rounded-lg">
+          <div className="w-full">
+            <div className="mx-auto w-full  rounded-2xl bg-white">
               {arr.map((comp, i) => (
                 <Disclosure defaultOpen>
                   {({ open }) => (
                     <div className="mb-4 ">
                       <div className="flex w-full justify-between rounded-t-2xl border-b-2  border-opacity-50 border-gray-200 bg-[#F8F8F9] px-4 py-4 text-left text-sm font-medium  hover:bg-purple-200 focus:outline-none  ">
                         <div className="flex gap-2 w-full justify-between text-sm font-bold">
-                          <h2 className="flex gap-2">
+                          <h2 className="flex gap-3 text-[#171717] text-sm">
                             {i === 0 ? (
                               <>
-                                <FaFolder className="text-blued w-5 h-5 " />
+                                <FaFolder className="text-[#B3D4FF] w-5 h-5 " />
                                 Adaptive level{" "}
-                                <p className="inline-block text-gray-400">
+                                <p className="inline-block text-[#8F92A1]">
                                   &#40;{adaptive?.length}&#41;
                                 </p>{" "}
                               </>
                             ) : i === 1 ? (
                               <>
-                                <FaFolder className="text-blued w-5 h-5 " />
+                                <FaFolder className="text-[#B3D4FF] w-5 h-5 " />
                                 Beginner level{" "}
-                                <p className="inline-block text-gray-400">
+                                <p className="inline-block text-[#8F92A1]">
                                   &#40;{beginner.length}&#41;
                                 </p>{" "}
                               </>
                             ) : i === 2 ? (
                               <>
-                                <FaFolder className="text-blued w-5 h-5" />
+                                <FaFolder className="text-[#B3D4FF] w-5 h-5 " />
                                 For Intermediate{" "}
-                                <p className="inline-block text-gray-400">
+                                <p className="inline-block text-[#8F92A1]">
                                   &#40;{intermediate.length}&#41;
                                 </p>{" "}
                               </>
                             ) : (
                               <>
-                                <FaFolder className="text-blued w-5 h-5" />
+                                <FaFolder className="text-[#B3D4FF] w-5 h-5 " />
                                 For Advanced{" "}
-                                <p className="inline-block text-gray-400">
+                                <p className="inline-block text-[#8F92A1]">
                                   &#40;{advanced.length}&#41;
                                 </p>{" "}
                               </>
@@ -106,7 +120,7 @@ export const Test = () => {
                             <FaCaretDown
                               className={`${
                                 open ? "" : ""
-                              } h-5 w-5 text-gray-300`}
+                              } h-5 w-5 text-[#8F92A1]`}
                             />
                           </Disclosure.Button>
                           {/* <CiSettings
@@ -137,43 +151,65 @@ export const Test = () => {
         </div>
 
         {/* right block */}
-        <div className="lg:w-[28%] xl:w-[23%] w-full ml-2 bg-gray-100 rounded-3xl p-2  mt-10  min-h-[50rem] basis-full font-dmSans sm:block sm:basis-auto  ">
-          <div className="w-11/12 mt-2 rounded-3xl bg-white min-h-[99%] mx-auto">
-            <h2 className="text-base border-b-2 border-gray-200 font-bold text-center py-3  px-2">
+        <div className="w-1/4 p-4 bg-gray-100 rounded-3xl   min-h-[50rem] basis-full font-dmSans sm:block sm:basis-auto  ">
+          <div className="rounded-3xl bg-white min-h-[99%] mx-auto">
+            <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
               Recent Assessments Completed
             </h2>
-            {asses.map(() => {
-              return (
-                <>
-                  <div className="flex gap-2 px-3 py-1 mt-2">
-                    <div className="min-w-[2.5rem] h-10 bg-amber-500 self-center rounded-lg"></div>
-                    <div className="ml-1 mt-1">
-                      <h2 className="text-sm  font-bold  py-1 ">
-                        Software Engineer
-                      </h2>
-                      <h2 className="text-sm  font-normal  pb-2">
-                        Google{" "}
-                        <p className="text-gray-400 inline">in Pune,India</p>
-                      </h2>
+            <div className="p-3 ">
+              {recentAssessments.map((assessment) => {
+                return (
+                  <div className="flex flex-col md:gap-8">
+                    <div className="flex gap-3 items-center">
+                      <div className="min-w-[2.5rem] h-10  self-center rounded-lg">
+                        <img
+                          src="../../images/teams.png"
+                          alt=" user-icon"
+                          className=" rounded-lg w-11 h-11"
+                        />
+                      </div>
+                      <div>
+                        <h2 className="text-xs  font-bold text-[#171717] ">
+                          {assessment.name}
+                        </h2>
+                        <h2 className="text-xs  font-normal">
+                          {assessment.description}
+                          {/* <span className="text-[#8F92A1] inline">
+                            in Pune,India
+                          </span> */}
+                        </h2>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex px-3 pb-3 mt-2 justify-between">
-                    <div className="flex gap-1">
-                      <button className="rounded-lg bg-gray-100 p-2 text-base font-dmSans font-base">
-                        View
-                      </button>
-                      <button className="rounded-lg p-3  bg-gray-100 self-center">
-                        <CgUnavailable className="text-gray-400 text-lg" />
-                      </button>
-                    </div>
+                    <div className="flex  mb-5 gap-2 justify-between">
+                      <div className="flex gap-2">
+                        <button
+                          className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
+                          onClick={() => {
+                            navigate(
+                              `/collage/results/overview?level=${assessment.level}&assessment=${assessment._id}`
+                            );
+                          }}
+                        >
+                          View
+                        </button>
+                        <button
+                          className="rounded-lg p-3  bg-[#8F92A1] bg-opacity-5 self-center"
+                          onClick={() =>
+                            dispatch(removeFromRecent(assessment._id))
+                          }
+                        >
+                          <CgUnavailable className="text-[#8F92A1] text-lg" />
+                        </button>
+                      </div>
 
-                    <p className="text-sm  font-normal text-gray-400">
-                      1 week ago
-                    </p>
+                      <p className="text-xs  font-normal text-[#8F92A1]">
+                        {calculateDaysAndWeeks(assessment.endDate)}
+                      </p>
+                    </div>
                   </div>
-                </>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

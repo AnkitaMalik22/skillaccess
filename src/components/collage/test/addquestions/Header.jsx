@@ -6,11 +6,11 @@ import { useSelector } from "react-redux";
 
 const Header = ({ Q, page }) => {
   const navigate = useNavigate();
-  const [search, setSearch] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const topics = JSON.parse(localStorage.getItem("topics"));
   const { name } = useSelector((state) => state.test);
-  const level = search.get("level");
-
+  const level = searchParams.get("level");
+  console.log(level);
   return (
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
