@@ -93,11 +93,11 @@ export const getAssessment = createAsyncThunk(
 
 export const getPlacedStudents = createAsyncThunk(
   "dashboard/getPlacedStudents",
-  async (data, { rejectWithValue }) => {
+  async (collegeId, { rejectWithValue }) => {
     try {
-      const req = await axios.post(
-        `${REACT_APP_API_URL}/api/college/dashboard/placed/students`,
-        data,
+      const req = await axios.get(
+        `${REACT_APP_API_URL}/api/company//jobs/placements/${collegeId}`,
+
         {
           headers: {
             "Content-Type": "application/json",

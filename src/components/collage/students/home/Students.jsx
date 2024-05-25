@@ -244,43 +244,6 @@ const Students = () => {
               {/* </div>{" "} */}
             </div>
           ))}
-
-          {/* <div className=" grid-cols-3 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
-            {" "}
-            {/* row-2 */}
-          {/* <div className={` flex `}>
-              <div className="flex self-center">
-                <div className=" min-w-[3rem]  h-12 self-center bg-red-600 mr-2  "></div>
-                <span className="break-words min-w-0 pt-1 ">
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                    Role
-                  </h2>
-                  <h2 className="font-dmSans font-medium text-xs break-words text-gray-400">
-                    {" "}
-                    CompanyName
-                  </h2>
-                </span>
-              </div>
-            </div>
-            <div className="flex justify-center ">
-              <div className=" self-center h-fit">
-                <span>
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
-                    Year
-                  </h2>
-                  <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blue-500">
-                    {" "}
-                    Degree
-                  </h2>
-                </span>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <span className="flex justify-center h-fit self-center gap-2 bg-[#DE350B66] bg-opacity-40 text-white text-xs font-semibold px-4 py-2 rounded-xl hover:cursor-pointer">
-                Approve Request
-              </span>
-            </div>{" "}
-          </div> */}
         </div>
       </div>
 
@@ -308,7 +271,7 @@ const Students = () => {
       </div>
 
       {/* list to be iterated */}
-
+      {console.log(approvedStudents)}
       {approvedStudents?.map((student, index) => (
         <div className=" grid-cols-6 rounded-lg my-2 py-2 pl-2 text-center w-11/12 mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-100 ">
           {" "}

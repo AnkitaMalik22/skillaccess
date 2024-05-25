@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { FaCircle, FaDotCircle } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { getPlacedStudents } from "../../../../redux/collage/dashboard/dashboardSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ChartComp = () => {
   const [toggle, setToggle] = useState(0);
@@ -90,6 +92,13 @@ const ChartComp = () => {
       },
     ],
   });
+  const dispatch = useDispatch();
+  const { placedStudents } = useSelector((state) => state.dashboard);
+  const { user } = useSelector((state) => state.collageAuth);
+  console.log(user);
+  useEffect(() => {
+    dispatch(getPlacedStudents(user?._id));
+  }, []);
   return (
     <div className="sm:flex bg-gray-100 w-full gap-1 justify-between relative rounded-3xl p-4 md:p-8 mb-5">
       {/* chart component */}
@@ -176,21 +185,22 @@ const ChartComp = () => {
         </span>
 
         <div className="bg-white  overflow-y-scroll h-[27rem] mb-10 rounded-lg ">
-          {placements?.map((placement) => {
+          {placedStudents?.map((student) => {
             return (
               <div className="card card-side shadow-sm mb-1 h-auto p-5 gap-2">
                 <figure className="w-14 h-14 rounded mt-2">
-                  <img
-                    src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
-                    alt="Movie"
-                  />
+                  <img src={student?.avatar.url} alt="Movie" />
                 </figure>
                 <div className="">
-                  <p className="text-sm font-bold text-[#171717]">Name</p>
-                  <p className="text-xs text-[#8F92A1]">Company</p>
+                  <p className="text-sm font-bold text-[#171717]">
+                    {student.FirstName} {student.LastName}
+                  </p>
+                  <p className="text-xs text-[#8F92A1]">
+                    {student?.CompanyPlaced?.basic?.companyName}
+                  </p>
                   <FaStar className="inline-block text-xs 2xl:text-sm text-amber-500" />
                   <p className="inline-block pl-2 text-xs 2xl:text-sm text-[#171717] ">
-                    24-08-22
+                    {student?.PlacedAt.substring(0, 9)}
                   </p>
                 </div>
               </div>
