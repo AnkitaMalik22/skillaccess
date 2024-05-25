@@ -17,7 +17,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   return (
-    <div className="flex w-full mx-auto justify-between mb-2 font-dmSans">
+    <div className="flex w-full mx-auto justify-between mb-6">
       <div
         className={`fixed -left-[100px] w-[200vw] h-screen bg-black ${
           !toggle ? "-z-20" : "z-[99]"
@@ -36,7 +36,9 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
             className="mx-auto sm:h-6 sm:w-6 h-4 w-4"
           />
         </button>
-        <h2 className="text-2xl font-bold self-center">Inbox</h2>
+        <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
+          Inbox
+        </h2>
 
         <Disclosure
           as={"div"}

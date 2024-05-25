@@ -12,6 +12,7 @@ import * as XLSX from "xlsx";
 import PopUp from "../../../PopUps/PopUp";
 import Loader from "../../test/addVideo/Loader";
 import { uploadStudents } from "../../../../redux/collage/student/studentSlice";
+import { IoIosSearch } from "react-icons/io";
 
 const Header = ({ handleFilter, setFilteredStudents }) => {
   const { uploadedStudents } = useSelector((state) => state.collegeStudents);
@@ -125,7 +126,7 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
 
   const navigate = useNavigate();
   return (
-    <div className="flex w-11/12 mx-auto justify-between mb-2 font-dmSans">
+    <div className="flex w-full mx-auto justify-between mb-6">
       {visible && (
         <PopUp
           visible={visible}
@@ -137,37 +138,36 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
         />
       )}
 
-      <span className="flex gap-4">
-        <button className=" self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16">
-          <img src="../../images/icons/reports.png" alt="" />
+      <span className="flex gap-2">
+        <button className="  self-center object-center  rounded-lg h-10 w-10 ">
+          <img src="../../images/icons/reports.png" alt="ico" />
         </button>
       </span>
-      <div className="bg-gray-100 rounded-xl mx-2  sm:h-12 h-10 flex my-2 px-4 w-fit">
-        <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search..."
-          onChange={handleFilter}
-          className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96 max-w-md mx-auto  "
-        />
+
+      <div className=" rounded-xl w-full sm:h-12 h-10 flex">
+        <span className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
+          <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400 " />
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={handleFilter}
+            className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
+          />
+        </span>
       </div>
 
-      <span className="flex gap-2">
+      <span className="flex gap-3">
         <button
-          className="self-center justify-center flex bg-[#F8F8F9] py-3  rounded-xl w-32  gap-2 "
+          className="self-center justify-center flex bg-[#8f92a11a] px-7 py-3 rounded-2xl gap-2 text-sm text-[#171717] font-bold "
           onClick={handleAddTeamClick}
         >
           <FiPlus className="self-center text-lg " /> Add
         </button>
+
         {showPopup && <StudentPoP onClose={handleClosePopup} />}
-        {/* <button className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
-    
-        >
-  
-        </button> */}
 
         <button
-          className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
+          className="self-center justify-center flex bg-[#0052CC] px-5 py-3  rounded-2xl text-white  gap-2 text-md font-bold w-40"
           onClick={() => {
             upload.current.click();
           }}
@@ -178,16 +178,12 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
             className="hidden"
             onChange={handleFile}
           />
-          {loading ? (
-            <Loader />
-          ) : (
-            <FiUpload className="self-center text-lg font-bold " />
-          )}{" "}
+          {loading ? <Loader /> : <FiUpload className="self-center text-lg" />}{" "}
           Upload New
         </button>
 
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
-          <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
+        <button className="bg-[#8f92a11a]  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
+          <PiSlidersHorizontalLight className="h-7 w-7" />
         </button>
       </span>
     </div>

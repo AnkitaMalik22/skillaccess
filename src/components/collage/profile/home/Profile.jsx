@@ -103,7 +103,7 @@ const Profile = () => {
   // const [editable, setEditable] = useState(false);
   console.log("submitprofile", submitUpdateProfile);
   return (
-    <div className="px-8">
+    <div className="w-11/12 md:py-10 py-5 mx-auto">
       {user && editable && (
         <EditHeader
           editable={editable}

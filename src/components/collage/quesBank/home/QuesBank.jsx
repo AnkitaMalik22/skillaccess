@@ -6,7 +6,7 @@ import BookMark from "./BookMark";
 
 const QuesBank = () => {
   return (
-    <div className="w-11/12 mx-auto mt-4 font-dmSans">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <div className="mb-9">
         <Header />
       </div>
