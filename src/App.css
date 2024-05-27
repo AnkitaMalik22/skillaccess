@@ -32,9 +32,9 @@ body {
   position: static !important;
   top: 0px !important;
 }
-.skiptranslate {
+/* .skiptranslate {
   display: none;
-}
+} */
 .goog-gt-vt {
   display: none;
 }
@@ -42,7 +42,7 @@ body {
   display: none;
 }
 .goog-te-gadget {
-  display: none !important;
+  /* display: none !important; */
   color: transparent !important;
 }
 

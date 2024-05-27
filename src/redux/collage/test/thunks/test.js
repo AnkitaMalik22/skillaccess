@@ -206,7 +206,30 @@ export const getRecentTests = createAsyncThunk(
     }
   }
 );
+export const getRecentStudentTests = createAsyncThunk(
+  "test/getRecentStudentTests",
+  async (studentId, { rejectWithValue, getState }) => {
+    try {
+      const req = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/college/student/tests/${studentId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
 
+      const res = req.data;
+      console.log(res);
+
+      return res.assessments;
+    } catch (error) {
+      console.log("catch", error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 export const removeFromRecent = createAsyncThunk(
   "test/removeFromRecent",
   async (id, { rejectWithValue, getState, dispatch }) => {

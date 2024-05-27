@@ -24,14 +24,14 @@ const Beginner = () => {
   const dispatch = useDispatch();
 
   const { testLoading } = useSelector((state) => state.test);
-  const { credit } = useSelector((state) => state.collageAuth);
+  const { credit } = useSelector((state) => state.collageAuth.balance);
   console.log(credit);
 
   const handleClose = () => {
     setShow(false);
   };
   const handleFunc = () => {
-    if (credit.credit) {
+    if (credit) {
       navigate("/collage/test/name?level=beginner");
     } else {
       setShow(true);

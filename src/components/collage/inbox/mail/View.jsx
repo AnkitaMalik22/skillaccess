@@ -180,7 +180,9 @@ const View = ({ index, filter, inboxType }) => {
                   <>
                     <Disclosure.Button className="flex w-full sm:w-96 justify-between rounded-lg bg-[#8F92A1] bg-opacity-20 px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                       <span className="text-xs font-bold text-[#8F92A1]">
-                        {Email?.mail?.from?.Email}
+                        {inboxType === "Sent"
+                          ? Email?.mail?.to?.Email
+                          : Email?.mail?.from?.Email}
                       </span>
                       {/* <FaX className={`w-4 h-4 text-gray-400`} /> */}
                     </Disclosure.Button>
