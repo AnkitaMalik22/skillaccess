@@ -133,24 +133,26 @@ export default function App() {
               {StudentCompaniesRoute()} */}
               {/* .......................................................................................................................... */}
             </Routes>
-          </Suspense>{" "}
+          </Suspense>
         </CollageLayout>
       ) : (
-        <Routes>
-          {/* ------------------------------------- student --------------------------------------------------- */}
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            {/* ------------------------------------- student --------------------------------------------------- */}
 
-          {/* <Route path="/student" element={<RegisterStudent />} />
+            {/* <Route path="/student" element={<RegisterStudent />} />
           <Route path="/student/login" element={<LoginStudent />} /> */}
 
-          {/* ----------------------------------------collage-------------------------------------------------------------- */}
+            {/* ----------------------------------------collage-------------------------------------------------------------- */}
 
-          <Route path="" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/terms&policies" element={<TermsPolicies />} />
-          <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/password/reset/:id" element={<ResetPassword />} />
-          <Route path="collage/me/failed" element={<NotAuth />} />
-        </Routes>
+            <Route path="" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/terms&policies" element={<TermsPolicies />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/password/reset/:id" element={<ResetPassword />} />
+            <Route path="collage/me/failed" element={<NotAuth />} />
+          </Routes>
+        </Suspense>
       )}
     </React.Fragment>
   );

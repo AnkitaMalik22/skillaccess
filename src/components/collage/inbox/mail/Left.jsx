@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { TfiClip } from "react-icons/tfi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getInbox } from "../../../../redux/collage/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import convertDate from "../../../../util/getDate";
+import { markAsRead } from "../../../../redux/collage/Inbox/inboxSlice";
 
 const Left = ({ data, index, inboxType }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(getInbox);
   const [arr, setArr] = useState([
@@ -28,11 +30,12 @@ const Left = ({ data, index, inboxType }) => {
   return (
     <div
       className={`rounded-lg hover:bg-[#0052CC] hover:bg-opacity-5 p-3`}
-      onClick={() =>
+      onClick={async () => {
+        await dispatch(markAsRead({ type: inboxType, id: data._id }));
         navigate(
           `/collage/inbox/mail?index=${index}&type=view&show=all&inboxType=${inboxType}`
-        )
-      }
+        );
+      }}
     >
       <div className="flex justify-between">
         <div className="flex gap-2">

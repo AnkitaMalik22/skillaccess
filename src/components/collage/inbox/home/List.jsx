@@ -16,6 +16,7 @@ import {
 } from "../../../../redux/collage/auth/authSlice";
 import {
   bookmarkMail,
+  markAsRead,
   removeBookmarkedMail,
 } from "../../../../redux/collage/Inbox/inboxSlice";
 import socketIOClient from "socket.io-client";
@@ -85,7 +86,8 @@ const List = ({ show, inboxType, setInboxType }) => {
       dispatch(getMail(queries));
     }
   };
-  const handleNav = (i) =>
+  const handleNav = async (i, el) => {
+    await dispatch(markAsRead({ type: inboxType, id: el.mail._id }));
     navigate(
       `/collage/inbox/mail?index=${i}&inboxType=${inboxType}&type=view&show=${show}&within=${searchParams.get(
         "within"
@@ -95,6 +97,7 @@ const List = ({ show, inboxType, setInboxType }) => {
         "date"
       )}&typeFilter=${searchParams.get("typeFilter")}`
     );
+  };
   const handleLeft = () => {
     if (queries.skip <= 0) {
       return;
@@ -331,15 +334,19 @@ const List = ({ show, inboxType, setInboxType }) => {
                 />
               </div>
               <p
-                className="text-sm font-medium cursor-pointer self-center"
+                className={`text-sm font-medium cursor-pointer self-center ${
+                  el.seen ? " text-gray-400 " : ""
+                }`}
                 // onClick={() => navigate("/collage/inbox/mail?type=view")}
-                // onClick={() => handleNav(i)}
+                onClick={() => handleNav(i, el)}
               >
                 {el.mail?.from?.FirstName}
               </p>
               <p
-                className="text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer "
-                onClick={() => handleNav(i)}
+                className={`text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer ${
+                  el.seen ? " text-gray-400 " : ""
+                }`}
+                onClick={() => handleNav(i, el)}
               >
                 {el.mail?.subject}
               </p>

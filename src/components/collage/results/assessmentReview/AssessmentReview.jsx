@@ -290,6 +290,7 @@ const AssessmentReview = () => {
 
       <div className="mt-16">
         {questions
+          ?.filter((question) => question.StudentAnswerIndex !== undefined)
           ?.slice((selected - 1) * 10, selected * 10)
           .map((question, i) => {
             return (

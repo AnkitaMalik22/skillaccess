@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSortDown } from "react-icons/fa";
 import { FiCornerUpLeft, FiCornerUpRight, FiTrash } from "react-icons/fi";
 import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
@@ -36,6 +36,18 @@ const ViewBar = ({ filter, index, inboxType }) => {
     mail[inboxType === "received" ? "emailsReceived" : "emailsSent"][index]
   );
 
+  useEffect(() => {
+    console.log(show);
+    if (show === "all") {
+      dispatch(getMail({ limit: 50, skip: 0 })).then(() => {});
+      setEmail(
+        mail[inboxType === "Received" ? "emailsReceived" : "emailsSent"][index]
+      );
+    } else {
+      dispatch(searchMail(filter));
+    }
+  }, ["", inboxType, index, dispatch]);
+
   return (
     <div className="flex w-full">
       <div className="w-full flex justify-between self-center">
@@ -48,7 +60,10 @@ const ViewBar = ({ filter, index, inboxType }) => {
             <p className="text-sm font-bold  ">Reply</p>
             <span className="flex gap-2">
               <p className="text-sm font-bold  text-gray-400">
-                to {Email?.mail?.from?.Email}
+                to{" "}
+                {inboxType === "Sent"
+                  ? Email?.mail?.to?.Email
+                  : Email?.mail?.from?.Email}
               </p>
 
               {/* <FaSortDown className="text-gray-400" /> */}
