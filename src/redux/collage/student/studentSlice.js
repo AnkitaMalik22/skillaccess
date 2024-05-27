@@ -205,12 +205,15 @@ export const studentSlice = createSlice({
       })
       .addCase(getStudentCV.pending, (state, action) => {
         state.status = "loading";
+        state.GET_STUDENT_LOADING = true;
       })
       .addCase(getStudentCV.fulfilled, (state, action) => {
         state.studentCV = action.payload;
+        state.GET_STUDENT_LOADING = false;
       })
       .addCase(getStudentCV.rejected, (state, action) => {
         state.status = "failed";
+        state.GET_STUDENT_LOADING = false;
         state.error = action.error.message;
       })
       .addCase(rejectRequest.pending, (state) => {

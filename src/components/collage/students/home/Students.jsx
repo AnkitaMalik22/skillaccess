@@ -255,25 +255,35 @@ const Students = () => {
           </div>
           <div className="flex justify-center flex-col">
             <h2 className="font-dmSans font-normal text-sm text-[#171717]">
-              Midweight UI/UX Designer
+            {
+  student?.studentResponses &&  student?.studentResponses?.length >0 
+    ? student?.studentResponses?.length >= 2
+      ? student?.studentResponses[student?.studentResponses?.length - 2]?.assessmentId?.name
+      : student?.studentResponses[student?.studentResponses?.length - 1]?.assessmentId?.name
+    : 'Not Available'
+}
             </h2>
-            <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
+            {/* <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
               Mailchimp
               <span className="inline font-normal break-words text-[#8F92A1]">
                 , in London, UK
               </span>
-            </h2>
+            </h2> */}
           </div>
           <div className="flex justify-center flex-col">
             <h2 className="font-dmSans font-normal text-sm text-[#171717]">
-              Midweight UI/UX Designer
+            {
+  student?.studentResponses &&  student?.studentResponses?.length >0 
+    ? student?.studentResponses[student?.studentResponses?.length - 1]?.assessmentId?.name
+    : 'Not Available'
+}
             </h2>
-            <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
+            {/* <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
               Mailchimp
               <span className="inline font-normal break-words text-[#8F92A1]">
                 , in London, UK
               </span>
-            </h2>
+            </h2> */}
           </div>
           <div className="flex justify-center">
             <div className=" self-center">
