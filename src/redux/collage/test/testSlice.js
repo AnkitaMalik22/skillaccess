@@ -27,6 +27,7 @@ import {
   getStudentsForTest,
   getRecentTests,
   removeFromRecent,
+  getRecentStudentTests,
 } from "./thunks/test";
 
 import {
@@ -52,6 +53,7 @@ import {
 
 const testState = {
   recentAssessments: [],
+  studentRecentassessment: [],
   inTest: false,
   testLoading: false,
   totalSelectedQuestions: 5,
@@ -908,6 +910,15 @@ const testSlice = createSlice({
         state.selectedStudents = action.payload;
       })
       .addCase(getselectedStudents.rejected, (state, action) => {
+        console.error(action.payload);
+      })
+      .addCase(getRecentStudentTests.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(getRecentStudentTests.fulfilled, (state, action) => {
+        state.studentRecentassessment = action.payload;
+      })
+      .addCase(getRecentStudentTests.rejected, (state, action) => {
         console.error(action.payload);
       })
       .addCase(getStudentsForTest.fulfilled, (state, action) => {

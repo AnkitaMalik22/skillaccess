@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { useDispatch } from "react-redux";
-import { uploadStudents } from "../../redux/collage/student/studentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getStudents,
+  uploadStudents,
+} from "../../redux/collage/student/studentSlice";
 import toast from "react-hot-toast";
 
 const StudentPoP = ({ onClose }) => {
@@ -10,7 +13,7 @@ const StudentPoP = ({ onClose }) => {
     LastName: "",
     Email: "",
   });
-
+  const { user } = useSelector((state) => state.collageAuth);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -36,6 +39,8 @@ const StudentPoP = ({ onClose }) => {
     } else {
       console.log(student, "pop");
       dispatch(uploadStudents([student]));
+
+      dispatch(getStudents({ id: user?._id }));
 
       setStudent({
         FirstName: "",
