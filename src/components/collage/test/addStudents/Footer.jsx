@@ -6,11 +6,13 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { inviteToTest } from "../../../../redux/collage/test/thunks/student";
+import { useState } from "react";
+import Loader from "../../../loaders/Loader";
 
 const Footer = ({ students }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const { credit } = useSelector((state) => state.collageAuth);
   const testId = searchParams.get("testId");
@@ -26,6 +28,7 @@ const Footer = ({ students }) => {
       );
     } else {
       console.log(testId, students);
+      setLoading(true);
       await dispatch(
         inviteToTest({
           testId: testId,
@@ -51,7 +54,8 @@ const Footer = ({ students }) => {
             onClick={handleSendInvite}
             disabled={students.length === 0}
           >
-            <FaPlus className="text-white text-lg" />
+            {loading ? <Loader /> : <FaPlus className="text-white text-lg" />}
+
             <p className="self-center text-white">Send Invite</p>
           </button>
         </div>

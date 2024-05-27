@@ -472,7 +472,7 @@ const CollageLayout = ({ children }) => {
                         //     bottom.current.getBoundingClientRect().top,
                         //   behavior: "smooth",
                         // });
-                        if (!location.pathname.match(/\/collage\/test\/*/)) {
+                        if (!location.pathname.match(/\/collage\/test\/.*/)) {
                           dispatch(setSelected(i));
                           dispatch(
                             setTestBasicDetails({
