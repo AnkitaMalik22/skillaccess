@@ -232,7 +232,7 @@ const Students = () => {
         <div className=" grid-cols-6 rounded-2xl  p-2 text-center mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-100 mb-4 ">
           {" "}
           {/* row-2 */}
-          <div className="flex gap-3 items-center justify-center">
+          <div className="flex gap-3 items-center ">
             <div className="w-11  h-11 self-center  flex items-center justify-center text-xl ">
               <img
                 src="../../images/teams.png"
