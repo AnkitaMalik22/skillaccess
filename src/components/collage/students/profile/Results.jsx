@@ -56,7 +56,7 @@ const Results = ({ assessmentResult, id }) => {
             key={index}
           >
             <span className="w-full   py-2 text-sm font-dmSans">
-              Wipro web -Fresher -aug2021{" "}
+              {response.assessmentId.name}
             </span>
             <span className="w-full   p-2 text-sm font-dmSans">
               {formatDate(response.completedAt)}
@@ -73,10 +73,10 @@ const Results = ({ assessmentResult, id }) => {
                   <select
                     className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
                     onChange={handleStatusChange(
-                      response.assessmentId,
+                      response.assessmentId._id,
                       response._id
                     )}
-                    value={response.status}
+                    value={response?.status}
                   >
                     <option value="">pending</option>
                     <option value="rejected">rejected</option>

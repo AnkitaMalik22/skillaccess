@@ -99,14 +99,16 @@ const List = ({ FilterdStudents }) => {
               <span className="flex gap-2">
                 <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                   <div
-                    className={`h-full rounded-lg ${getProgressBarColor(20)}`}
-                    style={{ width: 20 }}
+                    className={`h-full rounded-lg ${getProgressBarColor(
+                      assessment.avgPercentage
+                    )}`}
+                    style={{ width: assessment.avgPercentage }}
                   ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
                   {/* {student?.percentage?.toFixed(2)}% */}
-                  10%
+                  {assessment.avgPercentage}%
                 </h2>
               </span>
             </div>
