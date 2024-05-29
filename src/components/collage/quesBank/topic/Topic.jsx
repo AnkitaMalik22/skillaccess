@@ -102,7 +102,7 @@ const Topic = () => {
   //   }
   // }, [sections]);
 
-  const google_translate_elementhandleSelect = (id) => {
+  const handleSelect = (id) => {
     console.log("id", id);
     if (!selectedSections.includes(id)) {
       setSelectedSections([...selectedSections, id]);
