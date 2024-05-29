@@ -22,8 +22,6 @@ const Appeared = ({ assessment }) => {
 
   const { testDataResponse, response } = useSelector((state) => state.test);
 
-  // console.log(assessment);
-  // console.log(testDataResponse);
   console.log(response);
 
   useEffect(() => {
@@ -33,62 +31,6 @@ const Appeared = ({ assessment }) => {
   const getResponse = (responseId) => {
     dispatch(getStudentResponse(responseId));
   };
-
-  // useEffect(()=>{
-  //   dispatch(getTestResultPage(assessment._id));
-  // },[])
-
-  // useEffect(()=>{
-  //   dispatch(getTestResultPage(assessment._id));
-  // },[])
-
-  // const arr = [2, 1, 1, 1, 1];
-
-  // let arr = assessment.studentResponses.map((responseId) => {
-  //   // console.log(student);
-  //   dispatch(getStudentResponse(responseId))
-  //   return student;
-  // }
-  // );
-
-  // const responses= assessment.studentResponses.forEach((responseId)=>{
-  // dispatch(getStudentResponse(responseId))
-  //   })
-
-  // console.log("studentResponses",assessment.studentResponses);
-
-  // const responses = assessment.studentResponses.map((responseId) => {
-  //   // console.log(student);
-  //   dispatch(getStudentResponse(responseId))
-
-  // }
-  // );
-
-  // let arr = testDataResponse?.map((student) => {
-  //   student.studentResponses.forEach((resId) => {
-  //     console.log("resId", resId);
-  //     const responseId = assessment.studentResponses.find((response) => response._id === resId._id);
-  //     // add the responseId to the student object
-  //     student.responseId = responseId;
-  //     console.log("student", student);
-  //   });
-  //   return student;
-  // });
-
-  let copy = [...testDataResponse];
-
-  // let arr = copy?.map((student) => {
-  //   let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
-  //   student.studentResponses.forEach((resId) => {
-  //     console.log("resId", resId);
-  //     const responseId = assessment?.studentResponses?.find((response) => response._id === resId._id);
-  //     // add the responseId to the updatedStudent object
-  //     updatedStudent.responseId = responseId;
-  //     updatedStudent.response = response;
-  //     console.log("updatedStudent", updatedStudent);
-  //   });
-  //   return updatedStudent;
-  // });
 
   let arr = [assessment?.studentResponses];
 
