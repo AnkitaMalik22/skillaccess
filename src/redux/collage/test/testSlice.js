@@ -64,7 +64,7 @@ const testState = {
   studentResponse: [],
   selectedStudents: [],
   response: [],
-  testDataResponse: [],
+  testDataResponse: {},
   testName: "",
   testDescription: "",
   testAttempts: "",
@@ -746,6 +746,7 @@ const testSlice = createSlice({
       })
       .addCase(getTestResultPage.fulfilled, (state, action) => {
         state.testDataResponse = action.payload;
+        console.log(action.payload);
       })
       .addCase(getTestResultPage.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);

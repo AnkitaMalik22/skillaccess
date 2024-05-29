@@ -14,7 +14,6 @@ function SettingsRoute() {
     <Route path="collage/settings">
       <Route path="" element={<SettingsPage />} />
       <Route path="security" element={<SecurityPage />} />
-      <Route path="security/securityApp" element={<SecurityAppPage />} />
       <Route path="security/secondFA" element={<SecondFAPage />} />
       <Route path="activity" element={<ActivityPage />} />
       <Route path="notifications" element={<NotificationsPage />} />
