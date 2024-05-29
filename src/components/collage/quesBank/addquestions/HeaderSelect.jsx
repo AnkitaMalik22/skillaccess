@@ -29,7 +29,7 @@ const Header = ({ Q }) => {
 
           <div className="flex items-center">
             <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans ">
-              Create Topic
+              Add Questions
             </h2>
             {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
               <h3 className="mr-2">Untitiled Assessments</h3>

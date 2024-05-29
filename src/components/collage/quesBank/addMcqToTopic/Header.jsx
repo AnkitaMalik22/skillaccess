@@ -96,11 +96,7 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
         <button className="flex self-center ml-2 rounded-lg  gap-2">
           {addType === "topic" && (
             <button
-              onClick={() =>
-                level === "adaptive"
-                  ? navigate(`/collage/test/selectAdaptive?level=${level}`)
-                  : navigate(`/collage/test/select?level=${level}`)
-              }
+              onClick={() => navigate(-1)}
               className=" mr-3 self-center bg-white rounded-lg "
             >
               <FaChevronLeft className=" p-3  h-10 w-10 self-center " />
@@ -108,7 +104,7 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
           )}
 
           <div className="self-center">
-            <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans  text-white ">
+            <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans   ">
               Create Assessment
             </h2>
           </div>
