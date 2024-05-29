@@ -102,7 +102,7 @@ const Topic = () => {
   //   }
   // }, [sections]);
 
-  const handleSelect = (id) => {
+  const google_translate_elementhandleSelect = (id) => {
     console.log("id", id);
     if (!selectedSections.includes(id)) {
       setSelectedSections([...selectedSections, id]);
@@ -132,7 +132,7 @@ const Topic = () => {
   };
 
   return (
-    <div className="w-[95%] mx-auto font-dmSans">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       {visible && (
         <DeletePoP
           visible={visible}
@@ -145,8 +145,8 @@ const Topic = () => {
         />
       )}
       <Header handleFilter={handleFilterSections} />
-      <div className="flex flex-wrap gap-4 w-full justify-center bg-gray-100 px-3 py-6 rounded-3xl ">
-        <div className="w-full flex justify-between px-6 mb-2">
+      <div className="flex flex-wrap gap-4 w-full justify-center bg-gray-100 p-5 rounded-3xl ">
+        <div className="w-full flex justify-between mb-5">
           <h2 className="font-bold text-xl">Choose a Topic</h2>{" "}
           {/* <div className="flex self-center"> */}{" "}
           {/* <input
@@ -163,10 +163,14 @@ const Topic = () => {
             />{" "}
             <label className="text-sm pl-1 self-center">Delete Selected</label>
           </div> */}
-          <button className="inline-flex items-center justify-center">
-         {
-          selectedSections?.length > 0 && (   <h3 className="text-sm mr-3 font-bold text-gray-500">{selectedSections?.length}{" /"}{sections?.length}{" "}</h3>)
-}
+          <button className="flex gap-2 items-center">
+            {selectedSections?.length > 0 && (
+              <h3 className="text-sm mr-3 font-bold text-gray-500">
+                {selectedSections?.length}
+                {" /"}
+                {sections?.length}{" "}
+              </h3>
+            )}
             <input
               name="select"
               type="checkbox"
@@ -199,55 +203,56 @@ const Topic = () => {
           </button>
         </div>
 
-        {filteredSections &&
-          filteredSections.map((section, index) => {
-            return (
-              <div
-                className={`w-[17rem] mb-4 bg-white rounded-2xl cursor-pointer ${
-                  selectedSections.includes(section._id)
-                    ? "border-2 border-[#0052CC]"
-                    : ""
-                }`}
-                key={index}
-                onClick={() => {
-                  console.log("section", section);
-                  handleSelect(section._id);
-                }}
-              >
-                <figure>
-                  <img src={randomImage()} alt="cover" />
-                </figure>
-                <div className="card-body">
-                  <h2 className="font-bold text-xl">{section?.Heading}</h2>
-                  <div
-                    className="flex gap-2"
-                    onClick={() => {
-                      dispatch(
-                        setCurrentTopic({
-                          topic: section,
-                          // Type: questionType || "mcq",
-                        })
-                      );
-                      localStorage.setItem(
-                        "TopicDetails",
-                        JSON.stringify(section)
-                      );
-                      navigate(`/collage/quesBank/topic/${section._id}`);
-                    }}
-                  >
-                    <Folder />
-                    <p className="text-[#95ACFA] text-sm">
-                      {getTotalQuestions(section)} Files
-                    </p>
+        <div className="flex gap-5 flex-wrap">
+          {filteredSections &&
+            filteredSections.map((section, index) => {
+              return (
+                <div
+                  className={`w-[17rem] mb-4 bg-white rounded-2xl cursor-pointer ${
+                    selectedSections.includes(section._id)
+                      ? "border-2 border-[#0052CC]"
+                      : ""
+                  }`}
+                  key={index}
+                  onClick={() => {
+                    console.log("section", section);
+                    handleSelect(section._id);
+                  }}
+                >
+                  <figure>
+                    <img src={randomImage()} alt="cover" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="font-bold text-xl">{section?.Heading}</h2>
+                    <div
+                      className="flex gap-2"
+                      onClick={() => {
+                        dispatch(
+                          setCurrentTopic({
+                            topic: section,
+                            // Type: questionType || "mcq",
+                          })
+                        );
+                        localStorage.setItem(
+                          "TopicDetails",
+                          JSON.stringify(section)
+                        );
+                        navigate(`/collage/quesBank/topic/${section._id}`);
+                      }}
+                    >
+                      <Folder />
+                      <p className="text-[#95ACFA] text-sm">
+                        {getTotalQuestions(section)} Files
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-
+              );
+            })}
+        </div>
         {filteredSections?.length === 0 && (
           <div className="w-full flex justify-center items-center  mb-4 bg-white rounded-2xl">
-            <h2 className="text-xl font-bold">No Topics Found</h2>
+            <h2 className="text-xl font-bold text-center">No Topics Found</h2>
           </div>
         )}
       </div>
