@@ -66,7 +66,7 @@ const CreateTopic = () => {
   };
 
   return (
-    <div className="pt-8 w-11/12 mx-auto font-dmSans">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header next={handleNext} />
 
       <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">

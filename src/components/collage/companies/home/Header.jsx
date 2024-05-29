@@ -11,9 +11,9 @@ const Header = ({ handleFilter }) => {
   return (
     <div className="flex w-full mx-auto justify-between mb-6">
       {/* comp */}
-      <div className="flex gap-2">
+      <div className="flex gap-3">
         <button
-          className="  self-center object-center  rounded-lg h-10 w-10 "
+          className="self-center object-center rounded-lg h-10 w-10 "
           // onClick={() => navigate('collage/companies')}
         >
           <img src="../../images/icons/sales.jpg" alt="icon" />

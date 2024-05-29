@@ -248,7 +248,7 @@ const AddMcqToTopic = () => {
   }, [currentTopic]);
 
   return (
-    <div>
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header
         question={question}
         setQuestion={setQuestion}
@@ -256,17 +256,17 @@ const AddMcqToTopic = () => {
         type={type}
         addType={addType}
       />
-      <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
-        <div className="flex flex-wrap gap-2 sm:w-[95.7%] mx-auto ">
-          <span className="w-[49%] ">
-            <h2 className="font-bold mb-2">Question</h2>
-            <div className="flex w-full justify-between">
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl">
+        <div className="flex md:flex-nowrap flex-wrap gap-5 mx-auto md:mb-40 mb-10">
+          <div className="w-1/2">
+            <h2 className="font-bold mb-4 text-xl text-[#3E3E3E]">Question</h2>
+            <div className="flex gap-3 w-full justify-between mb-5">
               <select
                 name="Duration"
                 onChange={handleChanges}
                 value={question.Duration}
                 id=""
-                className="w-[65%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                className="w-3/5 rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E]"
               >
                 <option value={0}>Time to answer the question</option>
 
@@ -280,7 +280,7 @@ const AddMcqToTopic = () => {
                 name="QuestionLevel"
                 onChange={handleChanges}
                 value={question.QuestionLevel}
-                className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                className="w-2/5 rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E]"
               >
                 <option value="">Level</option>
 
@@ -297,215 +297,207 @@ const AddMcqToTopic = () => {
                   return { ...prev, Title: value };
                 })
               }
-              className="bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+              className="bg-[#F8F8F9] border-none focus:outline-none rounded-xl focus:ring-0 placeholder-[#3E3E3E]"
               placeholder="Enter Question Here"
               name="Title"
             />
-          </span>
-          <span className="w-[49%]">
-            <h2 className="font-bold mb-2">Test description</h2>
-            <div className="w-11/12 flex flex-col gap-2">
-              <div className="px-5 pb-4 flex flex-col gap-4">
-                {/* mcq option wrapper */}
-                <span className="flex gap-2">
-                  {/*  */}
-                  {/* radio button */}
-                  <div className="flex w-5 justify-center">
-                    <input
-                      type="radio"
-                      name="Answer"
-                      id="option1"
-                      value={0}
-                      checked={parseInt(question.AnswerIndex) === 0}
-                      onChange={handleChanges}
-                      className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                    />{" "}
-                  </div>
-                  {/* option input */}
+          </div>
+          <div className="w-1/2">
+            <h2 className="font-bold mb-4 text-xl text-[#3E3E3E]">
+              Test Description
+            </h2>
+            <div className="flex flex-col gap-4">
+              {/* mcq option wrapper */}
+              <div className="flex gap-2">
+                {/*  */}
+                {/* radio button */}
+                <div className="flex w-5 justify-center ">
                   <input
-                    type="text"
-                    placeholder="option 1"
-                    name="Option1"
-                    value={
-                      question.Options && question.Options.length > 0
-                        ? question.Options[0]
-                        : ""
-                    }
+                    type="radio"
+                    name="Answer"
+                    id="option1"
+                    value={0}
+                    checked={parseInt(question.AnswerIndex) === 0}
                     onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
-                  />
+                    className="w-3 h-3 p-[.4rem] checked:bg-none cursor-pointer checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
+                  />{" "}
+                </div>
+                {/* option input */}
+                <input
+                  type="text"
+                  placeholder="option 1"
+                  name="Option1"
+                  value={
+                    question.Options && question.Options.length > 0
+                      ? question.Options[0]
+                      : ""
+                  }
+                  onChange={handleChanges}
+                  className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
+                />
 
-                  {/*  */}
-                  <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
-                    onClick={() =>
-                      setQuestion({
-                        ...question,
-                        "question.Options": [
-                          ...question.Options,
-                          (question.Options[0] = ""),
-                        ],
-                      })
-                    }
-                  >
-                    <FaX className="self-center mx-2" />
-                  </div>
-                </span>
-
-                <span className="flex gap-2">
-                  {/*  */}
-                  {/* radio button */}
-                  <div className="flex w-5 justify-center">
-                    <input
-                      type="radio"
-                      name="Answer"
-                      id="option3"
-                      value={1}
-                      checked={parseInt(question.AnswerIndex) === 1}
-                      onChange={handleChanges}
-                      className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                    />{" "}
-                  </div>
-                  {/* option input 2*/}
-                  <input
-                    type="text"
-                    placeholder="option 2"
-                    name={`Option2`}
-                    value={
-                      question.Options && question.Options.length > 0
-                        ? question.Options[1]
-                        : ""
-                    }
-                    onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
-                  />
-
-                  {/*  */}
-                  <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
-                    onClick={() =>
-                      setQuestion({
-                        ...question,
-                        "question.Options": [
-                          ...question.Options,
-                          (question.Options[1] = ""),
-                        ],
-                      })
-                    }
-                  >
-                    <FaX className="self-center mx-2" />
-                  </div>
-                </span>
-
-                <span className="flex gap-2">
-                  {/*  */}
-                  {/* radio button */}
-                  <div className="flex w-5 justify-center">
-                    <input
-                      type="radio"
-                      name="Answer"
-                      id="option3"
-                      value={2}
-                      checked={parseInt(question.AnswerIndex) === 2}
-                      onChange={handleChanges}
-                      className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                    />{" "}
-                  </div>
-                  {/* option input 3*/}
-                  <input
-                    type="text"
-                    placeholder="option 3"
-                    name={`Option3`}
-                    value={
-                      question.Options && question.Options.length > 0
-                        ? question.Options[2]
-                        : ""
-                    }
-                    onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
-                  />
-
-                  {/*  */}
-                  <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
-                    onClick={() =>
-                      setQuestion({
-                        ...question,
-                        "question.Options": [
-                          ...question.Options,
-                          (question.Options[2] = ""),
-                        ],
-                      })
-                    }
-                  >
-                    <FaX className="self-center mx-2" />
-                  </div>
-                </span>
-
-                <span className="flex gap-2">
-                  {/*  */}
-                  {/* radio button */}
-                  <div className="flex w-5 justify-center">
-                    <input
-                      type="radio"
-                      name="Answer"
-                      id="option3"
-                      value={3}
-                      checked={parseInt(question.AnswerIndex) === 3}
-                      onChange={handleChanges}
-                      className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                    />{" "}
-                  </div>
-                  {/* option input 4*/}
-                  <input
-                    type="text"
-                    placeholder="option 4"
-                    name={`Option4`}
-                    value={
-                      question.Options && question.Options.length > 0
-                        ? question.Options[3]
-                        : ""
-                    }
-                    onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
-                  />
-
-                  {/*  */}
-                  <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
-                    onClick={() =>
-                      setQuestion({
-                        ...question,
-                        "question.Options": [
-                          ...question.Options,
-                          (question.Options[3] = ""),
-                        ],
-                      })
-                    }
-                  >
-                    <FaX className="self-center mx-2" />
-                  </div>
-                </span>
-                {/* add button and shuffle container */}
-                <div className="flex justify-between">
-                  {/* <button className="flex w-1/5 bg-gray-100 rounded-xl  font-boldgap-2 justify-center py-3">
-                    <FaPlus className="self-center" /> Add
-                  </button>
-                  <span className="self-center">
-                    <input type="checkbox" className="mr-2" />{" "}
-                    <label className="">Shuffle Answers</label>
-                  </span> */}
+                {/*  */}
+                <div
+                  className=" flex justify-center rounded-lg cursor-pointer "
+                  onClick={() =>
+                    setQuestion({
+                      ...question,
+                      "question.Options": [
+                        ...question.Options,
+                        (question.Options[0] = ""),
+                      ],
+                    })
+                  }
+                >
+                  <FaX className="self-center mx-2" />
                 </div>
               </div>
+
+              <div className="flex gap-2">
+                {/*  */}
+                {/* radio button */}
+                <div className="flex w-5 justify-center">
+                  <input
+                    type="radio"
+                    name="Answer"
+                    id="option3"
+                    value={1}
+                    checked={parseInt(question.AnswerIndex) === 1}
+                    onChange={handleChanges}
+                    className="w-3 h-3 p-[.4rem] checked:bg-none cursor-pointer checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
+                  />{" "}
+                </div>
+                {/* option input 2*/}
+                <input
+                  type="text"
+                  placeholder="option 2"
+                  name={`Option2`}
+                  value={
+                    question.Options && question.Options.length > 0
+                      ? question.Options[1]
+                      : ""
+                  }
+                  onChange={handleChanges}
+                  className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
+                />
+
+                {/*  */}
+                <div
+                  className="flex justify-center rounded-lg cursor-pointer "
+                  onClick={() =>
+                    setQuestion({
+                      ...question,
+                      "question.Options": [
+                        ...question.Options,
+                        (question.Options[1] = ""),
+                      ],
+                    })
+                  }
+                >
+                  <FaX className="self-center mx-2" />
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                {/*  */}
+                {/* radio button */}
+                <div className="flex w-5 justify-center">
+                  <input
+                    type="radio"
+                    name="Answer"
+                    id="option3"
+                    value={2}
+                    checked={parseInt(question.AnswerIndex) === 2}
+                    onChange={handleChanges}
+                    className="w-3 h-3 p-[.4rem] checked:bg-none cursor-pointer  checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
+                  />{" "}
+                </div>
+                {/* option input 3*/}
+                <input
+                  type="text"
+                  placeholder="option 3"
+                  name={`Option3`}
+                  value={
+                    question.Options && question.Options.length > 0
+                      ? question.Options[2]
+                      : ""
+                  }
+                  onChange={handleChanges}
+                  className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
+                />
+
+                {/*  */}
+                <div
+                  className=" flex justify-center rounded-lg cursor-pointer "
+                  onClick={() =>
+                    setQuestion({
+                      ...question,
+                      "question.Options": [
+                        ...question.Options,
+                        (question.Options[2] = ""),
+                      ],
+                    })
+                  }
+                >
+                  <FaX className="self-center mx-2" />
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                {/*  */}
+                {/* radio button */}
+                <div className="flex w-5 justify-center">
+                  <input
+                    type="radio"
+                    name="Answer"
+                    id="option3"
+                    value={3}
+                    checked={parseInt(question.AnswerIndex) === 3}
+                    onChange={handleChanges}
+                    className="w-3 h-3 p-[.4rem] checked:bg-none cursor-pointer checked:border checked:border-blue-700 border-blued checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
+                  />{" "}
+                </div>
+                {/* option input 4*/}
+                <input
+                  type="text"
+                  placeholder="option 4"
+                  name={`Option4`}
+                  value={
+                    question.Options && question.Options.length > 0
+                      ? question.Options[3]
+                      : ""
+                  }
+                  onChange={handleChanges}
+                  className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
+                />
+
+                {/*  */}
+                <div
+                  className=" flex justify-center rounded-lg cursor-pointer "
+                  onClick={() =>
+                    setQuestion({
+                      ...question,
+                      "question.Options": [
+                        ...question.Options,
+                        (question.Options[3] = ""),
+                      ],
+                    })
+                  }
+                >
+                  <FaX className="self-center mx-2" />
+                </div>
+              </div>
+              {/* add button and shuffle container */}
             </div>
-          </span>
+          </div>
         </div>
-        <div className="absolute bottom-10 flex right-8 gap-2">
+
+        <div className="flex justify-end gap-5">
           {" "}
           <div className=" flex gap-2">
             {addType === "topic" && (
               <button
-                className={`self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                className={`self-center justify-center cursor-pointer flex bg-[#8F92A1] text-[#171717] py-3 px-6 rounded-2xl text-sm font-bold gap-2 bg-opacity-10 ${
                   countDetail >= 0 ? "" : "hidden"
                 }`}
                 onClick={handlePrev}
@@ -517,7 +509,7 @@ const AddMcqToTopic = () => {
           <div className=" flex">
             {addType === "topic" && (
               <button
-                className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+                className="self-center justify-center cursor-pointer flex bg-[#0052CC] text-white  py-3 px-6 rounded-2xl text-sm font-bold gap-2 "
                 // onClick={addQuestion}
                 onClick={handleQuestionSave}
               >

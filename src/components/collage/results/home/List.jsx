@@ -102,13 +102,12 @@ const List = ({ FilterdStudents }) => {
                     className={`h-full rounded-lg ${getProgressBarColor(
                       assessment.avgPercentage?.toFixed(2)
                     )}`}
-                    style={{ width: assessment.avgPercentage?.toFixed(2) }}
+                    style={{ width: assessment.avgPercentage }}
                   ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
-                  {/* {student?.percentage?.toFixed(2)}% */}
-                  {assessment.avgPercentage?.toFixed(2)}%
+                  {assessment?.percentage?.toFixed(2)}%
                 </h2>
               </span>
             </div>

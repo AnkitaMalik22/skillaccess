@@ -32,15 +32,11 @@ const AddQuestionsSelect = () => {
         break;
 
       case "code":
-        navigate(
-          `/collage/quesBank/code/${id}?type=compiler&addType=topic`
-        );
+        navigate(`/collage/quesBank/code/${id}?type=compiler&addType=topic`);
         break;
 
       case "video":
-        navigate(
-          `/collage/quesBank/video/${id}?type=video&addType=topic`
-        );
+        navigate(`/collage/quesBank/video/${id}?type=video&addType=topic`);
 
         break;
 
@@ -51,9 +47,7 @@ const AddQuestionsSelect = () => {
         break;
 
       case "essay":
-        navigate(
-          `/collage/quesBank/essay/${id}?type=essay&addType=topic`
-        );
+        navigate(`/collage/quesBank/essay/${id}?type=essay&addType=topic`);
         break;
 
       default:
@@ -62,224 +56,98 @@ const AddQuestionsSelect = () => {
     }
   };
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <HeaderSelect Q={selectQuestionType} />
 
-      <div className="w-11/12 mx-auto mt-20">
+      <div className="mx-auto ">
         {/* larger screens */}
-        <div className="   my-2 rounded-lg tracking-wide justify-between  ">
-          <h2 className="font-normal text-xs sm:text-sm text-gray-400  mt-8 tracking-wide ">
-            Add up to 10 custom questions to your assessment (optional). You can
-            use five question types: multiple-choice, essay, video, code and
-            find answer.
-          </h2>
+        <h2 className="font-medium text-lg text-[#7D7D7D] mb-6 font-dmSans">
+          Add up to 10 custom questions to your assessment (optional). You can
+          use five question types: multiple-choice, essay, video, code and find
+          answer.
+        </h2>
+
+        <div className="w-full md:mb-10 mb-5">
+          {[
+            {
+              type: "mcq",
+              label: "Multiple Questions",
+              description: "One Correct Answer",
+            },
+            {
+              type: "code",
+              label: "Code",
+              description: "Programming Questions",
+            },
+            { type: "essay", label: "Essay", description: "Open Text Answer" },
+            {
+              type: "video",
+              label: "Video",
+              description: "Record video to answer questions",
+            },
+            {
+              type: "findAnswer",
+              label: "Find Answer",
+              description: "Read Phrase and Answer them",
+            },
+          ].map((item) => (
+            <div
+              key={item.type}
+              className={`w-full flex justify-between items-center gap-5 bg-[#F8F8F9] text-[#000000]  rounded-2xl border h-20 py-5 px-8 mb-3 ${
+                selectQuestionType === item.type
+                  ? "border-[#95ACFA]"
+                  : " opacity-60"
+              }`}
+              onClick={() => setSelectQuestionType(item.type)}
+            >
+              <div className="flex gap-5 font-dmSans items-center w-1/3">
+                <input
+                  type="radio"
+                  name="ques"
+                  checked={selectQuestionType === item.type}
+                  className="w-3 h-3 checked:bg-none checked:border checked:border-blue-700 border-blue-700 ring-transparent ring-2 checked:ring-blue-700 ring-offset-2"
+                  onChange={() => setSelectQuestionType(item.type)}
+                />
+                <img
+                  src="../../../images/icons/exam.png"
+                  alt=""
+                  className="w-6 h-8"
+                />
+                <h2 className="text-xl font-normal">{item.label}</h2>
+              </div>
+              <h2 className="text-xl font-normal flex-1">{item.description}</h2>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="4"
+                viewBox="0 0 17 4"
+                fill="none"
+                style={{
+                  opacity: selectQuestionType === item.type ? 1 : 0.5,
+                }}
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.609375 1.9998C0.609375 0.8955 1.51015 0 2.62096 0C3.73267 0 4.63254 0.8955 4.63254 1.9998C4.63254 3.105 3.73267 3.9996 2.62096 3.9996C1.51015 3.9996 0.609375 3.105 0.609375 1.9998ZM6.64502 1.9998C6.64502 0.8955 7.5458 0 8.6566 0C9.76741 0 10.6682 0.8955 10.6682 1.9998C10.6682 3.105 9.76741 3.9996 8.6566 3.9996C7.5458 3.9996 6.64502 3.105 6.64502 1.9998ZM12.6794 1.9998C12.6794 0.8955 13.5802 0 14.6919 0C15.8027 0 16.7035 0.8955 16.7035 1.9998C16.7035 3.105 15.8027 3.9996 14.6919 3.9996C13.5802 3.9996 12.6794 3.105 12.6794 1.9998Z"
+                  fill="#000000"
+                />
+              </svg>
+            </div>
+          ))}
         </div>
-
-        <div className="  sm:mt-5 rounded-lg tracking-wide  w-full ">
-          {/* mcq */}
-          <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "mcq"?'border-blued':'opacity-70'
-            }`}
-            onClick={() => setSelectQuestionType("mcq")}
-          >
-            {" "}
-            <div className="flex gap-5 font-dmSans w-1/3">
-              <div className="w-5 h-5 self-center">
-                <input
-                  type="radio"
-                  name="ques"
-                  checked={selectQuestionType === "mcq"}
-                  className={`w-3 h-3 p-[.4rem]  checked:bg-none  checked:border checked:border-blue-700 border-blue-700 checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center `}
-                  onClick={(e) => {
-                    setSelectQuestionType("mcq");
-                  }}
-                />
-              </div>
-
-              <img
-                src="../../../images/icons/exam.png"
-                alt=""
-                className="w-6 h-8 self-center"
-              />
-              <h2 className="text-xl font-normal self-center">
-                Multiple Questions
-              </h2>
-            </div>
-            {/*  */}
-            <h2 className="text-xl font-normal self-center">
-              One Correct Answer
-            </h2>
-            <img
-              src="../../../images/icons/dot.png"
-              alt=""
-              className="self-center w-5"
-            />
-          </div>
-
-          {/* code */}
-          <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "code" ?'border-blued':'opacity-70'
-            }`}
-            onClick={() => setSelectQuestionType("code")}
-          >
-            {" "}
-            <div className="flex gap-5 font-dmSans w-1/3">
-              <div className="w-5 h-5 self-center">
-                {" "}
-                <input
-                  type="radio"
-                  name="ques"
-                  checked={selectQuestionType === "code"}
-                  className={`w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center   border-blue-700`}
-                  onClick={() => setSelectQuestionType("code")}
-                />
-              </div>
-
-              <img
-                src="../../../images/icons/exam.png"
-                alt=""
-                className="w-6 h-8 self-center"
-              />
-              <h2 className="text-xl font-normal self-center">Code</h2>
-            </div>
-            {/*  */}
-            <h2 className="text-xl font-normal self-center">
-              Programming Questions
-            </h2>
-            <img
-              src="../../../images/icons/dot.png"
-              alt=""
-              className="self-center w-5"
-            />
-          </div>
-
-          {/* Essay */}
-
-          <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "essay"?'border-blued':'opacity-70'
-            }`}
-            onClick={() => setSelectQuestionType("essay")}
-          >
-            {" "}
-            <div className="flex gap-5 font-dmSans w-1/3">
-              <div className="w-5 h-5 self-center">
-                <input
-                  type="radio"
-                  checked={selectQuestionType === "essay"}
-                  name="ques"
-                  className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blue-700 checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                  onClick={() => setSelectQuestionType("essay")}
-                />
-              </div>
-              <img
-                src="../../../images/icons/exam.png"
-                alt=""
-                className="w-6 h-8 self-center"
-              />
-              <h2 className="text-xl font-normal self-center">Essay</h2>
-            </div>
-            {/*  */}
-            <h2 className="text-xl font-normal self-center">
-              Open Text Answer
-            </h2>
-            <img
-              src="../../../images/icons/dot.png"
-              alt=""
-              className="self-center w-5"
-            />
-          </div>
-          {/*  */}
-
-          <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "video"?'border-blued':'opacity-70'
-            }`}
-            onClick={() => setSelectQuestionType("video")}
-          >
-            {" "}
-            <div className="flex gap-5 font-dmSans w-1/3">
-              <div className="w-5 h-5 self-center">
-                <input
-                  type="radio"
-                  name="ques"
-                  checked={selectQuestionType === "video"}
-                  className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blue-700 checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                  onClick={() => setSelectQuestionType("video")}
-                />
-              </div>
-              <img
-                src="../../../images/icons/exam.png"
-                alt=""
-                className="w-6 h-8 self-center"
-              />
-              <h2 className="text-xl font-normal self-center">Video</h2>
-            </div>
-            {/*  */}
-            <h2 className="text-xl font-normal self-center">
-              Record video to answer questions
-            </h2>
-            <img
-              src="../../../images/icons/dot.png"
-              alt=""
-              className="self-center w-5"
-            />
-          </div>
-          {/*  */}
-
-          {/* Find Answer*/}
-
-          <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "findAnswer"?'border-blued':'opacity-70'
-            }`}
-            onClick={() => setSelectQuestionType("findAnswer")}
-          >
-            {" "}
-            <div className="flex gap-5 font-dmSans w-1/3">
-              <div className="w-5 h-5 self-center">
-                <input
-                  type="radio"
-                  name="ques"
-                  checked={selectQuestionType === "findAnswer"}
-                  className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blue-700 checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                  onClick={() => setSelectQuestionType("findAnswer")}
-                />
-              </div>
-              <img
-                src="../../../images/icons/exam.png"
-                alt=""
-                className="w-6 h-8 self-center"
-              />
-              <h2 className="text-xl font-normal self-center">Find Answer</h2>
-            </div>
-            {/*  */}
-            <h2 className="text-xl font-normal self-center">
-              Read Phrase and Answer them
-            </h2>
-            <img
-              src="../../../images/icons/dot.png"
-              alt=""
-              className="self-center w-5"
-            />
-          </div>
-          {/*  */}
-        </div>
-      </div>
-
-      <div className=" w-11/12 mx-auto flex justify-end mt-14">
-        <div className="flex gap-4">
-          <button
-            className="self-center justify-center flex bg-white border border-blue-500 py-3 px-8 rounded-xl text-xs gap-2 text-blue-500"
-            onClick={NavHandler}
-          >
-            New Question
-          </button>
-          {/* <button className="self-center justify-center flex bg-white border border-blue-500 py-3 px-8 rounded-xl text-xs gap-2 text-blue-500">
+        <div className="flex justify-end">
+          <div className="flex gap-4">
+            <button
+              className="self-center justify-center flex bg-[#0052CC] border  py-3 px-8 rounded-xl text-xs gap-2 text-white"
+              onClick={NavHandler}
+            >
+              Add Question
+            </button>
+            {/* <button className="self-center justify-center flex bg-white border border-blue-500 py-3 px-8 rounded-xl text-xs gap-2 text-blue-500">
             Copy question from another assessment
           </button> */}
+          </div>
         </div>
       </div>
     </div>

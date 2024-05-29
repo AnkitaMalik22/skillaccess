@@ -53,12 +53,9 @@ const TopicDetails = () => {
   const [selected, setSelected] = useState(1);
   console.log(questions);
   return (
-    <div className="w-11/12 mx-auto relative    min-h-[90vh] pb-20">
-      {/* <Header page={"final"} /> */}
+    <div className="w-11/12 mx-auto py-5 md:py-10 min-h-[90vh] relative">
       <TopicHeader Heading={currentTopic?.Heading} page={"qb"} sectionId={id} />
-      <div className="w-4/5 mx-auto"></div>
-
-      <div className="mt-16">
+      <div className="md:mb-10 mb-5">
         {/* {console.log(bookmarks)} */}
         {/* {TopicDetails */}
         {/* //   ?.slice((selected - 1) * 10, selected * 10)
@@ -68,7 +65,7 @@ const TopicDetails = () => {
           ?.slice((selected - 1) * 10, selected * 10)
           .map((question, i) => {
             return (
-              <div className="my-2">
+              <div>
                 {/* {!question.code && !question.videoFile && 
                 <List
                   question={question}
@@ -187,7 +184,7 @@ const TopicDetails = () => {
             */}
       </div>
 
-      <div className="absolute bottom-2 mt-20 flex gap-2 w-full justify-center">
+      <div className="absolute mb-5 md:mb-10 flex gap-2 w-full justify-center bottom-1">
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
           <FaChevronLeft
             className={`rotate-45 text-lg self-center ${
@@ -206,7 +203,7 @@ const TopicDetails = () => {
             hasQuestions && (
               <div
                 key={pageNumber}
-                className={`rounded-lg h-10 w-10 flex justify-center ${
+                className={`rounded-lg h-10 w-10 flex justify-center cursor-pointer ${
                   selected === pageNumber
                     ? "bg-blue-700 text-white"
                     : "bg-gray-100"
