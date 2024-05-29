@@ -35,25 +35,26 @@ body {
 /* .skiptranslate {
   display: none;
 } */
-.goog-gt-vt {
+/* .goog-gt-vt {
   display: none;
-}
+} */
 .goog-te-gadget > span {
   display: none;
 }
 .goog-te-gadget {
-  /* display: none !important; */
-  color: transparent !important;
+  display: block !important;
+  font-size: 0px !important;
+  /* color: transparent !important; */
 }
 
-.goog-te-gadget .goog-te-combo {
+/* .goog-te-gadget .goog-te-combo {
   margin: 4px 0;
   font-weight: bold;
   font-family: DM Sans;
   font-style: italic;
   color: #161616;
   font-size: 0.9rem;
-}
+} */
 
 iframe {
   display: none;

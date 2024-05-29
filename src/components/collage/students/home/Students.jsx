@@ -255,13 +255,16 @@ const Students = () => {
           </div>
           <div className="flex justify-center flex-col">
             <h2 className="font-dmSans font-normal text-sm text-[#171717]">
-            {
-  student?.studentResponses &&  student?.studentResponses?.length >0 
-    ? student?.studentResponses?.length >= 2
-      ? student?.studentResponses[student?.studentResponses?.length - 2]?.assessmentId?.name
-      : student?.studentResponses[student?.studentResponses?.length - 1]?.assessmentId?.name
-    : 'Not Available'
-}
+              {student?.studentResponses &&
+              student?.studentResponses?.length > 0
+                ? student?.studentResponses?.length >= 2
+                  ? student?.studentResponses[
+                      student?.studentResponses?.length - 2
+                    ]?.assessmentId?.name
+                  : student?.studentResponses[
+                      student?.studentResponses?.length - 1
+                    ]?.assessmentId?.name
+                : "Not Available"}
             </h2>
             {/* <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
               Mailchimp
@@ -272,11 +275,12 @@ const Students = () => {
           </div>
           <div className="flex justify-center flex-col">
             <h2 className="font-dmSans font-normal text-sm text-[#171717]">
-            {
-  student?.studentResponses &&  student?.studentResponses?.length >0 
-    ? student?.studentResponses[student?.studentResponses?.length - 1]?.assessmentId?.name
-    : 'Not Available'
-}
+              {student?.studentResponses &&
+              student?.studentResponses?.length > 0
+                ? student?.studentResponses[
+                    student?.studentResponses?.length - 1
+                  ]?.assessmentId?.name
+                : "Not Available"}
             </h2>
             {/* <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
               Mailchimp

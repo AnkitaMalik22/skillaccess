@@ -18,22 +18,22 @@ const BookMark = () => {
   }, []);
 
   return (
-    <div className="w-full mx-auto bg-[#f7f7f8] lg:px-8 lg:pt-7 pb-4 rounded-3xl">
-      <span className="flex justify-between mb-6 ">
-        <span className="flex gap-2 self-center">
+    <div className="w-full mx-auto bg-[#F8F8F9] md:px-8 md:py-6 py-5 px-5 rounded-3xl">
+      <div className="flex justify-between mb-6 items-center ">
+        <div className="flex gap-2 self-center">
           <LuBookmarkMinus className="self-center text-2xl text-[#95ACFA]" />
-          <h2 className="font-bold text-base self-center mr-2">
+          <h2 className="font-bold text-base self-center">
             Bookmark questions
           </h2>
-        </span>
+        </div>
 
         <button
-          className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-2 px-3"
+          className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-[5px] px-2"
           onClick={() => navigate("/collage/quesBank/bookmarks")}
         >
           View All
         </button>
-      </span>
+      </div>
 
       {/* list to be iterated */}
       {bookmarks?.map(
@@ -44,9 +44,11 @@ const BookMark = () => {
       )}
 
       {bookmarks?.length === 0 && (
-        <div className="flex gap-2  rounded-lg p-3">
+        <div className="flex gap-2  rounded-lg">
           <div className="w-full">
-            <h2 className="p-4">No Bookmarks!</h2>
+            <h2 className="text-[#171717] text-base text-center">
+              No Bookmarks!
+            </h2>
           </div>
         </div>
       )}
