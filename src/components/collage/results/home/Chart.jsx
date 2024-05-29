@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { FaCircle, FaDotCircle } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ChartComp = () => {
+  const { year } = useSelector((state) => state.result.graph);
+  const [students, setStudents] = useState({ placed: [], appeared: [] });
   const [toggle, setToggle] = useState(5);
   const navigate = useNavigate();
   const [placements, setPlacements] = useState([1, 2, 3, 4, 5, , 9, 9, 6]);
@@ -72,6 +75,21 @@ const ChartComp = () => {
       },
     ],
   });
+  useEffect(() => {
+    const newPlaced = [];
+    const newAppeared = [];
+
+    year.forEach((month) => {
+      newPlaced.push(month.totalPlaced);
+      newAppeared.push(month.totalAppearedCount);
+    });
+
+    setStudents((prev) => ({
+      ...prev,
+      placed: newPlaced,
+      appeared: newAppeared,
+    }));
+  }, [year]);
   return (
     <div className="sm:flex  mt-6 bg-gray-100 w-full rounded-lg gap-6 font-dmSans  justify-center relative">
       {/* chart component */}
@@ -123,15 +141,26 @@ const ChartComp = () => {
         </div>
 
         <div className="3xl:h-[507px] h-96">
-          <Chart
-            id="results"
-            className="bg-white shadow-md mt-2 rounded-lg "
-            options={settings.options}
-            series={settings.series}
-            type="line"
-            height={"100%"}
-            width={"100%"}
-          />
+          {year && (
+            <Chart
+              id="results"
+              className="bg-white shadow-md mt-2 rounded-lg "
+              options={settings.options}
+              series={[
+                {
+                  name: "Total Students Appeared",
+                  data: students.appeared,
+                },
+                {
+                  name: "Total Students Selected",
+                  data: students.placed,
+                },
+              ]}
+              type="line"
+              height={"100%"}
+              width={"100%"}
+            />
+          )}
           <div className="flex gap-4 my-4">
             <span className="flex gap-1">
               <FaCircle className="text-[#0052CC90]" />{" "}

@@ -50,6 +50,7 @@ import AccountRoute from "./pages/collage/accounting/AccountRoutes";
 import { getCreditDetails } from "./redux/collage/dummySlice";
 import CollageLayout from "./layout/Collage";
 import { getCollege } from "./redux/collage/auth/authSlice";
+import SecurityAppPage from "./pages/collage/settings/SecurityAppPage";
 
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
@@ -144,6 +145,10 @@ export default function App() {
           <Route path="/student/login" element={<LoginStudent />} /> */}
 
             {/* ----------------------------------------collage-------------------------------------------------------------- */}
+            <Route
+              path="/collage/settings/security/securityApp"
+              element={<SecurityAppPage />}
+            />
 
             <Route path="" element={<Login />} />
             <Route path="/register" element={<Register />} />
