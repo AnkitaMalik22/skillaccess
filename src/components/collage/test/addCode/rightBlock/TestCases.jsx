@@ -136,15 +136,12 @@ const TestCases = ({
   };
 
   const deleteHandler = (index) => {
-    setTestCases((prev) => {
-      const updatedTestCases = prev.filter((_, i) => i !== index);
-      return updatedTestCases;
-    });
-
-    setExpandedTestCases((prev) => {
-      const updatedExpandedTestCases = prev.filter((_, i) => i !== index);
-      return updatedExpandedTestCases;
-    });
+    setTestCases((prev) => prev.filter((_, i) => i !== index));
+    setExpandedTestCases((prev) => prev.filter((_, i) => i !== index));
+    setQuestion((prev) => ({
+      ...prev,
+      testcase: prev.testcase.filter((_, i) => i !== index),
+    }));
   };
 
   const addTestCase = () => {
