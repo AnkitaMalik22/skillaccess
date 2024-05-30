@@ -116,7 +116,7 @@ const Navbar = (props) => {
           </div> */}
 
           {/* <FaAngleDown className="" /> */}
-          {/* <div id="google_translate_element" className="google-div"></div> */}
+          <div id="google_translate_element" className="google-div"></div>
           {/* <select
             
               className="border-none bg-transparent"

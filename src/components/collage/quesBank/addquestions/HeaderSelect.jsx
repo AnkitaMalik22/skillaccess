@@ -17,16 +17,6 @@ const Header = ({ Q }) => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="flex w-full mx-auto justify-between mb-6">
-      {/* comp */}
-      <div className="flex gap-3">
-        <button
-          className="self-center object-center rounded-lg h-10 w-10 "
-          onClick={() => navigate(-1)}
-        >
-          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
-=======
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
         <button className="flex self-center ml-2 rounded-lg  gap-2 items-center">
@@ -61,7 +51,6 @@ const Header = ({ Q }) => {
               <h3>21 MINS</h3>
             </div> */}
           </div>
->>>>>>> 2ab7059ab895743f1d4357173a0467767d86235f
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Create Assessment
