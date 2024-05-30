@@ -91,24 +91,28 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
   };
 
   return (
-    <div className="flex w-full mx-auto justify-between mb-6">
-      {/* comp */}
-      <div className="flex gap-3">
-        {addType === "topic" && (
-          <button
-            className="self-center object-center rounded-lg h-10 w-10 "
-            onClick={() =>
-              level === "adaptive"
-                ? navigate(`/collage/test/selectAdaptive?level=${level}`)
-                : navigate(`/collage/test/select?level=${level}`)
-            }
-          >
-            <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
-          </button>
-        )}
-        <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Create Assessment
-        </h2>
+    <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">
+      <div className="h-fit self-center">
+        <button className="flex self-center ml-2 rounded-lg  gap-2">
+          {addType === "topic" && (
+            <button
+              onClick={() =>
+                level === "adaptive"
+                  ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+                  : navigate(`/collage/test/select?level=${level}`)
+              }
+              className=" mr-3 self-center bg-white rounded-lg "
+            >
+              <FaChevronLeft className=" p-3  h-10 w-10 self-center " />
+            </button>
+          )}
+
+          <div className="self-center">
+            <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans  text-white ">
+              Create Assessment
+            </h2>
+          </div>
+        </button>
       </div>
 
       <div className="flex gap-3">
