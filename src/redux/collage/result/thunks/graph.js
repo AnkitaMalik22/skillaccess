@@ -6,7 +6,7 @@ export const getResultGraph = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments/result/graph`,
+        `${process.env.REACT_APP_API_URL}/api/assessments/result/graph?duration=year`,
         {
           headers: {
             "Content-Type": "application/json",

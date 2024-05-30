@@ -82,84 +82,85 @@ const Appeared = ({ assessment }) => {
 
       {/* list to be iterated */}
 
-      {testDataResponse?.map((student, index) => (
-        <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
-          {" "}
-          {/* row-2 */}
-          <div className={` flex `}>
-            <div className="flex self-center">
-              <div className=" min-w-[3rem]  h-12 self-center  mr-2  ">
-                <img src="../../images/user.jpg" alt="" />
-              </div>
-              <span className="break-words min-w-0 pt-1 self-center">
-                <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                  {student?.studentId?.FirstName}
-                </h2>
-              </span>
-            </div>
-          </div>
-          {/*  */}
-          <div className="flex justify-center mr-16 ">
-            <div className=" self-center h-fit ">
-              <span>
-                <h2 className="font-dmSans  sm:text-sm ">
-                  1st March - 8th March
-                </h2>
-              </span>
-            </div>
-          </div>
-          {/*  */}
-          <div className="flex justify-center">
-            <div className=" self-center h-fit">
-              <span>
-                <select
-                  className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
-                  onChange={handleStatusChange(assessment._id, student._id)}
-                  value={student.status}
-                >
-                  <option value="">pending</option>
-                  <option value="rejected">rejected</option>
-                  <option value="selected">selected</option>
-                </select>
-              </span>
-            </div>
-          </div>
-          {/*  */}
-          <div className="flex justify-center">
-            <div className=" self-center">
-              <span className="flex gap-2">
-                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
-                  <div
-                    className={`h-full rounded-lg ${getProgressBarColor(
-                      student?.percentage
-                    )}`}
-                    style={{ width: `${student?.percentage}%` }}
-                  ></div>
+      {testDataResponse?.length > 0 &&
+        testDataResponse?.map((student, index) => (
+          <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
+            {" "}
+            {/* row-2 */}
+            <div className={` flex `}>
+              <div className="flex self-center">
+                <div className=" min-w-[3rem]  h-12 self-center  mr-2  ">
+                  <img src="../../images/user.jpg" alt="" />
                 </div>
-                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
-                  {" "}
-                  {student?.percentage?.toFixed(2)}%
+                <span className="break-words min-w-0 pt-1 self-center">
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
+                    {student?.studentId?.FirstName}
+                  </h2>
+                </span>
+              </div>
+            </div>
+            {/*  */}
+            <div className="flex justify-center mr-16 ">
+              <div className=" self-center h-fit ">
+                <span>
+                  <h2 className="font-dmSans  sm:text-sm ">
+                    1st March - 8th March
+                  </h2>
+                </span>
+              </div>
+            </div>
+            {/*  */}
+            <div className="flex justify-center">
+              <div className=" self-center h-fit">
+                <span>
+                  <select
+                    className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
+                    onChange={handleStatusChange(assessment?._id, student?._id)}
+                    value={student?.status}
+                  >
+                    <option value="">pending</option>
+                    <option value="rejected">rejected</option>
+                    <option value="selected">selected</option>
+                  </select>
+                </span>
+              </div>
+            </div>
+            {/*  */}
+            <div className="flex justify-center">
+              <div className=" self-center">
+                <span className="flex gap-2">
+                  <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                    <div
+                      className={`h-full rounded-lg ${getProgressBarColor(
+                        student?.percentage
+                      )}`}
+                      style={{ width: `${student?.percentage}%` }}
+                    ></div>
+                  </div>
+                  <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                    {" "}
+                    {student?.percentage?.toFixed(2)}%
+                  </h2>
+                </span>
+              </div>
+            </div>
+            {/*  */}
+            <div className="flex justify-end mr-3">
+              <span
+                className="self-center cursor-pointer"
+                onClick={() =>
+                  navigate(
+                    `/collage/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                  )
+                }
+              >
+                <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
+                  Assessment Review
                 </h2>
               </span>
             </div>
           </div>
-          {/*  */}
-          <div className="flex justify-end mr-3">
-            <span
-              className="self-center cursor-pointer"
-              onClick={() =>
-                navigate(
-                  `/collage/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                )
-              }
-            >
-              <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
-                Assessment Review
-              </h2>
-            </span>
-          </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
