@@ -223,11 +223,11 @@ const AddCode = () => {
   }, [currentTopic]);
 
   return (
-    <div className="">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header handleSave={handleSave} />
-      <div className="bg-white min-h-[90vh] mx-auto rounded-xl pt-4 sm:w-[95.7%] px-3 relative">
-        <div className="flex flex-wrap gap-2  ">
-          <span className="w-[49%] ">
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl">
+        <div className="flex md:flex-nowrap flex-wrap gap-5 mx-auto md:mb-40 mb-10">
+          <div className="w-1/2">
             <Question
               question={question}
               setQuestion={setQuestion}
@@ -238,8 +238,8 @@ const AddCode = () => {
               handleSave={handleSave}
               addType={addType}
             />
-          </span>
-          <span className="w-[49%]">
+          </div>
+          <div className="w-1/2">
             <Code
               toggle={toggle}
               setToggle={setToggle}
@@ -250,7 +250,7 @@ const AddCode = () => {
               id={id}
               type={type}
             />
-          </span>
+          </div>
         </div>
 
         <div className="pt-20">

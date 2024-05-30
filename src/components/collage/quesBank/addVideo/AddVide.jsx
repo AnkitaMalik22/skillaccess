@@ -55,7 +55,6 @@ const AddVideo = () => {
 
   const [videoLink, setVideoLink] = useState("");
 
-
   const [loading, setLoading] = useState(false);
 
   const chunksRef = useRef([]);
@@ -251,8 +250,7 @@ const AddVideo = () => {
       );
     } catch (error) {
       console.error("Error uploading video:", error);
-    }
-    finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -274,11 +272,15 @@ const AddVideo = () => {
   return (
     <>
       {!videoPreview ? (
-        <div className="pt-8 w-11/12 mx-auto font-dmSans">
+        <div className="w-11/12 mx-auto py-5 md:py-10">
           <Header />
 
-          <div className="flex flex-col items-center justify-center h-full pt-16">
-            {!recording && <p className="text-base font-bold">Upload video </p>}
+          <div className="flex flex-col items-center justify-center h-full md:pt-10">
+            {!recording && (
+              <p className="text-base font-bold text-[#171717]">
+                Upload video{" "}
+              </p>
+            )}
 
             {!recording && (
               <div
@@ -292,17 +294,17 @@ const AddVideo = () => {
                 <img
                   src="../../../images/ant-design_cloud-upload-outlined.png"
                   alt="upload"
-                  className="cursor-pointer"
+                  className="cursor-pointer mb-5"
                 />
 
-                <p className="text-base font-bold pt-4">
+                <p className="text-base font-bold mb-4">
                   Drag & drop video files or{" "}
                   <a className="text-[#0052cc] border-b-2 border-[#0052cc]  cursor-pointer">
                     Browse
                   </a>
                 </p>
 
-                <p className="w-[440px] text-center pt-4">
+                <p className="w-[440px] text-sm text-center text-[#8F92A1]">
                   Supported Formats: MOV, GIF, MP4, MPEG, MKV, or WEBM file
                   format Maximum file size: 1 GB
                 </p>
@@ -315,21 +317,21 @@ const AddVideo = () => {
                   className="self-center justify-center flex items-center bg-[#0052CC] w-[196px] h-[56px] px-4 rounded-2xl text-xs gap-2 text-white"
                   {...getRootProps()}
                 >
-                  <GrUploadOption className=" w-[22px] h-[22px] text-white" />
+                  <GrUploadOption className=" w-[22px] h-[22px] text-white text-sm" />
                   Upload
                 </button>
               )}
             </div>
 
-            {!recording && 
+            {!recording && (
               <div className="flex items-center gap-12  pt-6">
-                <hr className="w-[400px] h-[2px]"/>
-                <p className="text-center  text-[#8f92a1] font-medium text-[20px]">Or</p>
-                <hr className="w-[400px] [2px]"/>
+                <hr className="w-[400px] h-[2px]" />
+                <p className="text-center  text-[#8f92a1] font-medium text-[20px]">
+                  Or
+                </p>
+                <hr className="w-[400px] [2px]" />
               </div>
-              
-              
-              }
+            )}
 
             <div className="flex mt-10">
               {!recording && (
@@ -337,16 +339,16 @@ const AddVideo = () => {
                   className="self-center justify-center border-2 border-[#0052cc] font-medium flex items-center bg-blue-100 px-4 rounded-2xl text-[20px] gap-2 h-[60px] w-[685px] text-[#0052cc]"
                   onClick={handleStartRecording}
                 >
-                <PiVideoCamera className="h-[40px] w-[40px]" />  Record a Video
+                  <PiVideoCamera className="h-[40px] w-[40px]" /> Record a Video
                 </button>
               )}
             </div>
 
             {recording && (
               <>
-                <div className=" h-full w-full flex  justify-center items-center z-10">
+                <div className=" h-full w-full flex mb-5 justify-center items-center z-10">
                   <Webcam
-                    className="w-[640px] h-[480px] bg-black"
+                    className="w-full md:w-[640px] h-[480px] bg-black rounded-2xl"
                     mirrored={true}
                     audio={true}
                     ref={webcamRef}
@@ -354,25 +356,25 @@ const AddVideo = () => {
                   />
                 </div>
 
-                <div className="  flex item-center mt-4">
+                <div className="flex item-center gap-4">
                   <button
                     className={`self-center justify-center items-center flex ${
-                      paused ? "bg-blue-500" : "bg-red-500"
-                    } text-[#0052cc] py-3 px-4 rounded-2xl text-xs gap-2`}
+                      paused ? "bg-[#0052CC]" : "bg-red-500"
+                    } text-white py-3 px-4 rounded-2xl text-xs gap-2`}
                     onClick={handlePauseResumeRecording}
                   >
                     {paused ? "Resume" : "Pause"}
                   </button>
 
                   <button
-                    className="self-center justify-center flex bg-[#0052CC] py-3 px-4 rounded-2xl text-xs gap-2 text-white ml-4"
+                    className="self-center justify-center flex bg-[#0052CC] py-3 px-4 rounded-2xl text-xs gap-2 text-white"
                     onClick={handleStopRecording}
                   >
                     Finish Recording
                   </button>
 
                   <p
-                    className={`text-center ml-4 rounded-2xl text-[#fff] py-3 px-4 font-bold pt-2 ${
+                    className={`text-center text-xs rounded-2xl text-[#fff] py-3 px-4 font-bold ${
                       timer >= maxDurationInSeconds - warningTime
                         ? "bg-red-500"
                         : "bg-green-500"
@@ -386,15 +388,18 @@ const AddVideo = () => {
           </div>
         </div>
       ) : (
-        <div className="pt-8 w-11/12 mx-auto font-dmSans">
+        <div className="w-11/12 mx-auto py-5 md:py-10">
           <Header />
 
-          <video className="w-[500px] h-[300px] mt-10" controls>
+          <video
+            className="w-full md:w-[500px] h-[300px] rounded-2xl mb-5"
+            controls
+          >
             <source src={videoPreview} type={file && file.type} />
             Your browser does not support the video tag.
           </video>
 
-          <div className="flex justify-between items-center mt-6">
+          <div className="flex justify-between items-center">
             <button
               className="self-center  justify-center flex bg-black py-3 px-4 rounded-2xl text-xs gap-2 text-white"
               onClick={() => {
@@ -420,14 +425,12 @@ const AddVideo = () => {
 
               onClick={handleFileUpload}
             >
-
               Add Questions{" "}
               {loading === false ? (
                 <FaPlus className="self-center" />
               ) : (
                 <Loader />
               )}
-
             </button>
           </div>
         </div>

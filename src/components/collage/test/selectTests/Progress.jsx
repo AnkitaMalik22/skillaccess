@@ -3,7 +3,7 @@ import React from "react";
 export const Progress = () => {
   return (
     <>
-      <div className="w-4/5 mx-auto flex my-7">
+      <div className="w-4/5 mx-auto flex mb-5">
         <div className="w-1/3 flex">
           <div className="w-1/3 "></div>
           <div className="relative">

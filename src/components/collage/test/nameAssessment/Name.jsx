@@ -293,7 +293,7 @@ const Name = () => {
   };
 
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header handleNext={handleSubmit} />
       <div className="w-4/5 mx-auto">
         <Progress />

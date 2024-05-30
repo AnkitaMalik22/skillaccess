@@ -13,14 +13,14 @@ const Code = ({
   setQuestion,
 }) => {
   return (
-    <div className="font-dmSans">
-      <h2 className="font-bold mb-3 text-xl">
+    <>
+      <h2 className="font-bold mb-4 text-xl text-[#3E3E3E]">
         Coding Language: {question.codeLanguage || "please select a language"}{" "}
       </h2>
 
       {/* toggler */}
-      <div className="p-2 mt-4 rounded-lg">
-        <span className="grid grid-cols-4 text-lg mb-4">
+      <div className="">
+        <div className="grid grid-cols-4 text-lg mb-4">
           <div>
             <h2
               className={` w-fit text-center pb-2 hover:cursor-pointer mx-auto `}
@@ -76,7 +76,7 @@ const Code = ({
               } `}
             ></div>
           </div>
-        </span>
+        </div>
 
         {toggle === 1 ? (
           <Signature
@@ -98,7 +98,7 @@ const Code = ({
           <Verification question={question} handleChanges={handleChanges} />
         )}
       </div>
-    </div>
+    </>
   );
 };
 
