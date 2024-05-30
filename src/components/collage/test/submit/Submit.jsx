@@ -16,7 +16,7 @@ import { getCollege } from "../../../../redux/collage/auth/authSlice";
 const Submit = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
   const {
     level,
     name,
@@ -238,7 +238,7 @@ const Submit = () => {
         console.log(totalQuestions, questions.length);
         toast.error(
           `Add ${
-            totalQuestions - questions.length
+            2 * totalQuestions - questions.length
           } more questions to complete the test`
         );
         return;
@@ -299,6 +299,7 @@ const Submit = () => {
     // console.log(totalTimeCal, totalDuration);
     localStorage.setItem("totalTime", JSON.stringify(totalTimeCal));
     localStorage.setItem("testName", JSON.stringify(name));
+    setLoading(true);
     dispatch(
       createTest({
         level,
@@ -317,6 +318,7 @@ const Submit = () => {
       //   setTestBasicDetails({ name: "", description: "", totalAttempts: null ,totalQuestions:0})
       // );
       dispatch(getCollege());
+      setLoading(false);
       console.log(res);
 
       if (res.type === "test/createTest/fulfilled") {
@@ -332,7 +334,7 @@ const Submit = () => {
 
   return (
     <div className="w-11/12 mx-auto relative    min-h-[90vh] pb-20">
-      <Header page={"final"} handleSubmit={handleSubmit} />
+      <Header page={"final"} handleSubmit={handleSubmit} loading={loading} />
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>

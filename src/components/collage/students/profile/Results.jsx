@@ -65,7 +65,7 @@ const Results = ({ assessmentResult, id }) => {
               {response.topics.map((topic) => topic.Heading).join(", ")}
             </span>
             <span className="w-full   p-2 text-sm font-dmSans">
-              {response.percentage}%
+              {response.percentage?.toFixed(2)}%
             </span>
             <div className="flex justify-center">
               <div className=" self-center h-fit">

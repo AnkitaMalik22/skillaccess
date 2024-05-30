@@ -44,7 +44,7 @@ const Header = ({
           )}
 
           <div className="self-center">
-            <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans  text-white ">
+            <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans   ">
               Create Assessment
             </h2>
           </div>
