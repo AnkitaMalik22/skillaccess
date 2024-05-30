@@ -205,7 +205,7 @@ const Signature = ({
 
   return (
     <div>
-      <div className="bg-[#F8F8F9] mt-12 px-6 p-6 rounded-lg">
+      <div className="bg-[#F8F8F9] p-5 rounded-lg">
         <section className="grid grid-cols-2 gap-4">
           <div>
             {" "}
@@ -267,14 +267,14 @@ const Signature = ({
         </section>
 
         <section>
-          <h2 className="text-xl font-bold font-dmSans">Parameters</h2>
+          <h2 className="text-xl font-bold font-dmSans mb-4">Parameters</h2>
         </section>
 
         <section className="flex flex-col  gap-4">
           {question &&
             question.parameters &&
             question?.parameters?.map((param, index) => (
-              <div className="flex flex-row justify-between">
+              <div className="flex flex-row justify-between gap-4">
                 <div className="w-1/2">
                   <input
                     type="text"

@@ -90,8 +90,8 @@ const SelectTests = () => {
 
     // let totalInAdv = parseInt(Total)-parseInt(totalQ);
     if (
-      parseInt(currentQuestionCount) > parseInt(totalQuestions)*2 ||
-      parseInt(totalQ) > parseInt(totalQuestions)*2
+      parseInt(currentQuestionCount) > parseInt(totalQuestions) * 2 ||
+      parseInt(totalQ) > parseInt(totalQuestions) * 2
     ) {
       toast.error("max questions reached");
       return;
@@ -192,7 +192,10 @@ const SelectTests = () => {
             errText = "Insufficient Intermediate questions";
             return;
           }
-          if ( Math.ceil(parseInt(totalQ) / 3) > questionsByLevel["advanced"].length) {
+          if (
+            Math.ceil(parseInt(totalQ) / 3) >
+            questionsByLevel["advanced"].length
+          ) {
             errText = "Insufficient Advanced questions";
             return;
           }
@@ -290,7 +293,7 @@ const SelectTests = () => {
 
   return (
     <div
-      className={`font-dmSans text-sm font-bold ${
+      className={`w-11/12 mx-auto py-5 md:py-10 font-dmSans ${
         visible ? "h-screen overflow-hidden" : ""
       }`}
     >
@@ -318,32 +321,30 @@ const SelectTests = () => {
 
       {/* larger screens */}
 
-      <div className="  w-11/12 mx-auto min-h-[90vh] my-2 rounded-lg tracking-wide justify-between  ">
-        <div>
-          <h2 className="w-11/12  text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-lg mb-10 sm:mb-1 ">
-            Your Assessment can include upto 5 tests, Browse the test library
-            and add the most relevant tests.{" "}
-          </h2>
-        </div>
+      <div className="bg-white min-h-[90vh] mx-auto">
+        <h2 className="w-full text-lg font-medium text-[#7D7D7D] mt-10 mb-3 font-dmSans">
+          Your Assessment can include upto 5 tests, Browse the test library and
+          add the most relevant tests.{" "}
+        </h2>
 
-        <div className=" mx-auto  my-2 rounded-lg grid sm:grid-cols-5 grid-cols-2 gap-6">
+        <div className="mb-5 md:mb-10 rounded-lg grid sm:grid-cols-5 grid-cols-2 gap-5">
           {selectedSections?.map((section, index) => (
             <div
-              className="w-full h-32 border border-dashed rounded-lg border-blued col-span-1 flex justify-center "
+              className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 p-2 md:p-5"
               key={`${section._id + section.Type}`}
             >
               {/* {console.log(section, "section")} */}
 
-              <span className="self-center">
-                <h2 className="text-xl font-bold mb-4 line-clamp-2 break-words">
+              <div className="flex gap-2 flex-col">
+                <h2 className="text-xl font-bold line-clamp-2 break-words">
                   {section?.Heading}
                 </h2>
 
                 <div className="flex gap-2">
                   <img
                     src="../../images/icons/menu-boxed.png"
-                    alt=""
-                    className="self-center"
+                    alt="icon"
+                    className="w-6 h-6 self-center"
                   />
 
                   <h2 className="font-bold text-xs text-gray-400 self-center">
@@ -351,12 +352,12 @@ const SelectTests = () => {
                   </h2>
                 </div>
 
-                <div className="flex justify-between mt-1">
+                <div className="flex justify-between">
                   {" "}
                   <div className="flex gap-2 w-full">
                     <img
                       src="../../images/icons/stopwatch.png"
-                      alt=""
+                      alt="icon"
                       className="w-6 h-6 self-center"
                     />
 
@@ -366,11 +367,11 @@ const SelectTests = () => {
                   </div>
                   <img
                     src="../../images/icons/cross.png"
-                    alt=""
+                    alt="icon"
                     onClick={() => removeSection(section, index)}
                   />
                 </div>
-              </span>
+              </div>
             </div>
           ))}
 
@@ -379,15 +380,15 @@ const SelectTests = () => {
                 (_, index) => (
                   <div
                     key={index}
-                    className="w-full h-32 border border-dashed rounded-lg border-blued col-span-1 flex justify-center "
+                    className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 flex justify-center p-2 md:p-5"
                   >
-                    <span className="self-center">
+                    <div className="self-center">
                       <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
 
                       <h2 className="font-semibold mt-1">
                         Add section {index + 1}{" "}
                       </h2>
-                    </span>
+                    </div>
                   </div>
                 )
               )
@@ -414,7 +415,7 @@ const SelectTests = () => {
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
-          <div className="w-full h-64 bg-gray-100 rounded-lg flex justify-center">
+          <div className="w-full bg-gray-100 rounded-lg flex justify-center p-5">
             <div className=" self-center w-fit h-fit ">
               <div
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
@@ -475,13 +476,13 @@ const SelectTests = () => {
 
             // </div>
 
-            <div className="w-full h-64 rounded-lg bg-gray-100  relative">
-              <div className="card-body overflow-y-auto h-52">
-                <h2 className="text-xl font-bold mb-4 break-words">
+            <div className="w-full rounded-lg bg-gray-100  relative p-5">
+              <div className="overflow-y-auto">
+                <h2 className="text-xl font-bold mb-2 break-words">
                   {section.Heading}
                 </h2>
 
-                <p className="text-sm leading-[26px] text-[#8F92A1] break-words">
+                <p className="text-sm leading-[26px] text-[#8F92A1] break-words h-full md:h-40 mb-2">
                   {
                     // section.Description.length > 60
                     //   ? section.Description.substring(0, 60) + "..."
@@ -490,63 +491,44 @@ const SelectTests = () => {
                   }
                 </p>
 
-                <div>
-                  <div className="flex justify-between absolute bottom-0 w-3/4 mb-2">
-                    <div>
-                      {/* <span className="flex gap-1 mb-1">
-                        <img
-                          src="./../../images/icons/stopwatch.png"
-                          alt=""
-                          className="w-7 h-7"
-                        />{" "}
-                        <p className="text-gray-400 self-center">
-                          {section.Time}
-                        </p>
-                      </span> */}
+                <div className="flex justify-between mb-2">
+                  <button
+                    className="w-[90px] h-[40px] bg-[#8F92A120] rounded-xl"
+                    onClick={() => {
+                      dispatch(
+                        setCurrentTopic({
+                          topic: {
+                            ...section,
+                            Type: questionType || "mcq",
+                          },
+                        })
+                      );
+                      localStorage.setItem(
+                        "Details",
 
-                      <button
-                        className="w-[90px] h-[40px] bg-[#8F92A120] rounded-xl"
-                        onClick={() => {
-                          // if (!questionType) {
-                          //   toast.error("Please select a question type first.");
-                          //   return;
-                          // }
-                          dispatch(
-                            setCurrentTopic({
-                              topic: {
-                                ...section,
-                                Type: questionType || "mcq",
-                              },
-                            })
-                          );
-                          localStorage.setItem(
-                            "Details",
+                        JSON.stringify({
+                          ...section,
+                          Type: questionType || "mcq",
+                        })
+                      );
 
-                            JSON.stringify({
-                              ...section,
-                              Type: questionType || "mcq",
-                            })
-                          );
+                      Navigate(
+                        `/collage/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
+                      );
+                    }}
+                  >
+                    Details
+                  </button>
 
-                          Navigate(
-                            `/collage/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
-                          );
-                        }}
-                      >
-                        Details
-                      </button>
-                    </div>
-
-                    <button
-                      className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white "
-                      onClick={() => {
-                        setVisible(true);
-                        setSection(section);
-                      }}
-                    >
-                      Add
-                    </button>
-                  </div>
+                  <button
+                    className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white "
+                    onClick={() => {
+                      setVisible(true);
+                      setSection(section);
+                    }}
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
             </div>

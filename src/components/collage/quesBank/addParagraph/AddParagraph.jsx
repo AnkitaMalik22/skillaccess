@@ -183,7 +183,7 @@ const AddParagraph = () => {
     setCountDetail(currentTopic?.findAnswers?.length - 1);
   }, [currentTopic]);
   return (
-    <div>
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header
         save={handleSave}
         section={ID}
@@ -193,17 +193,17 @@ const AddParagraph = () => {
         type={type}
         addType={addType}
       />
-      <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4 font-dmSans">
-        <div className=" sm:w-[95.7%] mx-auto ">
-          <div className="w-[49%]">
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl ">
+        <div className="mb-5 md:mb-10">
+          <div className="w-1/2 mb-4">
             <h2 className="font-bold mb-2">Question</h2>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full gap-3 justify-between">
               <select
                 name="Duration"
                 onChange={handleChanges}
                 value={question.Duration}
                 id=""
-                className="w-[65%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                className="w-3/5 rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E]"
               >
                 <option value={0}>Time to answer the question</option>
 
@@ -217,7 +217,7 @@ const AddParagraph = () => {
                 name="QuestionLevel"
                 onChange={handleChanges}
                 value={question.QuestionLevel}
-                className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                className="w-2/5 rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E]"
               >
                 <option value="">Level</option>
 
@@ -229,7 +229,7 @@ const AddParagraph = () => {
           </div>
 
           <textarea
-            className="resize-none w-full h-[247px] text-lg bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0placeholder-gray-400 mb-6"
+            className="resize-none mb-4 w-full md:h-[250px] rounded-xl bg-[#F8F8F9] focus:outline-none border-none  text-[#3E3E3E] placeholder:text-[#3E3E3E]"
             placeholder="Enter Paragraph"
             name="Title"
             onChange={handleChanges}
@@ -237,9 +237,9 @@ const AddParagraph = () => {
           ></textarea>
 
           {question.questions.map((ques, index) => (
-            <div key={index} className="mb-4">
+            <div key={index}>
               <textarea
-                className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none  mb-3 rounded-lg focus:ring-0placeholder-gray-400"
+                className="resize-none w-full h-full rounded-xl bg-[#F8F8F9] focus:outline-none border-none text-[#3E3E3E] placeholder:text-[#3E3E3E]"
                 placeholder="Enter Question Here"
                 name="question"
                 value={question.questions[index].question}
@@ -256,33 +256,30 @@ const AddParagraph = () => {
         </div>
 
         {/* <Footer question={question}  setQues={setQuestion} handleSave={handleSave} /> */}
-        <div className="pt-10 flex justify-between">
-          <div className=" ml-8 mb-10">
-            {" "}
-            <div className=" flex">
-              <button
-                className="self-center justify-center flex bg-[#8F92A1] bg-opacity-10  py-3 px-4 rounded-xl text-sm font-bold gap-2 "
-                onClick={() => {
-                  if (question.questions.some((q) => q.question === "")) {
-                    toast.error("Please enter all questions");
-                    return;
-                  } else if (question.questions.length >= MAX_QUESTIONS) {
-                    toast.error("You can't add more than 3 questions");
-                    return;
-                  } else {
-                    setQuestion({
-                      ...question,
-                      questions: [...question.questions, { question: "" }],
-                    });
-                  }
-                }}
-              >
-                Add More
-              </button>
-            </div>
+        <div className=" flex justify-between items-center">
+          <div className=" flex">
+            <button
+              className="self-center justify-center flex bg-[#8F92A1] bg-opacity-10  py-3 px-4 rounded-xl text-sm font-bold gap-2 "
+              onClick={() => {
+                if (question.questions.some((q) => q.question === "")) {
+                  toast.error("Please enter all questions");
+                  return;
+                } else if (question.questions.length >= MAX_QUESTIONS) {
+                  toast.error("You can't add more than 3 questions");
+                  return;
+                } else {
+                  setQuestion({
+                    ...question,
+                    questions: [...question.questions, { question: "" }],
+                  });
+                }
+              }}
+            >
+              Add More
+            </button>
           </div>
 
-          <div className=" mb-10 flex pr-8 gap-2">
+          <div className="flex gap-2">
             {" "}
             <div className=" flex gap-2">
               {addType === "topic" ? (

@@ -152,7 +152,7 @@ const AddEssay = () => {
   }, [currentTopic]);
 
   return (
-    <div>
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header
         handleSave={handleSave}
         topics={topics}
@@ -164,41 +164,43 @@ const AddEssay = () => {
         type={type}
         addType={addType}
       />
-      <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
-        <div className=" sm:w-[95.7%] mx-auto ">
-          <div className="w-[49%]">
-            <h2 className="font-bold mb-2">Question</h2>
-            <select
-              name="Duration"
-              onChange={handleChanges}
-              value={question.Duration}
-              id=""
-              className="w-[65%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
-            >
-              <option value={0}>Time to answer the question</option>
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl">
+        <div>
+          <div className="w-1/2">
+            <h2 className="font-bold mb-4 text-xl text-[#3E3E3E]">Question</h2>
+            <div className="gap-3 flex mb-4">
+              <select
+                name="Duration"
+                onChange={handleChanges}
+                value={question.Duration}
+                id=""
+                className="w-3/5 rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E]"
+              >
+                <option value={0}>Time to answer the question</option>
 
-              <option value={1}>1 minute</option>
-              <option value={2}>2 minutes</option>
-              <option value={3}>3 minutes</option>
-              <option value={4}>4 minutes</option>
-            </select>
+                <option value={1}>1 minute</option>
+                <option value={2}>2 minutes</option>
+                <option value={3}>3 minutes</option>
+                <option value={4}>4 minutes</option>
+              </select>
 
-            <select
-              name="QuestionLevel"
-              onChange={handleChanges}
-              value={question.QuestionLevel}
-              className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
-            >
-              <option value="">Level</option>
+              <select
+                name="QuestionLevel"
+                onChange={handleChanges}
+                value={question.QuestionLevel}
+                className="w-2/5 rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E]"
+              >
+                <option value="">Level</option>
 
-              <option value={"beginner"}>Beginner</option>
-              <option value={"intermediate"}>Intermediate</option>
-              <option value={"advanced"}>Advanced</option>
-            </select>
+                <option value={"beginner"}>Beginner</option>
+                <option value={"intermediate"}>Intermediate</option>
+                <option value={"advanced"}>Advanced</option>
+              </select>
+            </div>
           </div>
 
           <textarea
-            className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0placeholder-gray-400"
+            className="resize-none w-full h-full md:h-[250px] rounded-xl bg-[#F8F8F9] focus:outline-none border-none  text-[#3E3E3E] placeholder:text-[#3E3E3E]"
             placeholder="Enter Question Here"
             name="Title"
             onChange={handleChanges}
