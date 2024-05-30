@@ -6,8 +6,9 @@ import {
   uploadStudents,
 } from "../../redux/collage/student/studentSlice";
 import toast from "react-hot-toast";
-
+import Loader from "../collage/test/addVideo/Loader";
 const StudentPoP = ({ onClose }) => {
+  const [loading, setLoading] = useState(false);
   const [student, setStudent] = useState({
     FirstName: "",
     LastName: "",
@@ -23,7 +24,7 @@ const StudentPoP = ({ onClose }) => {
     });
   };
 
-  const handleSaveInvite = () => {
+  const handleSaveInvite = async () => {
     if (!student.FirstName) {
       toast.error("First Name is required");
       return;
@@ -38,10 +39,11 @@ const StudentPoP = ({ onClose }) => {
       return;
     } else {
       console.log(student, "pop");
+      setLoading(true);
       dispatch(uploadStudents([student]));
 
-      dispatch(getStudents({ id: user?._id }));
-
+      await dispatch(getStudents({ id: user?._id }));
+      setLoading(false);
       setStudent({
         FirstName: "",
         LastName: "",
@@ -88,10 +90,10 @@ const StudentPoP = ({ onClose }) => {
 
           <div className="flex justify-end">
             <button
-              className="bg-[#0052cc] text-white px-4 py-3 rounded-xl text-sm font-bold"
+              className="bg-[#0052cc] text-white px-4 py-3 rounded-xl text-sm font-bold flex item-center justify-center"
               onClick={() => handleSaveInvite()}
             >
-              Send Invite
+              Send Invite {loading && <Loader />}
             </button>
           </div>
 
