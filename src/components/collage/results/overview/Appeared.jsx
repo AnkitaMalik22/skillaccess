@@ -115,8 +115,8 @@ const Appeared = ({ assessment }) => {
                 <span>
                   <select
                     className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
-                    onChange={handleStatusChange(assessment._id, student._id)}
-                    value={student.status}
+                    onChange={handleStatusChange(assessment?._id, student?._id)}
+                    value={student?.status}
                   >
                     <option value="">pending</option>
                     <option value="rejected">rejected</option>

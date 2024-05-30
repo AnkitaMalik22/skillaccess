@@ -17,7 +17,7 @@ const Results = () => {
   useEffect(() => {
     dispatch(getResultGraph());
     dispatch(getAllTests());
-  }, [dispatch]);
+  }, [dispatch, ""]);
   let arr = assessments.beginner.concat(
     assessments.intermediate,
     assessments.advanced,
