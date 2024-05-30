@@ -9,16 +9,13 @@ const Companies = () => {
   // const [companies, setcompanies] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
   const dispatch = useDispatch();
   const { companies } = useSelector((state) => state.dashboard);
-  const {user} =useSelector(
-    (state) => state.collageAuth
-  );
+  const { user } = useSelector((state) => state.collageAuth);
 
   useEffect(() => {
-    if(user){
-      dispatch(getCompany({collegeId : user?._id}));
+    if (user) {
+      dispatch(getCompany({ collegeId: user?._id }));
     }
-  }, [dispatch,user]);
-
+  }, [dispatch, user]);
 
   const [filtered, setFiltered] = React.useState([]);
   const handleFilterCompanies = (e) => {

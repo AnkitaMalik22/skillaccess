@@ -33,7 +33,7 @@ const HeaderMarks = ({ response, totalQuestions }) => {
           <div className="w-1/2">
             <p className="text-lg">Time taken</p>
 
-            <p className="font-bold text-[28px]">{response?.timeTaken} mins</p>
+            <p className="font-bold text-[28px]">{response?.timeTaken < 60 ? "<1" : Math.floor(response?.timeTaken/60)} mins</p>
           </div>
           <div className="w-1/2 ">
             <p className="text-lg">Questions Attempted</p>

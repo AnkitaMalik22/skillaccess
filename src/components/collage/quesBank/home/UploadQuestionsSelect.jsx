@@ -107,9 +107,13 @@ const AddQuestionsSelect = () => {
 
               headers.forEach((header) => {
                 if (
-                  !["Title", "Duration", "option", "AnswerIndex","QuestionLevel"].includes(
-                    header
-                  )
+                  ![
+                    "Title",
+                    "Duration",
+                    "option",
+                    "AnswerIndex",
+                    "QuestionLevel",
+                  ].includes(header)
                 ) {
                   setLoading(false);
                   toast.error(header + " is incorrect");
@@ -135,7 +139,8 @@ const AddQuestionsSelect = () => {
                       header.v !== "option" &&
                       header.v !== "AnswerIndex" &&
                       header.v !== "Duration" &&
-                      header.v !== "Title" && header.v !== "QuestionLevel"
+                      header.v !== "Title" &&
+                      header.v !== "QuestionLevel"
                     ) {
                       toast.error("Invalid Headers");
                       setLoading(false);
@@ -161,7 +166,8 @@ const AddQuestionsSelect = () => {
                     } else if (
                       header.v === "AnswerIndex" ||
                       header.v === "Duration" ||
-                      header.v !== "Title" || header.v !== "QuestionLevel"
+                      header.v !== "Title" ||
+                      header.v !== "QuestionLevel"
                     ) {
                       if (header.v === "AnswerIndex") {
                         if (row) {
@@ -302,7 +308,11 @@ const AddQuestionsSelect = () => {
                 return;
               }
               headers.forEach((header) => {
-                if (!["Title", "Duration", "question","QuestionLevel"].includes(header)) {
+                if (
+                  !["Title", "Duration", "question", "QuestionLevel"].includes(
+                    header
+                  )
+                ) {
                   setLoading(false);
 
                   toast.error(header + " is incorrect");
@@ -330,7 +340,8 @@ const AddQuestionsSelect = () => {
                     if (
                       header.v !== "question" &&
                       header.v !== "Duration" &&
-                      header.v !== "Title" && header.v !=="QuestionLevel"
+                      header.v !== "Title" &&
+                      header.v !== "QuestionLevel"
                     ) {
                       setLoading(false);
                       setError(true);
@@ -472,8 +483,12 @@ const AddQuestionsSelect = () => {
                   let header =
                     worksheet[XLSX.utils.encode_cell({ r: 0, c: colNum })];
 
-                    if (header.v !== "Duration" && header.v !== "Title" && header.v !== "QuestionLevel") {
-                      setLoading(false);
+                  if (
+                    header.v !== "Duration" &&
+                    header.v !== "Title" &&
+                    header.v !== "QuestionLevel"
+                  ) {
+                    setLoading(false);
                     toast.error("Wrong Question Type");
                     return;
                   } else {
@@ -579,8 +594,7 @@ const AddQuestionsSelect = () => {
         <div className="   my-2 rounded-lg tracking-wide justify-between  ">
           <h2 className="font-normal text-xs sm:text-sm text-gray-400  mt-8 tracking-wide ">
             Add up to 10 custom questions to your assessment (optional). You can
-            use five question types: multiple-choice, essay, video, code and
-            find answer.
+            use five question types: multiple-choice, essay and find answer.
           </h2>
         </div>
 
@@ -607,7 +621,7 @@ const AddQuestionsSelect = () => {
               </div>
 
               <img
-                src="../../../images/icons/exam.png"
+                src="../../../../images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -620,7 +634,7 @@ const AddQuestionsSelect = () => {
               One Correct Answer
             </h2>
             <img
-              src="../../../images/icons/dot.png"
+              src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
             />
@@ -686,7 +700,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../images/icons/exam.png"
+                src="../../../../images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -697,7 +711,7 @@ const AddQuestionsSelect = () => {
               Open Text Answer
             </h2>
             <img
-              src="../../../images/icons/dot.png"
+              src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
             />
@@ -760,7 +774,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../images/icons/exam.png"
+                src="../../../../images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -771,7 +785,7 @@ const AddQuestionsSelect = () => {
               Read Phrase and Answer them
             </h2>
             <img
-              src="../../../images/icons/dot.png"
+              src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
             />

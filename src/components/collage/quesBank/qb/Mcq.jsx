@@ -49,60 +49,62 @@ const Mcq = ({ question, number }) => {
   };
 
   return (
-    <div className="flex justify-between gap-2 font-dmSans relative z-10">
-      <button className=" bg-blued rounded-xl text-white text-base font-bold py-2 w-12 h-11">
+    <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10">
+      <button className=" bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
         Q-{number}
       </button>
-      <div className="w-full ">
+      <div className="w-full">
         <Disclosure className="relative z-10">
           {({ open }) => (
             <div className="mb-4">
-              <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
-                <div className="flex justify-between items-center w-full">
+              <div className="flex w-full justify-between rounded-lg border-[#95ACFA] border text-[#3E3E3E] py-3 text-left text-lg font-normal">
+                <div className="flex justify-between items-center w-full px-2">
                   <p
-                    className="text-sm pl-4"
+                    className="text-sm"
                     dangerouslySetInnerHTML={{ __html: question.Title }}
                   ></p>
-
-                  <div className="level flex items-center gap-2 ">
-                    <PiPencilSimpleLineBold
-                      className=" w-6 h-6 p-1 rounded-lg  self-center cursor-pointer"
-                      onClick={() => {
-                        navigate(
-                          `/collage/quesBank/addMcqToTopic/${question._id}?type=mcq&addType=edit`
-                        );
-                        localStorage.setItem(
-                          "qbQues",
-                          JSON.stringify(question)
-                        );
-                      }}
-                    />
-                    {question.QuestionLevel == "beginner" && (
-                      <p className="rounded-2xl mr-4 py-1.5 bg-cyan-500 text-white w-8 h-8 text-center font-extrabold  ">
-                        L1
-                      </p>
-                    )}
-                    {question.QuestionLevel == "intermediate" && (
-                      <p className="rounded-2xl mr-4   py-1.5 bg-green-500 text-white w-8 h-8 text-center font-extrabold  ">
-                        L2
-                      </p>
-                    )}
-                    {question.QuestionLevel == "advanced" && (
-                      <p className="rounded-2xl mr-4   py-1.5 bg-red-500 text-white w-8 h-8 text-center font-extrabold  ">
-                        L3
-                      </p>
-                    )}
+                  <div className="flex justify-between gap-2 items-center">
+                    <div>
+                      <PiPencilSimpleLineBold
+                        className="w-6 h-6 p-1 rounded-lg self-center cursor-pointer"
+                        onClick={() => {
+                          navigate(
+                            `/collage/quesBank/addMcqToTopic/${question._id}?type=mcq&addType=edit`
+                          );
+                          localStorage.setItem(
+                            "qbQues",
+                            JSON.stringify(question)
+                          );
+                        }}
+                      />
+                    </div>
+                    <div className="level flex items-center gap-2 ">
+                      {question.QuestionLevel == "beginner" && (
+                        <p className="rounded-2xl bg-cyan-500 text-white text-sm w-8 h-8 text-center font-medium flex items-center justify-center ">
+                          L1
+                        </p>
+                      )}
+                      {question.QuestionLevel == "intermediate" && (
+                        <p className="rounded-2xl bg-green-500 text-white text-sm  w-8 h-8 text-center font-medium flex items-center justify-center ">
+                          L2
+                        </p>
+                      )}
+                      {question.QuestionLevel == "advanced" && (
+                        <p className="rounded-2xl bg-red-500 text-white text-sm  w-8 h-8 text-center font-medium flex justify-center items-center ">
+                          L3
+                        </p>
+                      )}
+                    </div>{" "}
+                    <div className="flex gap-2 self-center">
+                      <Disclosure.Button className="flex gap-2 self-center">
+                        <FaCaretDown
+                          className={`${
+                            open ? "rotate-180" : ""
+                          } h-5 w-5 text-gray-400 `}
+                        />
+                      </Disclosure.Button>
+                    </div>
                   </div>
-                </div>
-                <div className="flex gap-2 self-center">
-                  <Disclosure.Button className="flex gap-2 w-10/12 self-center">
-                    <FaCaretDown
-                      className={`${
-                        open ? "rotate-180" : ""
-                      } h-5 w-5 text-gray-400 `}
-                    />
-                    <h2></h2>{" "}
-                  </Disclosure.Button>
                 </div>
               </div>
 
@@ -125,7 +127,7 @@ const Mcq = ({ question, number }) => {
 
                     <label
                       className={` text-sm ${
-                        AnswerIndex === index ? "text-green" : "text-black"
+                        AnswerIndex === index ? "text-green" : "text-[#3E3E3E]"
                       }`}
                     >
                       {question

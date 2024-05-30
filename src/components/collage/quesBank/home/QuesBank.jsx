@@ -10,13 +10,14 @@ const QuesBank = () => {
       <div className="mb-9">
         <Header />
       </div>
-      <Topic />
-
-      <div className="flex justify-between  mt-8">
-        <div className=" w-[60%]">
+      <>
+        <Topic />
+      </>
+      <div className="flex justify-between md:flex-nowrap flex-wrap  mt-8 gap-3 md:gap-9">
+        <div className=" w-3/5">
           <Recent />
         </div>
-        <div className="w-[38%]">
+        <div className="w-2/5">
           <BookMark />
         </div>
       </div>
