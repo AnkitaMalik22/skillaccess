@@ -82,7 +82,7 @@ const Appeared = ({ assessment }) => {
 
       {/* list to be iterated */}
 
-      {testDataResponse?.map((student, index) => (
+      {arr[0]?.map((student, index) => (
         <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}

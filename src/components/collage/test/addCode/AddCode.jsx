@@ -51,7 +51,7 @@ const AddCode = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const [validate, setValidate] = useState(false);
-  const { ADD_QUESTION_LOADING}= useSelector((state) => state.test);
+  const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const type = searchParams.get("type");
   const level = searchParams.get("level");
 
@@ -62,30 +62,13 @@ const AddCode = () => {
   searchParams.get("topicId") !== null
     ? (ID = searchParams.get("topicId"))
     : (ID = id);
-  // Format of the question object
-  // "code": "printf('hello world')",
-  // "codeQuestion": "Write a program to print 'hello world'",
-  // "codeLanguage": "c",
-  // "parameters": "int",
-  // "testcase": [
-  // {
-  //   "input": "5",
-  //   "expectedOutput": "5"
-  // },
-  // {
-  //   "input": "10",
-  //   "expectedOutput": "10"
-  // }
-  // ],
-  // "output": [
-  // "hello world"
-  // ]
+
   const [question, setQuestion] = useState({
     section: ID,
     id: ID + Date.now(),
     QuestionLevel: level,
     Duration: 0,
-    code: "",
+    code: {},
     codeQuestion: "",
     codeLanguage: "",
     parameters: [
@@ -94,7 +77,7 @@ const AddCode = () => {
         type: "String",
       },
     ],
-    testcase: [{ input: "", expectedOutput: "" }],
+    testcase: [],
     output: [""],
     returnType: "",
     verificationCode: "",
@@ -122,10 +105,9 @@ const AddCode = () => {
   const handleSave = (component) => {
     if (addType === "topic") {
       if (
-        question.codeQuestion != "" ||
+        // question.codeQuestion != "" ||
         question.code != "" ||
-        question.codeLanguage != "" ||
-        question.code != "" ||
+        // question.codeLanguage != "" ||
         question.verificationCode != ""
       ) {
         if (question.code === "") {
@@ -133,26 +115,26 @@ const AddCode = () => {
 
           return;
         }
-        if (question.verificationCode === "") {
-          toast.error("Please fill the code");
+        // if (question.verificationCode === "") {
+        //   toast.error("Please fill the code");
 
-          return;
-        }
+        //   return;
+        // }
         if (question.Duration == 0) {
           toast.error("Please fill the duration");
 
           return;
         }
-        if (question.codeQuestion === "") {
-          toast.error("Please fill the question");
+        // if (question.codeQuestion === "") {
+        //   toast.error("Please fill the question");
 
-          return;
-        }
-        if (question.codeLanguage === "") {
-          toast.error("Please fill the codelanguage");
+        //   return;
+        // }
+        // if (question.codeLanguage === "") {
+        //   toast.error("Please fill the codelanguage");
 
-          return;
-        }
+        //   return;
+        // }
         if (isPrev) {
           dispatch(
             editQuestionById({
@@ -170,7 +152,7 @@ const AddCode = () => {
 
             id: ID + Date.now(),
             section: ID,
-            code: "",
+            code: {},
             Duration: 0,
             codeQuestion: "",
             codeLanguage: "",
@@ -180,7 +162,7 @@ const AddCode = () => {
                 type: "String",
               },
             ],
-            testcase: [{ input: "", expectedOutput: "" }],
+            testcase: [{ input: "", expectedOutput: "", isHidden: true }],
             output: [""],
           });
           setToggle(1);
@@ -192,7 +174,7 @@ const AddCode = () => {
 
             id: ID + Date.now(),
             section: ID,
-            code: "",
+            code: {},
             Duration: 0,
             codeQuestion: "",
             codeLanguage: "",
@@ -202,7 +184,7 @@ const AddCode = () => {
                 type: "String",
               },
             ],
-            testcase: [{ input: "", expectedOutput: "" }],
+            testcase: [{ input: "", expectedOutput: "", isHidden: true }],
             output: [""],
           });
           setToggle(1);
@@ -259,37 +241,13 @@ const AddCode = () => {
             })
           ).then(() => {
             setCount(topics[id].compiler.length - 1);
-          setIsPrev(false);
-          setQuestion({
-            QuestionLevel: level,
-
-            id: ID + Date.now(),
-            section: ID,
-            code: "",
-            Duration: 0,
-            codeQuestion: "",
-            codeLanguage: "",
-            parameters: [
-              {
-                paramName: "",
-                type: "String",
-              },
-            ],
-            testcase: [{ input: "", expectedOutput: "" }],
-            output: [""],
-          })
-        });
-          ;
-        } else {
-          dispatch(
-            addCompiler({ data: question, id: id, type: type, prev: false })
-          ).then(()=>{
+            setIsPrev(false);
             setQuestion({
               QuestionLevel: level,
-  
+
               id: ID + Date.now(),
               section: ID,
-              code: "",
+              code: {},
               Duration: 0,
               codeQuestion: "",
               codeLanguage: "",
@@ -299,23 +257,41 @@ const AddCode = () => {
                   type: "String",
                 },
               ],
-              testcase: [{ input: "", expectedOutput: "" }],
+              testcase: [{ input: "", expectedOutput: "", isHidden: true }],
               output: [""],
-            })
-            if(!ADD_QUESTION_LOADING){
+            });
+          });
+        } else {
+          dispatch(
+            addCompiler({ data: question, id: id, type: type, prev: false })
+          ).then(() => {
+            setQuestion({
+              QuestionLevel: level,
+
+              id: ID + Date.now(),
+              section: ID,
+              code: {},
+              Duration: 0,
+              codeQuestion: "",
+              codeLanguage: "",
+              parameters: [
+                {
+                  paramName: "",
+                  type: "String",
+                },
+              ],
+              testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+              output: [""],
+            });
+            if (!ADD_QUESTION_LOADING) {
               setToggle(1);
-            if (component === "save") {
-              navigate(-1);
+              if (component === "save") {
+                navigate(-1);
+              }
             }
-            }
-
-            
-          })
+          });
           // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          ;
         }
-
-       
       } else {
         toast.error("Please fill all the fields");
       }
@@ -325,6 +301,7 @@ const AddCode = () => {
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
+  console.log(question);
 
   return (
     <div className="">
