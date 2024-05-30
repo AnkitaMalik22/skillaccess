@@ -2,14 +2,15 @@ import React from "react";
 
 const Question = ({ question, handleChanges, handleQuestionChange }) => {
   return (
-    <div className="h-96 font-dmSans">
-      <h2 className="font-bold text-xl">Question</h2>
+    <>
+      <h2 className="font-bold mb-4 text-xl text-[#3E3E3E]">Question</h2>
+
       <select
         name="codeLanguage"
         value={question.codeLanguage}
         onChange={handleChanges}
         id=""
-        className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 mt-3 select text-gray-400"
+        className="rounded-xl mb-4 bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E] w-full"
       >
         <option value="">Select Language</option>
         <option value="Java">Java</option>
@@ -17,42 +18,41 @@ const Question = ({ question, handleChanges, handleQuestionChange }) => {
         <option value="C++">C++</option>
         <option value="C">C</option>
       </select>
-      <div className="flex w-full justify-between">
-      <select
-              name="Duration"
-              onChange={handleChanges}
-              value={question.Duration}
-              id=""
-              className="w-[65%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
-            >
-              <option value={0}>Time to answer the question</option>
-              <option value={15}>15 minutes</option>
-              <option value={30}>30 minute</option>
-              <option value={60}>60 minutes</option>
-              <option value={90}>90 minutes</option>
-         
-            </select>
-            <select
-                name="QuestionLevel"
-                onChange={handleChanges}
-                value={question.QuestionLevel}
-                className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
-              >
-                <option value="">Level</option>
+      <div className="flex w-full justify-between gap-4 mb-4">
+        <select
+          name="Duration"
+          onChange={handleChanges}
+          value={question.Duration}
+          id=""
+          className="w-3/5 rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E]"
+        >
+          <option value={0}>Time to answer the question</option>
+          <option value={15}>15 minutes</option>
+          <option value={30}>30 minute</option>
+          <option value={60}>60 minutes</option>
+          <option value={90}>90 minutes</option>
+        </select>
+        <select
+          name="QuestionLevel"
+          onChange={handleChanges}
+          value={question.QuestionLevel}
+          className="rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E] w-2/5"
+        >
+          <option value="">Level</option>
 
-                <option value={"beginner"}>Beginner</option>
-                <option value={"intermediate"}>Intermediate</option>
-                <option value={"advanced"}>Advanced</option>
-              </select>
-              </div>
+          <option value={"beginner"}>Beginner</option>
+          <option value={"intermediate"}>Intermediate</option>
+          <option value={"advanced"}>Advanced</option>
+        </select>
+      </div>
       <textarea
-        className="resize-none w-full h-full bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+        className="rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E] resize-none w-full h-full placeholder:text-[#3E3E3E]"
         placeholder="Enter Question Here"
         name="codeQuestion"
         value={question.codeQuestion}
         onChange={handleChanges}
       ></textarea>
-    </div>
+    </>
   );
 };
 
