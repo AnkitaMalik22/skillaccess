@@ -1,43 +1,78 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 
-const Initial = ({ question, handleChanges }) => {
-  function handleEditorChange(value, event) {
-    // here is the current value
-    handleChanges({ target: { name: "code", value } });
-  }
+const Initial = ({
+  question,
+  handleChanges,
+  selectedLanguage,
+  handleEditorChange,
+  editorValue,
+}) => {
+  //   const codeTemplates = {
+  //     Java: `import java.io.*;
 
-  function handleEditorDidMount(editor, monaco) {
-    console.log("onMount: the editor instance:", editor);
-    console.log("onMount: the monaco instance:", monaco);
-  }
+  //     public class Main {
+  //       public static void main(String[] args) {
+  //         // Insert your code here
+  //       }
+  //     }`,
+  //     Python: `def main():
+  //     # Insert your code here
 
-  function handleEditorWillMount(monaco) {
-    console.log("beforeMount: the monaco instance:", monaco);
-  }
+  // if __name__ == "__main__":
+  //     main()`,
+  //     Cpp: `#include <bits/stdc++.h>
+  //            using namespace std;
 
-  function handleEditorValidation(markers) {
-    // model markers
-    // markers.forEach(marker => console.log('onValidate:', marker.message));
-  }
+  // int main() {
+  //     // Insert your code here
+  //     return 0;
+  // }`,
+  //     C: `#include <stdio.h>
+
+  // int main() {
+  //     // Insert your code here
+  //     return 0;
+  // }`,
+  //   };
+
+  //   const [codeMap, setCodeMap] = useState({
+  //     Java: codeTemplates.Java,
+  //     Python: codeTemplates.Python,
+  //     Cpp: codeTemplates.Cpp,
+  //     C: codeTemplates.C,
+  //   });
+
+  //   const [editorValue, setEditorValue] = useState(codeTemplates.Java);
+
+  //   useEffect(() => {
+  //     const defaultValue = codeMap[question.codeLanguage] || codeTemplates.Java;
+  //     setEditorValue(defaultValue);
+  //   }, [question.codeLanguage, codeMap]);
+
+  //   const handleEditorChange = (value) => {
+  //     setEditorValue(value);
+  //     handleChanges({ target: { name: "code", value } });
+
+  //     setCodeMap((prevCodeMap) => ({
+  //       ...prevCodeMap,
+  //       [question.codeLanguage]: value,
+  //     }));
+  //   };
+
+  //   const selectedLanguage = question.codeLanguage.toLowerCase();
 
   return (
-    <code className="h-56 w-full bg-red-300">
+    <div className="h-auto w-full bg-red-300">
       <Editor
         theme="vs-dark"
         height="20rem"
-        defaultLanguage="javascript"
-        defaultValue="export function undefined( undefined ) {
-            // Insert your code here 
-        }"
+        defaultLanguage={selectedLanguage}
+        value={editorValue}
         onChange={handleEditorChange}
-        onMount={handleEditorDidMount}
-        beforeMount={handleEditorWillMount}
-        onValidate={handleEditorValidation}
-        name="code"
-        value={question.code}
+        className="h-[450px] mb-6 pt-4"
       />
-    </code>
+    </div>
   );
 };
 
