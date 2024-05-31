@@ -354,7 +354,7 @@ const Submit = () => {
                     number={(selected - 1) * 10 + 1 + i}
                   />
                 )}
-                {question.Title && (
+                {question.Title && !question.codeQuestion && (
                   <List
                     question={question}
                     number={(selected - 1) * 10 + 1 + i}

@@ -65,15 +65,19 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
     <div className="mx-6 flex bg-white rounded-lg justify-between">
       <div className="w-11/12 flex flex-col gap-2">
         {search.get(`${Number}`) !== "true" ? (
-          <h2 className="px-4 font-semibold pt-3 text-base">
-            {Number + 1} &nbsp; {Title}
+          <h2 className="flex px-4 gap-3 font-semibold pt-3 text-base ">
+            <div className="">{Number + 1}. </div>
+            <div
+              className=""
+              dangerouslySetInnerHTML={{ __html: compiler.Title }}
+            ></div>
           </h2>
         ) : (
           <input
             onChange={handleChange}
             placeholder="enter new question"
             name="codeQuestion"
-            value={compiler.codeQuestion}
+            value={compiler.Title}
           />
         )}
         <div className="px-5 pb-4 flex flex-col gap-4">
@@ -88,14 +92,19 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
             </div>
             {search.get(`${Number}`) !== "true" ? (
               <label for="answer" className="self-center">
-                {Number + 1} &nbsp; {compiler.code}
+                <h2 className="flex px-4 gap-3 font-semibold pt-3 text-base ">
+                  <div
+                    className=""
+                    dangerouslySetInnerHTML={{ __html: compiler.codeQuestion }}
+                  ></div>
+                </h2>
               </label>
             ) : (
               <input
                 onChange={handleChange}
                 placeholder="enter new question"
                 name="code"
-                value={compiler.code}
+                value={compiler.codeQuestion}
               />
             )}
           </span>
