@@ -66,9 +66,9 @@ const AddCode = () => {
   const [question, setQuestion] = useState({
     section: ID,
     id: ID + Date.now(),
-    QuestionLevel: "beginner",
+    QuestionLevel: level,
     Duration: 0,
-    code: "",
+    code: {},
     codeQuestion: "",
     codeLanguage: "",
     parameters: [
@@ -77,10 +77,11 @@ const AddCode = () => {
         type: "String",
       },
     ],
-    testcase: [{ input: "", expectedOutput: "" }],
+    testcase: [],
     output: [""],
     returnType: "",
     verificationCode: "",
+    Title: "",
   });
 
   const handleChanges = (e) => {
@@ -111,10 +112,9 @@ const AddCode = () => {
   const handleSave = (component) => {
     if (addType === "topic") {
       if (
-        question.codeQuestion != "" ||
+        // question.codeQuestion != "" ||
         question.code != "" ||
-        question.codeLanguage != "" ||
-        question.code != "" ||
+        // question.codeLanguage != "" ||
         question.verificationCode != ""
       ) {
         if (question.code === "") {
@@ -122,11 +122,11 @@ const AddCode = () => {
 
           return;
         }
-        if (question.verificationCode === "") {
-          toast.error("Please fill the code");
+        // if (question.verificationCode === "") {
+        //   toast.error("Please fill the code");
 
-          return;
-        }
+        //   return;
+        // }
         if (question.Duration == 0) {
           toast.error("Please fill the duration");
 
@@ -137,11 +137,11 @@ const AddCode = () => {
 
           return;
         }
-        if (question.codeLanguage === "") {
-          toast.error("Please fill the codelanguage");
+        // if (question.codeLanguage === "") {
+        //   toast.error("Please fill the codelanguage");
 
-          return;
-        }
+        //   return;
+        // }
         if (isPrev) {
           dispatch(
             editQuestionById({
@@ -159,7 +159,8 @@ const AddCode = () => {
 
             id: ID + Date.now(),
             section: ID,
-            code: "",
+            Title: "",
+            code: {},
             Duration: 0,
             codeQuestion: "",
             codeLanguage: "",
@@ -169,7 +170,7 @@ const AddCode = () => {
                 type: "String",
               },
             ],
-            testcase: [{ input: "", expectedOutput: "" }],
+            testcase: [{ input: "", expectedOutput: "", isHidden: true }],
             output: [""],
           });
           setToggle(1);
@@ -181,7 +182,8 @@ const AddCode = () => {
 
             id: ID + Date.now(),
             section: ID,
-            code: "",
+            Title: "",
+            code: {},
             Duration: 0,
             codeQuestion: "",
             codeLanguage: "",
@@ -191,7 +193,7 @@ const AddCode = () => {
                 type: "String",
               },
             ],
-            testcase: [{ input: "", expectedOutput: "" }],
+            testcase: [{ input: "", expectedOutput: "", isHidden: true }],
             output: [""],
           });
           setToggle(1);
@@ -221,13 +223,14 @@ const AddCode = () => {
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
+  console.log(question);
 
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div className="">
       <Header handleSave={handleSave} />
-      <div className="bg-white min-h-[90vh] mx-auto rounded-xl">
-        <div className="flex md:flex-nowrap flex-wrap gap-5 mx-auto md:mb-40 mb-10">
-          <div className="w-1/2">
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl pt-4 sm:w-[95.7%] px-3 relative">
+        <div className="flex flex-wrap gap-2  ">
+          <span className="w-[49%] ">
             <Question
               question={question}
               setQuestion={setQuestion}
@@ -236,10 +239,9 @@ const AddCode = () => {
               handleChanges={handleChanges}
               handleQuestionChange={handleQuestionChange}
               handleSave={handleSave}
-              addType={addType}
             />
-          </div>
-          <div className="w-1/2">
+          </span>
+          <span className="w-[49%]">
             <Code
               toggle={toggle}
               setToggle={setToggle}
@@ -250,7 +252,7 @@ const AddCode = () => {
               id={id}
               type={type}
             />
-          </div>
+          </span>
         </div>
 
         <div className="pt-20">
@@ -278,14 +280,12 @@ const AddCode = () => {
               )}
             </div>
             <div className=" flex">
-              {addType === "topic" && (
-                <button
-                  className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
-                  onClick={() => handleSave("next")}
-                >
-                  <FaPlus className="self-center" /> Add Next Question
-                </button>
-              )}
+              <button
+                className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+                onClick={() => handleSave("next")}
+              >
+                <FaPlus className="self-center" /> Add Next Question
+              </button>
             </div>
           </div>
         </div>
