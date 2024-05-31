@@ -31,7 +31,7 @@ const List = ({ Title, number, code, question }) => {
             <div className="mb-4">
               <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
                 <div className="flex justify-between items-center w-full">
-                  <p>{Title}</p>
+                  <p>{question.Title}</p>
 
                   <div className="level flex items-center gap-2 ">
                     <PiPencilSimpleLineBold
@@ -89,7 +89,12 @@ const List = ({ Title, number, code, question }) => {
 
                     <label className="text-blacktext-sm">
                       {/* {code.toString().substring(0, 50)} */}
-                      {code}
+                      <div
+                        className=""
+                        dangerouslySetInnerHTML={{
+                          __html: question.codeQuestion,
+                        }}
+                      ></div>
                     </label>
                   </div>
                 </Disclosure.Panel>

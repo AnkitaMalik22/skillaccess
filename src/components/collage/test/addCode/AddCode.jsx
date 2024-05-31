@@ -81,6 +81,7 @@ const AddCode = () => {
     output: [""],
     returnType: "",
     verificationCode: "",
+    Title: "",
   });
 
   const handleChanges = (e) => {
@@ -152,6 +153,7 @@ const AddCode = () => {
 
             id: ID + Date.now(),
             section: ID,
+            Title: "",
             code: {},
             Duration: 0,
             codeQuestion: "",
@@ -174,6 +176,7 @@ const AddCode = () => {
 
             id: ID + Date.now(),
             section: ID,
+            Title: "",
             code: {},
             Duration: 0,
             codeQuestion: "",
@@ -248,6 +251,7 @@ const AddCode = () => {
               id: ID + Date.now(),
               section: ID,
               code: {},
+              Title: "",
               Duration: 0,
               codeQuestion: "",
               codeLanguage: "",
@@ -271,6 +275,7 @@ const AddCode = () => {
               id: ID + Date.now(),
               section: ID,
               code: {},
+              Title: "",
               Duration: 0,
               codeQuestion: "",
               codeLanguage: "",

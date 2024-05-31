@@ -38,19 +38,19 @@ const Question = ({
         <option value={90}>90 minutes</option>
       </select>
 
-      {/* <textarea
-        className="resize-none w-full h-full bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
-        placeholder="Enter Question Here"
-        name="codeQuestion"
-        value={question.codeQuestion}
-        onChange={handleChanges}
-      ></textarea> */}
-      <ReactQuill
+      <textarea
+        className="resize-none w-full h-[40px] bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+        placeholder="Enter Question Name"
+        name="Title"
         value={question.Title}
+        onChange={handleChanges}
+      ></textarea>
+      <ReactQuill
+        value={question.codeQuestion}
         onChange={(value) =>
           setQuestion((prev) => {
             // console.log({ ...prev, Title: e.target.value });
-            return { ...prev, Title: value };
+            return { ...prev, codeQuestion: value };
           })
         }
         // onChange={handleChanges}

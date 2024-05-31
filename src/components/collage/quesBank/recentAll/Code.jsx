@@ -27,7 +27,7 @@ const List = ({ Title, number, code, question }) => {
             <div className="mb-4">
               <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
                 <div>
-                  <p className="text-sm">{Title}</p>
+                  <p className="text-sm">{question.Title}</p>
                 </div>
                 <div className="flex gap-2 self-center">
                   <Disclosure.Button className="flex gap-2 w-10/12 self-center">
@@ -55,7 +55,12 @@ const List = ({ Title, number, code, question }) => {
 
                     <label className="text-blacktext-sm">
                       {/* {code.toString().substring(0, 50)} */}
-                      {code}
+                      <div
+                        className=""
+                        dangerouslySetInnerHTML={{
+                          __html: question.codeQuestion,
+                        }}
+                      ></div>
                     </label>
                   </div>
                 </Disclosure.Panel>
