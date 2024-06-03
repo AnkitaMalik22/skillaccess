@@ -247,7 +247,7 @@ const Submit = () => {
         console.log(totalQuestions, questions.length);
         window.alert(
           `Remove ${
-            questions.length - totalQuestions
+            questions.length - totalQuestions * 2
           } questions to complete the test`
         );
 

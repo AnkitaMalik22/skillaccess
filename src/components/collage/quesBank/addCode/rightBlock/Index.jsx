@@ -3,6 +3,7 @@ import Signature from "./Signature";
 import Initial from "./Initial";
 import TestCases from "./TestCases";
 import Verification from "./Verification";
+import { toast } from "react-hot-toast";
 
 const Code = ({
   toggle,
@@ -15,6 +16,11 @@ const Code = ({
   setEditorValue,
   editorValue,
 }) => {
+  useEffect(() => {
+    const ques = JSON.parse(localStorage.getItem("qbQues"));
+
+    setEditorValue(ques?.code["Java"]?.defaultCode);
+  }, []);
   // const codeTemplates = {
   //   Java: {
   //     defaultCode: `import java.io.*;
@@ -91,7 +97,7 @@ const Code = ({
 
   // question.code = codeMap;
   const selectedLanguage = question.codeLanguage.toLowerCase();
-  console.log(editorValue);
+
   return (
     <div className="font-dmSans">
       <h2 className="font-bold mb-3 text-xl">
@@ -167,17 +173,22 @@ const Code = ({
           //   />
           // ) :
 
-          <Initial
-            // question={question} handleChanges={handleChanges}
-            selectedLanguage={selectedLanguage}
-            // editorValue={editorValue}
-            // handleEditorChange={handleEditorChange}
-            editorValue={editorValue.initialCode}
-            setEditorValue={setEditorValue}
-            handleEditorChange={(value) =>
-              handleEditorChange(value, "defaultCode")
-            }
-          />
+          editorValue.initialCode && (
+            <>
+              {" "}
+              <Initial
+                // question={question} handleChanges={handleChanges}
+                selectedLanguage={selectedLanguage}
+                // editorValue={editorValue}
+                // handleEditorChange={handleEditorChange}
+                editorValue={editorValue.initialCode}
+                setEditorValue={setEditorValue}
+                handleEditorChange={(value) =>
+                  handleEditorChange(value, "defaultCode")
+                }
+              />
+            </>
+          )
         ) : toggle === 2 ? (
           // <Initial question={question} handleChanges={handleChanges} />
           <TestCases
@@ -205,6 +216,7 @@ const Code = ({
           />
         )}
       </div>
+      <h2> Code : {editorValue?.initialCode}</h2>
     </div>
   );
 };

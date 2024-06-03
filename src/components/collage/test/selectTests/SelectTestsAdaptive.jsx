@@ -82,15 +82,11 @@ const SelectTests = () => {
     // console.log(section, "section");
 
     // console.log(currentQuestionCount + parseInt(totalQ));
-    console.log(
-      currentQuestionCount,
-      totalQuestions,
-      currentQuestionCount > totalQuestions
-    );
 
     // let totalInAdv = parseInt(Total)-parseInt(totalQ);
     if (
-      parseInt(currentQuestionCount) > parseInt(totalQuestions) * 2 ||
+      parseInt(currentQuestionCount) + parseInt(totalQ) * 2 >
+        parseInt(totalQuestions) * 2 ||
       parseInt(totalQ) > parseInt(totalQuestions) * 2
     ) {
       toast.error("max questions reached");
