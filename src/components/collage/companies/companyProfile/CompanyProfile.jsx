@@ -207,86 +207,84 @@ const CompanyProfile = () => {
         handleFilter={handleFilterJobs}
       />
 
-      <div className="sm:flex justify-between mb-2 font-dmSans mt-8">
-        <div className="sm:w-[45%]">
-          <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
+      <div className="flex justify-between font-dmSans gap-5 md:gap-10">
+        <div className="w-1/2">
+          <div className="w-full bg-[#F8F8F9] rounded-t-[32px] h-40 md:h-[240px] relative">
             <img
               src="../../../images/CompanyBg.png"
-              alt=""
-              className="w-full h-full rounded-t-3xl z-0 object-cover"
+              alt="img"
+              className="w-full h-full z-0 object-cover rounded-t-[32px]"
             />
-            <div className=" absolute -bottom-7  left-5 bg-white w-14 h-14 flex justify-center rounded-lg">
+            <div className=" absolute -bottom-7  left-5 bg-white h-12 w-12 flex justify-center items-center rounded-lg">
               <img
                 src={companyDetails?.basic?.logo}
-                className="w-10 h-10 rounded-lg self-center"
-                alt=""
+                className="w-10 h-10 object-contain self-center"
+                alt="brand logo"
               />
             </div>
           </div>
-          <div className="w-full bg-gray-100 flex justify-between pt-14 pb-6 pr-10 pl-5">
-            <div>
+          <div className="w-full bg-[#F8F8F9] flex justify-between p-5 pt-10 gap-2 mb-[6px]">
+            <div className="gap-1 flex flex-col">
               <h2 className="font-bold text-lg">
                 {companyDetails?.basic?.companyName}
               </h2>
-              <h2 className="text-xs font-medium mt-1">
+              <h2 className="text-xs font-medium">
                 {companyDetails?.location?.state} Branch Office
               </h2>
-              <h2 className="text-xs font-medium mt-2 text-gray-400">
+              <h2 className="text-xs font-medium text-[#8E91A0">
                 Available Jobs
               </h2>
             </div>
             <div className="self-center">
-              <h2 className="text-gray-400 text-sm font-bold ">EMPLOYEES</h2>
-              <h2 className="text-sm font-bold text-center mt-1">200+</h2>
+              <h2 className="text-[#8E91A0] text-sm font-bold mb-1">
+                EMPLOYEES
+              </h2>
+              <h2 className="text-sm font-bold text-center">200+</h2>
             </div>
           </div>
 
-          <div className="bg-gray-100 mt-2 px-6 ">
-            <span className="">
-              <h2 className="text-base font-bold pt-6 ">About Us</h2>
-              <p className=" mt-2 text-sm text-gray-400 pb-6">
-                {companyDetails?.about?.description}
-              </p>
-            </span>
+          <div className="bg-[#F8F8F9] p-5 mb-[6px]">
+            <h2 className="text-base font-bold mb-2">About Us</h2>
+            <p className="text-sm text-[#7D7D7D] first-letter:capitalize">
+              {companyDetails?.about?.description}
+            </p>
           </div>
 
           {/* bullets */}
-          <div className="bg-gray-100 mt-2 px-6 pb-6 rounded-b-lg">
-            <span className="">
-              <h2 className="text-base font-bold pt-6 mb-4">Achievements</h2>
-              {/* awards */}
-              {companyDetails?.awards?.map((award, index) => (
-                <span
-                  className="mt-2 text-sm text-gray-400 pb-3 flex gap-2"
-                  key={index}
-                >
-                  <VscCircleFilled className="text-white border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
-                  <p>{award?.name}</p>
-                </span>
-              ))}
-            </span>
+          <div className="bg-[#F8F8F9] p-5 rounded-b-[32px]">
+            <h2 className="text-base font-bold mb-2">Achievements</h2>
+            {/* awards */}
+            {companyDetails?.awards?.map((award, index) => (
+              <div
+                className="text-sm text-gray-400 mb-2 flex gap-2 items-center"
+                key={index}
+              >
+                <VscCircleFilled className="text-white border-4 w-fit h-fit rounded-full self-center border-blue-500 m-0" />
+                <p>{award?.name}</p>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="sm:w-[50%] h-[100vh] overflow-y-auto mb-2">
+        <div className="w-1/2 h-[100vh] overflow-y-auto">
           {/*  */}
           <div className="flex justify-between mb-7">
             <h2 className="font-bold">Available jobs</h2>
             <h2
               className="font-bold underline underline-offset-2 text-blued"
               onClick={() => {
-                navigate("/collage/dashboard/jobs");
+                navigate("/collage/companies/jobs");
               }}
             >
               See All
             </h2>
           </div>
           {filtered
-            ?.filter((job) => job?.company?._id === id)
+            // ?.filter((job) => job?.company?._id === id)
             ?.map((job, index) => {
               return (
                 <div
-                  className="flex justify-between w-[98%]  mt-4 bg-gray-100 rounded-lg p-4"
+                  className="flex justify-between mt-4 bg-gray-100 rounded-lg p-4"
                   key={index}
                 >
                   <>
