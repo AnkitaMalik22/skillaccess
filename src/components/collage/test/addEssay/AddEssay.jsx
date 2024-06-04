@@ -13,11 +13,15 @@ import {
   addEssayToTopic,
 } from "../../../../redux/collage/test/testSlice";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import CircularLoader from "../../../CircularLoader";
 
 const AddEssay = () => {
   const { id } = useParams();
   //prev count
-  const { topics, currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
+  const [loading, setLoading] = useState(false);
+  const { topics, currentTopic, ADD_QUESTION_LOADING } = useSelector(
+    (state) => state.test
+  );
   const [isPrev, setIsPrev] = useState(false);
   const [countDetail, setCountDetail] = useState(-1);
   const [count, setCount] = useState(topics[id]?.essay.length - 1);
@@ -64,7 +68,7 @@ const AddEssay = () => {
     setQuestion({ ...question, [e.target.name]: e.target.value });
   };
 
-  const handleSave =async (saveType) => {
+  const handleSave = async (saveType) => {
     if (addType === "topic") {
       if (
         !question.Title ||
@@ -78,6 +82,7 @@ const AddEssay = () => {
       } else {
         if (isPrev) {
           //dispatch api call to update by ID
+          setLoading(true);
           await dispatch(
             editQuestionById({
               index: countDetail + 1,
@@ -85,30 +90,34 @@ const AddEssay = () => {
               id: question._id,
               question: question,
             })
-          )
-          await setCountDetail(currentTopic.essay.length - 1);
+          );
+          await setCountDetail(currentTopic?.essay?.length - 1);
 
           await setQuestion({
-              Title: "",
-              Duration: 0,
-              id: id + Date.now(),
-              QuestionLevel: level,
-            })
-          ;
+            Title: "",
+            Duration: 0,
+            id: id + Date.now(),
+            QuestionLevel: level,
+          });
+          setLoading(false);
         } else {
-          await dispatch(addEssayToTopic({ data: question, id: id, type: type }));
-          await dispatch(addQuestionToTopic({ data: question, id: id, type: type }))
+          setLoading(true);
+          await dispatch(
+            addEssayToTopic({ data: question, id: id, type: type })
+          );
+          await dispatch(
+            addQuestionToTopic({ data: question, id: id, type: type })
+          );
           await setQuestion({
-              Title: "",
-              Duration: 0,
-              id: id + Date.now(),
-              QuestionLevel: level,
-            })
-            if(!ADD_QUESTION_LOADING){
-              if (saveType === "save") navigate(-1);
-            }
-
-          
+            Title: "",
+            Duration: 0,
+            id: id + Date.now(),
+            QuestionLevel: level,
+          });
+          setLoading(false);
+          if (!ADD_QUESTION_LOADING) {
+            if (saveType === "save") navigate(-1);
+          }
         }
       }
     } else {
@@ -127,25 +136,24 @@ const AddEssay = () => {
               prev: true,
               index: count + 1,
             })
-          ).then(()=>{
+          ).then(() => {
             setCount(topics[id].essay.length - 1);
-          setQuestion({
-            QuestionLevel: level,
+            setQuestion({
+              QuestionLevel: level,
 
-            id: ID + Date.now(),
-            Title: "",
-            Duration: 0,
-            section: ID,
-          })
-          if (!ADD_QUESTION_LOADING) {
-            if (saveType === "save") navigate(-1);
-          }
-          })
-          ;
+              id: ID + Date.now(),
+              Title: "",
+              Duration: 0,
+              section: ID,
+            });
+            if (!ADD_QUESTION_LOADING) {
+              if (saveType === "save") navigate(-1);
+            }
+          });
         } else {
-         await dispatch(
+          await dispatch(
             addEssay({ data: question, id: id, type: type, prev: false })
-          )
+          );
           await setIsPrev(false);
           await setCount(topics[id].essay.length - 1);
           await setQuestion({
@@ -155,12 +163,10 @@ const AddEssay = () => {
             Title: "",
             Duration: 0,
             section: ID,
-          })
+          });
           if (!ADD_QUESTION_LOADING) {
             if (saveType === "save") navigate(-1);
           }
-        
-          
         }
       }
     }
@@ -238,9 +244,16 @@ const AddEssay = () => {
           <div className=" flex">
             <button
               className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
-              onClick={() => handleSave()}
+              onClick={() => {
+                if (!loading) handleSave();
+              }}
             >
-              <FaPlus className="self-center" /> Add Next Question
+              {loading ? (
+                <CircularLoader />
+              ) : (
+                <FaPlus className="self-center" />
+              )}{" "}
+              Add Next Question
             </button>
           </div>
         </div>

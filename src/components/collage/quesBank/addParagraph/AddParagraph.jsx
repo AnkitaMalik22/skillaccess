@@ -15,8 +15,10 @@ import {
   addFindAnsToTopic,
 } from "../../../../redux/collage/test/testSlice";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import CircularLoader from "../../../CircularLoader";
 
 const AddParagraph = () => {
+  const [loading, setLoading] = useState(false);
   const MAX_QUESTIONS = 3;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -111,7 +113,8 @@ const AddParagraph = () => {
         return;
       } else {
         if (isPrev) {
-          setCountDetail(currentTopic.findAnswers.length - 1);
+          setLoading(true);
+          setCountDetail(currentTopic?.findAnswers?.length - 1);
           setIsPrev(false);
           //api call
           dispatch(
@@ -121,7 +124,9 @@ const AddParagraph = () => {
               id: question._id,
               question: question,
             })
-          );
+          ).then(() => {
+            setLoading(false);
+          });
 
           setQuestion({
             QuestionLevel: "beginner",
@@ -132,12 +137,14 @@ const AddParagraph = () => {
             id: ID + Date.now(),
           });
         } else {
+          setLoading(true);
           await dispatch(
             addFindAnsToTopic({ data: question, id: id, type: "findAnswer" })
           );
           await dispatch(
             addQuestionToTopic({ data: question, id: id, type: "findAnswer" })
           );
+          setLoading(false);
           // .then(()=>{
           await setQuestion({
             QuestionLevel: "beginner",
@@ -308,7 +315,12 @@ const AddParagraph = () => {
                   className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
                   onClick={() => handleSave()}
                 >
-                  <FaPlus className="self-center" /> Add Next Question
+                  {loading ? (
+                    <CircularLoader />
+                  ) : (
+                    <FaPlus className="self-center" />
+                  )}{" "}
+                  Add Next Question
                 </button>
               )}
             </div>
