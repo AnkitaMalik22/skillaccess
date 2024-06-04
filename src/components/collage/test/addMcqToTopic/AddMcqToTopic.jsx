@@ -14,7 +14,9 @@ import { editQuestionById } from "../../../../redux/collage/test/thunks/question
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 
 const AddMcqToTopic = () => {
-  const { currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
+  const { currentTopic, ADD_QUESTION_LOADING } = useSelector(
+    (state) => state.test
+  );
   const [isPrev, setIsPrev] = useState(false);
   const [countDetail, setCountDetail] = useState(-1);
 
@@ -175,8 +177,10 @@ const AddMcqToTopic = () => {
         });
       } else {
         setIsPrev(false);
-        setCountDetail(currentTopic.questions.length - 1);
-        dispatch(addQuestionToTopic({ data: question, id: id, type: type })).then(()=>{
+        setCountDetail(currentTopic?.questions?.length - 1);
+        dispatch(
+          addQuestionToTopic({ data: question, id: id, type: type })
+        ).then(() => {
           // if(!ADD_QUESTION_LOADING){
           //   navigate(-1);
           // }
@@ -187,8 +191,8 @@ const AddMcqToTopic = () => {
             id: id + Date.now(),
             Duration: 0,
           });
-        })
-       
+        });
+
         // navigate(-1);
       }
     }
@@ -201,17 +205,14 @@ const AddMcqToTopic = () => {
 
   // useEffect(() => {
   //   if(!ADD_QUESTION_LOADING){
-  //         navigate(-1); 
+  //         navigate(-1);
   //   }
-  
+
   //     return () => {
   //       //navigate(-1);
   //     }
   //   }
   //   , [ADD_QUESTION_LOADING]);
-
-
-
 
   const stripHtml = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -231,37 +232,37 @@ const AddMcqToTopic = () => {
           <span className="w-[49%] ">
             <h2 className="font-bold mb-2">Question</h2>
             <div className="flex w-full justify-between">
-            <select
-              name="Duration"
-              onChange={handleChanges}
-              value={question.Duration}
-              id=""
-              className={`${
-                level === "adaptive" ? "w-[65%]" : "w-full"
-              } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
-            >
-              <option value={0}>Time to answer the question</option>
-
-              <option value={1}>1 minute</option>
-              <option value={2}>2 minutes</option>
-              <option value={3}>3 minutes</option>
-              <option value={4}>4 minutes</option>
-            </select>
-            {level === "adaptive" && (
               <select
-                name="QuestionLevel"
+                name="Duration"
                 onChange={handleChanges}
-                value={question.QuestionLevel}
-                className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                value={question.Duration}
+                id=""
+                className={`${
+                  level === "adaptive" ? "w-[65%]" : "w-full"
+                } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
               >
-                <option value="">Level</option>
+                <option value={0}>Time to answer the question</option>
 
-                <option value={"beginner"}>Beginner</option>
-                <option value={"intermediate"}>Intermediate</option>
-                <option value={"advanced"}>Advanced</option>
+                <option value={1}>1 minute</option>
+                <option value={2}>2 minutes</option>
+                <option value={3}>3 minutes</option>
+                <option value={4}>4 minutes</option>
               </select>
-            )}
-        </div>
+              {level === "adaptive" && (
+                <select
+                  name="QuestionLevel"
+                  onChange={handleChanges}
+                  value={question.QuestionLevel}
+                  className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                >
+                  <option value="">Level</option>
+
+                  <option value={"beginner"}>Beginner</option>
+                  <option value={"intermediate"}>Intermediate</option>
+                  <option value={"advanced"}>Advanced</option>
+                </select>
+              )}
+            </div>
             <ReactQuill
               value={question.Title}
               onChange={(value) =>

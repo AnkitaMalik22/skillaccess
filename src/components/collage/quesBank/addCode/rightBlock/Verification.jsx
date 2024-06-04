@@ -13,7 +13,7 @@ const Verification = ({
         theme="vs-dark"
         height="20rem"
         defaultLanguage={selectedLanguage}
-        value={question.code[selectedLanguage].solutionCode || editorValue}
+        value={question?.code[selectedLanguage]?.solutionCode || editorValue}
         onChange={(value) => handleEditorChange(value, "solutionCode")}
         className="h-[450px] mb-6 "
       />

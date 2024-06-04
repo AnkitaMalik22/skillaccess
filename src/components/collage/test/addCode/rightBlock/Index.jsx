@@ -11,137 +11,84 @@ const Code = ({
   handleChanges,
   handleQuestionChange,
   setQuestion,
+  handleEditorChange,
+  editorValue,
 }) => {
-  //   const codeTemplates = {
-  //     Java: `import java.io.*;
+  // const codeTemplates = {
+  //   Java: {
+  //     defaultCode: `import java.io.*;
 
-  //     public class Main {
-  //       public static void main(String[] args) {
-  //         // Insert your code here
-  //       }
-  //     }`,
-  //     Python: `def main():
-  //     # Insert your code here
+  // public class Main {
+  //   public static void main(String[] args) {
+  //     // Insert your Java initial code here
+  //   }
+  // }`,
+  //     solutionCode: `import java.io.*;
+
+  // public class Main {
+  //   public static void main(String[] args) {
+  //     // Insert your Java solution code here
+  //   }
+  // }`,
+  //   },
+  //   Python: {
+  //     defaultCode: `def main():
+  //     # Insert your Python initial code here
 
   // if __name__ == "__main__":
   //     main()`,
-  //     Cpp: `#include <bits/stdc++.h>
-  //            using namespace std;
+  //     solutionCode: `def main():
+  //     # Insert your Python solution code here
 
-  // int main() {
-  //     // Insert your code here
-  //     return 0;
-  // }`,
-  //     C: `#include <stdio.h>
+  // if __name__ == "__main__":
+  //     main()`,
+  //   },
+  //   Cpp: {
+  //     defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
+  //     solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
+  //   },
+  //   C: {
+  //     defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
+  //     solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
+  //   },
+  // };
 
-  // int main() {
-  //     // Insert your code here
-  //     return 0;
-  // }`,
-  //   };
+  // const [codeMap, setCodeMap] = useState({
+  //   Java: codeTemplates.Java,
+  //   Python: codeTemplates.Python,
+  //   Cpp: codeTemplates.Cpp,
+  //   C: codeTemplates.C,
+  // });
 
-  //   const [editorValue, setEditorValue] = useState(
-  //     codeTemplates || codeTemplates.Java
-  //   );
-  //   console.log(editorValue);
-  //   const [codeMap, setCodeMap] = useState({
-  //     Java: codeTemplates.Java,
-  //     Python: codeTemplates.Python,
-  //     Cpp: codeTemplates.Cpp,
-  //     C: codeTemplates.C,
+  // const [editorValue, setEditorValue] = useState({
+  //   initialCode: (codeMap[question.codeLanguage] || codeTemplates.Java)
+  //     ?.defaultCode,
+  //   solutionCode: (codeMap[question.codeLanguage] || codeTemplates.Java)
+  //     ?.solutionCode,
+  // });
+
+  // useEffect(() => {
+  //   const defaultValue = codeMap[question.codeLanguage] || codeTemplates.Java;
+  //   setEditorValue({
+  //     initialCode: defaultValue.defaultCode,
+  //     solutionCode: defaultValue.solutionCode,
   //   });
-  //   console.log(codeMap);
-  //   useEffect(() => {
-  //     const defaultValue = codeMap[question.codeLanguage] || codeTemplates.Java;
-  //     setEditorValue(defaultValue);
-  //   }, [question.codeLanguage, codeMap]);
+  // }, [question.codeLanguage, codeMap]);
 
-  //   const handleEditorChange = (value) => {
-  //     setEditorValue(value);
-  //     handleChanges({ target: { name: "code", value } });
+  // const handleEditorChange = (value, type) => {
+  //   setEditorValue((prev) => ({ ...prev, [type]: value }));
+  //   handleChanges({ target: { name: type, value } });
 
-  //     setCodeMap((prevCodeMap) => ({
-  //       ...prevCodeMap,
-  //       [question.codeLanguage]: value,
-  //     }));
-  //   };
-  //   question.code = codeMap;
-  //   const selectedLanguage = question.codeLanguage.toLowerCase();
-  const codeTemplates = {
-    Java: {
-      defaultCode: `import java.io.*;
-  
-  public class Main {
-    public static void main(String[] args) {
-      // Insert your Java initial code here
-    }
-  }`,
-      solutionCode: `import java.io.*;
-  
-  public class Main {
-    public static void main(String[] args) {
-      // Insert your Java solution code here
-    }
-  }`,
-    },
-    Python: {
-      defaultCode: `def main():
-      # Insert your Python initial code here
-  
-  if __name__ == "__main__":
-      main()`,
-      solutionCode: `def main():
-      # Insert your Python solution code here
-  
-  if __name__ == "__main__":
-      main()`,
-    },
-    Cpp: {
-      defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
-      solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
-    },
-    C: {
-      defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
-      solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
-    },
-  };
+  //   setCodeMap((prevCodeMap) => ({
+  //     ...prevCodeMap,
+  //     [question.codeLanguage]: {
+  //       ...prevCodeMap[question.codeLanguage],
+  //       [type]: value,
+  //     },
+  //   }));
+  // };
 
-  const [codeMap, setCodeMap] = useState({
-    Java: codeTemplates.Java,
-    Python: codeTemplates.Python,
-    Cpp: codeTemplates.Cpp,
-    C: codeTemplates.C,
-  });
-
-  const [editorValue, setEditorValue] = useState({
-    initialCode: (codeMap[question.codeLanguage] || codeTemplates.Java)
-      ?.defaultCode,
-    solutionCode: (codeMap[question.codeLanguage] || codeTemplates.Java)
-      ?.solutionCode,
-  });
-
-  useEffect(() => {
-    const defaultValue = codeMap[question.codeLanguage] || codeTemplates.Java;
-    setEditorValue({
-      initialCode: defaultValue.defaultCode,
-      solutionCode: defaultValue.solutionCode,
-    });
-  }, [question.codeLanguage, codeMap]);
-
-  const handleEditorChange = (value, type) => {
-    setEditorValue((prev) => ({ ...prev, [type]: value }));
-    handleChanges({ target: { name: type, value } });
-
-    setCodeMap((prevCodeMap) => ({
-      ...prevCodeMap,
-      [question.codeLanguage]: {
-        ...prevCodeMap[question.codeLanguage],
-        [type]: value,
-      },
-    }));
-  };
-
-  question.code = codeMap;
+  // question.code = codeMap;
   const selectedLanguage = question.codeLanguage.toLowerCase();
   return (
     <div className="font-dmSans">

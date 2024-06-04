@@ -57,7 +57,44 @@ const AddCode = () => {
 
   const addType = searchParams.get("addType");
   const [toggle, setToggle] = useState(1);
-
+  const codeTemplates = {
+    Java: {
+      defaultCode: `import java.io.*;
+  
+  public class Main {
+    public static void main(String[] args) {
+      // Insert your Java initial code here
+    }
+  }`,
+      solutionCode: `import java.io.*;
+  
+  public class Main {
+    public static void main(String[] args) {
+      // Insert your Java solution code here
+    }
+  }`,
+    },
+    Python: {
+      defaultCode: `def main():
+      # Insert your Python initial code here
+  
+  if __name__ == "__main__":
+      main()`,
+      solutionCode: `def main():
+      # Insert your Python solution code here
+  
+  if __name__ == "__main__":
+      main()`,
+    },
+    Cpp: {
+      defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
+      solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
+    },
+    C: {
+      defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
+      solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
+    },
+  };
   let ID;
   searchParams.get("topicId") !== null
     ? (ID = searchParams.get("topicId"))
@@ -68,9 +105,14 @@ const AddCode = () => {
     id: ID + Date.now(),
     QuestionLevel: level,
     Duration: 0,
-    code: {},
+    code: {
+      Java: codeTemplates.Java,
+      Cpp: codeTemplates.Cpp,
+      Python: codeTemplates.Python,
+      C: codeTemplates.C,
+    },
     codeQuestion: "",
-    codeLanguage: "",
+    codeLanguage: "Java",
     parameters: [
       {
         paramName: "",
@@ -84,6 +126,44 @@ const AddCode = () => {
     Title: "",
   });
 
+  // const [codeMap, setCodeMap] = useState({
+  //   Java: codeTemplates.Java,
+  //   Python: codeTemplates.Python,
+  //   Cpp: codeTemplates.Cpp,
+  //   C: codeTemplates.C,
+  // });
+
+  const [editorValue, setEditorValue] = useState({
+    initialCode: question?.code[question.codeLanguage]?.defaultCode,
+    solutionCode: question?.code[question?.codeLanguage]?.solutionCode,
+  });
+
+  useEffect(() => {
+    if (question.code) {
+      const defaultValue = question.code[question.codeLanguage];
+
+      setEditorValue({
+        initialCode: defaultValue?.defaultCode,
+        solutionCode: defaultValue?.solutionCode,
+      });
+    }
+  }, [question.codeLanguage]);
+
+  const handleEditorChange = (value, type) => {
+    setEditorValue((prev) => ({ ...prev, [type]: value }));
+    setQuestion((prevQuestion) => ({
+      ...prevQuestion,
+      code: {
+        ...prevQuestion.code,
+        [prevQuestion.codeLanguage]: {
+          ...prevQuestion.code[prevQuestion.codeLanguage],
+          [type]: value,
+        },
+      },
+    }));
+  };
+
+  const selectedLanguage = question.codeLanguage.toLowerCase();
   const handleChanges = (e) => {
     setQuestion({ ...question, [e.target.name]: e.target.value });
   };
@@ -102,11 +182,53 @@ const AddCode = () => {
       setQuestion({ ...question, [name]: value });
     }
   };
-
+  const resetQuestion = () => {
+    setQuestion({
+      QuestionLevel: level,
+      id: ID + Date.now(),
+      section: ID,
+      Title: "",
+      code: {
+        Java: {
+          defaultCode: codeTemplates.Java.defaultCode,
+          solutionCode: codeTemplates.Java.solutionCode,
+        },
+        Cpp: {
+          defaultCode: codeTemplates.Cpp.defaultCode,
+          solutionCode: codeTemplates.Cpp.solutionCode,
+        },
+        Python: {
+          defaultCode: codeTemplates.Python.defaultCode,
+          solutionCode: codeTemplates.Python.solutionCode,
+        },
+        C: {
+          defaultCode: codeTemplates.C.defaultCode,
+          solutionCode: codeTemplates.C.solutionCode,
+        },
+      },
+      Duration: 0,
+      codeQuestion: "",
+      codeLanguage: "Java",
+      parameters: [
+        {
+          paramName: "",
+          type: "String",
+        },
+      ],
+      testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+      output: [""],
+    });
+  };
   useEffect(() => {
     if (addType === "edit") {
       const ques = JSON.parse(localStorage.getItem("qbQues"));
-      setQuestion(ques);
+      setQuestion({ ...ques, codeLanguage: "Java" });
+      const defaultValue = ques.code[question.codeLanguage];
+
+      setEditorValue({
+        initialCode: defaultValue?.defaultCode,
+        solutionCode: defaultValue?.solutionCode,
+      });
     }
   }, []);
   const handleSave = (component) => {
@@ -154,48 +276,50 @@ const AddCode = () => {
           setCountDetail(currentTopic.compiler.length - 1);
 
           setIsPrev(false);
-          setQuestion({
-            QuestionLevel: "beginner",
+          // setQuestion({
+          //   QuestionLevel: "beginner",
 
-            id: ID + Date.now(),
-            section: ID,
-            Title: "",
-            code: {},
-            Duration: 0,
-            codeQuestion: "",
-            codeLanguage: "",
-            parameters: [
-              {
-                paramName: "",
-                type: "String",
-              },
-            ],
-            testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-            output: [""],
-          });
+          //   id: ID + Date.now(),
+          //   section: ID,
+          //   Title: "",
+          //   code: {},
+          //   Duration: 0,
+          //   codeQuestion: "",
+          //   codeLanguage: "",
+          //   parameters: [
+          //     {
+          //       paramName: "",
+          //       type: "String",
+          //     },
+          //   ],
+          //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+          //   output: [""],
+          // });
+          resetQuestion();
           setToggle(1);
         } else {
           dispatch(addCompilerToTopic({ data: question, id: id, type: type }));
           dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({
-            QuestionLevel: level,
+          // setQuestion({
+          //   QuestionLevel: level,
 
-            id: ID + Date.now(),
-            section: ID,
-            Title: "",
-            code: {},
-            Duration: 0,
-            codeQuestion: "",
-            codeLanguage: "",
-            parameters: [
-              {
-                paramName: "",
-                type: "String",
-              },
-            ],
-            testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-            output: [""],
-          });
+          //   id: ID + Date.now(),
+          //   section: ID,
+          //   Title: "",
+          //   code: {},
+          //   Duration: 0,
+          //   codeQuestion: "",
+          //   codeLanguage: "",
+          //   parameters: [
+          //     {
+          //       paramName: "",
+          //       type: "String",
+          //     },
+          //   ],
+          //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+          //   output: [""],
+          // });
+          resetQuestion();
           setToggle(1);
         }
 
@@ -207,8 +331,6 @@ const AddCode = () => {
       } else {
         toast.error("Please fill all the fields");
       }
-
-      console.log(question);
     } else {
       dispatch(
         editQuestionById({
@@ -220,6 +342,10 @@ const AddCode = () => {
       navigate(-1);
     }
   };
+  useEffect(() => {
+    setCountDetail(currentTopic?.compiler?.length - 1);
+  }, [currentTopic]);
+  console.log(question);
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
@@ -249,6 +375,9 @@ const AddCode = () => {
               handleChanges={handleChanges}
               handleQuestionChange={handleQuestionChange}
               setQuestion={setQuestion}
+              handleEditorChange={handleEditorChange}
+              editorValue={editorValue}
+              setEditorValue={setEditorValue}
               id={id}
               type={type}
             />
@@ -279,14 +408,14 @@ const AddCode = () => {
                 </button>
               )}
             </div>
-            <div className=" flex">
+            {/* <div className=" flex">
               <button
                 className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
                 onClick={() => handleSave("next")}
               >
                 <FaPlus className="self-center" /> Add Next Question
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -37,12 +37,12 @@ const List = ({ Title, number, code, question }) => {
                     <PiPencilSimpleLineBold
                       className=" w-6 h-6 p-1 rounded-lg  self-center cursor-pointer"
                       onClick={() => {
-                        navigate(
-                          `/collage/quesBank/code/${question._id}?type=code&addType=edit`
-                        );
                         localStorage.setItem(
                           "qbQues",
                           JSON.stringify(question)
+                        );
+                        navigate(
+                          `/collage/quesBank/code/${question._id}?type=code&addType=edit`
                         );
                       }}
                     />
