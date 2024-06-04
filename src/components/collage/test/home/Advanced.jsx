@@ -14,14 +14,14 @@ const Advanced = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const advanced = useSelector((state) => state.test.assessments.advanced);
-  const { credit } = useSelector((state) => state.collageAuth.balance);
+  const credit = useSelector((state) => state.collageAuth);
   console.log(credit);
 
   const handleClose = () => {
     setShow(false);
   };
   const handleFunc = () => {
-    if (credit) {
+    if (credit?.balance?.credit) {
       navigate("/collage/test/name?level=advanced");
     } else {
       setShow(true);

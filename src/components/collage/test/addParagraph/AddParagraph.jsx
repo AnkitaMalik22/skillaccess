@@ -12,8 +12,11 @@ import {
   addFindAnsToTopic,
 } from "../../../../redux/collage/test/testSlice";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import CircularLoader from "../../../CircularLoader";
 
 const AddParagraph = () => {
+  const [loading, setLoading] = useState(false);
+
   const MAX_QUESTIONS = 3;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,7 +39,9 @@ const AddParagraph = () => {
     questions: [{ question: "" }],
   });
 
-  const { topics, currentTopic,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
+  const { topics, currentTopic, ADD_QUESTION_LOADING } = useSelector(
+    (state) => state.test
+  );
   const [isPrev, setIsPrev] = useState(false);
 
   const [count, setCount] = useState(topics[id]?.findAnswers.length - 1);
@@ -84,7 +89,7 @@ const AddParagraph = () => {
   //   console.log(question);
   // }, [question]);
 
-  const handleSave =async (saveType) => {
+  const handleSave = async (saveType) => {
     if (addType === "topic") {
       if (
         !question.Title ||
@@ -100,9 +105,10 @@ const AddParagraph = () => {
         return;
       } else {
         if (isPrev) {
-          setCountDetail(currentTopic.findAnswers.length - 1);
+          setCountDetail(currentTopic?.findAnswers?.length - 1);
           setIsPrev(false);
           //api call
+          setLoading(true);
           dispatch(
             editQuestionById({
               index: countDetail + 1,
@@ -110,7 +116,7 @@ const AddParagraph = () => {
               id: question._id,
               question: question,
             })
-          );
+          ).then(() => setLoading(false));
 
           setQuestion({
             QuestionLevel: level,
@@ -121,24 +127,26 @@ const AddParagraph = () => {
             id: ID + Date.now(),
           });
         } else {
-         await dispatch(
+          setLoading(true);
+          await dispatch(
             addFindAnsToTopic({ data: question, id: id, type: "findAnswer" })
-          ) 
-         await dispatch(
+          );
+          await dispatch(
             addQuestionToTopic({ data: question, id: id, type: "findAnswer" })
-          )
+          );
           // .then(()=>{
-         await   setQuestion({
-              QuestionLevel: level,
-              Title: "",
-              section: ID,
-              questions: [{ question: "" }],
-              Duration: 0,
-              id: ID + Date.now(),
-            })
-            if(!ADD_QUESTION_LOADING){
-              if (saveType === "save") navigate(-1);
-            }
+          await setQuestion({
+            QuestionLevel: level,
+            Title: "",
+            section: ID,
+            questions: [{ question: "" }],
+            Duration: 0,
+            id: ID + Date.now(),
+          });
+          setLoading(false);
+          if (!ADD_QUESTION_LOADING) {
+            if (saveType === "save") navigate(-1);
+          }
           // })
         }
       }
@@ -161,9 +169,9 @@ const AddParagraph = () => {
               prev: true,
               index: count + 1,
             })
-          )
+          );
           // .then(()=>{
-          await  setCount(topics[id].findAnswers.length - 1);
+          await setCount(topics[id].findAnswers.length - 1);
           await setQuestion({
             questions: [{ question: "" }],
             QuestionLevel: level,
@@ -173,11 +181,10 @@ const AddParagraph = () => {
             Duration: 0,
             section: ID,
           });
-          if(!ADD_QUESTION_LOADING){
+          if (!ADD_QUESTION_LOADING) {
             if (saveType === "save") navigate(-1);
           }
           // })
-          
         } else {
           dispatch(
             addFindAns({
@@ -187,32 +194,29 @@ const AddParagraph = () => {
               prev: false,
               index: count + 1,
             })
-          )
+          );
           // .then(() => {
-            
+
           await setQuestion({
-              questions: [{ question: "" }],
-              QuestionLevel: level,
-              id: ID + Date.now(),
-              Title: "",
-              questions: [],
-              Duration: 0,
-              section: ID,
-            })
-            if (!ADD_QUESTION_LOADING) {
-              if (saveType === "save") navigate(-1);
-            }
+            questions: [{ question: "" }],
+            QuestionLevel: level,
+            id: ID + Date.now(),
+            Title: "",
+            questions: [],
+            Duration: 0,
+            section: ID,
+          });
+          if (!ADD_QUESTION_LOADING) {
+            if (saveType === "save") navigate(-1);
+          }
           // });
           // if (type === "save") navigate(-1);
           // dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          
         }
       }
     }
   };
 
-
-    
   useEffect(() => {
     setCountDetail(currentTopic?.findAnswers?.length - 1);
   }, [currentTopic]);
@@ -329,7 +333,12 @@ const AddParagraph = () => {
                 className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
                 onClick={() => handleSave()}
               >
-                <FaPlus className="self-center" /> Add Next Question
+                {loading ? (
+                  <CircularLoader />
+                ) : (
+                  <FaPlus className="self-center" />
+                )}{" "}
+                Add Next Question
               </button>
             </div>
           </div>
