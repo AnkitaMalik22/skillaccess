@@ -57,7 +57,44 @@ const AddCode = () => {
 
   const addType = searchParams.get("addType");
   const [toggle, setToggle] = useState(1);
-
+  const codeTemplates = {
+    Java: {
+      defaultCode: `import java.io.*;
+  
+  public class Main {
+    public static void main(String[] args) {
+      // Insert your Java initial code here
+    }
+  }`,
+      solutionCode: `import java.io.*;
+  
+  public class Main {
+    public static void main(String[] args) {
+      // Insert your Java solution code here
+    }
+  }`,
+    },
+    Python: {
+      defaultCode: `def main():
+      # Insert your Python initial code here
+  
+  if __name__ == "__main__":
+      main()`,
+      solutionCode: `def main():
+      # Insert your Python solution code here
+  
+  if __name__ == "__main__":
+      main()`,
+    },
+    Cpp: {
+      defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
+      solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
+    },
+    C: {
+      defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
+      solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
+    },
+  };
   let ID;
   searchParams.get("topicId") !== null
     ? (ID = searchParams.get("topicId"))
@@ -68,9 +105,14 @@ const AddCode = () => {
     id: ID + Date.now(),
     QuestionLevel: level,
     Duration: 0,
-    code: {},
+    code: {
+      Java: codeTemplates.Java,
+      Cpp: codeTemplates.Cpp,
+      Python: codeTemplates.Python,
+      C: codeTemplates.C,
+    },
     codeQuestion: "",
-    codeLanguage: "",
+    codeLanguage: "Java",
     parameters: [
       {
         paramName: "",
@@ -84,6 +126,41 @@ const AddCode = () => {
     Title: "",
   });
 
+  // const [codeMap, setCodeMap] = useState({
+  //   Java: codeTemplates.Java,
+  //   Python: codeTemplates.Python,
+  //   Cpp: codeTemplates.Cpp,
+  //   C: codeTemplates.C,
+  // });
+
+  const [editorValue, setEditorValue] = useState({
+    initialCode: question?.code[question.codeLanguage]?.defaultCode,
+    solutionCode: question?.code[question.codeLanguage]?.solutionCode,
+  });
+
+  useEffect(() => {
+    const defaultValue = question.code[question.codeLanguage];
+    setEditorValue({
+      initialCode: defaultValue.defaultCode,
+      solutionCode: defaultValue.solutionCode,
+    });
+  }, [question.codeLanguage]);
+
+  const handleEditorChange = (value, type) => {
+    setEditorValue((prev) => ({ ...prev, [type]: value }));
+    setQuestion((prevQuestion) => ({
+      ...prevQuestion,
+      code: {
+        ...prevQuestion.code,
+        [prevQuestion.codeLanguage]: {
+          ...prevQuestion.code[prevQuestion.codeLanguage],
+          [type]: value,
+        },
+      },
+    }));
+  };
+
+  const selectedLanguage = question.codeLanguage.toLowerCase();
   const handleChanges = (e) => {
     setQuestion({ ...question, [e.target.name]: e.target.value });
   };
@@ -102,7 +179,43 @@ const AddCode = () => {
       setQuestion({ ...question, [name]: value });
     }
   };
-
+  const resetQuestion = () => {
+    setQuestion({
+      QuestionLevel: level,
+      id: ID + Date.now(),
+      section: ID,
+      Title: "",
+      code: {
+        Java: {
+          defaultCode: codeTemplates.Java.defaultCode,
+          solutionCode: codeTemplates.Java.solutionCode,
+        },
+        Cpp: {
+          defaultCode: codeTemplates.Cpp.defaultCode,
+          solutionCode: codeTemplates.Cpp.solutionCode,
+        },
+        Python: {
+          defaultCode: codeTemplates.Python.defaultCode,
+          solutionCode: codeTemplates.Python.solutionCode,
+        },
+        C: {
+          defaultCode: codeTemplates.C.defaultCode,
+          solutionCode: codeTemplates.C.solutionCode,
+        },
+      },
+      Duration: 0,
+      codeQuestion: "",
+      codeLanguage: "Java",
+      parameters: [
+        {
+          paramName: "",
+          type: "String",
+        },
+      ],
+      testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+      output: [""],
+    });
+  };
   const handleSave = (component) => {
     if (addType === "topic") {
       if (
@@ -142,54 +255,89 @@ const AddCode = () => {
               index: countDetail + 1,
               type: "code",
               id: question._id,
-              question: question,
+              question: { ...question, codeLanguage: "" },
             })
           );
           setCountDetail(currentTopic.compiler.length - 1);
 
           setIsPrev(false);
-          setQuestion({
-            QuestionLevel: level,
+          // setQuestion({
+          //   QuestionLevel: level,
 
-            id: ID + Date.now(),
-            section: ID,
-            Title: "",
-            code: {},
-            Duration: 0,
-            codeQuestion: "",
-            codeLanguage: "",
-            parameters: [
-              {
-                paramName: "",
-                type: "String",
-              },
-            ],
-            testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-            output: [""],
-          });
+          //   id: ID + Date.now(),
+          //   section: ID,
+          //   Title: "",
+          //   code: {},
+          //   Duration: 0,
+          //   codeQuestion: "",
+          //   codeLanguage: "",
+          //   parameters: [
+          //     {
+          //       paramName: "",
+          //       type: "String",
+          //     },
+          //   ],
+          //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+          //   output: [""],
+          // });
+          resetQuestion();
           setToggle(1);
         } else {
-          dispatch(addCompilerToTopic({ data: question, id: id, type: type }));
-          dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          setQuestion({
-            QuestionLevel: level,
+          dispatch(
+            addCompilerToTopic({
+              data: { ...question, codeLanguage: "" },
+              id: id,
+              type: type,
+            })
+          );
+          dispatch(
+            addQuestionToTopic({
+              data: { ...question, codeLanguage: "" },
+              id: id,
+              type: type,
+            })
+          );
+          // setQuestion({
+          //   QuestionLevel: level,
 
-            id: ID + Date.now(),
-            section: ID,
-            Title: "",
-            code: {},
-            Duration: 0,
-            codeQuestion: "",
-            codeLanguage: "",
-            parameters: [
-              {
-                paramName: "",
-                type: "String",
-              },
-            ],
-            testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-            output: [""],
-          });
+          //   id: ID + Date.now(),
+          //   section: ID,
+          //   Title: "",
+          //   code: {
+          //     Java: {
+          //       defaultCode: "",
+
+          //       solutionCode: "",
+          //     },
+          //     Cpp: {
+          //       defaultCode: "",
+
+          //       solutionCode: "",
+          //     },
+          //     Python: {
+          //       defaultCode: "",
+
+          //       solutionCode: "",
+          //     },
+          //     C: {
+          //       defaultCode: "",
+
+          //       solutionCode: "",
+          //     },
+          //   },
+          //   Duration: 0,
+          //   codeQuestion: "",
+          //   codeLanguage: "Java",
+          //   parameters: [
+          //     {
+          //       paramName: "",
+          //       type: "String",
+          //     },
+          //   ],
+          //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+          //   output: [""],
+          // });
+          resetQuestion();
           setToggle(1);
         }
 
@@ -236,7 +384,7 @@ const AddCode = () => {
         if (isPrev) {
           dispatch(
             addCompiler({
-              data: question,
+              data: { ...question, codeLanguage: "" },
               id: id,
               type: type,
               prev: true,
@@ -245,49 +393,77 @@ const AddCode = () => {
           ).then(() => {
             setCount(topics[id].compiler.length - 1);
             setIsPrev(false);
-            setQuestion({
-              QuestionLevel: level,
+            // setQuestion({
+            //   QuestionLevel: level,
 
-              id: ID + Date.now(),
-              section: ID,
-              code: {},
-              Title: "",
-              Duration: 0,
-              codeQuestion: "",
-              codeLanguage: "",
-              parameters: [
-                {
-                  paramName: "",
-                  type: "String",
-                },
-              ],
-              testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-              output: [""],
-            });
+            //   id: ID + Date.now(),
+            //   section: ID,
+            //   code: {},
+            //   Title: "",
+            //   Duration: 0,
+            //   codeQuestion: "",
+            //   codeLanguage: "Java",
+            //   parameters: [
+            //     {
+            //       paramName: "",
+            //       type: "String",
+            //     },
+            //   ],
+            //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+            //   output: [""],
+            // });
+            resetQuestion();
           });
         } else {
           dispatch(
-            addCompiler({ data: question, id: id, type: type, prev: false })
+            addCompiler({
+              data: { ...question, codeLanguage: "" },
+              id: id,
+              type: type,
+              prev: false,
+            })
           ).then(() => {
-            setQuestion({
-              QuestionLevel: level,
+            // setQuestion({
+            //   QuestionLevel: level,
 
-              id: ID + Date.now(),
-              section: ID,
-              code: {},
-              Title: "",
-              Duration: 0,
-              codeQuestion: "",
-              codeLanguage: "",
-              parameters: [
-                {
-                  paramName: "",
-                  type: "String",
-                },
-              ],
-              testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-              output: [""],
-            });
+            //   id: ID + Date.now(),
+            //   section: ID,
+            //   code: {
+            //     Java: {
+            //       defaultCode: "",
+
+            //       solutionCode: "",
+            //     },
+            //     Cpp: {
+            //       defaultCode: "",
+
+            //       solutionCode: "",
+            //     },
+            //     Python: {
+            //       defaultCode: "",
+
+            //       solutionCode: "",
+            //     },
+            //     C: {
+            //       defaultCode: "",
+
+            //       solutionCode: "",
+            //     },
+            //   },
+            //   Title: "",
+            //   Duration: 0,
+            //   codeQuestion: "",
+            //   codeLanguage: "",
+            //   parameters: [
+            //     {
+            //       paramName: "",
+            //       type: "String",
+            //     },
+            //   ],
+            //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+            //   output: [""],
+            // });
+            resetQuestion();
             if (!ADD_QUESTION_LOADING) {
               setToggle(1);
               if (component === "save") {
@@ -332,6 +508,8 @@ const AddCode = () => {
               handleChanges={handleChanges}
               handleQuestionChange={handleQuestionChange}
               setQuestion={setQuestion}
+              handleEditorChange={handleEditorChange}
+              editorValue={editorValue}
               id={id}
               type={type}
             />
