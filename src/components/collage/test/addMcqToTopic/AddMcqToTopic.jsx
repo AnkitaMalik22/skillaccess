@@ -12,6 +12,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import CircularLoader from "../../../CircularLoader";
 
 const AddMcqToTopic = () => {
   const { currentTopic, ADD_QUESTION_LOADING } = useSelector(
@@ -36,7 +37,7 @@ const AddMcqToTopic = () => {
     QuestionType: "",
     AnswerIndex: null,
   });
-
+  const [loader, setLoader] = useState(false);
   // section Id
   const { sectionId } = useParams();
 
@@ -160,6 +161,7 @@ const AddMcqToTopic = () => {
         //api call
         setIsPrev(false);
         setCountDetail(currentTopic.questions.length - 1);
+        setLoader(true);
         dispatch(
           editQuestionById({
             index: countDetail + 1,
@@ -167,7 +169,7 @@ const AddMcqToTopic = () => {
             id: question._id,
             question: question,
           })
-        );
+        ).then(() => setLoader(false));
         setQuestion({
           QuestionLevel: level === "adaptive" ? "beginner" : level,
           Title: "",
@@ -178,12 +180,14 @@ const AddMcqToTopic = () => {
       } else {
         setIsPrev(false);
         setCountDetail(currentTopic?.questions?.length - 1);
+        setLoader(true);
         dispatch(
           addQuestionToTopic({ data: question, id: id, type: type })
         ).then(() => {
           // if(!ADD_QUESTION_LOADING){
           //   navigate(-1);
           // }
+          setLoader(false);
           setQuestion({
             QuestionLevel: level === "adaptive" ? "beginner" : level,
             Title: "",
@@ -494,7 +498,8 @@ const AddMcqToTopic = () => {
               // onClick={addQuestion}
               onClick={handleQuestionSave}
             >
-              <FaPlus className="self-center" /> Add Next Question
+              {loader ? <CircularLoader /> : <FaPlus className="self-center" />}{" "}
+              Add Next Question
             </button>
           </div>
         </div>

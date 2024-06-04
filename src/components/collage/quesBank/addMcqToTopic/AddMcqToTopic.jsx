@@ -15,11 +15,14 @@ import {
   editQuestionById,
 } from "../../../../redux/collage/test/thunks/question";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import CircularLoader from "../../../CircularLoader";
 
 const AddMcqToTopic = () => {
   const { currentTopic, ADD_QUESTION_LOADING } = useSelector(
     (state) => state.test
   );
+
+  const [loading, setLoading] = useState(false);
   const [isPrev, setIsPrev] = useState(false);
   const [countDetail, setCountDetail] = useState(-1);
   // const[level,setLevel]=useState("beginner");
@@ -169,7 +172,8 @@ const AddMcqToTopic = () => {
           if (isPrev) {
             //api call
             setIsPrev(false);
-            setCountDetail(currentTopic.questions.length - 1);
+            setCountDetail(currentTopic?.questions?.length - 1);
+            setLoading(true);
             dispatch(
               editQuestionById({
                 index: countDetail + 1,
@@ -177,7 +181,7 @@ const AddMcqToTopic = () => {
                 id: question._id,
                 question: question,
               })
-            );
+            ).then(() => setLoading(false));
             setQuestion({
               QuestionLevel: "beginner",
               Title: "",
@@ -186,11 +190,13 @@ const AddMcqToTopic = () => {
               Duration: 0,
             });
           } else {
+            setLoading(true);
             setIsPrev(false);
-            setCountDetail(currentTopic.questions.length - 1);
+            setCountDetail(currentTopic?.questions?.length - 1);
             dispatch(
               addQuestionToTopic({ data: question, id: id, type: type })
             ).then(() => {
+              setLoading(false);
               // if(!ADD_QUESTION_LOADING){
               //   navigate(-1);
               // }
@@ -513,7 +519,12 @@ const AddMcqToTopic = () => {
                 // onClick={addQuestion}
                 onClick={handleQuestionSave}
               >
-                <FaPlus className="self-center" /> Add Next Question
+                {loading ? (
+                  <CircularLoader />
+                ) : (
+                  <FaPlus className="self-center" />
+                )}{" "}
+                Add Next Question
               </button>
             )}
           </div>

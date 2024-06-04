@@ -17,14 +17,14 @@ const Adaptive = () => {
   const [show, setShow] = useState(false);
   const Adaptive = useSelector((state) => state.test.assessments.adaptive);
   const { testLoading } = useSelector((state) => state.test);
-  const { credit } = useSelector((state) => state.collageAuth.balance);
+  const credit = useSelector((state) => state?.collageAuth);
   console.log(credit);
 
   const handleClose = () => {
     setShow(false);
   };
   const handleFunc = () => {
-    if (credit) {
+    if (credit?.balance?.credit) {
       navigate("/collage/test/name?level=adaptive");
     } else {
       setShow(true);
