@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Editor from "@monaco-editor/react";
 
 const Initial = ({ selectedLanguage, handleEditorChange, editorValue }) => {
   console.log(selectedLanguage);
   return (
-    <div className="h-auto w-full bg-red-300">
+    <div className="w-full   ">
       <Editor
-        theme="vs-dark"
-        height="20rem"
+        theme="vs-light"
+        height="535px"
         defaultLanguage={selectedLanguage}
         value={editorValue}
         onChange={(value) => handleEditorChange(value, "defaultCode")}
-        className="h-[450px] mb-6 "
+        className="border-2  border-gray-300"
       />
     </div>
   );

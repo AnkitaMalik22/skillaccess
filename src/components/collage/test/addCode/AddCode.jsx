@@ -126,13 +126,6 @@ const AddCode = () => {
     Title: "",
   });
 
-  // const [codeMap, setCodeMap] = useState({
-  //   Java: codeTemplates.Java,
-  //   Python: codeTemplates.Python,
-  //   Cpp: codeTemplates.Cpp,
-  //   C: codeTemplates.C,
-  // });
-
   const [editorValue, setEditorValue] = useState({
     initialCode: question?.code[question.codeLanguage]?.defaultCode,
     solutionCode: question?.code[question.codeLanguage]?.solutionCode,
@@ -144,7 +137,7 @@ const AddCode = () => {
       initialCode: defaultValue.defaultCode,
       solutionCode: defaultValue.solutionCode,
     });
-  }, [question.codeLanguage]);
+  }, [question.codeLanguage, question.code]);
 
   const handleEditorChange = (value, type) => {
     setEditorValue((prev) => ({ ...prev, [type]: value }));
@@ -220,35 +213,26 @@ const AddCode = () => {
     if (addType === "topic") {
       if (
         // question.codeQuestion != "" ||
-        question.code != "" ||
+        question.code != ""
         // question.codeLanguage != "" ||
-        question.verificationCode != ""
       ) {
         if (question.code === "") {
           toast.error("Please fill the code");
 
           return;
         }
-        // if (question.verificationCode === "") {
-        //   toast.error("Please fill the code");
 
-        //   return;
-        // }
         if (question.Duration == 0) {
           toast.error("Please fill the duration");
 
           return;
         }
-        // if (question.codeQuestion === "") {
-        //   toast.error("Please fill the question");
+        if (question.codeQuestion === "") {
+          toast.error("Please fill the question");
 
-        //   return;
-        // }
-        // if (question.codeLanguage === "") {
-        //   toast.error("Please fill the codelanguage");
+          return;
+        }
 
-        //   return;
-        // }
         if (isPrev) {
           dispatch(
             editQuestionById({
@@ -261,25 +245,7 @@ const AddCode = () => {
           setCountDetail(currentTopic.compiler.length - 1);
 
           setIsPrev(false);
-          // setQuestion({
-          //   QuestionLevel: level,
 
-          //   id: ID + Date.now(),
-          //   section: ID,
-          //   Title: "",
-          //   code: {},
-          //   Duration: 0,
-          //   codeQuestion: "",
-          //   codeLanguage: "",
-          //   parameters: [
-          //     {
-          //       paramName: "",
-          //       type: "String",
-          //     },
-          //   ],
-          //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-          //   output: [""],
-          // });
           resetQuestion();
           setToggle(1);
         } else {
@@ -297,46 +263,7 @@ const AddCode = () => {
               type: type,
             })
           );
-          // setQuestion({
-          //   QuestionLevel: level,
 
-          //   id: ID + Date.now(),
-          //   section: ID,
-          //   Title: "",
-          //   code: {
-          //     Java: {
-          //       defaultCode: "",
-
-          //       solutionCode: "",
-          //     },
-          //     Cpp: {
-          //       defaultCode: "",
-
-          //       solutionCode: "",
-          //     },
-          //     Python: {
-          //       defaultCode: "",
-
-          //       solutionCode: "",
-          //     },
-          //     C: {
-          //       defaultCode: "",
-
-          //       solutionCode: "",
-          //     },
-          //   },
-          //   Duration: 0,
-          //   codeQuestion: "",
-          //   codeLanguage: "Java",
-          //   parameters: [
-          //     {
-          //       paramName: "",
-          //       type: "String",
-          //     },
-          //   ],
-          //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-          //   output: [""],
-          // });
           resetQuestion();
           setToggle(1);
         }
@@ -393,25 +320,7 @@ const AddCode = () => {
           ).then(() => {
             setCount(topics[id].compiler.length - 1);
             setIsPrev(false);
-            // setQuestion({
-            //   QuestionLevel: level,
 
-            //   id: ID + Date.now(),
-            //   section: ID,
-            //   code: {},
-            //   Title: "",
-            //   Duration: 0,
-            //   codeQuestion: "",
-            //   codeLanguage: "Java",
-            //   parameters: [
-            //     {
-            //       paramName: "",
-            //       type: "String",
-            //     },
-            //   ],
-            //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-            //   output: [""],
-            // });
             resetQuestion();
           });
         } else {
@@ -423,46 +332,6 @@ const AddCode = () => {
               prev: false,
             })
           ).then(() => {
-            // setQuestion({
-            //   QuestionLevel: level,
-
-            //   id: ID + Date.now(),
-            //   section: ID,
-            //   code: {
-            //     Java: {
-            //       defaultCode: "",
-
-            //       solutionCode: "",
-            //     },
-            //     Cpp: {
-            //       defaultCode: "",
-
-            //       solutionCode: "",
-            //     },
-            //     Python: {
-            //       defaultCode: "",
-
-            //       solutionCode: "",
-            //     },
-            //     C: {
-            //       defaultCode: "",
-
-            //       solutionCode: "",
-            //     },
-            //   },
-            //   Title: "",
-            //   Duration: 0,
-            //   codeQuestion: "",
-            //   codeLanguage: "",
-            //   parameters: [
-            //     {
-            //       paramName: "",
-            //       type: "String",
-            //     },
-            //   ],
-            //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-            //   output: [""],
-            // });
             resetQuestion();
             if (!ADD_QUESTION_LOADING) {
               setToggle(1);
