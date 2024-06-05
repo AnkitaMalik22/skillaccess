@@ -227,7 +227,7 @@ const TestCases = ({
           {expandedTestCases[index] && (
             <div className="p-4">
               <label htmlFor={`input-${index}`}>Input:</label>
-              <input
+              <textarea
                 type="text"
                 id={`input-${index}`}
                 className="border p-1 w-full"
@@ -239,7 +239,7 @@ const TestCases = ({
               />
 
               <label htmlFor={`output-${index}`}>expectedOutput:</label>
-              <input
+              <textarea
                 type="text"
                 id={`output-${index}`}
                 className="border p-1 w-full"
