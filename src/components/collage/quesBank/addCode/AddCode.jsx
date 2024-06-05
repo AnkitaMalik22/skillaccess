@@ -139,11 +139,14 @@ const AddCode = () => {
   });
 
   useEffect(() => {
-    const defaultValue = question.code[question.codeLanguage];
-    setEditorValue({
-      initialCode: defaultValue?.defaultCode,
-      solutionCode: defaultValue?.solutionCode,
-    });
+    if (question.code) {
+      const defaultValue = question.code[question.codeLanguage];
+
+      setEditorValue({
+        initialCode: defaultValue?.defaultCode,
+        solutionCode: defaultValue?.solutionCode,
+      });
+    }
   }, [question.codeLanguage]);
 
   const handleEditorChange = (value, type) => {
@@ -219,7 +222,13 @@ const AddCode = () => {
   useEffect(() => {
     if (addType === "edit") {
       const ques = JSON.parse(localStorage.getItem("qbQues"));
-      setQuestion(ques);
+      setQuestion({ ...ques, codeLanguage: "Java" });
+      const defaultValue = ques.code[question.codeLanguage];
+
+      setEditorValue({
+        initialCode: defaultValue?.defaultCode,
+        solutionCode: defaultValue?.solutionCode,
+      });
     }
   }, []);
   const handleSave = (component) => {
@@ -322,8 +331,6 @@ const AddCode = () => {
       } else {
         toast.error("Please fill all the fields");
       }
-
-      console.log(question);
     } else {
       dispatch(
         editQuestionById({

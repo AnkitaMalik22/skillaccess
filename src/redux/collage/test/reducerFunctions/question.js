@@ -133,10 +133,15 @@ export const addQuesFunc = (state, action) => {
         break;
 
       case "mcq":
-        state.currentTopic.questions = [
-          ...state.currentTopic.questions,
-          questions[0],
-        ];
+        if (state.currentTopic.questions) {
+          state.currentTopic.questions = [
+            ...state.currentTopic.questions,
+            questions[0],
+          ];
+        } else {
+          state.currentTopic.questions = [questions[0]];
+        }
+
         break;
 
       case "compiler":
