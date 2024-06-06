@@ -23,7 +23,6 @@ const Review = () => {
   // console.log(questionType);
   const { currentTopic, topics } = useSelector((state) => state.test);
   useEffect(() => {
-  
     if (type === "section") {
       // const topics = JSON.parse(localStorage.getItem("topics"));
       setName(topics[id].Heading);
@@ -64,7 +63,6 @@ const Review = () => {
           JSON.parse(localStorage.getItem("assessment")).topics[id].compiler
         );
     }
-    
   }, [topics, "", currentTopic]);
   console.log(currentTopic);
 
@@ -90,7 +88,7 @@ const Review = () => {
       totalVideo = 0,
       totalCompiler = 0,
       totalFindAnswer = 0;
-  
+
     if (type === "topic") {
       if (currentTopic.Type === "essay") {
         totalEssay += currentTopic.essay?.reduce((acc, curr) => {
@@ -112,7 +110,7 @@ const Review = () => {
           return acc + parseInt(curr.Duration);
         }, 0);
       }
-  
+
       if (currentTopic.Type === "mcq") {
         totalMcq += currentTopic.questions?.reduce((acc, curr) => {
           return acc + parseInt(curr.Duration);
@@ -120,7 +118,7 @@ const Review = () => {
       }
     } else if (type === "section") {
       const section = topics[id];
-  
+
       if (section.Type === "essay") {
         totalEssay += section.essay?.reduce((acc, curr) => {
           return acc + parseInt(curr.Duration);
@@ -141,17 +139,17 @@ const Review = () => {
           return acc + parseInt(curr.Duration);
         }, 0);
       }
-  
+
       if (section.Type === "mcq") {
         totalMcq += section.questions?.reduce((acc, curr) => {
           return acc + parseInt(curr.Duration);
         }, 0);
       }
     }
-  
+
     const total =
       totalMcq + totalEssay + totalVideo + totalCompiler + totalFindAnswer;
-  
+
     return total;
   };
   const [noQuestionsMessage, setNoQuestionsMessage] = useState("");
@@ -166,7 +164,7 @@ const Review = () => {
       setNoQuestionsMessage("");
     }
   }, [questions]);
-  const totalTime=handleCalculateTime();
+  const totalTime = handleCalculateTime();
   return (
     <div className="font-dmSans text-sm font-bold">
       <Header
@@ -195,7 +193,9 @@ const Review = () => {
             <h2>{questionType}</h2>
             <div className="flex gap-1 ">
               <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
-              <p className="text-gray-400 text-xs self-center">{totalTime} mins</p>
+              <p className="text-gray-400 text-xs self-center">
+                {totalTime} mins
+              </p>
             </div>
           </span>
           {/* <span className="flex">
@@ -212,36 +212,36 @@ const Review = () => {
         {noQuestionsMessage && (
           <div className="text-red-500 text-center">{noQuestionsMessage}</div>
         )}
-     {questionType === "mcq" ? (
-  questions?.length > 0 ? (
-    [...questions] // Create a copy of the questions array
-      // Sort questions based on level
-      .sort((a, b) => {
-        // Define the order of levels
-        const levelsOrder = ['beginner', 'intermediate', 'advanced'];
+        {questionType === "mcq" ? (
+          questions?.length > 0 ? (
+            [...questions] // Create a copy of the questions array
+              // Sort questions based on level
+              .sort((a, b) => {
+                // Define the order of levels
+                const levelsOrder = ["beginner", "intermediate", "advanced"];
 
-        // Compare the levels of questions
-        const levelAIndex = levelsOrder.indexOf(a.QuestionLevel);
-        const levelBIndex = levelsOrder.indexOf(b.QuestionLevel);
+                // Compare the levels of questions
+                const levelAIndex = levelsOrder.indexOf(a.QuestionLevel);
+                const levelBIndex = levelsOrder.indexOf(b.QuestionLevel);
 
-        // Return the comparison result
-        return levelAIndex - levelBIndex;
-      })
-      // Map over sorted questions
-      .map((question, i) => (
-        <Mcq
-          key={i}
-          view={view}
-          type={type}
-          id={id}
-          Number={i}
-          question={question}
-          Title={question.Title}
-          Options={question.Options}
-          AnswerIndex={question.AnswerIndex}
-        />
-      ))
-  ): (
+                // Return the comparison result
+                return levelAIndex - levelBIndex;
+              })
+              // Map over sorted questions
+              .map((question, i) => (
+                <Mcq
+                  key={i}
+                  view={view}
+                  type={type}
+                  id={id}
+                  Number={i}
+                  question={question}
+                  Title={question.Title}
+                  Options={question.Options}
+                  AnswerIndex={question.AnswerIndex}
+                />
+              ))
+          ) : (
             <></>
           )
         ) : questionType === "findAnswer" ? (

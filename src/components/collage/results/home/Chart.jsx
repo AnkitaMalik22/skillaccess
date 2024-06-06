@@ -97,7 +97,7 @@ const ChartComp = () => {
         <div className="md:p-2 flex justify-between">
           <h2 className="font-extrabold text-lg ">Result Overview</h2>{" "}
           <span className="flex gap-4 text-sm font-bold">
-            <button
+            {/* <button
               className={`border-2 border-x-transparent border-transparent ${
                 toggle === 5 && " text-blue-600 border-b-blue-700"
               }`}
@@ -128,7 +128,7 @@ const ChartComp = () => {
               onClick={() => setToggle(2)}
             >
               Quarter
-            </button>
+            </button> */}
             <button
               className={`border-2 border-x-transparent border-transparent ${
                 toggle === 3 && " text-blue-600 border-b-blue-700"

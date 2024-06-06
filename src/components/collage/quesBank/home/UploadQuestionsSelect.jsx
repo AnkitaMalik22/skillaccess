@@ -633,54 +633,13 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               One Correct Answer
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
-
-          {/* code */}
-          {/* <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "code" && "border-blued "
-            }`}
-            onClick={() => setSelectQuestionType("code")}
-          >
-            {" "}
-            <div className="flex gap-5 font-dmSans w-1/3">
-              <div className="w-5 h-5 self-center">
-                {" "}
-                <input
-                  type="radio"
-                  name="ques"
-                  checked={selectQuestionType === "code"}
-                  className={`w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center   border-blue-700`}
-                  onClick={() => setSelectQuestionType("code")}
-                />
-              </div>
-
-              <img
-                src="../../../images/icons/exam.png"
-                alt=""
-                className="w-6 h-8 self-center"
-              />
-              <h2 className="text-xl font-normal self-center">Code</h2>
-            </div>
-          
-            <h2 className="text-xl font-normal self-center">
-              Programming Questions
-            </h2>
-            <img
-              src="../../../images/icons/dot.png"
-              alt=""
-              className="self-center w-5"
-            />
-          </div> 
-          
-          */}
-
-          {/* Essay */}
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
@@ -710,51 +669,13 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Open Text Answer
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
-          {/*  */}
-
-          {/* <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "video" && "border-blued "
-            }`}
-            onClick={() => setSelectQuestionType("video")}
-          >
-            {" "}
-            <div className="flex gap-5 font-dmSans w-1/3">
-              <div className="w-5 h-5 self-center">
-                <input
-                  type="radio"
-                  name="ques"
-                  checked={selectQuestionType === "video"}
-                  className="w-3 h-3 p-[.4rem] checked:bg-none  checked:border checked:border-blue-700 border-blue-700 checked:p-0 border-2  ring-transparent ring-2 checked:ring-blue-700 ring-offset-2   self-center "
-                  onClick={() => setSelectQuestionType("video")}
-                />
-              </div>
-              <img
-                src="../../../images/icons/exam.png"
-                alt=""
-                className="w-6 h-8 self-center"
-              />
-              <h2 className="text-xl font-normal self-center">Video</h2>
-            </div>
-            
-            <h2 className="text-xl font-normal self-center">
-              Record video to answer questions
-            </h2>
-            <img
-              src="../../../images/icons/dot.png"
-              alt=""
-              className="self-center w-5"
-            />
-          </div>
-           */}
-
-          {/* Find Answer*/}
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
@@ -784,11 +705,12 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Read Phrase and Answer them
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
           {/*  */}
         </div>

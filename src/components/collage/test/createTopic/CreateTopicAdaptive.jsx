@@ -48,9 +48,11 @@ const CreateTopic = () => {
     dispatch(createTopic(topic)).then((res) => {
       if (res.payload._id) {
         //navigate(`/collage/test/typeOfQuestions/${res.payload._id}`);
-        navigate(`/collage/test/addMcqToTopic/${res.payload._id}?type=mcq&addType=topic&level=adaptive`);
+        navigate(
+          `/collage/test/addMcqToTopic/${res.payload._id}?type=mcq&addType=topic&level=adaptive`
+        );
       } else {
-        toast.error("Error in creating topic. Please try again.");
+        toast.error("Invalid or duplicate name.");
         return;
       }
       setTopic({
@@ -68,9 +70,8 @@ const CreateTopic = () => {
 
       <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">
         <h2 className="w-full font-medium  text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-lg mb-10 sm:mb-1 text-lg">
-          Add questions to your assessment (optional). You can
-          use five question types: multiple-choice, essay, video ,code and find
-          answer.
+          Add questions to your assessment (optional). You can use five question
+          types: multiple-choice, essay, video ,code and find answer.
         </h2>
 
         <input

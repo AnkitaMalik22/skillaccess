@@ -51,6 +51,7 @@ import { getCreditDetails } from "./redux/collage/dummySlice";
 import CollageLayout from "./layout/Collage";
 import { getCollege } from "./redux/collage/auth/authSlice";
 import SecurityAppPage from "./pages/collage/settings/SecurityAppPage";
+import { toast } from "react-hot-toast";
 
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));

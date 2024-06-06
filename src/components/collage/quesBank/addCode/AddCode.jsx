@@ -126,13 +126,6 @@ const AddCode = () => {
     Title: "",
   });
 
-  // const [codeMap, setCodeMap] = useState({
-  //   Java: codeTemplates.Java,
-  //   Python: codeTemplates.Python,
-  //   Cpp: codeTemplates.Cpp,
-  //   C: codeTemplates.C,
-  // });
-
   const [editorValue, setEditorValue] = useState({
     initialCode: question?.code[question.codeLanguage]?.defaultCode,
     solutionCode: question?.code[question?.codeLanguage]?.solutionCode,
@@ -233,22 +226,13 @@ const AddCode = () => {
   }, []);
   const handleSave = (component) => {
     if (addType === "topic") {
-      if (
-        // question.codeQuestion != "" ||
-        question.code != "" ||
-        // question.codeLanguage != "" ||
-        question.verificationCode != ""
-      ) {
+      if (question.code != "") {
         if (question.code === "") {
           toast.error("Please fill the code");
 
           return;
         }
-        // if (question.verificationCode === "") {
-        //   toast.error("Please fill the code");
 
-        //   return;
-        // }
         if (question.Duration == 0) {
           toast.error("Please fill the duration");
 
@@ -259,11 +243,7 @@ const AddCode = () => {
 
           return;
         }
-        // if (question.codeLanguage === "") {
-        //   toast.error("Please fill the codelanguage");
 
-        //   return;
-        // }
         if (isPrev) {
           dispatch(
             editQuestionById({
@@ -276,49 +256,11 @@ const AddCode = () => {
           setCountDetail(currentTopic.compiler.length - 1);
 
           setIsPrev(false);
-          // setQuestion({
-          //   QuestionLevel: "beginner",
-
-          //   id: ID + Date.now(),
-          //   section: ID,
-          //   Title: "",
-          //   code: {},
-          //   Duration: 0,
-          //   codeQuestion: "",
-          //   codeLanguage: "",
-          //   parameters: [
-          //     {
-          //       paramName: "",
-          //       type: "String",
-          //     },
-          //   ],
-          //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-          //   output: [""],
-          // });
           resetQuestion();
           setToggle(1);
         } else {
           dispatch(addCompilerToTopic({ data: question, id: id, type: type }));
           dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
-          // setQuestion({
-          //   QuestionLevel: level,
-
-          //   id: ID + Date.now(),
-          //   section: ID,
-          //   Title: "",
-          //   code: {},
-          //   Duration: 0,
-          //   codeQuestion: "",
-          //   codeLanguage: "",
-          //   parameters: [
-          //     {
-          //       paramName: "",
-          //       type: "String",
-          //     },
-          //   ],
-          //   testcase: [{ input: "", expectedOutput: "", isHidden: true }],
-          //   output: [""],
-          // });
           resetQuestion();
           setToggle(1);
         }
@@ -408,14 +350,6 @@ const AddCode = () => {
                 </button>
               )}
             </div>
-            {/* <div className=" flex">
-              <button
-                className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
-                onClick={() => handleSave("next")}
-              >
-                <FaPlus className="self-center" /> Add Next Question
-              </button>
-            </div> */}
           </div>
         </div>
       </div>

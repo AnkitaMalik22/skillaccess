@@ -68,7 +68,7 @@ const Header = ({ selectQuestionType }) => {
     console.log(Duration);
     const vid = {
       ...topicToBeAdded.video,
-      QuestionLevel:"beginner",
+      QuestionLevel: "beginner",
       Duration: Duration,
       id: ID,
       section:
@@ -165,7 +165,7 @@ const Header = ({ selectQuestionType }) => {
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
         <button className="flex self-center ml-2 rounded-lg  gap-2">
-          <button onClick={() =>   navigate(-1)} className="mt-2 mr-3">
+          <button onClick={() => navigate(-1)} className="mt-2 mr-3">
             <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
           </button>
 
@@ -174,7 +174,7 @@ const Header = ({ selectQuestionType }) => {
               Create Assessment
             </h2>
 
-            <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
+            {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
               <h3 className="mr-2">Untitiled Assessments</h3>
               <span>
                 <img
@@ -192,7 +192,7 @@ const Header = ({ selectQuestionType }) => {
                 />
               </span>
               <h3>Add Questions</h3>
-            </div>
+            </div> */}
           </div>
         </button>
       </div>
