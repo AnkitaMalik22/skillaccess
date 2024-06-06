@@ -11,10 +11,12 @@ import { FcGoogle } from "react-icons/fc";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Layout from "./Layout";
+import CircularLoader from "../../../components/CircularLoader";
 // import 'react-phone-input-2/lib/bootstrap.css'
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loader, setLoader] = useState(false);
   const [phone, setPhone] = useState("+91");
   const [Credentials, setCredentials] = useState({
     Email: "",
@@ -56,7 +58,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoader(true);
     const { Email, Password, FirstName, LastName, University } = Credentials;
 
     const data = {
@@ -76,6 +78,8 @@ const Register = () => {
       }
     } catch (error) {
       console.log("Reject" + error);
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -314,7 +318,7 @@ const Register = () => {
               onClick={handleSubmit}
               disabled={isCreateAccountDisabled}
             >
-              Register
+              Register{loader && <CircularLoader />}
             </button>
             <h3 className=" text-center text-[#8F92A1] font-bold text-xs mb-2">
               OR

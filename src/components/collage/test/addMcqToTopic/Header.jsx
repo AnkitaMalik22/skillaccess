@@ -50,31 +50,8 @@ const Header = ({ question, setQuestion, id, type }) => {
         }
       );
       setQuestion({ Title: "", Options: [], Duration: 0, AnswerIndex: null });
-
-      // level === "adaptive"
-      //       ? navigate(`/collage/test/selectAdaptive?level=${level}`)
-      //       : navigate(`/collage/test/select?level=${level}`);
-
-      // api call to push questions to topic
     }
   };
-
-  // useEffect(() => {
-  //   console.log("calling --" , ADD_QUESTION_LOADING)
-  //   if(!ADD_QUESTION_LOADING){
-  //     console.log("calling 2 --" , ADD_QUESTION_LOADING)
-  //     level === "adaptive"
-  //       ? navigate(`/collage/test/selectAdaptive?level=${level}`)
-  //       : navigate(`/collage/test/select?level=${level}`);
-  //   }else{
-  //     console.log("loading")
-  //   }
-
-  //     return () => {
-  //       //navigate(-1);
-  //     }
-  //   }
-  //   , [ADD_QUESTION_LOADING]);
 
   return (
     <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">

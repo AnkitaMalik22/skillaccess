@@ -1,7 +1,7 @@
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate ,useSearchParams} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Header = ({ handleSubmit }) => {
   const navigate = useNavigate();
@@ -11,7 +11,14 @@ const Header = ({ handleSubmit }) => {
     <div className="flex  mx-auto justify-between mb-2 mt-5">
       <div>
         <button className="flex self-center  rounded-lg  gap-2">
-          <button onClick={() =>  level  === 'adaptive' ? navigate("/collage/test/selectAdaptive?level=adaptive") : navigate(-1)} className="mt-2 mr-3">
+          <button
+            onClick={() =>
+              level === "adaptive"
+                ? navigate("/collage/test/selectAdaptive?level=adaptive")
+                : navigate(-1)
+            }
+            className="mt-2 mr-3"
+          >
             <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
           </button>
 
@@ -19,7 +26,7 @@ const Header = ({ handleSubmit }) => {
             <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans ">
               Create Assessment
             </h2>
-            <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
+            {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
               <h3 className="mr-2">Untitiled Assessments</h3>
               <span>
                 <img
@@ -37,7 +44,7 @@ const Header = ({ handleSubmit }) => {
                 />
               </span>
               <h3>Add Questions</h3>
-            </div>
+            </div> */}
           </div>
         </button>
       </div>

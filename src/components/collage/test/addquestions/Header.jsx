@@ -14,7 +14,7 @@ const Header = ({ Q, page }) => {
   return (
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
-        <button className="flex self-center ml-2 rounded-lg  gap-2">
+        <button className="flex items-center ml-2 rounded-lg  gap-2">
           <button
             onClick={() =>
               level === "adaptive"
@@ -30,7 +30,7 @@ const Header = ({ Q, page }) => {
             <h2 className="sm:text-xl mt-2 text-left font-bold self-center text-3xl font-dmSans  w-full ">
               Create Assessment
             </h2>
-            <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3 ">
+            {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3 ">
               <h3 className="mr-2 ">{name}</h3>
               <span>
                 <img
@@ -51,7 +51,7 @@ const Header = ({ Q, page }) => {
                 />
               </span>
               <h3>Add Questions</h3>
-            </div>
+            </div> */}
           </div>
         </button>
       </div>

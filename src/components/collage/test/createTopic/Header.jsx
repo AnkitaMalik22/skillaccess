@@ -1,10 +1,13 @@
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Loader from "../addVideo/Loader";
 
 const Header = ({ next }) => {
   const navigate = useNavigate();
+  const { test, ADD_tOPIC_LOADING } = useSelector((state) => state.test);
   return (
     <div className="flex w-full mx-auto justify-between mb-6">
       {/* comp */}
@@ -22,12 +25,15 @@ const Header = ({ next }) => {
 
       <div className="flex gap-3">
         <button
-          className="bg-[#8f92a11a]  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center"
+          className="bg-[#0052CC] self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={() => next()}
         >
           Next Step{" "}
-          <FaArrowRightLong className="self-center text-lg text-white ml-4" />
-        </button>
+          {!ADD_tOPIC_LOADING && (
+            <FaArrowRightLong className="self-center text-lg text-white ml-4" />
+          )}
+          {ADD_tOPIC_LOADING && <Loader size="sm" />}
+        </button>{" "}
       </div>
     </div>
   );
