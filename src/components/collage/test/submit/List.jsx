@@ -8,7 +8,7 @@ import {
   setCurrentQuestionCount,
 } from "../../../../redux/collage/test/testSlice";
 
-const List = ({ question, number }) => {
+const List = ({ question, number, level }) => {
   const [type, setType] = useState();
   const [AnswerIndex, setAnswerIndex] = useState(question.AnswerIndex);
   const { currentQuestionCount } = useSelector((state) => state.test);

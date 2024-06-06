@@ -195,6 +195,43 @@ const Submit = () => {
     return total;
   };
 
+  const adaptiveCheck = (error) => {
+    let err = false;
+    for (let i = 0; i < 5; i++) {
+      // assuming we have topics[0] to topics[4]
+      if (topics[i]) {
+        let l1 = 0;
+        let l2 = 0;
+        let l3 = 0;
+        topics[i].questions.forEach((question) => {
+          if (question.QuestionLevel === "beginner") {
+            l1 += 1;
+          } else if (question.QuestionLevel === "intermediate") {
+            l2 += 1;
+          } else {
+            l3 += 1;
+          }
+        });
+        if (l1 < topics[i].totalL1Question) {
+          err = `Insufficient l1 question in topic ${i + 1}`;
+        }
+        if (l2 < topics[i].totalL2Question) {
+          err = `Insufficient l2 question in topic ${i + 1}`;
+        }
+        if (l3 < topics[i].totalL3Question) {
+          err = `Insufficient l3 question in topic ${i + 1}`;
+        }
+      }
+    }
+    error = err;
+    console.log(error);
+    return error;
+
+    // Example usage:
+    // const topics = [{ ... }, { ... }, { ... }, { ... }, { ... }];
+    // const result = checkQuestions(topics);
+    // console.log(result); // Logs the result of the check
+  };
   const handleSubmit = () => {
     // dispatch(setTest({
     //   totalTime,
@@ -234,6 +271,13 @@ const Submit = () => {
     }
     console.log("adaapt", testType);
     if (testType === "adaptive") {
+      let error = false;
+      error = adaptiveCheck(error);
+      console.log(error);
+
+      if (error) {
+        return toast.error(error);
+      }
       if (parseInt(totalQuestions) * 2 > questions.length) {
         console.log(totalQuestions, questions.length);
         toast.error(
@@ -356,6 +400,7 @@ const Submit = () => {
                 )}
                 {question.Title && !question.codeQuestion && (
                   <List
+                    level={testType}
                     question={question}
                     number={(selected - 1) * 10 + 1 + i}
                   />
