@@ -727,9 +727,11 @@ const testSlice = createSlice({
       })
       .addCase(createTopic.fulfilled, (state, action) => {
         state.TopicToBeAdded.id = action.payload._id;
+        state.ADD_tOPIC_LOADING = false;
       })
       .addCase(createTopic.rejected, (state, action) => {
         // return action.payload;
+        state.ADD_tOPIC_LOADING = false;
       })
 
       .addCase(getStudentResponse.pending, (state, action) => {

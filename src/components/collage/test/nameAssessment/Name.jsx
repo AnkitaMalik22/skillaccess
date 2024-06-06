@@ -200,8 +200,8 @@ const Name = () => {
       </div>
 
       {/* larger screens */}
-      <div className="  w-11/12 mx-auto min-h-[90vh] my-2 rounded-lg  justify-between  ">
-        <h2 className="w-full font-medium  text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-lg mb-10 sm:mb-1 text-lg">
+      <div className="  bg-white min-h-[90vh] mx-auto  ">
+        <h2 className="w-full text-lg font-medium text-[#7D7D7D] mt-10 mb-5">
           Add up to 10 custom questions to your assessment (optional). You can
           use five question types: multiple-choice, essay, video, code and find
           answer.
@@ -209,7 +209,7 @@ const Name = () => {
 
         <input
           type="text"
-          className={`w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-12  rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
+          className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
             errors.name ? "border-red-500" : "border-none"
           }`}
           placeholder="Name of the Assessment"
@@ -223,8 +223,8 @@ const Name = () => {
         <input
           type="tel"
           name="totalAttempts"
-          className={` w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
-            errors.totalAttempts ? "border-red-500" : "border-none"
+          className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+            errors.name ? "border-red-500" : "border-none"
           }`}
           placeholder="No. of Attempts"
           value={testDetails.totalAttempts}
@@ -236,8 +236,8 @@ const Name = () => {
         <input
           name="totalQuestions"
           type="tel"
-          className={` w-full bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
-            errors.totalQuestions ? "border-red-500" : "border-none"
+          className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+            errors.name ? "border-red-500" : "border-none"
           }`}
           placeholder="No. of Questions"
           value={testDetails.totalQuestions}
@@ -257,16 +257,16 @@ const Name = () => {
           onChange={handleChange}
         /> */}
 
-        <div className="flex justify-between items-center w-full  ">
+        <div className="flex justify-between items-center w-full gap-4  ">
           {/* Duration From */}
-          <div className=" bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0">
+          <div className=" mb-4 w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
             <label className="text-gray-400">Duration From *</label>
             <input
               type="datetime-local"
               name="duration_from"
               value={testDetails?.duration_from?.slice(0, 16)}
               onChange={handleChange}
-              className={`border-none bg-gray-100 ${
+              className={`border-none bg-gray-100 p-0 ml-10 ${
                 errors.duration ? "border-red-500" : ""
               }`}
               required
@@ -275,14 +275,14 @@ const Name = () => {
           </div>
 
           {/* Duration To */}
-          <div className=" bg-gray-100 h-16 px-6 text-lg font-bold py-2 mt-6 rounded-lg focus:outline-0">
+          <div className=" mb-4 w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
             <label className="text-gray-400">Duration To *</label>
             <input
               type="datetime-local"
               name="duration_to"
               value={testDetails?.duration_to?.slice(0, 16)}
               onChange={handleChange}
-              className={`border-none bg-gray-100 ${
+              className={`border-none bg-gray-100 p-0 ml-10 ${
                 errors.duration ? "border-red-500" : ""
               }`}
               required
@@ -293,7 +293,7 @@ const Name = () => {
         {errors.duration && (
           <span className="text-red-500 ml-5 pt-2">{errors.duration}</span>
         )}
-        <div className="mt-3 flex items-center gap-2 text-lg pl-4">
+        <div className="flex items-center gap-2 text-lg mb-4">
           <label
             htmlFor="isNegativeMarking"
             className="flex items-center gap-3 text-gray-400"
@@ -310,8 +310,8 @@ const Name = () => {
           </label>
         </div>
         <textarea
-          className={`w-full bg-gray-100 h-48 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${
-            errors.description ? "border-red-500" : "border-none"
+          className={`w-full h-40 rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+            errors.name ? "border-red-500" : "border-none"
           }`}
           placeholder="Add Description"
           name="description"
