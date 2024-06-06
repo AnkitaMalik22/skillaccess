@@ -187,6 +187,7 @@ const testState = {
 
   ADD_QUESTION_LOADING: false,
   GET_TOPICS_LOADING: false,
+  ADD_tOPIC_LOADING: false,
 };
 
 // export const getStudentResponse = createAsyncThunk("test/studentResponse",
@@ -721,6 +722,7 @@ const testSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(createTopic.pending, (state, action) => {
+        state.ADD_tOPIC_LOADING = true;
         // return action.payload;
       })
       .addCase(createTopic.fulfilled, (state, action) => {

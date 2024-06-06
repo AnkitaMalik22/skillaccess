@@ -110,20 +110,24 @@ const Header = ({
 
               headers.forEach((header) => {
                 if (
-                  !["Title", "Duration", "option", "AnswerIndex","QuestionLevel"].includes(
-                    header
-                  )
+                  ![
+                    "Title",
+                    "Duration",
+                    "option",
+                    "AnswerIndex",
+                    "QuestionLevel",
+                  ].includes(header)
                 ) {
                   setLoading(false);
                   toast.error(header + " is incorrect");
                   return;
                 }
               });
-console.log("count",count)
+              console.log("count", count);
 
               if (count !== 8) {
                 setLoading(false);
-                toast.error("invalid no. of fields",count);
+                toast.error("invalid no. of fields", count);
                 return;
               }
               for (let colNum = range.s.c; colNum <= count; colNum++) {
@@ -139,7 +143,8 @@ console.log("count",count)
                       header.v !== "option" &&
                       header.v !== "AnswerIndex" &&
                       header.v !== "Duration" &&
-                      header.v !== "Title" && header.v !== "QuestionLevel"
+                      header.v !== "Title" &&
+                      header.v !== "QuestionLevel"
                     ) {
                       toast.error("Invalid Headers");
                       setLoading(false);
@@ -307,7 +312,11 @@ console.log("count",count)
                 return;
               }
               headers.forEach((header) => {
-                if (!["Title", "Duration", "question","QuestionLevel"].includes(header)) {
+                if (
+                  !["Title", "Duration", "question", "QuestionLevel"].includes(
+                    header
+                  )
+                ) {
                   setLoading(false);
 
                   toast.error(header + " is incorrect");
@@ -335,7 +344,8 @@ console.log("count",count)
                     if (
                       header.v !== "question" &&
                       header.v !== "Duration" &&
-                      header.v !== "Title" && header.v !=="QuestionLevel"
+                      header.v !== "Title" &&
+                      header.v !== "QuestionLevel"
                     ) {
                       setLoading(false);
                       setError(true);
@@ -461,7 +471,7 @@ console.log("count",count)
               }
 
               if (
-                !["Title", "Duration","QuestionLevel"].every((header) =>
+                !["Title", "Duration", "QuestionLevel"].every((header) =>
                   headers.includes(header)
                 )
               ) {
@@ -477,7 +487,11 @@ console.log("count",count)
                   let header =
                     worksheet[XLSX.utils.encode_cell({ r: 0, c: colNum })];
 
-                  if (header.v !== "Duration" && header.v !== "Title" && header.v !== "QuestionLevel") {
+                  if (
+                    header.v !== "Duration" &&
+                    header.v !== "Title" &&
+                    header.v !== "QuestionLevel"
+                  ) {
                     setLoading(false);
                     toast.error("invalid header");
                     return;

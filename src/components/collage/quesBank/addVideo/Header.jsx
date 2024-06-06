@@ -155,7 +155,7 @@ const Header = () => {
 
   return (
     <div className="flex w-full mx-auto justify-between mb-6">
-      <div className="flex gap-3">
+      <div className="flex gap-3 items-center">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
           onClick={() => navigate(-1)}
@@ -166,7 +166,7 @@ const Header = () => {
           <h2 className="text-xl md:text-[28px] font-bold font-dmSans text-[#171717] mb-2">
             Create Question
           </h2>
-          <div className="flex gap-3 items-center text-[#567BF9] text-xs font-medium">
+          {/* <div className="flex gap-3 items-center text-[#567BF9] text-xs font-medium">
             <h3>Untitiled Assessments</h3>
             <div className="flex gap-2">
               <img
@@ -184,7 +184,7 @@ const Header = () => {
               />
               <h3>21 MINS</h3>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

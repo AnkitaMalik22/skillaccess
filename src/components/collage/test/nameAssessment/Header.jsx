@@ -10,7 +10,7 @@ const Header = ({ handleNext }) => {
       <div className="flex gap-3">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(`/collage/test`)}
         >
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>

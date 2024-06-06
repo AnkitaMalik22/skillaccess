@@ -1,22 +1,25 @@
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate ,useSearchParams} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Header = ({ Q, page }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useSearchParams();
   const topics = JSON.parse(localStorage.getItem("topics"));
-  const {name} = useSelector((state) => state.test);
+  const { name } = useSelector((state) => state.test);
   const level = search.get("level");
 
   return (
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div>
-        <button className="flex self-center ml-2 rounded-lg  gap-2">
+        <button className="flex items-center ml-2 rounded-lg  gap-2">
           <button
-            onClick={() =>   level === 'adaptive' ? navigate(`/collage/test/selectAdaptive?level=${level}`) : navigate(`/collage/test/select?level=${level}`)
+            onClick={() =>
+              level === "adaptive"
+                ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+                : navigate(`/collage/test/select?level=${level}`)
             }
             className="mt-2 mr-3"
           >
@@ -27,7 +30,7 @@ const Header = ({ Q, page }) => {
             <h2 className="sm:text-xl mt-2 text-left font-bold self-center text-3xl font-dmSans  w-full ">
               Create Assessment
             </h2>
-            <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3 ">
+            {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3 ">
               <h3 className="mr-2 ">{name}</h3>
               <span>
                 <img
@@ -46,7 +49,7 @@ const Header = ({ Q, page }) => {
                 />
               </span>
               <h3>Add Questions</h3>
-            </div>
+            </div> */}
           </div>
         </button>
       </div>
@@ -55,10 +58,7 @@ const Header = ({ Q, page }) => {
         <div className=" flex">
           <button
             className="self-center justify-center flex bg-blue-800 py-3 px-4 rounded-lg text-xs gap-2 text-white"
-            onClick={() =>
-              navigate("/collage/quesBank")
-                
-            }
+            onClick={() => navigate("/collage/quesBank")}
           >
             Next Step{" "}
             <FaArrowRightLong className="self-center text-lg text-white ml-4" />
