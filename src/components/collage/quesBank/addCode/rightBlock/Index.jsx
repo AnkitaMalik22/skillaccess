@@ -158,7 +158,7 @@ const Code = ({
             </h2>
             <div
               className={`w-full h-1 rounded-lg ${
-                toggle === 4 ? "bg-[#0052CC]" : ""
+                toggle === 3 ? "bg-[#0052CC]" : ""
               } `}
             ></div>
           </div>
@@ -216,7 +216,7 @@ const Code = ({
           />
         )}
       </div>
-      <h2> Code : {editorValue?.initialCode}</h2>
+      {/* <h2> Code : {editorValue?.initialCode}</h2> */}
     </div>
   );
 };
