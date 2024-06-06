@@ -217,7 +217,10 @@ const SelectTests = () => {
       }
 
       sectionCopy.questions = mixedQuestions.slice(0, Total);
-
+      sectionCopy.totalL2Question = Math.floor((2 * parseInt(totalQ)) / 3);
+      sectionCopy.totalL1Question = parseInt(totalQ);
+      sectionCopy.totalL3Question =
+        totalQ - Math.floor((2 * parseInt(totalQ)) / 3);
       // console.log(sectionCopy);
       if (mixedQuestions.length < totalQ) {
         toast.error("insufficient number of questions ");

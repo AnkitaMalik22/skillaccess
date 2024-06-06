@@ -123,7 +123,6 @@ const Header = ({
                   return;
                 }
               });
-              console.log("count", count);
 
               if (count !== 8) {
                 setLoading(false);
@@ -543,9 +542,16 @@ const Header = ({
 
   const handleNav = () => {
     if (type === "section") {
-      if (currentQuestionCount > totalQuestions) {
-        toast.error("too many questions");
+      if (level === "adaptive") {
+        if (currentQuestionCount > totalQuestions * 2) {
+          return toast.error("too many questions");
+        }
       } else {
+        if (currentQuestionCount > totalQuestions) {
+          return toast.error("too many questions");
+        }
+      }
+      {
         navigate(
           `/collage/test/${
             qt === "mcq"
