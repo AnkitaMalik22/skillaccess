@@ -280,8 +280,26 @@ const AssessmentReview = () => {
   const max = questions?.length / 10;
   const [selected, setSelected] = useState(1);
 
-  const [sections, setSections] = useState(response?.topics);
-  console.log(questions);
+  // const [sections, setSections] = useState(response?.topics);
+
+  const handleCode = (lang, code) => {
+    switch (lang) {
+      case "C":
+        return code?.C?.answerCode;
+      case "Cpp":
+        return code?.Cpp?.answerCode
+      case "Java":
+        return code?.Java?.answerCode
+      case "Python":
+        return code?.Python?.answerCode
+      default:
+        return 'No Code Found';
+    }
+  }
+
+
+
+  // console.log(questions);
   return (
     <div className="w-11/12 mx-auto py-5 md:py-10">
       <div className="flex w-full mx-auto justify-between mb-5">
@@ -297,9 +315,27 @@ const AssessmentReview = () => {
       {/* <Header page={"final"} handleSubmit={handleSubmit} /> */}
 
       <HeaderMarks response={response} totalQuestions={questions?.length} />
-      <div>
-        {questions
+
+      <div className="mt-16">
+        {questions 
           ?.filter((question) => question.StudentAnswerIndex !== undefined)
+          ?.slice((selected - 1) * 10, selected * 10)
+          .map((question, i) => {
+            return (
+              <div className="my-2">
+             
+                        <List
+                          question={question}
+                          number={(selected - 1) * 10 + 1 + i}
+                        />
+                     
+                
+              </div>
+            );
+          })}
+
+ {questions
+          ?.filter((question) => question.AnswerIndex == undefined )
           ?.slice((selected - 1) * 10, selected * 10)
           .map((question, i) => {
             return (
@@ -308,7 +344,7 @@ const AssessmentReview = () => {
                   <Code
                     question={question}
                     Title={question.codeQuestion}
-                    code={question.code}
+                    code={handleCode(question.codeLanguage,question.code)}
                     number={(selected - 1) * 10 + 1 + i}
                   />
                 )}
@@ -348,7 +384,6 @@ const AssessmentReview = () => {
               </div>
             );
           })}
-
         {/* iterate this list */}
       </div>
       <div className="absolute bottom-2 mt-20 flex gap-2 w-full justify-center">
