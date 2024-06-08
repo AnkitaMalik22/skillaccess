@@ -40,9 +40,12 @@ const StudentPoP = ({ onClose }) => {
     } else {
       console.log(student, "pop");
       setLoading(true);
-      dispatch(uploadStudents([student]));
+      dispatch(uploadStudents([student])).then(()=>{
+        dispatch(getStudents({ id: user?._id }));
+      
+      })
 
-      await dispatch(getStudents({ id: user?._id }));
+      // await dispatch(getStudents({ id: user?._id }));
       setLoading(false);
       setStudent({
         FirstName: "",
