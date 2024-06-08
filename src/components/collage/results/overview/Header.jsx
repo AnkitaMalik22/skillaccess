@@ -6,22 +6,22 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex justify-between mb-2 font-dmSans mt-4">
-      <span className="flex gap-4">
+    <div className="flex w-full mx-auto justify-between items-start ">
+      <div className="flex gap-3">
         <button
-          className="bg-[#D9E1E7]   ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16"
+          className="self-center object-center rounded-lg h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className="mx-auto  h-4 w-4 font-light" />
+          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
-        <div className="object-fill rounded-2xl ">
-          <img
-            src="../../images/overview.png"
-            alt="overview"
-            className="w-full"
-          />
-        </div>
-      </span>
+      </div>
+      <div className="object-fill rounded-2xl ">
+        <img
+          src="../../images/overview.png"
+          alt="overview"
+          className="w-full"
+        />
+      </div>
     </div>
   );
 };

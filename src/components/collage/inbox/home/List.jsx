@@ -207,7 +207,7 @@ const List = ({ show, inboxType, setInboxType }) => {
 
   console.log(arr);
   return (
-    <div className="bg-[#8F92A1] bg-opacity-5 rounded-t-xl pb-4">
+    <div className="bg-[#8F92A1] bg-opacity-5 rounded-2xl">
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
 
       {/* <dialog id="my_modal_3" className="modal">
@@ -223,7 +223,7 @@ const List = ({ show, inboxType, setInboxType }) => {
         </div>
       </dialog> */}
 
-      <div className="flex border-b border-gray-200 p-4 justify-between rounded-t-xl w-[99.9%] mx-auto">
+      <div className="flex border-b border-gray-200 p-4 justify-between mx-auto">
         <div className="flex gap-2 self-center">
           <input
             name="all"
@@ -266,112 +266,107 @@ const List = ({ show, inboxType, setInboxType }) => {
           {Total < totalmails && <FaChevronRight onClick={handleRight} />}
         </div>
       </div>
-      <div className="p-4 font-medium text-gray-400">
-        <h1>Today</h1>
-      </div>
+      <div className="p-4">
+        <h2 className="text-[#7D7D7D] text-base font-medium mb-4">Today</h2>
 
-      {arr?.map((el, i) => {
-        console.log(el);
-        return (
-          <div className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto ">
-            <div className="flex gap-4 ">
-              {el.isChecked ? (
-                <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center ">
-                  {" "}
-                  {/* <img
+        {arr?.map((el, i) => {
+          console.log(el);
+          return (
+            <div className="mb-4 bg-white rounded-lg flex justify-between p-4 ">
+              <div className="flex gap-4 items-center ">
+                {/* {el.isChecked ? (
+                  <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center "> */}{" "}
+                {/* <img
                     src={el.mail.from.avatar.url}
                     alt=""
                     width="10px"
                     height="10px"
                   /> */}
-                </div>
-              ) : (
-                <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center ">
-                  {" "}
-                  {/* <img
+                {/* </div>
+                ) : (
+                  <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center "> */}{" "}
+                {/* <img
                     src={el.mail.from.avatar.url}
                     alt=""
                     width="10px"
                     height="10px"
                   /> */}
+                {/* </div>
+                )} */}
+                <input
+                  name="k"
+                  onChange={(e) => handleCheckbox(e)}
+                  key={i}
+                  type="checkbox"
+                  checked={el?.isChecked || false}
+                  id={el._id}
+                  className={`border-none bg-[#DEEBFF] rounded self-center`}
+                />
+                {el?.mail?.bookmarked ? (
+                  <TiStarFullOutline
+                    className="self-center"
+                    onClick={async () => {
+                      await dispatch(removeBookmarkedMail(el?.mail?._id));
+                      await dispatch(getMail(queries));
+                    }}
+                  />
+                ) : (
+                  <TiStarOutline
+                    className="self-center"
+                    onClick={async () => {
+                      await dispatch(bookmarkMail(el?.mail?._id));
+                      await dispatch(getMail(queries));
+                    }}
+                  />
+                )}
+                <div className="w-5 h-5 rounded-full bg-blued self-center inline-flex justify-center items-center">
+                  <img
+                    src={el?.mail?.from?.avatar?.url}
+                    alt=""
+                    width="10px"
+                    height="10px"
+                  />
                 </div>
-              )}
-
-              <input
-                name="k"
-                onChange={(e) => handleCheckbox(e)}
-                key={i}
-                type="checkbox"
-                checked={el?.isChecked || false}
-                id={el._id}
-                className={`border-none bg-[#DEEBFF] rounded self-center`}
-              />
-
-              {el?.mail?.bookmarked ? (
-                <TiStarFullOutline
-                  className="self-center"
-                  onClick={async () => {
-                    await dispatch(removeBookmarkedMail(el?.mail?._id));
-                    await dispatch(getMail(queries));
-                  }}
-                />
-              ) : (
-                <TiStarOutline
-                  className="self-center"
-                  onClick={async () => {
-                    await dispatch(bookmarkMail(el?.mail?._id));
-                    await dispatch(getMail(queries));
-                  }}
-                />
-              )}
-
-              <div className="w-5 h-5 rounded-full bg-blued self-center inline-flex justify-center items-center">
-                <img
-                  src={el?.mail?.from?.avatar?.url}
-                  alt=""
-                  width="10px"
-                  height="10px"
-                />
-              </div>
-              <p
-                className={`text-sm font-medium cursor-pointer self-center ${
-                  el.seen ? " text-gray-400 " : ""
-                }`}
-                // onClick={() => navigate("/collage/inbox/mail?type=view")}
-                onClick={() => handleNav(i, el)}
-              >
-                {el.mail?.from?.FirstName}
-              </p>
-              <p
-                className={`text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer ${
-                  el.seen ? " text-gray-400 " : ""
-                }`}
-                onClick={() => handleNav(i, el)}
-              >
-                {el.mail?.subject}
-              </p>
-              <p
-                className="text-sm text-gray-400 line-clamp-1  cursor-pointer max-w-[40vw] self-center"
-                dangerouslySetInnerHTML={{ __html: el.mail?.message }}
-                // onClick={() => handleNav(i)}
-              />
-            </div>
-
-            <div className="flex gap-4 pr-4">
-              {el?.mail?.attachments?.length > 0 && (
-                <TfiClip
-                  className="rotate-180 text-2xl text-gray-400 cursor-pointer"
+                <p
+                  className={`text-sm font-medium cursor-pointer self-center first-letter:capitalize ${
+                    el.seen ? " text-gray-400 " : ""
+                  }`}
+                  // onClick={() => navigate("/collage/inbox/mail?type=view")}
+                  onClick={() => handleNav(i, el)}
+                >
+                  {el.mail?.from?.FirstName}
+                </p>
+                <p
+                  className={`text-sm font-medium sm:max-w-[150px] line-clamp-1 max-h-6 self-center cursor-pointer first-letter:capitalize ${
+                    el.seen ? " text-gray-400 " : ""
+                  }`}
+                  onClick={() => handleNav(i, el)}
+                >
+                  {el.mail?.subject}
+                </p>
+                <p
+                  className="text-sm text-gray-400 line-clamp-1  cursor-pointer max-w-[40vw] self-center"
+                  dangerouslySetInnerHTML={{ __html: el.mail?.message }}
                   // onClick={() => handleNav(i)}
                 />
-              )}
+              </div>
 
-              <p className="text-sm font-medium text-gray-400">
-                {el?.mail?.Date && convertDate(el?.mail?.Date)}
-              </p>
+              <div className="flex gap-4 items-center">
+                {el?.mail?.attachments?.length > 0 && (
+                  <TfiClip
+                    className="rotate-180 text-2xl text-gray-400 cursor-pointer"
+                    // onClick={() => handleNav(i)}
+                  />
+                )}
+
+                <p className="text-sm font-medium text-gray-400">
+                  {el?.mail?.Date && convertDate(el?.mail?.Date)}
+                </p>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       {/* iterable */}
     </div>
   );
