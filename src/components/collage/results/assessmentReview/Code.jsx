@@ -36,7 +36,7 @@ const List = ({ Title, number, code, question }) => {
                 <div>
                   <p
                     className="text-sm"
-                    dangerouslySetInnerHTML={{ __html: Title }}
+                    dangerouslySetInnerHTML={{ __html: question.Title }}
                   />
                 </div>
                 <div className="flex gap-2 self-center">
