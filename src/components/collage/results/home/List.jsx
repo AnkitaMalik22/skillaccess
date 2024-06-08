@@ -107,7 +107,7 @@ const List = ({ FilterdStudents }) => {
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
-                  {assessment?.percentage?.toFixed(2)}%
+                  {assessment?.avgPercentage?.toFixed(2)}%
                 </h2>
               </span>
             </div>
