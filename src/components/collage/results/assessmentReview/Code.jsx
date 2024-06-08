@@ -27,7 +27,10 @@ const List = ({ Title, number, code, question }) => {
             <div className="mb-4">
               <div className="flex w-full justify-between rounded-lg  pl-4 py-3 text-left text-sm font-medium  hover:border-[#95ACFA] hover:border">
                 <div>
-                  <p className="text-sm" dangerouslySetInnerHTML={{ __html: Title}}/>
+                  <p
+                    className="text-sm"
+                    dangerouslySetInnerHTML={{ __html: question.Title }}
+                  />
                 </div>
                 <div className="flex gap-2 self-center">
                   <Disclosure.Button className="flex gap-2 w-10/12 self-center">
