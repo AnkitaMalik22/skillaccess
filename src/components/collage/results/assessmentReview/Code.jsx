@@ -4,6 +4,7 @@ import { FaCaretDown } from "react-icons/fa";
 import { RiBookmark2Fill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
+import Editor from "@monaco-editor/react";
 
 const List = ({ Title, number, code, question }) => {
   const dispatch = useDispatch();
@@ -15,7 +16,13 @@ const List = ({ Title, number, code, question }) => {
       })
     );
   };
+  const getPassedTestCasesCount = () => {
+    return question.testcase.filter((tc) => tc.passed).length;
+  };
 
+  const passedTestCasesCount = getPassedTestCasesCount();
+  const totalTestCasesCount = question.testcase.length;
+  const testcasePassed = passedTestCasesCount / totalTestCasesCount;
   return (
     <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10">
       <button className=" bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
@@ -53,13 +60,27 @@ const List = ({ Title, number, code, question }) => {
                 leaveTo="transform scale-95 opacity-0"
               >
                 <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500">
-                  <div className="flex gap-2  rounded-lg p-3">
-                    <div className="w-6"></div>
+                  <div className="flex flex-col gap-2  rounded-lg p-3">
+                    {/* <div className="w-6"></div> */}
 
-                    <label className="text-blacktext-sm">
-                      {/* {code.toString().substring(0, 50)} */}
-                      {code}
-                    </label>
+                    <Editor
+                      theme="vs-light"
+                      height="300px"
+                      defaultLanguage={question.codeLangugae}
+                      value={code}
+                      options={{ readOnly: true }}
+                      className="border-2 border-[#95ACFA] rounded-[4px]"
+                    />
+                    <div
+                      className={`${
+                        passedTestCasesCount / totalTestCasesCount > 0.5
+                          ? "text-green-500"
+                          : "text-red-400"
+                      } mt-2 p-2 bg-[#E6EFFF] rounded-lg text-center text-sm font-semibold`}
+                    >
+                      Test Cases Passed: {passedTestCasesCount} /{" "}
+                      {totalTestCasesCount}
+                    </div>
                   </div>
                 </Disclosure.Panel>
               </Transition>
