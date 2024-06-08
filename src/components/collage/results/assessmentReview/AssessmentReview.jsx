@@ -314,7 +314,7 @@ const AssessmentReview = () => {
 
       <HeaderMarks response={response} totalQuestions={questions?.length} />
 
-      <div className="mt-16">
+      <div className="mt-10 mb-10">
         {questions
           ?.filter((question) => question.StudentAnswerIndex !== undefined)
           ?.slice((selected - 1) * 10, selected * 10)
@@ -381,7 +381,7 @@ const AssessmentReview = () => {
           })}
         {/* iterate this list */}
       </div>
-      <div className="absolute bottom-2 mt-20 flex gap-2 w-full justify-center">
+      <div className="flex gap-2 w-full justify-center">
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
           <FaChevronLeft
             className={`rotate-45 text-lg self-center ${
