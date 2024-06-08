@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex w-[98%] mx-auto justify-between mt-2 font-dmSans">
-      <span className="flex gap-4">
+    <div className="flex w-full mx-auto justify-between mb-5">
+      <div className="flex gap-3">
         <button
-          className="bg-[#D9E1E7]  self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16"
+          className="self-center object-center rounded-lg h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaAngleLeft className="mx-auto  h-4 w-4" />
+          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
-      </span>
+      </div>
     </div>
   );
 };

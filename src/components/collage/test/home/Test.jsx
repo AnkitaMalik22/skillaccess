@@ -180,7 +180,7 @@ export const Test = () => {
                         </h2>
                       </div>
                     </div>
-                    <div className="flex  mb-5 gap-2 justify-between">
+                    <div className="flex  mb-5 gap-2 justify-between items-center">
                       <div className="flex gap-2">
                         <button
                           className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"

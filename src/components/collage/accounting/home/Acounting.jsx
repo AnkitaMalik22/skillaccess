@@ -61,7 +61,7 @@ const Acounting = () => {
   //   },
   // ];
   return (
-    <div className="px-5 md:px-10 xl:px-20 py-4 md:py-8 xl:py-12  ">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <div className="w-full flex justify-between items-center mb-5 md:mb-10">
         <p className="font-bold text-[#171717] text-md font-[Heebo]">
           My Current Plan
