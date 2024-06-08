@@ -33,15 +33,19 @@ const Portfolio = ({ Portfolio }) => {
     window.open(url, "_blank");
   };
   return (
-    <div className="px-4  ">
+    <div className="mt-5">
       {Portfolio?.map((portfolio, index) => {
         return (
           <div
-            className=" grid grid-cols-4 text-center mt-3 bg-white rounded-lg w-11/12 mx-auto"
+            className=" grid grid-cols-4 text-center bg-white rounded-lg mx-auto"
             key={index}
           >
             <span className="w-full  px-10 py-2 text-sm font-dmSans grid ">
-              <img src={checkSrc(portfolio)} alt="wordPress" className="" />
+              <img
+                src={checkSrc(portfolio)}
+                alt="wordPress"
+                className="h-10 w-10"
+              />
             </span>
             <span
               className="self-center col-span-3"

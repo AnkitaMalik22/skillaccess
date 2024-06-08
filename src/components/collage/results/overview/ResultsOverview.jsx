@@ -45,7 +45,7 @@ const ResultsOverview = () => {
   // );
 
   return (
-    <div className="w-[95%] mx-auto ">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header />
       <Info user={user} assessment={assessment} />
 

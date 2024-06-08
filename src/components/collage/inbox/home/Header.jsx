@@ -26,7 +26,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
           refButton.current.click();
         }}
       ></div>
-      <span className="flex gap-4">
+      <div className="flex gap-4">
         <button
           className=" self-center ml-2 rounded-lg "
           // onClick={() => navigate(-1)}
@@ -36,7 +36,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
             className="mx-auto sm:h-6 sm:w-6 h-4 w-4"
           />
         </button>
-        <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
+        <h2 className="text-xl  font-bold self-center font-dmSans text-[#171717]">
           Inbox
         </h2>
 
@@ -48,7 +48,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
         >
           {({ open }) => (
             <div className="relative">
-              <div className=" mx-2  h-8 my-2 px-4 w-fit flex">
+              <div className="px-3 w-fit flex">
                 <div className="flex justify-between">
                   <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
                   <input
@@ -88,7 +88,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
         </Disclosure>
 
         {/*  */}
-      </span>
+      </div>
 
       <button
         className="bg-blue-700 py-2 px-3 self-center mr-2 rounded-lg flex gap-2 text-white"

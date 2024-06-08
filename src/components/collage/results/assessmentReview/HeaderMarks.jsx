@@ -20,48 +20,60 @@ const HeaderMarks = ({ response, totalQuestions }) => {
   }, [dispatch, assessmentId]);
   console.log(response);
   return (
-    <div className="w-full flex justify-between items-center bg-[#8f92a1] bg-opacity-5  rounded-[24px] py-7 mt-4">
-      <div className="flex flex-col pl-12 w-2/3">
-        <div className="">
-          <p className="text-lg text-[#171717]">Test name</p>
-
-          <p className="font-bold text-[#171717] text-[28px]">
-            {assessment?.name}
+    <div className="flex justify-between items-center bg-[#8F92A1] bg-opacity-5 p-5 md:p-8 gap-2 mb-5 md:mb-10 rounded-2xl">
+      <div className="flex flex-col w-1/2">
+        <div className="mb-4">
+          <p className="text-lg text-[#171717] text-opacity-50 font-bold">
+            Test Name
           </p>
+
+          <h2 className="font-bold text-[#171717] text-xl first-letter:capitalize">
+            {assessment?.name}
+          </h2>
+        </div>
+        <div className="flex justify-between mb-4">
+          <div className="w-1/2 ">
+            <p className="text-lg text-[#171717] text-opacity-50 font-bold">
+              Questions Attempted
+            </p>
+            <h2 className="font-bold text-[#171717] text-xl first-letter:capitalize">
+              {response?.totalQuestionsAttempted || 0}{" "}
+            </h2>
+          </div>{" "}
+          <div className="w-1/2">
+            <p className="text-lg text-[#171717] text-opacity-50 font-bold">
+              Correct Answers
+            </p>
+
+            <h2 className="font-bold text-[#171717] text-xl first-letter:capitalize">
+              {response?.correctAnswers}
+            </h2>
+          </div>
         </div>
         <div className="flex justify-between ">
           <div className="w-1/2">
-            <p className="text-lg">Time taken</p>
+            <p className="text-lg text-[#171717] text-opacity-50 font-bold">
+              Time Taken
+            </p>
 
-            <p className="font-bold text-[28px]">
+            <h2 className="font-bold text-[#171717] text-xl first-letter:capitalize">
               {response?.timeTaken < 60
                 ? "<1"
                 : Math.floor(response?.timeTaken / 60)}{" "}
               mins
-            </p>
-          </div>
-          <div className="w-1/2 ">
-            <p className="text-lg">Questions Attempted</p>
-            <p className="font-bold text-[28px]">
-              {response?.totalQuestionsAttempted || 0}{" "}
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-between ">
-          <div className="w-1/2">
-            <p className="text-lg">Correct Answers</p>
-
-            <p className="font-bold text-[28px]">{response?.correctAnswers}</p>
+            </h2>
           </div>
           <div className="w-1/2">
-            <p className="text-lg">Overall Result</p>
-            <p className="font-bold text-[28px]">
+            <p className="text-lg text-[#171717] text-opacity-50 font-bold">
+              Overall Result
+            </p>
+            <h2 className="font-bold text-[#171717] text-xl first-letter:capitalize">
               {response?.percentage?.toFixed(2)}%
-            </p>
+            </h2>
           </div>
         </div>
       </div>
-      <div class="mr-10 w-[200px] h-[200px] flex flex-row justify-center items-center gap-10 mt-22 mb-23  px-12 py-30 rounded-full shadow-md border border-solid border-black border-opacity-25 bg-gradient-to-b from-white to-white  border-[radial-gradient(circle at 100% 85%, #2fd790, rgba(47, 215, 144, 0) 100%)]">
+      <div className=" w-[200px] h-[200px] flex flex-row justify-center items-center gap-10 mt-22 mb-23  px-12 py-30 rounded-full shadow-md border border-[#2FD790]">
         <p className="text-[32px] font-bold text-[#2fd790]">
           {response?.totalMarks + "/" + assessment?.totalMarks}
         </p>

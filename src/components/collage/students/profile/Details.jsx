@@ -38,17 +38,17 @@ const Details = ({ student }) => {
         />
       )}
       {/* first section */}
-      <div className=" flex justify-between border-b  bg-gray-50 rounded-t-lg">
+      <div className=" flex justify-between border-b  bg-gray-50 rounded-t-2xl  p-4">
         {/* profile photo */}
-        <div className="flex gap-2 px-3 py-1 mt-2">
+        <div className="flex gap-2 items-center">
           <div className="min-w-[2.5rem] h-10  self-center rounded-lg">
             <img src={student?.avatar?.url} alt="" className="h-10 w-10" />
           </div>
-          <div className="ml-1 mt-1">
-            <h2 className="text-base  font-bold  py-1 ">
+          <div className="">
+            <h2 className="text-base  font-bold">
               {student.FirstName} {student.LastName}
             </h2>
-            <h2 className="text-sm   pb-2">{student.role}</h2>
+            <h2 className="text-sm">{student.role}</h2>
           </div>
         </div>
 
@@ -69,22 +69,36 @@ const Details = ({ student }) => {
       </div>
 
       {/* second section */}
-      <div className="border-b px-6  grid grid-cols-4 text-xs font-bold text-center py-4 bg-gray-50 ">
-        <span className="text-center">
-          <h2 className="text-gray-400 my-1 capitalize">EMAIL ADDRESS</h2>
-          <h2>{student.Email}</h2>
-        </span>
-        <span>
-          <h2 className="text-gray-400 my-1">PHONE NUMBER</h2>
-          <h2>{student.PhoneNumber}</h2>
-        </span>
-        <span>
-          <h2 className="text-gray-400 my-1">ADDRESS</h2>
-          <h2>{student?.Address}</h2>
-        </span>
-        <span className="text-center">
-          <h2 className="text-gray-400 my-1">WEBSITE</h2>
-          <h2 className="text-blue-700">
+      <div className="border-b p-4  grid grid-cols-4 text-xs font-bold text-center bg-gray-50 ">
+        <div className="text-center">
+          <h2 className="text-[#8F92A1] font-bold text-xs capitalize mb-1 tracking-[1px]">
+            EMAIL ADDRESS
+          </h2>
+          <h2 className="text-xs lowercase font-bold text-[#171717]">
+            {student.Email}
+          </h2>
+        </div>
+        <div>
+          <h2 className="text-[#8F92A1] font-bold text-xs capitalize mb-1 tracking-[1px]">
+            PHONE NUMBER
+          </h2>
+          <h2 className="text-xs font-bold text-[#171717]">
+            {student.PhoneNumber}
+          </h2>
+        </div>
+        <div>
+          <h2 className="text-[#8F92A1] font-bold text-xs capitalize mb-1 tracking-[1px]">
+            ADDRESS
+          </h2>
+          <h2 className="text-xs first-letter:capitalize font-bold text-[#171717]">
+            {student?.Address}
+          </h2>
+        </div>
+        <div className="text-center">
+          <h2 className="text-[#8F92A1] font-bold text-xs capitalize mb-1 tracking-[1px]">
+            WEBSITE
+          </h2>
+          <h2 className="text-xs first-letter:capitalize font-bold text-[#0052CC] lowercase">
             {" "}
             <a
               href={student.Website}
@@ -95,12 +109,12 @@ const Details = ({ student }) => {
               {student.Website}
             </a>
           </h2>
-        </span>
+        </div>
       </div>
 
       {/* third section */}
 
-      <div className="border-b  px-6 flex justify-between text-xs font-bold text-center p-4 bg-gray-50 ">
+      <div className="border-b  flex justify-between text-xs font-bold text-center p-4 bg-gray-50 items-center ">
         <h2 className="self-center font-bold text-base">Software Knowledge</h2>
         <span className="flex gap-2 flex-wrap text-sm">
           {/* <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " /> */}

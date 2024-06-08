@@ -19,7 +19,7 @@ const Header = () => {
           refButton.current.click();
         }}
       ></div> */}
-      <div className="flex gap-4 justify-between md:mb-16 mb-5">
+      <div className="flex gap-4 justify-between md:mb-10 mb-5">
         <div className="flex gap-2">
           <button
             className=" self-center ml-2 rounded-lg "
