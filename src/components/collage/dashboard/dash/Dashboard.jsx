@@ -30,17 +30,13 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const { students, companies, assessments, jobs, placedStudents } =
     useSelector((state) => state.dashboard);
-    const {user} =useSelector(
-      (state) => state.collageAuth
-    );
-  
+  const { user } = useSelector((state) => state.collageAuth);
 
-    useEffect(() => {
-      if(user){
-        dispatch(getCompany({collegeId : user?._id}));
-      }
-    }, [user]);
-  
+  useEffect(() => {
+    if (user) {
+      dispatch(getCompany({ collegeId: user?._id }));
+    }
+  }, [user]);
 
   useEffect(() => {
     dispatch(getStudent());
@@ -184,7 +180,7 @@ export default function Dashboard() {
 
               <button
                 className="text-[#95ACFA] text-sm mb-4 md:mb-8"
-                onClick={() => navigate("/collage/dashboard/companies")}
+                onClick={() => navigate("/collage/companies")}
               >
                 See All
               </button>
