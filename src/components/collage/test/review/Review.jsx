@@ -3,14 +3,16 @@ import Header from "./Header";
 import { LiaStopwatchSolid } from "react-icons/lia";
 import Mcq from "./Mcq";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import FindAnswer from "./FindAnswer";
 import Essay from "./Essay";
 import Code from "./Code";
 import Video from "./Video";
+import { toast } from "react-hot-toast";
 const { getTopicById } = require("../../../../redux/collage/test/testSlice");
 
 const Review = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   const [name, setName] = useState();

@@ -532,6 +532,8 @@ const Header = ({
         }
 
         setVisible(false);
+        toast.success("questions added successfully");
+        navigate(`/collage/test/select?level=${searchParams.get("level")}`);
       } else {
         setVisible(false);
       }
