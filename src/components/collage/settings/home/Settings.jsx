@@ -28,10 +28,10 @@ const Settings = () => {
   };
   const Navigate = useNavigate();
   return (
-    <div className="font-dmSans p-5 md:px-24 md:py-16 w-3/4 ">
+    <div className="font-dmSans w-11/12 mx-auto py-5 md:py-10">
       <Header />
 
-      <div className="w-full mt-16 flex-col gap-4 flex">
+      <div className="w-3/4 mt-16 flex-col gap-4 flex">
         {/* notis */}
         <div className="flex flex-col">
           <div

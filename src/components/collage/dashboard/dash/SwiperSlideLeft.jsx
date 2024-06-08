@@ -10,16 +10,14 @@ const SwiperSlideLeft = () => {
   const { newCompanies, loading } = useSelector((state) => state.dashboard);
   const navigate = useNavigate();
   useSelector((state) => console.log("state : ", state.dashboard));
-  const {user} =useSelector(
-    (state) => state.collageAuth
-  );
+  const { user } = useSelector((state) => state.collageAuth);
 
   useEffect(() => {
-if(user){
-  dispatch(getNewCompanies({collegeId : user?._id}));
-}
+    if (user) {
+      dispatch(getNewCompanies({ collegeId: user?._id }));
+    }
     console.log("newCompanies : ", newCompanies);
-  }, [dispatch,user]);
+  }, [dispatch, user]);
 
   const companies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -72,11 +70,11 @@ if(user){
                 className="w-full h-full rounded-lg"
               />
             </figure>
-            <span>
+            <div>
               <h3 className="text-xs text-[#8F92A1] font-bold text-center break-words ">
                 {company?.basic?.companyName}
               </h3>
-            </span>
+            </div>
           </div>
         </SwiperSlide>
       ))}

@@ -27,18 +27,18 @@ const Profile = () => {
 
   console.log(studentCV.studentResponses);
   return (
-    <div className="">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       {GET_STUDENT_LOADING ? (
         <Loader />
       ) : (
         <>
           {" "}
           <Header />
-          <div className="grid grid-cols-12 w-[96%] mt-1 mx-auto border-gray-200  ">
-            <div className="col-span-9 rounded-lg mt-3  ">
+          <div className="grid grid-cols-12 mx-auto border-gray-200  ">
+            <div className="col-span-9 rounded-2xl  ">
               <Details student={studentCV} />
               {/* toggler */}
-              <div className="bg-gray-50 p-4 mt-4 rounded-lg">
+              <div className="bg-gray-50 p-4">
                 <span className="grid grid-cols-4 text-xs font-bold border-b border-spacing-0 border-gray-200">
                   <h2
                     className={`${
