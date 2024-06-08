@@ -287,17 +287,15 @@ const AssessmentReview = () => {
       case "C":
         return code?.C?.answerCode;
       case "Cpp":
-        return code?.Cpp?.answerCode
+        return code?.Cpp?.answerCode;
       case "Java":
-        return code?.Java?.answerCode
+        return code?.Java?.answerCode;
       case "Python":
-        return code?.Python?.answerCode
+        return code?.Python?.answerCode;
       default:
-        return 'No Code Found';
+        return "No Code Found";
     }
-  }
-
-
+  };
 
   // console.log(questions);
   return (
@@ -317,34 +315,31 @@ const AssessmentReview = () => {
       <HeaderMarks response={response} totalQuestions={questions?.length} />
 
       <div className="mt-16">
-        {questions 
+        {questions
           ?.filter((question) => question.StudentAnswerIndex !== undefined)
           ?.slice((selected - 1) * 10, selected * 10)
           .map((question, i) => {
             return (
               <div className="my-2">
-             
-                        <List
-                          question={question}
-                          number={(selected - 1) * 10 + 1 + i}
-                        />
-                     
-                
+                <List
+                  question={question}
+                  number={(selected - 1) * 10 + 1 + i}
+                />
               </div>
             );
           })}
 
- {questions
-          ?.filter((question) => question.AnswerIndex == undefined )
+        {questions
+          ?.filter((question) => question.AnswerIndex == undefined)
           ?.slice((selected - 1) * 10, selected * 10)
           .map((question, i) => {
             return (
               <div className="my-2">
-                {question.codeQuestion && (
+                {question.testcase && (
                   <Code
                     question={question}
                     Title={question.codeQuestion}
-                    code={handleCode(question.codeLanguage,question.code)}
+                    code={handleCode(question.codeLanguage, question.code)}
                     number={(selected - 1) * 10 + 1 + i}
                   />
                 )}
@@ -358,7 +353,7 @@ const AssessmentReview = () => {
                 {
                   question.questions ||
                   (question.Options &&
-                    !question.codeQuestion &&
+                    !question.testcase &&
                     !question.videoFile)
                     ? //  &&
                       //   (question.AnswerIndex !== undefined
@@ -369,7 +364,7 @@ const AssessmentReview = () => {
                           number={(selected - 1) * 10 + 1 + i}
                         />
                       )
-                    : !question.codeQuestion &&
+                    : !question.testcase &&
                       !question.videoFile &&
                       !question.questions &&
                       !question.Options && (
