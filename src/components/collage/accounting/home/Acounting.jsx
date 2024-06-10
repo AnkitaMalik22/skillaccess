@@ -1,24 +1,60 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cancelAPlan,
   getAllPlans,
+  getSelectedPlans,
   selectAPlan,
 } from "../../../../redux/collage/account/paymentSlice";
 import { getCollege } from "../../../../redux/collage/auth/authSlice";
+import axios from "axios";
 
 const Acounting = () => {
+  const { user, isLoggedIn, uploadImg } = useSelector(
+    (state) => state.collageAuth
+  );
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { plans, select_loading, cancel_loading } = useSelector(
+  const { plans, select_loading, selectPlan, cancel_loading } = useSelector(
     (state) => state.payment
   );
-  const { selectedPlan, credit } = useSelector((state) => state.collageAuth);
+  const [requestStatus, setRequestStatus] = useState();
+  const { credit } = useSelector((state) => state.collageAuth);
+  const selectedPlan = user?.selectedPlan;
+  // console.log(requestStatus);
+
+  useEffect(() => {
+    getSelected();
+  }, []);
+
+  async function getSelected() {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/admin/selected-plans/${user?._id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+
+      // console.log(response.data);
+      setRequestStatus(response.data.selectedPlan);
+
+      return response.data.selectedPlan;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     dispatch(getAllPlans());
-  }, [dispatch]);
+
+    // dispatch(getSelectedPlans());
+  }, [dispatch, requestStatus]);
 
   //   useEffect(() => {
   // if(!cancel_loading){
@@ -105,11 +141,15 @@ const Acounting = () => {
                       </span>{" "}
                       per Month
                     </p>
+                    {requestStatus?.status === "" &&
+                      requestStatus?.planId === plan._id && (
+                        <p>Request Pending</p>
+                      )}
                   </div>
                 </div>
 
                 <div className="">
-                  {plan._id == selectedPlan?._id && credit.credit !== 0 ? (
+                  {plan._id == selectedPlan && credit.credit !== 0 ? (
                     <button
                       className="self-center  bg-[#007AFF]  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
                       onClick={() => {
@@ -128,6 +168,7 @@ const Acounting = () => {
                         console.log(plan);
                         dispatch(selectAPlan({ planId: plan._id })).then(() => {
                           dispatch(getCollege());
+                          getSelected();
                         });
                       }}
                     >
