@@ -292,12 +292,13 @@ const Students = () => {
           <div className="flex justify-center">
             <div className=" self-center">
               <span>
-                <div className="min-w-[4rem] bg-gray-300 rounded-lg h-2 mx-auto">
+                {/* <div className="min-w-[4rem] bg-gray-300 rounded-lg h-2 mx-auto">
                   <div className="w-3/4 bg-[#00875A] h-full rounded-lg"></div>
-                </div>
+                </div> */}
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
                   {" "}
-                  Good
+                  {/* Good */}
+                  Not available
                 </h2>
               </span>
             </div>
