@@ -307,6 +307,59 @@ const CollageLayout = ({ children }) => {
     }
   }, [dispatch, location.pathname]);
 
+  //do not remove
+  useEffect(() => {
+    if (change === true) {
+      if (path.match(/\/collage\/dashboard*/)) {
+        dispatch(setSelected(0));
+      }
+
+      if (path.match(/\/collage\/test*/)) {
+        dispatch(setSelected(1));
+      }
+
+      if (path.match(/\/collage\/companies*/)) {
+        dispatch(setSelected(2));
+      }
+
+      if (path.match(/\/collage\/students*/)) {
+        dispatch(setSelected(3));
+      }
+
+      if (path.match(/\/collage\/results*/)) {
+        dispatch(setSelected(4));
+      }
+
+      if (path.match(/\/collage\/quesBank*/)) {
+        dispatch(setSelected(5));
+      }
+
+      if (path.match(/\/collage\/profile*/)) {
+        dispatch(setSelected(7));
+      }
+
+      if (path.match(/\/collage\/inbox*/)) {
+        dispatch(setSelected(8));
+      }
+
+      if (path.match(/\/collage\/teams*/)) {
+        dispatch(setSelected(9));
+      }
+
+      if (path.match(/\/collage\/accounting*/)) {
+        dispatch(setSelected(10));
+      }
+
+      if (location.pathname.match(/\/collage\/settings*/)) {
+        dispatch(setSelected(11));
+      }
+
+      setChange(false);
+      navigate(path);
+    }
+
+    // toast.success(path);
+  });
   return (
     <>
       {visible && (
