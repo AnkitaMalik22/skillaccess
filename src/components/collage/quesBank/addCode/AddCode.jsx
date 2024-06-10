@@ -13,7 +13,10 @@ import {
   addCompilerToTopic,
 } from "../../../../redux/collage/test/testSlice";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
-import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import {
+  editBankQuestionById,
+  editQuestionById,
+} from "../../../../redux/collage/test/thunks/question";
 
 const AddCode = () => {
   const { id } = useParams();
@@ -103,7 +106,7 @@ const AddCode = () => {
   const [question, setQuestion] = useState({
     section: ID,
     id: ID + Date.now(),
-    QuestionLevel: level,
+    QuestionLevel: "beginner",
     Duration: 0,
     code: {
       Java: codeTemplates.Java,
@@ -127,20 +130,20 @@ const AddCode = () => {
   });
 
   const [editorValue, setEditorValue] = useState({
-    initialCode: question?.code[question.codeLanguage]?.defaultCode,
+    initialCode: question?.code[question?.codeLanguage]?.defaultCode,
     solutionCode: question?.code[question?.codeLanguage]?.solutionCode,
   });
 
   useEffect(() => {
-    if (question.code) {
-      const defaultValue = question.code[question.codeLanguage];
+    // if (question.code) {
+    const defaultValue = question?.code[question?.codeLanguage];
 
-      setEditorValue({
-        initialCode: defaultValue?.defaultCode,
-        solutionCode: defaultValue?.solutionCode,
-      });
-    }
-  }, [question.codeLanguage]);
+    setEditorValue({
+      initialCode: defaultValue?.defaultCode,
+      solutionCode: defaultValue?.solutionCode,
+    });
+    // }
+  }, [question.codeLanguage, question.code]);
 
   const handleEditorChange = (value, type) => {
     setEditorValue((prev) => ({ ...prev, [type]: value }));
@@ -171,13 +174,17 @@ const AddCode = () => {
       const list = [...question.parameters];
       list[index][name] = value;
       setQuestion({ ...question, parameters: list });
+    } else if (e.target.name === "QuestionLevel") {
+      setQuestion((prev) => {
+        return { ...prev, QuestionLevel: e.target.value };
+      });
     } else {
       setQuestion({ ...question, [name]: value });
     }
   };
   const resetQuestion = () => {
     setQuestion({
-      QuestionLevel: level,
+      QuestionLevel: "beginner",
       id: ID + Date.now(),
       section: ID,
       Title: "",
@@ -224,7 +231,7 @@ const AddCode = () => {
       });
     }
   }, []);
-  const handleSave = (component) => {
+  const handleSave = async (component) => {
     if (addType === "topic") {
       if (question.code != "") {
         if (question.code === "") {
@@ -259,10 +266,16 @@ const AddCode = () => {
           resetQuestion();
           setToggle(1);
         } else {
-          dispatch(addCompilerToTopic({ data: question, id: id, type: type }));
-          dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
+          await dispatch(
+            addCompilerToTopic({ data: question, id: id, type: type })
+          );
+          await dispatch(
+            addQuestionToTopic({ data: question, id: id, type: type })
+          );
+
           resetQuestion();
           setToggle(1);
+          navigate(`/collage/quesBank/topic/${id}`);
         }
 
         if (component === "save") {
@@ -275,7 +288,7 @@ const AddCode = () => {
       }
     } else {
       dispatch(
-        editQuestionById({
+        editBankQuestionById({
           type: "code",
           id: question._id,
           question: question,

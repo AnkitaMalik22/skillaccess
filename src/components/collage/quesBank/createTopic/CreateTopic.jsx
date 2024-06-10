@@ -20,9 +20,24 @@ const CreateTopic = () => {
   });
   const [isNameEmpty, setIsNameEmpty] = useState(false);
   const [isDescEmpty, setIsDescEmpty] = useState(false);
-
+  const [headingLimitExceeded, setHeadingLimitExceeded] = useState(false);
+  const [descLimitExceeded, setDescLimitExceeded] = useState(false);
   const changeHandler = (e) => {
-    const name = e.target.name;
+    const { name, value } = e.target;
+
+    if (name === "Heading" && value.length > 30) {
+      setHeadingLimitExceeded(true);
+      return; // Stop updating state if character limit is exceeded
+    } else {
+      setHeadingLimitExceeded(false);
+    }
+    if (name === "Description" && value.length > 70) {
+      setDescLimitExceeded(true);
+      return;
+    } else {
+      setDescLimitExceeded(false);
+    }
+    // const name = e.target.name;
     setTopic((prev) => {
       const copy = { ...prev };
       copy[name] = e.target.value;
@@ -65,7 +80,7 @@ const CreateTopic = () => {
   };
 
   return (
-    <div className="pt-8 w-11/12 mx-auto font-dmSans">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header next={handleNext} />
 
       <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">
@@ -88,6 +103,11 @@ const CreateTopic = () => {
         {isNameEmpty && (
           <p className="text-red-500 ml-4 ">Please fill in the name.</p>
         )}
+        {headingLimitExceeded && (
+          <p className="text-red-500 ml-4">
+            Character limit exceeded (50 characters max).
+          </p>
+        )}
 
         <textarea
           onChange={changeHandler}
@@ -100,6 +120,11 @@ const CreateTopic = () => {
         />
         {isDescEmpty && (
           <p className="text-red-500 ml-4">Please fill in the description.</p>
+        )}
+        {descLimitExceeded && (
+          <p className="text-red-500 ml-4">
+            Character limit exceeded (50 characters max).
+          </p>
         )}
       </div>
     </div>
