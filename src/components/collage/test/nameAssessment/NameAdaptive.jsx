@@ -271,8 +271,8 @@ const Name = () => {
       setErrors((prevErrors) => ({ ...prevErrors, duration: "" }));
     }
 
-    if (assessments.beginner.length > 0) {
-      assessments.beginner.forEach((assessment) => {
+    if (assessments.adaptive.length > 0) {
+      assessments.adaptive.forEach((assessment) => {
         if (assessment.name === testDetails.name) {
           flag = "true";
           toast.error("Duplicate name");

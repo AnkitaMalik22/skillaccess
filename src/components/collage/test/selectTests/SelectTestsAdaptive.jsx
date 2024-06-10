@@ -322,8 +322,8 @@ const SelectTests = () => {
 
       <div className="bg-white min-h-[90vh] mx-auto">
         <h2 className="w-full text-lg font-medium text-[#7D7D7D] mt-10 mb-3 font-dmSans">
-          Your Assessment can include upto 5 tests, Browse the test library and
-          add the most relevant tests.{" "}
+          Your Assessment can include up to 5 Question topics, browse the below
+          library to draft the Assessment.{" "}
         </h2>
 
         <div className="mb-5 md:mb-10 rounded-lg grid sm:grid-cols-5 grid-cols-2 gap-5">

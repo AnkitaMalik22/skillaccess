@@ -40,12 +40,10 @@ const StudentPoP = ({ onClose }) => {
     } else {
       console.log(student, "pop");
       setLoading(true);
-      dispatch(uploadStudents([student])).then(()=>{
+      await dispatch(uploadStudents([student])).then(() => {
         dispatch(getStudents({ id: user?._id }));
-      
-      })
-
-      // await dispatch(getStudents({ id: user?._id }));
+      });
+      toast.success("Students Uploaded Successfully");
       setLoading(false);
       setStudent({
         FirstName: "",

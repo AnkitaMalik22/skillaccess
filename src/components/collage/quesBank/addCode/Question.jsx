@@ -12,6 +12,19 @@ const Question = ({
     <div className="h-96 font-dmSans">
       <h2 className="font-bold text-xl">Question</h2>
       <select
+        name="QuestionLevel"
+        onChange={handleChanges}
+        value={question.QuestionLevel}
+        className="w-full rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E]"
+      >
+        <option value="">Level</option>
+
+        <option value={"beginner"}>Beginner</option>
+        <option value={"intermediate"}>Intermediate</option>
+        <option value={"advanced"}>Advanced</option>
+      </select>
+
+      <select
         name="codeLanguage"
         value={question.codeLanguage || "Java"}
         onChange={handleChanges}
