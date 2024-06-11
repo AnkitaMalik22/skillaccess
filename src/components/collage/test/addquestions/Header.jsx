@@ -42,6 +42,7 @@ const Header = ({ Q, page }) => {
               : navigate("/collage/test/final")
           }
         >
+          Next
           <FaArrowRightLong className="self-center text-lg text-white ml-4" />
         </button>
       </div>

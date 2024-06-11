@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllTransactions } from "../../../../redux/collage/account/paymentSlice";
 import { useNavigate } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
+import { capitalize, convertToReadable } from "../../../../util/getDate";
 
 const Transactions = () => {
   // const transactions = [1,2,3,4,5,6,];
@@ -12,11 +13,6 @@ const Transactions = () => {
   useEffect(() => {
     dispatch(getAllTransactions());
   }, [dispatch]);
-
-  const covertToDateFormat = (date) => {
-    const d = new Date(date);
-    return d.toDateString();
-  };
 
   return (
     <div className="w-11/12 mx-auto py-5 md:py-10">
@@ -46,9 +42,9 @@ const Transactions = () => {
             {!fetch_loading && transactions?.length > 0 ? (
               transactions?.map((transaction) => (
                 <div className="grid grid-cols-3 items-center justify-between bg-white w-full p-3 mb-3 rounded-lg">
-                  <div>{covertToDateFormat(transaction.Date)}</div>
-                  <div>{transaction.planName}</div>
-                  <div>{transaction.credit}</div>
+                  <div>{convertToReadable(transaction.date)}</div>
+                  <div>{capitalize(transaction.for)}</div>
+                  <div>{transaction.creditUsed}</div>
                 </div>
               ))
             ) : (

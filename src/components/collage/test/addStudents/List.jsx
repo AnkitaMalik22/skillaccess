@@ -110,12 +110,15 @@ const List = ({ uploadedStudents, setStudents, students }) => {
   // When rendering checkboxes, use the `checkedState` to determine each checkbox's checked property
 
   return (
-    <div className=" grid-cols-5 rounded-lg my-4 py-2 px-6    mx-auto  font-dmSans  text-sm   w-[98.9%] bg-white">
+    <div className=" grid-cols-5 mx-auto  font-dmSans  text-sm  ">
       {" "}
       {/* row-2 */}
       {uploadedStudents?.map((student) => {
         return (
-          <div className="flex flex-col w-full mb-3" key={student._id}>
+          <div
+            className="flex flex-col w-full mb-3 p-5 rounded-lg bg-white items-center"
+            key={student._id}
+          >
             {/* {console.log(student)} */}
             {/* <div className={` flex `}> */}
             <div className="flex self-center flex-row items-center justify-between w-full  ">
@@ -127,14 +130,14 @@ const List = ({ uploadedStudents, setStudents, students }) => {
                   height="50px"
                 />
               </div>
-              <h2 className="font-dmSans font-bold text-sm sm:text-lg text-start w-[30%]">
+              <h2 className="font-dmSans font-bold text-base text-start capitalize">
                 {student.FirstName} {student.LastName}
               </h2>
-              <h2 className="font-dmSans  sm:text-lg text-gray-400 w-[30%] ">
+              <h2 className="font-dmSans  text-base text-gray-400 lowercase">
                 {student.Email}
               </h2>
 
-              <span className="self-center ">
+              <div className="self-center ">
                 {/* <input
             type="checkbox"
             name=""
@@ -145,11 +148,11 @@ const List = ({ uploadedStudents, setStudents, students }) => {
           /> */}
                 <input
                   type="checkbox"
-                  className="p-1 rounded"
+                  className="p-1 rounded cursor-pointer"
                   checked={!!checkedState[student._id]} // Determine if checked
                   onChange={() => handleCheckboxChange(student._id)}
                 />
-              </span>
+              </div>
 
               {/* </div> */}
             </div>

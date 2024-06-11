@@ -105,7 +105,7 @@ export const getAllTransactions = createAsyncThunk(
         }
       );
 
-      return response.data.transactions;
+      return response.data.transactions.reverse();
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
