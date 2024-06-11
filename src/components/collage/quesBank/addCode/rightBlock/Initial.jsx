@@ -9,10 +9,16 @@ const Initial = ({
   setEditorValue,
   editorValue,
 }) => {
+  if (selectedLanguage) {
+    selectedLanguage = selectedLanguage.toLowerCase();
+    selectedLanguage =
+      selectedLanguage.charAt(0).toUpperCase() + selectedLanguage.slice(1);
+  }
   useEffect(() => {
     const ques = JSON.parse(localStorage.getItem("qbQues"));
-    {
-      setEditorValue(ques?.code[selectedLanguage]?.defaultCode);
+
+    if (ques?.code?.[selectedLanguage]?.defaultCode) {
+      setEditorValue(ques?.code[selectedLanguage]);
     }
   }, []);
   return (
@@ -20,7 +26,7 @@ const Initial = ({
       <Editor
         theme="vs-light"
         height="535px"
-        defaultLanguage={selectedLanguage || "Java"}
+        defaultLanguage={selectedLanguage?.toLowerCase() || "java"}
         value={editorValue}
         onChange={(value) => handleEditorChange(value, "defaultCode")}
         className="border-2  border-gray-300"

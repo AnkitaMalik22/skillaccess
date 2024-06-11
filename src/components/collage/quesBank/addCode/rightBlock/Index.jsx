@@ -16,12 +16,88 @@ const Code = ({
   setEditorValue,
   editorValue,
 }) => {
-  useEffect(() => {
-    const ques = JSON.parse(localStorage.getItem("qbQues"));
+  // useEffect(() => {
+  //   const ques = JSON.parse(localStorage.getItem("qbQues"));
 
-    setEditorValue(ques?.code[question.codeLanguage || "Java"]?.defaultCode);
-  }, []);
-  console.log(editorValue);
+  //   console.log("runagain local", ques);
+
+  //   setEditorValue(ques?.code[selectedLanguage]);
+  // }, []);
+  // const codeTemplates = {
+  //   Java: {
+  //     defaultCode: `import java.io.*;
+
+  // public class Main {
+  //   public static void main(String[] args) {
+  //     // Insert your Java initial code here
+  //   }
+  // }`,
+  //     solutionCode: `import java.io.*;
+
+  // public class Main {
+  //   public static void main(String[] args) {
+  //     // Insert your Java solution code here
+  //   }
+  // }`,
+  //   },
+  //   Python: {
+  //     defaultCode: `def main():
+  //     # Insert your Python initial code here
+
+  // if __name__ == "__main__":
+  //     main()`,
+  //     solutionCode: `def main():
+  //     # Insert your Python solution code here
+
+  // if __name__ == "__main__":
+  //     main()`,
+  //   },
+  //   Cpp: {
+  //     defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
+  //     solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
+  //   },
+  //   C: {
+  //     defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
+  //     solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
+  //   },
+  // };
+
+  // const [codeMap, setCodeMap] = useState({
+  //   Java: codeTemplates.Java,
+  //   Python: codeTemplates.Python,
+  //   Cpp: codeTemplates.Cpp,
+  //   C: codeTemplates.C,
+  // });
+
+  // const [editorValue, setEditorValue] = useState({
+  //   initialCode: (codeMap[question.codeLanguage] || codeTemplates.Java)
+  //     ?.defaultCode,
+  //   solutionCode: (codeMap[question.codeLanguage] || codeTemplates.Java)
+  //     ?.solutionCode,
+  // });
+
+  // useEffect(() => {
+  //   const defaultValue = codeMap[question.codeLanguage] || codeTemplates.Java;
+  //   setEditorValue({
+  //     initialCode: defaultValue.defaultCode,
+  //     solutionCode: defaultValue.solutionCode,
+  //   });
+  // }, [question.codeLanguage, codeMap]);
+
+  // const handleEditorChange = (value, type) => {
+  //   setEditorValue((prev) => ({ ...prev, [type]: value }));
+  //   handleChanges({ target: { name: type, value } });
+
+  //   setCodeMap((prevCodeMap) => ({
+  //     ...prevCodeMap,
+  //     [question.codeLanguage]: {
+  //       ...prevCodeMap[question.codeLanguage],
+  //       [type]: value,
+  //     },
+  //   }));
+  // };
+
+  // question.code = codeMap;
   const selectedLanguage = question.codeLanguage.toLowerCase();
 
   return (
@@ -99,23 +175,23 @@ const Code = ({
           //   />
           // ) :
 
-          // editorValue?.initialCode && (
-          // <>
-          //   {" "}
-          <Initial
-            // question={question} handleChanges={handleChanges}
-            selectedLanguage={selectedLanguage}
-            // editorValue={editorValue}
-            // handleEditorChange={handleEditorChange}
-            editorValue={editorValue?.initialCode}
-            setEditorValue={setEditorValue}
-            handleEditorChange={(value) =>
-              handleEditorChange(value, "defaultCode")
-            }
-          />
-        ) : //   </>
-        // )
-        toggle === 2 ? (
+          editorValue.defaultCode && (
+            <>
+              {" "}
+              <Initial
+                // question={question} handleChanges={handleChanges}
+                selectedLanguage={selectedLanguage}
+                // editorValue={editorValue}
+                // handleEditorChange={handleEditorChange}
+                editorValue={editorValue.defaultCode}
+                setEditorValue={setEditorValue}
+                handleEditorChange={(value) =>
+                  handleEditorChange(value, "defaultCode")
+                }
+              />
+            </>
+          )
+        ) : toggle === 2 ? (
           // <Initial question={question} handleChanges={handleChanges} />
           <TestCases
             question={question}
