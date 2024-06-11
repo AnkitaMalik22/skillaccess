@@ -18,6 +18,46 @@ import {
   editQuestionById,
 } from "../../../../redux/collage/test/thunks/question";
 
+const codeTemplates = {
+  Java: {
+    defaultCode: `import java.io.*;
+  
+  public class Main {
+    public static void main(String[] args) {
+      // Insert your Java initial code here
+    }
+  }`,
+    solutionCode: `import java.io.*;
+  
+  public class Main {
+    public static void main(String[] args) {
+      // Insert your Java solution code here
+    }
+  }`,
+  },
+  Python: {
+    defaultCode: `def main():
+      # Insert your Python initial code here
+  
+  if __name__ == "__main__":
+      main()`,
+    solutionCode: `def main():
+      # Insert your Python solution code here
+  
+  if __name__ == "__main__":
+      main()`,
+  },
+  Cpp: {
+    defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
+    solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
+  },
+  C: {
+    defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
+    solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
+  },
+};
+let ID;
+
 const AddCode = () => {
   const { id } = useParams();
   const { topics, currentTopic } = useSelector((state) => state.test);
@@ -60,45 +100,7 @@ const AddCode = () => {
 
   const addType = searchParams.get("addType");
   const [toggle, setToggle] = useState(1);
-  const codeTemplates = {
-    Java: {
-      defaultCode: `import java.io.*;
-  
-  public class Main {
-    public static void main(String[] args) {
-      // Insert your Java initial code here
-    }
-  }`,
-      solutionCode: `import java.io.*;
-  
-  public class Main {
-    public static void main(String[] args) {
-      // Insert your Java solution code here
-    }
-  }`,
-    },
-    Python: {
-      defaultCode: `def main():
-      # Insert your Python initial code here
-  
-  if __name__ == "__main__":
-      main()`,
-      solutionCode: `def main():
-      # Insert your Python solution code here
-  
-  if __name__ == "__main__":
-      main()`,
-    },
-    Cpp: {
-      defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
-      solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
-    },
-    C: {
-      defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
-      solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
-    },
-  };
-  let ID;
+
   searchParams.get("topicId") !== null
     ? (ID = searchParams.get("topicId"))
     : (ID = id);
@@ -129,21 +131,24 @@ const AddCode = () => {
     Title: "",
   });
 
-  const [editorValue, setEditorValue] = useState({
-    initialCode: question?.code[question?.codeLanguage]?.defaultCode,
-    solutionCode: question?.code[question?.codeLanguage]?.solutionCode,
+  const [editorValue, setEditorValue] = useState(() => {
+    if (question && question.code && question.codeLanguage)
+      return {
+        defaultCode: question?.code[question?.codeLanguage]?.defaultCode,
+        solutionCode: question?.code[question?.codeLanguage]?.solutionCode,
+      };
   });
 
   useEffect(() => {
-    // if (question.code) {
-    const defaultValue = question?.code[question?.codeLanguage];
+    if (question.code) {
+      const defaultValue = question.code[question.codeLanguage];
 
-    setEditorValue({
-      initialCode: defaultValue?.defaultCode,
-      solutionCode: defaultValue?.solutionCode,
-    });
-    // }
-  }, [question.codeLanguage, question.code]);
+      setEditorValue({
+        defaultCode: defaultValue?.defaultCode,
+        solutionCode: defaultValue?.solutionCode,
+      });
+    }
+  }, [question.codeLanguage]);
 
   const handleEditorChange = (value, type) => {
     setEditorValue((prev) => ({ ...prev, [type]: value }));
@@ -226,7 +231,7 @@ const AddCode = () => {
       const defaultValue = ques.code[question.codeLanguage];
 
       setEditorValue({
-        initialCode: defaultValue?.defaultCode,
+        defaultCode: defaultValue?.defaultCode,
         solutionCode: defaultValue?.solutionCode,
       });
     }
@@ -300,11 +305,9 @@ const AddCode = () => {
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
-  console.log(question);
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
-  console.log(question);
 
   return (
     <div className="">
