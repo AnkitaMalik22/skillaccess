@@ -57,10 +57,10 @@ const AddQuestionType = () => {
   };
 
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto py-5 md:py-10">
       <Header selectQuestionType={selectQuestionType} />
 
-      <div className="w-11/12 mx-auto mt-20">
+      <div className="mt-5">
         {/* larger screens */}
 
         <div className="   my-2 rounded-lg tracking-wide justify-between  ">
@@ -75,7 +75,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "mcq"?'border-blued':'opacity-70'
+              selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("mcq")}
           >
@@ -118,7 +118,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "short"?'border-blued':'opacity-70'
+              selectQuestionType === "short" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("short")}
           >
@@ -153,7 +153,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "long"?'border-blued':'opacity-70'
+              selectQuestionType === "long" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("long")}
           >
