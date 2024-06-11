@@ -752,6 +752,7 @@ const collageAuthSlice = createSlice({
       })
       .addCase(getCollege.pending, (state, action) => {
         // state.status = "loading";
+        // state.USER_LOADING = true;
         console.log("pending");
       })
       .addCase(getCollege.fulfilled, (state, action) => {
@@ -763,6 +764,7 @@ const collageAuthSlice = createSlice({
         };
         state.balance = action.payload?.balance;
         state.selectedPlan = action.payload?.credit[0];
+        // state.USER_LOADING = false;
         localStorage.setItem("userId", action.payload.college._id);
 
         // Add any fetched posts to the array
@@ -772,6 +774,7 @@ const collageAuthSlice = createSlice({
         // state.logoutError = action.payload;
         console.log("rej");
         state.isLoggedIn = false;
+        // state.USER_LOADING = false;
         // alert("You are logged out! Please login again");
         // window.location.href = "/";
 
