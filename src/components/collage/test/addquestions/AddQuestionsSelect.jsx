@@ -62,10 +62,10 @@ const AddQuestionsSelect = () => {
     }
   };
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto py-5 md:py-10 ">
       <HeaderSelect Q={selectQuestionType} />
 
-      <div className="w-11/12 mx-auto mt-20">
+      <div className=" mx-auto mt-20">
         {/* larger screens */}
         <div className="   my-2 rounded-lg tracking-wide justify-between  ">
           <h2 className="font-normal text-xs sm:text-sm text-gray-400  mt-8 tracking-wide ">
@@ -79,7 +79,7 @@ const AddQuestionsSelect = () => {
           {/* mcq */}
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "mcq"?'border-blued':'opacity-70'
+              selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("mcq")}
           >
@@ -120,7 +120,7 @@ const AddQuestionsSelect = () => {
           {/* code */}
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "code" ?'border-blued':'opacity-70'
+              selectQuestionType === "code" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("code")}
           >
@@ -159,7 +159,7 @@ const AddQuestionsSelect = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "essay"?'border-blued':'opacity-70'
+              selectQuestionType === "essay" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("essay")}
           >
@@ -195,7 +195,7 @@ const AddQuestionsSelect = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "video"?'border-blued':'opacity-70'
+              selectQuestionType === "video" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("video")}
           >
@@ -233,7 +233,9 @@ const AddQuestionsSelect = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "findAnswer"?'border-blued':'opacity-70'
+              selectQuestionType === "findAnswer"
+                ? "border-blued"
+                : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("findAnswer")}
           >

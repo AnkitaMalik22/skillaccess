@@ -224,16 +224,16 @@ const AddMcqToTopic = () => {
   };
   // console.log(question);
   return (
-    <div>
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header
         question={question}
         setQuestion={setQuestion}
         id={id}
         type={type}
       />
-      <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
-        <div className="flex flex-wrap gap-2 sm:w-[95.7%] mx-auto ">
-          <span className="w-[49%] ">
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl pt-4">
+        <div className="flex flex-wrap gap-5 md:flex-nowrap mx-auto ">
+          <span className="w-1/2">
             <h2 className="font-bold mb-2">Question</h2>
             <div className="flex w-full justify-between">
               <select
@@ -242,7 +242,7 @@ const AddMcqToTopic = () => {
                 value={question.Duration}
                 id=""
                 className={`${
-                  level === "adaptive" ? "w-[65%]" : "w-full"
+                  level === "adaptive" ? " w-2/3" : "w-full"
                 } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
               >
                 <option value={0}>Time to answer the question</option>
@@ -257,7 +257,7 @@ const AddMcqToTopic = () => {
                   name="QuestionLevel"
                   onChange={handleChanges}
                   value={question.QuestionLevel}
-                  className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                  className=" w-1/3 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
                 >
                   <option value="">Level</option>
 
@@ -280,7 +280,7 @@ const AddMcqToTopic = () => {
               name="Title"
             />
           </span>
-          <span className="w-[49%]">
+          <span className="w-1/2">
             <h2 className="font-bold mb-2">Test description</h2>
             <div className="w-11/12 flex flex-col gap-2">
               <div className="px-5 pb-4 flex flex-col gap-4">
@@ -478,7 +478,7 @@ const AddMcqToTopic = () => {
             </div>
           </span>
         </div>
-        <div className="absolute bottom-10 flex right-8 gap-2">
+        <div className="flex justify-between gap-2">
           {" "}
           <div className=" flex gap-2">
             {

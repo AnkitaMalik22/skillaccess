@@ -14,7 +14,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const AddMcq = () => {
-  const { topics,ADD_QUESTION_LOADING } = useSelector((state) => state.test);
+  const { topics, ADD_QUESTION_LOADING } = useSelector((state) => state.test);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,7 +30,6 @@ const AddMcq = () => {
 
   const level = searchParams.get("level");
   const addType = searchParams.get("addType");
-
 
   const [question, setQuestion] = useState({
     QuestionLevel: level === "adaptive" ? "beginner" : level,
@@ -126,7 +125,7 @@ const AddMcq = () => {
     }
   };
 
-  const handleAddQuestion = async(type) => {
+  const handleAddQuestion = async (type) => {
     console.log(
       question.Title,
       question.Title === "",
@@ -159,10 +158,10 @@ const AddMcq = () => {
       return;
     } else {
       if (isPrev) {
-        console.log("calling 1 --" , addType)
-       await dispatch(
+        console.log("calling 1 --", addType);
+        await dispatch(
           addMcq({ question: question, id: id, prev: true, index: count + 1 })
-        )
+        );
         // .then(() => {
 
         await setIsPrev(false);
@@ -174,33 +173,28 @@ const AddMcq = () => {
           Duration: 0,
           AnswerIndex: null,
           section: search.get("topicId"),
-        })
-        await setCount(topics[id].questions.length - 1)
-        if (type === "save" && addType !== 'test') {
+        });
+        await setCount(topics[id].questions.length - 1);
+        if (type === "save" && addType !== "test") {
           level === "adaptive"
             ? navigate(`/collage/test/selectAdaptive?level=${level}`)
             : navigate(`/collage/test/select?level=${level}`);
-        }else{
+        } else {
           navigate(-1);
         }
         // });
-        
       } else {
-        dispatch(addMcq({ question: question, id: id, prev: false }))
+        dispatch(addMcq({ question: question, id: id, prev: false }));
         // .then(()=>{
-          console.log("calling 2 --" , addType)
-          if (type === "save" && addType !== 'test')
-          {
+        console.log("calling 2 --", addType);
+        if (type === "save" && addType !== "test") {
           level === "adaptive"
             ? navigate(`/collage/test/selectAdaptive?level=${level}`)
             : navigate(`/collage/test/select?level=${level}`);
-
-          }else if (type !== "save" && addType == 'test'){
-           
-          }else{
-            navigate(-1);
-
-          }
+        } else if (type !== "save" && addType == "test") {
+        } else {
+          navigate(-1);
+        }
         // })
         await setQuestion({
           QuestionLevel: level === "adaptive" ? "beginner" : level,
@@ -211,23 +205,19 @@ const AddMcq = () => {
           AnswerIndex: null,
           section: search.get("topicId"),
         });
-       
+
         //   if(!ADD_QUESTION_LOADING){
         //    navigate(-1);
         //  }
         // console.log("ADD_QUESTION_LOADING",ADD_QUESTION_LOADING)
-      
-      
-   
       }
     }
   };
 
-
   // useEffect(() => {
   //   console.log("ADD_QUESTION_LOADING 1",ADD_QUESTION_LOADING)
   // if(!ADD_QUESTION_LOADING){
-  //       navigate(-1); 
+  //       navigate(-1);
   // }
 
   //   return () => {
@@ -235,13 +225,9 @@ const AddMcq = () => {
   //   }
   // }
   // , [ADD_QUESTION_LOADING]);
-    
-
-
-
 
   return (
-    <div>
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header
         handleSave={handleAddQuestion}
         topics={topics}
@@ -252,42 +238,42 @@ const AddMcq = () => {
         isPrev={isPrev}
         setIsPrev={setIsPrev}
       />
-      <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
-        <div className="flex flex-wrap gap-2 sm:w-[95.7%] mx-auto ">
-          <span className="w-[49%] ">
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl pt-4">
+        <div className="flex flex-wrap gap-5 md:flex-nowrap mx-auto ">
+          <span className="w-1/2 ">
             <h2 className="font-bold mb-2">Question</h2>
             <div className="flex w-full justify-between">
-            <select
-              name="Duration"
-              onChange={handleChanges}
-              value={question.Duration}
-              id=""
-              className={`${
-                level === "adaptive" ? "w-[65%]" : "w-full"
-              } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
-            >
-              <option value={0}>Time to answer the question</option>
-
-              <option value={1}>1 minute</option>
-              <option value={2}>2 minutes</option>
-              <option value={3}>3 minutes</option>
-              <option value={4}>4 minutes</option>
-            </select>
-            {level === "adaptive" && (
               <select
-                name="Level"
-                // onChange={handleChanges}
-                // value={question.Duration}
+                name="Duration"
+                onChange={handleChanges}
+                value={question.Duration}
                 id=""
-                className="w-[30%] rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                className={`${
+                  level === "adaptive" ? "w-2/3" : "w-full"
+                } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
               >
-                <option value="">Level</option>
+                <option value={0}>Time to answer the question</option>
 
-                <option value={"beginner"}>Beginner</option>
-                <option value={"intermediate"}>Intermediate</option>
-                <option value={"advanced"}>Advanced</option>
+                <option value={1}>1 minute</option>
+                <option value={2}>2 minutes</option>
+                <option value={3}>3 minutes</option>
+                <option value={4}>4 minutes</option>
               </select>
-            )}
+              {level === "adaptive" && (
+                <select
+                  name="Level"
+                  // onChange={handleChanges}
+                  // value={question.Duration}
+                  id=""
+                  className="w-2/6 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                >
+                  <option value="">Level</option>
+
+                  <option value={"beginner"}>Beginner</option>
+                  <option value={"intermediate"}>Intermediate</option>
+                  <option value={"advanced"}>Advanced</option>
+                </select>
+              )}
             </div>
             <ReactQuill
               value={question.Title}
@@ -302,7 +288,7 @@ const AddMcq = () => {
               name="Title"
             />
           </span>
-          <span className="w-[49%]">
+          <span className="w-1/2">
             <h2 className="font-bold mb-2">Test description</h2>
             <div className="w-11/12 flex flex-col gap-2">
               <div className="px-5 pb-4 flex flex-col gap-4">
@@ -500,7 +486,7 @@ const AddMcq = () => {
             </div>
           </span>
         </div>
-        <div className="absolute bottom-10 flex right-8 gap-2">
+        <div className="flex justify-between gap-2">
           {" "}
           <div className=" flex gap-2">
             <button

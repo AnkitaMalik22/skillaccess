@@ -221,7 +221,7 @@ const AddParagraph = () => {
     setCountDetail(currentTopic?.findAnswers?.length - 1);
   }, [currentTopic]);
   return (
-    <div>
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header
         save={handleSave}
         section={ID}
@@ -231,9 +231,9 @@ const AddParagraph = () => {
         type={type}
         addType={addType}
       />
-      <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4 font-dmSans">
-        <div className=" sm:w-[95.7%] mx-auto ">
-          <div className="w-[49%]">
+      <div className="bg-white min-h-[90vh]mx-auto rounded-xl font-dmSans">
+        <div className="flex gap-5 mx-auto ">
+          <div className="w-1/2">
             <h2 className="font-bold mb-2">Question</h2>
             <select
               name="Duration"
