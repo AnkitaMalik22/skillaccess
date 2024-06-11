@@ -12,8 +12,6 @@ const Navbar = (props) => {
   };
   const userDetails = useSelector((state) => state.collageAuth);
 
-  console.log(userDetails);
-
   //   let scriptLoaded = false;
 
   //   const loadGoogleTranslateScript = () => {
@@ -78,7 +76,12 @@ const Navbar = (props) => {
           </button>
 
           {/* noifiaction */}
-          <button className="border border-[#D9E1E7] text-[#0090FF] rounded-lg px-2 py-3 relative flex items-center">
+          <button
+            onClick={() => {
+              navigate("/collage/accounting");
+            }}
+            className="border border-[#D9E1E7] text-[#0090FF] rounded-lg px-2 py-3 relative flex items-center"
+          >
             {/* <FiBell className="text-lg" />{" "} */}
             <FaCoins />
             <h1 className="text-[#0090FF] px-2">

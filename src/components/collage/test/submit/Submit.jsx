@@ -3,6 +3,7 @@ import Header from "./Header";
 import { Progress } from "./Progress";
 import List from "./List";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -420,10 +421,8 @@ const Submit = () => {
 
       <div className="absolute bottom-2 mt-20 flex gap-2 w-full justify-center">
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-          <FaChevronLeft
-            className={`rotate-45 text-lg self-center ${
-              selected === 1 && "disabled"
-            }`}
+          <IoMdArrowDropleft
+            className={` text-lg self-center ${selected === 1 && "disabled"}`}
             onClick={() => selected !== 1 && setSelected(selected - 1)}
           />
         </div>
@@ -451,8 +450,8 @@ const Submit = () => {
         })}
 
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-          <FaChevronRight
-            className={`rotate-45 text-lg self-center ${
+          <IoMdArrowDropright
+            className={` text-lg self-center ${
               selected === Math.ceil(max) && "disabled"
             }`}
             onClick={() =>

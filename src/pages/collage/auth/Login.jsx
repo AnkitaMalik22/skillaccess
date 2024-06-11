@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LuEye } from "react-icons/lu";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
 import {
   googleLoginCollage,
@@ -147,23 +147,18 @@ const Login = () => {
                 placeholder="Password"
                 className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
               />
-              {/* <button
-              className="btn !shadow-none bg-snow border-none"
-              onClick={(e) => {
-                e.preventDefault();
-                type === "text" ? setType("password") : setType("text");
-              }}
-            >
-              <LuEye className="text-gray-400 text-2xl" />
-            </button> */}
               <button
-                className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none "
                 onClick={(e) => {
                   e.preventDefault();
                   type === "text" ? setType("password") : setType("text");
                 }}
               >
-                <LuEye className="text-gray-400 text-2xl" />
+                {type === "text" ? (
+                  <LuEye className="text-gray-400 text-2xl" />
+                ) : (
+                  <LuEyeOff className="text-gray-400 text-2xl" />
+                )}
               </button>
             </div>
 
@@ -173,23 +168,6 @@ const Login = () => {
             >
               <h1 className="text-blue-700 font-bold">Forgot Password</h1>
             </div>
-
-            {/* {Error.length > 0 &&
-            Error.map((error) => (
-              <div className="w-full max-w-xs  mx-auto flex md:mt-6 mt-4 rounded-xl  ">
-                <input
-                  type="checkbox"
-                  defaultChecked={true}
-                  onClick={(e) => e.preventDefault()}
-                  placeholder="Confirm Password"
-                  disabled={true}
-                  className="  border-none w-4 h-4 focus:outline-none  rounded-full bg-gray-400  mx-auto  checked:bg-gray-400 mt-2 mr-2 hover:!bg-red-500"
-                />
-                <h1 className="text-gray-400 self-center w-full">
-                  {error.message}
-                </h1>
-              </div>
-            ))} */}
 
             <button
               className={`btn hover:bg-[#0052CC] bg-[#0052CC] rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${

@@ -16,11 +16,13 @@ const Code = ({
   setEditorValue,
   editorValue,
 }) => {
-  useEffect(() => {
-    const ques = JSON.parse(localStorage.getItem("qbQues"));
+  // useEffect(() => {
+  //   const ques = JSON.parse(localStorage.getItem("qbQues"));
 
-    setEditorValue(ques?.code["Java"]?.defaultCode);
-  }, []);
+  //   console.log("runagain local", ques);
+
+  //   setEditorValue(ques?.code[selectedLanguage]);
+  // }, []);
   // const codeTemplates = {
   //   Java: {
   //     defaultCode: `import java.io.*;
@@ -173,7 +175,7 @@ const Code = ({
           //   />
           // ) :
 
-          editorValue.initialCode && (
+          editorValue.defaultCode && (
             <>
               {" "}
               <Initial
@@ -181,7 +183,7 @@ const Code = ({
                 selectedLanguage={selectedLanguage}
                 // editorValue={editorValue}
                 // handleEditorChange={handleEditorChange}
-                editorValue={editorValue.initialCode}
+                editorValue={editorValue.defaultCode}
                 setEditorValue={setEditorValue}
                 handleEditorChange={(value) =>
                   handleEditorChange(value, "defaultCode")
@@ -208,7 +210,7 @@ const Code = ({
           // )
           <Verification
             selectedLanguage={selectedLanguage}
-            editorValue={editorValue.solutionCode}
+            editorValue={editorValue?.solutionCode}
             setEditorValue={setEditorValue}
             handleEditorChange={(value) =>
               handleEditorChange(value, "solutionCode")

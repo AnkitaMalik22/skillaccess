@@ -13,7 +13,50 @@ import {
   addCompilerToTopic,
 } from "../../../../redux/collage/test/testSlice";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
-import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import {
+  editBankQuestionById,
+  editQuestionById,
+} from "../../../../redux/collage/test/thunks/question";
+
+const codeTemplates = {
+  Java: {
+    defaultCode: `import java.io.*;
+  
+  public class Main {
+    public static void main(String[] args) {
+      // Insert your Java initial code here
+    }
+  }`,
+    solutionCode: `import java.io.*;
+  
+  public class Main {
+    public static void main(String[] args) {
+      // Insert your Java solution code here
+    }
+  }`,
+  },
+  Python: {
+    defaultCode: `def main():
+      # Insert your Python initial code here
+  
+  if __name__ == "__main__":
+      main()`,
+    solutionCode: `def main():
+      # Insert your Python solution code here
+  
+  if __name__ == "__main__":
+      main()`,
+  },
+  Cpp: {
+    defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
+    solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
+  },
+  C: {
+    defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
+    solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
+  },
+};
+let ID;
 
 const AddCode = () => {
   const { id } = useParams();
@@ -57,45 +100,7 @@ const AddCode = () => {
 
   const addType = searchParams.get("addType");
   const [toggle, setToggle] = useState(1);
-  const codeTemplates = {
-    Java: {
-      defaultCode: `import java.io.*;
-  
-  public class Main {
-    public static void main(String[] args) {
-      // Insert your Java initial code here
-    }
-  }`,
-      solutionCode: `import java.io.*;
-  
-  public class Main {
-    public static void main(String[] args) {
-      // Insert your Java solution code here
-    }
-  }`,
-    },
-    Python: {
-      defaultCode: `def main():
-      # Insert your Python initial code here
-  
-  if __name__ == "__main__":
-      main()`,
-      solutionCode: `def main():
-      # Insert your Python solution code here
-  
-  if __name__ == "__main__":
-      main()`,
-    },
-    Cpp: {
-      defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
-      solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
-    },
-    C: {
-      defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
-      solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
-    },
-  };
-  let ID;
+
   searchParams.get("topicId") !== null
     ? (ID = searchParams.get("topicId"))
     : (ID = id);
@@ -103,7 +108,7 @@ const AddCode = () => {
   const [question, setQuestion] = useState({
     section: ID,
     id: ID + Date.now(),
-    QuestionLevel: level,
+    QuestionLevel: "beginner",
     Duration: 0,
     code: {
       Java: codeTemplates.Java,
@@ -126,9 +131,12 @@ const AddCode = () => {
     Title: "",
   });
 
-  const [editorValue, setEditorValue] = useState({
-    initialCode: question?.code[question.codeLanguage]?.defaultCode,
-    solutionCode: question?.code[question?.codeLanguage]?.solutionCode,
+  const [editorValue, setEditorValue] = useState(() => {
+    if (question && question.code && question.codeLanguage)
+      return {
+        defaultCode: question?.code[question?.codeLanguage]?.defaultCode,
+        solutionCode: question?.code[question?.codeLanguage]?.solutionCode,
+      };
   });
 
   useEffect(() => {
@@ -136,7 +144,7 @@ const AddCode = () => {
       const defaultValue = question.code[question.codeLanguage];
 
       setEditorValue({
-        initialCode: defaultValue?.defaultCode,
+        defaultCode: defaultValue?.defaultCode,
         solutionCode: defaultValue?.solutionCode,
       });
     }
@@ -171,13 +179,17 @@ const AddCode = () => {
       const list = [...question.parameters];
       list[index][name] = value;
       setQuestion({ ...question, parameters: list });
+    } else if (e.target.name === "QuestionLevel") {
+      setQuestion((prev) => {
+        return { ...prev, QuestionLevel: e.target.value };
+      });
     } else {
       setQuestion({ ...question, [name]: value });
     }
   };
   const resetQuestion = () => {
     setQuestion({
-      QuestionLevel: level,
+      QuestionLevel: "beginner",
       id: ID + Date.now(),
       section: ID,
       Title: "",
@@ -219,12 +231,12 @@ const AddCode = () => {
       const defaultValue = ques.code[question.codeLanguage];
 
       setEditorValue({
-        initialCode: defaultValue?.defaultCode,
+        defaultCode: defaultValue?.defaultCode,
         solutionCode: defaultValue?.solutionCode,
       });
     }
   }, []);
-  const handleSave = (component) => {
+  const handleSave = async (component) => {
     if (addType === "topic") {
       if (question.code != "") {
         if (question.code === "") {
@@ -259,10 +271,16 @@ const AddCode = () => {
           resetQuestion();
           setToggle(1);
         } else {
-          dispatch(addCompilerToTopic({ data: question, id: id, type: type }));
-          dispatch(addQuestionToTopic({ data: question, id: id, type: type }));
+          await dispatch(
+            addCompilerToTopic({ data: question, id: id, type: type })
+          );
+          await dispatch(
+            addQuestionToTopic({ data: question, id: id, type: type })
+          );
+
           resetQuestion();
           setToggle(1);
+          navigate(`/collage/quesBank/topic/${id}`);
         }
 
         if (component === "save") {
@@ -275,7 +293,7 @@ const AddCode = () => {
       }
     } else {
       dispatch(
-        editQuestionById({
+        editBankQuestionById({
           type: "code",
           id: question._id,
           question: question,
@@ -287,18 +305,16 @@ const AddCode = () => {
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
-  console.log(question);
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
-  console.log(question);
 
   return (
-    <div className="">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header handleSave={handleSave} />
-      <div className="bg-white min-h-[90vh] mx-auto rounded-xl pt-4 sm:w-[95.7%] px-3 relative">
-        <div className="flex flex-wrap gap-2  ">
-          <span className="w-[49%] ">
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl relative">
+        <div className="flex flex-wrap gap-2 md:flex-nowrap ">
+          <span className="w-1/2">
             <Question
               question={question}
               setQuestion={setQuestion}
@@ -309,7 +325,7 @@ const AddCode = () => {
               handleSave={handleSave}
             />
           </span>
-          <span className="w-[49%]">
+          <span className="w-1/2">
             <Code
               toggle={toggle}
               setToggle={setToggle}

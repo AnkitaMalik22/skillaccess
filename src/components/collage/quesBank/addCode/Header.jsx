@@ -14,7 +14,7 @@ const Header = ({ handleSave, addType }) => {
   };
 
   return (
-    <div className="flex w-full mx-auto justify-between mb-6">
+    <div className="flex w-full mx-auto justify-between mb-5">
       <div className="flex gap-3">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
