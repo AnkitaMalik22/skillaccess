@@ -50,68 +50,77 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
   };
 
   const handleStudentUpload = async () => {
-    if (excel) {
-      setLoading(true);
-      try {
-        const workbook = XLSX.read(excel, { type: "binary" });
-        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-        const headers = jsonData[0];
-        const students = [];
-
-        // if (headers.length !== 3 || headers[0] !== 'FirstName' || headers[1] !== 'LastName' || headers[2] !== 'Email') {
-        //   toast.error('Invalid file format');
-        //   return;
-        // }
-
-        if (
-          headers.length !== 3 ||
-          headers[0] !== "FirstName" ||
-          headers[1] !== "LastName" ||
-          headers[2] !== "Email"
-        ) {
-          toast.error("Invalid file format");
-          return;
-        }
-
-        for (let i = 1; i < jsonData.length; i++) {
-          const row = jsonData[i];
-
-          if (!row[0]) {
-            toast.error(`First Name is Required at Row ${i}`);
-            setLoading(false);
-            return;
-          } else if (!row[1]) {
-            toast.error(`Last Name is Required at Row ${i} `);
-            setLoading(false);
-            return;
-          } else if (!row[2]) {
-            toast.error(`Email is Required at Row ${i}`);
-            setLoading(false);
-            return;
-          } else {
-            students.push({
-              FirstName: row[0],
-              LastName: row[1],
-              Email: row[2],
-            });
-          }
-        }
-
-        dispatch(uploadStudents(students));
-
-        // console.log(students);
-
-        setLoading(false);
-        setVisible(false);
-      } catch (error) {
-        setLoading(false);
-        toast.error("An error occurred while processing the file");
-      }
-    } else {
+    if (!excel) {
       toast.error("No file selected");
+      return;
+    }
+  
+    setLoading(true);
+    try {
+      const workbook = XLSX.read(excel, { type: "binary" });
+      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+  
+      if (jsonData.length === 0) {
+        toast.error("The Excel file is empty");
+        setLoading(false);
+        return;
+      }
+  
+      const headers = jsonData[0];
+      const expectedHeaders = ["FirstName", "LastName", "Email"];
+      const isValidFormat = expectedHeaders.every((header, index) => headers[index] === header);
+  
+      if (!isValidFormat || headers.length !== 3) {
+        toast.error("Invalid file format");
+        setLoading(false);
+        return;
+      }
+  
+      const students = [];
+      for (let i = 1; i < jsonData.length; i++) {
+        const row = jsonData[i];
+  
+        // Skip empty rows
+        if (row.length === 0 || row.every(cell => !cell)) {
+          continue;
+        }
+  
+        const [firstName, lastName, email] = row;
+  
+        if (!firstName) {
+          toast.error(`First Name is required at row ${i + 1}`);
+          continue;
+        }
+        if (!lastName) {
+          toast.error(`Last Name is required at row ${i + 1}`);
+          continue;
+        }
+        if (!email) {
+          toast.error(`Email is required at row ${i + 1}`);
+          continue;
+        }
+  
+        students.push({ FirstName: firstName, LastName: lastName, Email: email });
+      }
+  
+      if (students.length > 0) {
+        dispatch(uploadStudents(students));
+        toast.success("Students uploaded successfully");
+      } else {
+        toast.warn("No valid student data to upload");
+      }
+  
+      setVisible(false);
+    } catch (error) {
+      toast.error("An error occurred while processing the file");
+      console.error("Error processing the file:", error);
+    } finally {
+      setLoading(false);
+      // dispatch(getAllStudents());
     }
   };
+  
 
   const handleAddTeamClick = () => {
     setShowPopup(true);
