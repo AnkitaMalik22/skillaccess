@@ -107,11 +107,12 @@ const AddQuestionType = () => {
             <h2 className="text-xl font-normal self-center">
               One Correct Answer
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
 
           {/* Essay */}
@@ -144,11 +145,12 @@ const AddQuestionType = () => {
             </div>
             {/*  */}
             <h2 className="text-xl font-normal self-center">Answer in breif</h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
 
           <div
@@ -181,11 +183,12 @@ const AddQuestionType = () => {
             <h2 className="text-xl font-normal self-center">
               Answer in detail
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
         </div>
       </div>
