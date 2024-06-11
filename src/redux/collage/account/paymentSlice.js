@@ -215,11 +215,12 @@ export const paymentSlice = createSlice({
     builder.addCase(selectAPlan.pending, (state, action) => {
       state.status = "loading";
       state.select_loading = true;
+      toast.loading("Plan request raised successfully");
     });
     builder.addCase(selectAPlan.fulfilled, (state, { payload }) => {
       state.status = "success";
       state.select_loading = false;
-      toast.success("Plan request raised successfully");
+      toast.dismiss();
     });
     builder.addCase(selectAPlan.rejected, (state, action) => {
       state.status = "failed";
@@ -258,10 +259,12 @@ export const paymentSlice = createSlice({
     builder.addCase(cancelAPlan.pending, (state, action) => {
       state.status = "loading";
       state.cancel_loading = true;
+      toast.loading("Please untill while we cancel the plan");
     });
     builder.addCase(cancelAPlan.fulfilled, (state, { payload }) => {
       state.status = "success";
       state.cancel_loading = false;
+      toast.dismiss();
       toast.success("Plan cancelled successfully");
     });
     builder.addCase(cancelAPlan.rejected, (state, action) => {
