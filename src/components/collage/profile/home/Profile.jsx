@@ -10,66 +10,12 @@ import {
   setUploadImg,
 } from "../../../../redux/collage/auth/authSlice";
 const Profile = () => {
-  // const dispatch = useDispatch();
-  // const { user, isLoggedIn, uploadImg } = useSelector(
-  //   (state) => state.collageAuth
-  // );
-  // const [editable, setEditable] = useState(false);
-  // const [college, setCollege] = useState(user);
-  // const [avatar, setAvatar] = useState(user?.avatar?.url || "");
-  // const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     dispatch(getCollege());
-  //   }
-  // }, [dispatch, isLoggedIn]);
-
-  // // useEffect(() => {
-  // //   if (user) {
-  // //     setCollege(user);
-  // //     if (user.avatar && user.avatar.url) {
-  // //       setAvatar(user.avatar.url);
-
-  // //     }
-  // //   }
-  // // }, [user]);
-  // useEffect(() => {
-  //   if (user) {
-  //     setCollege(user);
-  //     dispatch(getCollege());
-  //   }
-  // }, [dispatch, isLoggedIn]);
-
-  // useEffect(() => {
-  //   if (submitUpdateProfile) {
-  //     dispatch(updateCollege(college));
-  //     dispatch(getCollege());
-  //     setSubmitUpdateProfile(false);
-  //     setEditable(false);
-  //     localStorage.setItem("editable", false);
-  //   }
-  // }, [submitUpdateProfile, dispatch, college]);
-
-  // const handleUpdate = () => {
-  //   dispatch(updateCollege(college));
-  //   setEditable(false);
-  //   localStorage.setItem("editable", false);
-  // };
-
   const dispatch = useDispatch();
   const { user, isLoggedIn, uploadImg } = useSelector(
     (state) => state.collageAuth
   );
   const [editable, setEditable] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   const value = localStorage.getItem("editable");
-  //   if (value === "true") {
-  //     // setEditable(true);
-  //   }
-  // }, []);
 
   const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
   const [avatar, setAvatar] = useState("");
@@ -106,9 +52,8 @@ const Profile = () => {
       setAvatar(user.avatar.url);
     }
     if (avatar) {
-      console.log("nahi");
       dispatch(updateAvatar({ avatar, id: user._id }));
-      dispatch(getCollege());
+      // dispatch(getCollege());
       // setCollege({ ...college, avatar: { url:user.avatar.url} });
     }
   }, [submitUpdateProfile]);

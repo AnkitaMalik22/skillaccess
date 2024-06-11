@@ -35,11 +35,9 @@ const Header = ({
     if (uploadImg) {
       dispatch(setUploadImg(false));
     }
-    console.log(uploadImg);
   }, [uploadImg]);
 
   const handleAvatarChange = (e) => {
-    console.log(e.target.files[0]);
     const reader = new FileReader();
 
     reader.onload = () => {
