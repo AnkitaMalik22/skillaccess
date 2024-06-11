@@ -110,11 +110,12 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               One Correct Answer
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
 
           {/* code */}
@@ -148,11 +149,12 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Programming Questions
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
 
           {/* Essay */}
@@ -185,11 +187,12 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Open Text Answer
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
           {/*  */}
 
@@ -221,11 +224,12 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Record video to answer questions
             </h2>
-            <img
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
+            <div className=""></div>
           </div>
           {/*  */}
 
@@ -261,11 +265,12 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Read Phrase and Answer them
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
           {/*  */}
         </div>

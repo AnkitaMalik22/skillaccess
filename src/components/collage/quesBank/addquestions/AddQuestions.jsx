@@ -55,41 +55,6 @@ const AddQuestions = () => {
     topicsCopy.splice(index, 1);
     dispatch(setTestSelectedTopics(topicsCopy));
   };
-  console.log(topics);
-  // const handleCalculateTime = () => {
-  //   const topicTimes = topics.map((topic) => {
-  //     let totalMcq = 0,
-  //       totalEssay = 0,
-  //       totalVideo = 0,
-  //       totalCompiler = 0,
-  //       totalFindAnswer = 0;
-
-  //     if (topic.Type === "essay") {
-  //       totalEssay = topic.essay?.reduce((acc, curr) => {
-  //         return acc + parseInt(curr.Duration);
-  //       }, 0);
-  //     }
-  //     if (topic.Type === "video") {
-  //       totalVideo = topic.video?.reduce((acc, curr) => {
-  //         return acc + parseInt(curr.Duration);
-  //       }, 0);
-  //     }
-  //     if (topic.Type === "compiler") {
-  //       totalCompiler = topic.compiler?.reduce((acc, curr) => {
-  //         return acc + parseInt(curr.Duration);
-  //       }, 0);
-  //     }
-  //     if (topic.Type === "findAnswer") {
-  //       totalFindAnswer = topic.findAnswers?.reduce((acc, curr) => {
-  //         return acc + parseInt(curr.Duration);
-  //       }, 0);
-  //     }
-
-  //     if (topic.Type === "mcq") {
-  //       totalMcq = topic.questions?.reduce((acc, curr) => {
-  //         return acc + parseInt(curr.Duration);
-  //       }, 0);
-  //     }
   const handleCalculateTime = () => {
     const topicTimes = topics.reduce((acc, topic) => {
       const existingIndex = acc.findIndex(
