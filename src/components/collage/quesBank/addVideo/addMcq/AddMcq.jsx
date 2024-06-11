@@ -258,9 +258,9 @@ const AddMcq = () => {
         addType={addType}
       />
 
-      <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4">
-        <div className="flex flex-wrap gap-2 sm:w-[95.7%] mx-auto ">
-          <span className="w-[49%] ">
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl">
+        <div className="flex flex-wrap gap-2 md:flex-nowrap mx-auto ">
+          <span className="w-1/2">
             <h2 className="font-bold">Question</h2>
 
             {/* <select
