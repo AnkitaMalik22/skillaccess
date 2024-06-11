@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import PopUp from "../../../../PopUps/PopUp";
 import { FiUpload } from "react-icons/fi";
 import Loader from "../../addVideo/Loader";
+import TipComponent from "./Instructions";
+
 const TestCases = ({
   question,
   handleChanges,
@@ -194,7 +196,7 @@ const TestCases = ({
           }}
         />
       )}
-
+      <TipComponent />
       {question?.testcase?.map((testCase, index) => (
         <section
           key={index}
