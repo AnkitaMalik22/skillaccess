@@ -268,8 +268,8 @@ const SelectTests = () => {
       <div className="  w-11/12 mx-auto min-h-[90vh] my-2 rounded-lg tracking-wide justify-between  ">
         <div>
           <h2 className="w-11/12  text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-lg mb-10 sm:mb-1 ">
-            Your Assessment can include upto 5 tests, Browse the test library
-            and add the most relevant tests.{" "}
+            Your Assessment can include up to 5 Question topics, browse the
+            below library to draft the Assessment.{" "}
           </h2>
         </div>
 

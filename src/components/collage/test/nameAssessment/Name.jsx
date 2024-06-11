@@ -16,6 +16,7 @@ const Name = () => {
   const [search, setSearch] = useSearchParams();
 
   const level = search.get("level");
+  console.log(level);
 
   const {
     name,
@@ -178,8 +179,24 @@ const Name = () => {
       setErrors((prevErrors) => ({ ...prevErrors, duration: "" }));
     }
 
-    if (assessments.beginner.length > 0) {
+    if (assessments.beginner.length > 0 && level === "beginner") {
       assessments.beginner.forEach((assessment) => {
+        if (assessment.name === testDetails.name) {
+          flag = "true";
+          toast.error("Duplicate name");
+        }
+      });
+    }
+    if (assessments.intermediate.length > 0 && level === "intermediate") {
+      assessments.intermediate.forEach((assessment) => {
+        if (assessment.name === testDetails.name) {
+          flag = "true";
+          toast.error("Duplicate name");
+        }
+      });
+    }
+    if (assessments.advanced.length > 0 && level === "advanced") {
+      assessments.advanced.forEach((assessment) => {
         if (assessment.name === testDetails.name) {
           flag = "true";
           toast.error("Duplicate name");

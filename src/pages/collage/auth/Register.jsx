@@ -6,7 +6,7 @@ import {
   registerCollage,
 } from "../../../redux/collage/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { LuEye } from "react-icons/lu";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -251,23 +251,19 @@ const Register = () => {
                 placeholder="Password"
                 className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
               />
-              {/* <button
-              className="rounded-e-lg btn-primary bg-snow text-center p-2"
-              onClick={(e) => {
-                e.preventDefault();
-                type === "text" ? setType("password") : setType("text");
-              }}
-            >
-              <LuEye className="text-gray-400 text-2xl" />
-            </button> */}
+
               <button
-                className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none "
                 onClick={(e) => {
                   e.preventDefault();
                   type === "text" ? setType("password") : setType("text");
                 }}
               >
-                <LuEye className="text-gray-400 text-2xl" />
+                {type === "text" ? (
+                  <LuEye className="text-gray-400 text-2xl" />
+                ) : (
+                  <LuEyeOff className="text-gray-400 text-2xl" />
+                )}
               </button>
             </div>
 

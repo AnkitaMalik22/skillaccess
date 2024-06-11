@@ -176,7 +176,7 @@ export const studentSlice = createSlice({
         state.error = false;
         console.log(action.payload, "action.payload");
         getStudents();
-        toast.success("Students Uploaded Successfully");
+        // toast.success("Students Uploaded Successfully");
         // state.uploadedStudents = action.payload.uploadedStudents;
         // state.invitedStudents = action.payload.invitedStudents;
         // state.approvedStudents = action.payload.approvedStudents;

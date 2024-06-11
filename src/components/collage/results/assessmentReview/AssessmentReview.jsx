@@ -3,6 +3,7 @@ import Header from "./Header";
 import { Progress } from "./Progress";
 import List from "./List";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
@@ -298,6 +299,10 @@ const AssessmentReview = () => {
   };
 
   // console.log(questions);
+  let k = questions?.filter(
+    (question) => question.StudentAnswerIndex !== undefined
+  ).length;
+  console.log(k);
   return (
     <div className="w-11/12 mx-auto py-5 md:py-10">
       <div className="flex w-full mx-auto justify-between mb-5">
@@ -340,12 +345,12 @@ const AssessmentReview = () => {
                     question={question}
                     Title={question.codeQuestion}
                     code={handleCode(question.codeLanguage, question.code)}
-                    number={(selected - 1) * 10 + 1 + i}
+                    number={(selected - 1) * 10 + 1 + i + k}
                   />
                 )}
                 {question.videoFile && (
                   <Video
-                    Number={(selected - 1) * 10 + 1 + i}
+                    Number={(selected - 1) * 10 + 1 + i + k}
                     video={question}
                   />
                 )}
@@ -361,7 +366,7 @@ const AssessmentReview = () => {
                       !question.videoFile && (
                         <List
                           question={question}
-                          number={(selected - 1) * 10 + 1 + i}
+                          number={(selected - 1) * 10 + 1 + i + k}
                         />
                       )
                     : !question.testcase &&
@@ -370,7 +375,7 @@ const AssessmentReview = () => {
                       !question.Options && (
                         <Essay
                           question={question}
-                          number={(selected - 1) * 10 + 1 + i}
+                          number={(selected - 1) * 10 + 1 + i + k}
                         />
                       )
 
@@ -383,10 +388,8 @@ const AssessmentReview = () => {
       </div>
       <div className="flex gap-2 w-full justify-center">
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-          <FaChevronLeft
-            className={`rotate-45 text-lg self-center ${
-              selected === 1 && "disabled"
-            }`}
+          <IoMdArrowDropleft
+            className={` text-lg self-center ${selected === 1 && "disabled"}`}
             onClick={() => selected !== 1 && setSelected(selected - 1)}
           />
         </div>
@@ -414,8 +417,8 @@ const AssessmentReview = () => {
         })}
 
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-          <FaChevronRight
-            className={`rotate-45 text-lg self-center ${
+          <IoMdArrowDropright
+            className={` text-lg self-center ${
               selected === Math.ceil(max) && "disabled"
             }`}
             onClick={() =>
