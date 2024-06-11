@@ -203,7 +203,7 @@ const LongShortAnswer = () => {
   };
 
   return (
-    <div>
+    <div className="mx-auto w-11/12 py-5 md:py-10">
       <Header
         handleSave={handleSave}
         question={question}

@@ -26,8 +26,10 @@ const Acounting = () => {
   // console.log(requestStatus);
 
   useEffect(() => {
-    getSelected();
-  }, []);
+    if (user?._id) {
+      getSelected();
+    }
+  }, [user?._id]);
 
   async function getSelected() {
     try {
@@ -165,7 +167,7 @@ const Acounting = () => {
                     <button
                       className="self-center  bg-[#007AFF]  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
                       onClick={() => {
-                        console.log(plan);
+                        // console.log(plan);
                         dispatch(selectAPlan({ planId: plan._id })).then(() => {
                           dispatch(getCollege());
                           getSelected();

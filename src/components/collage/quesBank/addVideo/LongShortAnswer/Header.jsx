@@ -31,9 +31,9 @@ const Header = ({
   };
 
   return (
-    <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">
+    <div className="flex justify-between mb-5">
       <div className="h-fit self-center">
-        <button className="flex self-center ml-2 rounded-lg  gap-2">
+        <button className="flex self-center rounded-lg  gap-2">
           {addType !== "edit" && (
             <button
               onClick={() => navigate(-1)}
