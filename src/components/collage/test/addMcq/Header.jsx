@@ -1,7 +1,7 @@
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate, useParams,useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addMcq, createTest } from "../../../../redux/collage/test/testSlice";
 import Loader from "../../../loaders/Loader";
@@ -20,7 +20,7 @@ const Header = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { test ,ADD_QUESTION_LOADING}= useSelector((state) => state.test);
+  const { test, ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const addType = searchParams.get("addType");
   // const handleCreateTest = () => {
   //   console.log("test", test);
@@ -35,10 +35,7 @@ const Header = ({
   // };
 
   const handleSaveNext = () => {
-    
     handleSave("save");
-  
-    
   };
   // useEffect(() => {
   //   dispatch(setTest({questions}));
@@ -76,8 +73,8 @@ const Header = ({
 
             onClick={handleSaveNext}
           >
-             {ADD_QUESTION_LOADING && addType !== 'test' ?  "Saving" : "Save"}
-            {ADD_QUESTION_LOADING  && addType !== 'test' && <Loader size="sm" />}
+            {ADD_QUESTION_LOADING && addType !== "test" ? "Saving" : "Save"}
+            {ADD_QUESTION_LOADING && addType !== "test" && <Loader size="sm" />}
           </button>
         </div>
       </div>
