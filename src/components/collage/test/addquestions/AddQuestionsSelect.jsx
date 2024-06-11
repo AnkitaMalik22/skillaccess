@@ -79,7 +79,7 @@ const AddQuestionsSelect = () => {
           {/* mcq */}
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "mcq"?'border-blued':'opacity-70'
+              selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("mcq")}
           >
@@ -110,17 +110,18 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               One Correct Answer
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
 
           {/* code */}
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "code" ?'border-blued':'opacity-70'
+              selectQuestionType === "code" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("code")}
           >
@@ -148,18 +149,19 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Programming Questions
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
 
           {/* Essay */}
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "essay"?'border-blued':'opacity-70'
+              selectQuestionType === "essay" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("essay")}
           >
@@ -185,17 +187,18 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Open Text Answer
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
           {/*  */}
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "video"?'border-blued':'opacity-70'
+              selectQuestionType === "video" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("video")}
           >
@@ -221,11 +224,12 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Record video to answer questions
             </h2>
-            <img
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
+            <div className=""></div>
           </div>
           {/*  */}
 
@@ -233,7 +237,9 @@ const AddQuestionsSelect = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "findAnswer"?'border-blued':'opacity-70'
+              selectQuestionType === "findAnswer"
+                ? "border-blued"
+                : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("findAnswer")}
           >
@@ -259,11 +265,12 @@ const AddQuestionsSelect = () => {
             <h2 className="text-xl font-normal self-center">
               Read Phrase and Answer them
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
           {/*  */}
         </div>

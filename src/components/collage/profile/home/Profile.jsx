@@ -10,25 +10,71 @@ import {
   setUploadImg,
 } from "../../../../redux/collage/auth/authSlice";
 const Profile = () => {
-  // <<<<<<< AnkitaMalik22-ankita-dev
+  // const dispatch = useDispatch();
+  // const { user, isLoggedIn, uploadImg } = useSelector(
+  //   (state) => state.collageAuth
+  // );
+  // const [editable, setEditable] = useState(false);
+  // const [college, setCollege] = useState(user);
+  // const [avatar, setAvatar] = useState(user?.avatar?.url || "");
+  // const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
+
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     dispatch(getCollege());
+  //   }
+  // }, [dispatch, isLoggedIn]);
+
+  // // useEffect(() => {
+  // //   if (user) {
+  // //     setCollege(user);
+  // //     if (user.avatar && user.avatar.url) {
+  // //       setAvatar(user.avatar.url);
+
+  // //     }
+  // //   }
+  // // }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setCollege(user);
+  //     dispatch(getCollege());
+  //   }
+  // }, [dispatch, isLoggedIn]);
+
+  // useEffect(() => {
+  //   if (submitUpdateProfile) {
+  //     dispatch(updateCollege(college));
+  //     dispatch(getCollege());
+  //     setSubmitUpdateProfile(false);
+  //     setEditable(false);
+  //     localStorage.setItem("editable", false);
+  //   }
+  // }, [submitUpdateProfile, dispatch, college]);
+
+  // const handleUpdate = () => {
+  //   dispatch(updateCollege(college));
+  //   setEditable(false);
+  //   localStorage.setItem("editable", false);
+  // };
+
   const dispatch = useDispatch();
   const { user, isLoggedIn, uploadImg } = useSelector(
     (state) => state.collageAuth
   );
   const [editable, setEditable] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const value = localStorage.getItem("editable");
-    if (value === "true") {
-      // setEditable(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const value = localStorage.getItem("editable");
+  //   if (value === "true") {
+  //     // setEditable(true);
+  //   }
+  // }, []);
 
   const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
   const [avatar, setAvatar] = useState("");
   const [college, setCollege] = useState(user);
   const handleUpdate = (college) => {
-    console.log("update");
     dispatch(updateCollege(college));
     setEditable(false);
     localStorage.setItem("editable", false);
@@ -36,16 +82,17 @@ const Profile = () => {
   useEffect(() => {
     if (user) {
       setCollege(user);
-      dispatch(getCollege());
+
+      // dispatch(getCollege());
     }
   }, [dispatch, isLoggedIn]);
-  useEffect(() => {
-    // if (!user){
-    dispatch(getCollege());
-    console.log(college);
-    // }
-    // console.log(college, "college");
-  }, []);
+  // useEffect(() => {
+  //   // if (!user){
+  //   dispatch(getCollege());
+  //   console.log(college);
+  //   // }
+  //   // console.log(college, "college");
+  // }, []);
   useEffect(() => {
     if (user) {
       setCollege(user);
@@ -53,39 +100,18 @@ const Profile = () => {
       dispatch(getCollege());
     }
   }, [user]);
-  //     dispatch(getCollege()).then((res) =>
-  //       setCollege({
-  //         CollegeName: res.payload.CollegeName || "college name ",
-  //         Email: res.payload.Email || "email",
-  //         Phone: res.payload.Phone || "phone",
-  //         Address: res.payload.Address || "address",
-  //         Website: res.payload.Website || "web",
-  //         avatar: {
-  //           public_id: res.payload.avatar?.public_id || "",
-  //           url: res.payload.avatar?.url || "",
-  //         },
-  //         Description: res.payload.Description || "desc",
-  //         Code: res.payload.code || "code",
-  //         Location: res.payload.Location || "loc",
-  //         State: res.payload.State || "state",
-  //         City: res.payload.City || "city",
-  //       })
-  //     );
-  //     console.log(user);
-  //   }, []);
+
   useEffect(() => {
     if (user && user.avatar && user.avatar.url) {
       setAvatar(user.avatar.url);
     }
     if (avatar) {
-      // const myForm = new FormData();
-      // myForm.set("file", avatar);
-      // console.log(myForm, "myform");
+      console.log("nahi");
       dispatch(updateAvatar({ avatar, id: user._id }));
       dispatch(getCollege());
       // setCollege({ ...college, avatar: { url:user.avatar.url} });
     }
-  }, [editable]);
+  }, [submitUpdateProfile]);
   useEffect(() => {
     if (submitUpdateProfile) {
       dispatch(updateCollege(college));
@@ -95,13 +121,7 @@ const Profile = () => {
       localStorage.setItem("editable", false);
     }
   }, [submitUpdateProfile]);
-  // useEffect(() => {
-  //   dispatch(getCollege());
-  //   dispatch(setUploadImg(false))
-  // }, [uploadImg]);
-  // =======
-  // const [editable, setEditable] = useState(false);
-  console.log("submitprofile", submitUpdateProfile);
+
   return (
     <div className="w-11/12 md:py-10 py-5 mx-auto">
       {user && editable && (

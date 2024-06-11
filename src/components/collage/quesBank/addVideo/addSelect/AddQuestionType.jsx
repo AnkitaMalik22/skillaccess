@@ -75,7 +75,7 @@ const AddQuestionType = () => {
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "mcq"?'border-blued':'opacity-70'
+              selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("mcq")}
           >
@@ -107,18 +107,19 @@ const AddQuestionType = () => {
             <h2 className="text-xl font-normal self-center">
               One Correct Answer
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
 
           {/* Essay */}
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "short"?'border-blued':'opacity-70'
+              selectQuestionType === "short" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("short")}
           >
@@ -144,16 +145,17 @@ const AddQuestionType = () => {
             </div>
             {/*  */}
             <h2 className="text-xl font-normal self-center">Answer in breif</h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
 
           <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "long"?'border-blued':'opacity-70'
+              selectQuestionType === "long" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("long")}
           >
@@ -181,11 +183,12 @@ const AddQuestionType = () => {
             <h2 className="text-xl font-normal self-center">
               Answer in detail
             </h2>
-            <img
+            <div className=""></div>
+            {/* <img
               src="../../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            />
+            /> */}
           </div>
         </div>
       </div>
