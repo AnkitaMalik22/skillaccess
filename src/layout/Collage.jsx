@@ -10,11 +10,9 @@ import {
 } from "../redux/collage/test/testSlice";
 import { getCollege } from "../redux/collage/auth/authSlice";
 import PopUp from "../components/PopUps/PopUp";
-import useTranslate from "../hooks/useTranslate";
 import { toast } from "react-hot-toast";
 
 const CollageLayout = ({ children }) => {
-  useTranslate();
   const [visible, setVisible] = useState(false);
   const [change, setChange] = useState(false);
   const [path, setPath] = useState("");
