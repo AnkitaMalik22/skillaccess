@@ -21,23 +21,23 @@ const Header = ({
   setAvatar,
 }) => {
   const dispatch = useDispatch();
+  // const { uploadImg } = useSelector((state) => state.collageAuth);
+  const { user, isLoggedIn, uploadImg } = useSelector(
+    (state) => state.collageAuth
+  );
   const [avatarPreview, setAvatarPreview] = useState(avatar);
-  const { uploadImg } = useSelector((state) => state.collageAuth);
-
+  const imgRef = useRef(null);
+  // useEffect(() => {
+  //   dispatch(getCollege());
+  // }, [dispatch]);
   useEffect(() => {
-    dispatch(getCollege());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getCollege());
+    // dispatch(getCollege());
     if (uploadImg) {
       dispatch(setUploadImg(false));
     }
-    console.log(uploadImg);
   }, [uploadImg]);
 
   const handleAvatarChange = (e) => {
-    console.log(e.target.files[0]);
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -48,15 +48,8 @@ const Header = ({
     };
 
     reader.readAsDataURL(e.target.files[0]);
-    // const formData = new FormData();
-
-    // formData.append("avatar", e.target.files[0].toString());
-    // setAvatar( e.target.files[0]);
-    // dispatch(updateAvatar({
-    //   avatar: e.target.files[0]
-    // }));
   };
-  const imgRef = useRef(null);
+
   return (
     // {/* profile container */}
     <section className="bg-gray-50 rounded-xl px-6">
@@ -97,15 +90,6 @@ const Header = ({
                 width="56px"
                 className="relative top[-50%]  rounded-lg "
               />
-              {/* {editable && (
-                <div className="absolute bottom-2 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-blue-700 bg-opacity-80">
-                  <img
-                    src="../../images/icons/pen.png"
-                    alt=""
-                    onClick={() => setEditable(true)}
-                  />
-                </div>
-              )} */}
             </div>
           )}
 
