@@ -50,7 +50,7 @@ const Header = ({ Q }) => {
             className="self-center w-32 justify-center flex bg-blue-700 py-2 font-bold px-4 rounded-xl gap-2 text-white"
             onClick={() => handleNext()}
           >
-            Next Step{" "}
+            Next
             <FaArrowRightLong className="self-center text-lg text-white ml-4" />
           </button>
         </div>

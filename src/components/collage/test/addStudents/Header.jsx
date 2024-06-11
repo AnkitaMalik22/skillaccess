@@ -9,10 +9,10 @@ import {
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({handleFilter}) => {
+const Header = ({ handleFilter }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex w-full mx-auto justify-between mb-2 font-dmSans">
+    <div className="flex w-full mx-auto justify-between mb-5 font-dmSans">
       <div className="bg-gray-200 rounded-xl mx-2  sm:h-12 h-10 flex my-2 px-4 w-fit">
         <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
         <input
