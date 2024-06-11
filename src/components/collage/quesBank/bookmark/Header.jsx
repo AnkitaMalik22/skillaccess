@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex  mx-auto justify-between mb-2 mt-5">
+    <div className="flex  mx-auto justify-between mb-5">
       <div>
         <button className="flex self-center  rounded-lg  gap-2">
           <button onClick={() => navigate(-1)} className="mt-2 mr-3">
@@ -15,7 +15,7 @@ const Header = () => {
 
           <div className="self-center flex ">
             <h2 className="sm:text-xl mt-2 text-left font-bold self-center text-3xl font-dmSans ">
-            Book mark Questions
+              Book mark Questions
             </h2>
             {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
               <h3 className="mr-2">Untitiled Assessments</h3>
@@ -41,9 +41,7 @@ const Header = () => {
       </div>
 
       <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
-        <div className=" flex">
-      
-        </div>
+        <div className=" flex"></div>
       </div>
     </div>
   );

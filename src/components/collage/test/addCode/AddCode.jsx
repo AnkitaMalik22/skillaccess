@@ -354,11 +354,11 @@ const AddCode = () => {
   console.log(question);
 
   return (
-    <div className="">
+    <div className="w-11/12 mx-auto py-5 md:py-10">
       <Header handleSave={handleSave} />
-      <div className="bg-white min-h-[90vh] mx-auto rounded-xl pt-4 sm:w-[95.7%] px-3 relative">
-        <div className="flex flex-wrap gap-2  ">
-          <span className="w-[49%] ">
+      <div className="bg-white min-h-[90vh] mx-auto rounded-xl relative">
+        <div className="flex flex-wrap gap-5 md:flex-nowrap mb-5 md:mb-10 ">
+          <div className="w-1/2 ">
             <Question
               question={question}
               setQuestion={setQuestion}
@@ -368,8 +368,8 @@ const AddCode = () => {
               handleQuestionChange={handleQuestionChange}
               handleSave={handleSave}
             />
-          </span>
-          <span className="w-[49%]">
+          </div>
+          <div className="w-1/2">
             <Code
               toggle={toggle}
               setToggle={setToggle}
@@ -382,41 +382,39 @@ const AddCode = () => {
               id={id}
               type={type}
             />
-          </span>
+          </div>
         </div>
 
-        <div className="pt-20">
-          <div className="absolute bottom-10 flex right-8 gap-2">
-            {" "}
-            <div className=" flex gap-2">
-              {addType === "topic" ? (
-                <button
-                  className={`self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
-                    countDetail >= 0 ? "" : "hidden"
-                  }`}
-                  onClick={handlePrev}
-                >
-                  <FaChevronLeft className="self-center" /> Prev
-                </button>
-              ) : (
-                <button
-                  className={`self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
-                    count >= 0 ? "" : "hidden"
-                  }`}
-                  onClick={handlePrev}
-                >
-                  <FaChevronLeft className="self-center" /> Prev
-                </button>
-              )}
-            </div>
-            <div className=" flex">
+        <div className="flex gap-2 justify-between">
+          {" "}
+          <div className=" flex gap-2">
+            {addType === "topic" ? (
               <button
-                className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
-                onClick={() => handleSave("next")}
+                className={`self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                  countDetail >= 0 ? "" : "hidden"
+                }`}
+                onClick={handlePrev}
               >
-                <FaPlus className="self-center" /> Add Next Question
+                <FaChevronLeft className="self-center" /> Prev
               </button>
-            </div>
+            ) : (
+              <button
+                className={`self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                  count >= 0 ? "" : "hidden"
+                }`}
+                onClick={handlePrev}
+              >
+                <FaChevronLeft className="self-center" /> Next
+              </button>
+            )}
+          </div>
+          <div className=" flex">
+            <button
+              className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+              onClick={() => handleSave("next")}
+            >
+              <FaPlus className="self-center" /> Add Next Question
+            </button>
           </div>
         </div>
       </div>

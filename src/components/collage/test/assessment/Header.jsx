@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 const Header = ({ name }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex w-[97%] mx-auto justify-between mb-2">
+    <div className="flex mx-auto justify-between mb-5">
       <button
-        className="flex self-center ml-2 rounded-lg  gap-2"
+        className="flex self-center rounded-lg  gap-2"
         onClick={() => navigate(-1)}
       >
         <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
@@ -22,8 +22,6 @@ const Header = ({ name }) => {
           className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96  mx-auto  "
         />
       </div>
-
-      <div className="flex gap-2"></div>
     </div>
   );
 };

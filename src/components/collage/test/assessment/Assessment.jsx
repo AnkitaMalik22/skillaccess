@@ -113,14 +113,14 @@ const Assessment = () => {
   const totalTime = handleCalculateTime();
   console.log(totalTime);
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto ">
       <Header name={assessment.name} />
-      <span className="flex gap-2 w-[97%] mx-auto px-2 ">
+      <span className="flex gap-2 mx-auto px-2 ">
         <FaFolder className="text-blued w-5 h-5" />
         <h2 className="text-xs">Beginner Level</h2>
       </span>
 
-      <h2 className="flex gap-2 w-[95.6%] mx-auto px-2 bg-gray-100 p-3 my-2 rounded-lg tracking-wide [word-spacing:.1rem]">
+      <h2 className="flex gap-2  mx-auto px-2 bg-gray-100 p-3 my-2 rounded-lg tracking-wide [word-spacing:.1rem]">
         Create the first things for your platform
       </h2>
 
@@ -186,8 +186,8 @@ const Assessment = () => {
         </div>
       </div> */}
 
-      <div className="  w-[95.6%] mx-auto rounded-lg tracking-wide justify-between flex font-dmSans  mt-8">
-        <div className="md:w-[58%] ">
+      <div className="  mx-auto rounded-lg tracking-wide justify-between flex font-dmSans  mt-8">
+        <div className="w-1/2 ">
           {assessment?.topics?.map((topic, index) => (
             <div className="w-full  my-4 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
               {" "}
@@ -209,18 +209,18 @@ const Assessment = () => {
                 <div className="flex gap-1 ">
                   <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
                   <p className="text-gray-400 text-xs self-center">
-                  {
-                          totalTime.find(
-                            (timeObj) =>
-                              timeObj.type === topic.Type &&
-                              timeObj.Heading === topic.Heading
-                          )?.total
-                        }{" "} mins
+                    {
+                      totalTime.find(
+                        (timeObj) =>
+                          timeObj.type === topic.Type &&
+                          timeObj.Heading === topic.Heading
+                      )?.total
+                    }{" "}
+                    mins
                   </p>
                 </div>
               </div>
               {/* type */}
-          
               {/* cross */}
               {/* <div className="col-span-1  flex justify-center">
                 <RxCross1 className="self-center text-red-600 w-5 h-5" />
@@ -240,7 +240,6 @@ const Assessment = () => {
                 </button>
               </div>
               {/* details */}
-          
               {/* edit */}
               {/* <div className="col-span-1  flex justify-center">
                 <PiPencilSimpleLine
@@ -256,7 +255,7 @@ const Assessment = () => {
           ))}
         </div>
 
-        <div className="  hidden md:block w-[40%] ">
+        <div className="  hidden md:block w-1/2 ">
           <div className=" !rounded-lg  ">
             {/* 
             

@@ -62,10 +62,10 @@ const AddQuestionsSelect = () => {
     }
   };
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto py-5 md:py-10 ">
       <HeaderSelect Q={selectQuestionType} />
 
-      <div className="w-11/12 mx-auto mt-20">
+      <div className=" mx-auto mt-20">
         {/* larger screens */}
         <div className="   my-2 rounded-lg tracking-wide justify-between  ">
           <h2 className="font-normal text-xs sm:text-sm text-gray-400  mt-8 tracking-wide ">
