@@ -237,7 +237,8 @@ const TestCases = ({
                 // onChange={(e) => handleInputChange(index, e.target.value)}
                 name="input"
                 value={question.testcase[index].input}
-                onChange={(e) => handleQuestionChange(e, index)}
+                disabled={true}
+                // onChange={(e) => handleQuestionChange(e, index)}
               />
 
               <label htmlFor={`output-${index}`}>expectedOutput:</label>
@@ -247,7 +248,8 @@ const TestCases = ({
                 className="border p-1 w-full"
                 name="expectedOutput"
                 value={question.testcase[index].expectedOutput}
-                onChange={(e) => handleQuestionChange(e, index)}
+                disabled={true}
+                // onChange={(e) => handleQuestionChange(e, index)}
                 // value={testCase.expectedOutput.map((item) => (Array.isArray(item) ? `[${item.join(",")}]` : item)).join(", ")}
                 // onChange={(e) => handleOutputChange(index, e.target.value)}
               />
@@ -261,7 +263,8 @@ const TestCases = ({
                   value=""
                   className="sr-only peer "
                   checked={testCase.isHidden}
-                  onChange={() => handleCheckboxChange(index)}
+                  disabled={true}
+                  // onChange={() => handleCheckboxChange(index)}
                 />
                 <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
               </label>

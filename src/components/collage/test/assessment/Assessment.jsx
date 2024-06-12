@@ -193,7 +193,7 @@ const Assessment = () => {
               {" "}
               {/* heading */}
               <div className="flex justify-between px-4 ">
-                <h2 className="self-center text-xs sm:text-sm">
+                <h2 className="self-center text-xs capitalize">
                   {topic.Heading}
                 </h2>
                 <span className="flex gap-1">
@@ -227,9 +227,11 @@ const Assessment = () => {
               </div> */}
               {/* desc */}
               <div className="flex px-4 justify-between mt-4 text-xs font-normal text-gray-400 ">
-                <p className="line-clamp-2">{topic.Description}</p>
+                <p className="line-clamp-2 first-letter:uppercase">
+                  {topic.Description}
+                </p>
                 <button
-                  className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs"
+                  className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs hover:bg-blue-500 hover:text-white"
                   onClick={() =>
                     navigate(
                       `/collage/test/details/${index}?question=${topic.Type}&type=assessment&view=false`
@@ -261,10 +263,10 @@ const Assessment = () => {
             
             */}
             <div className="bg-gray-100 rounded-2xl p-2 mb-6">
-              <span className="flex justify-between px-2 font-bold text-base ">
+              <div className="flex justify-between px-2 font-bold text-base ">
                 <h2>Number of Student Placed</h2>{" "}
                 <h2 className="text-sm text-gray-400">Updated 5 min ago</h2>
-              </span>
+              </div>
               <div className="flex">
                 <div className=" relative w-80 h-60">
                   <Chart
