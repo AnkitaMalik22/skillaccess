@@ -153,7 +153,7 @@ const Acounting = () => {
                 <div className="">
                   {plan._id == selectedPlan && credit.credit !== 0 ? (
                     <button
-                      className="self-center  bg-[#007AFF]  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
+                      className="self-center  bg-red-600  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
                       onClick={() => {
                         dispatch(cancelAPlan({ planId: plan._id })).then(() => {
                           console.log(plan);
