@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllTransactions } from "../../../../redux/collage/account/paymentSlice";
 import { useNavigate } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
+import CircularLoader from "../../../CircularLoader";
 import { capitalize, convertToReadable } from "../../../../util/getDate";
 
 const Transactions = () => {
@@ -38,7 +39,10 @@ const Transactions = () => {
             <div>Points Used</div>
           </div>
           <div className="acc-table  flex flex-col w-full rounded-lg font-dmSans font-medium">
-            {fetch_loading && <div>Loading...</div>}
+            <div className="flex justify-center">
+              {fetch_loading && <CircularLoader />}
+            </div>
+
             {!fetch_loading && transactions?.length > 0 ? (
               transactions?.map((transaction) => (
                 <div className="grid grid-cols-3 items-center justify-between bg-white w-full p-3 mb-3 rounded-lg">
