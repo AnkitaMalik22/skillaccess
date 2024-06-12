@@ -270,7 +270,7 @@ const TestCases = ({
         </section>
       ))}
 
-      <div className="w-full flex justify-between mx-4 ">
+      {/* <div className="w-full flex justify-between mx-4 ">
         <button
           className="  bg-[#0052CC] text-white rounded-lg px-5 py-3 flex gap-2"
           onClick={() => {
@@ -292,7 +292,7 @@ const TestCases = ({
         >
           <FaPlus className="self-center" /> Add Test Case
         </button>{" "}
-      </div>
+      </div> */}
     </div>
   );
 };
