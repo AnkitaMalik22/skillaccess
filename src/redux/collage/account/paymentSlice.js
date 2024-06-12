@@ -215,7 +215,9 @@ export const paymentSlice = createSlice({
     builder.addCase(selectAPlan.pending, (state, action) => {
       state.status = "loading";
       state.select_loading = true;
-      toast.loading("Plan request raised successfully");
+      toast.loading(
+        "Please wait until we finalize the plan. The request has been raised successfully."
+      );
     });
     builder.addCase(selectAPlan.fulfilled, (state, { payload }) => {
       state.status = "success";
