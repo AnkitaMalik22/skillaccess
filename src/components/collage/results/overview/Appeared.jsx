@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -8,24 +8,30 @@ import {
 } from "../../../../redux/collage/test/thunks/test";
 import { getTestResultPage } from "../../../../redux/collage/test/thunks/test";
 import { getStudentResponse } from "../../../../redux/collage/test/thunks/student";
+import CircularLoader from "../../../CircularLoader";
 
 const Appeared = ({ assessment }) => {
+  const [isLoading, setIsLoading] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleStatusChange = (testId, responseId) => async (event) => {
     const status = event.target.value;
+    setIsLoading({ ...isLoading, [responseId]: true });
     await dispatch(selectStudentTest({ testId, responseId, status }));
-    dispatch(getTest(testId));
-    // dispatch(getTestResultPage(testId));
+    await dispatch(getTest(testId));
+    await dispatch(getTestResultPage(assessment._id));
+    setIsLoading({ ...isLoading, [responseId]: false });
   };
 
   const { testDataResponse, response } = useSelector((state) => state.test);
 
-  console.log(response);
+  // console.log(response);
 
   useEffect(() => {
-    dispatch(getTestResultPage(assessment?._id));
+    if (assessment?._id) {
+      dispatch(getTestResultPage(assessment._id));
+    }
   }, [dispatch, assessment?._id]);
 
   const getResponse = (responseId) => {
@@ -68,7 +74,7 @@ const Appeared = ({ assessment }) => {
 
     percentageData.forEach((percentage) => {
       let color = "";
-      if (percentage === 0) {
+      if (percentage <= 0) {
         color = "transparent";
       } else if (percentage > 0 && percentage < 33.33) {
         color = "#F44336"; // Red color
@@ -130,15 +136,22 @@ const Appeared = ({ assessment }) => {
             <div className="flex justify-center">
               <div className=" self-center h-fit">
                 <span>
-                  <select
-                    className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
-                    onChange={handleStatusChange(assessment?._id, student?._id)}
-                    value={student?.status}
-                  >
-                    <option value="">Pending</option>
-                    <option value="rejected">Rejected</option>
-                    <option value="selected">Selected</option>
-                  </select>
+                  {isLoading[student?._id] ? (
+                    <CircularLoader />
+                  ) : (
+                    <select
+                      className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
+                      onChange={handleStatusChange(
+                        assessment?._id,
+                        student?._id
+                      )}
+                      value={student?.status}
+                    >
+                      <option value="">Pending</option>
+                      <option value="rejected">Rejected</option>
+                      <option value="selected">Selected</option>
+                    </select>
+                  )}
                 </span>
               </div>
             </div>
