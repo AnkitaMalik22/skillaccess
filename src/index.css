@@ -1,11 +1,12 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Firefox */
-* 
-{
+* {
   scrollbar-width: 0px;
   scrollbar-color: rgb(243 244 246);
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 /* Chrome, Edge, and Safari */
@@ -34,11 +35,6 @@
   display: none !important ;
 }
 
-@tailwind components;
-@tailwind utilities;
-
-
-
 /* Sidebar Css */
 
 .btn-transition-c {
@@ -56,7 +52,7 @@
 }
 
 .btn-transition {
-  @apply transition-all duration-300 ease-in-out ;
+  @apply transition-all duration-300 ease-in-out;
 }
 
 .active-li {
@@ -64,9 +60,8 @@
 }
 
 .hover-li:hover {
-  @apply bg-white bg-opacity-20 text-black rounded-lg ; /* Hover state */
+  @apply bg-white bg-opacity-20 text-black rounded-lg; /* Hover state */
 }
-
 
 #\:0\.targetLanguage select:not(:first-child) {
   display: none;
