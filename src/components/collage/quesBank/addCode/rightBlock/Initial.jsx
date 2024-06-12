@@ -25,7 +25,7 @@ const Initial = ({
     <div className="w-full">
       <Editor
         theme="vs-light"
-        height="535px"
+        height="580px"
         defaultLanguage={selectedLanguage?.toLowerCase() || "java"}
         value={editorValue}
         onChange={(value) => handleEditorChange(value, "defaultCode")}
