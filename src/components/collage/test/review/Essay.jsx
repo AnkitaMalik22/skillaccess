@@ -85,11 +85,11 @@ const Essay = ({ Title, Number, id, question, type, view }) => {
   };
 
   return (
-    <div className="mx-6 flex bg-white rounded-lg justify-between mb-2">
-      <div className="w-11/12 flex flex-col gap-2 ">
+    <div className="flex bg-white rounded-lg justify-between mb-5">
+      <div className="p-5 flex flex-col gap-2 ">
         {search.get(`${Number}`) !== "true" ? (
-          <h2 className="px-4 font-semibold pt-3 text-base">
-            {Number + 1} &nbsp; {Title}
+          <h2 className="flex mb-2 gap-3 font-semibold  text-base break-words ">
+            Q{Number + 1}. &nbsp; {Title}
           </h2>
         ) : (
           <input
@@ -99,7 +99,7 @@ const Essay = ({ Title, Number, id, question, type, view }) => {
             value={essay.Title}
           />
         )}
-        <div className="px-5 pb-4 flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
           {/* {Options.map((ques) => (
             <span className="flex gap-2">
               <div className="flex w-5 justify-center">

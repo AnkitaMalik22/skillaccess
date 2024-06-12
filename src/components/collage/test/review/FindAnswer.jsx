@@ -112,10 +112,10 @@ const FindAnswer = ({ Title, Options, Number, id, type, view, question }) => {
   };
 
   return (
-    <div className="mx-6 flex bg-white rounded-lg justify-between mb-2">
-      <div className="w-11/12 flex flex-col gap-2">
+    <div className="flex bg-white rounded-lg justify-between mb-5">
+      <div className="p-5 flex flex-col gap-2">
         {search.get(`${Number}`) !== "true" ? (
-          <h2 className="px-4 font-semibold pt-3 text-base">
+          <h2 className="flex mb-2 gap-3 font-semibold  text-base break-words ">
             {Number + 1} &nbsp; {Title}
           </h2>
         ) : (

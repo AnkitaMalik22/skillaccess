@@ -581,7 +581,7 @@ const Header = ({
     }
   };
   return (
-    <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
+    <div className="flex  justify-between items-center mb-5">
       {visible && (
         <PopUp
           visible={visible}
@@ -611,7 +611,7 @@ const Header = ({
           </button>
 
           <div className="flex self-center">
-            <h2 className="sm:text-xl  text-left font-bold  text-3xl font-dmSans self-center">
+            <h2 className="text-3xl  text-left font-bold font-dmSans self-center capitalize">
               {name ? name : "Create Assessment"}
             </h2>
           </div>
