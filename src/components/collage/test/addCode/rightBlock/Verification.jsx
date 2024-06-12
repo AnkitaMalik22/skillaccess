@@ -12,7 +12,7 @@ const Verification = ({
   question,
   setQuestion,
 }) => {
-  const [testCaseExpand, setTestCaseExpand] = useState(true);
+  const [testCaseExpand, setTestCaseExpand] = useState(false);
 
 
 
