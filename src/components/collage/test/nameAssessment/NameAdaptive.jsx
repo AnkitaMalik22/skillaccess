@@ -311,7 +311,7 @@ const Name = () => {
           onChange={handleChange}
         />
         {errors.name && (
-          <span className="text-red-500 ml-5 pt-2">{errors.name}</span>
+          <span className="text-red-500 py-2">{errors.name}</span>
         )}
         <input
           type="tel"
@@ -324,7 +324,7 @@ const Name = () => {
           onChange={handleChange}
         />
         {errors.totalAttempts && (
-          <span className="text-red-500 ml-5 pt-2">{errors.totalAttempts}</span>
+          <span className="text-red-500 py-2">{errors.totalAttempts}</span>
         )}
         <input
           name="totalQuestions"
@@ -337,9 +337,7 @@ const Name = () => {
           onChange={handleChange}
         />
         {errors.totalQuestions && (
-          <span className="text-red-500 ml-5 pt-2">
-            {errors.totalQuestions}
-          </span>
+          <span className="text-red-500 py-2">{errors.totalQuestions}</span>
         )}
         {/* <input
           name="totalDuration"
@@ -412,7 +410,7 @@ const Name = () => {
           onChange={handleChange}
         />
         {errors.description && (
-          <span className="text-red-500 ml-5 pt-2">{errors.description}</span>
+          <span className="text-red-500 py-2">{errors.description}</span>
         )}
       </div>
     </div>

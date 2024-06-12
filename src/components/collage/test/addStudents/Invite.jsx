@@ -11,8 +11,11 @@ import {
 import { getStudentsForTest } from "../../../../redux/collage/test/thunks/test";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { FaChevronLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Invite = () => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { credit } = useSelector((state) => state.collageAuth);
   const testId = searchParams.get("testId");
@@ -62,35 +65,43 @@ const Invite = () => {
 
   // console.log(uploadedStudents)
   return (
-    <div>
-      <div className="bg-white min-h-[90vh] w-[98%] mx-auto rounded-xl pt-4 font-dmSans">
-        <div className=" sm:w-[95.7%] mx-auto ">
-          <div className="w-full">
-            <div
-              name=""
-              id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 py-3 px-7 font-bold text-2xl"
-            >
-              {localStorage
-                .getItem("testName")
-                .substring(1, testName.length - 1)}
-            </div>
-          </div>
+    <div className="bg-white min-h-[90vh] w-11/12 mx-auto rounded-xl py-5 md:py-10 font-dmSans">
+      <div className="flex gap-3 mb-5">
+        <button
+          className="self-center object-center rounded-lg h-10 w-10 "
+          onClick={() => navigate(-1)}
+        >
+          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
+        </button>
+        {/* <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
+          Create Assessment
+        </h2> */}
+      </div>
 
-          <div className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg  px-7 pt-3 pb-8 focus:ring-0placeholder-gray-400 mb-6">
-            <Header handleFilter={handleFilterStudents} />
-            <List
-              setStudents={setStudents}
-              uploadedStudents={filteredStudents}
-              students={students}
-            />
+      <div className=" mx-auto ">
+        <div className="w-full">
+          <div
+            name=""
+            id=""
+            className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 p-5 font-bold text-2xl"
+          >
+            {localStorage.getItem("testName").substring(1, testName.length - 1)}
           </div>
         </div>
 
-        <div className="w-[95.7%] mx-auto">
-          {" "}
-          <Footer students={students} />
+        <div className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg p-5 focus:ring-0placeholder-gray-400 mb-6">
+          <Header handleFilter={handleFilterStudents} />
+          <List
+            setStudents={setStudents}
+            uploadedStudents={filteredStudents}
+            students={students}
+          />
         </div>
+      </div>
+
+      <div className="mx-auto">
+        {" "}
+        <Footer students={students} />
       </div>
     </div>
   );

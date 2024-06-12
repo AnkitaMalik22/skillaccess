@@ -113,14 +113,14 @@ const Assessment = () => {
   const totalTime = handleCalculateTime();
   console.log(totalTime);
   return (
-    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto ">
+    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto py-5 md:py-10 ">
       <Header name={assessment.name} />
-      <span className="flex gap-2 mx-auto px-2 ">
+      <div className="flex gap-2 mx-auto mb-5 ">
         <FaFolder className="text-blued w-5 h-5" />
         <h2 className="text-xs">Beginner Level</h2>
-      </span>
+      </div>
 
-      <h2 className="flex gap-2  mx-auto px-2 bg-gray-100 p-3 my-2 rounded-lg tracking-wide [word-spacing:.1rem]">
+      <h2 className="flex gap-2  mx-auto p-3 bg-gray-100 mb-5  rounded-lg tracking-wide">
         Create the first things for your platform
       </h2>
 
@@ -186,10 +186,10 @@ const Assessment = () => {
         </div>
       </div> */}
 
-      <div className="  mx-auto rounded-lg tracking-wide justify-between flex font-dmSans  mt-8">
+      <div className="  mx-auto rounded-lg tracking-wide justify-between flex font-dmSans gap-5">
         <div className="w-1/2 ">
           {assessment?.topics?.map((topic, index) => (
-            <div className="w-full  my-4 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
+            <div className="w-full  mb-5 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
               {" "}
               {/* heading */}
               <div className="flex justify-between px-4 ">
