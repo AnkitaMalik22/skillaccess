@@ -34,31 +34,53 @@ const Appeared = ({ assessment }) => {
 
   let arr = [assessment?.studentResponses];
 
-  console.log(arr);
+  // console.log(arr);
 
-  const getProgressBarColor = (percentage) => {
-    if (percentage === 0) {
-      return ""; // Return empty string for transparent
-    } else if (percentage > 0 && percentage < 33.33) {
-      return "bg-red-600"; // Red color
-    } else if (percentage >= 33.33 && percentage < 66.66) {
-      return "bg-blue-600"; // Blue color
-    } else {
-      return "bg-green-600"; // Green color
-    }
-  };
-  const getProgressBarWidth = (percentage) => {
-    if (percentage === 0) {
-      return 0; // Width is 0 when percentage is 0
-    } else if (percentage < 33.33) {
-      return 40; // 2/5 width
-    } else if (percentage < 66.66) {
-      return 60; // 3/5 width
-    } else {
-      return 100; // Full width
-    }
-  };
-  console.log(arr);
+  // const getProgressBarColor = (percentage) => {
+  //   if (percentage === 0) {
+  //     return ""; // Return empty string for transparent
+  //   } else if (percentage > 0 && percentage < 33.33) {
+  //     return "bg-red-600"; // Red color
+  //   } else if (percentage >= 33.33 && percentage < 66.66) {
+  //     return "bg-blue-600"; // Blue color
+  //   } else {
+  //     return "bg-green-600"; // Green color
+  //   }
+  // };
+  // const getProgressBarWidth = (percentage) => {
+  //   if (percentage === 0) {
+  //     return 0; // Width is 0 when percentage is 0
+  //   } else if (percentage < 33.33) {
+  //     return 40; // 2/5 width
+  //   } else if (percentage < 66.66) {
+  //     return 60; // 3/5 width
+  //   } else {
+  //     return 100; // Full width
+  //   }
+  // };
+  // console.log(arr);
+
+  let percentageData = [];
+  let colors = [];
+
+  if (testDataResponse?.length > 0) {
+    percentageData = testDataResponse.map((item) => item.percentage);
+
+    percentageData.forEach((percentage) => {
+      let color = "";
+      if (percentage === 0) {
+        color = "transparent";
+      } else if (percentage > 0 && percentage < 33.33) {
+        color = "#F44336"; // Red color
+      } else if (percentage >= 33.33 && percentage < 66.66) {
+        color = "#FFC107"; // Orange color
+      } else {
+        color = "#4CAF50"; // Green color
+      }
+      colors.push(color);
+    });
+  }
+
   return (
     <div className="w-full mx-auto">
       {/* legend */}
@@ -74,7 +96,16 @@ const Appeared = ({ assessment }) => {
 
       {testDataResponse?.length > 0 &&
         testDataResponse?.map((student, index) => (
-          <div className=" grid-cols-5 rounded-lg py-2  font-dmSans  text-sm hidden md:grid mb-4">
+          <div
+            className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full border-2 transition-colors duration-300"
+            style={{ borderColor: "transparent", borderWidth: "2px" }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.borderColor = colors[index])
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.borderColor = "transparent")
+            }
+          >
             {" "}
             {/* row-2 */}
             <div className="flex justify-center gap-2">
@@ -117,10 +148,11 @@ const Appeared = ({ assessment }) => {
                 <span className="flex gap-2 items-center">
                   <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                     <div
-                      className={`h-full rounded-lg ${getProgressBarColor(
-                        student?.percentage
-                      )}`}
-                      style={{ width: `${student?.percentage}%` }}
+                      className={`h-full rounded-lg`}
+                      style={{
+                        width: `${student?.percentage}%`,
+                        backgroundColor: colors[index],
+                      }}
                     ></div>
                   </div>
                   <h2 className="font-dmSans font-bold text-xs ">

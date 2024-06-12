@@ -28,17 +28,41 @@ const List = ({ FilterdStudents }) => {
     // dispatch(getCollege());
     dispatch(getAllTests());
   }, [dispatch]);
-  const getProgressBarColor = (percentage) => {
-    if (percentage === 0) {
-      return ""; // Return empty string for transparent
-    } else if (percentage > 0 && percentage < 33.33) {
-      return "bg-red-600"; // Red color
-    } else if (percentage >= 33.33 && percentage < 66.66) {
-      return "bg-blue-600"; // Blue color
-    } else {
-      return "bg-green-600"; // Green color
-    }
-  };
+
+  // const getProgressBarColor = (percentage) => {
+  //   if (percentage === 0) {
+  //     return ""; // Return empty string for transparent
+  //   } else if (percentage > 0 && percentage < 33.33) {
+  //     return "bg-red-600"; // Red color
+  //   } else if (percentage >= 33.33 && percentage < 66.66) {
+  //     return "bg-blue-600"; // Blue color
+  //   } else {
+  //     return "bg-green-600"; // Green color
+  //   }
+  // };
+  // console.log(getProgressBarColor);
+
+  const percentageData = FilterdStudents?.map((item) => {
+    return item.avgPercentage;
+  });
+
+  let colors = [];
+  if (percentageData) {
+    percentageData.forEach((percentage) => {
+      let color = "";
+      if (percentage === 0) {
+        color = "transparent";
+      } else if (percentage > 0 && percentage < 33.33) {
+        color = "#F44336";
+      } else if (percentage >= 33.33 && percentage < 66.66) {
+        color = "#FFC107";
+      } else {
+        color = "#4CAF50";
+      }
+      colors.push(color);
+    });
+  }
+
   return (
     <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 rounded-2xl p-8">
       {/* legend */}
@@ -61,8 +85,17 @@ const List = ({ FilterdStudents }) => {
       </div>
 
       {/* list to be iterated */}
-      {FilterdStudents.map((assessment) => (
-        <div className=" grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full bg-white">
+      {FilterdStudents.map((assessment, index) => (
+        <div
+          className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full bg-white border-2 transition-colors duration-300"
+          style={{ borderColor: "transparent", borderWidth: "2px" }}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.borderColor = colors[index])
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.borderColor = "transparent")
+          }
+        >
           {" "}
           {/* row-2 */}
           <div className={` flex justify-center `}>
@@ -97,12 +130,13 @@ const List = ({ FilterdStudents }) => {
           <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
-                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto ">
                   <div
-                    className={`h-full rounded-lg ${getProgressBarColor(
-                      assessment.avgPercentage?.toFixed(2)
-                    )}`}
-                    style={{ width: assessment.avgPercentage }}
+                    className={`h-full rounded-lg`}
+                    style={{
+                      width: assessment.avgPercentage,
+                      backgroundColor: colors[index],
+                    }}
                   ></div>
                 </div>
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
