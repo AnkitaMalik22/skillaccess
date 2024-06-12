@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Header = ({ handleNext }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex w-full mx-auto justify-between mb-6 items-center">
+    <div className="flex w-full mx-auto justify-between mb-5 items-center">
       <div className="flex gap-3">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
@@ -24,7 +24,7 @@ const Header = ({ handleNext }) => {
           className="bg-[#0052CC] self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={() => handleNext()}
         >
-          Next Step{" "}
+          Next
           <FaArrowRightLong className="self-center text-lg text-white ml-4" />
         </button>{" "}
       </div>

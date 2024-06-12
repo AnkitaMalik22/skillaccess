@@ -32,7 +32,7 @@ const VideoEssay = ({
 
   const [previousShortEssay, setPreviousShortEssay] = useState(question);
   const [previousLongEssay, setPreviousLongEssay] = useState(question);
-  
+
   useEffect(() => {
     if (type === "short") {
       setPreviousShortEssay(question);
@@ -91,8 +91,8 @@ const VideoEssay = ({
   };
 
   return (
-    <div className="mx-6 flex bg-white rounded-lg justify-between my-4">
-      <div className="w-11/12 flex flex-col gap-2">
+    <div className="flex bg-white rounded-lg justify-between mb-5">
+      <div className="p-5 flex flex-col gap-2">
         {search.get(`${Number}`) !== "true" ? (
           <h2 className="px-4 font-semibold pt-3 text-base">
             {Index + 1} &nbsp; {essay.Title}
@@ -108,7 +108,8 @@ const VideoEssay = ({
         )}
 
         {search.get(Number) === "true" && (
-          <button onClick={handleSubmit}
+          <button
+            onClick={handleSubmit}
             // onClick={() => {
             //   if (type === "short") {
             //     if (videoState.short.length === 0) {

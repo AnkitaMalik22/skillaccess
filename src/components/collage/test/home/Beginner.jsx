@@ -117,7 +117,7 @@ const Beginner = () => {
             </SwiperSlide>
           ))
         )}
-        <SwiperSlide></SwiperSlide>
+        {/* <SwiperSlide></SwiperSlide> */}
 
         <span className="absolute top-1/2 right-0 z-20 h-fit w-fit">
           <SlideNextButton />

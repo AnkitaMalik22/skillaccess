@@ -49,7 +49,7 @@ const Adaptive = () => {
         </div>
       </div>
       <Swiper
-        className="relative sm:!max-w-md md:!max-w-lg"
+        className="relative md:w-full"
         loop={true}
         spaceBetween={"1px"}
         slidesPerView={2}
@@ -76,9 +76,9 @@ const Adaptive = () => {
             slidesPerView: 1.3,
           },
           1000: { slidesPerView: 1.3 },
-          1280: {
-            slidesPerView: 2,
-          },
+          1280: { slidesPerView: 1.5 },
+          1400: { slidesPerView: 2 },
+          1600: { slidesPerView: 2.5 },
         }}
       >
         {Adaptive?.map((item, i) => (

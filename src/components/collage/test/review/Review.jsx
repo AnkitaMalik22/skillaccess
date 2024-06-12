@@ -168,7 +168,7 @@ const Review = () => {
   }, [questions]);
   const totalTime = handleCalculateTime();
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <div className="font-dmSans text-sm font-bold w-11/12 py-5 md:py-10 mx-auto">
       <Header
         name={name}
         view={view}
@@ -186,14 +186,14 @@ const Review = () => {
       />
 
       <div
-        className={` w-11/12 mx-auto min-h-[80vh] my-2 rounded-lg   bg-gray-100  ${
+        className={`mx-auto p-5 min-h-[80vh] my-2 rounded-lg   bg-gray-100  ${
           visible && "h-[80vh] overflow-hidden"
         }`}
       >
-        <div className="flex justify-between p-4">
-          <span className="flex gap-2 pl-2">
-            <h2>{questionType}</h2>
-            <div className="flex gap-1 ">
+        <div className="flex justify-between mb-5">
+          <span className="flex gap-2 items-center">
+            <h2 className="capitalize text-lg">{questionType}</h2>
+            <div className="flex gap-1 items-center ">
               <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
               <p className="text-gray-400 text-xs self-center">
                 {totalTime} mins
