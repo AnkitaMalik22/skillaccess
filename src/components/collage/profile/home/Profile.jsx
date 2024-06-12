@@ -20,11 +20,11 @@ const Profile = () => {
   const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
   const [avatar, setAvatar] = useState("");
   const [college, setCollege] = useState(user);
-  const handleUpdate = (college) => {
-    dispatch(updateCollege(college));
-    setEditable(false);
-    localStorage.setItem("editable", false);
-  };
+  // const handleUpdate = (college) => {
+  //   dispatch(updateCollege(college));
+  //   setEditable(false);
+  //   localStorage.setItem("editable", false);
+  // };
   useEffect(() => {
     if (user) {
       setCollege(user);
@@ -73,7 +73,7 @@ const Profile = () => {
         <EditHeader
           editable={editable}
           setEditable={setEditable}
-          handleUpdate={handleUpdate}
+          // handleUpdate={handleUpdate}
           college={college}
           setCollege={setCollege}
           setSubmitUpdateProfile={setSubmitUpdateProfile}
@@ -83,7 +83,7 @@ const Profile = () => {
         <Header
           editable={editable}
           setEditable={setEditable}
-          handleUpdate={handleUpdate}
+          // handleUpdate={handleUpdate}
           college={college}
           setCollege={setCollege}
           setAvatar={setAvatar}

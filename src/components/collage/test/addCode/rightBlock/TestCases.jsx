@@ -185,7 +185,7 @@ const TestCases = ({
   };
   console.log(question?.testcase);
   return (
-    <div>
+    <div className="h-[535px] overflow-y-auto w-full">
       {visible && (
         <PopUp
           visible={visible}
@@ -232,7 +232,7 @@ const TestCases = ({
               <textarea
                 type="text"
                 id={`input-${index}`}
-                className="border p-1 w-full"
+                className="border p-1 w-full h-[100px]"
                 // value={testCase.input.map((item) => (Array.isArray(item) ? `[${item.join(",")}]` : item)).join(", ")}
                 // onChange={(e) => handleInputChange(index, e.target.value)}
                 name="input"
@@ -270,7 +270,7 @@ const TestCases = ({
         </section>
       ))}
 
-      <div className="w-full flex justify-between mx-4 ">
+      <div className="w-full flex justify-between px-4  ">
         <button
           className="  bg-[#0052CC] text-white rounded-lg px-5 py-3 flex gap-2"
           onClick={() => {
