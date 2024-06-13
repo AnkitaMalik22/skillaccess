@@ -23,7 +23,7 @@ const AddVideoMcqPage = lazy(() => import("./AddVideoMcqPage"));
 const AddVideoLongShortPage = lazy(() => import("./AddVideoLongShortPage"));
 const AddVideoQuestionsPage = lazy(() => import("./AddVideoQuestionsPage"));
 
-export default function Test() {
+function Test() {
   return (
     <Route path="collage/test">
       <Route path="" element={<TestPage />} />
@@ -46,14 +46,13 @@ export default function Test() {
       <Route path="essay/:id" element={<AddEssayPage />} />
       <Route path="find-ans/:id" element={<AddParagraphPage />} />
       <Route path="video/:id" element={<AddVideoPage />} />
-
       <Route path="video/:id/addmcq" element={<AddVideoMcqPage />} />
-
       <Route path="video/shortlong/:id" element={<AddVideoLongShortPage />} />
-
       <Route path="video/:id/selectType" element={<AddVideoQuestionsPage />} />
       <Route path="final" element={<FinalizePage />} />
       <Route path="invite" element={<InvitePage />} />
     </Route>
   );
 }
+
+export default Test;
