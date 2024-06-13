@@ -1,61 +1,21 @@
 import React, { useEffect } from "react";
-import Header from "./Header";
 import { TbFileDownload } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getStudents,
-  approveStudent,
-  setLoading,
-} from "../../../../redux/collage/student/studentSlice";
-import PopUp from "./PopUp";
+import { getStudents } from "../../../redux/collage/student/studentSlice";
+import useTranslate from "../../../hooks/useTranslate";
+import Header from "../../../components/collage/students/Header";
 
 const Students = () => {
+  useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [visible, setVisible] = React.useState(false);
-  const [sId, setSId] = React.useState(null);
   const [filteredStudents, setFilteredStudents] = React.useState([]);
-  const {
-    uploadedStudents,
-    approvedStudents,
-    pendingStudents,
-    loading,
-    GET_STUDENT_LOADING,
-  } = useSelector((state) => state.collegeStudents);
+  const { uploadedStudents, approvedStudents, pendingStudents } = useSelector(
+    (state) => state.collegeStudents
+  );
 
   const { user } = useSelector((state) => state.collageAuth);
-
-  //  useEffect(() => {
-  // async()=>{
-  //  await dispatch(getStudents({id: user?._id}))
-
-  // setFilteredStudents(uploadedStudents)
-  // }
-
-  // console.log(filteredStudents, "filteredStudents")
-
-  //   // console.log(students)
-
-  //  }, [])
-
-  //  useEffect(() => {
-  // if (!loading)
-  // {
-  //   console.log("loading", loading, user?._id,user)
-  //  //await dispatch(getStudents({id: user?._id}))
-  //   //await  setFilteredStudents(uploadedStudents)
-
-  //   dispatch(setLoading(false))
-
-  // }
-
-  // console.log(filteredStudents, "filteredStudents")
-  // //if (user) {
-  //  // setFilteredStudents(uploadedStudents)
-  // //}
-
-  //   }, [loading,])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,15 +31,10 @@ const Students = () => {
     setFilteredStudents(uploadedStudents);
   }, [uploadedStudents]);
 
-  const handleApprove = (studentId) => {};
-
   const handleFilterStudents = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      console.log("empty");
-
       setFilteredStudents(uploadedStudents);
-      console.log(uploadedStudents);
       return;
     } else {
       setFilteredStudents(
@@ -92,13 +47,10 @@ const Students = () => {
           );
         })
       );
-
-      console.log(filteredStudents, "filtered--", value);
     }
   };
-  console.log(uploadedStudents);
   return (
-    <div>
+    <>
       <Header handleFilter={handleFilterStudents} />
 
       <div className="w-full flex justify-between md:gap-10 gap-5 flex-wrap md:flex-nowrap md:mb-10 mb-5">
@@ -124,16 +76,6 @@ const Students = () => {
                   <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
                     {student?.FirstName + " " + student?.LastName}
                   </h2>
-
-                  {/* <span className="break-words min-w-0 pt-1 ">
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                    Role
-                  </h2>
-                  <h2 className="font-dmSans font-medium text-xs break-words text-gray-400">
-                    {" "}
-                   Student
-                  </h2>
-                </span> */}
                 </div>
               </div>
               <div className="font-dmSans font-semibold text-sm text-[#7F7F7F] lowercase break-words">
@@ -167,33 +109,11 @@ const Students = () => {
                       {student?.FirstName + " " + student?.LastName}
                     </h2>
                   </div>
-
-                  {/* <span className="break-words min-w-0 pt-1 ">
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                    Role
-                  </h2>
-                  <h2 className="font-dmSans font-medium text-xs break-words text-gray-400">
-                    {" "}
-                   Student
-                  </h2>
-                </span> */}
                 </div>
               </div>
               <div className="font-dmSans font-semibold text-sm text-[#7F7F7F] lowercase break-words">
                 {student?.Email}
               </div>
-              {/* <div className="flex item-center gap-2"> */}
-              {/* <button
-                className="flex justify-center"
-                onClick={() => {
-                  setVisible(true);
-                  setSId(student?._id);
-                }}
-              >
-                <span className="flex justify-center h-fit self-center gap-2 bg-[#DE350B66] bg-opacity-40 text-white text-xs font-semibold px-4 py-2 rounded-xl hover:cursor-pointer">
-                  Approve Request
-                </span>
-              </button> */}
               <div className="flex  self-center gap-3">
                 <h2
                   className="font-dmSans text-xs font-bold text-white bg-[#95ACFA] p-2 rounded-lg cursor-pointer"
@@ -266,12 +186,6 @@ const Students = () => {
                     ]?.assessmentId?.name
                 : "Not Available"}
             </h2>
-            {/* <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
-              Mailchimp
-              <span className="inline font-normal break-words text-[#8F92A1]">
-                , in London, UK
-              </span>
-            </h2> */}
           </div>
           <div className="flex justify-center flex-col">
             <h2 className="font-dmSans font-normal text-sm text-[#171717]">
@@ -282,22 +196,11 @@ const Students = () => {
                   ]?.assessmentId?.name
                 : "Not Available"}
             </h2>
-            {/* <h2 className="font-dmSans font-bold text-sm inline text-[#0052C#171717C]">
-              Mailchimp
-              <span className="inline font-normal break-words text-[#8F92A1]">
-                , in London, UK
-              </span>
-            </h2> */}
           </div>
           <div className="flex justify-center">
             <div className=" self-center">
               <span>
-                {/* <div className="min-w-[4rem] bg-gray-300 rounded-lg h-2 mx-auto">
-                  <div className="w-3/4 bg-[#00875A] h-full rounded-lg"></div>
-                </div> */}
                 <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
-                  {" "}
-                  {/* Good */}
                   Not available
                 </h2>
               </span>
@@ -319,7 +222,7 @@ const Students = () => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

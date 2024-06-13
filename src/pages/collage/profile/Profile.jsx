@@ -1,44 +1,34 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import List from "./List";
-import EditHeader from "./EditHeader";
 import { useDispatch, useSelector } from "react-redux";
+import Header from "../../../components/collage/profile/Header";
+import List from "../../../components/collage/profile/List";
 import {
   getCollege,
   updateCollege,
   updateAvatar,
-  setUploadImg,
-} from "../../../../redux/collage/auth/authSlice";
-const Profile = () => {
-  const dispatch = useDispatch();
-  const { user, isLoggedIn, uploadImg } = useSelector(
-    (state) => state.collageAuth
-  );
-  const [editable, setEditable] = useState(false);
-  const [loading, setLoading] = useState(false);
+} from "../../../redux/collage/auth/authSlice";
+import EditHeader from "../../../components/collage/profile/EditHeader";
+import useTranslate from "../../../hooks/useTranslate";
 
+const Profile = () => {
+  useTranslate();
+  const dispatch = useDispatch();
+  const { user, isLoggedIn } = useSelector((state) => state.collageAuth);
+  const [editable, setEditable] = useState(false);
   const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
   const [avatar, setAvatar] = useState("");
   const [college, setCollege] = useState(user);
-  // const handleUpdate = (college) => {
-  //   dispatch(updateCollege(college));
-  //   setEditable(false);
-  //   localStorage.setItem("editable", false);
-  // };
+  const handleUpdate = (college) => {
+    dispatch(updateCollege(college));
+    setEditable(false);
+    localStorage.setItem("editable", false);
+  };
   useEffect(() => {
     if (user) {
       setCollege(user);
-
-      // dispatch(getCollege());
     }
   }, [dispatch, isLoggedIn]);
-  // useEffect(() => {
-  //   // if (!user){
-  //   dispatch(getCollege());
-  //   console.log(college);
-  //   // }
-  //   // console.log(college, "college");
-  // }, []);
+
   useEffect(() => {
     if (user) {
       setCollege(user);
@@ -53,10 +43,8 @@ const Profile = () => {
     }
     if (avatar) {
       dispatch(updateAvatar({ avatar, id: user._id }));
-      dispatch(getCollege());
-      // setCollege({ ...college, avatar: { url:user.avatar.url} });
     }
-  }, [editable]);
+  }, [submitUpdateProfile]);
   useEffect(() => {
     if (submitUpdateProfile) {
       dispatch(updateCollege(college));
@@ -68,12 +56,12 @@ const Profile = () => {
   }, [submitUpdateProfile]);
 
   return (
-    <div>
+    <>
       {user && editable && (
         <EditHeader
           editable={editable}
           setEditable={setEditable}
-          // handleUpdate={handleUpdate}
+          handleUpdate={handleUpdate}
           college={college}
           setCollege={setCollege}
           setSubmitUpdateProfile={setSubmitUpdateProfile}
@@ -83,7 +71,7 @@ const Profile = () => {
         <Header
           editable={editable}
           setEditable={setEditable}
-          // handleUpdate={handleUpdate}
+          handleUpdate={handleUpdate}
           college={college}
           setCollege={setCollege}
           setAvatar={setAvatar}
@@ -92,8 +80,7 @@ const Profile = () => {
       )}
       {!user && <h1> Loading ... </h1>}
       <List editable={editable} setEditable={setEditable} />
-      {/* {window.location.reload(true)} */}
-    </div>
+    </>
   );
 };
 export default Profile;

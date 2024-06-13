@@ -1,49 +1,54 @@
 import React, { useEffect } from "react";
-import Header from "./Header";
-import { VscCircleFilled } from "react-icons/vsc";
 import { CiLocationOn } from "react-icons/ci";
-import { FaArrowRight } from "react-icons/fa";
+import { FaAngleLeft, FaArrowRight } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ChartComp from "./ChartComp";
+import ChartComp from "../../../components/collage/companies/job/ChartComp";
 import {
   getJobById,
   getTotalJobs,
-} from "../../../../redux/collage/dashboard/dashboardSlice";
-import calculateDaysAgo from "../../../../util/calculateDaysAgo";
-const JobOverview = () => {
+} from "../../../redux/collage/dashboard/dashboardSlice";
+import calculateDaysAgo from "../../../util/calculateDaysAgo";
+import useTranslate from "../../../hooks/useTranslate";
+
+const CompanyJobOverview = () => {
+  useTranslate();
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
   const dispatch = useDispatch();
 
   const { jobDetails } = useSelector((state) => state.dashboard);
   const { jobs } = useSelector((state) => state.dashboard);
-  console.log("ankita", jobDetails);
 
   useEffect(() => {
     dispatch(getJobById(id));
     dispatch(getTotalJobs());
-    console.log("hi", jobDetails);
   }, [id]);
 
   return (
     <>
-      <Header
-        Role={jobDetails?.JobTitle}
-        companyName={jobDetails?.company?.basic?.companyName}
-      />
+      <div className="flex gap-2 items-center mb-5">
+        <button
+          className="bg-gray-200  self-center rounded-lg h-10 w-10 sm:h-12 sm:w-16"
+          onClick={() => navigate(-1)}
+        >
+          <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
+        </button>
+        <h2 className="text-xl font-bold self-center">
+          {jobDetails?.JobTitle}, {jobDetails?.company?.basic?.companyName}
+        </h2>
+      </div>
 
-      <div className="sm:flex w-[95%] mx-auto justify-between mb-2 font-dmSans mt-8">
-        <div className="sm:w-[45%]">
+      <div className="flex gap-5 mx-auto justify-between mb-2 ">
+        <div className="w-1/2">
           <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
             <img
               src="../../images/job.png"
-              alt=""
+              alt="icon"
               className="w-full h-full rounded-t-3xl z-0 object-cover"
             />
           </div>
-          <div className="w-full bg-gray-100 flex justify-between pt-14 pb-6 pr-10 pl-5">
+          <div className="w-full bg-gray-100 flex justify-between p-5 mb-1">
             <div>
               <h2 className="font-bold text-lg">{jobDetails.JobTitle}</h2>
               <h2 className="text-xs font-medium mt-1">
@@ -61,101 +66,53 @@ const JobOverview = () => {
 
           {/* /Requirements */}
 
-          <div className="bg-gray-100 mt-2 px-6 grid grid-cols-4 text-xs font-bold text-center p-4 ">
-            <span>
+          <div className="bg-gray-100 mb-1 p-5 grid grid-cols-4 text-xs font-bold text-center">
+            <div>
               <h2 className="text-gray-400 my-1">EXPERIENCE</h2>
               <h2>
                 {jobDetails.ExperienceFrom}-{jobDetails.ExperienceTo} Years
               </h2>
-            </span>
-            <span>
+            </div>
+            <div>
               <h2 className="text-gray-400 my-1">SENIORITY LEVEL</h2>
               <h2>{jobDetails.SeniorityLevel}</h2>
-            </span>
-            <span>
+            </div>
+            <div>
               <h2 className="text-gray-400 my-1">EMPLOYMENT</h2>
               <h2>{jobDetails.EmploymentType}</h2>
-            </span>
-            <span>
+            </div>
+            <div>
               <h2 className="text-gray-400 my-1">SALARY</h2>
               <h2>
                 {jobDetails.SalaryFrom}-{jobDetails.SalaryTo}
               </h2>
-            </span>
+            </div>
           </div>
           {/* Role Overview */}
-          <div className="bg-gray-100 mt-2 px-6 ">
-            <span className="">
-              <h2 className="text-base font-bold pt-6 ">Role Overview</h2>
-              <p className=" mt-2 text-sm text-gray-400 pb-6">
-                {jobDetails.RoleOverview}
-              </p>
-            </span>
+          <div className="bg-gray-100 p-5 mb-1">
+            <h2 className="text-base font-bold mb-2">Role Overview</h2>
+            <p className="text-sm text-gray-400">{jobDetails.RoleOverview}</p>
           </div>
 
-          {/* bullets */}
-          <div className="bg-gray-100 mt-2 px-6 pb-6 rounded-b-lg">
-            <h2 className="text-base font-bold pt-6 mb-4">
+          <div className="bg-gray-100 p-5 mb-1 rounded-b-lg">
+            <h2 className="text-base font-bold mb-2">
+              {" "}
               Duties & Responsibilities
             </h2>
-            {jobDetails.DutiesResponsibility}
-            {/* <span className="">
-              
-              <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-                <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                  consectetur, blanditiis, rerum temporibus magnam illum maxime
-                </p>
-              </span>
-              <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-                <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                  consectetur, blanditiis, rerum temporibus magnam illum maxime
-                </p>
-              </span>
-              <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-                <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                  consectetur, blanditiis, rerum temporibus magnam illum maxime
-                </p>
-              </span>
-              <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-                <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                  consectetur, blanditiis, rerum temporibus magnam illum maxime
-                </p>
-              </span>
-              <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-                <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                  consectetur, blanditiis, rerum temporibus magnam illum maxime
-                </p>
-              </span>
-            </span> */}
+            <p className="text-sm text-gray-400">
+              {" "}
+              {jobDetails.DutiesResponsibility}
+            </p>
           </div>
         </div>
 
-        <div className="sm:w-[50%] ">
+        <div className="w-1/2 ">
           <div className=" w-full relative bg-gray-100 p-4 rounded-lg">
             <h2 className="font-bold my-4">Number of Students Placed</h2>
             <div className="w-10/12">
               {" "}
               <ChartComp />
             </div>
-
-            {/* <h2 className="absolute bottom-9 right-9 font-bold text-gray-400">
-              Updated 5 mins ago
-            </h2> */}
           </div>
 
           {/*  */}
@@ -229,4 +186,4 @@ const JobOverview = () => {
   );
 };
 
-export default JobOverview;
+export default CompanyJobOverview;

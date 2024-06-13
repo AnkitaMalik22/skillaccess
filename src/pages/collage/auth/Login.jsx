@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,15 +12,11 @@ import {
 import { useGoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
 import Layout from "./Layout";
-import Loader from "../../../Loader";
 import CircularLoader from "../../../components/CircularLoader";
 
 const Login = () => {
-  // cosnt[(error, setError)] = useState();
-
   const { Error, logoutError } = useSelector((state) => state.collageAuth);
   const [loader, setLoader] = useState(false);
-
   const [type, setType] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,7 +25,6 @@ const Login = () => {
     Password: "",
     confirmPassword: "",
   });
-  // const [checked, setChecked] = useState(false);
 
   const changeHandler = (e) => {
     let cred = e.target.name;
@@ -39,11 +33,6 @@ const Login = () => {
       return { ...prev, [cred]: val };
     });
   };
-
-  const sel = useSelector((state) => state.collageAuth);
-  useEffect(() => {
-    // console.log(sel);
-  }, []);
 
   const handleSubmit = async (e) => {
     setLoader(true);
@@ -69,13 +58,7 @@ const Login = () => {
     }
   };
 
-  // const handleCheckboxChange = () => {
-  //   setChecked(!checked); // Toggle checkbox status
-  // };
-  const isLoginDisabled =
-    // !checked ||
-    !Credentials.Email || !Credentials.Password;
-  // GOOGlE LOGIN
+  const isLoginDisabled = !Credentials.Email || !Credentials.Password;
 
   function handleGoogleLoginSuccess(tokenResponse) {
     const accessToken = tokenResponse.access_token;
@@ -84,7 +67,6 @@ const Login = () => {
   }
 
   const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
-  const [showPassword, setShowPassword] = useState(false);
   return (
     <Layout>
       <form action="" className="w-full">

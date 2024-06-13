@@ -1,7 +1,6 @@
-import { Disclosure, Transition } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import React, { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
-import { RiBookmark2Fill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
