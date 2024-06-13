@@ -6,7 +6,10 @@ import { FaArrowRight } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ChartComp from "./ChartComp";
-import { getJobById,getTotalJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
+import {
+  getJobById,
+  getTotalJobs,
+} from "../../../../redux/collage/dashboard/dashboardSlice";
 import calculateDaysAgo from "../../../../util/calculateDaysAgo";
 const JobOverview = () => {
   const navigate = useNavigate();
@@ -25,10 +28,11 @@ const JobOverview = () => {
   }, [id]);
 
   return (
-    <div>
-      <div className="mt-4">
-        <Header Role={jobDetails?.JobTitle} companyName={jobDetails?.company?.basic?.companyName}/>
-      </div>
+    <>
+      <Header
+        Role={jobDetails?.JobTitle}
+        companyName={jobDetails?.company?.basic?.companyName}
+      />
 
       <div className="sm:flex w-[95%] mx-auto justify-between mb-2 font-dmSans mt-8">
         <div className="sm:w-[45%]">
@@ -157,65 +161,71 @@ const JobOverview = () => {
           {/*  */}
           <div className="flex justify-between mb-7 mt-4">
             <h2 className="font-bold">Similar jobs</h2>
-            <h2 className="font-bold underline underline-offset-2 text-blued cursor-pointer"
-            onClick={() => navigate("/collage/dashboard/jobs")}
+            <h2
+              className="font-bold underline underline-offset-2 text-blued cursor-pointer"
+              onClick={() => navigate("/collage/dashboard/jobs")}
             >
               See All
             </h2>
           </div>
-          {jobs?.filter(((job)=>
-            job?.JobTitle===jobDetails?.JobTitle && job?._id!==id )).map((job,index)=>{
-            return(
-<div className="flex justify-between w-[98%] bg-gray-100 rounded-lg p-4" key={index}>
-            <div className="sm:flex">
-            <div className="  flex justify-center rounded-lg mr-2">
-                  <img
-                    src={job?.company?.basic?.logo}
-                    className="w-10 h-10 rounded-lg self-center"
-                    alt=""
-                  />
-                </div>
-              <span className="">
-                <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                  {job?.JobTitle}
-                </h2>
-                <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
-                  {" "}
-                  {job?.company?.basic?.companyName}
-                </h2>
-                <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
-                  {" "}
-                  {calculateDaysAgo(jobDetails.createdAt)}
-                </h2>
-               
-              </span>
-            </div>
-            <div className="flex sm:gap-6 gap-1">
-              <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
-              <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
-                {" "}
-                {job.JobLocation || "location"}
-              </h2>
-              <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
-                {" "}
-                {job.WorkplaceType || "WOrktype"}
-              </h2>
-              <button className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
-               onClick={() =>
-                          navigate(`/collage/companies/jobOverview/${job._id}`)
-                        }
-              >
-              {job.EmploymentType || "employmentType"}
-              </button>
-              <FaArrowRight className="text-gray-400 self-center" />
-            </div>
-          </div>
+          {jobs
+            ?.filter(
+              (job) => job?.JobTitle === jobDetails?.JobTitle && job?._id !== id
             )
- } )
-          }
+            .map((job, index) => {
+              return (
+                <div
+                  className="flex justify-between w-[98%] bg-gray-100 rounded-lg p-4"
+                  key={index}
+                >
+                  <div className="sm:flex">
+                    <div className="  flex justify-center rounded-lg mr-2">
+                      <img
+                        src={job?.company?.basic?.logo}
+                        className="w-10 h-10 rounded-lg self-center"
+                        alt=""
+                      />
+                    </div>
+                    <span className="">
+                      <h2 className="font-dmSans font-semibold text-sm sm:text-base">
+                        {job?.JobTitle}
+                      </h2>
+                      <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
+                        {" "}
+                        {job?.company?.basic?.companyName}
+                      </h2>
+                      <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
+                        {" "}
+                        {calculateDaysAgo(jobDetails.createdAt)}
+                      </h2>
+                    </span>
+                  </div>
+                  <div className="flex sm:gap-6 gap-1">
+                    <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
+                    <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
+                      {" "}
+                      {job.JobLocation || "location"}
+                    </h2>
+                    <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
+                      {" "}
+                      {job.WorkplaceType || "WOrktype"}
+                    </h2>
+                    <button
+                      className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
+                      onClick={() =>
+                        navigate(`/collage/companies/jobOverview/${job._id}`)
+                      }
+                    >
+                      {job.EmploymentType || "employmentType"}
+                    </button>
+                    <FaArrowRight className="text-gray-400 self-center" />
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

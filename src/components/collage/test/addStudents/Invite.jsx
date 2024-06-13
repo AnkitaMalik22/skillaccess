@@ -65,7 +65,7 @@ const Invite = () => {
 
   // console.log(uploadedStudents)
   return (
-    <div className="bg-white min-h-[90vh] w-11/12 mx-auto rounded-xl py-5 md:py-10 font-dmSans">
+    <>
       <div className="flex gap-3 mb-5">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
@@ -103,7 +103,7 @@ const Invite = () => {
         {" "}
         <Footer students={students} />
       </div>
-    </div>
+    </>
   );
 };
 
