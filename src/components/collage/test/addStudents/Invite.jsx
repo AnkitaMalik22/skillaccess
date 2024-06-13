@@ -85,7 +85,7 @@ const Invite = () => {
             id=""
             className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 p-5 font-bold text-2xl"
           >
-            {localStorage.getItem("testName").substring(1, testName.length - 1)}
+            {localStorage?.getItem("testName")}
           </div>
         </div>
 

@@ -130,9 +130,9 @@ const List = ({ FilterdStudents }) => {
           <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
-                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto ">
+                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                   <div
-                    className={`h-full rounded-lg`}
+                    className="h-full rounded-lg"
                     style={{
                       width: assessment.avgPercentage,
                       backgroundColor: colors[index],
