@@ -62,7 +62,7 @@ const AddQuestionsSelect = () => {
     }
   };
   return (
-    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto py-5 md:py-10 ">
+    <>
       <HeaderSelect Q={selectQuestionType} />
 
       <div className=" mx-auto mt-20">
@@ -289,7 +289,7 @@ const AddQuestionsSelect = () => {
           </button> */}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

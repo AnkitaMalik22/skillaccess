@@ -113,7 +113,7 @@ const Assessment = () => {
   const totalTime = handleCalculateTime();
   console.log(totalTime);
   return (
-    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto py-5 md:py-10 ">
+    <>
       <Header name={assessment.name} />
       <div className="flex gap-2 mx-auto mb-5 ">
         <FaFolder className="text-blued w-5 h-5" />
@@ -123,68 +123,6 @@ const Assessment = () => {
       <h2 className="flex gap-2  mx-auto p-3 bg-gray-100 mb-5  rounded-lg tracking-wide">
         Create the first things for your platform
       </h2>
-
-      {/* small screen charts
-      <div className="   md:hidden md:w-[40%] ">
-        <div className=" !rounded-lg ">
-          <Chart
-            className="bg-gray-100 rounded-lg"
-            options={settings.options}
-            series={settings.options.series}
-            type="donut"
-            height={400}
-            responsive={[
-              {
-                breakpoint: 500,
-
-                options: {},
-              },
-            ]}
-          />
-
-          <Chart
-            className="bg-gray-100 rounded-lg mt-2"
-            options={{
-              chart: {
-                type: "bar",
-              },
-
-              series: [
-                {
-                  data: [
-                    {
-                      x: "category A",
-                      y: 10,
-                    },
-                    {
-                      x: "category B",
-                      y: 18,
-                    },
-                    {
-                      x: "category C",
-                      y: 13,
-                    },
-                  ],
-                },
-              ],
-            }}
-            series={[
-              {
-                data: [23, 34, 12, 54, 32, 43],
-              },
-            ]}
-            type="bar"
-            height={200}
-            responsive={[
-              {
-                breakpoint: 500,
-
-                options: {},
-              },
-            ]}
-          />
-        </div>
-      </div> */}
 
       <div className="  mx-auto rounded-lg tracking-wide justify-between flex font-dmSans gap-5">
         <div className="w-1/2 ">
@@ -376,7 +314,7 @@ const Assessment = () => {
       </div>
 
       {/* larger screens */}
-    </div>
+    </>
   );
 };
 

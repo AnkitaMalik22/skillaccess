@@ -75,7 +75,7 @@ const Mail = () => {
   }, [sendMailLoading, ""]);
 
   return (
-    <div className="w-11/12 mx-auto font-dmSans">
+    <>
       <Header />
 
       <div className="bg-lGray bg-opacity-5  p-4 rounded-lg max-w-[80vw]">
@@ -129,7 +129,7 @@ const Mail = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

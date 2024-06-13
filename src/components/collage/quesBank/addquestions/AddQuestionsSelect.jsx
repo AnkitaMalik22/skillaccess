@@ -52,7 +52,7 @@ const AddQuestionsSelect = () => {
     }
   };
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <HeaderSelect Q={selectQuestionType} />
 
       <div className="mx-auto ">

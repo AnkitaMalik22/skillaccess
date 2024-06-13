@@ -14,7 +14,7 @@ const Notifiactions = () => {
   const [enabled7, setEnabled7] = useState(false);
 
   return (
-    <div className="w-11/12 mx-auto font-dmSans pt-4">
+    <>
       <Header />
 
       <div className="flex gap-40 mt-20">
@@ -48,7 +48,9 @@ const Notifiactions = () => {
 
             <div>
               <h1 className="text-lg font-bold">Companies Onboarded</h1>
-              <p className="text-gray-400">Updates about new companies onboarded</p>
+              <p className="text-gray-400">
+                Updates about new companies onboarded
+              </p>
             </div>
           </div>
 
@@ -99,7 +101,9 @@ const Notifiactions = () => {
 
             <div>
               <h1 className="text-lg font-bold">Test Performance</h1>
-              <p className="text-gray-400">Updates about your test scores and performances</p>
+              <p className="text-gray-400">
+                Updates about your test scores and performances
+              </p>
             </div>
           </div>
           <div className="flex gap-4 mb-4">
@@ -123,7 +127,9 @@ const Notifiactions = () => {
 
             <div>
               <h1 className="text-lg font-bold">Inbox</h1>
-              <p className="text-gray-400">Updates about new messages in your inbox</p>
+              <p className="text-gray-400">
+                Updates about new messages in your inbox
+              </p>
             </div>
           </div>
         </div>
@@ -133,7 +139,8 @@ const Notifiactions = () => {
         <div className="sm:w-2/6">
           <h1 className="text-lg font-bold">Push Notifcation</h1>
           <p className="text-gray-400">
-            Get push notifications in-app to find out what’s going on when you are online.
+            Get push notifications in-app to find out what’s going on when you
+            are online.
           </p>
         </div>
         <div>
@@ -159,7 +166,9 @@ const Notifiactions = () => {
 
             <div>
               <h1 className="text-lg font-bold">Companies Onboarded</h1>
-              <p className="text-gray-400">Updates about new companies onboarded</p>
+              <p className="text-gray-400">
+                Updates about new companies onboarded
+              </p>
             </div>
           </div>
           <div className="flex gap-4 mb-4">
@@ -208,7 +217,9 @@ const Notifiactions = () => {
 
             <div>
               <h1 className="text-lg font-bold">Test Performance</h1>
-              <p className="text-gray-400">Updates about your test scores and performances</p>
+              <p className="text-gray-400">
+                Updates about your test scores and performances
+              </p>
             </div>
           </div>
           {/* toggle 3 */}
@@ -233,12 +244,14 @@ const Notifiactions = () => {
 
             <div>
               <h1 className="text-lg font-bold">Inbox</h1>
-              <p className="text-gray-400">Updates about new messages in your inbox</p>
+              <p className="text-gray-400">
+                Updates about new messages in your inbox
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

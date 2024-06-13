@@ -16,7 +16,7 @@ const Transactions = () => {
   }, [dispatch]);
 
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       {" "}
       <div className="flex w-full mx-auto justify-between mb-6">
         <div className="flex gap-3">

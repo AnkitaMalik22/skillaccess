@@ -68,7 +68,7 @@ const Profile = () => {
   }, [submitUpdateProfile]);
 
   return (
-    <div className="w-11/12 md:py-10 py-5 mx-auto">
+    <div>
       {user && editable && (
         <EditHeader
           editable={editable}

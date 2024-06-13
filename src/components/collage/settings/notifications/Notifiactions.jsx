@@ -12,7 +12,7 @@ const Notifiactions = () => {
   const [enabled5, setEnabled5] = useState(false);
 
   return (
-    <div className="w-11/12 mx-auto font-dmSans pt-4">
+    <div>
       <Header />
 
       <div className="flex gap-40 mt-20">

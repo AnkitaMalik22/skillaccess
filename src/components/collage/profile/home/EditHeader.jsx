@@ -3,7 +3,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
-const EditHeader = ({  
+const EditHeader = ({
   setEditable,
   editable,
   handleUpdate,
@@ -12,7 +12,7 @@ const EditHeader = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">
+    <div className="flex justify-between mb-2">
       <div className="h-fit self-center">
         <button className="flex self-center ml-2 rounded-lg  gap-2">
           <button
