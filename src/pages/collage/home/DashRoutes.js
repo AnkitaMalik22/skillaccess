@@ -12,8 +12,6 @@ const DashboardRoutes = () => {
   return (
     <Route path="collage/dashboard">
       <Route path="" element={<Home />} />
-      {/* <Route path="companies" element={<CompanyPage />} /> */}
-      {/* <Route path="jobs" element={<JobsPage />} /> */}
       <Route path="students" element={<StudentsPage />} />
       <Route path="students/profile" element={<StudentsProfilePage />} />
     </Route>
