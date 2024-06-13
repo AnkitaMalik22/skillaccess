@@ -10,7 +10,7 @@ const ProfileFinal = () => {
   const [editable, setEditable] = useState(false);
   const [student, setStudent] = useState();
   return (
-    <div className="w-11/12 mx-auto font-dmSans">
+    <>
       <Header
         student={student}
         editable={editable}
@@ -31,7 +31,7 @@ const ProfileFinal = () => {
       <Skills />
       <div className="my-6"></div>
       <Portfolio />
-    </div>
+    </>
   );
 };
 

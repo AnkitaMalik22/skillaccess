@@ -52,9 +52,9 @@ const Header = ({
 
   return (
     // {/* profile container */}
-    <section className="bg-gray-50 rounded-xl px-6">
+    <div className="bg-gray-50 rounded-xl p-5">
       {/* first section */}
-      <div className=" flex justify-between border-b  bg-gray-50 rounded-t-lg py-8">
+      <div className=" flex justify-between border-b  bg-gray-50 rounded-t-lg">
         {/* profile photo */}
         <div className="flex gap-2 px-3 py-1 mt-2">
           {editable ? (
@@ -79,7 +79,7 @@ const Header = ({
               />
             </div>
           ) : (
-            <div className="relative w-14 h-14 bg-blued self-center rounded-lg flex justify-center items-center">
+            <div className="relative w-14 h-14 bg-gray-200 self-center rounded-lg flex justify-center items-center">
               <img
                 src={
                   college && college.avatar && college.avatar.url
@@ -88,7 +88,7 @@ const Header = ({
                 }
                 alt="avatar"
                 width="56px"
-                className="relative top[-50%]  rounded-lg "
+                className="relative p-2 rounded-lg "
               />
             </div>
           )}
@@ -324,7 +324,7 @@ const Header = ({
           </p>
         )}
       </div>
-    </section>
+    </div>
   );
 };
 

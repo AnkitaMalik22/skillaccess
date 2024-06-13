@@ -80,7 +80,7 @@ const CreateTopic = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <Header next={handleNext} />
 
       <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">

@@ -177,7 +177,7 @@ const AddEssay = () => {
   }, [currentTopic]);
 
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <Header
         handleSave={handleSave}
         topics={topics}

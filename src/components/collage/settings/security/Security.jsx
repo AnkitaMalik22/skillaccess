@@ -101,7 +101,7 @@ const Security = () => {
     dispatch(getSecretQr());
   }, []);
   return (
-    <div className="w-11/12 mx-auto pt-4">
+    <>
       <Header />
 
       <div className="flex gap-40 mt-20">
@@ -307,7 +307,7 @@ const Security = () => {
         </div>
         {showQR && <QrPop onCancel={() => setShowQR(false)} qr={qr} />}
       </div>
-    </div>
+    </>
   );
 };
 

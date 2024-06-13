@@ -7,7 +7,7 @@ import { Progress } from "../common/Progress";
 const ProfilePersonal = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-11/12 mx-auto py-7 font-dmSans">
+    <>
       <Header next={() => navigate("/student/profile/education")} />
       <Progress level={1} />
       <div className=" flex flex-col py-4">
@@ -87,7 +87,7 @@ const ProfilePersonal = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

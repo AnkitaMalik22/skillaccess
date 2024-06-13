@@ -9,10 +9,7 @@ const Companies = () => {
   const [companies, setcompanies] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
   const dispatch = useDispatch();
   // const { companies } = useSelector((state) => state.dashboard);
-  const {user} =useSelector(
-    (state) => state.collageAuth
-  );
-
+  const { user } = useSelector((state) => state.collageAuth);
 
   useEffect(() => {
     dispatch(getCompany());
@@ -20,7 +17,7 @@ const Companies = () => {
 
   const navigate = useNavigate();
   return (
-    <div className="w-11/12 mx-auto">
+    <>
       <Header />
       <div className="flex flex-wrap mx-1 w-fit justify-between">
         {companies?.map((company, index) => {
@@ -64,7 +61,7 @@ const Companies = () => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -111,7 +111,7 @@ const Compose = () => {
           })
         }
         value={email.Message}
-        className="w-full flex border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg h-[30vh] placeholder-gray-400"
+        className="w-full flex border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg min-h-[30vh] placeholder-gray-400"
         placeholder="Type Something ..."
         style={{ display: "inline-block" }}
       />

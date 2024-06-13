@@ -81,6 +81,14 @@ iframe #webpack-dev-server-client-overlay {
   color: #000000;
 }
 
+.swiper-wrapper {
+  gap: 10px;
+}
+
+.ql-editor {
+  min-height: 20vh;
+}
+
 /* CSS for animation */
 @keyframes slideIn {
   from {

@@ -237,7 +237,7 @@ const View = ({ index, filter, inboxType }) => {
                 await dispatch(uploadAttachment(Object.values(e.target.files)));
                 setLoading(false);
               }}
-            ></input>
+            />
             <TfiClip
               className="rotate-180 text-2xl text-gray-400 self-center"
               onClick={() => upload.current.click()}

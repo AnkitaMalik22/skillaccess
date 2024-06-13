@@ -130,7 +130,7 @@ const AddQuestions = () => {
   const totalTime = handleCalculateTime();
   console.log(totalTime);
   return (
-    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto py-5 md:py-10">
+    <div className=" text-sm">
       <Header page={"submit"} />
       <div className="w-4/5 mx-auto">
         <Progress />

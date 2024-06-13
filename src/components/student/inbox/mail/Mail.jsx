@@ -18,7 +18,7 @@ const Mail = () => {
   let { type } = useParams();
 
   return (
-    <div className="w-11/12 mx-auto font-dmSans">
+    <>
       <Header />
 
       <div className="bg-lGray bg-opacity-5  p-4 rounded-lg ">
@@ -58,7 +58,7 @@ const Mail = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

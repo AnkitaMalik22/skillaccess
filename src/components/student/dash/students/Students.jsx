@@ -13,7 +13,7 @@ const Students = () => {
   const navigate = useNavigate();
   const [items, setItems] = useState(true);
   return (
-    <div className="w-11/12 mx-auto">
+    <>
       <div className="flex w-full mx-auto justify-between mb-4">
         <button
           className="  self-center  rounded-lg h-10 w-10 "
@@ -260,7 +260,7 @@ const Students = () => {
           </span>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

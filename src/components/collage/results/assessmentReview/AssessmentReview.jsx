@@ -169,113 +169,6 @@ const AssessmentReview = () => {
     }
   }, [response, ""]);
 
-  //   useEffect(() => {
-  //     if (topics[0])
-  //       switch (topics[0].Type) {
-  //         case "essay":
-  //           section1 = topics[0].essay;
-  //           break;
-  //         case "video":
-  //           section1 = topics[0].video;
-  //           break;
-  //         case "compiler":
-  //           section1 = topics[0].compiler;
-  //           break;
-  //         case "findAnswer":
-  //           section1 = topics[0].findAnswers;
-  //           break;
-  //         default:
-  //           section1 = topics[0].questions;
-  //           break;
-  //       }
-
-  //     if (response?.topics[1])
-  //       switch (response?.topics[1].Type) {
-  //         case "essay":
-  //           section2 = response?.topics[1].essay;
-  //           break;
-  //         case "video":
-  //           section2 = response?.topics[1].video;
-  //           break;
-  //         case "compiler":
-  //           section2 = response?.topics[1].compiler;
-  //           break;
-  //         case "findAnswer":
-  //           section2 = response?.topics[1].findAnswers;
-  //           break;
-  //         default:
-  //           section2 = response?.topics[1].questions;
-  //           break;
-  //       }
-
-  //     if (response?.topics[2])
-  //       switch (response?.topics[2].Type) {
-  //         case "essay":
-  //           section3 = response?.topics[2].essay;
-  //           break;
-  //         case "video":
-  //           section3 = response?.topics[2].video;
-  //           break;
-  //         case "compiler":
-  //           section3 = response?.topics[2].compiler;
-  //           break;
-  //         case "findAnswer":
-  //           section3 = response?.topics[2].findAnswers;
-  //           break;
-  //         default:
-  //           section3 = response?.topics[2].questions;
-  //           break;
-  //       }
-
-  //     if (response?.topics[3])
-  //       switch (response?.topics[3].Type) {
-  //         case "essay":
-  //           section4 = response?.topics[3].essay;
-  //           break;
-  //         case "video":
-  //           section4 = response?.topics[3].video;
-  //           break;
-  //         case "compiler":
-  //           section4 = response?.topics[3].compiler;
-  //           break;
-  //         case "findAnswer":
-  //           section4 = response?.topics[3].findAnswers;
-  //           break;
-  //         default:
-  //           section4 = response?.topics[3].questions;
-  //           break;
-  //       }
-
-  //     if (response?.topics[4])
-  //       switch (response?.topics[4].Type) {
-  //         case "essay":
-  //           section5 = response?.topics[4].essay;
-  //           break;
-  //         case "video":
-  //           section5 = response?.topics[4].video;
-  //           break;
-  //         case "compiler":
-  //           section5 = response?.topics[4].compiler;
-  //           break;
-  //         case "findAnswer":
-  //           section5 = response?.topics[4].findAnswers;
-  //           break;
-  //         default:
-  //           section5 = response?.topics[4].questions;
-  //           break;
-  //       }
-
-  //     console.log(section1, section2, section3, section4, section5);
-
-  //     setQuestions([
-  //       ...section1,
-  //       ...section2,
-  //       ...section3,
-  //       ...section4,
-  //       ...section5,
-  //     ]);
-  //   }, [topics, ""]);
-
   const handleSubmit = () => {};
 
   const max = questions?.length / 10;
@@ -304,7 +197,7 @@ const AssessmentReview = () => {
   ).length;
   console.log(k);
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <div className="flex w-full mx-auto justify-between mb-5">
         <div className="flex gap-3">
           <button
