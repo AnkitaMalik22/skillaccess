@@ -86,8 +86,9 @@ const Card = (props) => {
             //   total: props.assessment.totalQuestionsCount,
             // });
             localStorage.setItem("testId", props.assessment._id);
-            props.assessment &&
-              navigate(`/collage/test/invite?testId=${props.assessment._id}`);
+            localStorage.setItem("testName", props.assessment?.name);
+            props?.assessment &&
+              navigate(`/collage/test/invite?testId=${props?.assessment._id}`);
           }}
         >
           <div className="w-8 h-8 bg-blue-500  rounded"></div>

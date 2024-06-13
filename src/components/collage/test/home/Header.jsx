@@ -15,7 +15,7 @@ const Header = ({ students }) => {
           <FiPieChart className=" sm:h-[32px] sm:w-[32px] h-10 w-10 self-center" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Companies
+          Test
         </h2>
       </span>
 
