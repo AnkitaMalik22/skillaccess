@@ -40,7 +40,7 @@ const Companies = () => {
   }, [companies]);
   const navigate = useNavigate();
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <Header handleFilter={handleFilterCompanies} />
       <div className="flex flex-wrap gap-5 md:gap-10 md:gap-y-[30px] gap-y-4 ">
         {filtered &&

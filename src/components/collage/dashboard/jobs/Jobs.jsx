@@ -19,7 +19,7 @@ const Jobs = () => {
 
   const { jobs } = useSelector((state) => state.dashboard);
 
-  const [filtered, setFiltered] =React.useState([]);
+  const [filtered, setFiltered] = React.useState([]);
   useEffect(() => {
     dispatch(getTotalJobs());
   }, [dispatch]);
@@ -29,25 +29,23 @@ const Jobs = () => {
       console.log("empty");
 
       setFiltered(jobs);
-       
+
       return;
     } else {
       setFiltered(
         jobs.filter((Jobs) => {
           const regex = new RegExp(value, "i");
-          return (
-            regex.test(Jobs.JobTitle)
-          );
+          return regex.test(Jobs.JobTitle);
         })
-      )
+      );
     }
   };
-  useEffect(()=>{
+  useEffect(() => {
     setFiltered(jobs);
-  },[jobs]);
+  }, [jobs]);
 
   return (
-    <div className="mx-4">
+    <>
       <div className="flex w-full mx-auto justify-between mb-2">
         <button
           className="  self-center  rounded-lg h-10 w-10 "
@@ -107,10 +105,11 @@ const Jobs = () => {
                   {" "}
                   {job.WorkplaceType || "WOrktype"}
                 </h2>
-                <button className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
-                onClick={() =>
-                  navigate(`/collage/companies/jobOverview/${job._id}`)
-                }
+                <button
+                  className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
+                  onClick={() =>
+                    navigate(`/collage/companies/jobOverview/${job._id}`)
+                  }
                 >
                   {job.EmploymentType || "employmentType"}
                 </button>
@@ -120,7 +119,7 @@ const Jobs = () => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 

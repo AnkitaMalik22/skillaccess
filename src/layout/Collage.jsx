@@ -373,77 +373,77 @@ const CollageLayout = ({ children }) => {
         />
       )}
       <Navbar open={open} setOpen={setOpen} />
-      <div className=" h-full bg-[#95ACFA] relative">
-        <div className="flex h-screen  justify-start pt-20 ">
-          <aside
-            className={`px-2 sm:px-4 block transition-width overflow-x-hidden bg-secondary z-30  scrollbar overflow-y-scroll ${
-              open ? "w-1/2" : "lg:w-[260px] w-20"
-            }`}
-          >
-            <ul className="list-none">
-              {arr.map((el, i) => (
-                <li
-                  className={`btn-transition ${
-                    selection === i ? "active-li" : ""
-                  } `}
-                  key={i}
-                  onMouseOver={() => setHovered(i)}
-                  onMouseOut={() => setHovered(null)}
-                  onClick={() => {
-                    if (!location.pathname.match(/\/collage\/test\/.*/)) {
-                      dispatch(setSelected(i));
-                      dispatch(
-                        setTestBasicDetails({
-                          name: "",
-                          description: "",
-                          totalAttempts: null,
-                          totalQuestions: 0,
-                        })
-                      );
-                      dispatch(setTestSelectedTopics([]));
-                      setOpen(false);
-                      navigate(el.path);
-                    } else {
-                      setVisible(true);
-                      setPath(el.path);
-                    }
-                  }}
+      {/* <div className=" h-full  relative"> */}
+      <section className="flex h-screen  justify-start pt-20 bg-[#95ACFA] font-dmSans">
+        <aside
+          className={`px-2 sm:px-4 block transition-width overflow-x-hidden bg-secondary z-30  scrollbar overflow-y-scroll ${
+            open ? "w-1/2" : "lg:w-[260px] w-20"
+          }`}
+        >
+          <ul className="list-none">
+            {arr.map((el, i) => (
+              <li
+                className={`btn-transition ${
+                  selection === i ? "active-li" : ""
+                } `}
+                key={i}
+                onMouseOver={() => setHovered(i)}
+                onMouseOut={() => setHovered(null)}
+                onClick={() => {
+                  if (!location.pathname.match(/\/collage\/test\/.*/)) {
+                    dispatch(setSelected(i));
+                    dispatch(
+                      setTestBasicDetails({
+                        name: "",
+                        description: "",
+                        totalAttempts: null,
+                        totalQuestions: 0,
+                      })
+                    );
+                    dispatch(setTestSelectedTopics([]));
+                    setOpen(false);
+                    navigate(el.path);
+                  } else {
+                    setVisible(true);
+                    setPath(el.path);
+                  }
+                }}
+              >
+                <button
+                  className={`flex gap-4 mb-8 h-fit py-2 justify-start ${
+                    el.name === "Notifications"
+                      ? "ml-[-20px] hidden"
+                      : "btn hover-li"
+                  } ${
+                    open ? "w-full" : "lg:w-full"
+                  } shadow-none text-white rounded-2xl border-none focus:outline-none max-w-xs mx-auto ${
+                    selection === i
+                      ? "bg-white !text-[#171717]"
+                      : " bg-transparent"
+                  }`}
                 >
-                  <button
-                    className={`flex gap-4 mb-8 h-fit py-2 justify-start ${
-                      el.name === "Notifications"
-                        ? "ml-[-20px] hidden"
-                        : "btn hover-li"
-                    } ${
-                      open ? "w-full" : "lg:w-full"
-                    } shadow-none text-white rounded-2xl border-none focus:outline-none max-w-xs mx-auto ${
-                      selection === i
-                        ? "bg-white !text-[#171717]"
-                        : " bg-transparent"
-                    }`}
+                  <div className="">{el.icon}</div>
+                  <h3
+                    className={`text-lg font-bold font-dmSans ${
+                      open ? "" : "lg:block hidden"
+                    } w-fit h-fit`}
                   >
-                    <div className="">{el.icon}</div>
-                    <h3
-                      className={`text-lg font-bold font-dmSans ${
-                        open ? "" : "lg:block hidden"
-                      } w-fit h-fit`}
-                    >
-                      {el.name}
-                    </h3>
-                  </button>
-                </li>
-              ))}
-              <li className="mb-5 text-center font-dmSans text-lg font-bold ">
-                <h2 className="text-[#06152B]">© 2024 skillaccess</h2>
+                    {el.name}
+                  </h3>
+                </button>
               </li>
-            </ul>
-          </aside>
+            ))}
+            <li className="mb-5 text-center font-dmSans text-lg font-bold ">
+              <h2 className="text-[#06152B]">© 2024 skillaccess</h2>
+            </li>
+          </ul>
+        </aside>
 
-          <div className="bg-white rounded-3xl h-[90vh] overflow-y-scroll w-full flex-1  font-dmSans mr-5 ">
-            {children}
-          </div>
-        </div>
-      </div>
+        <main className="container p-5 md:p-10 bg-white rounded-3xl h-[90vh] overflow-y-scroll w-full flex-1  font-dmSans mr-5 ">
+          <div className="row">{children}</div>
+        </main>
+      </section>
+      {/* </div> */}
     </>
   );
 };

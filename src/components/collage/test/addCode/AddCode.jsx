@@ -354,7 +354,7 @@ const AddCode = () => {
   console.log(question);
 
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <Header handleSave={handleSave} />
       <div className="bg-white min-h-[90vh] mx-auto rounded-xl relative">
         <div className="flex flex-wrap gap-5 md:flex-nowrap mb-5 md:mb-10 ">

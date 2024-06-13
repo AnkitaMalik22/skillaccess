@@ -44,7 +44,7 @@ const Results = () => {
     setFiltered(arr);
   }, [assessments]);
   return (
-    <div className="w-11/12 mx-auto">
+    <div>
       <ChartComp />
       <div className="mt-14">
         <Filter handleFilter={handleFilterStudents} />

@@ -1,6 +1,6 @@
 import React, { lazy } from "react";
 import { Route } from "react-router-dom";
-const JobsPage = lazy(() => import("../home/JobsPage"));
+const JobsPage = lazy(() => import("./JobsPage"));
 
 const CompaniesPage = lazy(() => import("./CompaniesPage"));
 const CompanyProfilePage = lazy(() => import("./CompanyProfilePage"));

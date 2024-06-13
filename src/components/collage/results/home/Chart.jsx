@@ -91,7 +91,7 @@ const ChartComp = () => {
     }));
   }, [year]);
   return (
-    <div className="sm:flex  mt-6 bg-gray-100 w-full rounded-lg gap-6 font-dmSans  justify-center relative">
+    <div className="sm:flex  bg-gray-100 w-full rounded-lg gap-6 font-dmSans  justify-center relative">
       {/* chart component */}
       <div className="w-full  rounded-s p-5 mt-2">
         <div className="flex justify-between">

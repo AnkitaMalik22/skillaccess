@@ -4,6 +4,7 @@ import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useNavigate } from "react-router-dom";
 import { getNewCompanies } from "../../../../redux/collage/dashboard/dashboardSlice";
+import "swiper/css";
 
 const SwiperSlideLeft = () => {
   const dispatch = useDispatch();
@@ -80,36 +81,7 @@ const SwiperSlideLeft = () => {
       ))}
 
       {loading && <h1>Loading...</h1>}
-
-      {/* {newCompanies &&
-        newCompanies.map((company) => (
-          <SwiperSlide key={company._id}>
-            <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-              <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
-                {company.basic && company.basic.logo ? (
-                  <img
-                    src={company.basic.logo}
-                    alt="img not loaded"
-                    className="w-full h-full"
-                  />
-                ) : (
-                  <img
-                    src="../intel.png"
-                    alt="img not loaded"
-                    className="w-full h-full"
-                  />
-                )}
-              </figure>
-              <h3 className="text-sm text-gray-400 font-semibold text-center break-words h-full">
-                {company.basic && company.basic.companyName
-                  ? company.basic.companyName
-                  : "company name"}
-              </h3>
-            </div>
-          </SwiperSlide>
-        ))} */}
-
-      <span className="absolute top-1/3 right-5 z-20 h-fit w-fit">
+      <span className="absolute top-1/3 right-0 z-20 h-fit w-fit">
         <SlideNextButton />
       </span>
     </Swiper>

@@ -1,6 +1,5 @@
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
-import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {

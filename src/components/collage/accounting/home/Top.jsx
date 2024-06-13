@@ -1,4 +1,4 @@
-import React, { useEffect ,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { BsChevronRight } from "react-icons/bs";
 import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,24 +6,6 @@ import { makePayment } from "../../../../redux/collage/account/paymentSlice";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import Gpay from "./GPay";
-
-// const Products = [{
-//   id: 1,
-//   dish: "punjabi",
-//   address: "North Indian, Biryani, Mughlai",
-//   somedata: " 1175 + order placed from here recently",
-//   qnty: 1,
-//   price: 25,
-// },
-// {
-//   id: 2,
-//   dish: "Jugaadi Adda vadapav",
-//   address: "Street Food",
-//   somedata: " 2525 + order placed from here recently",
-//   qnty: 1,
-//   price: 25,
-
-// }]
 
 const Plans = [
   {
@@ -35,25 +17,6 @@ const Plans = [
     total: 25,
     price: 500,
   },
-
-  // {
-  // id: 2,
-  //  name: "Half Yearly",
-  // description : "lorem ipsum dolor sit amet",
-  // price: 1000,
-  //  duration: "6 months",
-  //  discount: 10,
-  //  total: 25,
-  // },
-  // {
-  //   id: 3,
-  //  name: "Yearly",
-  //  description : "lorem ipsum dolor sit amet",
-  // price: 2000,
-  // duration: "12 months",
-  // discount: 10,
-  // total: 25,
-  //  },
 ];
 
 const Top = () => {
@@ -64,65 +27,6 @@ const Top = () => {
   const [paymentMethod, setPaymentMethod] = React.useState("");
   const [showPoPup, setShowPoPup] = useState(false);
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-  
-
-  // const creditPayment = async () => {
-  //   console.log("payment done");
-  //   const customerName = "John Doe"; // Example name
-  //   const customerAddress = "123 Main Street, City, Country";
-  //   const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-  //   let body = {
-  //     products: Plans,
-  //     customerName: customerName,
-  //     customerAddress: customerAddress,
-  //   };
-  //   const headers = {
-  //     "Content-Type": "application/json",
-  //     "auth-token": localStorage.getItem("auth-token"),
-  //     'Access-Control-Allow-Origin' : 'https://skillaccessclient.netlify.app'
-  //   };
-
-  //body = JSON.stringify(body);
-
-  // const response = await axios.post(
-  //  `${REACT_APP_API_URL}/api/payment/make-payment`,
-  // body,
-  // {
-  //  headers: {
-  //    "Content-Type": "application/json",
-  //    "auth-token": localStorage.getItem("auth-token"),
-  // },
-  //  }
-  /// );
-
-  // dispatch(makePayment(body))
-
-  // .then( async( result) => {
-
-  // if (status === "success") {
-
-  // const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-
-  //   stripe.redirectToCheckout({
-  //     sessionId: payment.id
-  //   });
-
-  //   }
-
-  // }).catch((err) => {
-  //   console.log(err);
-  // });
-
-  //  const session = await response.json();
-
-  //  const result = stripe.redirectToCheckout({
-  //    sessionId: session.id,
-  //   });
-
-  // if (result.error) {
-  //  console.log(result.error);
-  ///}
-  // };
 
   const creditPayment = async () => {
     //console.log("payment done");
@@ -211,11 +115,9 @@ const Top = () => {
     } else if (paymentMethod === PAYMENT_METHODS[2]) {
       toast.error("UPI payment is not available right now");
     } else {
-   handleShow();
+      handleShow();
     }
   };
-
-
 
   const handleShow = () => {
     setShowPoPup(true);
@@ -224,10 +126,9 @@ const Top = () => {
     setShowPoPup(false);
   };
 
-  
   return (
     <div className=" w-full grid grid-cols-2 gap-8">
-        {showPoPup && <Gpay onCancel={handleClose} Plan={Plans[0]}/>}
+      {showPoPup && <Gpay onCancel={handleClose} Plan={Plans[0]} />}
       {/* left pannel */}
       <div className="p-4 rounded-xl bg-lGray bg-opacity-5">
         <div className="mb-4 flex justify-between">
@@ -381,7 +282,9 @@ const Top = () => {
               : ""
           }`}
           onClick={(prev) =>
-            prev !== PAYMENT_METHODS[2] ? setPaymentMethod(PAYMENT_METHODS[2])  : setPaymentMethod("")
+            prev !== PAYMENT_METHODS[2]
+              ? setPaymentMethod(PAYMENT_METHODS[2])
+              : setPaymentMethod("")
           }
         >
           {/* left*/}

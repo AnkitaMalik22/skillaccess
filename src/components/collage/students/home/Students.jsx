@@ -98,7 +98,7 @@ const Students = () => {
   };
   console.log(uploadedStudents);
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <Header handleFilter={handleFilterStudents} />
 
       <div className="w-full flex justify-between md:gap-10 gap-5 flex-wrap md:flex-nowrap md:mb-10 mb-5">

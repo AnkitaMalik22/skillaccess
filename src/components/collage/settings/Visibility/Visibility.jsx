@@ -10,15 +10,16 @@ const Visibility = () => {
   const [enabled3, setEnabled3] = useState(false);
 
   return (
-    <div className="w-11/12 mx-auto font-dmSans pt-4">
+    <>
       <Header />
 
       <div className="flex gap-40 mt-20">
         <div className="sm:w-2/6">
           <h1 className="text-lg font-bold">Profile Visibility</h1>
           <p className="text-gray-400">
-            Your profile visibility settings allow you to control who can view your profile 
-            information. You have the option to set your profile to be visible to:
+            Your profile visibility settings allow you to control who can view
+            your profile information. You have the option to set your profile to
+            be visible to:
           </p>
         </div>
         <div>
@@ -44,7 +45,9 @@ const Visibility = () => {
 
             <div>
               <h1 className="text-lg font-bold">Public</h1>
-              <p className="text-gray-400">Your profile is visible to anyone visiting the platform.</p>
+              <p className="text-gray-400">
+                Your profile is visible to anyone visiting the platform.
+              </p>
             </div>
           </div>
 
@@ -70,11 +73,13 @@ const Visibility = () => {
 
             <div>
               <h1 className="text-lg font-bold">Logged-in Users</h1>
-              <p className="text-gray-400">Your profile is visible only to users who are logged into the platform.</p>
+              <p className="text-gray-400">
+                Your profile is visible only to users who are logged into the
+                platform.
+              </p>
             </div>
           </div>
           {/* toggle 3 */}
-        
         </div>
       </div>
 
@@ -82,8 +87,10 @@ const Visibility = () => {
         <div className="sm:w-2/6">
           <h1 className="text-lg font-bold">Assessment Results</h1>
           <p className="text-gray-400">
-          Your assessment results are confidential and will only be visible to you, unless you choose to share them with others. You have the option to
-           share your results with potential employers or colleagues through secure links generated within the platform.
+            Your assessment results are confidential and will only be visible to
+            you, unless you choose to share them with others. You have the
+            option to share your results with potential employers or colleagues
+            through secure links generated within the platform.
           </p>
         </div>
         <div>
@@ -109,7 +116,9 @@ const Visibility = () => {
 
             <div>
               <h1 className="text-lg font-bold">Public</h1>
-              <p className="text-gray-400">Make your assessment results visible to everyone.</p>
+              <p className="text-gray-400">
+                Make your assessment results visible to everyone.
+              </p>
             </div>
           </div>
 
@@ -135,13 +144,15 @@ const Visibility = () => {
 
             <div>
               <h1 className="text-lg font-bold">Logged-in Users</h1>
-              <p className="text-gray-400">Your profile is visible only to users who are logged into the platform.</p>
+              <p className="text-gray-400">
+                Your profile is visible only to users who are logged into the
+                platform.
+              </p>
             </div>
           </div>
-         
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

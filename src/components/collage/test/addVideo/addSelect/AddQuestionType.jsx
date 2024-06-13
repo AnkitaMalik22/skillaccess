@@ -62,7 +62,7 @@ const AddQuestionType = () => {
   };
 
   return (
-    <div className="font-dmSans text-sm font-bold">
+    <>
       <Header selectQuestionType={selectQuestionType} />
 
       <div className="w-11/12 mx-auto mt-20">
@@ -212,7 +212,7 @@ const AddQuestionType = () => {
           </button> */}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

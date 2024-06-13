@@ -65,7 +65,7 @@ const Invite = () => {
 
   // console.log(uploadedStudents)
   return (
-    <div className="bg-white min-h-[90vh] w-11/12 mx-auto rounded-xl py-5 md:py-10 font-dmSans">
+    <>
       <div className="flex gap-3 mb-5">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
@@ -85,7 +85,7 @@ const Invite = () => {
             id=""
             className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 p-5 font-bold text-2xl"
           >
-            {localStorage.getItem("testName").substring(1, testName.length - 1)}
+            {localStorage?.getItem("testName")}
           </div>
         </div>
 
@@ -103,7 +103,7 @@ const Invite = () => {
         {" "}
         <Footer students={students} />
       </div>
-    </div>
+    </>
   );
 };
 

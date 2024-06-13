@@ -16,7 +16,7 @@ const AssessmentList = ({ id }) => {
   }, []);
   console.log(studentRecentassessment);
   return (
-    <div className="w-11/12 mt-2 rounded-lg bg-white min-h-[99%] mx-auto">
+    <>
       <h2 className="text-base  font-bold text-center py-3 ">
         Recent Assessments Completed
       </h2>
@@ -71,7 +71,7 @@ const AssessmentList = ({ id }) => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 
