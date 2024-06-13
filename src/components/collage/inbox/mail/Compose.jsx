@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 import ReactQuill from "react-quill"; // Import ReactQuill
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
+import CircularLoader from "../../../CircularLoader";
 const Compose = () => {
   const [socket, setSocket] = useState(null);
   const ENDPOINT = process.env.REACT_APP_API_URL;
@@ -25,6 +26,8 @@ const Compose = () => {
   const upload = useRef();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [loader, setLoader] = useState(false);
+  console.log(loader);
   const [files, setFiles] = useState([]);
   const [email, setEmail] = useState({ Email: "", Message: "", Subject: "" });
   const handleChange = (e) => {
@@ -55,10 +58,16 @@ const Compose = () => {
 
   const handleSubmit = () => {
     if (!loading) {
-      dispatch(sendMail({ ...email, attachments })).then(() => {
-        socket.emit("joinRoom", email.Email);
-        socket.emit("message", email.Email, "new Mail");
-      });
+      setLoader(true);
+      dispatch(sendMail({ ...email, attachments }))
+        .then(() => {
+          socket.emit("joinRoom", email.Email);
+          socket.emit("message", email.Email, "new Mail");
+          setLoader(false);
+        })
+        .catch(() => {
+          setLoader(false);
+        });
     } else {
       toast.error("please wait! uploading files...");
     }
@@ -171,10 +180,10 @@ const Compose = () => {
           <button
             className={`${
               loading ? "disabled !bg-gray-700 " : "bg-blue-700 "
-            } text-sm font-bold text-white rounded-xl px-4 py-2 mt-4`}
+            } btn text-sm font-bold text-white rounded-xl px-4 py-2 mt-4`}
             onClick={handleSubmit}
           >
-            Send
+            Send {loader && <CircularLoader />}
           </button>
         </div>
       </div>
