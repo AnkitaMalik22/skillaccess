@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getCollege } from "./redux/collage/auth/authSlice";
-import TestRoute from "./pages/collage/test";
+import TestRoute from "./pages/collage/test/TestHome";
 import ResultsRoute from "./pages/collage/results";
 import QuesRoute from "./pages/collage/quesBank";
 import StudentRoute from "./pages/collage/students";
