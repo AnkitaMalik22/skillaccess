@@ -1,4 +1,3 @@
-import { current } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -115,10 +114,10 @@ export const deleteTopics = createAsyncThunk(
   "test/deleteTopics",
   async (data, { rejectWithValue }) => {
     try {
-      console.log("data", data)
+      console.log("data", data);
       const req = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/assessments/sections`,
-        {data},
+        { data },
         {
           headers: {
             "Content-Type": "application/json",

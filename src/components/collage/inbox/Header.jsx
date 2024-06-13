@@ -10,7 +10,7 @@ import {
 import { FaSortDown } from "react-icons/fa6";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
-import SearchForm from "../mail/SearchForm";
+import SearchForm from "./mail/SearchForm";
 
 const Header = ({ show, setShow, inboxType, setInboxType }) => {
   const refButton = useRef(null);

@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { current } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+
 import {
   addQuesFunc,
   editQuestionFun,
@@ -128,7 +126,7 @@ const testState = {
   duration_to: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).duration_to
     : "",
-  duration_to: localStorage.getItem("testDetails")
+  negative: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).isNegativeMarking
     : false,
   topics: localStorage.getItem("topics")

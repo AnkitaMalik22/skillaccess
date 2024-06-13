@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import Left from "./Left";
-import View from "./View";
-import { useParams, useSearchParams } from "react-router-dom";
-import Compose from "./Compose";
+import Header from "../../../components/collage/inbox/mail/Header";
+import Left from "../../../components/collage/inbox/mail/Left";
+import View from "../../../components/collage/inbox/mail/View";
+import { useSearchParams } from "react-router-dom";
+import Compose from "../../../components/collage/inbox/mail/Compose";
 import { PiArrowCounterClockwiseBold } from "react-icons/pi";
-
-import ViewBar from "./ViewBar";
-import ComposeBar from "./ComposeBar";
+import ViewBar from "../../../components/collage/inbox/mail/ViewBar";
+import ComposeBar from "../../../components/collage/inbox/mail/ComposeBar";
 import {
-  getCollege,
   getInbox,
   getMail,
-  getSentEmails,
   searchMail,
-} from "../../../../redux/collage/auth/authSlice";
+} from "../../../redux/collage/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import useTranslate from "../../../hooks/useTranslate";
 
 const Mail = () => {
+  useTranslate();
   const dispatch = useDispatch();
 
   const [searchParams, setSearchParams] = useSearchParams();

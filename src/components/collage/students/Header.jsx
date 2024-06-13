@@ -3,15 +3,15 @@ import { FaAngleLeft, FaChevronLeft, FaPlus, FaSearch } from "react-icons/fa";
 import { FiPlus, FiUpload } from "react-icons/fi";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
-import StudentPoP from "../../../PopUps/StudentPoP";
+import StudentPoP from "../../PopUps/StudentPoP";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 import * as XLSX from "xlsx";
-import PopUp from "../../../PopUps/PopUp";
-import Loader from "../../test/addVideo/Loader";
-import { uploadStudents } from "../../../../redux/collage/student/studentSlice";
+import PopUp from "../../PopUps/PopUp";
+import Loader from "../test/addVideo/Loader";
+import { uploadStudents } from "../../../redux/collage/student/studentSlice";
 import { IoIosSearch } from "react-icons/io";
 
 const Header = ({ handleFilter, setFilteredStudents }) => {
@@ -54,40 +54,42 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
       toast.error("No file selected");
       return;
     }
-  
+
     setLoading(true);
     try {
       const workbook = XLSX.read(excel, { type: "binary" });
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-  
+
       if (jsonData.length === 0) {
         toast.error("The Excel file is empty");
         setLoading(false);
         return;
       }
-  
+
       const headers = jsonData[0];
       const expectedHeaders = ["FirstName", "LastName", "Email"];
-      const isValidFormat = expectedHeaders.every((header, index) => headers[index] === header);
-  
+      const isValidFormat = expectedHeaders.every(
+        (header, index) => headers[index] === header
+      );
+
       if (!isValidFormat || headers.length !== 3) {
         toast.error("Invalid file format");
         setLoading(false);
         return;
       }
-  
+
       const students = [];
       for (let i = 1; i < jsonData.length; i++) {
         const row = jsonData[i];
-  
+
         // Skip empty rows
-        if (row.length === 0 || row.every(cell => !cell)) {
+        if (row.length === 0 || row.every((cell) => !cell)) {
           continue;
         }
-  
+
         const [firstName, lastName, email] = row;
-  
+
         if (!firstName) {
           toast.error(`First Name is required at row ${i + 1}`);
           continue;
@@ -100,17 +102,21 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
           toast.error(`Email is required at row ${i + 1}`);
           continue;
         }
-  
-        students.push({ FirstName: firstName, LastName: lastName, Email: email });
+
+        students.push({
+          FirstName: firstName,
+          LastName: lastName,
+          Email: email,
+        });
       }
-  
+
       if (students.length > 0) {
         dispatch(uploadStudents(students));
         toast.success("Students uploaded successfully");
       } else {
         toast.warn("No valid student data to upload");
       }
-  
+
       setVisible(false);
     } catch (error) {
       toast.error("An error occurred while processing the file");
@@ -120,7 +126,6 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
       // dispatch(getAllStudents());
     }
   };
-  
 
   const handleAddTeamClick = () => {
     setShowPopup(true);

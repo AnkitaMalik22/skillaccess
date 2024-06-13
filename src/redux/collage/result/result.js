@@ -35,6 +35,6 @@ const resultSlice = createSlice({
   },
 });
 
-export const {} = resultSlice.actions;
+// export const {} = resultSlice.actions;
 
 export default resultSlice.reducer;

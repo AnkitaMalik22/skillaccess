@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-
-import Header from "./Header";
-
-import Details from "./Details";
-import AssessmentList from "./AssessmentList";
-import Education from "./Education";
-import Skills from "./Skills";
-import Results from "./Results";
-import Portfolio from "./Portfolio";
-import Loader from "../../../../Loader";
-import { useNavigate, useParams } from "react-router-dom";
+import Header from "../../../components/collage/students/profile/Header";
+import Details from "../../../components/collage/students/profile/Details";
+import AssessmentList from "../../../components/collage/students/profile/AssessmentList";
+import Education from "../../../components/collage/students/profile/Education";
+import Skills from "../../../components/collage/students/profile/Skills";
+import Results from "../../../components/collage/students/profile/Results";
+import Portfolio from "../../../components/collage/students/profile/Portfolio";
+import Loader from "../../../Loader";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getStudentCV } from "../../../../redux/collage/student/studentSlice";
+import { getStudentCV } from "../../../redux/collage/student/studentSlice";
+import useTranslate from "../../../hooks/useTranslate";
 
-const Profile = () => {
+const StudentsProfile = () => {
+  useTranslate();
   const { id } = useParams();
   const [toggle, setToggle] = useState(1);
   const dispatch = useDispatch();
@@ -108,4 +108,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default StudentsProfile;

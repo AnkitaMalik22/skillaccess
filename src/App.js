@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getCollege } from "./redux/collage/auth/authSlice";
-import TestRoute from "./pages/collage/test/Index";
+import TestRoute from "./pages/collage/test/index";
 import ResultsRoute from "./pages/collage/results";
 import QuesRoute from "./pages/collage/quesBank";
 import StudentRoute from "./pages/collage/students";
 import InboxRoute from "./pages/collage/inbox/index";
 import SettingsRoute from "./pages/collage/settings/index";
 import TeamsRoute from "./pages/collage/teams";
-import ProfilePage from "./pages/collage/profile/ProfilePage";
+import Profile from "./pages/collage/profile/Profile";
 import CompaniesRoute from "./pages/collage/companies";
 import Loader from "./Loader";
 import ForgotPassword from "./pages/collage/auth/ForgotPassword";
@@ -76,9 +76,7 @@ export default function App() {
                 {AccountRoute()}
               </>
               <Route path="/collage/dashboard" element={<Dashboard />} />
-              <Route path="/collage/profile">
-                <Route path="" element={<ProfilePage />} />
-              </Route>
+              <Route path="/collage/profile" element={<Profile />} />
             </Routes>
           </Suspense>
         </CollageLayout>

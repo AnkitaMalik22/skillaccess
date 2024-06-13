@@ -13,14 +13,14 @@ import {
   getMail,
   getSentEmails,
   searchMail,
-} from "../../../../redux/collage/auth/authSlice";
+} from "../../../redux/collage/auth/authSlice";
 import {
   bookmarkMail,
   markAsRead,
   removeBookmarkedMail,
-} from "../../../../redux/collage/Inbox/inboxSlice";
+} from "../../../redux/collage/Inbox/inboxSlice";
 import socketIOClient from "socket.io-client";
-import convertDate from "../../../../util/getDate";
+import convertDate from "../../../util/getDate";
 
 const ENDPOINT = process.env.REACT_APP_API_URL; // Socket.IO server endpoint
 const List = ({ show, inboxType, setInboxType }) => {

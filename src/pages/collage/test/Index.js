@@ -1,6 +1,5 @@
-import { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
-
+import { lazy } from "react";
+import { Route } from "react-router-dom";
 const NameAssessmentPage = lazy(() => import("./NameAssessmentPage"));
 const SelectTestsPage = lazy(() => import("./SelectTestsPage"));
 const SelectTestsAdaptivePage = lazy(() => import("./SelectTestsAdaptivePage"));
@@ -20,13 +19,11 @@ const CreateTopicPage = lazy(() => import("./CreateTopicPage"));
 const CreateTopicAdaptivePage = lazy(() => import("./CreateTopicAdaptivePage"));
 const AddMcqToTopicPage = lazy(() => import("./AddMcqToTopicPage"));
 const AddVideoPage = lazy(() => import("./AddVideoPage"));
-
 const AddVideoMcqPage = lazy(() => import("./AddVideoMcqPage"));
-
 const AddVideoLongShortPage = lazy(() => import("./AddVideoLongShortPage"));
-
 const AddVideoQuestionsPage = lazy(() => import("./AddVideoQuestionsPage"));
-export default function () {
+
+export default function Test() {
   return (
     <Route path="collage/test">
       <Route path="" element={<TestPage />} />

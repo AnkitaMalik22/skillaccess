@@ -1,18 +1,17 @@
 import React, { lazy } from "react";
 import { Route } from "react-router-dom";
-const JobsPage = lazy(() => import("./JobsPage"));
-
-const CompaniesPage = lazy(() => import("./CompaniesPage"));
-const CompanyProfilePage = lazy(() => import("./CompanyProfilePage"));
-const CompanyJobOverviewPage = lazy(() => import("./CompanyJobOverviewPage"));
+const Jobs = lazy(() => import("./Jobs"));
+const Companies = lazy(() => import("./Companies"));
+const CompanyProfile = lazy(() => import("./CompanyProfile"));
+const CompanyJobOverview = lazy(() => import("./CompanyJobOverview"));
 
 export default function CompaniesRoute() {
   return (
     <Route path="collage/companies">
-      <Route path="" element={<CompaniesPage />} />
-      <Route path="jobs" element={<JobsPage />} />
-      <Route path="profile/:id" element={<CompanyProfilePage />} />
-      <Route path="jobOverview/:id" element={<CompanyJobOverviewPage />} />
+      <Route path="" element={<Companies />} />
+      <Route path="jobs" element={<Jobs />} />
+      <Route path="profile/:id" element={<CompanyProfile />} />
+      <Route path="jobOverview/:id" element={<CompanyJobOverview />} />
     </Route>
   );
 }

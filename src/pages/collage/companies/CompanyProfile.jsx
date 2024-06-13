@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
-import Header from "./Header";
 import { VscCircleFilled } from "react-icons/vsc";
-import { CiLocationOn } from "react-icons/ci";
-import { FaArrowRight } from "react-icons/fa";
+import { FaAngleLeft, FaArrowRight } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCompanyDetails } from "../../../../redux/features/company/companySlice";
+import { getCompanyDetails } from "../../../redux/features/company/companySlice";
 import {
   getCompany,
   getTotalJobs,
-} from "../../../../redux/collage/dashboard/dashboardSlice";
+} from "../../../redux/collage/dashboard/dashboardSlice";
+import useTranslate from "../../../hooks/useTranslate";
+import { IoIosSearch } from "react-icons/io";
 
 const CompanyProfile = () => {
+  useTranslate();
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -49,10 +50,34 @@ const CompanyProfile = () => {
 
   return (
     <>
-      <Header
-        CompanyName={companyDetails?.basic?.companyName}
-        handleFilter={handleFilterJobs}
-      />
+      <div className="flex w-full mx-auto justify-between mb-6">
+        {/* comp */}
+        <span className="flex gap-3">
+          <button
+            className="bg-[#D9E1E7]  self-center object-center  rounded-lg p-3"
+            onClick={() => navigate(-1)}
+          >
+            <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
+          </button>
+
+          <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
+            {companyDetails?.basic?.companyName}
+          </h2>
+        </span>
+
+        {/* search */}
+        <div className="rounded-xl w-full sm:h-12 h-10 flex">
+          <div className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
+            <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400 " />
+            <input
+              type="text"
+              placeholder="Search..."
+              onChange={handleFilterJobs}
+              className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
+            />
+          </div>
+        </div>
+      </div>
 
       <div className="flex justify-between font-dmSans gap-5 md:gap-10">
         <div className="w-1/2">
@@ -118,7 +143,7 @@ const CompanyProfile = () => {
           <div className="flex justify-between mb-7">
             <h2 className="font-bold">Available jobs</h2>
             <h2
-              className="font-bold underline underline-offset-2 text-blued"
+              className="font-bold underline underline-offset-2 text-blued cursor-pointer"
               onClick={() => {
                 navigate("/collage/companies/jobs");
               }}

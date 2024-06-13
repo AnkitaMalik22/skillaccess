@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-
-import Header from "./Header";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getCompany } from "../../../../redux/collage/dashboard/dashboardSlice";
+import { getCompany } from "../../../redux/collage/dashboard/dashboardSlice";
+import useTranslate from "../../../hooks/useTranslate";
+import { IoIosSearch } from "react-icons/io";
+import { FiPlus, FiUpload } from "react-icons/fi";
 
 const Companies = () => {
-  // const [companies, setcompanies] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
+  useTranslate();
   const dispatch = useDispatch();
   const { companies } = useSelector((state) => state.dashboard);
   const { user } = useSelector((state) => state.collageAuth);
@@ -21,8 +22,6 @@ const Companies = () => {
   const handleFilterCompanies = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      console.log("empty");
-
       setFiltered(companies);
 
       return;
@@ -40,8 +39,46 @@ const Companies = () => {
   }, [companies]);
   const navigate = useNavigate();
   return (
-    <div>
-      <Header handleFilter={handleFilterCompanies} />
+    <>
+      <div className="flex w-full mx-auto justify-between mb-6">
+        <div className="flex gap-3">
+          <button
+            className="self-center object-center rounded-lg h-10 w-10 "
+            // onClick={() => navigate('collage/companies')}
+          >
+            <img src="../../images/icons/sales.jpg" alt="icon" />
+          </button>
+          <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
+            Companies
+          </h2>
+        </div>
+
+        {/* search */}
+        <div className=" rounded-xl w-full sm:h-12 h-10 flex">
+          <span className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
+            <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400 " />
+            <input
+              type="text"
+              placeholder="Search..."
+              onChange={handleFilterCompanies}
+              className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
+            />
+          </span>
+        </div>
+
+        {/* <div className="flex gap-3">
+          <button className="self-center justify-center flex bg-[#8f92a11a] px-7 py-3 rounded-2xl gap-2 text-sm text-[#171717] font-bold ">
+            <FiPlus className="self-center text-lg " /> Add
+          </button>
+
+          <button className="self-center justify-center flex bg-[#0052CC] px-5 py-3  rounded-2xl text-white  gap-2 text-md font-bold w-40">
+            <FiUpload className="self-center text-lg " /> Upload New
+          </button>
+          <button className="bg-[#8f92a11a]  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
+            <img src="../../images/icons/Filter.png" className="w-7 h-7" />
+          </button>
+        </div> */}
+      </div>
       <div className="flex flex-wrap gap-5 md:gap-10 md:gap-y-[30px] gap-y-4 ">
         {filtered &&
           filtered?.map((company, index) => {
@@ -91,7 +128,7 @@ const Companies = () => {
             );
           })}
       </div>
-    </div>
+    </>
   );
 };
 

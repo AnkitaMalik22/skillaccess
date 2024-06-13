@@ -189,7 +189,7 @@ export const removeQById = (state, action) => {
 
     case "essay":
       localStorage.setItem("bug", JSON.stringify(state.topics[topicIndex]));
-      state.topics[topicIndex].essay.map((question, index) => {
+      state.topics[topicIndex].essay.forEach((question, index) => {
         if (question.id === questionId) {
           console.log(question.id);
           selfIndex = index;
@@ -203,7 +203,7 @@ export const removeQById = (state, action) => {
       break;
 
     case "compiler":
-      state.topics[topicIndex].compiler.map((question, index) => {
+      state.topics[topicIndex].compiler.forEach((question, index) => {
         if (question.id === questionId) {
           selfIndex = index;
         }
@@ -214,7 +214,7 @@ export const removeQById = (state, action) => {
       });
       break;
     case "findAnswer":
-      state.topics[topicIndex].findAnswers.map((question, index) => {
+      state.topics[topicIndex].findAnswers.forEach((question, index) => {
         if (question.id === questionId) {
           selfIndex = index;
         }
@@ -226,7 +226,7 @@ export const removeQById = (state, action) => {
       break;
 
     case "video":
-      state.topics[topicIndex].video.map((question, index) => {
+      state.topics[topicIndex].video.forEach((question, index) => {
         if (question.id === questionId) {
           selfIndex = index;
         }
