@@ -86,7 +86,6 @@ export default function App() {
               path="/collage/settings/security/securityApp"
               element={<SecurityAppPage />}
             />
-
             <Route path="" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/terms&policies" element={<TermsPolicies />} />

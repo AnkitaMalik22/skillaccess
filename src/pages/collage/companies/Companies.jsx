@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCompany } from "../../../redux/collage/dashboard/dashboardSlice";
 import useTranslate from "../../../hooks/useTranslate";
 import { IoIosSearch } from "react-icons/io";
-import { FiPlus, FiUpload } from "react-icons/fi";
 
 const Companies = () => {
   useTranslate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { companies } = useSelector((state) => state.dashboard);
   const { user } = useSelector((state) => state.collageAuth);
+  const [filtered, setFiltered] = React.useState([]);
 
   useEffect(() => {
     if (user) {
@@ -18,12 +19,10 @@ const Companies = () => {
     }
   }, [dispatch, user]);
 
-  const [filtered, setFiltered] = React.useState([]);
   const handleFilterCompanies = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
       setFiltered(companies);
-
       return;
     } else {
       setFiltered(
@@ -37,7 +36,6 @@ const Companies = () => {
   useEffect(() => {
     setFiltered(companies);
   }, [companies]);
-  const navigate = useNavigate();
   return (
     <>
       <div className="flex w-full mx-auto justify-between mb-6">
