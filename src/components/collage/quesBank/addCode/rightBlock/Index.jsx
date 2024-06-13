@@ -209,6 +209,8 @@ const Code = ({
           //   />
           // )
           <Verification
+            question={question}
+            setQuestion={setQuestion}
             selectedLanguage={selectedLanguage}
             editorValue={editorValue?.solutionCode}
             setEditorValue={setEditorValue}

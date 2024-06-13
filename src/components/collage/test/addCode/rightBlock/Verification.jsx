@@ -82,7 +82,7 @@ const [ runLoading , setRunLoading] = useState(false);
         <div className="w-full">
           <Editor
             theme="vs-light"
-            height="535px"
+            height="52vh"
             defaultLanguage={selectedLanguage}
             value={editorValue}
             onChange={(value) => handleEditorChange(value, "solutionCode")}
