@@ -58,48 +58,8 @@ const Acounting = () => {
     // dispatch(getSelectedPlans());
   }, [dispatch, requestStatus]);
 
-  //   useEffect(() => {
-  // if(!cancel_loading){
-  //   dispatch(getCollege());
-  // }
-  //   }, [cancel_loading]);
-
-  // const payments = [
-  //   {
-  //     planName: "Basic",
-  //     price: "49.99",
-  //     credit: 100,
-  //     limit: 10,
-  //     charges: "Not Allowed",
-  //     active: true,
-  //   },
-  //   {
-  //     planName: "Plus",
-  //     price: "99.99",
-  //     credit: 200,
-  //     limit: 20,
-  //     charges: "Not Allowed",
-  //     active: false,
-  //   },
-  //   {
-  //     planName: "Business",
-  //     price: "149.99",
-  //     credit: 400,
-  //     limit: 40,
-  //     charges: "Not Allowed",
-  //     active: false,
-  //   },
-  //   {
-  //     planName: "Exclusive",
-  //     price: "199.99",
-  //     credit: 400,
-  //     limit: 400,
-  //     charges: "50 Cents",
-  //     active: false,
-  //   },
-  // ];
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <div className="w-full flex justify-between items-center mb-5 md:mb-10">
         <p className="font-bold text-[#171717] text-md font-[Heebo]">
           My Current Plan

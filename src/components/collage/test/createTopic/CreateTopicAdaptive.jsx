@@ -65,7 +65,7 @@ const CreateTopic = () => {
   };
 
   return (
-    <div className="pt-8 w-11/12 mx-auto font-dmSans">
+    <>
       <Header next={handleNext} />
 
       <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">
@@ -101,7 +101,7 @@ const CreateTopic = () => {
           <p className="text-red-500 ml-4">Please fill in the description.</p>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

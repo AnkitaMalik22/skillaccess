@@ -50,7 +50,7 @@ const Students = () => {
     setFiltered(placedStudents);
   }, [placedStudents]);
   return (
-    <div className="w-11/12 mx-auto">
+    <div>
       <div className="flex w-full mx-auto justify-between mb-4">
         <button
           className="  self-center  rounded-lg h-10 w-10 "

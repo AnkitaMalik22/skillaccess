@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Portfolio = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-11/12 mx-auto py-7">
+    <>
       <Header
         next={() => navigate("/student/profile/final")}
         isPortfolio={true}
@@ -35,7 +35,7 @@ const Portfolio = () => {
           </button>
         </div>
       </div>{" "}
-    </div>
+    </>
   );
 };
 

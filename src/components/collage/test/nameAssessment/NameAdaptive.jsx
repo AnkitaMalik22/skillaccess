@@ -286,7 +286,7 @@ const Name = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <Header handleNext={handleSubmit} />
       <div className="w-4/5 mx-auto">
         <Progress />

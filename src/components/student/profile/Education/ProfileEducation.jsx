@@ -9,7 +9,7 @@ import { CgPinAlt } from "react-icons/cg";
 const ProfileEducation = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-11/12 mx-auto py-7">
+    <>
       <Header next={() => navigate("/student/profile/skills")} />
       <Progress level={2} />
 
@@ -137,7 +137,7 @@ const ProfileEducation = () => {
           <FiPlus className="self-center text-lg " /> Add
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
