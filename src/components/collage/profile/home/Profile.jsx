@@ -53,10 +53,10 @@ const Profile = () => {
     }
     if (avatar) {
       dispatch(updateAvatar({ avatar, id: user._id }));
-      // dispatch(getCollege());
+      dispatch(getCollege());
       // setCollege({ ...college, avatar: { url:user.avatar.url} });
     }
-  }, [submitUpdateProfile]);
+  }, [editable]);
   useEffect(() => {
     if (submitUpdateProfile) {
       dispatch(updateCollege(college));
