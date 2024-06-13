@@ -49,7 +49,7 @@ export const getCompany = createAsyncThunk(
     try {
       const req = await axios.get(
         `${REACT_APP_API_URL}/api/college/dashboard/companies/${data.collegeId}`,
-     
+
         {
           headers: {
             "Content-Type": "application/json",
@@ -292,6 +292,6 @@ const dashboardSlice = createSlice({
   },
 });
 
-export const {} = dashboardSlice.actions;
+// export const {} = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

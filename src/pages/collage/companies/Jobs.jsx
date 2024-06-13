@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from "react";
+// import Jobs from "../../../components/collage/dashboard/jobs/Jobs";
+// import useTranslate from "../../../hooks/useTranslate";
 
-import { FaSearch } from "react-icons/fa";
-import { FaAngleLeft } from "react-icons/fa6";
+// const JobsPage = () => {
+//   useTranslate();
+//   return <Jobs />;
+// };
+
+// export default JobsPage;
+
+import React, { useEffect } from "react";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { CiLocationOn } from "react-icons/ci";
 import { FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getTotalJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
-import BackIcon from "../../../buttons/BackIcon";
+import { getTotalJobs } from "../../../redux/collage/dashboard/dashboardSlice";
 import { IoIosSearch } from "react-icons/io";
-import calculateDaysAgo from "../../../../util/calculateDaysAgo";
+import calculateDaysAgo from "../../../util/calculateDaysAgo";
+import useTranslate from "../../../hooks/useTranslate";
+import { FaAngleLeft } from "react-icons/fa";
 
 const Jobs = () => {
-  // const [jobs, setJobs] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
+  useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -51,7 +59,7 @@ const Jobs = () => {
           className="  self-center  rounded-lg h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <BackIcon />
+          <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
         </button>
         <div className=" rounded-xl mx-2 w-full sm:h-12 h-10 flex my-2 ">
           <span className="w-fit mx-auto flex self-center">

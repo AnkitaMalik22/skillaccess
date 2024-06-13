@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
-import ChartComp from "./Chart";
-import Filter from "./Filters";
-import List from "./List";
+import ChartComp from "../../../components/collage/results/home/Chart";
+import Filter from "../../../components/collage/results/home/Filters";
+import List from "../../../components/collage/results/home/List";
 import { useSelector, useDispatch } from "react-redux";
+import { getAllTests } from "../../../redux/collage/test/thunks/test";
+import { getResultGraph } from "../../../redux/collage/result/thunks/graph";
+import useTranslate from "../../../hooks/useTranslate";
 
-import { useNavigate } from "react-router-dom";
-import { getAllTests } from "../../../../redux/collage/test/thunks/test";
-import { getResultGraph } from "../../../../redux/collage/result/thunks/graph";
 const Results = () => {
+  useTranslate();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const assessments = useSelector((state) => state.test.assessments);
 
   const [filtered, setFiltered] = React.useState([]);
-  console.log(assessments);
   useEffect(() => {
     dispatch(getResultGraph());
     dispatch(getAllTests());
@@ -26,10 +25,7 @@ const Results = () => {
   const handleFilterStudents = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      console.log("empty");
-
       setFiltered(arr);
-
       return;
     } else {
       setFiltered(

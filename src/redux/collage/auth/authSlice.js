@@ -779,7 +779,7 @@ const collageAuthSlice = createSlice({
         // window.location.href = "/";
 
         if (
-          action.payload.message == "Token is blacklisted. Please login again"
+          action.payload.message === "Token is blacklisted. Please login again"
         ) {
           localStorage.removeItem("auth-token");
           state.loggedInUsers = null;
@@ -950,7 +950,7 @@ const collageAuthSlice = createSlice({
       .addCase(removeLoggedOutUser.rejected, (state, action) => {
         console.log(action.payload);
         // getLoggedInUsers();
-        if (state.loggedInUsers.length == 0) {
+        if (state.loggedInUsers.length === 0) {
           state.loggedInUsers = null;
           state.logoutError = "No user is logged in";
           window.redirect("/");

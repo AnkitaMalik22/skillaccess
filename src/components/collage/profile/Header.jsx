@@ -10,7 +10,7 @@ import {
   setUploadImg,
   updateAvatar,
   updateCollege,
-} from "../../../../redux/collage/auth/authSlice";
+} from "../../../redux/collage/auth/authSlice";
 
 const Header = ({
   editable,

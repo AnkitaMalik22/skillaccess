@@ -1,3 +1,14 @@
+// import React from "react";
+// import Acounting from "../../../components/collage/accounting/home/Acounting";
+// import useTranslate from "../../../hooks/useTranslate";
+
+// const AccountingPage = () => {
+//   useTranslate();
+//   return <Acounting />;
+// };
+
+// export default AccountingPage;
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,11 +17,14 @@ import {
   getAllPlans,
   getSelectedPlans,
   selectAPlan,
-} from "../../../../redux/collage/account/paymentSlice";
-import { getCollege } from "../../../../redux/collage/auth/authSlice";
+} from "../../../redux/collage/account/paymentSlice";
+import { getCollege } from "../../../redux/collage/auth/authSlice";
+import useTranslate from "../../../hooks/useTranslate";
+
 import axios from "axios";
 
-const Acounting = () => {
+const Accounting = () => {
+  useTranslate();
   const { user, isLoggedIn, uploadImg } = useSelector(
     (state) => state.collageAuth
   );
@@ -59,7 +73,7 @@ const Acounting = () => {
   }, [dispatch, requestStatus]);
 
   return (
-    <div>
+    <>
       <div className="w-full flex justify-between items-center mb-5 md:mb-10">
         <p className="font-bold text-[#171717] text-md font-[Heebo]">
           My Current Plan
@@ -101,7 +115,7 @@ const Acounting = () => {
                       <span className="text-xl md:text-[34px] text-[#2d2d2d] font-[Heebo] font-normal ">
                         {plan.price}
                       </span>{" "}
-                      per Month
+                      per month
                     </p>
                     {requestStatus?.status === "" &&
                       requestStatus?.planId === plan._id && (
@@ -110,7 +124,7 @@ const Acounting = () => {
                   </div>
                 </div>
 
-                <div className="">
+                <div>
                   {plan._id == selectedPlan && credit.credit !== 0 ? (
                     <button
                       className="self-center  bg-red-600  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
@@ -139,26 +153,22 @@ const Acounting = () => {
                   )}
                 </div>
               </div>
-              <div className="max-w-[380px] flex flex-col gap-5">
-                <p className="text-lg font-[Heebo]">Assessment Credit</p>
-                <p className="text-lg font-[Heebo]">
-                  Student invitation limit for one assessment
-                </p>
-                <p className="text-lg font-[Heebo]">
-                  Charges for each student invitation after limit
-                </p>
+              <div className="max-w-[380px] flex flex-col gap-5 text-lg font-[Heebo]">
+                <p>Assessment Credit</p>
+                <p>Student invitation limit for one assessment</p>
+                <p>Charges for each student invitation after limit</p>
               </div>
-              <div className=" flex flex-col gap-5">
-                <p className="text-lg font-bold font-[Heebo]">{plan.credit}</p>
-                <p className="text-lg font-bold font-[Heebo]">{plan.limit}</p>
-                <p className="text-lg font-bold font-[Heebo]">{plan.charges}</p>
+              <div className=" flex flex-col gap-5 text-lg font-bold font-[Heebo]">
+                <p>{plan.credit}</p>
+                <p>{plan.limit}</p>
+                <p>{plan.charges}</p>
               </div>
             </div>
           </>
         ))
       }
-    </div>
+    </>
   );
 };
 
-export default Acounting;
+export default Accounting;

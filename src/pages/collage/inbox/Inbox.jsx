@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import Header from "./Header";
-import List from "./List";
+import Header from "../../../components/collage/inbox/Header";
+import List from "../../../components/collage/inbox/List";
+import useTranslate from "../../../hooks/useTranslate";
 
 const Inbox = () => {
+  useTranslate();
   const [show, setShow] = useState("all");
   const [inboxType, setInboxType] = useState("Received");
   return (
-    <div>
+    <>
       <Header
         show={show}
         setShow={setShow}
@@ -14,7 +16,7 @@ const Inbox = () => {
         setInboxType={setInboxType}
       />
       <List show={show} inboxType={inboxType} setInboxType={setInboxType} />
-    </div>
+    </>
   );
 };
 

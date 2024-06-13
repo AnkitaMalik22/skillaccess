@@ -1,6 +1,5 @@
-import { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
-
+import { lazy } from "react";
+import { Route } from "react-router-dom";
 const NameAssessmentPage = lazy(() => import("./NameAssessmentPage"));
 const SelectTestsPage = lazy(() => import("./SelectTestsPage"));
 const SelectTestsAdaptivePage = lazy(() => import("./SelectTestsAdaptivePage"));
@@ -20,13 +19,11 @@ const CreateTopicPage = lazy(() => import("./CreateTopicPage"));
 const CreateTopicAdaptivePage = lazy(() => import("./CreateTopicAdaptivePage"));
 const AddMcqToTopicPage = lazy(() => import("./AddMcqToTopicPage"));
 const AddVideoPage = lazy(() => import("./AddVideoPage"));
-
 const AddVideoMcqPage = lazy(() => import("./AddVideoMcqPage"));
-
 const AddVideoLongShortPage = lazy(() => import("./AddVideoLongShortPage"));
-
 const AddVideoQuestionsPage = lazy(() => import("./AddVideoQuestionsPage"));
-export default function () {
+
+function TestHome() {
   return (
     <Route path="collage/test">
       <Route path="" element={<TestPage />} />
@@ -49,14 +46,13 @@ export default function () {
       <Route path="essay/:id" element={<AddEssayPage />} />
       <Route path="find-ans/:id" element={<AddParagraphPage />} />
       <Route path="video/:id" element={<AddVideoPage />} />
-
       <Route path="video/:id/addmcq" element={<AddVideoMcqPage />} />
-
       <Route path="video/shortlong/:id" element={<AddVideoLongShortPage />} />
-
       <Route path="video/:id/selectType" element={<AddVideoQuestionsPage />} />
       <Route path="final" element={<FinalizePage />} />
       <Route path="invite" element={<InvitePage />} />
     </Route>
   );
 }
+
+export default TestHome;

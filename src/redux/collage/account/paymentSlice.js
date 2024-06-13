@@ -127,7 +127,6 @@ export const selectAPlan = createAsyncThunk(
       );
 
       return response.data;
-      console.log(response.data);
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
