@@ -130,7 +130,7 @@ const AddQuestions = () => {
   const totalTime = handleCalculateTime();
   console.log(totalTime);
   return (
-    <div className=" text-sm">
+    <>
       <Header page={"submit"} />
       <div className="w-4/5 mx-auto">
         <Progress />
@@ -220,7 +220,7 @@ const AddQuestions = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

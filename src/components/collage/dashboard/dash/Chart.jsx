@@ -171,7 +171,7 @@ const ChartComp = () => {
           </h1>
           <h1
             className="text-blue-500 hover:cursor-pointer text-sm"
-            onClick={() => navigate("/collage/dashboard/students")}
+            onClick={() => navigate("/collage/students")}
           >
             See All
           </h1>
