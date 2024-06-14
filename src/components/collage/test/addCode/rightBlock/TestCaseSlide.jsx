@@ -31,7 +31,7 @@ const SlideUpDown = ({
     try {
       let newQuestion = { ...question };
       newQuestion.testcase.push({
-        input: userInput,
+        input:userInput,
         expectedOutput: userOutput,
         isHidden: hideTestCase,
       });
@@ -50,6 +50,8 @@ const SlideUpDown = ({
 
   function compileUserInput() {
     setRunLoading(true);
+    console.log("Compiling User Input")
+    console.log(`1\n${userInput}\n`)
 
     return axios
       .post(
@@ -57,7 +59,7 @@ const SlideUpDown = ({
         {
           code: userCode,
           language: userLang,
-          input: `${userInput}`,
+          input : `1\n${userInput}\n`,
         },
         {
           timeout: 20000,
