@@ -40,7 +40,7 @@ const Results = () => {
     setFiltered(arr);
   }, [assessments]);
   return (
-    <div>
+    <>
       <ChartComp />
       <div className="mt-14">
         <Filter handleFilter={handleFilterStudents} />
@@ -48,7 +48,7 @@ const Results = () => {
       <div className="mt-5">
         <List FilterdStudents={filtered} />
       </div>
-    </div>
+    </>
   );
 };
 
