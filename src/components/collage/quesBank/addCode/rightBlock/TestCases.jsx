@@ -181,7 +181,7 @@ const TestCases = ({
   };
   console.log(question?.testcase);
   return (
-    <div>
+    <div className="h-[535px] overflow-y-auto w-full ">
       {visible && (
         <PopUp
           visible={visible}
@@ -225,10 +225,10 @@ const TestCases = ({
           {expandedTestCases[index] && (
             <div className="p-4">
               <label htmlFor={`input-${index}`}>Input:</label>
-              <input
+              <textarea
                 type="text"
                 id={`input-${index}`}
-                className="border p-1 w-full"
+                className="border p-1 w-full h-[100px]"
                 // value={testCase.input.map((item) => (Array.isArray(item) ? `[${item.join(",")}]` : item)).join(", ")}
                 // onChange={(e) => handleInputChange(index, e.target.value)}
                 name="input"
@@ -238,7 +238,7 @@ const TestCases = ({
               />
 
               <label htmlFor={`output-${index}`}>expectedOutput:</label>
-              <input
+              <textarea
                 type="text"
                 id={`output-${index}`}
                 className="border p-1 w-full"
