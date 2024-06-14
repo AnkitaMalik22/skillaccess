@@ -25,7 +25,7 @@ import calculateDaysAndWeeks from "../../../util/daysAndWeeks";
 import { getStudents } from "../../../redux/collage/student/studentSlice";
 import useTranslate from "../../../hooks/useTranslate";
 
-export const Test = () => {
+const Test = () => {
   useTranslate();
   const dispatch = useDispatch();
   const beginner = useSelector((state) => state.test.assessments.beginner);
@@ -211,3 +211,5 @@ export const Test = () => {
     </div>
   );
 };
+
+export default Test;
