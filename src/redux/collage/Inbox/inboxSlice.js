@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
-import toast from "react-hot-toast";
-import { getInbox, getMail } from "../auth/authSlice";
+import { getMail } from "../auth/authSlice";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 

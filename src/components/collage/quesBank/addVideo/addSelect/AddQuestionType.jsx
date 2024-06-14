@@ -57,7 +57,7 @@ const AddQuestionType = () => {
   };
 
   return (
-    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto py-5 md:py-10">
+    <div className="text-sm font-bold">
       <Header selectQuestionType={selectQuestionType} />
 
       <div className="mt-5">

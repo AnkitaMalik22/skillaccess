@@ -9,9 +9,11 @@ const Initial = ({ selectedLanguage, handleEditorChange, editorValue,question })
  
           <Editor
             height="50vh"
+            value={editorValue}
+            onChange={(value) => handleEditorChange(value, "defaultCode")}
             defaultLanguage={selectedLanguage}
             defaultValue={editorValue}
-            onChange={handleEditorChange}
+            // onChange={handleEditorChange}
           />
         </div>
      

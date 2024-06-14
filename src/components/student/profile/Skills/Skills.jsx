@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Skills = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-11/12 mx-auto py-6">
+    <>
       <Header next={() => navigate("/student/profile/portfolio")} />
       <Progress level={3} />
       <div className="flex flex-col gap-10">
@@ -61,7 +61,7 @@ const Skills = () => {
           </select>
         </div>
       </div>{" "}
-    </div>
+    </>
   );
 };
 

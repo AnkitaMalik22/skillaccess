@@ -1,16 +1,12 @@
-import { Disclosure, Transition } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import React, { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
-import { RiBookmark2Fill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
-import toast from "react-hot-toast";
-import { editBankQuestionById } from "../../../../redux/collage/test/thunks/question";
 import { useNavigate } from "react-router-dom";
 const Essay = ({ question, number }) => {
   const [type, setType] = useState();
-  const [AnswerIndex, setAnswerIndex] = useState(question.AnswerIndex);
   console.log(question);
   const dispatch = useDispatch();
   const handleDelete = ({ sectionId, questionId }) => {

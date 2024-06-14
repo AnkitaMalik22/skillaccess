@@ -185,7 +185,7 @@ const TestCases = ({
   };
   console.log(question?.testcase);
   return (
-    <div>
+    <div className="h-[535px] overflow-y-auto w-full">
       {visible && (
         <PopUp
           visible={visible}
@@ -232,7 +232,7 @@ const TestCases = ({
               <textarea
                 type="text"
                 id={`input-${index}`}
-                className="border p-1 w-full"
+                className="border p-1 w-full h-[100px]"
                 // value={testCase.input.map((item) => (Array.isArray(item) ? `[${item.join(",")}]` : item)).join(", ")}
                 // onChange={(e) => handleInputChange(index, e.target.value)}
                 name="input"

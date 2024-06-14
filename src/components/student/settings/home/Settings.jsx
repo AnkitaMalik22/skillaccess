@@ -14,7 +14,7 @@ const Settings = () => {
 
   const Navigate = useNavigate();
   return (
-    <div className="w-11/12 mx-auto font-dmSans">
+    <>
       <Header />
 
       <div className="w-full mt-16 flex-col gap-4 flex">
@@ -92,7 +92,7 @@ const Settings = () => {
         {/*  */}
       </div>
       {/*  */}
-    </div>
+    </>
   );
 };
 

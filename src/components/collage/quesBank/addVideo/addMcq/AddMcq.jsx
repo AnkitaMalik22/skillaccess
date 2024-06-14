@@ -250,7 +250,7 @@ const AddMcq = () => {
   }, [TopicToBeAdded]);
 
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <Header
         question={question}
         setQuestion={setQuestion}
@@ -318,7 +318,7 @@ const AddMcq = () => {
             />
           </span>
 
-          <span className="w-[49%]">
+          <span className="w-1/2">
             <h2 className="font-bold">Test Description</h2>
 
             <div className="w-11/12 flex flex-col gap-2">

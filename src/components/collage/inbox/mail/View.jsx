@@ -17,6 +17,7 @@ import {
 import { Link, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import socketIOClient from "socket.io-client";
+import CircularLoader from "../../../CircularLoader";
 
 const View = ({ index, filter, inboxType }) => {
   const [socket, setSocket] = useState(null);
@@ -25,6 +26,7 @@ const View = ({ index, filter, inboxType }) => {
   const show = searchParams.get("show");
   const dispatch = useDispatch();
   const upload = useRef();
+  const [loader, setLoader] = useState(false);
   const { mail } = useSelector((state) => state.collageAuth);
   // const Email = mail.emailsReceived[index];
   const user = useSelector(getInbox);
@@ -235,7 +237,7 @@ const View = ({ index, filter, inboxType }) => {
                 await dispatch(uploadAttachment(Object.values(e.target.files)));
                 setLoading(false);
               }}
-            ></input>
+            />
             <TfiClip
               className="rotate-180 text-2xl text-gray-400 self-center"
               onClick={() => upload.current.click()}
@@ -246,27 +248,33 @@ const View = ({ index, filter, inboxType }) => {
             <button
               className={`${
                 loading ? "disabled !bg-gray-700 " : "bg-blue-700 "
-              } text-sm font-bold text-white rounded-xl px-4 py-2`}
+              } btn  bg-blue-700 text-sm font-bold text-white rounded-xl px-4 py-2`}
               onClick={() => {
                 if (!loading) {
+                  setLoader(true);
                   dispatch(
                     sendReply({
                       ...email,
                       attachments: mail.attachments ? mail.attachments : [],
                       id: Email.mail._id,
                     })
-                  ).then(() => {
-                    dispatch(getMail({ limit: 50, skip: 0 }));
-                    socket.emit("joinRoom", Email?.mail?.from?.Email);
-                    socket.emit("message", email.Email, "new Mail");
-                  });
+                  )
+                    .then(() => {
+                      dispatch(getMail({ limit: 50, skip: 0 }));
+                      socket.emit("joinRoom", Email?.mail?.from?.Email);
+                      socket.emit("message", email.Email, "new Mail");
+                      setLoader(false);
+                    })
+                    .catch(() => {
+                      setLoader(false);
+                    });
                   setEmail({ Message: "" });
                 } else {
                   toast.error("please wait! uploading files...");
                 }
               }}
             >
-              Send
+              Send {loader && <CircularLoader />}
             </button>
           </div>
         </div>

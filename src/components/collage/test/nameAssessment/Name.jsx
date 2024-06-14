@@ -136,6 +136,15 @@ const Name = () => {
         totalAttempts: "Please enter Total Attempts",
       }));
       flag = true;
+    } else if (
+      testDetails.totalAttempts < 1 ||
+      testDetails.totalAttempts > 10
+    ) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        totalAttempts: "Total Attempts must be between 1 and 10",
+      }));
+      flag = true;
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, totalAttempts: "" }));
     }
@@ -210,7 +219,7 @@ const Name = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <Header handleNext={handleSubmit} />
       <div className="w-4/5 mx-auto">
         <Progress />
@@ -267,14 +276,6 @@ const Name = () => {
           {errors.totalQuestions && (
             <span className="text-red-500 pt-2">{errors.totalQuestions}</span>
           )}
-          {/* <input
-          name="totalDuration"
-          type="number"
-          className="w-full bg-gray-100 h-16 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border-none placeholder-gray-400"
-          placeholder="Total Duration in minutes"
-          value={testDetails.totalDuration}
-          onChange={handleChange}
-        /> */}
 
           <div className="flex justify-between items-center w-full gap-4  ">
             {/* Duration From */}
@@ -285,7 +286,7 @@ const Name = () => {
                 name="duration_from"
                 value={testDetails?.duration_from?.slice(0, 16)}
                 onChange={handleChange}
-                className={`border-none bg-gray-100 p-0 ml-10 ${
+                className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${
                   errors.duration ? "border-red-500" : ""
                 }`}
                 required
@@ -301,7 +302,7 @@ const Name = () => {
                 name="duration_to"
                 value={testDetails?.duration_to?.slice(0, 16)}
                 onChange={handleChange}
-                className={`border-none bg-gray-100 p-0 ml-10 ${
+                className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${
                   errors.duration ? "border-red-500" : ""
                 }`}
                 required

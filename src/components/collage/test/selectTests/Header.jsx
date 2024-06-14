@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex mx-auto justify-between my-5">
+    <div className="flex mx-auto justify-between my-5 items-center">
       <div className="flex gap-3 items-center">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "

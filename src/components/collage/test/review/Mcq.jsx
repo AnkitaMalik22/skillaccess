@@ -99,12 +99,13 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   };
 
   return (
-    <div className="mx-6 flex bg-white rounded-lg justify-between my-4">
-      <div className="w-11/12 flex flex-col gap-2">
+    <div className="flex bg-white rounded-lg justify-between mb-5">
+      <div className="p-5 flex flex-col gap-2">
         {search.get(`${Number}`) !== "true" ? (
-          <h2 className="flex px-4 gap-3 font-semibold pt-3 text-base ">
-            <div className="">{Number + 1}. </div>
-            <div className="" dangerouslySetInnerHTML={{ __html: Title }}></div>
+          <h2 className="flex mb-2 gap-3 font-semibold  text-base first-letter:uppercase ">
+            <div>{Number + 1}. </div>
+
+            <div dangerouslySetInnerHTML={{ __html: Title }}></div>
           </h2>
         ) : (
           <ReactQuill
@@ -115,11 +116,7 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
             name="Title"
           />
         )}
-        <div
-          className={`px-5 pb-4 flex flex-col gap-4  ${
-            view ? "mt-10" : "mt-0"
-          }`}
-        >
+        <div className={`flex flex-col gap-4  `}>
           {mcq.Options.map((ques, index) => (
             <span className="flex gap-2">
               <div className="flex w-5 justify-center">
