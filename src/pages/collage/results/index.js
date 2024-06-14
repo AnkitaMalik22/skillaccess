@@ -1,6 +1,6 @@
-import React, { lazy } from "react";
+import { lazy } from "react";
 import { Route } from "react-router-dom";
-import AssessmentReviewPage from "./AssessmentReviewPage";
+import AssessmentReview from "./AssessmentReview";
 const Results = lazy(() => import("./Results"));
 const ResultsOverview = lazy(() => import("./ResultsOverview"));
 
@@ -9,7 +9,7 @@ export default function ResultsRoute() {
     <Route path="collage/results">
       <Route path="" element={<Results />} />
       <Route path="overview" element={<ResultsOverview />} />
-      <Route path="assessmentReview" element={<AssessmentReviewPage />} />
+      <Route path="assessmentReview" element={<AssessmentReview />} />
     </Route>
   );
 }

@@ -1,56 +1,56 @@
 import { lazy } from "react";
 import { Route } from "react-router-dom";
-const NameAssessmentPage = lazy(() => import("./NameAssessmentPage"));
-const SelectTestsPage = lazy(() => import("./SelectTestsPage"));
-const SelectTestsAdaptivePage = lazy(() => import("./SelectTestsAdaptivePage"));
-const AddQuestionsPage = lazy(() => import("./AddQuestionsPage"));
-const ReviewPage = lazy(() => import("./ReviewPage"));
-const AddMcqPage = lazy(() => import("./AddMcqPage"));
-const AddCodePage = lazy(() => import("./AddCodePage"));
-const AddEssayPage = lazy(() => import("./AddEssayPage"));
-const AddParagraphPage = lazy(() => import("./AddParagraphPage"));
-const FinalizePage = lazy(() => import("./FinalizePage"));
-const InvitePage = lazy(() => import("./InvitePage"));
-const AddQuestionsSelectPage = lazy(() => import("./AddQuestionsSelectPage"));
-const SubmitPage = lazy(() => import("./SubmitPage"));
-const TestPage = lazy(() => import("./TestPage"));
-const AssessmentPage = lazy(() => import("./AssessmentPage"));
-const CreateTopicPage = lazy(() => import("./CreateTopicPage"));
-const CreateTopicAdaptivePage = lazy(() => import("./CreateTopicAdaptivePage"));
-const AddMcqToTopicPage = lazy(() => import("./AddMcqToTopicPage"));
-const AddVideoPage = lazy(() => import("./AddVideoPage"));
-const AddVideoMcqPage = lazy(() => import("./AddVideoMcqPage"));
-const AddVideoLongShortPage = lazy(() => import("./AddVideoLongShortPage"));
-const AddVideoQuestionsPage = lazy(() => import("./AddVideoQuestionsPage"));
+const NameAssessment = lazy(() => import("./NameAssessmentPage"));
+const SelectTests = lazy(() => import("./SelectTests"));
+const SelectTestsAdaptive = lazy(() => import("./SelectTestsAdaptive"));
+const AddQuestions = lazy(() => import("./AddQuestions"));
+const Review = lazy(() => import("./Review"));
+const AddMcq = lazy(() => import("./AddMcq"));
+const AddCode = lazy(() => import("./AddCodePage"));
+const AddEssay = lazy(() => import("./AddEssay"));
+const AddParagraph = lazy(() => import("./AddParagraph"));
+const Finalize = lazy(() => import("./Finalize"));
+const Invite = lazy(() => import("./Invite"));
+const AddQuestionsSelect = lazy(() => import("./AddQuestionsSelect"));
+const Submit = lazy(() => import("./Submit"));
+const Test = lazy(() => import("./Test"));
+const Assessment = lazy(() => import("./Assessment"));
+const CreateTopic = lazy(() => import("./CreateTopic"));
+const CreateTopicAdaptive = lazy(() => import("./CreateTopicAdaptive"));
+const AddMcqToTopic = lazy(() => import("./AddMcqToTopic"));
+const AddVideo = lazy(() => import("./AddVideo"));
+const AddVideoMcq = lazy(() => import("./AddVideoMcq"));
+const AddVideoLongShort = lazy(() => import("./AddVideoLongShort"));
+const AddVideoQuestions = lazy(() => import("./AddVideoQuestions"));
 
 function TestHome() {
   return (
     <Route path="collage/test">
-      <Route path="" element={<TestPage />} />
-      <Route path="assessment" element={<AssessmentPage />} />
-      <Route path="name" element={<NameAssessmentPage />} />
-      <Route path="select" element={<SelectTestsPage />} />
-      <Route path="selectAdaptive" element={<SelectTestsAdaptivePage />} />
-      <Route path="submit" element={<SubmitPage />} />
-      {/* <Route path="preview" element={<AddQuestionsSelectPage />} /> */}
-      <Route path="questions" element={<AddQuestionsPage />} />
-      <Route path="typeOfQuestions/:id" element={<AddQuestionsSelectPage />} />
-      {/* <Route path="mcq/:id" element={<AddMcqPage />} /> */}
-      {/* <Route path="preview" element={<AddQuestionsPage />} /> */}
-      <Route path="createTopic" element={<CreateTopicPage />} />
-      <Route path="createTopicAdaptive" element={<CreateTopicAdaptivePage />} />
-      <Route path="details/:id" element={<ReviewPage />} />
-      <Route path="addMcqToTopic/:id" element={<AddMcqToTopicPage />} />
-      <Route path="addMcq/:id" element={<AddMcqPage />} />
-      <Route path="code/:id" element={<AddCodePage />} />
-      <Route path="essay/:id" element={<AddEssayPage />} />
-      <Route path="find-ans/:id" element={<AddParagraphPage />} />
-      <Route path="video/:id" element={<AddVideoPage />} />
-      <Route path="video/:id/addmcq" element={<AddVideoMcqPage />} />
-      <Route path="video/shortlong/:id" element={<AddVideoLongShortPage />} />
-      <Route path="video/:id/selectType" element={<AddVideoQuestionsPage />} />
-      <Route path="final" element={<FinalizePage />} />
-      <Route path="invite" element={<InvitePage />} />
+      <Route path="" element={<Test />} />
+      <Route path="assessment" element={<Assessment />} />
+      <Route path="name" element={<NameAssessment />} />
+      <Route path="select" element={<SelectTests />} />
+      <Route path="selectAdaptive" element={<SelectTestsAdaptive />} />
+      <Route path="submit" element={<Submit />} />
+      {/* <Route path="preview" element={<AddQuestionsSelect  />} /> */}
+      <Route path="questions" element={<AddQuestions />} />
+      <Route path="typeOfQuestions/:id" element={<AddQuestionsSelect />} />
+      {/* <Route path="mcq/:id" element={<AddMcq  />} /> */}
+      {/* <Route path="preview" element={<AddQuestions  />} /> */}
+      <Route path="createTopic" element={<CreateTopic />} />
+      <Route path="createTopicAdaptive" element={<CreateTopicAdaptive />} />
+      <Route path="details/:id" element={<Review />} />
+      <Route path="addMcqToTopic/:id" element={<AddMcqToTopic />} />
+      <Route path="addMcq/:id" element={<AddMcq />} />
+      <Route path="code/:id" element={<AddCode />} />
+      <Route path="essay/:id" element={<AddEssay />} />
+      <Route path="find-ans/:id" element={<AddParagraph />} />
+      <Route path="video/:id" element={<AddVideo />} />
+      <Route path="video/:id/addmcq" element={<AddVideoMcq />} />
+      <Route path="video/shortlong/:id" element={<AddVideoLongShort />} />
+      <Route path="video/:id/selectType" element={<AddVideoQuestions />} />
+      <Route path="final" element={<Finalize />} />
+      <Route path="invite" element={<Invite />} />
     </Route>
   );
 }
