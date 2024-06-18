@@ -140,15 +140,15 @@ const AddCode = () => {
   });
 
   useEffect(() => {
-    if (question.code) {
-      const defaultValue = question.code[question.codeLanguage];
+    // if (question.code) {
+    const defaultValue = question.code[question.codeLanguage];
 
-      setEditorValue({
-        defaultCode: defaultValue?.defaultCode,
-        solutionCode: defaultValue?.solutionCode,
-      });
-    }
-  }, [question.codeLanguage]);
+    setEditorValue({
+      defaultCode: defaultValue?.defaultCode,
+      solutionCode: defaultValue?.solutionCode,
+    });
+    // }
+  }, [question.codeLanguage, question.code]);
 
   const handleEditorChange = (value, type) => {
     setEditorValue((prev) => ({ ...prev, [type]: value }));

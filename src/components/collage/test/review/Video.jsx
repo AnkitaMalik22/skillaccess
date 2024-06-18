@@ -73,7 +73,7 @@ const Video = ({ Number, id, video, type, view }) => {
   //   }
   // };
   return (
-    <div className="flex bg-white rounded-lg justify-between mb-5">
+    <div className="flex bg-white rounded-lg justify-between mb-5 flex-col">
       <div className="p-5 flex flex-col gap-2">
         <h2 className="px-4 font-semibold pt-3 text-base">
           {Number + 1} &nbsp;

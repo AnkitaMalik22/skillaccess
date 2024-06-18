@@ -43,7 +43,7 @@ const StudentPoP = ({ onClose }) => {
       await dispatch(uploadStudents([student])).then(() => {
         dispatch(getStudents({ id: user?._id }));
       });
-      toast.success("Students Uploaded Successfully");
+      // toast.success("Students Uploaded Successfully");
       setLoading(false);
       setStudent({
         FirstName: "",
