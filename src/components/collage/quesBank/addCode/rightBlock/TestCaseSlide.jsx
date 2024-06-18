@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -103,8 +102,13 @@ const SlideUpDown = ({
             <textarea
               type="text"
               id={`input`}
-              className={`border p-1 w-full ${outputStatus !== "" ? (outputStatus === "Passed" ? "border-green-500" : "border-red-500") : ""
-                }`}
+              className={`border p-1 w-full ${
+                outputStatus !== ""
+                  ? outputStatus === "Passed"
+                    ? "border-green-500"
+                    : "border-red-500"
+                  : ""
+              }`}
               name="input"
               value={userInput}
               onChange={(e) => handleChangeInput(e)}
@@ -114,8 +118,13 @@ const SlideUpDown = ({
             <textarea
               type="text"
               id={`output`}
-              className={`border p-1 w-full ${outputStatus !== "" ? (outputStatus === "Passed" ? "border-green-500" : "border-red-500") : ""
-                }`}
+              className={`border p-1 w-full ${
+                outputStatus !== ""
+                  ? outputStatus === "Passed"
+                    ? "border-green-500"
+                    : "border-red-500"
+                  : ""
+              }`}
               disabled={true}
               name="expectedOutput"
               value={userOutput}
@@ -146,11 +155,13 @@ const SlideUpDown = ({
                 className={`${
                   outputStatus === "Passed" ? "bg-green-500" : "bg-slate-500"
                 } text-white rounded-lg px-5 py-3 flex gap-2`}
-                onClick={()=>{
-                    outputStatus === "Passed" ? addTestCase() : compileUserInput()
+                onClick={() => {
+                  outputStatus === "Passed"
+                    ? addTestCase()
+                    : compileUserInput();
                 }}
               >
-                <FaPlus className="self-center" /> Add Test Case 
+                <FaPlus className="self-center" /> Add Test Case
               </button>
             </div>
           </div>
@@ -159,14 +170,22 @@ const SlideUpDown = ({
           <div
             className={`border-l-4  p-4 mb-4
              ${
-               outputStatus !== "" ? (outputStatus === "Passed" ? "bg-green-200 border-green-500 text-green-700" : "bg-red-200 border-red-500 text-red-700") : ""
+               outputStatus !== ""
+                 ? outputStatus === "Passed"
+                   ? "bg-green-200 border-green-500 text-green-700"
+                   : "bg-red-200 border-red-500 text-red-700"
+                 : ""
              }`}
             role="message"
           >
             <div className="flex justify-between items-center flex-col">
               <h3 className="font-bold">Message</h3>
               <p className="text-md  focus:outline-none">
-                {outputStatus !== "" ? (outputStatus === "Passed" ? "Test case passed!" : "Test case failed!") : ""}
+                {outputStatus !== ""
+                  ? outputStatus === "Passed"
+                    ? "Test case passed!"
+                    : "Test case failed!"
+                  : ""}
               </p>
             </div>
           </div>

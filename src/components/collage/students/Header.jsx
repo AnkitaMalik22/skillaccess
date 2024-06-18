@@ -27,7 +27,6 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
   const dispatch = useDispatch();
 
   const handleFile = (e) => {
-    setVisible(true);
     const types = [
       "application/vnd.ms-excel",
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -39,13 +38,15 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
     ];
     let file = e.target.files[0];
     if (file && types.includes(file.type)) {
+      setVisible(true);
       let reader = new FileReader();
       reader.readAsArrayBuffer(file);
       reader.onload = (e) => {
         setExcel(e.target.result);
       };
     } else {
-      toast.error("invalid file type");
+      toast.error("Invalid file type only excel file accepted");
+      // console.log("not valid type");
     }
   };
 
@@ -74,7 +75,7 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
       );
 
       if (!isValidFormat || headers.length !== 3) {
-        toast.error("Invalid file format");
+        toast.error("Invalid file format only excel file accepted");
         setLoading(false);
         return;
       }
@@ -112,7 +113,7 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
 
       if (students.length > 0) {
         dispatch(uploadStudents(students));
-        toast.success("Students uploaded successfully");
+        // toast.success("Students uploaded successfully");
       } else {
         toast.warn("No valid student data to upload");
       }
