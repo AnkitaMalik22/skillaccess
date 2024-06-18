@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import Header from "./Header";
-import { Progress } from "./Progress";
-import List from "./List";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-
 import { useNavigate } from "react-router-dom";
-import Code from "./Code";
-import Video from "./Video";
+import List from "../../../components/collage/quesBank/bookmark/List";
+import Header from "../../../components/collage/quesBank/bookmark/Header";
+import Code from "../../../components/collage/quesBank/bookmark/Code";
+import Video from "../../../components/collage/quesBank/bookmark/Video";
+import useTranslate from "../../../hooks/useTranslate";
 
 const Bookmarks = () => {
+  useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { bookmarks } = useSelector((state) => state.test);

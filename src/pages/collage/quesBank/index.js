@@ -1,48 +1,48 @@
 import { lazy } from "react";
 import { Route } from "react-router-dom";
 
-const RecentPage = lazy(() => import("./RecentPage"));
-const TopicPage = lazy(() => import("./TopicPage"));
-const UploadPage = lazy(() => import("./UploadPage"));
-const QuesBankPage = lazy(() => import("./QuesBankPage"));
-const BookmarkPage = lazy(() => import("./BookmarkPage"));
-const TopicDetailsPage = lazy(() => import("./TopicDetailsPage"));
-const RecentAllPage = lazy(() => import("./RecentAllPage"));
+const Recent = lazy(() => import("./Recent"));
+const Topic = lazy(() => import("./Topic"));
+const Upload = lazy(() => import("./Upload"));
+const QuesBank = lazy(() => import("./QuesBank"));
+const Bookmark = lazy(() => import("./Bookmark"));
+const TopicDetails = lazy(() => import("./TopicDetails"));
+const RecentAll = lazy(() => import("./RecentAll"));
 const UploadTopic = lazy(() => import("./UploadTopic"));
-const AddMcqToTopicPage = lazy(() => import("./AddMcqToTopicPage"));
-const AddQuestionsPage = lazy(() => import("./AddQuestionsPage"));
-const AddCodePage = lazy(() => import("./AddCodePage"));
-const AddEssayPage = lazy(() => import("./AddEssayPage"));
-const AddParagraphPage = lazy(() => import("./AddParagraphPage"));
-const CreateTopicPage = lazy(() => import("./CreateTopicPage"));
-const AddVideoPage = lazy(() => import("./AddVideoPage"));
-const AddVideoMcqPage = lazy(() => import("./AddVideoMcqPage"));
-const AddVideoLongShortPage = lazy(() => import("./AddVideoLongShortPage"));
-const AddQuestionsSelectPage = lazy(() => import("./AddQuestionsSelectPage"));
-const AddVideoQuestionsPage = lazy(() => import("./AddVideoQuestionsPage"));
+const AddMcqToTopic = lazy(() => import("./AddMcqToTopic"));
+const AddQuestions = lazy(() => import("./AddQuestions"));
+const AddCode = lazy(() => import("./AddCodePage"));
+const AddEssay = lazy(() => import("./AddEssay"));
+const AddParagraph = lazy(() => import("./AddParagraph"));
+const CreateTopic = lazy(() => import("./CreateTopic"));
+const AddVideo = lazy(() => import("./AddVideo"));
+const AddVideoMcq = lazy(() => import("./AddVideoMcq"));
+const AddVideoLongShort = lazy(() => import("./AddVideoLongShort"));
+const AddQuestionsSelect = lazy(() => import("./AddQuestionsSelect"));
+const AddVideoQuestions = lazy(() => import("./AddVideoQuestions"));
 
 function QuesRoute() {
   return (
     <Route path="collage/quesBank">
-      <Route path="" element={<QuesBankPage />} />
-      <Route path="recent" element={<RecentPage />} />
-      <Route path="recentAll" element={<RecentAllPage />} />
-      <Route path="topic" element={<TopicPage />} />
-      <Route path="topic/:id" element={<TopicDetailsPage />} />
+      <Route path="" element={<QuesBank />} />
+      <Route path="recent" element={<Recent />} />
+      <Route path="recentAll" element={<RecentAll />} />
+      <Route path="topic" element={<Topic />} />
+      <Route path="topic/:id" element={<TopicDetails />} />
       <Route path="topic/upload/:id" element={<UploadTopic />} />
-      <Route path="upload" element={<UploadPage />} />
-      <Route path="bookmarks" element={<BookmarkPage />} />
-      <Route path="questions" element={<AddQuestionsPage />} />
-      <Route path="typeOfQuestions/:id" element={<AddQuestionsSelectPage />} />
-      <Route path="createTopic" element={<CreateTopicPage />} />
-      <Route path="addMcqToTopic/:id" element={<AddMcqToTopicPage />} />
-      <Route path="code/:id" element={<AddCodePage />} />
-      <Route path="essay/:id" element={<AddEssayPage />} />
-      <Route path="find-ans/:id" element={<AddParagraphPage />} />
-      <Route path="video/:id" element={<AddVideoPage />} />
-      <Route path="video/:id/addmcq" element={<AddVideoMcqPage />} />
-      <Route path="video/shortlong/:id" element={<AddVideoLongShortPage />} />
-      <Route path="video/:id/selectType" element={<AddVideoQuestionsPage />} />
+      <Route path="upload" element={<Upload />} />
+      <Route path="bookmarks" element={<Bookmark />} />
+      <Route path="questions" element={<AddQuestions />} />
+      <Route path="typeOfQuestions/:id" element={<AddQuestionsSelect />} />
+      <Route path="createTopic" element={<CreateTopic />} />
+      <Route path="addMcqToTopic/:id" element={<AddMcqToTopic />} />
+      <Route path="code/:id" element={<AddCode />} />
+      <Route path="essay/:id" element={<AddEssay />} />
+      <Route path="find-ans/:id" element={<AddParagraph />} />
+      <Route path="video/:id" element={<AddVideo />} />
+      <Route path="video/:id/addmcq" element={<AddVideoMcq />} />
+      <Route path="video/shortlong/:id" element={<AddVideoLongShort />} />
+      <Route path="video/:id/selectType" element={<AddVideoQuestions />} />
       <Route path="*" element={<div>404</div>} />
     </Route>
   );

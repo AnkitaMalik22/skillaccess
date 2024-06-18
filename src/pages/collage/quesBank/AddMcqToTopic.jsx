@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
+import Header from "../../../components/collage/quesBank/addMcqToTopic/Header";
 
 import { FaX } from "react-icons/fa6";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
@@ -13,11 +13,13 @@ import toast from "react-hot-toast";
 import {
   editBankQuestionById,
   editQuestionById,
-} from "../../../../redux/collage/test/thunks/question";
-import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
-import CircularLoader from "../../../CircularLoader";
+} from "../../../redux/collage/test/thunks/question";
+import { addQuestionToTopic } from "../../../redux/collage/test/thunks/topic";
+import CircularLoader from "../../../components/CircularLoader";
+import useTranslate from "../../../hooks/useTranslate";
 
 const AddMcqToTopic = () => {
+  useTranslate();
   const { currentTopic, ADD_QUESTION_LOADING } = useSelector(
     (state) => state.test
   );

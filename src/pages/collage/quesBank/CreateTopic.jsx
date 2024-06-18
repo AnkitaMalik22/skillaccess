@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import Header from "./Header";
-
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { createTopic } from "../../../../redux/collage/test/thunks/topic";
+import { createTopic } from "../../../redux/collage/test/thunks/topic";
+import useTranslate from "../../../hooks/useTranslate";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { FaChevronLeft } from "react-icons/fa";
 
 const CreateTopic = () => {
+  useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -81,7 +83,33 @@ const CreateTopic = () => {
 
   return (
     <div>
-      <Header next={handleNext} />
+      <div className="flex w-full mx-auto justify-between mb-2 mt-5">
+        <div>
+          <button className="flex self-center ml-2 rounded-lg  gap-2">
+            <button onClick={() => navigate(-1)} className="mt-2 mr-3">
+              <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
+            </button>
+
+            <div className="flex h-full self-center">
+              <h2 className="sm:text-xl  text-left font-bold self-center text-3xl mt-2 font-dmSans ">
+                Create Topic
+              </h2>
+            </div>
+          </button>
+        </div>
+
+        <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
+          <div className=" flex">
+            <button
+              className="self-center justify-center flex bg-[#0052CC] py-3 px-4 rounded-2xl text-xs gap-2 text-white"
+              onClick={handleNext}
+            >
+              Next Step{" "}
+              <FaArrowRightLong className="self-center text-lg text-white ml-4" />
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">
         <h2 className="w-full font-medium  text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-lg mb-10 sm:mb-1 text-lg">
