@@ -26,7 +26,7 @@ const Video = ({ video, Number }) => {
     <Disclosure>
       {({ open }) => (
         <>
-          <div className="w-full flex justify-between ">
+          <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10 mb-4">
             {" "}
             <button className=" bg-blued rounded-lg bg-opacity-5 text-left text-blued flex">
               {" "}
@@ -56,10 +56,12 @@ const Video = ({ video, Number }) => {
             </div> */}
           </div>
 
-          <Disclosure.Panel>
-            <div className="mx-6  bg-white rounded-lg ">
-              <div className="w-11/12 flex flex-col gap-2">
-                <h2 className="px-4 font-semibold pt-3 text-base"></h2>
+          <Disclosure.Panel  className="relative z-10">
+            
+          <div className="mb-4">
+              <div className="flex w-full justify-between flex-col rounded-lg border-[#95ACFA] border text-[#3E3E3E] py-3 text-left text-lg font-normal  ">
+                <div className="flex justify-between items-center w-full px-2">
+                {/* <h2 className="px-4 font-semibold pt-3 text-base"></h2> */}
                 <div className="px-5 pb-4 flex flex-col gap-4">
                   <span className="flex gap-2">
                     <div className="flex w-5 justify-center"></div>
@@ -110,7 +112,8 @@ const Video = ({ video, Number }) => {
                   />
                 ))}
             </div>
-          </Disclosure.Panel>
+            </div>
+            </Disclosure.Panel>
         </>
       )}
     </Disclosure>

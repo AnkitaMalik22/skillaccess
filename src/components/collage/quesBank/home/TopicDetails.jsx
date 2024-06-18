@@ -45,13 +45,13 @@ const TopicDetails = () => {
           .map((question, i) => {
             return (
               <div>
-                {question.Options && (
+                {question.Options && !question.videoFile && (
                   <Mcq
                     question={question}
                     number={(selected - 1) * 10 + 1 + i}
                   />
                 )}
-                {question.questions && (
+                {question.questions && !question.videoFile &&(
                   <FindAnswer
                     question={question}
                     number={(selected - 1) * 10 + 1 + i}
@@ -67,7 +67,7 @@ const TopicDetails = () => {
                       number={(selected - 1) * 10 + 1 + i}
                     />
                   )}
-                {question.code && (
+                {question.code && !question.videoFile && (
                   <Code
                     question={question}
                     Title={question.codeQuestion}
