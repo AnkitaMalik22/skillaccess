@@ -34,41 +34,9 @@ const Security = () => {
 
     dispatch(updatePassword(password));
   };
-  // useEffect(() => {
-  //   if (user.authType === "qr") {
-  //     setSelectedOption("securityApp");
-  //     return;
-  //   }
-  //   if (user.authType === "otp") {
-  //     setSelectedOption("textMessage");
-  //     return;
-  //   }
-  //   if (user.authType === "none") {
-  //     setSelectedOption("none");
-  //     return;
-  //   }
-  // }, []);
-  // useEffect(() => {
-  //   if (selectedOption === "securityApp") {
-  //     dispatch(selectAuth({ type: "qr" }));
-  //   } else if (selectedOption === "textMessage") {
-  //     dispatch(selectAuth({ type: "otp" }));
-  //     // navigate("/collage/settings/security/secondFA");
-  //   } else {
-  //     dispatch(selectAuth({ type: "none" }));
-  //   }
-  // }, [selectedOption]);
-  // const handleVerificationClick = () => {
-  //   if (selectedOption === "securityApp") {
-  //     dispatch(selectAuth({ type: "qr" }));
-  //   } else if (selectedOption === "textMessage") {
-  //     dispatch(selectAuth({ type: "otp" }));
-  //     // navigate("/collage/settings/security/secondFA");
-  //   }
-  // };
 
   return (
-    <div className="w-11/12 mx-auto pt-4">
+    <>
       <Header />
 
       <div className="flex gap-40 mt-20">
@@ -215,7 +183,7 @@ const Security = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

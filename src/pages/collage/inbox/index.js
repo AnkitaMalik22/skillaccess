@@ -1,19 +1,13 @@
-import { useEffect } from "react";
-
-import { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
-
-const MailPage = lazy(() => import("./MailPage"));
-const InboxPage = lazy(() => import("./InboxPage"));
+import { lazy } from "react";
+import { Route } from "react-router-dom";
+const Mail = lazy(() => import("./Mail"));
+const Inbox = lazy(() => import("./Inbox"));
 
 export default function () {
   return (
     <Route path="collage/inbox">
-      <Route path="mail">
-        <Route path="" element={<MailPage />} />
-        {/* <Route path="" element={<MailPage />} /> */}
-      </Route>
-      <Route path="" element={<InboxPage />} />
+      <Route path="" element={<Inbox />} />
+      <Route path="mail" element={<Mail />} />
     </Route>
   );
 }

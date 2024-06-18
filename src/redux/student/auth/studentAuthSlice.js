@@ -199,7 +199,6 @@ export const getStudent = createAsyncThunk(
       });
 
       return response.data.student;
-      console.log(response.data.student);
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -330,7 +329,7 @@ export const googleLoginStudent = createAsyncThunk(
 
 export const googleRegisterStudent = createAsyncThunk(
   "studentAuth/googleRegisterStudent",
-  async ({accessToken,collegeId ,inviteLink}, { rejectWithValue }) => {
+  async ({ accessToken, collegeId, inviteLink }, { rejectWithValue }) => {
     try {
       const ip = await getIp();
       console.log("google register");
@@ -521,7 +520,6 @@ const studentAuthSlice = createSlice({
         console.log("pending");
       })
       .addCase(getStudent.fulfilled, (state, action) => {
-
         console.log(action.payload);
         state.isLoggedIn = true;
         state.user = action.payload;
@@ -535,7 +533,7 @@ const studentAuthSlice = createSlice({
         // alert("You are logged out! Please login again");
 
         if (
-          action.payload.message == "Token is blacklisted. Please login again"
+          action.payload.message === "Token is blacklisted. Please login again"
         ) {
           localStorage.removeItem("auth-token");
           state.loggedInUsers = null;
@@ -698,7 +696,7 @@ const studentAuthSlice = createSlice({
       .addCase(removeLoggedOutUser.rejected, (state, action) => {
         console.log(action.payload);
         // getLoggedInUsers();
-        if (state.loggedInUsers.length == 0) {
+        if (state.loggedInUsers.length === 0) {
           state.loggedInUsers = null;
           state.logoutError = "No user is logged in";
           window.redirect("/");

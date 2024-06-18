@@ -47,14 +47,13 @@ body {
   /* color: transparent !important; */
 }
 
-/* .goog-te-gadget .goog-te-combo {
-  margin: 4px 0;
-  font-weight: bold;
+.goog-te-gadget .goog-te-combo {
+  font-weight: 700;
   font-family: DM Sans;
   font-style: italic;
   color: #161616;
   font-size: 0.9rem;
-} */
+}
 
 iframe {
   display: none;
@@ -80,6 +79,14 @@ iframe #webpack-dev-server-client-overlay {
 .nav-item:hover {
   background-color: #ffffff;
   color: #000000;
+}
+
+.swiper-wrapper {
+  gap: 10px;
+}
+
+.ql-editor {
+  min-height: 20vh;
 }
 
 /* CSS for animation */

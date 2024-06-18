@@ -1,7 +1,5 @@
-import { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
-
-
+import { lazy } from "react";
+import { Route } from "react-router-dom";
 const TeamsPage = lazy(() => import("./TeamsPage"));
 const Profile = lazy(() => import("./ProfileTeacherPage"));
 const ApprovedTeams = lazy(() => import("./ApprovedTeamsPage"));

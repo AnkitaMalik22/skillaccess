@@ -48,8 +48,8 @@ const Beginner = () => {
 
   const navigate = useNavigate();
   return (
-    <div className="flex bg-[#F8F8F9] w-full gap-4">
-      <div className=" w-[242px] h-[312px] bg-[#8F92A1] bg-opacity-5  my-3 ml-8 rounded-2xl flex justify-center">
+    <div className="flex bg-[#F8F8F9] w-full gap-2 p-5">
+      <div className=" w-[242px] h-[312px] bg-[#8F92A1] bg-opacity-5 rounded-2xl flex justify-center p-2">
         <div className=" self-center w-full h-fit ">
           <div
             className="bg-white sm:w-[64px] sm:h-[64px] w-10 h-10 rounded-2xl mx-auto flex justify-center hover:cursor-pointer "
@@ -117,7 +117,7 @@ const Beginner = () => {
             </SwiperSlide>
           ))
         )}
-        <SwiperSlide></SwiperSlide>
+        {/* <SwiperSlide></SwiperSlide> */}
 
         <span className="absolute top-1/2 right-0 z-20 h-fit w-fit">
           <SlideNextButton />

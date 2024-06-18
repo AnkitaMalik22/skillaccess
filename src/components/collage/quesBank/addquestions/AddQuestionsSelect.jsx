@@ -18,10 +18,6 @@ const AddQuestionsSelect = () => {
 
   const level = searchParams.get("level");
   const [selectQuestionType, setSelectQuestionType] = useState("");
-  console.log(id);
-  // useEffect(() => {
-  //   dispatch(setTest({ questionType: selectQuestionType }));
-  // }, [selectQuestionType]);
 
   const NavHandler = () => {
     switch (selectQuestionType) {
@@ -56,7 +52,7 @@ const AddQuestionsSelect = () => {
     }
   };
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <HeaderSelect Q={selectQuestionType} />
 
       <div className="mx-auto ">
@@ -116,7 +112,7 @@ const AddQuestionsSelect = () => {
                 <h2 className="text-xl font-normal">{item.label}</h2>
               </div>
               <h2 className="text-xl font-normal flex-1">{item.description}</h2>
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="17"
                 height="4"
@@ -132,7 +128,7 @@ const AddQuestionsSelect = () => {
                   d="M0.609375 1.9998C0.609375 0.8955 1.51015 0 2.62096 0C3.73267 0 4.63254 0.8955 4.63254 1.9998C4.63254 3.105 3.73267 3.9996 2.62096 3.9996C1.51015 3.9996 0.609375 3.105 0.609375 1.9998ZM6.64502 1.9998C6.64502 0.8955 7.5458 0 8.6566 0C9.76741 0 10.6682 0.8955 10.6682 1.9998C10.6682 3.105 9.76741 3.9996 8.6566 3.9996C7.5458 3.9996 6.64502 3.105 6.64502 1.9998ZM12.6794 1.9998C12.6794 0.8955 13.5802 0 14.6919 0C15.8027 0 16.7035 0.8955 16.7035 1.9998C16.7035 3.105 15.8027 3.9996 14.6919 3.9996C13.5802 3.9996 12.6794 3.105 12.6794 1.9998Z"
                   fill="#000000"
                 />
-              </svg>
+              </svg> */}
             </div>
           ))}
         </div>

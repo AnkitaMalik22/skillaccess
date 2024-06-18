@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex w-11/12 mx-auto justify-between my-6">
+    <div className="flex mx-auto justify-between my-5 items-center">
       <div className="flex gap-3 items-center">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
@@ -59,7 +59,7 @@ const Header = () => {
           className="bg-[#0052CC] self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={handleSubmit}
         >
-          Next Step{" "}
+          Next
           <FaArrowRightLong className="self-center text-lg text-white ml-4" />
         </button>{" "}
       </div>

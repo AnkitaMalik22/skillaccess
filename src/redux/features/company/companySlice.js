@@ -15,10 +15,6 @@ const initialState = {
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
-const authToken = localStorage.getItem("auth-token");
-
-// Get all companies -- /api/company/college/all -- GET | College
-
 export const getCompanyDetails = createAsyncThunk(
   "company/getCompanyDetails",
   async (companyId, { rejectWithValue }) => {

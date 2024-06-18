@@ -91,11 +91,11 @@ const ChartComp = () => {
     }));
   }, [year]);
   return (
-    <div className="sm:flex  mt-6 bg-gray-100 w-full rounded-lg gap-6 font-dmSans  justify-center relative">
+    <div className="sm:flex  bg-gray-100 w-full rounded-lg gap-6 font-dmSans  justify-center relative">
       {/* chart component */}
-      <div className="w-full  rounded-s sm:px-6 mt-2">
-        <div className="md:p-2 flex justify-between">
-          <h2 className="font-extrabold text-lg ">Result Overview</h2>{" "}
+      <div className="w-full  rounded-s p-5 mt-2">
+        <div className="flex justify-between">
+          <h2 className="font-extrabold text-lg mb-5 ">Result Overview</h2>{" "}
           <span className="flex gap-4 text-sm font-bold">
             {/* <button
               className={`border-2 border-x-transparent border-transparent ${
@@ -140,28 +140,30 @@ const ChartComp = () => {
           </span>
         </div>
 
-        <div className="3xl:h-[507px] h-96">
-          {year && (
-            <Chart
-              id="results"
-              className="bg-white shadow-md mt-2 rounded-lg "
-              options={settings.options}
-              series={[
-                {
-                  name: "Total Students Appeared",
-                  data: students.appeared,
-                },
-                {
-                  name: "Total Students Selected",
-                  data: students.placed,
-                },
-              ]}
-              type="line"
-              height={"100%"}
-              width={"100%"}
-            />
-          )}
-          <div className="flex gap-4 my-4">
+        <div>
+          <div className="3xl:h-[507px] h-96 mb-5">
+            {year && (
+              <Chart
+                id="results"
+                className="bg-white shadow-md mt-2 rounded-lg "
+                options={settings.options}
+                series={[
+                  {
+                    name: "Total Students Appeared",
+                    data: students.appeared,
+                  },
+                  {
+                    name: "Total Students Selected",
+                    data: students.placed,
+                  },
+                ]}
+                type="line"
+                height={"100%"}
+                width={"100%"}
+              />
+            )}
+          </div>
+          <div className="flex gap-4">
             <span className="flex gap-1">
               <FaCircle className="text-[#0052CC90]" />{" "}
               <h2 className="font-bold text-xs">Total Students Appeared</h2>

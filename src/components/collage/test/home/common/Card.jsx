@@ -7,7 +7,7 @@ import {
   deleteTest,
   getAllTests,
 } from "../../../../../redux/collage/test/thunks/test";
-
+import { FaPlus } from "react-icons/fa6";
 const Card = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Card = (props) => {
     });
   };
   return (
-    <div className="w-[242px] h-[312px] bg-white my-3 text-start font-bold text-black rounded sm:p-2 p-1 font-dmSans">
+    <div className="w-[242px] h-[312px] bg-white text-start font-bold text-black rounded-lg p-2 font-dmSans">
       <h2 className="mb-2 line-clamp-2 ">{props.assessment?.name}</h2>
       <p className="font-normal text-gray-400 text-xs line-clamp-4 sm:mb-2 mb-1 h-[48%]">
         {props.assessment?.description}
@@ -86,15 +86,21 @@ const Card = (props) => {
             //   total: props.assessment.totalQuestionsCount,
             // });
             localStorage.setItem("testId", props.assessment._id);
-            props.assessment &&
-              navigate(`/collage/test/invite?testId=${props.assessment._id}`);
+            localStorage.setItem("testName", props.assessment?.name);
+            props?.assessment &&
+              navigate(`/collage/test/invite?testId=${props?.assessment._id}`);
           }}
         >
-          <div className="w-8 h-8 bg-blue-500  rounded"></div>
-          <div className="w-8 h-8 bg-blue-900 rounded -ml-3"></div>
-          <div className="w-8 h-8 bg-blue-100 rounded -ml-3"></div>
+          <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500 mx-2" />
+          {props.assessment?.invitedStudents.slice(0, 5).map((student) => (
+            <>
+              <img src={student.avatar.url} className="w-8 h-8" />
+            </>
+          ))}
+
           <div className="w-8  rounded  font-dmSans text-gray-400 font-normal self-center text-xs pl-2">
-            +{props.assessment?.invitedStudents.length}
+            {props.assessment?.invitedStudents.length - 5 > 0 &&
+              +" " + props.assessment?.invitedStudents.length - 5}
           </div>
         </div>
 

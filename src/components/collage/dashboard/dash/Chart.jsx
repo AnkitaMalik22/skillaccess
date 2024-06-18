@@ -15,26 +15,13 @@ const ChartComp = () => {
       stroke: {
         curve: "smooth",
       },
-      responsive: [
-        {
-          breakpoint: 400,
-
-          options: {
-            chart: {
-              height: 300,
-            },
-            grid: {
-              padding: {
-                right: 0,
-              },
-            },
-          },
-        },
-      ],
       chart: {
-        id: "dash",
+        id: "graphData",
         toolbar: {
           show: false,
+        },
+        zoom: {
+          enabled: false,
         },
       },
       legend: {
@@ -50,21 +37,18 @@ const ChartComp = () => {
           right: 20,
         },
         xaxis: {
-          borderColor: "#00FFFFFF",
           lines: {
-            show: true, //or just here to disable only x axis grids
+            show: true, // Show vertical grid lines
           },
         },
         yaxis: {
-          labels: {
-            show: false,
-          },
           lines: {
-            show: false, //or just here to disable only y axis
+            show: false, // Hide horizontal grid lines
           },
         },
       },
       xaxis: {
+        borderColor: "#00FFFFFF",
         categories: [
           "Jan",
           "Feb",
@@ -80,6 +64,14 @@ const ChartComp = () => {
           "Dec",
         ],
       },
+      yaxis: {
+        labels: {
+          show: true,
+        },
+        lines: {
+          show: false, // Hide horizontal grid lines
+        },
+      },
     },
     series: [
       {
@@ -92,6 +84,7 @@ const ChartComp = () => {
       },
     ],
   });
+
   const dispatch = useDispatch();
   const { placedStudents } = useSelector((state) => state.dashboard);
   const { user } = useSelector((state) => state.collageAuth);
@@ -178,7 +171,7 @@ const ChartComp = () => {
           </h1>
           <h1
             className="text-blue-500 hover:cursor-pointer text-sm"
-            onClick={() => navigate("/collage/dashboard/students")}
+            onClick={() => navigate("/collage/students")}
           >
             See All
           </h1>

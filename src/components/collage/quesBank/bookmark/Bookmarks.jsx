@@ -20,7 +20,7 @@ const Bookmarks = () => {
   const [selected, setSelected] = useState(1);
 
   return (
-    <div className="w-11/12 mx-auto relative    min-h-[90vh] pb-20">
+    <div className=" relative    min-h-[90vh]">
       <Header page={"final"} />
       <div className="w-4/5 mx-auto"></div>
 

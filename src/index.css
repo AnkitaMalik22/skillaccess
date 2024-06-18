@@ -1,16 +1,17 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Firefox */
-* 
-{
-  scrollbar-width: 5px;
+* {
+  scrollbar-width: 0px;
   scrollbar-color: rgb(243 244 246);
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 5px;
+  width: 0px;
 }
 
 *::-webkit-scrollbar-track {
@@ -22,7 +23,7 @@
   background-color: rgb(107, 107, 198);
 
   border-radius: 14px;
-  /* border: 3px solid var(--primary); */
+  border: 3px solid var(--primary);
 }
 
 .apexcharts-yaxis-texts-g {
@@ -31,13 +32,8 @@
 
 .apexcharts-grid-borders,
 .apexcharts-xaxis-tick {
-  display: none !important ;
+  display: none !important;
 }
-
-@tailwind components;
-@tailwind utilities;
-
-
 
 /* Sidebar Css */
 
@@ -47,26 +43,29 @@
 
 .active-li-c {
   background-color: white;
-  color: black; /* Active state */
+  color: black;
+  /* Active state */
 }
 
 .hover-li-c:hover {
   background-color: rgba(255, 255, 255, 0.5);
-  color: black; /* Hover state */
+  color: black;
+  /* Hover state */
 }
 
 .btn-transition {
-  @apply transition-all duration-300 ease-in-out ;
+  @apply transition-all duration-300 ease-in-out;
 }
 
 .active-li {
-  @apply bg-white text-black rounded-lg; /* Active state */
+  @apply bg-white text-black rounded-lg;
+  /* Active state */
 }
 
 .hover-li:hover {
-  @apply bg-white bg-opacity-20 text-black rounded-lg ; /* Hover state */
+  @apply bg-white bg-opacity-20 text-black rounded-lg;
+  /* Hover state */
 }
-
 
 #\:0\.targetLanguage select:not(:first-child) {
   display: none;

@@ -33,11 +33,7 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const { students, companies, assessments, jobs, placedStudents } =
     useSelector((state) => state.dashboard);
-    const {user} =useSelector(
-      (state) => state.collageAuth
-    );
-  
-
+  const { user } = useSelector((state) => state.collageAuth);
 
   useEffect(() => {
     dispatch(getStudent());
@@ -87,7 +83,7 @@ export default function Dashboard() {
   };
   return (
     <>
-      <div className=" w-11/12 mx-auto font-dmSans">
+      <>
         {showPoPup && <CompleteProfile onCancel={handleClose} />}
         {/* chart */}
         <ChartComp />
@@ -135,7 +131,7 @@ export default function Dashboard() {
         <div className="my-4 w-full">
           <List />
         </div>
-      </div>
+      </>
     </>
   );
 }

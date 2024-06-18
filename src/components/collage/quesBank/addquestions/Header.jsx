@@ -12,7 +12,7 @@ const Header = ({ Q, page }) => {
   const level = search.get("level");
 
   return (
-    <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
+    <div className="flex mx-auto justify-between mb-5">
       <div>
         <button className="flex items-center ml-2 rounded-lg  gap-2">
           <button

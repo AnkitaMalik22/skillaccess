@@ -132,12 +132,13 @@ const AddCode = () => {
   });
 
   useEffect(() => {
-    const defaultValue = question.code[question.codeLanguage];
+    const defaultValue = question.code[question?.codeLanguage];
     setEditorValue({
-      initialCode: defaultValue.defaultCode,
-      solutionCode: defaultValue.solutionCode,
+      initialCode: defaultValue?.defaultCode,
+      solutionCode: defaultValue?.solutionCode,
     });
-  }, [question.codeLanguage, question.code]);
+    console.log(question.codeLanguage);
+  }, [question?.codeLanguage, question?.code]);
 
   const handleEditorChange = (value, type) => {
     setEditorValue((prev) => ({ ...prev, [type]: value }));
@@ -354,7 +355,7 @@ const AddCode = () => {
   console.log(question);
 
   return (
-    <div className="w-11/12 mx-auto py-5 md:py-10">
+    <div>
       <Header handleSave={handleSave} />
       <div className="bg-white min-h-[90vh] mx-auto rounded-xl relative">
         <div className="flex flex-wrap gap-5 md:flex-nowrap mb-5 md:mb-10 ">

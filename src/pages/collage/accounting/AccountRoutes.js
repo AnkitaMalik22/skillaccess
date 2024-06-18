@@ -1,15 +1,14 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
-
-const AccountingPage = lazy(() => import("./AccountingPage"));
-const TransactionPage = lazy(() => import("./TransactionPage"));
+const Accounting = lazy(() => import("./Accounting"));
+const Transactions = lazy(() => import("./Transactions"));
 
 function AccountRoute() {
   return (
     <Route path="collage/accounting">
-      <Route path="" element={<AccountingPage />} />
-        <Route path="transactions" element={<TransactionPage />} />
+      <Route path="" element={<Accounting />} />
+      <Route path="transactions" element={<Transactions />} />
     </Route>
   );
 }

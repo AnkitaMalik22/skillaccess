@@ -137,32 +137,8 @@ const Header = ({ selectQuestionType }) => {
 
   const navigate = useNavigate();
 
-  //   const NavHandler = () => {
-  //     switch (selectQuestionType) {
-  //       case "mcq":
-  //         navigate(`/collage/test/video/${id}/addmcq`);
-
-  //         break;
-
-  //       case "short":
-  //         navigate(`/collage/test/video/shortlong/${id}?length=short`);
-
-  //         break;
-
-  //       case "long":
-  //         navigate(`/collage/test/video/shortlong/${id}?length=long`);
-
-  //         break;
-
-  //       default:
-  //         window.alert("please select field");
-
-  //         break;
-  //     }
-  //   };
-
   return (
-    <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
+    <div className="flex  justify-between mb-2 ">
       <div>
         <button className="flex self-center ml-2 rounded-lg  gap-2">
           <button
