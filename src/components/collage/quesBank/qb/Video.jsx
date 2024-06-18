@@ -35,24 +35,24 @@ const Video = ({ video, Number }) => {
               </div>
             </button>
             <Disclosure.Button className="w-full bg-gray-100 ">
-              <div className="flex justify-between w-full h-full items-center py-2 rounded">
+              <div className="flex w-full justify-between items-center gap-2 rounded-lg border-[#95ACFA] border text-[#3E3E3E] py-3 text-left text-lg font-normal">
                 <div></div>
-                <h2 className="px-4 font-semibold  text-base">
+                <h2 className="px-4 font-semibold  text-base text-center">
                   Click to Expand{" "}
                 </h2>
-                <div className="level flex items-center gap-2 bg-gray-100 ">
+                <div className="level flex items-center mr-3 gap-2 ">
                   {video.QuestionLevel == "beginner" && (
-                    <p className="rounded-2xl mr-4 py-1.5 bg-cyan-500 text-white w-8 h-8 text-center font-extrabold  ">
+                    <p className="rounded-2xl bg-cyan-500 text-white text-sm w-8 h-8 text-center font-medium flex items-center justify-center ">
                       L1
                     </p>
                   )}
                   {video.QuestionLevel == "intermediate" && (
-                    <p className="rounded-2xl mr-4   py-1.5 bg-green-500 text-white w-8 h-8 text-center font-extrabold  ">
+                    <p className="rounded-2xl bg-green-500 text-white text-sm  w-8 h-8 text-center font-medium flex items-center justify-center ">
                       L2
                     </p>
                   )}
                   {video.QuestionLevel == "advanced" && (
-                    <p className="rounded-2xl mr-4   py-1.5 bg-red-500 text-white w-8 h-8 text-center font-extrabold  ">
+                    <p className="rounded-2xl bg-red-500 text-white text-sm  w-8 h-8 text-center font-medium flex justify-center items-center ">
                       L3
                     </p>
                   )}
@@ -62,7 +62,7 @@ const Video = ({ video, Number }) => {
           </div>
 
           <Disclosure.Panel className="relative z-10">
-            <div className="mb-4">
+            <div className="mb-4 ml-16">
               <div className="flex w-full justify-between flex-col rounded-lg border-[#95ACFA] border text-[#3E3E3E] py-3 text-left text-lg font-normal  ">
                 <div className="flex justify-between items-center w-full px-2">
                   {/* <h2 className="px-4 font-semibold pt-3 text-base"></h2> */}
