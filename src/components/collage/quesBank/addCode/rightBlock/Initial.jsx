@@ -14,13 +14,13 @@ const Initial = ({
     selectedLanguage =
       selectedLanguage.charAt(0).toUpperCase() + selectedLanguage.slice(1);
   }
-  useEffect(() => {
-    const ques = JSON.parse(localStorage.getItem("qbQues"));
+  // useEffect(() => {
+  //   const ques = JSON.parse(localStorage.getItem("qbQues"));
 
-    if (ques?.code?.[selectedLanguage]?.defaultCode) {
-      setEditorValue(ques?.code[selectedLanguage]);
-    }
-  }, []);
+  //   if (ques?.code?.[selectedLanguage]?.defaultCode) {
+  //     setEditorValue(ques?.code[selectedLanguage]);
+  //   }
+  // }, []);
   return (
     <div className="w-full">
       <Editor
