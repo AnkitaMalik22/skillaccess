@@ -35,7 +35,6 @@ const Header = ({
     (state) => state.test
   );
   const handleFile = (e) => {
-    setVisible(true);
     const types = [
       "application/vnd.ms-excel",
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -47,13 +46,14 @@ const Header = ({
     ];
     let file = e.target.files[0];
     if (file && types.includes(file.type)) {
+      setVisible(true);
       let reader = new FileReader();
       reader.readAsArrayBuffer(file);
       reader.onload = (e) => {
         setExcel(e.target.result);
       };
     } else {
-      toast.error("invalid file type");
+      toast.error("Invalid file type only excel file accepted");
     }
   };
   const upload = useRef(null);
@@ -534,8 +534,8 @@ const Header = ({
         setVisible(false);
         toast.success("questions added successfully");
         level === "adaptive"
-                  ? navigate(`/collage/test/selectAdaptive?level=${level}`)
-                  : navigate(`/collage/test/select?level=${level}`)
+          ? navigate(`/collage/test/selectAdaptive?level=${level}`)
+          : navigate(`/collage/test/select?level=${level}`);
         // navigate(`/collage/test/select?level=${searchParams.get("level")}`);
       } else {
         setVisible(false);

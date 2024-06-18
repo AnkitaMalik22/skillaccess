@@ -14,8 +14,8 @@ const Code = ({
   handleEditorChange,
   editorValue,
 }) => {
- 
   const selectedLanguage = question.codeLanguage.toLowerCase();
+  console.log(selectedLanguage);
   return (
     <div className="font-dmSans">
       <h2 className="font-bold mb-3 text-xl">
@@ -101,7 +101,6 @@ const Code = ({
             }
             // codeLanguage={question.codeLanguage}
             question={question}
-            
           />
         ) : toggle === 2 ? (
           // <Initial question={question} handleChanges={handleChanges} />
@@ -127,8 +126,7 @@ const Code = ({
             handleEditorChange={(value) =>
               handleEditorChange(value, "solutionCode")
             }
-            setQuestion = {setQuestion}
-            
+            setQuestion={setQuestion}
           />
         )}
       </div>
