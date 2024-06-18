@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-
-import Header from "./Header";
-
+import Header from "../../../components/collage/quesBank/addVideo/addMcq/Header";
 import { FaX } from "react-icons/fa6";
-
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
-
 import { useDispatch, useSelector } from "react-redux";
 import ReactQuill from "react-quill"; // Import ReactQuill
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
@@ -14,13 +10,15 @@ import {
   setMcq,
   addMcq,
   addVideo,
-} from "../../../../../redux/collage/test/testSlice";
+} from "../../../redux/collage/test/testSlice";
 
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { editBankQuestionById } from "../../../../../redux/collage/test/thunks/question";
+import { editBankQuestionById } from "../../../redux/collage/test/thunks/question";
+import useTranslate from "../../../hooks/useTranslate";
 
-const AddMcq = () => {
+const AddVideoMcq = () => {
+  useTranslate();
   const { TopicToBeAdded } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const addType = searchParams.get("addType");
@@ -580,4 +578,4 @@ const AddMcq = () => {
   );
 };
 
-export default AddMcq;
+export default AddVideoMcq;

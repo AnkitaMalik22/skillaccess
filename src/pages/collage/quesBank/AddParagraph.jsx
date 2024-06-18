@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../../../components/collage/quesBank/addParagraph/Header";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
-
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import {
   editBankQuestionById,
   editQuestionById,
-} from "../../../../redux/collage/test/thunks/question";
+} from "../../../redux/collage/test/thunks/question";
 import {
   addFindAns,
   addFindAnsToTopic,
-} from "../../../../redux/collage/test/testSlice";
-import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
-import CircularLoader from "../../../CircularLoader";
+} from "../../../redux/collage/test/testSlice";
+import { addQuestionToTopic } from "../../../redux/collage/test/thunks/topic";
+import CircularLoader from "../../../components/CircularLoader";
+import useTranslate from "../../../hooks/useTranslate";
 
 const AddParagraph = () => {
+  useTranslate();
   const [loading, setLoading] = useState(false);
   const MAX_QUESTIONS = 3;
   const navigate = useNavigate();

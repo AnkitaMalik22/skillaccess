@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import List from "./List";
+import Header from "../../../components/collage/quesBank/recentAll/Header";
+import List from "../../../components/collage/quesBank/recentAll/List";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Code from "./Code";
-import Video from "./Video";
-import { getRecentUsedQuestions } from "../../../../redux/collage/test/thunks/question";
+import Code from "../../../components/collage/quesBank/recentAll/Code";
+import Video from "../../../components/collage/quesBank/recentAll/Video";
+import { getRecentUsedQuestions } from "../../../redux/collage/test/thunks/question";
+import useTranslate from "../../../hooks/useTranslate";
 
 const RecentAll = () => {
+  useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -95,9 +97,8 @@ const RecentAll = () => {
   const paginatedQuestions = getPaginatedQuestions();
 
   return (
-    <div className="w-11/12 mx-auto relative min-h-[90vh] pb-20">
+    <div className="relative min-h-[90vh] ">
       <Header page={"final"} />
-      <div className="w-4/5 mx-auto"></div>
       <div className="mt-16">
         {paginatedQuestions.map((question, i) => {
           return (

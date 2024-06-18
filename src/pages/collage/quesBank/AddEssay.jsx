@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-
-import { FaX } from "react-icons/fa6";
+import Header from "../../../components/collage/quesBank/addEssay/Header";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
-
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import {
   editBankQuestionById,
   editQuestionById,
-} from "../../../../redux/collage/test/thunks/question";
+} from "../../../redux/collage/test/thunks/question";
 import {
   addEssay,
   addEssayToTopic,
-} from "../../../../redux/collage/test/testSlice";
-import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
-import CircularLoader from "../../../CircularLoader";
+} from "../../../redux/collage/test/testSlice";
+import { addQuestionToTopic } from "../../../redux/collage/test/thunks/topic";
+import CircularLoader from "../../../components/CircularLoader";
+import useTranslate from "../../../hooks/useTranslate";
 
 const AddEssay = () => {
+  useTranslate();
   const { id } = useParams();
   //prev count
   const { topics, currentTopic, ADD_QUESTION_LOADING } = useSelector(

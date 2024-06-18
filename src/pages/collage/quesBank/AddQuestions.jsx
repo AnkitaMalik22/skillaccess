@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import { Progress } from "./Progress";
+import React from "react";
+import Header from "../../../components/collage/quesBank/addquestions/Header";
+import { Progress } from "../../../components/collage/quesBank/addquestions/Progress";
 import { LiaStopwatchSolid } from "react-icons/lia";
 import { RxCross1 } from "react-icons/rx";
 import { PiPencilSimpleLine } from "react-icons/pi";
@@ -11,10 +11,12 @@ import {
   setQuesions,
   setTest,
   setTestSelectedTopics,
-} from "../../../../redux/collage/test/testSlice";
+} from "../../../redux/collage/test/testSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import useTranslate from "../../../hooks/useTranslate";
 
 const AddQuestions = () => {
+  useTranslate();
   const { topics, currentQuestionCount } = useSelector((state) => state.test);
 
   const navigate = useNavigate();

@@ -36,7 +36,6 @@ const Test = () => {
   const adaptive = useSelector((state) => state.test.assessments.adaptive);
 
   const navigate = useNavigate();
-  const asses = [1, 2, 3, 4, 5];
 
   const { recentAssessments } = useSelector((state) => state.test);
   const { user } = useSelector((state) => state.collageAuth);
