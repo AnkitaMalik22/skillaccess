@@ -9,8 +9,8 @@ import {
   selectAuth,
   updatePassword,
 } from "../../../redux/collage/auth/authSlice";
-import useTranslate from "../../../hooks/useTranslate";
 import QrPop from "../../../components/PopUps/QrPop";
+import useTranslate from "../../../hooks/useTranslate";
 
 const Security = () => {
   useTranslate();

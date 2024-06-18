@@ -132,12 +132,13 @@ const AddCode = () => {
   });
 
   useEffect(() => {
-    const defaultValue = question.code[question.codeLanguage];
+    const defaultValue = question.code[question?.codeLanguage];
     setEditorValue({
-      initialCode: defaultValue.defaultCode,
-      solutionCode: defaultValue.solutionCode,
+      initialCode: defaultValue?.defaultCode,
+      solutionCode: defaultValue?.solutionCode,
     });
-  }, [question.codeLanguage, question.code]);
+    console.log(question.codeLanguage);
+  }, [question?.codeLanguage, question?.code]);
 
   const handleEditorChange = (value, type) => {
     setEditorValue((prev) => ({ ...prev, [type]: value }));

@@ -57,6 +57,7 @@ const SlideUpDown = ({
           code: userCode,
           language: userLang,
           input: `${userInput}`,
+          // input : `1\n${userInput}\n`,
         },
         {
           timeout: 20000,

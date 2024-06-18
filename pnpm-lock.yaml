@@ -191,6 +191,9 @@ importers:
       swiper:
         specifier: ^11.0.5
         version: 11.1.4
+      tailwind-scrollbar:
+        specifier: ^3.1.0
+        version: 3.1.0(tailwindcss@3.4.4)
       url:
         specifier: ^0.11.3
         version: 0.11.3
@@ -6459,6 +6462,12 @@ packages:
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
+
+  tailwind-scrollbar@3.1.0:
+    resolution: {integrity: sha512-pmrtDIZeHyu2idTejfV59SbaJyvp1VRjYxAjZBH0jnyrPRo6HL1kD5Glz8VPagasqr6oAx6M05+Tuw429Z8jxg==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: 3.x
 
   tailwindcss@3.4.4:
     resolution: {integrity: sha512-ZoyXOdJjISB7/BcLTR6SEsLgKtDStYyYZVLsUtWChO4Ps20CBad7lfJKVDiejocV4ME1hLmyY0WJE3hSDcmQ2A==}
@@ -14465,6 +14474,10 @@ snapshots:
   swiper@11.1.4: {}
 
   symbol-tree@3.2.4: {}
+
+  tailwind-scrollbar@3.1.0(tailwindcss@3.4.4):
+    dependencies:
+      tailwindcss: 3.4.4
 
   tailwindcss@3.4.4:
     dependencies:
