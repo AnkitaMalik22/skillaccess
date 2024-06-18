@@ -39,55 +39,55 @@ const TopicDetails = () => {
 
   return (
     <div className="min-h-[90vh] relative">
-      <TopicHeader Heading={currentTopic?.Heading} page={"qb"} sectionId={id} />
-      <div className="mb-5">
-        {questions
-          ?.slice((selected - 1) * 10, selected * 10)
-          .map((question, i) => {
-            return (
-              <div>
-                {question.Options && (
-                  <Mcq
-                    question={question}
-                    number={(selected - 1) * 10 + 1 + i}
-                  />
-                )}
-                {question.questions && (
-                  <FindAnswer
-                    question={question}
-                    number={(selected - 1) * 10 + 1 + i}
-                  />
-                )}
+    <TopicHeader Heading={currentTopic?.Heading} page={"qb"} sectionId={id} />
+    <div className="mb-5">
+      {questions
+        ?.slice((selected - 1) * 10, selected * 10)
+        .map((question, i) => {
+          return (
+            <div>
+              {question.Options && !question.videoFile && (
+                <Mcq
+                  question={question}
+                  number={(selected - 1) * 10 + 1 + i}
+                />
+              )}
+              {question.questions && !question.videoFile &&(
+                <FindAnswer
+                  question={question}
+                  number={(selected - 1) * 10 + 1 + i}
+                />
+              )}
 
-                {!question.Options &&
-                  !question.questions &&
-                  !question.code &&
-                  !question.videoFile && (
-                    <Essay
-                      question={question}
-                      number={(selected - 1) * 10 + 1 + i}
-                    />
-                  )}
-                {question.code && (
-                  <Code
+              {!question.Options &&
+                !question.questions &&
+                !question.code &&
+                !question.videoFile && (
+                  <Essay
                     question={question}
-                    Title={question.codeQuestion}
-                    code={question.code}
                     number={(selected - 1) * 10 + 1 + i}
                   />
                 )}
-                {question.videoFile && (
-                  <Video
-                    Number={(selected - 1) * 10 + 1 + i}
-                    video={question}
-                  />
-                )}
-              </div>
-            );
-          })}
-      </div>
+              {question.code && !question.videoFile && (
+                <Code
+                  question={question}
+                  Title={question.codeQuestion}
+                  code={question.code}
+                  number={(selected - 1) * 10 + 1 + i}
+                />
+              )}
+              {question.videoFile && (
+                <Video
+                  Number={(selected - 1) * 10 + 1 + i}
+                  video={question}
+                />
+              )}
+            </div>
+          );
+        })}
+    </div>
 
-      <div className="flex gap-2 w-full justify-center bottom-1">
+    <div className="flex gap-2 w-full justify-center bottom-1">
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropleft
             className={` text-lg self-center ${selected === 1 && "disabled"}`}
