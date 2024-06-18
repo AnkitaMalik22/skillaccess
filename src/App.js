@@ -2,7 +2,7 @@ import "./App.css";
 import React, { Suspense, lazy, useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getCollege } from "./redux/collage/auth/authSlice";
 import TestRoute from "./pages/collage/test/TestHome";
@@ -34,13 +34,37 @@ export default function App() {
   const { user, isLoggedIn, logoutError, USER_LOADING } = useSelector(
     (state) => state.collageAuth
   );
+  const location = useLocation();
+  const [paths, setPaths] = useState([
+    /^\/$/, // Exact match for "/"
+    /^\/register$/, // Exact match for "/register"
+    /^\/terms&policies$/, // Exact match for "/terms&policies"
+    /^\/forgotPassword$/, // Exact match for "/forgotPassword"
+    /^\/password\/reset\/.*$/, // Match for "/password/reset/*"
+    /^\/collage\/me\/failed$/, // Exact match for "/collage/me/failed"
+    /^\/collage\/settings\/security\/securityApp$/, // Exact match for "/collage/settings/security/securityApp"
+  ]);
 
   useEffect(() => {
-    dispatch(getCollege()).finally(() => {
-      setLoader(false);
-    });
+    let shouldGetCollege = true;
+    for (let i = 0; i < paths.length; i++) {
+      const match = location.pathname.match(paths[i]);
+      console.log(
+        `Trying to match path: ${paths[i]} with pathname: ${location.pathname}`
+      );
+      console.log(`Match result: ${match}`);
+      if (match) {
+        shouldGetCollege = false;
+        setLoader(false);
+        break; // Exit loop early if a match is found
+      }
+    }
+    if (shouldGetCollege) {
+      dispatch(getCollege()).finally(() => {
+        setLoader(false); // Ensure setLoader is defined or imported
+      });
+    }
   }, [dispatch]);
-
   useEffect(() => {
     console.log(logoutError);
     if (logoutError) {
@@ -86,7 +110,7 @@ export default function App() {
               path="/collage/settings/security/securityApp"
               element={<SecurityAppPage />}
             />
-            <Route path="" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/terms&policies" element={<TermsPolicies />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />

@@ -7,7 +7,7 @@ import {
   deleteTest,
   getAllTests,
 } from "../../../../../redux/collage/test/thunks/test";
-
+import { FaPlus } from "react-icons/fa6";
 const Card = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -91,11 +91,16 @@ const Card = (props) => {
               navigate(`/collage/test/invite?testId=${props?.assessment._id}`);
           }}
         >
-          <div className="w-8 h-8 bg-blue-500  rounded"></div>
-          <div className="w-8 h-8 bg-blue-900 rounded -ml-3"></div>
-          <div className="w-8 h-8 bg-blue-100 rounded -ml-3"></div>
+          <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500 mx-2" />
+          {props.assessment?.invitedStudents.slice(0, 5).map((student) => (
+            <>
+              <img src={student.avatar.url} className="w-8 h-8" />
+            </>
+          ))}
+
           <div className="w-8  rounded  font-dmSans text-gray-400 font-normal self-center text-xs pl-2">
-            +{props.assessment?.invitedStudents.length}
+            {props.assessment?.invitedStudents.length - 5 > 0 &&
+              +" " + props.assessment?.invitedStudents.length - 5}
           </div>
         </div>
 
