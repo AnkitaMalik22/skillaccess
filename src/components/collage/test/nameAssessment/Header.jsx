@@ -2,6 +2,7 @@ import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import Assessment from "../../../../pages/collage/test/Assessment";
 
 const Header = ({ handleNext }) => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Header = ({ handleNext }) => {
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Create Question
+          Create Assessment
         </h2>
       </div>
 
