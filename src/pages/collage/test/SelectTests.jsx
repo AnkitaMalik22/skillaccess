@@ -369,7 +369,7 @@ const SelectTests = () => {
             </div>
           )}
           {filteredSections?.map((section, index) => (
-            <div className="p-5 flex flex-col justify-between bg-gray-100  rounded-lg min-h-64">
+            <div className="p-5 flex flex-col justify-between bg-gray-100  rounded-lg min-h-64 overflow-y-scroll">
               <div>
                 <h2 className="text-base text-[#171717] font-semibold mb-2 first-letter:uppercase">
                   {section.Heading}
