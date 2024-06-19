@@ -258,6 +258,7 @@ const Register = () => {
                   e.preventDefault();
                   type === "text" ? setType("password") : setType("text");
                 }}
+                type="button"
               >
                 {type === "text" ? (
                   <LuEye className="text-gray-400 text-2xl" />
@@ -313,6 +314,7 @@ const Register = () => {
               }`}
               onClick={handleSubmit}
               disabled={isCreateAccountDisabled}
+              type="submit"
             >
               Register{loader && <CircularLoader />}
             </button>

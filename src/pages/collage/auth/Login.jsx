@@ -110,56 +110,63 @@ const Login = () => {
                 double-check and try again.
               </p>
             )}
-            <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
-              <input
-                onChange={changeHandler}
-                value={Credentials.Email}
-                name="Email"
-                type="email"
-                placeholder="Email Address"
-                className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
-              />
-            </div>
-            <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
-              <input
-                name="Password"
-                onChange={changeHandler}
-                value={Credentials.Password}
-                type={type}
-                placeholder="Password"
-                className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
-              />
-              <button
-                className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none "
-                onClick={(e) => {
-                  e.preventDefault();
-                  type === "text" ? setType("password") : setType("text");
-                }}
+            <form
+              className="w-full flex flex-col items-center"
+              onSubmit={handleSubmit}
+            >
+              <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
+                <input
+                  onChange={changeHandler}
+                  value={Credentials.Email}
+                  name="Email"
+                  type="email"
+                  placeholder="Email Address"
+                  className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
+                />
+              </div>
+              <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
+                <input
+                  name="Password"
+                  onChange={changeHandler}
+                  value={Credentials.Password}
+                  type={type}
+                  placeholder="Password"
+                  className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
+                />
+                <button
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none "
+                  onClick={(e) => {
+                    e.preventDefault();
+                    type === "text" ? setType("password") : setType("text");
+                  }}
+                  type="button"
+                >
+                  {type === "text" ? (
+                    <LuEye className="text-gray-400 text-2xl" />
+                  ) : (
+                    <LuEyeOff className="text-gray-400 text-2xl" />
+                  )}
+                </button>
+              </div>
+
+              <div
+                className=" flex gap-2  px-2  w-full max-w-sm  mx-auto justify-end cursor-pointer mb-4 md:mb-8"
+                onClick={() => navigate("/forgotPassword")}
               >
-                {type === "text" ? (
-                  <LuEye className="text-gray-400 text-2xl" />
-                ) : (
-                  <LuEyeOff className="text-gray-400 text-2xl" />
-                )}
+                <h1 className="text-blue-700 font-bold">Forgot Password</h1>
+              </div>
+
+              <button
+                className={`btn hover:bg-[#0052CC] bg-[#0052CC] rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${
+                  isLoginDisabled ? "bg-[#99baeb] cursor-not-allowed" : ""
+                }`}
+                type="submit"
+                onClick={handleSubmit}
+                disabled={isLoginDisabled}
+              >
+                Login {loader && <CircularLoader />}
               </button>
-            </div>
-
-            <div
-              className=" flex gap-2  px-2  w-full max-w-sm  mx-auto justify-end cursor-pointer mb-4 md:mb-8"
-              onClick={() => navigate("/forgotPassword")}
-            >
-              <h1 className="text-blue-700 font-bold">Forgot Password</h1>
-            </div>
-
-            <button
-              className={`btn hover:bg-[#0052CC] bg-[#0052CC] rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${
-                isLoginDisabled ? "bg-[#99baeb] cursor-not-allowed" : ""
-              }`}
-              onClick={handleSubmit}
-              disabled={isLoginDisabled}
-            >
-              Login {loader && <CircularLoader />}
-            </button>
+            </form>
             <h3 className="text-lGray text-center text-bold text-xs mb-2">
               OR
             </h3>
