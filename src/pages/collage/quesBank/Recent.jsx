@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
 import { CgFolder } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getRecentUsedQuestions,
   deleteRecentUsedQuestion,
-} from "../../../../redux/collage/test/thunks/question";
+} from "../../../redux/collage/test/thunks/question";
+import useTranslate from "../../../hooks/useTranslate";
+import { PiSlidersHorizontalLight } from "react-icons/pi";
+import { FaAngleLeft, FaSearch } from "react-icons/fa";
 
 const Recent = () => {
-  // const arr = [2, 1, 1, 1, 1];
+  useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { recentUsedQuestions } = useSelector((state) => state.test);
-  console.log(recentUsedQuestions);
   useEffect(() => {
     dispatch(getRecentUsedQuestions());
-    console.log(recentUsedQuestions);
   }, []);
 
   const getTotalQuestions = (topic) => {
@@ -45,14 +45,33 @@ const Recent = () => {
   };
 
   const handleDelete = (type, id) => {
-    console.log("Delete", id);
-
     dispatch(deleteRecentUsedQuestion({ type, id }));
   };
 
   return (
     <div>
-      <Header />
+      <div className="flex  mx-auto justify-between mb-2 font-dmSans">
+        <span className="flex gap-4">
+          <button
+            className="bg-[#D9E1E7]  self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-14"
+            onClick={() => navigate(-1)}
+          >
+            <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
+          </button>
+        </span>
+        <div className="bg-gray-100 rounded-xl mx-2  sm:h-12 h-10 flex my-2 px-4 w-fit">
+          <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search..."
+            className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96 max-w-md mx-auto  "
+          />
+        </div>
+
+        <button className="bg-gray-200  self-center mr-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+          <PiSlidersHorizontalLight className="mx-auto sm:h-8 sm:w-8 h-6 w-6" />
+        </button>
+      </div>
       <div className="w-full mx-auto bg-[#F8F8F9] lg:px-8 lg:pt-7 pb-4 rounded-3xl">
         <span className="flex justify-between ">
           <h2 className="font-bold text-xl">Recent used questions</h2>

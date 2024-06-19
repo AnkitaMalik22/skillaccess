@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
-
-import Header from "./Header";
-
+import Header from "../../../components/collage/quesBank/addVideo/LongShortAnswer/Header";
 import { useDispatch, useSelector } from "react-redux";
-
-import { addVideo } from "../../../../../redux/collage/test/testSlice";
-
-import { FaX } from "react-icons/fa6";
-
+import { addVideo } from "../../../redux/collage/test/testSlice";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
-
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { editBankQuestionById } from "../../../../../redux/collage/test/thunks/question";
+import { editBankQuestionById } from "../../../redux/collage/test/thunks/question";
+import useTranslate from "../../../hooks/useTranslate";
 
 const LongShortAnswer = () => {
+  useTranslate();
   const navigate = useNavigate();
   const { TopicToBeAdded } = useSelector((state) => state.test);
   const dispatch = useDispatch();

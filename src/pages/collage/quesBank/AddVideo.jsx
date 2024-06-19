@@ -1,42 +1,22 @@
 import React, { useCallback, useRef, useState } from "react";
-
 import { PiVideoCamera } from "react-icons/pi";
-
 import { useDropzone } from "react-dropzone";
-
 import { GrUploadOption } from "react-icons/gr";
-
-import { GoDeviceCameraVideo } from "react-icons/go";
-
-import axios from "axios";
-
 import { FaPlus } from "react-icons/fa";
-
-import Webcam from "react-webcam";
-
-import Header from "./Header";
-
-// import {
-
-//   setTest,
-
-//   setMcq,
-
-//   addMcq,
-
-// } from "../../../../../redux/collage/test/testSlice";
-
 import { useDispatch } from "react-redux";
-
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-
-import { addVideo } from "../../../../redux/collage/test/testSlice";
-import Loader from "./Loader";
+import { addVideo } from "../../../redux/collage/test/testSlice";
+import Webcam from "react-webcam";
+import Header from "../../../components/collage/quesBank/addVideo/Header";
+import Loader from "../../../components/collage/quesBank/addVideo/Loader";
 import toast from "react-hot-toast";
+import axios from "axios";
+import useTranslate from "../../../hooks/useTranslate";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 const AddVideo = () => {
+  useTranslate();
   const dispatch = useDispatch();
   const [searchParam, setSearchParam] = useSearchParams();
   const { id } = useParams();

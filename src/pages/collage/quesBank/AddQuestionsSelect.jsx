@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
-import HeaderSelect from "./HeaderSelect";
-import { Progress } from "./Progress";
-import { LiaStopwatchSolid } from "react-icons/lia";
-import { RxCross1 } from "react-icons/rx";
-import { PiPencilSimpleLine } from "react-icons/pi";
-import { ImFileText } from "react-icons/im";
-import { setTest } from "../../../../redux/collage/test/testSlice";
+import React, { useState } from "react";
+import HeaderSelect from "../../../components/collage/quesBank/addquestions/HeaderSelect";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import useTranslate from "../../../hooks/useTranslate";
 
 const AddQuestionsSelect = () => {
+  useTranslate();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();

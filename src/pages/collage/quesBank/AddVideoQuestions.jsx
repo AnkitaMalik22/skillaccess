@@ -1,36 +1,15 @@
-import React, { useEffect, useState } from "react";
-
-import { LiaStopwatchSolid } from "react-icons/lia";
-
-import { RxCross1 } from "react-icons/rx";
-
-import { PiPencilSimpleLine } from "react-icons/pi";
-
-import { ImFileText } from "react-icons/im";
-
-// import { setTest } from "../../../../redux/collage/test/testSlice";
-
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-
-import Header from "./Header";
+import { useNavigate, useParams } from "react-router-dom";
+import Header from "../../../components/collage/quesBank/addVideo/addSelect/Header";
 import toast from "react-hot-toast";
+import useTranslate from "../../../hooks/useTranslate";
 
-const AddQuestionType = () => {
+const AddVideoQuestionsType = () => {
+  useTranslate();
   const { id } = useParams();
-
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
   const [selectQuestionType, setSelectQuestionType] = useState("");
-
-  // useEffect(() => {
-
-  //   dispatch(setTest({ questionType: selectQuestionType }));
-
-  // }, [selectQuestionType]);
 
   const NavHandler = () => {
     switch (selectQuestionType) {
@@ -211,4 +190,4 @@ const AddQuestionType = () => {
   );
 };
 
-export default AddQuestionType;
+export default AddVideoQuestionsType;
