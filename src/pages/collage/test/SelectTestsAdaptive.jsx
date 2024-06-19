@@ -472,16 +472,11 @@ const SelectTests = () => {
             <div className="w-full rounded-lg bg-gray-100  relative p-5">
               <div className="overflow-y-auto">
                 <h2 className="text-xl font-bold mb-2 break-words">
-                  {section.Heading}
+                  {section?.Heading}
                 </h2>
 
                 <p className="text-sm leading-[26px] text-[#8F92A1] break-words h-full md:h-40 mb-2">
-                  {
-                    // section.Description.length > 60
-                    //   ? section.Description.substring(0, 60) + "..."
-                    //   :
-                    section.Description
-                  }
+              {section?.Description?.length > 150 ? section?.Description?.slice(0, 150) + "..." : section?.Description}
                 </p>
 
                 <div className="flex justify-between mb-2">

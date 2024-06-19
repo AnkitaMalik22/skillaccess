@@ -372,10 +372,10 @@ const SelectTests = () => {
             <div className="p-5 flex flex-col justify-between bg-gray-100  rounded-lg min-h-64">
               <div>
                 <h2 className="text-base text-[#171717] font-semibold mb-2 first-letter:uppercase">
-                  {section.Heading}
+                  {section?.Heading}
                 </h2>
                 <p className="text-sm font-normal text-[#8F92A1] first-letter:uppercase ">
-                  {section.Description}
+                {section?.Description?.length > 150 ? section?.Description?.slice(0, 150) + "..." : section?.Description}
                 </p>
               </div>
               <div className="flex justify-between gap-2">
