@@ -24,7 +24,7 @@ const List = ({ Title, number, code, question }) => {
   };
   return (
     <div className="flex justify-between gap-2 font-dmSans relative z-10">
-      <button className=" bg-blued rounded-xl text-white text-base font-bold py-2 w-12 h-11">
+      <button className=" bg-blued rounded-xl text-white text-base font-bold py-2 min-w-12 h-11">
         Q-{number}
       </button>
       <div className="w-full  ">
