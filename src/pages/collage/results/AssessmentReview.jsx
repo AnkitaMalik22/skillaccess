@@ -25,13 +25,16 @@ const AssessmentReview = () => {
   const { response, GET_STUDENT_RESPONSE_LOADING } = useSelector((state) => state.test);
 
 
-  useEffect(() => {
-    // dispatch(getResponseByTestandStudent({
-    //   testId,
-    //   studentId
-    // }));
+  const [loading, setLoading] = useState(true);
 
-    dispatch(getStudentResponse(responseId));
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      await dispatch(getStudentResponse(responseId));
+      setLoading(false);
+    };
+  
+    fetchData();
   }, [testId, studentId]);
 
   console.log("testId", testId, studentId, response);
@@ -182,6 +185,12 @@ const AssessmentReview = () => {
     (question) => question.StudentAnswerIndex !== undefined
   ).length;
   console.log(k);
+
+
+  if (loading) {
+    return <Loader />;
+  }
+  
   return (
     <>
     { !GET_STUDENT_RESPONSE_LOADING ? (<> <div className="flex w-full mx-auto justify-between mb-5">
