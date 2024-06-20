@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import Skeleton from "../../../loaders/Skeleton";
 
 const List = ({ uploadedStudents, setStudents, students }) => {
   // const { uploadedStudents} = useSelector((state) => state.collegeStudents);
@@ -9,27 +10,8 @@ const List = ({ uploadedStudents, setStudents, students }) => {
 
   const [isChecked, setIsChecked] = useState(false);
   const { credit } = useSelector((state) => state.collageAuth);
-  //   setIsChecked((prev) => !prev); // Toggle based on previous state
-
-  //   // Determine if the student is already in the 'students' array
-  //   const isStudentInArray = students.some(student => student._id === id);
-
-  //   // If checkbox is checked and student not in array, add them
-  //   if (!isStudentInArray && !isChecked) {
-  //     const stdToAdd = uploadedStudents.find((student) => student._id === id);
-  //     if (stdToAdd) {
-  //       setStudents(prevStudents => [...prevStudents, stdToAdd]);
-  //     }
-  //   }
-  //   // If checkbox is unchecked and student in array, remove them
-  //   else if (isStudentInArray && isChecked) {
-  //     setStudents(prevStudents => prevStudents.filter(student => student._id !== id));
-  //   }
-
-  //   console.log(students)
-  // };
-
-  // Assuming `uploadedStudents` is an array of student objects with _id properties
+  const {GET_STUDENTS_LOADING } = useSelector((state) => state.test);
+  
   const [checkedState, setCheckedState] = useState({});
 
   const handleCheckboxChange = (id) => {
@@ -113,7 +95,12 @@ const List = ({ uploadedStudents, setStudents, students }) => {
     <div className=" grid-cols-5 mx-auto  font-dmSans  text-sm  ">
       {" "}
       {/* row-2 */}
-      {uploadedStudents?.map((student) => {
+{
+  GET_STUDENTS_LOADING && (<Skeleton/>)
+}
+
+      {!GET_STUDENTS_LOADING && 
+      uploadedStudents?.map((student) => {
         return (
           <div
             className="flex flex-col w-full mb-3 p-5 rounded-lg bg-white items-center"
@@ -199,7 +186,7 @@ const List = ({ uploadedStudents, setStudents, students }) => {
           </div>
         );
       })}
-      {uploadedStudents.length === 0 && (
+      {!GET_STUDENTS_LOADING && uploadedStudents.length === 0 && (
         <div className="w-full flex justify-center items-center  mb-4 bg-white rounded-2xl">
           <h2 className="text-xl font-bold">No Students Found</h2>
         </div>

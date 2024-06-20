@@ -11,6 +11,7 @@ import Essay from "../../../components/collage/results/assessmentReview/Essay";
 import HeaderMarks from "../../../components/collage/results/assessmentReview/HeaderMarks";
 import { getStudentResponse } from "../../../redux/collage/test/thunks/student";
 import useTranslate from "../../../hooks/useTranslate";
+import Loader from "../../../Loader";
 
 const AssessmentReview = () => {
   useTranslate();
@@ -21,17 +22,8 @@ const AssessmentReview = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { response } = useSelector((state) => state.test);
-  console.log(response);
-  // const {
-  //   level,
-  //   name,
-  //   description,
-  //   topics,
-  //   totalAttempts,
-  //   totalQuestions,
-  //   totalDuration,
-  // } = useSelector((state) => state.test);
+  const { response, GET_STUDENT_RESPONSE_LOADING } = useSelector((state) => state.test);
+
 
   useEffect(() => {
     // dispatch(getResponseByTestandStudent({
@@ -44,21 +36,19 @@ const AssessmentReview = () => {
 
   console.log("testId", testId, studentId, response);
 
-  const [questions, setQuestions] = useState();
+  const [questions, setQuestions] = useState(null);
   let section1 = [];
   let section2 = [];
   let section3 = [];
   let section4 = [];
   let section5 = [];
 
-  let topics = response?.topics;
+  // let topics = response?.topics;
   useEffect(() => {
-    if (response?.topics && response?.topics.length > 0) {
+    if(response?.topics && response?.topics.length > 0) {
       if (response?.topics[0]) {
-        console.log(response);
-
-        console.log("response?.topics[0].", response?.topics[0]?.Type);
-        console.log("response?.topics[1]", response?.topics[1]?.Type);
+        // console.log("response?.topics[0].", response?.topics[0]?.Type);
+        // console.log("response?.topics[1]", response?.topics[1]?.Type);
 
         switch (response?.topics[0].Type) {
           case "essay":
@@ -171,7 +161,7 @@ const AssessmentReview = () => {
   const max = questions?.length / 10;
   const [selected, setSelected] = useState(1);
 
-  // const [sections, setSections] = useState(response?.topics);
+
 
   const handleCode = (lang, code) => {
     switch (lang) {
@@ -188,14 +178,13 @@ const AssessmentReview = () => {
     }
   };
 
-  // console.log(questions);
   let k = questions?.filter(
     (question) => question.StudentAnswerIndex !== undefined
   ).length;
   console.log(k);
   return (
     <>
-      <div className="flex w-full mx-auto justify-between mb-5">
+    { !GET_STUDENT_RESPONSE_LOADING ? (<> <div className="flex w-full mx-auto justify-between mb-5">
         <div className="flex gap-3">
           <button
             className="self-center object-center rounded-lg h-10 w-10 "
@@ -209,21 +198,23 @@ const AssessmentReview = () => {
       <HeaderMarks response={response} totalQuestions={questions?.length} />
 
       <div className="mt-10 mb-10">
-        {questions
+        {questions && questions
           ?.filter((question) => question.StudentAnswerIndex !== undefined)
           ?.slice((selected - 1) * 10, selected * 10)
           .map((question, i) => {
             return (
               <div className="my-2">
+
                 <List
                   question={question}
                   number={(selected - 1) * 10 + 1 + i}
+                  isLoading={question.AnswerIndex === undefined || question.AnswerIndex === null || question.StudentAnswerIndex === undefined || question.StudentAnswerIndex === null}
                 />
               </div>
             );
           })}
 
-        {questions
+        {questions && questions
           ?.filter((question) => question.AnswerIndex == undefined)
           ?.slice((selected - 1) * 10, selected * 10)
           .map((question, i) => {
@@ -315,7 +306,7 @@ const AssessmentReview = () => {
             }
           />
         </div>
-      </div>
+      </div></>) : <Loader />}
     </>
   );
 };
