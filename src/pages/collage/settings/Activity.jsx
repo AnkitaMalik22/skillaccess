@@ -9,7 +9,7 @@ import {
 import useTranslate from "../../../hooks/useTranslate";
 
 const Activity = () => {
-  useTranslate();
+  //useTranslate();
   const { loggedInUsers } = useSelector((state) => state.collageAuth);
   const dispatch = useDispatch();
   const [place, setPlace] = useState("");

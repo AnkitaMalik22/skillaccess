@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Mail = () => {
-  useTranslate();
+  //useTranslate();
   const dispatch = useDispatch();
 
   const [searchParams, setSearchParams] = useSearchParams();

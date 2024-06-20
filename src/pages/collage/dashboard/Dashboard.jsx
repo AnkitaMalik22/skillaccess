@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCollege } from "../../../redux/collage/auth/authSlice";
 
 const Dashboard = () => {
-  useTranslate();
+  //useTranslate();
   const dispatch = useDispatch();
   const { students, companies, assessments, jobs, placedStudents } =
     useSelector((state) => state.dashboard);

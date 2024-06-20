@@ -5,7 +5,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Finalize = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   // const {
   //   name,

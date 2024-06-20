@@ -18,7 +18,7 @@ import Loader from "../../../components/loaders/Loader";
 import useTranslate from "../../../hooks/useTranslate";
 
 const SelectTests = () => {
-  useTranslate();
+  //useTranslate();
   const [visible, setVisible] = useState(false);
   const [totalQ, setTotalQ] = useState(0);
   const [qType, setQType] = useState("questions");
@@ -375,7 +375,9 @@ const SelectTests = () => {
                   {section?.Heading}
                 </h2>
                 <p className="text-sm font-normal text-[#8F92A1] first-letter:uppercase ">
-                {section?.Description?.length > 150 ? section?.Description?.slice(0, 150) + "..." : section?.Description}
+                  {section?.Description?.length > 150
+                    ? section?.Description?.slice(0, 150) + "..."
+                    : section?.Description}
                 </p>
               </div>
               <div className="flex justify-between gap-2">

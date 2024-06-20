@@ -10,7 +10,7 @@ import LogoutPoP from "../../../components/PopUps/LogoutPoP";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Settings = () => {
-  useTranslate();
+  //useTranslate();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);

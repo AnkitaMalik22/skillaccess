@@ -14,7 +14,7 @@ import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 
 const AddEssay = () => {
-  useTranslate();
+  //useTranslate();
   const { id } = useParams();
   //prev count
   const [loading, setLoading] = useState(false);

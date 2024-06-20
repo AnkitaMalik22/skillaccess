@@ -7,7 +7,7 @@ import { createTopic } from "../../../redux/collage/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
 
 const CreateTopic = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();

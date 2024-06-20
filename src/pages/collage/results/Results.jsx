@@ -8,15 +8,19 @@ import { getResultGraph } from "../../../redux/collage/result/thunks/graph";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Results = () => {
-  useTranslate();
+  //useTranslate();
   const dispatch = useDispatch();
   const assessments = useSelector((state) => state.test.assessments);
+  const {GET_TEST_LOADING} = useSelector((state) => state.test);
 
   const [filtered, setFiltered] = React.useState([]);
+
+
   useEffect(() => {
     dispatch(getResultGraph());
     dispatch(getAllTests());
   }, [dispatch, ""]);
+
   let arr = assessments.beginner.concat(
     assessments.intermediate,
     assessments.advanced,
@@ -46,7 +50,7 @@ const Results = () => {
         <Filter handleFilter={handleFilterStudents} />
       </div>
       <div className="mt-5">
-        <List FilterdStudents={filtered} />
+        <List FilterdStudents={filtered} isLoading={GET_TEST_LOADING} />
       </div>
     </>
   );

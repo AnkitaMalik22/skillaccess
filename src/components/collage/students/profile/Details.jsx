@@ -1,9 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { CgPinAlt } from "react-icons/cg";
 import { FaStar } from "react-icons/fa";
-import { SiAdobephotoshop } from "react-icons/si";
 import PopUp from "./PopUp";
 import PopUpReject from "./PopUpReject";
+import Loader from "../../../loaders/Loader";
+
+
+
+
 const Details = ({ student }) => {
   const handleViewCV = () => {
     window.open(student.Cv.url, "_blank");
@@ -12,7 +17,7 @@ const Details = ({ student }) => {
   const [visible, setVisible] = React.useState(false);
   const [show, setShow] = React.useState(false);
   const [sId, setSId] = React.useState(null);
-  console.log(student?.approved);
+  const {REJECT_STUDENT_LOADING, APPORVE_STUDENT_LOADING} = useSelector((state) => state.collegeStudents)  
   return (
     // {/* profile container */}
     <section>
@@ -137,13 +142,14 @@ const Details = ({ student }) => {
         <span className="flex gap-2">
           {!student?.approved && (
             <button
-              className="py-3  rounded-xl px-3 text-[#DE350B] border-2 border-[#DE350B] font-bold"
+              className="py-3  rounded-xl px-3 text-[#DE350B] border-2 border-[#DE350B] font-bold items-center gap-2"
               onClick={() => {
                 setShow(true);
                 setSId(student?._id);
               }}
             >
-              Reject Request
+               {REJECT_STUDENT_LOADING ? <>Rejecting... <Loader/></> : "Reject Request"}
+              
             </button>
           )}
           <button className="py-3  rounded-xl px-3 bg-[#8f92a11d] font-bold">
@@ -151,13 +157,14 @@ const Details = ({ student }) => {
           </button>
           {!student?.approved && (
             <button
-              className="py-2 text-white rounded-xl px-4 bg-blue-700 font-bold"
+              className="py-2 text-white rounded-xl px-4 bg-blue-700 font-bold flex items-center gap-2"
               onClick={() => {
                 setVisible(true);
                 setSId(student?._id);
               }}
             >
-              Approve Request
+            {APPORVE_STUDENT_LOADING ? <>Approving... <Loader/></> : "Approve Request"}
+         
             </button>
           )}
         </span>

@@ -14,7 +14,7 @@ import { getCollege } from "../../../redux/collage/auth/authSlice";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Submit = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
