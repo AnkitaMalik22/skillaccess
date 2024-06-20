@@ -57,103 +57,6 @@ const Name = () => {
     // console.log(name, description, totalAttempts);
   }, [dispatch]);
 
-  // const getTests = () => {
-  //   dispatch(getAllTests());
-  //   console.log("hello tests");
-  // };
-
-  // const handleChange = (e) => {
-  //   const { name, value, checked } = e.target;
-
-  //   // Check if the selected time is before the current time and date
-  //   const currentTime = new Date().toISOString().slice(0, 16); // Get current time and date
-  //   if (
-  //     (name === "duration_from" || name === "duration_to") &&
-  //     value < currentTime
-  //   ) {
-  //     toast.error("Please select a time and date after the current time and date.");
-  //     return; // Prevent updating state if the selected time is before the current time and date
-  //   }
-
-  //   setTestDetails({
-  //     ...testDetails,
-  //     [name]: name === "isNegativeMarking" ? checked : value,
-  //   });
-  // };
-  // console.log(testDetails);
-  // // const handleChange = (e) => {
-  // //   const { name, value } = e.target;
-
-  // //   // For duration_from and duration_to fields, update both formData and testDetails
-  // //   if (name === 'duration_from' || name === 'duration_to') {
-  // //     setFormData({
-  // //       ...formData,
-  // //       [name]: value,
-  // //     });
-
-  // //     setTestDetails({
-  // //       ...testDetails,
-  // //       [name]: value,
-  // //     });
-  // //   } else {
-  // //     // For other fields, update testDetails
-  // //     setTestDetails({
-  // //       ...testDetails,
-  // //       [name]: value,
-  // //     });
-  // //   }
-  // // };
-
-  // const handleSubmit = () => {
-  //   let flag = "false";
-  //   if (testDetails.name === "") {
-  //     toast.error('Please enter Name', {
-  //       icon: '⚠️'
-  //     });
-
-  //     flag = "true";
-  //   } else if (testDetails.duration_from === "") {
-  //     toast.error('Please enter Duration from', {
-  //       icon: '⚠️'
-  //     }
-  //     )
-  //     return;
-  //   } else if (testDetails.duration_to === "") {
-  //     toast.error('Please enter Duration to', {
-  //       icon: '⚠️'
-  //     });
-
-  //   } else if (testDetails.totalAttempts === "") {
-  //     window.alert("Please enter Total Attempts");
-  //     return;
-  //   } else if (testDetails.description === "") {
-  //     window.alert("Please enter Description");
-  //     return;
-  //   } else if (testDetails.duration_from >= testDetails.duration_to) {
-  //     toast.error('Duration To must be greater than Duration From', {
-  //       icon: '⚠️' // You can use any Unicode character or an image URL here
-  //     });
-  //     return;
-  //   }
-
-  //   if (assessments.beginner.length > 0) {
-  //     assessments.beginner.forEach((assessment) => {
-  //       if (assessment.name === testDetails.name) {
-  //         flag = "true";
-  //       }
-  //     });
-
-  //     // console.log(testDetails, name, description, totalAttempts);
-  //   }
-  //   if (flag === "false") {
-  //     dispatch(setTestBasicDetails(testDetails));
-
-  //     navigate("/collage/test/select");
-  //   } else {
-
-  //     toast.error("duplicate name");
-  //   }
-  // };
   const [errors, setErrors] = useState({
     name: "",
     totalAttempts: "",
@@ -299,46 +202,55 @@ const Name = () => {
           use five question types: multiple-choice, essay, video, code and find
           answer.
         </h2>
-
-        <input
-          type="text"
-          className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-            errors.name ? "border-red-500" : "border-none"
-          }`}
-          placeholder="Name of the Assessment"
-          name="name"
-          value={testDetails.name}
-          onChange={handleChange}
-        />
-        {errors.name && (
-          <span className="text-red-500 py-2">{errors.name}</span>
-        )}
-        <input
-          type="tel"
-          name="totalAttempts"
-          className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-            errors.name ? "border-red-500" : "border-none"
-          }`}
-          placeholder="No. of Attempts"
-          value={testDetails.totalAttempts}
-          onChange={handleChange}
-        />
-        {errors.totalAttempts && (
-          <span className="text-red-500 py-2">{errors.totalAttempts}</span>
-        )}
-        <input
-          name="totalQuestions"
-          type="tel"
-          className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-            errors.name ? "border-red-500" : "border-none"
-          }`}
-          placeholder="No. of Questions"
-          value={testDetails.totalQuestions}
-          onChange={handleChange}
-        />
-        {errors.totalQuestions && (
-          <span className="text-red-500 py-2">{errors.totalQuestions}</span>
-        )}
+        <div className="mb-4">
+          <input
+            type="text"
+            className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+              errors.name ? "border-red-500" : "border-none"
+            }`}
+            placeholder="Name of the Assessment"
+            name="name"
+            value={testDetails.name}
+            onChange={handleChange}
+          />
+          {errors.name && (
+            <span className="text-red-500 py-2 ml-4">{errors.name}</span>
+          )}
+        </div>
+        <div className="mb-4">
+          <input
+            type="tel"
+            name="totalAttempts"
+            className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+              errors.name ? "border-red-500" : "border-none"
+            }`}
+            placeholder="No. of Attempts"
+            value={testDetails.totalAttempts}
+            onChange={handleChange}
+          />
+          {errors.totalAttempts && (
+            <span className="text-red-500 py-2 ml-4">
+              {errors.totalAttempts}
+            </span>
+          )}
+        </div>
+        <div className="mb-4">
+          <input
+            name="totalQuestions"
+            type="tel"
+            className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+              errors.name ? "border-red-500" : "border-none"
+            }`}
+            placeholder="No. of Questions"
+            value={testDetails.totalQuestions}
+            onChange={handleChange}
+          />
+          {errors.totalQuestions && (
+            <span className="text-red-500 py-2 ml-4">
+              {errors.totalQuestions}
+            </span>
+          )}
+        </div>
         {/* <input
           name="totalDuration"
           type="number"
@@ -347,43 +259,44 @@ const Name = () => {
           value={testDetails.totalDuration}
           onChange={handleChange}
         /> */}
+        <div className="mb-4">
+          <div className="flex justify-between items-center w-full gap-4 ">
+            {/* Duration From */}
+            <div className="  w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
+              <label className="text-gray-400">Duration From *</label>
+              <input
+                type="datetime-local"
+                name="duration_from"
+                value={testDetails?.duration_from?.slice(0, 16)}
+                onChange={handleChange}
+                className={`border-none bg-gray-100 p-0 ml-10 ${
+                  errors.duration ? "border-red-500" : ""
+                }`}
+                required
+                fullWidth
+              />
+            </div>
 
-        <div className="flex justify-between items-center w-full gap-4 ">
-          {/* Duration From */}
-          <div className=" mb-4 w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
-            <label className="text-gray-400">Duration From *</label>
-            <input
-              type="datetime-local"
-              name="duration_from"
-              value={testDetails?.duration_from?.slice(0, 16)}
-              onChange={handleChange}
-              className={`border-none bg-gray-100 p-0 ml-10 ${
-                errors.duration ? "border-red-500" : ""
-              }`}
-              required
-              fullWidth
-            />
+            {/* Duration To */}
+            <div className="  w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
+              <label className="text-gray-400">Duration To *</label>
+              <input
+                type="datetime-local"
+                name="duration_to"
+                value={testDetails?.duration_to?.slice(0, 16)}
+                onChange={handleChange}
+                className={`border-none bg-gray-100 p-0 ml-10 ${
+                  errors.duration ? "border-red-500" : ""
+                }`}
+                required
+                fullWidth
+              />
+            </div>
           </div>
-
-          {/* Duration To */}
-          <div className=" mb-4 w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
-            <label className="text-gray-400">Duration To *</label>
-            <input
-              type="datetime-local"
-              name="duration_to"
-              value={testDetails?.duration_to?.slice(0, 16)}
-              onChange={handleChange}
-              className={`border-none bg-gray-100 p-0 ml-10 ${
-                errors.duration ? "border-red-500" : ""
-              }`}
-              required
-              fullWidth
-            />
-          </div>
+          {errors.duration && (
+            <span className="text-red-500 ml-4 pt-2">{errors.duration}</span>
+          )}
         </div>
-        {errors.duration && (
-          <span className="text-red-500 ml-5 pt-2">{errors.duration}</span>
-        )}
         <div className="flex items-center gap-2 text-lg mb-4">
           <label
             htmlFor="isNegativeMarking"
@@ -410,7 +323,7 @@ const Name = () => {
           onChange={handleChange}
         />
         {errors.description && (
-          <span className="text-red-500 py-2">{errors.description}</span>
+          <span className="text-red-500 py-2 ml-4">{errors.description}</span>
         )}
       </div>
     </div>
