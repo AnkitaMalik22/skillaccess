@@ -7,6 +7,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { editBankQuestionById } from "../../../redux/collage/test/thunks/question";
 import useTranslate from "../../../hooks/useTranslate";
+import Question from "../../../components/collage/quesBank/addCode/Question";
 
 const LongShortAnswer = () => {
   //useTranslate();
@@ -72,7 +73,7 @@ const LongShortAnswer = () => {
       console.log(ques);
     } else if (addType === "edit" && LongShort === "long") {
       let ques = JSON.parse(localStorage.getItem("qbQues"));
-      setQuestion(ques.short[Number]);
+      setQuestion(ques.long[Number]);
       setVide(ques);
       console.log(ques);
     }
@@ -196,7 +197,7 @@ const LongShortAnswer = () => {
       }
     }
   };
-
+  console.log(question);
   return (
     <div className="mx-auto w-11/12 py-5 md:py-10">
       <Header
@@ -217,7 +218,7 @@ const LongShortAnswer = () => {
             <select
               name="Duration"
               onChange={handleChanges}
-              value={question.Duration}
+              value={question?.Duration}
               id=""
               className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
             >
