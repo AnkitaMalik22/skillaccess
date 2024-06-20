@@ -10,12 +10,13 @@ const Initial = ({
   return (
     <div className="w-full   ">
       <Editor
-        height="50vh"
+        height="60vh"
         value={editorValue}
         onChange={(value) => handleEditorChange(value, "defaultCode")}
         defaultLanguage={selectedLanguage}
         defaultValue={editorValue}
         // onChange={handleEditorChange}
+        className="border-2  border-gray-300"
       />
     </div>
   );

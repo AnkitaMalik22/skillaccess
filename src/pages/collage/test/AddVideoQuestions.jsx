@@ -130,7 +130,7 @@ const AddVideoQuestionsPage = () => {
               <h2 className="text-xl font-normal self-center">Short Answers</h2>
             </div>
             {/*  */}
-            <h2 className="text-xl font-normal self-center">Answer in breif</h2>
+            <h2 className="text-xl font-normal self-center">Answer in brief</h2>
             {/* <img
               src="../../../../images/icons/dot.png"
               alt=""

@@ -28,12 +28,11 @@ const Video = ({ video, Number }) => {
         <>
           <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10 mb-4 ">
             {" "}
-            <button className=" bg-blued rounded-lg bg-opacity-5 text-left text-blued flex">
-              {" "}
-              <div className=" bg-blued rounded-xl text-white  text-center self-center text-base font-bold py-2 w-12 h-11">
-                Q-{Number}
-              </div>
-            </button>
+            {/* <button className=" bg-blued rounded-lg bg-opacity-5 text-left text-blued flex"> */}{" "}
+            <div className=" bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
+              Q-{Number}
+            </div>
+            {/* </button> */}
             <Disclosure.Button className="w-full bg-gray-100 ">
               <div className="flex w-full justify-between items-center gap-2 rounded-lg border-[#95ACFA] border text-[#3E3E3E] py-3 text-left text-lg font-normal">
                 <div></div>
