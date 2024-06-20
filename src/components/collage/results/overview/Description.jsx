@@ -57,7 +57,7 @@ const Description = ({ topics }) => {
       <h2 className="font-bold mb-2 text-base">Test Description</h2>
 
       {/* card */}
-      <div className="flex flex-row justify-between flex-wrap gap-4">
+      <div className="flex flex-row flex-wrap gap-4">
         {topics?.map((topic) => (
           <div className="flex  flex-wrap gap-8">
             <div className="w-64 bg-white rounded-2xl p-3">
