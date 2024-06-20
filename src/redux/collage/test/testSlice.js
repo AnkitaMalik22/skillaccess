@@ -186,6 +186,12 @@ const testState = {
   ADD_QUESTION_LOADING: false,
   GET_TOPICS_LOADING: false,
   ADD_tOPIC_LOADING: false,
+  GET_STUDENT_RESPONSE_LOADING: false,
+  TEST_DATA_RESPONSE_LOADING: false,
+  SELECTED_STUDENTS_LOADING: false,
+  GET_STUDENTS_LOADING : false,
+  GET_TESTS_LOADING:false,
+  GET_TEST_LOADING :false,
 };
 
 // export const getStudentResponse = createAsyncThunk("test/studentResponse",
@@ -635,29 +641,36 @@ const testSlice = createSlice({
       })
       .addCase(getTest.pending, (state, action) => {
         state.status = "loading";
+        state.GET_TEST_LOADING = true;
 
         console.log("pending");
       })
       .addCase(getTest.fulfilled, (state, action) => {
         state.test = action.payload;
+        state.GET_TEST_LOADING = false;
 
         console.log("fullfilled", state.test);
       })
       .addCase(getTest.rejected, (state, action) => {
         console.log(action.payload);
+        // toast.error(action.payload);
+        state.GET_TEST_LOADING = false;
 
         // window.alert(action.payload);
       })
       .addCase(getAllTests.pending, (state, action) => {
         state.status = "loading";
+        state.GET_TESTS_LOADING = true;
         console.log("pending");
       })
       .addCase(getAllTests.fulfilled, (state, action) => {
+        state.GET_TESTS_LOADING = false;
         getAllTestFulfilled(state, action);
       })
       .addCase(getAllTests.rejected, (state, action) => {
         console.error("Error fetching tests:", action.payload);
         state.status = "failed";
+        state.GET_TESTS_LOADING = false;
         state.error = action.payload;
       })
       .addCase(createTest.pending, (state, action) => {
@@ -734,35 +747,44 @@ const testSlice = createSlice({
 
       .addCase(getStudentResponse.pending, (state, action) => {
         state.status = "pending";
+        state.GET_STUDENT_RESPONSE_LOADING = true;
       })
       .addCase(getStudentResponse.fulfilled, (state, action) => {
         // state.studentResponse = action.payload;
+        state.GET_STUDENT_RESPONSE_LOADING = false;
         state.response = action.payload;
       })
       .addCase(getStudentResponse.rejected, (state, action) => {
+        state.GET_STUDENT_RESPONSE_LOADING = false;
         state.response = [];
         console.error("Error fetching student responses:", action.payload);
       })
       .addCase(getTestResultPage.pending, (state, action) => {
         state.status = "pending";
+        state.TEST_DATA_RESPONSE_LOADING = true;
       })
       .addCase(getTestResultPage.fulfilled, (state, action) => {
         state.testDataResponse = action.payload;
+        state.TEST_DATA_RESPONSE_LOADING = false;
       })
       .addCase(getTestResultPage.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.testDataResponse = [];
+        state.TEST_DATA_RESPONSE_LOADING = false;
       })
       .addCase(getResponseByTestandStudent.pending, (state, action) => {
         state.status = "pending";
+        state.GET_STUDENT_RESPONSE_LOADING = true;
       })
       .addCase(getResponseByTestandStudent.fulfilled, (state, action) => {
         state.response = action.payload;
+        state.GET_STUDENT_RESPONSE_LOADING = false;
         console.log(action.payload);
       })
       .addCase(getResponseByTestandStudent.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.response = [];
+        state.GET_STUDENT_RESPONSE_LOADING = false;
       })
       .addCase(addBookmark.pending, (state, action) => {
         state.status = "pending";
@@ -907,12 +929,15 @@ const testSlice = createSlice({
       })
       .addCase(getselectedStudents.pending, (state, action) => {
         state.status = "pending";
+        state.SELECTED_STUDENTS_LOADING = true;
       })
       .addCase(getselectedStudents.fulfilled, (state, action) => {
         state.selectedStudents = action.payload;
+        state.SELECTED_STUDENTS_LOADING = false;
       })
       .addCase(getselectedStudents.rejected, (state, action) => {
         console.error(action.payload);
+        state.SELECTED_STUDENTS_LOADING = false;
       })
       .addCase(getRecentStudentTests.pending, (state, action) => {
         state.status = "pending";
@@ -923,8 +948,17 @@ const testSlice = createSlice({
       .addCase(getRecentStudentTests.rejected, (state, action) => {
         console.error(action.payload);
       })
+      .addCase(getStudentsForTest.pending, (state, action) => {
+        state.status = "pending";
+        state.GET_STUDENTS_LOADING = true;
+      })
       .addCase(getStudentsForTest.fulfilled, (state, action) => {
         state.students = action.payload.students;
+        state.GET_STUDENTS_LOADING = false;
+      })
+      .addCase(getStudentsForTest.rejected, (state, action) => {
+        console.error(action.payload);
+        state.GET_STUDENTS_LOADING = false;
       });
   },
 });

@@ -19,7 +19,7 @@ import { IoIosSearch } from "react-icons/io";
 import { FaChevronLeft } from "react-icons/fa";
 
 const Topic = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [topics, settopics] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);

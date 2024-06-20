@@ -5,7 +5,7 @@ import BackIcon from "../../../components/buttons/BackIcon";
 import { useNavigate } from "react-router-dom";
 
 const Upload = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const handleDragOver = (e) => {
     e.preventDefault();

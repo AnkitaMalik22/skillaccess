@@ -11,7 +11,7 @@ import EditHeader from "../../../components/collage/profile/EditHeader";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Profile = () => {
-  useTranslate();
+  //useTranslate();
   const dispatch = useDispatch();
   const { user, isLoggedIn } = useSelector((state) => state.collageAuth);
   const [editable, setEditable] = useState(false);

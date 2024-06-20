@@ -6,7 +6,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import { IoIosSearch } from "react-icons/io";
 
 const Companies = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { companies } = useSelector((state) => state.dashboard);

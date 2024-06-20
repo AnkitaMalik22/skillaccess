@@ -3,7 +3,7 @@
 // import useTranslate from "../../../hooks/useTranslate";
 
 // const AccountingPage = () => {
-//   useTranslate();
+//   //useTranslate();
 //   return <Acounting />;
 // };
 
@@ -24,7 +24,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import axios from "axios";
 
 const Accounting = () => {
-  useTranslate();
+  //useTranslate();
   const { user, isLoggedIn, uploadImg } = useSelector(
     (state) => state.collageAuth
   );

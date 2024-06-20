@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import useTranslate from "../../../hooks/useTranslate";
 
 const ResultsOverview = () => {
-  useTranslate();
+  //useTranslate();
   const { user } = useSelector((state) => state.collageAuth);
   const assessment = useSelector((state) => state.test.test);
   // const {studentResponses} = useSelector((state) => state.test);

@@ -8,7 +8,7 @@ import { createTopic } from "../../../redux/collage/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
 
 const CreateTopicAdaptive = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

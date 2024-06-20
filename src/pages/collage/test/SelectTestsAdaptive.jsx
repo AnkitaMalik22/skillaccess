@@ -17,7 +17,7 @@ import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
 import useTranslate from "../../../hooks/useTranslate";
 
 const SelectTests = () => {
-  useTranslate();
+  //useTranslate();
   const [questionType, setQuestionType] = useState("mcq");
   const [visible, setVisible] = useState(false);
   const [section, setSection] = useState({});
@@ -476,7 +476,9 @@ const SelectTests = () => {
                 </h2>
 
                 <p className="text-sm leading-[26px] text-[#8F92A1] break-words h-full md:h-40 mb-2">
-              {section?.Description?.length > 150 ? section?.Description?.slice(0, 150) + "..." : section?.Description}
+                  {section?.Description?.length > 150
+                    ? section?.Description?.slice(0, 150) + "..."
+                    : section?.Description}
                 </p>
 
                 <div className="flex justify-between mb-2">

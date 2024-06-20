@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Assessment = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const assessment = JSON.parse(localStorage.getItem("assessment"));
   const [settings, setSettings] = useState({

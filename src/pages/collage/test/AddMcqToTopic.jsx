@@ -13,7 +13,7 @@ import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 
 const AddMcqToTopic = () => {
-  useTranslate();
+  //useTranslate();
   const { currentTopic, ADD_QUESTION_LOADING } = useSelector(
     (state) => state.test
   );

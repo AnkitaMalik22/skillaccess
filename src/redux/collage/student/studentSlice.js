@@ -6,6 +6,11 @@ import toast from "react-hot-toast";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 const initialState = {
+  GET_UPLOAD_STUDENTS_LOADING: false,
+  GET_PENDING_STUDENTS_LOADING: false,
+  APPROVE_STUDENT_LOADING: false,
+  GET_INVITED_STUDENTS_LOADING: false,
+  REJECT_STUDENT_LOADING: false,
   uploadedStudents: [],
   invitedStudents: [],
   approvedStudents: [],
@@ -169,6 +174,7 @@ export const studentSlice = createSlice({
       .addCase(uploadStudents.pending, (state) => {
         state.loading = true;
         state.error = false;
+        state.GET_UPLOAD_STUDENTS_LOADING = true;
       })
       .addCase(uploadStudents.fulfilled, (state, action) => {
         state.loading = false;
@@ -177,29 +183,35 @@ export const studentSlice = createSlice({
         // getStudents();
         toast.success("Students Uploaded Successfully");
         state.uploadedStudents = action.payload.uploadedStudents;
+        state.GET_UPLOAD_STUDENTS_LOADING = false;
         // state.invitedStudents = action.payload.invitedStudents;
         // state.approvedStudents = action.payload.approvedStudents;
       })
       .addCase(uploadStudents.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
+        state.GET_UPLOAD_STUDENTS_LOADING = false;
         console.log("error", action.payload);
         toast.error(action.payload);
       })
       .addCase(approveStudent.pending, (state) => {
         state.loading = true;
         state.error = false;
+        state.APPROVE_STUDENT_LOADING = true;
       })
       .addCase(approveStudent.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
+        state.APPROVE_STUDENT_LOADING = false;
         toast.success("Student Approved Successfully");
         getStudents();
         window.location.replace("/collage/students");
+
       })
       .addCase(approveStudent.rejected, (state) => {
         state.loading = false;
         state.error = true;
+        state.APPROVE_STUDENT_LOADING = false;
         toast.error("An error occurred while approving the student");
       })
       .addCase(getStudentCV.pending, (state, action) => {
@@ -218,16 +230,20 @@ export const studentSlice = createSlice({
       .addCase(rejectRequest.pending, (state) => {
         state.loading = true;
         state.error = false;
+        state.REJECT_STUDENT_LOADING = true;
+
       })
       .addCase(rejectRequest.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
         toast.success("Student Rejected Successfully");
+        state.REJECT_STUDENT_LOADING = false;
         window.location.replace("/collage/students");
       })
       .addCase(rejectRequest.rejected, (state) => {
         state.loading = false;
         state.error = true;
+        state.REJECT_STUDENT_LOADING = false;
         toast.error("An error occurred while rejecting the student");
       });
   },

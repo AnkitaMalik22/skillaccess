@@ -13,7 +13,7 @@ import { getStudentCV } from "../../../redux/collage/student/studentSlice";
 import useTranslate from "../../../hooks/useTranslate";
 
 const StudentsProfile = () => {
-  useTranslate();
+  //useTranslate();
   const { id } = useParams();
   const [toggle, setToggle] = useState(1);
   const dispatch = useDispatch();
