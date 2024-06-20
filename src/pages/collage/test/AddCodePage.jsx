@@ -3,7 +3,7 @@ import AddCode from "../../../components/collage/test/addCode/AddCode";
 import useTranslate from "../../../hooks/useTranslate";
 
 const AddCodePage = () => {
-  useTranslate();
+  //useTranslate();
   return <AddCode />;
 };
 

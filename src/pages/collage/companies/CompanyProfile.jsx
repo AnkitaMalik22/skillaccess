@@ -12,7 +12,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import { IoIosSearch } from "react-icons/io";
 
 const CompanyProfile = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();

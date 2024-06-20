@@ -12,7 +12,7 @@ import calculateDaysAgo from "../../../util/calculateDaysAgo";
 import useTranslate from "../../../hooks/useTranslate";
 
 const CompanyJobOverview = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();

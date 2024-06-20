@@ -2,7 +2,7 @@ import AddCode from "../../../components/collage/quesBank/addCode/AddCode";
 import useTranslate from "../../../hooks/useTranslate";
 
 const AddCodePage = () => {
-  useTranslate();
+  //useTranslate();
   return <AddCode />;
 };
 

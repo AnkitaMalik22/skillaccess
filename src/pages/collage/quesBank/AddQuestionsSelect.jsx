@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
 
 const AddQuestionsSelect = () => {
-  useTranslate();
+  //useTranslate();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();

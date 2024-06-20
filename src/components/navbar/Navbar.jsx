@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { FaCoins } from "react-icons/fa";
+import useTranslate from "../../hooks/useTranslate";
+import GoogleTranslate from "../GoogleTranslate";
 
 const Navbar = (props) => {
+  const currentLanguage = useTranslate();
   const navigate = useNavigate();
   const goToProfile = () => {
     // Function to navigate to profile page
@@ -64,7 +67,7 @@ const Navbar = (props) => {
           </h2>
         </div>
 
-        <div id="google_translate_element" className="google-div"></div>
+        <GoogleTranslate currentLanguage={currentLanguage} />
       </div>
     </nav>
   );

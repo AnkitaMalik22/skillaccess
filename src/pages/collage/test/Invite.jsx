@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Invite = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { credit } = useSelector((state) => state.collageAuth);

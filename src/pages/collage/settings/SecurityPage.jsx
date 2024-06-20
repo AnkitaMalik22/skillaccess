@@ -13,7 +13,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import QrPop from "../../../components/PopUps/QrPop";
 
 const Security = () => {
-  useTranslate();
+  //useTranslate();
   const { qr } = useSelector((state) => state.collageAuth);
 
   const dispatch = useDispatch();

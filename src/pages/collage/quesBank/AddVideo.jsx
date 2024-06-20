@@ -16,7 +16,7 @@ import useTranslate from "../../../hooks/useTranslate";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 const AddVideo = () => {
-  useTranslate();
+  //useTranslate();
   const dispatch = useDispatch();
   const [searchParam, setSearchParam] = useSearchParams();
   const { id } = useParams();

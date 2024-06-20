@@ -10,7 +10,7 @@ import { getAllBookmarks } from "../../../redux/collage/test/thunks/question";
 import { LuBookmarkMinus } from "react-icons/lu";
 
 const QuesBank = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { bookmarks } = useSelector((state) => state.test);

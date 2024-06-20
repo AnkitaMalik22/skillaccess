@@ -7,7 +7,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import Header from "../../../components/collage/students/Header";
 
 const Students = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [filteredStudents, setFilteredStudents] = React.useState([]);

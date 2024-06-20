@@ -18,7 +18,7 @@ import { editBankQuestionById } from "../../../redux/collage/test/thunks/questio
 import useTranslate from "../../../hooks/useTranslate";
 
 const AddVideoMcq = () => {
-  useTranslate();
+  //useTranslate();
   const { TopicToBeAdded } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const addType = searchParams.get("addType");

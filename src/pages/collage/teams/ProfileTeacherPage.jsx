@@ -2,7 +2,7 @@ import ProfileTeacher from "../../../components/collage/teams/profile/ProfileTea
 import useTranslate from "../../../hooks/useTranslate";
 
 const ProfileTeacherPage = () => {
-  useTranslate();
+  //useTranslate();
   return <ProfileTeacher />;
 };
 

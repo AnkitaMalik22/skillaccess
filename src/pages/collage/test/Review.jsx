@@ -11,7 +11,7 @@ import Video from "../../../components/collage/test/review/Video";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Review = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();

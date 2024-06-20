@@ -2,7 +2,7 @@ import SecurityApp from "../../../components/collage/settings/security/securityA
 import useTranslate from "../../../hooks/useTranslate";
 
 const SecurityAppPage = () => {
-  useTranslate();
+  //useTranslate();
   return <SecurityApp />;
 };
 

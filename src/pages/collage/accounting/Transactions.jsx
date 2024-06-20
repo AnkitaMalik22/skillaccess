@@ -8,7 +8,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import CircularLoader from "../../../components/CircularLoader";
 
 const Transactions = () => {
-  useTranslate();
+  //useTranslate();
   const dispatch = useDispatch();
   const { transactions, fetch_loading } = useSelector((state) => state.payment);
   const navigate = useNavigate();
