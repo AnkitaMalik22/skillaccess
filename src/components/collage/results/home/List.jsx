@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import { getAllTests } from "../../../../redux/collage/test/thunks/test";
+import Skeleton from "../../../loaders/Skeleton";
 
-const List = ({ FilterdStudents }) => {
+const List = ({ FilterdStudents ,isLoading }) => {
   // const arr = [2, 1, 1, 1, 1];
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -85,7 +86,10 @@ const List = ({ FilterdStudents }) => {
       </div>
 
       {/* list to be iterated */}
-      {FilterdStudents.map((assessment, index) => (
+      {
+        isLoading && (  <Skeleton/>)
+      }
+      {!isLoading && FilterdStudents.map((assessment, index) => (
         <div
           className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full bg-white border-2 transition-colors duration-300"
           style={{ borderColor: "transparent", borderWidth: "2px" }}
@@ -101,7 +105,7 @@ const List = ({ FilterdStudents }) => {
           <div className={` flex justify-center `}>
             <div className="flex self-center">
               <span>
-                <h2 className="font-dmSans  sm:text-sm">{assessment.name}</h2>
+                <h2 className="font-dmSans  sm:text-sm">{assessment?.name}</h2>
 
                 {/* <h2 className="font-dmSans  sm:text-sm"> */}
               </span>
@@ -112,7 +116,7 @@ const List = ({ FilterdStudents }) => {
             <div className=" self-center h-fit">
               <span>
                 <h2 className="font-dmSans  sm:text-sm">
-                  {assessment.studentResponses.length}
+                  {assessment?.studentResponses?.length}
                 </h2>
               </span>
             </div>
@@ -122,7 +126,7 @@ const List = ({ FilterdStudents }) => {
             <div className=" self-center h-fit">
               <span>
                 <h2 className="font-dmSans  sm:text-sm">
-                  {assessment.selectedStudents.length}
+                  {assessment?.selectedStudents?.length}
                 </h2>
               </span>
             </div>
@@ -162,6 +166,15 @@ const List = ({ FilterdStudents }) => {
           </div>
         </div>
       ))}
+      {
+        !isLoading && FilterdStudents && FilterdStudents?.length === 0 && (
+          <div className="flex justify-center items-center h-96">
+            <h2 className="font-dmSans text-lg text-gray-500">
+              No result found
+            </h2>
+          </div>
+        )
+      }
     </div>
   );
 };

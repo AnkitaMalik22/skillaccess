@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getselectedStudents } from "../../../../redux/collage/test/thunks/test";
+import Skeleton from "../../../loaders/Skeleton";
 const Selected = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const Selected = () => {
   useEffect(() => {
     dispatch(getselectedStudents(id));
   }, []);
-  const { selectedStudents } = useSelector((state) => state.test);
+  const { selectedStudents ,SELECTED_STUDENTS_LOADING} = useSelector((state) => state.test);
   console.log(selectedStudents);
   return (
     <div className="w-full mx-auto">
@@ -58,7 +59,9 @@ const Selected = () => {
       </div>
 
       {/* list to be iterated */}
-      {selectedStudents?.map((student, index) => (
+      {SELECTED_STUDENTS_LOADING &&    
+    <Skeleton/>}
+      { !SELECTED_STUDENTS_LOADING && selectedStudents?.map((student, index) => (
         <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}
@@ -126,6 +129,14 @@ const Selected = () => {
           </div>
         </div>
       ))}
+
+      {!SELECTED_STUDENTS_LOADING && selectedStudents && selectedStudents?.length === 0 && (
+        <div className="flex justify-center items-center h-96">
+          <h2 className="font-dmSans text-lg text-gray-500">
+            No students have selected for this assessment
+          </h2>
+        </div>
+      )}
     </div>
   );
 };
