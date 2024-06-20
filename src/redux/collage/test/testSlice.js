@@ -192,6 +192,8 @@ const testState = {
   GET_STUDENTS_LOADING : false,
   GET_TESTS_LOADING:false,
   GET_TEST_LOADING :false,
+  GET_RECENT_QUESTION_LOADING : false,
+  GET_BOOKMARKS_LOADING : false,
 };
 
 // export const getStudentResponse = createAsyncThunk("test/studentResponse",
@@ -823,24 +825,30 @@ const testSlice = createSlice({
       })
       .addCase(getAllBookmarks.pending, (state, action) => {
         state.status = "pending";
+        state.GET_BOOKMARKS_LOADING = true;
       })
       .addCase(getAllBookmarks.fulfilled, (state, action) => {
         state.bookmarks = action.payload;
+        state.GET_BOOKMARKS_LOADING = false;
       })
       .addCase(getAllBookmarks.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.bookmarks = [];
+        state.GET_BOOKMARKS_LOADING = false;
       })
       .addCase(getRecentUsedQuestions.pending, (state, action) => {
         state.status = "pending";
+        state.GET_RECENT_QUESTION_LOADING = true;
       })
       .addCase(getRecentUsedQuestions.fulfilled, (state, action) => {
         console.log(action.payload);
+        state.GET_RECENT_QUESTION_LOADING = false;
         state.recentUsedQuestions = action.payload;
       })
       .addCase(getRecentUsedQuestions.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.recentUsedQuestions = [];
+        state.GET_RECENT_QUESTION_LOADING = false;
       })
       .addCase(deleteRecentUsedQuestion.pending, (state, action) => {
         state.status = "pending";
@@ -881,14 +889,17 @@ const testSlice = createSlice({
       })
       .addCase(getAllTopicsQB.pending, (state, action) => {
         state.status = "pending";
+        state.GET_TOPICS_LOADING = true;
       })
       .addCase(getAllTopicsQB.fulfilled, (state, action) => {
         state.sections = action.payload;
         state.filteredSections = action.payload;
+        state.GET_TOPICS_LOADING = false;
       })
       .addCase(getAllTopicsQB.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.sections = [];
+        state.GET_TOPICS_LOADING = false;
       })
       .addCase(deleteTopics.pending, (state, action) => {
         state.status = "pending";
