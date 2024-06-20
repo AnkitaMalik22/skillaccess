@@ -12,7 +12,7 @@ const Bookmarks = () => {
   useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { bookmarks } = useSelector((state) => state.test);
+  const { bookmarks,GET_BOOKMARKS_LOADING } = useSelector((state) => state.test);
   console.log(bookmarks);
 
   const max = bookmarks?.length / 10;
@@ -25,34 +25,46 @@ const Bookmarks = () => {
 
       <div className="mt-16">
         {console.log(bookmarks)}
-        {bookmarks
-          ?.slice((selected - 1) * 10, selected * 10)
-          .map((question, i) => {
-            return (
-              <div className="my-2">
-                {question.codeQuestion && (
-                  <Code
-                    question={question}
-                    Title={question.codeQuestion}
-                    code={question.code}
-                    number={(selected - 1) * 10 + 1 + i}
-                  />
-                )}
-                {question.Title && (
-                  <List
-                    question={question}
-                    number={(selected - 1) * 10 + 1 + i}
-                  />
-                )}
-                {question.videoFile && (
-                  <Video
-                    Number={(selected - 1) * 10 + 1 + i}
-                    video={question}
-                  />
-                )}{" "}
-              </div>
-            );
-          })}
+        {
+          GET_BOOKMARKS_LOADING ? <><div className="grid-cols-3 text-center mx-auto font-dmSans font-bold text-base hidden md:grid bg-white py-3 mb-3 rounded-xl">
+          <div className="flex justify-center animate-pulse">
+            <div className="h-6 bg-gray-300 rounded-full w-3/4"></div>
+          </div>
+          <div className="flex justify-center animate-pulse">
+            <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
+          </div>
+          <div className="flex justify-center gap-1 animate-pulse">
+            <div className="h-6 bg-gray-300 rounded-full w-6"></div>
+          </div>
+          </div></> :  <> {bookmarks
+            ?.slice((selected - 1) * 10, selected * 10)
+            .map((question, i) => {
+              return (
+                <div className="my-2">
+                  {question.codeQuestion && (
+                    <Code
+                      question={question}
+                      Title={question.codeQuestion}
+                      code={question.code}
+                      number={(selected - 1) * 10 + 1 + i}
+                    />
+                  )}
+                  {question.Title && (
+                    <List
+                      question={question}
+                      number={(selected - 1) * 10 + 1 + i}
+                    />
+                  )}
+                  {question.videoFile && (
+                    <Video
+                      Number={(selected - 1) * 10 + 1 + i}
+                      video={question}
+                    />
+                  )}{" "}
+                </div>
+              );
+            })}</>
+        }
 
         {/* iterate this list */}
       </div>

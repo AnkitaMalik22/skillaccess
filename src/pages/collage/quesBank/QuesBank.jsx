@@ -13,7 +13,9 @@ const QuesBank = () => {
   useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { bookmarks } = useSelector((state) => state.test);
+  const { bookmarks, GET_BOOKMARKS_LOADING } = useSelector(
+    (state) => state.test
+  );
   useEffect(() => {
     dispatch(getAllBookmarks());
   }, []);
@@ -65,14 +67,35 @@ const QuesBank = () => {
             </div>
 
             {/* list to be iterated */}
-            {bookmarks?.map(
-              (bookmark, index) =>
-                bookmark.Type === "mcq" && (
-                  <Dropdown bookmark={bookmark} index={index + 1} />
-                )
+            {GET_BOOKMARKS_LOADING ? (
+              <>
+              {Array.from({ length: 3 }).map((_, index) => (
+                <div className="grid-cols-3 text-center mx-auto font-dmSans font-bold text-base hidden md:grid bg-white py-3 mb-3 rounded-xl">
+                <div className="flex justify-center animate-pulse">
+                  <div className="h-6 bg-gray-300 rounded-full w-3/4"></div>
+                </div>
+                <div className="flex justify-center animate-pulse">
+                  <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
+                </div>
+                <div className="flex justify-center gap-1 animate-pulse">
+                  <div className="h-6 bg-gray-300 rounded-full w-6"></div>
+                </div>
+              </div>
+              ))}
+              
+              </>
+            ) : (
+              <>
+                {bookmarks?.map(
+                  (bookmark, index) =>
+                    bookmark.Type === "mcq" && (
+                      <Dropdown bookmark={bookmark} index={index + 1} />
+                    )
+                )}
+              </>
             )}
 
-            {bookmarks?.length === 0 && (
+            {!GET_BOOKMARKS_LOADING && bookmarks?.length === 0 && (
               <div className="flex gap-2  rounded-lg">
                 <div className="w-full">
                   <h2 className="text-[#171717] text-base text-center">

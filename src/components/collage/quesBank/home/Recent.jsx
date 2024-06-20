@@ -10,7 +10,7 @@ const Recent = () => {
   const arr = [2, 1, 1, 1, 1];
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { recentUsedQuestions } = useSelector((state) => state.test);
+  const { recentUsedQuestions,GET_RECENT_QUESTION_LOADING } = useSelector((state) => state.test);
 
   useEffect(() => {
     dispatch(getRecentUsedQuestions());
@@ -43,7 +43,23 @@ const Recent = () => {
       </div>
 
       {/* list to be iterated */}
-      {recentUsedQuestions?.map((topic) => (
+      {GET_RECENT_QUESTION_LOADING ? (
+    // Render skeleton loader
+    <>
+    <div className="grid-cols-3 text-center mx-auto font-dmSans font-bold text-base hidden md:grid bg-white py-3 mb-3 rounded-xl">
+      <div className="flex justify-center animate-pulse">
+        <div className="h-6 bg-gray-300 rounded-full w-3/4"></div>
+      </div>
+      <div className="flex justify-center animate-pulse">
+        <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
+      </div>
+      <div className="flex justify-center gap-1 animate-pulse">
+        <div className="h-6 bg-gray-300 rounded-full w-6"></div>
+      </div>
+      </div>
+    </>
+  ) : (
+      recentUsedQuestions?.map((topic) => (
         <div className="grid-cols-3 text-center mx-auto font-dmSans font-bold text-base hidden md:grid bg-white py-3 mb-3 rounded-xl">
           {" "}
           {/* row-2 */}
@@ -80,7 +96,8 @@ const Recent = () => {
             </div>
           </div>
         </div>
-      ))}
+      ))
+    )}
     </div>
   );
 };
