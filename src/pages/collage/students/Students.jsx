@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStudents } from "../../../redux/collage/student/studentSlice";
 import useTranslate from "../../../hooks/useTranslate";
 import Header from "../../../components/collage/students/Header";
+import Skeleton from "../../../components/loaders/Skeleton";
 
 const Students = () => {
   useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [filteredStudents, setFilteredStudents] = React.useState([]);
-  const { uploadedStudents, approvedStudents, pendingStudents } = useSelector(
+  const { uploadedStudents, approvedStudents, pendingStudents ,GET_STUDENT_LOADING} = useSelector(
     (state) => state.collegeStudents
   );
 
@@ -60,7 +61,7 @@ const Students = () => {
             <h2>Invited Students</h2>
             <h2 className="text-[#8F92A1] text-xl tracking-[4px]">...</h2>
           </span>
-          {filteredStudents?.map((student, index) => (
+          {GET_STUDENT_LOADING ? (<Skeleton/>) : (filteredStudents?.map((student, index) => (
             <div className="flex rounded-2xl justify-between items-center  text-center mx-auto  font-dmSans font-semibold text-base bg-white mb-3 p-4 flex-wrap">
               {" "}
               {/* row-2 */}
@@ -82,7 +83,7 @@ const Students = () => {
                 {student?.Email}
               </div>
             </div>
-          ))}
+          )))}
         </div>
 
         {/* Pending request */}
@@ -92,45 +93,49 @@ const Students = () => {
             <h2 className="text-[#8F92A1] text-xl tracking-[4px]">...</h2>
           </span>
 
-          {pendingStudents?.map((student, index) => (
-            <div className="flex rounded-2xl justify-between items-center  text-center mx-auto  font-dmSans font-semibold text-base bg-white mb-3 p-4 gap-3 flex-wrap xl:flex-nowrap ">
-              {" "}
-              {/* row-2 */}
-              <div className="flex">
-                <div className="flex self-center">
-                  <div className="self-center gap-3 flex items-center justify-between">
-                    {" "}
-                    <img
-                      src="../../images/teams.png"
-                      alt=" user-icon"
-                      className=" rounded-lg w-11 h-11"
-                    />
-                    <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
-                      {student?.FirstName + " " + student?.LastName}
-                    </h2>
+
+          {
+
+            GET_STUDENT_LOADING ? (<Skeleton/>) :(pendingStudents?.map((student, index) => (
+              <div className="flex rounded-2xl justify-between items-center  text-center mx-auto  font-dmSans font-semibold text-base bg-white mb-3 p-4 gap-3 flex-wrap xl:flex-nowrap ">
+                {" "}
+                {/* row-2 */}
+                <div className="flex">
+                  <div className="flex self-center">
+                    <div className="self-center gap-3 flex items-center justify-between">
+                      {" "}
+                      <img
+                        src="../../images/teams.png"
+                        alt=" user-icon"
+                        className=" rounded-lg w-11 h-11"
+                      />
+                      <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
+                        {student?.FirstName + " " + student?.LastName}
+                      </h2>
+                    </div>
                   </div>
                 </div>
+                <div className="font-dmSans font-semibold text-sm text-[#7F7F7F] lowercase break-words">
+                  {student?.Email}
+                </div>
+                <div className="flex  self-center gap-3">
+                  <h2
+                    className="font-dmSans text-xs font-bold text-white bg-[#95ACFA] p-2 rounded-lg cursor-pointer"
+                    onClick={() =>
+                      navigate(`/collage/students/profile/${student._id}`)
+                    }
+                  >
+                    View CV
+                  </h2>
+  
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
+                    <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
+                  </h2>
+                </div>
+                {/* </div>{" "} */}
               </div>
-              <div className="font-dmSans font-semibold text-sm text-[#7F7F7F] lowercase break-words">
-                {student?.Email}
-              </div>
-              <div className="flex  self-center gap-3">
-                <h2
-                  className="font-dmSans text-xs font-bold text-white bg-[#95ACFA] p-2 rounded-lg cursor-pointer"
-                  onClick={() =>
-                    navigate(`/collage/students/profile/${student._id}`)
-                  }
-                >
-                  View CV
-                </h2>
-
-                <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
-                  <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
-                </h2>
-              </div>
-              {/* </div>{" "} */}
-            </div>
-          ))}
+            )))
+          }
         </div>
       </div>
 
@@ -148,80 +153,82 @@ const Students = () => {
 
       {/* list to be iterated */}
       {console.log(approvedStudents)}
-      {approvedStudents?.map((student, index) => (
-        <div className=" grid-cols-6 rounded-2xl  p-2 text-center mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-100 mb-4 ">
-          {" "}
-          {/* row-2 */}
-          <div className="flex gap-3 items-center ">
-            <div className="w-11  h-11 self-center  flex items-center justify-center text-xl ">
-              <img
-                src="../../images/teams.png"
-                alt=" user-icon"
-                className=" rounded-lg w-11 h-11"
-              />
+      {
+        GET_STUDENT_LOADING ? (<Skeleton/>) : (approvedStudents?.map((student, index) => (
+          <div className=" grid-cols-6 rounded-2xl  p-2 text-center mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-100 mb-4 ">
+            {" "}
+            {/* row-2 */}
+            <div className="flex gap-3 items-center ">
+              <div className="w-11  h-11 self-center  flex items-center justify-center text-xl ">
+                <img
+                  src="../../images/teams.png"
+                  alt=" user-icon"
+                  className=" rounded-lg w-11 h-11"
+                />
+              </div>
+              <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
+                {student?.FirstName + " " + student?.LastName}
+              </h2>
             </div>
-            <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
-              {student?.FirstName + " " + student?.LastName}
-            </h2>
-          </div>
-          <div className="flex justify-center flex-col">
-            <h2 className="font-dmSans font-normal text-sm text-[#7F7F7F]">
-              {student?.Education[0]?.EndDate.substring(0, 4)}
-            </h2>
-            <h2 className="font-dmSans font-bold text-sm inline text-[#0052CC]">
-              {" "}
-              {student?.Education[0]?.Degree}
-            </h2>
-          </div>
-          <div className="flex justify-center flex-col">
-            <h2 className="font-dmSans font-normal text-sm text-[#171717]">
-              {student?.studentResponses &&
-              student?.studentResponses?.length > 0
-                ? student?.studentResponses?.length >= 2
+            <div className="flex justify-center flex-col">
+              <h2 className="font-dmSans font-normal text-sm text-[#7F7F7F]">
+                {student?.Education[0]?.EndDate.substring(0, 4)}
+              </h2>
+              <h2 className="font-dmSans font-bold text-sm inline text-[#0052CC]">
+                {" "}
+                {student?.Education[0]?.Degree}
+              </h2>
+            </div>
+            <div className="flex justify-center flex-col">
+              <h2 className="font-dmSans font-normal text-sm text-[#171717]">
+                {student?.studentResponses &&
+                student?.studentResponses?.length > 0
+                  ? student?.studentResponses?.length >= 2
+                    ? student?.studentResponses[
+                        student?.studentResponses?.length - 2
+                      ]?.assessmentId?.name
+                    : student?.studentResponses[
+                        student?.studentResponses?.length - 1
+                      ]?.assessmentId?.name
+                  : "Not Available"}
+              </h2>
+            </div>
+            <div className="flex justify-center flex-col">
+              <h2 className="font-dmSans font-normal text-sm text-[#171717]">
+                {student?.studentResponses &&
+                student?.studentResponses?.length > 0
                   ? student?.studentResponses[
-                      student?.studentResponses?.length - 2
-                    ]?.assessmentId?.name
-                  : student?.studentResponses[
                       student?.studentResponses?.length - 1
                     ]?.assessmentId?.name
-                : "Not Available"}
-            </h2>
-          </div>
-          <div className="flex justify-center flex-col">
-            <h2 className="font-dmSans font-normal text-sm text-[#171717]">
-              {student?.studentResponses &&
-              student?.studentResponses?.length > 0
-                ? student?.studentResponses[
-                    student?.studentResponses?.length - 1
-                  ]?.assessmentId?.name
-                : "Not Available"}
-            </h2>
-          </div>
-          <div className="flex justify-center">
-            <div className=" self-center">
-              <span>
-                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
-                  Not available
-                </h2>
-              </span>
+                  : "Not Available"}
+              </h2>
+            </div>
+            <div className="flex justify-center">
+              <div className=" self-center">
+                <span>
+                  <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                    Not available
+                  </h2>
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-center items-center gap-3">
+              <h2
+                className="font-dmSans text-xs font-bold text-white bg-[#95ACFA] p-2 rounded-lg cursor-pointer"
+                onClick={() =>
+                  navigate(`/collage/students/profile/${student._id}`)
+                }
+              >
+                View CV
+              </h2>
+  
+              <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
+                <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
+              </h2>
             </div>
           </div>
-          <div className="flex justify-center items-center gap-3">
-            <h2
-              className="font-dmSans text-xs font-bold text-white bg-[#95ACFA] p-2 rounded-lg cursor-pointer"
-              onClick={() =>
-                navigate(`/collage/students/profile/${student._id}`)
-              }
-            >
-              View CV
-            </h2>
-
-            <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
-              <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
-            </h2>
-          </div>
-        </div>
-      ))}
+        )))
+      }
     </>
   );
 };

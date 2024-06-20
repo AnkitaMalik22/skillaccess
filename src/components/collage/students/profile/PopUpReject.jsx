@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { rejectRequest } from "../../../../redux/collage/student/studentSlice";
+import Loader from "../../../loaders/Loader";
+import { useSelector } from "react-redux";
 
 const PopUp = ({ handleSave, handleOverlay,studentId }) => {
 const dispatch = useDispatch();
+const {REJECT_STUDENT_LOADING} = useSelector((state) => state.collegeStudents)
 
 const handleReject = () => {
     dispatch(rejectRequest(studentId))
@@ -27,7 +30,7 @@ const handleReject = () => {
             className="self-center justify-center flex bg-blue-700 border border-blue-700 py-3 px-8 rounded-xl text-xs gap-2 text-white"
             onClick={()=>handleReject()}
           >
-           Reject
+           {REJECT_STUDENT_LOADING ? <>Rejecting... <Loader/></> : "Reject"}
           </button>
         </div>
       </div>
