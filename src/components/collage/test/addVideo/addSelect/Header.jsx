@@ -94,6 +94,7 @@ const Header = ({ selectQuestionType }) => {
     } else {
       dispatch(
         addQuestionToTopic({
+          QuestionLevel: level,
           data: vid,
           id: id,
           type: "video",
@@ -156,26 +157,6 @@ const Header = ({ selectQuestionType }) => {
             <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans ">
               Create Assessment
             </h2>
-            {/* 
-            <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
-              <h3 className="mr-2">Untitiled Assessments</h3>
-              <span>
-                <img
-                  src="../../../../images/icons/test.png"
-                  alt="test"
-                  className="w-4 h-4"
-                />
-              </span>
-              <h3 className="mr-2">0 Tests</h3>{" "}
-              <span className="w-2 h-2">
-                <img
-                  src="../../../../images/icons/hourglass.png"
-                  alt="test"
-                  className=" object-scale-down"
-                />
-              </span>
-              <h3>Add Questions</h3>
-            </div> */}
           </div>
         </button>
       </div>

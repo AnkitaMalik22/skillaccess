@@ -1,12 +1,8 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
-
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-
 import toast from "react-hot-toast";
 import {
   addVideoToSection,
@@ -17,29 +13,38 @@ import { addQuestionToTopic } from "../../../../../redux/collage/test/thunks/top
 const Header = ({ selectQuestionType }) => {
   const { id } = useParams();
   const [searchParam, setSearchParam] = useSearchParams();
-  const level = searchParam.get("level");
+
   const dispatch = useDispatch();
   let ID;
   searchParam.get("topicId") !== null
     ? (ID = searchParam.get("topicId"))
     : (ID = id);
   const topicToBeAdded = useSelector((state) => state.test.TopicToBeAdded);
+
+  const [question, setQuestion] = useState({
+    level: searchParam.get("level") || "beginner",
+  });
+
+  const handleChanges = (e) => {
+    setQuestion({
+      ...question,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const submit = () => {
     const updatedTopicToBeAdded = {
       ...topicToBeAdded,
 
       video: {
         videoFile: "", // Set video link to an empty string
-
         questions: [], // Set questions to an empty array
-
         long: [],
-
         short: [],
-
         // Add other properties if needed
       },
     };
+
     let mcq;
     if (topicToBeAdded.video.questions?.length > 0) {
       mcq = topicToBeAdded.video.questions.reduce((acc, question) => {
@@ -48,6 +53,7 @@ const Header = ({ selectQuestionType }) => {
     } else {
       mcq = 0;
     }
+
     let long;
     if (topicToBeAdded.video.long?.length > 0) {
       long = topicToBeAdded.video?.long?.reduce((acc, question) => {
@@ -56,19 +62,22 @@ const Header = ({ selectQuestionType }) => {
     } else {
       long = 0;
     }
+
     let short;
-    if (topicToBeAdded.video.long?.length > 0) {
+    if (topicToBeAdded.video.short?.length > 0) {
       short = topicToBeAdded.video?.short?.reduce((acc, question) => {
         return acc + parseInt(question.Duration);
       }, 0);
     } else {
       short = 0;
     }
+
     let Duration = mcq + long + short;
     console.log(Duration);
+
     const vid = {
       ...topicToBeAdded.video,
-      QuestionLevel: "beginner",
+      QuestionLevel: question.level,
       Duration: Duration,
       id: ID,
       section:
@@ -94,6 +103,7 @@ const Header = ({ selectQuestionType }) => {
     } else {
       dispatch(
         addQuestionToTopic({
+          QuestionLevel: question.level,
           data: vid,
           id: id,
           type: "video",
@@ -110,95 +120,37 @@ const Header = ({ selectQuestionType }) => {
         } else {
           navigate(`/collage/quesBank/typeOfQuestions/${id}`);
         }
-        //           navigate(`/collage/test/select`);
       });
     }
-    //  dispatch(
-    //     addQuestionToTopic({
-    //       index: id,
-    //       data: vid,
-    //       id: searchParam.get("section"),
-    //       type: "video",
-    //     })
-    //   ).then((res) => {
-    //     localStorage.setItem(
-    //       "TopicToBeAdded",
-    //       JSON.stringify(updatedTopicToBeAdded)
-    //     );
-    //     console.log(res);
-
-    //     navigate(
-    //       `/collage/test/${id}?type=section&question=video&topicId=${searchParam.get(
-    //         "section"
-    //       )}&view=true`
-    //     );
-    //   })
   };
 
   const navigate = useNavigate();
 
-  //   const NavHandler = () => {
-  //     switch (selectQuestionType) {
-  //       case "mcq":
-  //         navigate(`/collage/test/video/${id}/addmcq`);
-
-  //         break;
-
-  //       case "short":
-  //         navigate(`/collage/test/video/shortlong/${id}?length=short`);
-
-  //         break;
-
-  //       case "long":
-  //         navigate(`/collage/test/video/shortlong/${id}?length=long`);
-
-  //         break;
-
-  //       default:
-  //         window.alert("please select field");
-
-  //         break;
-  //     }
-  //   };
-
   return (
-    <div className="flex justify-between mb-5">
-      <div>
-        <button className="flex self-center rounded-lg  gap-2">
-          <button onClick={() => navigate(-1)} className="mt-2 mr-3">
-            <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
-          </button>
-
-          <div className="">
-            <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans ">
-              Create Assessment
-            </h2>
-
-            {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
-              <h3 className="mr-2">Untitiled Assessments</h3>
-              <span>
-                <img
-                  src="../../../../images/icons/test.png"
-                  alt="test"
-                  className="w-4 h-4"
-                />
-              </span>
-              <h3 className="mr-2">0 Tests</h3>{" "}
-              <span className="w-2 h-2">
-                <img
-                  src="../../../../images/icons/hourglass.png"
-                  alt="test"
-                  className=" object-scale-down"
-                />
-              </span>
-              <h3>Add Questions</h3>
-            </div> */}
-          </div>
+    <div className="flex justify-between mb-5 w-full">
+      <div className="flex  mb-5 w-1/2">
+        <button onClick={() => navigate(-1)} className="mr-3">
+          <FaChevronLeft className="p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
         </button>
+        <div className="flex justify-between w-full">
+          <h2 className="sm:text-xl text-left font-bold self-center text-3xl font-dmSans">
+            Create Assessment
+          </h2>
+          <select
+            name="level"
+            onChange={handleChanges}
+            value={question.level}
+            className="w-1/2 rounded-xl bg-[#F8F8F9] focus:outline-none border-none select text-[#3E3E3E]"
+          >
+            <option value="">Level</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
       </div>
-
-      <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
-        <div className=" flex">
+      <div className="bg-gray-100 rounded-xl mx-2 h-12 flex my-2">
+        <div className="flex">
           <button
             className="self-center justify-center flex bg-blue-800 py-3 px-4 rounded-lg text-xs gap-2 text-white"
             onClick={submit}
