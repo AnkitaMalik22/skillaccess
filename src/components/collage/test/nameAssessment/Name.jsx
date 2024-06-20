@@ -234,85 +234,96 @@ const Name = () => {
         </h2>
 
         <form>
-          <input
-            type="text"
-            className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-              errors.name ? "border-red-500" : "border-none"
-            }`}
-            placeholder="Name of the Assessment"
-            name="name"
-            value={testDetails.name}
-            onChange={handleChange}
-            required
-          />
-          {errors.name && (
-            <span className="text-red-500 pt-2">{errors.name}</span>
-          )}
-          <input
-            type="tel"
-            name="totalAttempts"
-            className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-              errors.name ? "border-red-500" : "border-none"
-            }`}
-            placeholder="No. of Attempts"
-            value={testDetails.totalAttempts}
-            onChange={handleChange}
-            required
-          />
-          {errors.totalAttempts && (
-            <span className="text-red-500 py-2">{errors.totalAttempts}</span>
-          )}
-          <input
-            name="totalQuestions"
-            type="tel"
-            className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-              errors.name ? "border-red-500" : "border-none"
-            }`}
-            placeholder="No. of Questions"
-            value={testDetails.totalQuestions}
-            onChange={handleChange}
-            required
-          />
-          {errors.totalQuestions && (
-            <span className="text-red-500 pt-2">{errors.totalQuestions}</span>
-          )}
-
-          <div className="flex justify-between items-center w-full gap-4  ">
-            {/* Duration From */}
-            <div className=" mb-4 w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
-              <label className="text-gray-400">Duration From *</label>
-              <input
-                type="datetime-local"
-                name="duration_from"
-                value={testDetails?.duration_from?.slice(0, 16)}
-                onChange={handleChange}
-                className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${
-                  errors.duration ? "border-red-500" : ""
-                }`}
-                required
-                fullWidth
-              />
-            </div>
-
-            {/* Duration To */}
-            <div className=" mb-4 w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
-              <label className="text-gray-400">Duration To *</label>
-              <input
-                type="datetime-local"
-                name="duration_to"
-                value={testDetails?.duration_to?.slice(0, 16)}
-                onChange={handleChange}
-                className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${
-                  errors.duration ? "border-red-500" : ""
-                }`}
-                required
-                fullWidth
-              />
-            </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+                errors.name ? "border-red-500" : "border-none"
+              }`}
+              placeholder="Name of the Assessment"
+              name="name"
+              value={testDetails.name}
+              onChange={handleChange}
+              required
+            />
+            {errors.name && (
+              <span className="text-red-500 pt-2 ml-4">{errors.name}</span>
+            )}
           </div>
-          {errors.duration && (
-            <span className="text-red-500 pt-2">{errors.duration}</span>
-          )}
+          <div className="mb-4">
+            <input
+              type="tel"
+              name="totalAttempts"
+              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+                errors.name ? "border-red-500" : "border-none"
+              }`}
+              placeholder="No. of Attempts"
+              value={testDetails.totalAttempts}
+              onChange={handleChange}
+              required
+            />
+            {errors.totalAttempts && (
+              <span className="text-red-500 ml-4 py-2">
+                {errors.totalAttempts}
+              </span>
+            )}
+          </div>
+          <div className="mb-4">
+            <input
+              name="totalQuestions"
+              type="tel"
+              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+                errors.name ? "border-red-500" : "border-none"
+              }`}
+              placeholder="No. of Questions"
+              value={testDetails.totalQuestions}
+              onChange={handleChange}
+              required
+            />
+            {errors.totalQuestions && (
+              <span className="text-red-500 pt-2 ml-4">
+                {errors.totalQuestions}
+              </span>
+            )}
+          </div>
+          <div className="mb-4">
+            <div className="flex justify-between items-center w-full gap-4  ">
+              {/* Duration From */}
+              <div className=" w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
+                <label className="text-gray-400">Duration From *</label>
+                <input
+                  type="datetime-local"
+                  name="duration_from"
+                  value={testDetails?.duration_from?.slice(0, 16)}
+                  onChange={handleChange}
+                  className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${
+                    errors.duration ? "border-red-500" : ""
+                  }`}
+                  required
+                  fullWidth
+                />
+              </div>
+
+              {/* Duration To */}
+              <div className="  w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
+                <label className="text-gray-400">Duration To *</label>
+                <input
+                  type="datetime-local"
+                  name="duration_to"
+                  value={testDetails?.duration_to?.slice(0, 16)}
+                  onChange={handleChange}
+                  className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${
+                    errors.duration ? "border-red-500" : ""
+                  }`}
+                  required
+                  fullWidth
+                />
+              </div>
+            </div>
+            {errors.duration && (
+              <span className="text-red-500 pt-2 ml-4">{errors.duration}</span>
+            )}
+          </div>
           <div className="flex items-center gap-2 text-lg mb-4">
             <label
               htmlFor="isNegativeMarking"
@@ -340,7 +351,7 @@ const Name = () => {
             required
           />
           {errors.description && (
-            <span className="text-red-500 pt-2">{errors.description}</span>
+            <span className="text-red-500 pt-2 ml-4">{errors.description}</span>
           )}
         </form>
       </div>

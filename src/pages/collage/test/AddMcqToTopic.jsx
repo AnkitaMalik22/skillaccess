@@ -497,7 +497,7 @@ const AddMcqToTopic = () => {
               // onClick={addQuestion}
               onClick={handleQuestionSave}
             >
-              {loader ? <CircularLoader /> : <FaPlus className="self-center" />}{" "}
+              {/* {loader ? <CircularLoader /> : <FaPlus className="self-center" />}{" "} */}
               Add Next Question
             </button>
           </div>
