@@ -14,7 +14,7 @@ import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 
 const AddParagraph = () => {
-  useTranslate();
+  //useTranslate();
   const [loading, setLoading] = useState(false);
 
   const MAX_QUESTIONS = 3;

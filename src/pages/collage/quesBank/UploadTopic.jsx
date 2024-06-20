@@ -12,7 +12,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const AddQuestionsSelect = () => {
-  useTranslate();
+  //useTranslate();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();

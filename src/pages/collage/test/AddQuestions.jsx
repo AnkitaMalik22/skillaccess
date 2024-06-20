@@ -15,7 +15,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 
 const AddQuestions = () => {
-  useTranslate();
+  //useTranslate();
   const { topics, currentQuestionCount } = useSelector((state) => state.test);
 
   const navigate = useNavigate();

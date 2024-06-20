@@ -5,7 +5,7 @@ import { Switch } from "@headlessui/react";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Notifications = () => {
-  useTranslate();
+  //useTranslate();
   const [enabled, setEnabled] = useState(false);
   const [enabled1, setEnabled1] = useState(false);
   const [enabled2, setEnabled2] = useState(false);

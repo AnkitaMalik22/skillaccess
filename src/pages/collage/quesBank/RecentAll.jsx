@@ -10,7 +10,7 @@ import { getRecentUsedQuestions } from "../../../redux/collage/test/thunks/quest
 import useTranslate from "../../../hooks/useTranslate";
 
 const RecentAll = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();

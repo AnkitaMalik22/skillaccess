@@ -9,7 +9,7 @@ import { editBankQuestionById } from "../../../redux/collage/test/thunks/questio
 import useTranslate from "../../../hooks/useTranslate";
 
 const LongShortAnswer = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const { TopicToBeAdded } = useSelector((state) => state.test);
   const dispatch = useDispatch();

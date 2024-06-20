@@ -11,7 +11,7 @@ import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { FaAngleLeft, FaSearch } from "react-icons/fa";
 
 const Recent = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { recentUsedQuestions } = useSelector((state) => state.test);

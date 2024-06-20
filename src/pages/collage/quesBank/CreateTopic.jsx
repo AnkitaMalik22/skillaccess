@@ -8,7 +8,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaChevronLeft } from "react-icons/fa";
 
 const CreateTopic = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();

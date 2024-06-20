@@ -13,7 +13,7 @@ import { getStudentResponse } from "../../../redux/collage/test/thunks/student";
 import useTranslate from "../../../hooks/useTranslate";
 
 const AssessmentReview = () => {
-  useTranslate();
+  //useTranslate();
   const searchParams = new URLSearchParams(window.location.search);
   const testId = searchParams.get("assessmentId");
   const studentId = searchParams.get("studentId");

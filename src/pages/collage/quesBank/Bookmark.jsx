@@ -9,7 +9,7 @@ import Video from "../../../components/collage/quesBank/bookmark/Video";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Bookmarks = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { bookmarks } = useSelector((state) => state.test);

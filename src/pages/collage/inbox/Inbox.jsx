@@ -4,7 +4,7 @@ import List from "../../../components/collage/inbox/List";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Inbox = () => {
-  useTranslate();
+  //useTranslate();
   const [show, setShow] = useState("all");
   const [inboxType, setInboxType] = useState("Received");
   return (

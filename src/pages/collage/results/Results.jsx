@@ -8,7 +8,7 @@ import { getResultGraph } from "../../../redux/collage/result/thunks/graph";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Results = () => {
-  useTranslate();
+  //useTranslate();
   const dispatch = useDispatch();
   const assessments = useSelector((state) => state.test.assessments);
 

@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
 
 const AddMcq = () => {
-  useTranslate();
+  //useTranslate();
   const { topics, ADD_QUESTION_LOADING } = useSelector((state) => state.test);
 
   const navigate = useNavigate();

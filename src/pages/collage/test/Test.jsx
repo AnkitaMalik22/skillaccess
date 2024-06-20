@@ -26,7 +26,7 @@ import { getStudents } from "../../../redux/collage/student/studentSlice";
 import useTranslate from "../../../hooks/useTranslate";
 
 const Test = () => {
-  useTranslate();
+  //useTranslate();
   const dispatch = useDispatch();
   const beginner = useSelector((state) => state.test.assessments.beginner);
   const intermediate = useSelector(

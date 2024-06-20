@@ -2,7 +2,7 @@
 // import useTranslate from "../../../hooks/useTranslate";
 
 // const JobsPage = () => {
-//   useTranslate();
+//   //useTranslate();
 //   return <Jobs />;
 // };
 
@@ -21,7 +21,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import { FaAngleLeft } from "react-icons/fa";
 
 const Jobs = () => {
-  useTranslate();
+  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
