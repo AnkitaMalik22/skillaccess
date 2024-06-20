@@ -769,6 +769,7 @@ const collageAuthSlice = createSlice({
 
         // Add any fetched posts to the array
         console.log("fullfilled get college");
+    
       })
       .addCase(getCollege.rejected, (state, action) => {
         // state.logoutError = action.payload;
@@ -787,7 +788,8 @@ const collageAuthSlice = createSlice({
         }
 
         console.log(action.payload.message);
-
+        toast.error(action.payload.message);
+        window.location.href = "/";
         // window.alert(action.payload);
       })
       .addCase(updateAvatar.pending, (state, action) => {

@@ -14,17 +14,9 @@ const Verification = ({
 }) => {
   const [testCaseExpand, setTestCaseExpand] = useState(false);
 
-
-
-const [userTheme, setUserTheme] = useState("light");
-const [runClicked , setRunClicked] = useState(false);
-const [ runLoading , setRunLoading] = useState(false);
-
-
-
-
-
-  
+  const [userTheme, setUserTheme] = useState("light");
+  const [runClicked, setRunClicked] = useState(false);
+  const [runLoading, setRunLoading] = useState(false);
 
   const handleExpand = () => {
     setTestCaseExpand(!testCaseExpand);
@@ -34,7 +26,7 @@ const [ runLoading , setRunLoading] = useState(false);
     if (!testCaseExpand && runClicked) {
       setTestCaseExpand(true);
     }
-  }, [testCaseExpand,runClicked]);
+  }, [testCaseExpand, runClicked]);
 
   return (
     <div className="w-full   ">
@@ -70,19 +62,24 @@ const [ runLoading , setRunLoading] = useState(false);
                     ? "bg-gray-200 "
                     : "bg-[#00875A] border border-gray-200 text-gray-200"
                 }`}
-                onClick={() => setRunClicked(true)}
+          onClick={() => setRunClicked(true)}
           // onClick={runLoading ? null : compile}
           // onClick={compile}
         >
-          
-          {runLoading ? <>Running... <LoaderIcon className="ml-4 animate-spin" /> </> : "Run"}
+          {runLoading ? (
+            <>
+              Running... <LoaderIcon className="ml-4 animate-spin" />{" "}
+            </>
+          ) : (
+            "Run"
+          )}
         </button>
       </div>
       {!testCaseExpand ? (
         <div className="w-full">
           <Editor
             theme="vs-light"
-            height="52vh"
+            height="60vh"
             defaultLanguage={selectedLanguage}
             value={editorValue}
             onChange={(value) => handleEditorChange(value, "solutionCode")}
@@ -93,21 +90,16 @@ const [ runLoading , setRunLoading] = useState(false);
         <SlideUpDown
           answer={question}
           testcase={question.testcase}
-         
           className="w-full"
           userTheme={userTheme}
           question={question}
-          setQuestion ={setQuestion}
-      
-       
-      
+          setQuestion={setQuestion}
           userCode={editorValue}
           userLang={selectedLanguage}
           runClicked={runClicked}
           setRunClicked={setRunClicked}
           runLoading={runLoading}
           setRunLoading={setRunLoading}
-          
         />
       )}
     </div>
