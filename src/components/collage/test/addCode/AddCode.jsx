@@ -386,7 +386,7 @@ const AddCode = () => {
           </div>
         </div>
 
-        <div className="flex gap-2 justify-between">
+        <div className="flex gap-2 justify-end">
           {" "}
           <div className=" flex gap-2">
             {addType === "topic" ? (
