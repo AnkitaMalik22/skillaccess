@@ -134,6 +134,7 @@ const Header = () => {
         let Duration = mcq + long + short;
         dispatch(
           addQuestionToTopic({
+            QuestionLevel: level,
             data: { ...topicToBeAdded.video, Duration: Duration },
             id: searchParams.get("topicId"),
             type: "video",

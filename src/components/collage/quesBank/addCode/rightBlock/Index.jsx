@@ -84,31 +84,34 @@ const Code = ({
           </div>
         </span>
 
-        {toggle === 1 &&
-          //   <Signature
-          //     question={question}
-          //     handleChanges={handleChanges}
-          //     handleQuestionChange={handleQuestionChange}
-          //     setQuestion={setQuestion}
-          //   />
-          // ) :
+        {
+          toggle === 1 && (
+            //   <Signature
+            //     question={question}
+            //     handleChanges={handleChanges}
+            //     handleQuestionChange={handleQuestionChange}
+            //     setQuestion={setQuestion}
+            //   />
+            // ) :
 
-          editorValue.defaultCode && (
-            <>
-              {" "}
-              <Initial
-                // question={question} handleChanges={handleChanges}
-                selectedLanguage={selectedLanguage}
-                // editorValue={editorValue}
-                // handleEditorChange={handleEditorChange}
-                editorValue={editorValue.defaultCode}
-                setEditorValue={setEditorValue}
-                handleEditorChange={(value) =>
-                  handleEditorChange(value, "defaultCode")
-                }
-              />
-            </>
-          )}
+            // editorValue.defaultCode && (
+            //   <>
+            // {" "}
+            <Initial
+              // question={question} handleChanges={handleChanges}
+              selectedLanguage={selectedLanguage}
+              // editorValue={editorValue}
+              // handleEditorChange={handleEditorChange}
+              editorValue={editorValue.defaultCode}
+              setEditorValue={setEditorValue}
+              handleEditorChange={(value) =>
+                handleEditorChange(value, "defaultCode")
+              }
+            />
+          )
+          // </>
+          // )
+        }
         {toggle === 2 && (
           // <Initial question={question} handleChanges={handleChanges} />
           <TestCases
