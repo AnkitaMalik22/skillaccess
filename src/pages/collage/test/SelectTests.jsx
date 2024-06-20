@@ -171,7 +171,7 @@ const SelectTests = () => {
 
     // console.log(updatedSections);
   };
-
+  console.log(selectedSections?.length);
   const removeSection = (section, index) => {
     let Qt;
     console.log(selectedSections[index].Type);
@@ -417,6 +417,12 @@ const SelectTests = () => {
                   onClick={() => {
                     if (!questionType) {
                       toast.error("Please select a question type first.");
+                      return;
+                    }
+                    if (selectedSections?.length === 5) {
+                      toast.error(
+                        "Please remove one from added section to add this topic's question"
+                      );
                       return;
                     }
                     // console.log(section);
