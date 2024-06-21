@@ -23,14 +23,14 @@ const AddVideoQuestionsPage = () => {
 
       case "short":
         navigate(
-          `/collage/test/video/shortlong/${id}?length=short?level=${level}`
+          `/collage/test/video/shortlong/${id}?length=short&level=${level}`
         );
 
         break;
 
       case "long":
         navigate(
-          `/collage/test/video/shortlong/${id}?length=long?level=${level}`
+          `/collage/test/video/shortlong/${id}?length=long&level=${level}`
         );
 
         break;
