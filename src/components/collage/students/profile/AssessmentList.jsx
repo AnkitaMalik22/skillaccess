@@ -12,16 +12,18 @@ const AssessmentList = ({ id }) => {
   const navigate = useNavigate();
   const { studentRecentassessment } = useSelector((state) => state.test);
   useEffect(() => {
+   if(id){
     dispatch(getRecentStudentTests(id));
-  }, []);
-  console.log(studentRecentassessment);
+   }
+  }, [id]);
+
   return (
     <>
       <h2 className="text-base  font-bold text-center py-3 ">
         Recent Assessments Completed
       </h2>
       <div className="p-3 ">
-        {studentRecentassessment?.map((assessment) => {
+        {studentRecentassessment?.filter((assessment , index) => assessment?.assessment?._id && index <10).map((assessment) => {
           return (
             <div className="flex flex-col md:gap-8">
               <div className="flex gap-3 items-center">
@@ -64,7 +66,8 @@ const AssessmentList = ({ id }) => {
                 </div>
 
                 <p className="text-xs  font-normal text-[#8F92A1]">
-                  {calculateDaysAndWeeks(assessment.assessment.endDate)}
+                  {/* {assessment.assessment.endDate} */}
+                  {calculateDaysAndWeeks(assessment.assessment.startDate)}
                 </p>
               </div>
             </div>

@@ -16,7 +16,7 @@ const Header = ({
   id,
   type,
   addType,
-  handleSave,
+  save,
   isPrev,
   setIsPrev,
   count,
@@ -29,7 +29,9 @@ const Header = ({
     // handleSave()
     // navigate(-1);
   };
-
+  const handleSave = () => {
+    save("save");
+  };
   return (
     // <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">
     //   <div className="h-fit self-center">

@@ -46,7 +46,7 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
         ).then(() => {
           if (!ADD_QUESTION_LOADING) {
             console.log("calling 2 --", ADD_QUESTION_LOADING);
-            navigate(-1);
+            navigate(`/collage/quesBank/topic/${id}`);
           }
         });
         setQuestion({ Title: "", Options: [], Duration: 0, AnswerIndex: null });

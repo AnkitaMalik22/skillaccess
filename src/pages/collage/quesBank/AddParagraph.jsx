@@ -155,7 +155,7 @@ const AddParagraph = () => {
             id: ID + Date.now(),
           });
           if (!ADD_QUESTION_LOADING) {
-            if (saveType === "save") navigate(-1);
+            if (saveType === "save") navigate(`/collage/quesBank/topic/${id}`);
           }
           // })
         }
