@@ -21,15 +21,15 @@ const List = ({ Title, number, code, question }) => {
   };
   console.log(question);
   return (
-    <div className="flex justify-between gap-2 font-dmSans relative z-10">
-      <button className=" bg-blued rounded-xl text-white text-base font-bold py-2 w-12 h-11">
+    <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10">
+      <button className=" bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
         Q-{number}
       </button>
       <div className="w-full  ">
         <Disclosure className="relative z-10">
           {({ open }) => (
             <div className="mb-4">
-              <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
+              <div className="flex w-full justify-between rounded-lg border border-[#95ACFA] text-[#3E3E3E] pl-4 py-3 text-left text-sm font-medium   focus:outline-none  ">
                 <div className="flex justify-between items-center w-full">
                   <p>{question.Title}</p>
 
@@ -74,7 +74,6 @@ const List = ({ Title, number, code, question }) => {
                   </Disclosure.Button>
                 </div>
               </div>
-
               <Transition
                 enter="transition duration-300 "
                 enterFrom="transform scale-95 ease-in opacity-0"
