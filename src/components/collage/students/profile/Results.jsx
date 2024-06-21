@@ -49,7 +49,7 @@ const Results = ({ assessmentResult, id }) => {
       </div>
 
       {/* iterable  */}
-      {assessmentResult?.map((response, index) => {
+      {assessmentResult?.filter((assessment) => assessment?.assessmentId?._id).map((response, index) => {
         return (
           <div
             className=" grid grid-cols-5 text-center mt-3 bg-white rounded-lg "
