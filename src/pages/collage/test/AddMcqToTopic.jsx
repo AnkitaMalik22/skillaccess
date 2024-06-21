@@ -53,7 +53,7 @@ const AddMcqToTopic = () => {
       return -1;
     });
   };
-
+  console.log(question);
   const handleChanges = (e) => {
     // console.log(question);
     if (e.target.name === "Title") {
@@ -146,7 +146,7 @@ const AddMcqToTopic = () => {
     ) {
       toast.error("Please enter atleast 4 options");
       return;
-    } else if (question.AnswerIndex === null) {
+    } else if (question.AnswerIndex === null || question.AnswerIndex == -1) {
       toast.error("Please select correct answer");
       return;
     } else if (question.Options.some((option) => option.trim() === "")) {
@@ -175,6 +175,7 @@ const AddMcqToTopic = () => {
           Options: [],
           id: id + Date.now(),
           Duration: 0,
+          AnswerIndex: null,
         });
       } else {
         setIsPrev(false);
@@ -193,6 +194,7 @@ const AddMcqToTopic = () => {
             Options: [],
             id: id + Date.now(),
             Duration: 0,
+            AnswerIndex: null,
           });
         });
 
