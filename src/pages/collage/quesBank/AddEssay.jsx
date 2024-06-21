@@ -121,11 +121,11 @@ const AddEssay = () => {
             Title: "",
             Duration: 0,
             id: id + Date.now(),
-            QuestionLevel: level,
+            QuestionLevel: "beginner",
           });
           setLoading(false);
           if (!ADD_QUESTION_LOADING) {
-            if (saveType === "save") navigate(-1);
+            if (saveType === "save") navigate(`/collage/quesBank/topic/${id}`);
           }
         }
       }
@@ -159,7 +159,7 @@ const AddEssay = () => {
   return (
     <div>
       <Header
-        handleSave={handleSave}
+        save={handleSave}
         topics={topics}
         isPrev={isPrev}
         setIsPrev={setIsPrev}
