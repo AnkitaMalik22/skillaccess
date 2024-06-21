@@ -190,6 +190,7 @@ const AddMcqToTopic = () => {
               Options: [],
               id: id + Date.now(),
               Duration: 0,
+              AnswerIndex: null,
             });
           } else {
             setLoading(true);
@@ -208,6 +209,7 @@ const AddMcqToTopic = () => {
                 Options: [],
                 id: id + Date.now(),
                 Duration: 0,
+                AnswerIndex: null,
               });
             });
 
