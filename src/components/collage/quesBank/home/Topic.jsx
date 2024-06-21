@@ -14,7 +14,7 @@ const Topic = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");
-  const { sections } = useSelector((state) => state.test);
+  const { sections ,GET_TOPICS_LOADING} = useSelector((state) => state.test);
   let topics = localStorage.getItem("topics")
     ? JSON.parse(localStorage.getItem("topics"))
     : [];
@@ -77,7 +77,21 @@ const Topic = () => {
       </div>
 
       <div className="flex flex-wrap 3xl:gap-10 gap-3">
-        {sections?.map(
+      {GET_TOPICS_LOADING
+            ? // Render skeleton loader
+              Array.from({ length: 3 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="w-[17rem] mb-4 bg-gray-200 rounded-2xl animate-pulse"
+                >
+                  <div className="h-40 bg-gray-300 rounded-t-2xl"></div>
+                  <div className="card-body">
+                    <div className="h-6 bg-gray-300 rounded-full w-3/4 mb-2"></div>
+                    <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
+                  </div>
+                </div>
+              )) : 
+        (sections?.map(
           (section, index) =>
             index < 4 && (
               <div
@@ -110,7 +124,8 @@ const Topic = () => {
                 </div>
               </div>
             )
-        )}
+        ))}
+      
       </div>
     </div>
   );

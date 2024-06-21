@@ -31,8 +31,8 @@ const List = ({ Title, number, code, question }) => {
       <div className="w-full  ">
         <Disclosure className="relative z-10">
           {({ open }) => (
-            <div className="mb-4">
-              <div className="flex w-full justify-between rounded-lg  pl-4 py-3 text-left text-sm font-medium  hover:border-[#95ACFA] hover:border">
+            <>
+              <div className="flex w-full justify-between rounded-lg  p-3 text-left text-sm font-medium  border-[#95ACFA] border mb-2">
                 <div>
                   <p
                     className="text-sm"
@@ -46,7 +46,6 @@ const List = ({ Title, number, code, question }) => {
                         open ? "rotate-180" : ""
                       } h-5 w-5 text-gray-400 `}
                     />
-                    <h2></h2>{" "}
                   </Disclosure.Button>
                 </div>
               </div>
@@ -60,7 +59,7 @@ const List = ({ Title, number, code, question }) => {
                 leaveTo="transform scale-95 opacity-0"
               >
                 <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500">
-                  <div className="flex flex-col gap-2  rounded-lg p-3">
+                  <div className="flex flex-col gap-2  rounded-lg">
                     {/* <div className="w-6"></div> */}
 
                     <Editor
@@ -84,7 +83,7 @@ const List = ({ Title, number, code, question }) => {
                   </div>
                 </Disclosure.Panel>
               </Transition>
-            </div>
+            </>
           )}
         </Disclosure>
       </div>

@@ -130,7 +130,7 @@ const Assessment = () => {
             <div className="w-full  mb-5 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
               {" "}
               {/* heading */}
-              <div className="flex justify-between px-4 ">
+              <div className="flex justify-between mb-5">
                 <h2 className="self-center text-xs capitalize">
                   {topic.Heading}
                 </h2>
@@ -164,12 +164,12 @@ const Assessment = () => {
                 <RxCross1 className="self-center text-red-600 w-5 h-5" />
               </div> */}
               {/* desc */}
-              <div className="flex px-4 justify-between mt-4 text-xs font-normal text-gray-400 ">
+              <div className="flex justify-between text-xs font-normal text-gray-400 ">
                 <p className="line-clamp-2 first-letter:uppercase">
                   {topic.Description}
                 </p>
                 <button
-                  className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs hover:bg-blue-500 hover:text-white"
+                  className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs hover:bg-blue-500 hover:text-white text-[#171717]"
                   onClick={() =>
                     navigate(
                       `/collage/test/details/${index}?question=${topic.Type}&type=assessment&view=false`
