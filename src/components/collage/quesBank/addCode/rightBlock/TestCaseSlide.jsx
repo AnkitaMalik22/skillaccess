@@ -55,7 +55,7 @@ const SlideUpDown = ({
         `https://skillaccess-compiler-cev7pzkbea-uc.a.run.app/`,
         {
           code: userCode,
-          language: userLang,
+          language: userLang == "python" ? "py" : userLang,
           input: `${userInput}`,
           // input : `1\n${userInput}\n`,
         },
