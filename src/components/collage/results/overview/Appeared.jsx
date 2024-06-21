@@ -89,6 +89,11 @@ const Appeared = ({ assessment }) => {
     });
   }
 
+  const covertToDateFormat = (date) => {
+    const d = new Date(date);
+    return d.toDateString();
+  };
+
   return (
     <div className="w-full mx-auto">
       {/* legend */}
@@ -137,7 +142,8 @@ const Appeared = ({ assessment }) => {
                 {/*  */}
                 <div className="flex justify-center items-center">
                   <h2 className="font-dmSans text-sm ">
-                    1st March - 8th March
+                    {covertToDateFormat(assessment?.startDate)} -{" "}
+                    {covertToDateFormat(assessment?.endDate)}
                   </h2>
                 </div>
                 {/*  */}

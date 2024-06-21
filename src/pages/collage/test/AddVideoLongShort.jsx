@@ -14,7 +14,7 @@ const LongShortAnswer = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
-  const type = searchParams.get("type");
+  const type = searchParams.get("length");
   const addType = searchParams.get("addType");
   const LongShort = searchParams.get("length");
   const level = searchParams.get("level");
