@@ -38,7 +38,12 @@ const Selected = () => {
   const { selectedStudents, SELECTED_STUDENTS_LOADING } = useSelector(
     (state) => state.test
   );
-  console.log(selectedStudents);
+
+  const covertToDateFormat = (date) => {
+    const d = new Date(date);
+    return d.toDateString();
+  };
+
   return (
     <div className="w-full mx-auto">
       {/* legend */}
@@ -84,7 +89,7 @@ const Selected = () => {
               <div className=" self-center h-fit ">
                 <span>
                   <h2 className="font-dmSans  sm:text-sm ">
-                    1st March - 8th March
+                    {covertToDateFormat(student?.completedAt)}
                   </h2>
                 </span>
               </div>
