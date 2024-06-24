@@ -76,7 +76,7 @@ const Description = ({ topics }) => {
                   </p>
                 </div>
 
-                <p className="text-xs self-center text-[#2348C7] text-opacity-80 tracking-[-0.4px]">
+                <p className="text-xs self-center text-[#2348C7] text-opacity-80 tracking-[-0.4px] first-letter:uppercase">
                   {topic.Type}
                 </p>
               </span>

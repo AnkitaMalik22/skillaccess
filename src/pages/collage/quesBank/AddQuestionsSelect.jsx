@@ -53,7 +53,7 @@ const AddQuestionsSelect = () => {
 
       <div className="mx-auto ">
         {/* larger screens */}
-        <h2 className="font-medium text-lg text-[#7D7D7D] mb-6 font-dmSans">
+        <h2 className="font-medium text-base text-[#7D7D7D] mb-5 font-dmSans">
           Add up to 10 custom questions to your assessment (optional). You can
           use five question types: multiple-choice, essay, video, code and find
           answer.
@@ -85,7 +85,7 @@ const AddQuestionsSelect = () => {
           ].map((item) => (
             <div
               key={item.type}
-              className={`w-full flex justify-between items-center gap-5 bg-[#F8F8F9] text-[#000000]  rounded-2xl border h-20 py-5 px-8 mb-3 ${
+              className={`w-full flex justify-between items-center gap-5 bg-[#F8F8F9] text-[#000000]  rounded-2xl border px-5 py-3 mb-3 cursor-pointer ${
                 selectQuestionType === item.type
                   ? "border-[#95ACFA]"
                   : " opacity-60"
@@ -105,9 +105,9 @@ const AddQuestionsSelect = () => {
                   alt=""
                   className="w-6 h-8"
                 />
-                <h2 className="text-xl font-normal">{item.label}</h2>
+                <h2 className="text-lg font-normal">{item.label}</h2>
               </div>
-              <h2 className="text-xl font-normal flex-1">{item.description}</h2>
+              <h2 className="text-lg font-normal flex-1">{item.description}</h2>
               {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="17"

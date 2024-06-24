@@ -125,7 +125,7 @@ const Recent = () => {
                   <CgFolder className="text-blued" />
                 </span>
                 <span>
-                  <h2 className="font-dmSans text-center  sm:text-sm">
+                  <h2 className="font-dmSans text-center  sm:text-sm first-letter:uppercase">
                     {topic?.Heading}
                   </h2>
                 </span>
@@ -135,7 +135,7 @@ const Recent = () => {
             <div className="flex justify-center ">
               <div className=" self-center h-fit">
                 <span>
-                  <h2 className="font-dmSans font-normal sm:text-sm">
+                  <h2 className="font-dmSans font-normal text-sm first-letter:uppercase">
                     {topic?.Type}
                   </h2>
                 </span>

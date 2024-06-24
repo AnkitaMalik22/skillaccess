@@ -609,7 +609,7 @@ const AddQuestionsSelect = () => {
         <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
           <div className=" flex">
             <button
-              className="self-center justify-center flex bg-[#0052CC] py-3 px-8 rounded-2xl text-xs gap-2 text-white"
+              className="self-center justify-center flex bg-[#0052CC] py-[5px] px-3 rounded-2xl text-xs gap-2 text-white"
               onClick={() => navigate(`/collage/quesBank/topic`)}
             >
               View All

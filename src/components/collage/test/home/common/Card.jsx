@@ -20,7 +20,9 @@ const Card = (props) => {
   };
   return (
     <div className="w-[242px] h-[312px] bg-white text-start font-bold text-black rounded-lg p-2 font-dmSans">
-      <h2 className="mb-2 line-clamp-2 ">{props.assessment?.name}</h2>
+      <h2 className="mb-2 line-clamp-2 first-letter:uppercase ">
+        {props.assessment?.name}
+      </h2>
       <p className="font-normal text-gray-400 text-xs line-clamp-4 sm:mb-2 mb-1 h-[48%]">
         {props.assessment?.description}
       </p>

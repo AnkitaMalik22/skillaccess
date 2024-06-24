@@ -285,11 +285,7 @@ const SelectTests = () => {
   }, [addSection, removeSection, selectedSections]);
 
   return (
-    <div
-      className={`w-11/12 mx-auto py-5 md:py-10 font-dmSans ${
-        visible ? "h-screen overflow-hidden" : ""
-      }`}
-    >
+    <div className={` ${visible ? "h-screen overflow-hidden" : ""}`}>
       {visible && (
         <PopUpAdaptive
           visible={visible}

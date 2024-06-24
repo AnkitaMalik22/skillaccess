@@ -145,8 +145,8 @@ const Test = () => {
         </div>
 
         {/* right block */}
-        <div className="w-1/4 p-4 bg-gray-100 rounded-3xl   min-h-[50rem] basis-full font-dmSans sm:block sm:basis-auto  ">
-          <div className="rounded-3xl bg-white min-h-[99%] mx-auto">
+        <div className="w-1/4 p-4 bg-gray-100 rounded-3xl overflow-y-auto max-h-full basis-full font-dmSans sm:block sm:basis-auto  ">
+          <div className="rounded-3xl bg-white mx-auto">
             <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
               Recent Assessments Completed
             </h2>
@@ -163,10 +163,10 @@ const Test = () => {
                         />
                       </div>
                       <div>
-                        <h2 className="text-xs  font-bold text-[#171717] ">
+                        <h2 className="text-xs  font-bold text-[#171717] first-letter:uppercase ">
                           {assessment.name}
                         </h2>
-                        <h2 className="text-xs  font-normal">
+                        <h2 className="text-xs  font-normal first-letter:uppercase">
                           {assessment.description}
                           {/* <span className="text-[#8F92A1] inline">
                             in Pune,India
@@ -187,7 +187,8 @@ const Test = () => {
                           View
                         </button>
                         <button
-                          className="rounded-lg p-3  bg-[#8F92A1] bg-opacity-5 self-center"
+                          className="rounded-lg p-3  bg-[#8F92A1] bg-opacity-5 self-center tooltip"
+                          data-tip="Cick here to remove."
                           onClick={() =>
                             dispatch(removeFromRecent(assessment._id))
                           }
