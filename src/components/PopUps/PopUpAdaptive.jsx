@@ -28,6 +28,7 @@ const PopUpAdaptive = ({
         <h1 className="text-center">
           Enter No Of Questions You want to select
         </h1>
+        
         <input
           type="number"
           name="noOfQuestions"
