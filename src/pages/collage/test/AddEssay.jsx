@@ -247,11 +247,11 @@ const AddEssay = () => {
                 if (!loading) handleSave();
               }}
             >
-              {loading ? (
+              {/* {loading ? (
                 <CircularLoader />
               ) : (
                 <FaPlus className="self-center" />
-              )}{" "}
+              )}{" "} */}
               Add Next Question
             </button>
           </div>

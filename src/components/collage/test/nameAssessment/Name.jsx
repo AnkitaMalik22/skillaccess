@@ -240,7 +240,7 @@ const Name = () => {
               className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
                 errors.name ? "border-red-500" : "border-none"
               }`}
-              placeholder="Name of the Assessment"
+              placeholder="Name of the Assessment*"
               name="name"
               value={testDetails.name}
               onChange={handleChange}
@@ -257,9 +257,13 @@ const Name = () => {
               className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
                 errors.name ? "border-red-500" : "border-none"
               }`}
-              placeholder="No. of Attempts"
+              placeholder="No. of Attempts*"
               value={testDetails.totalAttempts}
               onChange={handleChange}
+              pattern="[1-9]*"
+              onInput={(e) =>
+                (e.target.value = e.target.value.replace(/[^1-9]/g, ""))
+              }
               required
             />
             {errors.totalAttempts && (
@@ -275,9 +279,13 @@ const Name = () => {
               className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
                 errors.name ? "border-red-500" : "border-none"
               }`}
-              placeholder="No. of Questions"
+              placeholder="No. of Questions*"
               value={testDetails.totalQuestions}
               onChange={handleChange}
+              pattern="[1-9]*"
+              onInput={(e) =>
+                (e.target.value = e.target.value.replace(/[^1-9]/g, ""))
+              }
               required
             />
             {errors.totalQuestions && (
@@ -344,7 +352,7 @@ const Name = () => {
             className={`w-full h-40 rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
               errors.name ? "border-red-500" : "border-none"
             }`}
-            placeholder="Add Description"
+            placeholder="Add Description*"
             name="description"
             value={testDetails.description}
             onChange={handleChange}

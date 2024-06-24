@@ -64,21 +64,21 @@ const Test = () => {
       {/* search bar */}
       <Header students={approvedStudents} />
 
-      <div className="flex rounded-lg  md:flex-nowrap justify-center relative gap-3 md:gap-8">
+      <div className="flex rounded-lg md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch">
         {/* left block */}
-        <div className="w-3/4 rounded-lg">
-          <div className="w-full">
-            <div className="mx-auto w-full  rounded-2xl bg-white">
+        <div className="w-3/4 rounded-lg flex flex-col">
+          <div className="w-full flex-grow">
+            <div className="mx-auto w-full rounded-2xl bg-white">
               {arr.map((comp, i) => (
-                <Disclosure defaultOpen>
+                <Disclosure defaultOpen key={i}>
                   {({ open }) => (
-                    <div className="mb-4 ">
-                      <div className="flex w-full justify-between rounded-t-2xl border-b-2  border-opacity-50 border-gray-200 bg-[#F8F8F9] px-4 py-4 text-left text-sm font-medium  hover:bg-purple-200 focus:outline-none  ">
+                    <div className="mb-4">
+                      <div className="flex w-full justify-between rounded-t-2xl border-b-2 border-opacity-50 border-gray-200 bg-[#F8F8F9] px-4 py-4 text-left text-sm font-medium hover:bg-purple-200 focus:outline-none">
                         <div className="flex gap-2 w-full justify-between text-sm font-bold">
                           <h2 className="flex gap-3 text-[#171717] text-sm">
                             {i === 0 ? (
                               <>
-                                <FaFolder className="text-[#B3D4FF] w-5 h-5 " />
+                                <FaFolder className="text-[#B3D4FF] w-5 h-5" />
                                 Adaptive level{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{adaptive?.length}&#41;
@@ -86,7 +86,7 @@ const Test = () => {
                               </>
                             ) : i === 1 ? (
                               <>
-                                <FaFolder className="text-[#B3D4FF] w-5 h-5 " />
+                                <FaFolder className="text-[#B3D4FF] w-5 h-5" />
                                 Beginner level{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{beginner.length}&#41;
@@ -94,7 +94,7 @@ const Test = () => {
                               </>
                             ) : i === 2 ? (
                               <>
-                                <FaFolder className="text-[#B3D4FF] w-5 h-5 " />
+                                <FaFolder className="text-[#B3D4FF] w-5 h-5" />
                                 For Intermediate{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{intermediate.length}&#41;
@@ -102,14 +102,14 @@ const Test = () => {
                               </>
                             ) : (
                               <>
-                                <FaFolder className="text-[#B3D4FF] w-5 h-5 " />
+                                <FaFolder className="text-[#B3D4FF] w-5 h-5" />
                                 For Advanced{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{advanced.length}&#41;
                                 </p>{" "}
                               </>
                             )}
-                          </h2>{" "}
+                          </h2>
                           <Disclosure.Button>
                             <FaCaretDown
                               className={`${
@@ -117,25 +117,11 @@ const Test = () => {
                               } h-5 w-5 text-[#8F92A1]`}
                             />
                           </Disclosure.Button>
-                          {/* <CiSettings
-                          className="w-5 h-5 text-gray-500 hover:cursor-pointer"
-                          onClick={() => navigate("/collage/test/assessment")}
-                        /> */}
                         </div>
                       </div>
-
-                      {/* <Transition
-                        enter=" "
-                        enterFrom=""
-                        enterTo=""
-                        leave="transition duration-300 ease-out"
-                        leaveFrom="transform scale-100  opacity-100"
-                        leaveTo="transform scale-95 opacity-0"
-                      > */}
                       <Disclosure.Panel className="bg-gray-100 rounded-b-lg pb-6 mb-2 pt-4 text-sm text-gray-500">
                         {comp}
                       </Disclosure.Panel>
-                      {/* </Transition> */}
                     </div>
                   )}
                 </Disclosure>
@@ -145,65 +131,59 @@ const Test = () => {
         </div>
 
         {/* right block */}
-        <div className="w-1/4 p-4 bg-gray-100 rounded-3xl overflow-y-auto max-h-full basis-full font-dmSans sm:block sm:basis-auto  ">
-          <div className="rounded-3xl bg-white mx-auto">
+        <div className="w-1/4 p-4 bg-gray-100 h-[1200px] rounded-3xl font-dmSans sm:block flex-grow flex-shrink-0 flex flex-col">
+          <div className="rounded-3xl bg-white h-full mx-auto flex flex-col">
             <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
               Recent Assessments Completed
             </h2>
-            <div className="p-3 ">
-              {recentAssessments.map((assessment) => {
-                return (
-                  <div className="flex flex-col md:gap-8">
-                    <div className="flex gap-3 items-center">
-                      <div className="min-w-[2.5rem] h-10  self-center rounded-lg">
-                        <img
-                          src="../../images/teams.png"
-                          alt=" user-icon"
-                          className=" rounded-lg w-11 h-11"
-                        />
-                      </div>
-                      <div>
-                        <h2 className="text-xs  font-bold text-[#171717] first-letter:uppercase ">
-                          {assessment.name}
-                        </h2>
-                        <h2 className="text-xs  font-normal first-letter:uppercase">
-                          {assessment.description}
-                          {/* <span className="text-[#8F92A1] inline">
-                            in Pune,India
-                          </span> */}
-                        </h2>
-                      </div>
+            <div className="p-3 h-full overflow-y-auto">
+              {recentAssessments.map((assessment, index) => (
+                <div className="flex flex-col md:gap-8" key={index}>
+                  <div className="flex gap-3 items-center">
+                    <div className="min-w-[2.5rem] h-10 self-center rounded-lg">
+                      <img
+                        src="../../images/teams.png"
+                        alt="user-icon"
+                        className="rounded-lg w-11 h-11"
+                      />
                     </div>
-                    <div className="flex  mb-5 gap-2 justify-between items-center">
-                      <div className="flex gap-2">
-                        <button
-                          className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
-                          onClick={() => {
-                            navigate(
-                              `/collage/results/overview?level=${assessment.level}&assessment=${assessment._id}`
-                            );
-                          }}
-                        >
-                          View
-                        </button>
-                        <button
-                          className="rounded-lg p-3  bg-[#8F92A1] bg-opacity-5 self-center tooltip"
-                          data-tip="Cick here to remove."
-                          onClick={() =>
-                            dispatch(removeFromRecent(assessment._id))
-                          }
-                        >
-                          <CgUnavailable className="text-[#8F92A1] text-lg" />
-                        </button>
-                      </div>
-
-                      <p className="text-xs  font-normal text-[#8F92A1]">
-                        {calculateDaysAndWeeks(assessment.endDate)}
-                      </p>
+                    <div>
+                      <h2 className="text-xs font-bold text-[#171717] first-letter:uppercase">
+                        {assessment.name}
+                      </h2>
+                      <h2 className="text-xs font-normal first-letter:uppercase">
+                        {assessment.description}
+                      </h2>
                     </div>
                   </div>
-                );
-              })}
+                  <div className="flex mb-5 gap-2 justify-between items-center">
+                    <div className="flex gap-2">
+                      <button
+                        className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
+                        onClick={() => {
+                          navigate(
+                            `/collage/results/overview?level=${assessment.level}&assessment=${assessment._id}`
+                          );
+                        }}
+                      >
+                        View
+                      </button>
+                      <button
+                        className="rounded-lg p-3 bg-[#8F92A1] bg-opacity-5 self-center tooltip"
+                        data-tip="Cick here to remove."
+                        onClick={() =>
+                          dispatch(removeFromRecent(assessment._id))
+                        }
+                      >
+                        <CgUnavailable className="text-[#8F92A1] text-lg" />
+                      </button>
+                    </div>
+                    <p className="text-xs font-normal text-[#8F92A1]">
+                      {calculateDaysAndWeeks(assessment.endDate)}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
