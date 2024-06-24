@@ -49,45 +49,53 @@ const Results = ({ assessmentResult, id }) => {
       </div>
 
       {/* iterable  */}
-      {assessmentResult?.filter((assessment) => assessment?.assessmentId?._id).map((response, index) => {
-        return (
-          <div
-            className=" grid grid-cols-5 text-center mt-3 bg-white rounded-lg "
-            key={index}
-          >
-            <span className="w-full   py-2 text-sm font-dmSans">
-              {response.assessmentId.name}
-            </span>
-            <span className="w-full   p-2 text-sm font-dmSans">
-              {formatDate(response.completedAt)}
-            </span>
-            <span className="w-full   p-2 text-sm font-dmSans">
-              {response.topics.map((topic) => topic.Heading).join(", ")}
-            </span>
-            <span className="w-full   p-2 text-sm font-dmSans">
-              {response.percentage?.toFixed(2)}%
-            </span>
-            <div className="flex justify-center">
-              <div className=" self-center h-fit">
-                <span>
-                  <select
-                    className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
-                    onChange={handleStatusChange(
-                      response.assessmentId._id,
-                      response._id
-                    )}
-                    value={response?.status}
-                  >
-                    <option value="">pending</option>
-                    <option value="rejected">rejected</option>
-                    <option value="selected">selected</option>
-                  </select>
+      {assessmentResult.length > 0 ? (
+        assessmentResult
+          ?.filter((assessment) => assessment?.assessmentId?._id)
+          .map((response, index) => {
+            return (
+              <div
+                className=" grid grid-cols-5 text-center mt-3 bg-white rounded-lg "
+                key={index}
+              >
+                <span className="w-full   py-2 text-sm font-dmSans first-letter:uppercase">
+                  {response.assessmentId.name}
                 </span>
+                <span className="w-full   p-2 text-sm font-dmSans">
+                  {formatDate(response.completedAt)}
+                </span>
+                <span className="w-full   p-2 text-sm font-dmSans">
+                  {response.topics.map((topic) => topic.Heading).join(", ")}
+                </span>
+                <span className="w-full   p-2 text-sm font-dmSans">
+                  {response.percentage?.toFixed(2)}%
+                </span>
+                <div className="flex justify-center">
+                  <div className=" self-center h-fit">
+                    <span>
+                      <select
+                        className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
+                        onChange={handleStatusChange(
+                          response.assessmentId._id,
+                          response._id
+                        )}
+                        value={response?.status}
+                      >
+                        <option value="">pending</option>
+                        <option value="rejected">rejected</option>
+                        <option value="selected">selected</option>
+                      </select>
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })
+      ) : (
+        <p className="w-full h-[100px] text-gray-500 font-bold text-xl flex justify-center items-center">
+          No Result Found
+        </p>
+      )}
     </div>
   );
 };

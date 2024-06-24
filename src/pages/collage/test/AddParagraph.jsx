@@ -333,11 +333,11 @@ const AddParagraph = () => {
                 className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
                 onClick={() => handleSave()}
               >
-                {loading ? (
+                {/* {loading ? (
                   <CircularLoader />
                 ) : (
                   <FaPlus className="self-center" />
-                )}{" "}
+                )}{" "} */}
                 Add Next Question
               </button>
             </div>
