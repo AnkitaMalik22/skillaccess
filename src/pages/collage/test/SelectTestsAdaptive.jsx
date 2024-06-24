@@ -417,7 +417,7 @@ const SelectTests = () => {
                     To ensure variety in your test, double the total number of
                     questions. Divide these into three categories:
                     <span className="font-bold"> Beginner (n)</span>,{" "}
-                    <span className="font-bold">Intermediate (n/2)</span>, and
+                    <span className="font-bold">Intermediate (n x 2/3)</span>, and
                     <span className="font-bold"> Advanced (n/3)</span>. This
                     balanced approach will create an enjoyable experience for
                     all participants and highlight areas for further learning.
@@ -435,7 +435,7 @@ const SelectTests = () => {
                       </li>
                       <li>
                         Intermediate:{" "}
-                        <span className="font-bold">15 questions</span>
+                        <span className="font-bold">20 questions</span>
                       </li>
                       <li>
                         Advanced:{" "}
@@ -553,7 +553,8 @@ const SelectTests = () => {
                   </button>
 
                   <button
-                    className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white "
+                    className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white"
+                    // data-tip="Enter the value of n"
                     onClick={() => {
                       setVisible(true);
                       setSection(section);
