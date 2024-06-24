@@ -98,7 +98,7 @@ const StudentsProfile = () => {
             </div>
 
             {/* right side */}
-            <div className=" col-start-10 col-span-3 w-10/12  ml-10 bg-gray-50  rounded-lg  mt-3 pb-4 h-full max-h-[85vh] basis-full font-dmSans sm:block sm:basis-auto pt-2 ">
+            <div className=" col-start-10 col-span-3 w-10/12  ml-10 bg-gray-50  rounded-lg  mt-3 pb-4  h-[800px] basis-full font-dmSans sm:block sm:basis-auto pt-2 ">
               <AssessmentList id={id} />
             </div>
           </div>
