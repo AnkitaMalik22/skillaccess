@@ -59,7 +59,7 @@ const QuesBank = () => {
               </div>
 
               <button
-                className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-[5px] px-2"
+                className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-[5px] px-3"
                 onClick={() => navigate("/collage/quesBank/bookmarks")}
               >
                 View All
@@ -69,20 +69,19 @@ const QuesBank = () => {
             {/* list to be iterated */}
             {GET_BOOKMARKS_LOADING ? (
               <>
-              {Array.from({ length: 3 }).map((_, index) => (
-                <div className="grid-cols-3 text-center mx-auto font-dmSans font-bold text-base hidden md:grid bg-white py-3 mb-3 rounded-xl">
-                <div className="flex justify-center animate-pulse">
-                  <div className="h-6 bg-gray-300 rounded-full w-3/4"></div>
-                </div>
-                <div className="flex justify-center animate-pulse">
-                  <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
-                </div>
-                <div className="flex justify-center gap-1 animate-pulse">
-                  <div className="h-6 bg-gray-300 rounded-full w-6"></div>
-                </div>
-              </div>
-              ))}
-              
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <div className="grid-cols-3 text-center mx-auto font-dmSans font-bold text-base hidden md:grid bg-white py-3 mb-3 rounded-xl">
+                    <div className="flex justify-center animate-pulse">
+                      <div className="h-6 bg-gray-300 rounded-full w-3/4"></div>
+                    </div>
+                    <div className="flex justify-center animate-pulse">
+                      <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
+                    </div>
+                    <div className="flex justify-center gap-1 animate-pulse">
+                      <div className="h-6 bg-gray-300 rounded-full w-6"></div>
+                    </div>
+                  </div>
+                ))}
               </>
             ) : (
               <>

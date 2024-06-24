@@ -237,7 +237,7 @@ const SelectTests = () => {
   }, [addSection, removeSection, selectedSections]);
 
   return (
-    <div className="font-dmSans text-sm font-bold w-11/12 mx-auto py-5 md:py-10">
+    <>
       {visible && (
         <PopUpAdaptive
           section={section}
@@ -437,7 +437,7 @@ const SelectTests = () => {
           ))}{" "}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

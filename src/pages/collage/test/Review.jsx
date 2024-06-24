@@ -168,7 +168,7 @@ const Review = () => {
   }, [questions]);
   const totalTime = handleCalculateTime();
   return (
-    <div className="font-dmSans text-sm font-bold w-11/12 py-5 md:py-10 mx-auto">
+    <>
       <Header
         name={name}
         view={view}
@@ -319,7 +319,7 @@ const Review = () => {
           <></>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ import { PiSlidersHorizontalLight } from "react-icons/pi";
 const Header = ({ Heading, sectionId }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex w-full mx-auto justify-between mb-6">
+    <div className="flex w-full mx-auto justify-between mb-6 items-center">
       <div className="flex gap-3">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
@@ -16,7 +16,7 @@ const Header = ({ Heading, sectionId }) => {
         >
           <FaChevronLeft className="p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
         </button>
-        <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
+        <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717] first-letter:uppercase">
           {Heading}
         </h2>
       </div>

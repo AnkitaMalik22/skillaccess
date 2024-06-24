@@ -50,7 +50,7 @@ const CompanyProfile = () => {
 
   return (
     <>
-      <div className="flex w-full mx-auto justify-between mb-6">
+      <div className="flex w-full mx-auto justify-between mb-6 items-center">
         {/* comp */}
         <span className="flex gap-3">
           <button
@@ -60,7 +60,7 @@ const CompanyProfile = () => {
             <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
           </button>
 
-          <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
+          <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717] first-letter:uppercase">
             {companyDetails?.basic?.companyName}
           </h2>
         </span>

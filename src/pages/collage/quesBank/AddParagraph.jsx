@@ -318,7 +318,7 @@ const AddParagraph = () => {
                   {/* {loading ? (
                     <CircularLoader />
                   ) : ( */}
-                    <FaPlus className="self-center" />
+                  <FaPlus className="self-center" />
                   {/* )}{" "} */}
                   Add Next Question
                 </button>

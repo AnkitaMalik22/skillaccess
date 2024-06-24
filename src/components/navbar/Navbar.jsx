@@ -35,7 +35,7 @@ const Navbar = (props) => {
 
       {/* right */}
       <div className="flex gap-4">
-        <button className="border-2 border-[#D9E1E7]  text-[#D9E1E7] rounded-lg px-3 py-3 relative">
+        <button className="border-2 border-[#D9E1E7]  text-[#D9E1E7] rounded-lg px-2 p-1 relative">
           <FiBell className="text-lg" />{" "}
           <div className="rounded-full h-2 w-2 bg-[#0090FF]  absolute top-1 right-2"></div>
         </button>
@@ -44,7 +44,7 @@ const Navbar = (props) => {
           onClick={() => {
             navigate("/collage/accounting");
           }}
-          className="border border-[#D9E1E7] text-[#0090FF] rounded-lg px-2 py-3 relative flex items-center"
+          className="border border-[#D9E1E7] text-[#0090FF] rounded-lg px-3 p-1 relative flex items-center"
         >
           <FaCoins />
           <h1 className="text-[#0090FF] px-2">
@@ -53,14 +53,14 @@ const Navbar = (props) => {
         </button>
 
         <div
-          className="border border-[#D9E1E7]  rounded-lg p-2 relative flex gap-2"
+          className="border border-[#D9E1E7]  rounded-lg p-2 relative flex gap-3"
           style={{ marginRight: "12rem" }}
           onClick={goToProfile}
         >
           <img
             src={userDetails?.user?.avatar?.url}
             alt="icon"
-            className="h-8 w-8 p-1"
+            className="h-5 w-5"
           />{" "}
           <h2 className="text-sm font-bold self-center">
             Hello {userDetails?.user?.FirstName}

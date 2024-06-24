@@ -232,7 +232,7 @@ const AddParagraph = () => {
         addType={addType}
       />
       <div className="bg-white min-h-[90vh]mx-auto rounded-xl font-dmSans">
-        <div className="flex gap-5 mx-auto ">
+        <div className="flex flex-col gap-5 mx-auto ">
           <div className="w-1/2">
             <h2 className="font-bold mb-2">Question</h2>
             <select

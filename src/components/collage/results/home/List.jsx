@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllTests } from "../../../../redux/collage/test/thunks/test";
 import Skeleton from "../../../loaders/Skeleton";
 
-const List = ({ FilterdStudents ,isLoading }) => {
+const List = ({ FilterdStudents, isLoading }) => {
   // const arr = [2, 1, 1, 1, 1];
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -86,95 +86,92 @@ const List = ({ FilterdStudents ,isLoading }) => {
       </div>
 
       {/* list to be iterated */}
-      {
-        isLoading && (  <Skeleton/>)
-      }
-      {!isLoading && FilterdStudents.map((assessment, index) => (
-        <div
-          className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full bg-white border-2 transition-colors duration-300"
-          style={{ borderColor: "transparent", borderWidth: "2px" }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.borderColor = colors[index])
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.borderColor = "transparent")
-          }
-        >
-          {" "}
-          {/* row-2 */}
-          <div className={` flex justify-center `}>
-            <div className="flex self-center">
-              <span>
-                <h2 className="font-dmSans  sm:text-sm">{assessment?.name}</h2>
+      {isLoading && <Skeleton />}
+      {!isLoading &&
+        FilterdStudents.map((assessment, index) => (
+          <div
+            className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full bg-white border-2 transition-colors duration-300"
+            style={{ borderColor: "transparent", borderWidth: "2px" }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.borderColor = colors[index])
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.borderColor = "transparent")
+            }
+          >
+            {" "}
+            {/* row-2 */}
+            <div className={` flex justify-center `}>
+              <div className="flex self-center">
+                <span>
+                  <h2 className="font-dmSans  sm:text-sm first-letter:uppercase">
+                    {assessment?.name}
+                  </h2>
 
-                {/* <h2 className="font-dmSans  sm:text-sm"> */}
-              </span>
+                  {/* <h2 className="font-dmSans  sm:text-sm"> */}
+                </span>
+              </div>
             </div>
-          </div>
-          {/*  */}
-          <div className="flex justify-center ">
-            <div className=" self-center h-fit">
-              <span>
-                <h2 className="font-dmSans  sm:text-sm">
-                  {assessment?.studentResponses?.length}
+            {/*  */}
+            <div className="flex justify-center ">
+              <div className=" self-center h-fit">
+                <span>
+                  <h2 className="font-dmSans  sm:text-sm">
+                    {assessment?.studentResponses?.length}
+                  </h2>
+                </span>
+              </div>
+            </div>
+            {/*  */}
+            <div className="flex justify-center">
+              <div className=" self-center h-fit">
+                <span>
+                  <h2 className="font-dmSans  sm:text-sm">
+                    {assessment?.selectedStudents?.length}
+                  </h2>
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className=" self-center">
+                <span className="flex gap-2">
+                  <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                    <div
+                      className="h-full rounded-lg"
+                      style={{
+                        width: assessment.avgPercentage,
+                        backgroundColor: colors[index],
+                      }}
+                    ></div>
+                  </div>
+                  <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                    {" "}
+                    {assessment?.avgPercentage?.toFixed(2)}%
+                  </h2>
+                </span>
+              </div>
+            </div>
+            <div className="flexjustify-center mr-3">
+              <span
+                className="self-center hover:cursor-pointer "
+                onClick={() =>
+                  navigate(
+                    `/collage/results/overview?level=beginner&assessment=${assessment._id}`
+                  )
+                }
+              >
+                <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
+                  View Details
                 </h2>
               </span>
             </div>
           </div>
-          {/*  */}
-          <div className="flex justify-center">
-            <div className=" self-center h-fit">
-              <span>
-                <h2 className="font-dmSans  sm:text-sm">
-                  {assessment?.selectedStudents?.length}
-                </h2>
-              </span>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <div className=" self-center">
-              <span className="flex gap-2">
-                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
-                  <div
-                    className="h-full rounded-lg"
-                    style={{
-                      width: assessment.avgPercentage,
-                      backgroundColor: colors[index],
-                    }}
-                  ></div>
-                </div>
-                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
-                  {" "}
-                  {assessment?.avgPercentage?.toFixed(2)}%
-                </h2>
-              </span>
-            </div>
-          </div>
-          <div className="flexjustify-center mr-3">
-            <span
-              className="self-center hover:cursor-pointer "
-              onClick={() =>
-                navigate(
-                  `/collage/results/overview?level=beginner&assessment=${assessment._id}`
-                )
-              }
-            >
-              <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
-                View Details
-              </h2>
-            </span>
-          </div>
+        ))}
+      {!isLoading && FilterdStudents && FilterdStudents?.length === 0 && (
+        <div className="flex justify-center items-center h-96">
+          <h2 className="font-dmSans text-lg text-gray-500">No result found</h2>
         </div>
-      ))}
-      {
-        !isLoading && FilterdStudents && FilterdStudents?.length === 0 && (
-          <div className="flex justify-center items-center h-96">
-            <h2 className="font-dmSans text-lg text-gray-500">
-              No result found
-            </h2>
-          </div>
-        )
-      }
+      )}
     </div>
   );
 };
