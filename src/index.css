@@ -4,14 +4,14 @@
 
 /* Firefox */
 * {
-  scrollbar-width: 0px;
+  scrollbar-width: 6px;
   scrollbar-color: rgb(243 244 246);
   font-family: "DM Sans", sans-serif;
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 0px;
+  width: 6px;
 }
 
 *::-webkit-scrollbar-track {
