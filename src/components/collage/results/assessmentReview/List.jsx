@@ -45,7 +45,13 @@ const List = ({ question, number, isLoading }) => {
           <Disclosure className="relative z-10">
             {({ open }) => (
               <div>
-                <div className="flex w-full justify-between rounded-lg text-left text-sm font-medium border border-[#95ACFA] p-3">
+                <div
+                  className={`${
+                    AnswerIndex === StudentAnswerIndex
+                      ? "border-green-500"
+                      : "border-red-500"
+                  } flex w-full justify-between rounded-lg text-left text-sm font-medium border border-[#95ACFA] p-3`}
+                >
                   <p
                     className="text-base font-normal #3E3E3E"
                     dangerouslySetInnerHTML={{ __html: question.Title }}
@@ -65,7 +71,7 @@ const List = ({ question, number, isLoading }) => {
                   {question.Options?.map((option, index) => (
                     <div
                       key={index}
-                      className="flex gap-2 z-10 relative rounded-lg p-3"
+                      className="flex items-center gap-2 z-10 relative rounded-lg p-3"
                     >
                       <div className="w-6">
                         {AnswerIndex === StudentAnswerIndex ? (
@@ -100,7 +106,7 @@ const List = ({ question, number, isLoading }) => {
                       <label
                         className={`text-sm ${
                           AnswerIndex === index
-                            ? "text-[#00875A]"
+                            ? "text-[#00875A] font-bold"
                             : StudentAnswerIndex === index
                             ? "text-red-500"
                             : "text-black"

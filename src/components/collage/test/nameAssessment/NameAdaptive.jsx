@@ -75,7 +75,7 @@ const Name = () => {
       value < currentTime
     ) {
       toast.error(
-        "Please select a time and date after the current time and date."
+        "Please choose a date and time that is either the current moment or a future date and time."
       );
       return; // Prevent updating state if the selected time is before the current time and date
     }
@@ -129,6 +129,15 @@ const Name = () => {
       setErrors((prevErrors) => ({
         ...prevErrors,
         totalAttempts: "Please enter Total Attempts",
+      }));
+      flag = true;
+    } else if (
+      testDetails.totalAttempts < 1 ||
+      testDetails.totalAttempts > 10
+    ) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        totalAttempts: "Total Attempts must be between 1 and 10",
       }));
       flag = true;
     } else {

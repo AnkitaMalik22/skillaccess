@@ -11,6 +11,7 @@ import { editQuestionById } from "../../../redux/collage/test/thunks/question";
 import { addQuestionToTopic } from "../../../redux/collage/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
+import { setTotalTopicQuestions } from "../../../redux/collage/test/thunks/topic";
 
 const AddMcqToTopic = () => {
   //useTranslate();
@@ -53,7 +54,7 @@ const AddMcqToTopic = () => {
       return -1;
     });
   };
-
+  // console.log(question);
   const handleChanges = (e) => {
     // console.log(question);
     if (e.target.name === "Title") {
@@ -215,9 +216,14 @@ const AddMcqToTopic = () => {
 
   //     return () => {
   //       //navigate(-1);
-  //     }
+  //     } 
   //   }
   //   , [ADD_QUESTION_LOADING]);
+  useEffect(() => {
+    if (!ADD_QUESTION_LOADING) {
+      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level}));
+    }
+  }, [ADD_QUESTION_LOADING]);
 
   const stripHtml = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");

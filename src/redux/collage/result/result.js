@@ -29,7 +29,7 @@ const resultSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getResultGraph.fulfilled, (state, action) => {
       action.payload.assessments.forEach((element, i) => {
-        state.graph.year[element._id.month] = element;
+        state.graph.year[element._id.month-1] = element;
       });
     });
   },

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Header from "../../../components/collage/test/addVideo/addSelect/Header";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
+import { setTotalTopicQuestions } from "../../../redux/collage/test/thunks/topic";
 
 const AddVideoQuestionsPage = () => {
   //useTranslate();
@@ -13,6 +15,7 @@ const AddVideoQuestionsPage = () => {
   const [selectQuestionType, setSelectQuestionType] = useState("");
   const [searchParam, setSearchParam] = useSearchParams();
   const level = searchParam.get("level");
+  const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
 
   const NavHandler = () => {
     switch (selectQuestionType) {
@@ -41,6 +44,12 @@ const AddVideoQuestionsPage = () => {
         break;
     }
   };
+
+  useEffect(() => {
+    if (!ADD_QUESTION_LOADING) {
+      dispatch(setTotalTopicQuestions({ id, type: "video" ,level}));
+    }
+  }, [ADD_QUESTION_LOADING]);
 
   return (
     <>

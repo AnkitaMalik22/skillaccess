@@ -176,3 +176,98 @@ export const createTopic = createAsyncThunk(
     }
   }
 );
+export const setTotalTopicQuestions = createAsyncThunk(
+  'topics/setTotalTopicQuestions',
+  async (arg, { dispatch, rejectWithValue }) => {
+    try {
+      // Dispatch the getTopicById thunk and wait for the result
+      const topic= await dispatch(getTopicById(arg.id)).unwrap();
+
+
+      // console.log(topic, "topic");
+
+      if (!topic) {
+        console.error(`Topic with id ${arg.id} not found`);
+        return rejectWithValue('Topic not found');
+      }
+
+      const getArrayLength = (arr) => Array.isArray(arr) ? arr.length : 0;
+
+      let totalTopicQuestions = 0;
+      switch (arg.type) {
+        case "mcq":
+          console.log(arg.level, "arg.level");
+          if (arg.level === "adaptive") {
+            totalTopicQuestions = getArrayLength(topic.questions);
+          } else if (arg.level === "beginner") {
+            totalTopicQuestions = topic.questions?.filter((question) => question?.QuestionLevel
+            === "beginner")?.length || 0;
+            console.log(totalTopicQuestions, "totalTopicQuestions beginner");
+          } else if (arg.level === "intermediate") {
+            totalTopicQuestions = topic.questions?.filter((question) => question?.QuestionLevel
+            === "intermediate")?.length || 0;
+          } else if (arg.level === "advanced") {
+            totalTopicQuestions = topic.questions?.filter((question) => question?.QuestionLevel
+            === "advanced")?.length || 0;
+          }
+          break;
+        case "findAnswer":
+          if (arg.level === 'beginner') {
+            totalTopicQuestions = topic.findAnswers.filter((question) => question?.QuestionLevel === "beginner")?.length;
+          }
+          else if (arg.level === 'intermediate') {
+            totalTopicQuestions = topic.findAnswers.filter((question) => question?.QuestionLevel === "intermediate")?.length;
+          }
+          else if (arg.level === 'advanced') {
+            totalTopicQuestions = topic.findAnswers.filter((question) => question?.QuestionLevel === "advanced")?.length;
+          }
+          break;
+        case "essay":
+          if (arg.level === 'beginner') {
+            totalTopicQuestions = topic.essay.filter((question) => question?.QuestionLevel === "beginner")?.length;
+          }
+          else if (arg.level === 'intermediate') {
+            totalTopicQuestions = topic.essay.filter((question) => question?.QuestionLevel === "intermediate")?.length;
+          }
+          else if (arg.level === 'advanced') {
+            totalTopicQuestions = topic.essay.filter((question) => question?.QuestionLevel === "advanced")?.length;
+          }
+          
+          break;
+        case "video":
+          if (arg.level === 'beginner') {
+            totalTopicQuestions = topic.video.filter((question) => question?.QuestionLevel === "beginner")?.length;
+          }
+          else if (arg.level === 'intermediate') {
+            totalTopicQuestions = topic.video.filter((question) => question?.QuestionLevel === "intermediate")?.length;
+          }
+          else if (arg.level === 'advanced') {
+            totalTopicQuestions = topic.video.filter((question) => question?.QuestionLevel === "advanced")?.length;
+          }
+         
+          break;
+        case "compiler":
+          if (arg.level === 'beginner') {
+            totalTopicQuestions = topic.compiler.filter((question) => question?.QuestionLevel === "beginner")?.length;
+          }
+          else if (arg.level === 'intermediate') {
+            totalTopicQuestions = topic.compiler.filter((question) => question?.QuestionLevel === "intermediate")?.length;
+          }
+          else if (arg.level === 'advanced') {
+            totalTopicQuestions = topic.compiler.filter((question) => question?.QuestionLevel === "advanced")?.length;
+          }
+          
+          
+          break;
+        default:
+          console.warn(`Unknown question type: ${arg.type}`);
+          totalTopicQuestions = 0;
+          break;
+      }
+
+      return { totalTopicQuestions };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
