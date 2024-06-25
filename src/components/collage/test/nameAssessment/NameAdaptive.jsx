@@ -227,9 +227,9 @@ const Name = () => {
             placeholder="No. of Attempts*"
             value={testDetails.totalAttempts}
             onChange={handleChange}
-            pattern="[1-9]*"
+            pattern="[0-9]*"
             onInput={(e) =>
-              (e.target.value = e.target.value.replace(/[^1-9]/g, ""))
+              (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
             }
           />
           {errors.totalAttempts && (
@@ -248,9 +248,9 @@ const Name = () => {
             placeholder="No. of Questions*"
             value={testDetails.totalQuestions}
             onChange={handleChange}
-            pattern="[1-9]*"
+            pattern="[0-9]*"
             onInput={(e) =>
-              (e.target.value = e.target.value.replace(/[^1-9]/g, ""))
+              (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
             }
           />
           {errors.totalQuestions && (
