@@ -12,6 +12,8 @@ import {
 import { addQuestionToTopic } from "../../../redux/collage/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
+import { setTotalTopicQuestions } from "../../../redux/collage/test/thunks/topic";
+
 
 const AddParagraph = () => {
   //useTranslate();
@@ -220,6 +222,12 @@ const AddParagraph = () => {
   useEffect(() => {
     setCountDetail(currentTopic?.findAnswers?.length - 1);
   }, [currentTopic]);
+
+  useEffect(() => {
+    if (!ADD_QUESTION_LOADING) {
+      dispatch(setTotalTopicQuestions({ id, type: "findAnswer" ,level}));
+    }
+  }, [ADD_QUESTION_LOADING]);
   return (
     <div>
       <Header

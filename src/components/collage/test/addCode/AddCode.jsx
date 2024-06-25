@@ -14,6 +14,8 @@ import {
 } from "../../../../redux/collage/test/testSlice";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
+import { setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
+
 
 const AddCode = () => {
   const { id } = useParams();
@@ -352,7 +354,14 @@ const AddCode = () => {
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
-  console.log(question);
+  // console.log(question);
+
+useEffect(() => {
+    if (!ADD_QUESTION_LOADING) {
+      dispatch(setTotalTopicQuestions({ id, type: "compiler" ,level}));
+    }
+}, [ADD_QUESTION_LOADING]);
+
 
   return (
     <div>

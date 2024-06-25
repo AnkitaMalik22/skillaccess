@@ -12,6 +12,10 @@ import {
 import { addQuestionToTopic } from "../../../redux/collage/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
+import { setTotalTopicQuestions } from "../../../redux/collage/test/thunks/topic";
+
+
+
 
 const AddEssay = () => {
   //useTranslate();
@@ -174,6 +178,11 @@ const AddEssay = () => {
   useEffect(() => {
     setCountDetail(currentTopic?.essay?.length - 1);
   }, [currentTopic]);
+  useEffect(() => {
+    if (!ADD_QUESTION_LOADING) {
+      dispatch(setTotalTopicQuestions({ id, type: "essay" ,level}));
+    }
+  }, [ADD_QUESTION_LOADING]);
 
   return (
     <>

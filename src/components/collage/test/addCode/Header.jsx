@@ -1,17 +1,33 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../loaders/Loader";
+import { setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
+import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Header = ({ handleSave }) => {
   const navigate = useNavigate();
   const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const level = searchParams.get("level");
+
+
   const save = () => {
     handleSave("save");
     // navigate(-1);
   };
+  const {totalTopicQuestions} = useSelector((state) => state.test);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(setTotalTopicQuestions({ id, type: "compiler" ,level }));
+    }
+  }, [id,""]);
 
   return (
     <div className="flex w-full mx-auto justify-between mb-5">
@@ -23,7 +39,7 @@ const Header = ({ handleSave }) => {
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Create Assessment
+        Question No : {totalTopicQuestions+1}
         </h2>
       </div>
 

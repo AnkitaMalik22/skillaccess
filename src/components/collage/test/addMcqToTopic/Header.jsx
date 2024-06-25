@@ -7,6 +7,8 @@ import { useSearchParams } from "react-router-dom";
 import Loader from "../../../loaders/Loader";
 import toast from "react-hot-toast";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import { setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
+
 
 const Header = ({ question, setQuestion, id, type }) => {
   const navigate = useNavigate();
@@ -53,6 +55,15 @@ const Header = ({ question, setQuestion, id, type }) => {
     }
   };
 
+
+  const {totalTopicQuestions} = useSelector((state) => state.test);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level }));
+    }
+  }, [id,""]);
+
   return (
     <div className="flex w-full mx-auto justify-between mb-5">
       <div className="flex gap-3">
@@ -63,7 +74,7 @@ const Header = ({ question, setQuestion, id, type }) => {
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Create Assessment
+        Question No : {totalTopicQuestions+1}
         </h2>
       </div>
 

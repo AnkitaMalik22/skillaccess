@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 import {
   addQuesFunc,
   editQuestionFun,
@@ -35,6 +36,7 @@ import {
   getTopicById,
   getAllTopicsQB,
   deleteTopics,
+  setTotalTopicQuestions
 } from "./thunks/topic";
 
 import {
@@ -194,6 +196,7 @@ const testState = {
   GET_TEST_LOADING :false,
   GET_RECENT_QUESTION_LOADING : false,
   GET_BOOKMARKS_LOADING : false,
+  totalTopicQuestions : 0,
 };
 
 // export const getStudentResponse = createAsyncThunk("test/studentResponse",
@@ -225,6 +228,9 @@ const testState = {
 //   }
 // }
 // );
+
+
+
 
 const testSlice = createSlice({
   initialState: testState,
@@ -970,6 +976,17 @@ const testSlice = createSlice({
       .addCase(getStudentsForTest.rejected, (state, action) => {
         console.error(action.payload);
         state.GET_STUDENTS_LOADING = false;
+      })
+      .addCase(setTotalTopicQuestions.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(setTotalTopicQuestions.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.totalTopicQuestions = action.payload.totalTopicQuestions;
+      })
+      .addCase(setTotalTopicQuestions.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload || action.error.message;
       });
   },
 });

@@ -12,6 +12,7 @@ import {
 } from "../../../../redux/collage/test/testSlice";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { setTotalTopicQuestions } from "../../../redux/collage/test/thunks/topic";
 
 const AddMcq = () => {
   const { topics, ADD_QUESTION_LOADING } = useSelector((state) => state.test);
@@ -225,6 +226,12 @@ const AddMcq = () => {
   //   }
   // }
   // , [ADD_QUESTION_LOADING]);
+
+  useEffect(() => {
+    if (!ADD_QUESTION_LOADING) {
+      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level}));
+    }
+  }, [ADD_QUESTION_LOADING]);
 
   return (
     <div>
