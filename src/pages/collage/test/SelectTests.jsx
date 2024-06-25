@@ -347,9 +347,10 @@ const SelectTests = () => {
             <div className=" self-center w-fit h-fit ">
               <div
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
-                onClick={() =>
-                  Navigate(`/collage/test/createTopic?level=${level}`)
-                }
+                onClick={() => {
+                  localStorage.removeItem("currentTopic");
+                  Navigate(`/collage/test/createTopic?level=${level}`);
+                }}
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
               </div>
