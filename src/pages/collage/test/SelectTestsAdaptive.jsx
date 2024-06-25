@@ -417,7 +417,8 @@ const SelectTests = () => {
                     To ensure variety in your test, double the total number of
                     questions. Divide these into three categories:
                     <span className="font-bold"> Beginner (n)</span>,{" "}
-                    <span className="font-bold">Intermediate (n x 2/3)</span>, and
+                    <span className="font-bold">Intermediate (n x 2/3)</span>,
+                    and
                     <span className="font-bold"> Advanced (n/3)</span>. This
                     balanced approach will create an enjoyable experience for
                     all participants and highlight areas for further learning.
@@ -454,9 +455,10 @@ const SelectTests = () => {
             <div className=" self-center w-fit h-fit ">
               <div
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
-                onClick={() =>
-                  Navigate("/collage/test/createTopicAdaptive?level=adaptive")
-                }
+                onClick={() => {
+                  localStorage.removeItem("currentTopic");
+                  Navigate("/collage/test/createTopicAdaptive?level=adaptive");
+                }}
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
               </div>
