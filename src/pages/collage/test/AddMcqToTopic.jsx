@@ -216,7 +216,7 @@ const AddMcqToTopic = () => {
 
   //     return () => {
   //       //navigate(-1);
-  //     }
+  //     } 
   //   }
   //   , [ADD_QUESTION_LOADING]);
   useEffect(() => {

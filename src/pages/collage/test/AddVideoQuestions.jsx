@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Header from "../../../components/collage/test/addVideo/addSelect/Header";
@@ -13,6 +13,7 @@ const AddVideoQuestionsPage = () => {
   const [selectQuestionType, setSelectQuestionType] = useState("");
   const [searchParam, setSearchParam] = useSearchParams();
   const level = searchParam.get("level");
+  const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
 
   const NavHandler = () => {
     switch (selectQuestionType) {
@@ -41,6 +42,12 @@ const AddVideoQuestionsPage = () => {
         break;
     }
   };
+
+  useEffect(() => {
+    if (!ADD_QUESTION_LOADING) {
+      dispatch(setTotalTopicQuestions({ id, type: "video" ,level}));
+    }
+  }, [ADD_QUESTION_LOADING]);
 
   return (
     <>
