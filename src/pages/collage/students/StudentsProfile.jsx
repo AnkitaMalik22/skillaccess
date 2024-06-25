@@ -27,79 +27,83 @@ const StudentsProfile = () => {
 
   console.log(studentCV.studentResponses);
   return (
-    <div>
+    <div className="h-screen flex flex-col">
       {GET_STUDENT_LOADING ? (
         <Loader />
       ) : (
         <>
-          {" "}
           <Header />
-          <div className="grid grid-cols-12 mx-auto border-gray-200  ">
-            <div className="col-span-9 rounded-2xl  ">
-              <Details student={studentCV} />
-              {/* toggler */}
-              <div className="bg-gray-50 p-4">
-                <span className="grid grid-cols-4 text-xs font-bold border-b border-spacing-0 border-gray-200">
-                  <h2
-                    className={`${
-                      toggle === 1
-                        ? "text-blue-500 border-b-4 border-blue-500"
-                        : ""
-                    } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
-                    onClick={() => setToggle(1)}
-                  >
-                    Education
-                  </h2>
-                  <h2
-                    className={`${
-                      toggle === 2
-                        ? "text-blue-500 border-b-4 border-blue-500"
-                        : ""
-                    } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
-                    onClick={() => setToggle(2)}
-                  >
-                    Skills
-                  </h2>
-                  <h2
-                    className={`${
-                      toggle === 3
-                        ? "text-blue-500 border-b-4 border-blue-500"
-                        : ""
-                    } w-fit px-12 pb-2 hover:cursor-pointer mx-auto`}
-                    onClick={() => setToggle(3)}
-                  >
-                    Assessment Results
-                  </h2>
-                  <h2
-                    className={`${
-                      toggle === 4
-                        ? "text-blue-500 border-b-4 border-blue-500"
-                        : ""
-                    } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
-                    onClick={() => setToggle(4)}
-                  >
-                    Portfolio
-                  </h2>
-                </span>
+          <div className="flex-grow flex overflow-hidden">
+            <div className="flex-grow overflow-auto">
+              <div className="grid grid-cols-12 mx-auto border-gray-200 h-full">
+                <div className="col-span-9 rounded-2xl overflow-auto">
+                  <Details student={studentCV} />
+                  {/* toggler */}
+                  <div className="bg-gray-50 p-4">
+                    <span className="grid grid-cols-4 text-xs font-bold border-b border-spacing-0 border-gray-200">
+                      <h2
+                        className={`${
+                          toggle === 1
+                            ? "text-blue-500 border-b-4 border-blue-500"
+                            : ""
+                        } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
+                        onClick={() => setToggle(1)}
+                      >
+                        Education
+                      </h2>
+                      <h2
+                        className={`${
+                          toggle === 2
+                            ? "text-blue-500 border-b-4 border-blue-500"
+                            : ""
+                        } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
+                        onClick={() => setToggle(2)}
+                      >
+                        Skills
+                      </h2>
+                      <h2
+                        className={`${
+                          toggle === 3
+                            ? "text-blue-500 border-b-4 border-blue-500"
+                            : ""
+                        } w-fit px-12 pb-2 hover:cursor-pointer mx-auto`}
+                        onClick={() => setToggle(3)}
+                      >
+                        Assessment Results
+                      </h2>
+                      <h2
+                        className={`${
+                          toggle === 4
+                            ? "text-blue-500 border-b-4 border-blue-500"
+                            : ""
+                        } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
+                        onClick={() => setToggle(4)}
+                      >
+                        Portfolio
+                      </h2>
+                    </span>
+                    <div className="overflow-auto">
+                      {toggle === 1 ? (
+                        <Education Education={studentCV?.Education} />
+                      ) : toggle === 2 ? (
+                        <Skills skills={studentCV?.Skills} />
+                      ) : toggle === 3 ? (
+                        <Results
+                          assessmentResult={studentCV?.studentResponses}
+                          id={id}
+                        />
+                      ) : (
+                        <Portfolio Portfolio={studentCV?.Portfolio} />
+                      )}
+                    </div>
+                  </div>
+                </div>
 
-                {toggle === 1 ? (
-                  <Education Education={studentCV?.Education} />
-                ) : toggle === 2 ? (
-                  <Skills skills={studentCV?.Skills} />
-                ) : toggle === 3 ? (
-                  <Results
-                    assessmentResult={studentCV?.studentResponses}
-                    id={id}
-                  />
-                ) : (
-                  <Portfolio Portfolio={studentCV?.Portfolio} />
-                )}
+                {/* right side */}
+                <div className="col-start-10 col-span-3 w-10/12 ml-10 bg-gray-50 rounded-lg mt-3 pb-4 basis-full font-dmSans sm:block sm:basis-auto pt-2 overflow-hidden">
+                  <AssessmentList id={id} />
+                </div>
               </div>
-            </div>
-
-            {/* right side */}
-            <div className=" col-start-10 col-span-3 w-10/12  ml-10 bg-gray-50  rounded-lg  mt-3 pb-4  h-[800px] basis-full font-dmSans sm:block sm:basis-auto pt-2 ">
-              <AssessmentList id={id} />
             </div>
           </div>
         </>
@@ -107,5 +111,4 @@ const StudentsProfile = () => {
     </div>
   );
 };
-
 export default StudentsProfile;

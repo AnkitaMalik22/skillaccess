@@ -32,7 +32,13 @@ const List = ({ Title, number, code, question }) => {
         <Disclosure className="relative z-10">
           {({ open }) => (
             <>
-              <div className="flex w-full justify-between rounded-lg  p-3 text-left text-sm font-medium  border-[#95ACFA] border mb-2">
+              <div
+                className={`${
+                  passedTestCasesCount === totalTestCasesCount
+                    ? "border-green-500"
+                    : "border-red-500"
+                } flex w-full justify-between rounded-lg  p-3 text-left text-sm font-medium  border mb-2`}
+              >
                 <div>
                   <p
                     className="text-sm"

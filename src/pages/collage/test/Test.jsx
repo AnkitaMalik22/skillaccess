@@ -64,10 +64,10 @@ const Test = () => {
       {/* search bar */}
       <Header students={approvedStudents} />
 
-      <div className="flex rounded-lg md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch">
+      <div className="flex rounded-lg md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch h-screen">
         {/* left block */}
         <div className="w-3/4 rounded-lg flex flex-col">
-          <div className="w-full flex-grow">
+          <div className="w-full flex-grow overflow-y-auto">
             <div className="mx-auto w-full rounded-2xl bg-white">
               {arr.map((comp, i) => (
                 <Disclosure defaultOpen key={i}>
@@ -131,14 +131,14 @@ const Test = () => {
         </div>
 
         {/* right block */}
-        <div className="w-1/4 p-4 bg-gray-100 h-[1200px] rounded-3xl font-dmSans sm:block flex-grow flex-shrink-0 flex flex-col">
+        <div className="w-1/4 p-4 bg-gray-100 rounded-3xl font-dmSans sm:block flex flex-col">
           <div className="rounded-3xl bg-white h-full mx-auto flex flex-col">
             <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
               Recent Assessments Completed
             </h2>
-            <div className="p-3 h-full overflow-y-auto">
+            <div className="p-3 flex-grow overflow-y-auto">
               {recentAssessments.map((assessment, index) => (
-                <div className="flex flex-col md:gap-8" key={index}>
+                <div className="flex flex-col md:gap-8 mb-5" key={index}>
                   <div className="flex gap-3 items-center">
                     <div className="min-w-[2.5rem] h-10 self-center rounded-lg">
                       <img
