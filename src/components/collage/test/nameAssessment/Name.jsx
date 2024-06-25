@@ -80,7 +80,7 @@ const Name = () => {
       value < currentTime
     ) {
       toast.error(
-        "Please select a time and date after the current time and date."
+        "Please choose a date and time that is either the current moment or a future date and time."
       );
       return; // Prevent updating state if the selected time is before the current time and date
     }
