@@ -58,7 +58,7 @@ const Results = ({ assessmentResult, id }) => {
                 className=" grid grid-cols-5 text-center mt-3 bg-white rounded-lg "
                 key={index}
               >
-                <span className="w-full   py-2 text-sm font-dmSans">
+                <span className="w-full   py-2 text-sm font-dmSans first-letter:uppercase">
                   {response.assessmentId.name}
                 </span>
                 <span className="w-full   p-2 text-sm font-dmSans">

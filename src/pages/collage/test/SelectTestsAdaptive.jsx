@@ -15,7 +15,7 @@ import {
 import { getAllTopics } from "../../../redux/collage/test/thunks/topic";
 import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
 import useTranslate from "../../../hooks/useTranslate";
-
+import { Disclosure } from "@headlessui/react";
 const SelectTests = () => {
   //useTranslate();
   const [questionType, setQuestionType] = useState("mcq");
@@ -285,11 +285,7 @@ const SelectTests = () => {
   }, [addSection, removeSection, selectedSections]);
 
   return (
-    <div
-      className={`w-11/12 mx-auto py-5 md:py-10 font-dmSans ${
-        visible ? "h-screen overflow-hidden" : ""
-      }`}
-    >
+    <div className={` ${visible ? "h-screen overflow-hidden" : ""}`}>
       {visible && (
         <PopUpAdaptive
           visible={visible}
@@ -406,6 +402,52 @@ const SelectTests = () => {
           handleFilter={handleFilterSections}
           type={"adaptive"}
         />
+        <div className="w-full  mx-auto my-4 p-4 bg-blue-100 border-l-4 border-blue-500 text-blue-700">
+          <Disclosure defaultOpen className="w-full">
+            {({ open }) => (
+              <div className="w-full">
+                <Disclosure.Button className="w-full px-4 py-2 text-left text-lg font-semibold bg-blue-200 hover:bg-blue-300 rounded">
+                  {open ? "Hide Instructions" : "Show Instructions"}
+                </Disclosure.Button>
+                <Disclosure.Panel className="mt-4 w-full">
+                  <h3 className="text-lg font-semibold">
+                    Tip for Creating a Balanced Test
+                  </h3>
+                  <p className="mt-2">
+                    To ensure variety in your test, double the total number of
+                    questions. Divide these into three categories:
+                    <span className="font-bold"> Beginner (n)</span>,{" "}
+                    <span className="font-bold">Intermediate (n x 2/3)</span>, and
+                    <span className="font-bold"> Advanced (n/3)</span>. This
+                    balanced approach will create an enjoyable experience for
+                    all participants and highlight areas for further learning.
+                  </p>
+                  <div className="mt-4">
+                    <h4 className="text-md font-semibold">Example:</h4>
+                    <ul className="list-disc list-inside mt-2">
+                      <li>
+                        Double the total number of questions:{" "}
+                        <span className="font-bold">30 x 2 = 60</span>
+                      </li>
+                      <li>
+                        Beginner:{" "}
+                        <span className="font-bold">30 questions</span>
+                      </li>
+                      <li>
+                        Intermediate:{" "}
+                        <span className="font-bold">20 questions</span>
+                      </li>
+                      <li>
+                        Advanced:{" "}
+                        <span className="font-bold">10 questions</span>
+                      </li>
+                    </ul>
+                  </div>
+                </Disclosure.Panel>
+              </div>
+            )}
+          </Disclosure>
+        </div>
 
         <div className="grid grid-cols-4 gap-8 justify-center">
           <div className="w-full bg-gray-100 rounded-lg flex justify-center p-5">
@@ -511,7 +553,8 @@ const SelectTests = () => {
                   </button>
 
                   <button
-                    className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white "
+                    className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white"
+                    // data-tip="Enter the value of n"
                     onClick={() => {
                       setVisible(true);
                       setSection(section);

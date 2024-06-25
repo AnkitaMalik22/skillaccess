@@ -114,7 +114,7 @@ const Appeared = ({ assessment }) => {
           {!TEST_DATA_RESPONSE_LOADING && testDataResponse?.length > 0 ? (
             testDataResponse?.map((student, index) => (
               <div
-                className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full border-2 transition-colors duration-300"
+                className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full border-2 transition-colors duration-300 bg-white"
                 style={{ borderColor: "transparent", borderWidth: "2px" }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.borderColor = colors[index])

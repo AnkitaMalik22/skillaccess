@@ -148,10 +148,10 @@ const Test = () => {
                       />
                     </div>
                     <div>
-                      <h2 className="text-xs font-bold text-[#171717]">
+                      <h2 className="text-xs font-bold text-[#171717] first-letter:uppercase">
                         {assessment.name}
                       </h2>
-                      <h2 className="text-xs font-normal">
+                      <h2 className="text-xs font-normal first-letter:uppercase">
                         {assessment.description}
                       </h2>
                     </div>
@@ -169,7 +169,8 @@ const Test = () => {
                         View
                       </button>
                       <button
-                        className="rounded-lg p-3 bg-[#8F92A1] bg-opacity-5 self-center"
+                        className="rounded-lg p-3 bg-[#8F92A1] bg-opacity-5 self-center tooltip"
+                        data-tip="Cick here to remove."
                         onClick={() =>
                           dispatch(removeFromRecent(assessment._id))
                         }

@@ -162,7 +162,7 @@ const Header = () => {
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
 
-        <h2 className="text-xl md:text-[28px] font-bold font-dmSans text-[#171717] mb-2">
+        <h2 className="text-xl md:text-[28px] font-bold font-dmSans text-[#171717]">
           Create Question
         </h2>
       </div>

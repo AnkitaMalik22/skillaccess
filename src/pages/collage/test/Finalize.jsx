@@ -62,7 +62,7 @@ const Finalize = () => {
   };
 
   return (
-    <div className=" w-11/12 mx-auto py-5 md:py-10">
+    <>
       <div className="flex gap-3 mb-5">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
@@ -129,7 +129,7 @@ const Finalize = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

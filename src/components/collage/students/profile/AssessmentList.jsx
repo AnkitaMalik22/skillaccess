@@ -15,6 +15,9 @@ const AssessmentList = ({ id }) => {
     if (id) {
       dispatch(getRecentStudentTests(id));
     }
+    if (id) {
+      dispatch(getRecentStudentTests(id));
+    }
   }, [id]);
 
   return (
@@ -40,10 +43,10 @@ const AssessmentList = ({ id }) => {
                       />
                     </div>
                     <div>
-                      <h2 className="text-xs  font-bold text-[#171717] ">
+                      <h2 className="text-xs  font-bold text-[#171717] first-letter:uppercase">
                         {assessment.assessment.name}
                       </h2>
-                      <h2 className="text-xs  font-normal">
+                      <h2 className="text-xs  font-normal first-letter:uppercase">
                         {assessment.assessment.description}
                       </h2>
                     </div>

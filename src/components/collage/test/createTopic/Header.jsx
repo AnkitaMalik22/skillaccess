@@ -9,7 +9,7 @@ const Header = ({ next }) => {
   const navigate = useNavigate();
   const { test, ADD_tOPIC_LOADING } = useSelector((state) => state.test);
   return (
-    <div className="flex w-full mx-auto justify-between mb-6">
+    <div className="flex w-full mx-auto justify-between mb-5 md:mb-10">
       {/* comp */}
       <div className="flex gap-3">
         <button
