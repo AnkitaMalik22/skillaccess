@@ -53,7 +53,7 @@ const AddMcqToTopic = () => {
       return -1;
     });
   };
-  console.log(question);
+
   const handleChanges = (e) => {
     // console.log(question);
     if (e.target.name === "Title") {

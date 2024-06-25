@@ -63,7 +63,10 @@ const List = ({ question, number, isLoading }) => {
                 </div>
                 <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2 text-sm text-gray-500 z-10 relative">
                   {question.Options?.map((option, index) => (
-                    <div key={index} className="flex gap-2 z-10 relative rounded-lg p-3">
+                    <div
+                      key={index}
+                      className="flex gap-2 z-10 relative rounded-lg p-3"
+                    >
                       <div className="w-6">
                         {AnswerIndex === StudentAnswerIndex ? (
                           index === AnswerIndex ? (
@@ -78,7 +81,10 @@ const List = ({ question, number, isLoading }) => {
                             />
                           )
                         ) : index === StudentAnswerIndex ? (
-                          <img src="../../../images/icons/redDot.png" alt="red" />
+                          <img
+                            src="../../../images/icons/redDot.png"
+                            alt="red"
+                          />
                         ) : index === AnswerIndex ? (
                           <img
                             src="../../../images/icons/greenDot.png"
@@ -94,7 +100,7 @@ const List = ({ question, number, isLoading }) => {
                       <label
                         className={`text-sm ${
                           AnswerIndex === index
-                            ? "text-green"
+                            ? "text-[#00875A]"
                             : StudentAnswerIndex === index
                             ? "text-red-500"
                             : "text-black"
@@ -105,7 +111,10 @@ const List = ({ question, number, isLoading }) => {
                     </div>
                   ))}
                   {question.questions?.map((subQuestion, idx) => (
-                    <div key={idx} className="flex gap-2 z-10 relative rounded-lg p-3">
+                    <div
+                      key={idx}
+                      className="flex gap-2 z-10 relative rounded-lg p-3"
+                    >
                       <div className="w-6">
                         <input
                           type="radio"
