@@ -131,6 +131,15 @@ const Name = () => {
         totalAttempts: "Please enter Total Attempts",
       }));
       flag = true;
+    } else if (
+      testDetails.totalAttempts < 1 ||
+      testDetails.totalAttempts > 10
+    ) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        totalAttempts: "Total Attempts must be between 1 and 10",
+      }));
+      flag = true;
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, totalAttempts: "" }));
     }
