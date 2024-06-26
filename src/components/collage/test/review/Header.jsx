@@ -118,6 +118,7 @@ const Header = ({
                     "QuestionLevel",
                   ].includes(header)
                 ) {
+                  setError(true);
                   setLoading(false);
                   toast.error(header + " is incorrect");
                   return;
@@ -125,6 +126,7 @@ const Header = ({
               });
 
               if (count !== 8) {
+                setError(true);
                 setLoading(false);
                 toast.error("invalid no. of fields", count);
                 return;
@@ -160,6 +162,7 @@ const Header = ({
                           Options: [...OpArr, row.v],
                         };
                       } else {
+                        setError(true);
                         toast.error(
                           "Invalid value! row:" + (rowNum + 1) + "col:" + colNum
                         );
@@ -175,6 +178,7 @@ const Header = ({
                       if (header.v === "AnswerIndex") {
                         if (row) {
                           if (row.v > 3 && typeof row.v !== "number") {
+                            setError(true);
                             toast.error(
                               "Invalid value" + (rowNum + 1) + "col:" + colNum
                             );
@@ -190,6 +194,7 @@ const Header = ({
                             };
                           }
                         } else {
+                          setError(true);
                           toast.error(
                             "Invalid value! row:" +
                               (rowNum + 1) +
@@ -204,6 +209,7 @@ const Header = ({
                       if (header.v === "Duration") {
                         if (row) {
                           if (typeof row.v !== "number") {
+                            setError(true);
                             toast.error(
                               "Invalid value" + (rowNum + 1) + "col:" + colNum
                             );
@@ -219,6 +225,7 @@ const Header = ({
                             };
                           }
                         } else {
+                          setError(true);
                           toast.error(
                             "Invalid value! row:" +
                               (rowNum + 1) +
@@ -238,6 +245,7 @@ const Header = ({
                           id: Date.now() + currentTopic._id,
                         };
                       } else {
+                        setError(true);
                         toast.error(
                           "Invalid value! row:" + (rowNum + 1) + "col:" + colNum
                         );
@@ -248,7 +256,9 @@ const Header = ({
                   }
                 }
               }
-            } catch (error) {}
+            } catch (error) {
+              setError(true);
+            }
 
             setExcelJSON(jsonData.slice(1));
 
@@ -265,6 +275,7 @@ const Header = ({
               // navigate(-1);
             } else {
               setLoading(false);
+              setError(true);
               toast.error("unknown error, reloading page");
               setTimeout(() => {
                 window.location.reload(true);
@@ -307,6 +318,7 @@ const Header = ({
 
               if (count > 6) {
                 setLoading(false);
+                setError(true);
                 toast.error("invalid no. of fields");
                 return;
               }
@@ -317,20 +329,20 @@ const Header = ({
                   )
                 ) {
                   setLoading(false);
-
+                  setError(true);
                   toast.error(header + " is incorrect");
                   return;
                 }
               });
-              // if (
-              //   !["Title", "Duration", "question"].every((header) =>
-              //     headers.includes(header)
-              //   )
-              // ) {
-              //   toast.error("Missing/Incorrect header(s)");
-              //   setLoading(false);
-              //   return;
-              // }
+              if (
+                !["Title", "Duration", "question","QuestionLevel"].every((header) =>
+                  headers.includes(header)
+                )
+              ) {
+                toast.error('Header must contain "Title", "Duration", "question","QuestionLevel"');
+                setLoading(false);
+                return;
+              }
               for (let colNum = range.s.c; colNum <= count; colNum++) {
                 for (let rowNum = range.s.r + 1; rowNum <= rowCount; rowNum++) {
                   const row =
@@ -367,6 +379,7 @@ const Header = ({
                       if (header.v === "Duration") {
                         if (row) {
                           if (typeof row.v !== "number") {
+                            setError(true);
                             toast.error(
                               "Invalid value row:" +
                                 (rowNum + 1) +
@@ -387,6 +400,7 @@ const Header = ({
                             };
                           }
                         } else {
+                          setError(true);
                           toast.error(
                             "Invalid value! row:" +
                               (rowNum + 1) +
@@ -407,6 +421,7 @@ const Header = ({
                           id: Date.now() + currentTopic._id,
                         };
                       } else {
+                        setError(true);
                         toast.error(
                           "Invalid Value! row:" + (rowNum + 1) + "col:" + colNum
                         );
@@ -419,6 +434,7 @@ const Header = ({
               }
             } catch (error) {
               window.location.reload(true);
+              setError(true);
             }
 
             setExcelJSON(jsonData.slice(1));
@@ -544,7 +560,7 @@ const Header = ({
       window.location.reload(true);
     }
   };
-
+  console.log(type);
   const handleNav = () => {
     if (type === "section") {
       if (level === "adaptive") {

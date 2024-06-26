@@ -209,6 +209,8 @@ export const setTotalTopicQuestions = createAsyncThunk(
           } else if (arg.level === "advanced") {
             totalTopicQuestions = topic.questions?.filter((question) => question?.QuestionLevel
             === "advanced")?.length || 0;
+          }else{
+            totalTopicQuestions = topic.questions?.length
           }
           break;
         case "findAnswer":
@@ -220,6 +222,8 @@ export const setTotalTopicQuestions = createAsyncThunk(
           }
           else if (arg.level === 'advanced') {
             totalTopicQuestions = topic.findAnswers.filter((question) => question?.QuestionLevel === "advanced")?.length;
+          }else{
+            totalTopicQuestions =  topic.findAnswers?.length
           }
           break;
         case "essay":
@@ -231,6 +235,8 @@ export const setTotalTopicQuestions = createAsyncThunk(
           }
           else if (arg.level === 'advanced') {
             totalTopicQuestions = topic.essay.filter((question) => question?.QuestionLevel === "advanced")?.length;
+          }else{
+            totalTopicQuestions =  topic.essay?.length
           }
           
           break;
@@ -243,6 +249,8 @@ export const setTotalTopicQuestions = createAsyncThunk(
           }
           else if (arg.level === 'advanced') {
             totalTopicQuestions = topic.video.filter((question) => question?.QuestionLevel === "advanced")?.length;
+          }else{
+            totalTopicQuestions =  topic.video?.length
           }
          
           break;
@@ -255,6 +263,8 @@ export const setTotalTopicQuestions = createAsyncThunk(
           }
           else if (arg.level === 'advanced') {
             totalTopicQuestions = topic.compiler.filter((question) => question?.QuestionLevel === "advanced")?.length;
+          }else{
+            totalTopicQuestions =  topic.compiler?.length
           }
           
           
