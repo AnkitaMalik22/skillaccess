@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 
 import { FaChevronLeft } from "react-icons/fa";
 
@@ -7,7 +7,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import { addQuestionToTopic,setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -24,6 +24,8 @@ const Header = () => {
 
   //   const topicToBeAdded = JSON.parse(localStorage.getItem("TopicToBeAdded"));
   const topicToBeAdded = useSelector((state) => state.test.TopicToBeAdded);
+  const {totalTopicQuestions} = useSelector((state) => state.test);
+
   //   console.log(topicToBeAdded.video);
 
   const hasQuestions =
@@ -152,6 +154,14 @@ const Header = () => {
     }
   };
 
+  useEffect(() => {
+    if (id) {
+      dispatch(setTotalTopicQuestions({ id, type: "video" ,level : "all"}));
+    }
+  }, [id,""]);
+
+  
+
   return (
     <div className="flex w-full mx-auto justify-between mb-5">
       <div className="flex w-full items-center gap-3 ">
@@ -163,7 +173,8 @@ const Header = () => {
         </button>
 
         <h2 className="text-xl md:text-[28px] font-bold font-dmSans text-[#171717]">
-          Create Question
+        Question No : {totalTopicQuestions+1}
+
         </h2>
       </div>
     </div>

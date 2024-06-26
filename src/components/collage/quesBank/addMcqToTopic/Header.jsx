@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Loader from "../../../loaders/Loader";
 import toast from "react-hot-toast";
-import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import { addQuestionToTopic ,setTotalTopicQuestions} from "../../../../redux/collage/test/thunks/topic";
 import { editBankQuestionById } from "../../../../redux/collage/test/thunks/question";
 
 const Header = ({ question, setQuestion, id, type, addType }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { test, ADD_QUESTION_LOADING } = useSelector((state) => state.test);
+  const { test, ADD_QUESTION_LOADING,totalTopicQuestions } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const level = searchParams.get("level");
@@ -90,6 +90,11 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
     }
   };
 
+  useEffect(() => {
+    if (id) {
+      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level : "all"}));
+    }
+  }, [id,""]);
   return (
     <div className="flex w-full mx-auto justify-between mb-6">
       <div className="flex gap-3">
@@ -100,7 +105,7 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Create Question
+        Question No : {totalTopicQuestions+1}
         </h2>
       </div>
 
