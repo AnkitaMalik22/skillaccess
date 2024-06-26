@@ -326,7 +326,7 @@ const SelectTests = () => {
                       <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
 
                       <h2 className="font-semibold mt-1">
-                        Add section {index + 1}{" "}
+                        Add section {selectedSections.length+index + 1}{" "}
                       </h2>
                     </span>
                   </div>
