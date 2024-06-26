@@ -4,7 +4,7 @@ import { FaCaretDown } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { removeQuestionById } from "../../../../redux/collage/test/testSlice";
 
-const List = ({ question, number, isLoading }) => {
+const List = ({ question, level, number, isLoading }) => {
   const [AnswerIndex, setAnswerIndex] = useState(question?.AnswerIndex);
   const [StudentAnswerIndex, setStudentAnswerIndex] = useState(
     question?.StudentAnswerIndex
@@ -57,6 +57,25 @@ const List = ({ question, number, isLoading }) => {
                     dangerouslySetInnerHTML={{ __html: question.Title }}
                   />
                   <div className="flex gap-2 self-center">
+                    {level === "adaptive" && (
+                      <div className="level flex items-center gap-2 ">
+                        {question.QuestionLevel == "beginner" && (
+                          <p className="rounded-2xl bg-cyan-500 text-white text-sm w-8 h-8 text-center font-medium flex items-center justify-center ">
+                            L1
+                          </p>
+                        )}
+                        {question.QuestionLevel == "intermediate" && (
+                          <p className="rounded-2xl bg-green-500 text-white text-sm  w-8 h-8 text-center font-medium flex items-center justify-center ">
+                            L2
+                          </p>
+                        )}
+                        {question.QuestionLevel == "advanced" && (
+                          <p className="rounded-2xl bg-red-500 text-white text-sm  w-8 h-8 text-center font-medium flex justify-center items-center ">
+                            L3
+                          </p>
+                        )}
+                      </div>
+                    )}
                     <Disclosure.Button className="flex gap-2 w-10/12 self-center">
                       <FaCaretDown
                         className={`${

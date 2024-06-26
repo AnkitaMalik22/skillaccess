@@ -22,8 +22,9 @@ const AssessmentReview = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { response, GET_STUDENT_RESPONSE_LOADING } = useSelector((state) => state.test);
-
+  const { response, GET_STUDENT_RESPONSE_LOADING } = useSelector(
+    (state) => state.test
+  );
 
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +34,7 @@ const AssessmentReview = () => {
       await dispatch(getStudentResponse(responseId));
       setLoading(false);
     };
-  
+
     fetchData();
   }, [testId, studentId]);
 
@@ -48,7 +49,7 @@ const AssessmentReview = () => {
 
   // let topics = response?.topics;
   useEffect(() => {
-    if(response?.topics && response?.topics.length > 0) {
+    if (response?.topics && response?.topics.length > 0) {
       if (response?.topics[0]) {
         // console.log("response?.topics[0].", response?.topics[0]?.Type);
         // console.log("response?.topics[1]", response?.topics[1]?.Type);
@@ -164,8 +165,6 @@ const AssessmentReview = () => {
   const max = questions?.length / 10;
   const [selected, setSelected] = useState(1);
 
-
-
   const handleCode = (lang, code) => {
     switch (lang) {
       case "C":
@@ -186,136 +185,154 @@ const AssessmentReview = () => {
   ).length;
   console.log(k);
 
-
   if (loading) {
     return <Loader />;
   }
-  
+
   return (
     <>
-    { !GET_STUDENT_RESPONSE_LOADING ? (<> <div className="flex w-full mx-auto justify-between mb-5">
-        <div className="flex gap-3">
-          <button
-            className="self-center object-center rounded-lg h-10 w-10 "
-            onClick={() => navigate(-1)}
-          >
-            <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
-          </button>
-        </div>
-      </div>
-
-      <HeaderMarks response={response} totalQuestions={questions?.length} />
-
-      <div className="mt-10 mb-10">
-        {questions && questions
-          ?.filter((question) => question.StudentAnswerIndex !== undefined)
-          ?.slice((selected - 1) * 10, selected * 10)
-          .map((question, i) => {
-            return (
-              <div className="my-2">
-
-                <List
-                  question={question}
-                  number={(selected - 1) * 10 + 1 + i}
-                  isLoading={question.AnswerIndex === undefined || question.AnswerIndex === null || question.StudentAnswerIndex === undefined || question.StudentAnswerIndex === null}
-                />
-              </div>
-            );
-          })}
-
-        {questions && questions
-          ?.filter((question) => question.AnswerIndex == undefined)
-          ?.slice((selected - 1) * 10, selected * 10)
-          .map((question, i) => {
-            return (
-              <div className="my-2">
-                {question.testcase && (
-                  <Code
-                    question={question}
-                    Title={question.codeQuestion}
-                    code={handleCode(question.codeLanguage, question.code)}
-                    number={(selected - 1) * 10 + 1 + i + k}
-                  />
-                )}
-                {question.videoFile && (
-                  <Video
-                    Number={(selected - 1) * 10 + 1 + i + k}
-                    video={question}
-                  />
-                )}
-
-                {
-                  question.questions ||
-                  (question.Options &&
-                    !question.testcase &&
-                    !question.videoFile)
-                    ? //  &&
-                      //   (question.AnswerIndex !== undefined
-
-                      !question.videoFile && (
-                        <List
-                          question={question}
-                          number={(selected - 1) * 10 + 1 + i + k}
-                        />
-                      )
-                    : !question.testcase &&
-                      !question.videoFile &&
-                      !question.questions &&
-                      !question.Options && (
-                        <Essay
-                          question={question}
-                          number={(selected - 1) * 10 + 1 + i + k}
-                        />
-                      )
-
-                  // )
-                }
-              </div>
-            );
-          })}
-        {/* iterate this list */}
-      </div>
-      <div className="flex gap-2 w-full justify-center">
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-          <IoMdArrowDropleft
-            className={` text-lg self-center ${selected === 1 && "disabled"}`}
-            onClick={() => selected !== 1 && setSelected(selected - 1)}
-          />
-        </div>
-
-        {Array.from({ length: Math.ceil(max) }).map((_, index) => {
-          const pageNumber = index + 1;
-          const hasQuestions = (pageNumber - 1) * 10 < questions.length;
-          console.log(questions.length);
-          console.log(Math.ceil(max));
-          return (
-            hasQuestions && (
-              <div
-                key={pageNumber}
-                className={`rounded-lg h-10 w-10 flex justify-center ${
-                  selected === pageNumber
-                    ? "bg-blue-700 text-white"
-                    : "bg-gray-100"
-                }`}
-                onClick={() => setSelected(pageNumber)}
+      {!GET_STUDENT_RESPONSE_LOADING ? (
+        <>
+          {" "}
+          <div className="flex w-full mx-auto justify-between mb-5">
+            <div className="flex gap-3">
+              <button
+                className="self-center object-center rounded-lg h-10 w-10 "
+                onClick={() => navigate(-1)}
               >
-                <p className="self-center">{pageNumber}</p>
-              </div>
-            )
-          );
-        })}
+                <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
+              </button>
+            </div>
+          </div>
+          <HeaderMarks response={response} totalQuestions={questions?.length} />
+          <div className="mt-10 mb-10">
+            {questions &&
+              questions
+                ?.filter(
+                  (question) => question.StudentAnswerIndex !== undefined
+                )
+                ?.slice((selected - 1) * 10, selected * 10)
+                .map((question, i) => {
+                  return (
+                    <div className="my-2">
+                      <List
+                        question={question}
+                        level={response?.testType}
+                        number={(selected - 1) * 10 + 1 + i}
+                        isLoading={
+                          question.AnswerIndex === undefined ||
+                          question.AnswerIndex === null ||
+                          question.StudentAnswerIndex === undefined ||
+                          question.StudentAnswerIndex === null
+                        }
+                      />
+                    </div>
+                  );
+                })}
 
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
-          <IoMdArrowDropright
-            className={` text-lg self-center ${
-              selected === Math.ceil(max) && "disabled"
-            }`}
-            onClick={() =>
-              selected !== Math.ceil(max) && setSelected(selected + 1)
-            }
-          />
-        </div>
-      </div></>) : <Loader />}
+            {questions &&
+              questions
+                ?.filter((question) => question.AnswerIndex == undefined)
+                ?.slice((selected - 1) * 10, selected * 10)
+                .map((question, i) => {
+                  return (
+                    <div className="my-2">
+                      {question.testcase && (
+                        <Code
+                          question={question}
+                          Title={question.codeQuestion}
+                          code={handleCode(
+                            question.codeLanguage,
+                            question.code
+                          )}
+                          number={(selected - 1) * 10 + 1 + i + k}
+                        />
+                      )}
+                      {question.videoFile && (
+                        <Video
+                          Number={(selected - 1) * 10 + 1 + i + k}
+                          video={question}
+                        />
+                      )}
+
+                      {
+                        question.questions ||
+                        (question.Options &&
+                          !question.testcase &&
+                          !question.videoFile)
+                          ? //  &&
+                            //   (question.AnswerIndex !== undefined
+
+                            !question.videoFile && (
+                              <List
+                                question={question}
+                                number={(selected - 1) * 10 + 1 + i + k}
+                              />
+                            )
+                          : !question.testcase &&
+                            !question.videoFile &&
+                            !question.questions &&
+                            !question.Options && (
+                              <Essay
+                                question={question}
+                                number={(selected - 1) * 10 + 1 + i + k}
+                              />
+                            )
+
+                        // )
+                      }
+                    </div>
+                  );
+                })}
+            {/* iterate this list */}
+          </div>
+          <div className="flex gap-2 w-full justify-center">
+            <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+              <IoMdArrowDropleft
+                className={` text-lg self-center ${
+                  selected === 1 && "disabled"
+                }`}
+                onClick={() => selected !== 1 && setSelected(selected - 1)}
+              />
+            </div>
+
+            {Array.from({ length: Math.ceil(max) }).map((_, index) => {
+              const pageNumber = index + 1;
+              const hasQuestions = (pageNumber - 1) * 10 < questions.length;
+              console.log(questions.length);
+              console.log(Math.ceil(max));
+              return (
+                hasQuestions && (
+                  <div
+                    key={pageNumber}
+                    className={`rounded-lg h-10 w-10 flex justify-center ${
+                      selected === pageNumber
+                        ? "bg-blue-700 text-white"
+                        : "bg-gray-100"
+                    }`}
+                    onClick={() => setSelected(pageNumber)}
+                  >
+                    <p className="self-center">{pageNumber}</p>
+                  </div>
+                )
+              );
+            })}
+
+            <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+              <IoMdArrowDropright
+                className={` text-lg self-center ${
+                  selected === Math.ceil(max) && "disabled"
+                }`}
+                onClick={() =>
+                  selected !== Math.ceil(max) && setSelected(selected + 1)
+                }
+              />
+            </div>
+          </div>
+        </>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 };

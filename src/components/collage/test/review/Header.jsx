@@ -544,7 +544,7 @@ const Header = ({
       window.location.reload(true);
     }
   };
-
+  console.log(type);
   const handleNav = () => {
     if (type === "section") {
       if (level === "adaptive") {
