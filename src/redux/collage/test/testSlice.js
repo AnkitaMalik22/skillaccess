@@ -128,7 +128,7 @@ const testState = {
   duration_to: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).duration_to
     : "",
-  negative: localStorage.getItem("testDetails")
+  isNegativeMarking: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).isNegativeMarking
     : false,
   topics: localStorage.getItem("topics")
