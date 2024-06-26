@@ -28,6 +28,7 @@ const Submit = () => {
     totalDuration,
     duration_from,
     duration_to,
+    isNegativeMarking
   } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const testType = searchParams.get("level");
@@ -345,6 +346,7 @@ const Submit = () => {
     localStorage.setItem("totalTime", JSON.stringify(totalTimeCal));
     localStorage.setItem("testName", JSON.stringify(name));
     setLoading(true);
+
     dispatch(
       createTest({
         level,
@@ -357,6 +359,7 @@ const Submit = () => {
         endDate: duration_to,
         // totalDuration,
         topics,
+        isNegativeMarking : isNegativeMarking
       })
     ).then((res) => {
       // dispatch(
