@@ -9,28 +9,6 @@ const Selected = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("assessment");
 
-  const getProgressBarColor = (percentage) => {
-    if (percentage === 0) {
-      return ""; // Return empty string for transparent
-    } else if (percentage > 0 && percentage < 33.33) {
-      return "bg-red-600"; // Red color
-    } else if (percentage >= 33.33 && percentage < 66.66) {
-      return "bg-blue-600"; // Blue color
-    } else {
-      return "bg-green-600"; // Green color
-    }
-  };
-  const getProgressBarWidth = (percentage) => {
-    if (percentage === 0) {
-      return 0; // Width is 0 when percentage is 0
-    } else if (percentage < 33.33) {
-      return 40; // 2/5 width
-    } else if (percentage < 66.66) {
-      return 60; // 3/5 width
-    } else {
-      return 100; // Full width
-    }
-  };
   console.log(id);
   useEffect(() => {
     dispatch(getselectedStudents(id));
@@ -39,6 +17,26 @@ const Selected = () => {
     (state) => state.test
   );
 
+  let percentageData = [];
+  let colors = [];
+
+  if (selectedStudents?.length > 0) {
+    percentageData = selectedStudents.map((item) => item.percentage);
+
+    percentageData.forEach((percentage) => {
+      let color = "";
+      if (percentage <= 0) {
+        color = "transparent";
+      } else if (percentage > 0 && percentage < 33.33) {
+        color = "#F44336"; // Red color
+      } else if (percentage >= 33.33 && percentage < 66.66) {
+        color = "#FFC107"; // Orange color
+      } else {
+        color = "#4CAF50"; // Green color
+      }
+      colors.push(color);
+    });
+  }
   const covertToDateFormat = (date) => {
     const d = new Date(date);
     return d.toDateString();
@@ -106,10 +104,11 @@ const Selected = () => {
                 <span className="flex gap-2">
                   <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
                     <div
-                      className={`h-full rounded-lg ${getProgressBarColor(
-                        student?.percentage
-                      )}`}
-                      style={{ width: `${student?.percentage}%` }}
+                      className={`h-full rounded-lg`}
+                      style={{
+                        width: `${student?.percentage}%`,
+                        backgroundColor: colors[index],
+                      }}
                     ></div>
                   </div>
                   <h2 className="font-dmSans font-bold text-xs sm:text-xs ">

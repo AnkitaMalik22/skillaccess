@@ -47,7 +47,7 @@ const Info = ({ user, assessment }) => {
             {assessment?.name}
           </h2>
 
-          <h2 className="text-[#7D7D7D] text-xs ">Available Jobs</h2>
+          {/* <h2 className="text-[#7D7D7D] text-xs ">Available Jobs</h2> */}
         </div>
       </div>
       <div className="grid grid-cols-4 gap-10 text-center font-dmSans">
