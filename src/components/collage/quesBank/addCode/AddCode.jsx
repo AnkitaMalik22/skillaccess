@@ -12,7 +12,7 @@ import {
   addCompiler,
   addCompilerToTopic,
 } from "../../../../redux/collage/test/testSlice";
-import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
+import { addQuestionToTopic,setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
 import {
   editBankQuestionById,
   editQuestionById,
@@ -308,6 +308,13 @@ const AddCode = () => {
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
+
+  useEffect(() => {
+    if (!ADD_QUESTION_LOADING) {
+      dispatch(setTotalTopicQuestions({ id, type: "compiler" ,level : "all"}));
+    }
+  }, [ADD_QUESTION_LOADING]);
+
 
   return (
     <div>

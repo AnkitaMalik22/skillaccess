@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,10 @@ import {
   addQuestionToTopic,
 } from "../../../../redux/collage/test/testSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+
 import Loader from "../../../loaders/Loader";
+import { setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
 
 const Header = ({
   question,
@@ -23,8 +26,8 @@ const Header = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
-
+  const { ADD_QUESTION_LOADING,totalTopicQuestions } = useSelector((state) => state.test);
+ 
   const handleSaveNext = () => {
     // handleSave()
     // navigate(-1);
@@ -32,6 +35,14 @@ const Header = ({
   const handleSave = () => {
     save("save");
   };
+  useEffect(() => {
+    if (id) {
+      dispatch(setTotalTopicQuestions({ id, type: "essay" ,level: "all" }));
+    }
+  }, [id,""]);
+
+
+
   return (
     // <div className="flex w-[98%] mx-auto justify-between mb-2 mt-5">
     //   <div className="h-fit self-center">
@@ -72,6 +83,7 @@ const Header = ({
     //     </div>
     //   </div>
     // </div>
+    
 
     <div className="flex w-full mx-auto justify-between mb-6">
       <div className="flex gap-3">
@@ -82,7 +94,7 @@ const Header = ({
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Create Question
+        Question No : {totalTopicQuestions+1}
         </h2>
       </div>
 

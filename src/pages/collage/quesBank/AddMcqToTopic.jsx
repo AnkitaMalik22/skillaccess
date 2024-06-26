@@ -14,7 +14,7 @@ import {
   editBankQuestionById,
   editQuestionById,
 } from "../../../redux/collage/test/thunks/question";
-import { addQuestionToTopic } from "../../../redux/collage/test/thunks/topic";
+import { addQuestionToTopic ,setTotalTopicQuestions} from "../../../redux/collage/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 
@@ -256,6 +256,11 @@ const AddMcqToTopic = () => {
     console.log(currentTopic);
     setCountDetail(currentTopic?.questions?.length - 1);
   }, [currentTopic]);
+  useEffect(() => {
+    if (!ADD_QUESTION_LOADING) {
+      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level : "all"}));
+    }
+  }, [ADD_QUESTION_LOADING]);
 
   return (
     <div>
