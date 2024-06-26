@@ -411,17 +411,16 @@ const SelectTests = () => {
                 </Disclosure.Button>
                 <Disclosure.Panel className="mt-4 w-full">
                   <h3 className="text-lg font-semibold">
-                    Tip for Creating a Balanced Test
+                  How calculation of total questions needed/selected is done:
                   </h3>
                   <p className="mt-2">
-                    To ensure variety in your test, double the total number of
-                    questions. Divide these into three categories:
+                   <div><span className="font-bold"> n</span> = the number you select when you add a topic</div>
+                   <div><span className="font-bold"> Number of question for each type:</span> </div>
                     <span className="font-bold"> Beginner (n)</span>,{" "}
                     <span className="font-bold">Intermediate (n x 2/3)</span>,
                     and
                     <span className="font-bold"> Advanced (n/3)</span>. This
-                    balanced approach will create an enjoyable experience for
-                    all participants and highlight areas for further learning.
+                     approach will create a valid adaptive assessment.
                   </p>
                   <div className="mt-4">
                     <h4 className="text-md font-semibold">Example:</h4>
@@ -555,8 +554,8 @@ const SelectTests = () => {
                   </button>
 
                   <button
-                    className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white"
-                    // data-tip="Enter the value of n"
+                    className=" bg-[#00875A85] h-[40px] w-[72px] rounded-xl text-white tooltip"
+                    data-tip="n"
                     onClick={() => {
                       setVisible(true);
                       setSection(section);
