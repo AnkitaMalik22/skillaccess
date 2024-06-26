@@ -42,32 +42,6 @@ const Appeared = ({ assessment }) => {
 
   let arr = [assessment?.studentResponses];
 
-  // console.log(arr);
-
-  // const getProgressBarColor = (percentage) => {
-  //   if (percentage === 0) {
-  //     return ""; // Return empty string for transparent
-  //   } else if (percentage > 0 && percentage < 33.33) {
-  //     return "bg-red-600"; // Red color
-  //   } else if (percentage >= 33.33 && percentage < 66.66) {
-  //     return "bg-blue-600"; // Blue color
-  //   } else {
-  //     return "bg-green-600"; // Green color
-  //   }
-  // };
-  // const getProgressBarWidth = (percentage) => {
-  //   if (percentage === 0) {
-  //     return 0; // Width is 0 when percentage is 0
-  //   } else if (percentage < 33.33) {
-  //     return 40; // 2/5 width
-  //   } else if (percentage < 66.66) {
-  //     return 60; // 3/5 width
-  //   } else {
-  //     return 100; // Full width
-  //   }
-  // };
-  // console.log(arr);
-
   let percentageData = [];
   let colors = [];
 
