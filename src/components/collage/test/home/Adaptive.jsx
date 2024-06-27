@@ -90,7 +90,18 @@ const Adaptive = () => {
             />
           </SwiperSlide>
         ))}
-        {/* <SwiperSlide></SwiperSlide> */}
+       <SwiperSlide className="w-full">
+          {" "}
+          <div className="w-[242px]"> </div>
+        </SwiperSlide>
+        <SwiperSlide className="w-full">
+          {" "}
+          <div className="w-[242px]"> </div>
+        </SwiperSlide>
+        <SwiperSlide className="w-full">
+          {" "}
+          <div className="w-[242px]"> </div>
+        </SwiperSlide>
         <span className="absolute top-1/2 right-0 z-20 h-fit w-fit">
           <SlideNextButton />
         </span>

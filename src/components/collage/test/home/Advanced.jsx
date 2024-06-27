@@ -46,7 +46,7 @@ const Advanced = () => {
         </div>
       </div>
       <Swiper
-        className="relative sm:!max-w-md md:!max-w-lg"
+        className="relative md:w-full"
         loop={true}
         spaceBetween={"1px"}
         slidesPerView={2}
@@ -73,9 +73,12 @@ const Advanced = () => {
             slidesPerView: 1.3,
           },
           1000: { slidesPerView: 1.3 },
-          1280: {
-            slidesPerView: 2,
+          1024: {
+            slidesPerView: 1,
           },
+          1280: { slidesPerView: 1.5 },
+          1400: { slidesPerView: 2 },
+          1600: { slidesPerView: 2.5 },
         }}
       >
         {advanced?.map((item, i) => (
@@ -87,7 +90,18 @@ const Advanced = () => {
             />
           </SwiperSlide>
         ))}
-        <SwiperSlide></SwiperSlide>
+        <SwiperSlide className="w-full">
+          {" "}
+          <div className="w-[242px]"> </div>
+        </SwiperSlide>
+        <SwiperSlide className="w-full">
+          {" "}
+          <div className="w-[242px]"> </div>
+        </SwiperSlide>
+        <SwiperSlide className="w-full">
+          {" "}
+          <div className="w-[242px]"> </div>
+        </SwiperSlide>
         <span className="absolute top-1/2 right-0 z-20 h-fit w-fit">
           <SlideNextButton />
         </span>
