@@ -286,6 +286,13 @@ const SelectTests = () => {
 
   return (
     <div className={` ${visible ? "h-screen overflow-hidden" : ""}`}>
+
+{/* <button onClick={() => window.open(`/images/sample.jpg`, '_blank')}>
+          View Image
+          
+        </button> */}
+        <p>imagsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssse</p>
+        <img src="./public/intel.png" alt="" srcset="" />
       {visible && (
         <PopUpAdaptive
           visible={visible}
@@ -344,12 +351,12 @@ const SelectTests = () => {
                 <div className="flex justify-between">
                   {" "}
                   <div className="flex gap-2 w-full">
-                    <img
+                    {/* <img
                       src="../../images/icons/stopwatch.png"
                       alt="icon"
                       className="w-6 h-6 self-center"
-                    />
-
+                    /> */}
+                    <span className="self-center">Count : {section?.questions?.length/2}</span>
                     <h2 className="font-bold text-xs text-gray-400 self-center">
                       {section?.Time}
                     </h2>
