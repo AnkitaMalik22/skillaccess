@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft, FaDownload } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { FiUpload } from "react-icons/fi";
@@ -335,11 +335,13 @@ const Header = ({
                 }
               });
               if (
-                !["Title", "Duration", "question","QuestionLevel"].every((header) =>
-                  headers.includes(header)
+                !["Title", "Duration", "question", "QuestionLevel"].every(
+                  (header) => headers.includes(header)
                 )
               ) {
-                toast.error('Header must contain "Title", "Duration", "question","QuestionLevel"');
+                toast.error(
+                  'Header must contain "Title", "Duration", "question","QuestionLevel"'
+                );
                 setLoading(false);
                 return;
               }
@@ -599,6 +601,22 @@ const Header = ({
       }
     }
   };
+
+  const imageUrl = `/download/${
+    ques === "mcq"
+      ? "Mcq(1).xlsx"
+      : ques === "findAnswer"
+      ? "findAnswer.xlsx"
+      : "essay.xlsx"
+  }`;
+  const imageName = `${
+    ques === "mcq"
+      ? "Mcq(1).xlsx"
+      : ques === "findAnswer"
+      ? "findAnswer.xlsx"
+      : "essay.xlsx"
+  }`; // Replace with your desired image name
+
   return (
     <div className="flex  justify-between items-center mb-5">
       {visible && (
@@ -611,6 +629,8 @@ const Header = ({
           }}
         />
       )}
+
+      <img src={imageUrl} alt="" srcset="" className="hidden" />
 
       <div>
         <button className="flex self-center  rounded-lg  gap-2">
@@ -670,10 +690,17 @@ const Header = ({
                   Upload Questions
                 </button>
               )}
+            <a
+              className="flex items-center gap-2"
+              href={imageUrl}
+              download={imageName}
+            >
+              Sample File <FaDownload className="self-center" />
+            </a>
 
-            <button className="bg-[#F8F8F9] self-center  rounded-lg  w-10 sm:h-11 sm:w-14">
+            {/* <button className="bg-[#F8F8F9] self-center  rounded-lg  w-10 sm:h-11 sm:w-14">
               <PiSlidersHorizontalLight className="mx-auto sm:h-8 sm:w-8 h-6 w-6" />
-            </button>
+            </button> */}
           </div>
         )}
       </div>

@@ -286,13 +286,6 @@ const SelectTests = () => {
 
   return (
     <div className={` ${visible ? "h-screen overflow-hidden" : ""}`}>
-
-{/* <button onClick={() => window.open(`/images/sample.jpg`, '_blank')}>
-          View Image
-          
-        </button> */}
-        <p>imagsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssse</p>
-        <img src="./public/intel.png" alt="" srcset="" />
       {visible && (
         <PopUpAdaptive
           visible={visible}
@@ -356,7 +349,9 @@ const SelectTests = () => {
                       alt="icon"
                       className="w-6 h-6 self-center"
                     /> */}
-                    <span className="self-center">Count : {section?.questions?.length/2}</span>
+                    <span className="self-center">
+                      Count : {section?.questions?.length / 2}
+                    </span>
                     <h2 className="font-bold text-xs text-gray-400 self-center">
                       {section?.Time}
                     </h2>
@@ -382,7 +377,7 @@ const SelectTests = () => {
                       <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
 
                       <h2 className="font-semibold mt-1">
-                        Add section {selectedSections.length+ index + 1}{" "}
+                        Add section {selectedSections.length + index + 1}{" "}
                       </h2>
                     </div>
                   </div>
@@ -418,16 +413,24 @@ const SelectTests = () => {
                 </Disclosure.Button>
                 <Disclosure.Panel className="mt-4 w-full">
                   <h3 className="text-lg font-semibold">
-                  How calculation of total questions needed/selected is done:
+                    How calculation of total questions needed/selected is done:
                   </h3>
                   <p className="mt-2">
-                   <div><span className="font-bold"> n</span> = the number you select when you add a topic</div>
-                   <div><span className="font-bold"> Number of question for each type:</span> </div>
+                    <div>
+                      <span className="font-bold"> n</span> = the number you
+                      select when you add a topic
+                    </div>
+                    <div>
+                      <span className="font-bold">
+                        {" "}
+                        Number of question for each type:
+                      </span>{" "}
+                    </div>
                     <span className="font-bold"> Beginner (n)</span>,{" "}
                     <span className="font-bold">Intermediate (n x 2/3)</span>,
                     and
                     <span className="font-bold"> Advanced (n/3)</span>. This
-                     approach will create a valid adaptive assessment.
+                    approach will create a valid adaptive assessment.
                   </p>
                   <div className="mt-4">
                     <h4 className="text-md font-semibold">Example:</h4>
