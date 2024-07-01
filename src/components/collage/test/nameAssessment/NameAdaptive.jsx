@@ -119,7 +119,7 @@ const Name = () => {
     }
 
     if (testDetails.name === "") {
-      setErrors((prevErrors) => ({ ...prevErrors, name: "Please enter Name" }));
+      setErrors((prevErrors) => ({ ...prevErrors, name: "Please Enter Name" }));
       flag = true;
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, name: "" }));
@@ -128,7 +128,7 @@ const Name = () => {
     if (testDetails.totalAttempts === "") {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        totalAttempts: "Please enter Total Attempts",
+        totalAttempts: "Please Enter Total Attempts",
       }));
       flag = true;
     } else if (
@@ -147,7 +147,7 @@ const Name = () => {
     if (testDetails.totalQuestions === null) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        totalQuestions: "Please enter Total Questions",
+        totalQuestions: "Please Enter Total Questions",
       }));
       flag = true;
     } else {
@@ -157,7 +157,7 @@ const Name = () => {
     if (testDetails.description === "") {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        description: "Please enter Description",
+        description: "Please Enter Description",
       }));
       flag = true;
     } else {
