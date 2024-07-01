@@ -604,14 +604,14 @@ const Header = ({
 
   const imageUrl = `/download/${
     ques === "mcq"
-      ? "Mcq(1).xlsx"
+      ? "Mcq.xlsx"
       : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
   }`;
   const imageName = `${
     ques === "mcq"
-      ? "Mcq(1).xlsx"
+      ? "Mcq.xlsx"
       : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
@@ -670,6 +670,7 @@ const Header = ({
             {type === "topic" &&
               currentTopic.Type !== "compiler" &&
               currentTopic.Type !== "video" && (
+                <>
                 <button
                   className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
                   onClick={() => {
@@ -689,14 +690,19 @@ const Header = ({
                   )}{" "}
                   Upload Questions
                 </button>
+                       <a
+                       className="flex items-center gap-2"
+                       href={imageUrl}
+                       download={imageName}
+                     >
+                       Sample File <FaDownload className="self-center" />
+                     </a>
+                     </>
+                   
               )}
-            <a
-              className="flex items-center gap-2"
-              href={imageUrl}
-              download={imageName}
-            >
-              Sample File <FaDownload className="self-center" />
-            </a>
+ 
+
+      
 
             {/* <button className="bg-[#F8F8F9] self-center  rounded-lg  w-10 sm:h-11 sm:w-14">
               <PiSlidersHorizontalLight className="mx-auto sm:h-8 sm:w-8 h-6 w-6" />
