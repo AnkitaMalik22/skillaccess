@@ -37,7 +37,36 @@ const StudentPoP = ({ onClose }) => {
     } else if (!/\S+@\S+\.\S+/.test(student.Email)) {
       toast.error("Invalid Email format");
       return;
-    } else {
+    }
+    if (student.FirstName.length > 30) {
+      toast.error("First Name cannot exceed 30 characters");
+      return;
+    }
+    if (student.FirstName.length < 2) {
+      toast.error("First Name should have more than 2 characters");
+      return;
+    }
+    if (student.LastName.length > 30) {
+      toast.error("Last Name cannot exceed 30 characters");
+      return;
+    }
+    if (student.LastName.length < 2) {
+      toast.error("Last Name should have more than 2 characters");
+      return;
+  }
+  // no numeric values in name
+  if (!/^[a-zA-Z]*$/.test(student.FirstName)) {
+    toast.error("First Name should not contain numeric values");
+    return;
+  }
+  if (!/^[a-zA-Z]*$/.test(student.LastName)) {
+    toast.error("Last Name should not contain numeric values");
+    return;
+  }
+    // maxLength: [30, "Name cannot exceed 30 characters"],
+    // minLength: [2, "Name should have more than 2 characters"],
+    
+    else {
       console.log(student, "pop");
       setLoading(true);
       await dispatch(uploadStudents([student])).then(() => {
