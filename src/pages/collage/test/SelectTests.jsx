@@ -65,10 +65,11 @@ const SelectTests = () => {
 
   const addSection = (section) => {
     if (
-      currentQuestionCount > parseInt(totalQuestions) ||
+      parseInt(currentQuestionCount) + parseInt(totalQ) >
+        parseInt(totalQuestions) ||
       totalQ > totalQuestions
     ) {
-      toast.error("too many questions");
+      toast.error(`Number of question must be less than ${totalQuestions}`);
       return;
     }
     if (!questionType) {
@@ -326,7 +327,7 @@ const SelectTests = () => {
                       <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
 
                       <h2 className="font-semibold mt-1">
-                        Add section {selectedSections.length+index + 1}{" "}
+                        Add section {selectedSections.length + index + 1}{" "}
                       </h2>
                     </span>
                   </div>

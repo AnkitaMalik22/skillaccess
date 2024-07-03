@@ -567,11 +567,15 @@ const Header = ({
     if (type === "section") {
       if (level === "adaptive") {
         if (currentQuestionCount > totalQuestions * 2) {
-          return toast.error("too many questions");
+          return toast.error(
+            `Number of question must be less than ${totalQuestions / 2}`
+          );
         }
       } else {
         if (currentQuestionCount > totalQuestions) {
-          return toast.error("too many questions");
+          return toast.error(
+            `Number of question must be less than ${totalQuestions}`
+          );
         }
       }
       {
