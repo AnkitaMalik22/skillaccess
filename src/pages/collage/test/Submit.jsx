@@ -381,13 +381,13 @@ const Submit = () => {
   const [selected, setSelected] = useState(1);
 
   return (
-    <div className=" relative    min-h-[90vh]">
+    <div className=" relative  h-full  min-h-[90vh]">
       <Header page={"final"} handleSubmit={handleSubmit} loading={loading} />
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>
 
-      <div className="mt-16">
+      <div className="mt-16 ">
         {console.log(questions)}
         {questions
           ?.slice((selected - 1) * 10, selected * 10)
@@ -422,7 +422,7 @@ const Submit = () => {
         {/* iterate this list */}
       </div>
 
-      <div className="absolute bottom-2 mt-20 flex gap-2 w-full justify-center">
+      <div className="absolute -bottom-8 mt-40 flex gap-2 w-full justify-center">
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropleft
             className={` text-lg self-center ${selected === 1 && "disabled"}`}

@@ -108,17 +108,19 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
             <div dangerouslySetInnerHTML={{ __html: Title }}></div>
           </h2>
         ) : (
-          <ReactQuill
-            value={mcq.Title}
-            onChange={(value) => setMcq({ ...mcq, Title: value })}
-            className="border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
-            placeholder="Enter Question Here"
-            name="Title"
-          />
+          <div className="h-fit">
+            <ReactQuill
+              value={mcq.Title}
+              onChange={(value) => setMcq({ ...mcq, Title: value })}
+              className="border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+              placeholder="Enter Question Here"
+              name="Title"
+            />
+          </div>
         )}
-        <div className={`flex flex-col gap-4  `}>
+        <div className={`flex flex-col gap-4 mt-6 `}>
           {mcq.Options.map((ques, index) => (
-            <span className="flex gap-2">
+            <span className="flex gap-2 ">
               <div className="flex w-5 justify-center">
                 <input
                   name={mcq.Title}
@@ -134,6 +136,7 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
                 </label>
               ) : (
                 <input
+                  className="rounded-lg"
                   onChange={handleChange}
                   placeholder="enter new option"
                   name={index}
