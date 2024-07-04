@@ -182,6 +182,15 @@ const Name = () => {
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, duration: "" }));
     }
+    if (
+      testDetails.totalQuestions <1
+    ) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        totalQuestions: "Total Questions must be greater than 0",
+      }));
+      flag = true;
+    }
 
     if (assessments.adaptive.length > 0) {
       assessments.adaptive.forEach((assessment) => {

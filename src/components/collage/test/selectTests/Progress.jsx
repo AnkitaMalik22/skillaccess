@@ -19,7 +19,7 @@ export const Progress = () => {
           <div className="w-full  bg-blue-700 h-1/3 self-center -ml-2"></div>
           <div className="relative">
             <figure className="w-3 h-3 p-3 rounded-full bg-blue-700 z-50"></figure>
-            <h2 className="absolute -bottom-10 w-44 -left-10">Select Tests</h2>
+            <h2 className="absolute -bottom-10 w-44 -left-10 font-bold">Select Tests</h2>
           </div>
           <div className="w-full bg-[#CCDCF5] h-1/3 self-center -ml-1"></div>
         </div>
