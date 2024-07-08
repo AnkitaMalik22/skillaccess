@@ -393,11 +393,11 @@ const AddVideo = () => {
               onClick={handleFileUpload}
             >
               Add Questions{" "}
-              {/* {loading === false ? (
+              {loading === false ? (
                 <FaPlus className="self-center" />
               ) : (
                 <Loader />
-              )} */}
+              )}
             </button>
           </div>
         </div>

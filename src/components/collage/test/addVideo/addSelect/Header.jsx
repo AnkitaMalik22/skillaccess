@@ -141,7 +141,7 @@ const Header = ({ selectQuestionType }) => {
   return (
     <div className="flex  justify-between mb-2 ">
       <div>
-        <button className="flex self-center ml-2 rounded-lg  gap-2">
+        <button className="flex items-center ml-2 rounded-lg  gap-2">
           <button
             onClick={() =>
               level === "adaptive"
