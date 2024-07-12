@@ -764,6 +764,7 @@ const AddQuestionsSelect = () => {
             }}
           >
             <input
+              accept=".xlsx"
               type="file"
               ref={upload}
               className="hidden"

@@ -9,10 +9,12 @@ import {
 } from "../../../redux/collage/auth/authSlice";
 import EditHeader from "../../../components/collage/profile/EditHeader";
 import useTranslate from "../../../hooks/useTranslate";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   //useTranslate();
   const dispatch = useDispatch();
+  const [editing, setEditing] = useState(false);
   const { user, isLoggedIn } = useSelector((state) => state.collageAuth);
   const [editable, setEditable] = useState(false);
   const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
@@ -42,7 +44,13 @@ const Profile = () => {
       setAvatar(user.avatar.url);
     }
     if (avatar) {
-      dispatch(updateAvatar({ avatar, id: user._id }));
+      if (college.Phone.length < 10) {
+        toast.error("Invalid phone number !");
+      } else {
+        setEditing(true);
+        dispatch(updateAvatar({ avatar, id: user._id })).then(() => {});
+        setEditing(false);
+      }
     }
   }, [submitUpdateProfile]);
   useEffect(() => {
@@ -59,6 +67,7 @@ const Profile = () => {
     <>
       {user && editable && (
         <EditHeader
+          editing={editing}
           editable={editable}
           setEditable={setEditable}
           handleUpdate={handleUpdate}
@@ -69,6 +78,7 @@ const Profile = () => {
       )}
       {user && (
         <Header
+          editing={editing}
           editable={editable}
           setEditable={setEditable}
           handleUpdate={handleUpdate}

@@ -390,7 +390,10 @@ const CollageLayout = ({ children }) => {
                 onMouseOver={() => setHovered(i)}
                 onMouseOut={() => setHovered(null)}
                 onClick={() => {
-                  if (!location.pathname.match(/\/collage\/test\/.*/)) {
+                  if (
+                    !location.pathname.match(/\/collage\/test\/.*/) ||
+                    location.pathname.match(/\/collage\/test\/final.*/)
+                  ) {
                     dispatch(setSelected(i));
                     dispatch(
                       setTestBasicDetails({

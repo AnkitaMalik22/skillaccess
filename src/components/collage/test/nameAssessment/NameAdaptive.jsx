@@ -273,7 +273,7 @@ const Name = () => {
           <input
             name="totalQuestions"
             type="tel"
-            className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+            className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
               errors.name ? "border-red-500" : "border-none"
             }`}
             placeholder="No. of Questions*"

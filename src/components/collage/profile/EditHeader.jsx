@@ -2,8 +2,10 @@ import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../loaders/Loader";
 
 const EditHeader = ({
+  editing,
   setEditable,
   editable,
   handleUpdate,

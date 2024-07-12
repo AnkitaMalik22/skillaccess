@@ -11,8 +11,10 @@ import {
   updateAvatar,
   updateCollege,
 } from "../../../redux/collage/auth/authSlice";
+import Loader from "../../loaders/Loader";
 
 const Header = ({
+  editing,
   editable,
   setEditable,
   college,
@@ -121,14 +123,22 @@ const Header = ({
         {!editable && (
           <div className="self-center text-gray-400 mr-2">
             <button
-              className="py-2 text-white rounded-xl  bg-blue-700 font-bold flex gap-2 px-4"
+              className="py-2 text-white rounded-xl  bg-blue-700 font-bold flex gap-2 px-4 disabled:bg-blue-500"
+              disabled={editing}
               onClick={() => {
+                if (editing) {
+                  return;
+                }
                 localStorage.setItem("editable", true);
                 setEditable(true);
                 // window.location.reload(true);
               }}
             >
-              <img src="../../images/icons/pen.png" alt="" />{" "}
+              {editing ? (
+                <Loader />
+              ) : (
+                <img src="../../images/icons/pen.png" alt="" />
+              )}{" "}
               <p>Edit Profile</p>
             </button>
           </div>
