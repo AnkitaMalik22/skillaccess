@@ -95,10 +95,25 @@ const Name = () => {
         ...prevErrors,
         [name]: "", // Clear the error message if the value is valid
       }));
-      setTestDetails({
-        ...testDetails,
-        [name]: name === "isNegativeMarking" ? checked : value,
-      });
+
+      if (name === "duration_from" || name === "duration_to") {
+        // const date = new Date(value);
+        // const utcDate = new Date(
+        //   date.getTime() + date.getTimezoneOffset() * 60000
+        // );
+        // const formattedDate = utcDate.toISOString().slice(0, 16);
+        // console.log(date, utcDate, value);
+
+        setTestDetails({
+          ...testDetails,
+          [name]: value,
+        });
+      } else {
+        setTestDetails({
+          ...testDetails,
+          [name]: name === "isNegativeMarking" ? checked : value,
+        });
+      }
     }
   };
 
@@ -182,9 +197,7 @@ const Name = () => {
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, duration: "" }));
     }
-    if (
-      testDetails.totalQuestions <1
-    ) {
+    if (testDetails.totalQuestions < 1) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         totalQuestions: "Total Questions must be greater than 0",
