@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
+import { toast } from "react-hot-toast";
 import {
   googleRegisterCollage,
   registerCollage,
@@ -60,20 +61,25 @@ const Register = () => {
     e.preventDefault();
     setLoader(true);
     const { Email, Password, FirstName, LastName, University } = Credentials;
-
+    if (phone.length !== 12){
+      toast.error("Please enter a valid phone number");
+      setLoader(false);
+      return;
+    }
+ 
     const data = {
       Phone: phone,
       Email,
       Password,
       FirstName,
       LastName,
-
       CollegeName: University,
     };
     try {
       const ch = await dispatch(registerCollage(data));
       if (ch.meta.requestStatus === "fulfilled") {
         setCredentials({});
+        setLoader(false);
         navigate("/collage/dashboard");
       }
     } catch (error) {
