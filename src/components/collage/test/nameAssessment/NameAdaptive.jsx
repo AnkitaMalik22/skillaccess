@@ -95,10 +95,25 @@ const Name = () => {
         ...prevErrors,
         [name]: "", // Clear the error message if the value is valid
       }));
-      setTestDetails({
-        ...testDetails,
-        [name]: name === "isNegativeMarking" ? checked : value,
-      });
+
+      if (name === "duration_from" || name === "duration_to") {
+        // const date = new Date(value);
+        // const utcDate = new Date(
+        //   date.getTime() + date.getTimezoneOffset() * 60000
+        // );
+        // const formattedDate = utcDate.toISOString().slice(0, 16);
+        // console.log(date, utcDate, value);
+
+        setTestDetails({
+          ...testDetails,
+          [name]: value,
+        });
+      } else {
+        setTestDetails({
+          ...testDetails,
+          [name]: name === "isNegativeMarking" ? checked : value,
+        });
+      }
     }
   };
 
@@ -182,9 +197,7 @@ const Name = () => {
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, duration: "" }));
     }
-    if (
-      testDetails.totalQuestions <1
-    ) {
+    if (testDetails.totalQuestions < 1) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         totalQuestions: "Total Questions must be greater than 0",
@@ -260,7 +273,7 @@ const Name = () => {
           <input
             name="totalQuestions"
             type="tel"
-            className={`mb-4 w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
+            className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
               errors.name ? "border-red-500" : "border-none"
             }`}
             placeholder="No. of Questions*"
