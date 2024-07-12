@@ -158,7 +158,13 @@ const Name = () => {
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, totalQuestions: "" }));
     }
-
+    if (testDetails.totalQuestions < 1) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        totalQuestions: "Total Questions must be greater than 0",
+      }));
+      flag = true;
+    }
     if (testDetails.description === "") {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -212,6 +218,7 @@ const Name = () => {
         }
       });
     }
+
     if (!flag) {
       dispatch(setTestBasicDetails(testDetails));
       navigate(`/collage/test/select?level=${level}`);

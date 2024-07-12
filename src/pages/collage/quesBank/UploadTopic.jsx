@@ -760,10 +760,11 @@ const AddQuestionsSelect = () => {
           <button
             className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
             onClick={() => {
-              upload.current.click();
+              selectQuestionType === "" ? toast.error("Please select a question type") : upload.current.click();
             }}
           >
             <input
+              accept=".xlsx"
               type="file"
               ref={upload}
               className="hidden"
