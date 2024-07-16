@@ -971,6 +971,7 @@ const testSlice = createSlice({
       })
       .addCase(getStudentsForTest.fulfilled, (state, action) => {
         state.students = action.payload.students;
+        state.assessment = action.payload.assessment;
         state.GET_STUDENTS_LOADING = false;
       })
       .addCase(getStudentsForTest.rejected, (state, action) => {
