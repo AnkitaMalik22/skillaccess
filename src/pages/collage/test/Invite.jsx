@@ -22,7 +22,7 @@ const Invite = () => {
   const { approvedStudents: uploadedStudents, loading } = useSelector(
     (state) => state.collegeStudents
   );
-  const { students: studentList } = useSelector((state) => state.test);
+  const { students: studentList ,assessment } = useSelector((state) => state.test);
   const { user } = useSelector((state) => state.collageAuth);
 
   useEffect(() => {
@@ -96,8 +96,8 @@ const Invite = () => {
       </div>
 
       <div className="mx-auto">
-        {" "}
-        <Footer students={students} />
+        {console.log(assessment?.endDate)}
+        <Footer students={students} endDate ={assessment?.endDate} />
       </div>
     </>
   );
