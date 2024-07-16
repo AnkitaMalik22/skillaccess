@@ -24,3 +24,26 @@ export const getResultGraph = createAsyncThunk(
     }
   }
 );
+
+export const getAssessmentOverview = createAsyncThunk(
+  "result/getAssessmentOverview",
+  async (id, { rejectWithValue }) => {
+    try {
+      const req = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/assessments/overview/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+
+            "auth-token": localStorage.getItem("auth-token"),
+          },
+        }
+      );
+
+      const res = req.data;
+      return res;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

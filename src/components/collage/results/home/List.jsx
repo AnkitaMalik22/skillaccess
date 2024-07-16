@@ -139,7 +139,10 @@ const List = ({ FilterdStudents, isLoading }) => {
                     <div
                       className="h-full rounded-lg"
                       style={{
-                        width: assessment.avgPercentage,
+                        width:
+                          assessment.avgPercentage < 0
+                            ? 0
+                            : assessment.avgPercentage,
                         backgroundColor: colors[index],
                       }}
                     ></div>
