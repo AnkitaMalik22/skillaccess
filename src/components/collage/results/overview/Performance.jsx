@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import "./chart.css";
+import { getAssessmentOverview } from "../../../../redux/collage/result/thunks/graph";
+import { useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const Performance = () => {
   const [settings, setSettings] = useState({
@@ -20,6 +24,78 @@ const Performance = () => {
         },
       },
       colors: ["", "#6394DD", "#63B499", "#FCBF76", "#E8836A"],
+      legend: {
+        show: false,
+        horizontalAlign: "left",
+        offsetX: 10,
+        offsetY: 10,
+      },
+      grid: {
+        show: true,
+        padding: {
+          left: 50,
+          right: 20,
+        },
+        xaxis: {
+          borderColor: "#8F92A1",
+          labels: {
+            show: false,
+          },
+          lines: {
+            show: false, //or just here to disable only y axis
+          },
+        },
+        yaxis: {
+          axisBorder: {
+            show: true,
+            color: "#8F92A1",
+            offsetX: 100,
+            offsetY: 100,
+          },
+          borderColor: "#8F92A1",
+          labels: {
+            show: false,
+          },
+          lines: {
+            show: true, //or just here to disable only y axis
+          },
+        },
+      },
+      yaxis: {
+        axisBorder: {
+          show: true,
+          color: "#8F92A1",
+          offsetX: 37,
+          offsetY: -1,
+        },
+        tickAmount: 6,
+      },
+      xaxis: {
+        axisBorder: {
+          show: true,
+          color: "#8F92A1",
+          offsetX: 0,
+          offsetY: 0,
+        },
+        categories: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"],
+      },
+    },
+    loading: {
+      columnWidth: "30%",
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        colors: ["transparent"],
+        width: 5,
+      },
+      chart: {
+        id: "results",
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ["", "#808080", "#808080", "#808080", "#808080"],
       legend: {
         show: false,
         horizontalAlign: "left",
@@ -103,18 +179,32 @@ const Performance = () => {
       },
     ],
   });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
+  const { overview, overviewLoading } = useSelector((state) => state.result);
+  useEffect(() => {
+    dispatch(getAssessmentOverview(searchParams.get("assessment")));
+  }, []);
   return (
     <div>
-      {" "}
       <div className="bg-gray-100 rounded-2xl p-2 mb-6">
         <div className="flex gap-4">
           <div className=" relative w-5/6 h-60 bg-white rounded-3xl">
-            <Chart
-              series={settings.series}
-              options={settings.options}
-              height={"100%"}
-              type="bar"
-            />
+            {!overviewLoading ? (
+              <Chart
+                series={overview}
+                options={settings.options}
+                height={"100%"}
+                type="bar"
+              />
+            ) : (
+              <Chart
+                series={settings.series}
+                options={settings.loading}
+                height={"100%"}
+                type="bar"
+              />
+            )}
           </div>
           {/* labels */}
           <div className="self-center">
