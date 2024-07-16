@@ -95,6 +95,7 @@ const SelectTests = () => {
       for (let i = 0; i < selectedSections.length; i++) {
         if (selectedSections[i]._id === section._id) {
           if (selectedSections[i].Type === questionType) {
+            toast.error("This section is already added");
             return;
           }
 
