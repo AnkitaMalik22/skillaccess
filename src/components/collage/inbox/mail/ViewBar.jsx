@@ -53,7 +53,16 @@ const ViewBar = ({ filter, index, inboxType }) => {
       <div className="w-full flex justify-between self-center">
         <div className="flex gap-2">
           {/* photo */}
-          <div className="h-10 w-10 rounded-lg bg-blued"></div>
+          <div className="h-10 w-10 rounded-lg">
+            <img
+              src={
+                inboxType === "Sent"
+                  ? Email?.mail?.to.avatar.url
+                  : Email?.mail?.from.avatar.url
+              }
+              alt=""
+            />
+          </div>
           {/*  */}
 
           <div className="flex gap-1 self-center flex-col">

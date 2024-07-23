@@ -392,7 +392,8 @@ const CollageLayout = ({ children }) => {
                 onClick={() => {
                   if (
                     !location.pathname.match(/\/collage\/test\/.*/) ||
-                    location.pathname.match(/\/collage\/test\/final.*/)
+                    location.pathname.match(/\/collage\/test\/final.*/) ||
+                    location.pathname.match(/\/collage\/test\/invite.*/)
                   ) {
                     dispatch(setSelected(i));
                     dispatch(

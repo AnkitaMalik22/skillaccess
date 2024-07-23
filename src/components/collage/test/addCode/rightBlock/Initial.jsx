@@ -14,7 +14,7 @@ const Initial = ({
         value={editorValue}
         onChange={(value) => handleEditorChange(value, "defaultCode")}
         defaultLanguage={selectedLanguage}
-        defaultValue={editorValue}
+        defaultValue={"//Enter code here"}
         // onChange={handleEditorChange}
         className="border-2  border-gray-300"
       />

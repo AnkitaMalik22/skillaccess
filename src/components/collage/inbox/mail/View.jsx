@@ -169,7 +169,16 @@ const View = ({ index, filter, inboxType }) => {
         <div className=" bg-lGray bg-opacity-5 rounded-lg p-3 flex   justify-between">
           <div className="flex gap-2">
             {/* photo */}
-            <div className="h-10 w-10 rounded-lg bg-blued"></div>
+            <div className="h-10 w-10 rounded-lg ">
+              <img
+                src={
+                  inboxType === "Sent"
+                    ? Email?.mail?.to.avatar.url
+                    : Email?.mail?.from.avatar.url
+                }
+                alt=""
+              />
+            </div>
             {/*  */}
 
             <div className="flex gap-1 self-center">

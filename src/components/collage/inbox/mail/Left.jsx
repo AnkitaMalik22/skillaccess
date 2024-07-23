@@ -39,7 +39,16 @@ const Left = ({ data, index, inboxType }) => {
     >
       <div className="flex justify-between">
         <div className="flex gap-2">
-          <div className="w-10 h-10 rounded-lg bg-gray-300 self-center"></div>
+          <div className="w-10 h-10 rounded-lg  self-center">
+            <img
+              src={
+                inboxType === "Sent"
+                  ? data?.to.avatar.url
+                  : data?.from.avatar.url
+              }
+              alt=""
+            />
+          </div>
           <div className="self-center">
             <p className="leading-[16px] text-xs font-medium text-gray-400">
               {data?.from?.CollegeName}
