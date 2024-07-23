@@ -16,7 +16,6 @@ import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic"
 import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
 import { setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
 
-
 const AddCode = () => {
   const { id } = useParams();
   const { topics, currentTopic } = useSelector((state) => state.test);
@@ -61,13 +60,7 @@ const AddCode = () => {
   const [toggle, setToggle] = useState(1);
   const codeTemplates = {
     Java: {
-      defaultCode: `import java.io.*;
-  
-  public class Main {
-    public static void main(String[] args) {
-      // Insert your Java initial code here
-    }
-  }`,
+      defaultCode: ``,
       solutionCode: `import java.io.*;
   
   public class Main {
@@ -77,11 +70,7 @@ const AddCode = () => {
   }`,
     },
     Python: {
-      defaultCode: `def main():
-      # Insert your Python initial code here
-  
-  if __name__ == "__main__":
-      main()`,
+      defaultCode: ``,
       solutionCode: `def main():
       # Insert your Python solution code here
   
@@ -89,11 +78,11 @@ const AddCode = () => {
       main()`,
     },
     Cpp: {
-      defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
+      defaultCode: ``,
       solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
     },
     C: {
-      defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
+      defaultCode: ``,
       solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
     },
   };
@@ -252,6 +241,10 @@ const AddCode = () => {
           resetQuestion();
           setToggle(1);
         } else {
+          if (question.testcase.length < 1) {
+            toast.error("Testcases required");
+            return;
+          }
           dispatch(
             addCompilerToTopic({
               data: { ...question, codeLanguage: "" },
@@ -356,12 +349,11 @@ const AddCode = () => {
   }, [currentTopic]);
   // console.log(question);
 
-useEffect(() => {
+  useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "compiler" ,level}));
+      dispatch(setTotalTopicQuestions({ id, type: "compiler", level }));
     }
-}, [ADD_QUESTION_LOADING]);
-
+  }, [ADD_QUESTION_LOADING]);
 
   return (
     <div>
