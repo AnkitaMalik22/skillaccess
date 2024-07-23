@@ -366,7 +366,7 @@ const SelectTests = () => {
             </div>
           </div>
           {GET_TOPICS_LOADING && (
-            <div className="w-[50vw] min-h-64 rounded-lg flex items-center  justify-center  z-10 ">
+            <div className=" min-h-64 rounded-lg flex items-center  justify-center ">
               <Loader size="md" />
             </div>
           )}
