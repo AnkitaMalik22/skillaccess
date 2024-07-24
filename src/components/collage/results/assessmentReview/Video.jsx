@@ -20,15 +20,15 @@ const Video = ({ video, Number }) => {
     <Disclosure>
       {({ open }) => (
         <>
-          <div className="w-full flex justify-between ">
+           <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10 mb-4">
             {" "}
-            <button className=" bg-blued rounded-lg bg-opacity-5 text-left text-blued flex">
+            <button className="bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] p-3 h-12">
               {" "}
               <div className=" bg-blued rounded-xl text-white  text-center self-center text-base font-bold py-2 w-12 h-11">
                 Q-{Number}
               </div>
             </button>
-            <Disclosure.Button className="w-full bg-gray-100 mx-2">
+            <Disclosure.Button  className=" flex w-full justify-between rounded-lg text-left text-sm font-medium border border-[#95ACFA] p-3">
               Click to Expand{" "}
             </Disclosure.Button>
             {/* <div className="bg-gray-100 h-11 flex  rounded-xl px-1">

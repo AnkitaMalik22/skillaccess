@@ -151,7 +151,9 @@ const Video = ({ Number, id, video, type, view }) => {
           )}
         </div>
       )}
-
+  <h1 className="text-lg font-semibold text-[#3E3E3E] px-4 pt-3">
+                  {video?.questions.length > 0 && "Multiple Choice questions"}
+                </h1>
       {video?.questions?.length > 0 &&
         video.questions.map((question, index) => {
           return (
@@ -171,6 +173,9 @@ const Video = ({ Number, id, video, type, view }) => {
             />
           );
         })}
+         <h1 className="text-lg font-semibold text-[#3E3E3E] px-4 pt-3">
+                  {video?.long.length > 0 && "Long answer questions"}
+                </h1>
       {video?.long?.length > 0 &&
         video.long.map((question, index) => (
           <VideoEssay
@@ -187,6 +192,10 @@ const Video = ({ Number, id, video, type, view }) => {
             videoState={videoState}
           />
         ))}
+           <h1 className="text-lg font-semibold text-[#3E3E3E] px-4 pt-3">
+                  {" "}
+                  {video?.short.length > 0 && "Short answer questions"}
+                </h1>
       {video?.short?.length > 0 &&
         video.short.map((question, index) => (
           <VideoEssay

@@ -145,7 +145,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
                 value={student && student.Phone ? student.Phone : ""}
                 onChange={(e) => {
                   // Ensure the entered value doesn't exceed 10 digits
-                  if (e.target.value.length <= 10) {
+                  if (e.target.value.length === 10) {
                     setStudent({ ...student, Phone: e.target.value });
                   }
                 }}
