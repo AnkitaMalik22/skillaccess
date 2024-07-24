@@ -43,7 +43,8 @@ const Test = () => {
   const { approvedStudents } = useSelector((state) => state.collegeStudents);
   const [hasMore, setHasMore] = useState(true);
   const [index, setIndex] = useState(1);
-  const [length, setLength] = useState(recentAssessments?.length);
+  const [loadingRecent, setLoadingRecent] = useState(false);
+
   useEffect(() => {
     dispatch(
       setTestBasicDetails({
@@ -60,8 +61,35 @@ const Test = () => {
     dispatch(getAllTests());
   }, []);
 
-  const arr = [<Adaptive />, <Beginner />, <Intermediate />, <Advanced />];
+  const loadMore = () => {
+    console.log("loadmore", loadingRecent);
+    if (loadingRecent) {
+      return;
+    }
 
+    setLoadingRecent(true);
+    dispatch(getRecentTests({ skip: index * 10, limit: 10 }))
+      .then((res) => {
+        setLoadingRecent(false);
+        console.log(res);
+        console.log(res?.payload?.assessment?.length);
+        if (res?.payload?.assessment?.length <= 0) {
+          setHasMore(false);
+        }
+      })
+      .catch((error) => {
+        setLoadingRecent(false);
+      });
+
+    setIndex((prev) => prev + 1);
+  };
+
+  const arr = [
+    <Adaptive key="adaptive" />,
+    <Beginner key="beginner" />,
+    <Intermediate key="intermediate" />,
+    <Advanced key="advanced" />,
+  ];
   return (
     <div>
       {/* search bar */}
@@ -140,17 +168,8 @@ const Test = () => {
               Recent Assessments Completed
             </h2>
 
-            <div className="p-3 flex-grow overflow-y-auto">
-              <InfiniteScroll
-                pageStart={0}
-                loadMore={}
-                hasMore={true || false}
-                loader={
-                  <div className="loader" key={0}>
-                    Loading ...
-                  </div>
-                }
-              >
+            <div className="p-3 overflow-y-scroll !scrollbar-track-neutral-400 !scrollbar-thumb-slate-400">
+              <div>
                 {recentAssessments?.map((assessment, index) => (
                   <div className="flex flex-col md:gap-8 mb-5" key={index}>
                     <div className="flex gap-3 items-center">
@@ -198,7 +217,8 @@ const Test = () => {
                     </div>
                   </div>
                 ))}
-              </InfiniteScroll>
+                {hasMore && <button onClick={loadMore}>load more</button>}
+              </div>
             </div>
           </div>
         </div>
