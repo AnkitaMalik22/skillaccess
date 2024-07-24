@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import Header from "../../../components/collage/test/home/Header";
 import Beginner from "../../../components/collage/test/home/Beginner";
@@ -23,7 +23,8 @@ import {
 import Adaptive from "../../../components/collage/test/home/Adaptive";
 import calculateDaysAndWeeks from "../../../util/daysAndWeeks";
 import { getStudents } from "../../../redux/collage/student/studentSlice";
-import useTranslate from "../../../hooks/useTranslate";
+import InfiniteScroll from "react-infinite-scroller";
+import Loader from "../../../components/loaders/Loader";
 
 const Test = () => {
   //useTranslate();
@@ -40,6 +41,9 @@ const Test = () => {
   const { recentAssessments } = useSelector((state) => state.test);
   const { user } = useSelector((state) => state.collageAuth);
   const { approvedStudents } = useSelector((state) => state.collegeStudents);
+  const [hasMore, setHasMore] = useState(true);
+  const [index, setIndex] = useState(1);
+  const [loadingRecent, setLoadingRecent] = useState(false);
 
   useEffect(() => {
     dispatch(
@@ -51,14 +55,41 @@ const Test = () => {
       })
     );
     dispatch(getStudents({ id: user?._id }));
-    dispatch(getRecentTests());
+    dispatch(getRecentTests({ skip: index * 10, limit: 10 }));
     dispatch(setTestSelectedTopics([]));
     dispatch(setCurrentQuestionCount(0));
     dispatch(getAllTests());
   }, []);
 
-  const arr = [<Adaptive />, <Beginner />, <Intermediate />, <Advanced />];
+  const loadMore = () => {
+    console.log("loadmore", loadingRecent);
+    if (loadingRecent) {
+      return;
+    }
 
+    setLoadingRecent(true);
+    dispatch(getRecentTests({ skip: index * 10, limit: 10 }))
+      .then((res) => {
+        setLoadingRecent(false);
+        console.log(res);
+        console.log(res?.payload?.assessment?.length);
+        if (res?.payload?.assessment?.length <= 0) {
+          setHasMore(false);
+        }
+      })
+      .catch((error) => {
+        setLoadingRecent(false);
+      });
+
+    setIndex((prev) => prev + 1);
+  };
+
+  const arr = [
+    <Adaptive key="adaptive" />,
+    <Beginner key="beginner" />,
+    <Intermediate key="intermediate" />,
+    <Advanced key="advanced" />,
+  ];
   return (
     <div>
       {/* search bar */}
@@ -136,54 +167,67 @@ const Test = () => {
             <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
               Recent Assessments Completed
             </h2>
-            <div className="p-3 flex-grow overflow-y-auto">
-              {recentAssessments.map((assessment, index) => (
-                <div className="flex flex-col md:gap-8 mb-5" key={index}>
-                  <div className="flex gap-3 items-center">
-                    <div className="min-w-[2.5rem] h-10 self-center rounded-lg">
-                      <img
-                        src="../../images/teams.png"
-                        alt="user-icon"
-                        className="rounded-lg w-11 h-11"
-                      />
+
+            <div className="p-3 overflow-y-scroll !scrollbar-track-neutral-400 !scrollbar-thumb-slate-400">
+              <div>
+                {recentAssessments?.map((assessment, index) => (
+                  <div className="flex flex-col md:gap-8 mb-5" key={index}>
+                    <div className="flex gap-3 items-center">
+                      {/* <div className="min-w-[2.5rem] h-10 self-center rounded-lg">
+                        <img
+                          src="../../images/teams.png"
+                          alt="user-icon"
+                          className="rounded-lg w-11 h-11"
+                        />
+                      </div> */}
+                      <div>
+                        <h2 className="text-xs font-bold text-[#171717] first-letter:uppercase">
+                          {assessment.name}
+                        </h2>
+                        <h2 className="text-xs font-normal first-letter:uppercase">
+                          {assessment.description}
+                        </h2>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="text-xs font-bold text-[#171717] first-letter:uppercase">
-                        {assessment.name}
-                      </h2>
-                      <h2 className="text-xs font-normal first-letter:uppercase">
-                        {assessment.description}
-                      </h2>
+                    <div className="flex mb-5 gap-2 justify-between items-center">
+                      <div className="flex gap-2">
+                        <button
+                          className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
+                          onClick={() => {
+                            navigate(
+                              `/collage/results/overview?level=${assessment.level}&assessment=${assessment._id}`
+                            );
+                          }}
+                        >
+                          View
+                        </button>
+                        <button
+                          className="rounded-lg p-3 bg-[#8F92A1] bg-opacity-5 self-center tooltip"
+                          data-tip="Cick here to remove."
+                          onClick={() =>
+                            dispatch(removeFromRecent(assessment._id))
+                          }
+                        >
+                          <CgUnavailable className="text-[#8F92A1] text-lg" />
+                        </button>
+                      </div>
+                      <p className="text-xs font-normal text-[#8F92A1]">
+                        {calculateDaysAndWeeks(assessment.endDate)}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex mb-5 gap-2 justify-between items-center">
-                    <div className="flex gap-2">
-                      <button
-                        className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
-                        onClick={() => {
-                          navigate(
-                            `/collage/results/overview?level=${assessment.level}&assessment=${assessment._id}`
-                          );
-                        }}
-                      >
-                        View
-                      </button>
-                      <button
-                        className="rounded-lg p-3 bg-[#8F92A1] bg-opacity-5 self-center tooltip"
-                        data-tip="Cick here to remove."
-                        onClick={() =>
-                          dispatch(removeFromRecent(assessment._id))
-                        }
-                      >
-                        <CgUnavailable className="text-[#8F92A1] text-lg" />
-                      </button>
-                    </div>
-                    <p className="text-xs font-normal text-[#8F92A1]">
-                      {calculateDaysAndWeeks(assessment.endDate)}
-                    </p>
+                ))}
+                {hasMore && (
+                  <div className="bg-blued p-1 rounded-lg w-fit h-fit">
+                    <button
+                      onClick={loadMore}
+                      className=" bg-blued text-secondary-foreground shadow-md  text-white  hover:shadow-inner-lg p-1 rounded-lg"
+                    >
+                      load more
+                    </button>
                   </div>
-                </div>
-              ))}
+                )}
+              </div>
             </div>
           </div>
         </div>
