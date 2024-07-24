@@ -183,10 +183,10 @@ export const getselectedStudents = createAsyncThunk(
 
 export const getRecentTests = createAsyncThunk(
   "test/getRecentTests",
-  async (_, { rejectWithValue, getState }) => {
+  async ({ skip, limit }, { rejectWithValue, getState }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments/recent`,
+        `${process.env.REACT_APP_API_URL}/api/assessments/recent?skip=${skip}&limit=${limit}`,
         {
           headers: {
             "Content-Type": "application/json",
