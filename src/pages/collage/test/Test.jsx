@@ -173,13 +173,13 @@ const Test = () => {
                 {recentAssessments?.map((assessment, index) => (
                   <div className="flex flex-col md:gap-8 mb-5" key={index}>
                     <div className="flex gap-3 items-center">
-                      <div className="min-w-[2.5rem] h-10 self-center rounded-lg">
+                      {/* <div className="min-w-[2.5rem] h-10 self-center rounded-lg">
                         <img
                           src="../../images/teams.png"
                           alt="user-icon"
                           className="rounded-lg w-11 h-11"
                         />
-                      </div>
+                      </div> */}
                       <div>
                         <h2 className="text-xs font-bold text-[#171717] first-letter:uppercase">
                           {assessment.name}
@@ -217,7 +217,16 @@ const Test = () => {
                     </div>
                   </div>
                 ))}
-                {hasMore && <button onClick={loadMore}>load more</button>}
+                {hasMore && (
+                  <div className="bg-blued p-1 rounded-lg w-fit h-fit">
+                    <button
+                      onClick={loadMore}
+                      className=" bg-blued text-secondary-foreground shadow-md  text-white  hover:shadow-inner-lg p-1 rounded-lg"
+                    >
+                      load more
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
