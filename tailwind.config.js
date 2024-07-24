@@ -24,6 +24,9 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      boxShadow: {
+        "inner-lg": "inset 2px 2px 0px 0px rgba(1, 10, 1,0.3)",
+      },
       transitionProperty: {
         width: "width",
         height: "height",

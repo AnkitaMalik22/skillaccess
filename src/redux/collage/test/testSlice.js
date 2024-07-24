@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 import {
   addQuesFunc,
   editQuestionFun,
@@ -36,7 +35,7 @@ import {
   getTopicById,
   getAllTopicsQB,
   deleteTopics,
-  setTotalTopicQuestions
+  setTotalTopicQuestions,
 } from "./thunks/topic";
 
 import {
@@ -191,12 +190,12 @@ const testState = {
   GET_STUDENT_RESPONSE_LOADING: false,
   TEST_DATA_RESPONSE_LOADING: false,
   SELECTED_STUDENTS_LOADING: false,
-  GET_STUDENTS_LOADING : false,
-  GET_TESTS_LOADING:false,
-  GET_TEST_LOADING :false,
-  GET_RECENT_QUESTION_LOADING : false,
-  GET_BOOKMARKS_LOADING : false,
-  totalTopicQuestions : 0,
+  GET_STUDENTS_LOADING: false,
+  GET_TESTS_LOADING: false,
+  GET_TEST_LOADING: false,
+  GET_RECENT_QUESTION_LOADING: false,
+  GET_BOOKMARKS_LOADING: false,
+  totalTopicQuestions: 0,
 };
 
 // export const getStudentResponse = createAsyncThunk("test/studentResponse",
@@ -228,9 +227,6 @@ const testState = {
 //   }
 // }
 // );
-
-
-
 
 const testSlice = createSlice({
   initialState: testState,
@@ -917,7 +913,10 @@ const testSlice = createSlice({
         toast.success("Topic Deleted Successfully!");
       })
       .addCase(getRecentTests.fulfilled, (state, action) => {
-        state.recentAssessments = action.payload.assessment;
+        state.recentAssessments = [
+          ...state.recentAssessments,
+          ...action.payload.assessment,
+        ];
       })
       .addCase(removeFromRecent.fulfilled, (state, action) => {})
       .addCase(deleteTopics.rejected, (state, action) => {
@@ -979,14 +978,14 @@ const testSlice = createSlice({
         state.GET_STUDENTS_LOADING = false;
       })
       .addCase(setTotalTopicQuestions.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(setTotalTopicQuestions.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.totalTopicQuestions = action.payload.totalTopicQuestions;
       })
       .addCase(setTotalTopicQuestions.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.payload || action.error.message;
       });
   },
