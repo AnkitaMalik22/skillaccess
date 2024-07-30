@@ -56,11 +56,11 @@ const StudentPoP = ({ onClose }) => {
   }
   // no numeric values in name
   if (!/^[a-zA-Z]*$/.test(student.FirstName)) {
-    toast.error("First Name should not contain numeric values");
+    toast.error("First Name should not contain numeric values or spaces");
     return;
   }
   if (!/^[a-zA-Z]*$/.test(student.LastName)) {
-    toast.error("Last Name should not contain numeric values");
+    toast.error("Last Name should not contain numeric values or spaces");
     return;
   }
     // maxLength: [30, "Name cannot exceed 30 characters"],
