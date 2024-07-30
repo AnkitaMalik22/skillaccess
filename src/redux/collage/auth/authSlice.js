@@ -364,12 +364,12 @@ export const updateCollege = createAsyncThunk(
       );
 
       const res = req.data;
-      console.log("should not reject");
+      // console.log("should not reject");
       console.log(res);
-      return res.data.college;
+      return res.college;
     } catch (error) {
-      console.log("catch", error.response.data);
-      return rejectWithValue(error.response.data);
+      console.log("catch", error);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -744,10 +744,10 @@ const collageAuthSlice = createSlice({
         console.log("update college fulfilled");
       })
       .addCase(updateCollege.rejected, (state, action) => {
-        // console.log(action.payload);
+        console.log(action.payload);
         // window.alert(action.payload);
         // window.location.reload(true);
-        toast.error(action.payload.message);
+        // toast.error(action.payload);
         console.log("rejected update profile");
       })
       .addCase(getCollege.pending, (state, action) => {
