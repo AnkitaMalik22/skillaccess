@@ -21,7 +21,6 @@ const Header = ({
   setCollege,
   avatar,
   setAvatar,
-  phoneError,
 }) => {
   const dispatch = useDispatch();
   // const { uploadImg } = useSelector((state) => state.collageAuth);
@@ -224,8 +223,7 @@ const Header = ({
           </p> */}
         </div>
 
-        <div className=" flex flex-col justify-start ">
-        <div className=" flex  gap-2 ">
+        <div className="flex gap-2">
           <div className="w-10 h-10 rounded-2xl bg-gray-200 flex justify-center">
             <BsPhone className="self-center text-2xl" />
           </div>
@@ -244,9 +242,7 @@ const Header = ({
                     setCollege({ ...college, Phone: e.target.value });
                   }
                 }}
-                className={` rounded-lg border-none focus:outline-none appearance-none bg-[#f4f5f6] text-sm ${
-                  phoneError ? "border-red-500" : ""
-                }`}
+                className={` rounded-lg border-none focus:outline-none appearance-none bg-[#f4f5f6] text-sm `}
                 placeholder="Add Phone Number"
               />
             ) : college && college.Phone ? (
@@ -257,10 +253,6 @@ const Header = ({
               ""
             )}
           </div>
-          </div>
-          {
-            phoneError && <p className="text-red-500 text-sm">Phone number should be 10 digits</p>
-          }
         </div>
 
         <div className="flex gap-2 font-dmSans font-medium">
