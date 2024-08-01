@@ -151,7 +151,8 @@ const List = ({ question, level, number, isLoading }) => {
                         {subQuestion.question ? (
                           <>
                             <div>
-                              <h3>{subQuestion.question}</h3>
+                              <h3
+                               className="font-bold">{subQuestion.question}</h3>
                               <p>{subQuestion.studentAnswer}</p>
                             </div>
                           </>
