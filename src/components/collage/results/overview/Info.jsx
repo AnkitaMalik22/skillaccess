@@ -27,6 +27,12 @@ const Info = ({ user, assessment }) => {
     return `${day}${daySuffix} ${month}`;
   }
 
+  const uniqueStudentResponses = new Set(
+    assessment?.studentResponses?.map((response) => response.student)
+  );
+
+  const totalUniqueStudentResponses = uniqueStudentResponses.size || 0;
+
   return GET_TEST_LOADING ? (
     <>
       <Skeleton />
@@ -74,7 +80,8 @@ const Info = ({ user, assessment }) => {
           </h2>
 
           <h2 className="text-sm font-bold text-[#171717]">
-            {assessment?.studentResponses?.length}
+      
+            {totalUniqueStudentResponses}
           </h2>
         </div>
 
