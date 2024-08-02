@@ -9,7 +9,7 @@ const Selected = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("assessment");
 
-  console.log(id);
+  // //console.log(id);
   useEffect(() => {
     dispatch(getselectedStudents(id));
   }, []);

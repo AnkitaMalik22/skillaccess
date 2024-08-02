@@ -22,21 +22,21 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   const { currentQuestionCount } = useSelector((state) => state.test);
 
   const [mcq, setMcq] = useState(question);
-  console.log(question);
+  // //console.log(question);
   const dispatch = useDispatch();
 
-  console.log(question);
+  // //console.log(question);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name === "Title") {
-      console.log("name");
+      // //console.log("name");
       setMcq((prev) => {
         return { ...prev, [name]: value };
       });
     } else {
-      console.log(name);
+      // //console.log(name);
       setMcq((prev) => {
         return {
           ...prev,
@@ -57,8 +57,8 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   };
 
   const handleBookmark = () => {
-    console.log("bookmark");
-    // console.log(question);
+    // //console.log("bookmark");
+    // //console.log(question);
     dispatch(
       addBookmark({
         Title: question.Title,

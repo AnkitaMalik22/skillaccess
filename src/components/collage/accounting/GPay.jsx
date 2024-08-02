@@ -59,7 +59,7 @@ const Gpay = ({ onCancel ,Plan}) => {
                 },
               }}
               onLoadPaymentData={(paymentRequest) => {
-                console.log("load payment data", paymentRequest);
+                
               }}
             />
           </div>

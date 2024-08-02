@@ -11,7 +11,7 @@ const Footer = ({ setQues, question, handleSave }) => {
   }
 
   // React.useEffect(() => {
-  //   console.log(question);
+  //   //console.log(question);
   // }, [question]);
 
   return (

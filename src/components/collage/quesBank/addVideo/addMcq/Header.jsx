@@ -17,7 +17,7 @@ const Header = ({ question, setQuestion, handleSave, addType }) => {
   const { test } = useSelector((state) => state.test);
 
   const handleCreateTest = () => {
-    console.log("test", test);
+    // //console.log("test", test);
 
     dispatch(
       createTest({

@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../../components/collage/test/addMcq/Header";
 import ReactQuill from "react-quill"; // Import ReactQuill
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
@@ -53,10 +53,10 @@ const AddMcq = () => {
   };
 
   const handleChanges = (e) => {
-    // console.log(question);
+    // //console.log(question);
     if (e.target.name === "Title") {
       setQuestion((prev) => {
-        // console.log({ ...prev, Title: e.target.value });
+        // //console.log({ ...prev, Title: e.target.value });
         return { ...prev, Title: e.target.value };
       });
     } else if (e.target.name === "Duration") {
@@ -125,12 +125,12 @@ const AddMcq = () => {
   };
 
   const handleAddQuestion = async (type) => {
-    console.log(
-      question.Title,
-      question.Title === "",
-      question.Title.trim() === "",
-      question.Title === null
-    );
+    //console.log(
+    //   question.Title,
+    //   question.Title === "",
+    //   question.Title.trim() === "",
+    //   question.Title === null
+    // );
     if (
       !question.Title ||
       question.Title.trim() === "" ||
@@ -157,7 +157,7 @@ const AddMcq = () => {
       return;
     } else {
       if (isPrev) {
-        console.log("calling 1 --", addType);
+        //console.log("calling 1 --", addType);
         await dispatch(
           addMcq({ question: question, id: id, prev: true, index: count + 1 })
         );
@@ -185,7 +185,7 @@ const AddMcq = () => {
       } else {
         dispatch(addMcq({ question: question, id: id, prev: false }));
         // .then(()=>{
-        console.log("calling 2 --", addType);
+        //console.log("calling 2 --", addType);
         if (type === "save" && addType !== "test") {
           level === "adaptive"
             ? navigate(`/collage/test/selectAdaptive?level=${level}`)
@@ -208,13 +208,13 @@ const AddMcq = () => {
         //   if(!ADD_QUESTION_LOADING){
         //    navigate(-1);
         //  }
-        // console.log("ADD_QUESTION_LOADING",ADD_QUESTION_LOADING)
+        // //console.log("ADD_QUESTION_LOADING",ADD_QUESTION_LOADING)
       }
     }
   };
 
   // useEffect(() => {
-  //   console.log("ADD_QUESTION_LOADING 1",ADD_QUESTION_LOADING)
+  //   //console.log("ADD_QUESTION_LOADING 1",ADD_QUESTION_LOADING)
   // if(!ADD_QUESTION_LOADING){
   //       navigate(-1);
   // }
@@ -226,7 +226,7 @@ const AddMcq = () => {
   // , [ADD_QUESTION_LOADING]);
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level}));
+      dispatch(setTotalTopicQuestions({ id, type: "mcq", level }));
     }
   }, [ADD_QUESTION_LOADING]);
 
@@ -283,7 +283,7 @@ const AddMcq = () => {
               value={question.Title}
               onChange={(value) =>
                 setQuestion((prev) => {
-                  // console.log({ ...prev, Title: e.target.value });
+                  // //console.log({ ...prev, Title: e.target.value });
                   return { ...prev, Title: value };
                 })
               }

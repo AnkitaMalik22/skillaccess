@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../../components/collage/profile/Header";
 import List from "../../../components/collage/profile/List";
-import { getCollege, updateCollege, updateAvatar } from "../../../redux/collage/auth/authSlice";
+import {
+  getCollege,
+  updateCollege,
+  updateAvatar,
+} from "../../../redux/collage/auth/authSlice";
 import EditHeader from "../../../components/collage/profile/EditHeader";
 import toast from "react-hot-toast";
 
@@ -30,7 +34,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (submitUpdateProfile) {
-      console.log(college.Phone.length);
+      //console.log(college.Phone.length);
       if (college.Phone.length !== 10) {
         setPhoneError(true);
         setSubmitUpdateProfile(false);
@@ -48,7 +52,7 @@ const Profile = () => {
         localStorage.setItem("editable", "false");
       }
     }
-  }, [submitUpdateProfile , college.Phone.length]);
+  }, [submitUpdateProfile, college.Phone.length]);
 
   const handleUpdate = () => {
     if (college.Phone.length !== 10) {

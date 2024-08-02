@@ -42,7 +42,7 @@ export default function Dashboard() {
     dispatch(getTotalJobs());
     dispatch(getPlacedStudents());
 
-    // console.log("students : ",students);
+    // //console.log("students : ",students);
   }, [dispatch]);
 
   // const [companies, setcompanies] = useState([
@@ -70,7 +70,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch(getCollege());
-    console.log("get collaeg");
+    // //console.log("get collaeg");
   }, []);
   const navigate = useNavigate();
 

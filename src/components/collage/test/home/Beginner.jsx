@@ -26,7 +26,7 @@ const Beginner = () => {
   const { testLoading } = useSelector((state) => state.test);
   const credit = useSelector((state) => state.collageAuth);
 
-  console.log(credit);
+  //console.log(credit);
 
   const handleClose = () => {
     setShow(false);
@@ -42,7 +42,7 @@ const Beginner = () => {
   //  if(!testLoading){
   //    dispatch(getAllTests())
   //   }
-  //   console.log("testLoading",testLoading)
+  //   //console.log("testLoading",testLoading)
 
   //   }, [testLoading]);
 

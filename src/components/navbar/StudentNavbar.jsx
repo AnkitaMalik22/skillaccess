@@ -1,28 +1,26 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FiBell } from "react-icons/fi";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Navbar = (props) => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const goToProfile = () => {
     // Function to navigate to profile page
     navigate("/student/profile"); // Use navigate function to navigate to desired URL
   };
-  const userDetails = useSelector(
-    (state) => state.studentAuth
-  );
+  const userDetails = useSelector((state) => state.studentAuth);
 
-  console.log(userDetails)
- 
+  // //console.log(userDetails)
+
   //   let scriptLoaded = false;
-  
+
   //   const loadGoogleTranslateScript = () => {
   //     if (!scriptLoaded) {
   //       const script = document.createElement('script');
   //       script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
   //       script.async = true;
-  
+
   //       // Use a closure to maintain access to the script variable
   //       script.onload = () => {
   //         window.googleTranslateElementInit = () => {
@@ -35,14 +33,14 @@ const Navbar = (props) => {
   //           );
   //         };
   //       };
-  
+
   //       document.body.appendChild(script);
   //       scriptLoaded = true;
   //     }
   //   };
-  
+
   //   loadGoogleTranslateScript();
-  
+
   //   return () => {
   //     // Clean up script when component unmounts
   //     if (scriptLoaded) {
@@ -51,10 +49,9 @@ const Navbar = (props) => {
   //     }
   //   };
   // }, []);
-  
-  
+
   return (
-    <div className="border border-y-1 sorder border-gray-500 bg-white w-full z-[9999] m-0 fixed top-0"   >
+    <div className="border border-y-1 sorder border-gray-500 bg-white w-full z-[9999] m-0 fixed top-0">
       <div className="navbar flex justify-between ">
         {/* left */}
         <div>
@@ -71,7 +68,7 @@ const Navbar = (props) => {
             <img src="../../../images/logo.png" alt="" />
           </div>
         </div>
-    
+
         {/* right */}
         <div className="flex gap-3">
           {/* noifiaction */}
@@ -81,18 +78,23 @@ const Navbar = (props) => {
           </button>
 
           {/* noifiaction */}
-          <button className="border-2 border-gray-400  rounded-lg p-1 relative flex gap-2 "
-          style={{marginRight :'12rem'}}
-          onClick={goToProfile}
+          <button
+            className="border-2 border-gray-400  rounded-lg p-1 relative flex gap-2 "
+            style={{ marginRight: "12rem" }}
+            onClick={goToProfile}
           >
-            <img src={userDetails?.user?.avatar?.url} alt="" className="h-7 w-7" />{" "}
+            <img
+              src={userDetails?.user?.avatar?.url}
+              alt=""
+              className="h-7 w-7"
+            />{" "}
             <h2 className="pr-2 text-sm font-bold self-center font-dmSans italic">
-             Hello {userDetails?.user?.FirstName}
+              Hello {userDetails?.user?.FirstName}
             </h2>
           </button>
 
           {/* noifiaction */}
-         
+
           {/* noifiaction */}
           {/* <button className="border-none   rounded-lg p-2 relative"> */}
           {/* <div className="border-2 border-gray-400  text-gray-400 rounded-lg p-1 relative">
@@ -103,9 +105,9 @@ const Navbar = (props) => {
             </div>
           </div> */}
 
-            {/* <FaAngleDown className="" /> */}
-            <div id="google_translate_element" className="google-div"></div>
-            {/* <select
+          {/* <FaAngleDown className="" /> */}
+          <div id="google_translate_element" className="google-div"></div>
+          {/* <select
             
               className="border-none bg-transparent"
               onChange={(e) => changeLanguage(e.target.value)}

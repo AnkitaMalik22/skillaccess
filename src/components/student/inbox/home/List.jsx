@@ -22,7 +22,7 @@ const List = () => {
 
   const handleCheckbox = (e) => {
     const { checked, id, name } = e.target;
-    console.log(name);
+    // //console.log(name);
     if (name === "all") {
       let copy = arr.map((item) => {
         return { ...item, isChecked: checked };
@@ -32,7 +32,7 @@ const List = () => {
       let copy = arr.map((item) => {
         return item.id == id ? { ...item, isChecked: checked } : item;
       });
-      console.log(copy);
+      // //console.log(copy);
       setArr(copy);
     }
   };

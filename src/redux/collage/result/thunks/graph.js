@@ -19,7 +19,7 @@ export const getResultGraph = createAsyncThunk(
       const res = req.data;
       return res;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }

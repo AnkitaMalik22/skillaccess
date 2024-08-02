@@ -19,7 +19,7 @@ const List = ({ Title, number, code, question }) => {
       })
     );
   };
-  console.log(question);
+  // //console.log(question);
   return (
     <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10">
       <button className=" bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
@@ -105,7 +105,7 @@ const List = ({ Title, number, code, question }) => {
       {/* <div
         className="bg-gray-100 h-11 flex rounded-xl px-1"
         onClick={() => {
-          console.log(question);
+          //console.log(question);
           handleDelete({
             sectionId: question.section,
             questionId: question.id,

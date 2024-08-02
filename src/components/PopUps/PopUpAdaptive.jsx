@@ -13,7 +13,7 @@ const PopUpAdaptive = ({
   const [noOfQuestions, setNoOfQuestions] = useState(0);
 
   const handleSubmit = async () => {
-    console.log("noOfQuestions", noOfQuestions, section);
+    // //console.log("noOfQuestions", noOfQuestions, section);
     await dispatch(setTotalSelectedQuestions(noOfQuestions));
     await handleSave(section);
     await handleOverlay();
@@ -28,7 +28,7 @@ const PopUpAdaptive = ({
         <h1 className="text-center">
           Enter No Of Questions You want to select
         </h1>
-        
+
         <input
           type="number"
           name="noOfQuestions"
@@ -36,7 +36,6 @@ const PopUpAdaptive = ({
           className="w-full h-10 rounded-lg bg-gray-100 focus:outline-none border-none"
           placeholder="Enter No of Questions (n)"
           min="1"
-          
         />
 
         <div className="w-full flex justify-between">

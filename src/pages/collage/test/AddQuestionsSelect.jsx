@@ -14,7 +14,7 @@ const AddQuestionsSelect = () => {
 
   const level = searchParams.get("level");
   const [selectQuestionType, setSelectQuestionType] = useState("");
-  console.log(id);
+  //console.log(id);
   // useEffect(() => {
   //   dispatch(setTest({ questionType: selectQuestionType }));
   // }, [selectQuestionType]);

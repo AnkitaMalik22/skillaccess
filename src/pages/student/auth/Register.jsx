@@ -4,30 +4,31 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch, useSelector } from "react-redux";
 import { LuEye } from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
-import { googleRegisterStudent, registerStudent } from "../../../redux/student/auth/studentAuthSlice";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import {
+  googleRegisterStudent,
+  registerStudent,
+} from "../../../redux/student/auth/studentAuthSlice";
 // import 'react-phone-input-2/lib/bootstrap.css'
-
 
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-// req.query - CollegeId , inviteLink
+  // req.query - CollegeId , inviteLink
 
-const useSearchParam = (key) => {
-  const search = window.location.search;
-  const params = new URLSearchParams(search);
-  return params.get(key);
-};
+  const useSearchParam = (key) => {
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    return params.get(key);
+  };
 
-const collegeId = useSearchParam("CollegeId");
-const inviteLink = useSearchParam("inviteLink");
+  const collegeId = useSearchParam("CollegeId");
+  const inviteLink = useSearchParam("inviteLink");
 
+  //console.log(collegeId, inviteLink);
 
-console.log(collegeId, inviteLink);
-
-  const [phone,setPhone]=useState('+91');
+  const [phone, setPhone] = useState("+91");
   const [Credentials, setCredentials] = useState({
     Email: "",
     Password: "",
@@ -46,7 +47,7 @@ console.log(collegeId, inviteLink);
     e.preventDefault();
     let cred = e.target.name;
     let val = e.target.value;
-    
+
     // Check if the length of the value exceeds 15 characters
     if (cred === "FirstName" && val.length > 15) {
       return; // Do nothing if the length exceeds 15 characters
@@ -54,13 +55,13 @@ console.log(collegeId, inviteLink);
     if (cred === "LastName" && val.length > 15) {
       return; // Do nothing if the length exceeds 15 characters
     }
-  
+
     setCredentials((prev) => {
       return { ...prev, [cred]: val };
     });
   };
-  
-console.log(phone);
+
+  //console.log(phone);
 
   const sel = useSelector((state) => state.studentAuth);
   useEffect(() => {
@@ -70,11 +71,10 @@ console.log(phone);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { Email, Password, FirstName, LastName, University } =
-      Credentials;
-      
+    const { Email, Password, FirstName, LastName, University } = Credentials;
+
     const data = {
-      Phone:phone,
+      Phone: phone,
       Email,
       Password,
       FirstName,
@@ -85,7 +85,7 @@ console.log(phone);
       // CollegeName: University,
       CollegeId: collegeId,
       inviteLink: inviteLink,
-      registrationLink :inviteLink
+      registrationLink: inviteLink,
     };
     try {
       const ch = await dispatch(registerStudent(data));
@@ -94,7 +94,7 @@ console.log(phone);
         navigate("/student/profile");
       }
     } catch (error) {
-      console.log("Reject" + error);
+      //console.log("Reject" + error);
     }
   };
 
@@ -103,7 +103,7 @@ console.log(phone);
   function handleGoogleLoginSuccess(tokenResponse) {
     const accessToken = tokenResponse.access_token;
 
-    dispatch(googleRegisterStudent({accessToken, collegeId, inviteLink}));
+    dispatch(googleRegisterStudent({ accessToken, collegeId, inviteLink }));
     navigate("/student/profile");
     // .then((res) => {
     //   if (res.meta.requestStatus === "fulfilled") {
@@ -123,7 +123,7 @@ console.log(phone);
     !Credentials.Major ||
     !Credentials.From ||
     !Credentials.To ||
-    !(phone.length>5);
+    !(phone.length > 5);
 
   return (
     <form action="" className="font-dmSans">
@@ -235,35 +235,32 @@ console.log(phone);
           {/* dates */}
           <div className="w-full max-w-xl  mx-auto flex md:mt-6 mt-4 ">
             <span className="w-full flex gap-4 ">
-            <PhoneInput
-            defaultCountry="IN"
-      name="Phone"
-      value={phone}
-      onChange={setPhone}
-      type="number"
-      placeholder="Mobile Number"
-      inputStyle={{
-        width: "100%",
-        height:"48px",
-        maxWidth: "100%",
-        padding: "0.75rem",
-        borderRadius: "0.5rem",
-        border: "none",
-        paddingLeft:"70px",
-        outline: "none",
-        backgroundColor: "rgb(243 246 248 / var(--tw-bg-opacity))",
-      }}
-      containerStyle={{
-        width: "100%",
-      
-      }}
-      
-    />
+              <PhoneInput
+                defaultCountry="IN"
+                name="Phone"
+                value={phone}
+                onChange={setPhone}
+                type="number"
+                placeholder="Mobile Number"
+                inputStyle={{
+                  width: "100%",
+                  height: "48px",
+                  maxWidth: "100%",
+                  padding: "0.75rem",
+                  borderRadius: "0.5rem",
+                  border: "none",
+                  paddingLeft: "70px",
+                  outline: "none",
+                  backgroundColor: "rgb(243 246 248 / var(--tw-bg-opacity))",
+                }}
+                containerStyle={{
+                  width: "100%",
+                }}
+              />
             </span>
           </div>
 
-
-{/* 
+          {/* 
           <div className="w-full max-w-xl  mx-auto flex md:mt-6 mt-4 ">
             <span className="w-full flex gap-4 ">
               <select
@@ -275,7 +272,7 @@ console.log(phone);
                 <option value="+1">+1</option>
                 <option value="+91">+91</option>
                 {/* Add more country codes here */}
-              {/* </select>
+          {/* </select>
               <input
                 name="Phone"
                 value={Credentials.Phone}
@@ -286,7 +283,6 @@ console.log(phone);
               />
             </span>
           </div>     */}
-        
 
           {/* password */}
           <div className="w-full max-w-xl  mx-auto flex  md:mt-6 mt-4 rounded-xl relative">
@@ -307,7 +303,7 @@ console.log(phone);
             >
               <LuEye className="text-gray-400 text-2xl" />
             </button> */}
-             <button
+            <button
               className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
               onClick={(e) => {
                 e.preventDefault();
@@ -371,9 +367,7 @@ console.log(phone);
             type="button"
           >
             <FcGoogle className="text-lg mr-2" />
-            <h3 className="opacity-100" >
-              Continue with google
-            </h3>
+            <h3 className="opacity-100">Continue with google</h3>
           </button>
           <span className="text-lGray text-center text-sm font-semibold">
             Already have an account?{" "}

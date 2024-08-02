@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 import { setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
 
-
 const Header = ({ question, setQuestion, id, type }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,7 +43,7 @@ const Header = ({ question, setQuestion, id, type }) => {
       dispatch(addQuestionToTopic({ data: question, id: id, type: type })).then(
         () => {
           if (!ADD_QUESTION_LOADING) {
-            console.log("calling 2 --", ADD_QUESTION_LOADING);
+            //console.log("calling 2 --", ADD_QUESTION_LOADING);
             level === "adaptive"
               ? navigate(`/collage/test/selectAdaptive?level=${level}`)
               : navigate(-1);
@@ -55,14 +54,13 @@ const Header = ({ question, setQuestion, id, type }) => {
     }
   };
 
-
-  const {totalTopicQuestions} = useSelector((state) => state.test);
+  const { totalTopicQuestions } = useSelector((state) => state.test);
 
   useEffect(() => {
     if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level }));
+      dispatch(setTotalTopicQuestions({ id, type: "mcq", level }));
     }
-  }, [id,""]);
+  }, [id, ""]);
 
   return (
     <div className="flex w-full mx-auto justify-between mb-5">
@@ -74,7 +72,7 @@ const Header = ({ question, setQuestion, id, type }) => {
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-        Question No : {totalTopicQuestions+1}
+          Question No : {totalTopicQuestions + 1}
         </h2>
       </div>
 

@@ -10,7 +10,7 @@ export const getCreditDetails = createAsyncThunk(
   "test/getCreditDetails",
   async (id, { rejectWithValue }) => {
     try {
-      console.log(`get test ${id}`);
+      //console.log(`get test ${id}`);
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/admin/get-credit/${id}`,
 
@@ -22,10 +22,10 @@ export const getCreditDetails = createAsyncThunk(
         }
       );
       const res = req.data;
-      // console.log(res);
+      // //console.log(res);
       return res;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
 
       return rejectWithValue(error.response.data);
     }
@@ -42,7 +42,7 @@ const dummySlice = createSlice({
         state.status = "pending";
       })
       .addCase(getCreditDetails.fulfilled, (state, action) => {
-        console.log(action.payload, "credit");
+        //console.log(action.payload, "credit");
         state.credit = action.payload.credit;
       })
       .addCase(getCreditDetails.rejected, (state, action) => {

@@ -24,7 +24,7 @@ const List = ({ FilterdStudents, isLoading }) => {
   let totalStudentsAppeared = 0;
   let totalStudentsSelected = 0;
   let overallPerformance = 0;
-  console.log(FilterdStudents);
+  // //console.log(FilterdStudents);
   useEffect(() => {
     // dispatch(getCollege());
     dispatch(getAllTests());
@@ -41,7 +41,7 @@ const List = ({ FilterdStudents, isLoading }) => {
   //     return "bg-green-600"; // Green color
   //   }
   // };
-  // console.log(getProgressBarColor);
+  // //console.log(getProgressBarColor);
 
   const percentageData = FilterdStudents?.map((item) => {
     return item.avgPercentage;

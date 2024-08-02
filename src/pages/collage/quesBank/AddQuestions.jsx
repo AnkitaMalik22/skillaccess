@@ -23,7 +23,7 @@ const AddQuestions = () => {
   // question of the topic
   // const { topics } = useSelector((state) => state.test);
   // React.useEffect(() => {
-  //   console.log(topics, "topics");
+  //   //console.log(topics, "topics");
   // }, [topics]);
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -130,7 +130,7 @@ const AddQuestions = () => {
   // };
 
   const totalTime = handleCalculateTime();
-  console.log(totalTime);
+  //console.log(totalTime);
   return (
     <>
       <Header page={"submit"} />

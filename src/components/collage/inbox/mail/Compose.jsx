@@ -27,17 +27,15 @@ const Compose = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [loader, setLoader] = useState(false);
-  console.log(loader);
+
   const [files, setFiles] = useState([]);
   const [email, setEmail] = useState({ Email: "", Message: "", Subject: "" });
   const handleChange = (e) => {
     setEmail((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-    console.log(email);
   };
   const handleEmojiClick = (event, emoji) => {
-    console.log(event.emoji);
     setEmail((prev) => {
       return { ...prev, Message: `${prev.Message}  ${event.emoji}` };
     });
@@ -49,7 +47,7 @@ const Compose = () => {
 
     socket.on("message", (data) => {
       // Handle email sent event
-      console.log("ems");
+      // //console.log("ems");
       dispatch(getMail({ limit: 50, skip: 0 }));
     });
   }, []);

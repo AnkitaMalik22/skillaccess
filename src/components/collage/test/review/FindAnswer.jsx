@@ -54,8 +54,8 @@ const FindAnswer = ({ Title, Options, Number, id, type, view, question }) => {
   };
 
   const handleBookmark = () => {
-    console.log("bookmark");
-    // console.log(question);
+    // //console.log("bookmark");
+    // //console.log(question);
     dispatch(
       addBookmark({
         Title: question.Title,

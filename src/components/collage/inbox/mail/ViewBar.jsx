@@ -37,7 +37,7 @@ const ViewBar = ({ filter, index, inboxType }) => {
   );
 
   useEffect(() => {
-    console.log(show);
+    // //console.log(show);
     if (show === "all") {
       dispatch(getMail({ limit: 50, skip: 0 })).then(() => {});
       setEmail(

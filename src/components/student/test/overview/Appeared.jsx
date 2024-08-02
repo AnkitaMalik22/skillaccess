@@ -21,7 +21,7 @@ const Appeared = ({ assessment }) => {
   // const arr = [2, 1, 1, 1, 1];
 
   // let arr = assessment.studentResponses.map((responseId) => {
-  //   // console.log(student);
+  //   // //console.log(student);
   //   dispatch(getStudentResponse(responseId))
   //   return student;
   // }
@@ -31,10 +31,10 @@ const Appeared = ({ assessment }) => {
   // dispatch(getStudentResponse(responseId))
   //   })
 
-  // console.log("studentResponses",assessment.studentResponses);
+  // //console.log("studentResponses",assessment.studentResponses);
 
   // const responses = assessment.studentResponses.map((responseId) => {
-  //   // console.log(student);
+  //   // //console.log(student);
   //   dispatch(getStudentResponse(responseId))
 
   // }
@@ -42,28 +42,28 @@ const Appeared = ({ assessment }) => {
 
   // let arr = testDataResponse?.map((student) => {
   //   student.studentResponses.forEach((resId) => {
-  //     console.log("resId", resId);
+  //     //console.log("resId", resId);
   //     const responseId = assessment.studentResponses.find((response) => response._id === resId._id);
   //     // add the responseId to the student object
   //     student.responseId = responseId;
-  //     console.log("student", student);
+  //     //console.log("student", student);
   //   });
   //   return student;
   // });
 
-  console.log(testDataResponse.studentResponses);
-  console.log(assessment.studentResponses);
+  //console.log(testDataResponse.studentResponses);
+  //console.log(assessment.studentResponses);
   let copy = [...testDataResponse];
 
   // let arr = copy?.map((student) => {
   //   let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
   //   student.studentResponses.forEach((resId) => {
-  //     console.log("resId", resId);
+  //     //console.log("resId", resId);
   //     const responseId = assessment?.studentResponses?.find((response) => response._id === resId._id);
   //     // add the responseId to the updatedStudent object
   //     updatedStudent.responseId = responseId;
   //     updatedStudent.response = response;
-  //     console.log("updatedStudent", updatedStudent);
+  //     //console.log("updatedStudent", updatedStudent);
   //   });
   //   return updatedStudent;
   // });
@@ -71,14 +71,14 @@ const Appeared = ({ assessment }) => {
     ?.map((student) => {
       let updatedStudent = { ...student }; // Create a new object with the same properties as the student object
       student.studentResponses.forEach((resId) => {
-        console.log("resId", resId);
+        //console.log("resId", resId);
         const responseId = assessment?.studentResponses?.find(
           (response) => response._id === resId._id
         );
         // add the responseId to the updatedStudent object
         updatedStudent.responseId = responseId;
         updatedStudent.response = response;
-        console.log("updatedStudent", updatedStudent);
+        //console.log("updatedStudent", updatedStudent);
       });
       return updatedStudent;
     })
@@ -86,7 +86,7 @@ const Appeared = ({ assessment }) => {
       student?.studentTests?.includes(assessment._id.toString())
     );
 
-  console.log("arr", arr);
+  //console.log("arr", arr);
 
   return (
     <div className="w-full mx-auto">

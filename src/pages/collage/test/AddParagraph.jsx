@@ -14,7 +14,6 @@ import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 import { setTotalTopicQuestions } from "../../../redux/collage/test/thunks/topic";
 
-
 const AddParagraph = () => {
   //useTranslate();
   const [loading, setLoading] = useState(false);
@@ -88,7 +87,7 @@ const AddParagraph = () => {
   };
 
   // React.useEffect(() => {
-  //   console.log(question);
+  //   //console.log(question);
   // }, [question]);
 
   const handleSave = async (saveType) => {
@@ -225,7 +224,7 @@ const AddParagraph = () => {
 
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "findAnswer" ,level}));
+      dispatch(setTotalTopicQuestions({ id, type: "findAnswer", level }));
     }
   }, [ADD_QUESTION_LOADING]);
   return (

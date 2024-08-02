@@ -18,7 +18,7 @@ const StudentPoP = ({ onClose }) => {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    console.log(e.target.value, "pop");
+    // //console.log(e.target.value, "pop");
     setStudent((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
@@ -53,21 +53,20 @@ const StudentPoP = ({ onClose }) => {
     if (student.LastName.length < 2) {
       toast.error("Last Name should have more than 2 characters");
       return;
-  }
-  // no numeric values in name
-  if (!/^[a-zA-Z]*$/.test(student.FirstName)) {
-    toast.error("First Name should not contain numeric values");
-    return;
-  }
-  if (!/^[a-zA-Z]*$/.test(student.LastName)) {
-    toast.error("Last Name should not contain numeric values");
-    return;
-  }
+    }
+    // no numeric values in name
+    if (!/^[a-zA-Z]*$/.test(student.FirstName)) {
+      toast.error("First Name should not contain numeric values");
+      return;
+    }
+    if (!/^[a-zA-Z]*$/.test(student.LastName)) {
+      toast.error("Last Name should not contain numeric values");
+      return;
+    }
     // maxLength: [30, "Name cannot exceed 30 characters"],
     // minLength: [2, "Name should have more than 2 characters"],
-    
     else {
-      console.log(student, "pop");
+      // //console.log(student, "pop");
       setLoading(true);
       await dispatch(uploadStudents([student])).then(() => {
         dispatch(getStudents({ id: user?._id }));

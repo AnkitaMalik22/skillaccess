@@ -29,7 +29,7 @@ const Top = () => {
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const creditPayment = async () => {
-    //console.log("payment done");
+    ////console.log("payment done");
     const customerName = "John Doe";
     const customerAddress = "123 Main Street, City, Country";
     const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
@@ -61,7 +61,7 @@ const Top = () => {
       });
 
       if (result.error) {
-        console.log(result.error.message);
+        // //console.log(result.error.message);
       }
     } catch (error) {
       console.error("Payment Error: ", error.response?.data || error.message);
@@ -98,7 +98,7 @@ const Top = () => {
         sessionId: session.id,
       });
       if (result.error) {
-        console.log(result.error.message);
+        // //console.log(result.error.message);
       }
     } catch (error) {
       console.error("Payment Error: ", error.response?.data || error.message);

@@ -62,10 +62,10 @@ const TestCases = ({
           toast.error("Invalid file format");
           return;
         }
-        console.log(jsonData);
+        // //console.log(jsonData);
         for (let i = 1; i < jsonData.length; i++) {
           const row = jsonData[i];
-          console.log(jsonData[i]);
+          // //console.log(jsonData[i]);
           if (row[0] === "") {
             toast.error(`input  is Required at Row ${i}`);
             setLoading(false);
@@ -75,7 +75,7 @@ const TestCases = ({
             setLoading(false);
             return;
           } else if (row[2] === "") {
-            console.log(row[2]);
+            // //console.log(row[2]);
             toast.error(`isHidden is Required at Row ${i} ${row[2]}`);
             setLoading(false);
             return;
@@ -98,9 +98,9 @@ const TestCases = ({
             }));
           }
         }
-        console.log(testCasess);
+        // //console.log(testCasess);
 
-        // console.log(students);
+        // //console.log(students);
 
         setLoading(false);
         setVisible(false);
@@ -183,7 +183,7 @@ const TestCases = ({
       return updatedExpandedTestCases;
     });
   };
-  console.log(question?.testcase);
+  // //console.log(question?.testcase);
   return (
     <div className="h-[535px] overflow-y-auto w-full">
       {visible && (

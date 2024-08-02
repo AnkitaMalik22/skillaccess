@@ -18,10 +18,10 @@ export const getRecentUsedQuestions = createAsyncThunk(
         }
       );
       const res = req.data;
-      console.log(res);
+      //console.log(res);
       return res.topics;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -43,7 +43,7 @@ export const deleteRecentUsedQuestion = createAsyncThunk(
       const res = req.data;
       return res.topics;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -68,7 +68,7 @@ export const addBookmark = createAsyncThunk(
       const res = req.data;
       return res.bookmark;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -90,7 +90,7 @@ export const removeBookmark = createAsyncThunk(
       const res = req.data;
       return res.bookmarks;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -112,7 +112,7 @@ export const getAllBookmarks = createAsyncThunk(
       const res = req.data;
       return res.bookmarks;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -134,7 +134,7 @@ export const getBookmarkById = createAsyncThunk(
       const res = req.data;
       return res.bookmark;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -157,7 +157,7 @@ export const editQuestionById = createAsyncThunk(
       const res = req.data;
       return { res: res, index: data.index, type: data.type };
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -166,7 +166,7 @@ export const editQuestionById = createAsyncThunk(
 export const editBankQuestionById = createAsyncThunk(
   "test/editBankQuestionById",
   async (data, { rejectWithValue }) => {
-    console.log("ok");
+    //console.log("ok");
     try {
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/assessments/question/${data.id}?type=${data.type}`,
@@ -181,7 +181,7 @@ export const editBankQuestionById = createAsyncThunk(
       const res = req.data;
       return { res: res, type: data.type };
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -203,7 +203,7 @@ export const getTopicByIdQB = createAsyncThunk(
       const res = req.data;
       return res.section;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }

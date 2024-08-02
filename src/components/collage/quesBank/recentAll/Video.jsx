@@ -38,7 +38,7 @@ const Video = ({ video, Number }) => {
                 alt="cross"
                 className="self-center "
                 onClick={() => {
-                  console.log(video.section, video._id);
+                  //console.log(video.section, video._id);
                   handleDelete({
                     sectionId: video.section,
                     questionId: video.id,
@@ -87,7 +87,7 @@ const Video = ({ video, Number }) => {
               </h1>
               {video?.questions?.length > 0 &&
                 video.questions.map((mcq, index) => {
-                  console.log(mcq);
+                  // //console.log(mcq);
                   return (
                     <VideoMcq
                       //   handleDelete={handleDelete}

@@ -54,12 +54,12 @@ const AddMcqToTopic = () => {
       return -1;
     });
   };
-  // console.log(question);
+  // //console.log(question);
   const handleChanges = (e) => {
-    // console.log(question);
+    // //console.log(question);
     if (e.target.name === "Title") {
       setQuestion((prev) => {
-        // console.log({ ...prev, Title: e.target.value });
+        // //console.log({ ...prev, Title: e.target.value });
         return { ...prev, Title: e.target.value };
       });
     } else if (e.target.name === "Duration") {
@@ -205,7 +205,7 @@ const AddMcqToTopic = () => {
   };
 
   useEffect(() => {
-    console.log(currentTopic);
+    //console.log(currentTopic);
     setCountDetail(currentTopic?.questions?.length - 1);
   }, [currentTopic]);
 
@@ -216,12 +216,12 @@ const AddMcqToTopic = () => {
 
   //     return () => {
   //       //navigate(-1);
-  //     } 
+  //     }
   //   }
   //   , [ADD_QUESTION_LOADING]);
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level}));
+      dispatch(setTotalTopicQuestions({ id, type: "mcq", level }));
     }
   }, [ADD_QUESTION_LOADING]);
 
@@ -229,7 +229,7 @@ const AddMcqToTopic = () => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
   };
-  // console.log(question);
+  // //console.log(question);
   return (
     <div>
       <Header
@@ -278,7 +278,7 @@ const AddMcqToTopic = () => {
               value={question.Title}
               onChange={(value) =>
                 setQuestion((prev) => {
-                  // console.log({ ...prev, Title: e.target.value });
+                  // //console.log({ ...prev, Title: e.target.value });
                   return { ...prev, Title: value };
                 })
               }

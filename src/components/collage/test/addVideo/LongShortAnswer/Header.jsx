@@ -25,7 +25,7 @@ const Header = ({
   const dispatch = useDispatch();
 
   const handleSaveHeader = () => {
-    console.log(question);
+    // //console.log(question);
 
     handleSave();
     navigate(-1);

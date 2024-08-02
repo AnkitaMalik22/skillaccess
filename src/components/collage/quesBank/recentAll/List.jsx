@@ -124,7 +124,7 @@ const List = ({ question, number }) => {
             } else {
               setType("essay");
             }
-            console.log(type);
+            //console.log(type);
             handleDelete({
               sectionId: question.section,
               questionId: question.id,

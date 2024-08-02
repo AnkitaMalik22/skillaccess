@@ -62,7 +62,7 @@ const List = ({ show, inboxType, setInboxType }) => {
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
     setSocket(socket);
-    console.log("email");
+    // //console.log("email");
     getMails();
 
     //join room with  you mail as room id
@@ -160,7 +160,7 @@ const List = ({ show, inboxType, setInboxType }) => {
 
   useEffect(() => {
     if (JSON.stringify(user) !== JSON.stringify(arr)) {
-      console.log(user);
+      // //console.log(user);
       if (inboxType === "Received") {
         setArr(user.received);
         setTotal(user.received.length);
@@ -172,21 +172,21 @@ const List = ({ show, inboxType, setInboxType }) => {
   }, [user]);
 
   useEffect(() => {
-    console.log(user);
+    // //console.log(user);
     if (inboxType === "Received") {
       setArr(user.received);
       setTotal(user.received.length);
-      console.log("total : ", total);
+      // //console.log("total : ", total);
     } else {
       setArr(user.sent);
       setTotal(user.sent.length);
-      console.log("total : ", total);
+      // //console.log("total : ", total);
     }
   }, [inboxType]);
 
   const handleCheckbox = (e) => {
     const { checked, id, name } = e.target;
-    console.log(name);
+    // //console.log(name);
     if (name === "all") {
       let copy = arr.map((item) => {
         return { ...item, isChecked: checked };
@@ -196,7 +196,7 @@ const List = ({ show, inboxType, setInboxType }) => {
       let copy = arr.map((item) => {
         return item._id == id ? { ...item, isChecked: checked } : item;
       });
-      console.log(copy);
+      // //console.log(copy);
       setArr(copy);
     }
   };
@@ -205,7 +205,6 @@ const List = ({ show, inboxType, setInboxType }) => {
   //   dispatch(getMail(queries));
   // }, [queries]);
 
-  console.log(arr);
   return (
     <div className="bg-[#8F92A1] bg-opacity-5 rounded-2xl">
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -270,7 +269,6 @@ const List = ({ show, inboxType, setInboxType }) => {
         <h2 className="text-[#7D7D7D] text-base font-medium mb-4">Today</h2>
 
         {arr?.map((el, i) => {
-          console.log(el);
           return (
             <div className="mb-4 bg-white rounded-lg flex justify-between p-4 ">
               <div className="flex gap-4 items-center ">

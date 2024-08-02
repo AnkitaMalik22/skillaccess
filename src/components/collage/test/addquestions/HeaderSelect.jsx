@@ -11,12 +11,12 @@ const Header = ({ Q }) => {
   const page = search.get("page");
   const level = search.get("level");
 
-  console.log("page", level);
+  // //console.log("page", level);
   const handleNext = () => {
     if (page === "qb") {
       navigate(`/collage/quesBank/topic`);
     } else {
-      console.log("level", level);
+      // //console.log("level", level);
       level === "adaptive"
         ? navigate(`/collage/test/selectAdaptive?level=${level}`)
         : navigate(`/collage/test/select?level=${level}`);

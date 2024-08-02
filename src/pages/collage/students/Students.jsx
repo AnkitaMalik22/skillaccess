@@ -159,7 +159,7 @@ const Students = () => {
       </div>
 
       {/* list to be iterated */}
-      {console.log(approvedStudents)}
+      {/* {console.log(approvedStudents) } */}
       {GET_STUDENT_LOADING ? (
         <Skeleton />
       ) : (

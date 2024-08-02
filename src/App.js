@@ -49,10 +49,10 @@ export default function App() {
     let shouldGetCollege = true;
     for (let i = 0; i < paths.length; i++) {
       const match = location.pathname.match(paths[i]);
-      console.log(
-        `Trying to match path: ${paths[i]} with pathname: ${location.pathname}`
-      );
-      console.log(`Match result: ${match}`);
+      //console.log(
+      //   `Trying to match path: ${paths[i]} with pathname: ${location.pathname}`
+      // );
+      //console.log(`Match result: ${match}`);
       if (match) {
         shouldGetCollege = false;
         setLoader(false);
@@ -66,7 +66,7 @@ export default function App() {
     }
   }, [dispatch]);
   useEffect(() => {
-    console.log(logoutError);
+    //console.log(logoutError);
     if (logoutError) {
       navigate("/");
     }

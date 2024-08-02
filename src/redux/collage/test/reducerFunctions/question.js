@@ -88,7 +88,7 @@ export const removeQfunc = (state, action) => {
 
 export const addQuesFunc = (state, action) => {
   const { type, questions, isMultiple } = action.payload;
-  console.log(action.payload);
+  //console.log(action.payload);
   if (isMultiple) {
     switch (type) {
       case "essay":
@@ -163,10 +163,10 @@ export const removeQById = (state, action) => {
   const { sectionId, questionId, questionType } = action.payload;
   let copy = [];
   let topicIndex, selfIndex;
-  console.log(action.payload);
+  //console.log(action.payload);
   state.topics.forEach((topic, index) => {
-    console.log(topic.Type, questionType);
-    console.log(topic._id === sectionId && topic.Type === questionType);
+    //console.log(topic.Type, questionType);
+    //console.log(topic._id === sectionId && topic.Type === questionType);
     if (topic._id === sectionId && topic.Type === questionType)
       topicIndex = index;
   });
@@ -174,12 +174,12 @@ export const removeQById = (state, action) => {
   switch (questionType) {
     case "mcq":
       state.topics[topicIndex].questions.forEach((question, index) => {
-        console.log(question.id, questionId);
+        //console.log(question.id, questionId);
         if (question.id === questionId) {
           selfIndex = index;
         }
       });
-      console.log(selfIndex);
+      //console.log(selfIndex);
       copy = [...state.topics[topicIndex].questions];
       state.topics[topicIndex].questions = copy.filter((ques, index) => {
         return index !== selfIndex;
@@ -191,7 +191,7 @@ export const removeQById = (state, action) => {
       localStorage.setItem("bug", JSON.stringify(state.topics[topicIndex]));
       state.topics[topicIndex].essay.forEach((question, index) => {
         if (question.id === questionId) {
-          console.log(question.id);
+          //console.log(question.id);
           selfIndex = index;
         }
       });
