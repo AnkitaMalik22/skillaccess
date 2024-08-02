@@ -41,7 +41,7 @@ const AddVideoMcq = () => {
   const [search, setSearch] = useSearchParams();
   const Number = searchParams.get("index");
 
-  console.log(search.get("topicId"));
+  //console.log(search.get("topicId"));
   const [question, setQuestion] = useState({
     Title: "",
     Duration: 0,
@@ -68,7 +68,7 @@ const AddVideoMcq = () => {
       let ques = JSON.parse(localStorage.getItem("qbQues"));
       setQuestion(ques.questions[Number]);
       setVide(ques);
-      console.log(ques);
+      //console.log(ques);
     }
   }, []);
 
@@ -145,11 +145,11 @@ const AddVideoMcq = () => {
     }
   };
   const handleChanges = (e) => {
-    // console.log(question);
+    // //console.log(question);
 
     if (e.target.name === "Title") {
       setQuestion((prev) => {
-        // console.log({ ...prev, Title: e.target.value });
+        // //console.log({ ...prev, Title: e.target.value });
 
         return { ...prev, Title: e.target.value };
       });
@@ -306,7 +306,7 @@ const AddVideoMcq = () => {
               value={question.Title}
               onChange={(value) =>
                 setQuestion((prev) => {
-                  // console.log({ ...prev, Title: e.target.value });
+                  // //console.log({ ...prev, Title: e.target.value });
                   return { ...prev, Title: value };
                 })
               }

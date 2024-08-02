@@ -34,7 +34,7 @@ const Jobs = () => {
   const handleFilterJobs = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      console.log("empty");
+      //console.log("empty");
 
       setFiltered(jobs);
 

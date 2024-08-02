@@ -15,7 +15,7 @@ const Advanced = () => {
   const navigate = useNavigate();
   const advanced = useSelector((state) => state.test.assessments.advanced);
   const credit = useSelector((state) => state.collageAuth);
-  console.log(credit);
+  // //console.log(credit);
 
   const handleClose = () => {
     setShow(false);

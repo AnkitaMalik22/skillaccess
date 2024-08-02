@@ -11,7 +11,7 @@ const Header = ({ Q }) => {
   const page = search.get("page");
   const level = search.get("level");
 
-  console.log("page", page);
+  // //console.log("page", page);
   const handleNext = () => {
     navigate(`/collage/quesBank/topic`);
   };

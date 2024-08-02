@@ -10,8 +10,8 @@ const List = ({ uploadedStudents, setStudents, students }) => {
 
   const [isChecked, setIsChecked] = useState(false);
   const { credit } = useSelector((state) => state.collageAuth);
-  const {GET_STUDENTS_LOADING } = useSelector((state) => state.test);
-  
+  const { GET_STUDENTS_LOADING } = useSelector((state) => state.test);
+
   const [checkedState, setCheckedState] = useState({});
 
   const handleCheckboxChange = (id) => {
@@ -42,13 +42,13 @@ const List = ({ uploadedStudents, setStudents, students }) => {
         }
       }
 
-      console.log(students);
+      // //console.log(students);
       return newCheckedState;
     });
   };
 
   // const handleCheckboxChange = (id) => {
-  //   console.log(credit.limit-1 , students.length)
+  //   //console.log(credit.limit-1 , students.length)
   //    if(credit.limit-1<students.length){
   //     toast.error("Your current plan only support inviting " + credit.limit + " students" ,students.length);
 
@@ -83,7 +83,7 @@ const List = ({ uploadedStudents, setStudents, students }) => {
   //           prevStudents.filter((student) => student._id !== id)
   //         );
   //       }
-  //       console.log(students);
+  //       //console.log(students);
   //       return newCheckedState; // Return the updated state
   //     });
   //   }
@@ -95,37 +95,34 @@ const List = ({ uploadedStudents, setStudents, students }) => {
     <div className=" grid-cols-5 mx-auto  font-dmSans  text-sm  ">
       {" "}
       {/* row-2 */}
-{
-  GET_STUDENTS_LOADING && (<Skeleton/>)
-}
+      {GET_STUDENTS_LOADING && <Skeleton />}
+      {!GET_STUDENTS_LOADING &&
+        uploadedStudents?.map((student) => {
+          return (
+            <div
+              className="flex flex-col w-full mb-3 p-5 rounded-lg bg-white items-center"
+              key={student._id}
+            >
+              {/* {//console.log(student)} */}
+              {/* <div className={` flex `}> */}
+              <div className="flex self-center flex-row items-center justify-between w-full  ">
+                <div className=" min-w-[3rem]  h-12 self-center  mr-2 flex items-center justify-center text-xl ">
+                  <img
+                    src="../../images/student.png"
+                    alt=""
+                    width="50px"
+                    height="50px"
+                  />
+                </div>
+                <h2 className="font-dmSans font-bold text-base text-start capitalize">
+                  {student.FirstName} {student.LastName}
+                </h2>
+                <h2 className="font-dmSans  text-base text-gray-400 lowercase">
+                  {student.Email}
+                </h2>
 
-      {!GET_STUDENTS_LOADING && 
-      uploadedStudents?.map((student) => {
-        return (
-          <div
-            className="flex flex-col w-full mb-3 p-5 rounded-lg bg-white items-center"
-            key={student._id}
-          >
-            {/* {console.log(student)} */}
-            {/* <div className={` flex `}> */}
-            <div className="flex self-center flex-row items-center justify-between w-full  ">
-              <div className=" min-w-[3rem]  h-12 self-center  mr-2 flex items-center justify-center text-xl ">
-                <img
-                  src="../../images/student.png"
-                  alt=""
-                  width="50px"
-                  height="50px"
-                />
-              </div>
-              <h2 className="font-dmSans font-bold text-base text-start capitalize">
-                {student.FirstName} {student.LastName}
-              </h2>
-              <h2 className="font-dmSans  text-base text-gray-400 lowercase">
-                {student.Email}
-              </h2>
-
-              <div className="self-center ">
-                {/* <input
+                <div className="self-center ">
+                  {/* <input
             type="checkbox"
             name=""
             id=""
@@ -133,18 +130,18 @@ const List = ({ uploadedStudents, setStudents, students }) => {
             // onChange={handleCheckboxChange}
             onClick={()=>handleCheckboxChange(student._id)}
           /> */}
-                <input
-                  type="checkbox"
-                  className="p-1 rounded cursor-pointer"
-                  checked={!!checkedState[student._id]} // Determine if checked
-                  onChange={() => handleCheckboxChange(student._id)}
-                />
-              </div>
+                  <input
+                    type="checkbox"
+                    className="p-1 rounded cursor-pointer"
+                    checked={!!checkedState[student._id]} // Determine if checked
+                    onChange={() => handleCheckboxChange(student._id)}
+                  />
+                </div>
 
-              {/* </div> */}
-            </div>
-            {/*  */}
-            {/* <div className="flex justify-center mr-16 ">
+                {/* </div> */}
+              </div>
+              {/*  */}
+              {/* <div className="flex justify-center mr-16 ">
         <div className=" self-center h-fit ">
           <span>
             <h2 className="font-dmSans  sm:text-lg text-gray-400 ">
@@ -153,26 +150,26 @@ const List = ({ uploadedStudents, setStudents, students }) => {
           </span>
         </div>
       </div> */}
-            {/*  */}
-            {/* <div className="flex justify-center">
+              {/*  */}
+              {/* <div className="flex justify-center">
         <div className=" self-center h-fit">
           <span>
             <h2 className="font-dmSans sm:text-lg text-gray-400">II Year</h2>
           </span>
         </div>
       </div> */}
-            {/*  */}
-            {/*  */}
-            {/* <div className="flex justify-center">
+              {/*  */}
+              {/*  */}
+              {/* <div className="flex justify-center">
         <div className=" self-center h-fit">
           <span>
             <h2 className="font-dmSans sm:text-lg text-gray-400">2022</h2>
           </span>
         </div>
       </div> */}
-            {/*  */}
-            {/*  */}
-            {/* <div className="flex justify-end mr-3">
+              {/*  */}
+              {/*  */}
+              {/* <div className="flex justify-end mr-3">
         <span className="self-center ">  <input
             type="checkbox"
             name=""
@@ -183,9 +180,9 @@ const List = ({ uploadedStudents, setStudents, students }) => {
           />
         </span>
       </div> */}
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
       {!GET_STUDENTS_LOADING && uploadedStudents.length === 0 && (
         <div className="w-full flex justify-center items-center  mb-4 bg-white rounded-2xl">
           <h2 className="text-xl font-bold">No Students Found</h2>

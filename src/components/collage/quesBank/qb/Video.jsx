@@ -21,7 +21,7 @@ const Video = ({ video, Number }) => {
       })
     );
   };
-  console.log(video);
+  // //console.log(video);
   return (
     <Disclosure>
       {({ open }) => (
@@ -82,7 +82,7 @@ const Video = ({ video, Number }) => {
                 </h1>
                 {video?.questions?.length > 0 &&
                   video.questions.map((mcq, index) => {
-                    console.log(mcq);
+                    // //console.log(mcq);
                     return (
                       <VideoMcq
                         //   handleDelete={handleDelete}

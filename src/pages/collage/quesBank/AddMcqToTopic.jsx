@@ -14,7 +14,10 @@ import {
   editBankQuestionById,
   editQuestionById,
 } from "../../../redux/collage/test/thunks/question";
-import { addQuestionToTopic ,setTotalTopicQuestions} from "../../../redux/collage/test/thunks/topic";
+import {
+  addQuestionToTopic,
+  setTotalTopicQuestions,
+} from "../../../redux/collage/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 
@@ -63,10 +66,10 @@ const AddMcqToTopic = () => {
   };
 
   const handleChanges = (e) => {
-    // console.log(question);
+    // //console.log(question);
     if (e.target.name === "Title") {
       setQuestion((prev) => {
-        // console.log({ ...prev, Title: e.target.value });
+        // //console.log({ ...prev, Title: e.target.value });
         return { ...prev, Title: e.target.value };
       });
     } else if (e.target.name === "Duration") {
@@ -253,12 +256,12 @@ const AddMcqToTopic = () => {
   };
 
   useEffect(() => {
-    console.log(currentTopic);
+    //console.log(currentTopic);
     setCountDetail(currentTopic?.questions?.length - 1);
   }, [currentTopic]);
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level : "all"}));
+      dispatch(setTotalTopicQuestions({ id, type: "mcq", level: "all" }));
     }
   }, [ADD_QUESTION_LOADING]);
 
@@ -308,7 +311,7 @@ const AddMcqToTopic = () => {
               value={question.Title}
               onChange={(value) =>
                 setQuestion((prev) => {
-                  // console.log({ ...prev, Title: e.target.value });
+                  // //console.log({ ...prev, Title: e.target.value });
                   return { ...prev, Title: value };
                 })
               }

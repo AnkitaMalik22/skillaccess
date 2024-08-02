@@ -239,7 +239,7 @@ const AddVideo = () => {
     if (file) {
       uploadVideo(file);
 
-      // console.log(videoLink);
+      // //console.log(videoLink);
 
       // dispatch(addVideo({ data: videoLink }));
 

@@ -128,7 +128,7 @@ const AddCode = () => {
       initialCode: defaultValue?.defaultCode,
       solutionCode: defaultValue?.solutionCode,
     });
-    console.log(question.codeLanguage);
+    // //console.log(question.codeLanguage);
   }, [question?.codeLanguage, question?.code]);
 
   const handleEditorChange = (value, type) => {
@@ -342,12 +342,12 @@ const AddCode = () => {
         toast.error("Please fill all the fields");
       }
     }
-    console.log(question);
+    // //console.log(question);
   };
   useEffect(() => {
     setCountDetail(currentTopic?.compiler?.length - 1);
   }, [currentTopic]);
-  // console.log(question);
+  // //console.log(question);
 
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {

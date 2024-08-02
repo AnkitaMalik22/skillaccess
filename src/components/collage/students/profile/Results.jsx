@@ -14,7 +14,7 @@ const Results = ({ assessmentResult, id }) => {
     dispatch(getStudentCV(id));
     // dispatch(getTestResultPage(testId));
   };
-  console.log(assessmentResult);
+  // //console.log(assessmentResult);
   function formatDate(dateStr) {
     const months = [
       "Jan",

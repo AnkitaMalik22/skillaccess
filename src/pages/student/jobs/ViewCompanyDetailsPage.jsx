@@ -6,7 +6,7 @@ const ViewCompanyDetailsPage = () => {
   React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
-    console.log(currentPageLanguage + " " + navigator.language);
+    //console.log(currentPageLanguage + " " + navigator.language);
 
     let script = document.createElement("script");
     const loadGoogleTranslateScript = () => {
@@ -32,7 +32,7 @@ const ViewCompanyDetailsPage = () => {
     };
 
     if (navigator.language !== navigator.currentPageLanguage) {
-      console.log("Language is different");
+      //console.log("Language is different");
       loadGoogleTranslateScript();
     }
 
@@ -48,7 +48,7 @@ const ViewCompanyDetailsPage = () => {
   }, []);
   return (
     <StudentLayout>
-      <ViewCompanyDetails/>
+      <ViewCompanyDetails />
     </StudentLayout>
   );
 };

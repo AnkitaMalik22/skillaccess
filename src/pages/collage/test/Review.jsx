@@ -22,7 +22,7 @@ const Review = () => {
   const questionType = searchParams.get("question");
   const view = searchParams.get("view");
   const [visible, setVisible] = useState(false);
-  // console.log(questionType);
+  // //console.log(questionType);
   const { currentTopic, topics } = useSelector((state) => state.test);
   useEffect(() => {
     if (type === "section") {
@@ -66,14 +66,14 @@ const Review = () => {
         );
     }
   }, [topics, "", currentTopic]);
-  console.log(currentTopic);
+  //console.log(currentTopic);
 
   // useEffect(
   //   () => {
   //     dispatch(getTopicById(id)).then(() =>
   //       setQuestions(currentTopic.questions)
   //     );
-  //     console.log(currentTopic, "currentTopic", id);
+  //     //console.log(currentTopic, "currentTopic", id);
   //   },
   //   [dispatch],
   //   []
@@ -267,7 +267,7 @@ const Review = () => {
         ) : questionType === "essay" ? (
           questions?.length > 0 ? (
             questions.map((question, i) => {
-              // console.log(question);
+              // //console.log(question);
               return (
                 <Essay
                   Number={i}
@@ -285,7 +285,7 @@ const Review = () => {
         ) : questionType === "compiler" ? (
           questions?.length > 0 ? (
             questions.map((question, i) => {
-              // console.log(question);
+              // //console.log(question);
               return (
                 <Code
                   view={view}
@@ -303,7 +303,7 @@ const Review = () => {
           )
         ) : questions?.length > 0 ? (
           questions.map((question, i) => {
-            // console.log(question);
+            // //console.log(question);
             return (
               <Video
                 Number={i}

@@ -55,7 +55,7 @@ const RecentAll = () => {
           length += question.video?.length || 0;
           break;
         default:
-          console.log(`No matching type found for ${type}`);
+          //console.log(`No matching type found for ${type}`);
           break;
       }
     });

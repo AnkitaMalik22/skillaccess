@@ -39,7 +39,7 @@ export const addQuestionToTopic = createAsyncThunk(
         isMultiple: data.isMultiple,
       };
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error?.response?.data?.message || "");
     }
   }
@@ -61,7 +61,7 @@ export const getAllTopics = createAsyncThunk(
       const res = req.data;
       return res.topics;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -82,7 +82,7 @@ export const getAllTopicsQB = createAsyncThunk(
       const res = req.data;
       return res.topics;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -102,10 +102,10 @@ export const getTopicById = createAsyncThunk(
         }
       );
       const res = req.data;
-      // console.log("res", res);
+      // //console.log("res", res);
       return res.section;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -114,7 +114,7 @@ export const deleteTopics = createAsyncThunk(
   "test/deleteTopics",
   async (data, { rejectWithValue }) => {
     try {
-      console.log("data", data);
+      //console.log("data", data);
       const req = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/assessments/sections`,
         { data },
@@ -126,10 +126,10 @@ export const deleteTopics = createAsyncThunk(
         }
       );
       const res = req.data;
-      // console.log("res", res);
+      // //console.log("res", res);
       return res.sections;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -170,104 +170,124 @@ export const createTopic = createAsyncThunk(
 
       return res.section;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
 
       return rejectWithValue(error.response.data);
     }
   }
 );
 export const setTotalTopicQuestions = createAsyncThunk(
-  'topics/setTotalTopicQuestions',
+  "topics/setTotalTopicQuestions",
   async (arg, { dispatch, rejectWithValue }) => {
     try {
       // Dispatch the getTopicById thunk and wait for the result
-      const topic= await dispatch(getTopicById(arg.id)).unwrap();
+      const topic = await dispatch(getTopicById(arg.id)).unwrap();
 
-
-      // console.log(topic, "topic");
+      // //console.log(topic, "topic");
 
       if (!topic) {
         console.error(`Topic with id ${arg.id} not found`);
-        return rejectWithValue('Topic not found');
+        return rejectWithValue("Topic not found");
       }
 
-      const getArrayLength = (arr) => Array.isArray(arr) ? arr.length : 0;
+      const getArrayLength = (arr) => (Array.isArray(arr) ? arr.length : 0);
 
       let totalTopicQuestions = 0;
       switch (arg.type) {
         case "mcq":
-          console.log(arg.level, "arg.level");
+          //console.log(arg.level, "arg.level");
           if (arg.level === "adaptive") {
             totalTopicQuestions = getArrayLength(topic.questions);
           } else if (arg.level === "beginner") {
-            totalTopicQuestions = topic.questions?.filter((question) => question?.QuestionLevel
-            === "beginner")?.length || 0;
-            console.log(totalTopicQuestions, "totalTopicQuestions beginner");
+            totalTopicQuestions =
+              topic.questions?.filter(
+                (question) => question?.QuestionLevel === "beginner"
+              )?.length || 0;
+            //console.log(totalTopicQuestions, "totalTopicQuestions beginner");
           } else if (arg.level === "intermediate") {
-            totalTopicQuestions = topic.questions?.filter((question) => question?.QuestionLevel
-            === "intermediate")?.length || 0;
+            totalTopicQuestions =
+              topic.questions?.filter(
+                (question) => question?.QuestionLevel === "intermediate"
+              )?.length || 0;
           } else if (arg.level === "advanced") {
-            totalTopicQuestions = topic.questions?.filter((question) => question?.QuestionLevel
-            === "advanced")?.length || 0;
-          }else{
-            totalTopicQuestions = topic.questions?.length
+            totalTopicQuestions =
+              topic.questions?.filter(
+                (question) => question?.QuestionLevel === "advanced"
+              )?.length || 0;
+          } else {
+            totalTopicQuestions = topic.questions?.length;
           }
           break;
         case "findAnswer":
-          if (arg.level === 'beginner') {
-            totalTopicQuestions = topic.findAnswers.filter((question) => question?.QuestionLevel === "beginner")?.length;
-          }
-          else if (arg.level === 'intermediate') {
-            totalTopicQuestions = topic.findAnswers.filter((question) => question?.QuestionLevel === "intermediate")?.length;
-          }
-          else if (arg.level === 'advanced') {
-            totalTopicQuestions = topic.findAnswers.filter((question) => question?.QuestionLevel === "advanced")?.length;
-          }else{
-            totalTopicQuestions =  topic.findAnswers?.length
+          if (arg.level === "beginner") {
+            totalTopicQuestions = topic.findAnswers.filter(
+              (question) => question?.QuestionLevel === "beginner"
+            )?.length;
+          } else if (arg.level === "intermediate") {
+            totalTopicQuestions = topic.findAnswers.filter(
+              (question) => question?.QuestionLevel === "intermediate"
+            )?.length;
+          } else if (arg.level === "advanced") {
+            totalTopicQuestions = topic.findAnswers.filter(
+              (question) => question?.QuestionLevel === "advanced"
+            )?.length;
+          } else {
+            totalTopicQuestions = topic.findAnswers?.length;
           }
           break;
         case "essay":
-          if (arg.level === 'beginner') {
-            totalTopicQuestions = topic.essay.filter((question) => question?.QuestionLevel === "beginner")?.length;
+          if (arg.level === "beginner") {
+            totalTopicQuestions = topic.essay.filter(
+              (question) => question?.QuestionLevel === "beginner"
+            )?.length;
+          } else if (arg.level === "intermediate") {
+            totalTopicQuestions = topic.essay.filter(
+              (question) => question?.QuestionLevel === "intermediate"
+            )?.length;
+          } else if (arg.level === "advanced") {
+            totalTopicQuestions = topic.essay.filter(
+              (question) => question?.QuestionLevel === "advanced"
+            )?.length;
+          } else {
+            totalTopicQuestions = topic.essay?.length;
           }
-          else if (arg.level === 'intermediate') {
-            totalTopicQuestions = topic.essay.filter((question) => question?.QuestionLevel === "intermediate")?.length;
-          }
-          else if (arg.level === 'advanced') {
-            totalTopicQuestions = topic.essay.filter((question) => question?.QuestionLevel === "advanced")?.length;
-          }else{
-            totalTopicQuestions =  topic.essay?.length
-          }
-          
+
           break;
         case "video":
-          if (arg.level === 'beginner') {
-            totalTopicQuestions = topic.video.filter((question) => question?.QuestionLevel === "beginner")?.length;
+          if (arg.level === "beginner") {
+            totalTopicQuestions = topic.video.filter(
+              (question) => question?.QuestionLevel === "beginner"
+            )?.length;
+          } else if (arg.level === "intermediate") {
+            totalTopicQuestions = topic.video.filter(
+              (question) => question?.QuestionLevel === "intermediate"
+            )?.length;
+          } else if (arg.level === "advanced") {
+            totalTopicQuestions = topic.video.filter(
+              (question) => question?.QuestionLevel === "advanced"
+            )?.length;
+          } else {
+            totalTopicQuestions = topic.video?.length;
           }
-          else if (arg.level === 'intermediate') {
-            totalTopicQuestions = topic.video.filter((question) => question?.QuestionLevel === "intermediate")?.length;
-          }
-          else if (arg.level === 'advanced') {
-            totalTopicQuestions = topic.video.filter((question) => question?.QuestionLevel === "advanced")?.length;
-          }else{
-            totalTopicQuestions =  topic.video?.length
-          }
-         
+
           break;
         case "compiler":
-          if (arg.level === 'beginner') {
-            totalTopicQuestions = topic.compiler.filter((question) => question?.QuestionLevel === "beginner")?.length;
+          if (arg.level === "beginner") {
+            totalTopicQuestions = topic.compiler.filter(
+              (question) => question?.QuestionLevel === "beginner"
+            )?.length;
+          } else if (arg.level === "intermediate") {
+            totalTopicQuestions = topic.compiler.filter(
+              (question) => question?.QuestionLevel === "intermediate"
+            )?.length;
+          } else if (arg.level === "advanced") {
+            totalTopicQuestions = topic.compiler.filter(
+              (question) => question?.QuestionLevel === "advanced"
+            )?.length;
+          } else {
+            totalTopicQuestions = topic.compiler?.length;
           }
-          else if (arg.level === 'intermediate') {
-            totalTopicQuestions = topic.compiler.filter((question) => question?.QuestionLevel === "intermediate")?.length;
-          }
-          else if (arg.level === 'advanced') {
-            totalTopicQuestions = topic.compiler.filter((question) => question?.QuestionLevel === "advanced")?.length;
-          }else{
-            totalTopicQuestions =  topic.compiler?.length
-          }
-          
-          
+
           break;
         default:
           console.warn(`Unknown question type: ${arg.type}`);

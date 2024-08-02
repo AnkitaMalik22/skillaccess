@@ -25,7 +25,7 @@ const StudentsProfile = () => {
     dispatch(getStudentCV(id));
   }, [dispatch, id]);
 
-  console.log(studentCV.studentResponses);
+  //console.log(studentCV.studentResponses);
   return (
     <div className="h-screen flex flex-col">
       {GET_STUDENT_LOADING ? (

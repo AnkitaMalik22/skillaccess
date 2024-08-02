@@ -128,7 +128,7 @@ const VideoEssay = ({
             //         };
             //       });
             //     }
-            //     console.log(videoState, "short");
+            //     //console.log(videoState, "short");
             //   } else if (type === "long") {
             //     if (videoState.long.length === 0) {
             //       setVideoState((prev) => {

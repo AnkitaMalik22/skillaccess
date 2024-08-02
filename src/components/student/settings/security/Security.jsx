@@ -24,13 +24,13 @@ const Security = () => {
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
-  console.log(selectedOption);
+  //console.log(selectedOption);
   const handleChnage = (e) => {
     setPassword({ ...password, [e.target.name]: e.target.value });
   };
 
   const handleUpdatePassword = (password) => {
-    console.log("update");
+    //console.log("update");
 
     dispatch(updatePassword(password));
   };

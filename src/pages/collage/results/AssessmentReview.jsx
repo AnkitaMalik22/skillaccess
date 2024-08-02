@@ -38,7 +38,7 @@ const AssessmentReview = () => {
     fetchData();
   }, [testId, studentId]);
 
-  console.log("testId", testId, studentId, response);
+  //console.log("testId", testId, studentId, response);
 
   const [questions, setQuestions] = useState(null);
   let section1 = [];
@@ -51,8 +51,8 @@ const AssessmentReview = () => {
   useEffect(() => {
     if (response?.topics && response?.topics.length > 0) {
       if (response?.topics[0]) {
-        // console.log("response?.topics[0].", response?.topics[0]?.Type);
-        // console.log("response?.topics[1]", response?.topics[1]?.Type);
+        // //console.log("response?.topics[0].", response?.topics[0]?.Type);
+        // //console.log("response?.topics[1]", response?.topics[1]?.Type);
 
         switch (response?.topics[0].Type) {
           case "essay":
@@ -150,7 +150,7 @@ const AssessmentReview = () => {
             break;
         }
 
-      console.log(section1, section2, section3, section4, section5);
+      //console.log(section1, section2, section3, section4, section5);
 
       setQuestions([
         ...section1,
@@ -183,7 +183,7 @@ const AssessmentReview = () => {
   let k = questions?.filter(
     (question) => question.StudentAnswerIndex !== undefined
   ).length;
-  console.log(k);
+  //console.log(k);
 
   if (loading) {
     return <Loader />;
@@ -299,8 +299,8 @@ const AssessmentReview = () => {
             {Array.from({ length: Math.ceil(max) }).map((_, index) => {
               const pageNumber = index + 1;
               const hasQuestions = (pageNumber - 1) * 10 < questions.length;
-              console.log(questions.length);
-              console.log(Math.ceil(max));
+              //console.log(questions.length);
+              //console.log(Math.ceil(max));
               return (
                 hasQuestions && (
                   <div

@@ -46,7 +46,7 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
       };
     } else {
       toast.error("Invalid file type only excel file accepted");
-      // console.log("not valid type");
+      // //console.log("not valid type");
     }
   };
 

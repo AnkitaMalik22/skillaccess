@@ -15,7 +15,7 @@
 
 //   useEffect(() => {
 //     dispatch(getCompanyDetails(id));
-//     console.log(companyDetails);
+//     //console.log(companyDetails);
 //   }, [dispatch, id]);
 
 //   return (
@@ -78,7 +78,7 @@
 //                 <p>
 
 //                   {award?.name}
-//                   {console.log(award.name)}
+//                   {//console.log(award.name)}
 //                 </p>
 //               </span>
 //               })}
@@ -168,7 +168,7 @@ const CompanyProfile = () => {
 
   useEffect(() => {
     dispatch(getCompanyDetails(id));
-    console.log(companyDetails);
+    // //console.log(companyDetails);
   }, [dispatch, id]);
 
   return (
@@ -247,56 +247,55 @@ const CompanyProfile = () => {
               See All
             </h2>
           </div>
-        
-           {
-  Array.from({length: 5}, (_, i) => (
-    <div className="flex justify-between items-center w-[98%] bg-gray-100 rounded-lg p-4 mt-4">
-    <div className="sm:flex items-center" >
-    <div className="w-16 h-16 flex items-center mr-4 ">
-    <img
-      src="../../images/companyLogo.png"
-      alt=""
-      className=" rounded-2xl "
-    />
-  </div>
-      <span className="">
-        <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-          Role
-        </h2>
-        <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
-          {" "}
-          CompanyName
-        </h2>
-        <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
-          {" "}
-          date
-        </h2>
-        <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
-          {" "}
-          in <em className="not-italic text-black">Banglore In.</em>
-        </h2>
-      </span>
-    </div>
-    <div className="flex sm:gap-6 gap-1">
-      <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
-      <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
-        {" "}
-        location
-      </h2>
-      <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
-        {" "}
-        Remote
-      </h2>
-      <button className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
-      onClick={() => navigate("/student/companies/jobOverview")}
-      >
-        full time
-      </button>
-      <FaArrowRight className="text-gray-400 self-center" />
-    </div>
-  </div>
-  ))
-}
+
+          {Array.from({ length: 5 }, (_, i) => (
+            <div className="flex justify-between items-center w-[98%] bg-gray-100 rounded-lg p-4 mt-4">
+              <div className="sm:flex items-center">
+                <div className="w-16 h-16 flex items-center mr-4 ">
+                  <img
+                    src="../../images/companyLogo.png"
+                    alt=""
+                    className=" rounded-2xl "
+                  />
+                </div>
+                <span className="">
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base">
+                    Role
+                  </h2>
+                  <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
+                    {" "}
+                    CompanyName
+                  </h2>
+                  <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
+                    {" "}
+                    date
+                  </h2>
+                  <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
+                    {" "}
+                    in <em className="not-italic text-black">Banglore In.</em>
+                  </h2>
+                </span>
+              </div>
+              <div className="flex sm:gap-6 gap-1">
+                <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
+                <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
+                  {" "}
+                  location
+                </h2>
+                <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
+                  {" "}
+                  Remote
+                </h2>
+                <button
+                  className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
+                  onClick={() => navigate("/student/companies/jobOverview")}
+                >
+                  full time
+                </button>
+                <FaArrowRight className="text-gray-400 self-center" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

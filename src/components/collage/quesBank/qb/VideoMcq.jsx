@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const VideoMcq = ({ Number, mcq, id, video }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(mcq);
+  // //console.log(mcq);
   return (
     <div className="mx-6 flex bg-white rounded-lg justify-between my-4">
       {mcq.Title && (
@@ -33,37 +33,36 @@ const VideoMcq = ({ Number, mcq, id, video }) => {
           </h2>
 
           <div className="px-5 pb-4 flex flex-col gap-4">
-        
-            {
-            mcq?.Options?.map ((option, index) => {
-                return (
-                  <span className="flex gap-2">
-                      <div className="w-6">
-                        {console.log(mcq?.AnswerIndex, index)}
-                      {index === parseInt(mcq?.AnswerIndex) ? (
-                        <img
-                          src="../../../images/icons/greenDotSelected.png"
-                          alt="greensel"
-                        />
-                      ) : (
-                        <img
-                          src="../../../images/icons/blueDot.png"
-                          alt="greensel"
-                        />
-                      )}
-                    </div>
-                    <label
-                      className={` text-sm ${
-                        mcq?.AnswerIndex === index ? "text-green" : "text-[#3E3E3E]"
-                      }`}
-                    >
-                      {" "}
-                      {option}
-                    </label>
-                  </span>
-                );
-              })
-            }
+            {mcq?.Options?.map((option, index) => {
+              return (
+                <span className="flex gap-2">
+                  <div className="w-6">
+                    {/* {//console.log(mcq?.AnswerIndex, index)} */}
+                    {index === parseInt(mcq?.AnswerIndex) ? (
+                      <img
+                        src="../../../images/icons/greenDotSelected.png"
+                        alt="greensel"
+                      />
+                    ) : (
+                      <img
+                        src="../../../images/icons/blueDot.png"
+                        alt="greensel"
+                      />
+                    )}
+                  </div>
+                  <label
+                    className={` text-sm ${
+                      mcq?.AnswerIndex === index
+                        ? "text-green"
+                        : "text-[#3E3E3E]"
+                    }`}
+                  >
+                    {" "}
+                    {option}
+                  </label>
+                </span>
+              );
+            })}
           </div>
         </div>
       )}

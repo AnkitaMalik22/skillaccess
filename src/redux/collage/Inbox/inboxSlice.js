@@ -26,7 +26,7 @@ export const bookmarkMail = createAsyncThunk(
       const res = req.data;
       return res.data;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data);
     }
   }
@@ -49,7 +49,7 @@ export const removeBookmarkedMail = createAsyncThunk(
       const res = req.data;
       return res.data;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data);
     }
   }
@@ -75,7 +75,7 @@ export const markAsRead = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data);
     }
   }
@@ -88,22 +88,22 @@ const inboxSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(bookmarkMail.pending, (state, action) => {
-        console.log("bookmarkload");
+        //console.log("bookmarkload");
       })
       .addCase(bookmarkMail.fulfilled, (state, action) => {
-        console.log("bookmarkf", action.payload);
+        //console.log("bookmarkf", action.payload);
       })
       .addCase(bookmarkMail.rejected, (state, action) => {
-        console.log("bookmarkr", action.payload);
+        //console.log("bookmarkr", action.payload);
       })
       .addCase(removeBookmarkedMail.pending, (state, action) => {
-        console.log("removebookmarkload");
+        //console.log("removebookmarkload");
       })
       .addCase(removeBookmarkedMail.fulfilled, (state, action) => {
-        console.log("removebookmarkf", action.payload);
+        //console.log("removebookmarkf", action.payload);
       })
       .addCase(removeBookmarkedMail.rejected, (state, action) => {
-        console.log("removebookmarkr", action.payload);
+        //console.log("removebookmarkr", action.payload);
       });
   },
 });

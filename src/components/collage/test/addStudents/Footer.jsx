@@ -9,7 +9,7 @@ import { inviteToTest } from "../../../../redux/collage/test/thunks/student";
 import { useState } from "react";
 import Loader from "../../../loaders/Loader";
 
-const Footer = ({ students ,endDate}) => {
+const Footer = ({ students, endDate }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -20,14 +20,14 @@ const Footer = ({ students ,endDate}) => {
     if (students.length === 0) {
       toast.error("Select at least one student to send an invite.");
     } else if (!testId) {
-      console.log(testId);
+      // //console.log(testId);
       toast.error("Invalid Test Id");
     } else if (credit?.limit - 1 < students.length) {
       toast.error(
         "Your current plan only support inviting " + credit?.limit + "students"
       );
     } else {
-      console.log(testId, students);
+      // //console.log(testId, students);
       setLoading(true);
       await dispatch(
         inviteToTest({
@@ -50,17 +50,13 @@ const Footer = ({ students ,endDate}) => {
     endDateWithoutTime.setHours(0, 0, 0, 0);
     const currentDateWithoutTime = new Date();
     currentDateWithoutTime.setHours(0, 0, 0, 0);
-  
+
     const differenceMs = currentDateWithoutTime - endDateWithoutTime;
     const differenceDays = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
-    console.log(differenceDays);
-  
+    // //console.log(differenceDays);
+
     return differenceDays > 0 ? false : true;
-      
   };
-  
-
-
 
   return (
     <div className="pt-1 relative pb-20">
@@ -69,18 +65,32 @@ const Footer = ({ students ,endDate}) => {
         <div className=" flex gap-2">
           <button
             className={`self-center justify-center flex bg-blue-700 rounded-lg text-sm font-bold gap-2 px-10 py-3 ${
-              students.length === 0  ? "opacity-50 cursor-not-allowed" : (isActiveTest(endDate) ? "cursor-pointer" : "opacity-50 cursor-not-allowed")
+              students.length === 0
+                ? "opacity-50 cursor-not-allowed"
+                : isActiveTest(endDate)
+                ? "cursor-pointer"
+                : "opacity-50 cursor-not-allowed"
             }`}
             onClick={handleSendInvite}
             disabled={students.length === 0 || !isActiveTest(endDate)}
           >
-            {  loading ? <Loader /> :  (isActiveTest(endDate) ?? <FaPlus className="text-white text-lg" />)
-            }
+            {loading ? (
+              <Loader />
+            ) : (
+              isActiveTest(endDate) ?? <FaPlus className="text-white text-lg" />
+            )}
 
-            <p className="self-center text-white tooltip"data-tip={isActiveTest(endDate) ? "Invite Students to Test" : "This test has ended"} >
+            <p
+              className="self-center text-white tooltip"
+              data-tip={
+                isActiveTest(endDate)
+                  ? "Invite Students to Test"
+                  : "This test has ended"
+              }
+            >
               {}
               {isActiveTest(endDate) ? "Invite" : "Test Ended"}
-              </p>
+            </p>
           </button>
         </div>
       </div>

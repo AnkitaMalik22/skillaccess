@@ -33,7 +33,7 @@ const VideoMcq = ({
     const { name, value } = e.target;
 
     if (name === "Title") {
-      console.log("name", name, value);
+      // //console.log("name", name, value);
       setMcq((prev) => {
         return { ...prev, [name]: value };
       });
@@ -63,8 +63,8 @@ const VideoMcq = ({
     //   };
     // });
 
-    console.log(videoState, "mcq-state");
-    // console.log(mcq, "mcq");
+    // //console.log(videoState, "mcq-state");
+    // //console.log(mcq, "mcq");
   };
   const handleSubmit = () => {
     if (
@@ -77,7 +77,7 @@ const VideoMcq = ({
     }
 
     setSave(false);
-    console.log(mcq);
+    // //console.log(mcq);
     setVideoState((prev) => {
       return {
         ...prev,
@@ -136,7 +136,7 @@ const VideoMcq = ({
                 handleSubmit
                 // () => {
                 //   setSave(false);
-                //   console.log(mcq);
+                //   //console.log(mcq);
                 //   setVideoState((prev) => {
                 //     {
                 //       return {

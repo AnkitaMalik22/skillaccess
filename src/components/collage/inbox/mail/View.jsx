@@ -43,7 +43,7 @@ const View = ({ index, filter, inboxType }) => {
 
     socket.on("message", (data) => {
       // Handle email sent event
-      console.log("ems");
+      // //console.log("ems");
       dispatch(getMail({ limit: 50, skip: 0 }));
     });
 
@@ -53,7 +53,7 @@ const View = ({ index, filter, inboxType }) => {
   }, []);
 
   useEffect(() => {
-    console.log(show);
+    // //console.log(show);
     if (show === "all") {
       dispatch(getMail({ limit: 50, skip: 0 })).then(() => {
         if (inboxType === "Received") {
@@ -78,7 +78,7 @@ const View = ({ index, filter, inboxType }) => {
 
   const [email, setEmail] = useState({ Message: "" });
   const handleChange = (e) => {
-    console.log(e.target);
+    // //console.log(e.target);
     setEmail((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });

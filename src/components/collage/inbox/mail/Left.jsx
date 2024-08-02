@@ -19,7 +19,7 @@ const Left = ({ data, index, inboxType }) => {
 
   useEffect(() => {
     if (JSON.stringify(user) !== JSON.stringify(arr)) {
-      console.log(user);
+      // //console.log(user);
       if (inboxType === "Received") {
         setArr(user.received);
       } else {

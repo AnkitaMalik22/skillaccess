@@ -5,7 +5,7 @@ export const getTest = createAsyncThunk(
   "test/getTest",
   async (id, { rejectWithValue }) => {
     try {
-      console.log(`get test ${id}`);
+      //console.log(`get test ${id}`);
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/assessments/${id}`,
 
@@ -17,10 +17,10 @@ export const getTest = createAsyncThunk(
         }
       );
       const res = req.data;
-      // console.log(res);
+      // //console.log(res);
       return res;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
 
       return rejectWithValue(error.response.data);
     }
@@ -44,11 +44,11 @@ export const getTestResultPage = createAsyncThunk(
 
       const res = req.data;
 
-      console.log(res);
+      //console.log(res);
 
       return res.students;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
 
       return rejectWithValue(error.response.data);
     }
@@ -59,7 +59,7 @@ export const getAllTests = createAsyncThunk(
   "test/getAllTests",
   async (_, { rejectWithValue, getState }) => {
     try {
-      console.log(`get tests`);
+      //console.log(`get tests`);
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/assessments`,
         {
@@ -71,11 +71,11 @@ export const getAllTests = createAsyncThunk(
       );
 
       const res = req.data;
-      console.log(res);
+      //console.log(res);
 
       return res;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -98,7 +98,7 @@ export const createTest = createAsyncThunk(
       const res = req.data;
       return res.assessment;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -108,7 +108,7 @@ export const deleteTest = createAsyncThunk(
   "test/deleteTest",
   async (id, { rejectWithValue }) => {
     try {
-      console.log(`get test ${id}`);
+      //console.log(`get test ${id}`);
       const req = await axios.delete(
         `${process.env.REACT_APP_API_URL}/api/assessments/${id}`,
 
@@ -120,11 +120,11 @@ export const deleteTest = createAsyncThunk(
         }
       );
       const res = req.data;
-      // console.log(res);
+      // //console.log(res);
 
       return res;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
 
       return rejectWithValue(error.response.data);
     }
@@ -145,10 +145,10 @@ export const selectStudentTest = createAsyncThunk(
         }
       );
 
-      console.log(response, "response");
+      //console.log(response, "response");
       return response;
     } catch (error) {
-      console.log(error, "error.message");
+      //console.log(error, "error.message");
       return rejectWithValue(error.message);
     }
   }
@@ -170,11 +170,11 @@ export const getselectedStudents = createAsyncThunk(
 
       const res = req.data;
 
-      console.log(res);
+      //console.log(res);
 
       return res.selectedStudents;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
 
       return rejectWithValue(error.response.data);
     }
@@ -196,11 +196,11 @@ export const getRecentTests = createAsyncThunk(
       );
 
       const res = req.data;
-      console.log(res);
+      //console.log(res);
 
       return res;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -220,11 +220,11 @@ export const getRecentStudentTests = createAsyncThunk(
       );
 
       const res = req.data;
-      console.log(res);
+      //console.log(res);
 
       return res.assessments;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -233,7 +233,7 @@ export const removeFromRecent = createAsyncThunk(
   "test/removeFromRecent",
   async (id, { rejectWithValue, getState, dispatch }) => {
     try {
-      console.log(`get tests`);
+      //console.log(`get tests`);
       const req = await axios.delete(
         `${process.env.REACT_APP_API_URL}/api/assessments/recent/${id}`,
         {
@@ -249,7 +249,7 @@ export const removeFromRecent = createAsyncThunk(
       dispatch(getRecentTests());
       return res;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -273,11 +273,11 @@ export const getStudentsForTest = createAsyncThunk(
 
       const res = req.data;
 
-      console.log(res);
+      //console.log(res);
 
       return res;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
 
       return rejectWithValue(error.response.data);
     }

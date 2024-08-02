@@ -29,7 +29,7 @@ const AddQuestionsSelect = () => {
 
   // const [currentTopic, setCurrentTopic] = useState({});
 
-  console.log(id);
+  //console.log(id);
   // useEffect(() => {
   //   dispatch(setTest({ questionType: selectQuestionType }));
   // }, [selectQuestionType]);
@@ -149,7 +149,7 @@ const AddQuestionsSelect = () => {
                       return;
                     }
 
-                    console.log(header);
+                    //console.log(header);
                     if (header.v === "option") {
                       if (row) {
                         let OpArr = jsonData[rowNum].Options || [];
@@ -396,7 +396,7 @@ const AddQuestionsSelect = () => {
                         }
                       }
                       if (row) {
-                        console.log(row.v);
+                        //console.log(row.v);
                         jsonData[rowNum] = {
                           ...jsonData[rowNum],
                           [header.v]: row.v,
@@ -537,7 +537,7 @@ const AddQuestionsSelect = () => {
       toast.success("Questions Uploaded Successfully");
     } catch (error) {
       toast.error("An error occurred while uploading questions");
-      console.log(error);
+      //console.log(error);
       window.location.reload(true);
     }
   };
@@ -760,7 +760,9 @@ const AddQuestionsSelect = () => {
           <button
             className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
             onClick={() => {
-              selectQuestionType === "" ? toast.error("Please select a question type") : upload.current.click();
+              selectQuestionType === ""
+                ? toast.error("Please select a question type")
+                : upload.current.click();
             }}
           >
             <input

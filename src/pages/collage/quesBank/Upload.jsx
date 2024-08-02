@@ -13,7 +13,7 @@ const Upload = () => {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    // console.log(e.dataTransfer.files);
+    // //console.log(e.dataTransfer.files);
     toast.success("file dropped");
   };
 

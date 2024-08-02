@@ -22,7 +22,7 @@ const Finalize = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
-    //  console.log(test);
+    //  //console.log(test);
   }, []);
 
   // const totalTime = topics?.reduce((acc, topic) => acc + topic.Time, 0);

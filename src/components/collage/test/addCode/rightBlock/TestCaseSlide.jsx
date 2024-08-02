@@ -35,22 +35,22 @@ const SlideUpDown = ({
         isHidden: hideTestCase,
       });
       setQuestion(newQuestion);
-      console.log(question);
+      // //console.log(question);
       setUserInput("");
       setUserOutput("");
       setHideTestCase(false);
       setOutputStatus("");
       toast.success("Test case added successfully");
     } catch (error) {
-      console.log("Error adding test case", error);
+      // //console.log("Error adding test case", error);
       toast.error("Error adding test case");
     }
   };
 
   function compileUserInput() {
     setRunLoading(true);
-    console.log("Compiling User Input");
-    console.log(`1\n${userInput}\n`);
+    // //console.log("Compiling User Input");
+    // //console.log(`1\n${userInput}\n`);
 
     return axios
       .post(
@@ -80,7 +80,7 @@ const SlideUpDown = ({
       .catch((err) => {
         setOutputStatus("Failed");
         setRunLoading(false);
-        console.log("Error", err);
+        // //console.log("Error", err);
         setUserOutput("Error Executing code");
       });
   }

@@ -58,7 +58,7 @@ const LongShortAnswer = () => {
   };
 
   const handleSave = () => {
-    console.log(question);
+    //console.log(question);
 
     if (LongShort === "short") {
       if (

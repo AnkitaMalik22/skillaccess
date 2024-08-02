@@ -49,7 +49,7 @@ const Question = ({
         value={question.codeQuestion}
         onChange={(value) =>
           setQuestion((prev) => {
-            // console.log({ ...prev, Title: e.target.value });
+            // //console.log({ ...prev, Title: e.target.value });
             return { ...prev, codeQuestion: value };
           })
         }

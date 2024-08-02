@@ -1,14 +1,13 @@
 import React from "react";
 
-import Test  from "../../../components/student/test/home/Test";
+import Test from "../../../components/student/test/home/Test";
 import StudentLayout from "../../../layout/Student";
 
 const TestPage = () => {
   React.useEffect(() => {
-   
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
-    console.log(currentPageLanguage + " " + navigator.language);
+    //console.log(currentPageLanguage + " " + navigator.language);
 
     let script = document.createElement("script");
     const loadGoogleTranslateScript = () => {
@@ -33,27 +32,25 @@ const TestPage = () => {
       }
     };
 
-
-if(navigator.language !== navigator.currentPageLanguage) {
-  console.log("Language is different");
-  loadGoogleTranslateScript();
-}
-
-// loadGoogleTranslateScript();
-
-
-  return () => {
-    // Clean up script when component unmounts
-    if (scriptLoaded) {
-      document.body.removeChild(script);
-      scriptLoaded = false;
+    if (navigator.language !== navigator.currentPageLanguage) {
+      //console.log("Language is different");
+      loadGoogleTranslateScript();
     }
-  };
-}, []);
+
+    // loadGoogleTranslateScript();
+
+    return () => {
+      // Clean up script when component unmounts
+      if (scriptLoaded) {
+        document.body.removeChild(script);
+        scriptLoaded = false;
+      }
+    };
+  }, []);
   return (
     <StudentLayout>
       <Test />
-      </StudentLayout>
+    </StudentLayout>
   );
 };
 

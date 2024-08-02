@@ -35,7 +35,7 @@ const ResetPassword = () => {
 
   const sel = useSelector((state) => state.collageAuth);
   useEffect(() => {
-    // console.log(sel);
+    // //console.log(sel);
   }, []);
 
   const handleSubmit = async (e) => {

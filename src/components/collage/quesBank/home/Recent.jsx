@@ -16,11 +16,11 @@ const Recent = () => {
 
   useEffect(() => {
     dispatch(getRecentUsedQuestions());
-    console.log(recentUsedQuestions);
+    // //console.log(recentUsedQuestions);
   }, []);
 
   const handleDelete = (type, id) => {
-    console.log("Delete", id);
+    // //console.log("Delete", id);
 
     dispatch(deleteRecentUsedQuestion({ type, id }));
   };

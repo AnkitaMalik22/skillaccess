@@ -27,7 +27,7 @@ const Name = () => {
     duration_to,
     isNegativeMarking,
   } = useSelector((state) => state.test);
-  // const {} = useSelector((state) =>console.log(state.test));
+  // const {} = useSelector((state) =>//console.log(state.test));
   const navigate = useNavigate();
   const [testDetails, setTestDetails] = useState({
     level: level,
@@ -54,7 +54,7 @@ const Name = () => {
       isNegativeMarking: isNegativeMarking || false,
     });
     // why getting 0 here
-    // console.log(name, description, totalAttempts);
+    // //console.log(name, description, totalAttempts);
   }, [dispatch]);
 
   const [errors, setErrors] = useState({
@@ -102,7 +102,7 @@ const Name = () => {
         //   date.getTime() + date.getTimezoneOffset() * 60000
         // );
         // const formattedDate = utcDate.toISOString().slice(0, 16);
-        // console.log(date, utcDate, value);
+        // //console.log(date, utcDate, value);
 
         setTestDetails({
           ...testDetails,

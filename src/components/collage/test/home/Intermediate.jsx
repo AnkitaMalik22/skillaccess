@@ -20,7 +20,7 @@ const Intermediate = () => {
   );
   const credit = useSelector((state) => state.collageAuth);
 
-  console.log(credit);
+  // //console.log(credit);
 
   const handleClose = () => {
     setShow(false);

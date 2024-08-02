@@ -65,7 +65,7 @@ const Header = ({ selectQuestionType }) => {
       short = 0;
     }
     let Duration = mcq + long + short;
-    console.log(Duration);
+    // //console.log(Duration);
     const vid = {
       ...topicToBeAdded.video,
       QuestionLevel: level,
@@ -79,7 +79,7 @@ const Header = ({ selectQuestionType }) => {
       vid.questions.length + vid.long.length + vid.short.length;
     dispatch(clearTopicToBeAdded());
 
-    console.log(searchParam.get("section"));
+    // //console.log(searchParam.get("section"));
     if (searchParam.get("section") !== "null") {
       dispatch(addVideoToSection({ data: vid, index: id }));
       if (totalLength === 0) {
@@ -104,7 +104,7 @@ const Header = ({ selectQuestionType }) => {
           "TopicToBeAdded",
           JSON.stringify(updatedTopicToBeAdded)
         );
-        console.log(res);
+        // //console.log(res);
         if (totalLength === 0) {
           toast.error("Please add questions to the assessment");
           return;
@@ -126,7 +126,7 @@ const Header = ({ selectQuestionType }) => {
     //       "TopicToBeAdded",
     //       JSON.stringify(updatedTopicToBeAdded)
     //     );
-    //     console.log(res);
+    //     //console.log(res);
 
     //     navigate(
     //       `/collage/test/${id}?type=section&question=video&topicId=${searchParam.get(

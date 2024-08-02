@@ -18,7 +18,8 @@ const HeaderMarks = ({ response, totalQuestions }) => {
     dispatch(getTest(assessmentId));
     dispatch(getTestResultPage(assessmentId));
   }, [dispatch, assessmentId]);
-  console.log(response);
+  
+
   return (
     <>
       <div className="flex justify-between items-center bg-[#8F92A1] bg-opacity-5 p-5 md:p-8 gap-2 mb-5 md:mb-10 rounded-2xl">
@@ -29,7 +30,7 @@ const HeaderMarks = ({ response, totalQuestions }) => {
             </p>
 
             <h2 className="font-bold text-[#171717] text-xl first-letter:capitalize">
-              {assessment?.name}
+              {response.assessmentId.name}
             </h2>
           </div>
           <div className="flex justify-between mb-4">
@@ -69,14 +70,18 @@ const HeaderMarks = ({ response, totalQuestions }) => {
                 Overall Result
               </p>
               <h2 className="font-bold text-[#171717] text-xl first-letter:capitalize">
-                {response?.percentage?.toFixed(2) > 0 ? response?.percentage?.toFixed(2) : 0}%
+                {response?.percentage?.toFixed(2) > 0
+                  ? response?.percentage?.toFixed(2)
+                  : 0}
+                %
               </h2>
             </div>
           </div>
         </div>
         <div className=" w-[200px] h-[200px] flex flex-row justify-center items-center gap-10 mt-22 mb-23  px-12 py-30 rounded-full shadow-md border border-[#2FD790]">
           <p className="text-[32px] font-bold text-[#2fd790]">
-            {Math.round(response?.totalMarks) + "/" + assessment?.totalMarks}
+            {Math.round(response?.totalMarks)} /{" "}
+            {response.marks ? response.marks : "loading..."}
           </p>
         </div>
       </div>
@@ -84,10 +89,16 @@ const HeaderMarks = ({ response, totalQuestions }) => {
         <p>
           Only Multiple Choice Questions and Coding Questions are taken into
           account for correct answers and total marks || Beginner mcq marks : 1
-          || Intermediate mcq marks : 2 || Advanced mcq marks : 3 || Beginner coding marks : 10
-          || Intermediate coding marks : 20 || Advanced coding marks : 30
+          || Intermediate mcq marks : 2 || Advanced mcq marks : 3 || Beginner
+          coding marks : 10 || Intermediate coding marks : 20 || Advanced coding
+          marks : 30
         </p>
-        {response?.assessmentId?.isNegativeMarking &&  <span className="text-red-500">Negative marking is enabled || incorrect answer = -1/3 of question mark</span>  }
+        {response?.assessmentId?.isNegativeMarking && (
+          <span className="text-red-500">
+            Negative marking is enabled || incorrect answer = -1/3 of question
+            mark
+          </span>
+        )}
       </div>
     </>
   );

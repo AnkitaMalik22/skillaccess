@@ -96,7 +96,7 @@ const TestCases = ({
           }
         }
 
-        // console.log(students);
+        // //console.log(students);
 
         setLoading(false);
         setVisible(false);
@@ -179,7 +179,7 @@ const TestCases = ({
       return updatedExpandedTestCases;
     });
   };
-  console.log(question?.testcase);
+  // //console.log(question?.testcase);
   return (
     <div className="h-[535px] overflow-y-auto w-full ">
       {visible && (

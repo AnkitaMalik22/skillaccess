@@ -38,18 +38,18 @@ const Security = () => {
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
-    console.log(option);
+    //console.log(option);
     if (option === "securityApp") {
       setSelectedOption("securityApp");
       setShowQR(true);
-      console.log("securityApp clicked");
+      //console.log("securityApp clicked");
       dispatch(selectAuth({ type: "qr" }));
     } else if (option === "textMessage") {
-      console.log("textMessage clicked");
+      //console.log("textMessage clicked");
       dispatch(selectAuth({ type: "otp" }));
       // navigate("/collage/settings/security/secondFA");
     } else {
-      console.log("none clicked");
+      //console.log("none clicked");
       dispatch(selectAuth({ type: "none" }));
     }
   };
@@ -59,7 +59,7 @@ const Security = () => {
   };
 
   const handleUpdatePassword = (password) => {
-    console.log("update");
+    //console.log("update");
 
     dispatch(updatePassword(password));
   };
@@ -98,7 +98,7 @@ const Security = () => {
   const [showQR, setShowQR] = useState(false);
 
   useEffect(() => {
-    console.log("ue");
+    //console.log("ue");
     dispatch(getSecretQr());
   }, []);
   return (

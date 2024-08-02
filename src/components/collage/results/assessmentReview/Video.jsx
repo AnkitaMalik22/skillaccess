@@ -20,7 +20,7 @@ const Video = ({ video, Number }) => {
     <Disclosure>
       {({ open }) => (
         <>
-           <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10 mb-4">
+          <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10 mb-4">
             {" "}
             <button className="bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] p-3 h-12">
               {" "}
@@ -28,7 +28,7 @@ const Video = ({ video, Number }) => {
                 Q-{Number}
               </div>
             </button>
-            <Disclosure.Button  className=" flex w-full justify-between rounded-lg text-left text-sm font-medium border border-[#95ACFA] p-3">
+            <Disclosure.Button className=" flex w-full justify-between rounded-lg text-left text-sm font-medium border border-[#95ACFA] p-3">
               Click to Expand{" "}
             </Disclosure.Button>
             {/* <div className="bg-gray-100 h-11 flex  rounded-xl px-1">
@@ -37,7 +37,7 @@ const Video = ({ video, Number }) => {
                 alt="cross"
                 className="self-center "
                 onClick={() => {
-                  console.log(video.section, video._id);
+                  //console.log(video.section, video._id);
                   handleDelete({
                     sectionId: video.section,
                     questionId: video._id,
@@ -89,7 +89,7 @@ const Video = ({ video, Number }) => {
                   return (
                     <VideoMcq
                       //   handleDelete={handleDelete}
-                      key = {mcq._id}
+                      key={mcq._id}
                       mcq={mcq}
                       Number={index}
                       AnswerIndex={mcq.AnswerIndex}
@@ -101,12 +101,20 @@ const Video = ({ video, Number }) => {
               <h1>{video?.long.length > 0 && "Long answer questions"}</h1>
               {video?.long?.length > 0 &&
                 video.long.map((question, index) => (
-                  <VideoEssay Title={question.Title} Number={index} Answer={question.studentAnswer} />
+                  <VideoEssay
+                    Title={question.Title}
+                    Number={index}
+                    Answer={question.studentAnswer}
+                  />
                 ))}
               <h1> {video?.short.length > 0 && "Short answer questions"}</h1>
               {video?.short?.length > 0 &&
                 video.short.map((question, index) => (
-                  <VideoEssay Title={question.Title} Number={index}  Answer={question.studentAnswer} />
+                  <VideoEssay
+                    Title={question.Title}
+                    Number={index}
+                    Answer={question.studentAnswer}
+                  />
                 ))}
             </div>
           </Disclosure.Panel>

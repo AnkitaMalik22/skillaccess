@@ -11,7 +11,7 @@ const Description = ({ topics }) => {
 
     if (topic.Type === "essay") {
       totalEssay += topic.essay?.reduce((acc, curr) => {
-        console.log(parseInt(curr.Duration));
+        //console.log(parseInt(curr.Duration));
         return acc + parseInt(curr.Duration);
       }, 0);
     }
@@ -40,7 +40,7 @@ const Description = ({ topics }) => {
     const total =
       totalMcq + totalEssay + totalVideo + totalCompiler + totalFindAnswer;
 
-    console.log(
+    //console.log(
       total,
       "total",
       totalMcq,

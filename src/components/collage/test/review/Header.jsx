@@ -153,7 +153,7 @@ const Header = ({
                       return;
                     }
 
-                    console.log(header);
+                    // //console.log(header);
                     if (header.v === "option") {
                       if (row) {
                         let OpArr = jsonData[rowNum].Options || [];
@@ -414,7 +414,7 @@ const Header = ({
                         }
                       }
                       if (row) {
-                        console.log(row.v);
+                        // //console.log(row.v);
                         jsonData[rowNum] = {
                           ...jsonData[rowNum],
                           [header.v]: row.v,
@@ -562,7 +562,7 @@ const Header = ({
       window.location.reload(true);
     }
   };
-  console.log(type);
+  // //console.log(type);
   const handleNav = () => {
     if (type === "section") {
       if (level === "adaptive") {

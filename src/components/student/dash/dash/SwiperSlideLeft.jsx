@@ -9,11 +9,11 @@ const SwiperSlideLeft = () => {
   const dispatch = useDispatch();
   const { newCompanies, loading } = useSelector((state) => state.dashboard);
 
-  useSelector((state) => console.log("state : ", state.dashboard));
+  // useSelector((state) => //console.log("state : ", state.dashboard));
 
   useEffect(() => {
     dispatch(getNewCompanies());
-    console.log("newCompanies : ", newCompanies);
+    // //console.log("newCompanies : ", newCompanies);
   }, [dispatch]);
 
   return (

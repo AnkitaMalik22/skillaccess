@@ -176,7 +176,7 @@ export const paymentSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(makePayment.pending, (state, action) => {
       state.status = "loading";
-      console.log("loading");
+      //console.log("loading");
     });
     builder.addCase(makePayment.fulfilled, (state, { payload }) => {
       state.payment = payload;
@@ -194,7 +194,7 @@ export const paymentSlice = createSlice({
       state.status = "loading";
     });
     builder.addCase(getPayments.fulfilled, (state, { payload }) => {
-      console.log(payload.payments);
+      //console.log(payload.payments);
       state.payments = payload.payments;
       state.status = "success";
     });
@@ -249,7 +249,7 @@ export const paymentSlice = createSlice({
     });
     builder.addCase(getAllTransactions.fulfilled, (state, { payload }) => {
       state.transactions = payload;
-      console.log(payload);
+      //console.log(payload);
       state.status = "success";
       state.fetch_loading = false;
     });

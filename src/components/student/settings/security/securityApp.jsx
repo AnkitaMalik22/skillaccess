@@ -12,7 +12,7 @@ const SecurityApp = () => {
 
   const { qr } = useSelector((state) => state.collageAuth);
   useEffect(() => {
-    console.log("ue");
+    //console.log("ue");
     dispatch(getSecretQr({ non: "" }));
   }, []);
   const [code, setCode] = useState(null);

@@ -12,7 +12,10 @@ import {
   addFindAns,
   addFindAnsToTopic,
 } from "../../../redux/collage/test/testSlice";
-import { addQuestionToTopic ,setTotalTopicQuestions} from "../../../redux/collage/test/thunks/topic";
+import {
+  addQuestionToTopic,
+  setTotalTopicQuestions,
+} from "../../../redux/collage/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 
@@ -88,7 +91,7 @@ const AddParagraph = () => {
   };
 
   // React.useEffect(() => {
-  //   console.log(question);
+  //   //console.log(question);
   // }, [question]);
 
   useEffect(() => {
@@ -191,7 +194,9 @@ const AddParagraph = () => {
   }, [currentTopic]);
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "findAnswer" ,level: "all"}));
+      dispatch(
+        setTotalTopicQuestions({ id, type: "findAnswer", level: "all" })
+      );
     }
   }, [ADD_QUESTION_LOADING]);
 

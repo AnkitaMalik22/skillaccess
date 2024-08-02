@@ -1,61 +1,56 @@
-import React from 'react'
-import StudentTestLayout from '../../../layout/StudentTest'
-import Test from '../../../components/student/test/start/Test'
+import React from "react";
+import StudentTestLayout from "../../../layout/StudentTest";
+import Test from "../../../components/student/test/start/Test";
 
 const TestHome = () => {
-    React.useEffect(() => {
-   
-        let scriptLoaded = false;
-        const currentPageLanguage = document.documentElement.lang;
-        console.log(currentPageLanguage + " " + navigator.language);
-    
-        let script = document.createElement("script");
-        const loadGoogleTranslateScript = () => {
-          if (!scriptLoaded) {
-            script.src =
-              "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-            script.async = true;
-            script.onload = () => {
-              window.googleTranslateElementInit = () => {
-                new window.google.translate.TranslateElement(
-                  {
-                    pageLanguage: currentPageLanguage,
-                    includedLanguages: "en-US,en,hi,bn,ta,te,mr,gu,kn,ur,pa,ml,or", // Add more languages as needed
-                  },
-                  "google_translate_element"
-                );
-              };
-            };
-    
-            document.body.appendChild(script);
-            scriptLoaded = true;
-          }
+  React.useEffect(() => {
+    let scriptLoaded = false;
+    const currentPageLanguage = document.documentElement.lang;
+    //console.log(currentPageLanguage + " " + navigator.language);
+
+    let script = document.createElement("script");
+    const loadGoogleTranslateScript = () => {
+      if (!scriptLoaded) {
+        script.src =
+          "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        script.async = true;
+        script.onload = () => {
+          window.googleTranslateElementInit = () => {
+            new window.google.translate.TranslateElement(
+              {
+                pageLanguage: currentPageLanguage,
+                includedLanguages: "en-US,en,hi,bn,ta,te,mr,gu,kn,ur,pa,ml,or", // Add more languages as needed
+              },
+              "google_translate_element"
+            );
+          };
         };
-    
-    
-    if(navigator.language !== navigator.currentPageLanguage) {
-      console.log("Language is different");
+
+        document.body.appendChild(script);
+        scriptLoaded = true;
+      }
+    };
+
+    if (navigator.language !== navigator.currentPageLanguage) {
+      //console.log("Language is different");
       loadGoogleTranslateScript();
     }
-    
+
     // loadGoogleTranslateScript();
-    
-    
-      return () => {
-        // Clean up script when component unmounts
-        if (scriptLoaded) {
-          document.body.removeChild(script);
-          scriptLoaded = false;
-        }
-      };
-    }, []);
+
+    return () => {
+      // Clean up script when component unmounts
+      if (scriptLoaded) {
+        document.body.removeChild(script);
+        scriptLoaded = false;
+      }
+    };
+  }, []);
   return (
-   <StudentTestLayout>
+    <StudentTestLayout>
+      <Test />
+    </StudentTestLayout>
+  );
+};
 
-<Test />
-
-   </StudentTestLayout>
-  )
-}
-
-export default TestHome
+export default TestHome;

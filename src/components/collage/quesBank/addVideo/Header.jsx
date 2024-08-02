@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 
 import { FaChevronLeft } from "react-icons/fa";
 
@@ -7,7 +7,10 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addQuestionToTopic,setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
+import {
+  addQuestionToTopic,
+  setTotalTopicQuestions,
+} from "../../../../redux/collage/test/thunks/topic";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -24,9 +27,9 @@ const Header = () => {
 
   //   const topicToBeAdded = JSON.parse(localStorage.getItem("TopicToBeAdded"));
   const topicToBeAdded = useSelector((state) => state.test.TopicToBeAdded);
-  const {totalTopicQuestions} = useSelector((state) => state.test);
+  const { totalTopicQuestions } = useSelector((state) => state.test);
 
-  //   console.log(topicToBeAdded.video);
+  //   //console.log(topicToBeAdded.video);
 
   const hasQuestions =
     Array.isArray(topicToBeAdded?.video?.questions) &&
@@ -79,7 +82,7 @@ const Header = () => {
         let short = topicToBeAdded.video.short.reduce((acc, question) => {
           return acc + parseInt(question.Duration);
         }, 0);
-        console.log(mcq);
+        // //console.log(mcq);
         let Duration = mcq + long + short;
         dispatch(
           addQuestionToTopic({
@@ -131,7 +134,7 @@ const Header = () => {
         let short = topicToBeAdded.video.short.reduce((acc, question) => {
           return acc + parseInt(question.Duration);
         }, 0);
-        console.log(mcq);
+        // //console.log(mcq);
         let Duration = mcq + long + short;
         dispatch(
           addQuestionToTopic({
@@ -156,11 +159,9 @@ const Header = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "video" ,level : "all"}));
+      dispatch(setTotalTopicQuestions({ id, type: "video", level: "all" }));
     }
-  }, [id,""]);
-
-  
+  }, [id, ""]);
 
   return (
     <div className="flex w-full mx-auto justify-between mb-5">
@@ -173,8 +174,7 @@ const Header = () => {
         </button>
 
         <h2 className="text-xl md:text-[28px] font-bold font-dmSans text-[#171717]">
-        Question No : {totalTopicQuestions+1}
-
+          Question No : {totalTopicQuestions + 1}
         </h2>
       </div>
     </div>

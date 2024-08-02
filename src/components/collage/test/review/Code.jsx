@@ -20,7 +20,7 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
   const { currentQuestionCount } = useSelector((state) => state.test);
   const [search, setSearch] = useSearchParams();
   const [compiler, setCompiler] = useState(question);
-  console.log(compiler);
+  // //console.log(compiler);
   // const handleChange = (e) => {
   //   const { name, value, key } = e.target;
 
@@ -40,8 +40,8 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
     }));
   };
   const handleBookmark = () => {
-    console.log("bookmark");
-    // console.log(question);
+    // //console.log("bookmark");
+    // //console.log(question);
     dispatch(
       addBookmark({
         ...question,

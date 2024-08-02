@@ -40,8 +40,8 @@ const SelectTests = () => {
   const handleFilterSections = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      console.log("empty");
-      console.log(filteredSections, "filtered");
+      //console.log("empty");
+      //console.log(filteredSections, "filtered");
       setFilteredSections(sections);
 
       return;
@@ -53,7 +53,7 @@ const SelectTests = () => {
         })
       );
 
-      console.log(filteredSections, "filtered--", value);
+      //console.log(filteredSections, "filtered--", value);
     }
   };
 
@@ -88,8 +88,8 @@ const SelectTests = () => {
       let sectionCopy = { ...section, Type: questionType };
 
       // sectionCopy[Type] ="mcq";
-      // console.log(section);
-      // console.log(sectionCopy);
+      // //console.log(section);
+      // //console.log(sectionCopy);
 
       switch (questionType) {
         case "mcq":
@@ -127,12 +127,12 @@ const SelectTests = () => {
         }
         return arr;
       };
-      console.log(
-        sectionCopy[qType]?.length,
-        parseInt(totalQ),
-        qType,
-        questionType
-      );
+      //console.log(
+      //   sectionCopy[qType]?.length,
+      //   parseInt(totalQ),
+      //   qType,
+      //   questionType
+      // );
       if (sectionCopy[typeIf]?.length < parseInt(totalQ)) {
         toast.error("insufficient number of questions s");
         return;
@@ -142,9 +142,9 @@ const SelectTests = () => {
           0,
           parseInt(totalQ)
         );
-        console.log(sectionCopy, totalQ);
+        //console.log(sectionCopy, totalQ);
         // =======
-        //         console.log("totalQ : ", totalQ)
+        //         //console.log("totalQ : ", totalQ)
         //         sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(0, totalQ);
         // >>>>>>> saveMain
         dispatch(
@@ -170,12 +170,12 @@ const SelectTests = () => {
 
     // dispatch(setSections(sections.filter((s) => s !== section)));
 
-    // console.log(updatedSections);
+    // //console.log(updatedSections);
   };
-  console.log(selectedSections?.length);
+  //console.log(selectedSections?.length);
   const removeSection = (section, index) => {
     let Qt;
-    console.log(selectedSections[index].Type);
+    //console.log(selectedSections[index].Type);
     switch (selectedSections[index].Type) {
       case "mcq":
         Qt = "questions";
@@ -200,7 +200,7 @@ const SelectTests = () => {
     updatedSections.splice(index, 1);
 
     setSelectedSections(updatedSections);
-    // console.log(selectedSections[index][Qt].length);
+    // //console.log(selectedSections[index][Qt].length);
     dispatch(setTestSelectedTopics(updatedSections));
     dispatch(
       setCurrentQuestionCount(
@@ -222,7 +222,7 @@ const SelectTests = () => {
       setSelectedSections(topics);
     } catch (error) {}
 
-    // console.log("hello tests",sections);
+    // //console.log("hello tests",sections);
   }, []);
 
   useEffect(() => {
@@ -274,7 +274,7 @@ const SelectTests = () => {
               className="w-full h-32 border border-dashed rounded-lg border-blued col-span-1 flex justify-center "
               key={`${section._id + section.Type}`}
             >
-              {/* {console.log(section, "section")} */}
+              {/* {//console.log(section, "section")} */}
 
               <span className="self-center">
                 <h2 className="text-xl font-bold px-2 line-clamp-2 break-words">
@@ -427,7 +427,7 @@ const SelectTests = () => {
                       );
                       return;
                     }
-                    // console.log(section);
+                    // //console.log(section);
                     setSection(section);
                     setVisible(true);
                   }}

@@ -7,7 +7,7 @@ import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 const Essay = ({ question, number }) => {
   const [type, setType] = useState();
-  console.log(question);
+  // //console.log(question);
   const dispatch = useDispatch();
   const handleDelete = ({ sectionId, questionId }) => {
     dispatch(
