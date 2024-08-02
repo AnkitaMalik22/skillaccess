@@ -34,7 +34,8 @@ const List = ({ Title, number, code, question }) => {
             <>
               <div
                 className={`${
-                  passedTestCasesCount === totalTestCasesCount
+                  passedTestCasesCount / totalTestCasesCount > 0.5 &&
+                  passedTestCasesCount !== 0
                     ? "border-green-500"
                     : "border-red-500"
                 } flex w-full justify-between rounded-lg  p-3 text-left text-sm font-medium  border mb-2`}
@@ -83,8 +84,9 @@ const List = ({ Title, number, code, question }) => {
                           : "text-red-400"
                       } mt-2 p-2 bg-[#E6EFFF] rounded-lg text-center text-sm font-semibold`}
                     >
-                      Test Cases Passed: {passedTestCasesCount} /{" "}
-                      {totalTestCasesCount}
+                      {passedTestCasesCount > 0
+                        ? `Test Cases Passed: ${passedTestCasesCount} /${totalTestCasesCount}`
+                        : "0 Testcases Passed"}
                     </div>
                   </div>
                 </Disclosure.Panel>
@@ -96,7 +98,7 @@ const List = ({ Title, number, code, question }) => {
       {/* <div
         className="bg-gray-100 h-11 flex rounded-xl px-1"
         onClick={() => {
-          console.log(question);
+          //console.log(question);
           handleDelete({
             sectionId: question.section,
             questionId: question._id,

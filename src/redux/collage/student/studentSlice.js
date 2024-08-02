@@ -34,7 +34,7 @@ export const getStudents = createAsyncThunk(
           },
         }
       );
-      console.log(response.data);
+      //console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -56,10 +56,10 @@ export const uploadStudents = createAsyncThunk(
           },
         }
       );
-      console.log(response.data);
+      //console.log(response.data);
       return response.data;
     } catch (error) {
-      console.log(error, "error.message");
+      //console.log(error, "error.message");
       return rejectWithValue(error?.response?.data?.message);
     }
   }
@@ -79,10 +79,10 @@ export const approveStudent = createAsyncThunk(
         }
       );
 
-      console.log(response, "response");
+      //console.log(response, "response");
       return response;
     } catch (error) {
-      console.log(error, "error.message");
+      //console.log(error, "error.message");
       return rejectWithValue(error.message);
     }
   }
@@ -102,7 +102,7 @@ export const getStudentCV = createAsyncThunk(
         }
       );
       const res = req.data;
-      console.log(res);
+      //console.log(res);
       return res.student;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -179,7 +179,7 @@ export const studentSlice = createSlice({
       .addCase(uploadStudents.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-        console.log(action.payload, "action.payload");
+        //console.log(action.payload, "action.payload");
         // getStudents();
         toast.success("Invitation(s) sent to student(s)");
         state.uploadedStudents = action.payload.uploadedStudents;
@@ -191,7 +191,7 @@ export const studentSlice = createSlice({
         state.loading = false;
         state.error = true;
         state.GET_UPLOAD_STUDENTS_LOADING = false;
-        console.log("error", action.payload);
+        //console.log("error", action.payload);
         toast.error(action.payload);
       })
       .addCase(approveStudent.pending, (state) => {
@@ -206,7 +206,6 @@ export const studentSlice = createSlice({
         toast.success("Student Approved Successfully");
         getStudents();
         window.location.replace("/collage/students");
-
       })
       .addCase(approveStudent.rejected, (state) => {
         state.loading = false;
@@ -231,7 +230,6 @@ export const studentSlice = createSlice({
         state.loading = true;
         state.error = false;
         state.REJECT_STUDENT_LOADING = true;
-
       })
       .addCase(rejectRequest.fulfilled, (state, action) => {
         state.loading = false;

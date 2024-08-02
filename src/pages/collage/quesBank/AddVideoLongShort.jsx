@@ -70,12 +70,12 @@ const LongShortAnswer = () => {
       let ques = JSON.parse(localStorage.getItem("qbQues"));
       setQuestion(ques.short[Number]);
       setVide(ques);
-      console.log(ques);
+      //console.log(ques);
     } else if (addType === "edit" && LongShort === "long") {
       let ques = JSON.parse(localStorage.getItem("qbQues"));
       setQuestion(ques.long[Number]);
       setVide(ques);
-      console.log(ques);
+      //console.log(ques);
     }
   }, []);
   const handleSave = () => {
@@ -197,7 +197,7 @@ const LongShortAnswer = () => {
       }
     }
   };
-  console.log(question);
+  //console.log(question);
   return (
     <div className="mx-auto w-11/12 py-5 md:py-10">
       <Header

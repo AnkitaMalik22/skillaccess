@@ -63,7 +63,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
                     className="self-center"
                     onClick={() => {
                       setToggle(!toggle);
-                      console.log(toggle);
+                      // //console.log(toggle);
                     }}
                   >
                     <FaSortDown className="text-gray-400 self-center" />

@@ -18,7 +18,7 @@ const Essay = ({ question, number }) => {
     );
   };
 
-  console.log(question , "questionessay");
+  // //console.log(question , "questionessay");
   return (
     <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10 mb-4">
       <button className="bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] p-3 h-12">
@@ -86,11 +86,11 @@ const Essay = ({ question, number }) => {
                   </div>
                 ))} */}
 
-<div className="flex gap-2  z-10 relative rounded-lg p-3">
-                    <label className="text-blacktext-sm">
-                      {question.studentAnswer}
-                    </label>
-                  </div>
+                <div className="flex gap-2  z-10 relative rounded-lg p-3">
+                  <label className="text-blacktext-sm">
+                    {question.studentAnswer}
+                  </label>
+                </div>
               </Disclosure.Panel>
               {/* </Transition> */}
             </div>
@@ -103,7 +103,7 @@ const Essay = ({ question, number }) => {
           alt="cross"
           className="self-center "
           onClick={() => {
-            // console.log(question);
+            // //console.log(question);
             handleDelete({
               sectionId: question.section,
               questionId: question._id,

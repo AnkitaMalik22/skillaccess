@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
@@ -11,7 +11,7 @@ const Header = () => {
   const { id } = useParams();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const {totalTopicQuestions} = useSelector((state) => state.test);
+  const { totalTopicQuestions } = useSelector((state) => state.test);
   const type = searchParams.get("type");
   const level = searchParams.get("level");
 
@@ -21,7 +21,7 @@ const Header = () => {
 
   //   const topicToBeAdded = JSON.parse(localStorage.getItem("TopicToBeAdded"));
   const topicToBeAdded = useSelector((state) => state.test.TopicToBeAdded);
-  //   console.log(topicToBeAdded.video);
+  //   //console.log(topicToBeAdded.video);
 
   const hasQuestions =
     Array.isArray(topicToBeAdded?.video?.questions) &&
@@ -74,7 +74,7 @@ const Header = () => {
         let short = topicToBeAdded.video.short.reduce((acc, question) => {
           return acc + parseInt(question.Duration);
         }, 0);
-        console.log(mcq);
+        // //console.log(mcq);
         let Duration = mcq + long + short;
         dispatch(
           addQuestionToTopic({
@@ -126,7 +126,7 @@ const Header = () => {
         let short = topicToBeAdded.video.short.reduce((acc, question) => {
           return acc + parseInt(question.Duration);
         }, 0);
-        console.log(mcq);
+        // //console.log(mcq);
         let Duration = mcq + long + short;
         dispatch(
           addQuestionToTopic({
@@ -150,17 +150,15 @@ const Header = () => {
     }
   };
 
-
-
   useEffect(() => {
     if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "video" ,level }));
+      dispatch(setTotalTopicQuestions({ id, type: "video", level }));
     }
-  }, [id,""]);
+  }, [id, ""]);
 
   return (
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
-         <div className="flex gap-3">
+      <div className="flex gap-3">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
           onClick={() => navigate(-1)}
@@ -168,7 +166,7 @@ const Header = () => {
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-        Question No : {totalTopicQuestions+1}
+          Question No : {totalTopicQuestions + 1}
         </h2>
       </div>
 

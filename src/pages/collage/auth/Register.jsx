@@ -50,7 +50,7 @@ const Register = () => {
     });
   };
 
-  console.log(phone);
+  //console.log(phone);
 
   const sel = useSelector((state) => state.collageAuth);
   useEffect(() => {
@@ -61,12 +61,12 @@ const Register = () => {
     e.preventDefault();
     setLoader(true);
     const { Email, Password, FirstName, LastName, University } = Credentials;
-    if (phone.length !== 12){
+    if (phone.length !== 12) {
       toast.error("Please enter a valid phone number");
       setLoader(false);
       return;
     }
- 
+
     const data = {
       Phone: phone,
       Email,
@@ -83,7 +83,7 @@ const Register = () => {
         navigate("/collage/dashboard");
       }
     } catch (error) {
-      console.log("Reject" + error);
+      //console.log("Reject" + error);
     } finally {
       setLoader(false);
     }

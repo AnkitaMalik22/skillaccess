@@ -37,7 +37,7 @@ const AddMcq = () => {
 
   const [search, setSearch] = useSearchParams();
 
-  console.log(search.get("topicId"));
+  //console.log(search.get("topicId"));
   const [question, setQuestion] = useState({
     Title: "",
     Duration: 0,
@@ -119,11 +119,11 @@ const AddMcq = () => {
     }
   };
   const handleChanges = (e) => {
-    // console.log(question);
+    // //console.log(question);
 
     if (e.target.name === "Title") {
       setQuestion((prev) => {
-        // console.log({ ...prev, Title: e.target.value });
+        // //console.log({ ...prev, Title: e.target.value });
 
         return { ...prev, Title: e.target.value };
       });
@@ -279,7 +279,7 @@ const AddMcq = () => {
               value={question.Title}
               onChange={(value) =>
                 setQuestion((prev) => {
-                  // console.log({ ...prev, Title: e.target.value });
+                  // //console.log({ ...prev, Title: e.target.value });
                   return { ...prev, Title: value };
                 })
               }

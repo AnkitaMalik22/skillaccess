@@ -22,7 +22,9 @@ const Invite = () => {
   const { approvedStudents: uploadedStudents, loading } = useSelector(
     (state) => state.collegeStudents
   );
-  const { students: studentList ,assessment } = useSelector((state) => state.test);
+  const { students: studentList, assessment } = useSelector(
+    (state) => state.test
+  );
   const { user } = useSelector((state) => state.collageAuth);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const Invite = () => {
   const handleFilterStudents = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      console.log("empty");
+      //console.log("empty");
 
       setFilteredStudents(studentList);
 
@@ -53,13 +55,13 @@ const Invite = () => {
         })
       );
 
-      console.log(filteredStudents, "filtered--", value);
+      //console.log(filteredStudents, "filtered--", value);
     }
   };
 
   let testName = localStorage.getItem("testName");
 
-  // console.log(uploadedStudents)
+  // //console.log(uploadedStudents)
   return (
     <>
       <div className="flex gap-3 mb-5">
@@ -96,8 +98,8 @@ const Invite = () => {
       </div>
 
       <div className="mx-auto">
-        {console.log(assessment?.endDate)}
-        <Footer students={students} endDate ={assessment?.endDate} />
+        {/* {console.log(assessment?.endDate)} */}
+        <Footer students={students} endDate={assessment?.endDate} />
       </div>
     </>
   );

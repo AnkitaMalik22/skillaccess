@@ -61,7 +61,7 @@ const Header = () => {
                     className=""
                     onClick={() => {
                       setToggle(!toggle);
-                      console.log(toggle);
+                      //console.log(toggle);
                     }}
                   >
                     <FaSortDown className="text-gray-400 self-center" />

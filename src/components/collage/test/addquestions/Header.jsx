@@ -10,7 +10,7 @@ const Header = ({ Q, page }) => {
   const topics = JSON.parse(localStorage.getItem("topics"));
   const { name } = useSelector((state) => state.test);
   const level = searchParams.get("level");
-  console.log(level);
+  // //console.log(level);
   return (
     <div className="flex w-full mx-auto justify-between mb-5 ">
       <div className="flex gap-3">

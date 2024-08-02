@@ -18,7 +18,7 @@ const Adaptive = () => {
   const Adaptive = useSelector((state) => state.test.assessments.adaptive);
   const { testLoading } = useSelector((state) => state.test);
   const credit = useSelector((state) => state?.collageAuth);
-  console.log(credit);
+  // //console.log(credit);
 
   const handleClose = () => {
     setShow(false);
@@ -90,7 +90,7 @@ const Adaptive = () => {
             />
           </SwiperSlide>
         ))}
-       <SwiperSlide className="w-full">
+        <SwiperSlide className="w-full">
           {" "}
           <div className="w-[242px]"> </div>
         </SwiperSlide>

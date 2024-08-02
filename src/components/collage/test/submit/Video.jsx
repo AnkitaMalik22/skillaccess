@@ -44,7 +44,7 @@ const Video = ({ video, Number }) => {
                 alt="cross"
                 className="self-center "
                 onClick={() => {
-                  console.log(video.section, video._id);
+                  // //console.log(video.section, video._id);
                   handleDelete({
                     sectionId: video.section,
                     questionId: video.id,

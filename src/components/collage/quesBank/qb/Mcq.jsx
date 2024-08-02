@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const Mcq = ({ question, number }) => {
   const [type, setType] = useState();
   const [AnswerIndex, setAnswerIndex] = useState(question.AnswerIndex);
-  console.log(question);
+  // //console.log(question);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleDelete = ({ sectionId, questionId }) => {

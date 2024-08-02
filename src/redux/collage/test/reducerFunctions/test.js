@@ -1,6 +1,6 @@
 export const getAllTestFulfilled = (state, action) => {
   let assessments = action.payload.assessments;
-  console.log("assessments from : ", assessments);
+  //console.log("assessments from : ", assessments);
   state.assessments = {
     beginner: [],
     advanced: [],
@@ -24,7 +24,7 @@ export const getAllTestFulfilled = (state, action) => {
       );
       !isObjectPresent && state.assessments.advanced.push(assessment);
     } else {
-      console.log(assessment.level, "assessment.level");
+      //console.log(assessment.level, "assessment.level");
       const isObjectPresent = state.assessments?.adaptive?.some(
         (obj) => obj._id === assessment._id
       );

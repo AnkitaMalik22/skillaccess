@@ -15,7 +15,7 @@ const Code = ({
   editorValue,
 }) => {
   const selectedLanguage = question.codeLanguage.toLowerCase();
-  console.log(selectedLanguage);
+  // //console.log(selectedLanguage);
   return (
     <div className="font-dmSans">
       <h2 className="font-bold mb-3 text-xl">

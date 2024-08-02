@@ -53,7 +53,7 @@ const Header = ({ handleSubmit, loading }) => {
           <button
             className="self-center justify-center items-center flex bg-blue-800 py-3 px-4 rounded-lg text-xs gap-2 text-white"
             onClick={() => {
-              console.log("handle sub from headr");
+              // //console.log("handle sub from headr");
               handleSubmit();
             }}
           >

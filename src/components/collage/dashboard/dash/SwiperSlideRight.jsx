@@ -13,7 +13,7 @@ const SwiperSlideRight = () => {
   useEffect(() => {
     dispatch(getNewJobs());
   }, [dispatch]);
-  console.log(newJobs);
+  // //console.log(newJobs);
   const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (

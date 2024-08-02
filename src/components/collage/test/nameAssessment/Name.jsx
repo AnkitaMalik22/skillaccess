@@ -16,7 +16,7 @@ const Name = () => {
   const [search, setSearch] = useSearchParams();
 
   const level = search.get("level");
-  console.log(level);
+  // //console.log(level);
 
   const {
     name,
@@ -29,7 +29,7 @@ const Name = () => {
     duration_to,
     isNegativeMarking,
   } = useSelector((state) => state.test);
-  // const {} = useSelector((state) =>console.log(state.test));
+  // const {} = useSelector((state) =>//console.log(state.test));
   const navigate = useNavigate();
   const [testDetails, setTestDetails] = useState({
     level: level,

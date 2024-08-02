@@ -88,7 +88,7 @@ const ChartComp = () => {
   const dispatch = useDispatch();
   const { placedStudents } = useSelector((state) => state.dashboard);
   const { user } = useSelector((state) => state.collageAuth);
-  console.log(user);
+  // //console.log(user);
   useEffect(() => {
     dispatch(getPlacedStudents(user?._id));
   }, []);

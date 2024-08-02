@@ -28,7 +28,7 @@ const Submit = () => {
     totalDuration,
     duration_from,
     duration_to,
-    isNegativeMarking
+    isNegativeMarking,
   } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const testType = searchParams.get("level");
@@ -135,7 +135,7 @@ const Submit = () => {
           break;
       }
 
-    console.log(section1, section2, section3, section4, section5);
+    //console.log(section1, section2, section3, section4, section5);
 
     setQuestions([
       ...section1,
@@ -155,7 +155,7 @@ const Submit = () => {
     const totalTimeCal = topics.forEach((topic) => {
       if (topic.Type === "essay") {
         totalEssay += topic.essay?.reduce((acc, curr) => {
-          console.log(parseInt(curr.Duration));
+          //console.log(parseInt(curr.Duration));
           return acc + parseInt(curr.Duration);
         }, 0);
       }
@@ -185,15 +185,15 @@ const Submit = () => {
     const total =
       totalMcq + totalEssay + totalVideo + totalCompiler + totalFindAnswer;
 
-    console.log(
-      total,
-      "total",
-      totalMcq,
-      totalEssay,
-      totalVideo,
-      totalCompiler,
-      totalFindAnswer
-    );
+    //console.log(
+    //   total,
+    //   "total",
+    //   totalMcq,
+    //   totalEssay,
+    //   totalVideo,
+    //   totalCompiler,
+    //   totalFindAnswer
+    // );
     return total;
   };
 
@@ -226,13 +226,13 @@ const Submit = () => {
       }
     }
     error = err;
-    console.log(error);
+    //console.log(error);
     return error;
 
     // Example usage:
     // const topics = [{ ... }, { ... }, { ... }, { ... }, { ... }];
     // const result = checkQuestions(topics);
-    // console.log(result); // Logs the result of the check
+    // //console.log(result); // Logs the result of the check
   };
   const handleSubmit = () => {
     // dispatch(setTest({
@@ -271,17 +271,17 @@ const Submit = () => {
       toast.error("Please select atleast one topic");
       return;
     }
-    console.log("adaapt", testType);
+    //console.log("adaapt", testType);
     if (testType === "adaptive") {
       let error = false;
       error = adaptiveCheck(error);
-      console.log(error);
+      //console.log(error);
 
       if (error) {
         return toast.error(error);
       }
       if (parseInt(totalQuestions) * 2 > questions.length) {
-        console.log(totalQuestions, questions.length);
+        //console.log(totalQuestions, questions.length);
         toast.error(
           `Add ${
             2 * totalQuestions - questions.length
@@ -290,7 +290,7 @@ const Submit = () => {
         return;
       }
       if (parseInt(totalQuestions) * 2 < questions.length) {
-        console.log(totalQuestions, questions.length);
+        //console.log(totalQuestions, questions.length);
         window.alert(
           `Remove ${
             questions.length - totalQuestions * 2
@@ -301,7 +301,7 @@ const Submit = () => {
       }
     } else {
       if (totalQuestions > questions.length) {
-        console.log(totalQuestions, questions.length);
+        //console.log(totalQuestions, questions.length);
         toast.error(
           `Add ${
             totalQuestions - questions.length
@@ -310,7 +310,7 @@ const Submit = () => {
         return;
       }
       if (totalQuestions < questions.length) {
-        console.log(totalQuestions, questions.length);
+        //console.log(totalQuestions, questions.length);
         window.alert(
           `Remove ${
             questions.length - totalQuestions
@@ -326,9 +326,9 @@ const Submit = () => {
     //   return acc + curr;
     // }, 0);
 
-    console.log(totalTimeCal, totalDuration);
+    //console.log(totalTimeCal, totalDuration);
 
-    // console.log(totalTimeCal, totalDuration);
+    // //console.log(totalTimeCal, totalDuration);
 
     // if (totalTimeCal[0] > totalDuration) {
     //   window.alert(
@@ -342,7 +342,7 @@ const Submit = () => {
     //   window.alert("Total duration of questions is less than the total duration of test");
     //   return;
 
-    // console.log(totalTimeCal, totalDuration);
+    // //console.log(totalTimeCal, totalDuration);
     localStorage.setItem("totalTime", JSON.stringify(totalTimeCal));
     localStorage.setItem("testName", JSON.stringify(name));
     setLoading(true);
@@ -359,7 +359,7 @@ const Submit = () => {
         endDate: duration_to,
         // totalDuration,
         topics,
-        isNegativeMarking : isNegativeMarking
+        isNegativeMarking: isNegativeMarking,
       })
     ).then((res) => {
       // dispatch(
@@ -367,7 +367,7 @@ const Submit = () => {
       // );
       dispatch(getCollege());
       setLoading(false);
-      console.log(res);
+      //console.log(res);
 
       if (res.type === "test/createTest/fulfilled") {
         navigate(
@@ -388,7 +388,6 @@ const Submit = () => {
       </div>
 
       <div className="mt-16 ">
-        {console.log(questions)}
         {questions
           ?.slice((selected - 1) * 10, selected * 10)
           .map((question, i) => {
@@ -433,8 +432,8 @@ const Submit = () => {
         {Array.from({ length: Math.ceil(max) }).map((_, index) => {
           const pageNumber = index + 1;
           const hasQuestions = (pageNumber - 1) * 10 < questions.length;
-          console.log(questions.length);
-          console.log(Math.ceil(max));
+          //console.log(questions.length);
+          //console.log(Math.ceil(max));
           return (
             hasQuestions && (
               <div

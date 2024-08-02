@@ -52,7 +52,7 @@ const Login = () => {
         navigate("/collage/dashboard");
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     } finally {
       setLoader(false);
     }

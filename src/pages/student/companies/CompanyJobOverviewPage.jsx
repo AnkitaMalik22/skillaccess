@@ -3,11 +3,10 @@ import StudentLayout from "../../../layout/Student";
 import JobOverview from "../../../components/student/companies/job/JobOverview";
 
 const CompanyJobOverviewPage = () => {
-   React.useEffect(() => {
-   
+  React.useEffect(() => {
     let scriptLoaded = false;
     const currentPageLanguage = document.documentElement.lang;
-    console.log(currentPageLanguage + " " + navigator.language);
+    //console.log(currentPageLanguage + " " + navigator.language);
 
     let script = document.createElement("script");
     const loadGoogleTranslateScript = () => {
@@ -32,23 +31,21 @@ const CompanyJobOverviewPage = () => {
       }
     };
 
-
-if(navigator.language !== navigator.currentPageLanguage) {
-  console.log("Language is different");
-  loadGoogleTranslateScript();
-}
-
-// loadGoogleTranslateScript();
-
-
-  return () => {
-    // Clean up script when component unmounts
-    if (scriptLoaded) {
-      document.body.removeChild(script);
-      scriptLoaded = false;
+    if (navigator.language !== navigator.currentPageLanguage) {
+      //console.log("Language is different");
+      loadGoogleTranslateScript();
     }
-  };
-}, []);
+
+    // loadGoogleTranslateScript();
+
+    return () => {
+      // Clean up script when component unmounts
+      if (scriptLoaded) {
+        document.body.removeChild(script);
+        scriptLoaded = false;
+      }
+    };
+  }, []);
   return (
     <StudentLayout>
       <JobOverview />

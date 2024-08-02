@@ -32,14 +32,14 @@ const Video = ({ Number, id, video, type, view }) => {
       })
     );
   };
-  console.log(video, "video");
+  // //console.log(video, "video");
 
   const [videoState, setVideoState] = useState(video);
-  console.log(videoState);
+  // //console.log(videoState);
 
   const handleBookmark = () => {
-    console.log("bookmark");
-    // console.log(question);
+    // //console.log("bookmark");
+    // //console.log(question);
     dispatch(
       addBookmark({
         ...video,
@@ -54,12 +54,12 @@ const Video = ({ Number, id, video, type, view }) => {
   // const handleChange = (e) => {
   //   const { name, value, key } = e.target;
   //   if (name === "Title") {
-  //     console.log("name");
+  //     //console.log("name");
   //     setMcq((prev) => {
   //       return { ...prev, [name]: [value] };
   //     });
   //   } else {
-  //     console.log(name + " " + value + " " + key);
+  //     //console.log(name + " " + value + " " + key);
   //     setMcq((prev) => {
   //       return {
   //         ...prev,
@@ -137,7 +137,7 @@ const Video = ({ Number, id, video, type, view }) => {
               onClick={() => {
                 search.set(`${Number}`, "false");
                 setSearch(search);
-                console.log(videoState);
+                // //console.log(videoState);
                 dispatch(
                   editQuestion({
                     topicIndex: id,
@@ -151,9 +151,9 @@ const Video = ({ Number, id, video, type, view }) => {
           )}
         </div>
       )}
-  <h1 className="text-lg font-semibold text-[#3E3E3E] px-4 pt-3">
-                  {video?.questions.length > 0 && "Multiple Choice questions"}
-                </h1>
+      <h1 className="text-lg font-semibold text-[#3E3E3E] px-4 pt-3">
+        {video?.questions.length > 0 && "Multiple Choice questions"}
+      </h1>
       {video?.questions?.length > 0 &&
         video.questions.map((question, index) => {
           return (
@@ -173,9 +173,9 @@ const Video = ({ Number, id, video, type, view }) => {
             />
           );
         })}
-         <h1 className="text-lg font-semibold text-[#3E3E3E] px-4 pt-3">
-                  {video?.long.length > 0 && "Long answer questions"}
-                </h1>
+      <h1 className="text-lg font-semibold text-[#3E3E3E] px-4 pt-3">
+        {video?.long.length > 0 && "Long answer questions"}
+      </h1>
       {video?.long?.length > 0 &&
         video.long.map((question, index) => (
           <VideoEssay
@@ -192,10 +192,10 @@ const Video = ({ Number, id, video, type, view }) => {
             videoState={videoState}
           />
         ))}
-           <h1 className="text-lg font-semibold text-[#3E3E3E] px-4 pt-3">
-                  {" "}
-                  {video?.short.length > 0 && "Short answer questions"}
-                </h1>
+      <h1 className="text-lg font-semibold text-[#3E3E3E] px-4 pt-3">
+        {" "}
+        {video?.short.length > 0 && "Short answer questions"}
+      </h1>
       {video?.short?.length > 0 &&
         video.short.map((question, index) => (
           <VideoEssay

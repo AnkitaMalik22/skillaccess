@@ -5,136 +5,128 @@ import toast from "react-hot-toast";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
-
 export const addTeam = createAsyncThunk(
-    "team/addTeam",
-    async (data, { rejectWithValue }) => {
-        try {
-        const response = await axios.post(
-            `${REACT_APP_API_URL}/api/college/teams/invite`,
-            data,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                "auth-token": localStorage.getItem("auth-token"),
-              },
-            }
-        );
-        return response.data;
-        } catch (err) {
-        return rejectWithValue(err.response.data.message);
+  "team/addTeam",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${REACT_APP_API_URL}/api/college/teams/invite`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
         }
+      );
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data.message);
     }
-    );
+  }
+);
 
 export const getInvitedTeams = createAsyncThunk(
-    "team/getInvitedTeams",
-    async (data, { rejectWithValue }) => {
-        try {
-        const response = await axios.get(
-            `${REACT_APP_API_URL}/api/college/teams/invited`,
-            {
-                headers: {
-                  "Content-Type": "application/json",
-                  "auth-token": localStorage.getItem("auth-token"),
-                },
-              }
-        );
-        return response.data.team;
-        } catch (err) {
-        return rejectWithValue(err.response.data);
+  "team/getInvitedTeams",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${REACT_APP_API_URL}/api/college/teams/invited`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
         }
-    }
-    );
-
-    export const getRegisteredTeams = createAsyncThunk(
-      "team/getRegisteredTeams",
-      async (data, { rejectWithValue }) => {
-          try {
-          const response = await axios.get(
-              `${REACT_APP_API_URL}/api/college/teams/`,
-              {
-                  headers: {
-                    "Content-Type": "application/json",
-                    "auth-token": localStorage.getItem("auth-token"),
-                  },
-                }
-          );
-          console.log(response.data.team);
-          return response.data.team;
-          } catch (err) {
-          return rejectWithValue(err.response.data);
-          }
-      }
       );
-  
+      return response.data.team;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
-
-
-    const teamSlice = createSlice({
-
-        name: "team",
-        initialState: {
-          teams: [],
-          approvedTeams: [],
-          status: null,
-          error: null,
-          teamloading: false,
-        },
-        reducers:{
-          setLoading: (state, action) => {
-            state.teamloading= action.payload;
+export const getRegisteredTeams = createAsyncThunk(
+  "team/getRegisteredTeams",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${REACT_APP_API_URL}/api/college/teams/`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("auth-token"),
+          },
         }
-        },
-        extraReducers: (builder) => {
-         builder.addCase(addTeam.pending, (state, action) => {
-            state.status = "loading";
-            state.teamloading = true;
-          })
-         .addCase(addTeam.fulfilled, (state, action) => {
-            state.status = "success";
-            state.teamloading = false;
-            // state.teams = action.payload;
-            toast.success("Team member added successfully");
+      );
+      //console.log(response.data.team);
+      return response.data.team;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
-          })
-         .addCase(addTeam.rejected, (state, action) => {
-            state.status = "failed";
-            state.teamloading = false;
-            state.error = action.payload;
-            toast.error( action.payload)
-            // toast.error("Failed to add team member");
-          })
-         .addCase(getInvitedTeams.pending, (state, action) => {
-            state.status = "loading";
-          })
-          .addCase(getInvitedTeams.fulfilled, (state, action) => {
-            state.status = "success";
-            state.teams = action.payload;
-          })
-         .addCase(getInvitedTeams.rejected, (state, action) => {
-            state.status = "failed";
-         
-            state.error = action.payload;
-          })
-          .addCase(getRegisteredTeams.pending, (state, action) => {
-            state.status = "loading";
-          })
-          .addCase(getRegisteredTeams.fulfilled, (state, action) => {
-            state.status = "success";
-            state.approvedTeams = action.payload;
-            console.log(action.payload, "approved teams", state.approvedTeams);
-          })
-          .addCase(getRegisteredTeams.rejected, (state, action) => {
-            state.status = "failed";
-            state.error = action.payload;
-          })
-        },
-        });
+const teamSlice = createSlice({
+  name: "team",
+  initialState: {
+    teams: [],
+    approvedTeams: [],
+    status: null,
+    error: null,
+    teamloading: false,
+  },
+  reducers: {
+    setLoading: (state, action) => {
+      state.teamloading = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addTeam.pending, (state, action) => {
+        state.status = "loading";
+        state.teamloading = true;
+      })
+      .addCase(addTeam.fulfilled, (state, action) => {
+        state.status = "success";
+        state.teamloading = false;
+        // state.teams = action.payload;
+        toast.success("Team member added successfully");
+      })
+      .addCase(addTeam.rejected, (state, action) => {
+        state.status = "failed";
+        state.teamloading = false;
+        state.error = action.payload;
+        toast.error(action.payload);
+        // toast.error("Failed to add team member");
+      })
+      .addCase(getInvitedTeams.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(getInvitedTeams.fulfilled, (state, action) => {
+        state.status = "success";
+        state.teams = action.payload;
+      })
+      .addCase(getInvitedTeams.rejected, (state, action) => {
+        state.status = "failed";
 
-        export  const {setLoading} = teamSlice.actions;
+        state.error = action.payload;
+      })
+      .addCase(getRegisteredTeams.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(getRegisteredTeams.fulfilled, (state, action) => {
+        state.status = "success";
+        state.approvedTeams = action.payload;
+        //console.log(action.payload, "approved teams", state.approvedTeams);
+      })
+      .addCase(getRegisteredTeams.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      });
+  },
+});
 
-        export default teamSlice.reducer;
+export const { setLoading } = teamSlice.actions;
 
-    
-
+export default teamSlice.reducer;

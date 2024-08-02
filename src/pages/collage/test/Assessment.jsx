@@ -48,7 +48,7 @@ const Assessment = () => {
       },
     },
   });
-  console.log(assessment);
+  //console.log(assessment);
   const handleCalculateTime = () => {
     const topicTimes = assessment.topics.reduce((acc, topic) => {
       const existingIndex = acc.findIndex(
@@ -111,7 +111,7 @@ const Assessment = () => {
     return topicTimes;
   };
   const totalTime = handleCalculateTime();
-  console.log(totalTime);
+  //console.log(totalTime);
   return (
     <>
       <Header name={assessment.name} />

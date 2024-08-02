@@ -41,8 +41,8 @@ const SelectTests = () => {
   const handleFilterSections = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      console.log("empty");
-      console.log(filteredSections, "filtered");
+      //console.log("empty");
+      //console.log(filteredSections, "filtered");
       setFilteredSections(sections);
 
       return;
@@ -54,7 +54,7 @@ const SelectTests = () => {
         })
       );
 
-      console.log(filteredSections, "filtered--", value);
+      //console.log(filteredSections, "filtered--", value);
     }
   };
 
@@ -73,9 +73,9 @@ const SelectTests = () => {
       Math.ceil((2 / 3) * parseInt(totalQ)) +
       parseInt(totalQ);
     // localStorage.setItem("currentTotal", totalQuestions);
-    // console.log(section, "section");
+    // //console.log(section, "section");
 
-    // console.log(currentQuestionCount + parseInt(totalQ));
+    // //console.log(currentQuestionCount + parseInt(totalQ));
 
     // let totalInAdv = parseInt(Total)-parseInt(totalQ);
     if (
@@ -135,7 +135,7 @@ const SelectTests = () => {
         questionsByLevel[question.QuestionLevel].push(question);
       });
 
-      // console.log(questionsByLevel, "level");
+      // //console.log(questionsByLevel, "level");
 
       // Shuffle questions for each level
       // Object.values(questionsByLevel).forEach(shuffleArray);
@@ -144,7 +144,7 @@ const SelectTests = () => {
       Object.values(questionsByLevel).forEach((questions) =>
         shuffleArray(questions)
       );
-      // console.log(questionsByLevel);
+      // //console.log(questionsByLevel);
       let errText = "";
 
       questionsByLevel.intermediate = questionsByLevel.intermediate.slice(
@@ -169,7 +169,7 @@ const SelectTests = () => {
             questions.length
           );
 
-          console.log(questions);
+          //console.log(questions);
           if (
             Math.floor(parseInt(totalQ)) > questionsByLevel["beginner"].length
           ) {
@@ -190,22 +190,22 @@ const SelectTests = () => {
             errText = "Insufficient Advanced questions";
             return;
           }
-          console.log(
-            "length:" + questions.length,
-            parseInt(totalQ),
-            "numQuestionsAvailable:" + numQuestionsAvailable
-          );
+          //console.log(
+          //   "length:" + questions.length,
+          //   parseInt(totalQ),
+          //   "numQuestionsAvailable:" + numQuestionsAvailable
+          // );
           return questions.slice(0, numQuestionsAvailable);
         }
       );
 
       // Output the mixed questions array
-      console.log(
-        mixedQuestions.slice(0),
-        mixedQuestions.length,
-        "mixedQuestions",
-        Total
-      );
+      //console.log(
+      //   mixedQuestions.slice(0),
+      //   mixedQuestions.length,
+      //   "mixedQuestions",
+      //   Total
+      // );
       if (errText) {
         toast.error(errText);
         return;
@@ -216,7 +216,7 @@ const SelectTests = () => {
       sectionCopy.totalL1Question = parseInt(totalQ);
       sectionCopy.totalL3Question =
         totalQ - Math.floor((2 * parseInt(totalQ)) / 3);
-      // console.log(sectionCopy);
+      // //console.log(sectionCopy);
       if (mixedQuestions.length < totalQ) {
         toast.error("insufficient number of questions ");
         return;
@@ -239,7 +239,7 @@ const SelectTests = () => {
 
     // dispatch(setSections(sections.filter((s) => s !== section)));
 
-    // console.log(updatedSections);
+    // //console.log(updatedSections);
   };
 
   const removeSection = (section, index) => {
@@ -270,7 +270,7 @@ const SelectTests = () => {
       setSelectedSections(topics);
     } catch (error) {}
 
-    // console.log("hello tests",sections);
+    // //console.log("hello tests",sections);
   }, []);
 
   useEffect(() => {
@@ -323,7 +323,7 @@ const SelectTests = () => {
               className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 p-2 md:p-5"
               key={`${section._id + section.Type}`}
             >
-              {/* {console.log(section, "section")} */}
+              {/* {//console.log(section, "section")} */}
 
               <div className="flex gap-2 flex-col">
                 <h2 className="text-xl font-bold line-clamp-2 break-words">

@@ -20,7 +20,7 @@ const Topic = () => {
     : [];
 
   const getTotalQuestions = (topic) => {
-    console.log("topics", topic);
+    //console.log("topics", topic);
     let total = 0;
     total =
       topic?.questions?.length +
@@ -61,7 +61,7 @@ const Topic = () => {
       // setSelectedSections(topics);
     } catch (error) {}
 
-    // console.log("hello tests",sections);
+    // //console.log("hello tests",sections);
   }, []);
 
   return (

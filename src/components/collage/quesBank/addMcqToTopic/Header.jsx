@@ -6,17 +6,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Loader from "../../../loaders/Loader";
 import toast from "react-hot-toast";
-import { addQuestionToTopic ,setTotalTopicQuestions} from "../../../../redux/collage/test/thunks/topic";
+import {
+  addQuestionToTopic,
+  setTotalTopicQuestions,
+} from "../../../../redux/collage/test/thunks/topic";
 import { editBankQuestionById } from "../../../../redux/collage/test/thunks/question";
 
 const Header = ({ question, setQuestion, id, type, addType }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { test, ADD_QUESTION_LOADING,totalTopicQuestions } = useSelector((state) => state.test);
+  const { test, ADD_QUESTION_LOADING, totalTopicQuestions } = useSelector(
+    (state) => state.test
+  );
   const [searchParams, setSearchParams] = useSearchParams();
 
   const level = searchParams.get("level");
-  console.log(question);
+  // //console.log(question);
   const handleSave = () => {
     if (addType === "topic") {
       if (
@@ -45,7 +50,7 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
           addQuestionToTopic({ data: question, id: id, type: type })
         ).then(() => {
           if (!ADD_QUESTION_LOADING) {
-            console.log("calling 2 --", ADD_QUESTION_LOADING);
+            // //console.log("calling 2 --", ADD_QUESTION_LOADING);
             navigate(`/collage/quesBank/topic/${id}`);
           }
         });
@@ -84,7 +89,7 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
             question: question,
           })
         );
-        console.log("ok");
+        // //console.log("ok");
         navigate(-1);
       }
     }
@@ -92,9 +97,9 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
 
   useEffect(() => {
     if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "mcq" ,level : "all"}));
+      dispatch(setTotalTopicQuestions({ id, type: "mcq", level: "all" }));
     }
-  }, [id,""]);
+  }, [id, ""]);
   return (
     <div className="flex w-full mx-auto justify-between mb-6">
       <div className="flex gap-3">
@@ -105,7 +110,7 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-        Question No : {totalTopicQuestions+1}
+          Question No : {totalTopicQuestions + 1}
         </h2>
       </div>
 

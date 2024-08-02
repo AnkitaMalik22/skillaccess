@@ -32,8 +32,8 @@ export const getStudent = createAsyncThunk(
         }
       );
       const res = req.data;
-      console.log(res.students);
-      // console.log(res)
+      //console.log(res.students);
+      // //console.log(res)
       return res.students;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -130,7 +130,7 @@ export const getTotalJobs = createAsyncThunk(
         }
       );
       const res = req.data;
-      console.log(res.jobs);
+      //console.log(res.jobs);
       return res.jobs;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -152,7 +152,7 @@ export const getNewCompanies = createAsyncThunk(
         }
       );
       const res = req.data;
-      console.log(res.companies, "hdhdhd");
+      //console.log(res.companies, "hdhdhd");
       return res.companies;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -183,7 +183,7 @@ export const getJobById = createAsyncThunk(
         `${REACT_APP_API_URL}/api/company/jobs/${jobId}`
       );
       const res = req.data;
-      console.log(res);
+      //console.log(res);
       return res.job;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -199,15 +199,15 @@ const dashboardSlice = createSlice({
     builder
       .addCase(getStudent.pending, (state, action) => {
         // state.status = 'loading';
-        console.log("loading");
+        //console.log("loading");
       })
       .addCase(getStudent.fulfilled, (state, action) => {
-        console.log("success", action.payload);
+        //console.log("success", action.payload);
         state.status = "success";
         state.students = action.payload;
       })
       .addCase(getStudent.rejected, (state, action) => {
-        console.log("rejected");
+        //console.log("rejected");
         state.status = "failed";
         state.error = action.error.message;
       })
@@ -262,7 +262,7 @@ const dashboardSlice = createSlice({
       .addCase(getNewCompanies.fulfilled, (state, action) => {
         state.status = "success";
         state.newCompanies = action.payload;
-        console.log(state.newCompanies, "new companies");
+        //console.log(state.newCompanies, "new companies");
       })
       .addCase(getNewCompanies.rejected, (state, action) => {
         state.status = "failed";

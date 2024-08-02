@@ -61,8 +61,8 @@ const Topic = () => {
   const handleFilterSections = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      console.log("empty");
-      console.log(filteredSections, "filtered");
+      //console.log("empty");
+      //console.log(filteredSections, "filtered");
       dispatch(setFilteredSections(sections));
 
       return;
@@ -76,7 +76,7 @@ const Topic = () => {
         )
       );
 
-      console.log(filteredSections, "filtered--", value);
+      //console.log(filteredSections, "filtered--", value);
     }
   };
   useEffect(() => {
@@ -92,26 +92,26 @@ const Topic = () => {
       // setSelectedSections(topics);
     } catch (error) {}
 
-    // console.log("hello tests",sections);
+    // //console.log("hello tests",sections);
   }, []);
 
   // useEffect(() => {
   //   if (!sections) {
   //     dispatch(getAllTopicsQB()).then((res) => {
-  //       console.log("sections", sections);
+  //       //console.log("sections", sections);
   //       dispatch(setFilteredSections(sections));
   //     });
   //   }
   // }, [sections]);
 
   const handleSelect = (id) => {
-    console.log("id", id);
+    //console.log("id", id);
     if (!selectedSections.includes(id)) {
       setSelectedSections([...selectedSections, id]);
     } else {
       setSelectedSections(selectedSections.filter((section) => section !== id));
     }
-    console.log("selected", selectedSections);
+    //console.log("selected", selectedSections);
   };
 
   // const handleDiselect = (e, id) => {
@@ -258,7 +258,7 @@ const Topic = () => {
                     }`}
                     key={index}
                     onClick={() => {
-                      console.log("section", section);
+                      //console.log("section", section);
                       handleSelect(section._id);
                     }}
                   >

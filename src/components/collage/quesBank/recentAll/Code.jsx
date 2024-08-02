@@ -72,7 +72,7 @@ const List = ({ Title, number, code, question }) => {
       {/* <div
         className="bg-gray-100 h-11 flex rounded-xl px-1"
         onClick={() => {
-          console.log(question);
+          //console.log(question);
           handleDelete({
             sectionId: question.section,
             questionId: question.id,

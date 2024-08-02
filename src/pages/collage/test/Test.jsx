@@ -62,7 +62,7 @@ const Test = () => {
   }, []);
 
   const loadMore = () => {
-    console.log("loadmore", loadingRecent);
+    //console.log("loadmore", loadingRecent);
     if (loadingRecent) {
       return;
     }
@@ -71,8 +71,8 @@ const Test = () => {
     dispatch(getRecentTests({ skip: index * 10, limit: 10 }))
       .then((res) => {
         setLoadingRecent(false);
-        console.log(res);
-        console.log(res?.payload?.assessment?.length);
+        //console.log(res);
+        //console.log(res?.payload?.assessment?.length);
         if (res?.payload?.assessment?.length <= 0) {
           setHasMore(false);
         }

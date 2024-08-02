@@ -216,12 +216,12 @@ const testState = {
 
 //     const res = req.data;
 
-//     console.log(res)
+//     //console.log(res)
 
 //     return res.studentResponses;
 
 //   } catch (error) {
-//     console.log("catch", error.response.data);
+//     //console.log("catch", error.response.data);
 
 //     return rejectWithValue(error.response.data);
 //   }
@@ -239,7 +239,7 @@ const testSlice = createSlice({
       state.totalSelectedQuestions = parseInt(action.payload);
     },
     setCurrentQuestionCount: (state, action) => {
-      console.log(action.payload, "pay");
+      //console.log(action.payload, "pay");
       localStorage.setItem("currentQuestionCount", action.payload);
       state.currentQuestionCount = action.payload;
     },
@@ -321,7 +321,7 @@ const testSlice = createSlice({
           action.payload.data,
         ];
       } else {
-        console.log(action.payload.index);
+        //console.log(action.payload.index);
         state.topics[action.payload.id].essay[action.payload.index] =
           action.payload.data;
       }
@@ -414,7 +414,7 @@ const testSlice = createSlice({
       editQuestionFun(state, action);
     },
     addCompiler: (state, action) => {
-      console.log("compiler");
+      //console.log("compiler");
       if (action.payload.prev === false) {
         state.topics[action.payload.id].compiler = [
           ...state.topics[action.payload.id].compiler,
@@ -446,12 +446,12 @@ const testSlice = createSlice({
     },
     setTest: (state, action) => {
       state.test = { ...state.test, ...action.payload };
-      console.log(state.test, "test");
+      //console.log(state.test, "test");
     },
 
     setMcq: (state, action) => {
       const { sectionId, questions } = action.payload;
-      console.log(sectionId, "action.payload");
+      //console.log(sectionId, "action.payload");
       const id = sectionId.toString(); // Convert to string to use it as object key
 
       // Check if the section already exists in state
@@ -525,8 +525,8 @@ const testSlice = createSlice({
           isNegativeMarking: state.isNegativeMarking,
         })
       );
-      console.log(action.payload, "action.payload");
-      // console.log(current(state));
+      //console.log(action.payload, "action.payload");
+      // //console.log(current(state));
     },
     setTestSelectedTopics: (state, action) => {
       state.topics = action.payload;
@@ -574,7 +574,7 @@ const testSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(editQuestionById.fulfilled, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         switch (action.payload.type) {
           case "essay":
             state.currentTopic.essay[action.payload.index] =
@@ -602,7 +602,7 @@ const testSlice = createSlice({
         );
       })
       .addCase(editBankQuestionById.fulfilled, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         switch (action.payload.type) {
           case "essay":
             state.currentTopic.essay[action.payload.index] =
@@ -632,31 +632,31 @@ const testSlice = createSlice({
       .addCase(addQuestionToTopic.pending, (state, action) => {
         state.ADD_QUESTION_LOADING = true;
 
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(addQuestionToTopic.fulfilled, (state, action) => {
-        console.log("fulf");
+        //console.log("fulf");
         addQuesFunc(state, action);
         state.ADD_QUESTION_LOADING = false;
       })
       .addCase(addQuestionToTopic.rejected, (state, action) => {
-        console.log("rejected");
+        //console.log("rejected");
         state.ADD_QUESTION_LOADING = false;
       })
       .addCase(getTest.pending, (state, action) => {
         state.status = "loading";
         state.GET_TEST_LOADING = true;
 
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(getTest.fulfilled, (state, action) => {
         state.test = action.payload;
         state.GET_TEST_LOADING = false;
 
-        console.log("fullfilled", state.test);
+        //console.log("fullfilled", state.test);
       })
       .addCase(getTest.rejected, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         // toast.error(action.payload);
         state.GET_TEST_LOADING = false;
 
@@ -665,7 +665,7 @@ const testSlice = createSlice({
       .addCase(getAllTests.pending, (state, action) => {
         state.status = "loading";
         state.GET_TESTS_LOADING = true;
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(getAllTests.fulfilled, (state, action) => {
         state.GET_TESTS_LOADING = false;
@@ -679,10 +679,10 @@ const testSlice = createSlice({
       })
       .addCase(createTest.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(createTest.fulfilled, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         state.testId = action.payload._id;
         state.testName = action.payload.name;
         state.testDescription = action.payload.description;
@@ -693,14 +693,14 @@ const testSlice = createSlice({
         state.description = "";
         state.currentTopic = {};
 
-        console.log("fullfilled");
+        //console.log("fullfilled");
 
         getAllTests();
       })
       .addCase(createTest.rejected, (state, action) => {
-        // console.log(action.payload);
+        // //console.log(action.payload);
         toast.error(action.payload);
-        console.log(action.payload);
+        //console.log(action.payload);
 
         // window.alert(action.payload);
       })
@@ -708,13 +708,13 @@ const testSlice = createSlice({
         state.status = "loading";
         state.GET_TOPICS_LOADING = true;
 
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(getAllTopics.fulfilled, (state, action) => {
         state.sections = action.payload;
         state.GET_TOPICS_LOADING = false;
 
-        console.log("fullfilled");
+        //console.log("fullfilled");
       })
       .addCase(getAllTopics.rejected, (state, action) => {
         console.error("Error fetching topics:", action.payload);
@@ -724,12 +724,12 @@ const testSlice = createSlice({
       })
       .addCase(getTopicById.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(getTopicById.fulfilled, (state, action) => {
         state.currentTopic = action.payload;
-        // console.log(action.payload);
-        console.log("fullfilled");
+        // //console.log(action.payload);
+        //console.log("fullfilled");
       })
       .addCase(getTopicById.rejected, (state, action) => {
         console.error("Error fetching topic:", action.payload);
@@ -783,7 +783,7 @@ const testSlice = createSlice({
       .addCase(getResponseByTestandStudent.fulfilled, (state, action) => {
         state.response = action.payload;
         state.GET_STUDENT_RESPONSE_LOADING = false;
-        console.log(action.payload);
+        //console.log(action.payload);
       })
       .addCase(getResponseByTestandStudent.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
@@ -843,7 +843,7 @@ const testSlice = createSlice({
         state.GET_RECENT_QUESTION_LOADING = true;
       })
       .addCase(getRecentUsedQuestions.fulfilled, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         state.GET_RECENT_QUESTION_LOADING = false;
         state.recentUsedQuestions = action.payload;
       })
@@ -870,20 +870,20 @@ const testSlice = createSlice({
       .addCase(inviteToTest.fulfilled, (state, action) => {
         state.status = "fulfilled";
         toast.success("Students Invited Successfully!");
-        console.log(action.payload);
+        //console.log(action.payload);
       })
       .addCase(inviteToTest.rejected, (state, action) => {
         state.status = "rejected";
         toast.error("Error Inviting Students!");
-        console.log(action.payload);
+        //console.log(action.payload);
       })
       .addCase(getTopicByIdQB.pending, (state, action) => {
         state.status = "pending";
       })
       .addCase(getTopicByIdQB.fulfilled, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         state.currentTopic = action.payload;
-        console.log(action.payload);
+        //console.log(action.payload);
       })
       .addCase(getTopicByIdQB.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
@@ -907,7 +907,7 @@ const testSlice = createSlice({
         state.status = "pending";
       })
       .addCase(deleteTopics.fulfilled, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         state.sections = action.payload;
         state.filteredSections = action.payload;
         toast.success("Topic Deleted Successfully!");
@@ -929,7 +929,7 @@ const testSlice = createSlice({
       })
       .addCase(deleteTest.fulfilled, (state, action) => {
         state.testLoading = false;
-        console.log(action.payload);
+        //console.log(action.payload);
         // getAllTestFulfilled(state, action);
         toast.success("Test Deleted Successfully!");
       })
@@ -941,7 +941,7 @@ const testSlice = createSlice({
 
       .addCase(selectStudentTest.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        console.log(action.payload);
+        //console.log(action.payload);
       })
       .addCase(getselectedStudents.pending, (state, action) => {
         state.status = "pending";

@@ -28,7 +28,7 @@ const Appeared = ({ assessment }) => {
   const { testDataResponse, response, TEST_DATA_RESPONSE_LOADING } =
     useSelector((state) => state.test);
 
-  // console.log(response);
+  // //console.log(response);
 
   useEffect(() => {
     if (assessment?._id) {

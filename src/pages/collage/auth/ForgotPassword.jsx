@@ -31,7 +31,7 @@ const ForgotPassword = () => {
 
   const sel = useSelector((state) => state.collageAuth);
   useEffect(() => {
-    // console.log(sel);
+    // //console.log(sel);
   }, []);
   const isSenddisable = !Credentials.Email;
   const handleSubmit = async (e) => {
@@ -54,7 +54,7 @@ const ForgotPassword = () => {
     } catch (error) {
       setError(true);
 
-      console.log(error);
+      //console.log(error);
     }
   };
   return (

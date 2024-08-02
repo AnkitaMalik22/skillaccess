@@ -25,7 +25,7 @@ const Teams = () => {
 
   useEffect(() => {
     dispatch(getInvitedTeams());
-    console.log("Teams", teams);
+    // //console.log("Teams", teams);
   }, []);
 
   useEffect(() => {

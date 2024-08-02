@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 // const REACT_APP_API_URL = "http://localhost:4000";
 
-// console.log(process.env);
+// //console.log(process.env);
 
 //initial state
 
@@ -41,10 +41,10 @@ export const getSecretQr = createAsyncThunk(
       );
       const res = req.data;
 
-      console.log(res);
+      //console.log(res);
       return res;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -67,7 +67,7 @@ export const selectAuth = createAsyncThunk(
 
       return res;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -91,7 +91,7 @@ export const verifyQr = createAsyncThunk(
 
       return res;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -102,8 +102,8 @@ export const registerStudent = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const ip = await getIp();
-      console.log("registering", ip);
-      // console.log(process.env);
+      //console.log("registering", ip);
+      // //console.log(process.env);
       const req = await axios.post(
         `${REACT_APP_API_URL}/api/student/register?CollegeId=${data.CollegeId}&inviteLink=${data.inviteLink}`,
         { ...data, ip },
@@ -113,7 +113,7 @@ export const registerStudent = createAsyncThunk(
       localStorage.setItem("auth-token", res.token);
       return res.data;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -123,7 +123,7 @@ export const loginStudent = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const ip = await getIp();
-      console.log("login", ip);
+      //console.log("login", ip);
       const req = await axios.post(
         `${REACT_APP_API_URL}/api/student/login`,
         { ...data, ip },
@@ -131,10 +131,10 @@ export const loginStudent = createAsyncThunk(
       );
       const res = req.data;
       localStorage.setItem("auth-token", res.token);
-      console.log(res);
+      //console.log(res);
       return res;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data);
     }
   }
@@ -153,7 +153,7 @@ export const forgotPassword = createAsyncThunk(
 
       return res;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -163,7 +163,7 @@ export const updateCollege = createAsyncThunk(
   "studentAuth/updateCollege",
   async (data, { rejectWithValue }) => {
     try {
-      console.log("updating", localStorage.getItem("auth-token"));
+      //console.log("updating", localStorage.getItem("auth-token"));
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/student/update`,
         data,
@@ -177,11 +177,11 @@ export const updateCollege = createAsyncThunk(
       );
 
       const res = req.data;
-      console.log("should not reject");
-      console.log(res);
+      //console.log("should not reject");
+      //console.log(res);
       return res.data.college;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -209,7 +209,7 @@ export const updateAvatar = createAsyncThunk(
   "studentAuth/updateAvatar",
   async (data, { rejectWithValue }) => {
     try {
-      console.log("updating", localStorage.getItem("auth-token"));
+      //console.log("updating", localStorage.getItem("auth-token"));
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/student/update/avatar`,
         data,
@@ -222,10 +222,10 @@ export const updateAvatar = createAsyncThunk(
         }
       );
       const res = req.data;
-      // console.log(res);
+      // //console.log(res);
       return res;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return rejectWithValue(error.response.data);
     }
   }
@@ -235,7 +235,7 @@ export const logoutCollage = createAsyncThunk(
   "studentAuth/logoutCollage",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("logout");
+      //console.log("logout");
       const req = await axios.get(`${REACT_APP_API_URL}/api/student/logout`, {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
@@ -246,7 +246,7 @@ export const logoutCollage = createAsyncThunk(
       localStorage.removeItem("auth-token");
       return res.data;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data);
     }
   }
@@ -258,7 +258,7 @@ export const resetPassword = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const ip = await getIp();
-      console.log("updating", localStorage.getItem("auth-token"));
+      //console.log("updating", localStorage.getItem("auth-token"));
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/student/password/reset/${data.token}`,
         { password: data.password, confirmPassword: data.confirmPassword, ip },
@@ -273,7 +273,7 @@ export const resetPassword = createAsyncThunk(
       const res = req.data;
       return res;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -286,7 +286,7 @@ export const updatePassword = createAsyncThunk(
     try {
       const ip = await getIp();
 
-      console.log("updating", localStorage.getItem("auth-token"));
+      //console.log("updating", localStorage.getItem("auth-token"));
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/student/password/update`,
         { ...data, ip },
@@ -301,7 +301,7 @@ export const updatePassword = createAsyncThunk(
       const res = req.data;
       return res.data;
     } catch (error) {
-      console.log("catch", error.response.data);
+      //console.log("catch", error.response.data);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -312,7 +312,7 @@ export const googleLoginStudent = createAsyncThunk(
   async (accessToken, { rejectWithValue }) => {
     try {
       const ip = await getIp();
-      console.log("google login");
+      //console.log("google login");
       const req = await axios.post(`${REACT_APP_API_URL}/api/student/login`, {
         googleAccessToken: accessToken,
         ip,
@@ -321,7 +321,7 @@ export const googleLoginStudent = createAsyncThunk(
       localStorage.setItem("auth-token", res.token);
       return res;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -332,17 +332,17 @@ export const googleRegisterStudent = createAsyncThunk(
   async ({ accessToken, collegeId, inviteLink }, { rejectWithValue }) => {
     try {
       const ip = await getIp();
-      console.log("google register");
+      //console.log("google register");
       const req = await axios.post(
         `${REACT_APP_API_URL}/api/student/register?CollegeId=${collegeId}&inviteLink=${inviteLink}`,
         { googleAccessToken: accessToken, ip: ip }
       );
       const res = req.data;
-      console.log(res, "res.data");
+      //console.log(res, "res.data");
       localStorage.setItem("auth-token", res.token);
       return res;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -364,7 +364,7 @@ export const getLoggedInUsers = createAsyncThunk(
       const res = req.data;
       return res.loggedInUsers;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data);
     }
   }
@@ -387,7 +387,7 @@ export const logoutAUser = createAsyncThunk(
       const res = req.data;
       return res.loggedInUsers;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data);
     }
   }
@@ -410,7 +410,7 @@ export const removeLoggedOutUser = createAsyncThunk(
       const res = req.data;
       return res.loggedInUsers;
     } catch (error) {
-      console.log("catch");
+      //console.log("catch");
       return rejectWithValue(error.response.data);
     }
   }
@@ -456,17 +456,17 @@ const studentAuthSlice = createSlice({
       .addCase(forgotPassword.fulfilled, (state, action) => {})
       .addCase(registerStudent.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(registerStudent.fulfilled, (state, action) => {
         // state.status = action.payload
         state.isLoggedIn = true;
         state.user = action.payload;
         // Add any fetched posts to the array
-        console.log("fullfilled");
+        //console.log("fullfilled");
       })
       .addCase(registerStudent.rejected, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
 
         // <<<<<<< AnkitaMalik22-ankita-dev
         //   alert(action.payload);
@@ -476,7 +476,7 @@ const studentAuthSlice = createSlice({
       })
       .addCase(loginStudent.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(loginStudent.fulfilled, (state, action) => {
         // state.status = action.payload
@@ -501,31 +501,31 @@ const studentAuthSlice = createSlice({
       })
       .addCase(updateCollege.pending, (state, action) => {
         // state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(updateCollege.fulfilled, (state, action) => {
         // state.status = action.payload
         state.user = action.payload;
         window.location.reload(true);
-        console.log("update college fulfilled");
+        //console.log("update college fulfilled");
       })
       .addCase(updateCollege.rejected, (state, action) => {
-        // console.log(action.payload);
+        // //console.log(action.payload);
         // window.alert(action.payload);
         // window.location.reload(true);
-        console.log("rejected update profile");
+        //console.log("rejected update profile");
       })
       .addCase(getStudent.pending, (state, action) => {
         // state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(getStudent.fulfilled, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         state.isLoggedIn = true;
         state.user = action.payload;
 
         // Add any fetched posts to the array
-        console.log("fullfilled get college");
+        //console.log("fullfilled get college");
       })
       .addCase(getStudent.rejected, (state, action) => {
         // state.logoutError = action.payload;
@@ -540,35 +540,34 @@ const studentAuthSlice = createSlice({
           state.logoutError = action.payload;
         }
 
-        console.log(action.payload.message);
+        //console.log(action.payload.message);
 
         // window.alert(action.payload);
       })
       .addCase(updateAvatar.pending, (state, action) => {
         // state.status = "loading";
-        console.log("pending avatar");
+        //console.log("pending avatar");
       })
       .addCase(updateAvatar.fulfilled, (state, action) => {
         // state.status = action.payload
 
         state.status = "success";
-        console.log(action);
+        //console.log(action);
         // state.user = action.payload.college;
         state.uploadImg = true;
         state.user.avatar = action.payload.college.avatar;
 
         // getStudent();
         // Add any fetched posts to the array
-        console.log("fullfilled avatar");
+        //console.log("fullfilled avatar");
       })
       .addCase(updateAvatar.rejected, (state, action) => {
-        console.log("rejected avatar" + action.payload);
-
+        //console.log("rejected avatar" + action.payload);
         // window.alert(action.payload);
       })
       .addCase(logoutCollage.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(logoutCollage.fulfilled, (state, action) => {
         // state.status = action.payload
@@ -578,16 +577,15 @@ const studentAuthSlice = createSlice({
         localStorage.clear();
         localStorage.setItem("editable", false);
         // Add any fetched posts to the array
-        console.log("fullfilled");
+        //console.log("fullfilled");
       })
       .addCase(logoutCollage.rejected, (state, action) => {
-        console.log(action.payload);
-
+        //console.log(action.payload);
         // window.alert(action.payload);
       })
       .addCase(updatePassword.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(updatePassword.fulfilled, (state, action) => {
         state.status = action.payload;
@@ -605,10 +603,10 @@ const studentAuthSlice = createSlice({
       })
       .addCase(googleLoginStudent.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending google login");
+        //console.log("pending google login");
       })
       .addCase(googleLoginStudent.fulfilled, (state, action) => {
-        console.log("fuillfilled google login");
+        //console.log("fuillfilled google login");
         state.user = action.payload.user;
         state.status = action.payload;
         localStorage.setItem("auth-token", action.payload.token);
@@ -627,14 +625,14 @@ const studentAuthSlice = createSlice({
         }
       })
       .addCase(googleLoginStudent.rejected, (state, action) => {
-        // console.log(action.payload);
+        // //console.log(action.payload);
         toast.error(action.payload);
         // window.alert(action.payload);
         window.location.href = "/student";
       })
       .addCase(googleRegisterStudent.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(googleRegisterStudent.fulfilled, (state, action) => {
         state.status = action.payload;
@@ -643,10 +641,10 @@ const studentAuthSlice = createSlice({
         localStorage.setItem("auth-token", action.payload.token);
         window.location.href = "/student/profile";
         // Add any fetched posts to the array
-        console.log("fullfilled");
+        //console.log("fullfilled");
       })
       .addCase(googleRegisterStudent.rejected, (state, action) => {
-        // console.log(action.payload);
+        // //console.log(action.payload);
 
         state.error = action.payload;
         toast.error(action.payload);
@@ -656,45 +654,45 @@ const studentAuthSlice = createSlice({
       })
       .addCase(getLoggedInUsers.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(getLoggedInUsers.fulfilled, (state, action) => {
         state.status = "success";
         state.loggedInUsers = action.payload;
         // Add any fetched posts to the array
-        console.log("fullfilled");
+        //console.log("fullfilled");
       })
       .addCase(getLoggedInUsers.rejected, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         window.alert(action.payload);
       })
       .addCase(logoutAUser.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(logoutAUser.fulfilled, (state, action) => {
         state.status = "success";
         // state.user = action.payload;
         state.loggedInUsers = action.payload;
-        console.log("fullfilled");
+        //console.log("fullfilled");
       })
       .addCase(logoutAUser.rejected, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
 
         window.alert(action.payload);
       })
       .addCase(removeLoggedOutUser.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(removeLoggedOutUser.fulfilled, (state, action) => {
         state.status = "success";
         // state.user = action.payload;
         state.loggedInUsers = action.payload;
-        console.log("fullfilled");
+        //console.log("fullfilled");
       })
       .addCase(removeLoggedOutUser.rejected, (state, action) => {
-        console.log(action.payload);
+        //console.log(action.payload);
         // getLoggedInUsers();
         if (state.loggedInUsers.length === 0) {
           state.loggedInUsers = null;
@@ -706,18 +704,18 @@ const studentAuthSlice = createSlice({
       })
       .addCase(resetPassword.pending, (state, action) => {
         state.status = "loading";
-        console.log("pending");
+        //console.log("pending");
       })
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.status = "success";
         // state.user = action.payload;
         // state.loggedInUsers = action.payload;
-        console.log("fullfilled");
+        //console.log("fullfilled");
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.error = action.payload;
         toast.error(action.payload);
-        console.log(action.payload);
+        //console.log(action.payload);
         // getLoggedInUsers();
         // window.alert(action.payload);
       });

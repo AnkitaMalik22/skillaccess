@@ -199,7 +199,7 @@ const List = ({ question, number, level }) => {
               });
             }
 
-            console.log(type);
+            // //console.log(type);
           }}
         />
       </div>

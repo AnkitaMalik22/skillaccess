@@ -8,7 +8,10 @@ import { LuEye } from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
-import { googleLoginStudent, loginStudent } from "../../../redux/student/auth/studentAuthSlice";
+import {
+  googleLoginStudent,
+  loginStudent,
+} from "../../../redux/student/auth/studentAuthSlice";
 
 const Login = () => {
   // cosnt[(error, setError)] = useState();
@@ -34,7 +37,7 @@ const Login = () => {
 
   const sel = useSelector((state) => state.studentAuth);
   useEffect(() => {
-    // console.log(sel);
+    // //console.log(sel);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -53,7 +56,7 @@ const Login = () => {
         setCredentials({});
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -61,7 +64,7 @@ const Login = () => {
   //   setChecked(!checked); // Toggle checkbox status
   // };
   const isLoginDisabled =
-    // !checked || 
+    // !checked ||
     !Credentials.Email || !Credentials.Password;
   // GOOGlE LOGIN
 
@@ -148,16 +151,15 @@ const Login = () => {
             >
               <LuEye className="text-gray-400 text-2xl" />
             </button> */}
-               <button
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    type === "text" ? setType("password") : setType("text");
-                  }}
+            <button
+              className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+              onClick={(e) => {
+                e.preventDefault();
+                type === "text" ? setType("password") : setType("text");
+              }}
             >
               <LuEye className="text-gray-400 text-2xl" />
             </button>
-          
           </div>
 
           <div
@@ -184,7 +186,7 @@ const Login = () => {
               </div>
             ))} */}
 
-       <div className=" flex gap-2  p-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto ">
+          <div className=" flex gap-2  p-2 lg:mt-6 md:mt-6 mt-4   w-full max-w-xs  mx-auto ">
             {" "}
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
@@ -197,7 +199,7 @@ const Login = () => {
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
             <hr className="w-1/12 border-2 border-lGray opacity-20" />
           </div>
-   {/* 
+          {/* 
           <label className=" flex  gap-2 cursor-pointer mx-auto w-full max-w-xs">
             <input
               type="checkbox"
@@ -213,11 +215,11 @@ const Login = () => {
               </Link>
             </span>
           </label> */}
- 
+
           <button
-         className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
-          isLoginDisabled ? "bg-blued cursor-not-allowed" : ""
-        }`}
+            className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
+              isLoginDisabled ? "bg-blued cursor-not-allowed" : ""
+            }`}
             onClick={handleSubmit}
             disabled={isLoginDisabled}
           >

@@ -37,7 +37,7 @@ const Accounting = () => {
   const [requestStatus, setRequestStatus] = useState();
   const { credit } = useSelector((state) => state.collageAuth);
   const selectedPlan = user?.selectedPlan;
-  // console.log(requestStatus);
+  // //console.log(requestStatus);
 
   useEffect(() => {
     if (user?._id) {
@@ -57,12 +57,12 @@ const Accounting = () => {
         }
       );
 
-      // console.log(response.data);
+      // //console.log(response.data);
       setRequestStatus(response.data.selectedPlan);
 
       return response.data.selectedPlan;
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   }
 
@@ -130,7 +130,7 @@ const Accounting = () => {
                       className="self-center  bg-red-600  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
                       onClick={() => {
                         dispatch(cancelAPlan({ planId: plan._id })).then(() => {
-                          console.log(plan);
+                          //console.log(plan);
                           dispatch(getCollege());
                         });
                       }}
@@ -141,7 +141,7 @@ const Accounting = () => {
                     <button
                       className="self-center  bg-[#007AFF]  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
                       onClick={() => {
-                        // console.log(plan);
+                        // //console.log(plan);
                         dispatch(selectAPlan({ planId: plan._id })).then(() => {
                           dispatch(getCollege());
                           getSelected();

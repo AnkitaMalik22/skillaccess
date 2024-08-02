@@ -22,7 +22,7 @@ const Essay = ({ Title, Number, id, question, type, view }) => {
   const handleChange = (e) => {
     const { name, value, key } = e.target;
     if (name === "Title") {
-      // console.log("name");
+      // //console.log("name");
       setEssay((prev) => {
         return { ...prev, [name]: [value] };
       });
@@ -51,8 +51,8 @@ const Essay = ({ Title, Number, id, question, type, view }) => {
   // };
 
   const handleBookmark = () => {
-    console.log("bookmark");
-    // console.log(question);
+    // //console.log("bookmark");
+    // //console.log(question);
     dispatch(
       addBookmark({
         Title: question.Title,
@@ -65,7 +65,7 @@ const Essay = ({ Title, Number, id, question, type, view }) => {
   };
 
   const handleEdit = () => {
-    console.log(essay);
+    // //console.log(essay);
     if (essay.Title[0] === "") {
       toast.error("Please fill all the fields");
 

@@ -23,7 +23,7 @@ const Header = ({
   const { test, ADD_QUESTION_LOADING } = useSelector((state) => state.test);
   const addType = searchParams.get("addType");
   // const handleCreateTest = () => {
-  //   console.log("test", test);
+  //   //console.log("test", test);
   //   dispatch(
   //     createTest({
   //       name: test.testName,

@@ -12,7 +12,7 @@ const FindAnswer = ({ question, number }) => {
   const [type, setType] = useState();
   const navigate = useNavigate();
   const [AnswerIndex, setAnswerIndex] = useState(question.AnswerIndex);
-  console.log(question);
+  // //console.log(question);
   const dispatch = useDispatch();
   const handleDelete = ({ sectionId, questionId }) => {
     dispatch(

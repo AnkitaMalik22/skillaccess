@@ -47,7 +47,7 @@ const Mail = () => {
 
   useEffect(() => {
     if (JSON.stringify(user) !== JSON.stringify(arr)) {
-      console.log(user);
+      //console.log(user);
       if (inboxType === "Received") {
         setArr(user.received);
       } else {
@@ -57,7 +57,7 @@ const Mail = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log(user);
+    //console.log(user);
     if (inboxType === "Received") {
       setArr(user.received);
     } else {
