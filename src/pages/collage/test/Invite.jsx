@@ -88,7 +88,11 @@ const Invite = () => {
         </div>
 
         <div className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg p-5 focus:ring-0placeholder-gray-400 mb-6">
-          <Header handleFilter={handleFilterStudents} />
+          <Header handleFilter={handleFilterStudents}  
+            setStudents={setStudents}
+            uploadedStudents={filteredStudents}
+            students={students}
+            />
           <List
             setStudents={setStudents}
             uploadedStudents={filteredStudents}
