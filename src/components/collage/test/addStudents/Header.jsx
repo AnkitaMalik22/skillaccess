@@ -6,28 +6,64 @@ import {
   FaSearch,
   FaSortDown,
 } from "react-icons/fa";
-import { PiSlidersHorizontalLight } from "react-icons/pi";
+import { PiCheck, PiSlidersHorizontalLight } from "react-icons/pi";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ handleFilter }) => {
+
+
+const Header = ({ handleFilter ,uploadedStudents, setStudents, students}) => {
   const navigate = useNavigate();
+
+  const { credit } = useSelector((state) => state.collageAuth);
+  const { GET_STUDENTS_LOADING } = useSelector((state) => state.test);
+  const [checked , setChecked] = useState(false);
+
+
+
+
+
+  const handleSelectAll = () => {
+    const isSelect = !checked; // Determine whether to select or deselect
+    setChecked(isSelect); // Update the checked state
+
+    if (isSelect) {
+      setStudents(uploadedStudents); // Select all students
+    } else {
+      setStudents([]); // Deselect all students
+    }
+  };
+
+
+
   return (
     <div className="flex w-full mx-auto justify-between mb-5 font-dmSans">
-      <div className="bg-gray-200 rounded-xl mx-2  sm:h-12 h-10 flex my-2 px-4 w-fit">
+      <div className="bg-gray-200 rounded-xl mx-2 sm:h-12 h-10 flex my-2 px-4 w-fit">
         <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
         <input
           type="text"
-          // placeholder="Search student, stream, class, email…"
-          placeholder="Search student , email..."
+          placeholder="Search student, email..."
           onChange={handleFilter}
-          className="input border-none self-center bg-gray-200 focus:outline-none input-md sm:w-96 max-w-md mx-auto placeholder-gray-400 "
+          className="input border-none self-center bg-gray-200 focus:outline-none input-md sm:w-96 max-w-md mx-auto placeholder-gray-400"
         />
         <FaSortDown className="self-center pb-1 text-gray-400" />
       </div>
 
-      {/* <button className=" self-center mr-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16">
-        <PiSlidersHorizontalLight className="mx-auto sm:h-8 sm:w-8 h-6 w-6" />
-      </button> */}
+      <button className=" mr-2 rounded-lg h-10 w-24 sm:h-12 sm:w-32 flex ">
+      <p className="text-gray-400 font-bold text-sm mr-2 w-20 ">
+        {
+          GET_STUDENTS_LOADING ? "Loading Students" : (checked ? "Deselect All" : "Select All")
+        }
+      </p>
+        <input
+          type="checkbox"
+          className="p-1 rounded cursor-pointer mr-3"
+          checked={checked} // Determine if checked
+          onChange={handleSelectAll} // Use the updated function
+        />
+      </button>
     </div>
   );
 };

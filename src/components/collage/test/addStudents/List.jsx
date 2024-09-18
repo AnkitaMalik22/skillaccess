@@ -103,10 +103,19 @@ const List = ({ uploadedStudents, setStudents, students }) => {
               className="flex flex-col w-full mb-3 p-5 rounded-lg bg-white items-center"
               key={student._id}
             >
+             
+
               {/* {//console.log(student)} */}
               {/* <div className={` flex `}> */}
               <div className="flex self-center flex-row items-center justify-between w-full  ">
-                <div className=" min-w-[3rem]  h-12 self-center  mr-2 flex items-center justify-center text-xl ">
+              <div className="self-center  flex flex-row items-center justify-center">
+                <input
+                  type="checkbox"
+                  className="p-1 rounded cursor-pointer mr-3"
+                  checked={!!checkedState[student._id] || students.some((std) => std._id === student._id)}
+                  onChange={() => handleCheckboxChange(student._id)}
+                />
+                 <div className=" min-w-[3rem]  h-12 self-center  mr-2 flex items-center justify-center text-xl ">
                   <img
                     src="../../images/student.png"
                     alt=""
@@ -114,31 +123,14 @@ const List = ({ uploadedStudents, setStudents, students }) => {
                     height="50px"
                   />
                 </div>
+              </div>
+               
                 <h2 className="font-dmSans font-bold text-base text-start capitalize">
                   {student.FirstName} {student.LastName}
                 </h2>
                 <h2 className="font-dmSans  text-base text-gray-400 lowercase">
                   {student.Email}
                 </h2>
-
-                <div className="self-center ">
-                  {/* <input
-            type="checkbox"
-            name=""
-            id=""
-            className="p-1 rounded"
-            // onChange={handleCheckboxChange}
-            onClick={()=>handleCheckboxChange(student._id)}
-          /> */}
-                  <input
-                    type="checkbox"
-                    className="p-1 rounded cursor-pointer"
-                    checked={!!checkedState[student._id]} // Determine if checked
-                    onChange={() => handleCheckboxChange(student._id)}
-                  />
-                </div>
-
-                {/* </div> */}
               </div>
               {/*  */}
               {/* <div className="flex justify-center mr-16 ">
