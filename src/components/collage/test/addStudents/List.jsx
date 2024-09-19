@@ -17,6 +17,7 @@ const List = ({ uploadedStudents, setStudents, students }) => {
   const handleCheckboxChange = (id) => {
     setCheckedState((prevState) => {
       const isCurrentlyChecked = !!prevState[id];
+      console.log(isCurrentlyChecked);
       const newCheckedState = { ...prevState, [id]: !isCurrentlyChecked };
 
       if (isCurrentlyChecked) {

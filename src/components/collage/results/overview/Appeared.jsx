@@ -116,7 +116,7 @@ const Appeared = ({ assessment }) => {
                 {/*  */}
                 <div className="flex justify-center items-center">
                   <h2 className="font-dmSans text-sm ">
-                    {covertToDateFormat(student?.completedAt)}
+                    {covertToDateFormat(student?.createdAt)}
                     {/* -{" "}
                     {covertToDateFormat(assessment?.endDate)} */}
                   </h2>
