@@ -874,8 +874,8 @@ const testSlice = createSlice({
       })
       .addCase(inviteToTest.rejected, (state, action) => {
         state.status = "rejected";
-        toast.error("Error Inviting Students!");
-        //console.log(action.payload);
+        // toast.error("Your current plan limit is exceeded");
+          toast.error(action.payload?.message);
       })
       .addCase(getTopicByIdQB.pending, (state, action) => {
         state.status = "pending";
