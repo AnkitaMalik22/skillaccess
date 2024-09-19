@@ -59,10 +59,10 @@ const Results = ({ assessmentResult, id }) => {
                 key={index}
               >
                 <span className="w-full   py-2 text-sm font-dmSans first-letter:uppercase">
-                  {response.assessmentId.name}
+                  {response?.assessmentId?.name}
                 </span>
                 <span className="w-full   p-2 text-sm font-dmSans">
-                  {formatDate(response.completedAt)}
+                  {formatDate(response?.createdAt)}
                 </span>
                 <span className="w-full   p-2 text-sm font-dmSans">
                   {response.topics.map((topic) => topic.Heading).join(", ")}

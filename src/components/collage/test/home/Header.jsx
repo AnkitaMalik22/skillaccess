@@ -37,7 +37,7 @@ const Header = ({ students }) => {
           return (
             <div className="rounded-full xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end">
               <img
-                src={student.avatar.url}
+                src={student?.avatar?.url}
                 alt=""
                 srcset=""
                 className="rounded-full"
