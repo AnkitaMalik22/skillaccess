@@ -87,7 +87,7 @@ const Selected = () => {
               <div className=" self-center h-fit ">
                 <span>
                   <h2 className="font-dmSans  sm:text-sm ">
-                    {covertToDateFormat(student?.completedAt)}
+                    {covertToDateFormat(student?.createdAt)}
                   </h2>
                 </span>
               </div>
