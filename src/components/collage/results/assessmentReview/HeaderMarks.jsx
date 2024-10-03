@@ -59,9 +59,9 @@ const HeaderMarks = ({ response, totalQuestions }) => {
               </p>
 
               <h2 className="font-bold text-[#171717] text-xl first-letter:capitalize">
-                {response?.timeTaken < 60
+                {response?.timeTaken < 60000
                   ? "<1"
-                  : Math.floor(response?.timeTaken / 60)}{" "}
+                  : Math.floor(response?.timeTaken/ 1000 / 60)}{" "}
                 mins
               </h2>
             </div>
