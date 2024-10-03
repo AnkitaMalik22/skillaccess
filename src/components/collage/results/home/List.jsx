@@ -5,6 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllTests } from "../../../../redux/collage/test/thunks/test";
 import Skeleton from "../../../loaders/Skeleton";
+import { TbFileDownload } from "react-icons/tb";
+import toast from "react-hot-toast";
+
 
 const List = ({ FilterdStudents, isLoading }) => {
   // const arr = [2, 1, 1, 1, 1];
@@ -12,6 +15,7 @@ const List = ({ FilterdStudents, isLoading }) => {
   const navigate = useNavigate();
   const assessments = useSelector((state) => state.test.assessments);
   const beginner = useSelector((state) => state.test.assessments.beginner);
+
 
   // asessments ={beginner: Array(2), intermediate: Array(0), advanced: Array(0)} write in one array
 
@@ -63,6 +67,48 @@ const List = ({ FilterdStudents, isLoading }) => {
       colors.push(color);
     });
   }
+
+  const handleResultsDownload = async(assessmentId) => {
+    try {
+      // Replace the URL with your API endpoint
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/assessments/download/${assessmentId}`, {
+          method: 'GET',
+          headers: {
+            "auth-token": localStorage.getItem("auth-token"),
+          }
+      });
+
+      if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Convert the response to a Blob
+      const blob = await response.blob();
+
+      // Create a URL for the Blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a link element
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'data.xlsx'; // Set the file name for download
+
+      // Append the link to the body
+      document.body.appendChild(a);
+
+      // Programmatically click the link to trigger the download
+      a.click();
+
+      // Clean up and remove the link
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      toast.success('Download successful');
+  } catch (error) {
+    toast.error('Download failed');
+      console.error('Download failed:', error);
+  }
+}
 
   return (
     <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 rounded-2xl p-8">
@@ -154,8 +200,9 @@ const List = ({ FilterdStudents, isLoading }) => {
                 </span>
               </div>
             </div>
-            <div className="flexjustify-center mr-3">
-              <span
+          
+            <div className="flex  self-center gap-3 justify-center">
+            <div
                 className="self-center hover:cursor-pointer "
                 onClick={() =>
                   navigate(
@@ -166,8 +213,13 @@ const List = ({ FilterdStudents, isLoading }) => {
                 <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
                   View Details
                 </h2>
-              </span>
-            </div>
+              </div>
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer"
+                  onClick={() =>handleResultsDownload(assessment?._id)}
+                  >
+                    <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
+                  </h2>
+                </div>
           </div>
         ))}
       {!isLoading && FilterdStudents && FilterdStudents?.length === 0 && (
