@@ -59,8 +59,8 @@ const Footer = ({ students, endDate }) => {
   };
 
   return (
-    <div className="pt-1 relative pb-20">
-      <div className=" absolute right-0">
+    <div className="p-4">
+      {/* <div className=" absolute right-0"> */}
         {" "}
         <div className=" flex gap-2">
           <button
@@ -93,7 +93,7 @@ const Footer = ({ students, endDate }) => {
             </p>
           </button>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };

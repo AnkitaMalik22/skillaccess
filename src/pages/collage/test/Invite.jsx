@@ -76,15 +76,20 @@ const Invite = () => {
         </h2> */}
       </div>
 
-      <div className=" mx-auto ">
-        <div className="w-full">
+      <div className=" mx-auto bg-gray-100">
+        <div className="w-full flex  justify-between">
           <div
             name=""
             id=""
-            className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 p-5 font-bold text-2xl"
+            className="rounded-lg  focus:outline-none border-none mb-4 p-5 font-bold text-2xl"
           >
             {localStorage?.getItem("testName")}
           </div>
+
+        {/* {console.log(assessment?.endDate)} */}
+        <Footer students={students} endDate={assessment?.endDate} />
+
+    
         </div>
 
         <div className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg p-5 focus:ring-0placeholder-gray-400 mb-6">
@@ -101,10 +106,7 @@ const Invite = () => {
         </div>
       </div>
 
-      <div className="mx-auto">
-        {/* {console.log(assessment?.endDate)} */}
-        <Footer students={students} endDate={assessment?.endDate} />
-      </div>
+   
     </>
   );
 };

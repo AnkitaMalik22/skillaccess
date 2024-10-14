@@ -92,87 +92,58 @@ const List = ({ uploadedStudents, setStudents, students }) => {
 
   // When rendering checkboxes, use the `checkedState` to determine each checkbox's checked property
 
+  // sort students by no of tests appeared . show a rounded badge with the number of tests appeared
+  // and a filter to number of tests appeared
+
   return (
     <div className=" grid-cols-5 mx-auto  font-dmSans  text-sm  ">
       {" "}
       {/* row-2 */}
       {GET_STUDENTS_LOADING && <Skeleton />}
       {!GET_STUDENTS_LOADING &&
-        uploadedStudents?.map((student) => {
+        uploadedStudents.map((student) => {
           return (
             <div
               className="flex flex-col w-full mb-3 p-5 rounded-lg bg-white items-center"
               key={student._id}
             >
-             
-
               {/* {//console.log(student)} */}
               {/* <div className={` flex `}> */}
               <div className="flex self-center flex-row items-center justify-between w-full  ">
-              <div className="self-center  flex flex-row items-center justify-center">
-                <input
-                  type="checkbox"
-                  className="p-1 rounded cursor-pointer mr-3"
-                  checked={!!checkedState[student._id] || students.some((std) => std._id === student._id)}
-                  onChange={() => handleCheckboxChange(student._id)}
-                />
-                 <div className=" min-w-[3rem]  h-12 self-center  mr-2 flex items-center justify-center text-xl ">
-                  <img
-                    src="../../images/student.png"
-                    alt=""
-                    width="50px"
-                    height="50px"
+                <div className="self-center  flex flex-row items-center justify-center">
+                  <input
+                    type="checkbox"
+                    className="p-1 rounded cursor-pointer mr-3"
+                    checked={
+                      !!checkedState[student._id] ||
+                      students.some((std) => std._id === student._id)
+                    }
+                    onChange={() => handleCheckboxChange(student._id)}
                   />
+                  <div className=" min-w-[3rem]  h-12 self-center  mr-2 flex items-center justify-center text-xl bg-blue-100 rounded-full p-1">
+                    <img
+                      src={
+                        student?.avatar?.url
+                          ? student?.avatar?.url
+                          : "../../images/student.png"
+                      }
+                      className="rounded-full"
+                      alt=""
+                      width="50px"
+                      height="50px"
+                    />
+                  </div>
                 </div>
-              </div>
-               
-                <h2 className="font-dmSans font-bold text-base text-start capitalize">
+
+                <h2 className=" ml-2 font-dmSans font-bold text-base text-start capitalize w-full">
                   {student.FirstName} {student.LastName}
                 </h2>
                 <h2 className="font-dmSans  text-base text-gray-400 lowercase">
                   {student.Email}
                 </h2>
               </div>
-              {/*  */}
-              {/* <div className="flex justify-center mr-16 ">
-        <div className=" self-center h-fit ">
-          <span>
-            <h2 className="font-dmSans  sm:text-lg text-gray-400 ">
-            {student.Email}
-            </h2>
-          </span>
-        </div>
-      </div> */}
-              {/*  */}
-              {/* <div className="flex justify-center">
-        <div className=" self-center h-fit">
-          <span>
-            <h2 className="font-dmSans sm:text-lg text-gray-400">II Year</h2>
-          </span>
-        </div>
-      </div> */}
-              {/*  */}
-              {/*  */}
-              {/* <div className="flex justify-center">
-        <div className=" self-center h-fit">
-          <span>
-            <h2 className="font-dmSans sm:text-lg text-gray-400">2022</h2>
-          </span>
-        </div>
-      </div> */}
-              {/*  */}
-              {/*  */}
-              {/* <div className="flex justify-end mr-3">
-        <span className="self-center ">  <input
-            type="checkbox"
-            name=""
-            id=""
-            className="p-1 rounded"
-            // onChange={handleCheckboxChange}
-            onClick={()=>handleCheckboxChange(student._id)}
-          />
-        </span>
-      </div> */}
+
+            
             </div>
           );
         })}
