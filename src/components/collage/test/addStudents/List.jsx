@@ -101,7 +101,7 @@ const List = ({ uploadedStudents, setStudents, students }) => {
       {/* row-2 */}
       {GET_STUDENTS_LOADING && <Skeleton />}
       {!GET_STUDENTS_LOADING &&
-        uploadedStudents.map((student) => {
+        uploadedStudents?.map((student) => {
           return (
             <div
               className="flex flex-col w-full mb-3 p-5 rounded-lg bg-white items-center"
