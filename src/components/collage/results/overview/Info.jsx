@@ -24,7 +24,16 @@ const Info = ({ user, assessment }) => {
       daySuffix = "th";
     }
 
-    return `${day}${daySuffix} ${month}`;
+    // return `${day}${daySuffix} ${month}`;
+    // date with time
+
+    const timeString = date.toLocaleTimeString(undefined, {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  
+    return `${day}${daySuffix} ${month} ${timeString}`;
+  
   }
 
   const uniqueStudentResponses = new Set(
@@ -81,7 +90,9 @@ const Info = ({ user, assessment }) => {
 
           <h2 className="text-sm font-bold text-[#171717]">
       
-            {totalUniqueStudentResponses}
+            {/* {totalUniqueStudentResponses} */}
+            {/* {console.log(assessment.studentResponses)}*/}
+            {assessment?.studentResponses?.length} 
           </h2>
         </div>
 
