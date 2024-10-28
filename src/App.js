@@ -21,6 +21,7 @@ import NotAuth from "./components/PopUps/NotAuth";
 import AccountRoute from "./pages/collage/accounting/AccountRoutes";
 import CollageLayout from "./layout/Collage";
 import SecurityAppPage from "./pages/collage/settings/SecurityAppPage";
+import LoginCompany from "./pages/company/auth/Login";
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
 const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
@@ -43,6 +44,7 @@ export default function App() {
     /^\/password\/reset\/.*$/, // Match for "/password/reset/*"
     /^\/collage\/me\/failed$/, // Exact match for "/collage/me/failed"
     /^\/collage\/settings\/security\/securityApp$/, // Exact match for "/collage/settings/security/securityApp"
+    /^\/company.*$/
   ]);
 
   useEffect(() => {
@@ -116,6 +118,12 @@ export default function App() {
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/password/reset/:id" element={<ResetPassword />} />
             <Route path="collage/me/failed" element={<NotAuth />} />
+
+            {/* company routes */}
+
+            <Route path="/company">
+              <Route path="" element={<LoginCompany/>}/>
+            </Route>
           </Routes>
         </Suspense>
       )}
