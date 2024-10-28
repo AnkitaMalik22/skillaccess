@@ -75,7 +75,7 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
       );
 
       if (!isValidFormat || headers.length !== 3) {
-        toast.error("Invalid file format only excel file accepted");
+        toast.error("Incorrect titles, titles must be FirstName, LastName, Email"); 
         setLoading(false);
         return;
       }
