@@ -103,7 +103,7 @@ const Details = ({ student }) => {
           <h2 className="text-[#8F92A1] font-bold text-xs capitalize mb-1 tracking-[1px]">
             WEBSITE
           </h2>
-          <h2 className="text-xs first-letter:capitalize font-bold text-[#0052CC] lowercase">
+          <h2 className="text-xs first-letter:capitalize font-bold text-blued  lowercase">
             {" "}
             <a
               href={student.Website}
@@ -157,7 +157,7 @@ const Details = ({ student }) => {
           </button>
           {!student?.approved && (
             <button
-              className="py-2 text-white rounded-xl px-4 bg-blue-700 font-bold flex items-center gap-2"
+              className="py-2 text-white rounded-xl px-4 bg-accent font-bold flex items-center gap-2"
               onClick={() => {
                 setVisible(true);
                 setSId(student?._id);

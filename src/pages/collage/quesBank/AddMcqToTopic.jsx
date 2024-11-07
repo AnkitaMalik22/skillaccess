@@ -527,7 +527,7 @@ const AddMcqToTopic = () => {
           <div className=" flex">
             {addType === "topic" && (
               <button
-                className="self-center justify-center cursor-pointer flex bg-[#0052CC] text-white  py-3 px-6 rounded-2xl text-sm font-bold gap-2 "
+                className="self-center justify-center cursor-pointer flex bg-accent text-white  py-3 px-6 rounded-2xl text-sm font-bold gap-2 "
                 // onClick={addQuestion}
                 onClick={handleQuestionSave}
               >

@@ -307,7 +307,7 @@ const assessment={
 
         <About Description={assessment.description} />
 
-        <button className="bg-[#0052CC] text-white rounded-2xl h-10 font-dmSans px-16 self-end relative top-10 " style={{ marginTop: '-30px', marginRight: '1rem' }}
+        <button className="bg-accent text-white rounded-2xl h-10 font-dmSans px-16 self-end relative top-10 " style={{ marginTop: '-30px', marginRight: '1rem' }}
         onClick={()=>navigate('/student/test/1/start')}>
             Start the Assessment
         </button>

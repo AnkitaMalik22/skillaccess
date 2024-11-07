@@ -127,7 +127,7 @@ const Students = () => {
                 </div>
                 <div className="flex  self-center gap-3">
                   <h2
-                    className="font-dmSans text-xs font-bold text-white bg-[#95ACFA] p-2 rounded-lg cursor-pointer"
+                    className="font-dmSans text-xs font-bold text-white bg-accent p-2 rounded-lg cursor-pointer"
                     onClick={() =>
                       navigate(`/collage/students/profile/${student._id}`)
                     }
@@ -136,7 +136,7 @@ const Students = () => {
                   </h2>
 
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
-                    <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
+                    <TbFileDownload className="text-lightBlue h-6 w-6" />
                   </h2>
                 </div>
                 {/* </div>{" "} */}
@@ -183,7 +183,7 @@ const Students = () => {
               <h2 className="font-dmSans font-normal text-sm text-[#7F7F7F]">
                 {student?.Education[0]?.EndDate.substring(0, 4)}
               </h2>
-              <h2 className="font-dmSans font-bold text-sm inline text-[#0052CC]">
+              <h2 className="font-dmSans font-bold text-sm inline text-blued ">
                 {" "}
                 {student?.Education[0]?.Degree}
               </h2>
@@ -223,7 +223,7 @@ const Students = () => {
             </div>
             <div className="flex justify-center items-center gap-3">
               <h2
-                className="font-dmSans text-xs font-bold text-white bg-[#95ACFA] p-2 rounded-lg cursor-pointer"
+                className="font-dmSans text-xs font-bold text-white bg-accent p-2 rounded-lg cursor-pointer"
                 onClick={() =>
                   navigate(`/collage/students/profile/${student._id}`)
                 }
@@ -232,7 +232,7 @@ const Students = () => {
               </h2>
 
               <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer">
-                <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
+                <TbFileDownload className="text-lightBlue h-6 w-6" />
               </h2>
             </div>
           </div>

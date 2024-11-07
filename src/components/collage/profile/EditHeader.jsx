@@ -38,7 +38,7 @@ const EditHeader = ({
       <div className=" rounded-xl mx-2   h-12 flex my-2 font-dmSans ">
         <div className=" flex gap-2">
           <button
-            className="self-center justify-center flex text-blue-800 h-12 px-4 rounded-xl font-bold gap-2 bg-gray-700 bg-opacity-5 "
+            className="self-center justify-center flex text-blued h-12 px-4 rounded-xl font-bold gap-2 bg-gray-700 bg-opacity-5 "
             onClick={() => {
               setEditable(false);
               localStorage.setItem("editable", false);
@@ -47,7 +47,7 @@ const EditHeader = ({
             <p className="self-center"> Cancel</p>
           </button>
           <button
-            className="self-center justify-center flex h-12 px-4 rounded-xl font-bold gap-2 bg-blue-700 text-white sm:px-12 "
+            className="self-center justify-center flex h-12 px-4 rounded-xl font-bold gap-2 bg-accent text-white sm:px-12 "
             // onClick={() => handleUpdate(college)}
             onClick={() => setSubmitUpdateProfile(true)}
           >

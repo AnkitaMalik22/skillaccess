@@ -302,7 +302,7 @@ const Register = () => {
               <span className="text-[#8F92A1] font-medium text-xs ">
                 By creating an account, you agree to our{" "}
                 <Link
-                  className="text-blue-600"
+                  className="text-blued"
                   to="/terms&policies"
                   target="_blank"
                 >
@@ -315,7 +315,7 @@ const Register = () => {
             {/* register button */}
             <></>
             <button
-              className={`btn hover:bg-[#0052CC] bg-[#0052CC] rounded-2xl border-none focus:outline-none w-full max-w-xl mx-auto mb-2 text-white ${
+              className={`btn hover:bg-accent bg-accent rounded-2xl border-none focus:outline-none w-full max-w-xl mx-auto mb-2 text-white ${
                 isCreateAccountDisabled ? "bg-blued cursor-not-allowed" : ""
               }`}
               onClick={handleSubmit}
@@ -340,7 +340,7 @@ const Register = () => {
             </button>
             <span className="text-[#8F92A1] text-center text-sm font-semibold">
               Already have an account?{" "}
-              <Link to="/" className="text-[#0052CC] ">
+              <Link to="/" className="text-blued  ">
                 {" "}
                 Sign In
               </Link>

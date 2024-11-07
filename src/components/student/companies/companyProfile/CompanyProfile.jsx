@@ -74,7 +74,7 @@
 //               {/* awards */}
 //               {companyDetails?.awards?.map((award, index) => {
 //               <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2" key={index}>
-//                 <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+//                 <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blued mr-2" />
 //                 <p>
 
 //                   {award?.name}
@@ -130,10 +130,10 @@
 //                 Remote
 //               </h2> */}
 //               <button
-//                 className=" h-8 p-1 w-20  hover:bg-blue-900 bg-[#0052CC]  rounded-lg bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
+//                 className=" h-8 p-1 w-20  hover:bg-blue-900 bg-accent  rounded-lg bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
 //                 onClick={() => navigate("/collage/companies/jobOverview")}
 //               >
-//                 <p className="text-[#0052CC] -ml-8 font-dmSans text-sm font-medium  ">
+//                 <p className="text-blued  -ml-8 font-dmSans text-sm font-medium  ">
 //                  {job.WorkplaceType}
 //                 </p>
 //               </button>
@@ -227,12 +227,12 @@ const CompanyProfile = () => {
               <h2 className="text-base font-bold pt-6 mb-4">Achievements</h2>
               {/* awards */}
               <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-                <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+                <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blued mr-2" />
                 <p>zuzbobui isjadj</p>
               </span>
 
               <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-                <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+                <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blued mr-2" />
                 <p>zuzbobui isjadj</p>
               </span>
             </span>

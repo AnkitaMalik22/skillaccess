@@ -7,7 +7,7 @@ const ApplyPoPup = ({ onCancel}) => {
       
     >
       <div className="bg-white shadow-md w-[780px] h-96 mx-auto self-center   rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-4 relative">
-        <p className="text-[28px] font-bold flex justify-center mt-6 text-[#0052cc] ">Take Assessment</p>
+        <p className="text-[28px] font-bold flex justify-center mt-6 text-blued  ">Take Assessment</p>
         <div className="w-full flex gap-4 mb-6">
                 <div className="w-[40%] -mt-4">
                     <img
@@ -19,7 +19,7 @@ const ApplyPoPup = ({ onCancel}) => {
                     <p className="font-medium text-xl text-[#7f7f7f]">
                     To go further choose wether you want to take this assessment now or later.
                     </p>
-                    <button className="bg-[#0052cc] mt-14 w-full rounded-[16px] text-[12px] text-[#fff] py-3">Take Assessment Now</button>
+                    <button className="bg-accent mt-14 w-full rounded-[16px] text-[12px] text-[#fff] py-3">Take Assessment Now</button>
                     <button className="bg-gray-400 w-full rounded-[16px] text-[12px] text-[#fff] mt-4 py-3"
                     onClick={onCancel}
                     >Do It Later</button>

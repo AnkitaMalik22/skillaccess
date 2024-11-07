@@ -32,7 +32,7 @@ const Compose = () => {
         </div>
 
         <div>
-          <button className="bg-blue-700 text-sm font-bold text-white rounded-xl px-4 py-2">
+          <button className="bg-accent text-sm font-bold text-white rounded-xl px-4 py-2">
             Send
           </button>
         </div>

@@ -79,7 +79,7 @@ const ViewCompanyDetails = () => {
               Duties & Responsibilities
             </h2>
             <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blued mr-2" />
               <p>
                 {" "}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
@@ -87,7 +87,7 @@ const ViewCompanyDetails = () => {
               </p>
             </span>
             <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blued mr-2" />
               <p>
                 {" "}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
@@ -95,7 +95,7 @@ const ViewCompanyDetails = () => {
               </p>
             </span>
             <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blued mr-2" />
               <p>
                 {" "}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
@@ -103,7 +103,7 @@ const ViewCompanyDetails = () => {
               </p>
             </span>
             <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blued mr-2" />
               <p>
                 {" "}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
@@ -111,7 +111,7 @@ const ViewCompanyDetails = () => {
               </p>
             </span>
             <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
-              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blued mr-2" />
               <p>
                 {" "}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem

@@ -355,7 +355,7 @@ const AddCode = () => {
             <div className=" flex gap-2">
               {addType === "topic" ? (
                 <button
-                  className={`self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
                     countDetail >= 0 ? "" : "hidden"
                   }`}
                   onClick={handlePrev}
@@ -364,7 +364,7 @@ const AddCode = () => {
                 </button>
               ) : (
                 <button
-                  className={`self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
                     count >= 0 ? "" : "hidden"
                   }`}
                   onClick={handlePrev}

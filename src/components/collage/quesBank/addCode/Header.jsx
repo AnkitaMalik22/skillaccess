@@ -39,7 +39,7 @@ const Header = ({ handleSave, addType }) => {
 
       <div className="flex gap-3">
         <button
-          className="bg-[#0052CC] self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
+          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={() => {
             navigate(-1);
           }}
@@ -47,7 +47,7 @@ const Header = ({ handleSave, addType }) => {
           Cancel
         </button>{" "}
         <button
-          className="bg-[#0052CC] self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
+          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={handleSave}
         >
           {ADD_QUESTION_LOADING ? "Saving" : "Save"}

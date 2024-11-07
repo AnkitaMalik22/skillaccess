@@ -92,7 +92,7 @@ const Finalize = () => {
           {/* Need to all these details below from sections */}
           <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-lg flex justify-between px-5 py-4">
             <p>Total time to complete</p>
-            <p className="text-[#0052CC]  font-bold">
+            <p className="text-blued   font-bold">
               {/* {testDetails?.totalDuration}mins */}
               {totalTime} mins
             </p>
@@ -101,14 +101,14 @@ const Finalize = () => {
 
           <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-lg flex justify-between px-5 py-4">
             <p>Total number of questions</p>
-            <p className="text-[#0052CC]  font-bold">
+            <p className="text-blued   font-bold">
               {testDetails?.totalQuestions}
             </p>
           </div>
 
           <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-lg flex justify-between px-5 py-4">
             <p>Total attempts allowed</p>
-            <p className="text-[#0052CC]  font-bold">
+            <p className="text-blued   font-bold">
               {testDetails?.totalAttempts}
             </p>
           </div>
@@ -119,7 +119,7 @@ const Finalize = () => {
             {" "}
             <div className=" flex gap-2">
               <button
-                className="self-center justify-center flex bg-blue-700 rounded-lg text-sm font-bold gap-2 px-4 py-3"
+                className="self-center justify-center flex bg-accent rounded-lg text-sm font-bold gap-2 px-4 py-3"
                 onClick={() => handleSubmit()}
               >
                 <img src="../../images/icons/student.png" alt="" />{" "}

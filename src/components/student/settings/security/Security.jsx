@@ -67,7 +67,7 @@ const Security = () => {
             {/* {selectedOption === "textMessage" && (
               <button
                 onClick={handleVerificationClick}
-                className="ml-2 px-2 py-2 bg-blue-700 text-[#fff] font-semibold rounded-[4px]"
+                className="ml-2 px-2 py-2 bg-accent text-[#fff] font-semibold rounded-[4px]"
               >
                 Verify By TOTP
               </button>
@@ -93,7 +93,7 @@ const Security = () => {
             {/* {selectedOption === "securityApp" && (
               <button
                 onClick={handleVerificationClick}
-                className=" ml-2 px-2 py-2 text-[#fff] font-semibold rounded-[4px] bg-blue-700"
+                className=" ml-2 px-2 py-2 text-[#fff] font-semibold rounded-[4px] bg-accent"
               >
                 Verify By SecurityApp
               </button>
@@ -119,7 +119,7 @@ const Security = () => {
             {/* {selectedOption === "securityApp" && (
               <button
                 onClick={handleVerificationClick}
-                className=" ml-2 px-2 py-2 text-[#fff] font-semibold rounded-[4px] bg-blue-700"
+                className=" ml-2 px-2 py-2 text-[#fff] font-semibold rounded-[4px] bg-accent"
               >
                 Verify By SecurityApp
               </button>

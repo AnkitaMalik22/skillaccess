@@ -275,7 +275,7 @@ const TestCases = ({
 
       {/* <div className="w-full flex justify-between mx-4 ">
         <button
-          className="  bg-[#0052CC] text-white rounded-lg px-5 py-3 flex gap-2"
+          className="  bg-accent text-white rounded-lg px-5 py-3 flex gap-2"
           onClick={() => {
             upload.current.click();
           }}
@@ -290,7 +290,7 @@ const TestCases = ({
           Upload Testcases
         </button>
         <button
-          className="  bg-[#0052CC] text-white rounded-lg px-5 py-3 flex gap-2 "
+          className="  bg-accent text-white rounded-lg px-5 py-3 flex gap-2 "
           onClick={addTestCase}
         >
           <FaPlus className="self-center" /> Add Test Case

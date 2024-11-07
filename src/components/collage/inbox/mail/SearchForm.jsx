@@ -242,7 +242,7 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
           Cancel
         </button>
         <button
-          className="rounded-lg bg-blue-700 w-1/2 py-2 text-white"
+          className="rounded-lg bg-accent w-1/2 py-2 text-white"
           onClick={handleSave}
         >
           Save

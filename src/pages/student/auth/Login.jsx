@@ -209,7 +209,7 @@ const Login = () => {
             />
             <span className="text-lGray">
               By creating an account, you agree to our{" "}
-              <Link className="text-blue-600" to="/terms&policies">
+              <Link className="text-blued" to="/terms&policies">
                 {" "}
                 Terms-Policies.
               </Link>
@@ -217,7 +217,7 @@ const Login = () => {
           </label> */}
 
           <button
-            className={`btn hover:bg-blue-700 bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
+            className={`btn hover:bg-accent bg-blue-600 rounded-xl border-none md:mt-6 mt-4 focus:outline-none w-full max-w-xs mx-auto text-white ${
               isLoginDisabled ? "bg-blued cursor-not-allowed" : ""
             }`}
             onClick={handleSubmit}
@@ -242,7 +242,7 @@ const Login = () => {
           </button>
           <span className="text-lGray text-center text-sm font-semibold">
             Don't have an account?{" "}
-            <Link to="/register" className=" text-blue-600">
+            <Link to="/register" className=" text-blued">
               {" "}
               Sign Up
             </Link>
