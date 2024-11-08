@@ -28,7 +28,7 @@ const Test = () => {
   </div>
 
  <button
-          className="self-center w-32  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white"
+          className="self-center w-32  justify-center flex text-bluedpy-2 px-4 rounded-xl font-bold gap-2 bg-white"
           // onClick={() => navigate(-1)}
         >
         <img src='../../../images/icons/CombinedShape.png' alt="" className="self-center w-6 h-6" />
@@ -47,7 +47,7 @@ const Test = () => {
 
         </div>
         <div className="flex mt-8 justify-end gap-4  mr-4">
-<button className="bg-white border borde-2 border-[#0052CC] text-[#0052CC] py-2 px-12 rounded-xl">Skip</button>
+<button className="bg-white border borde-2 border-[#0052CC] text-blued  py-2 px-12 rounded-xl">Skip</button>
 <button className="bg-[#00875A] text-white py-2 px-12 rounded-xl">Next</button>
 </div>
     </div>

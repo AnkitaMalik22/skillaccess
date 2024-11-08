@@ -133,7 +133,7 @@ const Security = () => {
             {/* {selectedOption === "textMessage" && (
               <button
                 onClick={handleVerificationClick}
-                className="ml-2 px-2 py-2 bg-blue-700 text-[#fff] font-semibold rounded-[4px]"
+                className="ml-2 px-2 py-2 bg-accent text-[#fff] font-semibold rounded-[4px]"
               >
                 Verify By TOTP
               </button>
@@ -159,7 +159,7 @@ const Security = () => {
             {/* {selectedOption === "securityApp" && (
               <button
                 onClick={handleVerificationClick}
-                className=" ml-2 px-2 py-2 text-[#fff] font-semibold rounded-[4px] bg-blue-700"
+                className=" ml-2 px-2 py-2 text-[#fff] font-semibold rounded-[4px] bg-accent"
               >
                 Verify By SecurityApp
               </button>
@@ -186,7 +186,7 @@ const Security = () => {
             {/* {selectedOption === "securityApp" && (
               <button
                 onClick={handleVerificationClick}
-                className=" ml-2 px-2 py-2 text-[#fff] font-semibold rounded-[4px] bg-blue-700"
+                className=" ml-2 px-2 py-2 text-[#fff] font-semibold rounded-[4px] bg-accent"
               >
                 Verify By SecurityApp
               </button>
@@ -195,7 +195,7 @@ const Security = () => {
           <div className="">
             {selectedOption === "securityApp" && (
               <button
-                className="flex gap-2 text-xs font-bold px-6 py-2 text-[#fff]  rounded-[12px] bg-blue-700"
+                className="flex gap-2 text-xs font-bold px-6 py-2 text-[#fff]  rounded-[12px] bg-accent"
                 onClick={() => setShowQR(true)}
               >
                 Show Qr Code{" "}

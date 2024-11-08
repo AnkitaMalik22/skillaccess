@@ -69,7 +69,7 @@ const Topic = () => {
       <div className="flex justify-between md:mb-8 mb-5 items-center">
         <h2 className="font-bold text-xl text-[#171717]">Choose a Topic</h2>
         <button
-          className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-[5px] px-3"
+          className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
           onClick={() => navigate("/collage/quesBank/topic")}
         >
           View All
@@ -120,7 +120,7 @@ const Topic = () => {
                       </h2>
                       <div className="flex gap-2">
                         <Folder />
-                        <p className="text-[#95ACFA] text-sm">
+                        <p className="text-blued  text-sm">
                           {getTotalQuestions(section)} Files
                         </p>
                       </div>

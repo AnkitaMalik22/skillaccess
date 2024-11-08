@@ -99,7 +99,7 @@ const ChartComp = () => {
           <span className="flex gap-4 text-sm font-bold">
             {/* <button
               className={`border-2 border-x-transparent border-transparent ${
-                toggle === 5 && " text-blue-600 border-b-blue-700"
+                toggle === 5 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(5)}
             >
@@ -107,7 +107,7 @@ const ChartComp = () => {
             </button>
             <button
               className={`border-2 border-x-transparent border-transparent ${
-                toggle === 0 && " text-blue-600 border-b-blue-700"
+                toggle === 0 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(0)}
             >
@@ -115,7 +115,7 @@ const ChartComp = () => {
             </button>
             <button
               className={`border-2 border-x-transparent border-transparent ${
-                toggle === 1 && " text-blue-600 border-b-blue-700"
+                toggle === 1 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(1)}
             >
@@ -123,7 +123,7 @@ const ChartComp = () => {
             </button>
             <button
               className={`border-2 border-x-transparent border-transparent ${
-                toggle === 2 && " text-blue-600 border-b-blue-700"
+                toggle === 2 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(2)}
             >
@@ -131,7 +131,7 @@ const ChartComp = () => {
             </button> */}
             <button
               className={`border-2 border-x-transparent border-transparent ${
-                toggle === 3 && " text-blue-600 border-b-blue-700"
+                toggle === 3 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(3)}
             >

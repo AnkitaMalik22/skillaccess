@@ -100,7 +100,7 @@ export default function Dashboard() {
               </div>
 
               <button
-                className="text-blue-500"
+                className="text-blued"
                 onClick={() => navigate("/student/dashboard/jobs")}
               >
                 See All
@@ -119,7 +119,7 @@ export default function Dashboard() {
               </div>
 
               <button
-                className="text-blue-500"
+                className="text-blued"
                 onClick={() => navigate("/student/dashboard/jobs")}
               >
                 See All

@@ -45,14 +45,14 @@ const Header = ({ next, isPortfolio }) => {
         <div className=" flex">
           {isPortfolio ? (
             <button
-              className="self-center justify-center flex bg-blue-700 py-3 px-4 rounded-lg text-xs font-bold gap-2 text-white"
+              className="self-center justify-center flex bg-accent py-3 px-4 rounded-lg text-xs font-bold gap-2 text-white"
               onClick={next}
             >
               Save
             </button>
           ) : (
             <button
-              className="self-center justify-center flex bg-blue-700 py-3 px-4 rounded-lg text-xs font-bold gap-2 text-white"
+              className="self-center justify-center flex bg-accent py-3 px-4 rounded-lg text-xs font-bold gap-2 text-white"
               onClick={next}
             >
               Save & Next{" "}

@@ -57,7 +57,7 @@ const Header = ({handleAddTeamClick}) => {
         </h2>
       </span>
   
-        <button className="bg-[#0052cc] self-center text-sm font-bold py-3 px-10  rounded-xl text-[#fff]"
+        <button className="bg-accent self-center text-sm font-bold py-3 px-10  rounded-xl text-[#fff]"
         onClick={handleAddTeamClick}
         >
           Add Teams

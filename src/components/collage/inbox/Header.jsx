@@ -91,7 +91,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
       </div>
 
       <button
-        className="bg-blue-700 py-2 px-3 self-center mr-2 rounded-lg flex gap-2 text-white"
+        className="bg-accent py-2 px-3 self-center mr-2 rounded-lg flex gap-2 text-white"
         onClick={() => {
           navigate(`/collage/inbox/mail?type=compose&inboxType=${inboxType}`);
         }}

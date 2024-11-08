@@ -118,7 +118,7 @@ const Description = ({ topics }) => {
                     </p>
                   </div>
 
-                  <p className="text-xs self-center text-blue-500 tracking-[-0.4px] text-left">
+                  <p className="text-xs self-center text-blued tracking-[-0.4px] text-left">
                     Review
                   </p>
                 </div>

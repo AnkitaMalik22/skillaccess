@@ -676,7 +676,7 @@ const Header = ({
               currentTopic.Type !== "video" && (
                 <>
                   <button
-                    className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
+                    className="self-center justify-center flex bg-accent py-3  rounded-xl w-48 text-white  gap-2 "
                     onClick={() => {
                       upload.current.click();
                     }}

@@ -25,7 +25,7 @@ const List = ({ Title, number, code, question }) => {
   const testcasePassed = passedTestCasesCount / totalTestCasesCount;
   return (
     <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10">
-      <button className=" bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
+      <button className=" bg-accent rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
         Q-{number}
       </button>
       <div className="w-full  ">
@@ -75,7 +75,7 @@ const List = ({ Title, number, code, question }) => {
                       defaultLanguage={question.codeLangugae}
                       value={code}
                       options={{ readOnly: true }}
-                      className="border-2 border-[#95ACFA] rounded-[4px]"
+                      className="border-2 border-[#0D9AAC] rounded-[4px]"
                     />
                     <div
                       className={`${

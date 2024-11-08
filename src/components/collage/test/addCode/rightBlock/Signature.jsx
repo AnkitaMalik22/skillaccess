@@ -147,7 +147,7 @@ const Signature = ({
               {" "}
               <Disclosure className="w-11/12 self-center">
                 {({ open }) => (
-                  <div className="mb-4 relative border border-blue-500 rounded-xl py-1">
+                  <div className="mb-4 relative border border-blued rounded-xl py-1">
                     <div className="-top-3  left-3 text-xs font-medium text-blued absolute bg-[#F8F8F9] px-2">
                       Returns
                     </div>

@@ -29,7 +29,7 @@ const Left = ({ data, index, inboxType }) => {
   }, [user]);
   return (
     <div
-      className={`rounded-lg hover:bg-[#0052CC] hover:bg-opacity-5 p-3`}
+      className={`rounded-lg hover:bg-accent hover:bg-opacity-5 p-3`}
       onClick={async () => {
         await dispatch(markAsRead({ type: inboxType, id: data._id }));
         navigate(

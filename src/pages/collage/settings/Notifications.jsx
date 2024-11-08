@@ -33,7 +33,7 @@ const Notifications = () => {
               onChange={setEnabled}
               className={`self-center ${
                 enabled
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >
@@ -59,7 +59,7 @@ const Notifications = () => {
               onChange={setEnabled4}
               className={`self-center ${
                 enabled4
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >
@@ -84,7 +84,7 @@ const Notifications = () => {
               onChange={setEnabled5}
               className={`self-center ${
                 enabled5
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >
@@ -121,7 +121,7 @@ const Notifications = () => {
               onChange={setEnabled1}
               className={`self-center ${
                 enabled1
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >
@@ -147,7 +147,7 @@ const Notifications = () => {
               onChange={setEnabled2}
               className={`self-center ${
                 enabled2
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >
@@ -172,7 +172,7 @@ const Notifications = () => {
               onChange={setEnabled3}
               className={`self-center ${
                 enabled3
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >
