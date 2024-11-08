@@ -1,23 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 
-import {
-  googleLoginCollage,
-  loginCollage,
-} from "../../../redux/collage/auth/authSlice";
+
 
 import toast from "react-hot-toast";
 
 import CircularLoader from "../../../components/CircularLoader";
 import Layout from "../../collage/auth/Layout";
+import { LoginCompany, selectCompanyData, selectLoginState } from "../../../redux/company/auth/companyAuthSlice";
 
-const LoginCompany = () => {
-  const { Error, logoutError } = useSelector((state) => state.collageAuth);
-  const [loader, setLoader] = useState(false);
+const LoginCompanyPage = () => {
+  const { error,loading } = useSelector(selectLoginState);
+ const user = useSelector(selectCompanyData);
   const [type, setType] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,7 +34,7 @@ const LoginCompany = () => {
   };
 
   const handleSubmit = async (e) => {
-    setLoader(true);
+   
     e.preventDefault();
 
     const { Email, Password, confirmPassword } = Credentials;
@@ -46,16 +44,22 @@ const LoginCompany = () => {
       confirmPassword,
     };
     try {
-      const ch = await dispatch(loginCollage(data));
-      if (ch.meta.requestStatus === "fulfilled") {
-        toast.success("Logged in successfully");
-        setCredentials({});
-        navigate("/collage/dashboard");
+      const res = await dispatch(LoginCompany(data));
+      if (LoginCompany.fulfilled.match(res)) {
+        toast.success("logged in successfully")
+        if(user.status==="pending"){
+          navigate("/company/approval")
+        }else{
+          //navigate("/company/dashboard")
+        }
+      
+      } else if (LoginCompany.rejected.match(res)) {
+        // console.log(resultAction);
+      } else {
+
       }
-    } catch (error) {
-      //console.log(error);
-    } finally {
-      setLoader(false);
+    } catch {
+      toast.error("Invalid Email or Password");
     }
   };
 
@@ -95,13 +99,9 @@ const LoginCompany = () => {
             <h2 className="font-bold text-center text-[#8F92A1] text-xl mb-8">
               Welcome back!
             </h2>
-            {logoutError && (
-              <p className=" border-l-4 pl-4  rounded-[4px] border-[#dc2626] w-full max-w-sm py-3  mx-auto text-sm text-[#dc2626] bg-[#fee2e2]">
-                Oops!You're logged out. Please login again.
-              </p>
-            )}
+          
 
-            {Error.length > 0 && (
+            {error  && (
               <p className=" border-l-4 pl-4  rounded-[4px] border-[#dc2626] w-full max-w-sm py-3  mx-auto text-sm text-[#dc2626] bg-[#fee2e2]">
                 Oops! It seems like your email or password is incorrect. Please
                 double-check and try again.
@@ -154,18 +154,17 @@ const LoginCompany = () => {
               </div>
 
               <button
-                className={`btn hover:bg-[#0052CC] bg-[#0052CC] rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${
-                  isLoginDisabled ? "bg-[#99baeb] cursor-not-allowed" : ""
-                }`}
+                className={`btn hover:bg-[#0052CC] bg-[#0052CC] rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${isLoginDisabled ? "bg-[#99baeb] cursor-not-allowed" : ""
+                  }`}
                 type="submit"
                 onClick={handleSubmit}
                 disabled={isLoginDisabled}
               >
-                Login {loader && <CircularLoader />}
+                Login {loading && <CircularLoader />}
               </button>
             </form>
-            
-           
+
+
           </div>
         </div>
       </form>
@@ -173,4 +172,4 @@ const LoginCompany = () => {
   );
 };
 
-export default LoginCompany;
+export default LoginCompanyPage;

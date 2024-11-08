@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import { setSelected, selected } from "../redux/collage/sidebar/sideSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { getCompany } from "../redux/company/auth/companyAuthSlice";
 
 const CollageLayout = ({ children }) => {
   const [visible, setVisible] = useState(false);
@@ -350,6 +351,28 @@ const CollageLayout = ({ children }) => {
     // toast.success(path);
   });
 
+  useEffect(() => {
+    const getMe = async () => {
+      try {
+        const res = await dispatch(getCompany(data));
+        if (getCompany.fulfilled.match(res)) {
+          toast.success("Logged in successfully");
+          if (user.status === "pending") {
+            // Handle pending status
+          } else {
+            // navigate("/company/dashboard")
+          }
+        } else if (getCompany.rejected.match(res)) {
+          navigate("/company");
+        }
+      } catch (error) {
+        toast.error("Invalid Email or Password");
+      }
+    };
+  
+    getMe();
+  }, []);
+  
   return (
     <>
     

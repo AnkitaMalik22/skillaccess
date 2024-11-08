@@ -22,6 +22,9 @@ import AccountRoute from "./pages/collage/accounting/AccountRoutes";
 import CollageLayout from "./layout/Collage";
 import SecurityAppPage from "./pages/collage/settings/SecurityAppPage";
 import LoginCompany from "./pages/company/auth/Login";
+import RegisterCompany from "./pages/company/auth/RegisterCompany";
+import getCookie from "./util/getToken";
+import AwaitingApproval from "./pages/company/AwatingApproval";
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
 const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
@@ -73,6 +76,12 @@ export default function App() {
       navigate("/");
     }
   }, [logoutError]);
+  useEffect(() => {
+    if (/^\/company\/pr\/.*$/.test(window.location.pathname) && !getCookie()) {
+      console.log(!getCookie);
+      navigate("/company");
+    }
+  }, [])
 
   useEffect(() => {
     if (isLoggedIn && window.location.pathname === "/") {
@@ -121,8 +130,14 @@ export default function App() {
 
             {/* company routes */}
 
-            <Route path="/company">
-              <Route path="" element={<LoginCompany/>}/>
+            <Route path="/company/">
+              <Route path="" element={<LoginCompany />} />
+              <Route path="register" element={<RegisterCompany />} />
+              <Route path="approval" element={<AwaitingApproval />} />
+              {/* protected company routes below */}
+              <Route path="pr">
+
+              </Route>
             </Route>
           </Routes>
         </Suspense>

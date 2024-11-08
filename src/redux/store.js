@@ -12,6 +12,7 @@ import paymentReducer from "./collage/account/paymentSlice.js";
 import inboxSlice from "./collage/Inbox/inboxSlice.js";
 import dummySlice from "./collage/dummySlice.js";
 import resultSlice from "./collage/result/result.js";
+import companyAuthReducer from  "./company/auth/companyAuthSlice.js";
 
 const store = configureStore({
   reducer: {
@@ -29,6 +30,11 @@ const store = configureStore({
     studentAuth: studentAuthReducer,
     collegeStudents: collegeStudentsReducer,
     payment: paymentReducer,
+
+
+    // company
+
+    companyAuth:  companyAuthReducer,
   },
 });
 
