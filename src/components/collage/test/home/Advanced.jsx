@@ -35,7 +35,7 @@ const Advanced = () => {
             className="bg-white sm:w-[64px] sm:h-[64px] w-10 h-10 rounded-2xl mx-auto flex justify-center"
             onClick={handleFunc}
           >
-            <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
+            <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued" />
           </div>
           <h2 className="text-center text-black text-base  font-bold mb-4 mt-8  w-20  md:w-60">
             Add New Assessment

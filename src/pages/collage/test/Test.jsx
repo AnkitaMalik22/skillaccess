@@ -109,7 +109,7 @@ const Test = () => {
                           <h2 className="flex gap-3 text-[#171717] text-sm">
                             {i === 0 ? (
                               <>
-                                <FaFolder className="text-[#B3D4FF] w-5 h-5" />
+                                <FaFolder className="text-blued w-5 h-5" />
                                 Adaptive level{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{adaptive?.length}&#41;
@@ -117,7 +117,7 @@ const Test = () => {
                               </>
                             ) : i === 1 ? (
                               <>
-                                <FaFolder className="text-[#B3D4FF] w-5 h-5" />
+                                <FaFolder className="text-blued w-5 h-5" />
                                 Beginner level{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{beginner.length}&#41;
@@ -125,7 +125,7 @@ const Test = () => {
                               </>
                             ) : i === 2 ? (
                               <>
-                                <FaFolder className="text-[#B3D4FF] w-5 h-5" />
+                                <FaFolder className="text-blued w-5 h-5" />
                                 For Intermediate{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{intermediate.length}&#41;
@@ -133,7 +133,7 @@ const Test = () => {
                               </>
                             ) : (
                               <>
-                                <FaFolder className="text-[#B3D4FF] w-5 h-5" />
+                                <FaFolder className="text-blued w-5 h-5" />
                                 For Advanced{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{advanced.length}&#41;

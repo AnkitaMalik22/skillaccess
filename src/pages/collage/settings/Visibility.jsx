@@ -41,7 +41,7 @@ const Visibility = () => {
               onChange={setEnabled}
               className={`self-center ${
                 enabled
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >
@@ -69,7 +69,7 @@ const Visibility = () => {
               onChange={setEnabled3}
               className={`self-center ${
                 enabled3
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >
@@ -112,7 +112,7 @@ const Visibility = () => {
               onChange={setEnabled1}
               className={`self-center ${
                 enabled1
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >
@@ -140,7 +140,7 @@ const Visibility = () => {
               onChange={setEnabled2}
               className={`self-center ${
                 enabled2
-                  ? "bg-white border-2 border-blue-600"
+                  ? "bg-white border-2 border-blued"
                   : " border-2 border-gray-400"
               } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
             >

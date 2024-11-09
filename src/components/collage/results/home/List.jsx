@@ -114,19 +114,19 @@ const List = ({ FilterdStudents, isLoading }) => {
     <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 rounded-2xl p-8">
       {/* legend */}
       <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid">
-        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-2xl p-2 ">
+        <div className="bg-accent bg-opacity-5 rounded-s-2xl p-2 ">
           <h2>Test Name</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2">
+        <div className="bg-accent bg-opacity-5 p-2">
           <h2>Total Students Appeared</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2">
+        <div className="bg-accent bg-opacity-5 p-2">
           <h2>Total Students Selected</h2>{" "}
         </div>
-        <div className="bg-[#0052CC]  bg-opacity-5 p-2">
+        <div className="bg-accent  bg-opacity-5 p-2">
           <h2>Overall Performance</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2 rounded-e-2xl">
+        <div className="bg-accent bg-opacity-5 p-2 rounded-e-2xl">
           <h2>Details</h2>
         </div>
       </div>
@@ -210,14 +210,14 @@ const List = ({ FilterdStudents, isLoading }) => {
                   )
                 }
               >
-                <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
+                <h2 className="font-dmSans  text-sm sm:text-base text-blued ">
                   View Details
                 </h2>
               </div>
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer"
                   onClick={() =>handleResultsDownload(assessment?._id)}
                   >
-                    <TbFileDownload className="text-[#B5B5BE] h-6 w-6" />
+                    <TbFileDownload className="text-lightBlue h-6 w-6" />
                   </h2>
                 </div>
           </div>

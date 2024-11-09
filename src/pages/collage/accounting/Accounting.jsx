@@ -79,7 +79,7 @@ const Accounting = () => {
           My Current Plan
         </p>
         <button
-          className="self-center justify-center flex bg-[#0052CC]  rounded-2xl px-[18px] py-[10px] text-white text-[12px] font-bold"
+          className="self-center justify-center flex bg-accent  rounded-2xl px-[18px] py-[10px] text-white text-[12px] font-bold"
           onClick={() => navigate("/collage/accounting/transactions")}
         >
           Transactions
@@ -127,7 +127,7 @@ const Accounting = () => {
                 <div>
                   {plan._id == selectedPlan && credit.credit !== 0 ? (
                     <button
-                      className="self-center  bg-red-600  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
+                      className="self-center  bg-secondary rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
                       onClick={() => {
                         dispatch(cancelAPlan({ planId: plan._id })).then(() => {
                           //console.log(plan);
@@ -139,7 +139,7 @@ const Accounting = () => {
                     </button>
                   ) : (
                     <button
-                      className="self-center  bg-[#007AFF]  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
+                      className="self-center  bg-accent  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
                       onClick={() => {
                         // //console.log(plan);
                         dispatch(selectAPlan({ planId: plan._id })).then(() => {

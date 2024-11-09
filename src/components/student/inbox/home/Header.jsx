@@ -83,7 +83,7 @@ const Header = () => {
       </span>
 
       <button
-        className="bg-blue-700 py-2 px-3 self-center mr-2 rounded-lg flex gap-2 text-white"
+        className="bg-accent py-2 px-3 self-center mr-2 rounded-lg flex gap-2 text-white"
         onClick={() => {
           navigate("/student/inbox/mail/:compose");
         }}

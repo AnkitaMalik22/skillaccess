@@ -157,7 +157,7 @@ const Login = () => {
               </div>
 
               <button
-                className={`btn hover:bg-[#0052CC] bg-[#0052CC] rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${
+                className={`btn hover:bg-accent bg-accent rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${
                   isLoginDisabled ? "bg-[#99baeb] cursor-not-allowed" : ""
                 }`}
                 type="submit"
@@ -187,7 +187,7 @@ const Login = () => {
             </button>
             <span className="text-[#8F92A1] text-center text-sm font-semibold">
               Don't have an account?{" "}
-              <Link to="/register" className=" text-[#0052CC]">
+              <Link to="/register" className=" text-blued ">
                 {" "}
                 Sign Up
               </Link>

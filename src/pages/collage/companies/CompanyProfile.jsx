@@ -131,7 +131,7 @@ const CompanyProfile = () => {
                 className="text-sm text-gray-400 mb-2 flex gap-2 items-center"
                 key={index}
               >
-                <VscCircleFilled className="text-white border-4 w-fit h-fit rounded-full self-center border-blue-500 m-0" />
+                <VscCircleFilled className="text-white border-4 w-fit h-fit rounded-full self-center border-blued m-0" />
                 <p>{award?.name}</p>
               </div>
             ))}
@@ -191,12 +191,12 @@ const CompanyProfile = () => {
                     </div>
                     <div className="flex sm:gap-6 gap-1">
                       <button
-                        className=" h-8 p-1 w-20  hover:bg-blue-900 bg-[#0052CC]  rounded-lg bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
+                        className=" h-8 p-1 w-20  hover:bg-blue-900 bg-accent  rounded-lg bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
                         onClick={() =>
                           navigate(`/collage/companies/jobOverview/${job._id}`)
                         }
                       >
-                        <p className="text-[#0052CC] -ml-8 font-dmSans text-sm font-medium  ">
+                        <p className="text-blued  -ml-8 font-dmSans text-sm font-medium  ">
                           {job.EmploymentType || "employmentType"}
                         </p>
                       </button>

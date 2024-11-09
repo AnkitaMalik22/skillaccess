@@ -69,7 +69,7 @@ const Companies = () => {
             <FiPlus className="self-center text-lg " /> Add
           </button>
 
-          <button className="self-center justify-center flex bg-[#0052CC] px-5 py-3  rounded-2xl text-white  gap-2 text-md font-bold w-40">
+          <button className="self-center justify-center flex bg-accent px-5 py-3  rounded-2xl text-white  gap-2 text-md font-bold w-40">
             <FiUpload className="self-center text-lg " /> Upload New
           </button>
           <button className="bg-[#8f92a11a]  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
@@ -111,7 +111,7 @@ const Companies = () => {
                   </p>
                   <div className="card-actions justify-end">
                     <button
-                      className="px-6 py-[10px] hover:bg-[#0052CC] bg-[#0052CC] text-xs font-dmSans font-bold rounded-2xl text-white"
+                      className="px-6 py-[10px] hover:bg-accent bg-accent text-xs font-dmSans font-bold rounded-2xl text-white"
                       onClick={
                         () =>
                           navigate(`/collage/companies/profile/${company._id}`)

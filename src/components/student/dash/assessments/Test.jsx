@@ -7,7 +7,7 @@ const Test = () => {
     <div>
       <Header />
       <div className="flex gap-4 my-3">
-        <button className="py-3 text-white rounded-2xl text-xs  bg-[#0052CC] font-bold flex gap-2 px-7 ">
+        <button className="py-3 text-white rounded-2xl text-xs  bg-accent font-bold flex gap-2 px-7 ">
           <p>Active</p>
         </button>
         <button className="py-3 b rounded-2xl text-xs  bg-gray-100 text-gray-800 font-bold flex gap-2 px-7 ">

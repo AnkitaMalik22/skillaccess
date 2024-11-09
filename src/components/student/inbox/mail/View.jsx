@@ -28,7 +28,7 @@ const View = () => {
       </p>
 
       <div className="flex gap-4">
-        <div className="bg-[#0052CC] p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
+        <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
           <div className="flex gap-2">
             <img src="../../images/icons/fileBlue.png" alt="" />
             <div className="self-center">
@@ -104,7 +104,7 @@ const View = () => {
             <BsEmojiSmile className="text-gray-400 text-xl self-center" />
             <TfiClip className="rotate-180 text-2xl text-gray-400 self-center" />
           </div>
-          <button className="text-white text-sm font-bold px-3 bg-blue-700 rounded-xl py-2 self-center">
+          <button className="text-white text-sm font-bold px-3 bg-accent rounded-xl py-2 self-center">
             Send
           </button>
         </div>

@@ -116,7 +116,7 @@ const ForgotPassword = () => {
             </div>
           )} */}
             <button
-              className={`btn hover:bg-[#0052CC] bg-[#0052CC] rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${
+              className={`btn hover:bg-accent bg-accent rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${
                 isSenddisable ? " bg-[#99baeb] cursor-not-allowed" : ""
               }`}
               onClick={handleSubmit}

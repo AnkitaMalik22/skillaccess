@@ -32,7 +32,7 @@ const Header = ({ Heading, sectionId }) => {
         </button>
 
         <button
-          className="self-center justify-center flex bg-[#0052CC] px-5 py-3 rounded-2xl text-white gap-2 text-md font-bold"
+          className="self-center justify-center flex bg-accent px-5 py-3 rounded-2xl text-white gap-2 text-md font-bold"
           onClick={() =>
             navigate(`/collage/quesBank/topic/upload/${sectionId}`)
           }

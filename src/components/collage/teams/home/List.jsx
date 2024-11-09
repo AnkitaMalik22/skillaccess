@@ -81,7 +81,7 @@ const List = () => {
             <div className="flex justify-center ">
               <div className=" self-center h-fit">
                 <span className="self-center">
-                  <h2 className="font-dmSans font-medium text-xs sm:text-base inline text-blue-500">
+                  <h2 className="font-dmSans font-medium text-xs sm:text-base inline text-blued">
                     {" "}
                     {team?.Email}
                   </h2>

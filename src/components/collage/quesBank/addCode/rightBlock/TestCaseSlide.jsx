@@ -139,7 +139,7 @@ const SlideUpDown = ({
                   onChange={() => setHideTestCase(!hideTestCase)}
                   className={`self-center ${
                     hideTestCase
-                      ? "bg-white border-2 border-blue-600"
+                      ? "bg-white border-2 border-blued"
                       : " border-2 border-gray-400"
                   } relative inline-flex h-6 w-12 pr-2 items-center rounded-full`}
                 >

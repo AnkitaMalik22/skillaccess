@@ -23,7 +23,7 @@ const Dropdown = ({ bookmark, index }) => {
             </div>
             <div className="flex gap-2 self-center">
               <RiBookmark2Fill
-                className="text-[#95ACFA] h-7 w-7 self-center"
+                className="text-blued  h-7 w-7 self-center"
                 onClick={() => dispatch(removeBookmark(bookmark._id))}
               />
 
@@ -31,7 +31,7 @@ const Dropdown = ({ bookmark, index }) => {
                 <FaChevronDown
                   className={`${
                     open ? "rotate-180" : ""
-                  } h-5 w-5 text-[#95ACFA] `}
+                  } h-5 w-5 text-blued  `}
                 />
                 <h2></h2>{" "}
               </Disclosure.Button>

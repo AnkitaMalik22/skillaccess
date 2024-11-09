@@ -231,7 +231,7 @@ const Assessment = () => {
                 {/* labels */}
                 <div className="self-center">
                   <div className="flex gap-1 ">
-                    <div className="w-4 h-4 rounded-full bg-[#0052CC] opacity-60"></div>{" "}
+                    <div className="w-4 h-4 rounded-full bg-accent opacity-60"></div>{" "}
                     <h2 className="text-xs font-bold text-[#7F7F7F]">
                       Total Students Applied
                     </h2>
@@ -257,7 +257,7 @@ const Assessment = () => {
                 <h2>Total Attempts</h2>{" "}
                 <input
                   type="date"
-                  className="rounded-lg focus:outline-none  border-none text-blue-500 "
+                  className="rounded-lg focus:outline-none  border-none text-blued "
                 />
               </span>
               <div className="w-full h-60">

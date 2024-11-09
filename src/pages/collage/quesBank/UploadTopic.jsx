@@ -609,7 +609,7 @@ const AddQuestionsSelect = () => {
         <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
           <div className=" flex">
             <button
-              className="self-center justify-center flex bg-[#0052CC] py-[5px] px-3 rounded-2xl text-xs gap-2 text-white"
+              className="self-center justify-center flex bg-accent py-[5px] px-3 rounded-2xl text-xs gap-2 text-white"
               onClick={() => navigate(`/collage/quesBank/topic`)}
             >
               View All
@@ -751,14 +751,14 @@ const AddQuestionsSelect = () => {
       <div className=" w-11/12 mx-auto flex justify-end mt-14">
         <div className="flex gap-4">
           {/* <button
-            className="self-center justify-center flex bg-white border border-blue-500 py-3 px-8 rounded-xl text-xs gap-2 text-blue-500"
+            className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-xs gap-2 text-blued"
             onClick={NavHandler}
           >
             New Question
           </button> */}
 
           <button
-            className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 "
+            className="self-center justify-center flex bg-accent py-3  rounded-xl w-48 text-white  gap-2 "
             onClick={() => {
               selectQuestionType === ""
                 ? toast.error("Please select a question type")
@@ -780,7 +780,7 @@ const AddQuestionsSelect = () => {
             Upload Questions
           </button>
 
-          {/* <button className="self-center justify-center flex bg-white border border-blue-500 py-3 px-8 rounded-xl text-xs gap-2 text-blue-500">
+          {/* <button className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-xs gap-2 text-blued">
             Copy question from another assessment
           </button> */}
         </div>

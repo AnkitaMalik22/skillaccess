@@ -176,7 +176,7 @@ const Header = () => {
             // Show "Submit" button
 
             <button
-              className="self-center justify-center flex bg-[#0052CC] py-3 px-8 rounded-2xl text-xs gap-2 text-white"
+              className="self-center justify-center flex bg-accent py-3 px-8 rounded-2xl text-xs gap-2 text-white"
               onClick={handleSave}
             >
               Submit
@@ -192,7 +192,7 @@ const Header = () => {
 
           //   <button
 
-          //     className="self-center justify-center flex bg-[#0052CC] py-3 px-8 rounded-2xl text-xs gap-2 text-white"
+          //     className="self-center justify-center flex bg-accent py-3 px-8 rounded-2xl text-xs gap-2 text-white"
 
           //     onClick={() => navigate("/collage/test/select")}
 

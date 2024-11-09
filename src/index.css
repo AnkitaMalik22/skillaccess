@@ -20,7 +20,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgb(107, 107, 198);
+  background-color: #043345;
 
   border-radius: 14px;
   border: 3px solid var(--primary);
@@ -69,4 +69,7 @@
 
 #\:0\.targetLanguage select:not(:first-child) {
   display: none;
+}
+[type = "checkbox"] {
+  color : #0AB8C8;
 }

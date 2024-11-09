@@ -52,14 +52,14 @@ const QuesBank = () => {
           <div className="w-full mx-auto bg-[#F8F8F9] md:px-8 md:py-6 py-5 px-5 rounded-3xl">
             <div className="flex justify-between mb-6 items-center ">
               <div className="flex gap-2 self-center">
-                <LuBookmarkMinus className="self-center text-2xl text-[#95ACFA]" />
+                <LuBookmarkMinus className="self-center text-2xl text-blued " />
                 <h2 className="font-bold text-base self-center">
                   Bookmark questions
                 </h2>
               </div>
 
               <button
-                className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-[5px] px-3"
+                className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
                 onClick={() => navigate("/collage/quesBank/bookmarks")}
               >
                 View All

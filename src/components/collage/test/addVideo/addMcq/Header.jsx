@@ -64,14 +64,14 @@ const Header = ({ question, setQuestion, handleSave }) => {
       <div className=" rounded-xl mx-2   h-12 flex my-2 font-dmSans ">
         <div className=" flex gap-2">
           <button
-            className="self-center w-24  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white"
+            className="self-center w-24  justify-center flex text-bluedpy-2 px-4 rounded-xl font-bold gap-2 bg-white"
             onClick={() => navigate(-1)}
           >
             Cancel
           </button>
 
           <button
-            className="self-center w-32 justify-center flex bg-blue-700 py-2 font-bold px-4 rounded-xl gap-2 text-white"
+            className="self-center w-32 justify-center flex bg-accent py-2 font-bold px-4 rounded-xl gap-2 text-white"
             // onClick={handleCreateTest}
 
             onClick={handleSaveHeader}

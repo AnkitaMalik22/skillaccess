@@ -25,7 +25,7 @@ const Header = () => {
         <h2 className="text-xl font-bold self-center">UX UI Designer, Google</h2>
       </span>
       <button
-            className="self-center justify-center flex bg-[#0052cc] py-3 px-4 rounded-lg text-xs gap-2 text-white"
+            className="self-center justify-center flex bg-accent py-3 px-4 rounded-lg text-xs gap-2 text-white"
           onClick={handleShow}
           >
             Apply Here{" "}

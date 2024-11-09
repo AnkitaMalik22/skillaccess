@@ -63,7 +63,7 @@ const Header = ({
             <div className="w-14 h-14 bg-blued self-center rounded-lg relative">
               <img src={avatar} alt="" width="56px" className="rounded-lg" />
 
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-blue-700 bg-opacity-80">
+              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
                 <img
                   src="../../images/icons/pen.png"
                   alt=""
@@ -123,7 +123,7 @@ const Header = ({
         {!editable && (
           <div className="self-center text-gray-400 mr-2">
             <button
-              className="py-2 text-white rounded-xl  bg-blue-700 font-bold flex gap-2 px-4 disabled:bg-blue-500"
+              className="py-2 text-white rounded-xl  bg-accent font-bold flex gap-2 px-4 disabled:bg-blue-500"
               disabled={editing}
               onClick={() => {
                 if (editing) {
@@ -280,7 +280,7 @@ const Header = ({
                 />
               ) : (
                 <a
-                  className="self-center text-blue-400 underline bg-transparent font-medium"
+                  className="self-center text-lightBlue underline bg-transparent font-medium"
                   href={college && college.Website ? college.Website : ""}
                   target="_blank"
                   rel="noreferrer"

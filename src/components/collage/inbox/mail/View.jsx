@@ -97,7 +97,7 @@ const View = ({ index, filter, inboxType }) => {
         <div className="flex gap-4">
           {Email?.mail?.attachments?.map((item, i) => {
             return (
-              <div className="bg-[#0052CC] p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
+              <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
                 <div className="flex gap-2">
                   {item.format !== "image" && (
                     <img src="../../images/icons/fileBlue.png" alt="" />
@@ -134,7 +134,7 @@ const View = ({ index, filter, inboxType }) => {
               <div className="flex gap-4">
                 {reply?.attachments?.map((item, i) => {
                   return (
-                    <div className="bg-[#0052CC] p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
+                    <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
                       <div className="flex gap-2">
                         {item.format !== "image" && (
                           <img src="../../images/icons/fileBlue.png" alt="" />
@@ -227,7 +227,7 @@ const View = ({ index, filter, inboxType }) => {
             <BsEmojiSmile className="text-gray-400 text-xl self-center" />
             <TfiClip className="rotate-180 text-2xl text-gray-400 self-center" />
           </div>
-          <button className="text-white text-sm font-bold px-3 bg-blue-700 rounded-xl py-2 self-center">
+          <button className="text-white text-sm font-bold px-3 bg-accent rounded-xl py-2 self-center">
             Send
           </button>
         </div> */}
@@ -256,8 +256,8 @@ const View = ({ index, filter, inboxType }) => {
           <div>
             <button
               className={`${
-                loading ? "disabled !bg-gray-700 " : "bg-blue-700 "
-              } btn  bg-blue-700 text-sm font-bold text-white rounded-xl px-4 py-2`}
+                loading ? "disabled !bg-gray-700 " : "bg-accent "
+              } btn  bg-accent text-sm font-bold text-white rounded-xl px-4 py-2`}
               onClick={() => {
                 if (!loading) {
                   setLoader(true);

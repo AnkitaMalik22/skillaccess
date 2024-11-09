@@ -182,7 +182,7 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
         {showPopup && <StudentPoP onClose={handleClosePopup} />}
 
         <button
-          className="self-center justify-center flex bg-[#0052CC] px-5 py-3  rounded-2xl text-white  gap-2 text-md font-bold w-40"
+          className="self-center justify-center flex bg-accent px-5 py-3  rounded-2xl text-white  gap-2 text-md font-bold w-40"
           onClick={() => {
             upload.current.click();
           }}

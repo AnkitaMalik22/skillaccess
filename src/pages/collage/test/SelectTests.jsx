@@ -353,7 +353,7 @@ const SelectTests = () => {
                   Navigate(`/collage/test/createTopic?level=${level}`);
                 }}
               >
-                <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
+                <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued" />
               </div>
 
               <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60">

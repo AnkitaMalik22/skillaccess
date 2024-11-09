@@ -88,7 +88,7 @@ const Dashboard = () => {
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
             <div className="rounded-lg bg-[#fafbff] w-10 h-10 flex justify-center mb-4">
-              <TbBriefcase2 className="text-[#95ACFA] self-center w-6 h-6 " />
+              <TbBriefcase2 className="text-blued  self-center w-6 h-6 " />
             </div>
             <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
               {jobs.length}
@@ -106,7 +106,7 @@ const Dashboard = () => {
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
             <div className="rounded-lg bg-[#fafbff] w-10 h-10 flex justify-center mb-4">
-              <MdOutlinedFlag className="text-[#0052CC] self-center w-6 h-6 " />
+              <MdOutlinedFlag className="text-blued  self-center w-6 h-6 " />
             </div>
             <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
               {assessments.length}
@@ -118,10 +118,10 @@ const Dashboard = () => {
               className="flex gap-2 justify-center hover:cursor-pointer"
               onClick={() => navigate("/collage/test")}
             >
-              <h2 className="text-[#0052CC] font-bold text-center  text-base  ">
+              <h2 className="text-blued  font-bold text-center  text-base  ">
                 Create New
               </h2>
-              <FaArrowRight className="text-[#0052CC] self-center" />
+              <FaArrowRight className="text-blued  self-center" />
             </span>
           </div>
         </div>
@@ -138,7 +138,7 @@ const Dashboard = () => {
             </div>
 
             <button
-              className="text-[#95ACFA] text-sm mb-4 md:mb-8"
+              className="text-blued  text-sm mb-4 md:mb-8"
               onClick={() => navigate("/collage/companies")}
             >
               See All
@@ -157,7 +157,7 @@ const Dashboard = () => {
             </div>
 
             <button
-              className="text-[#95ACFA] text-sm mb-4 md:mb-8"
+              className="text-blued  text-sm mb-4 md:mb-8"
               onClick={() => navigate("/collage/companies/jobs")}
             >
               See All

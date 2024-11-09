@@ -30,7 +30,7 @@ const Upload = () => {
           <BackIcon />
         </button>
 
-        <button className="bg-[#0052CC] text-white font-bold  self-center   text-sm 3xl:text-base rounded-lg py-3 px-6">
+        <button className="bg-accent text-white font-bold  self-center   text-sm 3xl:text-base rounded-lg py-3 px-6">
           Upload New
         </button>
       </div>
@@ -52,7 +52,7 @@ const Upload = () => {
           <p className="text-2xl text-center text-gray-300 mt-1">or </p>
           <div className="w-full flex justify-center">
             <label for="upload-file">
-              <div className="bg-[#0052CC] text-white font-bold   text-sm 3xl:text-base rounded-lg py-3 px-6 mx-auto hover:cursor-pointer">
+              <div className="bg-accent text-white font-bold   text-sm 3xl:text-base rounded-lg py-3 px-6 mx-auto hover:cursor-pointer">
                 Select a file from your computer
               </div>
             </label>

@@ -117,7 +117,7 @@ const Compose = () => {
       <div className="flex gap-4">
         {attachments?.map((item, i) => {
           return (
-            <div className="bg-[#0052CC] p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
+            <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
               <div className="flex gap-2">
                 {item.format !== "image" && (
                   <img src="../../images/icons/fileBlue.png" alt="" />
@@ -177,7 +177,7 @@ const Compose = () => {
         <div>
           <button
             className={`${
-              loading ? "disabled !bg-gray-700 " : "bg-blue-700 "
+              loading ? "disabled !bg-gray-700 " : "bg-accent "
             } btn text-sm font-bold text-white rounded-xl px-4 py-2 mt-4`}
             onClick={handleSubmit}
           >

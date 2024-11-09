@@ -6,7 +6,7 @@ const Gpay = ({ onCancel ,Plan}) => {
   return (
     <div className="w-full  min-w-full h-screen  min-h-[100vh] bg-black absolute z-[9999] flex left-0 top-0 bg-opacity-30 ">
       <div className="bg-white shadow-md w-[780px] h-96 mx-auto self-center   rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-4 relative">
-        <p className="text-[28px] font-bold flex justify-center mt-6 text-[#0052cc] ">
+        <p className="text-[28px] font-bold flex justify-center mt-6 text-blued  ">
             Make a Payment
         </p>
         <div className="w-full flex gap-4 mb-6">
@@ -20,10 +20,10 @@ const Gpay = ({ onCancel ,Plan}) => {
           </div>
           <div className="w-[52%] flex flex-col gap-4 justify-center">
             <p className="font-medium text-xl text-[#7f7f7f]">
-             Plan Name: <span className="text-[#0052cc]"> {Plan?.name}</span>
+             Plan Name: <span className="text-blued "> {Plan?.name}</span>
             </p>
             <p className="font-medium text-xl text-[#7f7f7f]">
-                Plan Amount:  <span className="text-[#0052cc]"> ₹{Plan?.price}</span>
+                Plan Amount:  <span className="text-blued "> ₹{Plan?.price}</span>
             </p>
             <GooglePayButton
               environment="TEST"

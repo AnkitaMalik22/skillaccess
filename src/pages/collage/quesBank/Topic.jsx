@@ -215,7 +215,7 @@ const Topic = () => {
             />{" "}
             {selectedSections?.length > 0 ? (
               <button
-                className="rounded-xl bg-[#0052cc] text-sm font-bold text-white py-2 px-4 ml-2 flex items-center gap-1 "
+                className="rounded-xl bg-accent text-sm font-bold text-white py-2 px-4 ml-2 flex items-center gap-1 "
                 onClick={handleDelete}
               >
                 Delete Selected
@@ -286,7 +286,7 @@ const Topic = () => {
                         }}
                       >
                         <Folder />
-                        <p className="text-[#95ACFA] text-sm">
+                        <p className="text-blued  text-sm">
                           {getTotalQuestions(section)} Files
                         </p>
                       </div>

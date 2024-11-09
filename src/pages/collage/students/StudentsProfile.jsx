@@ -44,7 +44,7 @@ const StudentsProfile = () => {
                       <h2
                         className={`${
                           toggle === 1
-                            ? "text-blue-500 border-b-4 border-blue-500"
+                            ? "text-blued border-b-4 border-blued"
                             : ""
                         } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(1)}
@@ -54,7 +54,7 @@ const StudentsProfile = () => {
                       <h2
                         className={`${
                           toggle === 2
-                            ? "text-blue-500 border-b-4 border-blue-500"
+                            ? "text-blued border-b-4 border-blued"
                             : ""
                         } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(2)}
@@ -64,7 +64,7 @@ const StudentsProfile = () => {
                       <h2
                         className={`${
                           toggle === 3
-                            ? "text-blue-500 border-b-4 border-blue-500"
+                            ? "text-blued border-b-4 border-blued"
                             : ""
                         } w-fit px-12 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(3)}
@@ -74,7 +74,7 @@ const StudentsProfile = () => {
                       <h2
                         className={`${
                           toggle === 4
-                            ? "text-blue-500 border-b-4 border-blue-500"
+                            ? "text-blued border-b-4 border-blued"
                             : ""
                         } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(4)}

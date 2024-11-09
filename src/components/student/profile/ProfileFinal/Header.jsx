@@ -13,7 +13,7 @@ const Header = ({ editable, setEditable }) => {
       {/* comp */}
       <span className="flex gap-2">
         <h2 className="text-2xl  font-bold  py-1  self-center">Personal</h2>{" "}
-        <div className=" p-[.3rem] w-6 h-6 rounded-lg  bg-blue-700 bg-opacity-80 self-center">
+        <div className=" p-[.3rem] w-6 h-6 rounded-lg  bg-accent bg-opacity-80 self-center">
           <img
             src="../../../images/icons/pen.png"
             alt="pen"
@@ -24,7 +24,7 @@ const Header = ({ editable, setEditable }) => {
 
       <span className="flex gap-2 text-xs font-bold">
         <button
-          className="self-center justify-center flex bg-[#0052CC] bg-opacity-80 py-3  rounded-xl  w-32  gap-2 text-white"
+          className="self-center justify-center flex bg-accent bg-opacity-80 py-3  rounded-xl  w-32  gap-2 text-white"
           // onClick={() => navigate("/collage/test/addMcq")}
         >
           Personal
