@@ -20,7 +20,7 @@ const SecondFA = () => {
         />
         <button
           className={`h-10 w-[400px] text-lg font-semibold rounded-[6px] text-[#fff] ${
-            totp ? "bg-blue-700 " : " bg-blued disabled:opacity-50"
+            totp ? "bg-accent " : " bg-blued disabled:opacity-50"
           }`}
           disabled={!totp} // Disable button when totp is empty
           onClick={handleSubmit} // Handle form submission

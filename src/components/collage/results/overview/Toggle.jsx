@@ -10,7 +10,7 @@ const Toggle = ({ assessment }) => {
       <div className="grid grid-cols-3 text-xs font-bold border-b border-spacing-0 border-gray-200 mb-4">
         <h2
           className={`${
-            toggle === 1 ? "text-blue-500 border-b-4 border-blue-500" : ""
+            toggle === 1 ? "text-blued border-b-4 border-blued" : ""
           } w-fit py-2 hover:cursor-pointer mx-auto`}
           onClick={() => setToggle(1)}
         >
@@ -18,7 +18,7 @@ const Toggle = ({ assessment }) => {
         </h2>
         <h2
           className={`${
-            toggle === 2 ? "text-blue-500 border-b-4 border-blue-500" : ""
+            toggle === 2 ? "text-blued border-b-4 border-blued" : ""
           } w-fit py-2 hover:cursor-pointer mx-auto`}
           onClick={() => setToggle(2)}
         >
@@ -26,7 +26,7 @@ const Toggle = ({ assessment }) => {
         </h2>
         <h2
           className={`${
-            toggle === 3 ? "text-blue-500 border-b-4 border-blue-500" : ""
+            toggle === 3 ? "text-blued border-b-4 border-blued" : ""
           } w-fit py-2 hover:cursor-pointer mx-auto`}
           onClick={() => setToggle(3)}
         >

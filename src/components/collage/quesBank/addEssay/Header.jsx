@@ -67,13 +67,13 @@ const Header = ({
     //   <div className=" rounded-xl mx-2   h-12 flex my-2 font-dmSans ">
     //     <div className=" flex gap-2">
     //       <button
-    //         className="self-center w-24  justify-center flex text-blue-800 py-2 px-4 rounded-xl font-bold gap-2 bg-white"
+    //         className="self-center w-24  justify-center flex text-bluedpy-2 px-4 rounded-xl font-bold gap-2 bg-white"
     //         onClick={() => navigate(-1)}
     //       >
     //         Cancel
     //       </button>
     //       <button
-    //         className="self-center w-32 justify-center flex bg-blue-700 py-2 font-bold px-4 rounded-xl gap-2 text-white"
+    //         className="self-center w-32 justify-center flex bg-accent py-2 font-bold px-4 rounded-xl gap-2 text-white"
     //         // onClick={() => navigate("/collage/test/preview")}
     //         onClick={() => handleSave("save")}
     //       >
@@ -100,7 +100,7 @@ const Header = ({
 
       <div className="flex gap-3">
         <button
-          className="bg-[#0052CC] self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
+          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={() => {
             navigate(-1);
           }}
@@ -108,7 +108,7 @@ const Header = ({
           Cancel
         </button>{" "}
         <button
-          className="bg-[#0052CC] self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
+          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={handleSave}
         >
           {ADD_QUESTION_LOADING ? "Saving" : "Save"}

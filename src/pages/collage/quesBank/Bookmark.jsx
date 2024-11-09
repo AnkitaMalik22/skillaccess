@@ -97,7 +97,7 @@ const Bookmarks = () => {
                 key={pageNumber}
                 className={`rounded-lg h-10 w-10 flex justify-center ${
                   selected === pageNumber
-                    ? "bg-blue-700 text-white"
+                    ? "bg-accent text-white"
                     : "bg-gray-100"
                 }`}
                 onClick={() => setSelected(pageNumber)}

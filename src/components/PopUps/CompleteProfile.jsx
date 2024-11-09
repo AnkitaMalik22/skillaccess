@@ -4,7 +4,7 @@ const CompleteProfile = ({ onCancel }) => {
   return (
     <div className="w-full  min-w-full h-screen  min-h-[100vh] bg-black absolute z-[9999] flex left-0 top-0 bg-opacity-30 ">
       <div className="bg-white shadow-md w-[780px] h-96 mx-auto self-center   rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-4 relative">
-        <p className="text-[28px] font-bold flex justify-center mt-6 text-[#0052cc] ">
+        <p className="text-[28px] font-bold flex justify-center mt-6 text-blued  ">
           Complete your profile first
         </p>
         <div className="w-full flex gap-4 mb-6">
@@ -16,7 +16,7 @@ const CompleteProfile = ({ onCancel }) => {
               To start your journey with us, fill in your profile details first
               to have seemless experience
             </p>
-            <button className="bg-[#0052cc] mt-14 w-full rounded-[16px] text-[12px] text-[#fff] py-3">
+            <button className="bg-accent mt-14 w-full rounded-[16px] text-[12px] text-[#fff] py-3">
               Continue
             </button>
           </div>

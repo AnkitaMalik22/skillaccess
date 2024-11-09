@@ -269,7 +269,7 @@ const AddVideo = () => {
 
                 <p className="text-base font-bold pt-4">
                   Drag & drop video files or{" "}
-                  <a className="text-[#0052cc] border-b-2 border-[#0052cc]  cursor-pointer">
+                  <a className="text-blued  border-b-2 border-[#0052cc]  cursor-pointer">
                     Browse
                   </a>
                 </p>
@@ -284,7 +284,7 @@ const AddVideo = () => {
             <div className="flex gap-4 mt-10">
               {!recording && (
                 <button
-                  className="self-center justify-center flex items-center bg-[#0052CC] w-[196px] h-[56px] px-4 rounded-2xl text-xs gap-2 text-white"
+                  className="self-center justify-center flex items-center bg-accent w-[196px] h-[56px] px-4 rounded-2xl text-xs gap-2 text-white"
                   {...getRootProps()}
                 >
                   <GrUploadOption className=" w-[22px] h-[22px] text-white" />
@@ -306,7 +306,7 @@ const AddVideo = () => {
             <div className="flex mt-10">
               {!recording && (
                 <button
-                  className="self-center justify-center border-2 border-[#0052cc] font-medium flex items-center bg-blue-100 px-4 rounded-2xl text-[20px] gap-2 h-[60px] w-[685px] text-[#0052cc]"
+                  className="self-center justify-center border-2 border-[#0052cc] font-medium flex items-center bg-blue-100 px-4 rounded-2xl text-[20px] gap-2 h-[60px] w-[685px] text-blued "
                   onClick={handleStartRecording}
                 >
                   <PiVideoCamera className="h-[40px] w-[40px]" /> Record a Video
@@ -330,14 +330,14 @@ const AddVideo = () => {
                   <button
                     className={`self-center justify-center items-center flex ${
                       paused ? "bg-blue-500" : "bg-red-500"
-                    } text-[#0052cc] py-3 px-4 rounded-2xl text-xs gap-2`}
+                    } text-blued  py-3 px-4 rounded-2xl text-xs gap-2`}
                     onClick={handlePauseResumeRecording}
                   >
                     {paused ? "Resume" : "Pause"}
                   </button>
 
                   <button
-                    className="self-center justify-center flex bg-[#0052CC] py-3 px-4 rounded-2xl text-xs gap-2 text-white ml-4"
+                    className="self-center justify-center flex bg-accent py-3 px-4 rounded-2xl text-xs gap-2 text-white ml-4"
                     onClick={handleStopRecording}
                   >
                     Finish Recording
@@ -381,7 +381,7 @@ const AddVideo = () => {
             </button>
 
             <button
-              className="self-center justify-center flex bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
               //  onClick={()=>{
 
               //   dispatch(addVideo({data:file}));

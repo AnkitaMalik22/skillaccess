@@ -32,7 +32,7 @@ const Info = ({ user, assessment }) => {
       minute: '2-digit'
     });
   
-    return `${day}${daySuffix} ${month} ${timeString}`;
+    return `${day}${daySuffix} ${month}`;
   
   }
 

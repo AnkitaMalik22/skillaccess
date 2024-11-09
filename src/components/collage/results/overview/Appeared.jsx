@@ -71,7 +71,7 @@ const Appeared = ({ assessment }) => {
   return (
     <div className="w-full mx-auto">
       {/* legend */}
-      <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid bg-[#0052CC] bg-opacity-5 rounded-lg p-4 mb-5">
+      <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid bg-accent bg-opacity-5 rounded-lg p-4 mb-5">
         <h2>Name and Profile</h2>
         <h2>Date</h2>
         <h2>Status</h2>
@@ -174,7 +174,7 @@ const Appeared = ({ assessment }) => {
                       )
                     }
                   >
-                    <h2 className="font-dmSans text-sm text-blue-500 ">
+                    <h2 className="font-dmSans text-sm text-blued ">
                       Assessment Review
                     </h2>
                   </span>

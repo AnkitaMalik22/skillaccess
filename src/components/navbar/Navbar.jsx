@@ -37,17 +37,17 @@ const Navbar = (props) => {
       <div className="flex gap-4">
         <button className="border-2 border-[#D9E1E7]  text-[#D9E1E7] rounded-lg px-2 p-1 relative">
           <FiBell className="text-lg" />{" "}
-          <div className="rounded-full h-2 w-2 bg-[#0090FF]  absolute top-1 right-2"></div>
+          <div className="rounded-full h-2 w-2 bg-lightBlue absolute top-1 right-2"></div>
         </button>
 
         <button
           onClick={() => {
             navigate("/collage/accounting");
           }}
-          className="border border-[#D9E1E7] text-[#0090FF] rounded-lg px-3 p-1 relative flex items-center"
+          className="border border-[#D9E1E7] text-blued  rounded-lg px-3 p-1 relative flex items-center"
         >
           <FaCoins />
-          <h1 className="text-[#0090FF] px-2">
+          <h1 className="text-blued  px-2">
             {userDetails?.balance?.credit ? userDetails?.balance?.credit : 0}
           </h1>
         </button>

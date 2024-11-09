@@ -64,7 +64,7 @@ const Footer = ({ students, endDate }) => {
         {" "}
         <div className=" flex gap-2">
           <button
-            className={`self-center justify-center flex bg-blue-700 rounded-lg text-sm font-bold gap-2 px-10 py-3 ${
+            className={`self-center justify-center flex bg-accent rounded-lg text-sm font-bold gap-2 px-10 py-3 ${
               students.length === 0
                 ? "opacity-50 cursor-not-allowed"
                 : isActiveTest(endDate)

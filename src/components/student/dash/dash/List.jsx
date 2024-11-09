@@ -32,22 +32,22 @@ const List = () => {
     <div className="w-full mx-auto">
       {/* legend */}
       <div className=" grid-cols-6  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid">
-        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg p-2 ">
+        <div className="bg-accent bg-opacity-5 rounded-s-lg p-2 ">
           <h2>Assessment Name</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2">
+        <div className="bg-accent bg-opacity-5 p-2">
           <h2>Your Score</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2">
+        <div className="bg-accent bg-opacity-5 p-2">
           <h2>Performance</h2>{" "}
         </div>
-        <div className="bg-[#0052CC]  bg-opacity-5 p-2">
+        <div className="bg-accent  bg-opacity-5 p-2">
           <h2>Profile</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg p-2 ">
+        <div className="bg-accent bg-opacity-5 rounded-s-lg p-2 ">
           <h2>Status</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2 rounded-e-lg">
+        <div className="bg-accent bg-opacity-5 p-2 rounded-e-lg">
           <h2>Details</h2>
         </div>
       </div>
@@ -117,7 +117,7 @@ const List = () => {
                 )
               }
             >
-              <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
+              <h2 className="font-dmSans  text-sm sm:text-base text-blued ">
                 View Details
               </h2>
             </span>

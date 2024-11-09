@@ -92,19 +92,19 @@ const Appeared = ({ assessment }) => {
     <div className="w-full mx-auto">
       {/* legend */}
       <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid">
-        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg p-2 ">
+        <div className="bg-accent bg-opacity-5 rounded-s-lg p-2 ">
           <h2>Name and Profile</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2">
+        <div className="bg-accent bg-opacity-5 p-2">
           <h2>Date</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2">
+        <div className="bg-accent bg-opacity-5 p-2">
           <h2>Status</h2>{" "}
         </div>
-        <div className="bg-[#0052CC]  bg-opacity-5 p-2">
+        <div className="bg-accent  bg-opacity-5 p-2">
           <h2>Assessment Performance(Mcq &Code)</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2 rounded-e-lg">
+        <div className="bg-accent bg-opacity-5 p-2 rounded-e-lg">
           <h2>Review</h2>
         </div>
       </div>
@@ -179,7 +179,7 @@ const Appeared = ({ assessment }) => {
                 )
               }
             >
-              <h2 className="font-dmSans  text-sm sm:text-base text-blue-500 ">
+              <h2 className="font-dmSans  text-sm sm:text-base text-blued ">
                 Assessment Review
               </h2>
             </span>

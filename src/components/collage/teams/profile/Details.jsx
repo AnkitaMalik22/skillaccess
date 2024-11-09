@@ -37,7 +37,7 @@ const Details = ({}) => {
         </div>
 
         <div className="self-center text-gray-400 mr-2">
-          <button className="py-3 text-white rounded-2xl text-xs  bg-[#0052CC] font-bold flex gap-2 px-4">
+          <button className="py-3 text-white rounded-2xl text-xs  bg-accent font-bold flex gap-2 px-4">
             <p>Connect</p>
           </button>
         </div>

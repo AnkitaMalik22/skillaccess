@@ -83,7 +83,7 @@ const Students = () => {
               <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
                 Year
               </h2>
-              <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blue-500">
+              <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blued">
                 {" "}
                 Degree
               </h2>
@@ -204,7 +204,7 @@ const Students = () => {
               <h2 className="font-dmSans font- text-xs sm:text-base break-words text-gray-400 ">
                 2nd year
               </h2>
-              <h2 className="font-dmSans font-semibold text-xs sm:text-xs inline break-words text-blue-500">
+              <h2 className="font-dmSans font-semibold text-xs sm:text-xs inline break-words text-blued">
                 {" "}
                 B.Sc
               </h2>

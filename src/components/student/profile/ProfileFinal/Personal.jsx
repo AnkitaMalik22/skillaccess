@@ -16,7 +16,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
             <div className="w-14 h-14 bg-blued self-center rounded-lg relative">
               <img src={""} alt="" width="50px" />
 
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-blue-700 bg-opacity-80">
+              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
                 <img
                   src="../../images/icons/pen.png"
                   alt=""
@@ -46,7 +46,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
                 className="relative top[-50%]  "
               />
               {editable && (
-                <div className="absolute bottom-2 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-blue-700 bg-opacity-80">
+                <div className="absolute bottom-2 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
                   <img
                     src="../../images/icons/pen.png"
                     alt=""
@@ -83,7 +83,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
         {/* {!editable && (
           <div className="self-center text-gray-400 mr-2">
             <button
-              className="py-2 text-white rounded-xl  bg-blue-700 font-bold flex gap-2 px-4"
+              className="py-2 text-white rounded-xl  bg-accent font-bold flex gap-2 px-4"
               onClick={() => {
                 localStorage.setItem("editable", true);
                 window.location.reload(true);
@@ -189,7 +189,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
                 />
               ) : (
                 <a
-                  className="self-center text-blue-400 underline"
+                  className="self-center text-lightBlue underline"
                   href={student && student.Website ? student.Website : ""}
                   target="_blank"
                   rel="noreferrer"

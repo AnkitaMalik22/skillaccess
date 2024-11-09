@@ -45,7 +45,7 @@ const List = ({ editable, setEditable }) => {
       per: 30,
       name: "Performance",
       icon: (
-        <div className="w-11 h-11 flex justify-center  rounded-xl bg-blue-700 bg-opacity-5">
+        <div className="w-11 h-11 flex justify-center  rounded-xl bg-accent bg-opacity-5">
           <img src="../../images/icons/gauge.png" className=" self-center" />
         </div>
       ),
@@ -68,7 +68,7 @@ const List = ({ editable, setEditable }) => {
         <h1 className="text-lg font-bold ">Achievements</h1>
 
         {editable && (
-          <button className="self-center w-32 justify-center flex bg-blue-700  py-2 font-bold px-4 rounded-xl  text-white gap-2">
+          <button className="self-center w-32 justify-center flex bg-accent  py-2 font-bold px-4 rounded-xl  text-white gap-2">
             <FaPlus className="text-lg self-center" />
             <p className="self-center"> Add New</p>
           </button>
@@ -77,17 +77,17 @@ const List = ({ editable, setEditable }) => {
 
       {/* legend */}
       <div className=" grid-cols-4  text-center mt-6 mb-1 mx-auto  font-dmSans font-bold text-base grid">
-        <div className="bg-[#0052CC] bg-opacity-5 rounded-s-2xl py-2  text-left pl-14">
+        <div className="bg-accent bg-opacity-5 rounded-s-2xl py-2  text-left pl-14">
           <h2>Icon</h2>
         </div>
 
-        <div className="bg-[#0052CC] bg-opacity-5 p-2">
+        <div className="bg-accent bg-opacity-5 p-2">
           <h2>Data Name</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5 p-2 ">
+        <div className="bg-accent bg-opacity-5 p-2 ">
           <h2>Statistics</h2>
         </div>
-        <div className="bg-[#0052CC] bg-opacity-5  p-2 rounded-e-2xl">
+        <div className="bg-accent bg-opacity-5  p-2 rounded-e-2xl">
           <h2>Performance</h2>
         </div>
       </div>

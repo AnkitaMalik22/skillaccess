@@ -374,7 +374,7 @@ const CollageLayout = ({ children }) => {
       )}
       <Navbar open={open} setOpen={setOpen} />
       {/* <div className=" h-full  relative"> */}
-      <section className="flex h-screen  justify-start pt-20 bg-[#95ACFA] font-dmSans">
+      <section className="flex h-screen  justify-start pt-20 bg-secondary font-dmSans">
         <aside
           className={`px-2 sm:px-4 block transition-width overflow-x-hidden bg-secondary z-30  scrollbar overflow-y-scroll ${
             open ? "w-1/2" : "lg:w-[260px] w-20"

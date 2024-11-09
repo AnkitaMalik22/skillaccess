@@ -119,7 +119,7 @@ const StudentPoP = ({ onClose }) => {
 
           <div className="flex justify-end">
             <button
-              className="bg-[#0052cc] text-white px-4 py-3 rounded-xl text-sm font-bold flex item-center justify-center"
+              className="bg-accent text-white px-4 py-3 rounded-xl text-sm font-bold flex item-center justify-center"
               onClick={() => handleSaveInvite()}
             >
               Send Invite {loading && <Loader />}

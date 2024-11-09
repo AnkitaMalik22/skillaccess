@@ -89,20 +89,20 @@ const Recent = () => {
 
         {/* legend */}
         <div className=" grid-cols-5  text-center my-6 mx-auto  font-dmSans font-bold text-base grid">
-          <div className="bg-[#0052CC] bg-opacity-5 rounded-s-lg p-2 ">
+          <div className="bg-accent bg-opacity-5 rounded-s-lg p-2 ">
             <h2>Topic</h2>
           </div>
 
-          <div className="bg-[#0052CC] bg-opacity-5 p-2">
+          <div className="bg-accent bg-opacity-5 p-2">
             <h2>Type</h2>
           </div>
-          <div className="bg-[#0052CC] bg-opacity-5 p-2 ">
+          <div className="bg-accent bg-opacity-5 p-2 ">
             <h2>No. of Questions</h2>
           </div>
-          <div className="bg-[#0052CC] bg-opacity-5  p-2 ">
+          <div className="bg-accent bg-opacity-5  p-2 ">
             <h2>Category</h2>
           </div>
-          <div className="bg-[#0052CC] bg-opacity-5 rounded-e-lg p-2">
+          <div className="bg-accent bg-opacity-5 rounded-e-lg p-2">
             <h2>Actions</h2>{" "}
           </div>
         </div>
@@ -157,7 +157,7 @@ const Recent = () => {
             <div className="flex justify-center ">
               <div className=" self-center h-fit">
                 <span>
-                  <h2 className="font-dmSans font-normal sm:text-sm text-[#0052CC]">
+                  <h2 className="font-dmSans font-normal sm:text-sm text-blued ">
                     UI/UX Designer
                   </h2>
                 </span>

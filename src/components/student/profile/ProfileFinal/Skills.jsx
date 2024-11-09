@@ -6,7 +6,7 @@ const Skills = () => {
     <div className="w-full">
       <span className="flex gap-2">
         <h2 className="text-2xl  font-bold  py-1  self-center">Skills</h2>{" "}
-        <div className=" p-[.3rem] w-6 h-6 rounded-lg  bg-blue-700 bg-opacity-80 self-center">
+        <div className=" p-[.3rem] w-6 h-6 rounded-lg  bg-accent bg-opacity-80 self-center">
           <img
             src="../../../images/icons/pen.png"
             alt="pen"

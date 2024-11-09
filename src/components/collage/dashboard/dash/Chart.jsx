@@ -101,7 +101,7 @@ const ChartComp = () => {
           <span className="flex gap-8 text-sm font-bold">
             <button
               className={`border-2 border-x-transparent border-transparent text-bold ${
-                toggle === 0 && " text-blue-600 border-b-blue-700"
+                toggle === 0 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(0)}
             >
@@ -109,7 +109,7 @@ const ChartComp = () => {
             </button>
             <button
               className={`border-2 border-x-transparent border-transparent text-bold ${
-                toggle === 1 && " text-blue-600 border-b-blue-700"
+                toggle === 1 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(1)}
             >
@@ -117,7 +117,7 @@ const ChartComp = () => {
             </button>
             <button
               className={`border-2 border-x-transparent border-transparent text-bold ${
-                toggle === 2 && " text-blue-600 border-b-blue-700"
+                toggle === 2 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(2)}
             >
@@ -125,7 +125,7 @@ const ChartComp = () => {
             </button>
             <button
               className={`border-2 border-x-transparent border-transparent text-bold ${
-                toggle === 3 && " text-blue-600 border-b-blue-700"
+                toggle === 3 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(3)}
             >
@@ -170,7 +170,7 @@ const ChartComp = () => {
             Recent Placements
           </h1>
           <h1
-            className="text-blue-500 hover:cursor-pointer text-sm"
+            className="text-blued hover:cursor-pointer text-sm"
             onClick={() => navigate("/collage/students")}
           >
             See All

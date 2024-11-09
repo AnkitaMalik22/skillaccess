@@ -32,7 +32,7 @@ const ActiveTests = (props) => {
           <button className=" bg-[#c6e1d9] text-[#00875a] rounded-2xl text-xs font-bold flex gap-2 px-7 text-center py-1 ">
             Remote
           </button>
-          <button className="  bg-[#c6d7f0] text-[#0052cc] rounded-2xl text-xs font-bold flex gap-2 px-7 text-center  py-1 ml-2">
+          <button className="  bg-[#c6d7f0] text-blued  rounded-2xl text-xs font-bold flex gap-2 px-7 text-center  py-1 ml-2">
             Full Time
           </button>
         </div>

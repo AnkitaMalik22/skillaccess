@@ -82,7 +82,7 @@ const ProfilePersonal = () => {
         <div className="mt-12 mb-8">
           <h2 className="text-lg font-bold ">CV</h2>
           <p className="text-lg pt-3">resumefileanamexyz.pdf</p>
-          <button className="self-center justify-center flex bg-blue-700 py-3  rounded-xl w-48 text-white  gap-2 mt-4 ">
+          <button className="self-center justify-center flex bg-accent py-3  rounded-xl w-48 text-white  gap-2 mt-4 ">
             <FiUpload className="self-center text-lg " /> Upload New
           </button>
         </div>

@@ -30,7 +30,7 @@ const Recent = () => {
       <div className="flex justify-between items-center mb-6">
         <h2 className="font-bold text-base">Recent used questions</h2>
         <button
-          className="rounded-xl bg-[#95ACFA] text-xs font-bold text-white py-[5px] px-3"
+          className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
           onClick={() => navigate("/collage/quesBank/recent")}
         >
           View All
@@ -38,7 +38,7 @@ const Recent = () => {
       </div>
 
       {/* legend */}
-      <div className=" grid-cols-3  text-center py-4 mb-6 mx-auto  font-dmSans font-bold text-base grid bg-[#0052CC] bg-opacity-5 ">
+      <div className=" grid-cols-3  text-center py-4 mb-6 mx-auto  font-dmSans font-bold text-base grid bg-accent bg-opacity-5 ">
         <h2>Topic</h2>
         <h2>Type</h2>
         <h2>Actions</h2>{" "}

@@ -36,7 +36,7 @@ const Code = ({
             </h2>
             <div
               className={`w-full h-1 rounded-lg ${
-                toggle === 1 ? "bg-[#0052CC]" : ""
+                toggle === 1 ? "bg-accent" : ""
               } `}
             ></div>
           </div> */}
@@ -50,7 +50,7 @@ const Code = ({
             </h2>
             <div
               className={`w-full h-1 rounded-lg ${
-                toggle === 1 ? "bg-[#0052CC]" : ""
+                toggle === 1 ? "bg-accent" : ""
               } `}
             ></div>
           </div>
@@ -64,7 +64,7 @@ const Code = ({
             </h2>
             <div
               className={`w-full h-1 rounded-lg ${
-                toggle === 2 ? "bg-[#0052CC]" : ""
+                toggle === 2 ? "bg-accent" : ""
               } `}
             ></div>
           </div>
@@ -78,7 +78,7 @@ const Code = ({
             </h2>
             <div
               className={`w-full h-1 rounded-lg ${
-                toggle === 3 ? "bg-[#0052CC]" : ""
+                toggle === 3 ? "bg-accent" : ""
               } `}
             ></div>
           </div>

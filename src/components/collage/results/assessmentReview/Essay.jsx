@@ -21,14 +21,14 @@ const Essay = ({ question, number }) => {
   // //console.log(question , "questionessay");
   return (
     <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10 mb-4">
-      <button className="bg-[#95ACFA] rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] p-3 h-12">
+      <button className="bg-accent rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] p-3 h-12">
         Q-{number}
       </button>
       <div className="w-full ">
         <Disclosure className="relative z-10">
           {({ open }) => (
             <div>
-              <div className=" flex w-full justify-between rounded-lg text-left text-sm font-medium border border-[#95ACFA] p-3">
+              <div className=" flex w-full justify-between rounded-lg text-left text-sm font-medium border border-[#0D9AAC] p-3">
                 <div>
                   <p className="text-sm">{question.Title}</p>
                 </div>

@@ -3,7 +3,7 @@ import { TfiClip } from "react-icons/tfi";
 
 const Left = () => {
   return (
-    <div className={`rounded-lg hover:bg-[#0052CC] hover:bg-opacity-5 p-3`}>
+    <div className={`rounded-lg hover:bg-accent hover:bg-opacity-5 p-3`}>
       <div className="flex justify-between">
         <div className="flex gap-2">
           <div className="w-10 h-10 rounded-lg bg-gray-300 self-center"></div>

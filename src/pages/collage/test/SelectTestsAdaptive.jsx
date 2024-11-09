@@ -405,7 +405,7 @@ const SelectTests = () => {
           handleFilter={handleFilterSections}
           type={"adaptive"}
         />
-        <div className="w-full  mx-auto my-4 p-4 bg-blue-100 border-l-4 border-blue-500 text-blue-700">
+        <div className="w-full  mx-auto my-4 p-4 bg-blue-100 border-l-4 border-blued text-blue-700">
           <Disclosure defaultOpen className="w-full">
             {({ open }) => (
               <div className="w-full">
@@ -470,7 +470,7 @@ const SelectTests = () => {
                   Navigate("/collage/test/createTopicAdaptive?level=adaptive");
                 }}
               >
-                <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blue-500" />
+                <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued" />
               </div>
 
               <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60">
