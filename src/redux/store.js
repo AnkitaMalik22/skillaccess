@@ -13,6 +13,7 @@ import inboxSlice from "./collage/Inbox/inboxSlice.js";
 import dummySlice from "./collage/dummySlice.js";
 import resultSlice from "./collage/result/result.js";
 import companyAuthReducer from  "./company/auth/companyAuthSlice.js";
+import jobReducer from "./company/jobs/jobSlice.js";
 
 const store = configureStore({
   reducer: {
@@ -35,6 +36,7 @@ const store = configureStore({
     // company
 
     companyAuth:  companyAuthReducer,
+    job : jobReducer,
   },
 });
 

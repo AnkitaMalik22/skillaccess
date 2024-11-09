@@ -50,7 +50,7 @@ const LoginCompanyPage = () => {
         if(user.status==="pending"){
           navigate("/company/approval")
         }else{
-          //navigate("/company/dashboard")
+          navigate("/company/dashboard")
         }
       
       } else if (LoginCompany.rejected.match(res)) {

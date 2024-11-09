@@ -1,4 +1,4 @@
-const { lightBlue } = require('@mui/material/colors');
+
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
