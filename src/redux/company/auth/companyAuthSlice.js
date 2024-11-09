@@ -14,7 +14,9 @@ const companyState = {
     login:{
         loading:false,
         error:null
-    }
+    },
+    isCompanyLogin:false,
+
 
 };
 
@@ -104,10 +106,11 @@ export const getCompany = createAsyncThunk(
              
                 {
                     headers: {
-                       "auth-token":getCookie()
+                       "auth-token":getCookie("token")
                     },
                 }
             );
+            console.log(req.data , "inside get company")
             return req.data;
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || "An error occurred");
@@ -129,6 +132,7 @@ const companyAuthSlice = createSlice({
             .addCase(RegisterCompany.fulfilled, (state, action) => {
                 state.register.loading = false;
                 state.data = action.payload.user;
+                state.isCompanyLogin = true;
                 document.cookie = `token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
             })
             .addCase(RegisterCompany.rejected, (state, action) => {
@@ -142,20 +146,27 @@ const companyAuthSlice = createSlice({
             .addCase(LoginCompany.fulfilled, (state, action) => {
                 state.login.loading = false;
                 state.data = action.payload.user;
+                state.isCompanyLogin = true;
                 document.cookie = `token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
             })
             .addCase(LoginCompany.rejected, (state, action) => {
                 state.login.loading = false;
                 state.login.error = action.payload;
             }).addCase(getCompany.pending, (state) => {
+                state.data = null;
               
             })
             .addCase(getCompany.fulfilled, (state, action) => {
              
-                state.data = action.payload.user;
+                state.data = action.payload.company;
+                state.isCompanyLogin = true;
+                console.log(action.payload)
                
             })
             .addCase(getCompany.rejected, (state, action) => {
+                alert(action.payload);
+                state.data = null;
+                state.isCompanyLogin = false;
               
             });
     },

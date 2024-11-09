@@ -3,9 +3,19 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import { setSelected, selected } from "../redux/collage/sidebar/sideSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getCompany } from "../redux/company/auth/companyAuthSlice";
+// import {
+//   setInTest,
+//   setTestBasicDetails,
+//   setTestSelectedTopics,
+// } from "../redux/company/test/testSlice";
 
-const CollageLayout = ({ children }) => {
+import PopUp from "../components/PopUps/PopUp";
+import { toast } from "react-hot-toast";
+import { getCompany } from "../redux/company/auth/companyAuthSlice";
+import CompanyNavbar from "../components/navbar/CompanyNavbar";
+import { Outlet } from 'react-router-dom';
+
+const CompanyLayout = ({ children }) => {
   const [visible, setVisible] = useState(false);
   const [change, setChange] = useState(false);
   const [path, setPath] = useState("");
@@ -19,6 +29,9 @@ const CollageLayout = ({ children }) => {
 
   const location = useLocation();
 
+  useEffect(() => {
+    dispatch(getCompany());
+  }, []);
 
   useEffect(() => {
     // Update sidebar selection based on the current path
@@ -33,7 +46,7 @@ const CollageLayout = ({ children }) => {
   const arr = [
     {
       name: "Dashboard",
-      path: "/collage/dashboard",
+      path: "/company/pr/dashboard",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -52,8 +65,28 @@ const CollageLayout = ({ children }) => {
       ),
     },
     {
+      name: "Jobs",
+      path: "/company/pr/jobs",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          viewBox="0 0 21 21"
+          fill="none"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M2.64642 7.4993H7.5779V2.4998H2.64642V7.4993ZM1.66012 9.5C1.11504 9.5 0.673828 9.0518 0.673828 8.50009V1.49989C0.673828 0.94729 1.11504 0.5 1.66012 0.5H8.56508C9.10928 0.5 9.55138 0.9473 9.55138 1.49989V8.50009C9.55138 9.0518 9.10928 9.5 8.56508 9.5H1.66012ZM13.4966 7.4993H18.4289V2.4998H13.4966V7.4993ZM12.5103 9.5C11.9652 9.5 11.524 9.0518 11.524 8.50009V1.49989C11.524 0.94729 11.9652 0.5 12.5103 0.5H19.4152C19.9594 0.5 20.4015 0.9473 20.4015 1.49989V8.50009C20.4015 9.0518 19.9594 9.5 19.4152 9.5H12.5103ZM2.64642 18.5H7.5779V13.4996H2.64642V18.5ZM1.66012 20.4998C1.11504 20.4998 0.673828 20.0516 0.673828 19.4999V12.4997C0.673828 11.9471 1.11504 11.4998 1.66012 11.4998H8.56508C9.10928 11.4998 9.55138 11.9471 9.55138 12.4997V19.4999C9.55138 20.0516 9.10928 20.4998 8.56508 20.4998H1.66012ZM13.4966 18.5H18.4289V13.4996H13.4966V18.5ZM12.5103 20.4998C11.9652 20.4998 11.524 20.0516 11.524 19.4999V12.4997C11.524 11.9471 11.9652 11.4998 12.5103 11.4998H19.4152C19.9594 11.4998 20.4015 11.9471 20.4015 12.4997V19.4999C20.4015 20.0516 19.9594 20.4998 19.4152 20.4998H12.5103Z"
+            fill={`${hovered === 1 || selection === 1 ? "#171717" : "white"}`}
+          />
+        </svg>
+      ),
+    },
+    {
       name: "Test",
-      path: "/collage/test",
+      path: "/company/test",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +106,7 @@ const CollageLayout = ({ children }) => {
     },
     {
       name: "Companies",
-      path: "/collage/companies",
+      path: "/company/companies",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +126,7 @@ const CollageLayout = ({ children }) => {
     },
     {
       name: "Students",
-      path: "/collage/students",
+      path: "/company/students",
       icon: (
         <svg
           width="20"
@@ -113,7 +146,7 @@ const CollageLayout = ({ children }) => {
     },
     {
       name: "Results",
-      path: "/collage/results",
+      path: "/company/results",
       icon: (
         <svg
           width="25"
@@ -133,7 +166,7 @@ const CollageLayout = ({ children }) => {
     },
     {
       name: "Question Bank",
-      path: "/collage/quesBank",
+      path: "/company/quesBank",
       icon: (
         <svg
           width="24"
@@ -154,7 +187,7 @@ const CollageLayout = ({ children }) => {
     { name: "Notifications", path: "" },
     {
       name: "Profile",
-      path: "/collage/profile",
+      path: "/company/profile",
       icon: (
         <svg
           width="18"
@@ -174,7 +207,7 @@ const CollageLayout = ({ children }) => {
     },
     {
       name: "Inbox",
-      path: "/collage/inbox",
+      path: "/company/inbox",
       icon: (
         <svg
           width="22"
@@ -194,7 +227,7 @@ const CollageLayout = ({ children }) => {
     },
     {
       name: "Teams",
-      path: "/collage/teams",
+      path: "/company/teams",
       icon: (
         <svg
           width="21"
@@ -232,7 +265,7 @@ const CollageLayout = ({ children }) => {
     },
     {
       name: "Accounting",
-      path: "/collage/accounting",
+      path: "/company/accounting",
       icon: (
         <svg
           width="26"
@@ -252,7 +285,7 @@ const CollageLayout = ({ children }) => {
     },
     {
       name: "Settings",
-      path: "/collage/settings",
+      path: "/company/settings",
       icon: (
         <svg
           width="23"
@@ -274,17 +307,18 @@ const CollageLayout = ({ children }) => {
 
   useEffect(() => {
     const pathToSelectionIndex = {
-      "/collage/dashboard": 0,
-      "/collage/test": 1,
-      "/collage/companies": 2,
-      "/collage/students": 3,
-      "/collage/results": 4,
-      "/collage/quesBank": 5,
-      "/collage/profile": 7,
-      "/collage/inbox": 8,
-      "/collage/teams": 9,
-      "/collage/accounting": 10,
-      "/collage/settings": 11,
+      "/company/pr/dashboard": 0,
+      // "/company/test": 1,
+      "/company/pr/jobs": 1,
+      "/company/pr/test": 2,
+      "/company/students": 3,
+      "/company/results": 4,
+      "/company/quesBank": 5,
+      "/company/profile": 7,
+      "/company/inbox": 8,
+      "/company/teams": 9,
+      "/company/accounting": 10,
+      "/company/settings": 11,
     };
 
     const matchPath = Object.keys(pathToSelectionIndex).find((path) =>
@@ -297,50 +331,50 @@ const CollageLayout = ({ children }) => {
     }
   }, [dispatch, location.pathname]);
 
- 
+  //do not remove
   useEffect(() => {
     if (change === true) {
-      if (path.match(/\/collage\/dashboard*/)) {
+      if (path.match(/\/company\/dashboard*/)) {
         dispatch(setSelected(0));
       }
 
-      if (path.match(/\/collage\/test*/)) {
+      if (path.match(/\/company\/test*/)) {
         dispatch(setSelected(1));
       }
 
-      if (path.match(/\/collage\/companies*/)) {
+      if (path.match(/\/company\/companies*/)) {
         dispatch(setSelected(2));
       }
 
-      if (path.match(/\/collage\/students*/)) {
+      if (path.match(/\/company\/students*/)) {
         dispatch(setSelected(3));
       }
 
-      if (path.match(/\/collage\/results*/)) {
+      if (path.match(/\/company\/results*/)) {
         dispatch(setSelected(4));
       }
 
-      if (path.match(/\/collage\/quesBank*/)) {
+      if (path.match(/\/company\/quesBank*/)) {
         dispatch(setSelected(5));
       }
 
-      if (path.match(/\/collage\/profile*/)) {
+      if (path.match(/\/company\/profile*/)) {
         dispatch(setSelected(7));
       }
 
-      if (path.match(/\/collage\/inbox*/)) {
+      if (path.match(/\/company\/inbox*/)) {
         dispatch(setSelected(8));
       }
 
-      if (path.match(/\/collage\/teams*/)) {
+      if (path.match(/\/company\/teams*/)) {
         dispatch(setSelected(9));
       }
 
-      if (path.match(/\/collage\/accounting*/)) {
+      if (path.match(/\/company\/accounting*/)) {
         dispatch(setSelected(10));
       }
 
-      if (location.pathname.match(/\/collage\/settings*/)) {
+      if (location.pathname.match(/\/company\/settings*/)) {
         dispatch(setSelected(11));
       }
 
@@ -350,35 +384,21 @@ const CollageLayout = ({ children }) => {
 
     // toast.success(path);
   });
-
-  useEffect(() => {
-    const getMe = async () => {
-      try {
-        const res = await dispatch(getCompany(data));
-        if (getCompany.fulfilled.match(res)) {
-          toast.success("Logged in successfully");
-          if (user.status === "pending") {
-            // Handle pending status
-          } else {
-            // navigate("/company/dashboard")
-          }
-        } else if (getCompany.rejected.match(res)) {
-          navigate("/company");
-        }
-      } catch (error) {
-        toast.error("Invalid Email or Password");
-      }
-    };
-  
-    getMe();
-  }, []);
-  
   return (
     <>
-    
-      <Navbar open={open} setOpen={setOpen} />
+      {visible && (
+        <PopUp
+          handleSave={() => {
+            setChange(true);
+          }}
+          handleOverlay={() => setVisible(false)}
+          message={"Test data will be lost. Are you sure you want to exit ?"}
+          saveText={"Continue"}
+        />
+      )}
+      <CompanyNavbar open={open} setOpen={setOpen} />
       {/* <div className=" h-full  relative"> */}
-      <section className="flex h-screen  justify-start pt-20 bg-[#95ACFA] font-dmSans">
+      <section className="flex h-screen  justify-start pt-20 bg-secondary font-dmSans">
         <aside
           className={`px-2 sm:px-4 block transition-width overflow-x-hidden bg-secondary z-30  scrollbar overflow-y-scroll ${
             open ? "w-1/2" : "lg:w-[260px] w-20"
@@ -394,7 +414,27 @@ const CollageLayout = ({ children }) => {
                 onMouseOver={() => setHovered(i)}
                 onMouseOut={() => setHovered(null)}
                 onClick={() => {
+                  if (
+                    !location.pathname.match(/\/company\/test\/.*/) ||
+                    location.pathname.match(/\/company\/test\/final.*/) ||
+                    location.pathname.match(/\/company\/test\/invite.*/)
+                  ) {
+                    dispatch(setSelected(i));
+                    // dispatch(
+                    //   setTestBasicDetails({
+                    //     name: "",
+                    //     description: "",
+                    //     totalAttempts: null,
+                    //     totalQuestions: 0,
+                    //   })
+                    // );
+                    // dispatch(setTestSelectedTopics([]));
+                    setOpen(false);
                     navigate(el.path);
+                  } else {
+                    setVisible(true);
+                    setPath(el.path);
+                  }
                 }}
               >
                 <button
@@ -428,6 +468,7 @@ const CollageLayout = ({ children }) => {
         </aside>
 
         <main className="container p-5 md:p-10 bg-white rounded-3xl h-[90vh] overflow-y-scroll w-full flex-1  font-dmSans mr-5 ">
+          <Outlet />
           <div className="row">{children}</div>
         </main>
       </section>
@@ -436,4 +477,4 @@ const CollageLayout = ({ children }) => {
   );
 };
 
-export default CollageLayout;
+export default CompanyLayout;

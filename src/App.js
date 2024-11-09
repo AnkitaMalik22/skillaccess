@@ -21,14 +21,21 @@ import NotAuth from "./components/PopUps/NotAuth";
 import AccountRoute from "./pages/collage/accounting/AccountRoutes";
 import CollageLayout from "./layout/Collage";
 import SecurityAppPage from "./pages/collage/settings/SecurityAppPage";
-import LoginCompany from "./pages/company/auth/Login";
-import RegisterCompany from "./pages/company/auth/RegisterCompany";
-import getCookie from "./util/getToken";
-import AwaitingApproval from "./pages/company/AwatingApproval";
+
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
 const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
 const Dashboard = lazy(() => import("./pages/collage/dashboard/Dashboard"));
+
+// company imports
+import LoginCompany from "./pages/company/auth/Login";
+import RegisterCompany from "./pages/company/auth/RegisterCompany";
+import getCookie from "./util/getToken";
+import AwaitingApproval from "./pages/company/AwatingApproval";
+import DashboardCompany from "./pages/company/dashboard/Dashboard";
+import CompanyLayout from "./layout/Company";
+import Job from "./pages/company/jobs/Job";
+import CreateJob from "./pages/company/jobs/CreateJob";
 
 export default function App() {
   const [loader, setLoader] = useState(true);
@@ -37,6 +44,9 @@ export default function App() {
 
   const { user, isLoggedIn, logoutError, USER_LOADING } = useSelector(
     (state) => state.collageAuth
+  );
+  const { data: company, isCompanyLogin } = useSelector(
+    (state) => state.companyAuth
   );
   const location = useLocation();
   const [paths, setPaths] = useState([
@@ -47,7 +57,7 @@ export default function App() {
     /^\/password\/reset\/.*$/, // Match for "/password/reset/*"
     /^\/collage\/me\/failed$/, // Exact match for "/collage/me/failed"
     /^\/collage\/settings\/security\/securityApp$/, // Exact match for "/collage/settings/security/securityApp"
-    /^\/company.*$/
+    /^\/company.*$/,
   ]);
 
   useEffect(() => {
@@ -77,14 +87,14 @@ export default function App() {
     }
   }, [logoutError]);
   useEffect(() => {
-    if (/^\/company\/pr\/.*$/.test(window.location.pathname) && !getCookie()) {
+    if (/^\/company\/pr\/.*$/.test(window.location.pathname) && !getCookie("token")) {
       console.log(!getCookie);
       navigate("/company");
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if (isLoggedIn && window.location.pathname === "/") {
+    if (isLoggedIn && window.location.pathname === "/" && !company) {
       navigate("/collage/dashboard");
     }
   }, [isLoggedIn, navigate]);
@@ -134,14 +144,28 @@ export default function App() {
               <Route path="" element={<LoginCompany />} />
               <Route path="register" element={<RegisterCompany />} />
               <Route path="approval" element={<AwaitingApproval />} />
-              {/* protected company routes below */}
-              <Route path="pr">
-
-              </Route>
+              <Route path="pr"  element={<CompanyLayout />}>
+            {/* <Route path="/" element={<CompanyLayout />}> */}
+            
+            <Route path="dashboard" element={<DashboardCompany />} />
+            <Route path="jobs" element={<Job />} />
+            <Route path="jobs/create" element={<CreateJob />} />
+            
+           
+             </Route>
             </Route>
+              
+            {/* </Route> */}
+           
+            {/* {isCompanyLogin && (
+          <Route path="/company" element={<CompanyLayout />}>
+            <Route path="dashboard" element={<DashboardCompany />} />
+          </Route>
+        )} */}
           </Routes>
         </Suspense>
       )}
+      
     </React.Fragment>
   );
 }
