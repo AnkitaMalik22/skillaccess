@@ -166,7 +166,7 @@ export default function RegisterCompanyPage() {
   const handleImageChange = (e, type) => {
     const file = e.target.files?.[0];
     if (file) {
-      setFormData((prev) => ({ ...prev, [type]: file }));
+      // setFormData((prev) => ({ ...prev, [type]: file }));
       const reader = new FileReader();
       reader.onloadend = () => {
         if (type === 'logo') {
@@ -198,35 +198,33 @@ export default function RegisterCompanyPage() {
       return;
     }
 
-    console.log(step);
+let logo,cover = "";
     if (logoPreview) {
 
       try {
 
-        const logo = await dispatch(uploadPicture({ type: "logo", image: logoFile })).unwrap();
-        setFormData((prev) => ({ ...prev, logo: logo.data.secure_url, publicIdLogo: logo.data.public_id }));
+         logo = await dispatch(uploadPicture({ type: "logo", image: logoFile })).unwrap()
 
       } catch (error) {
 
         //TODO : ERROR HANDLING
-        console.log(error);
+     
       }
-
     }
 
     if (coverPreview) {
-
       try {
-        console.log("he2")
-        const cover = await dispatch(uploadPicture({ type: "cover", image: logoFile })).unwrap();
-        setFormData((prev) => ({ ...prev, logo: cover.data.secure_url, publicIdLogo: cover.data.public_id }));
+    
+         cover = await dispatch(uploadPicture({ type: "cover", image: logoFile })).unwrap();
+       
 
       } catch (error) {
         //TODO : ERROR HANDLING
         console.log(error);
       }
     }
-    const resultAction = await dispatch(RegisterCompany(formData));
+    console.log(formData);
+    const resultAction = await dispatch(RegisterCompany({...formData,cover: cover.data.secure_url, publicIdCover: cover.data.public_id,logo: logo.data.secure_url, publicIdLogo: logo.data.public_id}));
 
     if (RegisterCompany.fulfilled.match(resultAction)) {
 

@@ -111,14 +111,15 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
         });
       }
 
+      setVisible(false);
       if (students.length > 0) {
-        dispatch(uploadStudents(students));
+       await dispatch(uploadStudents(students));
         // toast.success("Students uploaded successfully");
       } else {
         toast.warn("No valid student data to upload");
       }
 
-      setVisible(false);
+      
     } catch (error) {
       toast.error("An error occurred while processing the file");
       console.error("Error processing the file:", error);
