@@ -11,7 +11,7 @@ const CompanyNavbar = (props) => {
   const navigate = useNavigate();
   const goToProfile = () => {
     // Function to navigate to profile page
-    navigate("/company/profile"); // Use navigate function to navigate to desired URL
+    navigate("/company/pr/profile"); // Use navigate function to navigate to desired URL
   };
   const {data: userDetails }= useSelector((state) => state.companyAuth);
   // console.log(userDetails);
@@ -29,7 +29,8 @@ const CompanyNavbar = (props) => {
 
         <div className="ml-3">
           {" "}
-          <img src="../../../images/logo.png" alt="" />
+          <img src="../../../images/logoFinal.png" alt="" width="180px" />
+
         </div>
       </div>
 
