@@ -213,7 +213,10 @@ const JobDetailsPage = () => {
               </div>
               <button
             className="bg-blued text-white px-4 py-2 rounded"
-            onClick={() => navigate(`/company/pr/test/details/${assessment.test._id}`)}
+            onClick={() => {
+           
+              navigate(`/company/pr/test/details/${assessment?.test?._id}`)
+            }}
           >
             View
           </button>
@@ -264,7 +267,7 @@ const JobDetailsPage = () => {
           {
             students && students?.length === 0 && (
               <div className="bg-gray-100 flex justify-between p-5 mb-1">
-                <h2 className="font-bold text-lg">No assessments available</h2>
+                <h2 className="font-bold text-lg">No students available</h2>
               </div>
             )
           }

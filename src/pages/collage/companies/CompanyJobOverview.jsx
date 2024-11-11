@@ -10,6 +10,8 @@ import {
 } from "../../../redux/collage/dashboard/dashboardSlice";
 import calculateDaysAgo from "../../../util/calculateDaysAgo";
 import useTranslate from "../../../hooks/useTranslate";
+import Card from "../../../components/collage/test/home/common/Card";
+import TestCard from "../../../components/collage/companies/job/TestCard";
 
 const CompanyJobOverview = () => {
   //useTranslate();
@@ -43,7 +45,7 @@ const CompanyJobOverview = () => {
         <div className="w-1/2">
           <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
             <img
-              src="../../images/job.png"
+              src="../../../images/CompanyBg.png"
               alt="icon"
               className="w-full h-full rounded-t-3xl z-0 object-cover"
             />
@@ -117,15 +119,22 @@ const CompanyJobOverview = () => {
 
           {/*  */}
           <div className="flex justify-between mb-7 mt-4">
-            <h2 className="font-bold">Similar jobs</h2>
+            <h2 className="font-bold">Assigned Test</h2>
+
+        
             <h2
               className="font-bold underline underline-offset-2 text-blued cursor-pointer"
-              onClick={() => navigate("/collage/dashboard/jobs")}
+              onClick={() => {
+
+                localStorage.setItem("testId", jobDetails?.assessments[0]?.test?._id);
+                localStorage.setItem("testName", jobDetails?.assessments[0]?.test?.name);
+                navigate(`/collage/test/invite?testId=${jobDetails?.assessments[0]?.test?._id}`)}}
             >
-              See All
+              {/* arrow */}
+              Invite Students
             </h2>
           </div>
-          {jobs
+          {/* {jobs
             ?.filter(
               (job) => job?.JobTitle === jobDetails?.JobTitle && job?._id !== id
             )
@@ -179,7 +188,29 @@ const CompanyJobOverview = () => {
                   </div>
                 </div>
               );
-            })}
+            })} */}
+
+        {
+        jobDetails?.assessments &&   jobDetails?.assessments.map((assessment, index) => (
+            <TestCard
+              key={index}
+              assessment={assessment}
+              progress={1}
+              // progress={assessment?.progress}
+            />
+          ))
+        }
+        {
+          // no test assigned
+          jobDetails?.assessments &&  jobDetails?.assessments.length === 0 && (
+            <div className="flex justify-between w-[98%] bg-gray-100 rounded-lg p-4">
+              <h2 className="font-dmSans font-semibold text-sm sm:text-base">
+                No test assigned
+              </h2>
+            </div>
+          )
+        }
+
         </div>
       </div>
     </>

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import getCookie from "../../../util/getToken";
+import toast from "react-hot-toast";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -25,6 +26,7 @@ export const getJobs = createAsyncThunk(
                 {
                     headers: {
                         "Content-Type": "application/json",
+                        "auth-token": getCookie("token"),
                     },
                 }
             );
@@ -64,13 +66,14 @@ export const createJob = createAsyncThunk(
     async ({companyId , data}, { rejectWithValue }) => {
         try {
             console.log(data, "data" , companyId, "companyId")
+            const token = getCookie("token");
             const req = await axios.post(
                 `${REACT_APP_API_URL}/api/company/jobs/${companyId}`,
                 data,
                 {
                     headers: {
                         "Content-Type": "application/json",
-                        "auth-token": getCookie(),
+                        "auth-token": token,
                     },
                 }
             );
@@ -81,6 +84,9 @@ export const createJob = createAsyncThunk(
         }
     }
 );
+
+
+
 
 
 const jobSlice = createSlice({
@@ -99,11 +105,13 @@ const jobSlice = createSlice({
             .addCase(getJobs.fulfilled, (state, action) => {
                 state.loading = false;
                 state.jobs = action.payload.jobs;
+                
                 console.log(action.payload, "jobs")
             })
             .addCase(getJobs.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+                toast.error(action.payload);
             })
             .addCase(getJobDetails.pending, (state) => {
                 state.jobLoading = true;
@@ -116,6 +124,18 @@ const jobSlice = createSlice({
                 state.jobLoading = false;
                 state.jobError = action.payload;
             })
+            .addCase(createJob.pending, (state) => {
+                state.jobLoading = true;
+            })
+            .addCase(createJob.fulfilled, (state, action) => {
+                state.jobLoading = false;
+                toast.success("Job Created Successfully");
+            })
+            .addCase(createJob.rejected, (state, action) => {
+                state.jobLoading = false;
+                toast.error(action.payload);
+            })
+          
     },
 });
 

@@ -19,6 +19,13 @@ const List = ({ students }) => {
                     </li>
                 ))}
             </ul>
+            {
+            students && students?.length === 0 && (
+              <div className="bg-gray-100 flex justify-between p-5 mb-1">
+                <h2 className="font-bold text-lg">No students available</h2>
+              </div>
+            )
+          }
         </div>
     );
 };

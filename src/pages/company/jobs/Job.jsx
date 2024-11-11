@@ -65,8 +65,8 @@ const JobsPage = () => {
  
      <>
      <Header />
-     <div className="flex flex-wrap mx-1 w-fit justify-center gap-4 ">
-{
+     <div className="flex flex-wrap gap-5 md:gap-10 md:gap-y-[30px] gap-y-4 ">
+     {
     jobs && jobs?.map((job) => (
         <JobCard job={job} key={job._id} />
     ))
