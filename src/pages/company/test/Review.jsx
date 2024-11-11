@@ -9,6 +9,7 @@ import Essay from "../../../components/collage/test/review/Essay";
 import Code from "../../../components/collage/test/review/Code";
 import Video from "../../../components/collage/test/review/Video";
 import useTranslate from "../../../hooks/useTranslate";
+import { getTest } from "../../../redux/company/test/thunks/test";
 
 const Review = () => {
   //useTranslate();
@@ -23,8 +24,11 @@ const Review = () => {
   const view = searchParams.get("view");
   const [visible, setVisible] = useState(false);
   // //console.log(questionType);
-  const { currentTopic, topics } = useSelector((state) => state.test);
+  const { currentTopic, topics,test } = useSelector((state) => state.companyTest);
+
+
   useEffect(() => {
+   if(currentTopic){
     if (type === "section") {
       // const topics = JSON.parse(localStorage.getItem("topics"));
       setName(topics[id].Heading);
@@ -41,30 +45,33 @@ const Review = () => {
       questionType === "video" && setQuestions(currentTopic.video);
       questionType === "compiler" && setQuestions(currentTopic.compiler);
     } else {
-      setName(
-        JSON.parse(localStorage.getItem("assessment")).topics[id].Heading
+   if(topics[id]){
+    setName(
+      JSON.parse(localStorage.getItem("assessment")).topics[id].Heading
+    );
+    questionType === "mcq" &&
+      setQuestions(
+        JSON.parse(localStorage.getItem("assessment")).topics[id].questions
       );
-      questionType === "mcq" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].questions
-        );
-      questionType === "findAnswer" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].findAnswers
-        );
-      questionType === "essay" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].essay
-        );
-      questionType === "video" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].video
-        );
-      questionType === "compiler" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].compiler
-        );
+    questionType === "findAnswer" &&
+      setQuestions(
+        JSON.parse(localStorage.getItem("assessment")).topics[id].findAnswers
+      );
+    questionType === "essay" &&
+      setQuestions(
+        JSON.parse(localStorage.getItem("assessment")).topics[id].essay
+      );
+    questionType === "video" &&
+      setQuestions(
+        JSON.parse(localStorage.getItem("assessment")).topics[id].video
+      );
+    questionType === "compiler" &&
+      setQuestions(
+        JSON.parse(localStorage.getItem("assessment")).topics[id].compiler
+      );
     }
+  }
+   }
   }, [topics, "", currentTopic]);
   //console.log(currentTopic);
 
@@ -167,23 +174,25 @@ const Review = () => {
     }
   }, [questions]);
   const totalTime = handleCalculateTime();
+
+
+
+  useEffect(() => {
+    dispatch(getTest(id));
+    console.log(test, "test");
+  } , []);
   return (
     <>
-      <Header
-        name={name}
-        view={view}
-        qt={questionType}
-        id={
-          localStorage.getItem("Topics")
-            ? JSON.parse(localStorage.getItem("Topics"))._id
-            : ""
-        }
-        visible={visible}
-        setVisible={setVisible}
-        type={type}
-        topicId={searchParams.get("topicId")}
-        sectionId={localStorage.getItem("Details") ? currentTopic._id : ""}
-      />
+     {/* Test Details */}
+      <div className="flex justify-between">
+        <h2 className="text-lg capitalize">{test?.name}</h2>
+        <div className="flex gap-2 items-center">
+          <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
+          <p className="text-gray-400 text-xs self-center">{test?.totalTime} mins</p>
+        </div>
+      </div>
+     
+    
 
       <div
         className={`mx-auto p-5 min-h-[80vh] my-2 rounded-lg   bg-gray-100  ${

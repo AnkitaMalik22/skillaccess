@@ -1,114 +1,280 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from "react";
+import Header from "../../../components/company/HeaderJob.jsx";
+import { CiLocationOn } from "react-icons/ci";
+import { FaArrowRight } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getJobDetails } from '../../../redux/company/jobs/jobSlice';
 
-const JobDetailsPage = ({ job }) => {
-  const [tests, setTests] = useState([]);
-  const [selectedTests, setSelectedTests] = useState([]);
+import  calculateDaysAgo  from '../../../utils/calculateDaysAgo.js';
+import { getStudentsForTest } from "../../../redux/company/test/thunks/test.js";
+;
+
+const JobDetailsPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {id} = useParams();
+  console.log(id, "testid")
+  // const [job, setJob] = useState([]);
+  const {jobDetails } = useSelector((state) => state.job);
+  const {students} = useSelector((state) => state.companyTest);
+
 
   useEffect(() => {
     // Check if the job prop has an id property before fetching tests
-    if (job && job.id) {
+  
       // Fetch tests for the job
-      const fetchTests = async () => {
-        try {
-          const response = await fetch(`/api/jobs/${job.id}/tests`);
-          const data = await response.json();
-          setTests(data);
-        } catch (error) {
-          console.error('Error fetching tests:', error);
-        }
-      };
-      fetchTests();
+    // if(Job?._id){
+      
+    dispatch(getJobDetails(id));
+    for (let i = 0; i < jobDetails?.assessments?.length; i++) {
+      getStudents(jobDetails?.assessments[i]?.test?._id);
     }
-  }, [job]);
 
-  const handleTestSelect = (testId) => {
-    if (selectedTests.includes(testId)) {
-      setSelectedTests(selectedTests.filter((id) => id !== testId));
-    } else {
-      setSelectedTests([...selectedTests, testId]);
-    }
+ 
+
+    getStudentsForTest(jobDetails?.assessments[0]?.test?._id);
+    console.log(students , "students")  
+
+      // dispatch(getJobDetails(jobId));
+    // }
+
+  }, []);
+
+  const getStudents = (testId) => {
+    dispatch(getStudentsForTest(testId));
   };
 
-  const navigateToApplyPage = () => {
-    window.location.href = `/apply?job=${encodeURIComponent(JSON.stringify(job))}&selectedTests=${encodeURIComponent(JSON.stringify(selectedTests))}`;
-  };
+  // const handleTestSelect = (testId) => {
+  //   if (selectedTests.includes(testId)) {
+  //     setSelectedTests(selectedTests.filter((id) => id !== testId));
+  //   } else {
+  //     setSelectedTests([...selectedTests, testId]);
+  //   }
+  // };
+
+  // const navigateToApplyPage = () => {
+  //   window.location.href = `/apply?job=${encodeURIComponent(JSON.stringify(job))}&selectedTests=${encodeURIComponent(JSON.stringify(selectedTests))}`;
+  // };
 
   // Check if the job prop is defined before rendering the component
-  if (!job) {
+  if (!jobDetails) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-4">
+    <>
+    <Header
+      Role={jobDetails?.JobTitle}
+      companyName={jobDetails?.company?.basic?.companyName}
+    />
+
+    <div className="flex mx-auto justify-between mb-2 font-dmSans mt-8 gap-5">
+      <div className="w-1/2">
+        <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
           <img
-            src={job.company.logo}
-            alt={job.company.name}
-            className="w-16 h-16 rounded-full"
+            src="../../images/job.png"
+            alt=""
+            className="w-full h-full rounded-t-3xl z-0 object-cover"
           />
+        </div>
+        <div className="w-full bg-gray-100 flex justify-between p-5 mb-1">
           <div>
-            <h2 className="text-2xl font-bold">{job.title}</h2>
-            <p className="text-gray-500">{job.company.name}</p>
+            <h2 className="font-bold text-lg">{jobDetails.JobTitle}</h2>
+            <h2 className="text-xs font-medium mt-1">
+              {jobDetails.JobLocation}
+            </h2>
+            <h2 className="text-xs font-medium mt-2 text-gray-400">
+              {calculateDaysAgo(jobDetails.createdAt)}
+            </h2>
+          </div>
+          <div className="self-center">
+            <h2 className="text-gray-400 text-sm font-bold ">EMPLOYEES</h2>
+            <h2 className="text-sm font-bold text-center mt-1">200+</h2>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-500">{job.location}</span>
+
+        {/* /Requirements */}
+
+        <div className="bg-gray-100 grid grid-cols-4 text-center p-5 mb-1">
+          <div>
+            <h2 className="text-[#8E91A0] text-xs mb-1">EXPERIENCE</h2>
+            <h2 className="text-sm font-bold text-[#171717]">
+              {jobDetails.ExperienceFrom}-{jobDetails.ExperienceTo} Years
+            </h2>
+          </div>
+          <div>
+            <h2 className="text-[#8E91A0] text-xs mb-1">SENIORITY LEVEL</h2>
+            <h2 className="text-sm font-bold text-[#171717]">
+              {jobDetails.SeniorityLevel}
+            </h2>
+          </div>
+          <div>
+            <h2 className="text-[#8E91A0] text-xs mb-1">EMPLOYMENT</h2>
+            <h2 className="text-sm font-bold text-[#171717]">
+              {jobDetails.EmploymentType}
+            </h2>
+          </div>
+          <div>
+            <h2 className="text-[#8E91A0] text-xs mb-1">SALARY</h2>
+            <h2 className="text-sm font-bold text-[#171717]">
+              {jobDetails.SalaryFrom}-{jobDetails.SalaryTo}
+            </h2>
+          </div>
+        </div>
+        {/* Role Overview */}
+        <div className="bg-gray-100 mb-1 p-5 ">
+          <h2 className="text-base font-bold mb-1">Role Overview</h2>
+          <p className="text-sm text-gray-400">{jobDetails.RoleOverview}</p>
+        </div>
+
+        {/* bullets */}
+        <div className="bg-gray-100 p-5 rounded-b-lg">
+          <h2 className="text-base font-bold mb-1">
+            Duties & Responsibilities
+          </h2>
+          <p className="text-[#7D7D7D] font-normal text-sm">
+            {jobDetails.DutiesResponsibility}
+          </p>
+          {/* <span className="">
+            
+            <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <p>
+                {" "}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+                consectetur, blanditiis, rerum temporibus magnam illum maxime
+              </p>
+            </span>
+            <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <p>
+                {" "}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+                consectetur, blanditiis, rerum temporibus magnam illum maxime
+              </p>
+            </span>
+            <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <p>
+                {" "}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+                consectetur, blanditiis, rerum temporibus magnam illum maxime
+              </p>
+            </span>
+            <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <p>
+                {" "}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+                consectetur, blanditiis, rerum temporibus magnam illum maxime
+              </p>
+            </span>
+            <span className=" mt-2 text-sm text-gray-400 pb-3 flex gap-2">
+              <VscCircleFilled className="text-white  border-4 w-fit h-fit rounded-full self-center border-blue-500 mr-2" />
+              <p>
+                {" "}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
+                consectetur, blanditiis, rerum temporibus magnam illum maxime
+              </p>
+            </span>
+          </span> */}
         </div>
       </div>
-      <div className="border-t border-gray-200 pt-6">
-        <h3 className="text-xl font-bold mb-4">Job Details</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-gray-500">Employment Type</p>
-            <p>{job.employmentType}</p>
-          </div>
-          <div>
-            <p className="text-gray-500">Seniority Level</p>
-            <p>{job.seniorityLevel}</p>
-          </div>
-          <div>
-            <p className="text-gray-500">Experience</p>
-            <p>
-              {job.experienceFrom} - {job.experienceTo} years
-            </p>
-          </div>
-          <div>
-            <p className="text-gray-500">Salary</p>
-            <p>
-              ${job.salaryFrom} - ${job.salaryTo}
-            </p>
-          </div>
+
+      <div className="w-1/2">
+        <div className="flex justify-between mb-7 mt-4">
+          <h2 className="font-bold"> Assessments </h2>
+          {/* <h2
+            className="font-bold underline underline-offset-2 text-blued cursor-pointer"
+            onClick={() => navigate("/stude/jobs")}
+          >
+            See All
+          </h2> */}
         </div>
-      </div>
-      <div className="border-t border-gray-200 pt-6">
-        <h3 className="text-xl font-bold mb-4">Required Tests</h3>
-        <div className="grid grid-cols-2 gap-4">
-          {tests.map((test) => (
+        {jobDetails && jobDetails?.assessments?.map((assessment, index) => {
+
+          return (
             <div
-              key={test.id}
-              className={`bg-gray-100 rounded-lg p-4 cursor-pointer ${
-                selectedTests.includes(test.id)
-                  ? 'border-2 border-blue-500'
-                  : ''
-              }`}
-              onClick={() => handleTestSelect(test.id)}
+              key={index}
+              className="bg-gray-100 flex justify-between p-5 mb-1"
             >
-              <h4 className="text-lg font-bold">{test.name}</h4>
-              <p className="text-gray-500">{test.description}</p>
+              <div>
+                <h2 className="font-bold text-lg">{assessment?.test?.name}</h2>
+                <h2 className="text-xs font-medium mt-1">
+                  {assessment.test?.description}
+                </h2>
+              </div>
+              <div className="self-center">
+                <h2 className="text-gray-400 text-sm font-bold ">ATTEMPTS</h2>
+                <h2 className="text-sm font-bold text-center mt-1">
+                  {assessment.test?.attempts}
+                </h2>
+              </div>
+              <button
+            className="bg-blued text-white px-4 py-2 rounded"
+            onClick={() => navigate(`/company/pr/test/details/${assessment.test._id}`)}
+          >
+            View
+          </button>
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="flex justify-end">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={navigateToApplyPage}
-        >
-          Apply Now
-        </button>
+        
+          );
+          })}
+          {
+            jobDetails && jobDetails?.assessments?.length === 0 && (
+              <div className="bg-gray-100 flex justify-between p-5 mb-1">
+                <h2 className="font-bold text-lg">No assessments available</h2>
+              </div>
+            )
+          }
+          {/* Invited Students */}
+        <div className="flex justify-between mb-7 mt-4">
+          <h2 className="font-bold"> Invited Students </h2>
+          <h2
+            className="font-bold underline underline-offset-2 text-blued cursor-pointer"
+            onClick={() => navigate("/company/pr/job/students")}
+          >
+            See All
+          </h2>
+          </div>
+          {
+            students && students.slice(0, 3).map((student, index) => {
+              return (
+                <div
+                  key={index}
+                  className="bg-gray-100 flex justify-between p-5 mb-1"
+                >
+                  <div>
+                    <h2 className="font-bold text-lg">{student?.FirstName} {student?.LastName}</h2>
+                    <h2 className="text-xs font-medium mt-1">
+                      {student.Email}
+                    </h2>
+                  </div>
+                  <div className="self-center">
+                    <h2 className="text-gray-400 text-sm font-bold ">STATUS</h2>
+                    <h2 className="text-sm font-bold text-center mt-1">
+                      {student.Status}
+                    </h2>
+                  </div>
+                </div>
+              );
+            }
+          )}
+          {
+            students && students?.length === 0 && (
+              <div className="bg-gray-100 flex justify-between p-5 mb-1">
+                <h2 className="font-bold text-lg">No assessments available</h2>
+              </div>
+            )
+          }
+          
+          
+          
+            
       </div>
     </div>
+  </>
   );
 };
 

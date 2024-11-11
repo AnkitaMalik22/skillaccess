@@ -21,12 +21,6 @@ import NotAuth from "./components/PopUps/NotAuth";
 import AccountRoute from "./pages/collage/accounting/AccountRoutes";
 import CollageLayout from "./layout/Collage";
 import SecurityAppPage from "./pages/collage/settings/SecurityAppPage";
-
-const Register = lazy(() => import("./pages/collage/auth/Register"));
-const Login = lazy(() => import("./pages/collage/auth/Login"));
-const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
-const Dashboard = lazy(() => import("./pages/collage/dashboard/Dashboard"));
-
 // company imports
 import LoginCompany from "./pages/company/auth/Login";
 import RegisterCompany from "./pages/company/auth/RegisterCompany";
@@ -37,6 +31,15 @@ import CompanyLayout from "./layout/Company";
 import Job from "./pages/company/jobs/Job";
 import CreateJob from "./pages/company/jobs/CreateJob";
 import CompanyTestHome from "./pages/company/test/TestHome";
+import JobDetailsPage from "./pages/company/jobs/JobDetails";
+import InvitedStudentsForJob from "./pages/company/jobs/InvitedStudentsForJob";
+
+const Register = lazy(() => import("./pages/collage/auth/Register"));
+const Login = lazy(() => import("./pages/collage/auth/Login"));
+const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
+const Dashboard = lazy(() => import("./pages/collage/dashboard/Dashboard"));
+
+
 
 export default function App() {
   const [loader, setLoader] = useState(true);
@@ -151,6 +154,8 @@ export default function App() {
             <Route path="dashboard" element={<DashboardCompany />} />
             <Route path="jobs" element={<Job />} />
             <Route path="jobs/create" element={<CreateJob />} />
+            <Route path="jobs/:id" element={<JobDetailsPage />} />
+            <Route path="job/students" element={<InvitedStudentsForJob />} />
             
            
              </Route>

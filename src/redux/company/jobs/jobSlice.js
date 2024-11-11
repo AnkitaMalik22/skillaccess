@@ -44,7 +44,7 @@ export const getJobDetails = createAsyncThunk(
     async (data, { rejectWithValue }) => {
         try {
             const req = await axios.get(
-                `${REACT_APP_API_URL}/api/jobs/${data}`,
+                `${REACT_APP_API_URL}/api/company/jobs/${data}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -110,7 +110,7 @@ const jobSlice = createSlice({
             })
             .addCase(getJobDetails.fulfilled, (state, action) => {
                 state.jobLoading = false;
-                state.jobDetails = action.payload;
+                state.jobDetails = action.payload.job;
             })
             .addCase(getJobDetails.rejected, (state, action) => {
                 state.jobLoading = false;
