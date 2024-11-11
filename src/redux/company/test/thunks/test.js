@@ -1,23 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import getCookie from "../../../../util/getToken";
 
 export const getTest = createAsyncThunk(
   "test/getTest",
   async (id, { rejectWithValue }) => {
     try {
-      //console.log(`get test ${id}`);
+      console.log(`get test ${id}`);
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/company/test/${id}`,
 
         {
           headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+             "auth-token":getCookie("token")
           },
-        }
+      }
       );
       const res = req.data;
-      // //console.log(res);
+      console.log(res);
       return res;
     } catch (error) {
       //console.log(error);
@@ -261,20 +261,18 @@ export const getStudentsForTest = createAsyncThunk(
   async (testId, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments/students/${testId}`,
+        `${process.env.REACT_APP_API_URL}/api/company/test/students/${testId}`,
 
         {
           headers: {
-            "Content-Type": "application/json",
-
-            "auth-token": localStorage.getItem("auth-token"),
+             "auth-token":getCookie("token")
           },
-        }
+      }
       );
 
       const res = req.data;
 
-      //console.log(res);
+      console.log(res);
 
       return res;
     } catch (error) {

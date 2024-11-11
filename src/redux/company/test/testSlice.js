@@ -30,13 +30,14 @@ import {
 
 import {
   addQuestionToTopic,
-  createTopic,
   getAllTopics,
   getTopicById,
   getAllTopicsQB,
   deleteTopics,
+  createTopicCompany,
   setTotalTopicQuestions,
 } from "./thunks/topic";
+
 
 import {
   addBookmark,
@@ -706,15 +707,15 @@ const testSliceCompany= createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-      .addCase(createTopic.pending, (state, action) => {
+      .addCase(createTopicCompany.pending, (state, action) => {
         state.ADD_tOPIC_LOADING = true;
         // return action.payload;
       })
-      .addCase(createTopic.fulfilled, (state, action) => {
+      .addCase(createTopicCompany.fulfilled, (state, action) => {
         state.TopicToBeAdded.id = action.payload._id;
         state.ADD_tOPIC_LOADING = false;
       })
-      .addCase(createTopic.rejected, (state, action) => {
+      .addCase(createTopicCompany.rejected, (state, action) => {
         // return action.payload;
         state.ADD_tOPIC_LOADING = false;
       })

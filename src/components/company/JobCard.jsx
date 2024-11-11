@@ -6,6 +6,7 @@ import { PiPencilSimpleLine } from 'react-icons/pi'
 
 const JobCard = ({job}) => {
   const navigate = useNavigate();
+  console.log(job)
   return (
 
     <div className=" w-[40%] 2xl:w-1/3 h-auto bg-[#f8f8f9] my-3 text-start font-bold text-black rounded-2xl  font-dmSans p-5"  key={job.id}>
@@ -50,7 +51,7 @@ const JobCard = ({job}) => {
       <p className="text-[#e45b39] text-sm">Final Date 05/12/22</p>
 
         <button className="bg-blued text-white rounded-2xl text-xs font-bold flex gap-2 px-7 py-2 "
-          onClick={() => navigate("jobDetails")}
+          onClick={() => navigate(`/company/pr/jobs/${job?._id}`)}
         >
           View Details
         </button>
@@ -63,4 +64,4 @@ const JobCard = ({job}) => {
   )
 }
 
-export default JobCard
+export default JobCard;
