@@ -28,7 +28,8 @@ const schema = z.object({
     .number({ invalid_type_error: 'Must be a number' })
     .positive('Salary To must be positive'),
   RoleOverview: z.string().nonempty('Role Overview is required'),
-  DutiesResponsibility: z.string().nonempty('Duties and Responsibility is required')
+  DutiesResponsibility: z.string().nonempty('Duties and Responsibility is required'),
+  tier : z.string().nonempty('Tier is required')
 })
 
 const CreateJob = () => {
@@ -49,7 +50,8 @@ const CreateJob = () => {
     SalaryFrom: '',
     SalaryTo: '',
     RoleOverview: '',
-    DutiesResponsibility: ''
+    DutiesResponsibility: '',
+    tier : ''
   })
 
   const [errors, setErrors] = useState({})
@@ -69,6 +71,7 @@ const CreateJob = () => {
     // Convert string values to numbers where applicable for validation
     const validatedData = {
       ...formData,
+      CompanyName: company?.basic?.companyName,
       ExperienceFrom: Number(formData.ExperienceFrom),
       ExperienceTo: Number(formData.ExperienceTo),
       SalaryFrom: Number(formData.SalaryFrom),
@@ -77,11 +80,8 @@ const CreateJob = () => {
     try {
       schema.parse(validatedData)
       setErrors({})
-     await dispatch(createJob({companyId : company?._id, data : {...validatedData ,company : company?._id}})).then(() => {
-        toast.success("Job Created Successfully")
-        // navigate(-1)
-        });
-
+     await dispatch(createJob({companyId : company?._id, data : {...validatedData ,company : company?._id}}))
+   
 
 
     
@@ -121,7 +121,7 @@ const CreateJob = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         {[
           { label: 'Job Title', name: 'JobTitle' },
-          { label: 'Company Name', name: 'CompanyName' },
+          // { label: 'Company Name', name: 'CompanyName' },
           { label: 'Job Location', name: 'JobLocation' },
           { label: 'Workplace Type', name: 'WorkplaceType' },
           { label: 'Close By Date', name: 'CloseByDate', type: 'date' },
@@ -130,7 +130,11 @@ const CreateJob = () => {
           { label: 'Experience From', name: 'ExperienceFrom', type: 'number' },
           { label: 'Experience To', name: 'ExperienceTo', type: 'number' },
           { label: 'Salary From', name: 'SalaryFrom', type: 'number' },
-          { label: 'Salary To', name: 'SalaryTo', type: 'number' }
+          { label: 'Salary To', name: 'SalaryTo', type: 'number' },
+       
+         
+
+          
         ].map(({ label, name, type = 'text' }) => (
           <div key={name} className="flex flex-col">
             <label className="font-medium mb-1">{label}</label>
@@ -176,6 +180,25 @@ const CreateJob = () => {
           />
           {errors.DutiesResponsibility && (
             <p className="text-red-500 text-sm mt-1">{errors.DutiesResponsibility}</p>
+          )}
+        </div>
+        <div className="flex flex-col">
+          <label className="font-medium mb-1">Tier</label>
+          <select
+            name="tier"
+            value={formData.tier}
+            onChange={handleChange}
+            className={`border ${
+              errors.tier ? 'border-red-500' : 'border-gray-300'
+            } rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blued`}
+          >
+            <option value="">Select Tier</option>
+            <option value="tier1">Tier 1</option>
+            <option value="tier2">Tier 2</option>
+            <option value="tier3">Tier 3</option>
+          </select>
+          {errors.tier && (
+            <p className="text-red-500 text-sm mt-1">{errors.tier}</p>
           )}
         </div>
       </form>
