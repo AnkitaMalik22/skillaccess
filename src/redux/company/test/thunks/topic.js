@@ -1,14 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import getCookie from "../../../../util/getToken";
 
 export const addQuestionToTopic = createAsyncThunk(
-  "test/addQuestionToTopic",
+  "companyTest/addQuestionToTopic",
   async (data, { rejectWithValue, dispatch }) => {
     try {
       let req;
       if (data.isMultiple === true) {
         req = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/college/add-questions/${data.id}/${data.type}`,
+          `${process.env.REACT_APP_API_URL}/api/company/test/add-questions/${data.id}/${data.type}`,
           { questions: data.data },
           {
             headers: {
@@ -19,7 +20,7 @@ export const addQuestionToTopic = createAsyncThunk(
         );
       } else {
         req = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/college/add-questions/${data.id}/${data.type}`,
+          `${process.env.REACT_APP_API_URL}/api/company/test/add-questions/${data.id}/${data.type}`,
           { questions: [data.data] },
           {
             headers: {
@@ -45,16 +46,16 @@ export const addQuestionToTopic = createAsyncThunk(
   }
 );
 
-export const getAllTopics = createAsyncThunk(
-  "test/getAllTopics",
+export const getAllTopicsCompany = createAsyncThunk(
+  "companyTest/getAllTopics",
   async (data, { rejectWithValue, getState }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/college/topics/all?level=${data.level}`,
+        `${process.env.REACT_APP_API_URL}/api/company/test/topics/all?level=${data.level}`,
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token":getCookie("token"),
           },
         }
       );
@@ -67,7 +68,7 @@ export const getAllTopics = createAsyncThunk(
   }
 );
 export const getAllTopicsQB = createAsyncThunk(
-  "test/getAllTopicsQB",
+  "companyTest/getAllTopicsQB",
   async (data, { rejectWithValue, getState }) => {
     try {
       const req = await axios.get(
@@ -89,7 +90,7 @@ export const getAllTopicsQB = createAsyncThunk(
 );
 
 export const getTopicById = createAsyncThunk(
-  "test/getTopicById",
+  "companyTest/getTopicById",
   async (id, { rejectWithValue }) => {
     try {
       const req = await axios.get(
@@ -111,7 +112,7 @@ export const getTopicById = createAsyncThunk(
   }
 );
 export const deleteTopics = createAsyncThunk(
-  "test/deleteTopics",
+  "companyTest/deleteTopics",
   async (data, { rejectWithValue }) => {
     try {
       //console.log("data", data);
@@ -159,7 +160,7 @@ export const createTopicCompany = createAsyncThunk(
           headers: {
             "Content-Type": "application/json",
 
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );

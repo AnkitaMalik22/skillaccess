@@ -30,12 +30,13 @@ import {
 
 import {
   addQuestionToTopic,
-  createTopic,
+  createTopicCompany,
   getAllTopics,
   getTopicById,
   getAllTopicsQB,
   deleteTopics,
   setTotalTopicQuestions,
+  getAllTopicsCompany,
 } from "./thunks/topic";
 
 import {
@@ -674,19 +675,19 @@ const testSliceCompany= createSlice({
         //console.log(action.payload);
         // window.alert(action.payload);
       })
-      .addCase(getAllTopics.pending, (state, action) => {
+      .addCase(getAllTopicsCompany.pending, (state, action) => {
         state.status = "loading";
         state.GET_TOPICS_LOADING = true;
 
         //console.log("pending");
       })
-      .addCase(getAllTopics.fulfilled, (state, action) => {
+      .addCase(getAllTopicsCompany.fulfilled, (state, action) => {
         state.sections = action.payload;
         state.GET_TOPICS_LOADING = false;
 
         //console.log("fullfilled");
       })
-      .addCase(getAllTopics.rejected, (state, action) => {
+      .addCase(getAllTopicsCompany.rejected, (state, action) => {
         console.error("Error fetching topics:", action.payload);
         state.GET_TOPICS_LOADING = false;
         state.status = "failed";
@@ -706,15 +707,15 @@ const testSliceCompany= createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-      .addCase(createTopic.pending, (state, action) => {
+      .addCase(createTopicCompany.pending, (state, action) => {
         state.ADD_tOPIC_LOADING = true;
         // return action.payload;
       })
-      .addCase(createTopic.fulfilled, (state, action) => {
+      .addCase(createTopicCompany.fulfilled, (state, action) => {
         state.TopicToBeAdded.id = action.payload._id;
         state.ADD_tOPIC_LOADING = false;
       })
-      .addCase(createTopic.rejected, (state, action) => {
+      .addCase(createTopicCompany.rejected, (state, action) => {
         // return action.payload;
         state.ADD_tOPIC_LOADING = false;
       })

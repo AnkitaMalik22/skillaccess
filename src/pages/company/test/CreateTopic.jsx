@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { createTopic } from "../../../redux/collage/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
 import HeaderCompany from "../../../components/company/HeaderCompany";
+import { createTopicCompany } from "../../../redux/company/test/thunks/topic";
 
 const CreateTopic = () => {
   //useTranslate();
@@ -47,7 +48,7 @@ const CreateTopic = () => {
     });
   };
 
-  const handleNext = () => {
+  const handleNext =async  () => {
     if (!topic.Heading.trim()) {
       setIsNameEmpty(true);
       // toast.error("Please enter a name for the topic.");
@@ -64,8 +65,8 @@ const CreateTopic = () => {
       setIsDescEmpty(false);
     }
 
-    dispatch(createTopicCompany(topic)).then((res) => {
-      if (res.payload._id) {
+   const res = await dispatch(createTopicCompany(topic));
+   if (res.payload && res.payload._id) {
         navigate(
           `/company/pr/test/typeOfQuestions/${res.payload._id}?level=${level}`
         );
@@ -79,7 +80,6 @@ const CreateTopic = () => {
         Time: null,
         TotalQuestions: null,
       });
-    });
   };
 
   return (

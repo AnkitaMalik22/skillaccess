@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Header from "../../../components/collage/test/selectTests/Header";
 
-import { FiPlusCircle } from "react-icons/fi";
-import Inputs from "../../../components/collage/test/selectTests/Inputs";
-import { useSelector, useDispatch } from "react-redux";
 import { FaPlus } from "react-icons/fa";
+import { FiPlusCircle } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
+import Inputs from "../../../components/collage/test/selectTests/Inputs";
+import HeaderCompany from "../../../components/company/HeaderCompany";
+import { ProgressBar } from "../../../components/company/Progress";
+import Loader from "../../../components/loaders/Loader";
 import {
   setCurrentQuestionCount,
   setCurrentTopic,
   setTestSelectedTopics,
 } from "../../../redux/collage/test/testSlice";
-import { getAllTopics } from "../../../redux/collage/test/thunks/topic";
-import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
-import Loader from "../../../components/loaders/Loader";
-import useTranslate from "../../../hooks/useTranslate";
-import {ProgressBar} from "../../../components/company/Progress";
-import HeaderCompany from "../../../components/company/HeaderCompany";
+import { getAllTopicsCompany } from "../../../redux/company/test/thunks/topic";
 
 const SelectTests = () => {
   //useTranslate();
@@ -34,7 +32,7 @@ const SelectTests = () => {
   const dispatch = useDispatch();
 
   const { sections, currentQuestionCount, totalQuestions, GET_TOPICS_LOADING } =
-    useSelector((state) => state.test);
+    useSelector((state) => state.companyTest);
   // for filter the sections
 
   const [filteredSections, setFilteredSections] = useState(sections);
@@ -213,7 +211,7 @@ const SelectTests = () => {
 
   useEffect(() => {
 
-    // dispatch(getAllTopics({ level: level }));
+    dispatch(getAllTopicsCompany({ level: level }));
 
     if (sections) {
       setFilteredSections(sections);
