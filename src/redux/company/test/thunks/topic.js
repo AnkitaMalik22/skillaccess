@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import getCookie from "../../../../util/getToken";
 
-export const addQuestionToTopic = createAsyncThunk(
+export const addQuestionToTopicCompany = createAsyncThunk(
   "companyTest/addQuestionToTopic",
   async (data, { rejectWithValue, dispatch }) => {
     try {
@@ -14,7 +14,7 @@ export const addQuestionToTopic = createAsyncThunk(
           {
             headers: {
               "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("auth-token"),
+              "auth-token": getCookie("token"),
             },
           }
         );
@@ -25,7 +25,7 @@ export const addQuestionToTopic = createAsyncThunk(
           {
             headers: {
               "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("auth-token"),
+              "auth-token": getCookie("token"),
             },
           }
         );
@@ -76,7 +76,7 @@ export const getAllTopicsQB = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -98,7 +98,7 @@ export const getTopicById = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -122,7 +122,7 @@ export const deleteTopics = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );

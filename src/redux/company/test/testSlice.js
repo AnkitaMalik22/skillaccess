@@ -29,7 +29,7 @@ import {
 } from "./thunks/test";
 
 import {
-  addQuestionToTopic,
+  addQuestionToTopicCompany,
   createTopicCompany,
   getAllTopics,
   getTopicById,
@@ -601,17 +601,17 @@ const testSliceCompany= createSlice({
           JSON.stringify(state.currentTopic)
         );
       })
-      .addCase(addQuestionToTopic.pending, (state, action) => {
+      .addCase(addQuestionToTopicCompany.pending, (state, action) => {
         state.ADD_QUESTION_LOADING = true;
 
         //console.log("pending");
       })
-      .addCase(addQuestionToTopic.fulfilled, (state, action) => {
+      .addCase(addQuestionToTopicCompany.fulfilled, (state, action) => {
         //console.log("fulf");
         addQuesFunc(state, action);
         state.ADD_QUESTION_LOADING = false;
       })
-      .addCase(addQuestionToTopic.rejected, (state, action) => {
+      .addCase(addQuestionToTopicCompany.rejected, (state, action) => {
         //console.log("rejected");
         state.ADD_QUESTION_LOADING = false;
       })

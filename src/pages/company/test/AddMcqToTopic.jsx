@@ -12,6 +12,8 @@ import { addQuestionToTopic } from "../../../redux/collage/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 import { setTotalTopicQuestions } from "../../../redux/collage/test/thunks/topic";
+import { addQuestionToTopicCompany } from "../../../redux/company/test/thunks/topic";
+import HeaderCompany from "../../../components/company/HeaderCompany";
 
 const AddMcqToTopic = () => {
   //useTranslate();
@@ -131,7 +133,7 @@ const AddMcqToTopic = () => {
     }
   };
 
-  const handleQuestionSave = () => {
+  const handleQuestionSave = (navBack) => {
     if (
       !question.Title ||
       question.Title.trim() === "" ||
@@ -183,7 +185,7 @@ const AddMcqToTopic = () => {
         setCountDetail(currentTopic?.questions?.length - 1);
         setLoader(true);
         dispatch(
-          addQuestionToTopic({ data: question, id: id, type: type })
+          addQuestionToTopicCompany({ data: question, id: id, type: type || "mcq" })
         ).then(() => {
           // if(!ADD_QUESTION_LOADING){
           //   navigate(-1);
@@ -199,7 +201,9 @@ const AddMcqToTopic = () => {
           });
         });
 
-        // navigate(-1);
+        if(navBack){
+          navigate(-1);
+        }
       }
     }
   };
@@ -232,9 +236,10 @@ const AddMcqToTopic = () => {
   // //console.log(question);
   return (
     <div>
-      <Header
+      <HeaderCompany
+      title={`Question No:  ${countDetail + 1} of ${currentTopic?.questions?.length}`}
         question={question}
-        setQuestion={setQuestion}
+        handleNext={()=>handleQuestionSave(true)}
         id={id}
         type={type}
       />
@@ -488,15 +493,17 @@ const AddMcqToTopic = () => {
         <div className="flex justify-between gap-2">
           {" "}
           <div className=" flex gap-2">
+
+            {/* TO DO */}
             {
-              <button
-                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
-                  countDetail >= 0 ? "" : "hidden"
-                }`}
-                onClick={handlePrev}
-              >
-                <FaChevronLeft className="self-center" /> Prev
-              </button>
+              // <button
+              //   className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+              //     countDetail >= 0 ? "" : "hidden"
+              //   }`}
+              //   onClick={handlePrev}
+              // >
+              //   <FaChevronLeft className="self-center" /> Prev
+              // </button>
             }
           </div>
           <div className=" flex">
