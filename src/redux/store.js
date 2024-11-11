@@ -14,6 +14,7 @@ import dummySlice from "./collage/dummySlice.js";
 import resultSlice from "./collage/result/result.js";
 import companyAuthReducer from  "./company/auth/companyAuthSlice.js";
 import jobReducer from "./company/jobs/jobSlice.js";
+import companyTestReducer from "../redux/company/test/testSlice.js"
 
 const store = configureStore({
   reducer: {
@@ -37,6 +38,7 @@ const store = configureStore({
 
     companyAuth:  companyAuthReducer,
     job : jobReducer,
+    companyTest:companyTestReducer
   },
 });
 
