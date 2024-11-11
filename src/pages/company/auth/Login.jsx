@@ -47,10 +47,10 @@ const LoginCompanyPage = () => {
       const res = await dispatch(LoginCompany(data));
       if (LoginCompany.fulfilled.match(res)) {
         toast.success("logged in successfully")
-        if(user.status==="pending"){
+        if(res.status==="pending"){
           navigate("/company/approval")
         }else{
-          navigate("/company/dashboard")
+          navigate("/company/pr/dashboard")
         }
       
       } else if (LoginCompany.rejected.match(res)) {
@@ -58,7 +58,8 @@ const LoginCompanyPage = () => {
       } else {
 
       }
-    } catch {
+    } catch(err) {
+      console.log(err);
       toast.error("Invalid Email or Password");
     }
   };

@@ -36,6 +36,7 @@ import DashboardCompany from "./pages/company/dashboard/Dashboard";
 import CompanyLayout from "./layout/Company";
 import Job from "./pages/company/jobs/Job";
 import CreateJob from "./pages/company/jobs/CreateJob";
+import CompanyTestHome from "./pages/company/test/TestHome";
 
 export default function App() {
   const [loader, setLoader] = useState(true);
@@ -146,7 +147,7 @@ export default function App() {
               <Route path="approval" element={<AwaitingApproval />} />
               <Route path="pr"  element={<CompanyLayout />}>
             {/* <Route path="/" element={<CompanyLayout />}> */}
-            
+            {CompanyTestHome()}
             <Route path="dashboard" element={<DashboardCompany />} />
             <Route path="jobs" element={<Job />} />
             <Route path="jobs/create" element={<CreateJob />} />
