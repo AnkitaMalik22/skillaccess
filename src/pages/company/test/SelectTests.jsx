@@ -212,8 +212,8 @@ const SelectTests = () => {
   };
 
   useEffect(() => {
-    
-    dispatch(getAllTopics({ level: level }));
+
+    // dispatch(getAllTopics({ level: level }));
 
     if (sections) {
       setFilteredSections(sections);
@@ -354,7 +354,7 @@ const SelectTests = () => {
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
                 onClick={() => {
                   localStorage.removeItem("currentTopic");
-                  Navigate(`/collage/test/createTopic?level=${level}`);
+                  Navigate(`/company/pr/test/createTopic?level=${level}`);
                 }}
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued" />

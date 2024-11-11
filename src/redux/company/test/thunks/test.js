@@ -81,12 +81,13 @@ export const getAllTests = createAsyncThunk(
   }
 );
 
-export const createTest = createAsyncThunk(
-  "test/createTest",
+
+export const createTestCompany = createAsyncThunk(
+  "companyTest/createTest",
   async (data, { rejectWithValue }) => {
     try {
       const req = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/assessments/create`,
+        `${process.env.REACT_APP_API_URL}/api/company/test/create`,
         data,
         {
           headers: {
