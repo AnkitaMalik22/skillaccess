@@ -15,7 +15,7 @@ import {
 } from "./thunks/student";
 
 import {
-  createTest,
+  createTestCompany,
   deleteTest,
   getAllTests,
   getTest,
@@ -201,7 +201,7 @@ const testState = {
 
 const testSliceCompany= createSlice({
   initialState: testState,
-  name: "test",
+  name: "companyTest",
   reducers: {
     setInTest: (state, action) => {
       state.inTest = action.payload;
@@ -648,11 +648,11 @@ const testSliceCompany= createSlice({
         state.GET_TESTS_LOADING = false;
         state.error = action.payload;
       })
-      .addCase(createTest.pending, (state, action) => {
+      .addCase(createTestCompany.pending, (state, action) => {
         state.status = "loading";
         //console.log("pending");
       })
-      .addCase(createTest.fulfilled, (state, action) => {
+      .addCase(createTestCompany.fulfilled, (state, action) => {
         //console.log(action.payload);
         state.testId = action.payload._id;
         state.testName = action.payload.name;
@@ -668,11 +668,10 @@ const testSliceCompany= createSlice({
 
         getAllTests();
       })
-      .addCase(createTest.rejected, (state, action) => {
+      .addCase(createTestCompany.rejected, (state, action) => {
         // //console.log(action.payload);
         toast.error(action.payload);
         //console.log(action.payload);
-
         // window.alert(action.payload);
       })
       .addCase(getAllTopics.pending, (state, action) => {

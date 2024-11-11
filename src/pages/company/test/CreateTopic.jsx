@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { createTopic } from "../../../redux/collage/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
+import HeaderCompany from "../../../components/company/HeaderCompany";
 
 const CreateTopic = () => {
   //useTranslate();
@@ -63,10 +64,10 @@ const CreateTopic = () => {
       setIsDescEmpty(false);
     }
 
-    dispatch(createTopic(topic)).then((res) => {
+    dispatch(createTopicCompany(topic)).then((res) => {
       if (res.payload._id) {
         navigate(
-          `/collage/test/typeOfQuestions/${res.payload._id}?level=${level}`
+          `/company/pr/test/typeOfQuestions/${res.payload._id}?level=${level}`
         );
       } else {
         toast.error("Invalid or duplicate values");
@@ -83,7 +84,7 @@ const CreateTopic = () => {
 
   return (
     <div>
-      <Header next={handleNext} />
+      <HeaderCompany handleNext={handleNext} handlePrev={()=>{}} />
 
       <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">
         <h2 className="w-full font-medium  text-[#3E3E3E] rounded-lg mb-5 text-base">

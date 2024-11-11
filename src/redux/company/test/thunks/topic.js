@@ -135,8 +135,8 @@ export const deleteTopics = createAsyncThunk(
   }
 );
 
-export const createTopic = createAsyncThunk(
-  "test/createTopic",
+export const createTopicCompany = createAsyncThunk(
+  "companyTest/createTopic",
 
   async (data, { rejectWithValue }) => {
     //   {
@@ -153,10 +153,8 @@ export const createTopic = createAsyncThunk(
 
     try {
       const req = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/college/topics/create`,
-
+        `${process.env.REACT_APP_API_URL}/api/company/test/topics/create`,
         data,
-
         {
           headers: {
             "Content-Type": "application/json",
