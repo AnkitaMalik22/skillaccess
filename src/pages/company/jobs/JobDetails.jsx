@@ -20,26 +20,19 @@ const JobDetailsPage = () => {
   const {students} = useSelector((state) => state.companyTest);
 
 
-  useEffect(() => {
-    // Check if the job prop has an id property before fetching tests
-  
-      // Fetch tests for the job
-    // if(Job?._id){
-      
+useEffect(() => {
+  if (id) {
     dispatch(getJobDetails(id));
-    for (let i = 0; i < jobDetails?.assessments?.length; i++) {
-      getStudents(jobDetails?.assessments[i]?.test?._id);
+  }
+}, [dispatch, id]);
+
+useEffect(() => {
+  if (jobDetails?.assessments?.length) {
+    for (let i = 0; i < jobDetails.assessments.length; i++) {
+      getStudents(jobDetails.assessments[i]?.test?._id);
     }
-
- 
-
-    getStudentsForTest(jobDetails?.assessments[0]?.test?._id);
-    console.log(students , "students")  
-
-      // dispatch(getJobDetails(jobId));
-    // }
-
-  }, []);
+  }
+}, [jobDetails]);
 
   const getStudents = (testId) => {
     dispatch(getStudentsForTest(testId));
@@ -67,13 +60,14 @@ const JobDetailsPage = () => {
     <Header
       Role={jobDetails?.JobTitle}
       companyName={jobDetails?.company?.basic?.companyName}
+      jobId={jobDetails?._id}
     />
 
     <div className="flex mx-auto justify-between mb-2 font-dmSans mt-8 gap-5">
       <div className="w-1/2">
         <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
           <img
-            src="../../images/job.png"
+            src="../../../images/companyBg.png"
             alt=""
             className="w-full h-full rounded-t-3xl z-0 object-cover"
           />
@@ -228,6 +222,9 @@ const JobDetailsPage = () => {
             jobDetails && jobDetails?.assessments?.length === 0 && (
               <div className="bg-gray-100 flex justify-between p-5 mb-1">
                 <h2 className="font-bold text-lg">No assessments available</h2>
+                <button className="bg-blued text-white px-4 py-2 rounded"
+            onClick={() => { navigate(`/company/pr/job/add-test/${jobDetails?._id}`)}}
+                >Add</button>
               </div>
             )
           }

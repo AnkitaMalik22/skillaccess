@@ -80,7 +80,7 @@ const CreateJob = () => {
     try {
       schema.parse(validatedData)
       setErrors({})
-     await dispatch(createJob({companyId : company?._id, data : {...validatedData ,company : company?._id}}))
+     await dispatch(createJob({companyId : company?._id, data : {...validatedData ,company : company?._id}}));
    
 
 

@@ -61,7 +61,7 @@ export const getAllTests = createAsyncThunk(
     try {
       //console.log(`get tests`);
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments`,
+        `${process.env.REACT_APP_API_URL}/api/company/test/get-all`,
         {
           headers: {
             "Content-Type": "application/json",
