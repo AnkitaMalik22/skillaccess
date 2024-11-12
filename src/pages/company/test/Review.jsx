@@ -10,6 +10,9 @@ import Code from "../../../components/collage/test/review/Code";
 import Video from "../../../components/collage/test/review/Video";
 import useTranslate from "../../../hooks/useTranslate";
 import { getTest } from "../../../redux/company/test/thunks/test";
+import HeaderCompany from "../../../components/company/HeaderCompany";
+import Name from "../../../components/collage/test/nameAssessment/Name";
+import ReviewHeader from "../../../components/company/ReviewHeader";
 
 const Review = () => {
   //useTranslate();
@@ -22,6 +25,7 @@ const Review = () => {
   const type = searchParams.get("type");
   const questionType = searchParams.get("question");
   const view = searchParams.get("view");
+  const level = searchParams.get("level");
   const [visible, setVisible] = useState(false);
   // //console.log(questionType);
   const { currentTopic, topics,test } = useSelector((state) => state.companyTest);
@@ -179,17 +183,29 @@ const Review = () => {
 
   useEffect(() => {
     dispatch(getTest(id));
-    console.log(test, "test");
   } , []);
   return (
     <>
+<ReviewHeader  name={name}
+        view={view}
+        qt={questionType}
+        id={
+          localStorage.getItem("Topics")
+            ? JSON.parse(localStorage.getItem("Topics"))._id
+            : ""
+        }
+        visible={visible}
+        setVisible={setVisible}
+        type={type}
+        topicId={searchParams.get("topicId")}
+        sectionId={localStorage.getItem("Details") ? currentTopic._id : ""}/>
      {/* Test Details */}
       <div className="flex justify-between">
         <h2 className="text-lg capitalize">{test?.name}</h2>
-        <div className="flex gap-2 items-center">
+        {/* <div className="flex gap-2 items-center">
           <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
           <p className="text-gray-400 text-xs self-center">{test?.totalTime} mins</p>
-        </div>
+        </div> */}
       </div>
      
     

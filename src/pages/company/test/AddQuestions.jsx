@@ -13,10 +13,13 @@ import {
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import { Progress } from "../../../components/collage/test/submit/Progress";
+import { setCurrentQuestionCountCompany, setTestSelectedTopicsCompany } from "../../../redux/company/test/testSlice";
+import HeaderCompany from "../../../components/company/HeaderCompany";
+import {ProgressBar}  from "../../../components/company/Progress";
 
 const AddQuestions = () => {
   //useTranslate();
-  const { topics, currentQuestionCount } = useSelector((state) => state.test);
+  const { topics, currentQuestionCount } = useSelector((state) => state.companyTest);
 
   const navigate = useNavigate();
   // question of the topic
@@ -50,11 +53,11 @@ const AddQuestions = () => {
         break;
     }
     dispatch(
-      setCurrentQuestionCount(currentQuestionCount - topics[index][Qt].length)
+      setCurrentQuestionCountCompany(currentQuestionCount - topics[index][Qt].length)
     );
     let topicsCopy = [...topics];
     topicsCopy.splice(index, 1);
-    dispatch(setTestSelectedTopics(topicsCopy));
+    dispatch(setTestSelectedTopicsCompany(topicsCopy));
   };
 
   const handleCalculateTime = () => {
@@ -133,9 +136,15 @@ const AddQuestions = () => {
   //console.log(totalTime);
   return (
     <>
-      <Header page={"submit"} />
+    <HeaderCompany   handleNext={() => 
+              navigate(`/company/pr/test/submit?level=${level}`)
+          }
+          handlePrev={()=>{
+            navigate(`/company/pr/test/select?level=${level}`)
+          }}/>
+      {/* <Header page={"submit"} /> */}
       <div className="w-4/5 mx-auto">
-        <Progress />
+        <ProgressBar progress={3} />
       </div>
 
       <div className="w-11/12 mx-auto mt-20">
@@ -199,23 +208,23 @@ const AddQuestions = () => {
                       // }
                       onClick={() =>
                         navigate(
-                          `/collage/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
+                          `/company/pr/test/details/${index}?type=topic&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
                         )
                       }
                     >
                       Details
                     </button>
                   </div>
-                  <div className="col-span-1  flex justify-center">
+                  {/* <div className="col-span-1  flex justify-center">
                     <PiPencilSimpleLine
                       className="self-center text-blued w-5 h-5 cursor-pointer"
                       onClick={() =>
                         navigate(
-                          `/collage/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}`
+                          `/company/pr/test/details/${index}?type=topic&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}`
                         )
                       }
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}

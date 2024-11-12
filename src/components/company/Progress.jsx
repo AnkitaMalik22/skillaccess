@@ -11,7 +11,7 @@ export const ProgressBar = ({ progress = 1 }) => {
       <div className="w-1/3 flex">
         <div className="w-1/3"></div>
         <div className="relative">
-          <figure className={`w-3 h-3 p-3 rounded-full ${getStepClass(1)} z-50`}></figure>
+          <figure className={`w-3 h-3 p-3 rounded-full ${getStepClass(1)} z-50 `}></figure>
           <h2 className="absolute -bottom-10 w-44 -left-10">
             Name Assessment
           </h2>

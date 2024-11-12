@@ -16,6 +16,7 @@ import {
   setTestSelectedTopics,
 } from "../../../redux/collage/test/testSlice";
 import { getAllTopicsCompany } from "../../../redux/company/test/thunks/topic";
+import { setCurrentQuestionCountCompany, setCurrentTopicCompany, setTestSelectedTopicsCompany } from "../../../redux/company/test/testSlice";
 
 const SelectTests = () => {
   //useTranslate();
@@ -148,10 +149,10 @@ const SelectTests = () => {
         //         sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(0, totalQ);
         // >>>>>>> saveMain
         dispatch(
-          setCurrentQuestionCount(currentQuestionCount + parseInt(totalQ))
+          setCurrentQuestionCountCompany(currentQuestionCount + parseInt(totalQ))
         );
         setSelectedSections([...selectedSections, sectionCopy]);
-        dispatch(setTestSelectedTopics(selectedSections));
+        dispatch(setTestSelectedTopicsCompany(selectedSections));
       }
       // setSelectedSections([...selectedSections, sectionCopy]);
 
@@ -201,9 +202,9 @@ const SelectTests = () => {
 
     setSelectedSections(updatedSections);
     // //console.log(selectedSections[index][Qt].length);
-    dispatch(setTestSelectedTopics(updatedSections));
+    dispatch(setTestSelectedTopicsCompany(updatedSections));
     dispatch(
-      setCurrentQuestionCount(
+      setCurrentQuestionCountCompany(
         currentQuestionCount - selectedSections[index][Qt].length
       )
     );
@@ -235,7 +236,7 @@ const SelectTests = () => {
   useEffect(() => {
     // getSelectedSections();
 
-    dispatch(setTestSelectedTopics(selectedSections));
+    dispatch(setTestSelectedTopicsCompany(selectedSections));
   }, [addSection, removeSection, selectedSections]);
 
   return (
@@ -285,7 +286,7 @@ const SelectTests = () => {
 
                 <div className="flex gap-2 px-2">
                   <img
-                    src="../../images/icons/menu-boxed.png"
+                    src="../../../images/icons/menu-boxed.png"
                     alt="icon"
                     className="self-center"
                   />
@@ -299,7 +300,7 @@ const SelectTests = () => {
                   {" "}
                   <div className="flex gap-2 w-full px-2">
                     <img
-                      src="../../images/icons/stopwatch.png"
+                      src="../../../images/icons/stopwatch.png"
                       alt="icon"
                       className="w-6 h-6 self-center"
                     />
@@ -309,7 +310,7 @@ const SelectTests = () => {
                     </h2>
                   </div>
                   <img
-                    src="../../images/icons/cross.png"
+                    src="../../../images/icons/cross.png"
                     alt="icons"
                     onClick={() => removeSection(section, index)}
                   />
@@ -393,7 +394,7 @@ const SelectTests = () => {
                       return;
                     }
                     dispatch(
-                      setCurrentTopic({
+                      setCurrentTopicCompany({
                         topic: {
                           ...section,
                           Type: questionType || "mcq",
@@ -410,7 +411,7 @@ const SelectTests = () => {
                     );
 
                     Navigate(
-                      `/collage/test/details/${index}?type=topic&question=${questionType}&level=${level}`
+                      `/company/pr/test/details/${index}?type=topic&question=${questionType}&level=${level}`
                     );
                   }}
                 >

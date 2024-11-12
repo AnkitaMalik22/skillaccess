@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ProgressBar } from "../../../components/company/Progress";
 import HeaderCompany from "../../../components/company/HeaderCompany";
-import { setTestBasicDetails } from "../../../redux/company/test/testSlice";
+import {  setTestBasicDetailsCompany } from "../../../redux/company/test/testSlice";
 
 
 const Name = () => {
@@ -216,7 +216,7 @@ const Name = () => {
     }
 
     if (!flag) {
-      dispatch(setTestBasicDetails(testDetails));
+      dispatch(setTestBasicDetailsCompany(testDetails));
       navigate(`/company/pr/test/select?level=${level}`);
     }
   };
