@@ -146,7 +146,7 @@ const CompanyLayout = ({ children }) => {
     },
     {
       name: "Results",
-      path: "/company/results",
+      path: "/company/pr/results",
       icon: (
         <svg
           width="25"

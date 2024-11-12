@@ -147,8 +147,6 @@ const JobsPage = () => {
           View Details
         </button>
       </div>
-
-
     </div>
     ))
 }

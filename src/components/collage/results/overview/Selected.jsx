@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getselectedStudents } from "../../../../redux/collage/test/thunks/test";
 import Skeleton from "../../../loaders/Skeleton";
+import { getselectedStudentsCompany } from "../../../../redux/company/test/thunks/test";
+import isCompany from "../../../../util/isCompany";
+
 const Selected = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -11,10 +14,20 @@ const Selected = () => {
 
   // //console.log(id);
   useEffect(() => {
-    dispatch(getselectedStudents(id));
+    if(isCompany){
+      dispatch(getselectedStudentsCompany(id));
+    }else{
+      dispatch(getselectedStudents(id));
+    }
   }, []);
+
   const { selectedStudents, SELECTED_STUDENTS_LOADING } = useSelector(
-    (state) => state.test
+    (state) => {
+      if(isCompany()){
+      return state.companyTest;
+    }else{
+      return state.test;
+    }}
   );
 
   let percentageData = [];
@@ -123,9 +136,17 @@ const Selected = () => {
               <span
                 className="self-center cursor-pointer"
                 onClick={() =>
-                  navigate(
-                    `/collage/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                  )
+                 {
+                  if(isCompany()){
+                    navigate(
+                      `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                    )
+                  }else{
+                   navigate(
+                     `/collage/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                   )
+                  }
+                 }
                 }
               >
                 <h2 className="font-dmSans  text-sm sm:text-base text-blued ">

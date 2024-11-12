@@ -10,6 +10,8 @@ import { getTestResultPage } from "../../../../redux/collage/test/thunks/test";
 import { getStudentResponse } from "../../../../redux/collage/test/thunks/student";
 import CircularLoader from "../../../CircularLoader";
 import Skeleton from "../../../loaders/Skeleton";
+import { getTestResultPageCompany } from "../../../../redux/company/test/thunks/test";
+import isCompany from "../../../../util/isCompany";
 
 const Appeared = ({ assessment }) => {
   const [isLoading, setIsLoading] = useState({});
@@ -20,19 +22,29 @@ const Appeared = ({ assessment }) => {
     const status = event.target.value;
     setIsLoading({ ...isLoading, [responseId]: true });
     await dispatch(selectStudentTest({ testId, responseId, status }));
-    await dispatch(getTest(testId));
+    dispatch(getTest(testId));
     await dispatch(getTestResultPage(assessment._id));
     setIsLoading({ ...isLoading, [responseId]: false });
   };
 
   const { testDataResponse, response, TEST_DATA_RESPONSE_LOADING } =
-    useSelector((state) => state.test);
+    useSelector((state) => {if(isCompany()){
+     return state.test
+    }else{
+      return state.companyTest
+    }});
 
   // //console.log(response);
 
   useEffect(() => {
     if (assessment?._id) {
-      dispatch(getTestResultPage(assessment._id));
+      if(isCompany()){
+        dispatch(getTestResultPageCompany(assessment._id));
+
+      }else{
+        dispatch(getTestResultPage(assessment._id));
+
+      }
     }
   }, [dispatch, assessment?._id]);
 
@@ -169,10 +181,18 @@ const Appeared = ({ assessment }) => {
                   <span
                     className="self-center cursor-pointer"
                     onClick={() =>
-                      navigate(
-                        `/collage/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                      )
-                    }
+                      {
+                       if(isCompany()){
+                         navigate(
+                           `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                         )
+                       }else{
+                        navigate(
+                          `/collage/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                        )
+                       }
+                      }
+                     }
                   >
                     <h2 className="font-dmSans text-sm text-blued ">
                       Assessment Review

@@ -16,7 +16,7 @@ import companyAuthReducer from  "./company/auth/companyAuthSlice.js";
 import jobReducer from "./company/jobs/jobSlice.js";
 import companyTestReducer from "../redux/company/test/testSlice.js"
 import collegeJobsReducer from "./collage/jobs/collegeJobSlice.js";
-
+import companyResultReducer from "./company/result/result.js"
 
 
 
@@ -43,7 +43,8 @@ const store = configureStore({
 
     companyAuth:  companyAuthReducer,
     job : jobReducer,
-    companyTest:companyTestReducer
+    companyTest:companyTestReducer,
+    companyResult : companyResultReducer
   },
 });
 

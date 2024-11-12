@@ -33,6 +33,7 @@ import CompanyLayout from "./layout/Company";
 import Job from "./pages/company/jobs/Job";
 import CreateJob from "./pages/company/jobs/CreateJob";
 import CompanyTestHome from "./pages/company/test/TestHome";
+import CompanyResultRoutes from "./pages/company/results";
 import JobDetailsPage from "./pages/company/jobs/JobDetails";
 import InvitedStudentsForJob from "./pages/company/jobs/InvitedStudentsForJob";
 import Jobs from "./pages/collage/jobs/Jobs";
@@ -175,6 +176,7 @@ export default function App() {
               <Route path="pr"  element={<CompanyLayout />}>
             {/* <Route path="/" element={<CompanyLayout />}> */}
             {CompanyTestHome()}
+            {CompanyResultRoutes()}
             <Route path="profile" element={<CompanyProfile />} />
             <Route path="dashboard" element={<DashboardCompany />} />
             <Route path="jobs" element={<Job />} />

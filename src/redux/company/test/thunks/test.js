@@ -27,12 +27,12 @@ export const getTest = createAsyncThunk(
   }
 );
 
-export const getTestResultPage = createAsyncThunk(
+export const getTestResultPageCompany = createAsyncThunk(
   "test/getTestResultPage",
   async (id, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/studentDummy/get/test-details/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/company/studentDummy/get/test-details/${id}`,
 
         {
           headers: {
@@ -154,12 +154,12 @@ export const selectStudentTest = createAsyncThunk(
     }
   }
 );
-export const getselectedStudents = createAsyncThunk(
+export const getselectedStudentsCompany = createAsyncThunk(
   "test/getselectedStudents",
   async (id, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/college/test/students/selected/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/company/test/students/selected/${id}`,
 
         {
           headers: {

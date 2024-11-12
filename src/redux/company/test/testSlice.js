@@ -21,11 +21,12 @@ import {
   getTest,
   getTestResultPage,
   selectStudentTest,
-  getselectedStudents,
+  getselectedStudentsCompany,
   getStudentsForTest,
   getRecentTests,
   removeFromRecent,
   getRecentStudentTests,
+  getTestResultPageCompany,
 } from "./thunks/test";
 
 import {
@@ -51,7 +52,6 @@ import {
   removeBookmark,
   getTopicByIdQB,
 } from "./thunks/question";
-import { addTestToJob } from "./thunks/job";
 
 const testState = {
   recentAssessments: [],
@@ -736,15 +736,15 @@ const testSliceCompany= createSlice({
         state.response = [];
         console.error("Error fetching student responses:", action.payload);
       })
-      .addCase(getTestResultPage.pending, (state, action) => {
+      .addCase(getTestResultPageCompany.pending, (state, action) => {
         state.status = "pending";
         state.TEST_DATA_RESPONSE_LOADING = true;
       })
-      .addCase(getTestResultPage.fulfilled, (state, action) => {
+      .addCase(getTestResultPageCompany.fulfilled, (state, action) => {
         state.testDataResponse = action.payload;
         state.TEST_DATA_RESPONSE_LOADING = false;
       })
-      .addCase(getTestResultPage.rejected, (state, action) => {
+      .addCase(getTestResultPageCompany.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         state.testDataResponse = [];
         state.TEST_DATA_RESPONSE_LOADING = false;
@@ -916,15 +916,15 @@ const testSliceCompany= createSlice({
         state.status = "fulfilled";
         //console.log(action.payload);
       })
-      .addCase(getselectedStudents.pending, (state, action) => {
+      .addCase(getselectedStudentsCompany.pending, (state, action) => {
         state.status = "pending";
         state.SELECTED_STUDENTS_LOADING = true;
       })
-      .addCase(getselectedStudents.fulfilled, (state, action) => {
+      .addCase(getselectedStudentsCompany.fulfilled, (state, action) => {
         state.selectedStudents = action.payload;
         state.SELECTED_STUDENTS_LOADING = false;
       })
-      .addCase(getselectedStudents.rejected, (state, action) => {
+      .addCase(getselectedStudentsCompany.rejected, (state, action) => {
         console.error(action.payload);
         state.SELECTED_STUDENTS_LOADING = false;
       })
@@ -959,22 +959,6 @@ const testSliceCompany= createSlice({
       })
       .addCase(setTotalTopicQuestions.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.payload || action.error.message;
-      })
-      // JOB
-      .addCase(addTestToJob.pending, (state) => {
-        state.status = "loading";
-
-      }
-      )
-      .addCase(addTestToJob.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        toast.success("Test added to job successfully");
-        //console.log(action.payload);
-      })
-      .addCase(addTestToJob.rejected, (state, action) => {
-        state.status = "failed";
-        toast.error(action.payload);
         state.error = action.payload || action.error.message;
       });
   },
