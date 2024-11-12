@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import resetCompanyTestDetails from "../../../util/resetCompanyTestDetails";
 
 const Test = () => {
   const dispatch = useDispatch();
-
+useEffect(()=>{
+resetCompanyTestDetails(dispatch);
+},[])
   return (
     <div className="min-h-screen bg-background text-foreground">
       <main className="container mx-auto px-4 py-8">

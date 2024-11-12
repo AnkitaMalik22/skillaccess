@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import HeaderSelect from "../../../components/collage/test/addquestions/HeaderSelect";
+// import HeaderSelect from "../../../components/company/pr/test/addquestions/HeaderSelect";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
+import HeaderCompany from "../../../components/company/HeaderCompany";
 
 const AddQuestionsSelect = () => {
   //useTranslate();
@@ -19,36 +20,52 @@ const AddQuestionsSelect = () => {
   //   dispatch(setTest({ questionType: selectQuestionType }));
   // }, [selectQuestionType]);
 
+
+  const page = searchParams.get("page");
+
+
+  // //console.log("page", level);
+  const handleNext = () => {
+    if (page === "qb") {
+      navigate(`/company/pr/quesBank/topic`);
+    } else {
+      // //console.log("level", level);
+      level === "adaptive"
+        ? navigate(`/company/pr/test/selectAdaptive?level=${level}`)
+        : navigate(`/company/pr/test/select?level=${level}`);
+    }
+  };
+
   const NavHandler = () => {
     switch (selectQuestionType) {
       case "mcq":
         navigate(
-          `/collage/test/addMcqToTopic/${id}?type=mcq&addType=topic&level=${level}`
+          `/company/pr/test/addMcqToTopic/${id}?type=mcq&addType=topic&level=${level}`
         );
         break;
 
       case "code":
         navigate(
-          `/collage/test/code/${id}?type=compiler&addType=topic&level=${level}`
+          `/company/pr/test/code/${id}?type=compiler&addType=topic&level=${level}`
         );
         break;
 
       case "video":
         navigate(
-          `/collage/test/video/${id}?type=video&addType=topic&level=${level}`
+          `/company/pr/test/video/${id}?type=video&addType=topic&level=${level}`
         );
 
         break;
 
       case "findAnswer":
         navigate(
-          `/collage/test/find-ans/${id}?type=findAnswer&addType=topic&level=${level}`
+          `/company/pr/test/find-ans/${id}?type=findAnswer&addType=topic&level=${level}`
         );
         break;
 
       case "essay":
         navigate(
-          `/collage/test/essay/${id}?type=essay&addType=topic&level=${level}`
+          `/company/pr/test/essay/${id}?type=essay&addType=topic&level=${level}`
         );
         break;
 
@@ -59,7 +76,8 @@ const AddQuestionsSelect = () => {
   };
   return (
     <>
-      <HeaderSelect Q={selectQuestionType} />
+      {/* <HeaderSelect Q={selectQuestionType} /> */}
+      <HeaderCompany handleNext={handleNext} title={"Select question type."} handlePrev={()=>navigate(-1)}/>
 
       <div className=" mx-auto mt-20">
         {/* larger screens */}

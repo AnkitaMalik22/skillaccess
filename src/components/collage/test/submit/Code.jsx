@@ -76,7 +76,7 @@ const List = ({ Title, number, code, question }) => {
           )}
         </Disclosure>
       </div>
-      <div
+      {/* <div
         className="bg-gray-100 h-11 flex rounded-xl px-1"
         onClick={() => {
           // //console.log(question);
@@ -91,7 +91,7 @@ const List = ({ Title, number, code, question }) => {
           alt="cross"
           className="self-center "
         />
-      </div>
+      </div> */}
     </div>
   );
 };

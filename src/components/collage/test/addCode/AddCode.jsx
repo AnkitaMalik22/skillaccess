@@ -15,15 +15,22 @@ import {
 import { addQuestionToTopic } from "../../../../redux/collage/test/thunks/topic";
 import { editQuestionById } from "../../../../redux/collage/test/thunks/question";
 import { setTotalTopicQuestions } from "../../../../redux/collage/test/thunks/topic";
+import { addQuestionToTopicCompany } from "../../../../redux/company/test/thunks/topic";
+import HeaderCompany from "../../../company/HeaderCompany";
+import Loader from "../addVideo/Loader";
 
 const AddCode = () => {
   const { id } = useParams();
   const { topics, currentTopic } = useSelector((state) => state.test);
   const [isPrev, setIsPrev] = useState(false);
-
+const [loading,setLoading] = useState(false)
   const [count, setCount] = useState(topics[id]?.compiler.length - 1);
 
   const [countDetail, setCountDetail] = useState(-1);
+
+  const isCompany = ()=>{
+   return /\/company.*/.test(window.location.pathname);
+  }
 
   const handlePrev = () => {
     if (addType === "topic") {
@@ -201,7 +208,8 @@ const AddCode = () => {
       output: [""],
     });
   };
-  const handleSave = (component) => {
+  const handleSave =async  (component) => {
+    setLoading(true);
     if (addType === "topic") {
       if (
         // question.codeQuestion != "" ||
@@ -245,20 +253,32 @@ const AddCode = () => {
             toast.error("Testcases required");
             return;
           }
-          dispatch(
-            addCompilerToTopic({
-              data: { ...question, codeLanguage: "" },
-              id: id,
-              type: type,
-            })
-          );
-          dispatch(
-            addQuestionToTopic({
-              data: { ...question, codeLanguage: "" },
-              id: id,
-              type: type,
-            })
-          );
+         
+          if(isCompany()){
+           await dispatch(
+              addQuestionToTopicCompany({
+                data: { ...question, codeLanguage: "" },
+                id: id,
+                type: type,
+              })
+            );
+          }else{
+            await dispatch(
+              addCompilerToTopic({
+                data: { ...question, codeLanguage: "" },
+                id: id,
+                type: type,
+              })
+            );
+           await  dispatch(
+              addQuestionToTopic({
+                data: { ...question, codeLanguage: "" },
+                id: id,
+                type: type,
+              })
+            );
+          }
+          
 
           resetQuestion();
           setToggle(1);
@@ -305,7 +325,7 @@ const AddCode = () => {
           return;
         }
         if (isPrev) {
-          dispatch(
+        await  dispatch(
             addCompiler({
               data: { ...question, codeLanguage: "" },
               id: id,
@@ -320,7 +340,7 @@ const AddCode = () => {
             resetQuestion();
           });
         } else {
-          dispatch(
+         await dispatch(
             addCompiler({
               data: { ...question, codeLanguage: "" },
               id: id,
@@ -342,6 +362,7 @@ const AddCode = () => {
         toast.error("Please fill all the fields");
       }
     }
+    setLoading(false)
     // //console.log(question);
   };
   useEffect(() => {
@@ -357,7 +378,14 @@ const AddCode = () => {
 
   return (
     <div>
-      <Header handleSave={handleSave} />
+      {isCompany()?  <HeaderCompany hideNext={true} children ={<button
+          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
+          onClick={()=>handleSave("save")}
+        >
+          {loading ? "Saving" : "Save"}
+          {loading && <Loader size="sm" />}
+        </button>} handlePrev={()=>{navigate(`/company/pr/test/select?level=${level}`)}}/>:   <Header handleSave={handleSave} />}
+    
       <div className="bg-white min-h-[90vh] mx-auto rounded-xl relative">
         <div className="flex flex-wrap gap-5 md:flex-nowrap mb-5 md:mb-10 ">
           <div className="w-1/2 ">

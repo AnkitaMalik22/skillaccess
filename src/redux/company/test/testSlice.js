@@ -211,12 +211,12 @@ const testSliceCompany= createSlice({
     setTotalSelectedQuestions: (state, action) => {
       state.totalSelectedQuestions = parseInt(action.payload);
     },
-    setCurrentQuestionCount: (state, action) => {
+    setCurrentQuestionCountCompany: (state, action) => {
       //console.log(action.payload, "pay");
       localStorage.setItem("currentQuestionCount", action.payload);
       state.currentQuestionCount = action.payload;
     },
-    setCurrentTopic: (state, action) => {
+    setCurrentTopicCompany: (state, action) => {
       state.currentTopic = action.payload.topic;
       localStorage.setItem("currentTopic", JSON.stringify(state.currentTopic));
     },
@@ -473,7 +473,7 @@ const testSliceCompany= createSlice({
       return state.test.selectedSections;
     },
 
-    setTestBasicDetails: (state, action) => {
+    setTestBasicDetailsCompany: (state, action) => {
       state.name = action.payload.name;
       state.description = action.payload.description;
       state.totalAttempts = action.payload.totalAttempts;
@@ -501,7 +501,7 @@ const testSliceCompany= createSlice({
       //console.log(action.payload, "action.payload");
       // //console.log(current(state));
     },
-    setTestSelectedTopics: (state, action) => {
+    setTestSelectedTopicsCompany: (state, action) => {
       state.topics = action.payload;
       // localStorage.setItem(
       //   "test",
@@ -965,9 +965,9 @@ const testSliceCompany= createSlice({
 
 export const {
   setInTest,
-  setCurrentQuestionCount,
+  setCurrentQuestionCountCompany,
   setTotalSelectedQuestions,
-  setCurrentTopic,
+  setCurrentTopicCompany,
   clearTopicToBeAdded,
   editQuestion,
   removeQuestionById,
@@ -984,8 +984,8 @@ export const {
   setMcq,
   addCompiler,
   addVideo,
-  setTestBasicDetails,
-  setTestSelectedTopics,
+  setTestBasicDetailsCompany,
+  setTestSelectedTopicsCompany,
   addMcqToTopic,
   addFindAnsToTopic,
   addEssayToTopic,

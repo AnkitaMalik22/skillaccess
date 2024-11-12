@@ -3,7 +3,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
-const HeaderCompany = ({ handleNext ,handlePrev,title}) => {
+const HeaderCompany = ({ handleNext ,handlePrev,title,hideNext,children}) => {
   const navigate = useNavigate();
   return (
     <div className="flex w-full mx-auto justify-between mb-5 items-center">
@@ -19,7 +19,7 @@ const HeaderCompany = ({ handleNext ,handlePrev,title}) => {
         </h2>
       </div>
 
-      <div className="flex gap-3">
+      {!hideNext && <div className="flex gap-3">
         <button
           className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={() => handleNext()}
@@ -27,7 +27,8 @@ const HeaderCompany = ({ handleNext ,handlePrev,title}) => {
           Next
           <FaArrowRightLong className="self-center text-lg text-white ml-4" />
         </button>{" "}
-      </div>
+      </div>}
+      {children}
     </div>
   );
 };

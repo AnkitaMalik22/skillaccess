@@ -37,7 +37,7 @@ export const getTestResultPage = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -65,7 +65,7 @@ export const getAllTests = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -92,7 +92,7 @@ export const createTestCompany = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -116,7 +116,7 @@ export const deleteTest = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -141,7 +141,7 @@ export const selectStudentTest = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -164,7 +164,7 @@ export const getselectedStudents = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -191,7 +191,7 @@ export const getRecentTests = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -215,7 +215,7 @@ export const getRecentStudentTests = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );
@@ -240,7 +240,7 @@ export const removeFromRecent = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );

@@ -199,11 +199,12 @@ const AddMcqToTopic = () => {
             Duration: 0,
             AnswerIndex: null,
           });
+          if(navBack === true){
+            navigate(-1);
+          }
         });
 
-        if(navBack){
-          navigate(-1);
-        }
+       
       }
     }
   };
@@ -242,6 +243,9 @@ const AddMcqToTopic = () => {
         handleNext={()=>handleQuestionSave(true)}
         id={id}
         type={type}
+        handlePrev={()=>{
+          navigate(`/company/pr/test/select?level=${level}`);
+        }}
       />
       <div className="bg-white min-h-[90vh] mx-auto rounded-xl pt-4">
         <div className="flex flex-wrap gap-5 md:flex-nowrap mx-auto ">

@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import Header from "../../../components/collage/test/submit/Header";
-import { Progress } from "../../../components/collage/test/submit/Progress";
-import List from "../../../components/collage/test/submit/List";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
 import Code from "../../../components/collage/test/submit/Code";
+import Header from "../../../components/collage/test/submit/Header";
+import List from "../../../components/collage/test/submit/List";
+import { Progress } from "../../../components/collage/test/submit/Progress";
 import Video from "../../../components/collage/test/submit/Video";
-import toast from "react-hot-toast";
-import { createTest } from "../../../redux/collage/test/thunks/test";
-import { getCollege } from "../../../redux/collage/auth/authSlice";
-import useTranslate from "../../../hooks/useTranslate";
+import { createTestCompany } from "../../../redux/company/test/thunks/test";
+import resetCompanyTestDetails from "../../../util/resetCompanyTestDetails";
 
 const Submit = () => {
   //useTranslate();
@@ -29,7 +27,7 @@ const Submit = () => {
     duration_from,
     duration_to,
     isNegativeMarking,
-  } = useSelector((state) => state.test);
+  } = useSelector((state) => state.companyTest);
   const [searchParams, setSearchParams] = useSearchParams();
   const testType = searchParams.get("level");
 
@@ -252,7 +250,7 @@ const Submit = () => {
 
       if (confirmed) {
         // Navigate to the specified page
-        navigate(`/collage/test/name?level=${level}`);
+        navigate(`/company/pr/test/name?level=${level}`);
       }
 
       return;
@@ -263,7 +261,7 @@ const Submit = () => {
       );
       if (confirmed) {
         // Navigate to the specified page
-        navigate(`/collage/test/name?level=${level}`);
+        navigate(`/company/pr/test/name?level=${level}`);
       }
       return;
     }
@@ -348,7 +346,7 @@ const Submit = () => {
     setLoading(true);
 
     dispatch(
-      createTest({
+      createTestCompany({
         level,
         name,
         description,
@@ -365,14 +363,20 @@ const Submit = () => {
       // dispatch(
       //   setTestBasicDetails({ name: "", description: "", totalAttempts: null ,totalQuestions:0})
       // );
-      dispatch(getCollege());
+      // dispatch(getCollege());
       setLoading(false);
       //console.log(res);
 
-      if (res.type === "test/createTest/fulfilled") {
-        navigate(
-          `/collage/test/final?testId=${res.payload._id}&name=${res.payload.name}&duration=${res.payload.totalTime}&attepmts=${res.payload.totalAttempts}&total=${res.payload.totalQuestionsCount}`
-        );
+      if (res.type === "companyTest/createTest/fulfilled") {
+
+       resetCompanyTestDetails(dispatch);
+       toast.success("test created successfully")
+       navigate(`/company/pr/test/name?level=${level}`);
+        // navigate(
+        //   `/collage/test/final?testId=${res.payload._id}&name=${res.payload.name}&duration=${res.payload.totalTime}&attepmts=${res.payload.totalAttempts}&total=${res.payload.totalQuestionsCount}`
+        // );
+      }else{
+        toast.error("Error in creating test");
       }
     });
   };
