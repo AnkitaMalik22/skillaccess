@@ -85,6 +85,29 @@ export const createJob = createAsyncThunk(
     }
 );
 
+export const updateJob = createAsyncThunk(
+    "job/updateJob",
+    async ({ jobId, data }, { rejectWithValue }) => {
+        try {
+            const req = await axios.put(
+                `${REACT_APP_API_URL}/api/company/jobs/${jobId}`,
+                data,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "auth-token": getCookie("token"),
+                    },
+                }
+            );
+            return req.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "An error occurred");
+
+        }
+    }
+);
+
+
 
 
 
@@ -135,6 +158,19 @@ const jobSlice = createSlice({
                 state.jobLoading = false;
                 toast.error(action.payload);
             })
+            .addCase(updateJob.pending, (state) => {
+                state.jobLoading = true;
+            })
+            .addCase(updateJob.fulfilled, (state, action) => {
+                state.jobLoading = false;
+                state.jobDetails = action.payload.job;
+                
+                toast.success("Job Updated Successfully");
+            })
+            .addCase(updateJob.rejected, (state, action) => {
+                state.jobLoading = false;
+                toast.error(action.payload);
+            });
           
     },
 });

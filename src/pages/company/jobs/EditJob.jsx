@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import * as z from 'zod'
+import React, { useState, useEffect } from 'react';
+import * as z from 'zod';
 import { FiArrowLeft } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch ,useSelector} from 'react-redux';
-import { createJob } from '../../../redux/company/jobs/jobSlice';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateJob, getJobDetails } from '../../../redux/company/jobs/jobSlice';
 import toast from 'react-hot-toast';
 
 // Define the Zod schema for validation
@@ -29,13 +29,15 @@ const schema = z.object({
     .positive('Salary To must be positive'),
   RoleOverview: z.string().nonempty('Role Overview is required'),
   DutiesResponsibility: z.string().nonempty('Duties and Responsibility is required'),
-  tier : z.string().nonempty('Tier is required')
-})
+  tier: z.string().nonempty('Tier is required'),
+});
 
-const CreateJob = () => {
-    const navigate = useNavigate() ;
-    const dispatch = useDispatch();
-    const {data:company} = useSelector(state => state.companyAuth);
+const EditJob = () => {
+  const { jobId } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { data: company } = useSelector((state) => state.companyAuth);
+  const {jobDetails } = useSelector((state) => state.job);
 
   const [formData, setFormData] = useState({
     JobTitle: '',
@@ -51,77 +53,94 @@ const CreateJob = () => {
     SalaryTo: '',
     RoleOverview: '',
     DutiesResponsibility: '',
-    tier : ''
-  })
+    tier: '',
+  });
 
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
 
-  // Handle input change
+  // Load job details when the component mounts
+  useEffect(() => {
+    dispatch(getJobDetails(jobId));
+  }, [dispatch, jobId]);
+
+  useEffect(() => {
+    if (jobDetails) {
+      setFormData({
+        JobTitle: jobDetails.JobTitle,
+        CompanyName: jobDetails.CompanyName || company?.basic?.companyName,
+        JobLocation: jobDetails.JobLocation,
+        WorkplaceType: jobDetails.WorkplaceType,
+        CloseByDate: jobDetails.CloseByDate,
+        EmploymentType: jobDetails.EmploymentType,
+        SeniorityLevel: jobDetails.SeniorityLevel,
+        ExperienceFrom: jobDetails.ExperienceFrom,
+        ExperienceTo: jobDetails.ExperienceTo,
+        SalaryFrom: jobDetails.SalaryFrom,
+        SalaryTo: jobDetails.SalaryTo,
+        RoleOverview: jobDetails.RoleOverview,
+        DutiesResponsibility: jobDetails.DutiesResponsibility,
+        tier: jobDetails.tier,
+      });
+    }
+  }, [jobDetails, company]);
+
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
-  // Handle form submission
-  const handleSubmit =async (e) => {
-    e.preventDefault()
-    // Convert string values to numbers where applicable for validation
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const validatedData = {
       ...formData,
       CompanyName: company?.basic?.companyName,
       ExperienceFrom: Number(formData.ExperienceFrom),
       ExperienceTo: Number(formData.ExperienceTo),
       SalaryFrom: Number(formData.SalaryFrom),
-      SalaryTo: Number(formData.SalaryTo)
-    }
+      SalaryTo: Number(formData.SalaryTo),
+    };
     try {
-      schema.parse(validatedData)
-      setErrors({})
-     await dispatch(createJob({companyId : company?._id, data : {...validatedData ,company : company?._id}}));
-   
-
-
-    
-
-
-
-      console.log('Form submitted:', validatedData)
+      schema.parse(validatedData);
+      setErrors({});
+      await dispatch(updateJob({ jobId, data: validatedData }));
+     
+      navigate(`/company/pr/jobs/${jobId}`);
     } catch (err) {
       if (err instanceof z.ZodError) {
-        const fieldErrors = {}
+        const fieldErrors = {};
         err.errors.forEach(({ path, message }) => {
-          fieldErrors[path[0]] = message
-        })
-        setErrors(fieldErrors)
+          fieldErrors[path[0]] = message;
+        });
+        setErrors(fieldErrors);
       }
     }
-  }
+  };
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
-        <button className="flex items-center text-gray-600 hover:text-gray-800" onClick={() => navigate(-1)}>
+        <button
+          className="flex items-center text-gray-600 hover:text-gray-800"
+          onClick={() => navigate(-1)}
+        >
           <FiArrowLeft className="mr-2" size={20} />
           <span>Back</span>
         </button>
-        <h1 className="text-2xl font-bold text-center flex-grow">Create Job</h1>
+        <h1 className="text-2xl font-bold text-center flex-grow">Edit Job</h1>
         <button
           onClick={handleSubmit}
           className="bg-blued hover:bg-secondary text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
         >
-          Save
+          Save Changes
         </button>
       </div>
 
-      {/* Form Section */}
       <form onSubmit={handleSubmit} className="space-y-6">
         {[
           { label: 'Job Title', name: 'JobTitle' },
-          // { label: 'Company Name', name: 'CompanyName' },
           { label: 'Job Location', name: 'JobLocation' },
           { label: 'Workplace Type', name: 'WorkplaceType' },
           { label: 'Close By Date', name: 'CloseByDate', type: 'date' },
@@ -131,10 +150,6 @@ const CreateJob = () => {
           { label: 'Experience To', name: 'ExperienceTo', type: 'number' },
           { label: 'Salary From', name: 'SalaryFrom', type: 'number' },
           { label: 'Salary To', name: 'SalaryTo', type: 'number' },
-       
-         
-
-          
         ].map(({ label, name, type = 'text' }) => (
           <div key={name} className="flex flex-col">
             <label className="font-medium mb-1">{label}</label>
@@ -147,9 +162,7 @@ const CreateJob = () => {
                 errors[name] ? 'border-red-500' : 'border-gray-300'
               } rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blued`}
             />
-            {errors[name] && (
-              <p className="text-red-500 text-sm mt-1">{errors[name]}</p>
-            )}
+            {errors[name] && <p className="text-red-500 text-sm mt-1">{errors[name]}</p>}
           </div>
         ))}
 
@@ -163,9 +176,7 @@ const CreateJob = () => {
               errors.RoleOverview ? 'border-red-500' : 'border-gray-300'
             } rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blued`}
           />
-          {errors.RoleOverview && (
-            <p className="text-red-500 text-sm mt-1">{errors.RoleOverview}</p>
-          )}
+          {errors.RoleOverview && <p className="text-red-500 text-sm mt-1">{errors.RoleOverview}</p>}
         </div>
 
         <div className="flex flex-col">
@@ -182,6 +193,7 @@ const CreateJob = () => {
             <p className="text-red-500 text-sm mt-1">{errors.DutiesResponsibility}</p>
           )}
         </div>
+
         <div className="flex flex-col">
           <label className="font-medium mb-1">Tier</label>
           <select
@@ -197,13 +209,11 @@ const CreateJob = () => {
             <option value="tier2">Tier 2</option>
             <option value="tier3">Tier 3</option>
           </select>
-          {errors.tier && (
-            <p className="text-red-500 text-sm mt-1">{errors.tier}</p>
-          )}
+          {errors.tier && <p className="text-red-500 text-sm mt-1">{errors.tier}</p>}
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreateJob
+export default EditJob;

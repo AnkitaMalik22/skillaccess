@@ -36,6 +36,8 @@ import JobDetailsPage from "./pages/company/jobs/JobDetails";
 import InvitedStudentsForJob from "./pages/company/jobs/InvitedStudentsForJob";
 import Jobs from "./pages/collage/jobs/Jobs";
 import DesktopOnly from "./pages/common/DesktopOnly";
+import AddTestToJob from "./pages/company/jobs/AddTestToJob";
+import EditJob from "./pages/company/jobs/EditJob";
 
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
@@ -176,6 +178,8 @@ export default function App() {
             <Route path="jobs/create" element={<CreateJob />} />
             <Route path="jobs/:id" element={<JobDetailsPage />} />
             <Route path="job/students" element={<InvitedStudentsForJob />} />
+            <Route path="job/add-test/:jobId" element={<AddTestToJob />} />
+            <Route path="job/edit/:jobId" element={<EditJob />} />
             
            
              </Route>
