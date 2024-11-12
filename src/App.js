@@ -6,6 +6,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getCollege } from "./redux/collage/auth/authSlice";
 import TestRoute from "./pages/collage/test/TestHome";
+import JobRoute from "./pages/collage/jobs";
 import ResultsRoute from "./pages/collage/results";
 import QuesRoute from "./pages/collage/quesBank";
 import StudentRoute from "./pages/collage/students";
@@ -140,10 +141,12 @@ export default function App() {
                 {SettingsRoute()}
                 {TeamsRoute()}
                 {AccountRoute()}
+                {JobRoute()}
               </>
               <Route path="/collage/dashboard" element={<Dashboard />} />
               <Route path="/collage/profile" element={<Profile />} />
               <Route path="/collage/Jobs" element={<Jobs />} />
+
             </Routes>
           </Suspense>
         </CollageLayout>

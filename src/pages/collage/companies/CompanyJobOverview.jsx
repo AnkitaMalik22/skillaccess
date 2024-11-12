@@ -128,7 +128,7 @@ const CompanyJobOverview = () => {
 
                 localStorage.setItem("testId", jobDetails?.assessments[0]?.test?._id);
                 localStorage.setItem("testName", jobDetails?.assessments[0]?.test?.name);
-                navigate(`/collage/test/invite?testId=${jobDetails?.assessments[0]?.test?._id}`)}}
+                navigate(`/collage/job/test/invite?testId=${jobDetails?.assessments[0]?.test?._id}`)}}
             >
               {/* arrow */}
               Invite Students

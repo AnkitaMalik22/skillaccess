@@ -142,7 +142,7 @@ const JobsPage = () => {
       <p className="text-[#e45b39] text-sm">Final Date 05/12/22</p>
 
         <button className="bg-blued text-white rounded-2xl text-xs font-bold flex gap-2 px-7 py-2 "
-          onClick={() => navigate(`/collage/companies/jobOverview/${job?._id}`)}
+          onClick={() => navigate(`/collage/job/overview/${job?._id}`)}
         >
           View Details
         </button>
