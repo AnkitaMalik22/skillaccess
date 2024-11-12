@@ -208,23 +208,23 @@ const AddQuestions = () => {
                       // }
                       onClick={() =>
                         navigate(
-                          `/company/pr/test/details/${index}?type=topic&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
+                          `/company/pr/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
                         )
                       }
                     >
                       Details
                     </button>
                   </div>
-                  {/* <div className="col-span-1  flex justify-center">
+                  <div className="col-span-1  flex justify-center">
                     <PiPencilSimpleLine
                       className="self-center text-blued w-5 h-5 cursor-pointer"
                       onClick={() =>
                         navigate(
-                          `/company/pr/test/details/${index}?type=topic&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}`
+                          `/company/pr/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}`
                         )
                       }
                     />
-                  </div> */}
+                  </div>
                 </div>
               </div>
             ))}

@@ -33,12 +33,12 @@ resetCompanyTestDetails(dispatch);
             linkHref="/company/pr/test/name?level=advanced"
             linkText="Create Advanced Assessment"
           />
-          <Section
+          {/* <Section
             title="Expert Assessment"
             description="Design expert-level assessments to push your audience to new heights."
             linkHref="/company/pr/test/name?level=expert"
             linkText="Create Expert Assessment"
-          />
+          /> */}
         </div>
       </main>
     </div>

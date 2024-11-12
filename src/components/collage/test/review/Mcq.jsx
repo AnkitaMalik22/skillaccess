@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { RxCross1 } from "react-icons/rx";
-import { PiFileTextBold } from "react-icons/pi";
-import { IoSwapVerticalSharp } from "react-icons/io5";
-import { PiPencilSimpleLineBold } from "react-icons/pi";
+import React, { useState } from "react";
 import { CiBookmarkMinus } from "react-icons/ci";
-import { useDispatch, useSelector } from "react-redux";
+import { PiPencilSimpleLineBold } from "react-icons/pi";
+import { RxCross1 } from "react-icons/rx";
 import ReactQuill from "react-quill"; // Import ReactQuill
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
-import {
-  editQuestion,
-  removeQuestion,
-  setCurrentQuestionCount,
-} from "../../../../redux/collage/test/testSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { addBookmark } from "../../../../redux/collage/test/thunks/question";
 
-import { useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useSearchParams } from "react-router-dom";
+import { editQuestionCompany, removeQuestionCompany, setCurrentQuestionCountCompany } from "../../../../redux/company/test/testSlice";
 
 const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   const [search, setSearch] = useSearchParams();
@@ -49,10 +43,10 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   };
 
   const handleDelete = () => {
-    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
+    dispatch(setCurrentQuestionCountCompany(currentQuestionCount - 1));
 
     dispatch(
-      removeQuestion({ selfIndex: Number, topicIndex: id, questionType: "mcq" })
+      removeQuestionCompany({ selfIndex: Number, topicIndex: id, questionType: "mcq" })
     );
   };
 
@@ -88,7 +82,7 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
       search.set(`${Number}`, "false");
       setSearch(search);
       dispatch(
-        editQuestion({
+        editQuestionCompany({
           topicIndex: id,
           selfIndex: Number,
           questionType: "mcq",

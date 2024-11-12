@@ -374,7 +374,7 @@ const testSliceCompany= createSlice({
         JSON.stringify(state.TopicToBeAdded)
       );
     },
-    removeQuestion: (state, action) => {
+    removeQuestionCompany: (state, action) => {
       //questionType, topicIndex ,selfIndex
       removeQfunc(state, action);
     },
@@ -383,7 +383,7 @@ const testSliceCompany= createSlice({
       removeQById(state, action);
     },
 
-    editQuestion: (state, action) => {
+    editQuestionCompany: (state, action) => {
       editQuestionFun(state, action);
     },
     addCompiler: (state, action) => {
@@ -969,9 +969,9 @@ export const {
   setTotalSelectedQuestions,
   setCurrentTopicCompany,
   clearTopicToBeAdded,
-  editQuestion,
+  editQuestionCompany,
   removeQuestionById,
-  removeQuestion,
+  removeQuestionCompany,
   addMcq,
   addEssay,
   addFindAns,

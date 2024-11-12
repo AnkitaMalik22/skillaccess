@@ -70,7 +70,7 @@ const SelectTests = () => {
         parseInt(totalQuestions) ||
       totalQ > totalQuestions
     ) {
-      toast.error(`Number of question must be less than ${totalQuestions}`);
+      toast.error(`Number of question must be less than ${parseInt(totalQuestions) + 1}`);
       return;
     }
     if (!questionType) {
@@ -256,7 +256,13 @@ const SelectTests = () => {
           // totalQuestions={totalQuestions}
         />
       )}
-      <HeaderCompany handleNext={()=>{Navigate(`/company/pr/test/questions?level=${level}`)}} handlePrev={()=>{Navigate(`/company/pr/test/name?level=${level}`)}} title={""}/>
+      <HeaderCompany handleNext={()=>{
+        if (sections.length === 0) {
+          toast.error("Please select atleast one topic to proceed");
+          return;
+        }
+        
+        Navigate(`/company/pr/test/questions?level=${level}`)}} handlePrev={()=>{Navigate(`/company/pr/test/name?level=${level}`)}} title={""}/>
      
 
       <div className="w-4/5 mx-auto">
@@ -344,6 +350,7 @@ const SelectTests = () => {
           setQuestionType={setQuestionType}
           handleFilter={handleFilterSections}
           type={""}
+          customSelect={[{value:"mcq",label:"Multiple Choice Questions"},{value:"compiler",label:"Code"}]}
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
