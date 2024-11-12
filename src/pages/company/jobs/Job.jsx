@@ -54,19 +54,20 @@ const JobsPage = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(jobs , "jobs");
-    dispatch(getJobs( userDetails?._id));
-
-  }, [dispatch,userDetails]);
+useEffect(() => {
+  if (userDetails?._id) {
+    console.log(userDetails._id);
+    dispatch(getJobs(userDetails._id));
+  }
+}, [dispatch, userDetails?._id]);
 
 
   return (
  
      <>
      <Header />
-     <div className="flex flex-wrap mx-1 w-fit justify-center gap-4 ">
-{
+     <div className="flex flex-wrap gap-5 md:gap-10 md:gap-y-[30px] gap-y-4 ">
+     {
     jobs && jobs?.map((job) => (
         <JobCard job={job} key={job._id} />
     ))

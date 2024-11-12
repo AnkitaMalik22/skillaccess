@@ -25,6 +25,7 @@ import SecurityAppPage from "./pages/collage/settings/SecurityAppPage";
 import LoginCompany from "./pages/company/auth/Login";
 import RegisterCompany from "./pages/company/auth/RegisterCompany";
 import getCookie from "./util/getToken";
+import CompanyProfile from "./pages/company/profile/Profile";
 import AwaitingApproval from "./pages/company/AwatingApproval";
 import DashboardCompany from "./pages/company/dashboard/Dashboard";
 import CompanyLayout from "./layout/Company";
@@ -33,6 +34,8 @@ import CreateJob from "./pages/company/jobs/CreateJob";
 import CompanyTestHome from "./pages/company/test/TestHome";
 import JobDetailsPage from "./pages/company/jobs/JobDetails";
 import InvitedStudentsForJob from "./pages/company/jobs/InvitedStudentsForJob";
+import Jobs from "./pages/collage/jobs/Jobs";
+import DesktopOnly from "./pages/common/DesktopOnly";
 
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
@@ -43,6 +46,8 @@ const Dashboard = lazy(() => import("./pages/collage/dashboard/Dashboard"));
 
 export default function App() {
   const [loader, setLoader] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -103,11 +108,22 @@ export default function App() {
     }
   }, [isLoggedIn, navigate]);
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   if (loader || USER_LOADING) {
     return <Loader />;
   }
-  return (
-    <React.Fragment>
+  return isDesktop ? (
+    <div className="app-content">
+      <React.Fragment>
+      
       {isLoggedIn ? (
         <CollageLayout>
           <Suspense fallback={<Loader />}>
@@ -125,6 +141,7 @@ export default function App() {
               </>
               <Route path="/collage/dashboard" element={<Dashboard />} />
               <Route path="/collage/profile" element={<Profile />} />
+              <Route path="/collage/Jobs" element={<Jobs />} />
             </Routes>
           </Suspense>
         </CollageLayout>
@@ -142,15 +159,18 @@ export default function App() {
             <Route path="/password/reset/:id" element={<ResetPassword />} />
             <Route path="collage/me/failed" element={<NotAuth />} />
 
+
             {/* company routes */}
 
             <Route path="/company/">
               <Route path="" element={<LoginCompany />} />
               <Route path="register" element={<RegisterCompany />} />
+          
               <Route path="approval" element={<AwaitingApproval />} />
               <Route path="pr"  element={<CompanyLayout />}>
             {/* <Route path="/" element={<CompanyLayout />}> */}
             {CompanyTestHome()}
+            <Route path="profile" element={<CompanyProfile />} />
             <Route path="dashboard" element={<DashboardCompany />} />
             <Route path="jobs" element={<Job />} />
             <Route path="jobs/create" element={<CreateJob />} />
@@ -173,5 +193,10 @@ export default function App() {
       )}
       
     </React.Fragment>
+    </div>
+  ) : (
+    <DesktopOnly />
   );
+   
+  
 }

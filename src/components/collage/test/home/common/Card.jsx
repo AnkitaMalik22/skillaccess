@@ -94,16 +94,16 @@ const Card = (props) => {
           }}
         >
           <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued mx-2" />
-          {props.assessment?.invitedStudents.slice(0, 3).map((student) => (
+          {props.assessment?.invitedStudents?.slice(0, 3).map((student) => (
             <>
               <img src={student?.avatar?.url} className="w-8 h-8 -ml-1" />
             </>
           ))}
 
           <div className="w-8  rounded  font-dmSans text-gray-400 font-normal self-center text-xs pl-2">
-            {props.assessment?.invitedStudents.length - 3 > 0 &&
-              props.assessment?.invitedStudents.length - 3}
-            {props.assessment?.invitedStudents.length - 3 > 0 && "+"}
+            {props.assessment?.invitedStudents?.length - 3 > 0 &&
+              props.assessment?.invitedStudents?.length - 3}
+            {props.assessment?.invitedStudents?.length - 3 > 0 && "+"}
           </div>
         </div>
 

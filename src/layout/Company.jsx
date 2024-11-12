@@ -187,7 +187,7 @@ const CompanyLayout = ({ children }) => {
     { name: "Notifications", path: "" },
     {
       name: "Profile",
-      path: "/company/profile",
+      path: "/company/pr/profile",
       icon: (
         <svg
           width="18"
@@ -314,7 +314,7 @@ const CompanyLayout = ({ children }) => {
       "/company/students": 3,
       "/company/results": 4,
       "/company/quesBank": 5,
-      "/company/profile": 7,
+      "/company/pr/profile": 7,
       "/company/inbox": 8,
       "/company/teams": 9,
       "/company/accounting": 10,
@@ -358,7 +358,7 @@ const CompanyLayout = ({ children }) => {
         dispatch(setSelected(5));
       }
 
-      if (path.match(/\/company\/profile*/)) {
+      if (path.match(/\/company\/pr\/profile*/)) {
         dispatch(setSelected(7));
       }
 

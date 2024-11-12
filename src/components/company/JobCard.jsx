@@ -6,7 +6,7 @@ import { PiPencilSimpleLine } from 'react-icons/pi'
 
 const JobCard = ({job}) => {
   const navigate = useNavigate();
-  console.log(job)
+  // console.log(job)
   return (
 
     <div className=" w-[40%] 2xl:w-1/3 h-auto bg-[#f8f8f9] my-3 text-start font-bold text-black rounded-2xl  font-dmSans p-5"  key={job.id}>
