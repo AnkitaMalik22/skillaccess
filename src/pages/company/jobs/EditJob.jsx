@@ -194,7 +194,7 @@ const EditJob = () => {
           )}
         </div>
 
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <label className="font-medium mb-1">Tier</label>
           <select
             name="tier"
@@ -210,7 +210,7 @@ const EditJob = () => {
             <option value="tier3">Tier 3</option>
           </select>
           {errors.tier && <p className="text-red-500 text-sm mt-1">{errors.tier}</p>}
-        </div>
+        </div> */}
       </form>
     </div>
   );

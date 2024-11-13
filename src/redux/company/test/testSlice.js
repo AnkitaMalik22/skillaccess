@@ -970,6 +970,8 @@ const testSliceCompany= createSlice({
       .addCase(addTestToJob.fulfilled, (state, action) => {
         state.status = "succeeded";
         toast.success("Test added to job successfully");
+        window.location.replace("/company/pr/jobs/" + action.payload.job?._id);
+    
         //console.log(action.payload);
       })
       .addCase(addTestToJob.rejected, (state, action) => {

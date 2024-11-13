@@ -108,6 +108,31 @@ export const updateJob = createAsyncThunk(
 );
 
 
+// get all company job tests
+
+export const getCompanyJobTests = createAsyncThunk(
+    "job/getCompanyJobTests",
+    async (_, { rejectWithValue }) => {
+        try {
+            const req = await axios.get(
+                `${REACT_APP_API_URL}/api/company/test/all-tests`,
+
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "auth-token": getCookie("token"),
+                    },
+                }
+            );
+            return req.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "An error occurred");
+
+        }
+    }
+);
+
+
 
 
 
@@ -153,6 +178,7 @@ const jobSlice = createSlice({
             .addCase(createJob.fulfilled, (state, action) => {
                 state.jobLoading = false;
                 toast.success("Job Created Successfully");
+                window.location.href = `/company/pr/jobs/${action.payload.job._id}`;
             })
             .addCase(createJob.rejected, (state, action) => {
                 state.jobLoading = false;
@@ -164,7 +190,9 @@ const jobSlice = createSlice({
             .addCase(updateJob.fulfilled, (state, action) => {
                 state.jobLoading = false;
                 state.jobDetails = action.payload.job;
-                
+                // window.location.href = `/company/pr/jobs/${action.payload.job._id}`;
+
+
                 toast.success("Job Updated Successfully");
             })
             .addCase(updateJob.rejected, (state, action) => {

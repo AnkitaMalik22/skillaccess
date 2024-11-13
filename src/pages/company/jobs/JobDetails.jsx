@@ -200,12 +200,12 @@ useEffect(() => {
                 </h2>
               </div>
               <div className="self-center">
-                <h2 className="text-gray-400 text-sm font-bold ">ATTEMPTS</h2>
+                <h2 className="text-gray-400 text-sm font-bold ">Students</h2>
                 <h2 className="text-sm font-bold text-center mt-1">
-                  {assessment.test?.attempts}
+                  {assessment.test?.invitedStudents?.length}
                 </h2>
               </div>
-              <button
+              {/* <button
             className="bg-blued text-white px-4 py-2 rounded"
             onClick={() => {
            
@@ -213,7 +213,7 @@ useEffect(() => {
             }}
           >
             View
-          </button>
+          </button> */}
             </div>
         
           );

@@ -371,7 +371,7 @@ const Submit = () => {
 
        resetCompanyTestDetails(dispatch);
        toast.success("test created successfully")
-       navigate(`/company/pr/test/name?level=${level}`);
+       navigate(`/company/pr/test`);
         // navigate(
         //   `/collage/test/final?testId=${res.payload._id}&name=${res.payload.name}&duration=${res.payload.totalTime}&attepmts=${res.payload.totalAttempts}&total=${res.payload.totalQuestionsCount}`
         // );

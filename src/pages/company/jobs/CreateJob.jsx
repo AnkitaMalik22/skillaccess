@@ -29,7 +29,8 @@ const schema = z.object({
     .positive('Salary To must be positive'),
   RoleOverview: z.string().nonempty('Role Overview is required'),
   DutiesResponsibility: z.string().nonempty('Duties and Responsibility is required'),
-  tier : z.string().nonempty('Tier is required')
+  tier : z.string().nonempty('Tier is required'),
+  GraduationBatch: z.string().nonempty('Graduation Batch is required')
 })
 
 const CreateJob = () => {
@@ -109,12 +110,7 @@ const CreateJob = () => {
           <span>Back</span>
         </button>
         <h1 className="text-2xl font-bold text-center flex-grow">Create Job</h1>
-        <button
-          onClick={handleSubmit}
-          className="bg-blued hover:bg-secondary text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
-        >
-          Save
-        </button>
+      
       </div>
 
       {/* Form Section */}
@@ -123,7 +119,7 @@ const CreateJob = () => {
           { label: 'Job Title', name: 'JobTitle' },
           // { label: 'Company Name', name: 'CompanyName' },
           { label: 'Job Location', name: 'JobLocation' },
-          { label: 'Workplace Type', name: 'WorkplaceType' },
+          { label: 'Workplace Type', name: 'WorkplaceType', type: 'select', options: ['Remote', 'On-site', 'Hybrid'] },
           { label: 'Close By Date', name: 'CloseByDate', type: 'date' },
           { label: 'Employment Type', name: 'EmploymentType' },
           { label: 'Seniority Level', name: 'SeniorityLevel' },
@@ -131,27 +127,50 @@ const CreateJob = () => {
           { label: 'Experience To', name: 'ExperienceTo', type: 'number' },
           { label: 'Salary From', name: 'SalaryFrom', type: 'number' },
           { label: 'Salary To', name: 'SalaryTo', type: 'number' },
+          { label: 'Graduation Batch', name: 'GraduationBatch' },
+          
+
        
          
 
           
-        ].map(({ label, name, type = 'text' }) => (
+        ].map(({ label, name, type = 'text', options = [] }) => (
           <div key={name} className="flex flex-col">
             <label className="font-medium mb-1">{label}</label>
-            <input
-              type={type}
-              name={name}
-              value={formData[name]}
-              onChange={handleChange}
-              className={`border ${
-                errors[name] ? 'border-red-500' : 'border-gray-300'
-              } rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blued`}
-            />
+            {type === 'select' ? (
+              <select
+                name={name}
+                value={formData[name]}
+                onChange={handleChange}
+                className={`border ${
+                  errors[name] ? 'border-red-500' : 'border-gray-300'
+                } rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blued`}
+              >
+                <option value="">Select {label}</option>
+                {options.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type={type}
+                name={name}
+                value={formData[name]}
+                onChange={handleChange}
+                className={`border ${
+                  errors[name] ? 'border-red-500' : 'border-gray-300'
+                } rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blued`}
+              />
+            )}
             {errors[name] && (
               <p className="text-red-500 text-sm mt-1">{errors[name]}</p>
             )}
           </div>
         ))}
+
+
 
         <div className="flex flex-col">
           <label className="font-medium mb-1">Role Overview</label>
@@ -182,6 +201,7 @@ const CreateJob = () => {
             <p className="text-red-500 text-sm mt-1">{errors.DutiesResponsibility}</p>
           )}
         </div>
+      
         <div className="flex flex-col">
           <label className="font-medium mb-1">Tier</label>
           <select
@@ -201,6 +221,15 @@ const CreateJob = () => {
             <p className="text-red-500 text-sm mt-1">{errors.tier}</p>
           )}
         </div>
+        <div className="flex flex-col items-center">
+        <button
+          onClick={handleSubmit}
+          className="bg-blued w-[50%] hover:bg-secondary text-white font-semibold py-2 px-4 rounded-lg transition duration-200 " 
+        >
+          Save
+        </button>
+        </div>
+       
       </form>
     </div>
   )
