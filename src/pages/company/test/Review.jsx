@@ -9,10 +9,11 @@ import Essay from "../../../components/collage/test/review/Essay";
 import Code from "../../../components/collage/test/review/Code";
 import Video from "../../../components/collage/test/review/Video";
 import useTranslate from "../../../hooks/useTranslate";
-import { getTest } from "../../../redux/company/test/thunks/test";
+import { getTestCompany } from "../../../redux/company/test/thunks/test";
 import HeaderCompany from "../../../components/company/HeaderCompany";
 import Name from "../../../components/collage/test/nameAssessment/Name";
 import ReviewHeader from "../../../components/company/ReviewHeader";
+import { getTest } from "../../../redux/collage/test/thunks/test";
 
 const Review = () => {
   //useTranslate();
@@ -28,54 +29,54 @@ const Review = () => {
   const level = searchParams.get("level");
   const [visible, setVisible] = useState(false);
   // //console.log(questionType);
-  const { currentTopic, topics,test } = useSelector((state) => state.companyTest);
+  const { currentTopic, topics, test } = useSelector((state) => state.companyTest);
 
 
   useEffect(() => {
-   if(currentTopic){
-    if (type === "section") {
-      // const topics = JSON.parse(localStorage.getItem("topics"));
-      setName(topics[id].Heading);
-      questionType === "mcq" && setQuestions(topics[id].questions);
-      questionType === "findAnswer" && setQuestions(topics[id].findAnswers);
-      questionType === "essay" && setQuestions(topics[id].essay);
-      questionType === "video" && setQuestions(topics[id].video);
-      questionType === "compiler" && setQuestions(topics[id].compiler);
-    } else if (type === "topic") {
-      setName(currentTopic.Heading);
-      questionType === "mcq" && setQuestions(currentTopic.questions);
-      questionType === "findAnswer" && setQuestions(currentTopic.findAnswers);
-      questionType === "essay" && setQuestions(currentTopic.essay);
-      questionType === "video" && setQuestions(currentTopic.video);
-      questionType === "compiler" && setQuestions(currentTopic.compiler);
-    } else {
-   if(topics[id]){
-    setName(
-      JSON.parse(localStorage.getItem("assessment")).topics[id].Heading
-    );
-    questionType === "mcq" &&
-      setQuestions(
-        JSON.parse(localStorage.getItem("assessment")).topics[id].questions
-      );
-    questionType === "findAnswer" &&
-      setQuestions(
-        JSON.parse(localStorage.getItem("assessment")).topics[id].findAnswers
-      );
-    questionType === "essay" &&
-      setQuestions(
-        JSON.parse(localStorage.getItem("assessment")).topics[id].essay
-      );
-    questionType === "video" &&
-      setQuestions(
-        JSON.parse(localStorage.getItem("assessment")).topics[id].video
-      );
-    questionType === "compiler" &&
-      setQuestions(
-        JSON.parse(localStorage.getItem("assessment")).topics[id].compiler
-      );
+    if (currentTopic) {
+      if (type === "section") {
+        // const topics = JSON.parse(localStorage.getItem("topics"));
+        setName(topics[id].Heading);
+        questionType === "mcq" && setQuestions(topics[id].questions);
+        questionType === "findAnswer" && setQuestions(topics[id].findAnswers);
+        questionType === "essay" && setQuestions(topics[id].essay);
+        questionType === "video" && setQuestions(topics[id].video);
+        questionType === "compiler" && setQuestions(topics[id].compiler);
+      } else if (type === "topic") {
+        setName(currentTopic.Heading);
+        questionType === "mcq" && setQuestions(currentTopic.questions);
+        questionType === "findAnswer" && setQuestions(currentTopic.findAnswers);
+        questionType === "essay" && setQuestions(currentTopic.essay);
+        questionType === "video" && setQuestions(currentTopic.video);
+        questionType === "compiler" && setQuestions(currentTopic.compiler);
+      } else {
+        if (topics[id]) {
+          setName(
+            JSON.parse(localStorage.getItem("assessment")).topics[id].Heading
+          );
+          questionType === "mcq" &&
+            setQuestions(
+              JSON.parse(localStorage.getItem("assessment")).topics[id].questions
+            );
+          questionType === "findAnswer" &&
+            setQuestions(
+              JSON.parse(localStorage.getItem("assessment")).topics[id].findAnswers
+            );
+          questionType === "essay" &&
+            setQuestions(
+              JSON.parse(localStorage.getItem("assessment")).topics[id].essay
+            );
+          questionType === "video" &&
+            setQuestions(
+              JSON.parse(localStorage.getItem("assessment")).topics[id].video
+            );
+          questionType === "compiler" &&
+            setQuestions(
+              JSON.parse(localStorage.getItem("assessment")).topics[id].compiler
+            );
+        }
+      }
     }
-  }
-   }
   }, [topics, "", currentTopic]);
   //console.log(currentTopic);
 
@@ -183,10 +184,10 @@ const Review = () => {
 
   useEffect(() => {
     dispatch(getTest(id));
-  } , []);
+  }, []);
   return (
     <>
-<ReviewHeader  name={name}
+      <ReviewHeader name={name}
         view={view}
         qt={questionType}
         id={
@@ -198,8 +199,8 @@ const Review = () => {
         setVisible={setVisible}
         type={type}
         topicId={searchParams.get("topicId")}
-        sectionId={localStorage.getItem("Details") ? currentTopic._id : ""}/>
-     {/* Test Details */}
+        sectionId={localStorage.getItem("Details") ? currentTopic._id : ""} />
+      {/* Test Details */}
       <div className="flex justify-between">
         <h2 className="text-lg capitalize">{test?.name}</h2>
         {/* <div className="flex gap-2 items-center">
@@ -207,13 +208,12 @@ const Review = () => {
           <p className="text-gray-400 text-xs self-center">{test?.totalTime} mins</p>
         </div> */}
       </div>
-     
-    
+
+
 
       <div
-        className={`mx-auto p-5 min-h-[80vh] my-2 rounded-lg   bg-gray-100  ${
-          visible && "h-[80vh] overflow-hidden"
-        }`}
+        className={`mx-auto p-5 min-h-[80vh] my-2 rounded-lg   bg-gray-100  ${visible && "h-[80vh] overflow-hidden"
+          }`}
       >
         <div className="flex justify-between mb-5">
           <span className="flex gap-2 items-center">

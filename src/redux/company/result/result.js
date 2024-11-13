@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getAssessmentOverview, getResultGraph } from "./thunks/graph";
+import { getAssessmentOverviewCompany, getResultGraph } from "./thunks/graph";
 
 const initialState = {
   graph: {
@@ -51,7 +51,7 @@ const initialState = {
 
 const resultSliceCompany = createSlice({
   initialState: initialState,
-  name: "result",
+  name: "resultCompany",
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -60,7 +60,7 @@ const resultSliceCompany = createSlice({
           state.graph.year[element._id.month - 1] = element;
         });
       })
-      .addCase(getAssessmentOverview.fulfilled, (state, action) => {
+      .addCase(getAssessmentOverviewCompany.fulfilled, (state, action) => {
         action.payload.overview.forEach((result, index) => {
           // index  = day (starts from 0 )
           state.overview[1].data[index] =

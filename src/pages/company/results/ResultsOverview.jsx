@@ -13,12 +13,19 @@ import {
 } from "../../../redux/collage/test/thunks/test";
 import { useDispatch } from "react-redux";
 import useTranslate from "../../../hooks/useTranslate";
-import { getTestResultPageCompany } from "../../../redux/company/test/thunks/test";
+import { getTestCompany, getTestResultPageCompany } from "../../../redux/company/test/thunks/test";
+import isCompany from "../../../util/isCompany";
 
 const ResultsOverview = () => {
-  //useTranslate();
-  const { user } = useSelector((state) => state.collageAuth);
-  const assessment = useSelector((state) => state.test.test);
+  //useTranslate();;
+  const user = useSelector((state) =>{
+    if(isCompany()){
+      return  state.collageAuth.user
+    }else{
+        return state.companyAuth.data
+    }
+  });
+  const assessment = useSelector((state) => state.companyTest.test);
   // const {studentResponses} = useSelector((state) => state.test);
   const searchParams = new URLSearchParams(window.location.search);
   const assessmentId = searchParams.get("assessment");
@@ -30,7 +37,8 @@ const ResultsOverview = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getTest(assessmentId));
+
+    dispatch(getTestCompany(assessmentId));
     // dispatch(getTestResultPage(assessmentId));
     dispatch(getTestResultPageCompany(assessmentId));
 
@@ -48,7 +56,7 @@ const ResultsOverview = () => {
 
   return (
     <>
-      <Header />
+      <Header  user={user}/>
       <Info user={user} assessment={assessment} />
 
       <About Description={assessment?.description} />

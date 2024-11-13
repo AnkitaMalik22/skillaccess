@@ -10,7 +10,7 @@ import { getTestResultPage } from "../../../../redux/collage/test/thunks/test";
 import { getStudentResponse } from "../../../../redux/collage/test/thunks/student";
 import CircularLoader from "../../../CircularLoader";
 import Skeleton from "../../../loaders/Skeleton";
-import { getTestResultPageCompany } from "../../../../redux/company/test/thunks/test";
+import { getTestCompany, getTestResultPageCompany, selectStudentTestCompany } from "../../../../redux/company/test/thunks/test";
 import isCompany from "../../../../util/isCompany";
 
 const Appeared = ({ assessment }) => {
@@ -18,30 +18,43 @@ const Appeared = ({ assessment }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleStatusChange = (testId, responseId) => async (event) => {
+  const handleStatusChange = (testId, responseId, student) => async (event) => {
     const status = event.target.value;
     setIsLoading({ ...isLoading, [responseId]: true });
-    await dispatch(selectStudentTest({ testId, responseId, status }));
-    dispatch(getTest(testId));
-    await dispatch(getTestResultPage(assessment._id));
+    if (isCompany()) {
+
+      console.log(testId, responseId, student)
+      await dispatch(selectStudentTestCompany({ testId:student.assessmentId, responseId: student._id, status }));
+      dispatch(getTestCompany(student.assessmentId))
+      await dispatch(getTestResultPageCompany(student.assessmentId));
+
+    } else {
+      await dispatch(selectStudentTest({ testId, responseId, status }));
+      dispatch(getTest(testId));
+      await dispatch(getTestResultPage(assessment._id));
+
+    }
+
     setIsLoading({ ...isLoading, [responseId]: false });
   };
 
   const { testDataResponse, response, TEST_DATA_RESPONSE_LOADING } =
-    useSelector((state) => {if(isCompany()){
-     return state.test
-    }else{
-      return state.companyTest
-    }});
+    useSelector((state) => {
+      if (isCompany()) {
+        return state.test
+      } else {
+        return state.companyTest
+      }
+    });
 
   // //console.log(response);
 
   useEffect(() => {
     if (assessment?._id) {
-      if(isCompany()){
+      if (isCompany()) {
         dispatch(getTestResultPageCompany(assessment._id));
 
-      }else{
+      } else {
         dispatch(getTestResultPage(assessment._id));
 
       }
@@ -112,11 +125,11 @@ const Appeared = ({ assessment }) => {
                 {" "}
                 {/* row-2 */}
                 <div className="flex justify-center gap-2">
-                  <div className=" min-w-[3rem]  h-12 self-center">
+                  <div className=" min-w-[3rem] h-12 self-center">
                     <img
-                      src="../../images/user.jpg"
+                      src={student?.studentId?.avatar?.url || "../../../images/student.png"}
                       alt="icon"
-                      className="h-12 w-12"
+                      className="h-10 w-10 rounded-full"
                     />
                   </div>
                   <span className="break-words min-w-24 self-center">
@@ -144,7 +157,7 @@ const Appeared = ({ assessment }) => {
                           className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
                           onChange={handleStatusChange(
                             assessment?._id,
-                            student?._id
+                            student?._id, student
                           )}
                           value={student?.status}
                         >
@@ -180,19 +193,18 @@ const Appeared = ({ assessment }) => {
                 <div className="flex justify-center">
                   <span
                     className="self-center cursor-pointer"
-                    onClick={() =>
-                      {
-                       if(isCompany()){
-                         navigate(
-                           `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                         )
-                       }else{
+                    onClick={() => {
+                      if (isCompany()) {
+                        navigate(
+                          `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                        )
+                      } else {
                         navigate(
                           `/collage/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
                         )
-                       }
                       }
-                     }
+                    }
+                    }
                   >
                     <h2 className="font-dmSans text-sm text-blued ">
                       Assessment Review

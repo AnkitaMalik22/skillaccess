@@ -1,18 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import getCookie from "../../../../util/getToken";
 
-export const getStudentResponse = createAsyncThunk(
-  "test/studentResponse",
+export const getStudentResponseCompany = createAsyncThunk(
+  "companyTest/studentResponse",
   async (id, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/studentDummy/response/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/company/studentDummy/response/${id}`,
 
         {
           headers: {
             "Content-Type": "application/json",
 
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );

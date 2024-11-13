@@ -3,7 +3,7 @@ import axios from "axios";
 import getCookie from "../../../../util/getToken";
 
 export const getResultGraph = createAsyncThunk(
-  "result/getResultGraph",
+  "resultCompany/getResultGraph",
   async (_, { rejectWithValue }) => {
     try {
       const req = await axios.get(
@@ -26,17 +26,17 @@ export const getResultGraph = createAsyncThunk(
   }
 );
 
-export const getAssessmentOverview = createAsyncThunk(
-  "result/getAssessmentOverview",
+export const getAssessmentOverviewCompany = createAsyncThunk(
+  "resultCompany/getAssessmentOverview",
   async (id, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments/overview/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/company/test/overview/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
 
-            "auth-token": localStorage.getItem("auth-token"),
+            "auth-token": getCookie("token"),
           },
         }
       );

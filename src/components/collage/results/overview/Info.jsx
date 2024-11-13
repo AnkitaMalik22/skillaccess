@@ -51,7 +51,7 @@ const Info = ({ user, assessment }) => {
       <div className="flex  gap-5 items-center">
         <div className="flex object-cover rounded-xl  self-center p-2 bg-white md:h-20 md:w-20 h-16 w-16">
           <img
-            src={user?.avatar?.public_url || "../../images/companyLogo.png"}
+            src={user?.avatar?.url || "../../../images/companyLogo.png"}
             alt="college logo"
             className="self-center"
           />

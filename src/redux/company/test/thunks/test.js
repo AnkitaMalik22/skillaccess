@@ -2,8 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import getCookie from "../../../../util/getToken";
 
-export const getTest = createAsyncThunk(
-  "test/getTest",
+export const getTestCompany = createAsyncThunk(
+  "companyTest/getTest",
   async (id, { rejectWithValue }) => {
     try {
       console.log(`get test ${id}`);
@@ -131,12 +131,12 @@ export const deleteTest = createAsyncThunk(
     }
   }
 );
-export const selectStudentTest = createAsyncThunk(
-  "test/select",
+export const selectStudentTestCompany = createAsyncThunk(
+  "companyTest/select",
   async (data, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/college/test/status/${data.testId}/${data.responseId}`,
+        `${process.env.REACT_APP_API_URL}/api/company/test/status/${data.testId}/${data.responseId}`,
         { status: data.status },
         {
           headers: {

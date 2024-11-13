@@ -8,6 +8,7 @@ import Skeleton from "../../../loaders/Skeleton";
 import { TbFileDownload } from "react-icons/tb";
 import toast from "react-hot-toast";
 import isCompany from "../../../../util/isCompany";
+import getCookie from "../../../../util/getToken";
 
 
 const List = ({ FilterdStudents, isLoading }) => {
@@ -32,7 +33,7 @@ const List = ({ FilterdStudents, isLoading }) => {
   // //console.log(FilterdStudents);
   useEffect(() => {
     // dispatch(getCollege());
-    dispatch(getAllTests());
+    !isCompany() && dispatch(getAllTests());
   }, [dispatch]);
 
   // const getProgressBarColor = (percentage) => {
@@ -72,10 +73,10 @@ const List = ({ FilterdStudents, isLoading }) => {
   const handleResultsDownload = async (assessmentId) => {
     try {
       // Replace the URL with your API endpoint
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/assessments/download/${assessmentId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${isCompany()? "company/test":"assessments"}/download/${assessmentId}`, {
         method: 'GET',
         headers: {
-          "auth-token": localStorage.getItem("auth-token"),
+          "auth-token": isCompany() ? getCookie("token") : localStorage.getItem("auth-token"),
         }
       });
 

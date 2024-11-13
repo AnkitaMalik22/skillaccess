@@ -12,6 +12,7 @@ import HeaderMarks from "../../../components/collage/results/assessmentReview/He
 import { getStudentResponse } from "../../../redux/collage/test/thunks/student";
 import useTranslate from "../../../hooks/useTranslate";
 import Loader from "../../../Loader";
+import { getStudentResponseCompany } from "../../../redux/company/test/thunks/student";
 
 const AssessmentReview = () => {
   //useTranslate();
@@ -23,7 +24,7 @@ const AssessmentReview = () => {
   const dispatch = useDispatch();
 
   const { response, GET_STUDENT_RESPONSE_LOADING } = useSelector(
-    (state) => state.test
+    (state) => state.companyTest
   );
 
   const [loading, setLoading] = useState(true);
@@ -31,7 +32,7 @@ const AssessmentReview = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      await dispatch(getStudentResponse(responseId));
+      await dispatch(getStudentResponseCompany(responseId));
       setLoading(false);
     };
 

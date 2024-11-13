@@ -10,7 +10,7 @@ import { getAllTestFulfilled } from "./reducerFunctions/test";
 import toast from "react-hot-toast";
 import {
   getResponseByTestandStudent,
-  getStudentResponse,
+  getStudentResponseCompany,
   inviteToTest,
 } from "./thunks/student";
 
@@ -18,9 +18,9 @@ import {
   createTestCompany,
   deleteTest,
   getAllTests,
-  getTest,
+  getTestCompany,
   getTestResultPage,
-  selectStudentTest,
+  selectStudentTestCompany,
   getselectedStudentsCompany,
   getStudentsForTest,
   getRecentTests,
@@ -617,19 +617,19 @@ const testSliceCompany= createSlice({
         //console.log("rejected");
         state.ADD_QUESTION_LOADING = false;
       })
-      .addCase(getTest.pending, (state, action) => {
+      .addCase(getTestCompany.pending, (state, action) => {
         state.status = "loading";
         state.GET_TEST_LOADING = true;
 
         //console.log("pending");
       })
-      .addCase(getTest.fulfilled, (state, action) => {
+      .addCase(getTestCompany.fulfilled, (state, action) => {
         state.test = action.payload;
         state.GET_TEST_LOADING = false;
 
         //console.log("fullfilled", state.test);
       })
-      .addCase(getTest.rejected, (state, action) => {
+      .addCase(getTestCompany.rejected, (state, action) => {
         //console.log(action.payload);
         // toast.error(action.payload);
         state.GET_TEST_LOADING = false;
@@ -722,16 +722,16 @@ const testSliceCompany= createSlice({
         state.ADD_tOPIC_LOADING = false;
       })
 
-      .addCase(getStudentResponse.pending, (state, action) => {
+      .addCase(getStudentResponseCompany.pending, (state, action) => {
         state.status = "pending";
         state.GET_STUDENT_RESPONSE_LOADING = true;
       })
-      .addCase(getStudentResponse.fulfilled, (state, action) => {
+      .addCase(getStudentResponseCompany.fulfilled, (state, action) => {
         // state.studentResponse = action.payload;
         state.GET_STUDENT_RESPONSE_LOADING = false;
         state.response = action.payload;
       })
-      .addCase(getStudentResponse.rejected, (state, action) => {
+      .addCase(getStudentResponseCompany.rejected, (state, action) => {
         state.GET_STUDENT_RESPONSE_LOADING = false;
         state.response = [];
         console.error("Error fetching student responses:", action.payload);
@@ -912,7 +912,7 @@ const testSliceCompany= createSlice({
         toast.error("Error Deleting Test!");
       })
 
-      .addCase(selectStudentTest.fulfilled, (state, action) => {
+      .addCase(selectStudentTestCompany.fulfilled, (state, action) => {
         state.status = "fulfilled";
         //console.log(action.payload);
       })

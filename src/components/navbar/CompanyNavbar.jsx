@@ -41,7 +41,7 @@ const CompanyNavbar = (props) => {
           <div className="rounded-full h-2 w-2 bg-lightBlue absolute top-1 right-2"></div>
         </button>
 
-        <button
+        {/* <button
           onClick={() => {
             navigate("/collage/accounting");
           }}
@@ -51,7 +51,7 @@ const CompanyNavbar = (props) => {
           <h1 className="text-blued  px-2">
             {userDetails?.balance?.credit ? userDetails?.balance?.credit : 0}
           </h1>
-        </button>
+        </button> */}
 
         <div
           className="border border-[#D9E1E7]  rounded-lg p-2 relative flex gap-3"
@@ -59,12 +59,12 @@ const CompanyNavbar = (props) => {
           onClick={goToProfile}
         >
           <img
-            src={userDetails?.user?.avatar?.url}
+            src={userDetails?.user?.basic.logo || "../../../images/profile-data.png"}
             alt="icon"
             className="h-5 w-5"
           />{" "}
           <h2 className="text-sm font-bold self-center">
-            Hello {userDetails?.FirstName}
+            Hello {userDetails?.basic.companyName}
           </h2>
         </div>
 
