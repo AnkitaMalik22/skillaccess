@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../../../components/collage/profile/Header";
+import Header from "../../../components/company/profile/Header";
 import List from "../../../components/collage/profile/List";
 // import {
 //   getcompany,
 //   updatecompany,
 //   updateAvatar,
 // } from "../../../redux/collage/auth/authSlice";
-import EditHeader from "../../../components/collage/profile/EditHeader";
+import EditHeader from "../../../components/company/profile/EditHeader";
 import useTranslate from "../../../hooks/useTranslate";
 import toast from "react-hot-toast";
 import { getCompanyDetails } from "../../../redux/features/company/companySlice";
-import { getCompany } from "../../../redux/company/auth/companyAuthSlice";
+import { getCompany,updateCompany ,uploadPicture } from "../../../redux/company/auth/companyAuthSlice";
 
 const Profile = () => {
   //useTranslate();
@@ -25,7 +25,7 @@ const Profile = () => {
 
 
   const handleUpdate = (company) => {
-    // dispatch(updatecompany(company));
+    dispatch(updateCompany(company));
     setEditable(false);
     localStorage.setItem("editable", false);
   };
@@ -54,7 +54,7 @@ const Profile = () => {
       //   return;
       // } else {
         setEditing(true);
-        // dispatch(updateAvatar({ avatar, id: user._id })).then(() => {});
+        dispatch(uploadPicture({ avatar, id: user?._id })).then(() => {});
         setEditing(false);
       // }
     }
@@ -63,13 +63,13 @@ const Profile = () => {
   useEffect(() => {
     if (submitUpdateProfile) {
 
-      if(company.Phone.length < 10){
-        toast.error("Invalid phone number !");
-        setSubmitUpdateProfile(false);
-        return;
-      }
-      // dispatch(updatecompany(company));
-      // dispatch(getcompany());
+      // if(company.Phone.length < 10){
+      //   toast.error("Invalid phone number !");
+      //   setSubmitUpdateProfile(false);
+      //   return;
+      // }
+      dispatch(updateCompany(company));
+      // dispatch(getCompany());
       setSubmitUpdateProfile(false);
       setEditable(false);
       localStorage.setItem("editable", false);
@@ -96,7 +96,7 @@ const Profile = () => {
           setEditable={setEditable}
           handleUpdate={handleUpdate}
           company={company}
-          setcompany={setcompany}
+          setCompany={setcompany}
           setAvatar={setAvatar}
           avatar={avatar}
         />

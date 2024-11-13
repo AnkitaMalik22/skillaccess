@@ -77,7 +77,7 @@ const LoginCompanyPage = () => {
           <div className="card-body ">
             {/* skill access group */}
             <div className="flex gap-2 justify-center mb-4 md:mb-8">
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="43"
                 height="32"
@@ -90,8 +90,9 @@ const LoginCompanyPage = () => {
                   d="M16.4993 8.00009L16.4993 8.00012L12.4997 11.9997L21.4997 21.0006L30.4997 11.9997L26.4929 8.0001H16.4993V8.00009ZM21.4997 32.0004L21.499 31.9997L0.5 10.9998L12.5033 0H30.4997L42.5003 10.9998L21.5004 31.9997L21.4997 32.0004Z"
                   fill="#0052CC"
                 />
-              </svg>
-              <h1 className="font-bold text-[22px]">Skill Access</h1>
+              </svg> */}
+              {/* <h1 className="font-bold text-[22px]">Skill Access</h1> */}
+              <img src="../../images/logoFinal.png" alt="logo" className="w-60" />
             </div>
 
             <h2 className="font-bold text-2xl text-center text-[#171717] mb-2">

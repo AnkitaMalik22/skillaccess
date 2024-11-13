@@ -65,26 +65,27 @@ export const LoginCompany = createAsyncThunk(
 
 export const uploadPicture = createAsyncThunk(
     "companyAuth/uploadPicture",
-    async ({ type, image }, { rejectWithValue }) => {
+    async ({avatar }, { rejectWithValue }) => {
         try {
             const formData = new FormData();
 
-            if (type === "logo") {
-                formData.append("logo", image);
-                // Use FormData.entries() to log all the form data
-                for (let [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
-            } else {
-                formData.append("cover", image);
-            }
+            // if (type === "logo") {
+            //     formData.append("logo", image);
+            //     // Use FormData.entries() to log all the form data
+            //     for (let [key, value] of formData.entries()) {
+            //         console.log(`${key}: ${value}`);
+            //     }
+            // } else {
+            //     formData.append("cover", image);
+            // }
 
-            const req = await axios.post(
-                `${process.env.REACT_APP_API_URL}/api/company/upload/image`,
-                formData,
+            const req = await axios.put(
+                `${process.env.REACT_APP_API_URL}/api/company/update/logo`,
+               {logo : avatar},
                 {
                     headers: {
                         "Content-Type": "multipart/form-data",
+                        "auth-token": getCookie("token"),
                     },
                 }
             );
@@ -118,11 +119,68 @@ export const getCompany = createAsyncThunk(
     }
 );
 
+export const logoutCompany = createAsyncThunk(
+    "companyAuth/logout",
+    async (_, { rejectWithValue }) => {
+        try {
+            const req = await axios.post(
+                `${REACT_APP_API_URL}/api/company/logout`,
+                {},
+                {
+                    headers: {
+                        "auth-token": getCookie("token"),
+                    },
+                }
+            );
+            return req.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "An error occurred");
+        }
+    }
+);
+
+
+
+
+export const updateCompany = createAsyncThunk(
+    "collageAuth/updateCompany",
+    async (data, { rejectWithValue }) => {
+      try {
+        //console.log("updating", localStorage.getItem("auth-token"));
+        const req = await axios.put(
+          `${REACT_APP_API_URL}/api/company/update`,
+          data,
+  
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": getCookie("token"),
+            },
+          }
+        );
+  
+        const res = req.data;
+        // console.log("should not reject");
+        console.log(res);
+        return res.college;
+      } catch (error) {
+        // console.log("catch", error);
+        return rejectWithValue(error.response.data.message);
+      }
+    }
+  );
+  
+
 
 const companyAuthSlice = createSlice({
     name: "companyAuth",
     initialState: companyState,
-    reducers: {},
+    reducers: {
+        setUploadImg: (state, action) => {
+            state.uploadImg = action.payload;
+          },
+
+    },
     extraReducers: (builder) => {
         builder
             .addCase(RegisterCompany.pending, (state) => {
@@ -168,12 +226,51 @@ const companyAuthSlice = createSlice({
                 state.data = null;
                 state.isCompanyLogin = false;
               
+            })
+            .addCase(updateCompany.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(updateCompany.fulfilled, (state, action) => {
+                state.loading = false;
+                state.data = action.payload.company
+            })
+            .addCase(updateCompany.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(uploadPicture.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(uploadPicture.fulfilled, (state, action) => {
+                state.loading = false;
+                state.data = action.payload.company;
+            })
+            .addCase(uploadPicture.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(logoutCompany.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(logoutCompany.fulfilled, (state) => {
+                state.loading = false;
+                state.data = null;
+                state.isCompanyLogin = false;
+                document.cookie = "token=; path=/; max-age=0;  SameSite=Strict";
+                window.location.href = "/company";
+            })
+            .addCase(logoutCompany.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
             });
+
     },
 });
 
 export const selectRegisterState = (state) => state.companyAuth.register;
 export const selectLoginState = (state) => state.companyAuth.login;
 export const  selectCompanyData = (state) => state.companyAuth.data;
+
+export const { setUploadImg } = companyAuthSlice.actions;
 
 export default companyAuthSlice.reducer;
