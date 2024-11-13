@@ -18,7 +18,7 @@ const Results = () => {
 
   useEffect(() => {
     dispatch(getResultGraph());
-    dispatch(getAllTests());
+    dispatch(getAllTests(true));
   }, [dispatch, ""]);
 
   let arr = assessments.beginner.concat(
@@ -29,19 +29,23 @@ const Results = () => {
   const handleFilterStudents = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      setFiltered(arr);
+      setFiltered(arr.filter(assessment=>{
+        return !!assessment.job;
+      }));
       return;
     } else {
       setFiltered(
         arr.filter((assessment) => {
           const regex = new RegExp(value, "i");
-          return regex.test(assessment.name);
+          return regex.test(assessment.name) && assessment.job;
         })
       );
     }
   };
   useEffect(() => {
-    setFiltered(arr);
+    setFiltered(arr.filter(assessment=>{
+      return !!assessment.job;
+    }));
   }, [assessments]);
   return (
     <>

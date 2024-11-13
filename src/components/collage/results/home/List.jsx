@@ -33,7 +33,7 @@ const List = ({ FilterdStudents, isLoading }) => {
   // //console.log(FilterdStudents);
   useEffect(() => {
     // dispatch(getCollege());
-    !isCompany() && dispatch(getAllTests());
+    !isCompany && dispatch(getAllTests());
   }, [dispatch]);
 
   // const getProgressBarColor = (percentage) => {

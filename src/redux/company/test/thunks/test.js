@@ -57,11 +57,11 @@ export const getTestResultPageCompany = createAsyncThunk(
 
 export const getAllTests = createAsyncThunk(
   "test/getAllTests",
-  async (_, { rejectWithValue, getState }) => {
+  async (withJob, { rejectWithValue, getState }) => {
     try {
       //console.log(`get tests`);
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/company/test/get-all`,
+        `${process.env.REACT_APP_API_URL}/api/company/test/get-all?withJob=${withJob||false}`,
         {
           headers: {
             "Content-Type": "application/json",
