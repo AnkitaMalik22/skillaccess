@@ -59,7 +59,7 @@ const CompanyNavbar = (props) => {
           onClick={goToProfile}
         >
           <img
-            src={userDetails?.user?.avatar?.url}
+            src={userDetails?.avatar?.url}
             alt="icon"
             className="h-5 w-5"
           />{" "}
