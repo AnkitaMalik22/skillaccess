@@ -18,10 +18,16 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getCompany } from "../../../redux/company/auth/companyAuthSlice";
 import { getCompanyJobTests, getJobs } from "../../../redux/company/jobs/jobSlice";
+import { getAllTests } from "../../../redux/company/test/thunks/test";
 
 const DashboardCompany = () => {
   //useTranslate();
   const dispatch = useDispatch();
+  const { totalAssessments } = useSelector((state) => state.companyTest);
+
+
+
+
 
 
 const { data:user } = useSelector((state) => state.companyAuth);
@@ -44,6 +50,7 @@ const { jobs } = useSelector((state) => state.job);
 
   useEffect(() => {
     dispatch(getCompany());
+    dispatch(getAllTests());
     // dispatch(getCompanyJobTests());
   }, []);
 
@@ -119,7 +126,9 @@ const { jobs } = useSelector((state) => state.job);
               <MdOutlinedFlag className="text-blued  self-center w-6 h-6 " />
             </div>
             <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-              {0}
+              {
+              totalAssessments || 0
+              }
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
               Available Assessment

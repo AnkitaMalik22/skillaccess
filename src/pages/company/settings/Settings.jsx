@@ -38,7 +38,7 @@ const Settings = () => {
         <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
-            onClick={() => Navigate("/collage/settings/notifications")}
+            // onClick={() => Navigate("/collage/settings/notifications")}
           >
             <div className="flex gap-6 items-center">
               <img
@@ -61,7 +61,7 @@ const Settings = () => {
         <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between  px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
-            onClick={() => Navigate("/collage/settings/security")}
+            // onClick={() => Navigate("/collage/settings/security")}
           >
             <div className="flex gap-6 items-center">
               <img src="../../images/icons/lock.png" alt="lock-icon" />
@@ -80,7 +80,7 @@ const Settings = () => {
         <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
-            onClick={() => Navigate("/collage/settings/activity")}
+            // onClick={() => Navigate("/collage/settings/activity")}
           >
             <div className="flex gap-6 items-center">
               <img src="../../images/icons/location.png" alt="location-icon" />
@@ -99,7 +99,7 @@ const Settings = () => {
         <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
-            onClick={() => Navigate("/collage/settings/visibility")}
+            // onClick={() => Navigate("/collage/settings/visibility")}
           >
             <div className="flex gap-6 items-center">
               <img src="../../images/icons/eye.png" alt="eye-icon" />

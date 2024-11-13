@@ -79,6 +79,7 @@ const testState = {
     advanced: [],
     adaptive: [],
   },
+  totalAssessments: 0,
   //all topics
   sections: null,
   students: [],
@@ -644,6 +645,7 @@ const testSliceCompany= createSlice({
       })
       .addCase(getAllTests.fulfilled, (state, action) => {
         state.GET_TESTS_LOADING = false;
+        state.totalAssessments = action.payload.assessments?.length;
         getAllTestFulfilled(state, action);
       })
       .addCase(getAllTests.rejected, (state, action) => {

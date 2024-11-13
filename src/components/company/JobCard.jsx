@@ -7,14 +7,14 @@ import calculateDaysAgo from '../../utils/calculateDaysAgo'
 
 const JobCard = ({job}) => {
   const navigate = useNavigate();
-  // console.log(job)
+  console.log(job)
   return (
 
     <div className=" w-[30%] h-auto bg-[#f8f8f9] my-3 text-start font-bold text-black rounded-2xl  font-dmSans p-5"  key={job.id}>
       <div className="logo flex ">
         <div className="w-24 h-24 flex items-center ">
           <img
-            src="../../images/companyLogo.png"
+            src={job?.company?.avatar?.url || "../../images/job.png"}
             alt=""
             className=" rounded-2xl "
           />
