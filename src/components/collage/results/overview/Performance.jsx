@@ -5,6 +5,8 @@ import { getAssessmentOverview } from "../../../../redux/collage/result/thunks/g
 import { useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import isCompany from "../../../../util/isCompany";
+import { getAssessmentOverviewCompany } from "../../../../redux/company/result/thunks/graph";
 
 const Performance = () => {
   const [settings, setSettings] = useState({
@@ -181,9 +183,19 @@ const Performance = () => {
   });
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { overview, overviewLoading } = useSelector((state) => state.result);
+  const { overview, overviewLoading } = useSelector((state) => {if(isCompany()){
+    return state.companyResult
+  }else{
+    return state.result
+  }});
   useEffect(() => {
-    dispatch(getAssessmentOverview(searchParams.get("assessment")));
+    if(isCompany()){
+      dispatch(getAssessmentOverviewCompany(searchParams.get("assessment")));
+
+    }else{
+      dispatch(getAssessmentOverview(searchParams.get("assessment")));
+
+    }
   }, []);
   return (
     <div>

@@ -12,7 +12,7 @@ const ActiveTests = (props) => {
       <div className="logo flex ">
         <div className="w-24 h-24 flex items-center ">
           <img
-            src="../../images/companyLogo.png"
+            src="../../images/default_job.png"
             alt=""
             className=" rounded-2xl "
           />
