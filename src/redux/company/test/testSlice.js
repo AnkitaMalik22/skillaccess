@@ -52,6 +52,7 @@ import {
   removeBookmark,
   getTopicByIdQB,
 } from "./thunks/question";
+import { addTestToJob } from "./thunks/job";
 
 const testState = {
   recentAssessments: [],
