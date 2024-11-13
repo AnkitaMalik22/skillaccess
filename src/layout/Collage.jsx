@@ -459,7 +459,7 @@ const CollageLayout = ({ children }) => {
               </li>
             ))}
             <li className="mb-5 text-center font-dmSans text-lg font-bold ">
-              <h2 className="text-accent">© 2024 skillaccess</h2>
+              <h2 className="text-white">© 2024 skillaccess</h2>
             </li>
           </ul>
         </aside>

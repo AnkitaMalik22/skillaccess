@@ -25,3 +25,23 @@ export const addTestToJob = createAsyncThunk(
         }
     }
     );
+
+export const removeTestFromJob = createAsyncThunk(
+    "test/removeTestFromJob",
+    async (data, { rejectWithValue }) => {
+        try {
+        const req = await axios.delete(
+            `${process.env.REACT_APP_API_URL}/api/company/jobs/remove-test/${data.jobId}/${data.testId}`,
+            {
+            headers: {
+                "auth-token": getCookie("token"),
+            },
+            }
+        );
+        const res = req.data;
+        return res;
+        } catch (error) {
+        return rejectWithValue(error.response.data);
+        }
+    }
+    );

@@ -40,6 +40,7 @@ import Jobs from "./pages/collage/jobs/Jobs";
 import DesktopOnly from "./pages/common/DesktopOnly";
 import AddTestToJob from "./pages/company/jobs/AddTestToJob";
 import EditJob from "./pages/company/jobs/EditJob";
+import Settings from "./pages/company/settings/Settings";
 
 const Register = lazy(() => import("./pages/collage/auth/Register"));
 const Login = lazy(() => import("./pages/collage/auth/Login"));
@@ -166,6 +167,7 @@ export default function App() {
             <Route path="collage/me/failed" element={<NotAuth />} />
 
 
+
             {/* company routes */}
 
             <Route path="/company/">
@@ -176,6 +178,7 @@ export default function App() {
               <Route path="pr"  element={<CompanyLayout />}>
             {/* <Route path="/" element={<CompanyLayout />}> */}
             {CompanyTestHome()}
+            <Route path="settings" element={<Settings />} />
             {CompanyResultRoutes()}
             <Route path="profile" element={<CompanyProfile />} />
             <Route path="dashboard" element={<DashboardCompany />} />

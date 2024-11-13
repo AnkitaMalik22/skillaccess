@@ -960,6 +960,24 @@ const testSliceCompany= createSlice({
       .addCase(setTotalTopicQuestions.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
+      })
+      // JOB
+      .addCase(addTestToJob.pending, (state) => {
+        state.status = "loading";
+
+      }
+      )
+      .addCase(addTestToJob.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        toast.success("Test added to job successfully");
+        window.location.replace("/company/pr/jobs/" + action.payload.job?._id);
+    
+        //console.log(action.payload);
+      })
+      .addCase(addTestToJob.rejected, (state, action) => {
+        state.status = "failed";
+        toast.error(action.payload);
+        state.error = action.payload || action.error.message;
       });
   },
 });

@@ -12,7 +12,7 @@ const SwiperSlideLeft = () => {
   // useSelector((state) => //console.log("state : ", state.dashboard));
 
   useEffect(() => {
-    dispatch(getNewCompanies());
+    // dispatch(getNewCompanies());
     // //console.log("newCompanies : ", newCompanies);
   }, [dispatch]);
 

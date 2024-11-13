@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllTests } from '../../../redux/company/test/thunks/test';
 import { getJobDetails } from '../../../redux/company/jobs/jobSlice';
 import { useParams } from 'react-router-dom';
-import { addTestToJob } from '../../../redux/company/test/thunks/job';
+import { addTestToJob, removeTestFromJob } from '../../../redux/company/test/thunks/job';
 import { FiArrowLeft } from 'react-icons/fi';
 
 const AddTestToJob = () => {
@@ -24,9 +24,18 @@ const AddTestToJob = () => {
     dispatch(getJobDetails(jobId));
   }, [dispatch, jobId]);
 
+
+  useEffect(() => {
+    if(jobDetails?.assessments?.length > 0) {
+        setSelectedTestId(jobDetails?.assessments[0]?.test?._id);
+    }
+    }, [jobDetails]);
+
   const handleSelectTest = (id) => {
+    
     if (selectedTestId === id) {
       setSelectedTestId(null);
+    //   dispatch(removeTestFromJob({ jobId, testId: id }));
     } else {
         setSelectedTestId(id);
     }
