@@ -16,7 +16,7 @@ const Header = () => {
       </div>
       <div className="object-fill rounded-2xl ">
         <img
-          src="../../images/overview.png"
+          src="../../../images/overview.png"
           alt="overview"
           className="w-full"
         />

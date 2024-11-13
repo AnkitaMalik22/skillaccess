@@ -4,9 +4,14 @@ import { FaCircle, FaDotCircle } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import isCompany from "../../../../util/isCompany";
 
 const ChartComp = () => {
-  const { year } = useSelector((state) => state.result.graph);
+  const { year } = useSelector((state) => {if(isCompany()){
+    return state.companyResult.graph
+  }else{
+    return state.result.graph;
+  }});
   const [students, setStudents] = useState({ placed: [], appeared: [] });
   const [toggle, setToggle] = useState(5);
   const navigate = useNavigate();

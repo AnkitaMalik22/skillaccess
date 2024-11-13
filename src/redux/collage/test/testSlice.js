@@ -987,7 +987,8 @@ const testSlice = createSlice({
       .addCase(setTotalTopicQuestions.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
-      });
+      })
+      
   },
 });
 

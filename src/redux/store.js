@@ -12,6 +12,13 @@ import paymentReducer from "./collage/account/paymentSlice.js";
 import inboxSlice from "./collage/Inbox/inboxSlice.js";
 import dummySlice from "./collage/dummySlice.js";
 import resultSlice from "./collage/result/result.js";
+import companyAuthReducer from  "./company/auth/companyAuthSlice.js";
+import jobReducer from "./company/jobs/jobSlice.js";
+import companyTestReducer from "../redux/company/test/testSlice.js"
+import collegeJobsReducer from "./collage/jobs/collegeJobSlice.js";
+import companyResultReducer from "./company/result/result.js"
+
+
 
 const store = configureStore({
   reducer: {
@@ -20,6 +27,7 @@ const store = configureStore({
     dashboard: dashboardReducer,
     side: sideReducer,
     company: companyReducer,
+    collegeJobs : collegeJobsReducer,
     teamCollege: teamCollegeReducer,
     inbox: inboxSlice,
     dummy: dummySlice,
@@ -29,6 +37,14 @@ const store = configureStore({
     studentAuth: studentAuthReducer,
     collegeStudents: collegeStudentsReducer,
     payment: paymentReducer,
+
+
+    // company
+
+    companyAuth:  companyAuthReducer,
+    job : jobReducer,
+    companyTest:companyTestReducer,
+    companyResult : companyResultReducer
   },
 });
 

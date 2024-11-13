@@ -1,7 +1,7 @@
 import React from "react";
 import { IoIosSearch } from "react-icons/io";
 
-const Inputs = ({ questionType, setQuestionType, handleFilter, type }) => {
+const Inputs = ({ questionType, setQuestionType, handleFilter, type, customSelect }) => {
   return (
     <div className="flex justify-between mb-5 items-center">
       {" "}
@@ -37,12 +37,18 @@ const Inputs = ({ questionType, setQuestionType, handleFilter, type }) => {
             onChange={(e) => setQuestionType(e.target.value)}
             className="select text-[#171717]  font-bold text-sm focus:outline-none focus:ring-1 focus:ring-blued bg-gray-100 w-[250px] xl:w-[320px] h-[56px] rounded-lg self-center"
           >
-            <option value="">Question Type</option>
-            <option value="mcq">MCQ</option>
-            <option value="findAnswer">Find Answer</option>
-            <option value="essay">Essay</option>
-            <option value="video">Video</option>
-            <option value="compiler">Code</option>
+           <> <option value="">Question Type</option></>
+            {customSelect ? customSelect.map(({ value, label }) => {
+              return (
+                <option value={value}>{label}</option>
+              )
+            }) : <>
+              <option value="mcq">MCQ</option>
+              <option value="findAnswer">Find Answer</option>
+              <option value="essay">Essay</option>
+              <option value="video">Video</option>
+              <option value="compiler">Code</option></>}
+
           </select>
         )}
       </div>

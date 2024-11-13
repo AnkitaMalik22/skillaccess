@@ -29,7 +29,7 @@ const Navbar = (props) => {
 
         <div className="ml-3">
           {" "}
-          <img src="../../../images/logo.png" alt="" />
+          <img src="../../../images/logoFinal.png" alt="" width="180px" />
         </div>
       </div>
 
