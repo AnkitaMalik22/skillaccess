@@ -5,8 +5,8 @@ import { MdOutlinedFlag } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
-import SwiperSlideLeft from "../../../components/collage/dashboard/dash/SwiperSlideLeft";
-import SwiperSlideRight from "../../../components/collage/dashboard/dash/SwiperSlideLeft";
+import SwiperSlideLeft from "../../../components/company/dashboard/dash/SwiperSlideLeft";
+import SwiperSlideRight from "../../../components/company/dashboard/dash/SwiperSlideLeft";
 import ChartComp from "../../../components/collage/dashboard/dash/Chart";
 import {
   getStudent,
@@ -17,13 +17,15 @@ import {
 } from "../../../redux/collage/dashboard/dashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompany } from "../../../redux/company/auth/companyAuthSlice";
+import { getCompanyJobTests, getJobs } from "../../../redux/company/jobs/jobSlice";
 
 const DashboardCompany = () => {
   //useTranslate();
   const dispatch = useDispatch();
-  const { students, companies, assessments, jobs, placedStudents } =
-    useSelector((state) => state.dashboard);
-  const { user } = useSelector((state) => state.collageAuth);
+
+
+const { data:user } = useSelector((state) => state.companyAuth);
+const { jobs } = useSelector((state) => state.job);
 
   useEffect(() => {
     if (user) {
@@ -31,17 +33,21 @@ const DashboardCompany = () => {
     }
   }, [user]);
 
+
   useEffect(() => {
-    // dispatch(getStudent());
-    // // dispatch(getCompany());
-    // dispatch(getAssessment());
-    // dispatch(getTotalJobs());
-    // dispatch(getPlacedStudents());
-  }, [dispatch]);
+    if (user?._id) {
+
+      dispatch(getJobs(user._id));
+    }
+  }, [dispatch, user?._id]);
+
 
   useEffect(() => {
     dispatch(getCompany());
+    // dispatch(getCompanyJobTests());
   }, []);
+
+
   const navigate = useNavigate();
   return (
     <>
@@ -57,7 +63,7 @@ const DashboardCompany = () => {
             </div>
             <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
               {
-                12
+                jobs?.length || 0
               }
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">Total Jobs</h2>
@@ -69,7 +75,7 @@ const DashboardCompany = () => {
               <CgAwards className="text-green-600 self-center w-6 h-6 " />
             </div>
             <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-              {22}
+              {0}
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">Students Hired</h2>
             <h2 className="text-[#DE350B] font-medium text-[17px]">25.34%</h2>
@@ -80,7 +86,7 @@ const DashboardCompany = () => {
               <CgTrending className="text-[#FF991F] self-center w-6 h-6 " />
             </div>
             <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-              {11}
+              {0}
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
             Students Appeared
@@ -93,7 +99,9 @@ const DashboardCompany = () => {
               <TbBriefcase2 className="text-blued  self-center w-6 h-6 " />
             </div>
             <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-              {22}
+             {
+                0
+             }
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
             Intitutes
@@ -111,14 +119,14 @@ const DashboardCompany = () => {
               <MdOutlinedFlag className="text-blued  self-center w-6 h-6 " />
             </div>
             <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-              {11}
+              {0}
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
               Available Assessment
             </h2>
             <span
               className="flex gap-2 justify-center hover:cursor-pointer"
-              onClick={() => navigate("/collage/test")}
+              onClick={() => navigate("/company/pr/test")}
             >
               <h2 className="text-blued  font-bold text-center  text-base  ">
                 Create New
@@ -160,12 +168,13 @@ const DashboardCompany = () => {
 
             <button
               className="text-blued  text-sm mb-4 md:mb-8"
-              onClick={() => navigate("/company/pr/employees")}
+              // onClick={() => navigate("/company/pr/employees")}
             >
               See All
             </button>
           </span>
-          <SwiperSlideRight />
+
+          {/* <SwiperSlideRight /> */}
         </div>
       </div>
 

@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getNewJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
+import { getJobs } from "../../../../redux/company/jobs/jobSlice";
 
 const SwiperSlideRight = () => {
   const dispatch = useDispatch();
-  const { newJobs, loading } = useSelector((state) => state.dashboard);
+  const { jobs:newJobs, loading } = useSelector((state) => state.dashboard);
 
   useEffect(() => {
-    dispatch(getNewJobs());
+    dispatch(getJobs());
   }, [dispatch]);
 
   return (
