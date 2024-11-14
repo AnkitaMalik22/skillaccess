@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
-import { getAllTests } from "../../../../redux/collage/test/thunks/test";
+import { getAllTests } from "../../../../redux/college/test/thunks/test";
 
 const List = () => {
   const arr = [{ name: "ytasd", studentResponses: [], _id: "asd" }];

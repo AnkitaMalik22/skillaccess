@@ -7,15 +7,15 @@ import Toggle from "./Toggle";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { getAllTests, getStudentResponse, getTest, getTestResultPage } from "../../../../redux/collage/test/testSlice";
-import { getCollege } from "../../../../redux/collage/auth/authSlice";
+import { getAllTests, getStudentResponse, getTest, getTestResultPage } from "../../../../redux/college/test/testSlice";
+import { getCollege } from "../../../../redux/college/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
 const TestsOverview = () => {
     const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state.collageAuth);
+  const { user } = useSelector((state) => state.collegeAuth);
   // const assessment = useSelector((state) => state.test.test);
   // // const {studentResponses} = useSelector((state) => state.test);
   // const searchParams = new URLSearchParams(window.location.search);

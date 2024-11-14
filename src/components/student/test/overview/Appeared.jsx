@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getTestResultPage } from "../../../../redux/collage/test/thunks/test";
-import { getStudentResponse } from "../../../../redux/collage/test/thunks/student";
+import { getTestResultPage } from "../../../../redux/college/test/thunks/test";
+import { getStudentResponse } from "../../../../redux/college/test/thunks/student";
 
 const Appeared = ({ assessment }) => {
   const navigate = useNavigate();
@@ -175,7 +175,7 @@ const Appeared = ({ assessment }) => {
               className="self-center cursor-pointer"
               onClick={() =>
                 navigate(
-                  `/collage/results/assessmentReview?studentId=${student._id}&assessmentId=${assessment._id}&responseId=${student.responseId}`
+                  `/college/results/assessmentReview?studentId=${student._id}&assessmentId=${assessment._id}&responseId=${student.responseId}`
                 )
               }
             >

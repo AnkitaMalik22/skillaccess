@@ -16,9 +16,9 @@ root.render(
     <BrowserRouter>
       <GoogleOAuthProvider
         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        redirectUri="http://localhost:3000/collage/dashboard"
+        redirectUri="http://localhost:3000/college/dashboard"
       >
-        {/* redirectUri= "https://skillaccessclient.netlify.app/collage/dashboard" */}
+        {/* redirectUri= "https://skillaccessclient.netlify.app/college/dashboard" */}
         <App />
       </GoogleOAuthProvider>
     </BrowserRouter>

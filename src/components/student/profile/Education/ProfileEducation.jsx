@@ -22,7 +22,7 @@ const ProfileEducation = () => {
             <div className="flex gap-2 py-1 mt-2">
               <div className="min-w-[2.5rem] h-10 bg-amber-500 self-center rounded-lg"></div>
               <div className="ml-1 mt-1">
-                <h2 className="  font-bold  py-1 ">ABC collage</h2>
+                <h2 className="  font-bold  py-1 ">ABC college</h2>
                 <h2 className="font-normal  text-sm pb-2">
                   Bachelor in yapology
                 </h2>

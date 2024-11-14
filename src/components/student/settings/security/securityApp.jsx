@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getSecretQr,
   verifyQr,
-} from "../../../../redux/collage/auth/authSlice";
+} from "../../../../redux/college/auth/authSlice";
 import toast from "react-hot-toast";
 
 const SecurityApp = () => {
   const dispatch = useDispatch();
 
-  const { qr } = useSelector((state) => state.collageAuth);
+  const { qr } = useSelector((state) => state.collegeAuth);
   useEffect(() => {
     //console.log("ue");
     dispatch(getSecretQr({ non: "" }));

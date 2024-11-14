@@ -43,7 +43,7 @@ const CompanyNavbar = (props) => {
 
         {/* <button
           onClick={() => {
-            navigate("/collage/accounting");
+            navigate("/college/accounting");
           }}
           className="border border-[#D9E1E7] text-blued  rounded-lg px-3 p-1 relative flex items-center"
         >

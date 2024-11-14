@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import {
   selectAuth,
   updatePassword,
-} from "../../../../redux/collage/auth/authSlice";
+} from "../../../../redux/college/auth/authSlice";
 import toast from "react-hot-toast";
 
 const Security = () => {
   const dispatch = useDispatch();
-  const { user, isLoggedIn } = useSelector((state) => state.collageAuth);
+  const { user, isLoggedIn } = useSelector((state) => state.collegeAuth);
 
   const navigate = useNavigate();
   const [password, setPassword] = useState({

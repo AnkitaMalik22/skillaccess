@@ -22,9 +22,9 @@ import {
   getAssessment,
   getTotalJobs,
   getPlacedStudents,
-} from "../../../../redux/collage/dashboard/dashboardSlice";
+} from "../../../../redux/college/dashboard/dashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getCollege } from "../../../../redux/collage/auth/authSlice";
+import { getCollege } from "../../../../redux/college/auth/authSlice";
 import List from "./List";
 import ApplyPoPup from "../../../PopUps/ApplyPoPup";
 import CompleteProfile from "../../../PopUps/CompleteProfile";
@@ -33,7 +33,7 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const { students, companies, assessments, jobs, placedStudents } =
     useSelector((state) => state.dashboard);
-  const { user } = useSelector((state) => state.collageAuth);
+  const { user } = useSelector((state) => state.collegeAuth);
 
   useEffect(() => {
     dispatch(getStudent());

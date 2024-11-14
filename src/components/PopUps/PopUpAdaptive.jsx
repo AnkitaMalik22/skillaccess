@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { setTotalSelectedQuestions } from "../../redux/collage/test/testSlice";
+import { setTotalSelectedQuestions } from "../../redux/college/test/testSlice";
 import { useDispatch } from "react-redux";
 
 const PopUpAdaptive = ({

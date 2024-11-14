@@ -7,7 +7,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getTotalJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
+import { getTotalJobs } from "../../../../redux/college/dashboard/dashboardSlice";
 import BackIcon from "../../../buttons/BackIcon";
 import { IoIosSearch } from "react-icons/io";
 

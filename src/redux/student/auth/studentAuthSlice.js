@@ -231,8 +231,8 @@ export const updateAvatar = createAsyncThunk(
   }
 );
 
-export const logoutCollage = createAsyncThunk(
-  "studentAuth/logoutCollage",
+export const logoutCollege = createAsyncThunk(
+  "studentAuth/logoutCollege",
   async (_, { rejectWithValue }) => {
     try {
       //console.log("logout");
@@ -417,7 +417,7 @@ export const removeLoggedOutUser = createAsyncThunk(
 );
 
 const studentAuthSlice = createSlice({
-  name: "collageAuth",
+  name: "collegeAuth",
   initialState: studentState,
   reducers: {
     setUploadImg: (state, action) => {
@@ -444,7 +444,7 @@ const studentAuthSlice = createSlice({
       })
       .addCase(verifyQr.fulfilled, (state, action) => {
         toast.success("verified");
-        window.location.href = "/collage/dashboard";
+        window.location.href = "/college/dashboard";
       })
       .addCase(verifyQr.rejected, (state, action) => {
         toast.error("invalid token");
@@ -565,11 +565,11 @@ const studentAuthSlice = createSlice({
         //console.log("rejected avatar" + action.payload);
         // window.alert(action.payload);
       })
-      .addCase(logoutCollage.pending, (state, action) => {
+      .addCase(logoutCollege.pending, (state, action) => {
         state.status = "loading";
         //console.log("pending");
       })
-      .addCase(logoutCollage.fulfilled, (state, action) => {
+      .addCase(logoutCollege.fulfilled, (state, action) => {
         // state.status = action.payload
 
         state.user = null;
@@ -579,7 +579,7 @@ const studentAuthSlice = createSlice({
         // Add any fetched posts to the array
         //console.log("fullfilled");
       })
-      .addCase(logoutCollage.rejected, (state, action) => {
+      .addCase(logoutCollege.rejected, (state, action) => {
         //console.log(action.payload);
         // window.alert(action.payload);
       })
