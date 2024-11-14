@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState } from "react";
 import { TbFileDownload } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,10 @@ const Students = () => {
   //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [filteredStudents, setFilteredStudents] = React.useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const [filterType, setFilterType] = useState('all students');
+  const [batch, setBatch] = useState("all");
+  const [createdAt, setCreatedAt] = useState("");
   const {
     uploadedStudents,
     approvedStudents,
@@ -24,12 +27,15 @@ const Students = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (user?._id) {
-        await dispatch(getStudents({ id: user?._id }));
+        await dispatch(getStudents({ id: user?._id , batch , filterType, createdAt}));
       }
     };
+    
 
     fetchData();
-  }, [dispatch, user]);
+  }, [dispatch, user,batch,filterType,createdAt]);
+
+  
 
   useEffect(() => {
     setFilteredStudents(uploadedStudents);
@@ -55,7 +61,7 @@ const Students = () => {
   };
   return (
     <>
-      <Header handleFilter={handleFilterStudents} />
+      <Header handleFilter={handleFilterStudents} setYear={setBatch} year={batch} setCreatedAt={setCreatedAt} createdAt={createdAt} filterType={filterType} setFilterType={setFilterType} />
 
       <div className="w-full flex justify-between md:gap-10 gap-5 flex-wrap md:flex-nowrap md:mb-10 mb-5">
         {/* New students joined */}
