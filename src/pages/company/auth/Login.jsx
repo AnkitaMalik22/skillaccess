@@ -10,7 +10,7 @@ import { LuEye, LuEyeOff } from "react-icons/lu";
 import toast from "react-hot-toast";
 
 import CircularLoader from "../../../components/CircularLoader";
-import Layout from "../../collage/auth/Layout";
+import Layout from "../../college/auth/Layout";
 import { LoginCompany, selectCompanyData, selectLoginState } from "../../../redux/company/auth/companyAuthSlice";
 
 const LoginCompanyPage = () => {

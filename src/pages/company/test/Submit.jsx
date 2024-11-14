@@ -3,11 +3,11 @@ import toast from "react-hot-toast";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Code from "../../../components/collage/test/submit/Code";
-import Header from "../../../components/collage/test/submit/Header";
-import List from "../../../components/collage/test/submit/List";
-import { Progress } from "../../../components/collage/test/submit/Progress";
-import Video from "../../../components/collage/test/submit/Video";
+import Code from "../../../components/college/test/submit/Code";
+import Header from "../../../components/college/test/submit/Header";
+import List from "../../../components/college/test/submit/List";
+import { Progress } from "../../../components/college/test/submit/Progress";
+import Video from "../../../components/college/test/submit/Video";
 import { createTestCompany } from "../../../redux/company/test/thunks/test";
 import resetCompanyTestDetails from "../../../util/resetCompanyTestDetails";
 
@@ -373,7 +373,7 @@ const Submit = () => {
        toast.success("test created successfully")
        navigate(`/company/pr/test`);
         // navigate(
-        //   `/collage/test/final?testId=${res.payload._id}&name=${res.payload.name}&duration=${res.payload.totalTime}&attepmts=${res.payload.totalAttempts}&total=${res.payload.totalQuestionsCount}`
+        //   `/college/test/final?testId=${res.payload._id}&name=${res.payload.name}&duration=${res.payload.totalTime}&attepmts=${res.payload.totalAttempts}&total=${res.payload.totalQuestionsCount}`
         // );
       }else{
         toast.error("Error in creating test");

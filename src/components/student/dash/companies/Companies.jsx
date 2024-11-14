@@ -4,7 +4,7 @@ import { FaAngleLeft } from "react-icons/fa6";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getCompany } from "../../../../redux/collage/dashboard/dashboardSlice";
+import { getCompany } from "../../../../redux/college/dashboard/dashboardSlice";
 import { IoIosSearch } from "react-icons/io";
 import BackIcon from "../../../buttons/BackIcon";
 
@@ -12,7 +12,7 @@ const Companies = () => {
   const [companies, setcompanies] = useState([1, 2, 3, 4, 5, 6, , 9, 6]);
   const dispatch = useDispatch();
   // const { companies } = useSelector((state) => state.dashboard);
-  const { user } = useSelector((state) => state.collageAuth);
+  const { user } = useSelector((state) => state.collegeAuth);
 
   useEffect(() => {
     dispatch(getCompany());
@@ -76,7 +76,7 @@ const Companies = () => {
                   <div className="card-actions justify-end">
                     <button
                       className="px-4 py-2 hover:bg-blue-900 bg-accent text-xs font-dmSans font-bold rounded-xl text-white"
-                      onClick={() => navigate("/collage/companies/profile")}
+                      onClick={() => navigate("/college/companies/profile")}
                     >
                       View Details
                     </button>

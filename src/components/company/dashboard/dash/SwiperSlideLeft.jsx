@@ -11,7 +11,7 @@ const SwiperSlideLeft = () => {
   const { jobs, jobLoading } = useSelector((state) => state.job);
   const navigate = useNavigate();
   // useSelector((state) => //console.log("state : ", state.dashboard));
-  const { user } = useSelector((state) => state.collageAuth);
+  const { user } = useSelector((state) => state.collegeAuth);
 
   useEffect(() => {
     if (user?._id) {

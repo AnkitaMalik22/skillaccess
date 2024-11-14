@@ -5,10 +5,10 @@ import {
   getLoggedInUsers,
   logoutAUser,
   removeLoggedOutUser,
-} from "../../../../redux/collage/auth/authSlice";
+} from "../../../../redux/college/auth/authSlice";
 
 const Activity = () => {
-  const { loggedInUsers } = useSelector((state) => state.collageAuth);
+  const { loggedInUsers } = useSelector((state) => state.collegeAuth);
   const dispatch = useDispatch();
   const [place, setPlace] = useState("");
   const [userLocations, setUserLocations] = useState([]);

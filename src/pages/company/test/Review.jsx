@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../../components/collage/test/review/Header";
+import Header from "../../../components/college/test/review/Header";
 import { LiaStopwatchSolid } from "react-icons/lia";
-import Mcq from "../../../components/collage/test/review/Mcq";
+import Mcq from "../../../components/college/test/review/Mcq";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
-import FindAnswer from "../../../components/collage/test/review/FindAnswer";
-import Essay from "../../../components/collage/test/review/Essay";
-import Code from "../../../components/collage/test/review/Code";
-import Video from "../../../components/collage/test/review/Video";
+import FindAnswer from "../../../components/college/test/review/FindAnswer";
+import Essay from "../../../components/college/test/review/Essay";
+import Code from "../../../components/college/test/review/Code";
+import Video from "../../../components/college/test/review/Video";
 import useTranslate from "../../../hooks/useTranslate";
 import { getTestCompany } from "../../../redux/company/test/thunks/test";
 import HeaderCompany from "../../../components/company/HeaderCompany";
-import Name from "../../../components/collage/test/nameAssessment/Name";
+import Name from "../../../components/college/test/nameAssessment/Name";
 import ReviewHeader from "../../../components/company/ReviewHeader";
-import { getTest } from "../../../redux/collage/test/thunks/test";
+import { getTest } from "../../../redux/college/test/thunks/test";
 
 const Review = () => {
   //useTranslate();

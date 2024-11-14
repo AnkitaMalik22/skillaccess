@@ -23,7 +23,7 @@ const Header = ({
   setAvatar,
 }) => {
   const dispatch = useDispatch();
-  // const { uploadImg } = useSelector((state) => state.collageAuth);
+  // const { uploadImg } = useSelector((state) => state.collegeAuth);
   const { data:user, isLoggedIn, uploadImg } = useSelector(
     (state) => state.companyAuth
   );

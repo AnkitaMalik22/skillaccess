@@ -25,25 +25,25 @@ const Header = ({ editable, setEditable }) => {
       <span className="flex gap-2 text-xs font-bold">
         <button
           className="self-center justify-center flex bg-accent bg-opacity-80 py-3  rounded-xl  w-32  gap-2 text-white"
-          // onClick={() => navigate("/collage/test/addMcq")}
+          // onClick={() => navigate("/college/test/addMcq")}
         >
           Personal
         </button>
         <button
           className="self-center justify-center flex bg-gray-100 py-3  rounded-xl  w-32  gap-2 "
-          // onClick={() => navigate("/collage/test/addMcq")}
+          // onClick={() => navigate("/college/test/addMcq")}
         >
           Education
         </button>
         <button
           className="self-center justify-center flex bg-gray-100 py-3  rounded-xl  w-32  gap-2 "
-          // onClick={() => navigate("/collage/test/addMcq")}
+          // onClick={() => navigate("/college/test/addMcq")}
         >
           Skills
         </button>
         <button
           className="self-center justify-center flex bg-gray-100 py-3  rounded-xl  w-32  gap-2 "
-          // onClick={() => navigate("/collage/test/addMcq")}
+          // onClick={() => navigate("/college/test/addMcq")}
         >
           Portfolio
         </button>

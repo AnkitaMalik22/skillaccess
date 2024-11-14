@@ -34,7 +34,7 @@ const TestHeader = () => {
           </button>
           <button
             className="self-center w-32 justify-center flex bg-accent py-2 font-bold px-4 rounded-xl gap-2 text-white"
-            // onClick={() => navigate("/collage/test/preview")}
+            // onClick={() => navigate("/college/test/preview")}
             // onClick={handleSaveNext}
           >
             Submit

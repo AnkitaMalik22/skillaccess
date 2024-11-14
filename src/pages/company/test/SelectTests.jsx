@@ -6,7 +6,7 @@ import { FiPlusCircle } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
-import Inputs from "../../../components/collage/test/selectTests/Inputs";
+import Inputs from "../../../components/college/test/selectTests/Inputs";
 import HeaderCompany from "../../../components/company/HeaderCompany";
 import { ProgressBar } from "../../../components/company/Progress";
 import Loader from "../../../components/loaders/Loader";
@@ -14,7 +14,7 @@ import {
   setCurrentQuestionCount,
   setCurrentTopic,
   setTestSelectedTopics,
-} from "../../../redux/collage/test/testSlice";
+} from "../../../redux/college/test/testSlice";
 import { getAllTopicsCompany } from "../../../redux/company/test/thunks/topic";
 import { setCurrentQuestionCountCompany, setCurrentTopicCompany, setTestSelectedTopicsCompany } from "../../../redux/company/test/testSlice";
 

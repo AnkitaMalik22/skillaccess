@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { getTest } from "../../../../redux/collage/test/testSlice";
+import { getTest } from "../../../../redux/college/test/testSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 

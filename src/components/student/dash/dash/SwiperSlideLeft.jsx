@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { getNewCompanies } from "../../../../redux/collage/dashboard/dashboardSlice";
+import { getNewCompanies } from "../../../../redux/college/dashboard/dashboardSlice";
 
 const SwiperSlideLeft = () => {
   const dispatch = useDispatch();

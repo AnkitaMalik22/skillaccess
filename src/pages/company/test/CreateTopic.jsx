@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Header from "../../../components/collage/test/createTopic/Header";
+import Header from "../../../components/college/test/createTopic/Header";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { createTopic } from "../../../redux/collage/test/thunks/topic";
+import { createTopic } from "../../../redux/college/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
 import HeaderCompany from "../../../components/company/HeaderCompany";
 import { createTopicCompany } from "../../../redux/company/test/thunks/topic";

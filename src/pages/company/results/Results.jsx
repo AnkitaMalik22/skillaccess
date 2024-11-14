@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import ChartComp from "../../../components/collage/results/home/Chart";
-import Filter from "../../../components/collage/results/home/Filters";
-import List from "../../../components/collage/results/home/List";
+import ChartComp from "../../../components/college/results/home/Chart";
+import Filter from "../../../components/college/results/home/Filters";
+import List from "../../../components/college/results/home/List";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getResultGraph } from "../../../redux/company/result/thunks/graph";

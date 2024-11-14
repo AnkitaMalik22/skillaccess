@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../../components/company/profile/Header";
-import List from "../../../components/collage/profile/List";
+import List from "../../../components/college/profile/List";
 // import {
 //   getcompany,
 //   updatecompany,
 //   updateAvatar,
-// } from "../../../redux/collage/auth/authSlice";
+// } from "../../../redux/college/auth/authSlice";
 import EditHeader from "../../../components/company/profile/EditHeader";
 import useTranslate from "../../../hooks/useTranslate";
 import toast from "react-hot-toast";

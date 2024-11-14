@@ -4,24 +4,24 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getCollege } from "./redux/collage/auth/authSlice";
-import TestRoute from "./pages/collage/test/TestHome";
-import JobRoute from "./pages/collage/jobs";
-import ResultsRoute from "./pages/collage/results";
-import QuesRoute from "./pages/collage/quesBank";
-import StudentRoute from "./pages/collage/students";
-import InboxRoute from "./pages/collage/inbox";
-import SettingsRoute from "./pages/collage/settings";
-import TeamsRoute from "./pages/collage/teams";
-import Profile from "./pages/collage/profile/Profile";
-import CompaniesRoute from "./pages/collage/companies";
+import { getCollege } from "./redux/college/auth/authSlice";
+import TestRoute from "./pages/college/test/TestHome";
+import JobRoute from "./pages/college/jobs";
+import ResultsRoute from "./pages/college/results";
+import QuesRoute from "./pages/college/quesBank";
+import StudentRoute from "./pages/college/students";
+import InboxRoute from "./pages/college/inbox";
+import SettingsRoute from "./pages/college/settings";
+import TeamsRoute from "./pages/college/teams";
+import Profile from "./pages/college/profile/Profile";
+import CompaniesRoute from "./pages/college/companies";
 import Loader from "./Loader";
-import ForgotPassword from "./pages/collage/auth/ForgotPassword";
-import ResetPassword from "./pages/collage/auth/ResetPassword";
+import ForgotPassword from "./pages/college/auth/ForgotPassword";
+import ResetPassword from "./pages/college/auth/ResetPassword";
 import NotAuth from "./components/PopUps/NotAuth";
-import AccountRoute from "./pages/collage/accounting/AccountRoutes";
-import CollageLayout from "./layout/Collage";
-import SecurityAppPage from "./pages/collage/settings/SecurityAppPage";
+import AccountRoute from "./pages/college/accounting/AccountRoutes";
+import CollegeLayout from "./layout/College";
+import SecurityAppPage from "./pages/college/settings/SecurityAppPage";
 // company imports
 import LoginCompany from "./pages/company/auth/Login";
 import RegisterCompany from "./pages/company/auth/RegisterCompany";
@@ -36,16 +36,16 @@ import CompanyTestHome from "./pages/company/test/TestHome";
 import CompanyResultRoutes from "./pages/company/results";
 import JobDetailsPage from "./pages/company/jobs/JobDetails";
 import InvitedStudentsForJob from "./pages/company/jobs/InvitedStudentsForJob";
-import Jobs from "./pages/collage/jobs/Jobs";
+import Jobs from "./pages/college/jobs/Jobs";
 import DesktopOnly from "./pages/common/DesktopOnly";
 import AddTestToJob from "./pages/company/jobs/AddTestToJob";
 import EditJob from "./pages/company/jobs/EditJob";
 import Settings from "./pages/company/settings/Settings";
 
-const Register = lazy(() => import("./pages/collage/auth/Register"));
-const Login = lazy(() => import("./pages/collage/auth/Login"));
-const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
-const Dashboard = lazy(() => import("./pages/collage/dashboard/Dashboard"));
+const Register = lazy(() => import("./pages/college/auth/Register"));
+const Login = lazy(() => import("./pages/college/auth/Login"));
+const TermsPolicies = lazy(() => import("./pages/college/auth/TermsPolicies"));
+const Dashboard = lazy(() => import("./pages/college/dashboard/Dashboard"));
 
 
 
@@ -57,7 +57,7 @@ export default function App() {
   let navigate = useNavigate();
 
   const { user, isLoggedIn, logoutError, USER_LOADING } = useSelector(
-    (state) => state.collageAuth
+    (state) => state.collegeAuth
   );
   const { data: company, isCompanyLogin } = useSelector(
     (state) => state.companyAuth
@@ -69,8 +69,8 @@ export default function App() {
     /^\/terms&policies$/, // Exact match for "/terms&policies"
     /^\/forgotPassword$/, // Exact match for "/forgotPassword"
     /^\/password\/reset\/.*$/, // Match for "/password/reset/*"
-    /^\/collage\/me\/failed$/, // Exact match for "/collage/me/failed"
-    /^\/collage\/settings\/security\/securityApp$/, // Exact match for "/collage/settings/security/securityApp"
+    /^\/college\/me\/failed$/, // Exact match for "/college/me/failed"
+    /^\/college\/settings\/security\/securityApp$/, // Exact match for "/college/settings/security/securityApp"
     /^\/company.*$/,
   ]);
 
@@ -109,7 +109,7 @@ export default function App() {
 
   useEffect(() => {
     if (isLoggedIn && window.location.pathname === "/" && !company) {
-      navigate("/collage/dashboard");
+      navigate("/college/dashboard");
     }
   }, [isLoggedIn, navigate]);
 
@@ -130,7 +130,7 @@ export default function App() {
       <React.Fragment>
       
       {isLoggedIn ? (
-        <CollageLayout>
+        <CollegeLayout>
           <Suspense fallback={<Loader />}>
             <Routes>
               <>
@@ -145,18 +145,18 @@ export default function App() {
                 {AccountRoute()}
                 {JobRoute()}
               </>
-              <Route path="/collage/dashboard" element={<Dashboard />} />
-              <Route path="/collage/profile" element={<Profile />} />
-              <Route path="/collage/Jobs" element={<Jobs />} />
+              <Route path="/college/dashboard" element={<Dashboard />} />
+              <Route path="/college/profile" element={<Profile />} />
+              <Route path="/college/Jobs" element={<Jobs />} />
 
             </Routes>
           </Suspense>
-        </CollageLayout>
+        </CollegeLayout>
       ) : (
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route
-              path="/collage/settings/security/securityApp"
+              path="/college/settings/security/securityApp"
               element={<SecurityAppPage />}
             />
             <Route path="/" element={<Login />} />
@@ -164,7 +164,7 @@ export default function App() {
             <Route path="/terms&policies" element={<TermsPolicies />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/password/reset/:id" element={<ResetPassword />} />
-            <Route path="collage/me/failed" element={<NotAuth />} />
+            <Route path="college/me/failed" element={<NotAuth />} />
 
 
 

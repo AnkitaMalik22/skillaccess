@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../../components/collage/test/addMcqToTopic/Header";
+import Header from "../../../components/college/test/addMcqToTopic/Header";
 import { FaX } from "react-icons/fa6";
 import { FaChevronLeft, FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,11 +7,11 @@ import ReactQuill from "react-quill"; // Import ReactQuill
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { editQuestionById } from "../../../redux/collage/test/thunks/question";
-import { addQuestionToTopic } from "../../../redux/collage/test/thunks/topic";
+import { editQuestionById } from "../../../redux/college/test/thunks/question";
+import { addQuestionToTopic } from "../../../redux/college/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
-import { setTotalTopicQuestions } from "../../../redux/collage/test/thunks/topic";
+import { setTotalTopicQuestions } from "../../../redux/college/test/thunks/topic";
 import { addQuestionToTopicCompany } from "../../../redux/company/test/thunks/topic";
 import HeaderCompany from "../../../components/company/HeaderCompany";
 

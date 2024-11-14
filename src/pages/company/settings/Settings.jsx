@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Header from "../../../components/collage/settings/home/Header";
+import Header from "../../../components/college/settings/home/Header";
 import { FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {logoutCompany} from "../../../redux/company/auth/companyAuthSlice";
-// import { setAssessments } from "../../../redux/collage/test/testSlice";
+// import { setAssessments } from "../../../redux/college/test/testSlice";
 import toast from "react-hot-toast";
 import LogoutPoP from "../../../components/PopUps/LogoutPoP";
 import useTranslate from "../../../hooks/useTranslate";
@@ -38,7 +38,7 @@ const Settings = () => {
         <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
-            // onClick={() => Navigate("/collage/settings/notifications")}
+            // onClick={() => Navigate("/college/settings/notifications")}
           >
             <div className="flex gap-6 items-center">
               <img
@@ -61,7 +61,7 @@ const Settings = () => {
         <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between  px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
-            // onClick={() => Navigate("/collage/settings/security")}
+            // onClick={() => Navigate("/college/settings/security")}
           >
             <div className="flex gap-6 items-center">
               <img src="../../images/icons/lock.png" alt="lock-icon" />
@@ -80,7 +80,7 @@ const Settings = () => {
         <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
-            // onClick={() => Navigate("/collage/settings/activity")}
+            // onClick={() => Navigate("/college/settings/activity")}
           >
             <div className="flex gap-6 items-center">
               <img src="../../images/icons/location.png" alt="location-icon" />
@@ -99,7 +99,7 @@ const Settings = () => {
         <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
-            // onClick={() => Navigate("/collage/settings/visibility")}
+            // onClick={() => Navigate("/college/settings/visibility")}
           >
             <div className="flex gap-6 items-center">
               <img src="../../images/icons/eye.png" alt="eye-icon" />
