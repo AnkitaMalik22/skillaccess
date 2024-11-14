@@ -118,8 +118,9 @@ const JobsPage = () => {
         {job?.JobTitle}
 
         </span>
-        <span className='text-gray-400 font-medium text-sm font-dmSans  self-center'> {
-        job?.createdAt}
+        <span className='text-gray-400 font-medium text-sm font-dmSans  self-center'> 
+        {new Date(job?.createdAt).toDateString()}
+
         </span>
 
         <div className='flex items-start justify-between   h-full my-2'>
@@ -131,15 +132,17 @@ const JobsPage = () => {
         <h2 className='text-gray-400 font-medium text-base font-dmSans sm:mb-2'>Greater Bengaluru, Bengaluru Area</h2>
       </div>
 
-      <h2 className="my-6  line-clamp-2 break-words self-center">Google Analytics
+      <h2 className="my-6  line-clamp-2 break-words self-center">
+        {job?.JobTitle}
 
       </h2>
    
         <p className="text-sm py-2 text-gray-400 ">
-           Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae….
-        </p>
+{
+  job?.RoleOverview
+}        </p>
       <div className="flex flex-row items-start justify-between my-3">
-      <p className="text-[#e45b39] text-sm">Final Date 05/12/22</p>
+      <p className="text-[#e45b39] text-sm">Close Date : {new Date(job?.CloseByDate).toDateString()}</p>
 
         <button className="bg-blued text-white rounded-2xl text-xs font-bold flex gap-2 px-7 py-2 "
           onClick={() => navigate(`/collage/job/overview/${job?._id}`)}
