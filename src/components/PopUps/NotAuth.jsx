@@ -10,7 +10,7 @@ const NotAuth = ({ onCancel, onConfirm }) => {
   // }, []);
 
   const { USER_LOADING, isLoggedIn } = useSelector(
-    (state) => state.collageAuth
+    (state) => state.collegeAuth
   );
 
   const handleGoHome = () => {

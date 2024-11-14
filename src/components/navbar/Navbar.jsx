@@ -11,9 +11,9 @@ const Navbar = (props) => {
   const navigate = useNavigate();
   const goToProfile = () => {
     // Function to navigate to profile page
-    navigate("/collage/profile"); // Use navigate function to navigate to desired URL
+    navigate("/college/profile"); // Use navigate function to navigate to desired URL
   };
-  const userDetails = useSelector((state) => state.collageAuth);
+  const userDetails = useSelector((state) => state.collegeAuth);
 
   return (
     <nav className="navbar flex justify-between bg-white w-full z-[9999] fixed top-0 border-b-black border">
@@ -42,7 +42,7 @@ const Navbar = (props) => {
 
         <button
           onClick={() => {
-            navigate("/collage/accounting");
+            navigate("/college/accounting");
           }}
           className="border border-[#D9E1E7] text-blued  rounded-lg px-3 p-1 relative flex items-center"
         >

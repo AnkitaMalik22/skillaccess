@@ -17,7 +17,7 @@ const CreditPopUp = ({ onCancel }) => {
           </button>
           <button
             className="self-center justify-center flex bg-accent border border-blue-700 py-3 px-8 rounded-xl text-xs gap-2 text-white"
-            onClick={() => navigate("/collage/accounting")}
+            onClick={() => navigate("/college/accounting")}
           >
             Get Credits
           </button>

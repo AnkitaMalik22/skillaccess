@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 const ResultsOverview = () => {
-  const { user } = useSelector((state) => state.collageAuth);
+  const { user } = useSelector((state) => state.collegeAuth);
   const assessment = useSelector((state) => state.test.test);
   // const {studentResponses} = useSelector((state) => state.test);
   const searchParams = new URLSearchParams(window.location.search);

@@ -131,7 +131,7 @@
 //               </h2> */}
 //               <button
 //                 className=" h-8 p-1 w-20  hover:bg-blue-900 bg-accent  rounded-lg bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
-//                 onClick={() => navigate("/collage/companies/jobOverview")}
+//                 onClick={() => navigate("/college/companies/jobOverview")}
 //               >
 //                 <p className="text-blued  -ml-8 font-dmSans text-sm font-medium  ">
 //                  {job.WorkplaceType}

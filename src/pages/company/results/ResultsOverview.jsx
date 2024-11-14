@@ -1,16 +1,16 @@
 import React from "react";
-import Header from "../../../components/collage/results/overview/Header";
-import About from "../../../components/collage/results/overview/About";
-import Info from "../../../components/collage/results/overview/Info";
-import Description from "../../../components/collage/results/overview/Description";
-import Toggle from "../../../components/collage/results/overview/Toggle";
+import Header from "../../../components/college/results/overview/Header";
+import About from "../../../components/college/results/overview/About";
+import Info from "../../../components/college/results/overview/Info";
+import Description from "../../../components/college/results/overview/Description";
+import Toggle from "../../../components/college/results/overview/Toggle";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
   getAllTests,
   getTest,
   getTestResultPage,
-} from "../../../redux/collage/test/thunks/test";
+} from "../../../redux/college/test/thunks/test";
 import { useDispatch } from "react-redux";
 import useTranslate from "../../../hooks/useTranslate";
 import { getTestCompany, getTestResultPageCompany } from "../../../redux/company/test/thunks/test";
@@ -20,7 +20,7 @@ const ResultsOverview = () => {
   //useTranslate();;
   const user = useSelector((state) =>{
     if(isCompany()){
-      return  state.collageAuth.user
+      return  state.collegeAuth.user
     }else{
         return state.companyAuth.data
     }

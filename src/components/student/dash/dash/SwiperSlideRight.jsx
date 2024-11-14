@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { getNewJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
+import { getNewJobs } from "../../../../redux/college/dashboard/dashboardSlice";
 import { getJobs } from "../../../../redux/company/jobs/jobSlice";
 
 const SwiperSlideRight = () => {

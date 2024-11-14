@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
-import { setSelected, selected } from "../redux/collage/sidebar/sideSlice";
+import { setSelected, selected } from "../redux/college/sidebar/sideSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import {
 //   setInTest,

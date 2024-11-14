@@ -1,4 +1,4 @@
-import Header from "../../../components/collage/test/addquestions/Header";
+import Header from "../../../components/college/test/addquestions/Header";
 import { LiaStopwatchSolid } from "react-icons/lia";
 import { RxCross1 } from "react-icons/rx";
 import { PiPencilSimpleLine } from "react-icons/pi";
@@ -9,10 +9,10 @@ import {
   setQuesions,
   setTest,
   setTestSelectedTopics,
-} from "../../../redux/collage/test/testSlice";
+} from "../../../redux/college/test/testSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
-import { Progress } from "../../../components/collage/test/submit/Progress";
+import { Progress } from "../../../components/college/test/submit/Progress";
 import { setCurrentQuestionCountCompany, setTestSelectedTopicsCompany } from "../../../redux/company/test/testSlice";
 import HeaderCompany from "../../../components/company/HeaderCompany";
 import {ProgressBar}  from "../../../components/company/Progress";
@@ -204,7 +204,7 @@ const AddQuestions = () => {
                     <button
                       className="self-center  justify-center bg-gray-200 p-2 rounded-lg text-xs"
                       // onClick={() =>
-                      //   navigate(`/collage/test/${topic.type}/${topic.id}`)
+                      //   navigate(`/college/test/${topic.type}/${topic.id}`)
                       // }
                       onClick={() =>
                         navigate(

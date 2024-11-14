@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setTestBasicDetails,
   setTestSelectedTopics,
-} from "../redux/collage/test/testSlice";
+} from "../redux/college/test/testSlice";
 import TestHeader from "../components/student/test/start/TestHeader";
 
 const StudentTestLayout = ({ children }) => {
@@ -83,51 +83,51 @@ const StudentTestLayout = ({ children }) => {
       setDown(1);
     }
 
-    if (location.pathname.match(/\/collage\/companies*/)) {
+    if (location.pathname.match(/\/college\/companies*/)) {
       dispatch(setSelected(2));
       setDown(2);
     }
 
-    if (location.pathname.match(/\/collage\/StudentTests*/)) {
+    if (location.pathname.match(/\/college\/StudentTests*/)) {
       dispatch(setSelected(3));
       setDown(3);
     }
 
-    if (location.pathname.match(/\/collage\/results*/)) {
+    if (location.pathname.match(/\/college\/results*/)) {
       dispatch(setSelected(4));
       setDown(4);
     }
 
-    if (location.pathname.match(/\/collage\/quesBank*/)) {
+    if (location.pathname.match(/\/college\/quesBank*/)) {
       dispatch(setSelected(5));
       setDown(5);
     }
 
-    if (location.pathname.match(/\/collage\/profile*/)) {
+    if (location.pathname.match(/\/college\/profile*/)) {
       bottom.current.scrollIntoView();
       dispatch(setSelected(7));
       setDown(7);
     }
 
-    if (location.pathname.match(/\/collage\/inbox*/)) {
+    if (location.pathname.match(/\/college\/inbox*/)) {
       bottom.current.scrollIntoView();
       dispatch(setSelected(8));
       setDown(8);
     }
 
-    if (location.pathname.match(/\/collage\/teams*/)) {
+    if (location.pathname.match(/\/college\/teams*/)) {
       bottom.current.scrollIntoView();
       dispatch(setSelected(9));
       setDown(9);
     }
 
-    if (location.pathname.match(/\/collage\/accounting*/)) {
+    if (location.pathname.match(/\/college\/accounting*/)) {
       bottom.current.scrollIntoView();
       dispatch(setSelected(10));
       setDown(10);
     }
 
-    if (location.pathname.match(/\/collage\/settings*/)) {
+    if (location.pathname.match(/\/college\/settings*/)) {
       bottom.current.scrollIntoView();
       dispatch(setSelected(11));
       setDown(11);

@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getStudents,
   uploadStudents,
-} from "../../redux/collage/student/studentSlice";
+} from "../../redux/college/student/studentSlice";
 import toast from "react-hot-toast";
-import Loader from "../collage/test/addVideo/Loader";
+import Loader from "../college/test/addVideo/Loader";
 const StudentPoP = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const [student, setStudent] = useState({
@@ -14,7 +14,7 @@ const StudentPoP = ({ onClose }) => {
     LastName: "",
     Email: "",
   });
-  const { user } = useSelector((state) => state.collageAuth);
+  const { user } = useSelector((state) => state.collegeAuth);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {

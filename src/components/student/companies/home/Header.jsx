@@ -38,14 +38,14 @@ const Header = () => {
       <span className="flex gap-2">
         {/* <button
           className="self-center justify-center flex bg-[#F8F8F9] py-3  rounded-xl w-32  gap-2 "
-          // onClick={() => navigate("/collage/test/addMcq")}
+          // onClick={() => navigate("/college/test/addMcq")}
         >
           <FiPlus className="self-center text-lg " /> Add
         </button> */}
 
         {/* <button
           className="self-center justify-center flex bg-accent py-3  rounded-xl w-48 text-white  gap-2 "
-          // onClick={() => navigate("/collage/test/addMcq")}
+          // onClick={() => navigate("/college/test/addMcq")}
         >
           <FiUpload className="self-center text-lg " /> Upload Questions
         </button> */}

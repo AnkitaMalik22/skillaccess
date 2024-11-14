@@ -7,14 +7,14 @@ import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import SwiperSlideLeft from "../../../components/company/dashboard/dash/SwiperSlideLeft";
 import SwiperSlideRight from "../../../components/company/dashboard/dash/SwiperSlideLeft";
-import ChartComp from "../../../components/collage/dashboard/dash/Chart";
+import ChartComp from "../../../components/college/dashboard/dash/Chart";
 import {
   getStudent,
   // getCompany,
   getAssessment,
   getTotalJobs,
   getPlacedStudents,
-} from "../../../redux/collage/dashboard/dashboardSlice";
+} from "../../../redux/college/dashboard/dashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompany } from "../../../redux/company/auth/companyAuthSlice";
 import { getCompanyJobTests, getJobs } from "../../../redux/company/jobs/jobSlice";
@@ -115,7 +115,7 @@ const { jobs } = useSelector((state) => state.job);
             </h2>
             <h2
               className="text-[#DE350B] font-medium text-[17px] hover:cursor-pointer"
-              onClick={() => navigate("/collage/dashboard/jobs")}
+              onClick={() => navigate("/college/dashboard/jobs")}
             >
               0%
             </h2>

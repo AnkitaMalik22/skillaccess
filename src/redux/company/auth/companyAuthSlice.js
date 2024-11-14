@@ -1,4 +1,4 @@
-// collageAuthSlice.js
+// collegeAuthSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import getCookie from "../../../util/getToken";
@@ -143,7 +143,7 @@ export const logoutCompany = createAsyncThunk(
 
 
 export const updateCompany = createAsyncThunk(
-    "collageAuth/updateCompany",
+    "collegeAuth/updateCompany",
     async (data, { rejectWithValue }) => {
       try {
         //console.log("updating", localStorage.getItem("auth-token"));

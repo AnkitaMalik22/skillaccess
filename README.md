@@ -80,13 +80,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 │ │ ├── buttons/
 │ │ │  ├── BackIcons.jsx
 │ │ │  ├── BackIcons.jsx
-│ │ └── collage/
+│ │ └── college/
 │ │ │  ├── accounting/
 │ │ │     ├── Gpa.jsx
-│ │ └── collage/
+│ │ └── college/
 │ │ │  ├── BackIcons.jsx
 │ │ │  ├── BackIcons.jsx
-│ │ └── collage/
+│ │ └── college/
 │ │ │  ├── BackIcons.jsx
 │ │ │  ├── BackIcons.jsx
 │ │

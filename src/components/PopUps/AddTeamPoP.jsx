@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch } from "react-redux";
-import { addTeam, getInvitedTeams } from "../../redux/collage/teams/teamSlice";
+import { addTeam, getInvitedTeams } from "../../redux/college/teams/teamSlice";
 import toast from "react-hot-toast";
 
 const AddTeamPoP = ({ onClose }) => {

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { getNewJobs } from "../../../../redux/collage/dashboard/dashboardSlice";
+import { getNewJobs } from "../../../../redux/college/dashboard/dashboardSlice";
 import { useNavigate } from "react-router-dom";
 import "swiper/css";
 
@@ -50,7 +50,7 @@ const SwiperSlideRight = () => {
             <figure
               className="bg-white-500  mx-auto rounded-lg flex justify-center cursor-pointer mb-4"
               onClick={() =>
-                navigate(`/collage/companies/jobOverview/${job._id}`)
+                navigate(`/college/companies/jobOverview/${job._id}`)
               }
             >
               <img

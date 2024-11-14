@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import {
 //   deleteTest,
 //   getAllTests,
-// } from "../../../../../redux/collage/test/thunks/test";
+// } from "../../../../../redux/college/test/thunks/test";
 import { FaPlus } from "react-icons/fa6";
 const Card = (props) => {
   const navigate = useNavigate();
@@ -90,7 +90,7 @@ const Card = (props) => {
         //     localStorage.setItem("testId", props.assessment._id);
         //     localStorage.setItem("testName", props.assessment?.name);
         //     props?.assessment &&
-        //       navigate(`/collage/test/invite?testId=${props?.assessment._id}`);
+        //       navigate(`/college/test/invite?testId=${props?.assessment._id}`);
         //   }}
         >
           <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued mx-2" />
@@ -124,7 +124,7 @@ const Card = (props) => {
                 "assessment",
                 JSON.stringify(props.assessment)
               );
-              navigate("/collage/test/assessment");
+              navigate("/college/test/assessment");
             }}
           />
         </div>
