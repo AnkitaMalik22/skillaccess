@@ -81,6 +81,7 @@ const CreateJob = () => {
     try {
       schema.parse(validatedData)
       setErrors({})
+      console.log(company);
      await dispatch(createJob({companyId : company?._id, data : {...validatedData ,company : company?._id}}));
    
 
