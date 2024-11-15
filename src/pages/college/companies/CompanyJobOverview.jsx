@@ -12,6 +12,8 @@ import calculateDaysAgo from "../../../util/calculateDaysAgo";
 import useTranslate from "../../../hooks/useTranslate";
 import Card from "../../../components/college/test/home/common/Card";
 import TestCard from "../../../components/college/companies/job/TestCard";
+// import { ChevronRight } from "react-feather";
+// import { AlertCircle } from "react-feather";
 
 const CompanyJobOverview = () => {
   //useTranslate();
@@ -19,13 +21,72 @@ const CompanyJobOverview = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const { jobDetails } = useSelector((state) => state.dashboard);
+
+  const { jobDetails  } = useSelector((state) => state.dashboard);
+  const {user} = useSelector((state) => state.collegeAuth);
   const { jobs } = useSelector((state) => state.dashboard);
 
+
+
+
+  const isJobOpen = jobDetails?.isOpenForApply || new Date(jobDetails?.CloseByDate) >= new Date();
+
+  const handleInviteStudents = () => {
+      if (!isJobOpen) return;
+      localStorage.setItem("testId", jobDetails?.assessments[0]?.test?._id);
+      localStorage.setItem("testName", jobDetails?.assessments[0]?.test?.name);
+      navigate(`/college/job/test/invite?testId=${jobDetails?.assessments[0]?.test?._id}`);
+  };
+
+  const jobRequirements = [
+      {
+          label: "EXPERIENCE",
+          value: `${jobDetails.ExperienceFrom}-${jobDetails.ExperienceTo} Years`
+      },
+      {
+          label: "SENIORITY LEVEL",
+          value: jobDetails.SeniorityLevel
+      },
+      {
+          label: "EMPLOYMENT",
+          value: jobDetails.EmploymentType
+      },
+      {
+          label: "SALARY",
+          value: `${jobDetails.SalaryFrom}-${jobDetails.SalaryTo}`
+      }
+  ];
+
   useEffect(() => {
-    dispatch(getJobById(id));
-    dispatch(getTotalJobs());
-  }, [id]);
+    if (user?._id) {
+      dispatch(getJobById({
+        jobId : id,
+        collegeId : user?._id
+      }));
+    }
+    // dispatch(getTotalJobs());
+  }, [id,user?._id]);
+
+  const InviteButton = () => {
+    if (isJobOpen) {
+        return (
+            <button
+                onClick={handleInviteStudents}
+                className="flex items-center gap-2 text-blued hover:text-secondary font-medium transition-colors"
+            >
+                Invite Students
+                {/* <ChevronRight className="w-4 h-4" /> */}
+            </button>
+        );
+    }
+
+    return (
+        <div className="flex items-center gap-2 text-red-500">
+            {/* <AlertCircle className="w-4 h-4" /> */}
+            <span className="font-medium">Position Closed</span>
+        </div>
+    );
+};
 
   return (
     <>
@@ -41,178 +102,103 @@ const CompanyJobOverview = () => {
         </h2>
       </div>
 
-      <div className="flex gap-5 mx-auto justify-between mb-2 ">
-        <div className="w-1/2">
-          <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
-            <img
-              src="../../../images/CompanyBg.png"
-              alt="icon"
-              className="w-full h-full rounded-t-3xl z-0 object-cover"
-            />
-          </div>
-          <div className="w-full bg-gray-100 flex justify-between p-5 mb-1">
-            <div>
-              <h2 className="font-bold text-lg">{jobDetails.JobTitle}</h2>
-              <h2 className="text-xs font-medium mt-1">
-                {jobDetails.JobLocation}
-              </h2>
-              <h2 className="text-xs font-medium mt-2 text-gray-400">
-                {calculateDaysAgo(jobDetails.createdAt)}
-              </h2>
-            </div>
-            <div className="self-center">
-              <h2 className="text-gray-400 text-sm font-bold ">EMPLOYEES</h2>
-              <h2 className="text-sm font-bold text-center mt-1">200+</h2>
-            </div>
-          </div>
-
-          {/* /Requirements */}
-
-          <div className="bg-gray-100 mb-1 p-5 grid grid-cols-4 text-xs font-bold text-center">
-            <div>
-              <h2 className="text-gray-400 my-1">EXPERIENCE</h2>
-              <h2>
-                {jobDetails.ExperienceFrom}-{jobDetails.ExperienceTo} Years
-              </h2>
-            </div>
-            <div>
-              <h2 className="text-gray-400 my-1">SENIORITY LEVEL</h2>
-              <h2>{jobDetails.SeniorityLevel}</h2>
-            </div>
-            <div>
-              <h2 className="text-gray-400 my-1">EMPLOYMENT</h2>
-              <h2>{jobDetails.EmploymentType}</h2>
-            </div>
-            <div>
-              <h2 className="text-gray-400 my-1">SALARY</h2>
-              <h2>
-                {jobDetails.SalaryFrom}-{jobDetails.SalaryTo}
-              </h2>
-            </div>
-          </div>
-          {/* Role Overview */}
-          <div className="bg-gray-100 p-5 mb-1">
-            <h2 className="text-base font-bold mb-2">Role Overview</h2>
-            <p className="text-sm text-gray-400">{jobDetails.RoleOverview}</p>
-          </div>
-
-          <div className="bg-gray-100 p-5 mb-1 rounded-b-lg">
-            <h2 className="text-base font-bold mb-2">
-              {" "}
-              Duties & Responsibilities
-            </h2>
-            <p className="text-sm text-gray-400">
-              {" "}
-              {jobDetails.DutiesResponsibility}
-            </p>
-          </div>
-        </div>
-
-        <div className="w-1/2 ">
-          <div className=" w-full relative bg-gray-100 p-4 rounded-lg">
-            <h2 className="font-bold my-4">Number of Students Placed</h2>
-            <div className="w-10/12">
-              {" "}
-              <ChartComp />
-            </div>
-          </div>
-
-          {/*  */}
-          <div className="flex justify-between mb-7 mt-4">
-            <h2 className="font-bold">Assigned Test</h2>
-
-        
-            <h2
-              className="font-bold underline underline-offset-2 text-blued cursor-pointer"
-              onClick={() => {
-
-                localStorage.setItem("testId", jobDetails?.assessments[0]?.test?._id);
-                localStorage.setItem("testName", jobDetails?.assessments[0]?.test?.name);
-                navigate(`/college/job/test/invite?testId=${jobDetails?.assessments[0]?.test?._id}`)}}
-            >
-              {/* arrow */}
-              Invite Students
-            </h2>
-          </div>
-          {/* {jobs
-            ?.filter(
-              (job) => job?.JobTitle === jobDetails?.JobTitle && job?._id !== id
-            )
-            .map((job, index) => {
-              return (
-                <div
-                  className="flex justify-between w-[98%] bg-gray-100 rounded-lg p-4"
-                  key={index}
-                >
-                  <div className="sm:flex">
-                    <div className="  flex justify-center rounded-lg mr-2">
-                      <img
-                        src={job?.company?.basic?.logo}
-                        className="w-10 h-10 rounded-lg self-center"
-                        alt=""
-                      />
+      <div className="flex flex-col lg:flex-row gap-6 mx-auto max-w-7xl px-4 py-6">
+            {/* Left Column - Job Information */}
+            <div className="lg:w-1/2 space-y-4">
+                {/* Job Header with Image */}
+                <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+                    <div className="h-56 relative">
+                        <img
+                            src={jobDetails?.company?.basic?.coverPhoto || "../../../images/CompanyBg.png"}
+                            alt="Company Background"
+                            className="w-full h-full object-cover"
+                        />
+                        {!isJobOpen && (
+                            <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                Closed
+                            </div>
+                        )}
                     </div>
-                    <span className="">
-                      <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                        {job?.JobTitle}
-                      </h2>
-                      <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
-                        {" "}
-                        {job?.company?.basic?.companyName}
-                      </h2>
-                      <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
-                        {" "}
-                        {calculateDaysAgo(jobDetails.createdAt)}
-                      </h2>
-                    </span>
-                  </div>
-                  <div className="flex sm:gap-6 gap-1">
-                    <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
-                    <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
-                      {" "}
-                      {job.JobLocation || "location"}
-                    </h2>
-                    <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
-                      {" "}
-                      {job.WorkplaceType || "WOrktype"}
-                    </h2>
-                    <button
-                      className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
-                      onClick={() =>
-                        navigate(`/college/companies/jobOverview/${job._id}`)
-                      }
-                    >
-                      {job.EmploymentType || "employmentType"}
-                    </button>
-                    <FaArrowRight className="text-gray-400 self-center" />
-                  </div>
+                    
+                    {/* Job Title Section */}
+                    <div className="p-6 flex justify-between items-start border-b border-gray-100">
+                        <div className="space-y-2">
+                            <h1 className="text-xl font-bold text-gray-900">{jobDetails.JobTitle}</h1>
+                            <p className="text-sm text-gray-600">{jobDetails.JobLocation}</p>
+                            <p className="text-sm text-gray-400">{calculateDaysAgo(jobDetails.createdAt)}</p>
+                        </div>
+                        <div className="text-center">
+                            <p className="text-sm font-medium text-gray-500">EMPLOYEES</p>
+                            <p className="text-lg font-bold mt-1">200+</p>
+                        </div>
+                    </div>
+
+                    {/* Requirements Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 border-b border-gray-100">
+                        {jobRequirements.map((req, index) => (
+                            <div key={index} className="text-center">
+                                <p className="text-xs font-medium text-gray-500 mb-1">{req.label}</p>
+                                <p className="text-sm font-bold">{req.value}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Role Overview */}
+                    <div className="p-6 border-b border-gray-100">
+                        <h2 className="text-lg font-bold mb-3">Role Overview</h2>
+                        <p className="text-sm text-gray-600 leading-relaxed">{jobDetails.RoleOverview}</p>
+                    </div>
+
+                    {/* Duties & Responsibilities */}
+                    <div className="p-6">
+                        <h2 className="text-lg font-bold mb-3">Duties & Responsibilities</h2>
+                        <p className="text-sm text-gray-600 leading-relaxed">{jobDetails.DutiesResponsibility}</p>
+                    </div>
                 </div>
-              );
-            })} */}
-
-        {
-        jobDetails?.assessments &&   jobDetails?.assessments.map((assessment, index) => (
-            <TestCard
-              key={index}
-              assessment={assessment}
-              progress={1}
-              // progress={assessment?.progress}
-            />
-          ))
-        }
-        {
-          // no test assigned
-          jobDetails?.assessments &&  jobDetails?.assessments.length === 0 && (
-            <div className="flex justify-between w-[98%] bg-gray-100 rounded-lg p-4">
-              <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                No test assigned
-              </h2>
             </div>
-          )
-        }
 
+            {/* Right Column - Tests & Invitations */}
+            <div className="lg:w-1/2 space-y-6">
+                {/* Test Section Header */}
+                <div className="bg-white rounded-xl shadow-sm p-6">
+                    <div className="flex justify-between items-center mb-6">
+                        <h2 className="text-lg font-bold">Assigned Test</h2>
+                        <InviteButton />
+                    </div>
+
+                   
+
+                    {/* Test Cards */}
+                    <div className="space-y-4 mt-6">
+                        {jobDetails?.assessments?.length > 0 ? (
+                            jobDetails.assessments.map((assessment, index) => (
+                                <TestCard
+                                    key={index}
+                                    assessment={assessment}
+                                    progress={1}
+                                />
+                            ))
+                        ) : (
+                            <div className="bg-gray-50 rounded-lg p-4 text-center">
+                                <p className="text-gray-600 font-medium">No tests assigned yet</p>
+                            </div>
+                        )}
+                    </div>
+                     {/* Invited Students Section */}
+                     {jobDetails?.assessments?.[0]?.test?.invitedStudents && (
+                        <div className="flex justify-between items-center p-4 bg-blued text-white rounded-lg mt-4">
+                            <h2 className="font-medium">Invited Students</h2>
+                            <button
+                                onClick={() => navigate(`/college/companies/jobOverview/${jobDetails._id}/invitedStudents`)}
+                                className="text-white hover:text-blue-100 font-medium underline underline-offset-2"
+                            >
+                                View List
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
     </>
   );
 };

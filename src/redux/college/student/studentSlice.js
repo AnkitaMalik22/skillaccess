@@ -23,10 +23,11 @@ const initialState = {
 
 export const getStudents = createAsyncThunk(
   "student/getStudents",
-  async (id, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
+    // console.log(data, "data");
     try {
       const response = await axios.get(
-        `${REACT_APP_API_URL}/api/college/${id.id}/students`,
+        `${REACT_APP_API_URL}/api/college/${data?.id}/students?batch=${data?.batch}&filterType=${data?.filterType}&page=${data?.page}&limit=${data?.limit}`,
         {
           headers: {
             "Content-Type": "application/json",

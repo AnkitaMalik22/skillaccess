@@ -186,13 +186,13 @@ const Login = () => {
                 Continue with google
               </h3>
             </button>
-            <span className="text-[#8F92A1] text-center text-sm font-semibold">
+            {/* <span className="text-[#8F92A1] text-center text-sm font-semibold">
               Don't have an account?{" "}
               <Link to="/register" className=" text-blued ">
                 {" "}
                 Sign Up
               </Link>
-            </span>
+            </span> */}
           </div>
         </div>
       </form>

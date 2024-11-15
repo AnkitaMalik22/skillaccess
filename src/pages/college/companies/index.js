@@ -4,6 +4,7 @@ const Jobs = lazy(() => import("./Jobs"));
 const Companies = lazy(() => import("./Companies"));
 const CompanyProfile = lazy(() => import("./CompanyProfile"));
 const CompanyJobOverview = lazy(() => import("./CompanyJobOverview"));
+const ViewInvitedStudents = lazy(() => import("./ViewInvitedStudents"));
 
 export default function CompaniesRoute() {
   return (
@@ -12,6 +13,8 @@ export default function CompaniesRoute() {
       <Route path="jobs" element={<Jobs />} />
       <Route path="profile/:id" element={<CompanyProfile />} />
       <Route path="jobOverview/:id" element={<CompanyJobOverview />} />
+      <Route path="jobOverview/:id/invitedStudents" element={<ViewInvitedStudents />} />
+
     </Route>
   );
 }

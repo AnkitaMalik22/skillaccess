@@ -14,7 +14,7 @@ import Loader from "../test/addVideo/Loader";
 import { uploadStudents } from "../../../redux/college/student/studentSlice";
 import { IoIosSearch } from "react-icons/io";
 
-const Header = ({ handleFilter, setFilteredStudents }) => {
+const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilterType}) => {
   const { uploadedStudents } = useSelector((state) => state.collegeStudents);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -22,6 +22,15 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
   const [excelJSON, setExcelJSON] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const [visible, setVisible] = useState(false);
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  // const [year, setYear] = useState('');
+
+
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
 
   const upload = useRef(null);
   const dispatch = useDispatch();
@@ -155,14 +164,14 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
       )}
 
       <span className="flex gap-2">
-        <button className="  self-center object-center  rounded-lg h-10 w-10 ">
+        <button className="self-center object-center rounded-lg h-10 w-10">
           <img src="../../images/icons/reports.png" alt="ico" />
         </button>
       </span>
 
-      <div className=" rounded-xl w-full sm:h-12 h-10 flex">
+      <div className="rounded-xl w-full sm:h-12 h-10 flex justify-between">
         <span className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
-          <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400 " />
+          <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400" />
           <input
             type="text"
             placeholder="Search..."
@@ -170,20 +179,21 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
             className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
           />
         </span>
+     
       </div>
 
       <span className="flex gap-3">
         <button
-          className="self-center justify-center flex bg-[#8f92a11a] px-7 py-3 rounded-2xl gap-2 text-sm text-[#171717] font-bold "
+          className="self-center justify-center flex bg-[#8f92a11a] px-7 py-3 rounded-2xl gap-2 text-sm text-[#171717] font-bold hover:bg-blued hover:text-white transition-colors"
           onClick={handleAddTeamClick}
         >
-          <FiPlus className="self-center text-lg " /> Add
+          <FiPlus className="self-center text-lg" /> Add
         </button>
 
         {showPopup && <StudentPoP onClose={handleClosePopup} />}
 
         <button
-          className="self-center justify-center flex bg-accent px-5 py-3  rounded-2xl text-white  gap-2 text-md font-bold w-40"
+          className="self-center justify-center flex bg-accent px-5 py-3 rounded-2xl text-white gap-2 text-md font-bold w-40 "
           onClick={() => {
             upload.current.click();
           }}
@@ -198,9 +208,84 @@ const Header = ({ handleFilter, setFilteredStudents }) => {
           Upload New
         </button>
 
-        <button className="bg-[#8f92a11a]  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
-          <PiSlidersHorizontalLight className="h-7 w-7" />
-        </button>
+        <div className="relative">
+      {/* Button to toggle popup */}
+      <button
+        onClick={togglePopup}
+        className={`self-center rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center transition-colors ${isPopupOpen ? 'bg-[#0d9aac] text-white' : 'bg-[#8f92a11a] hover:bg-blued hover:text-white'}`}
+      >
+        <PiSlidersHorizontalLight className="h-7 w-7" />
+      </button>
+
+      {/* Popup */}
+      {isPopupOpen && (
+        <div className="absolute top-0 right-0 mt-12 w-64 p-4 bg-white shadow-2xl rounded-lg z-10 ">
+          <div className="flex flex-col space-y-4">
+            {/* Year Selection */}
+            <label className="text-sm font-semibold">Select Year</label>
+            <select
+              onChange={(e) => setYear(e.target.value || "")}
+              className="w-full px-4 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-accent"
+            >
+              <option value="">Select Year</option>
+              {(() => {
+                const currentYear = new Date().getFullYear();
+                const years = Array.from({ length: 9 }, (_, i) => currentYear - 4 + i);
+                return years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ));
+              })()}
+            </select>
+
+            {/* Created At Input */}
+            <label className="text-sm font-semibold">Created At</label>
+            <input
+              type="date"
+              value={createdAt}
+              onChange={(e) => setCreatedAt(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-accent"
+            />
+
+              {/* Filter Type Selection */}
+              <label className="text-sm font-semibold">Filter Type</label>
+            <select
+              onChange={(e) => setFilterType(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-accent"
+            >
+              <option value="all students">Select Filter</option>
+              <option value="pending students">Pending Students</option>
+              <option value="invited students">Invited Students</option>
+              <option value="approved students">Approved Students</option>
+            </select>
+
+            {/* Submit Button */}
+            <div className="flex justify-between">
+            <button
+              onClick={togglePopup}
+              className="px-4 py-2 text-sm text-white bg-accent rounded-lg focus:outline-none"
+            >
+              Apply
+            </button>
+            <button
+              onClick={() => {
+                setYear("");
+                setCreatedAt("");
+                setFilterType("all students");
+              }}
+              className="px-4 py-2 text-sm text-white bg-accent rounded-lg focus:outline-none"
+            >
+              Clear
+            </button>
+          </div>
+
+  
+          </div>
+        </div>
+      )}
+    </div>
+   
       </span>
     </div>
   );

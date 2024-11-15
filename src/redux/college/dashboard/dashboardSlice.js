@@ -177,10 +177,11 @@ export const getNewJobs = createAsyncThunk(
 
 export const getJobById = createAsyncThunk(
   "dashboard/jobDetails",
-  async (jobId, { rejectWithValue }) => {
+  async ({jobId , collegeId}, { rejectWithValue }) => {
     try {
+
       const req = await axios.get(
-        `${REACT_APP_API_URL}/api/company/jobs/${jobId}`
+        `${REACT_APP_API_URL}/api/company/jobs/${jobId}?college=true&collegeId=${collegeId}`,
       );
       const res = req.data;
       //console.log(res);
@@ -284,6 +285,7 @@ const dashboardSlice = createSlice({
       })
       .addCase(getJobById.fulfilled, (state, action) => {
         state.jobDetails = action.payload;
+        state.invitedStudents = action.payload.assessments[0].test.invitedStudents;
       })
       .addCase(getJobById.rejected, (state, action) => {
         state.status = "failed";

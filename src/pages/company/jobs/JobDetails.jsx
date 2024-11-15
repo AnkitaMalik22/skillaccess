@@ -67,7 +67,7 @@ useEffect(() => {
       <div className="w-1/2">
         <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
           <img
-            src="../../../images/companyBg.png"
+            src={jobDetails?.company?.basic?.coverPhoto || "../../../images/CompanyBg.png"}
             alt=""
             className="w-full h-full rounded-t-3xl z-0 object-cover"
           />
@@ -231,12 +231,18 @@ useEffect(() => {
           {/* Invited Students */}
         <div className="flex justify-between mb-7 mt-4">
           <h2 className="font-bold"> Invited Students </h2>
-          <h2
-            className="font-bold underline underline-offset-2 text-blued cursor-pointer"
-            onClick={() => navigate("/company/pr/job/students")}
-          >
-            See All
-          </h2>
+      
+         {/* {
+          jobDetails && jobDetails?.isOpenForApply || new Date(jobDetails?.CloseByDate) >= new Date() ?
+          
+          ( */}
+            <button className="bg-blued text-white px-4 py-2 rounded"
+            onClick={() => { navigate(`/company/pr/job/students`)}}
+            >View All</button>
+          {/* ) : (
+            <h2 className="font-bold underline underline-offset-2 text-red-400 cursor-pointer">Closed</h2>
+          )
+         } */}
           </div>
           {
             students && students.slice(0, 3).map((student, index) => {
