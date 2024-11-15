@@ -20,7 +20,7 @@ const JobCard = ({job}) => {
           />
         </div>
         <h2 className="mb-2 ml-2 line-clamp-2 break-words self-center">
-            {job?.companyName}
+            {job?.company?.basic?.companyName}
         </h2></div>
 
       <div className='flex flex-row items-start justify-between'>
@@ -46,7 +46,7 @@ const JobCard = ({job}) => {
 
 
       <h2 className="my-6  line-clamp-2 break-words self-center">
-{job?.JobTitle}
+{job?.RoleOverview}
       </h2>
    
         <p className="text-sm py-2 text-gray-400 ">
