@@ -83,13 +83,13 @@ const CompanyProfile = () => {
         <div className="w-1/2">
           <div className="w-full bg-[#F8F8F9] rounded-t-[32px] h-40 md:h-[240px] relative">
             <img
-              src="../../../images/CompanyBg.png"
+              src={companyDetails?.basic?.coverPhoto || "../../../images/default.jpg"}
               alt="img"
               className="w-full h-full z-0 object-cover rounded-t-[32px]"
             />
             <div className=" absolute -bottom-7  left-5 bg-white h-12 w-12 flex justify-center items-center rounded-lg">
               <img
-                src={companyDetails?.basic?.logo}
+                src={companyDetails?.basic?.logo || "../../../images/defaultUser.jpg" }
                 className="w-10 h-10 object-contain self-center"
                 alt="brand logo"
               />
@@ -163,7 +163,7 @@ const CompanyProfile = () => {
                     <div className="sm:flex">
                       <div className="  flex justify-center rounded-lg mr-2">
                         <img
-                          src={companyDetails?.basic?.logo}
+                          src={companyDetails?.basic?.logo || "../../../images/defaultUser.jpg"}
                           className="w-10 h-10 rounded-lg self-center"
                           alt=""
                         />

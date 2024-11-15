@@ -35,7 +35,7 @@ const Settings = () => {
 
       <div className="w-3/4 mt-16 flex-col gap-4 flex">
         {/* notis */}
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
             // onClick={() => Navigate("/college/settings/notifications")}
@@ -54,11 +54,11 @@ const Settings = () => {
               <FaChevronRight className="text-[#17171799] self-center text-xl" />
             </div>
           </div>
-        </div>
+        </div> */}
         {/*  */}
 
         {/* security*/}
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between  px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
             // onClick={() => Navigate("/college/settings/security")}
@@ -73,11 +73,11 @@ const Settings = () => {
               <FaChevronRight className="text-[#17171799] self-center text-xl" />
             </div>
           </div>
-        </div>
+        </div> */}
         {/*  */}
 
         {/* Login Activity*/}
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
             // onClick={() => Navigate("/college/settings/activity")}
@@ -92,11 +92,11 @@ const Settings = () => {
               <FaChevronRight className="text-[#17171799] self-center text-xl" />
             </div>
           </div>
-        </div>
+        </div> */}
         {/*  */}
 
         {/* Visibility*/}
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <div
             className="flex cursor-pointer justify-between px-6 py-3 bg-[#8F92A1] bg-opacity-5 rounded-2xl"
             // onClick={() => Navigate("/college/settings/visibility")}
@@ -109,7 +109,7 @@ const Settings = () => {
               <FaChevronRight className="text-[#17171799]  self-center text-xl" />
             </div>
           </div>
-        </div>
+        </div> */}
         {/*  */}
 
         {/* Visibility*/}

@@ -1,75 +1,104 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FiBell } from "react-icons/fi";
-import { useSelector } from "react-redux";
-import { FaCoins } from "react-icons/fa";
+import { FiBell, FiSettings } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 import useTranslate from "../../hooks/useTranslate";
 import GoogleTranslate from "../GoogleTranslate";
+import { Disclosure } from "@headlessui/react";
+import { logoutCompany } from "../../redux/company/auth/companyAuthSlice";
+import toast from "react-hot-toast";
 
 const CompanyNavbar = (props) => {
+
+  const dispatch = useDispatch();
   const currentLanguage = useTranslate();
   const navigate = useNavigate();
-  const goToProfile = () => {
-    // Function to navigate to profile page
-    navigate("/company/pr/profile"); // Use navigate function to navigate to desired URL
+  const { data: userDetails } = useSelector((state) => state.companyAuth);
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    try {
+      const ch = await dispatch(logoutCompany());
+      if (ch.meta.requestStatus === "fulfilled") {
+        toast.success("Logged out successfully");
+        navigate("/company");
+      }
+    } catch (error) {
+      toast.error("logging out failed");
+    }
   };
-  const {data: userDetails }= useSelector((state) => state.companyAuth);
-  // console.log(userDetails);
+
   return (
     <nav className="navbar flex justify-between bg-white w-full z-[9999] fixed top-0 border-b-black border">
-      {/* left */}
-      <div>
-        {/* mobile only */}
+      {/* Left Side */}
+      <div className="flex items-center">
+        {/* Mobile Toggle Button */}
         <button
-          className="btn btn-primary sm:hidden  "
+          className="btn btn-primary sm:hidden"
           onClick={() => props.setOpen(!props.open)}
         >
           hamb
         </button>
 
+        {/* Logo */}
         <div className="ml-3">
-          {" "}
-          <img src="../../../images/logoFinal.png" alt="" width="180px" />
-
+          <img src="../../../images/logoFinal.png" alt="Company Logo" width="180px" />
         </div>
       </div>
 
-      {/* right */}
-      <div className="flex gap-4">
-        <button className="border-2 border-[#D9E1E7]  text-[#D9E1E7] rounded-lg px-2 p-1 relative">
-          <FiBell className="text-lg" />{" "}
-          <div className="rounded-full h-2 w-2 bg-lightBlue absolute top-1 right-2"></div>
+      {/* Right Side */}
+      <div className="flex items-center gap-4">
+        {/* Notification Button */}
+        <button className="relative border-2 border-[#D9E1E7] text-[#D9E1E7] rounded-lg px-2 p-1">
+          <FiBell className="text-lg" />
+          <div className="absolute top-1 right-2 h-2 w-2 bg-lightBlue rounded-full"></div>
         </button>
 
-        {/* <button
-          onClick={() => {
-            navigate("/college/accounting");
-          }}
-          className="border border-[#D9E1E7] text-blued  rounded-lg px-3 p-1 relative flex items-center"
-        >
-          <FaCoins />
-          <h1 className="text-blued  px-2">
-            {userDetails?.balance?.credit ? userDetails?.balance?.credit : 0}
-          </h1>
-        </button> */}
+        {/* Profile Dropdown */}
+        <Disclosure as="div" className="relative">
+          {({ open }) => (
+            <>
+              <Disclosure.Button className="flex items-center border border-[#D9E1E7] rounded-lg p-2 gap-2">
+                <img
+                  src={
+                    userDetails?.avatar?.url ||
+                    userDetails?.user?.basic.logo ||
+                    "../../../images/defaultUser.png"
+                  }
+                  alt="User Avatar"
+                  className="h-5 w-5"
+                />
+                <h2 className="text-sm font-bold">
+                  Hello {userDetails?.basic?.companyName}
+                </h2>
+                <FiSettings className="text-lg text-accent" /> {/* Gear icon */}
+              </Disclosure.Button>
 
-        <div
-          className="border border-[#D9E1E7]  rounded-lg p-2 relative flex gap-3"
-          style={{ marginRight: "12rem" }}
-          onClick={goToProfile}
-        >
-          <img
-            src={userDetails?.avatar?.url|| userDetails?.user?.basic.logo || "../../../images/profile-data.png"}
-            alt="icon"
-            className="h-5 w-5"
-          />{" "}
-          <h2 className="text-sm font-bold self-center">
-            Hello {userDetails?.basic.companyName}
-          </h2>
-        </div>
-
-        <GoogleTranslate currentLanguage={currentLanguage} />
+              {/* Dropdown Panel */}
+              <Disclosure.Panel className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                <button
+                  onClick={() => navigate("/company/pr/profile")}
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-lg hover:text-white"
+                >
+                  Profile
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-red-400 rounded-lg hover:text-white"
+                >
+                  Logout
+                </button>
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+        <div className="w-44"></div>
+        {/* Language Selector */}
       </div>
+
+      <GoogleTranslate currentLanguage={currentLanguage} />
+
     </nav>
   );
 };
