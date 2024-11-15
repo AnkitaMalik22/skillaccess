@@ -1,24 +1,18 @@
 import { useEffect } from "react";
-import { CgClipboard, CgAwards, CgTrending } from "react-icons/cg";
-import { TbBriefcase2 } from "react-icons/tb";
-import { MdOutlinedFlag } from "react-icons/md";
+import { CgAwards, CgClipboard, CgTrending } from "react-icons/cg";
 import { FaArrowRight } from "react-icons/fa6";
+import { MdOutlinedFlag } from "react-icons/md";
+import { TbBriefcase2 } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
-import useTranslate from "../../../hooks/useTranslate";
 import SwiperSlideLeft from "../../../components/company/dashboard/dash/SwiperSlideLeft";
-import SwiperSlideRight from "../../../components/company/dashboard/dash/SwiperSlideLeft";
-import ChartComp from "../../../components/college/dashboard/dash/Chart";
-import {
-  getStudent,
-  // getCompany,
-  getAssessment,
-  getTotalJobs,
-  getPlacedStudents,
-} from "../../../redux/college/dashboard/dashboardSlice";
+
 import { useDispatch, useSelector } from "react-redux";
+import ChartComp from "../../../components/college/results/home/Chart";
 import { getCompany } from "../../../redux/company/auth/companyAuthSlice";
-import { getCompanyJobTests, getJobs } from "../../../redux/company/jobs/jobSlice";
+import { getJobs } from "../../../redux/company/jobs/jobSlice";
 import { getAllTests } from "../../../redux/company/test/thunks/test";
+import { getResultGraphCompany } from "../../../redux/company/result/thunks/graph";
+import toast from "react-hot-toast";
 
 const DashboardCompany = () => {
   //useTranslate();
@@ -42,7 +36,6 @@ const { jobs } = useSelector((state) => state.job);
 
   useEffect(() => {
     if (user?._id) {
-
       dispatch(getJobs(user._id));
     }
   }, [dispatch, user?._id]);
@@ -51,6 +44,7 @@ const { jobs } = useSelector((state) => state.job);
   useEffect(() => {
     dispatch(getCompany());
     dispatch(getAllTests());
+    dispatch(getResultGraphCompany())
     // dispatch(getCompanyJobTests());
   }, []);
 
@@ -74,7 +68,7 @@ const { jobs } = useSelector((state) => state.job);
               }
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">Total Jobs</h2>
-            <h2 className="text-[#00875A] font-medium text-[17px]">105.34%</h2>
+            {/* <h2 className="text-[#00875A] font-medium text-[17px]">105.34%</h2> */}
           </div>
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
@@ -85,7 +79,7 @@ const { jobs } = useSelector((state) => state.job);
               {0}
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">Students Hired</h2>
-            <h2 className="text-[#DE350B] font-medium text-[17px]">25.34%</h2>
+            {/* <h2 className="text-[#DE350B] font-medium text-[17px]">25.34%</h2> */}
           </div>
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
@@ -98,7 +92,7 @@ const { jobs } = useSelector((state) => state.job);
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
             Students Appeared
             </h2>
-            <h2 className="text-[#DE350B] font-medium text-[17px]">0%</h2>
+            {/* <h2 className="text-[#DE350B] font-medium text-[17px]">0%</h2> */}
           </div>
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
@@ -113,12 +107,12 @@ const { jobs } = useSelector((state) => state.job);
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
             Intitutes
             </h2>
-            <h2
+            {/* <h2
               className="text-[#DE350B] font-medium text-[17px] hover:cursor-pointer"
               onClick={() => navigate("/college/dashboard/jobs")}
             >
               0%
-            </h2>
+            </h2> */}
           </div>
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
@@ -146,7 +140,7 @@ const { jobs } = useSelector((state) => state.job);
         </div>
       </div>
 
-      <div className=" gap-5  mx-auto  overflow-x-clip grid grid-cols-2">
+      <div className=" gap-5  mx-auto  overflow-x-clip grid grid-cols-1">
         {/* 1st block */}
         <div className="bg-[#F8F8F9]  rounded-3xl p-4 md:p-8 mb-5">
           <span className="flex justify-between">
@@ -167,7 +161,7 @@ const { jobs } = useSelector((state) => state.job);
           <SwiperSlideLeft />
         </div>
         {/* 2nd block */}
-        <div className="bg-[#F8F8F9]  rounded-3xl p-4 md:p-8 mb-5">
+        {/* <div className="bg-[#F8F8F9]  rounded-3xl p-4 md:p-8 mb-5">
           <span className="flex justify-between">
             <div className="w-3/4">
               <h1 className="text-base font-bold mb-4 md:mb-8 basis-full text-[#171717] ">
@@ -183,8 +177,8 @@ const { jobs } = useSelector((state) => state.job);
             </button>
           </span>
 
-          {/* <SwiperSlideRight /> */}
-        </div>
+          <SwiperSlideRight />
+        </div> */}
       </div>
 
       <ChartComp />

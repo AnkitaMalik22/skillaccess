@@ -110,7 +110,7 @@ const JobsPage = () => {
           />
         </div>
         <h2 className="mb-2 ml-2 line-clamp-2 break-words self-center">
-            {job?.companyName}
+            {job?.company?.basic?.companyName}
         </h2></div>
 
       <div className='flex flex-row items-start justify-between'>
@@ -124,17 +124,25 @@ const JobsPage = () => {
         </span>
 
         <div className='flex items-start justify-between   h-full my-2'>
-        jobs
+       {
+        job?.EmploymentType
+       }
         </div>
       </div>
       <div className="location flex flex-row items-start my-3 ">
         <BsGeoAlt className="w-6  h-6 mr-3 " />
-        <h2 className='text-gray-400 font-medium text-base font-dmSans sm:mb-2'>Greater Bengaluru, Bengaluru Area</h2>
+        <h2 className='text-gray-400 font-medium text-base font-dmSans sm:mb-2'>
+        {
+          job.JobLocation
+        }
+          </h2>
       </div>
 
       <h2 className="my-6  line-clamp-2 break-words self-center">
-        {job?.JobTitle}
-
+        {/* {job?.JobTitle} */}
+        {
+  job?.SeniorityLevel
+}  
       </h2>
    
         <p className="text-sm py-2 text-gray-400 ">

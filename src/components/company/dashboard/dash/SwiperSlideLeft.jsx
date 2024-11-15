@@ -35,48 +35,47 @@ const SwiperSlideLeft = () => {
           slidesPerView: 2,
         },
         639: {
-          slidesPerView: 3,
+          slidesPerView: 5,
         },
         865: {
-          slidesPerView: 4,
+          slidesPerView: 6,
         },
         1000: {
-          slidesPerView: 3.5,
+          slidesPerView: 7,
         },
         1500: {
-          slidesPerView: 4,
+          slidesPerView: 8,
         },
         1920: {
-          slidesPerView: 5,
+          slidesPerView: 10,
         },
       }}
     >
       {jobs.map((job) => (
         <SwiperSlide className="flex ">
-          <div className="companies-dash bg-white  w-[100px] xl:w-[140px] p-4 rounded-2xl  ">
-            <figure
-              className="bg-gray-100 w-full h-20 mb-4 mx-auto cursor-pointer rounded-lg"
-              onClick={() =>
-                navigate(`/company/pr/jobs/${job._id}`)
-              }
-            >
-              <img
-                // src="../intel.png"
-                src={
-                  !job?.logo 
-                    ? "../../intel.png"
-                    : job?.logo
-                }
-                alt="Img"
-                className="w-full h-full rounded-lg"
-              />
-            </figure>
-            <div>
-              <h3 className="text-xs text-[#8F92A1] font-bold text-center break-words ">
-                {job?.JobTitle}
-              </h3>
-            </div>
-          </div>
+           <div className="companies-dash bg-white w-[100px] xl:w-[140px] p-4 rounded-2xl">
+      <figure
+        className="bg-gray-100 w-full h-20 mb-4 mx-auto cursor-pointer rounded-lg text-center pt-4"
+        onClick={() => navigate(`/company/pr/jobs/${job._id}`)}
+      >
+        {job?.SeniorityLevel}
+      </figure>
+      
+      <div className="text-center">
+        <h3 className="text-xs text-[#8F92A1] font-bold break-words">
+          {job?.JobTitle}
+        </h3>
+        
+        {/* Open/Closed Label */}
+        <div
+          className={`mt-2 px-2 py-1 rounded-lg text-xs font-semibold ${
+            job.isOpenforApply ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+          }`}
+        >
+          {job.isOpenforApply ? "Open" : "Closed"}
+        </div>
+      </div>
+    </div>
         </SwiperSlide>
       ))}
 

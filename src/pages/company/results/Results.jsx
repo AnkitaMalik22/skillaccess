@@ -4,7 +4,7 @@ import Filter from "../../../components/college/results/home/Filters";
 import List from "../../../components/college/results/home/List";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getResultGraph } from "../../../redux/company/result/thunks/graph";
+import { getResultGraphCompany } from "../../../redux/company/result/thunks/graph";
 import useTranslate from "../../../hooks/useTranslate";
 import { getAllTests } from "../../../redux/company/test/thunks/test";
 
@@ -17,7 +17,7 @@ const Results = () => {
   const [filtered, setFiltered] = React.useState([]);
 
   useEffect(() => {
-    dispatch(getResultGraph());
+    dispatch(getResultGraphCompany());
     dispatch(getAllTests(true));
   }, [dispatch, ""]);
 

@@ -72,8 +72,9 @@ const Results = ({ assessmentResult, id }) => {
                 </span>
                 <div className="flex justify-center">
                   <div className=" self-center h-fit">
-                    <span>
-                      <select
+                    <span className="text-sm">
+                    {response?.status}
+                      {/* <select
                         className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
                         onChange={handleStatusChange(
                           response.assessmentId._id,
@@ -84,7 +85,7 @@ const Results = ({ assessmentResult, id }) => {
                         <option value="">pending</option>
                         <option value="rejected">rejected</option>
                         <option value="selected">selected</option>
-                      </select>
+                      </select> */}
                     </span>
                   </div>
                 </div>

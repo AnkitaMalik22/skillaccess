@@ -11,7 +11,7 @@ import EditHeader from "../../../components/company/profile/EditHeader";
 import useTranslate from "../../../hooks/useTranslate";
 import toast from "react-hot-toast";
 import { getCompanyDetails } from "../../../redux/features/company/companySlice";
-import { getCompany,updateCompany ,uploadPicture } from "../../../redux/company/auth/companyAuthSlice";
+import { getCompany,updateCompany ,uploadCoverCompany,uploadPicture } from "../../../redux/company/auth/companyAuthSlice";
 
 const Profile = () => {
   //useTranslate();
@@ -22,7 +22,7 @@ const Profile = () => {
   const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
   const [avatar, setAvatar] = useState("");
   const [company, setcompany] = useState(user);
-
+  const [cover,setCover] = useState("");
 
   const handleUpdate = (company) => {
     dispatch(updateCompany(company));
@@ -31,7 +31,7 @@ const Profile = () => {
   };
   useEffect(() => {
     if (user) {
-      setcompany(user);
+      setcompany();
     }
   }, [dispatch, isLoggedIn]);
 
@@ -44,6 +44,7 @@ const Profile = () => {
   }, [user]);
 
   useEffect(() => {
+    console.log("triggg")
     if (user && user.avatar && user.avatar.url) {
       setAvatar(user.avatar.url);
     }
@@ -57,6 +58,10 @@ const Profile = () => {
         dispatch(uploadPicture({ avatar, id: user?._id })).then(() => {});
         setEditing(false);
       // }
+    }
+    console.log(cover);
+    if(cover){
+      dispatch(uploadCoverCompany({ cover })).then(() => {});
     }
   }, [submitUpdateProfile]);
   
@@ -98,11 +103,12 @@ const Profile = () => {
           company={company}
           setCompany={setcompany}
           setAvatar={setAvatar}
+          setCover={setCover}
           avatar={avatar}
         />
       )}
       {!user && <h1> Loading ... </h1>}
-      <List editable={editable} setEditable={setEditable} />
+      {/* <List editable={editable} setEditable={setEditable} /> */}
     </>
   );
 };

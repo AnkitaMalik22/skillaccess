@@ -96,6 +96,39 @@ export const uploadPicture = createAsyncThunk(
     }
 );
 
+export const uploadCoverCompany = createAsyncThunk(
+    "companyAuth/uploadCoverCompany",
+    async ({cover }, { rejectWithValue }) => {
+        try {
+            const formData = new FormData();
+
+            // if (type === "logo") {
+            //     formData.append("logo", image);
+            //     // Use FormData.entries() to log all the form data
+            //     for (let [key, value] of formData.entries()) {
+            //         console.log(`${key}: ${value}`);
+            //     }
+            // } else {
+            //     formData.append("cover", image);
+            // }
+
+            const req = await axios.put(
+                `${process.env.REACT_APP_API_URL}/api/company/update/cover`,
+               { cover},
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "auth-token": getCookie("token"),
+                    },
+                }
+            );
+            return req.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "An error occurred");
+        }
+    }
+);
+
 export const getCompany = createAsyncThunk(
     "companyAuth/getCompany",
     async (_, { rejectWithValue }) => {
@@ -215,8 +248,66 @@ const companyAuthSlice = createSlice({
               
             })
             .addCase(getCompany.fulfilled, (state, action) => {
-             
-                state.data = action.payload.company;
+                const user =  action.payload.company;
+                state.data = {
+                    status: user?.status || 'pending',
+                    statusChangedAt: user?.statusChangedAt || null,
+                    commentsByAdmin: user?.commentsByAdmin || [
+                      {
+                        comment: '',
+                        commentedBy: null,
+                        commentedAt: null,
+                      },
+                    ],
+                    Email: user?.Email || '',
+                    role: user?.role || 'company',
+                    FirstName: user?.FirstName || '',
+                    LastName: user?.LastName || '',
+                    Password: user?.Password || '',
+                    avatar: {
+                      public_id: user?.avatar?.public_id || '',
+                      url: user?.avatar?.url || '',
+                    },
+                    basic: {
+                      coverPhoto: user?.basic?.coverPhoto || '',
+                      publicIdLogo: user?.basic?.publicIdLogo || '',
+                      publicIdCover: user?.basic?.publicIdCover || '',
+                      logo: user?.basic?.logo || '',
+                      companyName: user?.basic?.companyName || '',
+                      website: user?.basic?.website || '',
+                      totalEmployees: user?.basic?.totalEmployees || 0,
+                      yearFounded: user?.basic?.yearFounded || 0,
+                      hqCity: user?.basic?.hqCity || '',
+                      annualRevenue: user?.basic?.annualRevenue || 0,
+                      sector: user?.basic?.sector || '',
+                      industry: user?.basic?.industry || '',
+                      companyType: user?.basic?.companyType || '',
+                      status: user?.basic?.status || '',
+                    },
+                    Phone: user?.Phone || 0,
+                    location: user?.location || {},
+                    leader: user?.leader || {},
+                    about: {
+                      description: user?.about?.description || '',
+                      missions: user?.about?.missions || '',
+                      programs: user?.about?.programs || '',
+                    },
+                    awards: user?.awards || [],
+                    dashboard: user?.dashboard || {},
+                    students: user?.students || [],
+                    jobs: user?.jobs || [],
+                    assessments: user?.assessments || [],
+                    createdAt: user?.createdAt || Date.now(),
+                    resetPasswordToken: user?.resetPasswordToken || '',
+                    resetPasswordExpire: user?.resetPasswordExpire || null,
+                    loginActivity: user?.loginActivity || [],
+                    otp: user?.otp || null,
+                    otpExpires: user?.otpExpires || null,
+                    otpVerified: user?.otpVerified || false,
+                    authType: user?.authType || 'none',
+                    emails: user?.emails || [],
+                    emailsSent: user?.emailsSent || [],
+                  };
                 state.isCompanyLogin = true;
                 console.log(action.payload)
                

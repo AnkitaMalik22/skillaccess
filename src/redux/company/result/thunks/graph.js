@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import getCookie from "../../../../util/getToken";
 
-export const getResultGraph = createAsyncThunk(
+export const getResultGraphCompany = createAsyncThunk(
   "resultCompany/getResultGraph",
   async (_, { rejectWithValue }) => {
     try {
