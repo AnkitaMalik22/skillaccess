@@ -261,16 +261,26 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
             </select>
 
             {/* Submit Button */}
+            <div className="flex justify-between">
+            <button
+              onClick={togglePopup}
+              className="px-4 py-2 text-sm text-white bg-accent rounded-lg focus:outline-none"
+            >
+              Apply
+            </button>
             <button
               onClick={() => {
-                console.log(`Year: ${year}, Created At: ${createdAt}`);
-                // setYear(year);
-                setIsPopupOpen(false); // Close the popup after selection
+                setYear("");
+                setCreatedAt("");
+                setFilterType("all students");
               }}
-              className="w-full py-2 bg-blued text-white rounded-lg hover:bg-secondary"
+              className="px-4 py-2 text-sm text-white bg-accent rounded-lg focus:outline-none"
             >
-     Close
+              Clear
             </button>
+          </div>
+
+  
           </div>
         </div>
       )}
