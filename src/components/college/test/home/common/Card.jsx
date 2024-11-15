@@ -96,7 +96,7 @@ const Card = (props) => {
           <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued mx-2" />
           {props.assessment?.invitedStudents?.slice(0, 3).map((student) => (
             <>
-              <img src={student?.avatar?.url} className="w-8 h-8 -ml-1" />
+              <img src={student?.avatar?.url || "../../../images/defaultUser.jpg"} className="w-8 h-8 -ml-1" />
             </>
           ))}
 

@@ -36,7 +36,7 @@ const Header = () => {
             Settings
           </h2>
         </div>
-
+{/* 
         <Disclosure
           as={"div"}
           className={`flex flex-col z-[999] ${
@@ -59,7 +59,7 @@ const Header = () => {
               </div>
             </div>
           )}
-        </Disclosure>
+        </Disclosure> */}
 
         {/*  */}
       </div>
