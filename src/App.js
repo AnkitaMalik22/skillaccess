@@ -41,6 +41,7 @@ import DesktopOnly from "./pages/common/DesktopOnly";
 import AddTestToJob from "./pages/company/jobs/AddTestToJob";
 import EditJob from "./pages/company/jobs/EditJob";
 import Settings from "./pages/company/settings/Settings";
+import ViewInvitedStudents from "./pages/college/companies/ViewInvitedStudents";
 
 const Register = lazy(() => import("./pages/college/auth/Register"));
 const Login = lazy(() => import("./pages/college/auth/Login"));
@@ -188,6 +189,7 @@ export default function App() {
             <Route path="job/students" element={<InvitedStudentsForJob />} />
             <Route path="job/add-test/:jobId" element={<AddTestToJob />} />
             <Route path="job/edit/:jobId" element={<EditJob />} />
+
             
            
              </Route>
