@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import SwiperSlideLeft from "../../../components/college/dashboard/dash/SwiperSlideLeft";
 import SwiperSlideRight from "../../../components/college/dashboard/dash/SwiperSlideLeft";
-import ChartComp from "../../../components/college/dashboard/dash/Chart";
+
 import {
   getStudent,
   getCompany,
@@ -17,6 +17,7 @@ import {
 } from "../../../redux/college/dashboard/dashboardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getCollege } from "../../../redux/college/auth/authSlice";
+import ChartComp from "../../../components/college/results/home/Chart";
 
 const Dashboard = () => {
   //useTranslate();

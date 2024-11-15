@@ -100,7 +100,7 @@ const Profile = () => {
         />
       )}
       {!user && <h1> Loading ... </h1>}
-      <List editable={editable} setEditable={setEditable} />
+      {/* <List editable={editable} setEditable={setEditable} /> */}
     </>
   );
 };

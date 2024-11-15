@@ -134,14 +134,14 @@ const ChartComp = () => {
             >
               Quarter
             </button> */}
-            <button
+            {/* <button
               className={`border-2 border-x-transparent border-transparent ${
                 toggle === 3 && " text-blued border-b-blue-700"
               }`}
               onClick={() => setToggle(3)}
             >
               Year
-            </button>
+            </button> */}
           </span>
         </div>
 

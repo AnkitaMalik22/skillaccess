@@ -1,17 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { MdOutlineEmail } from "react-icons/md";
-import { CgPinAlt } from "react-icons/cg";
-import { BsPhone } from "react-icons/bs";
-import { PiLinkSimple } from "react-icons/pi";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getCompany,
-  setUploadImg,
-  updateAvatar,
-  updateCompany,
-} from "../../../redux/company/auth/companyAuthSlice";
-import Loader from "../../loaders/Loader";
+import { setUploadImg } from "../../../redux/company/auth/companyAuthSlice";
+import { FaCity, FaGlobe, FaIndustry, FaRegBuilding } from "react-icons/fa";
+import DefaultCoverPhoto from "../../DefaultCoverPhoto";
+import { MdEdit } from "react-icons/md";
+import { FiUpload } from "react-icons/fi";
 
 const Header = ({
   editing,
@@ -20,24 +14,36 @@ const Header = ({
   company,
   setCompany,
   avatar,
+  setCover,
   setAvatar,
 }) => {
   const dispatch = useDispatch();
-  // const { uploadImg } = useSelector((state) => state.collegeAuth);
-  const { data:user, isLoggedIn, uploadImg } = useSelector(
-    (state) => state.companyAuth
-  );
+  const { uploadImg } = useSelector((state) => state.companyAuth);
   const [avatarPreview, setAvatarPreview] = useState(avatar);
+  const [coverPreview, setCoverPreview] = useState(company?.basic?.coverPhoto || "default-cover.jpg");
   const imgRef = useRef(null);
-  // useEffect(() => {
-  //   dispatch(getcompany());
-  // }, [dispatch]);
+  const coverRef = useRef(null);
   useEffect(() => {
-    // dispatch(getcompany());
     if (uploadImg) {
       dispatch(setUploadImg(false));
     }
   }, [uploadImg]);
+
+  useEffect(()=>{
+setCoverPreview(company?.basic.coverPhoto)
+  },[company])
+
+  const handleCoverChange = (e) => {
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setCover(reader.result);
+        setCoverPreview(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   const handleAvatarChange = (e) => {
     const reader = new FileReader();
@@ -52,286 +58,332 @@ const Header = ({
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  return (
-    // {/* profile container */}
-    <div className="bg-gray-50 rounded-xl p-5">
-      {/* first section */}
-      <div className=" flex justify-between border-b  bg-gray-50 rounded-t-lg">
-        {/* profile photo */}
-        <div className="flex gap-2 px-3 py-1 mt-2">
-          {editable ? (
-            <div className="w-14 h-14 bg-blued self-center rounded-lg relative">
-              <img src={avatar} alt="" width="56px" className="rounded-lg" />
+  // Function to handle adding a new award
+  // Function to handle adding a new award
+  const handleAddAward = () => {
+    setCompany((prev) => {
+      const newCompany = { ...prev };
+      // Ensure you create a new array for awards to avoid direct mutation
+      const newAwards = [...newCompany.awards, { name: "", description: "", dateOfIssue: "", media: [] }];
+      newCompany.awards = newAwards;  // Assign the new array back to the company object
+      return newCompany;
+    });
+  };
 
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
-                <img
-                  src="../../images/icons/pen.png"
-                  alt=""
-                  onClick={() => imgRef.current.click()}
-                />
-              </div>
+
+  // Function to handle change in award input fields
+  const handleAwardChange = (index, field, value) => {
+    setCompany((prev) => {
+      const newCompany = { ...prev };
+      newCompany.awards[index][field] = value;
+      return newCompany;
+    });
+  };
+
+  // Function to remove an award
+  const handleRemoveAward = (index) => {
+    setCompany((prev) => {
+      const newCompany = { ...prev };
+      newCompany.awards.splice(index, 1);
+      return newCompany;
+    });
+  };
+
+  const renderInputField = (label, value, keyPath, placeholder, isNotFullWidth, icon) => (
+    <div className={`${isNotFullWidth ? "w-fit" : "w-full"} mb-4`}>
+      <label className="text-sm text-gray-500">{label}</label>
+
+      <div className="flex items-center space-x-2">
+        {icon && <span className="text-gray-400">{icon}</span>}
+        {editable ? (
+          <input
+            type="text"
+            value={value || ""}
+            onChange={(e) =>
+              setCompany((prev) => {
+                // Deep clone the object
+                const newCompany = JSON.parse(JSON.stringify(prev));
+
+                const keys = keyPath.split(".");
+                let obj = newCompany;
+                for (let i = 0; i < keys.length - 1; i++) {
+                  obj = obj[keys[i]];
+                }
+                obj[keys[keys.length - 1]] = e.target.value; // Now this modifies the new deep copy
+
+                return newCompany;
+              })
+            }
+            className={`${isNotFullWidth ? "w-fit" : "w-full"} p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]`}
+            placeholder={placeholder}
+          />
+        ) : (
+          <p className="text-gray-500">{value || `Add ${label}`}</p>
+        )}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-md relative">
+      {/* Header Section */}
+
+     
+
+      {/* Cover Image Section */}
+      <div className="relative w-full h-32 bg-[#e0e0e0] rounded-lg mb-8">
+
+        {company?.basic?.coverPhoto ? <img
+          src={ editable ? coverPreview:company?.basic?.coverPhoto}
+          alt="Cover"
+          className="w-full h-full object-cover"
+        /> : <DefaultCoverPhoto />}
+
+        {editable && (
+          <div className="absolute top-2 right-2">
+            <button
+              onClick={() => coverRef.current.click()}
+              className="bg-accent text-white p-1 rounded-full"
+            >
+            <FiUpload />
+            </button>
+            <input
+              ref={coverRef}
+              type="file"
+              name="coverImage"
+              className="hidden"
+              accept="image/*"
+              onChange={handleCoverChange}
+            />
+          </div>
+        )}
+
+
+
+        {/* Avatar Section */}
+        <div className="absolute left-6 bottom-[-28px] z- w-20 h-20 rounded-full bg-white flex justify-center items-center  shadow-lg">
+          <img
+            src={avatarPreview || company?.avatar?.url}
+            alt="Avatar"
+            className="w-full h-full object-cover"
+          />
+          {editable && (
+            <div className="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-neutral flex items-center justify-center">
+              <label htmlFor="avatarUpload" className="cursor-pointer">
+                <FiUpload />
+              </label>
               <input
                 ref={imgRef}
                 type="file"
-                name="avatar"
-                id="file"
+                id="avatarUpload"
                 className="hidden"
                 accept="image/*"
                 onChange={handleAvatarChange}
               />
             </div>
-          ) : (
-            <div className="relative w-14 h-14 bg-gray-200 self-center rounded-lg flex justify-center items-center">
-              <img
-                src={
-                  company && company.avatar && company.avatar.url
-                    ? company.avatar.url
-                    : ""
-                }
-                alt="avatar"
-                width="56px"
-                className="relative p-2 rounded-lg "
-              />
-            </div>
           )}
-
-          <div className="ml-1 mt-1">
-            <h2 className="3xl:text-[28px] text-[20px] font-extrabold  py-1  ">
-              {editable && company ? (
-                <input
-                  type="text"
-                  value={
-                    company && company.basic?.companyName ? company?.basic?.companyName : ""
-                  }
-                  onChange={(e) =>
-                    setCompany({ ...company, basic: { ...company.basic, companyName: e.target.value } })
-                  }
-                  className="bg-transparent border-none focus:outline-none w-full min-w-[30vw]  text-[20px] font-extrabold   "
-                />
-              ) : company && company.basic?.companyName ? (
-                <p className="text-[20px] font-extrabold  py-1  ">
-                  {company.basic?.companyName}
-                </p>
-              ) : (
-                ""
-              )}
-            </h2>
-            <h2 className="text-sm text-gray-400   pb-2">UPME00006369</h2>
-          </div>
         </div>
+      </div>
 
+
+
+
+
+
+      {/* Basic Info Section */}
+      <div className="mb-8">
+
+        <div className="flex w-full gap-6  "><h2 className="text-lg font-semibold  self-center">Basic Info</h2>
         {!editable && (
-          <div className="self-center text-gray-400 mr-2">
-            <button
-              className="py-2 text-white rounded-xl  bg-accent font-bold flex gap-2 px-4 disabled:bg-blue-500"
-              disabled={editing}
-              onClick={() => {
-                if (editing) {
-                  return;
-                }
-                localStorage.setItem("editable", true);
-                setEditable(true);
-                // window.location.reload(true);
-              }}
-            >
-              {editing ? (
-                <Loader />
-              ) : (
-                <img src="../../images/icons/pen.png" alt="" />
-              )}{" "}
-              <p>Edit Profile</p>
-            </button>
-          </div>
-        )}
-      </div>
+        <button
+          className="py-2   bg-accent text-white rounded-lg shadow-lg flex items-center justify-center gap-2 w-6 h-6"
+          onClick={() => setEditable(true)}
+        >
+        <MdEdit />
+          {/* <span>Edit Profile</span> */}
+        </button>
+      )}</div>
+        
+        <div className="flex flex-wrap gap-6">
 
-      {/* second section */}
-      <div className="border-b px-6  py-8 bg-gray-50 font-dmSans">
-        <h1 className="text-lg font-bold">Overview</h1>
-        {company && company?.about?.description ? (
-          <div className="text-sm  font-medium mt-2">
-            {editable && company ? (
-              <textarea
-                className="mt-2 bg-transparent border-none focus:outline-none w-full max-w-[80vw]"
-                type="text"
-                value={
-                  company && company?.about?.description ? company?.about?.description : ""
-                }
-                onChange={(e) =>
-                  setCompany({ ...company, about: { ...company.about, description: e.target.value } })
-                }
-              />
-            ) : company && company?.about?.description ? (
-              <p className="text-sm  font-medium mt-2 leading-loose text-gray-500">
-                {company?.about?.description}
-              </p>
-            ) : (
-              ""
-            )}
-          </div>
-        ) : (
-          <div className="text-sm  font-medium mt-2 text-gray-500  rounded-lg">
-            {editable && company ? (
-              <textarea
-                type="text"
-                value={
-                  company && company?.about?.description ? company?.about?.description : ""
-                }
-                onChange={(e) =>
-                  setCompany({ ...company, about: { ...company.about,description: e.target.value } })
-                }
-                className={`rounded-lg mt-2 border-none focus:outline-none w-full max-w-[80vw]  h-full min-h-[25vh]  text-gray-500 bg-[#f4f5f6]
-                `}
-                placeholder="Add Description"
-              />
-            ) : (
-              "No Description Available"
-            )}
-          </div>
-        )}
-      </div>
-      <div className="px-6  py-8 bg-gray-50 font-dmSans flex sm:gap-16 text-sm font-medium ">
-        <div className="flex gap-2 ">
-          <div className="w-10 h-10 rounded-2xl bg-gray-200 flex justify-center">
-            <MdOutlineEmail className="self-center text-2xl" />
-          </div>
-          {company && company.Email ? (
-            <p className="self-center">
-              {editable && company ? (
-                <input
-                  type="text"
-                  value={company && company.Email ? company.Email : ""}
-                  onChange={(e) =>
-                    setCompany({ ...company, Email: e.target.value })
-                  }
-                  className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6]  `}
-                  placeholder="Add Email"
-                />
-              ) : company && company.Email ? (
-                <p className=" text-gray-500 bg-transparent text-sm">
-                  {" "}
-                  {company.Email}
-                </p>
-              ) : (
-                ""
-              )}
-            </p>
-          ) : (
-            <p className=" font-medium self-center">No Email Available</p>
+          {renderInputField(
+            "Company Name",
+            company?.basic?.companyName,
+            "basic.companyName",
+            "Add Company Name",
+            true,
+            <FaRegBuilding />
           )}
-          {/* <p className="font-medium self-center">
-          </p> */}
+          
+          {renderInputField(
+            "Website",
+            company?.basic?.website,
+            "basic.website",
+            "Add Website",
+            true,
+            <FaGlobe />
+          )}
+          {renderInputField(
+            "Industry",
+            company?.basic?.industry,
+            "basic.industry",
+            "Add Industry",
+            true,
+            <FaIndustry />
+          )}
+          {renderInputField(
+            "HQ City",
+            company?.basic?.hqCity,
+            "basic.hqCity",
+            "Add HQ City",
+            true,
+            <FaCity />
+          )}
         </div>
+      </div>
 
-        <div className="flex gap-2">
-          <div className="w-10 h-10 rounded-2xl bg-gray-200 flex justify-center">
-            <BsPhone className="self-center text-2xl" />
-          </div>
+      {/* Leader Section */}
+      <div className="mb-8">
+        <h2 className="text-lg font-semibold mb-4">Company Leader</h2>
+        {renderInputField(
+          "Leader Name",
+          company?.leader?.name,
+          "leader.name",
+          "Add Leader Name"
+        )}
+        {renderInputField(
+          "Leader Title",
+          company?.leader?.title,
+          "leader.title",
+          "Add Leader Title"
+        )}
+      </div>
 
-          {/* {!company.Phone ?? <p className="self-center">No Phone Available</p>} */}
+      {/* Location Section */}
+      <div className="mb-8">
+        <h2 className="text-lg font-semibold mb-4">Location</h2>
+        {renderInputField(
+          "Location Name",
+          company?.location?.locName,
+          "location.locName",
+          "Add Location Name"
+        )}
+        {renderInputField(
+          "Address",
+          company?.location?.address,
+          "location.address",
+          "Add Address"
+        )}
+      </div>
 
-          <div className="self-center font-medium">
-            {editable && company ? (
-              <input
-                type="tel" // Set input type to "tel" for telephone number
-                maxLength={10} // Set maximum length to 10 digits
-                value={company && company.Phone ? company.Phone : ""}
-                onChange={(e) => {
-                  // Ensure the entered value doesn't exceed 10 digits
-                  if (e.target.value.length <= 10) {
-                    setCompany({ ...company, Phone: e.target.value });
-                  }
-                }}
-                className={` rounded-lg border-none focus:outline-none appearance-none bg-[#f4f5f6] text-sm `}
-                placeholder="Add Phone Number"
-              />
-            ) : company && company.Phone ? (
-              <p className="text-gray-500 bg-transparent text-sm">
-                {company.Phone}
-              </p>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
+      {/* About Section */}
+      <div className="mb-8">
+        <h2 className="text-lg font-semibold mb-4">About</h2>
+        {editable ?  <textarea
+          className="w-full p-4 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
+          value={company?.about?.description || ""}
+          onChange={(e) =>
+            setCompany({
+              ...company,
+              about: { ...company.about, description: e.target.value },
+            })
+          }
+          placeholder="Add a description about the company"
+        />: <p className="text-gray-500">{company?.about?.description || "Add About Section"}</p>}
+       
+      </div>
 
-        <div className="flex gap-2 font-dmSans font-medium">
-          <div className="w-10 h-10 rounded-2xl bg-gray-200 flex justify-center">
-            {" "}
-            <PiLinkSimple className="self-center text-2xl" />
-          </div>
-          {/* <p className="text-blue-700 self-center">http://www.vetindia.in/</p> */}
-
-          {/* {!company?.basic?.website && (
-            <p className="  self-center">No Website Available</p>
-          )} */}
-
-          {company ? (
-            <>
-              {editable && company ? (
-                <input
-                  type="text"
-                  value={company && company?.basic?.website ? company?.basic?.website : ""}
-                  onChange={(e) =>
-                    setCompany({ ...company, basic: { ...company.basic, website: e.target.value } })
-                  }
-                  className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6]`}
-                  placeholder="Add company Website"
-                />
-              ) : (
-                <a
-                  className="self-center text-lightBlue underline bg-transparent font-medium"
-                  href={company && company?.basic?.website ? company?.basic?.website : ""}
-                  target="_blank"
-                  rel="noreferrer"
+      {/* Awards Section */}
+      <div className="mb-8">
+        <h2 className="text-lg font-semibold mb-4">Awards</h2>
+        {company?.awards?.map((award, index) => (
+          <div key={index} className="mb-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+            <div className="flex justify-between items-center">
+              {/* <h3 className="text-md font-semibold">Award {index + 1}</h3> */}
+              {editable && (
+                <button
+                  onClick={() => handleRemoveAward(index)}
+                  className="text-red-500"
                 >
-                  {company && company?.basic?.website ? company?.basic?.website : ""}
-                </a>
+                  Remove
+                </button>
               )}
-            </>
-          ) : (
-            <></>
-          )}
-        </div>
-      </div>
-
-      <div className="px-6 flex gap-2  pb-8 ">
-        <div className="w-10 h-10  rounded-2xl bg-gray-200 flex justify-center">
-          {" "}
-          <CgPinAlt className="self-center text-3xl" />
-        </div>
-        {/* <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center">
-          G - 55-56, Street No.-1, Palam Extension, Near Sector - 7, Dwarka,
-          Delhi, 110075
-        </p> */}
-        {/* {!company?.location?.locName && (
-          <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center">
-            No Address Available
-          </p>
-        )} */}
-
-        {company ? (
-          <>
-            {editable && company ? (
-              <input
-                type="text"
-                value={company && company?.location?.locName ? company?.location?.locName : ""}
-                onChange={(e) =>
-                  setCompany({ ...company, location: { ...company.location, locName: e.target.value } })
-                }
-                className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6] break-words  w-full max-w-[416px]`}
-                placeholder="company Address"
-              />
-            ) : (
-              <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center">
-                {company && company?.location?.locName ? company?.location?.locName : ""}
-              </p>
-            )}
-          </>
-        ) : (
-          <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center">
-            No Address Available
-          </p>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm text-gray-500">Award Name</label>
+                {editable ? (
+                  <input
+                    type="text"
+                    value={award.name || ""}
+                    onChange={(e) =>
+                      handleAwardChange(index, "name", e.target.value)
+                    }
+                    className="w-full p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
+                    placeholder="Add Award Name"
+                  />
+                ) : (
+                  <p className="text-gray-500">{award.name || "Add Award Name"}</p>
+                )}
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Description</label>
+                {editable ? (
+                  <textarea
+                    value={award.description || ""}
+                    onChange={(e) =>
+                      handleAwardChange(index, "description", e.target.value)
+                    }
+                    className="w-full p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
+                    placeholder="Add Award Description"
+                  />
+                ) : (
+                  <p className="text-gray-500">{award.description || "Add Description"}</p>
+                )}
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Date of Issue</label>
+                {editable ? (
+                  <input
+                    type="date"
+                    value={award.dateOfIssue || ""}
+                    onChange={(e) =>
+                      handleAwardChange(index, "dateOfIssue", e.target.value)
+                    }
+                    className="w-full p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
+                  />
+                ) : (
+                  <p className="text-gray-500">{award.dateOfIssue || "Add Date"}</p>
+                )}
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Media</label>
+                {editable ? (
+                  <input
+                    type="text"
+                    value={award.media.join(", ") || ""}
+                    onChange={(e) =>
+                      handleAwardChange(index, "media", e.target.value.split(", "))
+                    }
+                    className="w-full p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
+                    placeholder="Add Award Media URLs (comma separated)"
+                  />
+                ) : (
+                  <p className="text-gray-500">
+                    {award.media.length > 0 ? award.media.join(", ") : "Add Media URLs"}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        {editable && (
+          <button
+            onClick={handleAddAward}
+            className="mt-4 py-2 px-4 bg-neutral text-white rounded-lg shadow-lg"
+          >
+            Add Award
+          </button>
         )}
       </div>
     </div>

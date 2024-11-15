@@ -1,17 +1,36 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FiBell } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { FiBell, FiSettings } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 import { FaCoins } from "react-icons/fa";
 import useTranslate from "../../hooks/useTranslate";
 import GoogleTranslate from "../GoogleTranslate";
+import { Disclosure } from "@headlessui/react";
+import { logoutCollege } from "../../redux/college/auth/authSlice";
+import { setAssessments } from "../../redux/college/test/testSlice";
+import toast from "react-hot-toast";
 
 const Navbar = (props) => {
   const currentLanguage = useTranslate();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const goToProfile = () => {
     // Function to navigate to profile page
     navigate("/college/profile"); // Use navigate function to navigate to desired URL
+  };
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    try {
+      const ch = await dispatch(logoutCollege());
+      if (ch.meta.requestStatus === "fulfilled") {
+        toast.success("Logged out successfully");
+        dispatch(setAssessments());
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("logging out failed");
+    }
   };
   const userDetails = useSelector((state) => state.collegeAuth);
 
@@ -35,10 +54,10 @@ const Navbar = (props) => {
 
       {/* right */}
       <div className="flex gap-4">
-        <button className="border-2 border-[#D9E1E7]  text-[#D9E1E7] rounded-lg px-2 p-1 relative">
+        {/* <button className="border-2 border-[#D9E1E7]  text-[#D9E1E7] rounded-lg px-2 p-1 relative">
           <FiBell className="text-lg" />{" "}
           <div className="rounded-full h-2 w-2 bg-lightBlue absolute top-1 right-2"></div>
-        </button>
+        </button> */}
 
         <button
           onClick={() => {
@@ -52,23 +71,65 @@ const Navbar = (props) => {
           </h1>
         </button>
 
-        <div
+        {/* <div
           className="border border-[#D9E1E7]  rounded-lg p-2 relative flex gap-3"
           style={{ marginRight: "12rem" }}
           onClick={goToProfile}
         >
           <img
-            src={userDetails?.user?.avatar?.url}
+            src={userDetails?.user?.avatar?.url || "../../../images/defaultUser.png"}
             alt="icon"
             className="h-5 w-5"
           />{" "}
           <h2 className="text-sm font-bold self-center">
             Hello {userDetails?.user?.FirstName}
           </h2>
-        </div>
+        </div> */}
+         {/* Profile Dropdown */}
+       <Disclosure as="div" className="relative">
+          {({ open }) => (
+            <>
+              <Disclosure.Button className="flex items-center border border-[#D9E1E7] rounded-lg p-2 gap-2">
+                <img
+                  src={
+                    userDetails?.avatar?.url ||
+                    
+                    "../../../images/defaultUser.jpg"
+                  }
+                  alt="User Avatar"
+                  className="h-5 w-5"
+                />
+                <h2 className="text-sm font-bold">
+                  Hello {userDetails?.FirstName}
+                </h2>
+                <FiSettings className="text-lg text-accent" /> {/* Gear icon */}
+              </Disclosure.Button>
+
+              {/* Dropdown Panel */}
+              <Disclosure.Panel className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                <button
+                  onClick={goToProfile}
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-lg hover:text-white"
+                >
+                  Profile
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-red-400 rounded-lg hover:text-white"
+                >
+                  Logout
+                </button>
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+
+        <div className="w-52"></div>
 
         <GoogleTranslate currentLanguage={currentLanguage} />
       </div>
+      
+      
     </nav>
   );
 };

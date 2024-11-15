@@ -92,15 +92,15 @@ const Companies = () => {
       )}
       <figure>
         <img
-          src="../../images/CompanyBg.png"
+          src={ company?.basic?.coverPhoto ||"../../../images/default.jpg"}
           alt="company card"
-          className="object-cover xl:h-40 md:h-28 h-20"
+          className="object-cover xl:h-40 md:h-28 h-20 w-full"
         />
       </figure>
       <div className="card-body gap-0 py">
         <div className="w-12 h-12 -mt-10 rounded-xl bg-[#F8F8F9] p-2 mb-4">
           <img
-            src={company.basic?.logo || "../../images/companyLogo.png"}
+            src={company.basic?.logo || "../../../images/defaultUser.jpg"}
             alt=""
             className="object-cover"
           />
