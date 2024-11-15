@@ -17,10 +17,10 @@ const schema = z.object({
   SeniorityLevel: z.string().nonempty('Seniority Level is required'),
   ExperienceFrom: z
     .number({ invalid_type_error: 'Must be a number' })
-    .positive('Experience From must be positive'),
+    .nonnegative('Experience From must be non-negative'),
   ExperienceTo: z
     .number({ invalid_type_error: 'Must be a number' })
-    .positive('Experience To must be positive'),
+    .nonnegative('Experience To must be non-negative'),
   SalaryFrom: z
     .number({ invalid_type_error: 'Must be a number' })
     .positive('Salary From must be positive'),
