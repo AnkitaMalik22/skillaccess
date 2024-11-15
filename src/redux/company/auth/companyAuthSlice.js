@@ -250,6 +250,7 @@ const companyAuthSlice = createSlice({
             .addCase(getCompany.fulfilled, (state, action) => {
                 const user =  action.payload.company;
                 state.data = {
+                    _id:user?._id || null,
                     status: user?.status || 'pending',
                     statusChangedAt: user?.statusChangedAt || null,
                     commentsByAdmin: user?.commentsByAdmin || [
