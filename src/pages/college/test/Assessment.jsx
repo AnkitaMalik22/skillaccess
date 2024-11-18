@@ -6,6 +6,7 @@ import { LiaStopwatchSolid } from "react-icons/lia";
 import Chart from "react-apexcharts";
 import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
+import Performance from "../../../components/college/results/overview/Performance";
 
 const Assessment = () => {
   //useTranslate();
@@ -196,10 +197,8 @@ const Assessment = () => {
         </div>
 
         <div className="  hidden md:block w-1/2 ">
-          <div className=" !rounded-lg  ">
-            {/* 
+          {/* <div className=" !rounded-lg  ">
             
-            */}
             <div className="bg-gray-100 rounded-2xl p-2 mb-6">
               <div className="flex justify-between px-2 font-bold text-base ">
                 <h2>Number of Student Placed</h2>{" "}
@@ -228,7 +227,7 @@ const Assessment = () => {
                     Total
                   </h2>
                 </div>
-                {/* labels */}
+               
                 <div className="self-center">
                   <div className="flex gap-1 ">
                     <div className="w-4 h-4 rounded-full bg-accent opacity-60"></div>{" "}
@@ -308,9 +307,11 @@ const Assessment = () => {
                 />
               </div>
             </div>
-            {/*  */}
-          </div>
+       
+          </div> */}
+            <Performance />
         </div>
+      
       </div>
 
       {/* larger screens */}
