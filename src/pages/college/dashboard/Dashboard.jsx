@@ -60,7 +60,7 @@ const Dashboard = () => {
               {students.length}
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">Students</h2>
-            <h2 className="text-[#00875A] font-medium text-[17px]">105.34%</h2>
+            {/* <h2 className="text-[#00875A] font-medium text-[17px]">105.34%</h2> */}
           </div>
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
@@ -71,7 +71,7 @@ const Dashboard = () => {
               {companies.length}
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">Companies</h2>
-            <h2 className="text-[#DE350B] font-medium text-[17px]">25.34%</h2>
+            {/* <h2 className="text-[#DE350B] font-medium text-[17px]">25.34%</h2> */}
           </div>
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
@@ -84,7 +84,7 @@ const Dashboard = () => {
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
               Student Placed
             </h2>
-            <h2 className="text-[#DE350B] font-medium text-[17px]">0%</h2>
+            {/* <h2 className="text-[#DE350B] font-medium text-[17px]">0%</h2> */}
           </div>
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
@@ -101,7 +101,7 @@ const Dashboard = () => {
               className="text-[#DE350B] font-medium text-[17px] hover:cursor-pointer"
               onClick={() => navigate("/college/dashboard/jobs")}
             >
-              0%
+              {/* 0% */}
             </h2>
           </div>
 

@@ -50,24 +50,24 @@ const AddQuestionsSelect = () => {
         );
         break;
 
-      case "video":
-        navigate(
-          `/company/pr/test/video/${id}?type=video&addType=topic&level=${level}`
-        );
+      // case "video":
+      //   navigate(
+      //     `/company/pr/test/video/${id}?type=video&addType=topic&level=${level}`
+      //   );
 
-        break;
+      //   break;
 
-      case "findAnswer":
-        navigate(
-          `/company/pr/test/find-ans/${id}?type=findAnswer&addType=topic&level=${level}`
-        );
-        break;
+      // case "findAnswer":
+      //   navigate(
+      //     `/company/pr/test/find-ans/${id}?type=findAnswer&addType=topic&level=${level}`
+      //   );
+      //   break;
 
-      case "essay":
-        navigate(
-          `/company/pr/test/essay/${id}?type=essay&addType=topic&level=${level}`
-        );
-        break;
+      // case "essay":
+      //   navigate(
+      //     `/company/pr/test/essay/${id}?type=essay&addType=topic&level=${level}`
+      //   );
+      //   break;
 
       default:
         toast.error("please select field");
@@ -173,7 +173,7 @@ const AddQuestionsSelect = () => {
 
           {/* Essay */}
 
-          <div
+          {/* <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "essay" ? "border-blued" : "opacity-70"
             }`}
@@ -197,26 +197,26 @@ const AddQuestionsSelect = () => {
               />
               <h2 className="text-xl font-normal self-center">Essay</h2>
             </div>
-            {/*  */}
+            
             <h2 className="text-xl font-normal self-center">
               Open Text Answer
             </h2>
             <div className=""></div>
-            {/* <img
+            <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            /> */}
-          </div>
+            />
+          </div> */}
           {/*  */}
 
-          <div
+          {/* <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "video" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("video")}
           >
-            {" "}
+          
             <div className="flex gap-5 font-dmSans w-1/3">
               <div className="w-5 h-5 self-center">
                 <input
@@ -234,22 +234,22 @@ const AddQuestionsSelect = () => {
               />
               <h2 className="text-xl font-normal self-center">Video</h2>
             </div>
-            {/*  */}
+         
             <h2 className="text-xl font-normal self-center">
               Record video to answer questions
             </h2>
-            {/* <img
+            <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            /> */}
+            />
             <div className=""></div>
-          </div>
+          </div> */}
           {/*  */}
 
           {/* Find Answer*/}
 
-          <div
+          {/* <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "findAnswer"
                 ? "border-blued"
@@ -257,7 +257,7 @@ const AddQuestionsSelect = () => {
             }`}
             onClick={() => setSelectQuestionType("findAnswer")}
           >
-            {" "}
+         
             <div className="flex gap-5 font-dmSans w-1/3">
               <div className="w-5 h-5 self-center">
                 <input
@@ -275,18 +275,18 @@ const AddQuestionsSelect = () => {
               />
               <h2 className="text-xl font-normal self-center">Find Answer</h2>
             </div>
-            {/*  */}
+           
             <h2 className="text-xl font-normal self-center">
               Read Phrase and Answer them
             </h2>
             <div className=""></div>
-            {/* <img
+            <img
               src="../../../images/icons/dot.png"
               alt=""
               className="self-center w-5"
-            /> */}
-          </div>
-          {/*  */}
+            />
+          </div> */}
+          
         </div>
       </div>
 

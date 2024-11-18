@@ -20,7 +20,7 @@ const Header = ({ students }) => {
       </span>
 
       {/* search */}
-      <div className=" rounded-xl w-full sm:h-12 h-10 flex">
+      {/* <div className=" rounded-xl w-full sm:h-12 h-10 flex">
         <span className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
           <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400 " />
           <input
@@ -30,7 +30,7 @@ const Header = ({ students }) => {
             className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
           />
         </span>
-      </div>
+      </div> */}
 
       <div className="flex gap-2 items-center">
         {students.slice(0, 5).map((student) => {

@@ -109,13 +109,13 @@ const Navbar = (props) => {
               <Disclosure.Panel className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                 <button
                   onClick={goToProfile}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-lg hover:text-white"
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 hover:bg-opacity-60 rounded-lg "
                 >
                   Profile
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-red-400 rounded-lg hover:text-white"
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 rounded-lg "
                 >
                   Logout
                 </button>
