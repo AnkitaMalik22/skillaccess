@@ -7,7 +7,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 
 const jobState = {
-
+    cursor:"",
     jobs : [],
     loading: false,
     error: null,
@@ -18,11 +18,11 @@ const jobState = {
 
 export const getJobs = createAsyncThunk(
     "job/getJobs",
-    async (companyId, { rejectWithValue }) => {
+    async ({companyId,cursor,limit=10}, { rejectWithValue }) => {
         console.log(companyId, "companyId")
         try {
             const req = await axios.get(
-                `${REACT_APP_API_URL}/api/company/all-jobs/${companyId}`,
+                `${REACT_APP_API_URL}/api/company/all-jobs/${companyId}?cursor=${cursor}&limit=${limit}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -152,14 +152,14 @@ const jobSlice = createSlice({
             })
             .addCase(getJobs.fulfilled, (state, action) => {
                 state.loading = false;
-                state.jobs = action.payload.jobs;
-                
+                state.jobs = [...state.jobs,...action.payload.jobs];
+                state.cursor=action.payload.nextCursor;
                 console.log(action.payload, "jobs")
             })
             .addCase(getJobs.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                toast.error(action.payload);
+                // toast.error(action.payload);
             })
             .addCase(getJobDetails.pending, (state) => {
                 state.jobLoading = true;

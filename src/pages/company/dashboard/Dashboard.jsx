@@ -36,7 +36,7 @@ const { jobs } = useSelector((state) => state.job);
 
   useEffect(() => {
     if (user?._id) {
-      dispatch(getJobs(user._id));
+      dispatch(getJobs({ companyId: user._id ,cursor:"" ,limit : 10 }));
     }
   }, [dispatch, user?._id]);
 

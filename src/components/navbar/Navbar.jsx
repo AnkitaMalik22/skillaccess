@@ -86,13 +86,13 @@ const Navbar = (props) => {
           </h2>
         </div> */}
          {/* Profile Dropdown */}
-       <Disclosure as="div" className="relative">
-          {({ open }) => (
+       <Disclosure as="div" className="relative" >
+          {({ open ,close}) => (
             <>
               <Disclosure.Button className="flex items-center border border-[#D9E1E7] rounded-lg p-2 gap-2">
                 <img
                   src={
-                    userDetails?.avatar?.url ||
+                    userDetails?.user?.avatar?.url ||
                     
                     "../../../images/defaultUser.jpg"
                   }
@@ -100,13 +100,13 @@ const Navbar = (props) => {
                   className="h-5 w-5"
                 />
                 <h2 className="text-sm font-bold">
-                  Hello {userDetails?.FirstName}
+                  Hello {userDetails?.user?.FirstName}
                 </h2>
                 <FiSettings className="text-lg text-accent" /> {/* Gear icon */}
               </Disclosure.Button>
 
               {/* Dropdown Panel */}
-              <Disclosure.Panel className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+              <Disclosure.Panel className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10" onMouseLeave={()=>close()}>
                 <button
                   onClick={goToProfile}
                   className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 hover:bg-opacity-60 rounded-lg "

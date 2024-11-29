@@ -1,14 +1,17 @@
-import React,{useEffect} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../../../components/company/JobsHeader";
 import JobCard from "../../../components/company/JobCard";
-import { useDispatch , useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getJobs } from "../../../redux/company/jobs/jobSlice";
+import { LoaderIcon } from "react-hot-toast";
+import Loader from "../../../components/CircularLoader"
 
 const JobsPage = () => {
-    const dispatch = useDispatch();
-    const {data: userDetails }= useSelector((state) => state.companyAuth);
-    const {jobs} = useSelector((state) => state.job);
-   
+  const dispatch = useDispatch();
+  const { data: userDetails } = useSelector((state) => state.companyAuth);
+  const { jobs, cursor } = useSelector((state) => state.job);
+const [loading, setLoading] = useState(false);
+const LoadMoreRef = useRef();
 
   React.useEffect(() => {
     let scriptLoaded = false;
@@ -54,28 +57,45 @@ const JobsPage = () => {
     };
   }, []);
 
-useEffect(() => {
-  if (userDetails?._id) {
-    console.log(userDetails._id);
-    dispatch(getJobs(userDetails._id));
-  }
-}, [dispatch, userDetails?._id]);
+  useEffect(() => {
+    if (userDetails?._id) {
+      // console.log(userDetails._id);
+      dispatch(getJobs({ companyId: userDetails._id, cursor, limit: 10 }));
+      // dispatch(getJobs(userDetails._id));
+    }
+  }, [dispatch, userDetails?._id]);
 
 
   return (
- 
-     <>
-     <Header />
-     <div className="flex flex-wrap gap-5 md:gap-10 md:gap-y-[30px] gap-y-4 ">
-     {
-    jobs && jobs?.map((job) => (
-        <JobCard job={job} key={job._id} />
-    ))
-}
-     </div>
-     
-     </>
-  
+
+    <>
+
+      <Header />
+      <div className="flex flex-wrap gap-5 md:gap-10 md:gap-y-[30px] gap-y-4  h-[70vh] overflow-y-scroll" onScroll={(e) => {
+        const { scrollTop, scrollHeight, clientHeight } = e.target;
+
+        // Check if the user has scrolled to the bottom
+        if (scrollTop + clientHeight >= scrollHeight) {
+
+        cursor!==null &&  LoadMoreRef.current.click();
+        }
+      }}>
+        {
+          jobs && jobs?.map((job, index) => {
+
+            return (
+              <JobCard job={job} key={job._id} />
+            )
+          })
+        }
+        <button ref={LoadMoreRef} onClick={async () => {
+          !loading && await  dispatch(getJobs({ companyId: userDetails._id, cursor, limit: 10 }));
+        
+        }}>{loading ? <Loader />:""  }  </button>
+      </div>
+
+    </>
+
   );
 };
 

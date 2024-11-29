@@ -96,7 +96,7 @@ export const getPlacedStudents = createAsyncThunk(
   async (collegeId, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${REACT_APP_API_URL}/api/company//jobs/placements/${collegeId}`,
+        `${REACT_APP_API_URL}/api/company/jobs/placements/${collegeId}`,
 
         {
           headers: {

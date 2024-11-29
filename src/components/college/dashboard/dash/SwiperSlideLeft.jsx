@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useNavigate } from "react-router-dom";
-import { getNewCompanies } from "../../../../redux/college/dashboard/dashboardSlice";
+import { getCompany, getNewCompanies } from "../../../../redux/college/dashboard/dashboardSlice";
 import "swiper/css";
 
 const SwiperSlideLeft = () => {
   const dispatch = useDispatch();
-  const { newCompanies, loading } = useSelector((state) => state.dashboard);
+  const { companies:newCompanies, loading } = useSelector((state) => state.dashboard);
   const navigate = useNavigate();
   // useSelector((state) => //console.log("state : ", state.dashboard));
   const { user } = useSelector((state) => state.collegeAuth);
 
   useEffect(() => {
     if (user) {
-      dispatch(getNewCompanies({ collegeId: user?._id }));
+      dispatch(getCompany({ collegeId: user?._id }));
     }
     // //console.log("newCompanies : ", newCompanies);
   }, [dispatch, user]);
