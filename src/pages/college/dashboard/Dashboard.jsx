@@ -6,8 +6,8 @@ import { FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import SwiperSlideLeft from "../../../components/college/dashboard/dash/SwiperSlideLeft";
-import SwiperSlideRight from "../../../components/college/dashboard/dash/SwiperSlideLeft";
-
+import SwiperSlideRight from "../../../components/college/dashboard/dash/SwiperSlideRight";
+import { getResultGraph } from "../../../redux/college/result/thunks/graph";
 import {
   getStudent,
   getCompany,
@@ -18,6 +18,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getCollege } from "../../../redux/college/auth/authSlice";
 import ChartComp from "../../../components/college/results/home/Chart";
+import { getAllJobs } from "../../../redux/college/jobs/collegeJobSlice";
 
 const Dashboard = () => {
   //useTranslate();
@@ -28,7 +29,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user) {
+      dispatch(getAllJobs(user?._id))
       dispatch(getCompany({ collegeId: user?._id }));
+      dispatch(getResultGraph());
     }
   }, [user]);
 
@@ -159,7 +162,7 @@ const Dashboard = () => {
 
             <button
               className="text-blued  text-sm mb-4 md:mb-8"
-              onClick={() => navigate("/college/companies/jobs")}
+              onClick={() => navigate("/college/jobs")}
             >
               See All
             </button>

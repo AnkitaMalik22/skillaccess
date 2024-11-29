@@ -5,16 +5,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { getNewJobs } from "../../../../redux/college/dashboard/dashboardSlice";
 import { useNavigate } from "react-router-dom";
 import "swiper/css";
+import { getAllJobs } from "../../../../redux/college/jobs/collegeJobSlice";
 
 const SwiperSlideRight = () => {
   const dispatch = useDispatch();
-  const { newJobs, loading } = useSelector((state) => state.dashboard);
+
+  const { jobs: newJobs } = useSelector((state) => state.collegeJobs);
   const navigate = useNavigate();
-  useEffect(() => {
-    dispatch(getNewJobs());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllJobs( user?._id));
+  // }, [dispatch]);
   // //console.log(newJobs);
-  const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  // const jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <Swiper
