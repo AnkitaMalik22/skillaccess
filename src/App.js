@@ -42,6 +42,8 @@ import AddTestToJob from "./pages/company/jobs/AddTestToJob";
 import EditJob from "./pages/company/jobs/EditJob";
 import Settings from "./pages/company/settings/Settings";
 import ViewInvitedStudents from "./pages/college/companies/ViewInvitedStudents";
+import RegisterUniversity from "./pages/university/auth/RegisterUniversity";
+import UniversityLoginPage from "./pages/university/auth/LoginUniversity";
 
 const Register = lazy(() => import("./pages/college/auth/Register"));
 const Login = lazy(() => import("./pages/college/auth/Login"));
@@ -73,6 +75,8 @@ export default function App() {
     /^\/college\/me\/failed$/, // Exact match for "/college/me/failed"
     /^\/college\/settings\/security\/securityApp$/, // Exact match for "/college/settings/security/securityApp"
     /^\/company.*$/,
+    /^\/university.*$/,
+
   ]);
 
   useEffect(() => {
@@ -193,6 +197,17 @@ export default function App() {
             
            
              </Route>
+            </Route>
+
+            {/* university routes */}
+            <Route path="/university/">
+              <Route path="" element={<UniversityLoginPage />} />
+              <Route path="register" element={<RegisterUniversity />} />
+              <Route path="approval" element={<AwaitingApproval />} />
+              <Route path="pr" element={<CompanyLayout />}>
+                <Route path="settings" element={<Settings />} />
+                
+              </Route>
             </Route>
               
             {/* </Route> */}
