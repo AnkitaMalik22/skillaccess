@@ -87,12 +87,12 @@ const universityAuthSlice = createSlice({
         state.loading = false;
         state.error = action.payload || "Registration failed.";
 
-        toast.error(action.payload || "Registration failed.");
+        toast.error(action.payload?.message || "Registration failed.");
       })
         .addCase(loginUniversity.pending, (state) => {
             state.loading = true;
             state.error = null;
-            toast.loading("Logging in...");
+            // toast.loading("Logging in...");
         })
         .addCase(loginUniversity.fulfilled, (state, action) => {
             state.isAuthenticated = true;
@@ -112,7 +112,7 @@ const universityAuthSlice = createSlice({
         .addCase(loginUniversity.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload || "Login failed.";
-            toast.error(action.payload || "Login failed.");
+            toast.error(action.payload.message || "Login failed.");
         })
         .addCase(forgotPassword.pending, (state) => {
             state.loading = true;
