@@ -13,6 +13,7 @@ const StudentPoP = ({ onClose }) => {
     FirstName: "",
     LastName: "",
     Email: "",
+    Batch:""
   });
   const { user } = useSelector((state) => state.collegeAuth);
   const dispatch = useDispatch();
@@ -63,6 +64,14 @@ const StudentPoP = ({ onClose }) => {
     toast.error("Last Name should not contain numeric values or spaces");
     return;
   }
+  if (!/^\d{4}$/.test(parseInt(student.Batch))) {
+    toast.error("Invalid Batch");
+    return;
+  }
+  
+
+
+  
     // maxLength: [30, "Name cannot exceed 30 characters"],
     // minLength: [2, "Name should have more than 2 characters"],
     else {
@@ -108,6 +117,13 @@ const StudentPoP = ({ onClose }) => {
             name="Email"
             onChange={handleChange}
             placeholder="Email Address*"
+            className="bg-[#8F92A1] bg-opacity-5 rounded-lg w-full  p-3 border-none text-[#8F92A1] text-sm"
+          />
+          <input
+            type="text"
+            name="Batch"
+            onChange={handleChange}
+            placeholder="Batch*"
             className="bg-[#8F92A1] bg-opacity-5 rounded-lg w-full  p-3 border-none text-[#8F92A1] text-sm"
           />
           {/* <input
