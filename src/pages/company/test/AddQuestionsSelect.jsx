@@ -50,24 +50,24 @@ const AddQuestionsSelect = () => {
         );
         break;
 
-      // case "video":
-      //   navigate(
-      //     `/company/pr/test/video/${id}?type=video&addType=topic&level=${level}`
-      //   );
+      case "video":
+        navigate(
+          `/company/pr/test/video/${id}?type=video&addType=topic&level=${level}`
+        );
 
-      //   break;
+        break;
 
-      // case "findAnswer":
-      //   navigate(
-      //     `/company/pr/test/find-ans/${id}?type=findAnswer&addType=topic&level=${level}`
-      //   );
-      //   break;
+      case "findAnswer":
+        navigate(
+          `/company/pr/test/find-ans/${id}?type=findAnswer&addType=topic&level=${level}`
+        );
+        break;
 
-      // case "essay":
-      //   navigate(
-      //     `/company/pr/test/essay/${id}?type=essay&addType=topic&level=${level}`
-      //   );
-      //   break;
+      case "essay":
+        navigate(
+          `/company/pr/test/essay/${id}?type=essay&addType=topic&level=${level}`
+        );
+        break;
 
       default:
         toast.error("please select field");
@@ -173,7 +173,7 @@ const AddQuestionsSelect = () => {
 
           {/* Essay */}
 
-          {/* <div
+          <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "essay" ? "border-blued" : "opacity-70"
             }`}
@@ -207,10 +207,10 @@ const AddQuestionsSelect = () => {
               alt=""
               className="self-center w-5"
             />
-          </div> */}
+          </div>
           {/*  */}
 
-          {/* <div
+          <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "video" ? "border-blued" : "opacity-70"
             }`}
@@ -244,12 +244,12 @@ const AddQuestionsSelect = () => {
               className="self-center w-5"
             />
             <div className=""></div>
-          </div> */}
+          </div>
           {/*  */}
 
           {/* Find Answer*/}
 
-          {/* <div
+          <div
             className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "findAnswer"
                 ? "border-blued"
@@ -285,7 +285,7 @@ const AddQuestionsSelect = () => {
               alt=""
               className="self-center w-5"
             />
-          </div> */}
+          </div>
           
         </div>
       </div>
