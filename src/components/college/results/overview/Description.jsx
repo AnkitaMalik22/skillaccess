@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { CgStopwatch } from "react-icons/cg";
-
-const Description = ({ topics }) => {
+import axios from "axios"
+import Loader from "../../../../components/loaders/Loader"
+import toast from "react-hot-toast";
+const Description = ({ topics,assessment }) => {
   const handleCalculateTime = (topic) => {
     let totalMcq = 0,
       totalEssay = 0,
@@ -51,11 +53,28 @@ const Description = ({ topics }) => {
     // );
     return total;
   };
+  const [loading,setLoading] = useState(false);
 
   return (
     <div className="bg-[#8F92A1] font-dmSans bg-opacity-5 p-5 mt-1 mb-5 rounded-b-2xl ">
       <h2 className="font-bold mb-2 text-base">Test Description</h2>
 
+    { !assessment?.isReportGenerated &&  <button
+              className="py-3 text-white rounded-2xl text-xs  bg-accent font-bold flex gap-2 px-7 my-4 "
+              onClick={async ()=>{
+              try {
+                setLoading(true)
+                await axios.get(`${process.env.REACT_APP_API_URL}/api/assessments/publish-report/${assessment._id}`);
+                setLoading(false)
+                toast.success("Result has been published");
+              } catch (error) {
+                
+              }
+              }}
+              type="button"
+            >
+             {loading? <Loader />: <p>Publish result</p> }
+            </button>}
       {/* card */}
       <div className="flex flex-row flex-wrap gap-4">
         {topics?.map((topic) => (
@@ -75,6 +94,8 @@ const Description = ({ topics }) => {
                     {handleCalculateTime(topic)} Min
                   </p>
                 </div>
+
+
 
                 <p className="text-xs self-center text-[#2348C7] text-opacity-80 tracking-[-0.4px] first-letter:uppercase">
                   {topic.Type}

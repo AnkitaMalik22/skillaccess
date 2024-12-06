@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
+import toast from "react-hot-toast";
 
 const Invite = () => {
   //useTranslate();
@@ -18,17 +19,21 @@ const Invite = () => {
   const dispatch = useDispatch();
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
+  const [year, setYear] = useState("");
+const [limit,setLimit] = useState(50);
+  const [page, setPage] = useState(1);
+
 
   const { approvedStudents: uploadedStudents, loading } = useSelector(
     (state) => state.collegeStudents
   );
-  const { students: studentList, assessment } = useSelector(
+  const { students: studentList, assessment, hasNextPageStudent } = useSelector(
     (state) => state.test
   );
   const { user } = useSelector((state) => state.collegeAuth);
 
   useEffect(() => {
-    dispatch(getStudentsForTest(testId));
+    dispatch(getStudentsForTest({ testId, skip: 0, limit: limit, batch: year }))
   }, []);
 
   useEffect(() => {
@@ -61,6 +66,19 @@ const Invite = () => {
 
   let testName = localStorage.getItem("testName");
 
+  const handleNext = () => {
+    dispatch(getStudentsForTest({ testId, skip: page * limit, limit: limit, batch: year }));
+    setPage((prev) => prev + 1);
+  };
+
+  const handlePrev = () => {
+    dispatch(getStudentsForTest({ testId, skip: (page - 1) * limit, limit: limit, batch: year }));
+    setPage((prev) => prev - 1);
+    toast.error("prev")
+
+  }
+
+
   // //console.log(uploadedStudents)
   return (
     <>
@@ -86,18 +104,28 @@ const Invite = () => {
             {localStorage?.getItem("testName")}
           </div>
 
-        {/* {console.log(assessment?.endDate)} */}
-        <Footer students={students} endDate={assessment?.endDate} />
+          {/* {console.log(assessment?.endDate)} */}
+          <Footer students={students} endDate={assessment?.endDate} />
 
-    
+
         </div>
 
         <div className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg p-5 focus:ring-0placeholder-gray-400 mb-6">
-          <Header handleFilter={handleFilterStudents}  
+          <Header handleFilter={handleFilterStudents}
             setStudents={setStudents}
             uploadedStudents={filteredStudents}
             students={students}
-            />
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            disableNext={!hasNextPageStudent}
+            disablePrev={page === 1}
+            handleChangeYear={(e) => {
+              setPage(1);
+              setYear(e.target.value || "");
+              dispatch(getStudentsForTest({ testId, skip: (page - 1) * limit, limit: limit, batch: e.target.value }))
+            }}
+          />
+
           <List
             setStudents={setStudents}
             uploadedStudents={filteredStudents}
@@ -106,7 +134,7 @@ const Invite = () => {
         </div>
       </div>
 
-   
+
     </>
   );
 };

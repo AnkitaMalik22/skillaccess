@@ -257,11 +257,10 @@ export const removeFromRecent = createAsyncThunk(
 
 export const getStudentsForTest = createAsyncThunk(
   "test/getStudentsForTest",
-  async (testId, { rejectWithValue }) => {
+  async ({testId,skip,limit,batch}, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments/students/${testId}`,
-
+        `${process.env.REACT_APP_API_URL}/api/assessments/students/${testId}?skip=${skip}&limit=${limit}&batch=${batch}`,
         {
           headers: {
             "Content-Type": "application/json",

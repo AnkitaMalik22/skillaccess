@@ -98,7 +98,7 @@ const Students = () => {
                   <div className="flex self-center items-center gap-3">
                     <div className="w-11  h-11 self-center  flex items-center justify-center text-xl ">
                       <img
-                        src="../../images/teams.png"
+                        src="../../../images/defaultUser.jpg"
                         alt=" user-icon"
                         className=" rounded-lg w-11 h-11"
                       />
@@ -135,7 +135,7 @@ const Students = () => {
                     <div className="self-center gap-3 flex items-center justify-between">
                       {" "}
                       <img
-                        src="../../images/teams.png"
+                        src="../../images/defaultUser.jpg"
                         alt=" user-icon"
                         className=" rounded-lg w-11 h-11"
                       />
@@ -198,7 +198,7 @@ const Students = () => {
               <div className="flex gap-3 items-center">
                 <div className="w-11 h-11 self-center flex items-center justify-center text-xl">
                   <img
-                    src="../../images/teams.png"
+                    src={student?.avatar?.url ||"../../images/defaultUser.jpg"}
                     alt="user-icon"
                     className="rounded-lg w-11 h-11"
                   />

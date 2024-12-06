@@ -350,7 +350,7 @@ const SelectTests = () => {
           setQuestionType={setQuestionType}
           handleFilter={handleFilterSections}
           type={""}
-          customSelect={[{value:"mcq",label:"Multiple Choice Questions"},{value:"compiler",label:"Code"}]}
+          // customSelect={[{value:"mcq",label:"Multiple Choice Questions"},{value:"compiler",label:"Code"}]}
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
