@@ -60,7 +60,7 @@ const ResultsOverview = () => {
       <Info user={user} assessment={assessment} />
 
       <About Description={assessment?.description} />
-      <Description topics={assessment?.topics} />
+      <Description topics={assessment?.topics} assessment={assessment}/>
 
       <Toggle assessment={assessment} />
     </>
