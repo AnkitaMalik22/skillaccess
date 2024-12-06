@@ -42,6 +42,7 @@ import AddTestToJob from "./pages/company/jobs/AddTestToJob";
 import EditJob from "./pages/company/jobs/EditJob";
 import Settings from "./pages/company/settings/Settings";
 import ViewInvitedStudents from "./pages/college/companies/ViewInvitedStudents";
+import CompanyQuesRoute from "./pages/company/quesBank";
 
 const Register = lazy(() => import("./pages/college/auth/Register"));
 const Login = lazy(() => import("./pages/college/auth/Login"));
@@ -178,6 +179,7 @@ export default function App() {
               <Route path="approval" element={<AwaitingApproval />} />
               <Route path="pr"  element={<CompanyLayout />}>
             {/* <Route path="/" element={<CompanyLayout />}> */}
+            {CompanyQuesRoute()}
             {CompanyTestHome()}
             <Route path="settings" element={<Settings />} />
             {CompanyResultRoutes()}
