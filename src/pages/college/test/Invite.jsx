@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Footer from "../../../components/college/test/addStudents/Footer";
 import Header from "../../../components/college/test/addStudents/Header";
 import List from "../../../components/college/test/addStudents/List";
@@ -20,9 +20,9 @@ const Invite = () => {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [year, setYear] = useState("");
-const [limit,setLimit] = useState(50);
+  const [limit,setLimit] = useState(50);
   const [page, setPage] = useState(1);
-
+  const debounceRef = useRef(null); // Ref for debounce timer
 
   const { approvedStudents: uploadedStudents, loading } = useSelector(
     (state) => state.collegeStudents
@@ -39,6 +39,14 @@ const [limit,setLimit] = useState(50);
   useEffect(() => {
     setFilteredStudents(studentList);
   }, [studentList]);
+  useEffect(() => {
+    return () => {
+      // Cleanup the timer on unmount
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, []);
 
   const handleFilterStudents = (e) => {
     const value = e.target.value;
@@ -49,17 +57,31 @@ const [limit,setLimit] = useState(50);
 
       return;
     } else {
-      setFilteredStudents(
-        studentList.filter((student) => {
-          const regex = new RegExp(value, "i");
-          return (
-            regex.test(student.FirstName) ||
-            regex.test(student.LastName) ||
-            regex.test(student.Email)
-          );
-        })
-      );
-
+      // setFilteredStudents(
+      //   studentList.filter((student) => {
+      //     const regex = new RegExp(value, "i");
+      //     return (
+      //       regex.test(student.FirstName) ||
+      //       regex.test(student.LastName) ||
+      //       regex.test(student.Email)
+      //     );
+      //   })
+      // );
+      setPage(1);
+      
+      // Debounce dispatch action
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    debounceRef.current = setTimeout(() => {
+      dispatch(getStudentsForTest({
+        testId,
+        skip: 0,
+        limit,
+        search: value,
+        batch: year,
+      }));
+    }, 300); // Adjust debounce time (300ms is common)
       //console.log(filteredStudents, "filtered--", value);
     }
   };
