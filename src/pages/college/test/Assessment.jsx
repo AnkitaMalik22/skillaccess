@@ -115,10 +115,10 @@ const Assessment = () => {
   //console.log(totalTime);
   return (
     <>
-      <Header name={assessment.name} />
+      <Header name={assessment?.name} />
       <div className="flex gap-2 mx-auto mb-5 ">
         <FaFolder className="text-blued w-5 h-5" />
-        <h2 className="text-xs">Beginner Level</h2>
+        <h2 className="text-xs">{assessment?.level} Level</h2>
       </div>
 
       <h2 className="flex gap-2  mx-auto p-3 bg-gray-100 mb-5  rounded-lg tracking-wide">

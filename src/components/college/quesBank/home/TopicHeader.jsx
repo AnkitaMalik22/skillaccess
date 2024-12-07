@@ -40,9 +40,9 @@ const Header = ({ Heading, sectionId }) => {
           <FiUpload className="self-center text-lg" /> Upload Questions
         </button>
 
-        <button className="bg-[#8f92a11a] self-center rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
+        {/* <button className="bg-[#8f92a11a] self-center rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
           <PiSlidersHorizontalLight className="mx-auto  h-7 w-7" />
-        </button>
+        </button> */}
       </div>
     </div>
   );
