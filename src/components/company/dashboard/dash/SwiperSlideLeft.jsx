@@ -54,15 +54,16 @@ const SwiperSlideLeft = () => {
       {jobs.map((job) => (
         <SwiperSlide className="flex ">
            <div className="companies-dash bg-white w-[100px] xl:w-[140px] p-4 rounded-2xl">
-      <figure
-        className="bg-gray-100 w-full h-20 mb-4 mx-auto cursor-pointer rounded-lg text-center pt-4"
+      <div
+        className="bg-gray-100 w-full h-20 mb-4 mx-auto cursor-pointer rounded-lg text-center pb-10"
         onClick={() => navigate(`/company/pr/jobs/${job._id}`)}
       >
-        {job?.SeniorityLevel}
-      </figure>
+        <img src={job?.company?.avatar.url || "../../../images/default.jpg"} alt="" className="rounded-lg object-contain" />
+        {/* {job?.SeniorityLevel} */}
+      </div>
       
       <div className="text-center">
-        <h3 className="text-xs text-[#8F92A1] font-bold break-words">
+        <h3 className="text-xs text-accent font-bold break-words mt-10">
           {job?.JobTitle}
         </h3>
         

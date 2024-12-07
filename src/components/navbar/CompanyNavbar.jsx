@@ -50,10 +50,10 @@ const CompanyNavbar = (props) => {
       {/* Right Side */}
       <div className="flex items-center gap-4">
         {/* Notification Button */}
-        <button className="relative border-2 border-[#D9E1E7] text-[#D9E1E7] rounded-lg px-2 p-1">
+        {/* <button className="relative border-2 border-[#D9E1E7] text-[#D9E1E7] rounded-lg px-2 p-1">
           <FiBell className="text-lg" />
           <div className="absolute top-1 right-2 h-2 w-2 bg-lightBlue rounded-full"></div>
-        </button>
+        </button> */}
 
         {/* Profile Dropdown */}
         <Disclosure as="div" className="relative">
@@ -85,7 +85,7 @@ const CompanyNavbar = (props) => {
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-sm hover:gray-100 rounded-lg hover:text-white"
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-lg hover:text-white"
                 >
                   Logout
                 </button>

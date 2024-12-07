@@ -73,9 +73,9 @@ const Jobs = () => {
           </span>
         </div>
 
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+        {/* <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
-        </button>
+        </button> */}
       </div>
       <div className="flex flex-col gap-4  items-center  ">
         {filtered?.map((job, index) => {
@@ -84,7 +84,7 @@ const Jobs = () => {
               <div className="sm:flex">
                 <div className="  flex justify-center rounded-lg mr-8">
                   <img
-                    src={job?.company?.basic?.logo}
+                    src={job?.company?.basic?.logo || "../../../images/defaultUser.jpg"}
                     className="w-10 h-10 rounded-lg self-center"
                     alt=""
                   />
