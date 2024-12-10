@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { createTest } from "../../../redux/college/test/thunks/test";
 import { getCollege } from "../../../redux/college/auth/authSlice";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni } from "../../../util/isCompany";
 
 const Submit = () => {
   //useTranslate();
@@ -32,7 +33,7 @@ const Submit = () => {
   } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const testType = searchParams.get("level");
-
+  const entity = isUni() ? "university/pr": "college"
   const [questions, setQuestions] = useState();
   let section1 = [];
   let section2 = [];
@@ -252,7 +253,7 @@ const Submit = () => {
 
       if (confirmed) {
         // Navigate to the specified page
-        navigate(`/college/test/name?level=${level}`);
+        navigate(`/${entity}/test/name?level=${level}`);
       }
 
       return;
@@ -263,7 +264,7 @@ const Submit = () => {
       );
       if (confirmed) {
         // Navigate to the specified page
-        navigate(`/college/test/name?level=${level}`);
+        navigate(`/${entity}/test/name?level=${level}`);
       }
       return;
     }
@@ -365,13 +366,13 @@ const Submit = () => {
       // dispatch(
       //   setTestBasicDetails({ name: "", description: "", totalAttempts: null ,totalQuestions:0})
       // );
-      dispatch(getCollege());
+     if(!isUni()) dispatch(getCollege());
       setLoading(false);
       //console.log(res);
 
       if (res.type === "test/createTest/fulfilled") {
         navigate(
-          `/college/test/final?testId=${res.payload._id}&name=${res.payload.name}&duration=${res.payload.totalTime}&attepmts=${res.payload.totalAttempts}&total=${res.payload.totalQuestionsCount}`
+          `/${entity}/test/final?testId=${res.payload._id}&name=${res.payload.name}&duration=${res.payload.totalTime}&attepmts=${res.payload.totalAttempts}&total=${res.payload.totalQuestionsCount}`
         );
       }
     });

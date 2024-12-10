@@ -6,6 +6,7 @@ import Header from "../../../components/college/test/addVideo/addSelect/Header";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
 import { setTotalTopicQuestions } from "../../../redux/college/test/thunks/topic";
+import { isUni } from "../../../util/isCompany";
 
 const AddVideoQuestionsPage = () => {
   //useTranslate();
@@ -16,24 +17,25 @@ const AddVideoQuestionsPage = () => {
   const [searchParam, setSearchParam] = useSearchParams();
   const level = searchParam.get("level");
   const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
-
+  const entity = isUni() ? "university/pr": "college";
+  
   const NavHandler = () => {
     switch (selectQuestionType) {
       case "mcq":
-        navigate(`/college/test/video/${id}/addmcq?level=${level}`);
+        navigate(`/${entity}/test/video/${id}/addmcq?level=${level}`);
 
         break;
 
       case "short":
         navigate(
-          `/college/test/video/shortlong/${id}?length=short&level=${level}`
+          `/${entity}/test/video/shortlong/${id}?length=short&level=${level}`
         );
 
         break;
 
       case "long":
         navigate(
-          `/college/test/video/shortlong/${id}?length=long&level=${level}`
+          `/${entity}/test/video/shortlong/${id}?length=long&level=${level}`
         );
 
         break;

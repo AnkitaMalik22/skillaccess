@@ -10,6 +10,8 @@ import { addBookmark } from "../../../../redux/college/test/thunks/question";
 import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 import { editQuestionCompany, removeQuestionCompany, setCurrentQuestionCountCompany } from "../../../../redux/company/test/testSlice";
+import isCompany from "../../../../util/isCompany";
+import { editQuestion } from "../../../../redux/college/test/testSlice";
 
 const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   const [search, setSearch] = useSearchParams();
@@ -81,14 +83,25 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
     } else {
       search.set(`${Number}`, "false");
       setSearch(search);
-      dispatch(
-        editQuestionCompany({
+
+      if (isCompany()) {
+        dispatch(
+          editQuestionCompany({
+            topicIndex: id,
+            selfIndex: Number,
+            questionType: "mcq",
+            question: mcq,
+          })
+        );
+      } else {
+        dispatch(editQuestion({
           topicIndex: id,
           selfIndex: Number,
           questionType: "mcq",
           question: mcq,
-        })
-      );
+        }))
+      }
+
     }
   };
 

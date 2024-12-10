@@ -3,6 +3,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { isUni } from "../../../../util/isCompany";
 
 const Header = ({ Q, page }) => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Header = ({ Q, page }) => {
   const topics = JSON.parse(localStorage.getItem("topics"));
   const { name } = useSelector((state) => state.test);
   const level = searchParams.get("level");
+  const entity = isUni() ? "university/pr" :"college";
   // //console.log(level);
   return (
     <div className="flex w-full mx-auto justify-between mb-5 ">
@@ -18,8 +20,8 @@ const Header = ({ Q, page }) => {
           className="self-center object-center rounded-lg h-10 w-10 "
           onClick={() => {
             level === "adaptive"
-              ? navigate(`/college/test/selectAdaptive?level=adaptive`)
-              : navigate(`/college/test/select?level=${level}`);
+              ? navigate(`/${entity}/test/selectAdaptive?level=adaptive`)
+              : navigate(`/${entity}/test/select?level=${level}`);
           }}
         >
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
@@ -42,8 +44,8 @@ const Header = ({ Q, page }) => {
           className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={() =>
             page == "submit"
-              ? navigate(`/college/test/submit?level=${level}`)
-              : navigate("/college/test/final")
+              ? navigate(`/${entity}/test/submit?level=${level}`)
+              : navigate(`/${entity}/test/final`)
           }
         >
           Next

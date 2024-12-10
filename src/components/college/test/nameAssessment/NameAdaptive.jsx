@@ -9,6 +9,7 @@ import {
   setTestBasicDetails,
 } from "../../../../redux/college/test/testSlice";
 import toast from "react-hot-toast";
+import { isUni } from "../../../../util/isCompany";
 
 const Name = () => {
   const dispatch = useDispatch();
@@ -215,7 +216,13 @@ const Name = () => {
     }
     if (!flag) {
       dispatch(setTestBasicDetails(testDetails));
-      navigate("/college/test/selectAdaptive?level=adaptive");
+
+      if (isUni()) {
+        navigate(`/university/pr/test/selectAdaptive?level=adaptive`);
+      } else {
+        navigate(`/college/test/selectAdaptive?level=adaptive`);
+      }
+
     }
   };
 

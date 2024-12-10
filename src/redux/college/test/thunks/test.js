@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getHeaders } from "../../../../util/isCompany";
 
 export const getTest = createAsyncThunk(
   "test/getTest",
@@ -60,14 +61,10 @@ export const getAllTests = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       //console.log(`get tests`);
+      
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/assessments`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
 
       const res = req.data;
@@ -88,12 +85,7 @@ export const createTest = createAsyncThunk(
       const req = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/assessments/create`,
         data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       return res.assessment;

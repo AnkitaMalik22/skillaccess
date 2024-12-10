@@ -13,8 +13,12 @@ import {
   clearTopicToBeAdded,
 } from "../../../../../redux/college/test/testSlice";
 import { addQuestionToTopic } from "../../../../../redux/college/test/thunks/topic";
+import { isUni } from "../../../../../util/isCompany";
 
 const Header = ({ selectQuestionType }) => {
+
+  const entity = isUni() ?"university/pr" : "college";
+
   const { id } = useParams();
   const [searchParam, setSearchParam] = useSearchParams();
   const level = searchParam.get("level");
@@ -86,7 +90,7 @@ const Header = ({ selectQuestionType }) => {
         toast.error("no questions");
       } else {
         navigate(
-          `/college/test/details/${id}?type=section&question=video&topicId=${searchParam.get(
+          `/${entity}/test/details/${id}?type=section&question=video&topicId=${searchParam.get(
             "section"
           )}&view=false&level=${level}`
         );
@@ -109,9 +113,9 @@ const Header = ({ selectQuestionType }) => {
           toast.error("Please add questions to the assessment");
           return;
         } else {
-          navigate(`/college/test/typeOfQuestions/${id}?level=${level}`);
+          navigate(`/${entity}/test/typeOfQuestions/${id}?level=${level}`);
         }
-        //           navigate(`/college/test/select`);
+        //           navigate(`/${entity}/test/select`);
       });
     }
     //  dispatch(
@@ -129,7 +133,7 @@ const Header = ({ selectQuestionType }) => {
     //     //console.log(res);
 
     //     navigate(
-    //       `/college/test/${id}?type=section&question=video&topicId=${searchParam.get(
+    //       `/${entity}/test/${id}?type=section&question=video&topicId=${searchParam.get(
     //         "section"
     //       )}&view=true`
     //     );
@@ -145,7 +149,7 @@ const Header = ({ selectQuestionType }) => {
           <button
             onClick={() =>
               level === "adaptive"
-                ? navigate("/college/test/selectAdaptive?level=adaptive")
+                ? navigate(`/${entity}/test/selectAdaptive?level=adaptive`)
                 : navigate(-1)
             }
             className="mt-2 mr-3"

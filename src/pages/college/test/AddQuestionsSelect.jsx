@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni } from "../../../util/isCompany";
 
 const AddQuestionsSelect = () => {
   //useTranslate();
@@ -20,35 +21,39 @@ const AddQuestionsSelect = () => {
   // }, [selectQuestionType]);
 
   const NavHandler = () => {
+
+    let entity = isUni() ?"university/pr" : "college";
+
     switch (selectQuestionType) {
+
       case "mcq":
         navigate(
-          `/college/test/addMcqToTopic/${id}?type=mcq&addType=topic&level=${level}`
+          `/${entity}/test/addMcqToTopic/${id}?type=mcq&addType=topic&level=${level}`
         );
         break;
 
       case "code":
         navigate(
-          `/college/test/code/${id}?type=compiler&addType=topic&level=${level}`
+          `/${entity}/test/code/${id}?type=compiler&addType=topic&level=${level}`
         );
         break;
 
       case "video":
         navigate(
-          `/college/test/video/${id}?type=video&addType=topic&level=${level}`
+          `/${entity}/test/video/${id}?type=video&addType=topic&level=${level}`
         );
 
         break;
 
       case "findAnswer":
         navigate(
-          `/college/test/find-ans/${id}?type=findAnswer&addType=topic&level=${level}`
+          `/${entity}/test/find-ans/${id}?type=findAnswer&addType=topic&level=${level}`
         );
         break;
 
       case "essay":
         navigate(
-          `/college/test/essay/${id}?type=essay&addType=topic&level=${level}`
+          `/${entity}/test/essay/${id}?type=essay&addType=topic&level=${level}`
         );
         break;
 
@@ -94,7 +99,7 @@ const AddQuestionsSelect = () => {
               </div>
 
               <img
-                src="../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -135,7 +140,7 @@ const AddQuestionsSelect = () => {
               </div>
 
               <img
-                src="../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -173,7 +178,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -210,7 +215,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -251,7 +256,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
