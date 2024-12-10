@@ -8,6 +8,7 @@ import Loader from "../../../loaders/Loader";
 import toast from "react-hot-toast";
 import { addQuestionToTopic } from "../../../../redux/college/test/thunks/topic";
 import { setTotalTopicQuestions } from "../../../../redux/college/test/thunks/topic";
+import { isUni } from "../../../../util/isCompany";
 
 const Header = ({ question, setQuestion, id, type }) => {
   const navigate = useNavigate();
