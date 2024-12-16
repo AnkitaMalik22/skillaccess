@@ -80,7 +80,7 @@ const universityAuthSlice = createSlice({
 
         toast.success("Registration successful.");
         if(action.payload.status === "pending") {
-            window.location.href = "/approval";
+            window.location.href = "/university/approval";
         }else{
             window.location.href = "/university/pr/dashboard";
         }
@@ -105,7 +105,7 @@ const universityAuthSlice = createSlice({
             toast.success("Login successful.");
 
             if(action.payload.status === "pending") {
-                window.location.href = "/approval";
+                window.location.href = "/university/approval";
             }else{
                 window.location.href = "/university/pr/dashboard";
             }
