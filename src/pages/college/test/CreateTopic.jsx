@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { createTopic } from "../../../redux/college/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni } from "../../../util/isCompany";
 
 const CreateTopic = () => {
   //useTranslate();
@@ -65,9 +66,16 @@ const CreateTopic = () => {
 
     dispatch(createTopic(topic)).then((res) => {
       if (res.payload._id) {
-        navigate(
-          `/college/test/typeOfQuestions/${res.payload._id}?level=${level}`
-        );
+
+        if(isUni()){
+          navigate(
+            `/university/pr/test/typeOfQuestions/${res.payload._id}?level=${level}`
+          );
+        }else{
+          navigate(
+            `/college/test/typeOfQuestions/${res.payload._id}?level=${level}`
+          );
+        }
       } else {
         toast.error("Invalid or duplicate values");
         return;

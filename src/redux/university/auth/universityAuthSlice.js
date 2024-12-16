@@ -28,6 +28,8 @@ export const loginUniversity = createAsyncThunk(
     async (data, thunkAPI) => {
         try {
             const response = await axios.post(`${REACT_APP_API_URL}/api/university/login`, data);
+            console.log(response.data);
+
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);
@@ -74,7 +76,7 @@ const universityAuthSlice = createSlice({
         state.isAuthenticated = true;
         state.user = action.payload;
         state.loading = false;
-        document.cookie = `token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
+        document.cookie = `uni-token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
 
         toast.success("Registration successful.");
         if(action.payload.status === "pending") {
@@ -98,7 +100,7 @@ const universityAuthSlice = createSlice({
             state.isAuthenticated = true;
             state.user = action.payload;
             state.loading = false;
-            document.cookie = `token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
+            document.cookie = `uni-token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
             
             toast.success("Login successful.");
 

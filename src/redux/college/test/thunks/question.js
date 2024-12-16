@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getHeaders } from "../../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -147,12 +148,7 @@ export const editQuestionById = createAsyncThunk(
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/assessments/question/${data.id}?type=${data.type}`,
         data.question,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       return { res: res, index: data.index, type: data.type };

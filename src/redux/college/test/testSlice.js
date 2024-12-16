@@ -75,6 +75,8 @@ const testState = {
     advanced: [],
     adaptive: [],
   },
+
+ hasNextPageStudent:false,
   //all topics
   sections: null,
   students: [],
@@ -971,6 +973,8 @@ const testSlice = createSlice({
       .addCase(getStudentsForTest.fulfilled, (state, action) => {
         state.students = action.payload.students;
         state.assessment = action.payload.assessment;
+       
+        state.hasNextPageStudent=  action.payload.hasNextPage;
         state.GET_STUDENTS_LOADING = false;
       })
       .addCase(getStudentsForTest.rejected, (state, action) => {

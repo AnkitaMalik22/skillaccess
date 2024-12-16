@@ -13,6 +13,7 @@ import {
 } from "../../../redux/college/test/testSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni } from "../../../util/isCompany";
 
 const AddQuestions = () => {
   //useTranslate();
@@ -24,6 +25,7 @@ const AddQuestions = () => {
   // React.useEffect(() => {
   //   //console.log(topics, "topics");
   // }, [topics]);
+  const entity = isUni() ?"university/pr" : "college"
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");
@@ -199,7 +201,7 @@ const AddQuestions = () => {
                       // }
                       onClick={() =>
                         navigate(
-                          `/college/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
+                          `/${entity}/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
                         )
                       }
                     >
@@ -211,7 +213,7 @@ const AddQuestions = () => {
                       className="self-center text-blued w-5 h-5 cursor-pointer"
                       onClick={() =>
                         navigate(
-                          `/college/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}`
+                          `/${entity}/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}`
                         )
                       }
                     />

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import getCookie from "../../../../util/getToken";
+import isCompany, { getHeaders, isUni } from "../../../../util/isCompany";
 export const addQuestionToTopic = createAsyncThunk(
   "test/addQuestionToTopic",
   async (data, { rejectWithValue, dispatch }) => {
@@ -10,23 +11,13 @@ export const addQuestionToTopic = createAsyncThunk(
         req = await axios.post(
           `${process.env.REACT_APP_API_URL}/api/college/add-questions/${data.id}/${data.type}`,
           { questions: data.data },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("auth-token"),
-            },
-          }
+          getHeaders()
         );
       } else {
         req = await axios.post(
           `${process.env.REACT_APP_API_URL}/api/college/add-questions/${data.id}/${data.type}`,
           { questions: [data.data] },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("auth-token"),
-            },
-          }
+          getHeaders()
         );
       }
 
@@ -51,12 +42,9 @@ export const getAllTopics = createAsyncThunk(
     try {
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/college/topics/all?level=${data.level}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        
+         getHeaders()
+        
       );
       const res = req.data;
       return res.topics;
@@ -72,12 +60,7 @@ export const getAllTopicsQB = createAsyncThunk(
     try {
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/qb/topics/all`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+          getHeaders()   
       );
       const res = req.data;
       return res.topics;
@@ -94,12 +77,7 @@ export const getTopicById = createAsyncThunk(
     try {
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/admin/topic/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+       getHeaders()
       );
       const res = req.data;
       // //console.log("res", res);
@@ -118,12 +96,7 @@ export const deleteTopics = createAsyncThunk(
       const req = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/assessments/sections`,
         { data },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+       getHeaders()
       );
       const res = req.data;
       // //console.log("res", res);
@@ -156,14 +129,7 @@ export const createTopic = createAsyncThunk(
         `${process.env.REACT_APP_API_URL}/api/college/topics/create`,
 
         data,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
 
       const res = req.data;
@@ -301,3 +267,5 @@ export const setTotalTopicQuestions = createAsyncThunk(
     }
   }
 );
+
+

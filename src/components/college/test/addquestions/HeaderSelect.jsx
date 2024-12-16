@@ -4,22 +4,25 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { isUni } from "../../../../util/isCompany";
 
 const Header = ({ Q }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useSearchParams();
   const page = search.get("page");
   const level = search.get("level");
+  const entity = isUni() ?"university/pr" : "college";
 
   // //console.log("page", level);
   const handleNext = () => {
+    
     if (page === "qb") {
-      navigate(`/college/quesBank/topic`);
+      navigate(`/${entity}/quesBank/topic`);
     } else {
       // //console.log("level", level);
       level === "adaptive"
-        ? navigate(`/college/test/selectAdaptive?level=${level}`)
-        : navigate(`/college/test/select?level=${level}`);
+        ? navigate(`/${entity}/test/selectAdaptive?level=${level}`)
+        : navigate(`/${entity}/test/select?level=${level}`);
     }
   };
 
@@ -29,7 +32,7 @@ const Header = ({ Q }) => {
         <button className="flex self-center ml-2 rounded-lg  gap-2">
           <button
             onClick={() => {
-              navigate(`/college/test/select?level=${level}`);
+              navigate(`/${entity}/test/select?level=${level}`);
             }}
             className=" mr-3 self-center bg-white rounded-lg "
           >

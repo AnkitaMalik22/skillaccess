@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCollege } from "../../../redux/college/auth/authSlice";
 import ChartComp from "../../../components/college/results/home/Chart";
 import { getAllJobs } from "../../../redux/college/jobs/collegeJobSlice";
+import axios from "axios"
 
 const Dashboard = () => {
   //useTranslate();
@@ -36,6 +37,9 @@ const Dashboard = () => {
   }, [user]);
 
   useEffect(() => {
+
+    
+
     dispatch(getStudent());
     // dispatch(getCompany());
     dispatch(getAssessment());
@@ -44,6 +48,8 @@ const Dashboard = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    console.log("dash")
+    axios.get(`${process.env.REACT_APP_API_URL}/api/assessments/generateReport/pdf/66bc53d75463d3635a4aeaac`);
     dispatch(getCollege());
   }, []);
   const navigate = useNavigate();

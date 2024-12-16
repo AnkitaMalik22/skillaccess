@@ -3,6 +3,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import Assessment from "../../../../pages/college/test/Assessment";
+import { isUni } from "../../../../util/isCompany";
 
 const Header = ({ handleNext }) => {
   const navigate = useNavigate();
@@ -11,7 +12,13 @@ const Header = ({ handleNext }) => {
       <div className="flex gap-3">
         <button
           className="self-center object-center rounded-lg h-10 w-10 "
-          onClick={() => navigate(`/college/test`)}
+          onClick={() => {
+            if(isUni()){
+              navigate(`/university/pr/test`)
+            }else{
+              navigate(`/college/test`)
+            }
+          }}
         >
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>

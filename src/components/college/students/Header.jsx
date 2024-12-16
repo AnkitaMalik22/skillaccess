@@ -78,13 +78,13 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
       }
 
       const headers = jsonData[0];
-      const expectedHeaders = ["FirstName", "LastName", "Email"];
+      const expectedHeaders = ["FirstName", "LastName", "Email","Batch"];
       const isValidFormat = expectedHeaders.every(
         (header, index) => headers[index] === header
       );
 
-      if (!isValidFormat || headers.length !== 3) {
-        toast.error("Incorrect titles, titles must be FirstName, LastName, Email"); 
+      if (!isValidFormat || headers.length !== 4) {
+        toast.error("Incorrect titles, titles must be FirstName, LastName, Email ,Batch"); 
         setLoading(false);
         return;
       }
@@ -98,7 +98,7 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
           continue;
         }
 
-        const [firstName, lastName, email] = row;
+        const [firstName, lastName, email , batch] = row;
 
         if (!firstName) {
           toast.error(`First Name is required at row ${i + 1}`);
@@ -113,10 +113,16 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
           continue;
         }
 
+        if(!batch){
+          toast.error(`Batch is required at row ${i + 1}`);
+          continue;
+        }
+
         students.push({
           FirstName: firstName,
           LastName: lastName,
           Email: email,
+          Batch:batch
         });
       }
 

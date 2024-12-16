@@ -7,6 +7,7 @@ import Chart from "react-apexcharts";
 import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import Performance from "../../../components/college/results/overview/Performance";
+import { isUni } from "../../../util/isCompany";
 
 const Assessment = () => {
   //useTranslate();
@@ -115,10 +116,10 @@ const Assessment = () => {
   //console.log(totalTime);
   return (
     <>
-      <Header name={assessment.name} />
+      <Header name={assessment?.name} />
       <div className="flex gap-2 mx-auto mb-5 ">
         <FaFolder className="text-blued w-5 h-5" />
-        <h2 className="text-xs">Beginner Level</h2>
+        <h2 className="text-xs">{assessment?.level} Level</h2>
       </div>
 
       <h2 className="flex gap-2  mx-auto p-3 bg-gray-100 mb-5  rounded-lg tracking-wide">
@@ -173,7 +174,7 @@ const Assessment = () => {
                   className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs hover:bg-blue-500 hover:text-white text-[#171717]"
                   onClick={() =>
                     navigate(
-                      `/college/test/details/${index}?question=${topic.Type}&type=assessment&view=false`
+                      `/${isUni() ?"university/pr":"college"}/test/details/${index}?question=${topic.Type}&type=assessment&view=false`
                     )
                   }
                 >
