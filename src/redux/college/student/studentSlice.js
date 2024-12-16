@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { getHeaders } from "../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -50,12 +51,7 @@ export const uploadStudents = createAsyncThunk(
       const response = await axios.post(
         `${REACT_APP_API_URL}/api/college/upload/students`,
         { students },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       //console.log(response.data);
       return response.data;

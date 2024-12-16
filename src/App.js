@@ -142,7 +142,7 @@ export default function App() {
               <Routes>
                 <>
                   {TestRoute("college/")}
-                  {StudentRoute()}
+                  {StudentRoute("college/")}
                   {QuesRoute()}
                   {CompaniesRoute()}
                   {ResultsRoute()}
@@ -208,7 +208,8 @@ export default function App() {
                   <Route path="settings" element={<Settings />} />
                   {
                     TestRoute("")
-                  }
+                   
+                  }{ StudentRoute("")}
                 </Route>
               </Route>
 
