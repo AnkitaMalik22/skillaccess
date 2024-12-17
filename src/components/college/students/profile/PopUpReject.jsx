@@ -3,13 +3,16 @@ import { useDispatch } from "react-redux";
 import { rejectRequest } from "../../../../redux/college/student/studentSlice";
 import Loader from "../../../loaders/Loader";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const PopUp = ({ handleSave, handleOverlay,studentId }) => {
 const dispatch = useDispatch();
 const {REJECT_STUDENT_LOADING} = useSelector((state) => state.collegeStudents)
+const navigate = useNavigate();
 
 const handleReject = () => {
-    dispatch(rejectRequest(studentId))
+    dispatch(rejectRequest(studentId));
+    navigate(-1);
 }
 
   return (

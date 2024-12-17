@@ -1,11 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"; // Assuming axios is used for API calls
 import toast from "react-hot-toast";
+import { clearCookie } from "../../../util/getToken";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 const initialState = {
   isAuthenticated: false,
-  user: null,
+  user: {
+    _id:localStorage.getItem("uniId") || null
+  },
   loading: false,
   error: null,
 };
@@ -63,6 +66,9 @@ const universityAuthSlice = createSlice({
       state.user = null;
       state.loading = false;
       state.error = null;
+      localStorage.removeItem("uniId");
+      clearCookie("uni-token");
+
     },
   },
   extraReducers: (builder) => {
@@ -74,7 +80,8 @@ const universityAuthSlice = createSlice({
       })
       .addCase(registerUniversity.fulfilled, (state, action) => {
         state.isAuthenticated = true;
-        state.user = action.payload;
+        state.user = action.payload.user;
+        localStorage.setItem("uniId",action.payload.user._id);
         state.loading = false;
         document.cookie = `uni-token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
 
@@ -98,7 +105,8 @@ const universityAuthSlice = createSlice({
         })
         .addCase(loginUniversity.fulfilled, (state, action) => {
             state.isAuthenticated = true;
-            state.user = action.payload;
+            state.user = action.payload.user;
+            localStorage.setItem("uniId",action.payload.user._id);
             state.loading = false;
             document.cookie = `uni-token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
             

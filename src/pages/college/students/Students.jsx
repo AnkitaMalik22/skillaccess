@@ -7,6 +7,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import Header from "../../../components/college/students/Header";
 import Skeleton from "../../../components/loaders/Skeleton";
 import { FcNext, FcPrevious } from "react-icons/fc";
+import { isUni } from "../../../util/isCompany";
 
 const Students = () => {
   //useTranslate();
@@ -23,7 +24,7 @@ const Students = () => {
     GET_STUDENT_LOADING,
   } = useSelector((state) => state.collegeStudents);
 
-  const { user } = useSelector((state) => state.collegeAuth);
+  const { user } = useSelector((state) => {return (!isUni() ?  state.collegeAuth :  state.universityAuth)});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -152,7 +153,7 @@ const Students = () => {
                   <h2
                     className="font-dmSans text-xs font-bold text-white bg-accent p-2 rounded-lg cursor-pointer"
                     onClick={() =>
-                      navigate(`/college/students/profile/${student._id}`)
+                      navigate(`/${isUni() ?"university/pr" :"college" }/students/profile/${student._id}`)
                     }
                   >
                     View
