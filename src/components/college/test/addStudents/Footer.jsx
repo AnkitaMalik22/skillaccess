@@ -47,7 +47,7 @@ const Footer = ({ students, endDate }) => {
         navigate(`/${!isUni() ?"college" : "university/pr"}/test`);
       }
     } catch (error) {
-          toast.error(action.payload?.message);
+          toast.error(error.payload?.message || 'something went wrong');
      
     }finally{
       setLoading(false)
