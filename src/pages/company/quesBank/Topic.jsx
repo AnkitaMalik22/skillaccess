@@ -45,12 +45,12 @@ const Topic = () => {
 
   const randomImage = () => {
     const images = [
-      "../../images/FrontEnd.png",
-      "../../images/HR.png",
-      "../../images/Marketing.png",
-      "../../images/HR.png",
-      "../../images/Marketing.png",
-      "../../images/FrontEnd.png",
+      "/images/FrontEnd.png",
+      "/images/HR.png",
+      "/images/Marketing.png",
+      "/images/HR.png",
+      "/images/Marketing.png",
+      "/images/FrontEnd.png",
     ];
     return images[Math.floor(Math.random() * images.length)];
   };

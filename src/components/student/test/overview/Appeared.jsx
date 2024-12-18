@@ -118,7 +118,7 @@ const Appeared = ({ assessment }) => {
           <div className={` flex `}>
             <div className="flex self-center">
               <div className=" min-w-[3rem]  h-12 self-center  mr-2  ">
-                <img src="../../images/user.jpg" alt="" />
+                <img src="/images/user.jpg" alt="" />
               </div>
               <span className="break-words min-w-0 pt-1 self-center">
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">

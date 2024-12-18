@@ -99,7 +99,7 @@ const Essay = ({ question, number }) => {
       </div>
       {/* <div className="bg-gray-100 h-11 flex  rounded-xl px-1">
         <img
-          src="../../images/icons/cross.png"
+          src="/images/icons/cross.png"
           alt="cross"
           className="self-center "
           onClick={() => {

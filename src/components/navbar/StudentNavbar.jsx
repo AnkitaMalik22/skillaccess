@@ -65,7 +65,7 @@ const Navbar = (props) => {
 
           <div className="">
             {" "}
-            <img src="../../../images/logo.png" alt="" />
+            <img src="/images/logo.png" alt="" />
           </div>
         </div>
 

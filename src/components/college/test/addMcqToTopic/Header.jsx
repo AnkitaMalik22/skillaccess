@@ -8,6 +8,7 @@ import Loader from "../../../loaders/Loader";
 import toast from "react-hot-toast";
 import { addQuestionToTopic } from "../../../../redux/college/test/thunks/topic";
 import { setTotalTopicQuestions } from "../../../../redux/college/test/thunks/topic";
+import { isUni } from "../../../../util/isCompany";
 
 const Header = ({ question, setQuestion, id, type }) => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const Header = ({ question, setQuestion, id, type }) => {
           if (!ADD_QUESTION_LOADING) {
             //console.log("calling 2 --", ADD_QUESTION_LOADING);
             level === "adaptive"
-              ? navigate(`/college/test/selectAdaptive?level=${level}`)
+              ? navigate(`/${isUni()? "university/pr":"college"}/test/selectAdaptive?level=${level}`)
               : navigate(-1);
           }
         }

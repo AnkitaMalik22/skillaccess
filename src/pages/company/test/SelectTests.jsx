@@ -292,7 +292,7 @@ const SelectTests = () => {
 
                 <div className="flex gap-2 px-2">
                   <img
-                    src="../../../images/icons/menu-boxed.png"
+                    src="/images/icons/menu-boxed.png"
                     alt="icon"
                     className="self-center"
                   />
@@ -306,7 +306,7 @@ const SelectTests = () => {
                   {" "}
                   <div className="flex gap-2 w-full px-2">
                     <img
-                      src="../../../images/icons/stopwatch.png"
+                      src="/images/icons/stopwatch.png"
                       alt="icon"
                       className="w-6 h-6 self-center"
                     />
@@ -316,7 +316,7 @@ const SelectTests = () => {
                     </h2>
                   </div>
                   <img
-                    src="../../../images/icons/cross.png"
+                    src="/images/icons/cross.png"
                     alt="icons"
                     onClick={() => removeSection(section, index)}
                   />

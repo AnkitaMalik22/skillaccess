@@ -157,7 +157,7 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
 
   const navigate = useNavigate();
   return (
-    <div className="flex w-full mx-auto justify-between mb-6">
+    <div className="flex w-full mx-auto justify-between mb-6" >
       {visible && (
         <PopUp
           visible={visible}
@@ -171,7 +171,7 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
 
       <span className="flex gap-2">
         <button className="self-center object-center rounded-lg h-10 w-10">
-          <img src="../../images/icons/reports.png" alt="ico" />
+          <img src="/images/icons/reports.png" alt="ico" />
         </button>
       </span>
 
@@ -225,7 +225,7 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
 
       {/* Popup */}
       {isPopupOpen && (
-        <div className="absolute top-0 right-0 mt-12 w-64 p-4 bg-white shadow-2xl rounded-lg z-10 ">
+        <div className="absolute top-0 right-0 mt-12 w-64 p-4 bg-white shadow-2xl rounded-lg z-10 " onMouseLeave={togglePopup} >
           <div className="flex flex-col space-y-4">
             {/* Year Selection */}
             <label className="text-sm font-semibold">Select Year</label>

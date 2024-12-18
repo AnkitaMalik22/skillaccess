@@ -30,7 +30,7 @@ const View = () => {
       <div className="flex gap-4">
         <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
           <div className="flex gap-2">
-            <img src="../../images/icons/fileBlue.png" alt="" />
+            <img src="/images/icons/fileBlue.png" alt="" />
             <div className="self-center">
               <p className="text-sm font-bold">Brief Details</p>
               <p className="text-xs font-medium">50.3 Mb</p>
@@ -43,7 +43,7 @@ const View = () => {
 
         <div className=" p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
           <div className=" flex gap-2">
-            <img src="../../images/icons/image.png" alt="" />
+            <img src="/images/icons/image.png" alt="" />
             <div className="self-center">
               <p className="text-sm font-bold">WireFrames</p>
               <p className="text-xs font-medium">50.3 Mb</p>

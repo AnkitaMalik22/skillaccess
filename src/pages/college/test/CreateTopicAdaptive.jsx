@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { createTopic } from "../../../redux/college/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni } from "../../../util/isCompany";
 
 const CreateTopicAdaptive = () => {
   //useTranslate();
@@ -51,7 +52,7 @@ const CreateTopicAdaptive = () => {
       if (res.payload._id) {
         //navigate(`/college/test/typeOfQuestions/${res.payload._id}`);
         navigate(
-          `/college/test/addMcqToTopic/${res.payload._id}?type=mcq&addType=topic&level=adaptive`
+          `/${isUni() ? "university/pr": "college"}/test/addMcqToTopic/${res.payload._id}?type=mcq&addType=topic&level=adaptive`
         );
       } else {
         toast.error("Invalid or duplicate name.");

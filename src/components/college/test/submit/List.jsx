@@ -109,12 +109,12 @@ const List = ({ question, number, level }) => {
                     <div className="w-6">
                       {index === AnswerIndex ? (
                         <img
-                          src="../../../images/icons/greenDotSelected.png"
+                          src="/images/icons/greenDotSelected.png"
                           alt="greensel"
                         />
                       ) : (
                         <img
-                          src="../../../images/icons/blueDot.png"
+                          src="/images/icons/blueDot.png"
                           alt="greensel"
                         />
                       )}
@@ -172,7 +172,7 @@ const List = ({ question, number, level }) => {
       </div>
       {/* <div className="bg-gray-100 h-11 flex  rounded-xl px-1">
         <img
-          src="../../images/icons/cross.png"
+          src="/images/icons/cross.png"
           alt="cross"
           className="self-center "
           onClick={() => {

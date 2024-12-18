@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getHeaders } from "../../../../util/isCompany";
 
 export const getStudentResponse = createAsyncThunk(
   "test/studentResponse",
@@ -63,12 +64,7 @@ export const inviteToTest = createAsyncThunk(
       const req = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/assessments/invite/students/${data.testId}`,
         data.students,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       return res;

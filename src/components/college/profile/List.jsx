@@ -46,7 +46,7 @@ const List = ({ editable, setEditable }) => {
       name: "Performance",
       icon: (
         <div className="w-11 h-11 flex justify-center  rounded-xl bg-accent bg-opacity-5">
-          <img src="../../images/icons/gauge.png" className=" self-center" />
+          <img src="/images/icons/gauge.png" className=" self-center" />
         </div>
       ),
     },

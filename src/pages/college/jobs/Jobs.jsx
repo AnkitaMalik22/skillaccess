@@ -78,7 +78,7 @@ const JobsPage = () => {
             className="self-center object-center rounded-lg h-10 w-10 "
             // onClick={() => navigate('college/companies')}
           >
-            <img src="../../images/icons/sales.jpg" alt="icon" />
+            <img src="/images/icons/sales.jpg" alt="icon" />
           </button>
           <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
            Jobs
@@ -104,7 +104,7 @@ const JobsPage = () => {
       <div className="logo flex ">
         <div className="w-24 h-24 flex items-center ">
           <img
-            src={job?.company?.avatar?.url || "../../images/job.png"}
+            src={job?.company?.avatar?.url || "/images/job.png"}
             alt=""
             className=" rounded-2xl "
           />

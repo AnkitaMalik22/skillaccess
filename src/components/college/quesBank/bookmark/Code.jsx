@@ -81,7 +81,7 @@ const List = ({ Title, number, code, question }) => {
         }}
       >
         <img
-          src="../../images/icons/cross.png"
+          src="/images/icons/cross.png"
           alt="cross"
           className="self-center "
         />

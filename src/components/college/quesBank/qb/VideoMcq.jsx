@@ -40,12 +40,12 @@ const VideoMcq = ({ Number, mcq, id, video }) => {
                     {/* {//console.log(mcq?.AnswerIndex, index)} */}
                     {index === parseInt(mcq?.AnswerIndex) ? (
                       <img
-                        src="../../../images/icons/greenDotSelected.png"
+                        src="/images/icons/greenDotSelected.png"
                         alt="greensel"
                       />
                     ) : (
                       <img
-                        src="../../../images/icons/blueDot.png"
+                        src="/images/icons/blueDot.png"
                         alt="greensel"
                       />
                     )}

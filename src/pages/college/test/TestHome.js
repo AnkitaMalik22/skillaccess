@@ -23,9 +23,9 @@ const AddVideoMcq = lazy(() => import("./AddVideoMcq"));
 const AddVideoLongShort = lazy(() => import("./AddVideoLongShort"));
 const AddVideoQuestions = lazy(() => import("./AddVideoQuestions"));
 
-function TestHome() {
+function TestHome(entity) {
   return (
-    <Route path="college/test">
+    <Route path={`${entity}test`}>
       <Route path="" element={<Test />} />
       <Route path="assessment" element={<Assessment />} />
       <Route path="name" element={<NameAssessment />} />

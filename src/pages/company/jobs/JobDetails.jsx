@@ -67,7 +67,7 @@ useEffect(() => {
       <div className="w-1/2">
         <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
           <img
-            src={jobDetails?.company?.basic?.coverPhoto || "../../../images/CompanyBg.png"}
+            src={jobDetails?.company?.basic?.coverPhoto || "/images/CompanyBg.png"}
             alt=""
             className="w-full h-full rounded-t-3xl z-0 object-cover"
           />

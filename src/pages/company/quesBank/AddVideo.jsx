@@ -272,7 +272,7 @@ const AddVideo = () => {
                 <input {...getInputProps()} />
 
                 <img
-                  src="../../../images/ant-design_cloud-upload-outlined.png"
+                  src="/images/ant-design_cloud-upload-outlined.png"
                   alt="upload"
                   className="cursor-pointer mb-5"
                 />

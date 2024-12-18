@@ -3,6 +3,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { isUni } from "../../../../util/isCompany";
 
 const Header = ({ Q, page }) => {
   const navigate = useNavigate();
@@ -17,9 +18,13 @@ const Header = ({ Q, page }) => {
         <button className="flex items-center ml-2 rounded-lg  gap-2">
           <button
             onClick={() =>
-              level === "adaptive"
+              isUni() ?( level === "adaptive"
+                ? navigate(`/university/pr/test/selectAdaptive?level=${level}`)
+                : navigate(`/university/pr/test/select?level=${level}`))
+              
+              : ( level === "adaptive"
                 ? navigate(`/college/test/selectAdaptive?level=${level}`)
-                : navigate(`/college/test/select?level=${level}`)
+                : navigate(`/college/test/select?level=${level}`))
             }
             className="mt-2 mr-3"
           >
@@ -34,7 +39,7 @@ const Header = ({ Q, page }) => {
               <h3 className="mr-2 ">{name}</h3>
               <span>
                 <img
-                  src="../../images/icons/test.png"
+                  src="/images/icons/test.png"
                   alt="test"
                   className="w-4 h-4"
                 />
@@ -43,7 +48,7 @@ const Header = ({ Q, page }) => {
               } Topics</h3>{" "}
               <span className="w-2 h-2">
                 <img
-                  src="../../images/icons/hourglass.png"
+                  src="/images/icons/hourglass.png"
                   alt="test"
                   className=" object-scale-down"
                 />
@@ -58,7 +63,9 @@ const Header = ({ Q, page }) => {
         <div className=" flex">
           <button
             className="self-center justify-center flex bg-blue-800 py-3 px-4 rounded-lg text-xs gap-2 text-white"
-            onClick={() => navigate("/college/quesBank")}
+            onClick={() => 
+              isUni() ? navigate("/university/pr/quesBank") : navigate("/college/quesBank")
+            }
           >
             Next Step{" "}
             <FaArrowRightLong className="self-center text-lg text-white ml-4" />

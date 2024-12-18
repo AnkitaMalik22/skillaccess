@@ -6,6 +6,7 @@ import { createTopic } from "../../../redux/college/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaChevronLeft } from "react-icons/fa";
+import { isUni } from "../../../util/isCompany";
 
 const CreateTopic = () => {
   //useTranslate();
@@ -66,7 +67,7 @@ const CreateTopic = () => {
 
     dispatch(createTopic(topic)).then((res) => {
       if (res.payload._id) {
-        navigate(`/college/quesBank/typeOfQuestions/${res.payload._id}`);
+        navigate(isUni() ?  `/university/pr/quesBank/typeOfQuestions/${res.payload._id}` : `/college/quesBank/typeOfQuestions/${res.payload._id}`);
         toast.success("Topic Created Successfully");
       } else {
         toast.error("Invalid or duplicate values");

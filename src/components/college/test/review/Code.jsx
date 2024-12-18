@@ -49,6 +49,8 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
         Type: "code",
       })
     );
+
+    
   };
 
   const handleDelete = () => {

@@ -14,7 +14,7 @@ const ViewCompanyDetails = () => {
       <div className="sm:w-[45%]">
         <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
           <img
-            src="../../images/job.png"
+            src="/images/job.png"
             alt=""
             className="w-full h-full rounded-t-3xl z-0 object-cover"
           />
@@ -148,7 +148,7 @@ const ViewCompanyDetails = () => {
     <div className="sm:flex items-center" >
     <div className="w-16 h-16 flex items-center mr-4 ">
     <img
-      src="../../images/companyLogo.png"
+      src="/images/companyLogo.png"
       alt=""
       className=" rounded-2xl "
     />

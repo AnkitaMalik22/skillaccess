@@ -44,7 +44,7 @@ const Companies = () => {
             className="self-center object-center rounded-lg h-10 w-10 "
             // onClick={() => navigate('college/companies')}
           >
-            <img src="../../images/icons/sales.jpg" alt="icon" />
+            <img src="/images/icons/sales.jpg" alt="icon" />
           </button>
           <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
             Companies
@@ -73,7 +73,7 @@ const Companies = () => {
             <FiUpload className="self-center text-lg " /> Upload New
           </button>
           <button className="bg-[#8f92a11a]  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
-            <img src="../../images/icons/Filter.png" className="w-7 h-7" />
+            <img src="/images/icons/Filter.png" className="w-7 h-7" />
           </button>
         </div> */}
       </div>
@@ -92,7 +92,7 @@ const Companies = () => {
       )}
       <figure>
         <img
-          src={ company?.basic?.coverPhoto ||"../../../images/default.jpg"}
+          src={ company?.basic?.coverPhoto ||"/images/default.jpg"}
           alt="company card"
           className="object-cover xl:h-40 md:h-28 h-20 w-full"
         />
@@ -100,7 +100,7 @@ const Companies = () => {
       <div className="card-body gap-0 py">
         <div className="w-12 h-12 -mt-10 rounded-xl bg-[#F8F8F9] p-2 mb-4">
           <img
-            src={company.basic?.logo || "../../../images/defaultUser.jpg"}
+            src={company.basic?.logo || "/images/defaultUser.jpg"}
             alt=""
             className="object-cover"
           />

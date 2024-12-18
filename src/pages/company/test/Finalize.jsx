@@ -122,7 +122,7 @@ const Finalize = () => {
                 className="self-center justify-center flex bg-accent rounded-lg text-sm font-bold gap-2 px-4 py-3"
                 onClick={() => handleSubmit()}
               >
-                <img src="../../images/icons/student.png" alt="" />{" "}
+                <img src="/images/icons/student.png" alt="" />{" "}
                 <p className="self-center text-white">Invite Students</p>
               </button>
             </div>

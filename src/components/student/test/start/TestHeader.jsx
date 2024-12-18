@@ -18,7 +18,7 @@ const TestHeader = () => {
             onClick={() => navigate(-1)}
           >
             <img
-              src="../../../images/icons/CombinedShape.png"
+              src="/images/icons/CombinedShape.png"
               alt=""
               className="self-center w-6 h-6"
             />

@@ -42,7 +42,7 @@ const Upload = () => {
       >
         <div className="self-center">
           <img
-            src="./../../images/icons/folderBlack.png"
+            src="/images/icons/folderBlack.png"
             alt=""
             className="mx-auto"
           />

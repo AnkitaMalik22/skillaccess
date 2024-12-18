@@ -8,7 +8,7 @@ const List = ({ students }) => {
                 {students.map((student, index) => (
                     <li key={index} className="p-2 bg-white rounded-lg shadow-sm flex items-center">
                         <img 
-                            src={student?.avatar?.url ? student?.avatar?.url : "../../images/student.png"}
+                            src={student?.avatar?.url ? student?.avatar?.url : "/images/student.png"}
                             alt={`${student.FirstName} ${student.LastName}`} 
                             className="w-10 h-10 rounded-full mr-4"
                         />

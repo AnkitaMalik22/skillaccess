@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../addVideo/Loader";
 import toast, { Toaster } from "react-hot-toast";
 import { addQuestionToTopic } from "../../../../redux/college/test/thunks/topic";
+import { isUni } from "../../../../util/isCompany";
 
 const Header = ({
   name,
@@ -551,9 +552,17 @@ const Header = ({
 
         setVisible(false);
         toast.success("questions added successfully");
-        level === "adaptive"
+        
+        if(isUni()){
+          level === "adaptive"
+          ? navigate(`/university/pr/test/selectAdaptive?level=${level}`)
+          : navigate(`/university/pr/test/select?level=${level}`)
+        }else{
+          level === "adaptive"
           ? navigate(`/college/test/selectAdaptive?level=${level}`)
           : navigate(`/college/test/select?level=${level}`);
+        }
+        
         // navigate(`/college/test/select?level=${searchParams.get("level")}`);
       } else {
         setVisible(false);
@@ -579,8 +588,11 @@ const Header = ({
         }
       }
       {
+
+       
+
         navigate(
-          `/college/test/${
+          `/${isUni() ?"university/pr" :"college"}/test/${
             qt === "mcq"
               ? "addMcq"
               : qt === "findAnswer"
@@ -598,10 +610,10 @@ const Header = ({
     } else {
       if (level === "adaptive") {
         navigate(
-          `/college/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
+          `/${isUni() ?"university/pr" :"college"}/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
         );
       } else {
-        navigate(`/college/test/typeOfQuestions/${sectionId}?level=${level}`);
+        navigate(`/${isUni() ?"university/pr" :"college"}/test/typeOfQuestions/${sectionId}?level=${level}`);
       }
     }
   };
@@ -641,11 +653,11 @@ const Header = ({
           <button
             onClick={() => {
               type === "section" &&
-                navigate(`/college/test/questions?level=${level}`);
+                navigate(`/${isUni() ?"university/pr" :"college"}/test/questions?level=${level}`);
               type === "topic" &&
                 (level === "adaptive"
-                  ? navigate(`/college/test/selectAdaptive?level=${level}`)
-                  : navigate(`/college/test/select?level=${level}`));
+                  ? navigate(`/${isUni() ?"university/pr" :"college"}/test/selectAdaptive?level=${level}`)
+                  : navigate(`/${isUni() ?"university/pr" :"college"}/test/select?level=${level}`));
               type === "assessment" && navigate(-1);
             }}
             className="mt-2 mr-3"

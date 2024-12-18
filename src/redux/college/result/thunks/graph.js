@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getHeaders } from "../../../../util/isCompany";
 
 export const getResultGraph = createAsyncThunk(
   "result/getResultGraph",
@@ -7,13 +8,7 @@ export const getResultGraph = createAsyncThunk(
     try {
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/assessments/result/graph?duration=year`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+       getHeaders()
       );
 
       const res = req.data;
@@ -31,13 +26,7 @@ export const getAssessmentOverview = createAsyncThunk(
     try {
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/assessments/overview/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
 
       const res = req.data;

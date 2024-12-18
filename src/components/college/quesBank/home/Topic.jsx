@@ -8,6 +8,7 @@ import {
 } from "../../../../redux/college/test/thunks/topic";
 import { setCurrentTopic } from "../../../../redux/college/test/testSlice";
 import { useSearchParams } from "react-router-dom";
+import { isUni } from "../../../../util/isCompany";
 
 const Topic = () => {
   const navigate = useNavigate();
@@ -34,12 +35,12 @@ const Topic = () => {
 
   const randomImage = () => {
     const images = [
-      "../../images/FrontEnd.png",
-      "../../images/HR.png",
-      "../../images/Marketing.png",
-      "../../images/HR.png",
-      "../../images/Marketing.png",
-      "../../images/FrontEnd.png",
+      "/images/FrontEnd.png",
+      "/images/HR.png",
+      "/images/Marketing.png",
+      "/images/HR.png",
+      "/images/Marketing.png",
+      "/images/FrontEnd.png",
     ];
     return images[Math.floor(Math.random() * images.length)];
   };
@@ -70,7 +71,7 @@ const Topic = () => {
         <h2 className="font-bold text-xl text-[#171717]">Choose a Topic</h2>
         <button
           className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
-          onClick={() => navigate("/college/quesBank/topic")}
+          onClick={() => isUni() ? navigate("/university/pr/quesBank/topic") : navigate("/college/quesBank/topic")}
         >
           View All
         </button>
@@ -108,7 +109,11 @@ const Topic = () => {
                         "TopicDetails",
                         JSON.stringify(section)
                       );
-                      navigate(`/college/quesBank/topic/${section._id}`);
+                      navigate(
+                        isUni()
+                          ? `/university/pr/quesBank/topic/${section._id}`
+                          : `/college/quesBank/topic/${section._id}`
+                      );
                     }}
                   >
                     <figure className="h-[155.5px] w-full object-cover">

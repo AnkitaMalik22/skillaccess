@@ -11,6 +11,7 @@ import {
   setTotalTopicQuestions,
 } from "../../../../redux/college/test/thunks/topic";
 import { editBankQuestionById } from "../../../../redux/college/test/thunks/question";
+import { isUni } from "../../../../util/isCompany";
 
 const Header = ({ question, setQuestion, id, type, addType }) => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const Header = ({ question, setQuestion, id, type, addType }) => {
         ).then(() => {
           if (!ADD_QUESTION_LOADING) {
             // //console.log("calling 2 --", ADD_QUESTION_LOADING);
-            navigate(`/college/quesBank/topic/${id}`);
+         isUni() ?    navigate(`/university/pr/quesBank/topic/${id}`) :   navigate(`/college/quesBank/topic/${id}`);
           }
         });
         setQuestion({ Title: "", Options: [], Duration: 0, AnswerIndex: null });

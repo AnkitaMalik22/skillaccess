@@ -7,6 +7,7 @@ import useTranslate from "../../../hooks/useTranslate";
 import Header from "../../../components/college/students/Header";
 import Skeleton from "../../../components/loaders/Skeleton";
 import { FcNext, FcPrevious } from "react-icons/fc";
+import { isUni } from "../../../util/isCompany";
 
 const Students = () => {
   //useTranslate();
@@ -23,7 +24,7 @@ const Students = () => {
     GET_STUDENT_LOADING,
   } = useSelector((state) => state.collegeStudents);
 
-  const { user } = useSelector((state) => state.collegeAuth);
+  const { user } = useSelector((state) => {return (!isUni() ?  state.collegeAuth :  state.universityAuth)});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,7 +99,7 @@ const Students = () => {
                   <div className="flex self-center items-center gap-3">
                     <div className="w-11  h-11 self-center  flex items-center justify-center text-xl ">
                       <img
-                        src="../../../images/defaultUser.jpg"
+                        src="/images/defaultUser.jpg"
                         alt=" user-icon"
                         className=" rounded-lg w-11 h-11"
                       />
@@ -135,7 +136,7 @@ const Students = () => {
                     <div className="self-center gap-3 flex items-center justify-between">
                       {" "}
                       <img
-                        src="../../images/defaultUser.jpg"
+                        src="/images/defaultUser.jpg"
                         alt=" user-icon"
                         className=" rounded-lg w-11 h-11"
                       />
@@ -152,7 +153,7 @@ const Students = () => {
                   <h2
                     className="font-dmSans text-xs font-bold text-white bg-accent p-2 rounded-lg cursor-pointer"
                     onClick={() =>
-                      navigate(`/college/students/profile/${student._id}`)
+                      navigate(`/${isUni() ?"university/pr" :"college" }/students/profile/${student._id}`)
                     }
                   >
                     View
@@ -192,13 +193,19 @@ const Students = () => {
           {approvedStudents?.map((student, index) => (
             <div 
               key={student._id} 
-              className="grid-cols-6 rounded-2xl p-2 text-center mx-auto font-dmSans font-semibold text-base hidden md:grid bg-gray-100"
+              className="grid-cols-6 rounded-2xl p-2 text-center mx-auto font-dmSans font-semibold text-base hidden md:grid bg-gray-100 hover:border-accent hover:cursor-pointer hover:border"
+              onClick={() =>
+                //  navigate(`/college/students/profile/${student._id}`)
+                navigate(`/${isUni() ?"university/pr" :"college" }/students/profile/${student._id}`)
+                }  
             >
-              {/* Student Info */}
+
+              <div className=" grid grid-cols-5 col-span-5">
+                    {/* Student Info */}
               <div className="flex gap-3 items-center">
                 <div className="w-11 h-11 self-center flex items-center justify-center text-xl">
                   <img
-                    src={student?.avatar?.url ||"../../images/defaultUser.jpg"}
+                    src={student?.avatar?.url ||"/images/defaultUser.jpg"}
                     alt="user-icon"
                     className="rounded-lg w-11 h-11"
                   />
@@ -246,15 +253,20 @@ const Students = () => {
                   </span>
                 </div>
               </div>
+              </div>
+            
 
               {/* Actions */}
               <div className="flex justify-center items-center gap-3">
-                <button
+                {/* <button
                   className="font-dmSans text-xs font-bold text-white bg-accent p-2 rounded-lg hover:bg-accent/90 transition-colors"
-                  onClick={() => navigate(`/college/students/profile/${student._id}`)}
+                  onClick={() =>
+                    //  navigate(`/college/students/profile/${student._id}`)
+                    navigate(`/${isUni() ?"university/pr" :"college" }/students/profile/${student._id}`)
+                    }  
                 >
                   View
-                </button>
+                </button> */}
                 <button className="text-lightBlue hover:text-lightBlue/80 transition-colors">
                   <TbFileDownload className="h-6 w-6" />
                 </button>

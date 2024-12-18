@@ -82,7 +82,7 @@ const Login = () => {
     <form action="" className="font-dmSans">
       <div className=" bg-base-100 shadow-xl h-full min-h-[100vh]  font-dmSans grid grid-cols-5 ">
         <figure className="w-full h-full bg-login bg-no-repeat bg-cover bg-center !hidden  lg:!block col-span-2 ">
-          {/* <img src="./images/loginBg.jpg" alt="" className="w-full h-full" /> */}
+          {/* <img src="/images/loginBg.jpg" alt="" className="w-full h-full" /> */}
         </figure>
 
         {/* right half */}
