@@ -61,12 +61,12 @@ const Header = ({
         {/* profile photo */}
         <div className="flex gap-2 px-3 py-1 mt-2">
           {editable ? (
-            <div className="w-14 h-14 bg-blued self-center rounded-lg relative">
-              <img src={avatar} alt="" width="56px" className="rounded-lg" />
+            <div className="w-14 h-14 bg-gray-200 self-center rounded-lg relative flex items-center justify-center">
+              <img src={avatar || college.avatar.url || "/images/defaultUser.jpg"} alt="" width="56px" className="rounded-lg " />
 
               <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
                 <img
-                  src="../../images/icons/pen.png"
+                  src="/images/icons/pen.png"
                   alt=""
                   onClick={() => imgRef.current.click()}
                 />
@@ -91,7 +91,7 @@ const Header = ({
                 }
                 alt="avatar"
                 width="56px"
-                className="relative p-2 rounded-lg "
+                className="relative p-2 rounded-lg"
               />
             </div>
           )}
@@ -159,15 +159,15 @@ const Header = ({
                 className="mt-2 bg-transparent border-none focus:outline-none w-full max-w-[80vw]"
                 type="text"
                 value={
-                  college && college.Description ? college.Description : ""
-                }
+                  isUni() ? ( college && college.description ? college.description : "") : ( college && college.Description ? college.Description : "")
+                 }
                 onChange={(e) =>
-                  setCollege({ ...college, Description: e.target.value })
+                  setCollege({ ...college, Description: e.target.value ,description:e.target.value })
                 }
               />
-            ) : college && college.Description ? (
+            ) : college && (college.Description || college.description) ? (
               <p className="text-sm  font-medium mt-2 leading-loose text-gray-500">
-                {college.Description}
+                {college.Description || college.description}
               </p>
             ) : (
               ""

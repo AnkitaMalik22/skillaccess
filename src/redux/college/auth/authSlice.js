@@ -4,7 +4,7 @@ import axios from "axios";
 import getIp from "./getIp";
 import toast from "react-hot-toast";
 import { getHeaders } from "../../../util/isCompany";
-import { getHeaders } from "../../../util/isCompany";
+// import { getHeaders } from "../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 // const REACT_APP_API_URL = "http://localhost:4000";
@@ -728,7 +728,7 @@ const collegeAuthSlice = createSlice({
       .addCase(updateCollege.fulfilled, (state, action) => {
         // state.status = action.payload
         state.user = action.payload;
-        window.location.reload(true);
+        // window.location.reload(true);
         //console.log("update college fulfilled");
       })
       .addCase(updateCollege.rejected, (state, action) => {

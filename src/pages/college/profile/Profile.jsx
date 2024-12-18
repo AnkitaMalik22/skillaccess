@@ -17,24 +17,43 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const { user, isLoggedIn } = useSelector((state) => state.collegeAuth);
-  const { isAuthenticated } = useSelector((state) => state.universityAuth);
+  // const { isAuthenticated } = useSelector((state) => state.universityAuth);
   const [editable, setEditable] = useState(false);
   const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
   const [avatar, setAvatar] = useState("");
   const [college, setCollege] = useState( user);
+const [loading,setLoading] = useState(false);
 
+  const handleUpdate =async () => {
 
-  const handleUpdate = (college) => {
-    dispatch(updateCollege(college));
+  try {
+    setLoading(true);
+    if(avatar){
+      await dispatch(updateAvatar({ avatar, id: user._id })).then((res)=>{
+        console.log()
+        setAvatar(res.payload.user.avatar.url)
+      })
+    }
+   const userUpdate = await dispatch(updateCollege(college));
+   
+   setCollege(userUpdate.payload)
     setEditable(false);
     localStorage.setItem("editable", false);
+
+  } catch (error) {
+    console.log(error)
+  } finally{
+    setLoading(false)
+  }
   };
+
 // Fetch college data on mount
 useEffect(() => {
-  dispatch(getCollege()).then(() => {
-    setCollege(user);
+  dispatch(getCollege()).then((res) => {
+    // console.log(res)
+    setCollege(res.payload.user);
   });
-}, [dispatch]);
+}, []);
 
 // Update state when user changes
 // useEffect(() => {
@@ -45,46 +64,46 @@ useEffect(() => {
 // }, [user]);
 
 // Handle avatar updates
-useEffect(() => {
-  if (avatar ) {
-    setEditing(true);
-    dispatch(updateAvatar({ avatar, id: user._id }))
-      .finally(() => setEditing(false));
-  }
-}, [avatar, dispatch]);
+// useEffect(() => {
+//   if (avatar ) {
+//     setEditing(true);
+//     dispatch(updateAvatar({ avatar, id: user._id }))
+//       .finally(() => setEditing(false));
+//   }
+// }, [avatar, dispatch]);
 
-  useEffect(() => {
-    if (user && user.avatar && user.avatar.url) {
-      setAvatar(user.avatar.url);
-    }
-    if (avatar) {
-      // if (college.Phone.length < 10) {
-      //   toast.error("Invalid phone number !");
+  // useEffect(() => {
+  //   if (user && user.avatar && user.avatar.url) {
+  //     setAvatar(user.avatar.url);
+  //   }
+  //   if (avatar) {
+  //     // if (college.Phone.length < 10) {
+  //     //   toast.error("Invalid phone number !");
         
-      //   return;
-      // } else {
-        setEditing(true);
-        dispatch(updateAvatar({ avatar, id: user._id })).then(() => {});
-        setEditing(false);
-      // }
-    }
-  }, [submitUpdateProfile]);
+  //     //   return;
+  //     // } else {
+  //       setEditing(true);
+  //       dispatch(updateAvatar({ avatar, id: user._id })).then(() => {});
+  //       setEditing(false);
+  //     // }
+  //   }
+  // }, [submitUpdateProfile]);
   
-  useEffect(() => {
-    if (submitUpdateProfile) {
+  // useEffect(() => {
+  //   if (submitUpdateProfile) {
 
-      if(!isUni() && college.Phone.length < 10){
-        toast.error("Invalid phone number !");
-        setSubmitUpdateProfile(false);
-        return;
-      }
-      dispatch(updateCollege(college));
-      // dispatch(getCollege());
-      setSubmitUpdateProfile(false);
-      setEditable(false);
-      localStorage.setItem("editable", false);
-    }
-  }, [submitUpdateProfile]);
+  //     if(!isUni() && college.Phone.length < 10){
+  //       toast.error("Invalid phone number !");
+  //       setSubmitUpdateProfile(false);
+  //       return;
+  //     }
+  //     dispatch(updateCollege(college));
+  //     // dispatch(getCollege());
+  //     setSubmitUpdateProfile(false);
+  //     setEditable(false);
+  //     localStorage.setItem("editable", false);
+  //   }
+  // }, [submitUpdateProfile]);
 
 
 
@@ -92,13 +111,12 @@ useEffect(() => {
     <>
       {user && editable && (
         <EditHeader
-          editing={editing}
+          loading={loading}
+          
           editable={editable}
-          setEditable={setEditable}
+        
           handleUpdate={handleUpdate}
-          college={college}
-          setCollege={setCollege}
-          setSubmitUpdateProfile={setSubmitUpdateProfile}
+          
         />
       )}
       {user && (
