@@ -7,7 +7,7 @@ import { getAllTests } from "../../../../redux/college/test/thunks/test";
 import Skeleton from "../../../loaders/Skeleton";
 import { TbFileDownload } from "react-icons/tb";
 import toast from "react-hot-toast";
-import isCompany from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 import getCookie from "../../../../util/getToken";
 
 
@@ -210,7 +210,7 @@ const List = ({ FilterdStudents, isLoading }) => {
                   if (isCompany()) {
                     navigate(`/company/pr/results/overview?level=beginner&assessment=${assessment._id}`)
                   }else{ navigate(
-                    `/college/results/overview?level=beginner&assessment=${assessment._id}`
+                    `/${isUni() ? "university/pr" : "college"}/results/overview?level=beginner&assessment=${assessment._id}`
                   )}
                  
                 }

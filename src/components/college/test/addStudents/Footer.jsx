@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { inviteToTest } from "../../../../redux/college/test/thunks/student";
 import { useState } from "react";
 import Loader from "../../../loaders/Loader";
+import { isUni } from "../../../../util/isCompany";
 
 const Footer = ({ students, endDate }) => {
   const navigate = useNavigate();
@@ -17,29 +18,39 @@ const Footer = ({ students, endDate }) => {
   const { credit } = useSelector((state) => state.collegeAuth);
   const testId = searchParams.get("testId");
   const handleSendInvite = async () => {
-    if (students.length === 0) {
-      toast.error("Select at least one student to send an invite.");
-    } else if (!testId) {
-      // //console.log(testId);
-      toast.error("Invalid Test Id");
-    } else if (credit?.limit - 1 < students.length) {
-      toast.error(
-        "Your current plan only support inviting " + credit?.limit + "students"
-      );
-    } else {
-      // //console.log(testId, students);
-      setLoading(true);
-      await dispatch(
-        inviteToTest({
-          testId: testId,
-          students,
-        })
-      );
+    try {
+      if (students.length === 0) {
+        toast.error("Select at least one student to send an invite.");
+      } else if (!testId) {
+        // //console.log(testId);
+        toast.error("Invalid Test Id");
+      } else if (credit?.limit - 1 < students.length) {
+        toast.error(
+          "Your current plan only support inviting " + credit?.limit + "students"
+        );
+      } else {
+        // //console.log(testId, students);
+        setLoading(true);
+        await dispatch(
+          inviteToTest({
+            testId: testId,
+            students,
+          })
+        ).unwrap();
+  
+        localStorage.removeItem("testDetails");
+        localStorage.removeItem("totalTime");
+        setLoading(false)
+        // toast.success("Invite sent");
+        toast.success("Students Invited Successfully!");
 
-      localStorage.removeItem("testDetails");
-      localStorage.removeItem("totalTime");
-      // toast.success("Invite sent");
-      navigate("/college/test");
+        navigate(`/${!isUni() ?"college" : "university/pr"}/test`);
+      }
+    } catch (error) {
+          toast.error(action.payload?.message);
+     
+    }finally{
+      setLoading(false)
     }
   };
 

@@ -145,7 +145,7 @@ export default function App() {
                   {StudentRoute("college/")}
                   {QuesRoute()}
                   {CompaniesRoute()}
-                  {ResultsRoute()}
+                  {ResultsRoute("college/")}
                   {InboxRoute()}
                   {SettingsRoute()}
                   {TeamsRoute()}
@@ -208,8 +208,9 @@ export default function App() {
                   <Route path="settings" element={<Settings />} />
                   {
                     TestRoute("")
-                   
+                  
                   }{ StudentRoute("")}
+                  {ResultsRoute("")}
                 </Route>
               </Route>
 

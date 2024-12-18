@@ -11,7 +11,7 @@ import { getStudentResponse } from "../../../../redux/college/test/thunks/studen
 import CircularLoader from "../../../CircularLoader";
 import Skeleton from "../../../loaders/Skeleton";
 import { getTestCompany, getTestResultPageCompany, selectStudentTestCompany } from "../../../../redux/company/test/thunks/test";
-import isCompany from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 
 const Appeared = ({ assessment }) => {
   const [isLoading, setIsLoading] = useState({});
@@ -200,7 +200,7 @@ const Appeared = ({ assessment }) => {
                         )
                       } else {
                         navigate(
-                          `/college/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                          `/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
                         )
                       }
                     }

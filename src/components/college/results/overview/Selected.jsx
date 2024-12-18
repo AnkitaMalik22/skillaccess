@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { getselectedStudents } from "../../../../redux/college/test/thunks/test";
 import Skeleton from "../../../loaders/Skeleton";
 import { getselectedStudentsCompany } from "../../../../redux/company/test/thunks/test";
-import isCompany from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 
 const Selected = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Selected = () => {
 
   // //console.log(id);
   useEffect(() => {
-    if(isCompany){
+    if(isCompany()){
       dispatch(getselectedStudentsCompany(id));
     }else{
       dispatch(getselectedStudents(id));
@@ -143,7 +143,7 @@ const Selected = () => {
                     )
                   }else{
                    navigate(
-                     `/college/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                     `/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
                    )
                   }
                  }

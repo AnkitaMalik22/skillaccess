@@ -125,7 +125,7 @@ const List = ({ uploadedStudents, setStudents, students }) => {
                       src={
                         student?.avatar?.url
                           ? student?.avatar?.url
-                          : "../../images/student.png"
+                          : "/images/student.png"
                       }
                       className="rounded-full"
                       alt=""

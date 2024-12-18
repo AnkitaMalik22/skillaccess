@@ -871,13 +871,12 @@ const testSlice = createSlice({
       })
       .addCase(inviteToTest.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        toast.success("Students Invited Successfully!");
+        // toast.success("Students Invited Successfully!");
         //console.log(action.payload);
       })
       .addCase(inviteToTest.rejected, (state, action) => {
         state.status = "rejected";
         // toast.error("Your current plan limit is exceeded");
-          toast.error(action.payload?.message);
       })
       .addCase(getTopicByIdQB.pending, (state, action) => {
         state.status = "pending";
