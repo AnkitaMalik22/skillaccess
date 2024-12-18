@@ -3,6 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import getIp from "./getIp";
 import toast from "react-hot-toast";
+import { getHeaders } from "../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 // const REACT_APP_API_URL = "http://localhost:4000";
@@ -355,12 +356,7 @@ export const updateCollege = createAsyncThunk(
         `${REACT_APP_API_URL}/api/college/update`,
         data,
 
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
 
       const res = req.data;
@@ -378,12 +374,9 @@ export const getCollege = createAsyncThunk(
   "collegeAuth/getCollege",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${REACT_APP_API_URL}/api/college/me`, {
-        withCredentials: true,
-        headers: {
-          "auth-token": localStorage.getItem("auth-token"),
-        },
-      });
+      const response = await axios.get(`${REACT_APP_API_URL}/api/college/me`, 
+        getHeaders()
+      );
 
       return response.data;
     } catch (error) {
@@ -400,13 +393,7 @@ export const updateAvatar = createAsyncThunk(
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/college/update/avatar`,
         data,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       // //console.log(res);
@@ -756,8 +743,9 @@ const collegeAuthSlice = createSlice({
         //console.log("pending");
       })
       .addCase(getCollege.fulfilled, (state, action) => {
-        state.isLoggedIn = true;
-        state.user = action.payload.college;
+        state.isLoggedIn = action.payload.user.role === "college";
+        state.user = action.payload.user;
+        console.log(action.payload.user);
         state.credit = {
           credit: action.payload?.credit[0]?.credit,
           limit: action.payload?.credit[0]?.limit,
@@ -765,7 +753,7 @@ const collegeAuthSlice = createSlice({
         state.balance = action.payload?.balance;
         state.selectedPlan = action.payload?.credit[0];
         // state.USER_LOADING = false;
-        localStorage.setItem("userId", action.payload.college._id);
+        localStorage.setItem("userId", action.payload.user._id);
 
         // Add any fetched posts to the array
         //console.log("fullfilled get college");
@@ -788,7 +776,7 @@ const collegeAuthSlice = createSlice({
 
         //console.log(action.payload.message);
         toast.error(action.payload.message);
-        window.location.href = "/";
+        // window.location.href = "/";
         // window.alert(action.payload);
       })
       .addCase(updateAvatar.pending, (state, action) => {
@@ -802,7 +790,7 @@ const collegeAuthSlice = createSlice({
         //console.log(action);
         // state.user = action.payload.college;
         state.uploadImg = true;
-        state.user.avatar = action.payload.college.avatar;
+        state.user.avatar = action.payload.user.avatar;
 
         // getCollege();
         // Add any fetched posts to the array
