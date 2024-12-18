@@ -9,9 +9,10 @@ export const isUni = ()=>{
 }
 
 
-export const getHeaders = (contentType = "application/json") => {
+export const getHeaders = (contentType = "application/json",additionalHeaders={}) => {
     const headers = {headers:{
       "Content-Type": contentType,
+      ...additionalHeaders
     }};
     if (isCompany()) {
       headers.headers["company-token"] = getCookie("token");

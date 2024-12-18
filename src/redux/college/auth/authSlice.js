@@ -3,6 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import getIp from "./getIp";
 import toast from "react-hot-toast";
+import { getHeaders } from "../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 // const REACT_APP_API_URL = "http://localhost:4000";
@@ -380,9 +381,7 @@ export const getCollege = createAsyncThunk(
     try {
       const response = await axios.get(`${REACT_APP_API_URL}/api/college/me`, {
         withCredentials: true,
-        headers: {
-          "auth-token": localStorage.getItem("auth-token"),
-        },
+         headers:getHeaders().headers,
       });
 
       return response.data;

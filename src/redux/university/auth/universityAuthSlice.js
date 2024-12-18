@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"; // Assuming axios is used for API calls
 import toast from "react-hot-toast";
 import { clearCookie } from "../../../util/getToken";
+import { getHeaders } from "../../../util/isCompany";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 const initialState = {
@@ -12,6 +13,22 @@ const initialState = {
   loading: false,
   error: null,
 };
+
+export const getUniversity = createAsyncThunk(
+  "universityAuth/getUniversity",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${REACT_APP_API_URL}/api/college/me`, {
+        withCredentials: true,
+         headers:getHeaders().headers,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 
 // Thunk for university registration
 export const registerUniversity = createAsyncThunk(
@@ -73,6 +90,10 @@ const universityAuthSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+    .addCase(getUniversity.fulfilled ,(state,action)=>{
+      state.user = action.payload.university;
+    })
       .addCase(registerUniversity.pending, (state) => {
         state.loading = true;
         state.error = null;
