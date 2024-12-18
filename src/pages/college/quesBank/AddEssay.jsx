@@ -15,6 +15,7 @@ import {
 import { addQuestionToTopic,setTotalTopicQuestions } from "../../../redux/college/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni } from "../../../util/isCompany";
 
 
 const AddEssay = () => {
@@ -127,7 +128,7 @@ const AddEssay = () => {
           });
           setLoading(false);
           if (!ADD_QUESTION_LOADING) {
-            if (saveType === "save") navigate(`/college/quesBank/topic/${id}`);
+            if (saveType === "save") navigate(isUni() ? "/university/pr/quesbank/topic/${id}" : `/college/quesBank/topic/${id}`);
           }
         }
       }

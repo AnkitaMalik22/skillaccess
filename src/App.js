@@ -52,8 +52,6 @@ const Login = lazy(() => import("./pages/college/auth/Login"));
 const TermsPolicies = lazy(() => import("./pages/college/auth/TermsPolicies"));
 const Dashboard = lazy(() => import("./pages/college/dashboard/Dashboard"));
 
-
-
 export default function App() {
   const [loader, setLoader] = useState(true);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
@@ -78,7 +76,6 @@ export default function App() {
     /^\/college\/settings\/security\/securityApp$/, // Exact match for "/college/settings/security/securityApp"
     /^\/company.*$/,
     /^\/university.*$/,
-
   ]);
 
   useEffect(() => {
@@ -108,7 +105,10 @@ export default function App() {
     }
   }, [logoutError]);
   useEffect(() => {
-    if (/^\/company\/pr\/.*$/.test(window.location.pathname) && !getCookie("token")) {
+    if (
+      /^\/company\/pr\/.*$/.test(window.location.pathname) &&
+      !getCookie("token")
+    ) {
       console.log(!getCookie);
       navigate("/company");
     }
@@ -119,7 +119,6 @@ export default function App() {
       navigate("/college/dashboard");
     }
   }, [isLoggedIn, navigate]);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -135,7 +134,6 @@ export default function App() {
   return isDesktop ? (
     <div className="app-content">
       <React.Fragment>
-
         {isLoggedIn ? (
           <CollegeLayout>
             <Suspense fallback={<Loader />}>
@@ -143,7 +141,7 @@ export default function App() {
                 <>
                   {TestRoute("college/")}
                   {StudentRoute("college/")}
-                  {QuesRoute()}
+                  {QuesRoute("college/")}
                   {CompaniesRoute()}
                   {ResultsRoute()}
                   {InboxRoute()}
@@ -155,7 +153,6 @@ export default function App() {
                 <Route path="/college/dashboard" element={<Dashboard />} />
                 <Route path="/college/profile" element={<Profile />} />
                 <Route path="/college/Jobs" element={<Jobs />} />
-
               </Routes>
             </Suspense>
           </CollegeLayout>
@@ -172,8 +169,6 @@ export default function App() {
               <Route path="/forgotPassword" element={<ForgotPassword />} />
               <Route path="/password/reset/:id" element={<ResetPassword />} />
               <Route path="college/me/failed" element={<NotAuth />} />
-
-
 
               {/* company routes */}
 
@@ -193,8 +188,14 @@ export default function App() {
                   <Route path="jobs" element={<Job />} />
                   <Route path="jobs/create" element={<CreateJob />} />
                   <Route path="jobs/:id" element={<JobDetailsPage />} />
-                  <Route path="job/students" element={<InvitedStudentsForJob />} />
-                  <Route path="job/add-test/:jobId" element={<AddTestToJob />} />
+                  <Route
+                    path="job/students"
+                    element={<InvitedStudentsForJob />}
+                  />
+                  <Route
+                    path="job/add-test/:jobId"
+                    element={<AddTestToJob />}
+                  />
                   <Route path="job/edit/:jobId" element={<EditJob />} />
                 </Route>
               </Route>
@@ -206,10 +207,9 @@ export default function App() {
                 <Route path="approval" element={<AwaitingApproval />} />
                 <Route path="pr" element={<UniversityLayout />}>
                   <Route path="settings" element={<Settings />} />
-                  {
-                    TestRoute("")
-                   
-                  }{ StudentRoute("")}
+                  {TestRoute("")}
+                  {StudentRoute("")}
+                  {QuesRoute("")}
                 </Route>
               </Route>
 
@@ -223,12 +223,9 @@ export default function App() {
             </Routes>
           </Suspense>
         )}
-
       </React.Fragment>
     </div>
   ) : (
     <DesktopOnly />
   );
-
-
 }
