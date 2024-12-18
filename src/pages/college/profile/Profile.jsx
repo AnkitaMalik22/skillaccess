@@ -114,7 +114,7 @@ useEffect(() => {
           loading={loading}
           
           editable={editable}
-        
+        setEditable={setEditable}
           handleUpdate={handleUpdate}
           
         />

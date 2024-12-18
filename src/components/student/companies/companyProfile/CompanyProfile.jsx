@@ -28,13 +28,13 @@
 //         <div className="sm:w-[45%]">
 //           <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
 //             <img
-//               src="../../images/company.png"
+//               src="/images/company.png"
 //               alt=""
 //               className="w-full h-full rounded-t-3xl z-0 object-cover"
 //             />
 //             <div className=" absolute -bottom-7  left-5 bg-white w-14 h-14 flex justify-center rounded-lg">
 //               <img
-//                 src="../../images/companyLogo.png"
+//                 src="/images/companyLogo.png"
 //                 className="w-10 h-10 rounded-lg self-center"
 //                 alt=""
 //               />
@@ -181,13 +181,13 @@ const CompanyProfile = () => {
         <div className="sm:w-[45%]">
           <div className="w-full bg-gray-100 rounded-t-3xl h-56 relative">
             <img
-              src="../../../images/company.png"
+              src="/images/company.png"
               alt=""
               className="w-full h-full rounded-t-3xl z-0 object-cover"
             />
             <div className=" absolute -bottom-7  left-5 bg-white w-14 h-14 flex justify-center rounded-lg">
               <img
-                src="../../images/companyLogo.png"
+                src="/images/companyLogo.png"
                 className="w-10 h-10 rounded-lg self-center"
                 alt=""
               />
@@ -253,7 +253,7 @@ const CompanyProfile = () => {
               <div className="sm:flex items-center">
                 <div className="w-16 h-16 flex items-center mr-4 ">
                   <img
-                    src="../../images/companyLogo.png"
+                    src="/images/companyLogo.png"
                     alt=""
                     className=" rounded-2xl "
                   />

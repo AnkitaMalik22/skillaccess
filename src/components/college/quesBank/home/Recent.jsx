@@ -102,7 +102,7 @@ const Recent = () => {
                 className=" self-center cursor-pointer"
                 onClick={() => handleDelete(topic?.Type, topic._id)}
               >
-                <img src="../../images/icons/cross.png" alt="" />
+                <img src="/images/icons/cross.png" alt="" />
               </div>
             </div>
           </div>

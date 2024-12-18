@@ -25,7 +25,7 @@ const Settings = () => {
             onClick={() => Navigate("/student/settings/notifications")}
           >
             <div className="flex gap-6 ">
-              <img src="../../images/icons/bellDot.png" alt="" srcset="" />
+              <img src="/images/icons/bellDot.png" alt="" srcset="" />
               <p className="text-lg">Notifications</p>
             </div>
             <div className="flex self-center">
@@ -42,7 +42,7 @@ const Settings = () => {
             onClick={() => Navigate("/student/settings/security")}
           >
             <div className="flex gap-6 ">
-              <img src="../../images/icons/lock.png" alt="" />
+              <img src="/images/icons/lock.png" alt="" />
               <p className="text-lg">Privacy and Security</p>
             </div>
             <div className="flex self-center">
@@ -59,7 +59,7 @@ const Settings = () => {
             onClick={() => Navigate("/student/settings/activity")}
           >
             <div className="flex gap-6 ">
-              <img src="../../images/icons/location.png" alt="" />
+              <img src="/images/icons/location.png" alt="" />
               <p className="text-lg">Login Activity</p>
             </div>
             <div className="flex self-center">
@@ -75,7 +75,7 @@ const Settings = () => {
             // onClick={() => setShowLogoutPopup(true)}
           >
             <div className="flex gap-6 ">
-              <img src="../../images/icons/del.png" alt="" />
+              <img src="/images/icons/del.png" alt="" />
               <p className="text-lg text-[#DE350B]">Log Out</p>
             </div>
             {/* <div className="flex self-center">

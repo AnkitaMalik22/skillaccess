@@ -113,7 +113,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -152,7 +152,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -190,7 +190,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -226,7 +226,7 @@ const AddQuestionsSelect = () => {
               Record video to answer questions
             </h2>
             {/* <img
-              src="../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -268,7 +268,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}

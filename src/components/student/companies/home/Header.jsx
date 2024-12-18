@@ -16,7 +16,7 @@ const Header = () => {
           className="  self-center object-center  rounded-lg h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <img src="../../images/icons/sales.jpg" alt="" />
+          <img src="/images/icons/sales.jpg" alt="" />
         </button>
         <h2 className="text-[28px] leading-[36px] font-bold self-center font-dmSans">
           Companies

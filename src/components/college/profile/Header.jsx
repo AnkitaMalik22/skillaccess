@@ -139,7 +139,7 @@ const Header = ({
               {editing ? (
                 <Loader />
               ) : (
-                <img src="../../images/icons/pen.png" alt="" />
+                <img src="/images/icons/pen.png" alt="" />
               )}{" "}
               <p>Edit Profile</p>
             </button>

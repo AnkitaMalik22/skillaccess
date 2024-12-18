@@ -596,7 +596,7 @@ const AddQuestionsSelect = () => {
               className="bg-[#D9E1E7]  self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-14"
               onClick={() => navigate(-1)}
             >
-              <img src="../../../../images/icons/back.png" alt="" srcset="" />
+              <img src="/images/icons/back.png" alt="" srcset="" />
             </button>
 
             <div className="">
@@ -656,7 +656,7 @@ const AddQuestionsSelect = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -670,7 +670,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -694,7 +694,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -706,7 +706,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -730,7 +730,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -742,7 +742,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}

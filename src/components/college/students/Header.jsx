@@ -171,7 +171,7 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
 
       <span className="flex gap-2">
         <button className="self-center object-center rounded-lg h-10 w-10">
-          <img src="../../images/icons/reports.png" alt="ico" />
+          <img src="/images/icons/reports.png" alt="ico" />
         </button>
       </span>
 

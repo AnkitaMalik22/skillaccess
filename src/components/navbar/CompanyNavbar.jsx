@@ -43,7 +43,7 @@ const CompanyNavbar = (props) => {
 
         {/* Logo */}
         <div className="ml-3">
-          <img src="../../../images/logoFinal.png" alt="Company Logo" width="180px" />
+          <img src="/images/logoFinal.png" alt="Company Logo" width="180px" />
         </div>
       </div>
 
@@ -64,7 +64,7 @@ const CompanyNavbar = (props) => {
                   src={
                     userDetails?.avatar?.url ||
                     userDetails?.user?.basic.logo ||
-                    "../../../images/defaultUser.png"
+                    "/images/defaultUser.png"
                   }
                   alt="User Avatar"
                   className="h-5 w-5"

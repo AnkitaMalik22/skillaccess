@@ -112,7 +112,7 @@ const AddQuestionsSelect = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -126,7 +126,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -153,7 +153,7 @@ const AddQuestionsSelect = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -165,7 +165,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -191,7 +191,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -203,7 +203,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             <img
-              src="../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             />
@@ -228,7 +228,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -239,7 +239,7 @@ const AddQuestionsSelect = () => {
               Record video to answer questions
             </h2>
             <img
-              src="../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             />
@@ -269,7 +269,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -281,7 +281,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             <img
-              src="../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             />

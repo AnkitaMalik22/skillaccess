@@ -62,7 +62,7 @@ const Activity = () => {
           >
             <div className="flex gap-4">
               <div className="w-10 h-10 object-contain p-2">
-                <img src="../../images/icons/location.png" alt="" />
+                <img src="/images/icons/location.png" alt="" />
               </div>
 
               <div>

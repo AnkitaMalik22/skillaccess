@@ -31,7 +31,7 @@ const Header = () => {
           onClick={() => navigate(-1)}
         >
           <img
-            src="./../../images/icons/inbox.png"
+            src="/images/icons/inbox.png"
             className="mx-auto sm:h-6 sm:w-6 h-4 w-4"
           />
         </button>

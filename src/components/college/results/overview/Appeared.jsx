@@ -127,7 +127,7 @@ const Appeared = ({ assessment }) => {
                 <div className="flex justify-center gap-2">
                   <div className=" min-w-[3rem] h-12 self-center">
                     <img
-                      src={student?.studentId?.avatar?.url || "../../../images/student.png"}
+                      src={student?.studentId?.avatar?.url || "/images/student.png"}
                       alt="icon"
                       className="h-10 w-10 rounded-full"
                     />

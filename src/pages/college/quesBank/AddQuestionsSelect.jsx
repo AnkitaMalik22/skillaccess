@@ -105,7 +105,7 @@ const AddQuestionsSelect = () => {
                   onChange={() => setSelectQuestionType(item.type)}
                 />
                 <img
-                  src="../../../images/icons/exam.png"
+                  src="/images/icons/exam.png"
                   alt=""
                   className="w-6 h-8"
                 />
