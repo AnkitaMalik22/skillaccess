@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../../components/college/profile/Header";
-import List from "../../../components/college/profile/List";
+// import List from "../../../components/college/profile/List";
 import {
   getCollege,
   updateCollege,
   updateAvatar,
 } from "../../../redux/college/auth/authSlice";
 import EditHeader from "../../../components/college/profile/EditHeader";
-import useTranslate from "../../../hooks/useTranslate";
+// import useTranslate from "../../../hooks/useTranslate";
 import toast from "react-hot-toast";
+import { isUni } from "../../../util/isCompany";
 
 const Profile = () => {
   //useTranslate();
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const { user, isLoggedIn } = useSelector((state) => state.collegeAuth);
+  const { isAuthenticated } = useSelector((state) => state.universityAuth);
   const [editable, setEditable] = useState(false);
   const [submitUpdateProfile, setSubmitUpdateProfile] = useState(false);
   const [avatar, setAvatar] = useState("");
-  const [college, setCollege] = useState(user);
+  const [college, setCollege] = useState( user);
 
 
   const handleUpdate = (college) => {
@@ -27,19 +29,29 @@ const Profile = () => {
     setEditable(false);
     localStorage.setItem("editable", false);
   };
-  useEffect(() => {
-    if (user) {
-      setCollege(user);
-    }
-  }, [dispatch, isLoggedIn]);
+// Fetch college data on mount
+useEffect(() => {
+  dispatch(getCollege()).then(() => {
+    setCollege(user);
+  });
+}, [dispatch]);
 
-  useEffect(() => {
-    if (user) {
-      setCollege(user);
-    } else {
-      dispatch(getCollege());
-    }
-  }, [user]);
+// Update state when user changes
+// useEffect(() => {
+//   if (!user) {
+//     console.log(user);
+//     setCollege(user);
+//   }
+// }, [user]);
+
+// Handle avatar updates
+useEffect(() => {
+  if (avatar ) {
+    setEditing(true);
+    dispatch(updateAvatar({ avatar, id: user._id }))
+      .finally(() => setEditing(false));
+  }
+}, [avatar, dispatch]);
 
   useEffect(() => {
     if (user && user.avatar && user.avatar.url) {
@@ -61,7 +73,7 @@ const Profile = () => {
   useEffect(() => {
     if (submitUpdateProfile) {
 
-      if(college.Phone.length < 10){
+      if(!isUni() && college.Phone.length < 10){
         toast.error("Invalid phone number !");
         setSubmitUpdateProfile(false);
         return;
@@ -73,6 +85,8 @@ const Profile = () => {
       localStorage.setItem("editable", false);
     }
   }, [submitUpdateProfile]);
+
+
 
   return (
     <>

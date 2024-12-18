@@ -46,6 +46,7 @@ import RegisterUniversity from "./pages/university/auth/RegisterUniversity";
 import UniversityLoginPage from "./pages/university/auth/LoginUniversity";
 import CompanyQuesRoute from "./pages/company/quesBank";
 import UniversityLayout from "./layout/University";
+import { isUni } from "./util/isCompany";
 
 const Register = lazy(() => import("./pages/college/auth/Register"));
 const Login = lazy(() => import("./pages/college/auth/Login"));
@@ -115,7 +116,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn && window.location.pathname === "/" && !company) {
+    if (isLoggedIn && window.location.pathname === "/" && !company && !isUni()) {
       navigate("/college/dashboard");
     }
   }, [isLoggedIn, navigate]);
@@ -134,7 +135,7 @@ export default function App() {
   return isDesktop ? (
     <div className="app-content">
       <React.Fragment>
-        {isLoggedIn ? (
+        {isLoggedIn  ? (
           <CollegeLayout>
             <Suspense fallback={<Loader />}>
               <Routes>
@@ -207,6 +208,7 @@ export default function App() {
                 <Route path="approval" element={<AwaitingApproval />} />
                 <Route path="pr" element={<UniversityLayout />}>
                   <Route path="settings" element={<Settings />} />
+                  <Route path="profile" element={<Profile />} />
                   {TestRoute("")}
                  {StudentRoute("")}
                   {QuesRoute("")}
