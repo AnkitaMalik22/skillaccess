@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni } from "../../../util/isCompany";
 
 const AddQuestionsSelect = () => {
   //useTranslate();
@@ -19,27 +20,30 @@ const AddQuestionsSelect = () => {
     switch (selectQuestionType) {
       case "mcq":
         navigate(
-          `/college/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic`
+          isUni() ? `/university/pr/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic` : `/college/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic`
+
         );
         break;
 
       case "code":
-        navigate(`/college/quesBank/code/${id}?type=compiler&addType=topic`);
+        navigate(isUni() ? `/university/pr/quesBank/code/${id}?type=compiler&addType=topic` : `/college/quesBank/code/${id}?type=compiler&addType=topic`);
         break;
 
       case "video":
-        navigate(`/college/quesBank/video/${id}?type=video&addType=topic`);
+        navigate(isUni() ? `/university/pr/quesBank/video/${id}?type=video&addType=topic` : `/college/quesBank/video/${id}?type=video&addType=topic`);
 
         break;
 
       case "findAnswer":
         navigate(
-          `/college/quesBank/find-ans/${id}?type=findAnswer&addType=topic`
+          isUni() ? `/university/pr/quesBank/find-ans/${id}?type=findAnswer&addType=topic` : `/college/quesBank/find-ans/${id}?type=findAnswer&addType=topic`
         );
         break;
 
       case "essay":
-        navigate(`/college/quesBank/essay/${id}?type=essay&addType=topic`);
+        navigate(
+          isUni() ? `/university/pr/quesBank/essay/${id}?type=essay&addType=topic` : `/college/quesBank/essay/${id}?type=essay&addType=topic`
+        );
         break;
 
       default:
