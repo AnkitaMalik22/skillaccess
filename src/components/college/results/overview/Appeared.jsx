@@ -11,7 +11,7 @@ import { getStudentResponse } from "../../../../redux/college/test/thunks/studen
 import CircularLoader from "../../../CircularLoader";
 import Skeleton from "../../../loaders/Skeleton";
 import { getTestCompany, getTestResultPageCompany, selectStudentTestCompany } from "../../../../redux/company/test/thunks/test";
-import isCompany from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 
 const Appeared = ({ assessment }) => {
   const [isLoading, setIsLoading] = useState({});
@@ -127,7 +127,7 @@ const Appeared = ({ assessment }) => {
                 <div className="flex justify-center gap-2">
                   <div className=" min-w-[3rem] h-12 self-center">
                     <img
-                      src={student?.studentId?.avatar?.url || "../../../images/student.png"}
+                      src={student?.studentId?.avatar?.url || "/images/student.png"}
                       alt="icon"
                       className="h-10 w-10 rounded-full"
                     />
@@ -200,7 +200,7 @@ const Appeared = ({ assessment }) => {
                         )
                       } else {
                         navigate(
-                          `/college/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                          `/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
                         )
                       }
                     }

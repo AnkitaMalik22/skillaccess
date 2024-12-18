@@ -102,7 +102,7 @@ const Accounting = () => {
               <div className="flex flex-col justify-center gap-5">
                 <div className="flex item-center gap-5">
                   <img
-                    src="../../images/aeroo.png"
+                    src="/images/aeroo.png"
                     alt="aeroo"
                     className="w-[64px] h-[64px]"
                   />

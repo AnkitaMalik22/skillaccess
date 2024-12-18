@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getHeaders } from "../../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -10,12 +11,7 @@ export const getRecentUsedQuestions = createAsyncThunk(
       const req = await axios.get(
         // `${REACT_APP_API_URL}/api/assessments/recent/questions`,
         `${REACT_APP_API_URL}/api/qb/recent/questions`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+      getHeaders()
       );
       const res = req.data;
       //console.log(res);
@@ -33,12 +29,7 @@ export const deleteRecentUsedQuestion = createAsyncThunk(
     try {
       const req = await axios.delete(
         `${REACT_APP_API_URL}/api/qb/recent/question/${data.id}?type=${data.type}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+       getHeaders()
       );
       const res = req.data;
       return res.topics;
@@ -58,12 +49,7 @@ export const addBookmark = createAsyncThunk(
       const req = await axios.post(
         `${REACT_APP_API_URL}/api/assessments/bookmarks/add`,
         data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+       getHeaders()
       );
       const res = req.data;
       return res.bookmark;
@@ -80,12 +66,7 @@ export const removeBookmark = createAsyncThunk(
     try {
       const req = await axios.delete(
         `${REACT_APP_API_URL}/api/assessments/bookmarks/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       return res.bookmarks;
@@ -102,12 +83,7 @@ export const getAllBookmarks = createAsyncThunk(
     try {
       const req = await axios.get(
         `${REACT_APP_API_URL}/api/assessments/get/bookmarks`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+       getHeaders()
       );
       const res = req.data;
       return res.bookmarks;
@@ -124,12 +100,7 @@ export const getBookmarkById = createAsyncThunk(
     try {
       const req = await axios.get(
         `${REACT_APP_API_URL}/api/college/bookmarks/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       return res.bookmark;
@@ -147,12 +118,7 @@ export const editQuestionById = createAsyncThunk(
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/assessments/question/${data.id}?type=${data.type}`,
         data.question,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       return { res: res, index: data.index, type: data.type };
@@ -171,12 +137,7 @@ export const editBankQuestionById = createAsyncThunk(
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/assessments/question/${data.id}?type=${data.type}`,
         data.question,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       return { res: res, type: data.type };
@@ -193,12 +154,7 @@ export const getTopicByIdQB = createAsyncThunk(
     try {
       const req = await axios.get(
         `${REACT_APP_API_URL}/api/assessment/section/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       return res.section;

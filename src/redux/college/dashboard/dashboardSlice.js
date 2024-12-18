@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getHeaders } from "../../../util/isCompany";
 const initialState = {
   students: [],
   companies: [],
@@ -24,12 +25,7 @@ export const getStudent = createAsyncThunk(
       const req = await axios.post(
         `${REACT_APP_API_URL}/api/student/college/get/all`,
         data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       //console.log(res.students);
@@ -74,12 +70,8 @@ export const getAssessment = createAsyncThunk(
       const req = await axios.post(
         `${REACT_APP_API_URL}/api/college/dashboard/assessments`,
         data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+         getHeaders()
+        
       );
       const res = req.data;
       return res.assessments;

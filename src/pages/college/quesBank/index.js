@@ -21,9 +21,9 @@ const AddVideoLongShort = lazy(() => import("./AddVideoLongShort"));
 const AddQuestionsSelect = lazy(() => import("./AddQuestionsSelect"));
 const AddVideoQuestions = lazy(() => import("./AddVideoQuestions"));
 
-function QuesRoute() {
+function QuesRoute(entity) {
   return (
-    <Route path="college/quesBank">
+    <Route path={`${entity}quesBank`}>
       <Route path="" element={<QuesBank />} />
       <Route path="recent" element={<Recent />} />
       <Route path="recentAll" element={<RecentAll />} />

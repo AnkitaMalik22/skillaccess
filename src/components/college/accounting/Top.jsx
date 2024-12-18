@@ -230,7 +230,7 @@ const Top = () => {
           {/* left*/}
           <div className="flex gap-8 object-cover">
             <div className="w-fit self-center">
-              <img src="../../images/credit-card.png" alt="" />
+              <img src="/images/credit-card.png" alt="" />
             </div>
 
             <div>
@@ -260,7 +260,7 @@ const Top = () => {
           {/* left*/}
           <div className="flex gap-8 object-cover">
             <div className="w-fit self-center">
-              <img src="../../images/Bitmap.png" alt="" />
+              <img src="/images/Bitmap.png" alt="" />
             </div>
 
             <div>
@@ -290,7 +290,7 @@ const Top = () => {
           {/* left*/}
           <div className="flex gap-8 object-cover">
             <div className="w-fit self-center">
-              <img src="../../images/credit-card-_1_.png" alt="" />
+              <img src="/images/credit-card-_1_.png" alt="" />
             </div>
 
             <div>

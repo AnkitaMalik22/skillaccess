@@ -8,6 +8,7 @@ import {
   getAllTests,
 } from "../../../../../redux/college/test/thunks/test";
 import { FaPlus } from "react-icons/fa6";
+import { isUni } from "../../../../../util/isCompany";
 const Card = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,6 +19,9 @@ const Card = (props) => {
       }
     });
   };
+
+  const entity = isUni() ? "university/pr" : "college";
+
   return (
     <div className="w-[242px] h-[312px] bg-white text-start font-bold text-black rounded-lg p-2 font-dmSans">
       <h2 className="mb-2 line-clamp-2 first-letter:uppercase ">
@@ -90,13 +94,13 @@ const Card = (props) => {
             localStorage.setItem("testId", props.assessment._id);
             localStorage.setItem("testName", props.assessment?.name);
             props?.assessment &&
-              navigate(`/college/test/invite?testId=${props?.assessment._id}`);
+              navigate(`/${entity}/test/invite?testId=${props?.assessment._id}`);
           }}
         >
           <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued mx-2" />
           {props.assessment?.invitedStudents?.slice(0, 3).map((student) => (
             <>
-              <img src={student?.avatar?.url || "../../../images/defaultUser.jpg"} className="w-8 h-8 -ml-1" />
+              <img src={student?.avatar?.url || "/images/defaultUser.jpg"} className="w-8 h-8 -ml-1" />
             </>
           ))}
 
@@ -124,7 +128,7 @@ const Card = (props) => {
                 "assessment",
                 JSON.stringify(props.assessment)
               );
-              navigate("/college/test/assessment");
+              navigate(`/${entity}/test/assessment`);
             }}
           />
         </div>

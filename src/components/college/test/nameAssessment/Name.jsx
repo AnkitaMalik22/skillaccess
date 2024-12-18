@@ -10,6 +10,7 @@ import {
   setTestBasicDetails,
 } from "../../../../redux/college/test/testSlice";
 import toast from "react-hot-toast";
+import { isUni } from "../../../../util/isCompany";
 
 const Name = () => {
   const dispatch = useDispatch();
@@ -221,7 +222,12 @@ const Name = () => {
 
     if (!flag) {
       dispatch(setTestBasicDetails(testDetails));
-      navigate(`/college/test/select?level=${level}`);
+      if (isUni()) {
+        navigate(`/university/pr/test/select?level=${level}`);
+      } else {
+        navigate(`/college/test/select?level=${level}`);
+      }
+
     }
   };
 
@@ -244,9 +250,8 @@ const Name = () => {
           <div className="mb-4">
             <input
               type="text"
-              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-                errors.name ? "border-red-500" : "border-none"
-              }`}
+              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${errors.name ? "border-red-500" : "border-none"
+                }`}
               placeholder="Name of the Assessment*"
               name="name"
               value={testDetails.name}
@@ -261,9 +266,8 @@ const Name = () => {
             <input
               type="tel"
               name="totalAttempts"
-              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-                errors.name ? "border-red-500" : "border-none"
-              }`}
+              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${errors.name ? "border-red-500" : "border-none"
+                }`}
               placeholder="No. of Attempts*"
               value={testDetails.totalAttempts}
               onChange={handleChange}
@@ -283,9 +287,8 @@ const Name = () => {
             <input
               name="totalQuestions"
               type="tel"
-              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-                errors.name ? "border-red-500" : "border-none"
-              }`}
+              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${errors.name ? "border-red-500" : "border-none"
+                }`}
               placeholder="No. of Questions*"
               value={testDetails.totalQuestions}
               onChange={handleChange}
@@ -311,9 +314,8 @@ const Name = () => {
                   name="duration_from"
                   value={testDetails?.duration_from?.slice(0, 16)}
                   onChange={handleChange}
-                  className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${
-                    errors.duration ? "border-red-500" : ""
-                  }`}
+                  className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${errors.duration ? "border-red-500" : ""
+                    }`}
                   required
                   fullWidth
                 />
@@ -327,9 +329,8 @@ const Name = () => {
                   name="duration_to"
                   value={testDetails?.duration_to?.slice(0, 16)}
                   onChange={handleChange}
-                  className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${
-                    errors.duration ? "border-red-500" : ""
-                  }`}
+                  className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${errors.duration ? "border-red-500" : ""
+                    }`}
                   required
                   fullWidth
                 />
@@ -356,9 +357,8 @@ const Name = () => {
             </label>
           </div>
           <textarea
-            className={`w-full h-40 rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${
-              errors.name ? "border-red-500" : "border-none"
-            }`}
+            className={`w-full h-40 rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${errors.name ? "border-red-500" : "border-none"
+              }`}
             placeholder="Add Description*"
             name="description"
             value={testDetails.description}

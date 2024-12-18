@@ -279,7 +279,6 @@ const [loading,setLoading] = useState(false)
             );
           }
           
-
           resetQuestion();
           setToggle(1);
         }

@@ -4,29 +4,29 @@ const Portfolio = ({ Portfolio }) => {
   const checkSrc = (url) => {
     url = url.toLowerCase();
     if (url.includes("wordpress")) {
-      return "../../../images/icons/wordPress.png";
+      return "/images/icons/wordPress.png";
     } else if (url.includes("linkedin")) {
-      return "../../../images/icons/LinkedIn.png";
+      return "/images/icons/LinkedIn.png";
     } else if (url.includes("facebook")) {
-      return "../../../images/icons/fb.png";
+      return "/images/icons/fb.png";
     } else if (url.includes("instagram")) {
-      return "../../../images/icons/ig.png";
+      return "/images/icons/ig.png";
     } else if (url.includes("youtube")) {
-      return "../../../images/icons/yt.png";
+      return "/images/icons/yt.png";
     } else if (url.includes("hackerearth")) {
-      return "../../../images/icons/hacker.png";
+      return "/images/icons/hacker.png";
     } else if (url.includes("codingninjas")) {
-      return "../../../images/icons/cn.png";
+      return "/images/icons/cn.png";
     } else if (url.includes("codeforces")) {
-      return "../../../images/icons/codef.png";
+      return "/images/icons/codef.png";
     } else if (url.includes("geeksforgeeks")) {
-      return "../../../images/icons/gfg.png";
+      return "/images/icons/gfg.png";
     } else if (url.includes("hackerrank")) {
-      return "../../../images/icons/hack.png";
+      return "/images/icons/hack.png";
     } else if (url.includes("leetcode")) {
-      return "../../../images/icons/lc.png";
+      return "/images/icons/lc.png";
     } else {
-      return "../../../images/icons/link.png";
+      return "/images/icons/link.png";
     }
   };
   const handleViewLink = (url) => {

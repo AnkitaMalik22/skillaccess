@@ -845,7 +845,7 @@ const testSliceCompany= createSlice({
       })
       .addCase(inviteToTest.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        toast.success("Students Invited Successfully!");
+        // toast.success("Students Invited Successfully!");
         //console.log(action.payload);
       })
       .addCase(inviteToTest.rejected, (state, action) => {

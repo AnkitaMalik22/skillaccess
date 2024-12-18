@@ -84,7 +84,7 @@ const Jobs = () => {
               <div className="sm:flex">
                 <div className="  flex justify-center rounded-lg mr-8">
                   <img
-                    src={job?.company?.basic?.logo || "../../../images/defaultUser.jpg"}
+                    src={job?.company?.basic?.logo || "/images/defaultUser.jpg"}
                     className="w-10 h-10 rounded-lg self-center"
                     alt=""
                   />

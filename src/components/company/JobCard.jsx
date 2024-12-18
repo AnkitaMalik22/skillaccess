@@ -15,7 +15,7 @@ const JobCard = ({ job }) => {
       <div className="logo flex items-center mb-4">
         <div className="w-24 h-24 flex items-center">
           <img
-            src={job?.company?.avatar?.url || '../../images/job.png'}
+            src={job?.company?.avatar?.url || '/images/job.png'}
             alt=""
             className="rounded-2xl w-full h-full object-cover"
           />

@@ -167,16 +167,16 @@ const Recent = () => {
             <div className="flex justify-center gap-3 ">
               {/* <div className=" self-center ">
                 {" "}
-                <img src="../../images/icons/clip.png" alt="" />{" "}
+                <img src="/images/icons/clip.png" alt="" />{" "}
               </div> */}
               {/* <div className=" self-center">
-                <img src="../../images/icons/pencil.png" alt="" />
+                <img src="/images/icons/pencil.png" alt="" />
               </div> */}
               <div
                 className=" self-center cursor-pointer"
                 onClick={() => handleDelete(topic?.Type, topic._id)}
               >
-                <img src="../../images/icons/cross.png" alt="" />
+                <img src="/images/icons/cross.png" alt="" />
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import Header from "../../../components/college/test/addVideo/addSelect/Header";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
 import { setTotalTopicQuestions } from "../../../redux/college/test/thunks/topic";
+import { isUni } from "../../../util/isCompany";
 
 const AddVideoQuestionsPage = () => {
   //useTranslate();
@@ -16,24 +17,25 @@ const AddVideoQuestionsPage = () => {
   const [searchParam, setSearchParam] = useSearchParams();
   const level = searchParam.get("level");
   const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
-
+  const entity = isUni() ? "university/pr": "college";
+  
   const NavHandler = () => {
     switch (selectQuestionType) {
       case "mcq":
-        navigate(`/college/test/video/${id}/addmcq?level=${level}`);
+        navigate(`/${entity}/test/video/${id}/addmcq?level=${level}`);
 
         break;
 
       case "short":
         navigate(
-          `/college/test/video/shortlong/${id}?length=short&level=${level}`
+          `/${entity}/test/video/shortlong/${id}?length=short&level=${level}`
         );
 
         break;
 
       case "long":
         navigate(
-          `/college/test/video/shortlong/${id}?length=long&level=${level}`
+          `/${entity}/test/video/shortlong/${id}?length=long&level=${level}`
         );
 
         break;
@@ -89,7 +91,7 @@ const AddVideoQuestionsPage = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -104,7 +106,7 @@ const AddVideoQuestionsPage = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -131,7 +133,7 @@ const AddVideoQuestionsPage = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -141,7 +143,7 @@ const AddVideoQuestionsPage = () => {
             {/*  */}
             <h2 className="text-xl font-normal self-center">Answer in brief</h2>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -167,7 +169,7 @@ const AddVideoQuestionsPage = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -180,7 +182,7 @@ const AddVideoQuestionsPage = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}

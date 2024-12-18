@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "../../../components/college/quesBank/home/Dropdown";
 import { getAllBookmarks } from "../../../redux/college/test/thunks/question";
 import { LuBookmarkMinus } from "react-icons/lu";
+import { isUni} from "../../../util/isCompany";
 
 const QuesBank = () => {
   //useTranslate();
@@ -25,7 +26,7 @@ const QuesBank = () => {
       <div className="flex w-full mx-auto justify-between mb-6">
         <div className="flex gap-4">
           <button className="  self-center object-center  rounded-lg h-10 w-10 ">
-            <img src="../../images/icons/reports.png" alt="icon" />
+            <img src="/images/icons/reports.png" alt="icon" />
           </button>
           <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
             Question Bank
@@ -35,7 +36,7 @@ const QuesBank = () => {
         <div className="flex gap-2">
           <button
             className="self-center justify-center flex bg-[#F8F8F9] py-3 px-5 rounded-xl  font-bold gap-2 "
-            onClick={() => navigate("/college/quesbank/createTopic")}
+            onClick={() => isUni() ? navigate("/university/pr/quesbank/createTopic") : navigate("/college/quesbank/createTopic")}
           >
             <FiPlus className="self-center text-lg " /> Add
           </button>
@@ -60,7 +61,7 @@ const QuesBank = () => {
 
               <button
                 className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
-                onClick={() => navigate("/college/quesBank/bookmarks")}
+                onClick={() => isUni() ? navigate("/university/pr/quesbank/bookmarks") : navigate("/college/quesbank/bookmarks")}
               >
                 View All
               </button>

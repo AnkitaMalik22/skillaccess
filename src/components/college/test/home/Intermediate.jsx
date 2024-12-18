@@ -11,6 +11,7 @@ import Card from "./common/Card";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CreditPopUp from "../../../PopUps/CreditPopUp";
+import { isUni } from "../../../../util/isCompany";
 
 const Intermediate = () => {
   const navigate = useNavigate();
@@ -26,11 +27,17 @@ const Intermediate = () => {
     setShow(false);
   };
   const handleFunc = () => {
-    if (credit?.balance?.credit) {
-      navigate("/college/test/name?level=intermediate");
-    } else {
-      setShow(true);
+
+    if(isUni()){
+      navigate("/university/pr/test/name?level=intermediate");
+    }else{
+      if (credit?.balance?.credit) {
+        navigate("/college/test/name?level=intermediate");
+      } else {
+        setShow(true);
+      }
     }
+    
   };
 
   return (

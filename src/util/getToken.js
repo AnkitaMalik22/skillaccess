@@ -7,5 +7,12 @@ export default function getCookie(name) {
     return null;  // If the cookie doesn't exist, return null
 }
 
+export function clearCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
+// Example usage:
+// clearCookie("token");
+
 
 // const token = getCookie("token");

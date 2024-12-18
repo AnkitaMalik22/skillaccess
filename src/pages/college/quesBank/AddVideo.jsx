@@ -12,6 +12,7 @@ import Loader from "../../../components/college/quesBank/addVideo/Loader";
 import toast from "react-hot-toast";
 import axios from "axios";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni } from "../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -224,9 +225,11 @@ const AddVideo = () => {
       // Navigate to the next step
 
       navigate(
-        `/college/quesBank/video/${id}/selectType?section=${searchParam.get(
-          "topicId"
-        )}`
+      isUni() ?   `/university/pr/quesBank/video/${id}/selectType?section=${searchParam.get(
+        "topicId"
+      )}` :   `/college/quesBank/video/${id}/selectType?section=${searchParam.get(
+        "topicId"
+      )}`
       );
     } catch (error) {
       console.error("Error uploading video:", error);
@@ -272,7 +275,7 @@ const AddVideo = () => {
                 <input {...getInputProps()} />
 
                 <img
-                  src="../../../images/ant-design_cloud-upload-outlined.png"
+                  src="/images/ant-design_cloud-upload-outlined.png"
                   alt="upload"
                   className="cursor-pointer mb-5"
                 />

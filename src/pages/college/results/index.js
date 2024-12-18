@@ -4,9 +4,9 @@ import AssessmentReview from "./AssessmentReview";
 const Results = lazy(() => import("./Results"));
 const ResultsOverview = lazy(() => import("./ResultsOverview"));
 
-export default function ResultsRoute() {
+export default function ResultsRoute(entity) {
   return (
-    <Route path="college/results">
+    <Route path={`${entity}results`}>
       <Route path="" element={<Results />} />
       <Route path="overview" element={<ResultsOverview />} />
       <Route path="assessmentReview" element={<AssessmentReview />} />

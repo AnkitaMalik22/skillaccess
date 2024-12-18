@@ -12,6 +12,7 @@ import {
   updateCollege,
 } from "../../../redux/college/auth/authSlice";
 import Loader from "../../loaders/Loader";
+import { isUni } from "../../../util/isCompany";
 
 const Header = ({
   editing,
@@ -29,9 +30,7 @@ const Header = ({
   );
   const [avatarPreview, setAvatarPreview] = useState(avatar);
   const imgRef = useRef(null);
-  // useEffect(() => {
-  //   dispatch(getCollege());
-  // }, [dispatch]);
+
   useEffect(() => {
     // dispatch(getCollege());
     if (uploadImg) {
@@ -52,6 +51,8 @@ const Header = ({
     reader.readAsDataURL(e.target.files[0]);
   };
 
+  // console.log(college);
+
   return (
     // {/* profile container */}
     <div className="bg-gray-50 rounded-xl p-5">
@@ -60,12 +61,12 @@ const Header = ({
         {/* profile photo */}
         <div className="flex gap-2 px-3 py-1 mt-2">
           {editable ? (
-            <div className="w-14 h-14 bg-blued self-center rounded-lg relative">
-              <img src={avatar} alt="" width="56px" className="rounded-lg" />
+            <div className="w-14 h-14 bg-gray-200 self-center rounded-lg relative flex items-center justify-center">
+              <img src={avatar || college.avatar.url || "/images/defaultUser.jpg"} alt="" width="56px" className="rounded-lg " />
 
               <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
                 <img
-                  src="../../images/icons/pen.png"
+                  src="/images/icons/pen.png"
                   alt=""
                   onClick={() => imgRef.current.click()}
                 />
@@ -90,7 +91,7 @@ const Header = ({
                 }
                 alt="avatar"
                 width="56px"
-                className="relative p-2 rounded-lg "
+                className="relative p-2 rounded-lg"
               />
             </div>
           )}
@@ -101,20 +102,21 @@ const Header = ({
                 <input
                   type="text"
                   value={
-                    college && college.CollegeName ? college.CollegeName : ""
+                 isUni() ? ( college && college.name ? college.name : "")
+                  : ( college && college.CollegeName ? college.CollegeName : "")
                   }
                   onChange={(e) =>
-                    setCollege({ ...college, CollegeName: e.target.value })
+                    isUni() ? setCollege({ ...college, name: e.target.value }) : setCollege({ ...college, CollegeName: e.target.value })
                   }
                   className="bg-transparent border-none focus:outline-none w-full min-w-[30vw]  text-[20px] font-extrabold   "
                 />
-              ) : college && college.CollegeName ? (
-                <p className="text-[20px] font-extrabold  py-1  ">
-                  {college.CollegeName}
-                </p>
               ) : (
-                ""
-              )}
+                <p className="text-[20px] font-extrabold  py-1  ">
+                 {
+                    isUni() ? ( college && college.name ? college.name : "") : ( college && college.CollegeName ? college.CollegeName : "")
+                 }
+                </p>
+              ) }
             </h2>
             <h2 className="text-sm text-gray-400   pb-2">UPME00006369</h2>
           </div>
@@ -137,7 +139,7 @@ const Header = ({
               {editing ? (
                 <Loader />
               ) : (
-                <img src="../../images/icons/pen.png" alt="" />
+                <img src="/images/icons/pen.png" alt="" />
               )}{" "}
               <p>Edit Profile</p>
             </button>
@@ -148,22 +150,24 @@ const Header = ({
       {/* second section */}
       <div className="border-b px-6  py-8 bg-gray-50 font-dmSans">
         <h1 className="text-lg font-bold">Overview</h1>
-        {college && college.Description ? (
+      {
+      college ?
+        (
           <div className="text-sm  font-medium mt-2">
             {editable && college ? (
               <textarea
                 className="mt-2 bg-transparent border-none focus:outline-none w-full max-w-[80vw]"
                 type="text"
                 value={
-                  college && college.Description ? college.Description : ""
-                }
+                  isUni() ? ( college && college.description ? college.description : "") : ( college && college.Description ? college.Description : "")
+                 }
                 onChange={(e) =>
-                  setCollege({ ...college, Description: e.target.value })
+                  setCollege({ ...college, Description: e.target.value ,description:e.target.value })
                 }
               />
-            ) : college && college.Description ? (
+            ) : college && (college.Description || college.description) ? (
               <p className="text-sm  font-medium mt-2 leading-loose text-gray-500">
-                {college.Description}
+                {college.Description || college.description}
               </p>
             ) : (
               ""
@@ -175,10 +179,10 @@ const Header = ({
               <textarea
                 type="text"
                 value={
-                  college && college.Description ? college.Description : ""
+                 isUni() ? ( college && college.description ? college.description : "") : ( college && college.Description ? college.Description : "")
                 }
                 onChange={(e) =>
-                  setCollege({ ...college, Description: e.target.value })
+               isUni() ? setCollege({ ...college, description: e.target.value }) : setCollege({ ...college, Description: e.target.value })
                 }
                 className={`rounded-lg mt-2 border-none focus:outline-none w-full max-w-[80vw]  h-full min-h-[25vh]  text-gray-500 bg-[#f4f5f6]
                 `}
@@ -188,33 +192,36 @@ const Header = ({
               "No Description Available"
             )}
           </div>
-        )}
+        )
+      }
       </div>
       <div className="px-6  py-8 bg-gray-50 font-dmSans flex sm:gap-16 text-sm font-medium ">
         <div className="flex gap-2 ">
           <div className="w-10 h-10 rounded-2xl bg-gray-200 flex justify-center">
             <MdOutlineEmail className="self-center text-2xl" />
           </div>
-          {college && college.Email ? (
+          {college  ? (
             <p className="self-center">
               {editable && college ? (
                 <input
                   type="text"
-                  value={college && college.Email ? college.Email : ""}
+                  value={
+                    isUni() ? ( college && college.email ? college.email : "") : ( college && college.Email ? college.Email : "")
+                  }
                   onChange={(e) =>
-                    setCollege({ ...college, Email: e.target.value })
+                    isUni() ? setCollege({ ...college, email: e.target.value }) : setCollege({ ...college, Email: e.target.value })
                   }
                   className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6]  `}
                   placeholder="Add Email"
                 />
-              ) : college && college.Email ? (
+              ) :  (
                 <p className=" text-gray-500 bg-transparent text-sm">
                   {" "}
-                  {college.Email}
+                 {
+                    isUni() ? ( college && college.email ? college.email : "") : ( college && college.Email ? college.Email : "")
+                 }
                 </p>
-              ) : (
-                ""
-              )}
+              ) }
             </p>
           ) : (
             <p className=" font-medium self-center">No Email Available</p>
@@ -235,19 +242,21 @@ const Header = ({
               <input
                 type="tel" // Set input type to "tel" for telephone number
                 maxLength={10} // Set maximum length to 10 digits
-                value={college && college.Phone ? college.Phone : ""}
+                value={
+                  isUni() ? ( college && college.phone ? college.phone : "") : ( college && college.Phone ? college.Phone : "")
+                }
                 onChange={(e) => {
                   // Ensure the entered value doesn't exceed 10 digits
                   if (e.target.value.length <= 10) {
-                    setCollege({ ...college, Phone: e.target.value });
+                    isUni() ? setCollege({ ...college, phone: e.target.value }) : setCollege({ ...college, Phone: e.target.value });
                   }
                 }}
                 className={` rounded-lg border-none focus:outline-none appearance-none bg-[#f4f5f6] text-sm `}
                 placeholder="Add Phone Number"
               />
-            ) : college && college.Phone ? (
+            ) : college && college.phone ? (
               <p className="text-gray-500 bg-transparent text-sm">
-                {college.Phone}
+                {college.phone}
               </p>
             ) : (
               ""
@@ -271,9 +280,11 @@ const Header = ({
               {editable && college ? (
                 <input
                   type="text"
-                  value={college && college.Website ? college.Website : ""}
+                  value={
+                    isUni() ? ( college && college.website ? college.website : "") : ( college && college.Website ? college.Website : "")
+                  }
                   onChange={(e) =>
-                    setCollege({ ...college, Website: e.target.value })
+                    isUni() ? setCollege({ ...college, website: e.target.value }) : setCollege({ ...college, Website: e.target.value })
                   }
                   className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6]`}
                   placeholder="Add College Website"
@@ -281,11 +292,15 @@ const Header = ({
               ) : (
                 <a
                   className="self-center text-lightBlue underline bg-transparent font-medium"
-                  href={college && college.Website ? college.Website : ""}
+                  href={
+                    isUni() ? ( college && college.website ? college.website : "") : ( college && college.Website ? college.Website : "")
+                  }
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {college && college.Website ? college.Website : ""}
+                  {
+                    isUni() ? ( college && college.website ? college.website : "") : ( college && college.Website ? college.Website : "")
+                  }
                 </a>
               )}
             </>
@@ -315,16 +330,19 @@ const Header = ({
             {editable && college ? (
               <input
                 type="text"
-                value={college && college.Address ? college.Address : ""}
+                value={
+                  isUni() ? ( college && college.address ? college.address : "") : ( college && college.Address ? college.Address : "")
+                }
                 onChange={(e) =>
-                  setCollege({ ...college, Address: e.target.value })
+                  isUni() ? setCollege({ ...college, address: e.target.value }) : setCollege({ ...college, Address: e.target.value })
                 }
                 className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6] break-words  w-full max-w-[416px]`}
                 placeholder="College Address"
               />
             ) : (
               <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center">
-                {college && college.Address ? college.Address : ""}
+                
+            {isUni() ? ( college && college.address ? college.address : "") : ( college && college.Address ? college.Address : "")}
               </p>
             )}
           </>

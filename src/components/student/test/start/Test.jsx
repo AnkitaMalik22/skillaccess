@@ -31,7 +31,7 @@ const Test = () => {
           className="self-center w-32  justify-center flex text-bluedpy-2 px-4 rounded-xl font-bold gap-2 bg-white"
           // onClick={() => navigate(-1)}
         >
-        <img src='../../../images/icons/CombinedShape.png' alt="" className="self-center w-6 h-6" />
+        <img src='/images/icons/CombinedShape.png' alt="" className="self-center w-6 h-6" />
         <p className="text-lg font-bold self-center text-[#E45B39] ">00:59:33</p>
         </button>
 

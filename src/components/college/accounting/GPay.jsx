@@ -12,7 +12,7 @@ const Gpay = ({ onCancel ,Plan}) => {
         <div className="w-full flex gap-4 mb-6">
           <div className="w-[46%] -mt-4">
             <img
-              src="../../images/payment.jpg"
+              src="/images/payment.jpg"
               alt="Gpay-data"
               height={"500px"}
               width={"500px"}

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getHeaders } from "../../../../util/isCompany";
 
 export const getTest = createAsyncThunk(
   "test/getTest",
@@ -9,12 +10,7 @@ export const getTest = createAsyncThunk(
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/assessments/${id}`,
 
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       // //console.log(res);
@@ -34,12 +30,7 @@ export const getTestResultPage = createAsyncThunk(
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/studentDummy/get/test-details/${id}`,
 
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
 
       const res = req.data;
@@ -60,14 +51,10 @@ export const getAllTests = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       //console.log(`get tests`);
+      
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/assessments`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
 
       const res = req.data;
@@ -88,12 +75,7 @@ export const createTest = createAsyncThunk(
       const req = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/assessments/create`,
         data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       const res = req.data;
       return res.assessment;
@@ -137,12 +119,7 @@ export const selectStudentTest = createAsyncThunk(
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/college/test/status/${data.testId}/${data.responseId}`,
         { status: data.status },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
 
       //console.log(response, "response");
@@ -159,13 +136,7 @@ export const getselectedStudents = createAsyncThunk(
     try {
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/college/test/students/selected/${id}`,
-
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
 
       const res = req.data;
@@ -261,13 +232,7 @@ export const getStudentsForTest = createAsyncThunk(
     try {
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/assessments/students/${testId}?skip=${skip}&limit=${limit}&batch=${batch}&search=${search}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+          getHeaders()
       );
 
       const res = req.data;

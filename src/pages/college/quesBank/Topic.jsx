@@ -17,6 +17,7 @@ import DeletePoP from "../../../components/PopUps/DeleetPoP";
 import useTranslate from "../../../hooks/useTranslate";
 import { IoIosSearch } from "react-icons/io";
 import { FaChevronLeft } from "react-icons/fa";
+import { isUni } from "../../../util/isCompany";
 
 const Topic = () => {
   //useTranslate();
@@ -45,12 +46,12 @@ const Topic = () => {
 
   const randomImage = () => {
     const images = [
-      "../../images/FrontEnd.png",
-      "../../images/HR.png",
-      "../../images/Marketing.png",
-      "../../images/HR.png",
-      "../../images/Marketing.png",
-      "../../images/FrontEnd.png",
+      "/images/FrontEnd.png",
+      "/images/HR.png",
+      "/images/Marketing.png",
+      "/images/HR.png",
+      "/images/Marketing.png",
+      "/images/FrontEnd.png",
     ];
     return images[Math.floor(Math.random() * images.length)];
   };
@@ -282,7 +283,11 @@ const Topic = () => {
                             "TopicDetails",
                             JSON.stringify(section)
                           );
-                          navigate(`/college/quesBank/topic/${section._id}`);
+                          navigate(
+                            isUni
+                              ? `/university/pr/quesbank/topic/${section._id}`
+                              : `/college/quesbank/topic/${section._id}`
+                          );
                         }}
                       >
                         <Folder />

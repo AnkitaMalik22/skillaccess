@@ -18,7 +18,7 @@ const Education = ({ Education }) => {
                 <div className="flex gap-2 py-1 mt-2">
                   <div className="min-w-[2.5rem] h-10 bg-slate-300 self-center rounded-lg">
                     <img
-                      src="../../../images/university.jpg"
+                      src="/images/university.jpg"
                       alt="university"
                       className="w-10 h-10 rounded-lg p-1"
                     />

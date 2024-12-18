@@ -16,6 +16,7 @@ import { getAllTopics } from "../../../redux/college/test/thunks/topic";
 import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
 import useTranslate from "../../../hooks/useTranslate";
 import { Disclosure } from "@headlessui/react";
+import { isUni } from "../../../util/isCompany";
 const SelectTests = () => {
   //useTranslate();
   const [questionType, setQuestionType] = useState("mcq");
@@ -332,7 +333,7 @@ const SelectTests = () => {
 
                 <div className="flex gap-2">
                   <img
-                    src="../../images/icons/menu-boxed.png"
+                    src="/images/icons/menu-boxed.png"
                     alt="icon"
                     className="w-6 h-6 self-center"
                   />
@@ -346,7 +347,7 @@ const SelectTests = () => {
                   {" "}
                   <div className="flex gap-2 w-full">
                     {/* <img
-                      src="../../images/icons/stopwatch.png"
+                      src="/images/icons/stopwatch.png"
                       alt="icon"
                       className="w-6 h-6 self-center"
                     /> */}
@@ -358,7 +359,7 @@ const SelectTests = () => {
                     </h2>
                   </div>
                   <img
-                    src="../../images/icons/cross.png"
+                    src="/images/icons/cross.png"
                     alt="icon"
                     onClick={() => removeSection(section, index)}
                   />
@@ -467,7 +468,12 @@ const SelectTests = () => {
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
                 onClick={() => {
                   localStorage.removeItem("currentTopic");
-                  Navigate("/college/test/createTopicAdaptive?level=adaptive");
+                  if(isUni()){
+                    Navigate("/university/pr/test/createTopicAdaptive?level=adaptive");
+                  }else{
+                    Navigate("/college/test/createTopicAdaptive?level=adaptive");
+                  }
+                  
                 }}
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued" />
@@ -555,10 +561,16 @@ const SelectTests = () => {
                           Type: questionType || "mcq",
                         })
                       );
-
-                      Navigate(
-                        `/college/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
-                      );
+                      if(isUni()){
+                        Navigate(
+                          `/university/pr/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
+                        );
+                      }else{
+                        Navigate(
+                          `/college/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
+                        );
+                      }
+                      
                     }}
                   >
                     Details

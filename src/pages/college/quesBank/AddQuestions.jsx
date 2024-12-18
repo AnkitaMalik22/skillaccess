@@ -14,6 +14,7 @@ import {
 } from "../../../redux/college/test/testSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni} from "../../../util/isCompany";
 
 const AddQuestions = () => {
   //useTranslate();
@@ -199,8 +200,7 @@ const AddQuestions = () => {
                       // }
                       onClick={() =>
                         navigate(
-                          `/college/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}`
-                        )
+                          isUni()? `/university/pr//test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}` :  `/college/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=false&level=${level}` )
                       }
                     >
                       Details
@@ -211,7 +211,8 @@ const AddQuestions = () => {
                       className="self-center text-blued w-5 h-5 cursor-pointer"
                       onClick={() =>
                         navigate(
-                          `/college/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}`
+                          isUni()? `/university/pr/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}` : `/college/test/details/${index}?type=section&question=${topic.Type}&topicId=${topic._id}&view=true&level=${level}`
+
                         )
                       }
                     />

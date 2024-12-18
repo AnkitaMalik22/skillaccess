@@ -9,6 +9,7 @@ import {
 import useTranslate from "../../../hooks/useTranslate";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { FaAngleLeft, FaSearch } from "react-icons/fa";
+import { isUni } from "../../../util/isCompany";
 
 const Recent = () => {
   //useTranslate();
@@ -116,7 +117,7 @@ const Recent = () => {
               className={` flex justify-center cursor-pointer`}
               onClick={() => {
                 navigate(
-                  `/college/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`
+                  isUni() ? `/university/pr/quesbank/topic/${topic._id}` : `/college/quesbank/topic/${topic._id}`
                 );
               }}
             >
@@ -167,16 +168,16 @@ const Recent = () => {
             <div className="flex justify-center gap-3 ">
               {/* <div className=" self-center ">
                 {" "}
-                <img src="../../images/icons/clip.png" alt="" />{" "}
+                <img src="/images/icons/clip.png" alt="" />{" "}
               </div> */}
               {/* <div className=" self-center">
-                <img src="../../images/icons/pencil.png" alt="" />
+                <img src="/images/icons/pencil.png" alt="" />
               </div> */}
               <div
                 className=" self-center cursor-pointer"
                 onClick={() => handleDelete(topic?.Type, topic._id)}
               >
-                <img src="../../images/icons/cross.png" alt="" />
+                <img src="/images/icons/cross.png" alt="" />
               </div>
             </div>
           </div>

@@ -23,7 +23,7 @@ const Header = ({handleAddTeamClick}) => {
     //       className=" self-center ml-2 rounded-lg h-10 w-5"
     //       onClick={() => navigate(-1)}
     //     >
-    //       <img src="../../images/icons/list.png" alt="" />
+    //       <img src="/images/icons/list.png" alt="" />
     //     </button>
     //     <h2 className="text-2xl font-dmSans font-bold text-left self-center">
     //       Team Members
@@ -50,7 +50,7 @@ const Header = ({handleAddTeamClick}) => {
           className=" self-center ml-2 rounded-lg h-10 w-5"
           onClick={() => navigate('/college/teams')}
         >
-          <img src="../../images/icons/list.png" alt="" />
+          <img src="/images/icons/list.png" alt="" />
         </button>
         <h2 className="text-2xl font-dmSans font-bold text-left self-center">
           Teams

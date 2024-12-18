@@ -5,6 +5,7 @@ import {
   deleteRecentUsedQuestion,
   getRecentUsedQuestions,
 } from "../../../../redux/college/test/thunks/question";
+import { isUni } from "../../../../util/isCompany";
 
 const Recent = () => {
   const arr = [2, 1, 1, 1, 1];
@@ -31,7 +32,9 @@ const Recent = () => {
         <h2 className="font-bold text-base">Recent used questions</h2>
         <button
           className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
-          onClick={() => navigate("/college/quesBank/recent")}
+          onClick={() => navigate(
+            isUni() ? "/university/pr/quesBank/recent" : "/college/quesBank/recent"
+          )}
         >
           View All
         </button>
@@ -69,7 +72,9 @@ const Recent = () => {
               className={`flex justify-center cursor-pointer`}
               onClick={() => {
                 navigate(
-                  `/college/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`
+                  isUni()
+                    ? `/university/pr/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`
+                    :   `/college/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`
                 );
               }}
             >
@@ -97,7 +102,7 @@ const Recent = () => {
                 className=" self-center cursor-pointer"
                 onClick={() => handleDelete(topic?.Type, topic._id)}
               >
-                <img src="../../images/icons/cross.png" alt="" />
+                <img src="/images/icons/cross.png" alt="" />
               </div>
             </div>
           </div>

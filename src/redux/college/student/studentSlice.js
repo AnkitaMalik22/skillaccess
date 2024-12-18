@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { getHeaders } from "../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -28,12 +29,7 @@ export const getStudents = createAsyncThunk(
     try {
       const response = await axios.get(
         `${REACT_APP_API_URL}/api/college/${data?.id}/students?batch=${data?.batch}&filterType=${data?.filterType}&page=${data?.page}&limit=${data?.limit}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+          getHeaders()
       );
       //console.log(response.data);
       return response.data;
@@ -50,12 +46,7 @@ export const uploadStudents = createAsyncThunk(
       const response = await axios.post(
         `${REACT_APP_API_URL}/api/college/upload/students`,
         { students },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
       //console.log(response.data);
       return response.data;
@@ -72,12 +63,7 @@ export const approveStudent = createAsyncThunk(
       const response = await axios.post(
         `${REACT_APP_API_URL}/api/college/student/approve`,
         { studentId },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+       getHeaders()
       );
 
       //console.log(response, "response");
@@ -95,12 +81,9 @@ export const getStudentCV = createAsyncThunk(
     try {
       const req = await axios.get(
         `${REACT_APP_API_URL}/api/college/student/${studentId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        
+         getHeaders()
+        
       );
       const res = req.data;
       //console.log(res);
@@ -118,12 +101,7 @@ export const rejectRequest = createAsyncThunk(
       const response = await axios.post(
         `${REACT_APP_API_URL}/api/college/student/reject/${studentId}`,
         {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+        getHeaders()
       );
 
       return response;
@@ -206,7 +184,7 @@ export const studentSlice = createSlice({
         state.APPROVE_STUDENT_LOADING = false;
         toast.success("Student Approved Successfully");
         getStudents();
-        window.location.replace("/college/students");
+        // window.location.replace("/college/students");
       })
       .addCase(approveStudent.rejected, (state) => {
         state.loading = false;
@@ -237,7 +215,7 @@ export const studentSlice = createSlice({
         state.error = false;
         toast.success("Student Rejected Successfully");
         state.REJECT_STUDENT_LOADING = false;
-        window.location.replace("/college/students");
+        // window.location.replace("/college/students");
       })
       .addCase(rejectRequest.rejected, (state) => {
         state.loading = false;

@@ -48,7 +48,7 @@ const Navbar = (props) => {
 
         <div className="ml-3">
           {" "}
-          <img src="../../../images/logoFinal.png" alt="" width="180px" />
+          <img src="/images/logoFinal.png" alt="" width="180px" />
         </div>
       </div>
 
@@ -77,7 +77,7 @@ const Navbar = (props) => {
           onClick={goToProfile}
         >
           <img
-            src={userDetails?.user?.avatar?.url || "../../../images/defaultUser.png"}
+            src={userDetails?.user?.avatar?.url || "/images/defaultUser.png"}
             alt="icon"
             className="h-5 w-5"
           />{" "}
@@ -94,7 +94,7 @@ const Navbar = (props) => {
                   src={
                     userDetails?.user?.avatar?.url ||
                     
-                    "../../../images/defaultUser.jpg"
+                    "/images/defaultUser.jpg"
                   }
                   alt="User Avatar"
                   className="h-5 w-5"

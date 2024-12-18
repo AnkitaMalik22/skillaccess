@@ -25,6 +25,7 @@ import calculateDaysAndWeeks from "../../../util/daysAndWeeks";
 import { getStudents } from "../../../redux/college/student/studentSlice";
 import InfiniteScroll from "react-infinite-scroller";
 import Loader from "../../../components/loaders/Loader";
+import { isUni } from "../../../util/isCompany";
 
 const Test = () => {
   //useTranslate();
@@ -55,7 +56,7 @@ const Test = () => {
       })
     );
     dispatch(getStudents({ id: user?._id }));
-    dispatch(getRecentTests({ skip: index * 10, limit: 10 }));
+    !isUni() && dispatch(getRecentTests({ skip: index * 10, limit: 10 }));
     dispatch(setTestSelectedTopics([]));
     dispatch(setCurrentQuestionCount(0));
     dispatch(getAllTests());
@@ -95,7 +96,7 @@ const Test = () => {
       {/* search bar */}
       <Header students={approvedStudents} />
 
-      <div className="flex rounded-lg md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch h-screen">
+      <div className={`flex rounded-lg md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch ${isUni() ? "":"h-screen" }` }>
         {/* left block */}
         <div className="w-3/4 rounded-lg flex flex-col">
           <div className="w-full flex-grow overflow-y-auto">
@@ -162,7 +163,7 @@ const Test = () => {
         </div>
 
         {/* right block */}
-        <div className="w-1/4 p-4 bg-gray-100 rounded-3xl font-dmSans sm:block flex flex-col">
+   {  !isUni() && <div className="w-1/4 p-4 bg-gray-100 rounded-3xl font-dmSans sm:block flex flex-col">
           <div className="rounded-3xl bg-white h-full mx-auto flex flex-col">
             <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
               Recent Assessments Completed
@@ -175,7 +176,7 @@ const Test = () => {
                     <div className="flex gap-3 items-center">
                       {/* <div className="min-w-[2.5rem] h-10 self-center rounded-lg">
                         <img
-                          src="../../images/teams.png"
+                          src="/images/teams.png"
                           alt="user-icon"
                           className="rounded-lg w-11 h-11"
                         />
@@ -230,7 +231,7 @@ const Test = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> }  
       </div>
     </div>
   );

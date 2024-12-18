@@ -37,7 +37,7 @@ const AssessmentList = ({ id }) => {
                 <div className="flex gap-3 items-center ">
                   <div className="min-w-[2.5rem] h-10  self-center rounded-lg">
                     <img
-                      src="../../../images/teams.png"
+                      src="/images/teams.png"
                       alt=" user-icon"
                       className=" rounded-lg w-11 h-11"
                     />

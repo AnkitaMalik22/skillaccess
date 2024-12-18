@@ -10,6 +10,7 @@ import Loader from "../../../components/college/test/addVideo/Loader";
 import { FiUpload } from "react-icons/fi";
 import useTranslate from "../../../hooks/useTranslate";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { isUni } from "../../../util/isCompany";
 
 const AddQuestionsSelect = () => {
   //useTranslate();
@@ -595,7 +596,7 @@ const AddQuestionsSelect = () => {
               className="bg-[#D9E1E7]  self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-14"
               onClick={() => navigate(-1)}
             >
-              <img src="../../../../images/icons/back.png" alt="" srcset="" />
+              <img src="/images/icons/back.png" alt="" srcset="" />
             </button>
 
             <div className="">
@@ -610,7 +611,9 @@ const AddQuestionsSelect = () => {
           <div className=" flex">
             <button
               className="self-center justify-center flex bg-accent py-[5px] px-3 rounded-2xl text-xs gap-2 text-white"
-              onClick={() => navigate(`/college/quesBank/topic`)}
+              onClick={() => navigate(
+                isUni() ? "/university/pr/quesbank/topic" : `/college/quesBank/topic`
+              )}
             >
               View All
               <FaArrowRightLong className="self-center text-lg text-white ml-4" />
@@ -653,7 +656,7 @@ const AddQuestionsSelect = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -667,7 +670,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -691,7 +694,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -703,7 +706,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -727,7 +730,7 @@ const AddQuestionsSelect = () => {
                 />
               </div>
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -739,7 +742,7 @@ const AddQuestionsSelect = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}

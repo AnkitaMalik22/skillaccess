@@ -27,13 +27,13 @@ const Companies = () => {
               key={index}
             >
               <figure>
-                <img src="../../images/CompanyBg.png" alt="Shoes" />
+                <img src="/images/CompanyBg.png" alt="Shoes" />
                 {/* <img src={company.basic.coverPhoto} alt="cover photo"  /> */}
               </figure>
               <div className="card-body">
                 <div className="w-14 h-14  -mt-10">
                   <img
-                    src="../../images/companyLogo.png"
+                    src="/images/companyLogo.png"
                     alt=""
                     className="object-scale-down rounded-2xl"
                   />

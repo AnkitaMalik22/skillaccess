@@ -54,7 +54,7 @@ const Companies = () => {
                 <figure>
                   <img
                     src={
-                      company.basic?.coverPhoto || "../../images/CompanyBg.png"
+                      company.basic?.coverPhoto || "/images/CompanyBg.png"
                     }
                     alt="cover photo"
                   />

@@ -42,14 +42,16 @@ import AddTestToJob from "./pages/company/jobs/AddTestToJob";
 import EditJob from "./pages/company/jobs/EditJob";
 import Settings from "./pages/company/settings/Settings";
 import ViewInvitedStudents from "./pages/college/companies/ViewInvitedStudents";
+import RegisterUniversity from "./pages/university/auth/RegisterUniversity";
+import UniversityLoginPage from "./pages/university/auth/LoginUniversity";
 import CompanyQuesRoute from "./pages/company/quesBank";
+import UniversityLayout from "./layout/University";
+import { isUni } from "./util/isCompany";
 
 const Register = lazy(() => import("./pages/college/auth/Register"));
 const Login = lazy(() => import("./pages/college/auth/Login"));
 const TermsPolicies = lazy(() => import("./pages/college/auth/TermsPolicies"));
 const Dashboard = lazy(() => import("./pages/college/dashboard/Dashboard"));
-
-
 
 export default function App() {
   const [loader, setLoader] = useState(true);
@@ -74,6 +76,7 @@ export default function App() {
     /^\/college\/me\/failed$/, // Exact match for "/college/me/failed"
     /^\/college\/settings\/security\/securityApp$/, // Exact match for "/college/settings/security/securityApp"
     /^\/company.*$/,
+    /^\/university.*$/,
   ]);
 
   useEffect(() => {
@@ -90,7 +93,7 @@ export default function App() {
         break; // Exit loop early if a match is found
       }
     }
-    if (shouldGetCollege) {
+    if (shouldGetCollege ) {
       dispatch(getCollege()).finally(() => {
         setLoader(false); // Ensure setLoader is defined or imported
       });
@@ -103,18 +106,20 @@ export default function App() {
     }
   }, [logoutError]);
   useEffect(() => {
-    if (/^\/company\/pr\/.*$/.test(window.location.pathname) && !getCookie("token")) {
+    if (
+      /^\/company\/pr\/.*$/.test(window.location.pathname) &&
+      !getCookie("token")
+    ) {
       console.log(!getCookie);
       navigate("/company");
     }
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn && window.location.pathname === "/" && !company) {
+    if (isLoggedIn && window.location.pathname === "/" && !company && !isUni()) {
       navigate("/college/dashboard");
     }
   }, [isLoggedIn, navigate]);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -130,89 +135,101 @@ export default function App() {
   return isDesktop ? (
     <div className="app-content">
       <React.Fragment>
-      
-      {isLoggedIn ? (
-        <CollegeLayout>
+        {isLoggedIn  ? (
+          <CollegeLayout>
+            <Suspense fallback={<Loader />}>
+              <Routes>
+                <>
+                  {TestRoute("college/")}
+                  {StudentRoute("college/")}
+                  {QuesRoute("college/")}
+                  {CompaniesRoute()}
+                  {ResultsRoute("college/")}
+                  {InboxRoute()}
+                  {SettingsRoute()}
+                  {TeamsRoute()}
+                  {AccountRoute()}
+                  {JobRoute()}
+                </>
+                <Route path="/college/dashboard" element={<Dashboard />} />
+                <Route path="/college/profile" element={<Profile />} />
+                <Route path="/college/Jobs" element={<Jobs />} />
+              </Routes>
+            </Suspense>
+          </CollegeLayout>
+        ) : (
           <Suspense fallback={<Loader />}>
             <Routes>
-              <>
-                {TestRoute()}
-                {StudentRoute()}
-                {QuesRoute()}
-                {CompaniesRoute()}
-                {ResultsRoute()}
-                {InboxRoute()}
-                {SettingsRoute()}
-                {TeamsRoute()}
-                {AccountRoute()}
-                {JobRoute()}
-              </>
-              <Route path="/college/dashboard" element={<Dashboard />} />
-              <Route path="/college/profile" element={<Profile />} />
-              <Route path="/college/Jobs" element={<Jobs />} />
+              <Route
+                path="/college/settings/security/securityApp"
+                element={<SecurityAppPage />}
+              />
+              <Route path="/" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/terms&policies" element={<TermsPolicies />} />
+              <Route path="/forgotPassword" element={<ForgotPassword />} />
+              <Route path="/password/reset/:id" element={<ResetPassword />} />
+              <Route path="college/me/failed" element={<NotAuth />} />
 
-            </Routes>
-          </Suspense>
-        </CollegeLayout>
-      ) : (
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route
-              path="/college/settings/security/securityApp"
-              element={<SecurityAppPage />}
-            />
-            <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/terms&policies" element={<TermsPolicies />} />
-            <Route path="/forgotPassword" element={<ForgotPassword />} />
-            <Route path="/password/reset/:id" element={<ResetPassword />} />
-            <Route path="college/me/failed" element={<NotAuth />} />
+              {/* company routes */}
 
+              <Route path="/company/">
+                <Route path="" element={<LoginCompany />} />
+                <Route path="register" element={<RegisterCompany />} />
 
+                <Route path="approval" element={<AwaitingApproval />} />
+                <Route path="pr" element={<CompanyLayout />}>
+                  {/* <Route path="/" element={<CompanyLayout />}> */}
+                  {CompanyQuesRoute()}
+                  {CompanyTestHome()}
+                  <Route path="settings" element={<Settings />} />
+                  {CompanyResultRoutes()}
+                  <Route path="profile" element={<CompanyProfile />} />
+                  <Route path="dashboard" element={<DashboardCompany />} />
+                  <Route path="jobs" element={<Job />} />
+                  <Route path="jobs/create" element={<CreateJob />} />
+                  <Route path="jobs/:id" element={<JobDetailsPage />} />
+                  <Route
+                    path="job/students"
+                    element={<InvitedStudentsForJob />}
+                  />
+                  <Route
+                    path="job/add-test/:jobId"
+                    element={<AddTestToJob />}
+                  />
+                  <Route path="job/edit/:jobId" element={<EditJob />} />
+                </Route>
+              </Route>
 
-            {/* company routes */}
+              {/* university routes */}
+              <Route path="/university/">
+                <Route path="" element={<UniversityLoginPage />} />
+                <Route path="register" element={<RegisterUniversity />} />
+                <Route path="approval" element={<AwaitingApproval />} />
+                <Route path="pr" element={<UniversityLayout />}>
+                  <Route path="settings" element={<Settings />} />
+                  <Route path="profile" element={<Profile />} />
+                  {TestRoute("")}
+                 {StudentRoute("")}
+                  {QuesRoute("")}
+                  {ResultsRoute("")}
+                  <Route path="dashboard" element={<Dashboard />} />
+                </Route>
+              </Route>
 
-            <Route path="/company/">
-              <Route path="" element={<LoginCompany />} />
-              <Route path="register" element={<RegisterCompany />} />
-          
-              <Route path="approval" element={<AwaitingApproval />} />
-              <Route path="pr"  element={<CompanyLayout />}>
-            {/* <Route path="/" element={<CompanyLayout />}> */}
-            {CompanyQuesRoute()}
-            {CompanyTestHome()}
-            <Route path="settings" element={<Settings />} />
-            {CompanyResultRoutes()}
-            <Route path="profile" element={<CompanyProfile />} />
-            <Route path="dashboard" element={<DashboardCompany />} />
-            <Route path="jobs" element={<Job />} />
-            <Route path="jobs/create" element={<CreateJob />} />
-            <Route path="jobs/:id" element={<JobDetailsPage />} />
-            <Route path="job/students" element={<InvitedStudentsForJob />} />
-            <Route path="job/add-test/:jobId" element={<AddTestToJob />} />
-            <Route path="job/edit/:jobId" element={<EditJob />} />
+              {/* </Route> */}
 
-            
-           
-             </Route>
-            </Route>
-              
-            {/* </Route> */}
-           
-            {/* {isCompanyLogin && (
+              {/* {isCompanyLogin && (
           <Route path="/company" element={<CompanyLayout />}>
             <Route path="dashboard" element={<DashboardCompany />} />
           </Route>
         )} */}
-          </Routes>
-        </Suspense>
-      )}
-      
-    </React.Fragment>
+            </Routes>
+          </Suspense>
+        )}
+      </React.Fragment>
     </div>
   ) : (
     <DesktopOnly />
   );
-   
-  
 }

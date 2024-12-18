@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../../components/college/quesBank/addVideo/addSelect/Header";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
+import { isUni } from "../../../util/isCompany";
 
 const AddVideoQuestionsType = () => {
   //useTranslate();
@@ -14,17 +15,17 @@ const AddVideoQuestionsType = () => {
   const NavHandler = () => {
     switch (selectQuestionType) {
       case "mcq":
-        navigate(`/college/quesBank/video/${id}/addmcq`);
+        navigate(isUni() ? `/university/pr/quesBank/video/${id}/addmcq` : `/college/quesBank/video/${id}/addmcq`);
 
         break;
 
       case "short":
-        navigate(`/college/quesBank/video/shortlong/${id}?length=short`);
+        navigate(isUni() ? `/university/pr/quesBank/video/shortlong/${id}?length=short` : `/college/quesBank/video/shortlong/${id}?length=short`);
 
         break;
 
       case "long":
-        navigate(`/college/quesBank/video/shortlong/${id}?length=long`);
+        navigate(isUni() ? `/university/pr/quesBank/video/shortlong/${id}?length=long` : `/college/quesBank/video/shortlong/${id}?length=long`);
 
         break;
 
@@ -73,7 +74,7 @@ const AddVideoQuestionsType = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -88,7 +89,7 @@ const AddVideoQuestionsType = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -115,7 +116,7 @@ const AddVideoQuestionsType = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -126,7 +127,7 @@ const AddVideoQuestionsType = () => {
             <h2 className="text-xl font-normal self-center">Answer in brief</h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -151,7 +152,7 @@ const AddVideoQuestionsType = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -164,7 +165,7 @@ const AddVideoQuestionsType = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
