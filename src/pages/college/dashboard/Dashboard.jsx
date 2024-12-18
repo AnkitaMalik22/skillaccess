@@ -32,8 +32,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(getAllJobs(user?._id))
-      dispatch(getCompany({ collegeId: user?._id }));
+     if (!isUni() ){
+        dispatch(getAllJobs(user?._id));
+        dispatch(getCompany({ collegeId: user?._id }));
+      }
+      
       dispatch(getResultGraph());
     }
   }, [user]);
@@ -61,7 +64,7 @@ const Dashboard = () => {
         <h1 className="text-base font-bold mb-4 md:mb-8 basis-full text-[#171717]">
           Overview
         </h1>
-        <div className="flex flex-wrap gap-6 xl:gap-8 2xl:gap-12 justify-between">
+        <div className="flex flex-wrap gap-6 xl:gap-8 2xl:gap-12 ">
           {/* 1st card */}
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
             <div className="rounded-lg bg-[#f6f6fb] w-10 h-10 flex justify-center mb-4">
@@ -74,7 +77,7 @@ const Dashboard = () => {
             {/* <h2 className="text-[#00875A] font-medium text-[17px]">105.34%</h2> */}
           </div>
 
-          <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
+{       !isUni()  &&   <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
             <div className="rounded-lg bg-[#f2f9f7] w-10 h-10 flex justify-center mb-4">
               <CgAwards className="text-green-600 self-center w-6 h-6 " />
             </div>
@@ -83,9 +86,9 @@ const Dashboard = () => {
             </h2>
             <h2 className="text-[#8F92A1] font-bold text-xs mb-4">Companies</h2>
             {/* <h2 className="text-[#DE350B] font-medium text-[17px]">25.34%</h2> */}
-          </div>
+          </div>}
 
-          <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
+       {  !isUni()  &&  <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
             <div className="rounded-lg bg-[#fffaf4] w-10 h-10 flex justify-center mb-4">
               <CgTrending className="text-[#FF991F] self-center w-6 h-6 " />
             </div>
@@ -96,9 +99,9 @@ const Dashboard = () => {
               Student Placed
             </h2>
             {/* <h2 className="text-[#DE350B] font-medium text-[17px]">0%</h2> */}
-          </div>
+          </div>}
 
-          <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
+       { !isUni()  &&   <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
             <div className="rounded-lg bg-[#fafbff] w-10 h-10 flex justify-center mb-4">
               <TbBriefcase2 className="text-blued  self-center w-6 h-6 " />
             </div>
@@ -114,7 +117,7 @@ const Dashboard = () => {
             >
               {/* 0% */}
             </h2>
-          </div>
+          </div>}
 
           <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
             <div className="rounded-lg bg-[#fafbff] w-10 h-10 flex justify-center mb-4">
@@ -128,7 +131,7 @@ const Dashboard = () => {
             </h2>
             <span
               className="flex gap-2 justify-center hover:cursor-pointer"
-              onClick={() => navigate("/college/test")}
+              onClick={() => navigate(`/${isUni() ? "university/pr":"college"}/test`)}
             >
               <h2 className="text-blued  font-bold text-center  text-base  ">
                 Create New
@@ -139,7 +142,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className=" gap-5  mx-auto  overflow-x-clip grid grid-cols-2">
+    {  !isUni() && <div className=" gap-5  mx-auto  overflow-x-clip grid grid-cols-2">
         {/* 1st block */}
         <div className="bg-[#F8F8F9]  rounded-3xl p-4 md:p-8 mb-5">
           <span className="flex justify-between">
@@ -177,7 +180,7 @@ const Dashboard = () => {
           </span>
           <SwiperSlideRight />
         </div>
-      </div>
+      </div>}
 
       <ChartComp />
     </>
