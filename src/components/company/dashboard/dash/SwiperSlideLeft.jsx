@@ -58,7 +58,7 @@ const SwiperSlideLeft = () => {
         className="bg-gray-100 w-full h-20 mb-4 mx-auto cursor-pointer rounded-lg text-center pb-10"
         onClick={() => navigate(`/company/pr/jobs/${job._id}`)}
       >
-        <img src={job?.company?.avatar.url || "../../../images/default.jpg"} alt="" className="rounded-lg object-contain" />
+        <img src={job?.company?.avatar.url || "/images/default.jpg"} alt="" className="rounded-lg object-contain" />
         {/* {job?.SeniorityLevel} */}
       </div>
       

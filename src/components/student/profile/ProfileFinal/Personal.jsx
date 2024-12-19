@@ -18,7 +18,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
 
               <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
                 <img
-                  src="../../images/icons/pen.png"
+                  src="/images/icons/pen.png"
                   alt=""
                   onClick={() => imgRef.current.click()}
                 />
@@ -48,7 +48,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
               {editable && (
                 <div className="absolute bottom-2 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
                   <img
-                    src="../../images/icons/pen.png"
+                    src="/images/icons/pen.png"
                     alt=""
                     onClick={() => setEditable(true)}
                   />
@@ -89,7 +89,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
                 window.location.reload(true);
               }}
             >
-              <img src="../../images/icons/pen.png" alt="" />{" "}
+              <img src="/images/icons/pen.png" alt="" />{" "}
               <p>Edit Profile</p>
             </button>
           </div>

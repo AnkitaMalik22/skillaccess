@@ -101,7 +101,7 @@ const Details = ({}) => {
         <div className="flex gap-2 ml-2 font-dmSans w-full self-center">
           <div className="w-10 h-10 rounded-lg bg-gray-200 bg-opacity-50 flex justify-center p-2">
             {" "}
-            <img src="../../images/icons/calendar.png" alt="" />
+            <img src="/images/icons/calendar.png" alt="" />
           </div>
           <p className="opacity-60 self-center">2.5 years experience</p>
         </div>

@@ -49,7 +49,7 @@ const UniversityLoginPage = () => {
           <div className="card-body">
             {/* Logo Section */}
             <div className="flex gap-2 justify-center mb-4 md:mb-8">
-              <img src="../../images/logoFinal.png" alt="logo" className="w-60" />
+              <img src="/images/logoFinal.png" alt="logo" className="w-60" />
             </div>
 
             {/* Heading Section */}

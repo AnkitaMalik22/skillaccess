@@ -109,7 +109,7 @@ const CompanyJobOverview = () => {
                 <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
                     <div className="h-56 relative">
                         <img
-                            src={jobDetails?.company?.basic?.coverPhoto || "../../../images/CompanyBg.png"}
+                            src={jobDetails?.company?.basic?.coverPhoto || "/images/CompanyBg.png"}
                             alt="Company Background"
                             className="w-full h-full object-cover"
                         />

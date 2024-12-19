@@ -93,7 +93,7 @@ export default function App() {
         break; // Exit loop early if a match is found
       }
     }
-    if (shouldGetCollege) {
+    if (shouldGetCollege ) {
       dispatch(getCollege()).finally(() => {
         setLoader(false); // Ensure setLoader is defined or imported
       });
@@ -213,6 +213,7 @@ export default function App() {
                  {StudentRoute("")}
                   {QuesRoute("")}
                   {ResultsRoute("")}
+                  <Route path="dashboard" element={<Dashboard />} />
                 </Route>
               </Route>
 

@@ -39,7 +39,7 @@ const Header = ({ Q, page }) => {
               <h3 className="mr-2 ">{name}</h3>
               <span>
                 <img
-                  src="../../images/icons/test.png"
+                  src="/images/icons/test.png"
                   alt="test"
                   className="w-4 h-4"
                 />
@@ -48,7 +48,7 @@ const Header = ({ Q, page }) => {
               } Topics</h3>{" "}
               <span className="w-2 h-2">
                 <img
-                  src="../../images/icons/hourglass.png"
+                  src="/images/icons/hourglass.png"
                   alt="test"
                   className=" object-scale-down"
                 />

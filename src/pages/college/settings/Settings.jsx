@@ -42,7 +42,7 @@ const Settings = () => {
           >
             <div className="flex gap-6 items-center">
               <img
-                src="../../images/icons/bellDot.png"
+                src="/images/icons/bellDot.png"
                 alt="bell-icon"
                 srcset=""
               />
@@ -64,7 +64,7 @@ const Settings = () => {
             onClick={() => Navigate("/college/settings/security")}
           >
             <div className="flex gap-6 items-center">
-              <img src="../../images/icons/lock.png" alt="lock-icon" />
+              <img src="/images/icons/lock.png" alt="lock-icon" />
               <p className="text-lg font-medium text-[#171717]">
                 Privacy and Security
               </p>
@@ -83,7 +83,7 @@ const Settings = () => {
             onClick={() => Navigate("/college/settings/activity")}
           >
             <div className="flex gap-6 items-center">
-              <img src="../../images/icons/location.png" alt="location-icon" />
+              <img src="/images/icons/location.png" alt="location-icon" />
               <p className="text-lg font-medium text-[#171717]">
                 Login Activity
               </p>
@@ -102,7 +102,7 @@ const Settings = () => {
             onClick={() => Navigate("/college/settings/visibility")}
           >
             <div className="flex gap-6 items-center">
-              <img src="../../images/icons/eye.png" alt="eye-icon" />
+              <img src="/images/icons/eye.png" alt="eye-icon" />
               <p className="text-lg font-medium text-[#171717]">Visibility</p>
             </div>
             <div className="flex self-center">
@@ -120,7 +120,7 @@ const Settings = () => {
             onClick={() => setShowLogoutPopup(true)}
           >
             <div className="flex gap-6 items-center">
-              <img src="../../images/icons/del.png" alt="del-icon" />
+              <img src="/images/icons/del.png" alt="del-icon" />
               <p className="text-lg text-[#DE350B] font-medium">Log Out</p>
             </div>
             {/* <div className="flex self-center">

@@ -48,7 +48,7 @@ const Header = () => {
             <h3>Untitiled Assessments</h3>
             <div className="flex gap-2">
               <img
-                src="../../../../images/icons/test.png"
+                src="/images/icons/test.png"
                 alt="test"
                 className="w-4 h-4"
               />
@@ -56,7 +56,7 @@ const Header = () => {
             </div>
             <div className="flex gap-2">
               <img
-                src="../../../../images/icons/hourglass.png"
+                src="/images/icons/hourglass.png"
                 alt="test"
                 className="w-4 h-4 object-contain"
               />

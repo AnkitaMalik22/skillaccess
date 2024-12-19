@@ -62,7 +62,7 @@ const List = () => {
                 <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center ">
                   {" "}
                   <img
-                    src="../../images/student.png"
+                    src="/images/student.png"
                     alt=""
                     width="50px"
                     height="50px"

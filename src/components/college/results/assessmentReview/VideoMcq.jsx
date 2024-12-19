@@ -25,21 +25,21 @@ const VideoMcq = ({ Number, mcq, AnswerIndex, StudentAnswerIndex }) => {
                 {AnswerIndex === StudentAnswerIndex ? (
                   index === AnswerIndex ? (
                     <img
-                      src="../../../images/icons/greenDotSelected.png"
+                      src="/images/icons/greenDotSelected.png"
                       alt="greensel"
                     />
                   ) : (
                     <img
-                      src="../../../images/icons/blueDot.png"
+                      src="/images/icons/blueDot.png"
                       alt="greensel"
                     />
                   )
                 ) : index === StudentAnswerIndex ? (
-                  <img src="../../../images/icons/redDot.png" alt="red" />
+                  <img src="/images/icons/redDot.png" alt="red" />
                 ) : index === AnswerIndex ? (
-                  <img src="../../../images/icons/greenDot.png" alt="green" />
+                  <img src="/images/icons/greenDot.png" alt="green" />
                 ) : (
-                  <img src="../../../images/icons/blueDot.png" alt="blue" />
+                  <img src="/images/icons/blueDot.png" alt="blue" />
                 )}
               </div>
 

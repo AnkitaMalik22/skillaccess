@@ -68,7 +68,7 @@ const ProfileEducation = () => {
           <h2>Acheivements (1)</h2>
           <div className="flex flex-wrap mt-4 border-b-2 pb-5">
             <img
-              src="../../images/cert.png"
+              src="/images/cert.png"
               alt=""
               className="w-60 h-40 object-cover rounded-lg"
             />

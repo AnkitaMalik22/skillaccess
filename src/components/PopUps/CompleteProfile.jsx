@@ -9,7 +9,7 @@ const CompleteProfile = ({ onCancel }) => {
         </p>
         <div className="w-full flex gap-4 mb-6">
           <div className="w-[40%] -mt-4">
-            <img src="../../images/profile-data.png" alt="profile-data" />
+            <img src="/images/profile-data.png" alt="profile-data" />
           </div>
           <div className="w-[52%]">
             <p className="font-medium text-xl text-[#7f7f7f]">

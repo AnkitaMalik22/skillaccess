@@ -86,7 +86,7 @@ const Selected = () => {
             <div className={` flex `}>
               <div className="flex self-center">
                 <div className=" min-w-[3rem] self-center  mr-2  ">
-                      <img  alt="" src={student?.studentId?.avatar?.url || "../../../images/student.png"} className="w-10 h-10 rounded-full"/>
+                      <img  alt="" src={student?.studentId?.avatar?.url || "/images/student.png"} className="w-10 h-10 rounded-full"/>
                 </div>
                 <span className="break-words min-w-24 pt-1 self-center">
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">

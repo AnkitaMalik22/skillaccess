@@ -137,7 +137,7 @@ const Register = () => {
                 />
               </svg>
               <h1 className="font-bold text-[22px]">Skill Access</h1> */}
-                  <img src="../../images/logoFinal.png" alt="logo" className="w-60" />
+                  <img src="/images/logoFinal.png" alt="logo" className="w-60" />
             </div>
 
             <h2 className="font-bold text-2xl text-center text-[#171717] mb-2">

@@ -11,7 +11,7 @@ const ApplyPoPup = ({ onCancel}) => {
         <div className="w-full flex gap-4 mb-6">
                 <div className="w-[40%] -mt-4">
                     <img
-                      src="../../images/profile-data.png"
+                      src="/images/profile-data.png"
                       alt="profile-data"
                       />
                 </div>

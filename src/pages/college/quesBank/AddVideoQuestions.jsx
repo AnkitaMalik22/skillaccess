@@ -74,7 +74,7 @@ const AddVideoQuestionsType = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -89,7 +89,7 @@ const AddVideoQuestionsType = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -116,7 +116,7 @@ const AddVideoQuestionsType = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -127,7 +127,7 @@ const AddVideoQuestionsType = () => {
             <h2 className="text-xl font-normal self-center">Answer in brief</h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}
@@ -152,7 +152,7 @@ const AddVideoQuestionsType = () => {
               </div>
 
               <img
-                src="../../../../images/icons/exam.png"
+                src="/images/icons/exam.png"
                 alt=""
                 className="w-6 h-8 self-center"
               />
@@ -165,7 +165,7 @@ const AddVideoQuestionsType = () => {
             </h2>
             <div className=""></div>
             {/* <img
-              src="../../../../images/icons/dot.png"
+              src="/images/icons/dot.png"
               alt=""
               className="self-center w-5"
             /> */}

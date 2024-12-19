@@ -13,7 +13,7 @@ const Filter = ({handleFilter}) => {
           className=" self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16"
           onClick={() => navigate(-1)}
         >
-          <img src="../../images/icons/list.png" alt="" />
+          <img src="/images/icons/list.png" alt="" />
         </button>
       </span>
       <div className="bg-gray-100 rounded-xl -ml-24 sm:h-12 h-10 flex my-2 px-4 w-fit">
@@ -29,7 +29,7 @@ const Filter = ({handleFilter}) => {
       <span className="flex gap-2">
         <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
           <img
-            src="../../../images/icons/Filter.png"
+            src="/images/icons/Filter.png"
             alt=""
             srcset=""
             className="mx-auto"

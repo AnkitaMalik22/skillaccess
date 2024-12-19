@@ -175,12 +175,12 @@ const FindAnswer = ({ question, number }) => {
                     <div className="w-6">
                       {index === AnswerIndex ? (
                         <img
-                          src="../../../images/icons/greenDotSelected.png"
+                          src="/images/icons/greenDotSelected.png"
                           alt="greensel"
                         />
                       ) : (
                         <img
-                          src="../../../images/icons/blueDot.png"
+                          src="/images/icons/blueDot.png"
                           alt="greensel"
                         />
                       )}

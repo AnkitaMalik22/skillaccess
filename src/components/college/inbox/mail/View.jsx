@@ -100,10 +100,10 @@ const View = ({ index, filter, inboxType }) => {
               <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
                 <div className="flex gap-2">
                   {item.format !== "image" && (
-                    <img src="../../images/icons/fileBlue.png" alt="" />
+                    <img src="/images/icons/fileBlue.png" alt="" />
                   )}
                   {item.format === "image/png" && (
-                    <img src="../../images/icons/image.png" alt="" />
+                    <img src="/images/icons/image.png" alt="" />
                   )}
                   <div className="self-center">
                     <p className="text-sm font-bold">{item.name}</p>
@@ -137,10 +137,10 @@ const View = ({ index, filter, inboxType }) => {
                     <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
                       <div className="flex gap-2">
                         {item.format !== "image" && (
-                          <img src="../../images/icons/fileBlue.png" alt="" />
+                          <img src="/images/icons/fileBlue.png" alt="" />
                         )}
                         {item.format === "image/png" && (
-                          <img src="../../images/icons/image.png" alt="" />
+                          <img src="/images/icons/image.png" alt="" />
                         )}
                         <div className="self-center">
                           <p className="text-sm font-bold">{item.name}</p>

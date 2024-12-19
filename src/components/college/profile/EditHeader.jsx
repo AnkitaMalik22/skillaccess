@@ -4,13 +4,14 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../loaders/Loader";
 
+
 const EditHeader = ({
-  editing,
+  loading,
+  
   setEditable,
-  editable,
+
   handleUpdate,
-  college,
-  setSubmitUpdateProfile,
+
 }) => {
   const navigate = useNavigate();
   return (
@@ -47,11 +48,11 @@ const EditHeader = ({
             <p className="self-center"> Cancel</p>
           </button>
           <button
-            className="self-center justify-center flex h-12 px-4 rounded-xl font-bold gap-2 bg-accent text-white sm:px-12 "
-            // onClick={() => handleUpdate(college)}
-            onClick={() => setSubmitUpdateProfile(true)}
+            className="self-center justify-center flex h-12 px-4 rounded-xl font-bold gap-2 bg-accent text-white sm:px-12 items-center "
+            onClick={handleUpdate}
+            // onClick={() => setSubmitUpdateProfile(true)}
           >
-            <p className="self-center">Save</p>
+          {loading ? <Loader />:<p className="self-center">Save</p> }  
           </button>
         </div>
       </div>

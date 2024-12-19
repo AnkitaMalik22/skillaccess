@@ -7,7 +7,7 @@ const Portfolio = () => {
         <h2 className="text-2xl  font-bold  py-1  self-center">Portfolio</h2>{" "}
         <div className=" p-[.3rem] w-6 h-6 rounded-lg  bg-accent bg-opacity-80 self-center">
           <img
-            src="../../../images/icons/pen.png"
+            src="/images/icons/pen.png"
             alt="pen"
             // onClick={() => setEditable(!editable)}
           />
@@ -17,7 +17,7 @@ const Portfolio = () => {
       <div className=" grid grid-cols-4 text-center mt-3 bg-gray-50 rounded-lg w-full mx-auto">
         <span className="w-full  px-10 py-2 text-sm font-dmSans grid ">
           <img
-            src="../../images/icons/wordPress.png"
+            src="/images/icons/wordPress.png"
             alt="wordPress"
             className=""
           />
@@ -32,7 +32,7 @@ const Portfolio = () => {
       <div className=" grid grid-cols-4 text-center mt-3 bg-gray-50 rounded-lg w-full mx-auto">
         <span className="w-full  px-10 py-2 text-sm font-dmSans grid ">
           <img
-            src="../../images/icons/LinkedIn.png"
+            src="/images/icons/LinkedIn.png"
             alt="wordPress"
             className=""
           />
@@ -46,7 +46,7 @@ const Portfolio = () => {
       {/* fb  */}
       <div className=" grid grid-cols-4 text-center mt-3 bg-gray-50 rounded-lg w-full mx-auto">
         <span className="w-full  px-10 py-2 text-sm font-dmSans grid ">
-          <img src="../../images/icons/fb.png" alt="wordPress" className="" />
+          <img src="/images/icons/fb.png" alt="wordPress" className="" />
         </span>
         <span className="self-center col-span-3">
           <p className="font-xs">www.yourprofile.com</p>
@@ -57,7 +57,7 @@ const Portfolio = () => {
       {/* ig */}
       <div className=" grid grid-cols-4 text-center mt-3 bg-gray-50 rounded-lg w-full mx-auto">
         <span className="w-full  px-10 py-2 text-sm font-dmSans grid ">
-          <img src="../../images/icons/ig.png" alt="wordPress" className="" />
+          <img src="/images/icons/ig.png" alt="wordPress" className="" />
         </span>
         <span className="self-center col-span-3">
           <p className="font-xs">www.yourprofile.com</p>
@@ -68,7 +68,7 @@ const Portfolio = () => {
       {/* yt */}
       <div className=" grid grid-cols-4 text-center mt-3 bg-gray-50 rounded-lg w-full mx-auto">
         <span className="w-full  px-10 py-2 text-sm font-dmSans grid ">
-          <img src="../../images/icons/yt.png" alt="wordPress" className="" />
+          <img src="/images/icons/yt.png" alt="wordPress" className="" />
         </span>
         <span className="self-center col-span-3">
           <p className="font-xs">www.yourprofile.com</p>
@@ -79,7 +79,7 @@ const Portfolio = () => {
       {/* X */}
       <div className=" grid grid-cols-4 text-center mt-3 bg-gray-50 rounded-lg w-full mx-auto">
         <span className="w-full  px-10 py-2 text-sm font-dmSans grid ">
-          <img src="../../images/icons/x.png" alt="wordPress" className="" />
+          <img src="/images/icons/x.png" alt="wordPress" className="" />
         </span>
         <span className="self-center col-span-3">
           <p className="font-xs">www.yourprofile.com</p>

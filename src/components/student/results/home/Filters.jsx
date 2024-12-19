@@ -14,7 +14,7 @@ const Filter = () => {
             className=" self-center ml-2 rounded-lg h-10 w-10 sm:h-12 "
             onClick={() => navigate(-1)}
           >
-            <img src="../../images/icons/list.png" alt="" />
+            <img src="/images/icons/list.png" alt="" />
           </button>
           <h2 className="font-extrabold text-lg self-center">
             Performance Review
