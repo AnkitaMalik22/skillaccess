@@ -269,3 +269,19 @@ export const setTotalTopicQuestions = createAsyncThunk(
 );
 
 
+export const uploadQuestionImage = createAsyncThunk("test/uploadQuestionImage", async (file, { rejectWithValue }) => {
+
+  try {
+    const formData = new FormData();
+  formData.append('image', file); // 'image' is the file object
+
+  const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/assessments/question/image`, formData, getHeaders('multipart/form-data'));
+  console.log(res,"thunk")
+return res.data.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data.message || "something went wrong");
+  }
+})
+
+
+

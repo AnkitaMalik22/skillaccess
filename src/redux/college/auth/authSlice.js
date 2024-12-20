@@ -839,7 +839,7 @@ const collegeAuthSlice = createSlice({
       .addCase(updatePassword.rejected, (state, action) => {
         //console.log(action.payload);
         toast.error(action.payload);
-        // alert(action.payload.message);
+        // alert(action.payload.message); 
       })
       .addCase(googleLoginCollege.pending, (state, action) => {
         state.status = "loading";

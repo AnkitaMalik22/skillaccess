@@ -583,8 +583,9 @@ const testSlice = createSlice({
               action.payload.res.question;
             break;
           case "mcq":
-            state.currentTopic.questions[action.payload.index] =
-              action.payload.res.question;
+            state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
+              index === action.payload.index ? action.payload.res.question : question
+            );
             break;
 
           case "findAnswer":
@@ -611,8 +612,11 @@ const testSlice = createSlice({
               action.payload.res.question;
             break;
           case "mcq":
-            state.currentTopic.questions[action.payload.index] =
-              action.payload.res.question;
+
+              state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
+                index === action.payload.index ? action.payload.res.question : question
+              );
+              
             break;
 
           case "findAnswer":

@@ -126,6 +126,8 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
           </div>
         )}
         <div className={`flex flex-col gap-4 mt-6 `}>
+          {question.image && (<img src={question.image} alt="question" className="w-full rounded-lg" />)}
+
           {mcq.Options.map((ques, index) => (
             <span className="flex gap-2 ">
               <div className="flex w-5 justify-center">

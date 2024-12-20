@@ -73,7 +73,7 @@ const List = ({ FilterdStudents, isLoading }) => {
   const handleResultsDownload = async (assessmentId) => {
     try {
       // Replace the URL with your API endpoint
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${isCompany()? "company/test":"assessments"}/download/${assessmentId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${isCompany() ? "company/test" : "assessments"}/download/${assessmentId}`, {
         method: 'GET',
         headers: {
           "auth-token": isCompany() ? getCookie("token") : localStorage.getItem("auth-token"),
@@ -129,7 +129,7 @@ const List = ({ FilterdStudents, isLoading }) => {
           <h2>Overall Performance</h2>
         </div>
         <div className="bg-accent bg-opacity-5 p-2 rounded-e-2xl">
-          <h2>Details</h2>
+          <h2>Download</h2>
         </div>
       </div>
 
@@ -138,13 +138,24 @@ const List = ({ FilterdStudents, isLoading }) => {
       {!isLoading &&
         FilterdStudents.map((assessment, index) => (
           <div
-            className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full bg-white border-2 transition-colors duration-300"
-            style={{ borderColor: "transparent", borderWidth: "2px" }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.borderColor = colors[index])
+            className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full bg-white border border-transparent duration-300 hover:border-accent "
+            // style={{ borderColor: "transparent", borderWidth: "2px" }}
+            // onMouseEnter={(e) =>
+            //   (e.currentTarget.style.borderColor = colors[index])
+            // }
+            // onMouseLeave={(e) =>
+            //   (e.currentTarget.style.borderColor = "transparent")
+            // }
+            onClick={() => {
+              if (isCompany()) {
+                navigate(`/company/pr/results/overview?level=beginner&assessment=${assessment._id}`)
+              } else {
+                navigate(
+                  `/${isUni() ? "university/pr" : "college"}/results/overview?level=beginner&assessment=${assessment._id}`
+                )
+              }
+
             }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.borderColor = "transparent")
             }
           >
             {" "}
@@ -204,24 +215,19 @@ const List = ({ FilterdStudents, isLoading }) => {
             </div>
 
             <div className="flex  self-center gap-3 justify-center">
-              <div
+              {/* <div
                 className="self-center hover:cursor-pointer "
-                onClick={() => {
-                  if (isCompany()) {
-                    navigate(`/company/pr/results/overview?level=beginner&assessment=${assessment._id}`)
-                  }else{ navigate(
-                    `/${isUni() ? "university/pr" : "college"}/results/overview?level=beginner&assessment=${assessment._id}`
-                  )}
-                 
-                }
-                }
+
               >
                 <h2 className="font-dmSans  text-sm sm:text-base text-blued ">
                   View Details
                 </h2>
-              </div>
+              </div> */}
               <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer"
-                onClick={() => handleResultsDownload(assessment?._id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleResultsDownload(assessment?._id)
+                }}
               >
                 <TbFileDownload className="text-lightBlue h-6 w-6" />
               </h2>

@@ -17,7 +17,7 @@ const StudentsProfile = () => {
   const { id } = useParams();
   const [toggle, setToggle] = useState(1);
   const dispatch = useDispatch();
-  const { studentCV, GET_STUDENT_LOADING } = useSelector(
+  const { studentCV, GET_STUDENT_LOADING, pagination } = useSelector(
     (state) => state.collegeStudents
   );
 
@@ -42,41 +42,37 @@ const StudentsProfile = () => {
                   <div className="bg-gray-50 p-4">
                     <span className="grid grid-cols-4 text-xs font-bold border-b border-spacing-0 border-gray-200">
                       <h2
-                        className={`${
-                          toggle === 1
-                            ? "text-blued border-b-4 border-blued"
-                            : ""
-                        } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
+                        className={`${toggle === 1
+                          ? "text-blued border-b-4 border-blued"
+                          : ""
+                          } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(1)}
                       >
                         Education
                       </h2>
                       <h2
-                        className={`${
-                          toggle === 2
-                            ? "text-blued border-b-4 border-blued"
-                            : ""
-                        } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
+                        className={`${toggle === 2
+                          ? "text-blued border-b-4 border-blued"
+                          : ""
+                          } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(2)}
                       >
                         Skills
                       </h2>
                       <h2
-                        className={`${
-                          toggle === 3
-                            ? "text-blued border-b-4 border-blued"
-                            : ""
-                        } w-fit px-12 pb-2 hover:cursor-pointer mx-auto`}
+                        className={`${toggle === 3
+                          ? "text-blued border-b-4 border-blued"
+                          : ""
+                          } w-fit px-12 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(3)}
                       >
                         Assessment Results
                       </h2>
                       <h2
-                        className={`${
-                          toggle === 4
-                            ? "text-blued border-b-4 border-blued"
-                            : ""
-                        } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
+                        className={`${toggle === 4
+                          ? "text-blued border-b-4 border-blued"
+                          : ""
+                          } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(4)}
                       >
                         Portfolio
@@ -84,14 +80,16 @@ const StudentsProfile = () => {
                     </span>
                     <div className="overflow-auto">
                       {toggle === 1 ? (
-                        <Education Education={studentCV?.Education} />
+                        <Results
+                          assessmentResult={studentCV?.studentResponses}
+                          pagination={pagination}
+                          id={id}
+                        />
                       ) : toggle === 2 ? (
                         <Skills skills={studentCV?.Skills} />
                       ) : toggle === 3 ? (
-                        <Results
-                          assessmentResult={studentCV?.studentResponses}
-                          id={id}
-                        />
+                        <Education Education={studentCV?.Education} />
+
                       ) : (
                         <Portfolio Portfolio={studentCV?.Portfolio} />
                       )}

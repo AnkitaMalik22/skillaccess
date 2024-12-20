@@ -91,7 +91,7 @@ const Topic = () => {
       topics = JSON.parse(localStorage.getItem("topics"));
 
       // setSelectedSections(topics);
-    } catch (error) {}
+    } catch (error) { }
 
     // //console.log("hello tests",sections);
   }, []);
@@ -205,9 +205,8 @@ const Topic = () => {
               name="select"
               type="checkbox"
               checked={selectedSections?.length > 0 ? true : false}
-              className={`rounded bg-[#DEEBFF] border-none ${
-                selectedSections.length > 0 ? "w-6 h-6 " : " focus:ring-0 "
-              }`}
+              className={`rounded bg-[#DEEBFF] border-none ${selectedSections.length > 0 ? "w-6 h-6 " : " focus:ring-0 "
+                }`}
               onChange={(e) => {
                 selectedSections?.length > 0
                   ? setVisible(true)
@@ -236,69 +235,68 @@ const Topic = () => {
         <div className="flex gap-5 flex-wrap">
           {GET_TOPICS_LOADING
             ? // Render skeleton loader
-              Array.from({ length: 5 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="w-[17rem] mb-4 bg-gray-200 rounded-2xl animate-pulse"
-                >
-                  <div className="h-40 bg-gray-300 rounded-t-2xl"></div>
-                  <div className="card-body">
-                    <div className="h-6 bg-gray-300 rounded-full w-3/4 mb-2"></div>
-                    <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
-                  </div>
+            Array.from({ length: 5 }).map((_, index) => (
+              <div
+                key={index}
+                className="w-[17rem] mb-4 bg-gray-200 rounded-2xl animate-pulse"
+              >
+                <div className="h-40 bg-gray-300 rounded-t-2xl"></div>
+                <div className="card-body">
+                  <div className="h-6 bg-gray-300 rounded-full w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
                 </div>
-              ))
+              </div>
+            ))
             : filteredSections &&
-              filteredSections.map((section, index) => {
-                return (
-                  <div
-                    className={`w-[17rem] mb-4 bg-white rounded-2xl cursor-pointer ${
-                      selectedSections.includes(section._id)
-                        ? "border-2 border-[#0052CC]"
-                        : ""
+            filteredSections.map((section, index) => {
+              return (
+                <div
+                  className={`w-[17rem] mb-4 bg-white rounded-2xl cursor-pointer ${selectedSections.includes(section._id)
+                    ? "border-2 border-[#0052CC]"
+                    : ""
                     }`}
-                    key={index}
-                    onClick={() => {
-                      //console.log("section", section);
-                      handleSelect(section._id);
-                    }}
-                  >
-                    <figure>
-                      <img src={randomImage()} alt="cover" />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="font-bold text-xl first-letter:uppercase">
-                        {section?.Heading}
-                      </h2>
-                      <div
-                        className="flex gap-2"
-                        onClick={() => {
-                          dispatch(
-                            setCurrentTopic({
-                              topic: section,
-                              // Type: questionType || "mcq",
-                            })
-                          );
-                          localStorage.setItem(
-                            "TopicDetails",
-                            JSON.stringify(section)
-                          );
-                          navigate(
-                            isUni
-                              ? `/university/pr/quesbank/topic/${section._id}`
-                              : `/college/quesbank/topic/${section._id}`
-                          );
-                        }}
-                      >
-                        <Folder />
-                        <p className="text-blued  text-sm">
-                          {getTotalQuestions(section)} Files
-                        </p>
-                      </div>
+                  key={index}
+                  onClick={() => {
+                    //console.log("section", section);
+                    handleSelect(section._id);
+                  }}
+                >
+                  <figure>
+                    <img src={randomImage()} alt="cover" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="font-bold text-xl first-letter:uppercase">
+                      {section?.Heading}
+                    </h2>
+                    <div
+                      className="flex gap-2"
+                      onClick={() => {
+                        dispatch(
+                          setCurrentTopic({
+                            topic: section,
+                            // Type: questionType || "mcq",
+                          })
+                        );
+                        localStorage.setItem(
+                          "TopicDetails",
+                          JSON.stringify(section)
+                        );
+                        navigate(
+                          isUni()
+                            ? `/university/pr/quesbank/topic/${section._id}`
+                            : `/college/quesbank/topic/${section._id}`
+                        );
+                      }}
+                    >
+                      <Folder />
+                      <p className="text-blued  text-sm">
+                        {getTotalQuestions(section)} Files
+                      </p>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              );
+            })}
         </div>
         {filteredSections?.length === 0 && (
           <div className="w-full flex justify-center items-center  mb-4 bg-white rounded-2xl">
