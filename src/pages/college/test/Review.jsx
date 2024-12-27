@@ -33,7 +33,7 @@ const Review = () => {
   const { currentTopic, topics, currentQuestionCount, totalQuestions } = useSelector((state) => state.test);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [selectedSections, setSelectedSections] = useState([]);
-
+  const [count, setCount] = useState(selectedQuestions.length);
 
 
   let sections = localStorage.getItem("topics")
@@ -49,7 +49,19 @@ const Review = () => {
         // Remove the question if it exists in the selectedQuestions array
         return prev.filter((q) => JSON.stringify(q) !== JSON.stringify(question));
       } else {
-        const newCount = currentQuestionCount + 1; // Add 1 for the new question
+
+        const topicIndex = sections.findIndex(
+          (section) => section.Type === questionType && section.id === currentTopic.id // Use an identifier like `id`
+        );
+        let newCount = 0;
+        if (topicIndex !== -1) {
+          newCount = currentQuestionCount - count + selectedQuestions.length + 1;
+          console.log(newCount, "newCount", currentQuestionCount, "currentQuestionCount", count, "count", selectedQuestions.length, "selectedQuestions.length");
+        } else {
+          newCount = parseInt(currentQuestionCount) - count + selectedQuestions.length + 1; // Add 1 for the new question
+        }
+        // console.log(newCount, "newCount", totalQuestions, "totalQuestions", count, "count", selectedQuestions.length, "selectedQuestions.length");
+
         if (newCount > parseInt(totalQuestions)) {
           toast.error(`Number of questions must be less than ${totalQuestions}`);
           return prev; // Do not add the question if the limit is exceeded
@@ -63,11 +75,21 @@ const Review = () => {
   // Handle select all
   const handleSelectAll = () => {
     const selectedCount = selectedQuestions.length;
-    const remainingQuestions = questions.length - selectedCount;
 
     // Calculate the new total count if all questions are selected
-    const newTotalCount = currentQuestionCount + remainingQuestions;
 
+    // Check if the topic already exists
+    const topicIndex = sections.findIndex(
+      (section) => section.Type === questionType && section.id === currentTopic.id // Use an identifier like `id`
+    );
+    let newTotalCount = 0;
+    if (topicIndex !== -1) {
+      newTotalCount = currentQuestionCount - selectedCount + questions.length;
+    } else {
+      newTotalCount = currentQuestionCount + questions.length
+    }
+
+    console.log(newTotalCount, "<-newTotalCount", currentQuestionCount, "<-currentQuestionCount", selectedCount, "<-selectedCount", questions.length, "<-questions.length");
     if (selectedCount === questions.length) {
       // Deselect all
       setSelectedQuestions([]);
@@ -167,6 +189,7 @@ const Review = () => {
         console.log(isPresent, "isPresent");
         if (isPresent && isPresent[0][typeIf].length > 0) {
           setSelectedQuestions(isPresent[0][typeIf]);
+          setCount(isPresent[0][typeIf].length);
           console.log(isPresent[0][typeIf], "isPresent");
         }
 
@@ -198,6 +221,7 @@ const Review = () => {
     } catch (error) {
       console.log(error);
     }
+
     setLoading(false);
   }
 
