@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import Folder from "./icon/Folder";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,6 +16,12 @@ const Topic = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");
   const { sections, GET_TOPICS_LOADING } = useSelector((state) => state.test);
+    const [query, setQuery] = useState({
+      category: '',
+      accessibleDepartments: [],
+      hasAccessToAllDepartments: false,
+      hasAccessToAllCategories: true
+    });
   let topics = localStorage.getItem("topics")
     ? JSON.parse(localStorage.getItem("topics"))
     : [];
@@ -50,7 +56,7 @@ const Topic = () => {
     //   level: level,
     // }));
 
-    dispatch(getAllTopicsQB());
+    dispatch(getAllTopicsQB(query));
 
     // if (sections) {
     //   setFilteredSections(sections);

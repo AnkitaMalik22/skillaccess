@@ -45,7 +45,7 @@ const Intermediate = () => {
       <div className=" min-w-max h-64 bg-[#8F92A1] bg-opacity-5 rounded-2xl flex justify-center p-2">
         <div className=" self-center w-fit h-fit ">
           <div
-            className="bg-white sm:w-[64px] sm:h-[64px] w-10 h-10 rounded-2xl mx-auto flex justify-center"
+            className="bg-white sm:w-[64px] sm:h-[64px] w-10 h-10 rounded-2xl mx-auto flex justify-center cursor-pointer"
             onClick={handleFunc}
           >
             <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued" />

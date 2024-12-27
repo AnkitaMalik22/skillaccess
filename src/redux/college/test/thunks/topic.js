@@ -39,12 +39,20 @@ export const addQuestionToTopic = createAsyncThunk(
 export const getAllTopics = createAsyncThunk(
   "test/getAllTopics",
   async (data, { rejectWithValue, getState }) => {
+    // console.log("data", data); 
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/college/topics/all?level=${data.level}`,
-        
-         getHeaders()
-        
+      `${process.env.REACT_APP_API_URL}/api/college/topics/all`, 
+      {
+        params: {
+        level: data.level,
+        category: data.category,
+        accessibleDepartments: data.accessibleDepartments,
+        hasAccessToAllDepartments: data.hasAccessToAllDepartments,
+        hasAccessToAllCategories: data.hasAccessToAllCategories
+        },
+        ...getHeaders()
+      }
       );
       const res = req.data;
       return res.topics;
@@ -60,7 +68,17 @@ export const getAllTopicsQB = createAsyncThunk(
     try {
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/qb/topics/all`,
-          getHeaders()   
+        {
+          params: {
+          level: data.level,
+          category: data.category,
+          accessibleDepartments: data.accessibleDepartments,
+          hasAccessToAllDepartments: data.hasAccessToAllDepartments,
+          hasAccessToAllCategories: data.hasAccessToAllCategories
+          },
+          ...getHeaders()
+        }
+         
       );
       const res = req.data;
       return res.topics;
