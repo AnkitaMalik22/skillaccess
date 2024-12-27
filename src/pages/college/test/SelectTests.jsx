@@ -362,10 +362,10 @@ const SelectTests = () => {
                   Navigate(`/${isUni() ? "university/pr" : "college"}/test/createTopic?level=${level}`);
                 }}
               >
-                <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued" />
+                <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued cursor-pointer" />
               </div>
 
-              <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60">
+              <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60 ">
                 Add New Topic
               </h2>
 

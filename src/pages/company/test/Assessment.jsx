@@ -169,7 +169,7 @@ const Assessment = () => {
                   {topic.Description}
                 </p>
                 <button
-                  className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs hover:bg-blue-500 hover:text-white text-[#171717]"
+                  className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs hover:bg-blued hover:text-white text-[#171717]"
                   onClick={() =>
                     navigate(
                       `/college/test/details/${index}?question=${topic.Type}&type=assessment&view=false`

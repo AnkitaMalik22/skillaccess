@@ -115,7 +115,7 @@ const CreateTopic = () => {
           name="Heading"
           value={topic.Heading}
           type="text"
-          className={`w-full bg-gray-100 mb-5 text-base font-bold p-2 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
+          className={`w-full bg-gray-100 mb-3 text-base font-bold px-3 py-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
             isNameEmpty ? "border-red-500" : "border-none"
           }`}
           placeholder="Name of the Topic"
@@ -133,7 +133,7 @@ const CreateTopic = () => {
           onChange={changeHandler}
           name="Description"
           value={topic.Description}
-          className={`w-full bg-gray-100 h-48 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${
+          className={`w-full bg-gray-100 h-48 px-6 text-base font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${
             isDescEmpty ? "border-red-500" : "border-none"
           }`}
           placeholder="Add Description"
