@@ -9,7 +9,7 @@ const Education = ({ Education }) => {
     return new Intl.DateTimeFormat("en-US", options).format(date);
   };
   return (
-    <div className="">
+    <div className=" min-h-40  text-center">
       {Education?.map((education, index) => {
         return (
           <div className="font-dmSans mt-2">
@@ -24,7 +24,7 @@ const Education = ({ Education }) => {
                     />
                   </div>
                   <div className="ml-1 mt-1">
-                    <h2 className="  font-bold  py-1 ">{education.School}</h2>
+                    <h2 className="  font-bold  py-1 ">{education?.School}</h2>
                     <h2 className="font-normal  text-sm pb-2">
                       {education?.Degree}
                     </h2>
@@ -37,8 +37,8 @@ const Education = ({ Education }) => {
                       {" "}
                       <LuClock3 className="self-center " />{" "}
                       <p className="self-center text-xs font-bold">
-                        {formatDate(education.StartDate)} to{" "}
-                        {formatDate(education.EndDate)}
+                        {formatDate(education?.StartDate)} to{" "}
+                        {formatDate(education?.EndDate)}
                       </p>
                     </span>
                   </div>
@@ -55,7 +55,7 @@ const Education = ({ Education }) => {
                 </span>
               </div>
 
-              <p className="text-sm font-dmSans">{education.Description}</p>
+              <p className="text-sm font-dmSans">{education?.Description}</p>
             </section>
 
             <section className="px-3 text-xs font-bold mt-5">
@@ -75,7 +75,7 @@ const Education = ({ Education }) => {
             </section>
           </div>
         );
-      })}
+      }) || <div className="flex justify-center h-36  items-center"><p>No education found</p></div>}
     </div>
   );
 };

@@ -248,9 +248,8 @@ const AddMcqToTopic = () => {
                 onChange={handleChanges}
                 value={question.Duration}
                 id=""
-                className={`${
-                  level === "adaptive" ? " w-2/3" : "w-full"
-                } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
+                className={`${level === "adaptive" ? " w-2/3" : "w-full"
+                  } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
               >
                 <option value={0}>Time to answer the question</option>
 
@@ -490,9 +489,8 @@ const AddMcqToTopic = () => {
           <div className=" flex gap-2">
             {
               <button
-                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
-                  countDetail >= 0 ? "" : "hidden"
-                }`}
+                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${countDetail >= 0 ? "" : "hidden"
+                  }`}
                 onClick={handlePrev}
               >
                 <FaChevronLeft className="self-center" /> Prev

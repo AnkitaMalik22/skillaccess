@@ -67,7 +67,7 @@ const SelectTests = () => {
   const addSection = (section) => {
     if (
       parseInt(currentQuestionCount) + parseInt(totalQ) >
-        parseInt(totalQuestions) ||
+      parseInt(totalQuestions) ||
       totalQ > totalQuestions
     ) {
       toast.error(`Number of question must be less than ${totalQuestions}`);
@@ -211,7 +211,13 @@ const SelectTests = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllTopics({ level: level }));
+   let test = JSON.parse(localStorage.getItem("testDetails"));
+
+  
+    dispatch(getAllTopics({ level: level , category : test.category, accessibleDepartments: test.accessibleDepartments,
+      hasAccessToAllDepartments: test.hasAccessToAllDepartments,
+      hasAccessToAllCategories: test.hasAccessToAllCategories}));
+       
 
     if (sections) {
       setFilteredSections(sections);
@@ -221,7 +227,7 @@ const SelectTests = () => {
       topics = JSON.parse(localStorage.getItem("topics"));
 
       setSelectedSections(topics);
-    } catch (error) {}
+    } catch (error) { }
 
     // //console.log("hello tests",sections);
   }, []);
@@ -242,6 +248,8 @@ const SelectTests = () => {
     <>
       {visible && (
         <PopUpAdaptive
+          // manual={true}
+          // selectManual={() => { Navigate(`/${isUni() ? "university/pr" : "college"}/test/details/${section._id}?type=topic&question=${questionType}&level=${level}`) }}
           section={section}
           visible={visible}
           handleSave={addSection}
@@ -251,8 +259,8 @@ const SelectTests = () => {
           addSection={addSection}
           totalQ={totalQ}
           setTotalQ={setTotalQ}
-          // setTotalQuestions={setTotalQuestions}
-          // totalQuestions={totalQuestions}
+        // setTotalQuestions={setTotalQuestions}
+        // totalQuestions={totalQuestions}
         />
       )}
       <Header />
@@ -319,21 +327,21 @@ const SelectTests = () => {
 
           {selectedSections?.length < 5
             ? Array.from({ length: 5 - selectedSections.length }).map(
-                (_, index) => (
-                  <div
-                    key={index}
-                    className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 flex justify-center p-2 md:p-5"
-                  >
-                    <span className="self-center">
-                      <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
+              (_, index) => (
+                <div
+                  key={index}
+                  className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 flex justify-center p-2 md:p-5"
+                >
+                  <span className="self-center">
+                    <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
 
-                      <h2 className="font-semibold mt-1">
-                        Add section {selectedSections.length + index + 1}{" "}
-                      </h2>
-                    </span>
-                  </div>
-                )
+                    <h2 className="font-semibold mt-1">
+                      Add section {selectedSections.length + index + 1}{" "}
+                    </h2>
+                  </span>
+                </div>
               )
+            )
             : null}
         </div>
 
@@ -351,13 +359,13 @@ const SelectTests = () => {
                 className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
                 onClick={() => {
                   localStorage.removeItem("currentTopic");
-                  Navigate(`/${isUni() ? "university/pr":"college"}/test/createTopic?level=${level}`);
+                  Navigate(`/${isUni() ? "university/pr" : "college"}/test/createTopic?level=${level}`);
                 }}
               >
-                <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued" />
+                <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued cursor-pointer" />
               </div>
 
-              <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60">
+              <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60 ">
                 Add New Topic
               </h2>
 
@@ -409,7 +417,7 @@ const SelectTests = () => {
                     );
 
                     Navigate(
-                      `/${isUni() ? "university/pr":"college"}/test/details/${index}?type=topic&question=${questionType}&level=${level}`
+                      `/${isUni() ? "university/pr" : "college"}/test/details/${section._id}?type=topic&question=${questionType}&level=${level}&select=true`
                     );
                   }}
                 >

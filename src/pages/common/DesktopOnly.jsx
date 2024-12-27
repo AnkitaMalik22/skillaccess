@@ -2,7 +2,7 @@ import React from "react";
 
 const DesktopOnly = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-blue-900 text-white ">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blued to-blued text-white ">
       <div className="mx-4 max-w-md p-6 bg-black bg-opacity-50 rounded-lg shadow-lg text-center">
         <div className="text-6xl">🖥️</div>
         <h1 className="text-2xl font-bold mb-4">Desktop View Only</h1>

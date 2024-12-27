@@ -19,7 +19,7 @@ const TopicDetails = () => {
   const id = useParams().id;
 
   useEffect(() => {
-    dispatch(getTopicById(id));
+    dispatch(getTopicById({ id, level: "" }));
   }, [id]);
 
   useEffect(() => {
@@ -103,11 +103,10 @@ const TopicDetails = () => {
             hasQuestions && (
               <div
                 key={pageNumber}
-                className={`rounded-lg h-10 w-10 flex justify-center cursor-pointer ${
-                  selected === pageNumber
-                    ? "bg-accent text-white"
-                    : "bg-gray-100"
-                }`}
+                className={`rounded-lg h-10 w-10 flex justify-center cursor-pointer ${selected === pageNumber
+                  ? "bg-accent text-white"
+                  : "bg-gray-100"
+                  }`}
                 onClick={() => setSelected(pageNumber)}
               >
                 <p className="self-center">{pageNumber}</p>
@@ -118,9 +117,8 @@ const TopicDetails = () => {
 
         <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropright
-            className={` text-lg self-center ${
-              selected === Math.ceil(max) && "disabled"
-            }`}
+            className={` text-lg self-center ${selected === Math.ceil(max) && "disabled"
+              }`}
             onClick={() =>
               selected !== Math.ceil(max) && setSelected(selected + 1)
             }
