@@ -141,7 +141,7 @@ const CreateTopic = () => {
         
         <button
           onClick={handleNext}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex items-center gap-2 bg-blued text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
           Next Step
           <FaArrowRightLong className="h-4 w-4" />
@@ -163,7 +163,7 @@ const CreateTopic = () => {
             placeholder="Enter the name of the Topic"
             className={`w-full p-3 rounded-lg bg-gray-50 border ${
               errors.heading ? 'border-red-500' : 'border-gray-200'
-            } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            } focus:ring-2 focus:ring-blued focus:border-transparent`}
           />
           {errors.heading && (
             <p className="mt-1 text-sm text-red-500">Please fill in the name.</p>
@@ -183,7 +183,7 @@ const CreateTopic = () => {
             rows={4}
             className={`w-full p-3 rounded-lg bg-gray-50 border ${
               errors.description ? 'border-red-500' : 'border-gray-200'
-            } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            } focus:ring-2 focus:ring-blued focus:border-transparent`}
           />
           {errors.description && (
             <p className="mt-1 text-sm text-red-500">Please fill in the description.</p>
@@ -199,7 +199,7 @@ const CreateTopic = () => {
             name="category"
             value={topic.category}
             onChange={handleChange}
-            className="w-full p-3 rounded-lg bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full p-3 rounded-lg bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blued focus:border-transparent"
           >
             <option value="" disabled>Select Category</option>
             {categories.map((cat) => (
@@ -217,7 +217,7 @@ const CreateTopic = () => {
                 name="hasAccessToAllDepartments"
                 checked={topic.hasAccessToAllDepartments}
                 onChange={handleChange}
-                className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="w-5 h-5 rounded border-gray-300 text-blued focus:ring-blued"
               />
               <span className="text-gray-700">Access to all departments</span>
             </label>
@@ -232,13 +232,18 @@ const CreateTopic = () => {
                       onClick={() => handleDepartmentSelect(dept)}
                       className={`p-3 rounded-lg text-left transition-colors ${
                         topic.accessibleDepartments.includes(dept)
-                          ? 'bg-blue-100 text-blue-800'
+                          ? 'bg-blue-100 text-blued'
                           : 'bg-gray-50 hover:bg-gray-100'
                       }`}
                     >
                       {dept}
                     </button>
                   ))}
+                  {
+                    selectedCategory.departments.length === 0 && (
+                      <p className="text-gray-600">No departments found</p>
+                    )
+                  }
                 </div>
 
                 {topic.accessibleDepartments.length > 0 && (
@@ -250,7 +255,7 @@ const CreateTopic = () => {
                         return (
                           <span
                             key={dept}
-                            className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800"
+                            className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm bg-blue-100 text-blued"
                           >
                             {dept}
                             <button

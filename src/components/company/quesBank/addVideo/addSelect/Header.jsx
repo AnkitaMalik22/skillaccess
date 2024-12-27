@@ -152,7 +152,7 @@ const Header = ({ selectQuestionType }) => {
       <div className="bg-gray-100 rounded-xl mx-2 h-12 flex my-2">
         <div className="flex">
           <button
-            className="self-center justify-center flex bg-blue-800 py-3 px-4 rounded-lg text-xs gap-2 text-white"
+            className="self-center justify-center flex bg-blued py-3 px-4 rounded-lg text-xs gap-2 text-white"
             onClick={submit}
           >
             Next Step{" "}

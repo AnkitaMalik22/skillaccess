@@ -313,7 +313,7 @@ const Name = () => {
               type="text"
               className={`w-full rounded-lg bg-gray-50 border ${
                 errors.name ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200`}
+              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="Name of the Assessment*"
               name="name"
               value={testDetails.name}
@@ -332,7 +332,7 @@ const Name = () => {
               name="totalAttempts"
               className={`w-full rounded-lg bg-gray-50 border ${
                 errors.totalAttempts ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200`}
+              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="No. of Attempts*"
               value={testDetails.totalAttempts}
               onChange={handleChange}
@@ -352,7 +352,7 @@ const Name = () => {
               type="tel"
               className={`w-full rounded-lg bg-gray-50 border ${
                 errors.totalQuestions ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200`}
+              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="No. of Questions*"
               value={testDetails.totalQuestions}
               onChange={handleChange}
@@ -374,7 +374,7 @@ const Name = () => {
                 name="duration_from"
                 value={testDetails?.duration_from?.slice(0, 16)}
                 onChange={handleChange}
-                className="w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blue-500"
+                className="w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blued"
                 required
               />
             </div>
@@ -386,7 +386,7 @@ const Name = () => {
                 name="duration_to"
                 value={testDetails?.duration_to?.slice(0, 16)}
                 onChange={handleChange}
-                className="w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blue-500"
+                className="w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blued"
                 required
               />
             </div>
@@ -402,7 +402,7 @@ const Name = () => {
               name="category"
               value={testDetails.category}
               onChange={handleChange}
-              className="w-full rounded-lg bg-gray-50 border border-gray-200 text-gray-800 text-lg p-4 pr-10 appearance-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+              className="w-full rounded-lg bg-gray-50 border border-gray-200 text-gray-800 text-lg p-4 pr-10 appearance-none focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200"
               required
             >
               <option value="">Select Category*</option>
@@ -427,7 +427,7 @@ const Name = () => {
                 name="isNegativeMarking"
                 checked={testDetails.isNegativeMarking}
                 onChange={handleChange}
-                className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="w-5 h-5 rounded border-gray-300 text-blued focus:ring-blued"
               />
               <span>Is there negative marking?</span>
             </label>
@@ -465,7 +465,7 @@ const Name = () => {
                         name="hasAccessToAllDepartments"
                         checked={testDetails.hasAccessToAllDepartments}
                         onChange={handleChange}
-                        className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className="w-5 h-5 rounded border-gray-300 text-blued focus:ring-blued"
                       />
                       <span>Access to all departments</span>
                     </label>
@@ -530,7 +530,7 @@ const Name = () => {
             <textarea
               className={`w-full h-40 rounded-lg bg-gray-50 border ${
                 errors.description ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200`}
+              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="Add Description*"
               name="description"
               value={testDetails.description}
