@@ -22,7 +22,7 @@ const StudentsProfile = () => {
   );
 
   useEffect(() => {
-    dispatch(getStudentCV(id));
+    dispatch(getStudentCV({ studentId: id, page: 1 }));
   }, [dispatch, id]);
 
   //console.log(studentCV.studentResponses);
@@ -48,7 +48,7 @@ const StudentsProfile = () => {
                           } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(1)}
                       >
-                        Education
+                        Assessment Results
                       </h2>
                       <h2
                         className={`${toggle === 2
@@ -66,7 +66,7 @@ const StudentsProfile = () => {
                           } w-fit px-12 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(3)}
                       >
-                        Assessment Results
+                        Education
                       </h2>
                       <h2
                         className={`${toggle === 4

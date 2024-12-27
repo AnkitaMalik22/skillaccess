@@ -532,6 +532,7 @@ const testSlice = createSlice({
     },
     setTestSelectedTopics: (state, action) => {
       state.topics = action.payload;
+      console.log(action.payload, "action.payload");
       // localStorage.setItem(
       //   "test",
       //   JSON.stringify({
@@ -734,6 +735,10 @@ const testSlice = createSlice({
       })
       .addCase(getTopicById.fulfilled, (state, action) => {
         state.currentTopic = action.payload;
+        localStorage.setItem(
+          "currentTopic",
+          JSON.stringify(action.payload)
+        );
         // //console.log(action.payload);
         //console.log("fullfilled");
       })

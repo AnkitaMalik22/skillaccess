@@ -73,10 +73,10 @@ export const getAllTopicsQB = createAsyncThunk(
 
 export const getTopicById = createAsyncThunk(
   "test/getTopicById",
-  async (id, { rejectWithValue }) => {
+  async ({id,level}, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/admin/topic/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/admin/topic/${id}?level=${level}`,
        getHeaders()
       );
       const res = req.data;
@@ -147,7 +147,7 @@ export const setTotalTopicQuestions = createAsyncThunk(
   async (arg, { dispatch, rejectWithValue }) => {
     try {
       // Dispatch the getTopicById thunk and wait for the result
-      const topic = await dispatch(getTopicById(arg.id)).unwrap();
+      const topic = await dispatch(getTopicById({id:arg.id})).unwrap();
 
       // //console.log(topic, "topic");
 

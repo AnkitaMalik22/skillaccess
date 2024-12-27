@@ -8,7 +8,11 @@ import FindAnswer from "../../../components/college/test/review/FindAnswer";
 import Essay from "../../../components/college/test/review/Essay";
 import Code from "../../../components/college/test/review/Code";
 import Video from "../../../components/college/test/review/Video";
-import useTranslate from "../../../hooks/useTranslate";
+import { getTopicById } from "../../../redux/college/test/thunks/topic";
+import Loader from "../../../components/loaders/Loader";
+import { setCurrentQuestionCount, setTestSelectedTopics } from "../../../redux/college/test/testSlice";
+import toast from "react-hot-toast";
+import { FiPlus } from "react-icons/fi";
 
 const Review = () => {
   //useTranslate();
@@ -19,71 +23,185 @@ const Review = () => {
   const [questions, setQuestions] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
+  const select = searchParams.get("select");
+
   const questionType = searchParams.get("question");
+  const level = searchParams.get("level");
   const view = searchParams.get("view");
   const [visible, setVisible] = useState(false);
-  // //console.log(questionType);
-  const { currentTopic, topics } = useSelector((state) => state.test);
-  useEffect(() => {
-    if (type === "section") {
-      // const topics = JSON.parse(localStorage.getItem("topics"));
-      setName(topics[id].Heading);
-      questionType === "mcq" && setQuestions(topics[id].questions);
-      questionType === "findAnswer" && setQuestions(topics[id].findAnswers);
-      questionType === "essay" && setQuestions(topics[id].essay);
-      questionType === "video" && setQuestions(topics[id].video);
-      questionType === "compiler" && setQuestions(topics[id].compiler);
-    } else if (type === "topic") {
-      setName(currentTopic.Heading);
-      questionType === "mcq" && setQuestions(currentTopic.questions);
-      questionType === "findAnswer" && setQuestions(currentTopic.findAnswers);
-      questionType === "essay" && setQuestions(currentTopic.essay);
-      questionType === "video" && setQuestions(currentTopic.video);
-      questionType === "compiler" && setQuestions(currentTopic.compiler);
-    } else {
-      setName(
-        JSON.parse(localStorage.getItem("assessment")).topics[id].Heading
-      );
-      questionType === "mcq" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].questions
-        );
-      questionType === "findAnswer" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].findAnswers
-        );
-      questionType === "essay" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].essay
-        );
-      questionType === "video" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].video
-        );
-      questionType === "compiler" &&
-        setQuestions(
-          JSON.parse(localStorage.getItem("assessment")).topics[id].compiler
-        );
-    }
-  }, [topics, "", currentTopic]);
-  //console.log(currentTopic);
+  const [loading, setLoading] = useState(false);
+  const { currentTopic, topics, currentQuestionCount, totalQuestions } = useSelector((state) => state.test);
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
+  const [selectedSections, setSelectedSections] = useState([]);
 
-  // useEffect(
-  //   () => {
-  //     dispatch(getTopicById(id)).then(() =>
-  //       setQuestions(currentTopic.questions)
-  //     );
-  //     //console.log(currentTopic, "currentTopic", id);
-  //   },
-  //   [dispatch],
-  //   []
-  // );
-  // update the topic from topics array where the id matches the id in the url
-  // for (let i = 0; i < topics.length; i++) {
-  //   if (topics[i]._id === id) {
-  //   topics[i].questions = newQuestions;
-  //   }
-  // }
+
+
+  let sections = localStorage.getItem("topics")
+    ? JSON.parse(localStorage.getItem("topics"))
+    : [];
+
+  // Handle individual question selection
+  const handleQuestionSelect = (question) => {
+    setSelectedQuestions((prev) => {
+      const isSelected = prev.some((q) => JSON.stringify(q) === JSON.stringify(question));
+
+      if (isSelected) {
+        // Remove the question if it exists in the selectedQuestions array
+        return prev.filter((q) => JSON.stringify(q) !== JSON.stringify(question));
+      } else {
+        const newCount = currentQuestionCount + 1; // Add 1 for the new question
+        if (newCount > parseInt(totalQuestions)) {
+          toast.error(`Number of questions must be less than ${totalQuestions}`);
+          return prev; // Do not add the question if the limit is exceeded
+        }
+        // Add the question to the selectedQuestions array
+        return [...prev, JSON.parse(JSON.stringify(question))];
+      }
+    });
+  };
+
+  // Handle select all
+  const handleSelectAll = () => {
+    const selectedCount = selectedQuestions.length;
+    const remainingQuestions = questions.length - selectedCount;
+
+    // Calculate the new total count if all questions are selected
+    const newTotalCount = currentQuestionCount + remainingQuestions;
+
+    if (selectedCount === questions.length) {
+      // Deselect all
+      setSelectedQuestions([]);
+    } else if (newTotalCount > parseInt(totalQuestions)) {
+      toast.error(`Number of questions must be less than ${totalQuestions}`);
+    } else {
+      // Select all
+      setSelectedQuestions(questions);
+    }
+  };
+
+
+  const QuestionCheckbox = ({ question }) => {
+    const isQuestionSelected = selectedQuestions.some(
+      (q) => JSON.stringify(q) === JSON.stringify(question)
+    );
+
+    const handleCheckboxChange = () => {
+      handleQuestionSelect(
+        JSON.parse(JSON.stringify(question)) // Ensures the exact object structure
+      );
+    };
+
+    return (
+      <div className="absolute left-4 top-4">
+        <input
+          type="checkbox"
+          checked={isQuestionSelected}
+          onChange={handleCheckboxChange}
+          className="h-5 w-5 rounded border-gray-300"
+        />
+      </div>
+    );
+  };
+
+
+
+  useEffect(() => {
+    handleTopics();
+
+
+  }, [topics]);
+
+
+  async function handleTopics() {
+
+    let typeIf;
+
+    if (questionType === "mcq") {
+      typeIf = "questions";
+    } else if (questionType === "findAnswer") {
+      typeIf = "findAnswers";
+    } else {
+      typeIf = questionType;
+    }
+    setLoading(true);
+    try {
+      if (type === "section") {
+
+        console.log(topics[id]);
+        // const topics = JSON.parse(localStorage.getItem("topics"));
+        setName(topics[id].Heading);
+
+        if (questionType === "mcq") {
+          if (select) {
+            console.log(topics[id].questions);
+            setQuestions(
+              currentTopic.questions.filter(q => {
+                console.log(q);
+                // Compare by a unique identifier like 'id' or '_id'
+                return !topics[id].questions.some(tq => tq._id === q._id);
+              })
+            );
+          } else {
+            setQuestions(topics[id].questions);
+          }
+        };
+
+        questionType === "findAnswer" && setQuestions(topics[id].findAnswers);
+        questionType === "essay" && setQuestions(topics[id].essay);
+        questionType === "video" && setQuestions(topics[id].video);
+        questionType === "compiler" && setQuestions(topics[id].compiler);
+
+      } else if (type === "topic") {
+
+        const req = await dispatch(getTopicById({ id: id, level }));
+
+        const isPresent = topics.filter((topic) => topic._id === id);
+
+        setName(currentTopic.Heading);
+        questionType === "mcq" && setQuestions(currentTopic.questions);
+        questionType === "findAnswer" && setQuestions(currentTopic.findAnswers);
+        questionType === "essay" && setQuestions(currentTopic.essay);
+        questionType === "video" && setQuestions(currentTopic.video);
+        questionType === "compiler" && setQuestions(currentTopic.compiler);
+
+        console.log(isPresent, "isPresent");
+        if (isPresent && isPresent[0][typeIf].length > 0) {
+          setSelectedQuestions(isPresent[0][typeIf]);
+          console.log(isPresent[0][typeIf], "isPresent");
+        }
+
+      } else {
+        setName(
+          JSON.parse(localStorage.getItem("assessment")).topics[id].Heading
+        );
+        questionType === "mcq" &&
+          setQuestions(
+            JSON.parse(localStorage.getItem("assessment")).topics[id].questions
+          );
+        questionType === "findAnswer" &&
+          setQuestions(
+            JSON.parse(localStorage.getItem("assessment")).topics[id].findAnswers
+          );
+        questionType === "essay" &&
+          setQuestions(
+            JSON.parse(localStorage.getItem("assessment")).topics[id].essay
+          );
+        questionType === "video" &&
+          setQuestions(
+            JSON.parse(localStorage.getItem("assessment")).topics[id].video
+          );
+        questionType === "compiler" &&
+          setQuestions(
+            JSON.parse(localStorage.getItem("assessment")).topics[id].compiler
+          );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  }
+
+
   const handleCalculateTime = () => {
     let totalMcq = 0,
       totalEssay = 0,
@@ -154,18 +272,107 @@ const Review = () => {
 
     return total;
   };
+
+  const addToSection = () => {
+
+    try {
+      if (type === "section") {
+        if (selectedQuestions.length === 0) {
+          toast.error("Please select questions to add to section");
+          return;
+        }
+
+        if (
+          parseInt(currentQuestionCount) + selectedQuestions.length >
+          parseInt(totalQuestions)
+        ) {
+          toast.error(`Number of question must be less than ${totalQuestions}`);
+          return;
+        }
+
+        let typeIf;
+        if (questionType === "mcq") {
+          typeIf = "questions";
+        } else if (questionType === "findAnswer") {
+          typeIf = "findAnswers";
+        } else {
+          typeIf = questionType;
+        }
+        {
+          let topicsCopy = JSON.parse(JSON.stringify(topics));
+          topicsCopy[id][typeIf] = [...topicsCopy[id][typeIf], ...selectedQuestions];
+          dispatch(
+            setCurrentQuestionCount(currentQuestionCount + selectedQuestions.length)
+          );
+          dispatch(setTestSelectedTopics(topicsCopy));
+          console.log(topicsCopy, "topicsCopy");
+          const newParams = new URLSearchParams(searchParams);
+
+          // Remove the "select" parameter
+          newParams.delete("select");
+
+          // Update the URL with the new search params
+          setSearchParams(newParams);
+
+        }
+      } else {
+        let sectionCopy = { ...currentTopic, Type: questionType };
+
+        let typeIf;
+        if (questionType === "mcq") {
+          typeIf = "questions";
+        } else if (questionType === "findAnswer") {
+          typeIf = "findAnswers";
+        } else {
+          typeIf = questionType;
+        }
+
+        // Check if the topic already exists
+        const topicIndex = sections.findIndex(
+          (section) => section.Type === questionType && section.id === currentTopic.id // Use an identifier like `id`
+        );
+
+        if (topicIndex !== -1) {
+          // Topic exists, replace questions
+          const existingCount = sections[topicIndex][typeIf]?.length || 0;
+          const newQuestionCount =
+            currentQuestionCount - existingCount + selectedQuestions.length;
+          console.log(newQuestionCount, "newQuestionCount", parseInt(totalQuestions), "totalQuestions");
+          if (newQuestionCount > parseInt(totalQuestions)) {
+            toast.error(`Number of questions must be less than ${totalQuestions}`);
+            return;
+          }
+
+          // Replace the questions for the topic
+          sections[topicIndex][typeIf] = selectedQuestions;
+          dispatch(setCurrentQuestionCount(newQuestionCount));
+          dispatch(setTestSelectedTopics([...sections]));
+        } else {
+          // Topic doesn't exist, add it
+          sectionCopy[typeIf] = selectedQuestions;
+          dispatch(setCurrentQuestionCount(currentQuestionCount + selectedQuestions.length));
+          dispatch(setTestSelectedTopics([...sections, sectionCopy]));
+        }
+
+        navigate(-1);
+
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const [noQuestionsMessage, setNoQuestionsMessage] = useState("");
 
-  useEffect(() => {
-    // Other code...
+  // useEffect(() => {
+  //   // Other code...
 
-    // Set message if no questions are present for the type
-    if (questions?.length === 0) {
-      setNoQuestionsMessage(`No ${questionType} questions found.`);
-    } else {
-      setNoQuestionsMessage("");
-    }
-  }, [questions]);
+  //   // Set message if no questions are present for the type
+  //   if (questions?.length === 0) {
+  //     setNoQuestionsMessage(`No ${questionType} questions found.`);
+  //   } else {
+  //     setNoQuestionsMessage("");
+  //   }
+  // }, [questions]);
   const totalTime = handleCalculateTime();
   return (
     <>
@@ -178,6 +385,7 @@ const Review = () => {
             ? JSON.parse(localStorage.getItem("Topics"))._id
             : ""
         }
+        handleTopics={handleTopics}
         visible={visible}
         setVisible={setVisible}
         type={type}
@@ -185,10 +393,9 @@ const Review = () => {
         sectionId={localStorage.getItem("Details") ? currentTopic._id : ""}
       />
 
-      <div
-        className={`mx-auto p-5 min-h-[80vh] my-2 rounded-lg   bg-gray-100  ${
-          visible && "h-[80vh] overflow-hidden"
-        }`}
+      {loading ? (<Loader />) : (<div
+        className={`mx-auto p-5 min-h-[80vh] my-2 rounded-lg   bg-gray-100  ${visible && "h-[80vh] overflow-hidden"
+          }`}
       >
         <div className="flex justify-between mb-5">
           <span className="flex gap-2 items-center">
@@ -211,116 +418,147 @@ const Review = () => {
             </label>
           </span> */}
         </div>
+
+        {(questions?.length > 0 && select) && (
+
+          <div className="flex justify-between">
+
+            <div className="flex items-center gap-2 p-4 bg-gray-50 rounded-lg">
+              <input type="checkbox"
+                checked={selectedQuestions.length === questions.length && questions.length > 0}
+                onChange={handleSelectAll}
+                className="h-5 w-5 rounded border-gray-300"
+              />
+              <span className="text-sm font-medium">
+                Select All ({selectedQuestions.length}/{questions.length})
+              </span>
+
+
+
+            </div>
+
+            <button
+              className="self-center justify-center flex bg-blued my-6 p-2 text-white hover:bg-cyan-600 rounded-xl w-32  gap-2 "
+              onClick={addToSection}
+            >
+              <FiPlus className="self-center text-lg " /> Add
+            </button>
+          </div>
+
+        )}
+
         {noQuestionsMessage && (
           <div className="text-red-500 text-center">{noQuestionsMessage}</div>
         )}
+
         {questionType === "mcq" ? (
           questions?.length > 0 ? (
-            [...questions] // Create a copy of the questions array
-              // Sort questions based on level
+            [...questions]
               .sort((a, b) => {
-                // Define the order of levels
                 const levelsOrder = ["beginner", "intermediate", "advanced"];
-
-                // Compare the levels of questions
                 const levelAIndex = levelsOrder.indexOf(a.QuestionLevel);
                 const levelBIndex = levelsOrder.indexOf(b.QuestionLevel);
-
-                // Return the comparison result
                 return levelAIndex - levelBIndex;
               })
-              // Map over sorted questions
               .map((question, i) => (
-                <Mcq
-                  key={i}
-                  view={view}
-                  type={type}
-                  id={id}
-                  Number={i}
-                  question={question}
-                  Title={question.Title}
-                  Options={question.Options}
-                  AnswerIndex={question.AnswerIndex}
-                />
+                <div key={i} className="relative">
+                  {select && <QuestionCheckbox question={question} />}
+                  <div className="pl-12">
+                    <Mcq
+                      view={view}
+                      type={type}
+                      id={id}
+                      Number={i}
+                      reset={() => handleTopics()}
+                      question={question}
+                      Title={question.Title}
+                      Options={question.Options}
+                      AnswerIndex={question.AnswerIndex}
+                    />
+                  </div>
+                </div>
               ))
-          ) : (
-            <></>
-          )
+          ) : null
         ) : questionType === "findAnswer" ? (
           questions?.length > 0 ? (
-            questions.map((question, i) => {
-              return (
-                <FindAnswer
-                  view={view}
-                  type={type}
-                  id={id}
-                  Number={i}
-                  question={question}
-                  Title={question?.Title || ""}
-                  Options={question?.questions || []}
-                />
-              );
-            })
-          ) : (
-            <></>
-          )
+            questions.map((question, i) => (
+              <div key={i} className="relative">
+                {select && <QuestionCheckbox question={question} />}
+                <div className="pl-12">
+                  <FindAnswer
+                    view={view}
+                    type={type}
+                    id={id}
+                    Number={i}
+                    question={question}
+                    Title={question?.Title || ""}
+                    Options={question?.questions || []}
+                  />
+                </div>
+              </div>
+            ))
+          ) : null
         ) : questionType === "essay" ? (
           questions?.length > 0 ? (
-            questions.map((question, i) => {
-              // //console.log(question);
-              return (
-                <Essay
-                  Number={i}
-                  Title={question?.Title || ""}
-                  id={id}
-                  view={view}
-                  type={type}
-                  question={question}
-                />
-              );
-            })
-          ) : (
-            <></>
-          )
+            questions.map((question, i) => (
+              <div key={i} className="relative">
+                {select && <QuestionCheckbox question={question} />}
+                <div className="pl-12">
+                  <Essay
+                    Number={i}
+                    Title={question?.Title || ""}
+                    id={id}
+                    view={view}
+                    type={type}
+                    question={question}
+                  />
+                </div>
+              </div>
+            ))
+          ) : null
         ) : questionType === "compiler" ? (
           questions?.length > 0 ? (
-            questions.map((question, i) => {
-              // //console.log(question);
-              return (
-                <Code
+            questions.map((question, i) => (
+              <div key={i} className="relative">
+                {select && <QuestionCheckbox question={question} />}
+                <div className="pl-12">
+                  <Code
+                    view={view}
+                    type={type}
+                    id={id}
+                    Number={i}
+                    Title={question?.codeQuestion || ""}
+                    code={question?.code}
+                    question={question}
+                  />
+                </div>
+              </div>
+            ))
+          ) : null
+        ) : questions?.length > 0 ? (
+          questions.map((question, i) => (
+            <div key={i} className="relative">
+              {select && <QuestionCheckbox question={question} />}
+              <div className="pl-12">
+                <Video
+                  Number={i}
+                  id={id}
+                  video={question}
                   view={view}
                   type={type}
-                  id={id}
-                  Number={i}
-                  Title={question?.codeQuestion || ""}
-                  code={question?.code}
                   question={question}
                 />
-              );
-            })
-          ) : (
-            <></>
-          )
-        ) : questions?.length > 0 ? (
-          questions.map((question, i) => {
-            // //console.log(question);
-            return (
-              <Video
-                Number={i}
-                id={id}
-                video={question}
-                view={view}
-                type={type}
-                question={question}
-              />
-            );
-          })
-        ) : (
-          <></>
-        )}
-      </div>
+              </div>
+            </div>
+          ))
+        ) : null}
+      </div>)}
     </>
   );
 };
 
 export default Review;
+
+
+
+
