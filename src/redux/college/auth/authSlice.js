@@ -336,7 +336,7 @@ export const forgotPassword = createAsyncThunk(
       const req = await axios.post(
         `${REACT_APP_API_URL}/api/college/password/forgot`,
         data,
-        getHeaders(),
+        getHeaders()
       );
       const res = req.data;
 
@@ -375,7 +375,8 @@ export const getCollege = createAsyncThunk(
   "collegeAuth/getCollege",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${REACT_APP_API_URL}/api/college/me`, 
+      const response = await axios.get(
+        `${REACT_APP_API_URL}/api/college/me`,
         getHeaders()
       );
 
@@ -436,9 +437,9 @@ export const resetPassword = createAsyncThunk(
       //console.log("updating", localStorage.getItem("auth-token"));
       const req = await axios.put(
         `${REACT_APP_API_URL}/api/college/password/reset/${data.token}`,
-        { password: data.password, confirmPassword: data.confirmPassword, ip },
+        { password: data.password, confirmPassword: data.confirmPassword, ip }
 
-      //  getHeaders()
+        //  getHeaders()
       );
       const res = req.data;
       return res;
@@ -666,9 +667,13 @@ const collegeAuthSlice = createSlice({
         state.qr.secret = action.payload.secret.ascii;
         state.qr.code = action.payload.qr;
       })
-      .addCase(forgotPassword.fulfilled, (state, action) => {})
+      
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        
+      })
       .addCase(registerCollege.pending, (state, action) => {
         state.status = "loading";
+
         //console.log("pending");
       })
       .addCase(registerCollege.fulfilled, (state, action) => {
@@ -834,7 +839,7 @@ const collegeAuthSlice = createSlice({
       .addCase(updatePassword.rejected, (state, action) => {
         //console.log(action.payload);
         toast.error(action.payload);
-        // alert(action.payload.message); 
+        // alert(action.payload.message);
       })
       .addCase(googleLoginCollege.pending, (state, action) => {
         state.status = "loading";
@@ -947,6 +952,15 @@ const collegeAuthSlice = createSlice({
       })
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.status = "success";
+        let role = action.payload?.user?.role;
+        // console.log(role);
+        if (role === "university") {
+          window.location.href = "/university";
+        } else if (role === "company") {
+          window.location.href = "/company";
+        } else {
+          window.location.href = "/";
+        }
         // state.user = action.payload;
         // state.loggedInUsers = action.payload;
         //console.log("fullfilled");
