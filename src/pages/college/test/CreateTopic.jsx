@@ -19,6 +19,11 @@ const CreateTopic = () => {
     Description: "",
     Time: null,
     TotalQuestions: null,
+    category: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).category:"",
+    categoryName: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).categoryName:"",
+    accessibleDepartments:localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).accessibleDepartments:[],
+    hasAccessToAllDepartments: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).hasAccessToAllDepartments:false,
+    hasAccessToAllCategories: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).hasAccessToAllCategories:false,
   });
   const [isNameEmpty, setIsNameEmpty] = useState(false);
   const [isDescEmpty, setIsDescEmpty] = useState(false);
@@ -85,6 +90,11 @@ const CreateTopic = () => {
         Description: "",
         Time: null,
         TotalQuestions: null,
+        category : localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).category:"",
+        categoryName: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).categoryName:"",
+        accessibleDepartments:localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).accessibleDepartments:[],
+        hasAccessToAllDepartments: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).hasAccessToAllDepartments:false,
+        
       });
     });
   };

@@ -525,6 +525,12 @@ const testSlice = createSlice({
           duration_to: state.duration_to,
           duration_from: state.duration_from,
           isNegativeMarking: state.isNegativeMarking,
+          accessibleDepartments: action.payload.accessibleDepartments,
+          hasAccessToAllDepartments: action.payload?.hasAccessToAllDepartments,
+          hasAccessToAllCategories: action.payload?.hasAccessToAllCategories,
+          category : action.payload?.category,
+          categoryName : action.payload?.categoryName
+
         })
       );
       //console.log(action.payload, "action.payload");

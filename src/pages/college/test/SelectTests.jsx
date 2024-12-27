@@ -211,7 +211,13 @@ const SelectTests = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllTopics({ level: level }));
+   let test = JSON.parse(localStorage.getItem("testDetails"));
+
+  
+    dispatch(getAllTopics({ level: level , category : test.category, accessibleDepartments: test.accessibleDepartments,
+      hasAccessToAllDepartments: test.hasAccessToAllDepartments,
+      hasAccessToAllCategories: test.hasAccessToAllCategories}));
+       
 
     if (sections) {
       setFilteredSections(sections);

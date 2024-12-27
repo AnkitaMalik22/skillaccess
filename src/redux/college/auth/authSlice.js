@@ -336,7 +336,7 @@ export const forgotPassword = createAsyncThunk(
       const req = await axios.post(
         `${REACT_APP_API_URL}/api/college/password/forgot`,
         data,
-        { withCredentials: true }
+        getHeaders(),
       );
       const res = req.data;
 
@@ -438,12 +438,7 @@ export const resetPassword = createAsyncThunk(
         `${REACT_APP_API_URL}/api/college/password/reset/${data.token}`,
         { password: data.password, confirmPassword: data.confirmPassword, ip },
 
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("auth-token"),
-          },
-        }
+      //  getHeaders()
       );
       const res = req.data;
       return res;

@@ -114,7 +114,7 @@ const UniversityLoginPage = () => {
               {/* Forgot Password */}
               <div
                 className="flex gap-2 px-2 w-full max-w-sm mx-auto justify-end cursor-pointer mb-4 md:mb-8"
-                onClick={() => navigate("/university/forgotPassword")}
+                onClick={() => navigate("/forgotPassword")}
               >
                 <h1 className="text-blue-700 font-bold">Forgot Password</h1>
               </div>
