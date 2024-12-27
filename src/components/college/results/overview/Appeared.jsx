@@ -24,7 +24,7 @@ const Appeared = ({ assessment }) => {
     if (isCompany()) {
 
       console.log(testId, responseId, student)
-      await dispatch(selectStudentTestCompany({ testId:student.assessmentId, responseId: student._id, status }));
+      await dispatch(selectStudentTestCompany({ testId: student.assessmentId, responseId: student._id, status }));
       dispatch(getTestCompany(student.assessmentId))
       await dispatch(getTestResultPageCompany(student.assessmentId));
 
@@ -113,13 +113,17 @@ const Appeared = ({ assessment }) => {
           {!TEST_DATA_RESPONSE_LOADING && testDataResponse?.length > 0 ? (
             testDataResponse?.map((student, index) => (
               <div
-                className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full border-2 transition-colors duration-300 bg-white"
-                style={{ borderColor: "transparent", borderWidth: "2px" }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.borderColor = colors[index])
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.borderColor = "transparent")
+                className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full border border-transparent hover:border-accent hover:cursor-pointer transition-colors duration-300 bg-white"
+                // style={{ borderColor: "transparent", borderWidth: "2px" }}
+                // onMouseEnter={(e) =>
+                //   (e.currentTarget.style.borderColor = colors[index])
+                // }
+                // onMouseLeave={(e) =>
+                //   (e.currentTarget.style.borderColor = "transparent")
+                // }
+                onClick={() =>
+                  //  navigate(`/college/students/profile/${student._id}`)
+                  navigate(`/${isUni() ? "university/pr" : "college"}/students/profile/${student.studentId._id}`)
                 }
               >
                 {" "}
@@ -147,7 +151,9 @@ const Appeared = ({ assessment }) => {
                   </h2>
                 </div>
                 {/*  */}
-                <div className="flex justify-center">
+                <div className="flex justify-center" onClick={(e) => {
+                  e.stopPropagation();
+                }}>
                   <div className=" self-center h-fit">
                     <span>
                       {isLoading[student?._id] ? (
@@ -155,10 +161,13 @@ const Appeared = ({ assessment }) => {
                       ) : (
                         <select
                           className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
-                          onChange={handleStatusChange(
-                            assessment?._id,
-                            student?._id, student
-                          )}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            handleStatusChange(
+                              assessment?._id,
+                              student?._id, student
+                            )
+                          }}
                           value={student?.status}
                         >
                           <option value="">Pending</option>
@@ -193,7 +202,8 @@ const Appeared = ({ assessment }) => {
                 <div className="flex justify-center">
                   <span
                     className="self-center cursor-pointer"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       if (isCompany()) {
                         navigate(
                           `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
