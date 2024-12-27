@@ -82,7 +82,7 @@ const Name = () => {
 
   useEffect(() => {
     dispatch(setInTest(true));
-  dispatch(getCategories());
+    dispatch(getCategories());
 
   }, []);
   const [errors, setErrors] = useState({
@@ -311,9 +311,8 @@ const Name = () => {
           <div>
             <input
               type="text"
-              className={`w-full rounded-lg bg-gray-50 border ${
-                errors.name ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={`w-full rounded-lg bg-gray-50 border ${errors.name ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="Name of the Assessment*"
               name="name"
               value={testDetails.name}
@@ -330,9 +329,8 @@ const Name = () => {
             <input
               type="tel"
               name="totalAttempts"
-              className={`w-full rounded-lg bg-gray-50 border ${
-                errors.totalAttempts ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={`w-full rounded-lg bg-gray-50 border ${errors.totalAttempts ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="No. of Attempts*"
               value={testDetails.totalAttempts}
               onChange={handleChange}
@@ -350,9 +348,8 @@ const Name = () => {
             <input
               name="totalQuestions"
               type="tel"
-              className={`w-full rounded-lg bg-gray-50 border ${
-                errors.totalQuestions ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={`w-full rounded-lg bg-gray-50 border ${errors.totalQuestions ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="No. of Questions*"
               value={testDetails.totalQuestions}
               onChange={handleChange}
@@ -405,7 +402,7 @@ const Name = () => {
               className="w-full rounded-lg bg-gray-50 border border-gray-200 text-gray-800 text-lg p-4 pr-10 appearance-none focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200"
               required
             >
-              <option value="">Select Category*</option>
+              <option value="">Select Category</option>
               {categories && categories.map((category) => (
                 <option key={category._id} value={category._id}>
                   {category.name}
@@ -435,11 +432,11 @@ const Name = () => {
 
           {testDetails.category && (
             <>
-             
+
 
               {/* Department Access Controls */}
               <div className="border rounded-lg p-4 bg-gray-50">
-                <div 
+                <div
                   className="flex items-center justify-between cursor-pointer"
                   onClick={() => setShowDepartmentControls(!showDepartmentControls)}
                 >
@@ -479,11 +476,11 @@ const Name = () => {
                           onChange={handleChange}
                           className="w-full rounded-lg bg-white border border-gray-200 text-gray-800 text-lg p-4 min-h-[120px]"
                         >
-                        {
-                          categories.find(cat => cat._id === testDetails.category)?.departments.map(dept => (
-                            <option key={dept} value={dept}>{dept}</option>
-                          ))
-                        }
+                          {
+                            categories.find(cat => cat._id === testDetails.category)?.departments.map(dept => (
+                              <option key={dept} value={dept}>{dept}</option>
+                            ))
+                          }
                         </select>
 
                         {/* Selected Departments Display */}
@@ -528,9 +525,8 @@ const Name = () => {
           {/* Description Textarea */}
           <div>
             <textarea
-              className={`w-full h-40 rounded-lg bg-gray-50 border ${
-                errors.description ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={`w-full h-40 rounded-lg bg-gray-50 border ${errors.description ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="Add Description*"
               name="description"
               value={testDetails.description}
