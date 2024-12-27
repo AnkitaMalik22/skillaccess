@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../../../components/college/quesBank/addMcqToTopic/Header";
 
 import { FaX } from "react-icons/fa6";
@@ -17,9 +17,14 @@ import {
 import {
   addQuestionToTopic,
   setTotalTopicQuestions,
+  uploadQuestionImage,
 } from "../../../redux/college/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
+import DropImageUpload from "../../../components/DropImageUpload";
+import axios from "axios";
+
+
 
 const AddMcqToTopic = () => {
   //useTranslate();
@@ -30,15 +35,18 @@ const AddMcqToTopic = () => {
   const [loading, setLoading] = useState(false);
   const [isPrev, setIsPrev] = useState(false);
   const [countDetail, setCountDetail] = useState(-1);
+  const [image, setImage] = useState("");
+  const [file, setFile] = useState(null);
   // const[level,setLevel]=useState("beginner");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const imgRef = useRef(null);
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
   const addType = searchParams.get("addType");
   const [question, setQuestion] = useState({
+    image: "",
     QuestionLevel: "beginner",
     Duration: 0,
     id: id + Date.now(),
@@ -144,9 +152,19 @@ const AddMcqToTopic = () => {
     if (addType === "edit") {
       const ques = JSON.parse(localStorage.getItem("qbQues"));
       setQuestion(ques);
+      setImage(ques.image || "");
     }
   }, []);
-  const handleQuestionSave = () => {
+  const handleQuestionSave = async () => {
+
+    let res = ""
+    if (image && file) {
+      const req = await dispatch(uploadQuestionImage(file));
+
+      res = req.payload.secure_url;
+
+    }
+
     if (addType === "topic") {
       {
         if (
@@ -184,7 +202,7 @@ const AddMcqToTopic = () => {
                 index: countDetail + 1,
                 type: "mcq",
                 id: question._id,
-                question: question,
+                question: { ...question, image: res },
               })
             ).then(() => setLoading(false));
             setQuestion({
@@ -200,7 +218,7 @@ const AddMcqToTopic = () => {
             setIsPrev(false);
             setCountDetail(currentTopic?.questions?.length - 1);
             dispatch(
-              addQuestionToTopic({ data: question, id: id, type: type })
+              addQuestionToTopic({ data: { ...question, image: res }, id: id, type: type })
             ).then(() => {
               setLoading(false);
               // if(!ADD_QUESTION_LOADING){
@@ -249,7 +267,7 @@ const AddMcqToTopic = () => {
         editBankQuestionById({
           type: "mcq",
           id: question._id,
-          question: question,
+          question: { ...question, image: res },
         });
       }
     }
@@ -265,15 +283,23 @@ const AddMcqToTopic = () => {
     }
   }, [ADD_QUESTION_LOADING]);
 
+
+
+
+
   return (
     <div>
       <Header
+        image={image}
+        file={file}
         question={question}
         setQuestion={setQuestion}
         id={id}
         type={type}
         addType={addType}
       />
+
+
       <div className="bg-white min-h-[90vh] mx-auto rounded-xl">
         <div className="flex md:flex-nowrap flex-wrap gap-5 mx-auto md:mb-40 mb-10">
           <div className="w-1/2">
@@ -307,7 +333,10 @@ const AddMcqToTopic = () => {
                 <option value={"advanced"}>Advanced</option>
               </select>
             </div>
+
+            <DropImageUpload image={image} setImage={setImage} setFile={setFile} />
             <ReactQuill
+
               value={question.Title}
               onChange={(value) =>
                 setQuestion((prev) => {
@@ -315,7 +344,7 @@ const AddMcqToTopic = () => {
                   return { ...prev, Title: value };
                 })
               }
-              className="bg-[#F8F8F9] border-none focus:outline-none rounded-xl focus:ring-0 placeholder-[#3E3E3E]"
+              className="bg-[#F8F8F9] border-none focus:outline-none rounded-xl focus:ring-0 placeholder-[#3E3E3E] "
               placeholder="Enter Question Here"
               name="Title"
             />
@@ -515,9 +544,8 @@ const AddMcqToTopic = () => {
           <div className=" flex gap-2">
             {addType === "topic" && (
               <button
-                className={`self-center justify-center cursor-pointer flex bg-[#8F92A1] text-[#171717] py-3 px-6 rounded-2xl text-sm font-bold gap-2 bg-opacity-10 ${
-                  countDetail >= 0 ? "" : "hidden"
-                }`}
+                className={`self-center justify-center cursor-pointer flex bg-[#8F92A1] text-[#171717] py-3 px-6 rounded-2xl text-sm font-bold gap-2 bg-opacity-10 ${countDetail >= 0 ? "" : "hidden"
+                  }`}
                 onClick={handlePrev}
               >
                 <FaChevronLeft className="self-center" /> Prev
@@ -541,6 +569,8 @@ const AddMcqToTopic = () => {
             )}
           </div>
         </div>
+
+
       </div>
     </div>
   );

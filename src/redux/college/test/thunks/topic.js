@@ -91,10 +91,10 @@ export const getAllTopicsQB = createAsyncThunk(
 
 export const getTopicById = createAsyncThunk(
   "test/getTopicById",
-  async (id, { rejectWithValue }) => {
+  async ({id,level}, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/admin/topic/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/admin/topic/${id}?level=${level}`,
        getHeaders()
       );
       const res = req.data;
@@ -165,7 +165,7 @@ export const setTotalTopicQuestions = createAsyncThunk(
   async (arg, { dispatch, rejectWithValue }) => {
     try {
       // Dispatch the getTopicById thunk and wait for the result
-      const topic = await dispatch(getTopicById(arg.id)).unwrap();
+      const topic = await dispatch(getTopicById({id:arg.id})).unwrap();
 
       // //console.log(topic, "topic");
 
@@ -285,5 +285,21 @@ export const setTotalTopicQuestions = createAsyncThunk(
     }
   }
 );
+
+
+export const uploadQuestionImage = createAsyncThunk("test/uploadQuestionImage", async (file, { rejectWithValue }) => {
+
+  try {
+    const formData = new FormData();
+  formData.append('image', file); // 'image' is the file object
+
+  const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/assessments/question/image`, formData, getHeaders('multipart/form-data'));
+  console.log(res,"thunk")
+return res.data.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data.message || "something went wrong");
+  }
+})
+
 
 

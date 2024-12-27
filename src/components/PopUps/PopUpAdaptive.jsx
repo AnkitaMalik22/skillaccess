@@ -8,6 +8,8 @@ const PopUpAdaptive = ({
   handleSave,
   setTotalQ,
   addSection,
+  selectManual,
+  manual
 }) => {
   const dispatch = useDispatch();
   const [noOfQuestions, setNoOfQuestions] = useState(0);
@@ -22,7 +24,7 @@ const PopUpAdaptive = ({
   return (
     <div
       className="w-full  min-w-full h-full min-h-[100vh] bg-black absolute z-[9999] flex left-0 top-0 bg-opacity-30 "
-      // onClick={handleOverlay}
+    // onClick={handleOverlay}
     >
       <div className="bg-white shadow-md w-96 h-56 mx-auto self-center rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-4">
         <h1 className="text-center">
@@ -54,6 +56,13 @@ const PopUpAdaptive = ({
           >
             Select
           </button>
+          {manual && (
+            <button
+              className="self-center justify-center flex bg-accent border border-blue-700 py-3 px-8 rounded-xl text-xs gap-2 text-white"
+              onClick={selectManual}
+            >
+              Select Manually
+            </button>)}
         </div>
       </div>
     </div>

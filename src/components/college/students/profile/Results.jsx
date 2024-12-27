@@ -5,13 +5,14 @@ import {
   selectStudentTest,
 } from "../../../../redux/college/test/thunks/test";
 import { getStudentCV } from "../../../../redux/college/student/studentSlice";
+import Pagination from "../../../Pagination";
 
-const Results = ({ assessmentResult, id }) => {
+const Results = ({ assessmentResult, id, pagination }) => {
   const dispatch = useDispatch();
   const handleStatusChange = (testId, responseId) => async (event) => {
     const status = event.target.value;
     await dispatch(selectStudentTest({ testId, responseId, status }));
-    dispatch(getStudentCV(id));
+    dispatch(getStudentCV({ studentId: id, page: pagination?.currentPage }));
     // dispatch(getTestResultPage(testId));
   };
   // //console.log(assessmentResult);
@@ -38,66 +39,86 @@ const Results = ({ assessmentResult, id }) => {
 
     return `${day} ${month} -${year}`;
   }
+
   return (
-    <div className="px-4  ">
-      <div className=" grid grid-cols-5 text-center mt-3 bg-[#8F92A1] bg-opacity-10 rounded-lg ">
-        <span className="w-full   p-2 font-bold font-dmSans">Name of test</span>
-        <span className="w-full   p-2 font-bold font-dmSans">Date</span>
-        <span className="w-full   p-2 font-bold font-dmSans">Topics</span>
-        <span className="w-full   p-2 font-bold font-dmSans">Score</span>
-        <span className="w-full  p-2 font-bold font-dmSans">Status</span>
+    <div className="w-full px-6 py-4 space-y-4">
+      {/* Header */}
+      <div className="grid grid-cols-5  font-dmSans font-bold text-base bg-[#0052cc0d] px-2  rounded-xl">
+        <div className="px-4 py-3">Name of test</div>
+        <div className="px-4 py-3">Date</div>
+        <div className="px-4 py-3">Topics</div>
+        <div className="px-4 py-3">Score</div>
+        <div className="px-4 py-3">Status</div>
       </div>
 
-      {/* iterable  */}
-      {assessmentResult.length > 0 ? (
-        assessmentResult
-          ?.filter((assessment) => assessment?.assessmentId?._id)
-          .map((response, index) => {
-            return (
+      {/* Content */}
+      {assessmentResult?.length > 0 ? (
+        <div className="space-y-2">
+          {assessmentResult
+            ?.filter((assessment) => assessment?.assessmentId?._id)
+            .map((response, index) => (
               <div
-                className=" grid grid-cols-5 text-center mt-3 bg-white rounded-lg "
+                className="grid grid-cols-5 bg-white rounded-lg border border-gray-200 text-sm"
                 key={index}
               >
-                <span className="w-full   py-2 text-sm font-dmSans first-letter:uppercase">
+                <div className="px-4 py-3 truncate">
                   {response?.assessmentId?.name}
-                </span>
-                <span className="w-full   p-2 text-sm font-dmSans">
+                </div>
+
+                <div className="px-4 py-3 text-gray-600">
                   {formatDate(response?.createdAt)}
-                </span>
-                <span className="w-full   p-2 text-sm font-dmSans">
-                  {response.topics.map((topic) => topic.Heading).join(", ")}
-                </span>
-                <span className="w-full   p-2 text-sm font-dmSans">
-                  {response.percentage?.toFixed(2)}%
-                </span>
-                <div className="flex justify-center">
-                  <div className=" self-center h-fit">
-                    <span className="text-sm">
-                    {response?.status}
-                      {/* <select
-                        className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
-                        onChange={handleStatusChange(
-                          response.assessmentId._id,
-                          response._id
-                        )}
-                        value={response?.status}
-                      >
-                        <option value="">pending</option>
-                        <option value="rejected">rejected</option>
-                        <option value="selected">selected</option>
-                      </select> */}
-                    </span>
-                  </div>
+                </div>
+
+                <div className="px-4 py-3 text-gray-600 truncate">
+                  {response?.topics?.map((topic) => topic.Heading).join(", ")}
+                </div>
+
+                <div className="px-4 py-3">
+                  <span
+                    className={`font-medium ${response.percentage >= 70 ? 'text-green-600' :
+                      response.percentage >= 40 ? 'text-yellow-600' :
+                        'text-red-600'
+                      }`}
+                  >
+                    {response.percentage?.toFixed(2)}%
+                  </span>
+                </div>
+
+                <div className="px-4 py-3">
+                  <span
+                    className={`
+                  inline-flex px-2.5 py-1 rounded-full text-xs font-medium
+                  ${response?.status === 'selected' ? 'bg-green-100 text-green-800' :
+                        response?.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                          'bg-yellow-100 text-yellow-800'
+                      }
+                `}
+                  >
+                    {response?.status || 'pending'}
+                  </span>
                 </div>
               </div>
-            );
-          })
+            ))}
+        </div>
       ) : (
-        <p className="w-full h-[100px] text-gray-500 font-bold text-xl flex justify-center items-center">
+        <div className="h-[100px] flex items-center justify-center text-gray-500 font-medium text-lg">
           No Result Found
-        </p>
+        </div>
       )}
+
+      {/* Pagination */}
+      <div className="pt-4">
+        <Pagination
+          currentPage={pagination?.currentPage}
+          onPageChange={(page) => {
+            dispatch(getStudentCV({ studentId: id, page }))
+          }}
+          totalPages={pagination?.totalPages}
+        />
+      </div>
     </div>
+
+
   );
 };
 

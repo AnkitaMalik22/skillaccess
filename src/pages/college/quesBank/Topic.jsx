@@ -49,7 +49,7 @@ const Topic = () => {
   };
 
   const handleSelect = (id) => {
-    setSelectedSections(prev => 
+    setSelectedSections(prev =>
       prev.includes(id) ? prev.filter(sectionId => sectionId !== id) : [...prev, id]
     );
   };
@@ -205,31 +205,31 @@ const Topic = () => {
             </label>
           </div>
           {!query?.hasAccessToAllDepartments && (
-  <div className="mb-2">
-    <label className="block text-sm font-medium text-gray-700">Departments</label>
-    <select
-      multiple
-      className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-      name="accessibleDepartments"
-      value={query?.accessibleDepartments || []}
-      onChange={(e) => {
-        const selectedOptions = Array.from(e.target.selectedOptions).map((option) => option.value);
-        setQuery((prevQuery) => ({
-          ...prevQuery,
-          accessibleDepartments: selectedOptions,
-        }));
-      }}
-    >
-      {categories &&
-        categories
-          .find((cat) => cat._id === query.category)?.departments?.map((dept) => (
-            <option key={dept} value={dept}>
-              {dept}
-            </option>
-          ))}
-    </select>
-  </div>
-)}
+            <div className="mb-2">
+              <label className="block text-sm font-medium text-gray-700">Departments</label>
+              <select
+                multiple
+                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                name="accessibleDepartments"
+                value={query?.accessibleDepartments || []}
+                onChange={(e) => {
+                  const selectedOptions = Array.from(e.target.selectedOptions).map((option) => option.value);
+                  setQuery((prevQuery) => ({
+                    ...prevQuery,
+                    accessibleDepartments: selectedOptions,
+                  }));
+                }}
+              >
+                {categories &&
+                  categories
+                    .find((cat) => cat._id === query.category)?.departments?.map((dept) => (
+                      <option key={dept} value={dept}>
+                        {dept}
+                      </option>
+                    ))}
+              </select>
+            </div>
+          )}
 
           <div className="flex justify-end">
             <button
@@ -254,9 +254,8 @@ const Topic = () => {
               name="select"
               type="checkbox"
               checked={selectedSections?.length > 0}
-              className={`rounded bg-[#DEEBFF] border-none ${
-                selectedSections.length > 0 ? 'w-6 h-6 ' : ' focus:ring-0 '
-              }`}
+              className={`rounded bg-[#DEEBFF] border-none ${selectedSections.length > 0 ? 'w-6 h-6 ' : ' focus:ring-0 '
+                }`}
               onChange={() => setVisible(selectedSections?.length > 0)}
             />
             {selectedSections?.length > 0 ? (
@@ -276,51 +275,50 @@ const Topic = () => {
         <div className="flex gap-5 flex-wrap">
           {GET_TOPICS_LOADING
             ? Array.from({ length: 5 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="w-[17rem] mb-4 bg-gray-200 rounded-2xl animate-pulse"
-                >
-                  <div className="h-40 bg-gray-300 rounded-t-2xl"></div>
-                  <div className="card-body">
-                    <div className="h-6 bg-gray-300 rounded-full w-3/4 mb-2"></div>
-                    <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
-                  </div>
+              <div
+                key={index}
+                className="w-[17rem] mb-4 bg-gray-200 rounded-2xl animate-pulse"
+              >
+                <div className="h-40 bg-gray-300 rounded-t-2xl"></div>
+                <div className="card-body">
+                  <div className="h-6 bg-gray-300 rounded-full w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
                 </div>
-              ))
+              </div>
+            ))
             : filteredSections &&
-              filteredSections.map((section) => (
-                <div
-                  className={`w-[17rem] mb-4 bg-white rounded-2xl cursor-pointer ${
-                    selectedSections.includes(section._id) ? 'border-2 border-[#0052CC]' : ''
+            filteredSections.map((section) => (
+              <div
+                className={`w-[17rem] mb-4 bg-white rounded-2xl cursor-pointer ${selectedSections.includes(section._id) ? 'border-2 border-[#0052CC]' : ''
                   }`}
-                  key={section._id}
-                  onClick={() => handleSelect(section._id)}
-                >
-                  <figure>
-                    <img src={randomImage()} alt="cover" />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="font-bold text-xl first-letter:uppercase">
-                      {section?.Heading}
-                    </h2>
-                    <div
-                      className="flex gap-2"
-                      onClick={() => {
-                        dispatch(setCurrentTopic({ topic: section }));
-                        localStorage.setItem('TopicDetails', JSON.stringify(section));
-                        navigate(
-                          isUni
-                            ? `/university/pr/quesbank/topic/${section._id}`
-                            : `/college/quesbank/topic/${section._id}`
-                        );
-                      }}
-                    >
-                      <Folder />
-                      <p className="text-blued text-sm">{getTotalQuestions(section)} Files</p>
-                    </div>
+                key={section._id}
+                onClick={() => handleSelect(section._id)}
+              >
+                <figure>
+                  <img src={randomImage()} alt="cover" />
+                </figure>
+                <div className="card-body">
+                  <h2 className="font-bold text-xl first-letter:uppercase">
+                    {section?.Heading}
+                  </h2>
+                  <div
+                    className="flex gap-2"
+                    onClick={() => {
+                      dispatch(setCurrentTopic({ topic: section }));
+                      localStorage.setItem('TopicDetails', JSON.stringify(section));
+                      navigate(
+                        isUni
+                          ? `/university/pr/quesbank/topic/${section._id}`
+                          : `/college/quesbank/topic/${section._id}`
+                      );
+                    }}
+                  >
+                    <Folder />
+                    <p className="text-blued text-sm">{getTotalQuestions(section)} Files</p>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
         </div>
         {filteredSections?.length === 0 && (
           <div className="w-full flex justify-center items-center mb-4 bg-white rounded-2xl">
@@ -333,4 +331,3 @@ const Topic = () => {
 };
 
 export default Topic;
-
