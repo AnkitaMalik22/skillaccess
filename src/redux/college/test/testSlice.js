@@ -525,6 +525,12 @@ const testSlice = createSlice({
           duration_to: state.duration_to,
           duration_from: state.duration_from,
           isNegativeMarking: state.isNegativeMarking,
+          accessibleDepartments: action.payload.accessibleDepartments,
+          hasAccessToAllDepartments: action.payload?.hasAccessToAllDepartments,
+          hasAccessToAllCategories: action.payload?.hasAccessToAllCategories,
+          category : action.payload?.category,
+          categoryName : action.payload?.categoryName
+
         })
       );
       //console.log(action.payload, "action.payload");
@@ -532,6 +538,7 @@ const testSlice = createSlice({
     },
     setTestSelectedTopics: (state, action) => {
       state.topics = action.payload;
+      console.log(action.payload, "action.payload");
       // localStorage.setItem(
       //   "test",
       //   JSON.stringify({
@@ -583,8 +590,9 @@ const testSlice = createSlice({
               action.payload.res.question;
             break;
           case "mcq":
-            state.currentTopic.questions[action.payload.index] =
-              action.payload.res.question;
+            state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
+              index === action.payload.index ? action.payload.res.question : question
+            );
             break;
 
           case "findAnswer":
@@ -611,8 +619,11 @@ const testSlice = createSlice({
               action.payload.res.question;
             break;
           case "mcq":
-            state.currentTopic.questions[action.payload.index] =
-              action.payload.res.question;
+
+              state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
+                index === action.payload.index ? action.payload.res.question : question
+              );
+              
             break;
 
           case "findAnswer":
@@ -730,6 +741,10 @@ const testSlice = createSlice({
       })
       .addCase(getTopicById.fulfilled, (state, action) => {
         state.currentTopic = action.payload;
+        localStorage.setItem(
+          "currentTopic",
+          JSON.stringify(action.payload)
+        );
         // //console.log(action.payload);
         //console.log("fullfilled");
       })

@@ -17,6 +17,12 @@ const initialState = {
   approvedStudents: [],
   pendingStudents: [],
   studentCV: [],
+  pagination: {
+    currentPage: 1,
+    limit: 10,
+    totalResponses: 21,
+    totalPages: 3
+},
   loading: false,
   error: false,
   GET_STUDENT_LOADING: false,
@@ -77,17 +83,17 @@ export const approveStudent = createAsyncThunk(
 
 export const getStudentCV = createAsyncThunk(
   "student/studentCV",
-  async (studentId, { rejectWithValue }) => {
+  async ({studentId,page}, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${REACT_APP_API_URL}/api/college/student/${studentId}`,
+        `${REACT_APP_API_URL}/api/college/student/${studentId}?page=${page}`,
         
          getHeaders()
         
       );
       const res = req.data;
       //console.log(res);
-      return res.student;
+      return res;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -197,7 +203,9 @@ export const studentSlice = createSlice({
         state.GET_STUDENT_LOADING = true;
       })
       .addCase(getStudentCV.fulfilled, (state, action) => {
-        state.studentCV = action.payload;
+        state.studentCV = action.payload.student;
+        console.log(action.payload, "action.payload");
+        state.pagination = action.payload.pagination;
         state.GET_STUDENT_LOADING = false;
       })
       .addCase(getStudentCV.rejected, (state, action) => {

@@ -11,13 +11,21 @@ import {
 } from "../../../../redux/college/test/testSlice";
 import toast from "react-hot-toast";
 import { isUni } from "../../../../util/isCompany";
+import { getCategories } from "../../../../redux/category/categorySlice";
 
 const Name = () => {
+  console.log("hello");//not printing
   const dispatch = useDispatch();
   const [search, setSearch] = useSearchParams();
+  // const [categories, setCategories] = useState([
+  //   "Category 1",
+  //   "Category 2",
+  //   "Category 3",
+  // ]);
 
   const level = search.get("level");
   // //console.log(level);
+  const { categories } = useSelector((state) => state.category);
 
   const {
     name,
@@ -42,6 +50,12 @@ const Name = () => {
     duration_from: duration_from || "", // New fields for duration
     duration_to: duration_to || "",
     isNegativeMarking: isNegativeMarking || false,
+    category: "",
+    categoryName: "",
+    hasAccessToAllBranches: false,
+    hasAccessToAllDepartments: false,
+    accessibleBranches: [],
+    accessibleDepartments: [],
   });
 
   useEffect(() => {
@@ -55,6 +69,12 @@ const Name = () => {
       duration_from: duration_from || "", // New fields for duration
       duration_to: duration_to || "",
       isNegativeMarking: isNegativeMarking || false,
+      category: "",
+      categoryName: "",
+      hasAccessToAllBranches: false,
+      hasAccessToAllDepartments: false,
+      accessibleBranches: [],
+      accessibleDepartments: [],
     });
   }, [dispatch]);
 
@@ -62,6 +82,8 @@ const Name = () => {
 
   useEffect(() => {
     dispatch(setInTest(true));
+    dispatch(getCategories());
+
   }, []);
   const [errors, setErrors] = useState({
     name: "",
@@ -72,7 +94,40 @@ const Name = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value, checked } = e.target;
+    const { name, value, checked, type } = e.target;
+
+    // Handle checkboxes for all access
+    if (name === "hasAccessToAllBranches" || name === "hasAccessToAllDepartments") {
+      setTestDetails(prev => ({
+        ...prev,
+        [name]: checked,
+        // Clear the specific access arrays when "all access" is checked
+        ...(name === "hasAccessToAllBranches" && checked ? { accessibleBranches: [] } : {}),
+        ...(name === "hasAccessToAllDepartments" && checked ? { accessibleDepartments: [] } : {})
+      }));
+      return;
+    }
+
+    // Handle multi-select for branches and departments
+    if (name === "accessibleBranches" || name === "accessibleDepartments") {
+      const options = Array.from(e.target.selectedOptions).map(option => option.value);
+      setTestDetails(prev => ({
+        ...prev,
+        [name]: options
+      }));
+      return;
+    }
+
+    // Handle category selection
+    if (name === "category") {
+      const selectedCategory = categories.find(cat => cat._id === value);
+      setTestDetails({
+        ...testDetails,
+        category: selectedCategory?._id || "",
+        categoryName: selectedCategory?.name || ""
+      });
+      return;
+    }
 
     // Check if the selected time is before the current time and date
     const currentTime = new Date().toISOString().slice(0, 16); // Get current time and date
@@ -231,27 +286,33 @@ const Name = () => {
     }
   };
 
+  console.log(categories);//not printing
+
+  // Add this state for collapse controls
+  const [showBranchControls, setShowBranchControls] = useState(false);
+  const [showDepartmentControls, setShowDepartmentControls] = useState(false);
+
   return (
-    <div>
+    <div className="bg-white min-h-screen">
       <Header handleNext={handleSubmit} />
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>
 
-      {/* larger screens */}
-      <div className="  bg-white min-h-[90vh] mx-auto  ">
-        <h2 className="w-full text-lg font-medium text-[#7D7D7D] mt-10 mb-5">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <h2 className="text-lg font-medium text-gray-600 mb-8">
           Add up to 10 custom questions to your assessment (optional). You can
           use five question types: multiple-choice, essay, video, code and find
           answer.
         </h2>
 
-        <form>
-          <div className="mb-4">
+        <form className="space-y-6">
+          {/* Name Input */}
+          <div>
             <input
               type="text"
-              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${errors.name ? "border-red-500" : "border-none"
-                }`}
+              className={`w-full rounded-lg bg-gray-50 border ${errors.name ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="Name of the Assessment*"
               name="name"
               value={testDetails.name}
@@ -259,115 +320,223 @@ const Name = () => {
               required
             />
             {errors.name && (
-              <span className="text-red-500 pt-2 ml-4">{errors.name}</span>
+              <p className="mt-2 text-sm text-red-600">{errors.name}</p>
             )}
           </div>
-          <div className="mb-4">
+
+          {/* Attempts Input */}
+          <div>
             <input
               type="tel"
               name="totalAttempts"
-              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${errors.name ? "border-red-500" : "border-none"
-                }`}
+              className={`w-full rounded-lg bg-gray-50 border ${errors.totalAttempts ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="No. of Attempts*"
               value={testDetails.totalAttempts}
               onChange={handleChange}
               pattern="[0-9]*"
-              onInput={(e) =>
-                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
-              }
+              onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))}
               required
             />
             {errors.totalAttempts && (
-              <span className="text-red-500 ml-4 py-2">
-                {errors.totalAttempts}
-              </span>
+              <p className="mt-2 text-sm text-red-600">{errors.totalAttempts}</p>
             )}
           </div>
-          <div className="mb-4">
+
+          {/* Questions Input */}
+          <div>
             <input
               name="totalQuestions"
               type="tel"
-              className={` w-full h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${errors.name ? "border-red-500" : "border-none"
-                }`}
+              className={`w-full rounded-lg bg-gray-50 border ${errors.totalQuestions ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="No. of Questions*"
               value={testDetails.totalQuestions}
               onChange={handleChange}
               pattern="[0-9]*"
-              onInput={(e) =>
-                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
-              }
+              onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))}
               required
             />
             {errors.totalQuestions && (
-              <span className="text-red-500 pt-2 ml-4">
-                {errors.totalQuestions}
-              </span>
+              <p className="mt-2 text-sm text-red-600">{errors.totalQuestions}</p>
             )}
           </div>
-          <div className="mb-4">
-            <div className="flex justify-between items-center w-full gap-4  ">
-              {/* Duration From */}
-              <div className=" w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
-                <label className="text-gray-400">Duration From *</label>
-                <input
-                  type="datetime-local"
-                  name="duration_from"
-                  value={testDetails?.duration_from?.slice(0, 16)}
-                  onChange={handleChange}
-                  className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${errors.duration ? "border-red-500" : ""
-                    }`}
-                  required
-                  fullWidth
-                />
-              </div>
 
-              {/* Duration To */}
-              <div className="  w-1/2 h-full rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4">
-                <label className="text-gray-400">Duration To *</label>
-                <input
-                  type="datetime-local"
-                  name="duration_to"
-                  value={testDetails?.duration_to?.slice(0, 16)}
-                  onChange={handleChange}
-                  className={`border-none cursor-pointer bg-gray-100 p-0 ml-10 ${errors.duration ? "border-red-500" : ""
-                    }`}
-                  required
-                  fullWidth
-                />
-              </div>
-            </div>
-            {errors.duration && (
-              <span className="text-red-500 pt-2 ml-4">{errors.duration}</span>
-            )}
-          </div>
-          <div className="flex items-center gap-2 text-lg mb-4">
-            <label
-              htmlFor="isNegativeMarking"
-              className="flex items-center gap-3 text-gray-400"
-            >
+          {/* Duration Inputs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
+              <label className="block text-gray-500 text-sm mb-2">Duration From *</label>
               <input
-                id="isNegativeMarking"
+                type="datetime-local"
+                name="duration_from"
+                value={testDetails?.duration_from?.slice(0, 16)}
+                onChange={handleChange}
+                className="w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blued"
+                required
+              />
+            </div>
+
+            <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
+              <label className="block text-gray-500 text-sm mb-2">Duration To *</label>
+              <input
+                type="datetime-local"
+                name="duration_to"
+                value={testDetails?.duration_to?.slice(0, 16)}
+                onChange={handleChange}
+                className="w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blued"
+                required
+              />
+            </div>
+          </div>
+          {errors.duration && (
+            <p className="text-sm text-red-600">{errors.duration}</p>
+          )}
+
+          {/* Category Select */}
+          <div>
+            <select
+              id="category"
+              name="category"
+              value={testDetails.category}
+              onChange={handleChange}
+              className="w-full rounded-lg bg-gray-50 border border-gray-200 text-gray-800 text-lg p-4 pr-10 appearance-none focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200"
+              required
+            >
+              <option value="">Select Category</option>
+              {categories && categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+              <svg className="h-5 w-5 text-gray-400" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </div>
+
+          {/* Negative Marking Checkbox */}
+          <div className="flex items-center">
+            <label className="flex items-center space-x-3 text-gray-700 cursor-pointer">
+              <input
                 type="checkbox"
                 name="isNegativeMarking"
                 checked={testDetails.isNegativeMarking}
                 onChange={handleChange}
-                className=""
-              />{" "}
-              Is there negative marking?
+                className="w-5 h-5 rounded border-gray-300 text-blued focus:ring-blued"
+              />
+              <span>Is there negative marking?</span>
             </label>
           </div>
-          <textarea
-            className={`w-full h-40 rounded-xl bg-[#F8F8F9] border-none text-[#3E3E3E] text-lg placeholder:text-[#3E3E3E] p-4 ${errors.name ? "border-red-500" : "border-none"
-              }`}
-            placeholder="Add Description*"
-            name="description"
-            value={testDetails.description}
-            onChange={handleChange}
-            required
-          />
-          {errors.description && (
-            <span className="text-red-500 pt-2 ml-4">{errors.description}</span>
+
+          {testDetails.category && (
+            <>
+
+
+              {/* Department Access Controls */}
+              <div className="border rounded-lg p-4 bg-gray-50">
+                <div
+                  className="flex items-center justify-between cursor-pointer"
+                  onClick={() => setShowDepartmentControls(!showDepartmentControls)}
+                >
+                  <h3 className="text-lg font-medium text-gray-700">Department Access</h3>
+                  <button type="button" className="text-gray-500">
+                    {showDepartmentControls ? (
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                      </svg>
+                    ) : (
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+
+                {showDepartmentControls && (
+                  <div className="mt-4 space-y-4">
+                    <label className="flex items-center space-x-3 text-gray-700 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="hasAccessToAllDepartments"
+                        checked={testDetails.hasAccessToAllDepartments}
+                        onChange={handleChange}
+                        className="w-5 h-5 rounded border-gray-300 text-blued focus:ring-blued"
+                      />
+                      <span>Access to all departments</span>
+                    </label>
+
+                    {!testDetails.hasAccessToAllDepartments && (
+                      <div className="space-y-2">
+                        <select
+                          multiple
+                          name="accessibleDepartments"
+                          value={testDetails.accessibleDepartments}
+                          onChange={handleChange}
+                          className="w-full rounded-lg bg-white border border-gray-200 text-gray-800 text-lg p-4 min-h-[120px]"
+                        >
+                          {
+                            categories.find(cat => cat._id === testDetails.category)?.departments.map(dept => (
+                              <option key={dept} value={dept}>{dept}</option>
+                            ))
+                          }
+                        </select>
+
+                        {/* Selected Departments Display */}
+                        {testDetails.accessibleDepartments.length > 0 && (
+                          <div className="mt-2">
+                            <p className="text-sm text-gray-600 mb-2">Selected Departments:</p>
+                            <div className="flex flex-wrap gap-2">
+                              {testDetails.accessibleDepartments.map((dept) => (
+                                <span
+                                  key={dept}
+                                  className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800"
+                                >
+                                  {dept}
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setTestDetails(prev => ({
+                                        ...prev,
+                                        accessibleDepartments: prev.accessibleDepartments.filter(d => d !== dept)
+                                      }));
+                                    }}
+                                    className="ml-2 inline-flex items-center p-0.5 rounded-full hover:bg-green-200"
+                                  >
+                                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                  </button>
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              {/* Year Access Controls */}
+            </>
           )}
+
+          {/* Description Textarea */}
+          <div>
+            <textarea
+              className={`w-full h-40 rounded-lg bg-gray-50 border ${errors.description ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              placeholder="Add Description*"
+              name="description"
+              value={testDetails.description}
+              onChange={handleChange}
+              required
+            />
+            {errors.description && (
+              <p className="mt-2 text-sm text-red-600">{errors.description}</p>
+            )}
+          </div>
         </form>
       </div>
     </div>

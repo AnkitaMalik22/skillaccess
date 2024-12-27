@@ -1,8 +1,8 @@
 import React from "react";
 import { SiAdobephotoshop } from "react-icons/si";
 
-const Skills = ({skills}) => {
-  return  (
+const Skills = ({ skills }) => {
+  return (
     <div className="grid grid-rows-4 px-4 text-base font-bold gap-8 mt-2 font-dmSans">
       <div className="grid grid-cols-2">
         <span>Software Knowledge</span>
@@ -12,7 +12,7 @@ const Skills = ({skills}) => {
               {software}
             </span>
           ))} */}
-          {skills?.SoftwareKnowledge?.join(', ')}
+          {skills?.SoftwareKnowledge?.join(', ') || "No software knowledge"}
         </span>
       </div>
 
@@ -22,7 +22,7 @@ const Skills = ({skills}) => {
           {/* {skills.Achievements.map((achievement, index) => (
             <span key={index}>{achievement}</span>
           ))} */}
-          {skills.Achievements.join(', ')}
+          {skills?.Achievements?.join(', ') || "No achievements"}
         </span>
       </div>
 
@@ -32,7 +32,7 @@ const Skills = ({skills}) => {
           {/* {skills.CodingKnowledge.map((language, index) => (
             <span key={index}>{language}</span>
           ))} */}
-          {skills.CodingKnowledge.join(', ')}
+          {skills?.CodingKnowledge.join(', ') || "No coding knowledge"}
         </span>
       </div>
 
@@ -42,7 +42,7 @@ const Skills = ({skills}) => {
           {/* {skills.Languages.map((language, index) => (
             <span key={index}>{language}</span>
           ))} */}
-          {skills.Languages.join(', ')}
+          {skills?.Languages.join(', ') || "No languages"}
         </span>
       </div>
     </div>

@@ -180,7 +180,7 @@ export const setTotalTopicQuestions = createAsyncThunk(
   async (arg, { dispatch, rejectWithValue }) => {
     try {
       // Dispatch the getTopicById thunk and wait for the result
-      const topic = await dispatch(getTopicById(arg.id)).unwrap();
+      const topic = await dispatch(getTopicById({id:arg.id})).unwrap();
 
       // //console.log(topic, "topic");
 

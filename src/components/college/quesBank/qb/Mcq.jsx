@@ -57,6 +57,7 @@ const Mcq = ({ question, number }) => {
           {({ open }) => (
             <div className="mb-4">
               <div className="flex w-full justify-between rounded-lg border-[#0D9AAC] border text-[#3E3E3E] py-3 text-left text-lg font-normal">
+
                 <div className="flex justify-between items-center w-full px-2">
                   <p
                     className="text-sm"
@@ -97,9 +98,8 @@ const Mcq = ({ question, number }) => {
                     <div className="flex gap-2 self-center">
                       <Disclosure.Button className="flex gap-2 self-center">
                         <FaCaretDown
-                          className={`${
-                            open ? "rotate-180" : ""
-                          } h-5 w-5 text-gray-400 `}
+                          className={`${open ? "rotate-180" : ""
+                            } h-5 w-5 text-gray-400 `}
                         />
                       </Disclosure.Button>
                     </div>
@@ -108,6 +108,8 @@ const Mcq = ({ question, number }) => {
               </div>
 
               <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
+
+                {question.image && (<img src={question.image} alt="question" className="w-full rounded-lg" />)}
                 {question.Options?.map((question, index) => (
                   <div className="flex gap-2 z-10 relative rounded-lg p-3">
                     <div className="w-6">
@@ -125,9 +127,8 @@ const Mcq = ({ question, number }) => {
                     </div>
 
                     <label
-                      className={` text-sm ${
-                        AnswerIndex === index ? "text-green" : "text-[#3E3E3E]"
-                      }`}
+                      className={` text-sm ${AnswerIndex === index ? "text-green" : "text-[#3E3E3E]"
+                        }`}
                     >
                       {question
                         ? question.question

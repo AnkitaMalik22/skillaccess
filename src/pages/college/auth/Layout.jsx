@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
             {/* This div will only be visible on screens larger than lg */}
             <img
               className="w-full h-[100vh] object-cover"
-              src="/images/loginBg.jpg"
+              src="/images/login-bg.jpg"
               alt="login-image"
             />
           </div>

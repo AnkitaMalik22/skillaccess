@@ -18,6 +18,7 @@ import companyTestReducer from "../redux/company/test/testSlice.js"
 import collegeJobsReducer from "./college/jobs/collegeJobSlice.js";
 import companyResultReducer from "./company/result/result.js"
 import universityAuthReducer from "./university/auth/universityAuthSlice.js";
+import categoryReducer from "./category/categorySlice.js";
 
 
 const store = configureStore({
@@ -48,6 +49,8 @@ const store = configureStore({
 
     // university
     universityAuth: universityAuthReducer,
+
+    category : categoryReducer,
   },
 });
 

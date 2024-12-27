@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "../addVideo/Loader";
 import toast, { Toaster } from "react-hot-toast";
-import { addQuestionToTopic } from "../../../../redux/college/test/thunks/topic";
+import { addQuestionToTopic, getTopicById } from "../../../../redux/college/test/thunks/topic";
 import { isUni } from "../../../../util/isCompany";
 
 const Header = ({
@@ -198,9 +198,9 @@ const Header = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              colNum
+                            (rowNum + 1) +
+                            "col:" +
+                            colNum
                           );
                           setLoading(false);
                           return;
@@ -229,9 +229,9 @@ const Header = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              colNum
+                            (rowNum + 1) +
+                            "col:" +
+                            colNum
                           );
                           setLoading(false);
                           return;
@@ -385,11 +385,11 @@ const Header = ({
                             setError(true);
                             toast.error(
                               "Invalid value row:" +
-                                (rowNum + 1) +
-                                "col:" +
-                                (colNum + 1) +
-                                "-->" +
-                                row.v
+                              (rowNum + 1) +
+                              "col:" +
+                              (colNum + 1) +
+                              "-->" +
+                              row.v
                             );
                             setLoading(false);
                             return;
@@ -406,9 +406,9 @@ const Header = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              colNum
+                            (rowNum + 1) +
+                            "col:" +
+                            colNum
                           );
                           setLoading(false);
                           return;
@@ -531,7 +531,7 @@ const Header = ({
                   }
                 }
               }
-            } catch (error) {}
+            } catch (error) { }
 
             setExcelJSON(jsonData.slice(1));
             await dispatch(
@@ -552,17 +552,17 @@ const Header = ({
 
         setVisible(false);
         toast.success("questions added successfully");
-        
-        if(isUni()){
+
+        if (isUni()) {
           level === "adaptive"
-          ? navigate(`/university/pr/test/selectAdaptive?level=${level}`)
-          : navigate(`/university/pr/test/select?level=${level}`)
-        }else{
+            ? navigate(`/university/pr/test/selectAdaptive?level=${level}`)
+            : navigate(`/university/pr/test/select?level=${level}`)
+        } else {
           level === "adaptive"
-          ? navigate(`/college/test/selectAdaptive?level=${level}`)
-          : navigate(`/college/test/select?level=${level}`);
+            ? navigate(`/college/test/selectAdaptive?level=${level}`)
+            : navigate(`/college/test/select?level=${level}`);
         }
-        
+
         // navigate(`/college/test/select?level=${searchParams.get("level")}`);
       } else {
         setVisible(false);
@@ -572,7 +572,7 @@ const Header = ({
     }
   };
   // //console.log(type);
-  const handleNav = () => {
+  const handleNav = async () => {
     if (type === "section") {
       if (level === "adaptive") {
         if (currentQuestionCount > totalQuestions * 2) {
@@ -589,49 +589,57 @@ const Header = ({
       }
       {
 
-       
 
-        navigate(
-          `/${isUni() ?"university/pr" :"college"}/test/${
-            qt === "mcq"
-              ? "addMcq"
-              : qt === "findAnswer"
-              ? "find-ans"
-              : qt === "compiler"
-              ? "code"
-              : qt === "essay"
-              ? "essay"
-              : qt === "video"
-              ? "video"
-              : "addMcq"
-          }/${id}?addType=test&topicId=${topicId}&level=${level}`
-        );
+
+        // navigate(
+        //   `/${isUni() ?"university/pr" :"college"}/test/${
+        //     qt === "mcq"
+        //       ? "addMcq"
+        //       : qt === "findAnswer"
+        //       ? "find-ans"
+        //       : qt === "compiler"
+        //       ? "code"
+        //       : qt === "essay"
+        //       ? "essay"
+        //       : qt === "video"
+        //       ? "video"
+        //       : "addMcq"
+        //   }/${id}?addType=test&topicId=${topicId}&level=${level}`
+        // );
+
+        const newParams = new URLSearchParams(searchParams);
+
+        // Add or update the "select" parameter
+        newParams.set("select", true);
+
+        // Update the URL with the new search params
+        setSearchParams(newParams);
+        await dispatch(getTopicById({ id: topicId, level }));
+        window.location.reload(true);
       }
     } else {
       if (level === "adaptive") {
         navigate(
-          `/${isUni() ?"university/pr" :"college"}/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
+          `/${isUni() ? "university/pr" : "college"}/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
         );
       } else {
-        navigate(`/${isUni() ?"university/pr" :"college"}/test/typeOfQuestions/${sectionId}?level=${level}`);
+        navigate(`/${isUni() ? "university/pr" : "college"}/test/typeOfQuestions/${sectionId}?level=${level}`);
       }
     }
   };
 
-  const imageUrl = `/download/${
-    ques === "mcq"
-      ? "Mcq.xlsx"
-      : ques === "findAnswer"
+  const imageUrl = `/download/${ques === "mcq"
+    ? "Mcq.xlsx"
+    : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
-  }`;
-  const imageName = `${
-    ques === "mcq"
-      ? "Mcq.xlsx"
-      : ques === "findAnswer"
+    }`;
+  const imageName = `${ques === "mcq"
+    ? "Mcq.xlsx"
+    : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
-  }`; // Replace with your desired image name
+    }`; // Replace with your desired image name
 
   return (
     <div className="flex  justify-between items-center mb-5">
@@ -653,11 +661,11 @@ const Header = ({
           <button
             onClick={() => {
               type === "section" &&
-                navigate(`/${isUni() ?"university/pr" :"college"}/test/questions?level=${level}`);
+                navigate(`/${isUni() ? "university/pr" : "college"}/test/questions?level=${level}`);
               type === "topic" &&
                 (level === "adaptive"
-                  ? navigate(`/${isUni() ?"university/pr" :"college"}/test/selectAdaptive?level=${level}`)
-                  : navigate(`/${isUni() ?"university/pr" :"college"}/test/select?level=${level}`));
+                  ? navigate(`/${isUni() ? "university/pr" : "college"}/test/selectAdaptive?level=${level}`)
+                  : navigate(`/${isUni() ? "university/pr" : "college"}/test/select?level=${level}`));
               type === "assessment" && navigate(-1);
             }}
             className="mt-2 mr-3"

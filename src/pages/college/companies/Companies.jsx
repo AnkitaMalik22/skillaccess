@@ -85,11 +85,11 @@ const Companies = () => {
       key={index}
     >
       {/* Hiring Tag */}
-      {company.hiring && (
+      {/* {company.hiring && (
         <div className="absolute top-2 right-2 bg-yellow-500 text-white text-sm font-semibold py-2 px-6 rounded-full">
           Hiring
         </div>
-      )}
+      )} */}
       <figure>
         <img
           src={ company?.basic?.coverPhoto ||"/images/default.jpg"}
