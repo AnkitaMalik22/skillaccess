@@ -44,7 +44,6 @@ import Settings from "./pages/company/settings/Settings";
 import ViewInvitedStudents from "./pages/college/companies/ViewInvitedStudents";
 import RegisterUniversity from "./pages/university/auth/RegisterUniversity";
 import UniversityLoginPage from "./pages/university/auth/LoginUniversity";
-import CompanyQuesRoute from "./pages/company/quesBank";
 import UniversityLayout from "./layout/University";
 import { isUni } from "./util/isCompany";
 
