@@ -10,7 +10,8 @@ const NameAssessmentPage = () => {
   const type = searchParams.get("level");
 
   //useTranslate();
-  return type !== "adaptive" ? <Name /> : <NameAdaptive />;
+  // return type !== "adaptive" ? <Name /> : <NameAdaptive />;
+  return <Name />;
 };
 
 export default NameAssessmentPage;

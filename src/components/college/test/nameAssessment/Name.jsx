@@ -14,17 +14,9 @@ import { isUni } from "../../../../util/isCompany";
 import { getCategories } from "../../../../redux/category/categorySlice";
 
 const Name = () => {
-  console.log("hello");//not printing
   const dispatch = useDispatch();
   const [search, setSearch] = useSearchParams();
-  // const [categories, setCategories] = useState([
-  //   "Category 1",
-  //   "Category 2",
-  //   "Category 3",
-  // ]);
-
   const level = search.get("level");
-  // //console.log(level);
   const { categories } = useSelector((state) => state.category);
 
   const {
@@ -36,6 +28,12 @@ const Name = () => {
     totalDuration,
     duration_from,
     duration_to,
+    category,
+    categoryName,
+    hasAccessToAllBranches,
+    hasAccessToAllDepartments,
+    accessibleBranches,
+    accessibleDepartments,
     isNegativeMarking,
   } = useSelector((state) => state.test);
   // const {} = useSelector((state) =>//console.log(state.test));
@@ -50,12 +48,12 @@ const Name = () => {
     duration_from: duration_from || "", // New fields for duration
     duration_to: duration_to || "",
     isNegativeMarking: isNegativeMarking || false,
-    category: "",
-    categoryName: "",
-    hasAccessToAllBranches: false,
-    hasAccessToAllDepartments: false,
-    accessibleBranches: [],
-    accessibleDepartments: [],
+    category: category || "",
+    categoryName: categoryName || "",
+    hasAccessToAllBranches: hasAccessToAllBranches || false,
+    hasAccessToAllDepartments: hasAccessToAllDepartments || false,
+    accessibleBranches: accessibleBranches || [],
+    accessibleDepartments: accessibleDepartments || [],
   });
 
   useEffect(() => {
@@ -69,12 +67,12 @@ const Name = () => {
       duration_from: duration_from || "", // New fields for duration
       duration_to: duration_to || "",
       isNegativeMarking: isNegativeMarking || false,
-      category: "",
-      categoryName: "",
-      hasAccessToAllBranches: false,
-      hasAccessToAllDepartments: false,
-      accessibleBranches: [],
-      accessibleDepartments: [],
+      category: category || "",
+      categoryName: categoryName || "",
+      hasAccessToAllBranches: hasAccessToAllBranches || false,
+      hasAccessToAllDepartments: hasAccessToAllDepartments || false,
+      accessibleBranches: accessibleBranches || [],
+      accessibleDepartments: accessibleDepartments || [],
     });
   }, [dispatch]);
 
@@ -82,8 +80,7 @@ const Name = () => {
 
   useEffect(() => {
     dispatch(setInTest(true));
-  dispatch(getCategories());
-
+    dispatch(getCategories());
   }, []);
   const [errors, setErrors] = useState({
     name: "",
@@ -97,34 +94,43 @@ const Name = () => {
     const { name, value, checked, type } = e.target;
 
     // Handle checkboxes for all access
-    if (name === "hasAccessToAllBranches" || name === "hasAccessToAllDepartments") {
-      setTestDetails(prev => ({
+    if (
+      name === "hasAccessToAllBranches" ||
+      name === "hasAccessToAllDepartments"
+    ) {
+      setTestDetails((prev) => ({
         ...prev,
         [name]: checked,
         // Clear the specific access arrays when "all access" is checked
-        ...(name === "hasAccessToAllBranches" && checked ? { accessibleBranches: [] } : {}),
-        ...(name === "hasAccessToAllDepartments" && checked ? { accessibleDepartments: [] } : {})
+        ...(name === "hasAccessToAllBranches" && checked
+          ? { accessibleBranches: [] }
+          : {}),
+        ...(name === "hasAccessToAllDepartments" && checked
+          ? { accessibleDepartments: [] }
+          : {}),
       }));
       return;
     }
 
     // Handle multi-select for branches and departments
     if (name === "accessibleBranches" || name === "accessibleDepartments") {
-      const options = Array.from(e.target.selectedOptions).map(option => option.value);
-      setTestDetails(prev => ({
+      const options = Array.from(e.target.selectedOptions).map(
+        (option) => option.value
+      );
+      setTestDetails((prev) => ({
         ...prev,
-        [name]: options
+        [name]: options,
       }));
       return;
     }
 
     // Handle category selection
     if (name === "category") {
-      const selectedCategory = categories.find(cat => cat._id === value);
+      const selectedCategory = categories.find((cat) => cat._id === value);
       setTestDetails({
         ...testDetails,
         category: selectedCategory?._id || "",
-        categoryName: selectedCategory?.name || ""
+        categoryName: selectedCategory?.name || "",
       });
       return;
     }
@@ -277,16 +283,24 @@ const Name = () => {
 
     if (!flag) {
       dispatch(setTestBasicDetails(testDetails));
-      if (isUni()) {
-        navigate(`/university/pr/test/select?level=${level}`);
+      if (level !== "adaptive") {
+        if (isUni()) {
+          navigate(`/university/pr/test/select?level=${level}`);
+        } else {
+          navigate(`/college/test/select?level=${level}`);
+        }
       } else {
-        navigate(`/college/test/select?level=${level}`);
+        if (isUni()) {
+          navigate(`/university/pr/test/selectAdaptive?level=adaptive`);
+        } else {
+          navigate(`/college/test/selectAdaptive?level=adaptive`);
+        }
       }
-
+      return;
     }
   };
 
-  console.log(categories);//not printing
+  console.log(categories); //not printing
 
   // Add this state for collapse controls
   const [showBranchControls, setShowBranchControls] = useState(false);
@@ -337,11 +351,15 @@ const Name = () => {
               value={testDetails.totalAttempts}
               onChange={handleChange}
               pattern="[0-9]*"
-              onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))}
+              onInput={(e) =>
+                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
+              }
               required
             />
             {errors.totalAttempts && (
-              <p className="mt-2 text-sm text-red-600">{errors.totalAttempts}</p>
+              <p className="mt-2 text-sm text-red-600">
+                {errors.totalAttempts}
+              </p>
             )}
           </div>
 
@@ -357,18 +375,24 @@ const Name = () => {
               value={testDetails.totalQuestions}
               onChange={handleChange}
               pattern="[0-9]*"
-              onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))}
+              onInput={(e) =>
+                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
+              }
               required
             />
             {errors.totalQuestions && (
-              <p className="mt-2 text-sm text-red-600">{errors.totalQuestions}</p>
+              <p className="mt-2 text-sm text-red-600">
+                {errors.totalQuestions}
+              </p>
             )}
           </div>
 
           {/* Duration Inputs */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-              <label className="block text-gray-500 text-sm mb-2">Duration From *</label>
+              <label className="block text-gray-500 text-sm mb-2">
+                Duration From *
+              </label>
               <input
                 type="datetime-local"
                 name="duration_from"
@@ -380,7 +404,9 @@ const Name = () => {
             </div>
 
             <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-              <label className="block text-gray-500 text-sm mb-2">Duration To *</label>
+              <label className="block text-gray-500 text-sm mb-2">
+                Duration To *
+              </label>
               <input
                 type="datetime-local"
                 name="duration_to"
@@ -406,14 +432,23 @@ const Name = () => {
               required
             >
               <option value="">Select Category*</option>
-              {categories && categories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.name}
-                </option>
-              ))}
+              {categories &&
+                categories.map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-              <svg className="h-5 w-5 text-gray-400" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                className="h-5 w-5 text-gray-400"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
                 <path d="M19 9l-7 7-7-7"></path>
               </svg>
             </div>
@@ -435,23 +470,45 @@ const Name = () => {
 
           {testDetails.category && (
             <>
-             
-
               {/* Department Access Controls */}
               <div className="border rounded-lg p-4 bg-gray-50">
-                <div 
+                <div
                   className="flex items-center justify-between cursor-pointer"
-                  onClick={() => setShowDepartmentControls(!showDepartmentControls)}
+                  onClick={() =>
+                    setShowDepartmentControls(!showDepartmentControls)
+                  }
                 >
-                  <h3 className="text-lg font-medium text-gray-700">Department Access</h3>
+                  <h3 className="text-lg font-medium text-gray-700">
+                    Department Access
+                  </h3>
                   <button type="button" className="text-gray-500">
                     {showDepartmentControls ? (
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 15l7-7 7 7"
+                        />
                       </svg>
                     ) : (
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
                       </svg>
                     )}
                   </button>
@@ -479,40 +536,57 @@ const Name = () => {
                           onChange={handleChange}
                           className="w-full rounded-lg bg-white border border-gray-200 text-gray-800 text-lg p-4 min-h-[120px]"
                         >
-                        {
-                          categories.find(cat => cat._id === testDetails.category)?.departments.map(dept => (
-                            <option key={dept} value={dept}>{dept}</option>
-                          ))
-                        }
+                          {categories
+                            .find((cat) => cat._id === testDetails.category)
+                            ?.departments.map((dept) => (
+                              <option key={dept} value={dept}>
+                                {dept}
+                              </option>
+                            ))}
                         </select>
 
                         {/* Selected Departments Display */}
-                        {testDetails.accessibleDepartments.length > 0 && (
+                        {testDetails?.accessibleDepartments?.length > 0 && (
                           <div className="mt-2">
-                            <p className="text-sm text-gray-600 mb-2">Selected Departments:</p>
+                            <p className="text-sm text-gray-600 mb-2">
+                              Selected Departments:
+                            </p>
                             <div className="flex flex-wrap gap-2">
-                              {testDetails.accessibleDepartments.map((dept) => (
-                                <span
-                                  key={dept}
-                                  className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800"
-                                >
-                                  {dept}
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      setTestDetails(prev => ({
-                                        ...prev,
-                                        accessibleDepartments: prev.accessibleDepartments.filter(d => d !== dept)
-                                      }));
-                                    }}
-                                    className="ml-2 inline-flex items-center p-0.5 rounded-full hover:bg-green-200"
+                              {testDetails?.accessibleDepartments?.map(
+                                (dept) => (
+                                  <span
+                                    key={dept}
+                                    className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800"
                                   >
-                                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                    </svg>
-                                  </button>
-                                </span>
-                              ))}
+                                    {dept}
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        setTestDetails((prev) => ({
+                                          ...prev,
+                                          accessibleDepartments:
+                                            prev.accessibleDepartments.filter(
+                                              (d) => d !== dept
+                                            ),
+                                        }));
+                                      }}
+                                      className="ml-2 inline-flex items-center p-0.5 rounded-full hover:bg-green-200"
+                                    >
+                                      <svg
+                                        className="w-3 h-3"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                      >
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                          clipRule="evenodd"
+                                        />
+                                      </svg>
+                                    </button>
+                                  </span>
+                                )
+                              )}
                             </div>
                           </div>
                         )}

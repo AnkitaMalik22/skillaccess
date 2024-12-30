@@ -36,7 +36,7 @@ const SelectTests = () => {
     useSelector((state) => state.test);
   // for filter the sections
 
-  const [filteredSections, setFilteredSections] = useState(sections);
+  const [filteredSections, setFilteredSections] = useState([]);
 
   const handleFilterSections = (e) => {
     const value = e.target.value;
