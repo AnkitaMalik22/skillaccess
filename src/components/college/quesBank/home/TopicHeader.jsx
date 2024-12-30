@@ -4,7 +4,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { FiPlus, FiUpload } from "react-icons/fi";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
-import { isUni } from "../../../../util/isCompany";
+import { isUni,isCompany } from "../../../../util/isCompany";
 
 const Header = ({ Heading, sectionId }) => {
   const navigate = useNavigate();
@@ -26,8 +26,7 @@ const Header = ({ Heading, sectionId }) => {
         <button
           className="self-center justify-center flex bg-[#8f92a11a] px-7 py-3 rounded-2xl gap-2 text-sm text-[#171717] font-bold "
           onClick={() =>
-           isUni() ? navigate(`/university/pr/quesBank/typeOfQuestions/${sectionId}?page=qb`) :  navigate(`/college/quesBank/typeOfQuestions/${sectionId}?page=qb`)
-          }
+           isUni() ? navigate(`/university/pr/quesBank/typeOfQuestions/${sectionId}?page=qb`) :  (isCompany() ? navigate(`/company/pr/quesBank/typeOfQuestions/${sectionId}?page=qb`) : navigate(`/college/quesBank/typeOfQuestions/${sectionId}?page=qb`))}
         >
           <FiPlus className="self-center text-lg" /> Add
         </button>
@@ -35,7 +34,7 @@ const Header = ({ Heading, sectionId }) => {
         <button
           className="self-center justify-center flex bg-accent px-5 py-3 rounded-2xl text-white gap-2 text-md font-bold"
           onClick={() =>
-            navigate(isUni() ? `/university/pr/quesBank/topic/upload/${sectionId}` : `/college/quesBank/topic/upload/${sectionId}`)
+            navigate(isUni() ? `/university/pr/quesBank/topic/upload/${sectionId}` : (isCompany() ? `/company/pr/quesBank/topic/upload/${sectionId}` : `/college/quesBank/topic/upload/${sectionId}`))
           }
         >
           <FiUpload className="self-center text-lg" /> Upload Questions

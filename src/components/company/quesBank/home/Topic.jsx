@@ -49,7 +49,9 @@ const Topic = () => {
     //   level: level,
     // }));
 
-    dispatch(getAllTopicsQB());
+    dispatch(getAllTopicsQB(
+      
+    ));
 
     // if (sections) {
     //   setFilteredSections(sections);

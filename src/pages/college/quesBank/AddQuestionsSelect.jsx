@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import isCompany, { isUni } from "../../../util/isCompany";
 
 const AddQuestionsSelect = () => {
   //useTranslate();
@@ -20,30 +20,29 @@ const AddQuestionsSelect = () => {
     switch (selectQuestionType) {
       case "mcq":
         navigate(
-          isUni() ? `/university/pr/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic` : `/college/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic`
+          isUni() ? `/university/pr/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic` : (isCompany() ? `/company/pr/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic` : `/college/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic`)
 
         );
         break;
 
       case "code":
-        navigate(isUni() ? `/university/pr/quesBank/code/${id}?type=compiler&addType=topic` : `/college/quesBank/code/${id}?type=compiler&addType=topic`);
+        navigate(isUni() ? `/university/pr/quesBank/code/${id}?type=compiler&addType=topic` : (isCompany() ? `/company/pr/quesBank/code/${id}?type=compiler&addType=topic` : `/college/quesBank/code/${id}?type=compiler&addType=topic`));
         break;
 
       case "video":
-        navigate(isUni() ? `/university/pr/quesBank/video/${id}?type=video&addType=topic` : `/college/quesBank/video/${id}?type=video&addType=topic`);
+        navigate(isUni() ? `/university/pr/quesBank/video/${id}?type=video&addType=topic` : (isCompany() ? `/company/pr/quesBank/video/${id}?type=video&addType=topic` : `/college/quesBank/video/${id}?type=video&addType=topic`));
 
         break;
 
       case "findAnswer":
         navigate(
-          isUni() ? `/university/pr/quesBank/find-ans/${id}?type=findAnswer&addType=topic` : `/college/quesBank/find-ans/${id}?type=findAnswer&addType=topic`
+          isUni() ? `/university/pr/quesBank/find-ans/${id}?type=findAnswer&addType=topic` : (isCompany() ? `/company/pr/quesBank/find-ans/${id}?type=findAnswer&addType=topic` : `/college/quesBank/find-ans/${id}?type=findAnswer&addType=topic`)
         );
         break;
 
       case "essay":
         navigate(
-          isUni() ? `/university/pr/quesBank/essay/${id}?type=essay&addType=topic` : `/college/quesBank/essay/${id}?type=essay&addType=topic`
-        );
+          isUni() ? `/university/pr/quesBank/essay/${id}?type=essay&addType=topic` : (isCompany() ? `/company/pr/quesBank/essay/${id}?type=essay&addType=topic` : `/college/quesBank/essay/${id}?type=essay&addType=topic`))
         break;
 
       default:

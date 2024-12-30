@@ -180,7 +180,8 @@ export default function App() {
                 <Route path="approval" element={<AwaitingApproval />} />
                 <Route path="pr" element={<CompanyLayout />}>
                   {/* <Route path="/" element={<CompanyLayout />}> */}
-                  {CompanyQuesRoute()}
+                  {/* {CompanyQuesRoute()} */}
+                  {QuesRoute("")}
                   {CompanyTestHome()}
                   <Route path="settings" element={<Settings />} />
                   {CompanyResultRoutes()}

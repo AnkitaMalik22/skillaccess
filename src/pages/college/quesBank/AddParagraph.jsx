@@ -18,7 +18,7 @@ import {
 } from "../../../redux/college/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { isUni,isCompany } from "../../../util/isCompany";
 
 const AddParagraph = () => {
   //useTranslate();
@@ -159,7 +159,7 @@ const AddParagraph = () => {
             id: ID + Date.now(),
           });
           if (!ADD_QUESTION_LOADING) {
-            if (saveType === "save") navigate(isUni() ? `/university/pr/quesBank/topic/${id}`: `/college/quesBank/topic/${id}`);
+            if (saveType === "save") navigate(isUni() ? `/university/pr/quesBank/topic/${id}`: (isCompany() ? `/company/pr/quesBank/topic/${id}` : `/college/quesBank/topic/${id}`));
           }
           // })
         }

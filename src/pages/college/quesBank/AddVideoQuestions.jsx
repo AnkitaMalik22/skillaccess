@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../../components/college/quesBank/addVideo/addSelect/Header";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import isCompany, { isUni } from "../../../util/isCompany";
 
 const AddVideoQuestionsType = () => {
   //useTranslate();
@@ -15,18 +15,17 @@ const AddVideoQuestionsType = () => {
   const NavHandler = () => {
     switch (selectQuestionType) {
       case "mcq":
-        navigate(isUni() ? `/university/pr/quesBank/video/${id}/addmcq` : `/college/quesBank/video/${id}/addmcq`);
+        navigate(isUni() ? `/university/pr/quesBank/video/${id}/addmcq` : (isCompany() ? `/company/pr/quesBank/video/${id}/addmcq` : `/college/quesBank/video/${id}/addmcq`));
 
         break;
 
       case "short":
-        navigate(isUni() ? `/university/pr/quesBank/video/shortlong/${id}?length=short` : `/college/quesBank/video/shortlong/${id}?length=short`);
+        navigate(isUni() ? `/university/pr/quesBank/video/shortlong/${id}?length=short` : (isCompany() ? `/company/pr/quesBank/video/shortlong/${id}?length=short` : `/college/quesBank/video/shortlong/${id}?length=short`));
 
         break;
 
       case "long":
-        navigate(isUni() ? `/university/pr/quesBank/video/shortlong/${id}?length=long` : `/college/quesBank/video/shortlong/${id}?length=long`);
-
+        navigate(isUni() ? `/university/pr/quesBank/video/shortlong/${id}?length=long` : (isCompany() ? `/company/pr/quesBank/video/shortlong/${id}?length=long` : `/college/quesBank/video/shortlong/${id}?length=long`));
         break;
 
       default:
