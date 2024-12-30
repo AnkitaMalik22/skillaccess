@@ -68,6 +68,12 @@ const testState = {
   testDescription: "",
   testAttempts: "",
   testId: "",
+  category  : "",
+  categoryName : "",
+  hasAccessToAllCategories : true,
+  accessibleDepartments: [],
+  hasAccessToAllDepartments: false,
+  testType: "",
   // testStatus : "",
   assessments: {
     beginner: [],

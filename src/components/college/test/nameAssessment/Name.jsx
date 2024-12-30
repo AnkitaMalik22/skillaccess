@@ -88,6 +88,8 @@ const Name = () => {
     totalQuestions: "",
     description: "",
     duration: "",
+    category: "",
+
   });
 
   const handleChange = (e) => {
@@ -170,137 +172,79 @@ const Name = () => {
   };
 
   const handleSubmit = () => {
-    let flag = false;
-    if (
-      testDetails.name === "" ||
-      testDetails.totalAttempts === "" ||
-      testDetails.totalQuestions === null ||
-      testDetails.description === "" ||
-      testDetails.duration_from === "" ||
-      testDetails.duration_to === ""
-    ) {
-      toast.error("Please Add All Fields", {
-        icon: "⚠️",
-      });
-      flag = true;
-    }
-
-    if (testDetails.name === "") {
-      setErrors((prevErrors) => ({ ...prevErrors, name: "Please Enter Name" }));
-      flag = true;
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, name: "" }));
-    }
-
-    if (testDetails.totalAttempts === "") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        totalAttempts: "Please Enter Total Attempts",
-      }));
-      flag = true;
-    } else if (
-      testDetails.totalAttempts < 1 ||
-      testDetails.totalAttempts > 10
-    ) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        totalAttempts: "Total Attempts must be between 1 and 10",
-      }));
-      flag = true;
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, totalAttempts: "" }));
-    }
-
-    if (testDetails.totalQuestions === null) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        totalQuestions: "Please Enter Total Questions",
-      }));
-      flag = true;
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, totalQuestions: "" }));
+    let hasError = false;
+  
+    // Helper function to set error messages
+    const setError = (field, message) => {
+      setErrors((prevErrors) => ({ ...prevErrors, [field]: message }));
+      hasError = true;
+    };
+  
+    // Validation for required fields
+    if (!testDetails.name) setError("name", "Please Enter Name");
+    if (!testDetails.totalAttempts) setError("totalAttempts", "Please Enter Total Attempts");
+    if (!testDetails.totalQuestions) setError("totalQuestions", "Please Enter Total Questions");
+    if (!testDetails.description) setError("description", "Please Enter Description");
+    if (!testDetails.duration_from) setError("duration", "Please Enter Duration From");
+    if (!testDetails.duration_to) setError("duration", "Please Enter Duration To");
+    if (!testDetails.category) setError("category", "Please Select Category");
+  
+    // Validation for numeric ranges
+    if (testDetails.totalAttempts < 1 || testDetails.totalAttempts > 10) {
+      setError("totalAttempts", "Total Attempts must be between 1 and 10");
     }
     if (testDetails.totalQuestions < 1) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        totalQuestions: "Total Questions must be greater than 0",
-      }));
-      flag = true;
+      setError("totalQuestions", "Total Questions must be greater than 0");
     }
-    if (testDetails.description === "") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        description: "Please Enter Description",
-      }));
-      flag = true;
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, description: "" }));
-    }
-
-    if (testDetails.duration_from === "") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        duration: "Please Enter Duration From",
-      }));
-    } else if (testDetails.duration_to === "") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        duration: "Please Enter Duration To",
-      }));
-    } else if (testDetails.duration_from >= testDetails.duration_to) {
-      toast.error("Duration To must be greater than Duration From", {
-        icon: "⚠️", // You can use any Unicode character or an image URL here
-      });
-      return;
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, duration: "" }));
-    }
-
-    if (assessments.beginner.length > 0 && level === "beginner") {
-      assessments.beginner.forEach((assessment) => {
-        if (assessment.name === testDetails.name) {
-          flag = "true";
-          toast.error("Duplicate name");
-        }
-      });
-    }
-    if (assessments.intermediate.length > 0 && level === "intermediate") {
-      assessments.intermediate.forEach((assessment) => {
-        if (assessment.name === testDetails.name) {
-          flag = "true";
-          toast.error("Duplicate name");
-        }
-      });
-    }
-    if (assessments.advanced.length > 0 && level === "advanced") {
-      assessments.advanced.forEach((assessment) => {
-        if (assessment.name === testDetails.name) {
-          flag = "true";
-          toast.error("Duplicate name");
-        }
-      });
-    }
-
-    if (!flag) {
-      dispatch(setTestBasicDetails(testDetails));
-      if (level !== "adaptive") {
-        if (isUni()) {
-          navigate(`/university/pr/test/select?level=${level}`);
-        } else {
-          navigate(`/college/test/select?level=${level}`);
-        }
-      } else {
-        if (isUni()) {
-          navigate(`/university/pr/test/selectAdaptive?level=adaptive`);
-        } else {
-          navigate(`/college/test/selectAdaptive?level=adaptive`);
-        }
+  
+    // Duration validation
+    if (testDetails.duration_from && testDetails.duration_to) {
+      if (testDetails.duration_from >= testDetails.duration_to) {
+        toast.error("Duration To must be greater than Duration From", {
+          icon: "⚠️",
+        });
+        hasError = true;
       }
-      return;
+    }
+  
+    // Branches and departments validation
+    // if (!testDetails.hasAccessToAllBranches && !testDetails.accessibleBranches.length) {
+    //   toast.error("Please select branches", { icon: "⚠️" });
+    //   hasError = true;
+    // }
+    // if (!testDetails.hasAccessToAllDepartments && !testDetails.accessibleDepartments.length) {
+    //   toast.error("Please select departments", { icon: "⚠️" });
+    //   hasError = true;
+    // }
+  
+    // Duplicate name validation based on level
+    const validateDuplicates = (assessmentsList) => {
+      return assessmentsList.some((assessment) => assessment.name === testDetails.name);
+    };
+  
+    if (level === "beginner" && validateDuplicates(assessments.beginner)) {
+      toast.error("Duplicate name in beginner assessments");
+      hasError = true;
+    }
+    if (level === "intermediate" && validateDuplicates(assessments.intermediate)) {
+      toast.error("Duplicate name in intermediate assessments");
+      hasError = true;
+    }
+    if (level === "advanced" && validateDuplicates(assessments.advanced)) {
+      toast.error("Duplicate name in advanced assessments");
+      hasError = true;
+    }
+  
+    // If no errors, proceed with dispatch and navigation
+    if (!hasError) {
+      dispatch(setTestBasicDetails(testDetails));
+      const basePath = isUni() ? "/university/pr/test/select" : "/college/test/select";
+      navigate(`${basePath}${level === "adaptive" ? "Adaptive" : ""}?level=${level}`);
     }
   };
+  
 
-  console.log(categories); //not printing
+  // console.log(categories); //not printing
 
   // Add this state for collapse controls
   const [showBranchControls, setShowBranchControls] = useState(false);
@@ -453,6 +397,9 @@ const Name = () => {
               </svg>
             </div>
           </div>
+          {errors.category && (
+            <p className="mt-2 text-sm text-red-600">{errors.category}</p>
+          )}
 
           {/* Negative Marking Checkbox */}
           <div className="flex items-center">
@@ -513,6 +460,8 @@ const Name = () => {
                     )}
                   </button>
                 </div>
+
+
 
                 {showDepartmentControls && (
                   <div className="mt-4 space-y-4">
