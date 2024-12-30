@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import Header from "../../../components/college/test/home/Header";
 import Beginner from "../../../components/college/test/home/Beginner";
-import { FaCaretDown } from "react-icons/fa";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { CgUnavailable } from "react-icons/cg";
 import Advanced from "../../../components/college/test/home/Advanced";
 import Intermediate from "../../../components/college/test/home/Intermediate";
@@ -143,11 +143,9 @@ const Test = () => {
                             )}
                           </h2>
                           <Disclosure.Button>
-                            <FaCaretDown
-                              className={`${
-                                open ? "" : ""
-                              } h-5 w-5 text-[#8F92A1]`}
-                            />
+                            {
+                              open ? <FaCaretDown className="text-[#8F92A1] text-lg" /> : <FaCaretUp className="text-[#8F92A1] text-lg" />
+                            }
                           </Disclosure.Button>
                         </div>
                       </div>
