@@ -67,7 +67,7 @@ const SelectTests = () => {
   const addSection = (section) => {
     if (
       parseInt(currentQuestionCount) + parseInt(totalQ) >
-        parseInt(totalQuestions) ||
+      parseInt(totalQuestions) ||
       totalQ > totalQuestions
     ) {
       toast.error(`Number of question must be less than ${parseInt(totalQuestions) + 1}`);
@@ -135,7 +135,7 @@ const SelectTests = () => {
       //   questionType
       // );
       if (sectionCopy[typeIf]?.length < parseInt(totalQ)) {
-        toast.error("insufficient number of questions s");
+        toast.error("insufficient number of questions");
         return;
       } else {
         // <<<<<<< saveMainCopy
@@ -222,7 +222,7 @@ const SelectTests = () => {
       topics = JSON.parse(localStorage.getItem("topics"));
 
       setSelectedSections(topics);
-    } catch (error) {}
+    } catch (error) { }
 
     // //console.log("hello tests",sections);
   }, []);
@@ -252,21 +252,22 @@ const SelectTests = () => {
           addSection={addSection}
           totalQ={totalQ}
           setTotalQ={setTotalQ}
-          // setTotalQuestions={setTotalQuestions}
-          // totalQuestions={totalQuestions}
+        // setTotalQuestions={setTotalQuestions}
+        // totalQuestions={totalQuestions}
         />
       )}
-      <HeaderCompany handleNext={()=>{
+      <HeaderCompany handleNext={() => {
         if (sections.length === 0) {
           toast.error("Please select atleast one topic to proceed");
           return;
         }
-        
-        Navigate(`/company/pr/test/questions?level=${level}`)}} handlePrev={()=>{Navigate(`/company/pr/test/name?level=${level}`)}} title={""}/>
-     
+
+        Navigate(`/company/pr/test/questions?level=${level}`)
+      }} handlePrev={() => { Navigate(`/company/pr/test/name?level=${level}`) }} title={""} />
+
 
       <div className="w-4/5 mx-auto">
-        <ProgressBar progress= {2}  />
+        <ProgressBar progress={2} />
       </div>
 
       {/* larger screens */}
@@ -327,21 +328,21 @@ const SelectTests = () => {
 
           {selectedSections?.length < 5
             ? Array.from({ length: 5 - selectedSections.length }).map(
-                (_, index) => (
-                  <div
-                    key={index}
-                    className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 flex justify-center p-2 md:p-5"
-                  >
-                    <span className="self-center">
-                      <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
+              (_, index) => (
+                <div
+                  key={index}
+                  className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 flex justify-center p-2 md:p-5"
+                >
+                  <span className="self-center">
+                    <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
 
-                      <h2 className="font-semibold mt-1">
-                        Add section {selectedSections.length + index + 1}{" "}
-                      </h2>
-                    </span>
-                  </div>
-                )
+                    <h2 className="font-semibold mt-1">
+                      Add section {selectedSections.length + index + 1}{" "}
+                    </h2>
+                  </span>
+                </div>
               )
+            )
             : null}
         </div>
 
@@ -350,7 +351,7 @@ const SelectTests = () => {
           setQuestionType={setQuestionType}
           handleFilter={handleFilterSections}
           type={""}
-          // customSelect={[{value:"mcq",label:"Multiple Choice Questions"},{value:"compiler",label:"Code"}]}
+        // customSelect={[{value:"mcq",label:"Multiple Choice Questions"},{value:"compiler",label:"Code"}]}
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">

@@ -35,6 +35,7 @@ const Header = ({
   // };
 
   const handleSaveNext = () => {
+    if (ADD_QUESTION_LOADING) return;
     handleSave("save");
   };
   // useEffect(() => {

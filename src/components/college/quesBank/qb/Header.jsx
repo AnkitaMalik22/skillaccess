@@ -15,7 +15,7 @@ const Header = () => {
 
           <div className="self-center flex ">
             <h2 className="sm:text-xl mt-2 text-left font-bold self-center text-3xl font-dmSans ">
-            Book mark Questions
+              Bookmark Questions
             </h2>
             {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
               <h3 className="mr-2">Untitiled Assessments</h3>
@@ -42,7 +42,7 @@ const Header = () => {
 
       <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
         <div className=" flex">
-      
+
         </div>
       </div>
     </div>

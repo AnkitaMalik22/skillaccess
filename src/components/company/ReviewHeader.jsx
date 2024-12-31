@@ -200,9 +200,9 @@ const ReviewHeader = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              colNum
+                            (rowNum + 1) +
+                            "col:" +
+                            colNum
                           );
                           setLoading(false);
                           return;
@@ -231,9 +231,9 @@ const ReviewHeader = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              colNum
+                            (rowNum + 1) +
+                            "col:" +
+                            colNum
                           );
                           setLoading(false);
                           return;
@@ -387,11 +387,11 @@ const ReviewHeader = ({
                             setError(true);
                             toast.error(
                               "Invalid value row:" +
-                                (rowNum + 1) +
-                                "col:" +
-                                (colNum + 1) +
-                                "-->" +
-                                row.v
+                              (rowNum + 1) +
+                              "col:" +
+                              (colNum + 1) +
+                              "-->" +
+                              row.v
                             );
                             setLoading(false);
                             return;
@@ -408,9 +408,9 @@ const ReviewHeader = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              colNum
+                            (rowNum + 1) +
+                            "col:" +
+                            colNum
                           );
                           setLoading(false);
                           return;
@@ -533,7 +533,7 @@ const ReviewHeader = ({
                   }
                 }
               }
-            } catch (error) {}
+            } catch (error) { }
 
             setExcelJSON(jsonData.slice(1));
             await dispatch(
@@ -571,30 +571,29 @@ const ReviewHeader = ({
       if (level === "adaptive") {
         if (currentQuestionCount > totalQuestions * 2) {
           return toast.error(
-            `Number of question must be less than ${totalQuestions / 2}`
+            `Number of questions must be less than or equal to ${totalQuestions / 2}`
           );
         }
       } else {
         if (currentQuestionCount > totalQuestions) {
           return toast.error(
-            `Number of question must be less than ${totalQuestions}`
+            `Number of questions must be less than or equal to ${totalQuestions}`
           );
         }
       }
       {
         navigate(
-          `/company/pr/test/${
-            qt === "mcq"
-              ? "addMcq"
-              : qt === "findAnswer"
+          `/company/pr/test/${qt === "mcq"
+            ? "addMcq"
+            : qt === "findAnswer"
               ? "find-ans"
               : qt === "compiler"
-              ? "code"
-              : qt === "essay"
-              ? "essay"
-              : qt === "video"
-              ? "video"
-              : "addMcq"
+                ? "code"
+                : qt === "essay"
+                  ? "essay"
+                  : qt === "video"
+                    ? "video"
+                    : "addMcq"
           }/${id}?addType=test&topicId=${topicId}&level=${level}`
         );
       }
@@ -609,20 +608,18 @@ const ReviewHeader = ({
     }
   };
 
-  const imageUrl = `/download/${
-    ques === "mcq"
-      ? "Mcq.xlsx"
-      : ques === "findAnswer"
+  const imageUrl = `/download/${ques === "mcq"
+    ? "Mcq.xlsx"
+    : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
-  }`;
-  const imageName = `${
-    ques === "mcq"
-      ? "Mcq.xlsx"
-      : ques === "findAnswer"
+    }`;
+  const imageName = `${ques === "mcq"
+    ? "Mcq.xlsx"
+    : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
-  }`; // Replace with your desired image name
+    }`; // Replace with your desired image name
 
   return (
     <div className="flex  justify-between items-center mb-5">
