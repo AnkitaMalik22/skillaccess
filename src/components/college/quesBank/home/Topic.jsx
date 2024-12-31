@@ -9,6 +9,7 @@ import {
 import { setCurrentTopic } from "../../../../redux/college/test/testSlice";
 import { useSearchParams } from "react-router-dom";
 import { isUni } from "../../../../util/isCompany";
+import { isCompany } from "../../../../util/isCompany";
 
 const Topic = () => {
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ const Topic = () => {
         <h2 className="font-bold text-xl text-[#171717]">Choose a Topic</h2>
         <button
           className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
-          onClick={() => isUni() ? navigate("/university/pr/quesBank/topic") : navigate("/college/quesBank/topic")}
+          onClick={() => isUni() ? navigate("/university/pr/quesBank/topic") : (isCompany() ? navigate("/company/pr/quesBank/topic") : navigate("/college/quesBank/topic"))}
         >
           View All
         </button>
@@ -118,7 +119,7 @@ const Topic = () => {
                       navigate(
                         isUni()
                           ? `/university/pr/quesBank/topic/${section._id}`
-                          : `/college/quesBank/topic/${section._id}`
+                          : (isCompany() ? `/company/pr/quesBank/topic/${section._id}` : `/college/quesBank/topic/${section._id}`)
                       );
                     }}
                   >

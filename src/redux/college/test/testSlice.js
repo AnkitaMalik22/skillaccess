@@ -68,6 +68,12 @@ const testState = {
   testDescription: "",
   testAttempts: "",
   testId: "",
+  category  : "",
+  categoryName : "",
+  hasAccessToAllCategories : true,
+  accessibleDepartments: [],
+  hasAccessToAllDepartments: false,
+  testType: "",
   // testStatus : "",
   assessments: {
     beginner: [],
@@ -512,6 +518,12 @@ const testSlice = createSlice({
       state.duration_from = action.payload.duration_from;
       state.duration_to = action.payload.duration_to;
       state.isNegativeMarking = action.payload.isNegativeMarking;
+      state.accessibleDepartments = action.payload.accessibleDepartments;
+      state.hasAccessToAllDepartments = action.payload.hasAccessToAllDepartments;
+      state.hasAccessToAllCategories = action.payload.hasAccessToAllCategories;
+      state.category = action.payload.category;
+      state.categoryName = action.payload.categoryName;
+      
       state.status = "active";
       localStorage.setItem(
         "testDetails",

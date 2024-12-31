@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "../../../components/college/quesBank/home/Dropdown";
 import { getAllBookmarks } from "../../../redux/college/test/thunks/question";
 import { LuBookmarkMinus } from "react-icons/lu";
-import { isUni} from "../../../util/isCompany";
+import isCompany, { isUni} from "../../../util/isCompany";
 
 const QuesBank = () => {
   //useTranslate();
@@ -36,7 +36,7 @@ const QuesBank = () => {
         <div className="flex gap-2">
           <button
             className="self-center justify-center flex bg-[#F8F8F9] py-3 px-5 rounded-xl  font-bold gap-2 "
-            onClick={() => isUni() ? navigate("/university/pr/quesbank/createTopic") : navigate("/college/quesbank/createTopic")}
+            onClick={() => isUni() ? navigate("/university/pr/quesbank/createTopic") :(isCompany() ? navigate("/company/pr/quesbank/createTopic") : navigate("/college/quesbank/createTopic")) }
           >
             <FiPlus className="self-center text-lg " /> Add
           </button>
@@ -61,7 +61,7 @@ const QuesBank = () => {
 
               <button
                 className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
-                onClick={() => isUni() ? navigate("/university/pr/quesbank/bookmarks") : navigate("/college/quesbank/bookmarks")}
+                onClick={() => isUni() ? navigate("/university/pr/quesbank/bookmarks") : (isCompany() ? navigate("/company/pr/quesbank/bookmarks") : navigate("/college/quesbank/bookmarks"))}
               >
                 View All
               </button>

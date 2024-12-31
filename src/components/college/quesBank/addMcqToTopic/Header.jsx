@@ -12,7 +12,7 @@ import {
   uploadQuestionImage,
 } from "../../../../redux/college/test/thunks/topic";
 import { editBankQuestionById } from "../../../../redux/college/test/thunks/question";
-import { isUni } from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 
 const Header = ({ question, setQuestion, id, type, addType, image, file }) => {
   const navigate = useNavigate();
@@ -61,7 +61,9 @@ const Header = ({ question, setQuestion, id, type, addType, image, file }) => {
         ).then(() => {
           if (!ADD_QUESTION_LOADING) {
             // //console.log("calling 2 --", ADD_QUESTION_LOADING);
-            isUni() ? navigate(`/university/pr/quesBank/topic/${id}`) : navigate(`/college/quesBank/topic/${id}`);
+            isUni() ? navigate(`/university/pr/quesBank/topic/${id}`) : (
+              isCompany() ? navigate(`/company/pr/quesBank/topic/${id}`) : navigate(`/college/quesBank/topic/${id}`)
+            )
           }
         });
         setQuestion({ Title: "", Options: [], Duration: 0, AnswerIndex: null });

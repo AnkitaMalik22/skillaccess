@@ -93,6 +93,7 @@ export const getTopicById = createAsyncThunk(
   "test/getTopicById",
   async ({id,level}, { rejectWithValue }) => {
     try {
+      console.log("header",getHeaders());
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/admin/topic/${id}?level=${level}`,
        getHeaders()

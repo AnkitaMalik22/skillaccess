@@ -8,7 +8,7 @@ import DeletePoP from '../../../components/PopUps/DeleetPoP';
 import { getAllTopicsQB, deleteTopics } from '../../../redux/college/test/thunks/topic';
 import { setCurrentTopic, setFilteredSections } from '../../../redux/college/test/testSlice';
 import { getCategories } from '../../../redux/category/categorySlice';
-import { isUni } from '../../../util/isCompany';
+import  { isUni,isCompany } from '../../../util/isCompany';
 
 const Topic = () => {
   const navigate = useNavigate();
@@ -307,9 +307,11 @@ const Topic = () => {
                       dispatch(setCurrentTopic({ topic: section }));
                       localStorage.setItem('TopicDetails', JSON.stringify(section));
                       navigate(
-                        isUni
+                        isUni()
                           ? `/university/pr/quesbank/topic/${section._id}`
-                          : `/college/quesbank/topic/${section._id}`
+                          : (
+                            isCompany() ? `/company/pr/quesbank/topic/${section._id}` : `/college/quesbank/topic/${section._id}`
+                          )
                       );
                     }}
                   >

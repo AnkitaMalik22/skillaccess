@@ -17,7 +17,7 @@ import {
   editBankQuestionById,
   editQuestionById,
 } from "../../../../redux/college/test/thunks/question";
-import { isUni } from "../../../../util/isCompany";
+import { isUni,isCompany } from "../../../../util/isCompany";
 
 const codeTemplates = {
   Java: {
@@ -283,7 +283,7 @@ const AddCode = () => {
           setToggle(1);
          
           isUni() ? navigate(`/university/pr/quesbank/topic/${id}`)
-          : navigate(`/college/quesBank/topic/${id}`);
+          : (isCompany() ? navigate(`/company/pr/quesbank/topic/${id}`) : navigate(`/college/quesBank/topic/${id}`));
         }
 
         if (component === "save") {

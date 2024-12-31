@@ -5,7 +5,7 @@ import {
   deleteRecentUsedQuestion,
   getRecentUsedQuestions,
 } from "../../../../redux/college/test/thunks/question";
-import { isUni } from "../../../../util/isCompany";
+import { isUni,isCompany } from "../../../../util/isCompany";
 
 const Recent = () => {
   const arr = [2, 1, 1, 1, 1];
@@ -33,7 +33,7 @@ const Recent = () => {
         <button
           className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
           onClick={() => navigate(
-            isUni() ? "/university/pr/quesBank/recent" : "/college/quesBank/recent"
+            isUni() ? "/university/pr/quesBank/recent" : (isCompany() ? "/company/pr/quesBank/recent" : "/college/quesBank/recent")
           )}
         >
           View All
@@ -74,7 +74,7 @@ const Recent = () => {
                 navigate(
                   isUni()
                     ? `/university/pr/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`
-                    :   `/college/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`
+                    :   (isCompany() ? `/company/pr/quesBank/recentAll?id=${topic._id}&type=${topic.Type}` : `/college/quesBank/recentAll?id=${topic._id}&type=${topic.Type}`)
                 );
               }}
             >
