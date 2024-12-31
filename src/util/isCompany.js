@@ -1,6 +1,6 @@
 import getCookie from "./getToken";
 
-const isCompany = ()=>{
+export const isCompany = ()=>{
     return /^\/company.*/.test(window.location.pathname);
    };
 

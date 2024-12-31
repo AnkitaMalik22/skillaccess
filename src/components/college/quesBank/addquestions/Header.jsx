@@ -3,7 +3,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { isUni } from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 
 const Header = ({ Q, page }) => {
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ const Header = ({ Q, page }) => {
           <button
             className="self-center justify-center flex bg-blued py-3 px-4 rounded-lg text-xs gap-2 text-white"
             onClick={() => 
-              isUni() ? navigate("/university/pr/quesBank") : navigate("/college/quesBank")
+              isUni() ? navigate("/university/pr/quesBank") : (isCompany() ? navigate("/company/pr/quesBank") : navigate("/college/quesBank"))
             }
           >
             Next Step{" "}

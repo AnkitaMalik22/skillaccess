@@ -6,7 +6,7 @@ import { createTopic } from "../../../redux/college/test/thunks/topic";
 import { getCategories } from "../../../redux/category/categorySlice";
 import { FaArrowRightLong } from "react-icons/fa6";
 import {  FaChevronLeft, FaTimes } from "react-icons/fa";
-import { isUni } from "../../../util/isCompany";
+import { isUni,isCompany } from "../../../util/isCompany";
 
 const CreateTopic = () => {
   const navigate = useNavigate();
@@ -111,7 +111,11 @@ const CreateTopic = () => {
         navigate(
           isUni()
             ? `/university/pr/quesBank/typeOfQuestions/${res.payload._id}`
-            : `/college/quesBank/typeOfQuestions/${res.payload._id}`
+            : (
+              isCompany()
+                ? `/company/pr/quesBank/typeOfQuestions/${res.payload._id}`
+                : `/college/quesBank/typeOfQuestions/${res.payload._id}`
+            )
         );
         toast.success("Topic Created Successfully");
       } else {

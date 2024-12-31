@@ -18,6 +18,28 @@ import Loader from "../../../components/loaders/Loader";
 import { isUni } from "../../../util/isCompany";
 
 
+const AddTopic = ({ Navigate, level }) => <div className="w-full max-w-64 h-64 bg-gray-100 rounded-lg flex justify-center">
+  <div className=" self-center w-fit h-fit ">
+    <div
+      className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
+      onClick={() => {
+        localStorage.removeItem("currentTopic");
+        Navigate(`/${isUni() ? "university/pr" : "college"}/test/createTopic?level=${level}`);
+      }}
+    >
+      <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued cursor-pointer" />
+    </div>
+
+    <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60 ">
+      Add New Topic
+    </h2>
+
+    <h2 className="text-xs text-center text-gray-400">
+      Create new Topics
+    </h2>
+  </div>
+</div>
+
 const SelectTests = () => {
   //useTranslate();
   const [visible, setVisible] = useState(false);
@@ -36,7 +58,7 @@ const SelectTests = () => {
     useSelector((state) => state.test);
   // for filter the sections
 
-  const [filteredSections, setFilteredSections] = useState(sections);
+  const [filteredSections, setFilteredSections] = useState([]);
 
   const handleFilterSections = (e) => {
     const value = e.target.value;
@@ -70,7 +92,7 @@ const SelectTests = () => {
       parseInt(totalQuestions) ||
       totalQ > totalQuestions
     ) {
-      toast.error(`Number of question must be less than ${totalQuestions}`);
+      toast.error(`Number of question must be less than or equal to ${totalQuestions}`);
       return;
     }
     if (!questionType) {
@@ -135,7 +157,7 @@ const SelectTests = () => {
       //   questionType
       // );
       if (sectionCopy[typeIf]?.length < parseInt(totalQ)) {
-        toast.error("insufficient number of questions s");
+        toast.error("insufficient number of questions");
         return;
       } else {
         // <<<<<<< saveMainCopy
@@ -211,13 +233,15 @@ const SelectTests = () => {
   };
 
   useEffect(() => {
-   let test = JSON.parse(localStorage.getItem("testDetails"));
+    let test = JSON.parse(localStorage.getItem("testDetails"));
 
-  
-    dispatch(getAllTopics({ level: level , category : test.category, accessibleDepartments: test.accessibleDepartments,
+
+    dispatch(getAllTopics({
+      level: level, category: test.category, accessibleDepartments: test.accessibleDepartments,
       hasAccessToAllDepartments: test.hasAccessToAllDepartments,
-      hasAccessToAllCategories: test.hasAccessToAllCategories}));
-       
+      hasAccessToAllCategories: test.hasAccessToAllCategories
+    }));
+
 
     if (sections) {
       setFilteredSections(sections);
@@ -353,27 +377,7 @@ const SelectTests = () => {
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
-          <div className="w-full h-64 bg-gray-100 rounded-lg flex justify-center">
-            <div className=" self-center w-fit h-fit ">
-              <div
-                className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
-                onClick={() => {
-                  localStorage.removeItem("currentTopic");
-                  Navigate(`/${isUni() ? "university/pr" : "college"}/test/createTopic?level=${level}`);
-                }}
-              >
-                <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued cursor-pointer" />
-              </div>
-
-              <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60 ">
-                Add New Topic
-              </h2>
-
-              <h2 className="text-xs text-center text-gray-400">
-                Create new Topics
-              </h2>
-            </div>
-          </div>
+          {filteredSections?.length > 0 && <AddTopic Navigate={Navigate} level={level} />}
           {GET_TOPICS_LOADING && (
             <div className=" min-h-64 rounded-lg flex items-center  justify-center ">
               <Loader size="md" />
@@ -382,10 +386,10 @@ const SelectTests = () => {
           {filteredSections?.map((section, index) => (
             <div className="p-5 flex flex-col justify-between bg-gray-100  rounded-lg min-h-64 overflow-y-scroll">
               <div>
-                <h2 className="text-base text-[#171717] font-semibold mb-2 first-letter:uppercase">
+                <h2 className="text-base text-[#171717] font-semibold mb-2 first-letter:uppercase line-clamp-2 break-words min-h-12">
                   {section?.Heading}
                 </h2>
-                <p className="text-sm font-normal text-[#8F92A1] first-letter:uppercase ">
+                <p className="text-sm font-normal text-[#8F92A1] first-letter:uppercase line-clamp-4">
                   {section?.Description?.length > 150
                     ? section?.Description?.slice(0, 150) + "..."
                     : section?.Description}
@@ -445,8 +449,12 @@ const SelectTests = () => {
                 </button>
               </div>{" "}
             </div>
-          ))}{" "}
+          ))}
         </div>
+        {filteredSections?.length === 0 && <div className="flex flex-col justify-center items-center">
+          <div className="text-center text-gray-400 self-center mx-auto text-2xl my-10">No topics found</div>
+          <AddTopic Navigate={Navigate} level={level} />
+        </div>}
       </div>
     </>
   );

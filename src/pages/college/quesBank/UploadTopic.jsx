@@ -10,7 +10,7 @@ import Loader from "../../../components/college/test/addVideo/Loader";
 import { FiUpload } from "react-icons/fi";
 import useTranslate from "../../../hooks/useTranslate";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { isUni } from "../../../util/isCompany";
+import { isUni ,isCompany} from "../../../util/isCompany";
 
 const AddQuestionsSelect = () => {
   //useTranslate();
@@ -612,7 +612,7 @@ const AddQuestionsSelect = () => {
             <button
               className="self-center justify-center flex bg-accent py-[5px] px-3 rounded-2xl text-xs gap-2 text-white"
               onClick={() => navigate(
-                isUni() ? "/university/pr/quesbank/topic" : `/college/quesBank/topic`
+                isUni() ? "/university/pr/quesbank/topic" : (isCompany() ? "/company/pr/quesbank/topic" : "/college/quesbank/topic")
               )}
             >
               View All
