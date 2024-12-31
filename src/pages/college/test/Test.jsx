@@ -96,7 +96,7 @@ const Test = () => {
       {/* search bar */}
       <Header students={approvedStudents} />
 
-      <div className={`flex rounded-lg md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch ${isUni() ? "":"h-screen" }` }>
+      <div className={`flex rounded-lg md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch ${isUni() ? "" : "h-screen"}`}>
         {/* left block */}
         <div className="w-3/4 rounded-lg flex flex-col">
           <div className="w-full flex-grow overflow-y-auto">
@@ -105,7 +105,7 @@ const Test = () => {
                 <Disclosure defaultOpen key={i}>
                   {({ open }) => (
                     <div className="mb-4">
-                      <div className="flex w-full justify-between rounded-t-2xl border-b-2 border-opacity-50 border-gray-200 bg-[#F8F8F9] px-4 py-4 text-left text-sm font-medium hover:bg-purple-200 focus:outline-none">
+                      <div className="flex w-full justify-between rounded-t-2xl border-b-2 border-opacity-50 border-gray-200 bg-[#F8F8F9] px-4 py-4 text-left text-sm font-mediumfocus:outline-none">
                         <div className="flex gap-2 w-full justify-between text-sm font-bold">
                           <h2 className="flex gap-3 text-[#171717] text-sm">
                             {i === 0 ? (
@@ -161,7 +161,7 @@ const Test = () => {
         </div>
 
         {/* right block */}
-   {  !isUni() && <div className="w-1/4 p-4 bg-gray-100 rounded-3xl font-dmSans sm:block flex flex-col">
+        {!isUni() && <div className="w-1/4 p-4 bg-gray-100 rounded-3xl font-dmSans sm:block flex flex-col">
           <div className="rounded-3xl bg-white h-full mx-auto flex flex-col">
             <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
               Recent Assessments Completed
@@ -229,7 +229,7 @@ const Test = () => {
               </div>
             </div>
           </div>
-        </div> }  
+        </div>}
       </div>
     </div>
   );

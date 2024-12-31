@@ -14,20 +14,21 @@ const Selected = () => {
 
   // //console.log(id);
   useEffect(() => {
-    if(isCompany()){
+    if (isCompany()) {
       dispatch(getselectedStudentsCompany(id));
-    }else{
+    } else {
       dispatch(getselectedStudents(id));
     }
   }, []);
 
   const { selectedStudents, SELECTED_STUDENTS_LOADING } = useSelector(
     (state) => {
-      if(isCompany()){
-      return state.companyTest;
-    }else{
-      return state.test;
-    }}
+      if (isCompany()) {
+        return state.companyTest;
+      } else {
+        return state.test;
+      }
+    }
   );
 
   let percentageData = [];
@@ -80,13 +81,19 @@ const Selected = () => {
       {SELECTED_STUDENTS_LOADING && <Skeleton />}
       {!SELECTED_STUDENTS_LOADING &&
         selectedStudents?.map((student, index) => (
-          <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
+          <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12 hover:border-accent hover:cursor-pointer border-transparent border" onClick={(e) => {
+            if (isCompany()) {
+              navigate(`/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`)
+            } else {
+              navigate(`/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`)
+            }
+          }}>
             {" "}
             {/* row-2 */}
             <div className={` flex `}>
               <div className="flex self-center">
                 <div className=" min-w-[3rem] self-center  mr-2  ">
-                      <img  alt="" src={student?.studentId?.avatar?.url || "/images/student.png"} className="w-10 h-10 rounded-full"/>
+                  <img alt="" src={student?.studentId?.avatar?.url || "/images/student.png"} className="w-10 h-10 rounded-full" />
                 </div>
                 <span className="break-words min-w-24 pt-1 self-center">
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
@@ -135,18 +142,18 @@ const Selected = () => {
             <div className="flex justify-end mr-3">
               <span
                 className="self-center cursor-pointer"
-                onClick={() =>
-                 {
-                  if(isCompany()){
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (isCompany()) {
                     navigate(
                       `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
                     )
-                  }else{
-                   navigate(
-                     `/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                   )
+                  } else {
+                    navigate(
+                      `/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                    )
                   }
-                 }
+                }
                 }
               >
                 <h2 className="font-dmSans  text-sm sm:text-base text-blued ">

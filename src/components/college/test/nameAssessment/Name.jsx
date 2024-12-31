@@ -269,9 +269,8 @@ const Name = () => {
           <div>
             <input
               type="text"
-              className={`w-full rounded-lg bg-gray-50 border ${
-                errors.name ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={`w-full rounded-lg bg-gray-50 border ${errors.name ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="Name of the Assessment*"
               name="name"
               value={testDetails.name}
@@ -288,9 +287,8 @@ const Name = () => {
             <input
               type="tel"
               name="totalAttempts"
-              className={`w-full rounded-lg bg-gray-50 border ${
-                errors.totalAttempts ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={`w-full rounded-lg bg-gray-50 border ${errors.totalAttempts ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="No. of Attempts*"
               value={testDetails.totalAttempts}
               onChange={handleChange}
@@ -312,9 +310,8 @@ const Name = () => {
             <input
               name="totalQuestions"
               type="tel"
-              className={`w-full rounded-lg bg-gray-50 border ${
-                errors.totalQuestions ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={`w-full rounded-lg bg-gray-50 border ${errors.totalQuestions ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="No. of Questions*"
               value={testDetails.totalQuestions}
               onChange={handleChange}
@@ -551,9 +548,8 @@ const Name = () => {
           {/* Description Textarea */}
           <div>
             <textarea
-              className={`w-full h-40 rounded-lg bg-gray-50 border ${
-                errors.description ? "border-red-500" : "border-gray-200"
-              } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={`w-full h-40 rounded-lg bg-gray-50 border ${errors.description ? "border-red-500" : "border-gray-200"
+                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
               placeholder="Add Description*"
               name="description"
               value={testDetails.description}
