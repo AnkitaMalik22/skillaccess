@@ -76,7 +76,7 @@ const Header = ({
         let rowCount = 0;
         let jsonData = [];
         let headers = [];
-        switch (currentTopic.Type) {
+        switch (currentTopic.Type || ques) {
           case "mcq":
             try {
               for (let colNum = range.s.c; colNum <= range.e.c; colNum++) {
@@ -264,6 +264,8 @@ const Header = ({
             setExcelJSON(jsonData.slice(1));
 
             if (error === false) {
+
+              console.log(jsonData.slice(1));
               await dispatch(
                 addQuestionToTopic({
                   data: jsonData.slice(1),
@@ -547,28 +549,30 @@ const Header = ({
             break;
 
           default:
+            console.log("default");
             break;
         }
 
         setVisible(false);
         toast.success("questions added successfully");
 
-        if (isUni()) {
-          level === "adaptive"
-            ? navigate(`/university/pr/test/selectAdaptive?level=${level}`)
-            : navigate(`/university/pr/test/select?level=${level}`)
-        } else {
-          level === "adaptive"
-            ? navigate(`/college/test/selectAdaptive?level=${level}`)
-            : navigate(`/college/test/select?level=${level}`);
-        }
+        // if (isUni()) {
+        //   level === "adaptive"
+        //     ? navigate(`/university/pr/test/selectAdaptive?level=${level}`)
+        //     : navigate(`/university/pr/test/select?level=${level}`)
+        // } else {
+        //   level === "adaptive"
+        //     ? navigate(`/college/test/selectAdaptive?level=${level}`)
+        //     : navigate(`/college/test/select?level=${level}`);
+        // }
 
         // navigate(`/college/test/select?level=${searchParams.get("level")}`);
       } else {
         setVisible(false);
       }
     } catch (error) {
-      window.location.reload(true);
+      // window.location.reload(true);
+      console.log(error);
     }
   };
   // //console.log(type);
@@ -577,13 +581,13 @@ const Header = ({
       if (level === "adaptive") {
         if (currentQuestionCount > totalQuestions * 2) {
           return toast.error(
-            `Number of question must be less than ${totalQuestions / 2}`
+            `Number of question must be less than or equal to ${totalQuestions / 2}`
           );
         }
       } else {
         if (currentQuestionCount > totalQuestions) {
           return toast.error(
-            `Number of question must be less than ${totalQuestions}`
+            `Number of question must be less than or equal to ${totalQuestions}`
           );
         }
       }

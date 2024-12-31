@@ -1,7 +1,7 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate ,useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addFindAns,
   addFindAnsToTopic,
@@ -29,16 +29,16 @@ const Header = ({
   const level = searchParams.get("level");
 
   const handleSave = () => {
-    save("save");
+    !ADD_QUESTION_LOADING && save("save");
   };
 
-  const {totalTopicQuestions} = useSelector((state) => state.test);
+  const { totalTopicQuestions } = useSelector((state) => state.test);
 
   useEffect(() => {
     if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "findAnswer" ,level }));
+      dispatch(setTotalTopicQuestions({ id, type: "findAnswer", level }));
     }
-  }, [id,""]);
+  }, [id, ""]);
 
   return (
     <div className="flex w-full mx-auto justify-between mb-5 ">
@@ -50,7 +50,7 @@ const Header = ({
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-        Question No : {totalTopicQuestions+1}
+          Question No : {totalTopicQuestions + 1}
         </h2>
       </div>
 

@@ -133,13 +133,15 @@ const Name = () => {
     const currentTime = new Date().toISOString().slice(0, 16); // Get current time and date
     if (
       (name === "duration_from" || name === "duration_to") &&
-      value < currentTime
+      new Date(value).toISOString().slice(0, 16) < currentTime
     ) {
       toast.error(
         "Please choose a date and time that is either the current moment or a future date and time."
       );
       return; // Prevent updating state if the selected time is before the current time and date
     }
+
+
 
     // Check if the entered value is negative
     if (
@@ -165,6 +167,9 @@ const Name = () => {
 
   const handleSubmit = () => {
     let flag = false;
+
+
+    console.log(new Date(testDetails.duration_from).toISOString().slice(0, 16) < new Date().toISOString().slice(0, 16), new Date(testDetails.duration_from).toISOString().slice(0, 16), new Date().toISOString().slice(0, 16));
     if (
       testDetails.name === "" ||
       testDetails.totalAttempts === "" ||
@@ -245,7 +250,13 @@ const Name = () => {
       toast.error("Duration To must be greater than Duration From", {
         icon: "⚠️", // You can use any Unicode character or an image URL here
       });
-      return;
+      flag = true;
+    }
+    else if (new Date(testDetails.duration_from).toISOString().slice(0, 16) < new Date().toISOString().slice(0, 16)) {
+      toast.error("Duration From must be greater than current date and time", {
+        icon: "⚠️", // You can use any Unicode character or an image URL here
+      });
+      flag = true;
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, duration: "" }));
     }
@@ -369,7 +380,8 @@ const Name = () => {
               <input
                 type="datetime-local"
                 name="duration_from"
-                value={testDetails?.duration_from?.slice(0, 16)}
+                min={new Date().toISOString().slice(0, 16)} // Disable past dates and times
+                value={testDetails?.duration_from}
                 onChange={handleChange}
                 className="w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blued"
                 required
