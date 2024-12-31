@@ -16,6 +16,7 @@ import { toast } from "react-hot-toast";
 import { Outlet } from 'react-router-dom';
 import getCookie from "../util/getToken";
 import { getCollege } from "../redux/college/auth/authSlice";
+import UniversityNavbar from "../components/navbar/UniversityNavbar";
 
 const UniversityLayout = ({ children }) => {
   const [visible, setVisible] = useState(false);
@@ -126,7 +127,7 @@ const UniversityLayout = ({ children }) => {
     //     </svg>
     //   ),
     // },
-  
+
     {
       name: "Results",
       path: "/university/pr/results",
@@ -187,7 +188,7 @@ const UniversityLayout = ({ children }) => {
         </svg>
       ),
     },
-   
+
     {
       name: "Profile",
       path: "/university/pr/profile",
@@ -308,10 +309,10 @@ const UniversityLayout = ({ children }) => {
     // },
   ];
 
-  const handleRedirect  = async ()=>{
+  const handleRedirect = async () => {
     try {
-      
-     await  dispatch(getCollege()).unwrap();
+
+      await dispatch(getCollege()).unwrap();
     } catch (error) {
       // console.log(error)
       navigate('/university')
@@ -320,7 +321,7 @@ const UniversityLayout = ({ children }) => {
 
   useEffect(() => {
 
-  handleRedirect()
+    handleRedirect()
 
     const pathToSelectionIndex = {
       "/university/pr/dashboard": 0,
@@ -413,20 +414,18 @@ const UniversityLayout = ({ children }) => {
           saveText={"Continue"}
         />
       )}
-      {/* <UniversityNavbar open={open} setOpen={setOpen} /> */}
+      <UniversityNavbar open={open} setOpen={setOpen} />
       {/* <div className=" h-full  relative"> */}
-      <section className="flex h-screen  justify-start pt-20 bg-secondary font-dmSans">
+      <section className="flex h-screen  justify-start pt-20 bg-secondary font-dmSans relative">
         <aside
-          className={`px-2 sm:px-4 block transition-width overflow-x-hidden bg-secondary z-30  scrollbar overflow-y-scroll ${
-            open ? "w-1/2" : "lg:w-[260px] w-20"
-          }`}
+          className={`px-2 sm:px-4 block transition-width overflow-x-hidden bg-secondary z-30  scrollbar overflow-y-scroll ${open ? "w-1/2" : "lg:w-[260px] w-20"
+            }`}
         >
           <ul className="list-none">
             {arr.map((el, i) => (
               <li
-                className={`btn-transition ${
-                  selection === i ? "active-li" : ""
-                } `}
+                className={`btn-transition ${selection === i ? "active-li" : ""
+                  } `}
                 key={i}
                 onMouseOver={() => setHovered(i)}
                 onMouseOut={() => setHovered(null)}
@@ -455,23 +454,19 @@ const UniversityLayout = ({ children }) => {
                 }}
               >
                 <button
-                  className={`flex gap-4 mb-8 h-fit py-2 justify-start ${
-                    el.name === "Notifications"
-                      ? "ml-[-20px] hidden"
-                      : "btn hover-li"
-                  } ${
-                    open ? "w-full" : "lg:w-full"
-                  } shadow-none text-white rounded-2xl border-none focus:outline-none max-w-xs mx-auto ${
-                    selection === i
+                  className={`flex gap-4 mb-8 h-fit py-2 justify-start ${el.name === "Notifications"
+                    ? "ml-[-20px] hidden"
+                    : "btn hover-li"
+                    } ${open ? "w-full" : "lg:w-full"
+                    } shadow-none text-white rounded-2xl border-none focus:outline-none max-w-xs mx-auto ${selection === i
                       ? "bg-white !text-[#171717]"
                       : " bg-transparent"
-                  }`}
+                    }`}
                 >
                   <div className="">{el.icon}</div>
                   <h3
-                    className={`text-lg font-bold font-dmSans ${
-                      open ? "" : "lg:block hidden"
-                    } w-fit h-fit`}
+                    className={`text-lg font-bold font-dmSans ${open ? "" : "lg:block hidden"
+                      } w-fit h-fit`}
                   >
                     {el.name}
                   </h3>

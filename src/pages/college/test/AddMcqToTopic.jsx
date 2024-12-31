@@ -131,64 +131,47 @@ const AddMcqToTopic = () => {
     }
   };
 
-  const handleQuestionSave = () => {
-    if (
-      !question.Title ||
-      question.Title.trim() === "" ||
-      question.Title === "<p><br></p>"
-    ) {
-      toast.error("Please enter question");
-      return;
-    } else if (
-      !question.Options[0] ||
-      !question.Options[1] ||
-      !question.Options[2] ||
-      !question.Options[3]
-    ) {
-      toast.error("Please enter atleast 4 options");
-      return;
-    } else if (question.AnswerIndex === null || question.AnswerIndex == -1) {
-      toast.error("Please select correct answer");
-      return;
-    } else if (question.Options.some((option) => option.trim() === "")) {
-      toast.error("Please enter all options");
-      return;
-    } else if (question.Duration == 0) {
-      toast.error("Please enter required time");
-      return;
-    } else {
-      if (isPrev) {
-        //api call
-        setIsPrev(false);
-        setCountDetail(currentTopic.questions.length - 1);
-        setLoader(true);
-        dispatch(
-          editQuestionById({
-            index: countDetail + 1,
-            type: "mcq",
-            id: question._id,
-            question: question,
-          })
-        ).then(() => setLoader(false));
-        setQuestion({
-          QuestionLevel: level === "adaptive" ? "beginner" : level,
-          Title: "",
-          Options: [],
-          id: id + Date.now(),
-          Duration: 0,
-          AnswerIndex: null,
-        });
+  const handleQuestionSave = async () => {
+    setLoader(true);
+    try {
+      if (
+        !question.Title ||
+        question.Title.trim() === "" ||
+        question.Title === "<p><br></p>"
+      ) {
+        toast.error("Please enter question");
+        return;
+      } else if (
+        !question.Options[0] ||
+        !question.Options[1] ||
+        !question.Options[2] ||
+        !question.Options[3]
+      ) {
+        toast.error("Please enter atleast 4 options");
+        return;
+      } else if (question.AnswerIndex === null || question.AnswerIndex == -1) {
+        toast.error("Please select correct answer");
+        return;
+      } else if (question.Options.some((option) => option.trim() === "")) {
+        toast.error("Please enter all options");
+        return;
+      } else if (question.Duration == 0) {
+        toast.error("Please enter required time");
+        return;
       } else {
-        setIsPrev(false);
-        setCountDetail(currentTopic?.questions?.length - 1);
-        setLoader(true);
-        dispatch(
-          addQuestionToTopic({ data: question, id: id, type: type })
-        ).then(() => {
-          // if(!ADD_QUESTION_LOADING){
-          //   navigate(-1);
-          // }
-          setLoader(false);
+        if (isPrev) {
+          //api call
+          setIsPrev(false);
+          setCountDetail(currentTopic.questions.length - 1);
+          setLoader(true);
+          await dispatch(
+            editQuestionById({
+              index: countDetail + 1,
+              type: "mcq",
+              id: question._id,
+              question: question,
+            })
+          ).then(() => setLoader(false));
           setQuestion({
             QuestionLevel: level === "adaptive" ? "beginner" : level,
             Title: "",
@@ -197,10 +180,34 @@ const AddMcqToTopic = () => {
             Duration: 0,
             AnswerIndex: null,
           });
-        });
+        } else {
+          setIsPrev(false);
+          setCountDetail(currentTopic?.questions?.length - 1);
 
-        // navigate(-1);
+          await dispatch(
+            addQuestionToTopic({ data: question, id: id, type: type })
+          ).then(() => {
+            // if(!ADD_QUESTION_LOADING){
+            //   navigate(-1);
+            // }
+
+            setQuestion({
+              QuestionLevel: level === "adaptive" ? "beginner" : level,
+              Title: "",
+              Options: [],
+              id: id + Date.now(),
+              Duration: 0,
+              AnswerIndex: null,
+            });
+          });
+
+          // navigate(-1);
+        }
       }
+    } catch (error) {
+
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -486,7 +493,7 @@ const AddMcqToTopic = () => {
         </div>
         <div className="flex justify-between gap-2">
           {" "}
-          <div className=" flex gap-2">
+          {/* <div className=" flex gap-2">
             {
               <button
                 className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${countDetail >= 0 ? "" : "hidden"
@@ -496,16 +503,19 @@ const AddMcqToTopic = () => {
                 <FaChevronLeft className="self-center" /> Prev
               </button>
             }
-          </div>
+          </div> */}
           <div className=" flex">
             <button
               className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
               // onClick={addQuestion}
-              onClick={handleQuestionSave}
+              onClick={() => {
+                !loader && handleQuestionSave();
+              }}
             >
-              {/* {loader ? <CircularLoader /> : <FaPlus className="self-center" />}{" "} */}
+              {loader ? <CircularLoader /> : <FaPlus className="self-center" />}{" "}
               Add Next Question
             </button>
+
           </div>
         </div>
       </div>

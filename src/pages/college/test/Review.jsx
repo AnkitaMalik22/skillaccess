@@ -63,7 +63,7 @@ const Review = () => {
         // console.log(newCount, "newCount", totalQuestions, "totalQuestions", count, "count", selectedQuestions.length, "selectedQuestions.length");
 
         if (newCount > parseInt(totalQuestions)) {
-          toast.error(`Number of questions must be less than ${totalQuestions}`);
+          toast.error(`Number of questions must be less than or equal to  ${totalQuestions}`);
           return prev; // Do not add the question if the limit is exceeded
         }
         // Add the question to the selectedQuestions array
@@ -94,7 +94,7 @@ const Review = () => {
       // Deselect all
       setSelectedQuestions([]);
     } else if (newTotalCount > parseInt(totalQuestions)) {
-      toast.error(`Number of questions must be less than ${totalQuestions}`);
+      toast.error(`Number of questions must be less than or equal to ${totalQuestions}`);
     } else {
       // Select all
       setSelectedQuestions(questions);
@@ -145,7 +145,7 @@ const Review = () => {
     } else {
       typeIf = questionType;
     }
-    setLoading(true);
+
     try {
       if (type === "section") {
 
@@ -187,7 +187,7 @@ const Review = () => {
         questionType === "compiler" && setQuestions(currentTopic.compiler);
 
         console.log(isPresent, "isPresent");
-        if (isPresent && isPresent[0][typeIf].length > 0) {
+        if (isPresent && isPresent?.length > 0 && isPresent[0][typeIf]?.length > 0) {
           setSelectedQuestions(isPresent[0][typeIf]);
           setCount(isPresent[0][typeIf].length);
           console.log(isPresent[0][typeIf], "isPresent");
@@ -222,7 +222,6 @@ const Review = () => {
       console.log(error);
     }
 
-    setLoading(false);
   }
 
 
@@ -310,7 +309,7 @@ const Review = () => {
           parseInt(currentQuestionCount) + selectedQuestions.length >
           parseInt(totalQuestions)
         ) {
-          toast.error(`Number of question must be less than ${totalQuestions}`);
+          toast.error(`Number of question must be less than or equal to ${totalQuestions}`);
           return;
         }
 
@@ -363,7 +362,7 @@ const Review = () => {
             currentQuestionCount - existingCount + selectedQuestions.length;
           console.log(newQuestionCount, "newQuestionCount", parseInt(totalQuestions), "totalQuestions");
           if (newQuestionCount > parseInt(totalQuestions)) {
-            toast.error(`Number of questions must be less than ${totalQuestions}`);
+            toast.error(`Number of questions must be less than or equal to ${totalQuestions}`);
             return;
           }
 
@@ -576,6 +575,10 @@ const Review = () => {
             </div>
           ))
         ) : null}
+
+        {questions?.length === 0 && <div className="flex justify-center items-center h-full">
+          <p className="text-gray-500 text-center">No Questions Found, Add Questions to this topic</p>
+        </div>}
       </div>)}
     </>
   );

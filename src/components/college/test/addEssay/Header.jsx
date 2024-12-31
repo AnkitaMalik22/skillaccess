@@ -1,7 +1,7 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addEssay,
   addEssayToTopic,
@@ -35,13 +35,13 @@ const Header = ({
     // handleSave()
     // navigate(-1);
   };
-  const {totalTopicQuestions} = useSelector((state) => state.test);
+  const { totalTopicQuestions } = useSelector((state) => state.test);
 
   useEffect(() => {
     if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "essay" ,level }));
+      dispatch(setTotalTopicQuestions({ id, type: "essay", level }));
     }
-  }, [id,""]);
+  }, [id, ""]);
 
   return (
     <div className="flex w-full mx-auto justify-between mb-5 ">
@@ -53,7 +53,7 @@ const Header = ({
           <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-        Question No : {totalTopicQuestions+1}
+          Question No : {totalTopicQuestions + 1}
         </h2>
       </div>
 
@@ -68,7 +68,7 @@ const Header = ({
         </button>{" "}
         <button
           className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
-          onClick={() => handleSave("save")}
+          onClick={() => { !ADD_QUESTION_LOADING && handleSave("save") }}
         >
           {ADD_QUESTION_LOADING ? "Saving" : "Save"}
           {ADD_QUESTION_LOADING && <Loader size="sm" />}

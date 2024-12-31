@@ -19,6 +19,8 @@ const Header = ({ question, setQuestion, id, type }) => {
   const level = searchParams.get("level");
 
   const handleSave = () => {
+
+    if (ADD_QUESTION_LOADING) return;
     if (
       !question.Title ||
       question.Title.trim() === "" ||
@@ -46,7 +48,7 @@ const Header = ({ question, setQuestion, id, type }) => {
           if (!ADD_QUESTION_LOADING) {
             //console.log("calling 2 --", ADD_QUESTION_LOADING);
             level === "adaptive"
-              ? navigate(`/${isUni()? "university/pr":"college"}/test/selectAdaptive?level=${level}`)
+              ? navigate(`/${isUni() ? "university/pr" : "college"}/test/selectAdaptive?level=${level}`)
               : navigate(-1);
           }
         }

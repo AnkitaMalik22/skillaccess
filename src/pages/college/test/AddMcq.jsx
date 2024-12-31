@@ -252,9 +252,8 @@ const AddMcq = () => {
                 onChange={handleChanges}
                 value={question.Duration}
                 id=""
-                className={`${
-                  level === "adaptive" ? "w-2/3" : "w-full"
-                } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
+                className={`${level === "adaptive" ? "w-2/3" : "w-full"
+                  } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
               >
                 <option value={0}>Time to answer the question</option>
 
@@ -493,7 +492,7 @@ const AddMcq = () => {
         <div className="flex justify-between gap-2">
           {" "}
           <div className=" flex gap-2">
-            <button
+            {/* <button
               className={`${
                 count > 0 ? "" : "hidden "
               } self-center justify-center flex ${
@@ -503,7 +502,7 @@ const AddMcq = () => {
               // onClick={() => navigate(-1)}
             >
               <FaChevronLeft className="self-center" /> Prev
-            </button>
+            </button> */}
           </div>
           <div className=" flex">
             <button
