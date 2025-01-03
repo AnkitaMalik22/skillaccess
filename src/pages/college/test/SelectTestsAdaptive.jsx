@@ -468,9 +468,9 @@ const SelectTests = () => {
                 onClick={() => {
                   localStorage.removeItem("currentTopic");
                   if(isUni()){
-                    Navigate("/university/pr/test/createTopicAdaptive?level=adaptive");
+                    Navigate("/university/pr/test/createTopic?level=adaptive");
                   }else{
-                    Navigate("/college/test/createTopicAdaptive?level=adaptive");
+                    Navigate("/college/test/createTopic?level=adaptive");
                   }
                   
                 }}

@@ -19,11 +19,22 @@ const CreateTopic = () => {
     Description: "",
     Time: null,
     TotalQuestions: null,
-    category: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).category:"",
-    categoryName: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).categoryName:"",
-    accessibleDepartments:localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).accessibleDepartments:[],
-    hasAccessToAllDepartments: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).hasAccessToAllDepartments:false,
-    hasAccessToAllCategories: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).hasAccessToAllCategories:false,
+    category: localStorage.getItem("testDetails")
+      ? JSON.parse(localStorage.getItem("testDetails")).category
+      : "",
+    categoryName: localStorage.getItem("testDetails")
+      ? JSON.parse(localStorage.getItem("testDetails")).categoryName
+      : "",
+    accessibleDepartments: localStorage.getItem("testDetails")
+      ? JSON.parse(localStorage.getItem("testDetails")).accessibleDepartments
+      : [],
+    hasAccessToAllDepartments: localStorage.getItem("testDetails")
+      ? JSON.parse(localStorage.getItem("testDetails"))
+          .hasAccessToAllDepartments
+      : false,
+    hasAccessToAllCategories: localStorage.getItem("testDetails")
+      ? JSON.parse(localStorage.getItem("testDetails")).hasAccessToAllCategories
+      : false,
   });
   const [isNameEmpty, setIsNameEmpty] = useState(false);
   const [isDescEmpty, setIsDescEmpty] = useState(false);
@@ -71,12 +82,20 @@ const CreateTopic = () => {
 
     dispatch(createTopic(topic)).then((res) => {
       if (res.payload._id) {
+        if (level === "adaptive") {
+          navigate(
+            `/${isUni() ? "university/pr" : "college"}/test/addMcqToTopic/${
+              res.payload._id
+            }?type=mcq&addType=topic&level=adaptive`
+          );
+          return;
+        }
 
-        if(isUni()){
+        if (isUni()) {
           navigate(
             `/university/pr/test/typeOfQuestions/${res.payload._id}?level=${level}`
           );
-        }else{
+        } else {
           navigate(
             `/college/test/typeOfQuestions/${res.payload._id}?level=${level}`
           );
@@ -90,11 +109,20 @@ const CreateTopic = () => {
         Description: "",
         Time: null,
         TotalQuestions: null,
-        category : localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).category:"",
-        categoryName: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).categoryName:"",
-        accessibleDepartments:localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).accessibleDepartments:[],
-        hasAccessToAllDepartments: localStorage.getItem("testDetails")?JSON.parse(localStorage.getItem("testDetails")).hasAccessToAllDepartments:false,
-        
+        category: localStorage.getItem("testDetails")
+          ? JSON.parse(localStorage.getItem("testDetails")).category
+          : "",
+        categoryName: localStorage.getItem("testDetails")
+          ? JSON.parse(localStorage.getItem("testDetails")).categoryName
+          : "",
+        accessibleDepartments: localStorage.getItem("testDetails")
+          ? JSON.parse(localStorage.getItem("testDetails"))
+              .accessibleDepartments
+          : [],
+        hasAccessToAllDepartments: localStorage.getItem("testDetails")
+          ? JSON.parse(localStorage.getItem("testDetails"))
+              .hasAccessToAllDepartments
+          : false,
       });
     });
   };
