@@ -87,7 +87,7 @@ export const removeQfunc = (state, action) => {
 };
 
 export const addQuesFunc = (state, action) => {
-  const { type, questions, isMultiple } = action.payload;
+  const { type, questions, isMultiple , uploadedQuestions} = action.payload;
   //console.log(action.payload);
   if (isMultiple) {
     switch (type) {
@@ -98,21 +98,21 @@ export const addQuesFunc = (state, action) => {
       case "findAnswer":
         state.currentTopic.findAnswers = [
           ...state.currentTopic.findAnswers,
-          ...questions,
+          ...uploadedQuestions,
         ];
         break;
 
       case "mcq":
         state.currentTopic.questions = [
           ...state.currentTopic.questions,
-          ...questions,
+          ...uploadedQuestions,
         ];
         break;
 
       case "compiler":
         state.currentTopic.compiler = [
           ...state.currentTopic.compiler,
-          ...questions,
+          ...uploadedQuestions,
         ];
         break;
 
@@ -133,6 +133,7 @@ export const addQuesFunc = (state, action) => {
         break;
 
       case "mcq":
+       
         if (state.currentTopic.questions) {
           state.currentTopic.questions = [
             ...state.currentTopic.questions,

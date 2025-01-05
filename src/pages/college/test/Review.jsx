@@ -131,7 +131,7 @@ const Review = () => {
     handleTopics();
 
 
-  }, [topics]);
+  }, [topics, currentTopic]);
 
 
   async function handleTopics() {

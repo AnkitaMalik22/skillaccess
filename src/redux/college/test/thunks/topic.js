@@ -25,6 +25,7 @@ export const addQuestionToTopic = createAsyncThunk(
 
       // if (data.index) return { question: res.questions[0] };
       return {
+        uploadedQuestions: res.uploadedQuestions,
         questions: res.questions,
         type: data.type,
         isMultiple: data.isMultiple,
