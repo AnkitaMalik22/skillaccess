@@ -175,13 +175,13 @@ const Name = () => {
 
   const handleSubmit = () => {
     let hasError = false;
-  
+
     // Helper function to set error messages
     const setError = (field, message) => {
       setErrors((prevErrors) => ({ ...prevErrors, [field]: message }));
       hasError = true;
     };
-  
+
     // Validation for required fields
     if (!testDetails.name) setError("name", "Please Enter Name");
     if (!testDetails.totalAttempts) setError("totalAttempts", "Please Enter Total Attempts");
@@ -190,7 +190,7 @@ const Name = () => {
     if (!testDetails.duration_from) setError("duration", "Please Enter Duration From");
     if (!testDetails.duration_to) setError("duration", "Please Enter Duration To");
     if (!testDetails.category) setError("category", "Please Select Category");
-  
+
     // Validation for numeric ranges
     if (testDetails.totalAttempts < 1 || testDetails.totalAttempts > 10) {
       setError("totalAttempts", "Total Attempts must be between 1 and 10");
@@ -198,7 +198,7 @@ const Name = () => {
     if (testDetails.totalQuestions < 1) {
       setError("totalQuestions", "Total Questions must be greater than 0");
     }
-  
+
     // Duration validation
     if (testDetails.duration_from && testDetails.duration_to) {
       if (testDetails.duration_from >= testDetails.duration_to) {
@@ -208,7 +208,7 @@ const Name = () => {
         hasError = true;
       }
     }
-  
+
     // Branches and departments validation
     // if (!testDetails.hasAccessToAllBranches && !testDetails.accessibleBranches.length) {
     //   toast.error("Please select branches", { icon: "⚠️" });
@@ -218,12 +218,12 @@ const Name = () => {
     //   toast.error("Please select departments", { icon: "⚠️" });
     //   hasError = true;
     // }
-  
+
     // Duplicate name validation based on level
     const validateDuplicates = (assessmentsList) => {
       return assessmentsList.some((assessment) => assessment.name === testDetails.name);
     };
-  
+
     if (level === "beginner" && validateDuplicates(assessments.beginner)) {
       toast.error("Duplicate name in beginner assessments");
       hasError = true;
@@ -236,7 +236,7 @@ const Name = () => {
       toast.error("Duplicate name in advanced assessments");
       hasError = true;
     }
-  
+
     // If no errors, proceed with dispatch and navigation
     if (!hasError) {
       dispatch(setTestBasicDetails(testDetails));
@@ -244,7 +244,7 @@ const Name = () => {
       navigate(`${basePath}${level === "adaptive" ? "Adaptive" : ""}?level=${level}`);
     }
   };
-  
+
 
   // console.log(categories); //not printing
 
