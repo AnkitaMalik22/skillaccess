@@ -51,36 +51,35 @@ const SwiperSlideLeft = () => {
         },
       }}
     >
-      {jobs.map((job) => (
+      {jobs && jobs?.map((job) => (
         <SwiperSlide className="flex ">
-           <div className="companies-dash bg-white w-[100px] xl:w-[140px] p-4 rounded-2xl">
-      <div
-        className="bg-gray-100 w-full h-20 mb-4 mx-auto cursor-pointer rounded-lg text-center pb-10"
-        onClick={() => navigate(`/company/pr/jobs/${job._id}`)}
-      >
-        <img src={job?.company?.avatar.url || "/images/default.jpg"} alt="" className="rounded-lg object-contain" />
-        {/* {job?.SeniorityLevel} */}
-      </div>
-      
-      <div className="text-center">
-        <h3 className="text-xs text-accent font-bold break-words mt-10">
-          {job?.JobTitle}
-        </h3>
-        
-        {/* Open/Closed Label */}
-        <div
-          className={`mt-2 px-2 py-1 rounded-lg text-xs font-semibold ${
-            job.isOpenforApply ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-          }`}
-        >
-          {job.isOpenforApply ? "Open" : "Closed"}
-        </div>
-      </div>
-    </div>
+          <div className="companies-dash bg-white w-[100px] xl:w-[140px] p-4 rounded-2xl">
+            <div
+              className="bg-gray-100 w-full h-20 mb-4 mx-auto cursor-pointer rounded-lg text-center pb-10"
+              onClick={() => navigate(`/company/pr/jobs/${job?._id}`)}
+            >
+              <img src={job?.company?.avatar?.url || "/images/default.jpg"} alt="" className="rounded-lg object-contain" />
+              {/* {job?.SeniorityLevel} */}
+            </div>
+
+            <div className="text-center">
+              <h3 className="text-xs text-accent font-bold break-words mt-10">
+                {job?.JobTitle}
+              </h3>
+
+              {/* Open/Closed Label */}
+              <div
+                className={`mt-2 px-2 py-1 rounded-lg text-xs font-semibold ${job?.isOpenforApply ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                  }`}
+              >
+                {job.isOpenforApply ? "Open" : "Closed"}
+              </div>
+            </div>
+          </div>
         </SwiperSlide>
       ))}
 
-      {jobLoading&& <h1>Loading...</h1>}
+      {jobLoading && <h1>Loading...</h1>}
       <span className="absolute top-1/3 right-0 z-20 h-fit w-fit">
         <SlideNextButton />
       </span>
