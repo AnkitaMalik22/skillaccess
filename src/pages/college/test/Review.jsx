@@ -352,9 +352,9 @@ const Review = () => {
 
         // Check if the topic already exists
         const topicIndex = sections.findIndex(
-          (section) => section.Type === questionType && section.id === currentTopic.id // Use an identifier like `id`
+          (section) => section.Type === questionType && section._id === currentTopic._id
         );
-
+        console.log(topicIndex, "topicIndex");
         if (topicIndex !== -1) {
           // Topic exists, replace questions
           const existingCount = sections[topicIndex][typeIf]?.length || 0;

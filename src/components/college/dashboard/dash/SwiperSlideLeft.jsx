@@ -53,9 +53,9 @@ const SwiperSlideLeft = () => {
     >
       {newCompanies.map((company) => (
         <SwiperSlide className="flex ">
-          <div className="companies-dash bg-white  w-[100px] xl:w-[140px] p-4 rounded-2xl  ">
-            <figure
-              className="bg-gray-100 w-full h-20 mb-4 mx-auto cursor-pointer rounded-lg"
+          <div className="mr-4 bg-white roundex-xl w-28 xl:w-[128px] h-[148px] p-2 rounded-2xl">
+          <figure
+              className="bg-gray-100 w-[90%] h-20 mb-4 mx-auto cursor-pointer rounded-lg"
               onClick={() =>
                 navigate(`/college/companies/profile/${company._id}`)
               }
@@ -73,7 +73,7 @@ const SwiperSlideLeft = () => {
             </figure>
             <div>
               <h3 className="text-xs text-[#8F92A1] font-bold text-center break-words ">
-                {company?.basic?.companyName}
+                {company?.basic?.companyName?. length > 20 ? company?.basic?.companyName?.slice(0, 20) + "..." : company?.basic?.companyName}
               </h3>
             </div>
           </div>
