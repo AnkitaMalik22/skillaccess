@@ -19,6 +19,7 @@ const Appeared = ({ assessment }) => {
   const dispatch = useDispatch();
 
   const handleStatusChange = (testId, responseId, student) => async (event) => {
+    console.log("student");
     const status = event.target.value;
     setIsLoading({ ...isLoading, [responseId]: true });
     if (isCompany()) {
@@ -165,8 +166,9 @@ const Appeared = ({ assessment }) => {
                             e.stopPropagation();
                             handleStatusChange(
                               assessment?._id,
-                              student?._id, student
-                            )
+                              student?._id,
+                              student
+                            )(e)
                           }}
                           value={student?.status}
                         >
