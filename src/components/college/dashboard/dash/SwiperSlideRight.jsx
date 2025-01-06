@@ -48,9 +48,9 @@ const SwiperSlideRight = () => {
     >
       {newJobs.map((job) => (
         <SwiperSlide>
-          <div className=" bg-white  w-28 xl:w-[182px] h-[148px] rounded-2xl p-4">
+          <div className="mx-4 bg-white roundex-xl w-28 xl:w-[158px] h-[148px] p-4 rounded-2xl">
             <figure
-              className="bg-white-500  mx-auto rounded-lg flex justify-center cursor-pointer mb-4"
+              className="bg-white-500  mx-8 rounded-lg flex justify-center cursor-pointer mb-4"
               onClick={() =>
                 navigate(`/college/companies/jobOverview/${job._id}`)
               }
