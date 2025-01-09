@@ -22,6 +22,10 @@ import {
   GetPhonecodes,
 } from "react-country-state-city";
 
+
+//to do 
+// form validation 
+// handle location get error
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

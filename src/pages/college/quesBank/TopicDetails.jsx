@@ -88,7 +88,7 @@ const TopicDetails = () => {
       </div>
 
       <div className="flex gap-2 w-full justify-center bottom-1">
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+        <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropleft
             className={` text-lg self-center ${selected === 1 && "disabled"}`}
             onClick={() => selected !== 1 && setSelected(selected - 1)}
@@ -103,10 +103,11 @@ const TopicDetails = () => {
             hasQuestions && (
               <div
                 key={pageNumber}
-                className={`rounded-lg h-10 w-10 flex justify-center cursor-pointer ${selected === pageNumber
-                  ? "bg-accent text-white"
-                  : "bg-gray-100"
-                  }`}
+                className={`rounded-md h-10 w-10 flex justify-center cursor-pointer ${
+                  selected === pageNumber
+                    ? "bg-accent text-white"
+                    : "bg-gray-100"
+                }`}
                 onClick={() => setSelected(pageNumber)}
               >
                 <p className="self-center">{pageNumber}</p>
@@ -115,10 +116,11 @@ const TopicDetails = () => {
           );
         })}
 
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+        <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropright
-            className={` text-lg self-center ${selected === Math.ceil(max) && "disabled"
-              }`}
+            className={` text-lg self-center ${
+              selected === Math.ceil(max) && "disabled"
+            }`}
             onClick={() =>
               selected !== Math.ceil(max) && setSelected(selected + 1)
             }

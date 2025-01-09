@@ -27,7 +27,7 @@ const Header = () => {
       ></div>
       <span className="flex gap-4">
         <button
-          className=" self-center ml-2 rounded-lg "
+          className=" self-center ml-2 rounded-md "
           onClick={() => navigate(-1)}
         >
           <img
@@ -83,7 +83,7 @@ const Header = () => {
       </span>
 
       <button
-        className="bg-accent py-2 px-3 self-center mr-2 rounded-lg flex gap-2 text-white"
+        className="bg-accent py-2 px-3 self-center mr-2 rounded-md flex gap-2 text-white"
         onClick={() => {
           navigate("/student/inbox/mail/:compose");
         }}

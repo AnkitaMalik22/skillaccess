@@ -14,14 +14,14 @@ const Header = () => {
       {/* comp */}
       <span className="flex gap-2 w-3/6 self-center">
         <button
-          className=" flex self-center object-center  rounded-lg h-10 w-10 "
+          className=" flex self-center object-center  rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-            <FiPieChart className=" sm:h-16 sm:w-11 h-10 w-10 self-center" />
+          <FiPieChart className=" sm:h-16 sm:w-11 h-10 w-10 self-center" />
         </button>
         {/* <h2 className="text-xl font-bold self-center">Test</h2> */}
         <h2 className="text-[28px] leading-[36px] font-bold self-center font-dmSans ">
-        Your Assessments
+          Your Assessments
         </h2>
       </span>
 
@@ -38,8 +38,7 @@ const Header = () => {
       </div>
 
       <span className="flex gap-2 w-[30%] justify-end">
-   
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+        <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
         </button>
       </span>

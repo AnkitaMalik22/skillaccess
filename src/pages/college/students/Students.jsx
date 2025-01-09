@@ -14,7 +14,7 @@ const Students = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [filteredStudents, setFilteredStudents] = useState([]);
-  const [filterType, setFilterType] = useState('all students');
+  const [filterType, setFilterType] = useState("all students");
   const [batch, setBatch] = useState("all");
   const [createdAt, setCreatedAt] = useState("");
   const {
@@ -24,20 +24,28 @@ const Students = () => {
     GET_STUDENT_LOADING,
   } = useSelector((state) => state.collegeStudents);
 
-  const { user } = useSelector((state) => { return (!isUni() ? state.collegeAuth : state.universityAuth) });
+  const { user } = useSelector((state) => {
+    return !isUni() ? state.collegeAuth : state.universityAuth;
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       if (user?._id) {
-        await dispatch(getStudents({ id: user?._id, batch, filterType, createdAt, page: 1, limit: 10 }));
+        await dispatch(
+          getStudents({
+            id: user?._id,
+            batch,
+            filterType,
+            createdAt,
+            page: 1,
+            limit: 10,
+          })
+        );
       }
     };
 
-
     fetchData();
   }, [dispatch, user, batch, filterType, createdAt]);
-
-
 
   useEffect(() => {
     setFilteredStudents(uploadedStudents);
@@ -62,24 +70,39 @@ const Students = () => {
     }
   };
 
-
   const [currentPage, setCurrentPage] = useState(1);
   const studentsPerPage = 10; // You can adjust this value
   const totalPages = Math.ceil(approvedStudents);
 
   useEffect(() => {
-    dispatch(getStudents({ id: user?._id, batch, filterType, createdAt, page: currentPage, limit: studentsPerPage }));
-
+    dispatch(
+      getStudents({
+        id: user?._id,
+        batch,
+        filterType,
+        createdAt,
+        page: currentPage,
+        limit: studentsPerPage,
+      })
+    );
   }, [currentPage, studentsPerPage]);
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1) {
       setCurrentPage(newPage);
     }
-  }
+  };
   return (
     <>
-      <Header handleFilter={handleFilterStudents} setYear={setBatch} year={batch} setCreatedAt={setCreatedAt} createdAt={createdAt} filterType={filterType} setFilterType={setFilterType} />
+      <Header
+        handleFilter={handleFilterStudents}
+        setYear={setBatch}
+        year={batch}
+        setCreatedAt={setCreatedAt}
+        createdAt={createdAt}
+        filterType={filterType}
+        setFilterType={setFilterType}
+      />
 
       <div className="w-full flex justify-between md:gap-10 gap-5 flex-wrap md:flex-nowrap md:mb-10 mb-5">
         {/* New students joined */}
@@ -101,7 +124,7 @@ const Students = () => {
                       <img
                         src="/images/defaultUser.jpg"
                         alt=" user-icon"
-                        className=" rounded-lg w-11 h-11"
+                        className=" rounded-md w-11 h-11"
                       />
                     </div>
                     <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
@@ -138,7 +161,7 @@ const Students = () => {
                       <img
                         src="/images/defaultUser.jpg"
                         alt=" user-icon"
-                        className=" rounded-lg w-11 h-11"
+                        className=" rounded-md w-11 h-11"
                       />
                       <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
                         {student?.FirstName + " " + student?.LastName}
@@ -151,9 +174,13 @@ const Students = () => {
                 </div>
                 <div className="flex  self-center gap-3">
                   <h2
-                    className="font-dmSans text-xs font-bold text-white bg-accent p-2 rounded-lg cursor-pointer"
+                    className="font-dmSans text-sm font-bold text-white bg-accent p-2 rounded-md cursor-pointer"
                     onClick={() =>
-                      navigate(`/${isUni() ? "university/pr" : "college"}/students/profile/${student._id}`)
+                      navigate(
+                        `/${
+                          isUni() ? "university/pr" : "college"
+                        }/students/profile/${student._id}`
+                      )
                     }
                   >
                     View
@@ -196,10 +223,13 @@ const Students = () => {
                 className="grid-cols-6 rounded-2xl p-2 text-center mx-auto font-dmSans font-semibold text-base hidden md:grid bg-gray-100 hover:border-accent hover:cursor-pointer border-transparent border"
                 onClick={() =>
                   //  navigate(`/college/students/profile/${student._id}`)
-                  navigate(`/${isUni() ? "university/pr" : "college"}/students/profile/${student._id}`)
+                  navigate(
+                    `/${
+                      isUni() ? "university/pr" : "college"
+                    }/students/profile/${student._id}`
+                  )
                 }
               >
-
                 <div className=" grid grid-cols-5 col-span-5">
                   {/* Student Info */}
                   <div className="flex gap-3 items-center">
@@ -207,7 +237,7 @@ const Students = () => {
                       <img
                         src={student?.avatar?.url || "/images/defaultUser.jpg"}
                         alt="user-icon"
-                        className="rounded-lg w-11 h-11"
+                        className="rounded-md w-11 h-11"
                       />
                     </div>
                     <h2 className="font-dmSans capitalize font-semibold text-sm text-[#171717] text-start">
@@ -229,7 +259,9 @@ const Students = () => {
                   <div className="flex justify-center flex-col">
                     <h2 className="font-dmSans font-normal text-sm text-[#171717]">
                       {student?.studentResponses?.length > 1
-                        ? student?.studentResponses[student?.studentResponses?.length - 2]?.assessmentId?.name
+                        ? student?.studentResponses[
+                            student?.studentResponses?.length - 2
+                          ]?.assessmentId?.name
                         : "Not Available"}
                     </h2>
                   </div>
@@ -238,7 +270,9 @@ const Students = () => {
                   <div className="flex justify-center flex-col">
                     <h2 className="font-dmSans font-normal text-sm text-[#171717]">
                       {student?.studentResponses?.length > 0
-                        ? student?.studentResponses[student?.studentResponses?.length - 1]?.assessmentId?.name
+                        ? student?.studentResponses[
+                            student?.studentResponses?.length - 1
+                          ]?.assessmentId?.name
                         : "Not Available"}
                     </h2>
                   </div>
@@ -247,7 +281,7 @@ const Students = () => {
                   <div className="flex justify-center">
                     <div className="self-center">
                       <span>
-                        <h2 className="font-dmSans font-bold text-xs sm:text-xs">
+                        <h2 className="font-dmSans font-bold text-sm sm:text-sm">
                           Not available
                         </h2>
                       </span>
@@ -255,11 +289,10 @@ const Students = () => {
                   </div>
                 </div>
 
-
                 {/* Actions */}
                 <div className="flex justify-center items-center gap-3">
                   {/* <button
-                  className="font-dmSans text-xs font-bold text-white bg-accent p-2 rounded-lg hover:bg-accent/90 transition-colors"
+                  className="font-dmSans text-sm font-bold text-white bg-accent p-2 rounded-md hover:bg-accent/90 transition-colors"
                   onClick={() =>
                     //  navigate(`/college/students/profile/${student._id}`)
                     navigate(`/${isUni() ?"university/pr" :"college" }/students/profile/${student._id}`)
@@ -273,14 +306,11 @@ const Students = () => {
                 </div>
               </div>
             ))}
-            {
-              approvedStudents?.length === 0 && (
-                <div className="text-center text-gray-500">
-                  <h2 className="text-lg">No students found</h2>
-                </div>
-              )
-            }
-
+            {approvedStudents?.length === 0 && (
+              <div className="text-center text-gray-500">
+                <h2 className="text-lg">No students found</h2>
+              </div>
+            )}
           </div>
         )}
 
@@ -289,7 +319,7 @@ const Students = () => {
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
+            className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
           >
             {/* <ChevronLeft className="w-5 h-5" /> */}
             <FcPrevious className="w-5 h-5" />
@@ -301,7 +331,7 @@ const Students = () => {
               <>
                 <button
                   onClick={() => handlePageChange(1)}
-                  className="h-8 w-8 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="h-8 w-8 rounded-md hover:bg-gray-100 transition-colors"
                 >
                   1
                 </button>
@@ -313,19 +343,17 @@ const Students = () => {
             {Array.from({ length: Math.min(3, totalPages) }, (_, i) => {
               const pageNum = Math.max(
                 1,
-                Math.min(
-                  currentPage - 1 + i,
-                  totalPages
-                )
+                Math.min(currentPage - 1 + i, totalPages)
               );
               return (
                 <button
                   key={pageNum}
                   onClick={() => handlePageChange(pageNum)}
-                  className={`h-8 w-8 rounded-lg transition-colors ${currentPage === pageNum
-                      ? 'bg-accent text-white'
-                      : 'hover:bg-gray-100'
-                    }`}
+                  className={`h-8 w-8 rounded-md transition-colors ${
+                    currentPage === pageNum
+                      ? "bg-accent text-white"
+                      : "hover:bg-gray-100"
+                  }`}
                 >
                   {pageNum}
                 </button>
@@ -335,10 +363,12 @@ const Students = () => {
             {/* Last Page */}
             {currentPage < totalPages - 1 && (
               <>
-                {currentPage < totalPages - 2 && <span className="text-gray-400">...</span>}
+                {currentPage < totalPages - 2 && (
+                  <span className="text-gray-400">...</span>
+                )}
                 <button
                   onClick={() => handlePageChange(totalPages)}
-                  className="h-8 w-8 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="h-8 w-8 rounded-md hover:bg-gray-100 transition-colors"
                 >
                   {totalPages}
                 </button>
@@ -349,7 +379,7 @@ const Students = () => {
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
+            className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
           >
             <FcNext className="w-5 h-5" />
             {/* <ChevronRight className="w-5 h-5" /> */}

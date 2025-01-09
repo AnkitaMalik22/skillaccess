@@ -6,22 +6,22 @@ const Compose = () => {
     <div className="p-4 flex flex-col gap-3">
       <input
         type="text"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg "
+        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md "
       />
       <input
         type="text"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
+        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
       />
       <input
         type="text"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
+        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
       />
       <input
         type="text"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
+        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
       />
       <textarea
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg h-[30vh] placeholder-gray-400"
+        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md h-[30vh] placeholder-gray-400"
         placeholder="Type Something ..."
       />
 

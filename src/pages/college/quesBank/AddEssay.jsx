@@ -12,11 +12,13 @@ import {
   addEssay,
   addEssayToTopic,
 } from "../../../redux/college/test/testSlice";
-import { addQuestionToTopic,setTotalTopicQuestions } from "../../../redux/college/test/thunks/topic";
+import {
+  addQuestionToTopic,
+  setTotalTopicQuestions,
+} from "../../../redux/college/test/thunks/topic";
 import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 import isCompany, { isUni } from "../../../util/isCompany";
-
 
 const AddEssay = () => {
   //useTranslate();
@@ -128,7 +130,14 @@ const AddEssay = () => {
           });
           setLoading(false);
           if (!ADD_QUESTION_LOADING) {
-            if (saveType === "save") navigate(isUni() ? `/university/pr/quesbank/topic/${id}` : ( isCompany() ? `/company/pr/quesbank/topic/${id}` : `/college/quesbank/topic/${id}`));
+            if (saveType === "save")
+              navigate(
+                isUni()
+                  ? `/university/pr/quesbank/topic/${id}`
+                  : isCompany()
+                  ? `/company/pr/quesbank/topic/${id}`
+                  : `/college/quesbank/topic/${id}`
+              );
           }
         }
       }
@@ -161,7 +170,7 @@ const AddEssay = () => {
 
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "essay" ,level : "all"}));
+      dispatch(setTotalTopicQuestions({ id, type: "essay", level: "all" }));
     }
   }, [ADD_QUESTION_LOADING]);
 
@@ -227,7 +236,7 @@ const AddEssay = () => {
           <div className=" flex gap-2">
             {addType === "topic" ? (
               <button
-                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                   countDetail >= 0 ? "" : "hidden"
                 }`}
                 onClick={handlePrev}
@@ -236,7 +245,7 @@ const AddEssay = () => {
               </button>
             ) : (
               <button
-                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                   count >= 0 ? "" : "hidden"
                 }`}
                 onClick={handlePrev}
@@ -248,13 +257,13 @@ const AddEssay = () => {
           <div className=" flex">
             {addType === "topic" && (
               <button
-                className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+                className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 "
                 onClick={() => handleSave()}
               >
                 {/* {loading ? (
                   <CircularLoader />
                 ) : ( */}
-                  <FaPlus className="self-center" />
+                <FaPlus className="self-center" />
                 {/* )}{" "} */}
                 Add Next Question
               </button>

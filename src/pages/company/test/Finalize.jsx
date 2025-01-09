@@ -65,10 +65,10 @@ const Finalize = () => {
     <>
       <div className="flex gap-3 mb-5">
         <button
-          className="self-center object-center rounded-lg h-10 w-10 "
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         {/* <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Create Assessment
@@ -80,17 +80,17 @@ const Finalize = () => {
             <div
               name=""
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 py-3 px-5 font-bold text-2xl capitalize"
+              className="w-full rounded-md bg-gray-100 focus:outline-none border-none mb-4 py-3 px-5 font-bold text-2xl capitalize"
             >
               {testDetails?.name}
             </div>
           </div>
 
-          <p className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg  px-5 pt-3 pb-8 focus:ring-0placeholder-gray-400 mb-6">
+          <p className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-md  px-5 pt-3 pb-8 focus:ring-0placeholder-gray-400 mb-6">
             {testDetails?.description}
           </p>
           {/* Need to all these details below from sections */}
-          <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-lg flex justify-between px-5 py-4">
+          <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-md flex justify-between px-5 py-4">
             <p>Total time to complete</p>
             <p className="text-blued   font-bold">
               {/* {testDetails?.totalDuration}mins */}
@@ -99,14 +99,14 @@ const Finalize = () => {
             {/* {totalTime}  */}
           </div>
 
-          <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-lg flex justify-between px-5 py-4">
+          <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-md flex justify-between px-5 py-4">
             <p>Total number of questions</p>
             <p className="text-blued   font-bold">
               {testDetails?.totalQuestions}
             </p>
           </div>
 
-          <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-lg flex justify-between px-5 py-4">
+          <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-md flex justify-between px-5 py-4">
             <p>Total attempts allowed</p>
             <p className="text-blued   font-bold">
               {testDetails?.totalAttempts}
@@ -119,7 +119,7 @@ const Finalize = () => {
             {" "}
             <div className=" flex gap-2">
               <button
-                className="self-center justify-center flex bg-accent rounded-lg text-sm font-bold gap-2 px-4 py-3"
+                className="self-center justify-center flex bg-accent rounded-md text-sm font-bold gap-2 px-4 py-3"
                 onClick={() => handleSubmit()}
               >
                 <img src="/images/icons/student.png" alt="" />{" "}

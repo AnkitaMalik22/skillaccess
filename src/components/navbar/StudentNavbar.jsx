@@ -72,14 +72,14 @@ const Navbar = (props) => {
         {/* right */}
         <div className="flex gap-3">
           {/* noifiaction */}
-          <button className="border-2 border-gray-400  text-gray-400 rounded-lg p-2 relative">
+          <button className="border-2 border-gray-400  text-gray-400 rounded-md p-2 relative">
             <FiBell className="text-lg" />{" "}
             <div className="rounded-full h-2 w-2 bg-lightBlue absolute top-1 right-2"></div>
           </button>
 
           {/* noifiaction */}
           <button
-            className="border-2 border-gray-400  rounded-lg p-1 relative flex gap-2 "
+            className="border-2 border-gray-400  rounded-md p-1 relative flex gap-2 "
             style={{ marginRight: "12rem" }}
             onClick={goToProfile}
           >
@@ -96,8 +96,8 @@ const Navbar = (props) => {
           {/* noifiaction */}
 
           {/* noifiaction */}
-          {/* <button className="border-none   rounded-lg p-2 relative"> */}
-          {/* <div className="border-2 border-gray-400  text-gray-400 rounded-lg p-1 relative">
+          {/* <button className="border-none   rounded-md p-2 relative"> */}
+          {/* <div className="border-2 border-gray-400  text-gray-400 rounded-md p-1 relative">
             <div className="rounded-full h-7 w-7 bg-gradient-to-b from-red-600 to-slate-800 "
             style={{backgroundImage: `url(${languages[language].image})`}}
             >

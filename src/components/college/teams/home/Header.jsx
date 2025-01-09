@@ -5,7 +5,7 @@ import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import AddTeamPoP from "../../../PopUps/AddTeamPoP";
 
-const Header = ({handleAddTeamClick}) => {
+const Header = ({ handleAddTeamClick }) => {
   // const [showPopup, setShowPopup] = useState(false);
 
   // const handleAddTeamClick = () => {
@@ -20,7 +20,7 @@ const Header = ({handleAddTeamClick}) => {
     // <div className="flex  mx-auto justify-between font-dmSans">
     //   <span className="flex gap-4">
     //     <button
-    //       className=" self-center ml-2 rounded-lg h-10 w-5"
+    //       className=" self-center ml-2 rounded-md h-10 w-5"
     //       onClick={() => navigate(-1)}
     //     >
     //       <img src="/images/icons/list.png" alt="" />
@@ -39,7 +39,7 @@ const Header = ({handleAddTeamClick}) => {
     //   </div>
 
     //   <span className="flex gap-2">
-    //     <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+    //     <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
     //       <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
     //     </button>
     //   </span>
@@ -47,8 +47,8 @@ const Header = ({handleAddTeamClick}) => {
     <div className="flex  mx-auto justify-between font-dmSans">
       <span className="flex gap-4">
         <button
-          className=" self-center ml-2 rounded-lg h-10 w-5"
-          onClick={() => navigate('/college/teams')}
+          className=" self-center ml-2 rounded-md h-10 w-5"
+          onClick={() => navigate("/college/teams")}
         >
           <img src="/images/icons/list.png" alt="" />
         </button>
@@ -56,13 +56,14 @@ const Header = ({handleAddTeamClick}) => {
           Teams
         </h2>
       </span>
-  
-        <button className="bg-accent self-center text-sm font-bold py-3 px-10  rounded-xl text-[#fff]"
+
+      <button
+        className="bg-accent self-center text-sm font-bold py-3 px-10  rounded-xl text-[#fff]"
         onClick={handleAddTeamClick}
-        >
-          Add Teams
-        </button>
-        {/* {showPopup && <AddTeamPoP onClose={handleClosePopup} />} */}
+      >
+        Add Teams
+      </button>
+      {/* {showPopup && <AddTeamPoP onClose={handleClosePopup} />} */}
     </div>
   );
 };

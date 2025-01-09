@@ -48,7 +48,7 @@ const CreateTopic = () => {
     });
   };
 
-  const handleNext =async  () => {
+  const handleNext = async () => {
     if (!topic.Heading.trim()) {
       setIsNameEmpty(true);
       // toast.error("Please enter a name for the topic.");
@@ -65,29 +65,29 @@ const CreateTopic = () => {
       setIsDescEmpty(false);
     }
 
-   const res = await dispatch(createTopicCompany(topic));
-   if (res.payload && res.payload._id) {
-        navigate(
-          `/company/pr/test/typeOfQuestions/${res.payload._id}?level=${level}`
-        );
-      } else {
-        toast.error("Invalid or duplicate values");
-        return;
-      }
-      setTopic({
-        Heading: "",
-        Description: "",
-        Time: null,
-        TotalQuestions: null,
-      });
+    const res = await dispatch(createTopicCompany(topic));
+    if (res.payload && res.payload._id) {
+      navigate(
+        `/company/pr/test/typeOfQuestions/${res.payload._id}?level=${level}`
+      );
+    } else {
+      toast.error("Invalid or duplicate values");
+      return;
+    }
+    setTopic({
+      Heading: "",
+      Description: "",
+      Time: null,
+      TotalQuestions: null,
+    });
   };
 
   return (
     <div>
-      <HeaderCompany handleNext={handleNext} handlePrev={()=>{}} />
+      <HeaderCompany handleNext={handleNext} handlePrev={() => {}} />
 
-      <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">
-        <h2 className="w-full font-medium  text-[#3E3E3E] rounded-lg mb-5 text-base">
+      <div className="  w-full mx-auto h-[90vh] my-2 rounded-md  justify-between  ">
+        <h2 className="w-full font-medium  text-[#3E3E3E] rounded-md mb-5 text-base">
           Add up to 10 custom questions to your assessment (optional). You can
           use five question types: multiple-choice, essay, video ,code and find
           answer.
@@ -98,7 +98,7 @@ const CreateTopic = () => {
           name="Heading"
           value={topic.Heading}
           type="text"
-          className={`w-full bg-gray-100 mb-5 text-base font-bold p-2 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
+          className={`w-full bg-gray-100 mb-5 text-base font-bold p-2 rounded-md focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
             isNameEmpty ? "border-red-500" : "border-none"
           }`}
           placeholder="Name of the Topic"
@@ -116,7 +116,7 @@ const CreateTopic = () => {
           onChange={changeHandler}
           name="Description"
           value={topic.Description}
-          className={`w-full bg-gray-100 h-48 px-6 text-lg font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${
+          className={`w-full bg-gray-100 h-48 px-6 text-lg font-bold py-8 mt-4 rounded-md focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${
             isDescEmpty ? "border-red-500" : "border-none"
           }`}
           placeholder="Add Description"

@@ -24,8 +24,6 @@ import useTranslate from "../../../hooks/useTranslate";
 import DropImageUpload from "../../../components/DropImageUpload";
 import axios from "axios";
 
-
-
 const AddMcqToTopic = () => {
   //useTranslate();
   const { currentTopic, ADD_QUESTION_LOADING } = useSelector(
@@ -156,13 +154,11 @@ const AddMcqToTopic = () => {
     }
   }, []);
   const handleQuestionSave = async () => {
-
-    let res = ""
+    let res = "";
     if (image && file) {
       const req = await dispatch(uploadQuestionImage(file));
 
       res = req.payload.secure_url;
-
     }
 
     if (addType === "topic") {
@@ -218,7 +214,11 @@ const AddMcqToTopic = () => {
             setIsPrev(false);
             setCountDetail(currentTopic?.questions?.length - 1);
             dispatch(
-              addQuestionToTopic({ data: { ...question, image: res }, id: id, type: type })
+              addQuestionToTopic({
+                data: { ...question, image: res },
+                id: id,
+                type: type,
+              })
             ).then(() => {
               setLoading(false);
               // if(!ADD_QUESTION_LOADING){
@@ -283,10 +283,6 @@ const AddMcqToTopic = () => {
     }
   }, [ADD_QUESTION_LOADING]);
 
-
-
-
-
   return (
     <div>
       <Header
@@ -298,7 +294,6 @@ const AddMcqToTopic = () => {
         type={type}
         addType={addType}
       />
-
 
       <div className="bg-white min-h-[90vh] mx-auto rounded-xl">
         <div className="flex md:flex-nowrap flex-wrap gap-5 mx-auto md:mb-40 mb-10">
@@ -334,9 +329,12 @@ const AddMcqToTopic = () => {
               </select>
             </div>
 
-            <DropImageUpload image={image} setImage={setImage} setFile={setFile} />
+            <DropImageUpload
+              image={image}
+              setImage={setImage}
+              setFile={setFile}
+            />
             <ReactQuill
-
               value={question.Title}
               onChange={(value) =>
                 setQuestion((prev) => {
@@ -380,12 +378,12 @@ const AddMcqToTopic = () => {
                       : ""
                   }
                   onChange={handleChanges}
-                  className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
+                  className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
                 />
 
                 {/*  */}
                 <div
-                  className=" flex justify-center rounded-lg cursor-pointer "
+                  className=" flex justify-center rounded-md cursor-pointer "
                   onClick={() =>
                     setQuestion({
                       ...question,
@@ -425,12 +423,12 @@ const AddMcqToTopic = () => {
                       : ""
                   }
                   onChange={handleChanges}
-                  className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
+                  className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
                 />
 
                 {/*  */}
                 <div
-                  className="flex justify-center rounded-lg cursor-pointer "
+                  className="flex justify-center rounded-md cursor-pointer "
                   onClick={() =>
                     setQuestion({
                       ...question,
@@ -470,12 +468,12 @@ const AddMcqToTopic = () => {
                       : ""
                   }
                   onChange={handleChanges}
-                  className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
+                  className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
                 />
 
                 {/*  */}
                 <div
-                  className=" flex justify-center rounded-lg cursor-pointer "
+                  className=" flex justify-center rounded-md cursor-pointer "
                   onClick={() =>
                     setQuestion({
                       ...question,
@@ -515,12 +513,12 @@ const AddMcqToTopic = () => {
                       : ""
                   }
                   onChange={handleChanges}
-                  className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
+                  className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-[#171717] bg-opacity-5"
                 />
 
                 {/*  */}
                 <div
-                  className=" flex justify-center rounded-lg cursor-pointer "
+                  className=" flex justify-center rounded-md cursor-pointer "
                   onClick={() =>
                     setQuestion({
                       ...question,
@@ -544,8 +542,9 @@ const AddMcqToTopic = () => {
           <div className=" flex gap-2">
             {addType === "topic" && (
               <button
-                className={`self-center justify-center cursor-pointer flex bg-[#8F92A1] text-[#171717] py-3 px-6 rounded-2xl text-sm font-bold gap-2 bg-opacity-10 ${countDetail >= 0 ? "" : "hidden"
-                  }`}
+                className={`self-center justify-center cursor-pointer flex bg-[#8F92A1] text-[#171717] py-3 px-6 rounded-2xl text-sm font-bold gap-2 bg-opacity-10 ${
+                  countDetail >= 0 ? "" : "hidden"
+                }`}
                 onClick={handlePrev}
               >
                 <FaChevronLeft className="self-center" /> Prev
@@ -569,8 +568,6 @@ const AddMcqToTopic = () => {
             )}
           </div>
         </div>
-
-
       </div>
     </div>
   );

@@ -26,7 +26,9 @@ const Footer = ({ students, endDate }) => {
         toast.error("Invalid Test Id");
       } else if (credit?.limit - 1 < students.length) {
         toast.error(
-          "Your current plan only support inviting " + credit?.limit + "students"
+          "Your current plan only support inviting " +
+            credit?.limit +
+            "students"
         );
       } else {
         // //console.log(testId, students);
@@ -37,20 +39,19 @@ const Footer = ({ students, endDate }) => {
             students,
           })
         ).unwrap();
-  
+
         localStorage.removeItem("testDetails");
         localStorage.removeItem("totalTime");
-        setLoading(false)
+        setLoading(false);
         // toast.success("Invite sent");
         toast.success("Students Invited Successfully!");
 
-        navigate(`/${!isUni() ?"college" : "university/pr"}/test`);
+        navigate(`/${!isUni() ? "college" : "university/pr"}/test`);
       }
     } catch (error) {
-          toast.error(error.payload?.message || 'something went wrong');
-     
-    }finally{
-      setLoading(false)
+      toast.error(error.payload?.message || "something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,39 +72,38 @@ const Footer = ({ students, endDate }) => {
 
   return (
     <div className="p-4">
-      {/* <div className=" absolute right-0"> */}
-        {" "}
-        <div className=" flex gap-2">
-          <button
-            className={`self-center justify-center flex bg-accent rounded-lg text-sm font-bold gap-2 px-10 py-3 ${
-              students.length === 0
-                ? "opacity-50 cursor-not-allowed"
-                : isActiveTest(endDate)
-                ? "cursor-pointer"
-                : "opacity-50 cursor-not-allowed"
-            }`}
-            onClick={handleSendInvite}
-            disabled={students.length === 0 || !isActiveTest(endDate)}
-          >
-            {loading ? (
-              <Loader />
-            ) : (
-              isActiveTest(endDate) ?? <FaPlus className="text-white text-lg" />
-            )}
+      {/* <div className=" absolute right-0"> */}{" "}
+      <div className=" flex gap-2">
+        <button
+          className={`self-center justify-center flex bg-accent rounded-md text-sm font-bold gap-2 px-10 py-3 ${
+            students.length === 0
+              ? "opacity-50 cursor-not-allowed"
+              : isActiveTest(endDate)
+              ? "cursor-pointer"
+              : "opacity-50 cursor-not-allowed"
+          }`}
+          onClick={handleSendInvite}
+          disabled={students.length === 0 || !isActiveTest(endDate)}
+        >
+          {loading ? (
+            <Loader />
+          ) : (
+            isActiveTest(endDate) ?? <FaPlus className="text-white text-lg" />
+          )}
 
-            <p
-              className="self-center text-white tooltip"
-              data-tip={
-                isActiveTest(endDate)
-                  ? "Invite Students to Test"
-                  : "This test has ended"
-              }
-            >
-              {}
-              {isActiveTest(endDate) ? "Invite" : "Test Ended"}
-            </p>
-          </button>
-        </div>
+          <p
+            className="self-center text-white tooltip"
+            data-tip={
+              isActiveTest(endDate)
+                ? "Invite Students to Test"
+                : "This test has ended"
+            }
+          >
+            {}
+            {isActiveTest(endDate) ? "Invite" : "Test Ended"}
+          </p>
+        </button>
+      </div>
       {/* </div> */}
     </div>
   );

@@ -9,7 +9,6 @@ import { logoutCompany } from "../../redux/company/auth/companyAuthSlice";
 import toast from "react-hot-toast";
 
 const CompanyNavbar = (props) => {
-
   const dispatch = useDispatch();
   const currentLanguage = useTranslate();
   const navigate = useNavigate();
@@ -50,7 +49,7 @@ const CompanyNavbar = (props) => {
       {/* Right Side */}
       <div className="flex items-center gap-4">
         {/* Notification Button */}
-        {/* <button className="relative border-2 border-[#D9E1E7] text-[#D9E1E7] rounded-lg px-2 p-1">
+        {/* <button className="relative border-2 border-[#D9E1E7] text-[#D9E1E7] rounded-md px-2 p-1">
           <FiBell className="text-lg" />
           <div className="absolute top-1 right-2 h-2 w-2 bg-lightBlue rounded-full"></div>
         </button> */}
@@ -59,7 +58,7 @@ const CompanyNavbar = (props) => {
         <Disclosure as="div" className="relative">
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex items-center border border-[#D9E1E7] rounded-lg p-2 gap-2">
+              <Disclosure.Button className="flex items-center border border-[#D9E1E7] rounded-md p-2 gap-2">
                 <img
                   src={
                     userDetails?.avatar?.url ||
@@ -76,16 +75,16 @@ const CompanyNavbar = (props) => {
               </Disclosure.Button>
 
               {/* Dropdown Panel */}
-              <Disclosure.Panel className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+              <Disclosure.Panel className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                 <button
                   onClick={() => navigate("/company/pr/profile")}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-lg hover:text-white"
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-md hover:text-white"
                 >
                   Profile
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-lg hover:text-white"
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-md hover:text-white"
                 >
                   Logout
                 </button>
@@ -98,7 +97,6 @@ const CompanyNavbar = (props) => {
       </div>
 
       <GoogleTranslate currentLanguage={currentLanguage} />
-
     </nav>
   );
 };

@@ -11,7 +11,7 @@ const Filter = () => {
       <span className="flex gap-12">
         <div className="flex gap-0">
           <button
-            className=" self-center ml-2 rounded-lg h-10 w-10 sm:h-12 "
+            className=" self-center ml-2 rounded-md h-10 w-10 sm:h-12 "
             onClick={() => navigate(-1)}
           >
             <img src="/images/icons/list.png" alt="" />
@@ -32,7 +32,7 @@ const Filter = () => {
       </span>
 
       <span className="flex gap-2">
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+        <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
         </button>
       </span>

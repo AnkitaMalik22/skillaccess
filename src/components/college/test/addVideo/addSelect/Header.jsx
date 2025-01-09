@@ -16,8 +16,7 @@ import { addQuestionToTopic } from "../../../../../redux/college/test/thunks/top
 import { isUni } from "../../../../../util/isCompany";
 
 const Header = ({ selectQuestionType }) => {
-
-  const entity = isUni() ?"university/pr" : "college";
+  const entity = isUni() ? "university/pr" : "college";
 
   const { id } = useParams();
   const [searchParam, setSearchParam] = useSearchParams();
@@ -145,7 +144,7 @@ const Header = ({ selectQuestionType }) => {
   return (
     <div className="flex  justify-between mb-2 ">
       <div>
-        <button className="flex items-center ml-2 rounded-lg  gap-2">
+        <button className="flex items-center ml-2 rounded-md  gap-2">
           <button
             onClick={() =>
               level === "adaptive"
@@ -154,7 +153,7 @@ const Header = ({ selectQuestionType }) => {
             }
             className="mt-2 mr-3"
           >
-            <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
+            <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-gray-200" />
           </button>
 
           <div className="">
@@ -168,7 +167,7 @@ const Header = ({ selectQuestionType }) => {
       <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
         <div className=" flex">
           <button
-            className="self-center justify-center flex bg-blued py-3 px-4 rounded-lg text-xs gap-2 text-white"
+            className="self-center justify-center flex bg-blued py-3 px-4 rounded-md text-sm gap-2 text-white"
             onClick={submit}
           >
             Next Step{" "}

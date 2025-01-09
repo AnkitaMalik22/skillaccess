@@ -38,7 +38,7 @@ const List = ({ Title, number, code, question }) => {
                   passedTestCasesCount !== 0
                     ? "border-green-500"
                     : "border-red-500"
-                } flex w-full justify-between rounded-lg  p-3 text-left text-sm font-medium  border mb-2`}
+                } flex w-full justify-between rounded-md  p-3 text-left text-sm font-medium  border mb-2`}
               >
                 <div>
                   <p
@@ -66,7 +66,7 @@ const List = ({ Title, number, code, question }) => {
                 leaveTo="transform scale-95 opacity-0"
               >
                 <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500">
-                  <div className="flex flex-col gap-2  rounded-lg">
+                  <div className="flex flex-col gap-2  rounded-md">
                     {/* <div className="w-6"></div> */}
 
                     <Editor
@@ -82,7 +82,7 @@ const List = ({ Title, number, code, question }) => {
                         passedTestCasesCount / totalTestCasesCount > 0.5
                           ? "text-green-500"
                           : "text-red-400"
-                      } mt-2 p-2 bg-[#E6EFFF] rounded-lg text-center text-sm font-semibold`}
+                      } mt-2 p-2 bg-[#E6EFFF] rounded-md text-center text-sm font-semibold`}
                     >
                       {passedTestCasesCount > 0
                         ? `Test Cases Passed: ${passedTestCasesCount} /${totalTestCasesCount}`

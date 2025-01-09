@@ -16,7 +16,7 @@ const Students = () => {
     <>
       <div className="flex w-full mx-auto justify-between mb-4">
         <button
-          className="  self-center  rounded-lg h-10 w-10 "
+          className="  self-center  rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
           <BackIcon />
@@ -32,7 +32,7 @@ const Students = () => {
           </span>
         </div>
 
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+        <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
         </button>
       </div>
@@ -60,7 +60,7 @@ const Students = () => {
       </div>
 
       {/* list to be iterated */}
-      <div className=" grid-cols-6 rounded-lg my-2 py-2 pl-2 text-center  mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-200">
+      <div className=" grid-cols-6 rounded-md my-2 py-2 pl-2 text-center  mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-gray-200">
         {" "}
         {/* row-2 */}
         <div className={` flex `}>
@@ -70,7 +70,7 @@ const Students = () => {
               <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
                 Role
               </h2>
-              <h2 className="font-dmSans font-medium text-xs break-words text-gray-400">
+              <h2 className="font-dmSans font-medium text-sm break-words text-gray-400">
                 {" "}
                 CompanyName
               </h2>
@@ -83,7 +83,7 @@ const Students = () => {
               <h2 className="font-dmSans font-semibold text-sm sm:text-base text-gray-400">
                 Year
               </h2>
-              <h2 className="font-dmSans font-base text-xs sm:text-xs inline text-blued">
+              <h2 className="font-dmSans font-base text-sm sm:text-sm inline text-blued">
                 {" "}
                 Degree
               </h2>
@@ -96,7 +96,7 @@ const Students = () => {
               <h2 className="font-dmSans font-semibold text-sm sm:text-base">
                 Designation
               </h2>
-              <h2 className="font-dmSans font-medium text-xs sm:text-xs inline">
+              <h2 className="font-dmSans font-medium text-sm sm:text-sm inline">
                 {" "}
                 City in{" "}
                 <h3 className="inline break-words text-gray-400">Country</h3>
@@ -114,10 +114,10 @@ const Students = () => {
         <div className="flex justify-center">
           <div className=" self-center">
             <span>
-              <div className="min-w-[4rem] bg-gray-300 rounded-lg h-2 mx-auto">
-                <div className="w-3/4 bg-green-600 h-full rounded-lg"></div>
+              <div className="min-w-[4rem] bg-gray-300 rounded-md h-2 mx-auto">
+                <div className="w-3/4 bg-green-600 h-full rounded-md"></div>
               </div>
-              <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+              <h2 className="font-dmSans font-bold text-sm sm:text-sm ">
                 {" "}
                 Good
               </h2>
@@ -126,7 +126,7 @@ const Students = () => {
         </div>
         <div className="flex justify-center">
           <span className="flex justify-center h-fit self-center gap-2">
-            <h2 className="font-dmSans text-xs font-bold text-white bg-blued p-2 rounded-lg">
+            <h2 className="font-dmSans text-sm font-bold text-white bg-blued p-2 rounded-md">
               View CV
             </h2>
 
@@ -138,7 +138,7 @@ const Students = () => {
       </div>
 
       {/* smaller screen legend */}
-      <div className=" grid-cols-3  text-center w-[98%] mx-auto  font-dmSans font-semibold sm:text-base text-xs md:hidden grid">
+      <div className=" grid-cols-3  text-center w-[98%] mx-auto  font-dmSans font-semibold sm:text-base text-sm md:hidden grid">
         <div
           className={`${items ? "" : "hidden"} bg-[#0052cc1f] rounded-s-lg p-2`}
         >
@@ -180,17 +180,17 @@ const Students = () => {
       </div>
 
       {/* small screen list to be iterated */}
-      <div className=" grid-cols-3  bg-gray-200 rounded-lg my-2 py-2 pl-2 text-center w-[98%] mx-auto  font-dmSans font-semibold sm:text-base text-xs md:hidden grid">
+      <div className=" grid-cols-3  bg-gray-200 rounded-md my-2 py-2 pl-2 text-center w-[98%] mx-auto  font-dmSans font-semibold sm:text-base text-sm md:hidden grid">
         {/* row-2 */}
 
         <div className={` ${items ? "" : "hidden"} `}>
           <div className="flex">
             <div className=" min-w-[2.5rem] h-8 self-center bg-red-600 mr-2"></div>
             <span className="">
-              <h2 className="font-dmSans text-xs sm:text-base break-words">
+              <h2 className="font-dmSans text-sm sm:text-base break-words">
                 Samir Sethiya
               </h2>
-              <h2 className="font-dmSans font-medium text-xs sm:text-xs inline break-words">
+              <h2 className="font-dmSans font-medium text-sm sm:text-sm inline break-words">
                 {" "}
                 Indoore
               </h2>
@@ -201,10 +201,10 @@ const Students = () => {
         <div className={` ${items ? "" : "hidden"} `}>
           <div>
             <span className="">
-              <h2 className="font-dmSans font- text-xs sm:text-base break-words text-gray-400 ">
+              <h2 className="font-dmSans font- text-sm sm:text-base break-words text-gray-400 ">
                 2nd year
               </h2>
-              <h2 className="font-dmSans font-semibold text-xs sm:text-xs inline break-words text-blued">
+              <h2 className="font-dmSans font-semibold text-sm sm:text-sm inline break-words text-blued">
                 {" "}
                 B.Sc
               </h2>
@@ -214,10 +214,10 @@ const Students = () => {
 
         <div className={` ${items ? "" : "hidden"} `}>
           <span className="">
-            <h2 className="font-dmSans font- text-xs sm:text-base break-words ">
+            <h2 className="font-dmSans font- text-sm sm:text-base break-words ">
               Designationengineer
             </h2>
-            <h2 className="font-dmSans font-medium text-xs sm:text-xs inline break-words">
+            <h2 className="font-dmSans font-medium text-sm sm:text-sm inline break-words">
               {" "}
               Pune <p className="text-gray-400 inline">in India</p>
             </h2>
@@ -227,7 +227,7 @@ const Students = () => {
         <div className={` ${!items ? "" : "hidden"}  flex pl-2`}>
           <div className="flex justify-center h-fit self-center">
             <span className="flex justify-center ">
-              <h2 className="font-dmSans font-semibold text-xs  sm:text-base text-green-500  w-fit ">
+              <h2 className="font-dmSans font-semibold text-sm  sm:text-base text-green-500  w-fit ">
                 300/<h2 className="inline text-black">500</h2>
               </h2>
             </span>
@@ -237,10 +237,10 @@ const Students = () => {
         <div className={` ${!items ? "" : "hidden"} flex justify-center`}>
           <div className=" self-center">
             <span>
-              <div className="min-w-[4rem] bg-gray-300 rounded-lg h-2 mx-auto">
-                <div className="w-3/4 bg-green-600 h-full rounded-lg"></div>
+              <div className="min-w-[4rem] bg-gray-300 rounded-md h-2 mx-auto">
+                <div className="w-3/4 bg-green-600 h-full rounded-md"></div>
               </div>
-              <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+              <h2 className="font-dmSans font-bold text-sm sm:text-sm ">
                 {" "}
                 Good
               </h2>
@@ -250,7 +250,7 @@ const Students = () => {
 
         <div className={` ${!items ? "" : "hidden"} `}>
           <span className="flex justify-center h-fit self-center gap-2">
-            <h2 className="font-dmSans text-xs font-semibold text-white bg-blued p-2 rounded-lg">
+            <h2 className="font-dmSans text-sm font-semibold text-white bg-blued p-2 rounded-md">
               View CV
             </h2>
 

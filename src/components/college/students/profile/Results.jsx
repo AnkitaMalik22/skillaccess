@@ -58,7 +58,7 @@ const Results = ({ assessmentResult, id, pagination }) => {
             ?.filter((assessment) => assessment?.assessmentId?._id)
             .map((response, index) => (
               <div
-                className="grid grid-cols-5 bg-white rounded-lg border border-gray-200 text-sm"
+                className="grid grid-cols-5 bg-white rounded-md border border-gray-200 text-sm"
                 key={index}
               >
                 <div className="px-4 py-3 truncate">
@@ -75,10 +75,13 @@ const Results = ({ assessmentResult, id, pagination }) => {
 
                 <div className="px-4 py-3">
                   <span
-                    className={`font-medium ${response.percentage >= 70 ? 'text-green-600' :
-                      response.percentage >= 40 ? 'text-yellow-600' :
-                        'text-red-600'
-                      }`}
+                    className={`font-medium ${
+                      response.percentage >= 70
+                        ? "text-green-600"
+                        : response.percentage >= 40
+                        ? "text-yellow-600"
+                        : "text-red-600"
+                    }`}
                   >
                     {response.percentage?.toFixed(2)}%
                   </span>
@@ -87,14 +90,17 @@ const Results = ({ assessmentResult, id, pagination }) => {
                 <div className="px-4 py-3">
                   <span
                     className={`
-                  inline-flex px-2.5 py-1 rounded-full text-xs font-medium
-                  ${response?.status === 'selected' ? 'bg-green-100 text-green-800' :
-                        response?.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                          'bg-yellow-100 text-yellow-800'
-                      }
+                  inline-flex px-2.5 py-1 rounded-full text-sm font-medium
+                  ${
+                    response?.status === "selected"
+                      ? "bg-green-100 text-green-800"
+                      : response?.status === "rejected"
+                      ? "bg-red-100 text-red-800"
+                      : "bg-yellow-100 text-yellow-800"
+                  }
                 `}
                   >
-                    {response?.status || 'pending'}
+                    {response?.status || "pending"}
                   </span>
                 </div>
               </div>
@@ -111,14 +117,12 @@ const Results = ({ assessmentResult, id, pagination }) => {
         <Pagination
           currentPage={pagination?.currentPage}
           onPageChange={(page) => {
-            dispatch(getStudentCV({ studentId: id, page }))
+            dispatch(getStudentCV({ studentId: id, page }));
           }}
           totalPages={pagination?.totalPages}
         />
       </div>
     </div>
-
-
   );
 };
 

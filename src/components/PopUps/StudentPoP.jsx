@@ -13,7 +13,7 @@ const StudentPoP = ({ onClose }) => {
     FirstName: "",
     LastName: "",
     Email: "",
-    Batch:""
+    Batch: "",
   });
   const { user } = useSelector((state) => state.collegeAuth);
   const dispatch = useDispatch();
@@ -54,24 +54,21 @@ const StudentPoP = ({ onClose }) => {
     if (student.LastName.length < 2) {
       toast.error("Last Name should have more than 2 characters");
       return;
-  }
-  // no numeric values in name
-  if (!/^[a-zA-Z]*$/.test(student.FirstName)) {
-    toast.error("First Name should not contain numeric values or spaces");
-    return;
-  }
-  if (!/^[a-zA-Z]*$/.test(student.LastName)) {
-    toast.error("Last Name should not contain numeric values or spaces");
-    return;
-  }
-  if (!/^\d{4}$/.test(parseInt(student.Batch))) {
-    toast.error("Invalid Batch");
-    return;
-  }
-  
+    }
+    // no numeric values in name
+    if (!/^[a-zA-Z]*$/.test(student.FirstName)) {
+      toast.error("First Name should not contain numeric values or spaces");
+      return;
+    }
+    if (!/^[a-zA-Z]*$/.test(student.LastName)) {
+      toast.error("Last Name should not contain numeric values or spaces");
+      return;
+    }
+    if (!/^\d{4}$/.test(parseInt(student.Batch))) {
+      toast.error("Invalid Batch");
+      return;
+    }
 
-
-  
     // maxLength: [30, "Name cannot exceed 30 characters"],
     // minLength: [2, "Name should have more than 2 characters"],
     else {
@@ -94,7 +91,7 @@ const StudentPoP = ({ onClose }) => {
   return (
     <div>
       <div className="w-full  min-w-full h-full min-h-[100vh] bg-[#171717] absolute z-[9999] flex left-0 top-0  bg-opacity-20">
-        <div className="py-12 bg-white shadow-md w-[500px] h-auto  mx-auto self-center rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-3 relative">
+        <div className="py-12 bg-white shadow-md w-[500px] h-auto  mx-auto self-center rounded-md bg-opactiy-10  px-12 flex flex-col justify-center gap-3 relative">
           <h3 className="text-2xl font-semibold mb-4 text-[#161718]">
             Add Student
           </h3>
@@ -103,28 +100,28 @@ const StudentPoP = ({ onClose }) => {
             name="FirstName"
             onChange={handleChange}
             placeholder="First Name*"
-            className="bg-[#8F92A1] bg-opacity-5 rounded-lg w-full  p-3 border-none text-[#8F92A1] text-sm"
+            className="bg-[#8F92A1] bg-opacity-5 rounded-md w-full  p-3 border-none text-[#8F92A1] text-sm"
           />
           <input
             type="text"
             name="LastName"
             onChange={handleChange}
             placeholder="Last Name*"
-            className="bg-[#8F92A1] bg-opacity-5 rounded-lg w-full  p-3 border-none text-[#8F92A1] text-sm"
+            className="bg-[#8F92A1] bg-opacity-5 rounded-md w-full  p-3 border-none text-[#8F92A1] text-sm"
           />
           <input
             type="email"
             name="Email"
             onChange={handleChange}
             placeholder="Email Address*"
-            className="bg-[#8F92A1] bg-opacity-5 rounded-lg w-full  p-3 border-none text-[#8F92A1] text-sm"
+            className="bg-[#8F92A1] bg-opacity-5 rounded-md w-full  p-3 border-none text-[#8F92A1] text-sm"
           />
           <input
             type="text"
             name="Batch"
             onChange={handleChange}
             placeholder="Batch*"
-            className="bg-[#8F92A1] bg-opacity-5 rounded-lg w-full  p-3 border-none text-[#8F92A1] text-sm"
+            className="bg-[#8F92A1] bg-opacity-5 rounded-md w-full  p-3 border-none text-[#8F92A1] text-sm"
           />
           {/* <input
               type="tel"

@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "./Header";
 import { Progress } from "./Progress";
 import { useSelector, useDispatch } from "react-redux";
+import InputField from "../../../../components/InputField";
 import {
   getAllTests,
   setInTest,
@@ -89,7 +90,6 @@ const Name = () => {
     description: "",
     duration: "",
     category: "",
-
   });
 
   const handleChange = (e) => {
@@ -149,8 +149,6 @@ const Name = () => {
       return; // Prevent updating state if the selected time is before the current time and date
     }
 
-
-
     // Check if the entered value is negative
     if (
       (name === "totalAttempts" || name === "totalQuestions") &&
@@ -184,11 +182,16 @@ const Name = () => {
 
     // Validation for required fields
     if (!testDetails.name) setError("name", "Please Enter Name");
-    if (!testDetails.totalAttempts) setError("totalAttempts", "Please Enter Total Attempts");
-    if (!testDetails.totalQuestions) setError("totalQuestions", "Please Enter Total Questions");
-    if (!testDetails.description) setError("description", "Please Enter Description");
-    if (!testDetails.duration_from) setError("duration", "Please Enter Duration From");
-    if (!testDetails.duration_to) setError("duration", "Please Enter Duration To");
+    if (!testDetails.totalAttempts)
+      setError("totalAttempts", "Please Enter Total Attempts");
+    if (!testDetails.totalQuestions)
+      setError("totalQuestions", "Please Enter Total Questions");
+    if (!testDetails.description)
+      setError("description", "Please Enter Description");
+    if (!testDetails.duration_from)
+      setError("duration", "Please Enter Duration From");
+    if (!testDetails.duration_to)
+      setError("duration", "Please Enter Duration To");
     if (!testDetails.category) setError("category", "Please Select Category");
 
     // Validation for numeric ranges
@@ -221,14 +224,19 @@ const Name = () => {
 
     // Duplicate name validation based on level
     const validateDuplicates = (assessmentsList) => {
-      return assessmentsList.some((assessment) => assessment.name === testDetails.name);
+      return assessmentsList.some(
+        (assessment) => assessment.name === testDetails.name
+      );
     };
 
     if (level === "beginner" && validateDuplicates(assessments.beginner)) {
       toast.error("Duplicate name in beginner assessments");
       hasError = true;
     }
-    if (level === "intermediate" && validateDuplicates(assessments.intermediate)) {
+    if (
+      level === "intermediate" &&
+      validateDuplicates(assessments.intermediate)
+    ) {
       toast.error("Duplicate name in intermediate assessments");
       hasError = true;
     }
@@ -240,11 +248,14 @@ const Name = () => {
     // If no errors, proceed with dispatch and navigation
     if (!hasError) {
       dispatch(setTestBasicDetails(testDetails));
-      const basePath = isUni() ? "/university/pr/test/select" : "/college/test/select";
-      navigate(`${basePath}${level === "adaptive" ? "Adaptive" : ""}?level=${level}`);
+      const basePath = isUni()
+        ? "/university/pr/test/select"
+        : "/college/test/select";
+      navigate(
+        `${basePath}${level === "adaptive" ? "Adaptive" : ""}?level=${level}`
+      );
     }
   };
-
 
   // console.log(categories); //not printing
 
@@ -259,8 +270,8 @@ const Name = () => {
         <Progress />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <h2 className="text-lg font-medium text-gray-600 mb-8">
+      <div className=" mx-auto py-8">
+        <h2 className="text-base font-medium text-gray-600 mb-8">
           Add up to 10 custom questions to your assessment (optional). You can
           use five question types: multiple-choice, essay, video, code and find
           answer.
@@ -269,10 +280,9 @@ const Name = () => {
         <form className="space-y-6">
           {/* Name Input */}
           <div>
-            <input
+            <InputField
               type="text"
-              className={`w-full rounded-lg bg-gray-50 border ${errors.name ? "border-red-500" : "border-gray-200"
-                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={`${errors.totalAttempts ? "border-red-500" : ""} `}
               placeholder="Name of the Assessment*"
               name="name"
               value={testDetails.name}
@@ -285,55 +295,55 @@ const Name = () => {
           </div>
 
           {/* Attempts Input */}
-          <div>
-            <input
-              type="tel"
-              name="totalAttempts"
-              className={`w-full rounded-lg bg-gray-50 border ${errors.totalAttempts ? "border-red-500" : "border-gray-200"
-                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
-              placeholder="No. of Attempts*"
-              value={testDetails.totalAttempts}
-              onChange={handleChange}
-              pattern="[0-9]*"
-              onInput={(e) =>
-                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
-              }
-              required
-            />
-            {errors.totalAttempts && (
-              <p className="mt-2 text-sm text-red-600">
-                {errors.totalAttempts}
-              </p>
-            )}
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <InputField
+                type="tel"
+                name="totalAttempts"
+                value={testDetails.totalAttempts}
+                onChange={handleChange}
+                placeholder="No. of Attempts*"
+                className={` ${errors.totalAttempts ? "border-red-500" : ""} `}
+                pattern="[0-9]*"
+                onInput={(e) => {
+                  e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Ensures only numbers
+                }}
+                required
+              />
+              {errors.totalAttempts && (
+                <p className="mt-2 text-sm text-red-600">
+                  {errors.totalAttempts}
+                </p>
+              )}
+            </div>
 
-          {/* Questions Input */}
-          <div>
-            <input
-              name="totalQuestions"
-              type="tel"
-              className={`w-full rounded-lg bg-gray-50 border ${errors.totalQuestions ? "border-red-500" : "border-gray-200"
-                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
-              placeholder="No. of Questions*"
-              value={testDetails.totalQuestions}
-              onChange={handleChange}
-              pattern="[0-9]*"
-              onInput={(e) =>
-                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
-              }
-              required
-            />
-            {errors.totalQuestions && (
-              <p className="mt-2 text-sm text-red-600">
-                {errors.totalQuestions}
-              </p>
-            )}
+            {/* Questions Input */}
+            <div>
+              <InputField
+                name="totalQuestions"
+                type="tel"
+                className={`${errors.totalQuestions ? "border-red-500" : ""} `}
+                placeholder="No. of Questions*"
+                value={testDetails.totalQuestions}
+                onChange={handleChange}
+                pattern="[0-9]*"
+                onInput={(e) =>
+                  (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
+                }
+                required
+              />
+              {errors.totalQuestions && (
+                <p className="mt-2 text-sm text-red-600">
+                  {errors.totalQuestions}
+                </p>
+              )}
+            </div>
           </div>
 
           {/* Duration Inputs */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-              <label className="block text-gray-500 text-sm mb-2">
+            <div className=" rounded-md border border-gray-200 p-4">
+              <label className="block text-gray-500 text-base mb-1">
                 Duration From *
               </label>
               <input
@@ -342,13 +352,13 @@ const Name = () => {
                 min={new Date().toISOString().slice(0, 16)} // Disable past dates and times
                 value={testDetails?.duration_from}
                 onChange={handleChange}
-                className="w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blued"
+                className="p-0 w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blued"
                 required
               />
             </div>
 
-            <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-              <label className="block text-gray-500 text-sm mb-2">
+            <div className="rounded-md border border-gray-200 p-4">
+              <label className="block text-gray-500 text-base mb-1">
                 Duration To *
               </label>
               <input
@@ -356,7 +366,7 @@ const Name = () => {
                 name="duration_to"
                 value={testDetails?.duration_to?.slice(0, 16)}
                 onChange={handleChange}
-                className="w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blued"
+                className="p-0 w-full bg-transparent border-none text-gray-800 focus:ring-2 focus:ring-blued"
                 required
               />
             </div>
@@ -372,7 +382,7 @@ const Name = () => {
               name="category"
               value={testDetails.category}
               onChange={handleChange}
-              className="w-full rounded-lg bg-gray-50 border border-gray-200 text-gray-800 text-lg p-4 pr-10 appearance-none focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200"
+              className=" border-gray-300 focus:outline-none focus:ring-1 focus:ring-blued w-full text-base text-[#4B5563] py-3 px-5 rounded-md shadow-sm focus:shadow-md hover:shadow-md"
               required
             >
               <option value="">Select Category*</option>
@@ -418,14 +428,14 @@ const Name = () => {
           {testDetails.category && (
             <>
               {/* Department Access Controls */}
-              <div className="border rounded-lg p-4 bg-gray-50">
+              <div className="border rounded-md p-4 ">
                 <div
                   className="flex items-center justify-between cursor-pointer"
                   onClick={() =>
                     setShowDepartmentControls(!showDepartmentControls)
                   }
                 >
-                  <h3 className="text-lg font-medium text-gray-700">
+                  <h3 className="text-base font-medium text-gray-700">
                     Department Access
                   </h3>
                   <button type="button" className="text-gray-500">
@@ -461,8 +471,6 @@ const Name = () => {
                   </button>
                 </div>
 
-
-
                 {showDepartmentControls && (
                   <div className="mt-4 space-y-4">
                     <label className="flex items-center space-x-3 text-gray-700 cursor-pointer">
@@ -483,7 +491,7 @@ const Name = () => {
                           name="accessibleDepartments"
                           value={testDetails.accessibleDepartments}
                           onChange={handleChange}
-                          className="w-full rounded-lg bg-white border border-gray-200 text-gray-800 text-lg p-4 min-h-[120px]"
+                          className="w-full rounded-md bg-white border border-gray-200 text-gray-800 text-base p-4 min-h-[120px]"
                         >
                           {categories
                             .find((cat) => cat._id === testDetails.category)
@@ -551,13 +559,16 @@ const Name = () => {
           {/* Description Textarea */}
           <div>
             <textarea
-              className={`w-full h-40 rounded-lg bg-gray-50 border ${errors.description ? "border-red-500" : "border-gray-200"
-                } text-gray-800 text-lg p-4 focus:ring-2 focus:ring-blued focus:border-transparent transition duration-200`}
+              className={` ${
+                errors.description ? "border-red-500" : "border-gray-200"
+              } border-gray-300 focus:outline-none focus:ring-1 focus:ring-blued w-full text-base text-[#4B5563] py-3 px-5 rounded-md shadow-sm focus:shadow-md hover:shadow-md transition-all duration-300`}
               placeholder="Add Description*"
               name="description"
               value={testDetails.description}
               onChange={handleChange}
               required
+              rows={5}
+              style={{ resize: "none" }}
             />
             {errors.description && (
               <p className="mt-2 text-sm text-red-600">{errors.description}</p>

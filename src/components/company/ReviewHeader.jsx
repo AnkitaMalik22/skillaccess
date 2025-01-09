@@ -8,7 +8,6 @@ import * as XLSX from "xlsx";
 
 import { useDispatch, useSelector } from "react-redux";
 
-
 import toast, { Toaster } from "react-hot-toast";
 
 import PopUp from "../PopUps/PopUp";
@@ -200,9 +199,9 @@ const ReviewHeader = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                            (rowNum + 1) +
-                            "col:" +
-                            colNum
+                              (rowNum + 1) +
+                              "col:" +
+                              colNum
                           );
                           setLoading(false);
                           return;
@@ -231,9 +230,9 @@ const ReviewHeader = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                            (rowNum + 1) +
-                            "col:" +
-                            colNum
+                              (rowNum + 1) +
+                              "col:" +
+                              colNum
                           );
                           setLoading(false);
                           return;
@@ -387,11 +386,11 @@ const ReviewHeader = ({
                             setError(true);
                             toast.error(
                               "Invalid value row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              (colNum + 1) +
-                              "-->" +
-                              row.v
+                                (rowNum + 1) +
+                                "col:" +
+                                (colNum + 1) +
+                                "-->" +
+                                row.v
                             );
                             setLoading(false);
                             return;
@@ -408,9 +407,9 @@ const ReviewHeader = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                            (rowNum + 1) +
-                            "col:" +
-                            colNum
+                              (rowNum + 1) +
+                              "col:" +
+                              colNum
                           );
                           setLoading(false);
                           return;
@@ -533,7 +532,7 @@ const ReviewHeader = ({
                   }
                 }
               }
-            } catch (error) { }
+            } catch (error) {}
 
             setExcelJSON(jsonData.slice(1));
             await dispatch(
@@ -571,7 +570,9 @@ const ReviewHeader = ({
       if (level === "adaptive") {
         if (currentQuestionCount > totalQuestions * 2) {
           return toast.error(
-            `Number of questions must be less than or equal to ${totalQuestions / 2}`
+            `Number of questions must be less than or equal to ${
+              totalQuestions / 2
+            }`
           );
         }
       } else {
@@ -583,17 +584,18 @@ const ReviewHeader = ({
       }
       {
         navigate(
-          `/company/pr/test/${qt === "mcq"
-            ? "addMcq"
-            : qt === "findAnswer"
+          `/company/pr/test/${
+            qt === "mcq"
+              ? "addMcq"
+              : qt === "findAnswer"
               ? "find-ans"
               : qt === "compiler"
-                ? "code"
-                : qt === "essay"
-                  ? "essay"
-                  : qt === "video"
-                    ? "video"
-                    : "addMcq"
+              ? "code"
+              : qt === "essay"
+              ? "essay"
+              : qt === "video"
+              ? "video"
+              : "addMcq"
           }/${id}?addType=test&topicId=${topicId}&level=${level}`
         );
       }
@@ -603,23 +605,27 @@ const ReviewHeader = ({
           `/company/pr/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
         );
       } else {
-        navigate(`/company/pr/test/typeOfQuestions/${sectionId}?level=${level}`);
+        navigate(
+          `/company/pr/test/typeOfQuestions/${sectionId}?level=${level}`
+        );
       }
     }
   };
 
-  const imageUrl = `/download/${ques === "mcq"
-    ? "Mcq.xlsx"
-    : ques === "findAnswer"
+  const imageUrl = `/download/${
+    ques === "mcq"
+      ? "Mcq.xlsx"
+      : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
-    }`;
-  const imageName = `${ques === "mcq"
-    ? "Mcq.xlsx"
-    : ques === "findAnswer"
+  }`;
+  const imageName = `${
+    ques === "mcq"
+      ? "Mcq.xlsx"
+      : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
-    }`; // Replace with your desired image name
+  }`; // Replace with your desired image name
 
   return (
     <div className="flex  justify-between items-center mb-5">
@@ -637,7 +643,7 @@ const ReviewHeader = ({
       <img src={imageUrl} alt="" srcset="" className="hidden" />
 
       <div>
-        <button className="flex self-center  rounded-lg  gap-2">
+        <button className="flex self-center  rounded-md  gap-2">
           <button
             onClick={() => {
               type === "section" &&
@@ -650,7 +656,7 @@ const ReviewHeader = ({
             }}
             className="mt-2 mr-3"
           >
-            <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
+            <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-gray-200" />
           </button>
 
           <div className="flex self-center">
@@ -705,7 +711,7 @@ const ReviewHeader = ({
                 </>
               )}
 
-            {/* <button className="bg-[#F8F8F9] self-center  rounded-lg  w-10 sm:h-11 sm:w-14">
+            {/* <button className="bg-[#F8F8F9] self-center  rounded-md  w-10 sm:h-11 sm:w-14">
               <PiSlidersHorizontalLight className="mx-auto sm:h-8 sm:w-8 h-6 w-6" />
             </button> */}
           </div>

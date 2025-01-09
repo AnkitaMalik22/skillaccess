@@ -55,7 +55,7 @@ const Teams = () => {
       </div>
 
       {!showPopup && teams?.length === 0 && (
-        <div className="w-1/2 mx-auto bg-white p-4 text-center rounded-lg text-slate-600">
+        <div className="w-1/2 mx-auto bg-white p-4 text-center rounded-md text-slate-600">
           No Member Found
         </div>
       )}

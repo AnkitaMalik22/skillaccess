@@ -9,7 +9,7 @@ const ViewBar = () => {
       <div className="w-full flex justify-between self-center">
         <div className="flex gap-2">
           {/* photo */}
-          <div className="h-10 w-10 rounded-lg bg-blued"></div>
+          <div className="h-10 w-10 rounded-md bg-blued"></div>
           {/*  */}
 
           <div className="flex gap-1 self-center flex-col">
@@ -28,7 +28,7 @@ const ViewBar = () => {
           <FiCornerUpLeft className="text-lg self-center text-gray-400" />
           <FiCornerUpRight className="text-lg self-center text-gray-400" />
 
-          <p className="text-xs font-bold self-center">10:30PM</p>
+          <p className="text-sm font-bold self-center">10:30PM</p>
         </div>
       </div>
     </div>

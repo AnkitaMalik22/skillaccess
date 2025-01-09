@@ -13,7 +13,7 @@ const Header = () => {
       {/* comp */}
       <span className="flex gap-2">
         <button
-          className="  self-center object-center  rounded-lg h-10 w-10 "
+          className="  self-center object-center  rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
           <img src="/images/icons/sales.jpg" alt="" />
@@ -49,7 +49,7 @@ const Header = () => {
         >
           <FiUpload className="self-center text-lg " /> Upload Questions
         </button> */}
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+        <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
         </button>
       </span>

@@ -22,7 +22,7 @@ const Details = ({}) => {
         {/* profile photo */}
         <div className="flex gap-2 px-3 py-1 mt-2">
           <div className="flex">
-            <div className="w-14 h-14 bg-blued self-center rounded-lg relative">
+            <div className="w-14 h-14 bg-blued self-center rounded-md relative">
               {" "}
               <div className="absolute bottom-0 right-0 w-3 h-3 rounded-full  bg-green-600 border-2 border-white "></div>
             </div>
@@ -37,7 +37,7 @@ const Details = ({}) => {
         </div>
 
         <div className="self-center text-gray-400 mr-2">
-          <button className="py-3 text-white rounded-2xl text-xs  bg-accent font-bold flex gap-2 px-4">
+          <button className="py-3 text-white rounded-2xl text-sm  bg-accent font-bold flex gap-2 px-4">
             <p>Connect</p>
           </button>
         </div>
@@ -47,7 +47,7 @@ const Details = ({}) => {
 
       <div className="px-6  py-4 bg-gray-50 font-dmSans  text-sm font-medium grid grid-cols-4">
         <div className="flex gap-2 ">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 bg-opacity-50 flex justify-center">
+          <div className="w-10 h-10 rounded-md bg-gray-200 bg-opacity-50 flex justify-center">
             <MdOutlineEmail className="self-center text-2xl" />
           </div>
           {teacher.Email ? (
@@ -60,7 +60,7 @@ const Details = ({}) => {
         </div>
 
         <div className="flex gap-2 w-full ">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 bg-opacity-50 flex justify-center px-2">
+          <div className="w-10 h-10 rounded-md bg-gray-200 bg-opacity-50 flex justify-center px-2">
             <BsPhone className="self-center text-2xl" />
           </div>
           <div className="w-full">
@@ -72,7 +72,7 @@ const Details = ({}) => {
         </div>
 
         <div className="flex gap-2 font-dmSans ">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 bg-opacity-50 flex justify-center">
+          <div className="w-10 h-10 rounded-md bg-gray-200 bg-opacity-50 flex justify-center">
             {" "}
             <CgMenuCake className="self-center text-2xl" />
           </div>
@@ -80,7 +80,7 @@ const Details = ({}) => {
         </div>
 
         <div className="flex gap-2 font-dmSans ">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 bg-opacity-50 flex justify-center">
+          <div className="w-10 h-10 rounded-md bg-gray-200 bg-opacity-50 flex justify-center">
             {" "}
             <PiLinkSimple className="self-center text-2xl" />
           </div>
@@ -90,7 +90,7 @@ const Details = ({}) => {
 
       <div className="grid grid-cols-4 pb-4">
         <div className="pl-6 flex gap-2  w-full self-center">
-          <div className="w-10 h-10 px-2 rounded-lg bg-gray-200 bg-opacity-50 flex justify-center self-center">
+          <div className="w-10 h-10 px-2 rounded-md bg-gray-200 bg-opacity-50 flex justify-center self-center">
             {" "}
             <CgPinAlt className="self-center text-3xl" />
           </div>
@@ -99,7 +99,7 @@ const Details = ({}) => {
           </p>
         </div>
         <div className="flex gap-2 ml-2 font-dmSans w-full self-center">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 bg-opacity-50 flex justify-center p-2">
+          <div className="w-10 h-10 rounded-md bg-gray-200 bg-opacity-50 flex justify-center p-2">
             {" "}
             <img src="/images/icons/calendar.png" alt="" />
           </div>

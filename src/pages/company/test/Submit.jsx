@@ -368,14 +368,13 @@ const Submit = () => {
       //console.log(res);
 
       if (res.type === "companyTest/createTest/fulfilled") {
-
-       resetCompanyTestDetails(dispatch);
-       toast.success("test created successfully")
-       navigate(`/company/pr/test`);
+        resetCompanyTestDetails(dispatch);
+        toast.success("test created successfully");
+        navigate(`/company/pr/test`);
         // navigate(
         //   `/college/test/final?testId=${res.payload._id}&name=${res.payload.name}&duration=${res.payload.totalTime}&attepmts=${res.payload.totalAttempts}&total=${res.payload.totalQuestionsCount}`
         // );
-      }else{
+      } else {
         toast.error("Error in creating test");
       }
     });
@@ -426,7 +425,7 @@ const Submit = () => {
       </div>
 
       <div className="absolute -bottom-8 mt-40 flex gap-2 w-full justify-center">
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+        <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropleft
             className={` text-lg self-center ${selected === 1 && "disabled"}`}
             onClick={() => selected !== 1 && setSelected(selected - 1)}
@@ -442,7 +441,7 @@ const Submit = () => {
             hasQuestions && (
               <div
                 key={pageNumber}
-                className={`rounded-lg h-10 w-10 flex justify-center ${
+                className={`rounded-md h-10 w-10 flex justify-center ${
                   selected === pageNumber
                     ? "bg-accent text-white"
                     : "bg-gray-100"
@@ -455,7 +454,7 @@ const Submit = () => {
           );
         })}
 
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+        <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropright
             className={` text-lg self-center ${
               selected === Math.ceil(max) && "disabled"

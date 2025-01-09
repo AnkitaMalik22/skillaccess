@@ -10,7 +10,10 @@ import Code from "../../../components/college/test/review/Code";
 import Video from "../../../components/college/test/review/Video";
 import { getTopicById } from "../../../redux/college/test/thunks/topic";
 import Loader from "../../../components/loaders/Loader";
-import { setCurrentQuestionCount, setTestSelectedTopics } from "../../../redux/college/test/testSlice";
+import {
+  setCurrentQuestionCount,
+  setTestSelectedTopics,
+} from "../../../redux/college/test/testSlice";
 import toast from "react-hot-toast";
 import { FiPlus } from "react-icons/fi";
 
@@ -30,11 +33,11 @@ const Review = () => {
   const view = searchParams.get("view");
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { currentTopic, topics, currentQuestionCount, totalQuestions } = useSelector((state) => state.test);
+  const { currentTopic, topics, currentQuestionCount, totalQuestions } =
+    useSelector((state) => state.test);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [selectedSections, setSelectedSections] = useState([]);
   const [count, setCount] = useState(selectedQuestions.length);
-
 
   let sections = localStorage.getItem("topics")
     ? JSON.parse(localStorage.getItem("topics"))
@@ -43,27 +46,47 @@ const Review = () => {
   // Handle individual question selection
   const handleQuestionSelect = (question) => {
     setSelectedQuestions((prev) => {
-      const isSelected = prev.some((q) => JSON.stringify(q) === JSON.stringify(question));
+      const isSelected = prev.some(
+        (q) => JSON.stringify(q) === JSON.stringify(question)
+      );
 
       if (isSelected) {
         // Remove the question if it exists in the selectedQuestions array
-        return prev.filter((q) => JSON.stringify(q) !== JSON.stringify(question));
+        return prev.filter(
+          (q) => JSON.stringify(q) !== JSON.stringify(question)
+        );
       } else {
-
         const topicIndex = sections.findIndex(
-          (section) => section.Type === questionType && section.id === currentTopic.id // Use an identifier like `id`
+          (section) =>
+            section.Type === questionType && section.id === currentTopic.id // Use an identifier like `id`
         );
         let newCount = 0;
         if (topicIndex !== -1) {
-          newCount = currentQuestionCount - count + selectedQuestions.length + 1;
-          console.log(newCount, "newCount", currentQuestionCount, "currentQuestionCount", count, "count", selectedQuestions.length, "selectedQuestions.length");
+          newCount =
+            currentQuestionCount - count + selectedQuestions.length + 1;
+          console.log(
+            newCount,
+            "newCount",
+            currentQuestionCount,
+            "currentQuestionCount",
+            count,
+            "count",
+            selectedQuestions.length,
+            "selectedQuestions.length"
+          );
         } else {
-          newCount = parseInt(currentQuestionCount) - count + selectedQuestions.length + 1; // Add 1 for the new question
+          newCount =
+            parseInt(currentQuestionCount) -
+            count +
+            selectedQuestions.length +
+            1; // Add 1 for the new question
         }
         // console.log(newCount, "newCount", totalQuestions, "totalQuestions", count, "count", selectedQuestions.length, "selectedQuestions.length");
 
         if (newCount > parseInt(totalQuestions)) {
-          toast.error(`Number of questions must be less than or equal to  ${totalQuestions}`);
+          toast.error(
+            `Number of questions must be less than or equal to  ${totalQuestions}`
+          );
           return prev; // Do not add the question if the limit is exceeded
         }
         // Add the question to the selectedQuestions array
@@ -80,27 +103,38 @@ const Review = () => {
 
     // Check if the topic already exists
     const topicIndex = sections.findIndex(
-      (section) => section.Type === questionType && section.id === currentTopic.id // Use an identifier like `id`
+      (section) =>
+        section.Type === questionType && section.id === currentTopic.id // Use an identifier like `id`
     );
     let newTotalCount = 0;
     if (topicIndex !== -1) {
       newTotalCount = currentQuestionCount - selectedCount + questions.length;
     } else {
-      newTotalCount = currentQuestionCount + questions.length
+      newTotalCount = currentQuestionCount + questions.length;
     }
 
-    console.log(newTotalCount, "<-newTotalCount", currentQuestionCount, "<-currentQuestionCount", selectedCount, "<-selectedCount", questions.length, "<-questions.length");
+    console.log(
+      newTotalCount,
+      "<-newTotalCount",
+      currentQuestionCount,
+      "<-currentQuestionCount",
+      selectedCount,
+      "<-selectedCount",
+      questions.length,
+      "<-questions.length"
+    );
     if (selectedCount === questions.length) {
       // Deselect all
       setSelectedQuestions([]);
     } else if (newTotalCount > parseInt(totalQuestions)) {
-      toast.error(`Number of questions must be less than or equal to ${totalQuestions}`);
+      toast.error(
+        `Number of questions must be less than or equal to ${totalQuestions}`
+      );
     } else {
       // Select all
       setSelectedQuestions(questions);
     }
   };
-
 
   const QuestionCheckbox = ({ question }) => {
     const isQuestionSelected = selectedQuestions.some(
@@ -125,17 +159,11 @@ const Review = () => {
     );
   };
 
-
-
   useEffect(() => {
     handleTopics();
-
-
   }, [topics, currentTopic]);
 
-
   async function handleTopics() {
-
     let typeIf;
 
     if (questionType === "mcq") {
@@ -148,7 +176,6 @@ const Review = () => {
 
     try {
       if (type === "section") {
-
         console.log(topics[id]);
         // const topics = JSON.parse(localStorage.getItem("topics"));
         setName(topics[id].Heading);
@@ -157,24 +184,22 @@ const Review = () => {
           if (select) {
             console.log(topics[id].questions);
             setQuestions(
-              currentTopic.questions.filter(q => {
+              currentTopic.questions.filter((q) => {
                 console.log(q);
                 // Compare by a unique identifier like 'id' or '_id'
-                return !topics[id].questions.some(tq => tq._id === q._id);
+                return !topics[id].questions.some((tq) => tq._id === q._id);
               })
             );
           } else {
             setQuestions(topics[id].questions);
           }
-        };
+        }
 
         questionType === "findAnswer" && setQuestions(topics[id].findAnswers);
         questionType === "essay" && setQuestions(topics[id].essay);
         questionType === "video" && setQuestions(topics[id].video);
         questionType === "compiler" && setQuestions(topics[id].compiler);
-
       } else if (type === "topic") {
-
         const req = await dispatch(getTopicById({ id: id, level }));
 
         const isPresent = topics.filter((topic) => topic._id === id);
@@ -187,12 +212,15 @@ const Review = () => {
         questionType === "compiler" && setQuestions(currentTopic.compiler);
 
         console.log(isPresent, "isPresent");
-        if (isPresent && isPresent?.length > 0 && isPresent[0][typeIf]?.length > 0) {
+        if (
+          isPresent &&
+          isPresent?.length > 0 &&
+          isPresent[0][typeIf]?.length > 0
+        ) {
           setSelectedQuestions(isPresent[0][typeIf]);
           setCount(isPresent[0][typeIf].length);
           console.log(isPresent[0][typeIf], "isPresent");
         }
-
       } else {
         setName(
           JSON.parse(localStorage.getItem("assessment")).topics[id].Heading
@@ -203,7 +231,8 @@ const Review = () => {
           );
         questionType === "findAnswer" &&
           setQuestions(
-            JSON.parse(localStorage.getItem("assessment")).topics[id].findAnswers
+            JSON.parse(localStorage.getItem("assessment")).topics[id]
+              .findAnswers
           );
         questionType === "essay" &&
           setQuestions(
@@ -221,9 +250,7 @@ const Review = () => {
     } catch (error) {
       console.log(error);
     }
-
   }
-
 
   const handleCalculateTime = () => {
     let totalMcq = 0,
@@ -297,7 +324,6 @@ const Review = () => {
   };
 
   const addToSection = () => {
-
     try {
       if (type === "section") {
         if (selectedQuestions.length === 0) {
@@ -309,7 +335,9 @@ const Review = () => {
           parseInt(currentQuestionCount) + selectedQuestions.length >
           parseInt(totalQuestions)
         ) {
-          toast.error(`Number of question must be less than or equal to ${totalQuestions}`);
+          toast.error(
+            `Number of question must be less than or equal to ${totalQuestions}`
+          );
           return;
         }
 
@@ -323,9 +351,14 @@ const Review = () => {
         }
         {
           let topicsCopy = JSON.parse(JSON.stringify(topics));
-          topicsCopy[id][typeIf] = [...topicsCopy[id][typeIf], ...selectedQuestions];
+          topicsCopy[id][typeIf] = [
+            ...topicsCopy[id][typeIf],
+            ...selectedQuestions,
+          ];
           dispatch(
-            setCurrentQuestionCount(currentQuestionCount + selectedQuestions.length)
+            setCurrentQuestionCount(
+              currentQuestionCount + selectedQuestions.length
+            )
           );
           dispatch(setTestSelectedTopics(topicsCopy));
           console.log(topicsCopy, "topicsCopy");
@@ -336,7 +369,6 @@ const Review = () => {
 
           // Update the URL with the new search params
           setSearchParams(newParams);
-
         }
       } else {
         let sectionCopy = { ...currentTopic, Type: questionType };
@@ -352,7 +384,8 @@ const Review = () => {
 
         // Check if the topic already exists
         const topicIndex = sections.findIndex(
-          (section) => section.Type === questionType && section._id === currentTopic._id
+          (section) =>
+            section.Type === questionType && section._id === currentTopic._id
         );
         console.log(topicIndex, "topicIndex");
         if (topicIndex !== -1) {
@@ -360,9 +393,16 @@ const Review = () => {
           const existingCount = sections[topicIndex][typeIf]?.length || 0;
           const newQuestionCount =
             currentQuestionCount - existingCount + selectedQuestions.length;
-          console.log(newQuestionCount, "newQuestionCount", parseInt(totalQuestions), "totalQuestions");
+          console.log(
+            newQuestionCount,
+            "newQuestionCount",
+            parseInt(totalQuestions),
+            "totalQuestions"
+          );
           if (newQuestionCount > parseInt(totalQuestions)) {
-            toast.error(`Number of questions must be less than or equal to ${totalQuestions}`);
+            toast.error(
+              `Number of questions must be less than or equal to ${totalQuestions}`
+            );
             return;
           }
 
@@ -373,17 +413,20 @@ const Review = () => {
         } else {
           // Topic doesn't exist, add it
           sectionCopy[typeIf] = selectedQuestions;
-          dispatch(setCurrentQuestionCount(currentQuestionCount + selectedQuestions.length));
+          dispatch(
+            setCurrentQuestionCount(
+              currentQuestionCount + selectedQuestions.length
+            )
+          );
           dispatch(setTestSelectedTopics([...sections, sectionCopy]));
         }
 
         navigate(-1);
-
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   const [noQuestionsMessage, setNoQuestionsMessage] = useState("");
 
   // useEffect(() => {
@@ -416,21 +459,25 @@ const Review = () => {
         sectionId={localStorage.getItem("Details") ? currentTopic._id : ""}
       />
 
-      {loading ? (<Loader />) : (<div
-        className={`mx-auto p-5 min-h-[80vh] my-2 rounded-lg   bg-gray-100  ${visible && "h-[80vh] overflow-hidden"
+      {loading ? (
+        <Loader />
+      ) : (
+        <div
+          className={`mx-auto p-5 min-h-[80vh] my-2 rounded-md   bg-gray-100  ${
+            visible && "h-[80vh] overflow-hidden"
           }`}
-      >
-        <div className="flex justify-between mb-5">
-          <span className="flex gap-2 items-center">
-            <h2 className="capitalize text-lg">{questionType}</h2>
-            <div className="flex gap-1 items-center ">
-              <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
-              <p className="text-gray-400 text-xs self-center">
-                {totalTime} mins
-              </p>
-            </div>
-          </span>
-          {/* <span className="flex">
+        >
+          <div className="flex justify-between mb-5">
+            <span className="flex gap-2 items-center">
+              <h2 className="capitalize text-lg">{questionType}</h2>
+              <div className="flex gap-1 items-center ">
+                <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
+                <p className="text-gray-400 text-sm self-center">
+                  {totalTime} mins
+                </p>
+              </div>
+            </span>
+            {/* <span className="flex">
             <input
               type="checkbox"
               name="delete"
@@ -440,152 +487,155 @@ const Review = () => {
               Delete Selected
             </label>
           </span> */}
-        </div>
-
-        {(questions?.length > 0 && select) && (
-
-          <div className="flex justify-between">
-
-            <div className="flex items-center gap-2 p-4 bg-gray-50 rounded-lg">
-              <input type="checkbox"
-                checked={selectedQuestions.length === questions.length && questions.length > 0}
-                onChange={handleSelectAll}
-                className="h-5 w-5 rounded border-gray-300"
-              />
-              <span className="text-sm font-medium">
-                Select All ({selectedQuestions.length}/{questions.length})
-              </span>
-
-
-
-            </div>
-
-            <button
-              className="self-center justify-center flex bg-blued my-6 p-2 text-white hover:bg-cyan-600 rounded-xl w-32  gap-2 "
-              onClick={addToSection}
-            >
-              <FiPlus className="self-center text-lg " /> Add
-            </button>
           </div>
 
-        )}
+          {questions?.length > 0 && select && (
+            <div className="flex justify-between">
+              <div className="flex items-center gap-2 p-4 bg-gray-50 rounded-md">
+                <input
+                  type="checkbox"
+                  checked={
+                    selectedQuestions.length === questions.length &&
+                    questions.length > 0
+                  }
+                  onChange={handleSelectAll}
+                  className="h-5 w-5 rounded border-gray-300"
+                />
+                <span className="text-sm font-medium">
+                  Select All ({selectedQuestions.length}/{questions.length})
+                </span>
+              </div>
 
-        {noQuestionsMessage && (
-          <div className="text-red-500 text-center">{noQuestionsMessage}</div>
-        )}
+              <button
+                className="self-center justify-center flex bg-blued my-6 p-2 text-white hover:bg-cyan-600 rounded-xl w-32  gap-2 "
+                onClick={addToSection}
+              >
+                <FiPlus className="self-center text-lg " /> Add
+              </button>
+            </div>
+          )}
 
-        {questionType === "mcq" ? (
-          questions?.length > 0 ? (
-            [...questions]
-              .sort((a, b) => {
-                const levelsOrder = ["beginner", "intermediate", "advanced"];
-                const levelAIndex = levelsOrder.indexOf(a.QuestionLevel);
-                const levelBIndex = levelsOrder.indexOf(b.QuestionLevel);
-                return levelAIndex - levelBIndex;
-              })
-              .map((question, i) => (
+          {noQuestionsMessage && (
+            <div className="text-red-500 text-center">{noQuestionsMessage}</div>
+          )}
+
+          {questionType === "mcq"
+            ? questions?.length > 0
+              ? [...questions]
+                  .sort((a, b) => {
+                    const levelsOrder = [
+                      "beginner",
+                      "intermediate",
+                      "advanced",
+                    ];
+                    const levelAIndex = levelsOrder.indexOf(a.QuestionLevel);
+                    const levelBIndex = levelsOrder.indexOf(b.QuestionLevel);
+                    return levelAIndex - levelBIndex;
+                  })
+                  .map((question, i) => (
+                    <div key={i} className="relative">
+                      {select && <QuestionCheckbox question={question} />}
+                      <div className="pl-12">
+                        <Mcq
+                          view={view}
+                          type={type}
+                          id={id}
+                          Number={i}
+                          reset={() => handleTopics()}
+                          question={question}
+                          Title={question.Title}
+                          Options={question.Options}
+                          AnswerIndex={question.AnswerIndex}
+                        />
+                      </div>
+                    </div>
+                  ))
+              : null
+            : questionType === "findAnswer"
+            ? questions?.length > 0
+              ? questions.map((question, i) => (
+                  <div key={i} className="relative">
+                    {select && <QuestionCheckbox question={question} />}
+                    <div className="pl-12">
+                      <FindAnswer
+                        view={view}
+                        type={type}
+                        id={id}
+                        Number={i}
+                        question={question}
+                        Title={question?.Title || ""}
+                        Options={question?.questions || []}
+                      />
+                    </div>
+                  </div>
+                ))
+              : null
+            : questionType === "essay"
+            ? questions?.length > 0
+              ? questions.map((question, i) => (
+                  <div key={i} className="relative">
+                    {select && <QuestionCheckbox question={question} />}
+                    <div className="pl-12">
+                      <Essay
+                        Number={i}
+                        Title={question?.Title || ""}
+                        id={id}
+                        view={view}
+                        type={type}
+                        question={question}
+                      />
+                    </div>
+                  </div>
+                ))
+              : null
+            : questionType === "compiler"
+            ? questions?.length > 0
+              ? questions.map((question, i) => (
+                  <div key={i} className="relative">
+                    {select && <QuestionCheckbox question={question} />}
+                    <div className="pl-12">
+                      <Code
+                        view={view}
+                        type={type}
+                        id={id}
+                        Number={i}
+                        Title={question?.codeQuestion || ""}
+                        code={question?.code}
+                        question={question}
+                      />
+                    </div>
+                  </div>
+                ))
+              : null
+            : questions?.length > 0
+            ? questions.map((question, i) => (
                 <div key={i} className="relative">
                   {select && <QuestionCheckbox question={question} />}
                   <div className="pl-12">
-                    <Mcq
+                    <Video
+                      Number={i}
+                      id={id}
+                      video={question}
                       view={view}
                       type={type}
-                      id={id}
-                      Number={i}
-                      reset={() => handleTopics()}
                       question={question}
-                      Title={question.Title}
-                      Options={question.Options}
-                      AnswerIndex={question.AnswerIndex}
                     />
                   </div>
                 </div>
               ))
-          ) : null
-        ) : questionType === "findAnswer" ? (
-          questions?.length > 0 ? (
-            questions.map((question, i) => (
-              <div key={i} className="relative">
-                {select && <QuestionCheckbox question={question} />}
-                <div className="pl-12">
-                  <FindAnswer
-                    view={view}
-                    type={type}
-                    id={id}
-                    Number={i}
-                    question={question}
-                    Title={question?.Title || ""}
-                    Options={question?.questions || []}
-                  />
-                </div>
-              </div>
-            ))
-          ) : null
-        ) : questionType === "essay" ? (
-          questions?.length > 0 ? (
-            questions.map((question, i) => (
-              <div key={i} className="relative">
-                {select && <QuestionCheckbox question={question} />}
-                <div className="pl-12">
-                  <Essay
-                    Number={i}
-                    Title={question?.Title || ""}
-                    id={id}
-                    view={view}
-                    type={type}
-                    question={question}
-                  />
-                </div>
-              </div>
-            ))
-          ) : null
-        ) : questionType === "compiler" ? (
-          questions?.length > 0 ? (
-            questions.map((question, i) => (
-              <div key={i} className="relative">
-                {select && <QuestionCheckbox question={question} />}
-                <div className="pl-12">
-                  <Code
-                    view={view}
-                    type={type}
-                    id={id}
-                    Number={i}
-                    Title={question?.codeQuestion || ""}
-                    code={question?.code}
-                    question={question}
-                  />
-                </div>
-              </div>
-            ))
-          ) : null
-        ) : questions?.length > 0 ? (
-          questions.map((question, i) => (
-            <div key={i} className="relative">
-              {select && <QuestionCheckbox question={question} />}
-              <div className="pl-12">
-                <Video
-                  Number={i}
-                  id={id}
-                  video={question}
-                  view={view}
-                  type={type}
-                  question={question}
-                />
-              </div>
-            </div>
-          ))
-        ) : null}
+            : null}
 
-        {questions?.length === 0 && <div className="flex justify-center items-center h-full">
-          <p className="text-gray-500 text-center">No Questions Found, Add Questions to this topic</p>
-        </div>}
-      </div>)}
+          {questions?.length === 0 && (
+            <div className="flex justify-center items-center h-full">
+              <p className="text-gray-500 text-center">
+                No Questions Found, Add Questions to this topic
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 };
 
 export default Review;
-
-
-
-

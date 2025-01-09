@@ -91,7 +91,7 @@ const ChartComp = () => {
     ],
   });
   return (
-    <div className="sm:flex  mt-6 bg-gray-100 w-full rounded-lg gap-1 gird  justify-between relative">
+    <div className="sm:flex  mt-6 bg-gray-100 w-full rounded-md gap-1 gird  justify-between relative">
       {/* chart component */}
       <div className=" w-[65%] rounded-s sm:px-6 mt-2">
         <div className="md:p-2 flex justify-between">
@@ -135,7 +135,7 @@ const ChartComp = () => {
         <div className="h-[25rem] w-[52vw] ml-2">
           <Chart
             id="dash"
-            className="bg-white shadow-md mt-2 rounded-lg  "
+            className="bg-white shadow-md mt-2 rounded-md  "
             options={settings.options}
             series={settings.series}
             type="line"
@@ -152,11 +152,11 @@ const ChartComp = () => {
           <div className="flex gap-4 my-4">
             <span className="flex gap-1">
               <FaCircle className="text-lightBlue" />{" "}
-              <h2 className="font-bold text-xs">Placements</h2>
+              <h2 className="font-bold text-sm">Placements</h2>
             </span>
             <span className="flex gap-1">
               <FaCircle className="text-green-400" />{" "}
-              <h2 className="font-bold text-xs">Students</h2>
+              <h2 className="font-bold text-sm">Students</h2>
             </span>
           </div>
         </div>
@@ -173,31 +173,31 @@ const ChartComp = () => {
           </h1>
         </span>
 
-        <div className="bg-white  overflow-y-scroll h-[27rem] mb-10 rounded-lg flex flex-col gap-4 ">
+        <div className="bg-white  overflow-y-scroll h-[27rem] mb-10 rounded-md flex flex-col gap-4 ">
           {placements?.map((placement) => {
             return (
               <div className="card card-side !rounded-none shadow-sm mb-1  p-4 flex justify-between  border-b-2">
                 <div>
                   <h2 className="font-bold mb-2">UI/UX Designer</h2>
                   <h2 className="text-gray-400 mb-4">Due on 05/12/22</h2>
-                  <button className="bg-gray-100 rounded-lg px-2 py-3 text-blued">
+                  <button className="bg-gray-100 rounded-md px-2 py-3 text-blued">
                     Start Assessment
                   </button>
                 </div>
                 <div className="">
                   <h2 className="text-green-600 mb-2">Completed</h2>
                   <span className="flex gap-2 mb-4">
-                    <div className="min-w-[4rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                    <div className="min-w-[4rem] bg-opacity-5 rounded-md h-3 mx-auto bg-green-600">
                       <div
-                        className={`w-3/5 bg-green-700 h-full rounded-lg`}
+                        className={`w-3/5 bg-green-700 h-full rounded-md`}
                       ></div>
                     </div>
-                    <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                    <h2 className="font-dmSans font-bold text-sm sm:text-sm ">
                       {" "}
                       70%
                     </h2>
                   </span>
-                  <button className="mt-2 rounded-lg px-2 py-3  text-blued">
+                  <button className="mt-2 rounded-md px-2 py-3  text-blued">
                     View Details
                   </button>
                 </div>

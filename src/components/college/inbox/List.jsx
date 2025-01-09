@@ -257,7 +257,7 @@ const List = ({ show, inboxType, setInboxType }) => {
           <HiDotsVertical className="self-center text-sm  text-gray-400" />
         </div>
         <div className="flex gap-2 self-center">
-          <p className="text-gray-400 text-xs font-bold">
+          <p className="text-gray-400 text-sm font-bold">
             {queries.skip}-{queries.skip + Total} of {totalmails}
           </p>
           {queries.skip > 0 && <FaChevronLeft onClick={handleLeft} />}
@@ -270,7 +270,7 @@ const List = ({ show, inboxType, setInboxType }) => {
 
         {arr?.map((el, i) => {
           return (
-            <div className="mb-4 bg-white rounded-lg flex justify-between p-4 ">
+            <div className="mb-4 bg-white rounded-md flex justify-between p-4 ">
               <div className="flex gap-4 items-center ">
                 {/* {el.isChecked ? (
                   <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center "> */}{" "}

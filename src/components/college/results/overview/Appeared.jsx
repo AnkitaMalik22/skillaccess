@@ -10,7 +10,11 @@ import { getTestResultPage } from "../../../../redux/college/test/thunks/test";
 import { getStudentResponse } from "../../../../redux/college/test/thunks/student";
 import CircularLoader from "../../../CircularLoader";
 import Skeleton from "../../../loaders/Skeleton";
-import { getTestCompany, getTestResultPageCompany, selectStudentTestCompany } from "../../../../redux/company/test/thunks/test";
+import {
+  getTestCompany,
+  getTestResultPageCompany,
+  selectStudentTestCompany,
+} from "../../../../redux/company/test/thunks/test";
 import isCompany, { isUni } from "../../../../util/isCompany";
 
 const Appeared = ({ assessment }) => {
@@ -23,17 +27,20 @@ const Appeared = ({ assessment }) => {
     const status = event.target.value;
     setIsLoading({ ...isLoading, [responseId]: true });
     if (isCompany()) {
-
-      console.log(testId, responseId, student)
-      await dispatch(selectStudentTestCompany({ testId: student.assessmentId, responseId: student._id, status }));
-      dispatch(getTestCompany(student.assessmentId))
+      console.log(testId, responseId, student);
+      await dispatch(
+        selectStudentTestCompany({
+          testId: student.assessmentId,
+          responseId: student._id,
+          status,
+        })
+      );
+      dispatch(getTestCompany(student.assessmentId));
       await dispatch(getTestResultPageCompany(student.assessmentId));
-
     } else {
       await dispatch(selectStudentTest({ testId, responseId, status }));
       dispatch(getTest(testId));
       await dispatch(getTestResultPage(assessment._id));
-
     }
 
     setIsLoading({ ...isLoading, [responseId]: false });
@@ -42,9 +49,9 @@ const Appeared = ({ assessment }) => {
   const { testDataResponse, response, TEST_DATA_RESPONSE_LOADING } =
     useSelector((state) => {
       if (isCompany()) {
-        return state.test
+        return state.test;
       } else {
-        return state.companyTest
+        return state.companyTest;
       }
     });
 
@@ -54,10 +61,8 @@ const Appeared = ({ assessment }) => {
     if (assessment?._id) {
       if (isCompany()) {
         dispatch(getTestResultPageCompany(assessment._id));
-
       } else {
         dispatch(getTestResultPage(assessment._id));
-
       }
     }
   }, [dispatch, assessment?._id]);
@@ -97,7 +102,7 @@ const Appeared = ({ assessment }) => {
   return (
     <div className="w-full mx-auto">
       {/* legend */}
-      <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid bg-accent bg-opacity-5 rounded-lg p-4 mb-5">
+      <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid bg-accent bg-opacity-5 rounded-md p-4 mb-5">
         <h2>Name and Profile</h2>
         <h2>Date</h2>
         <h2>Status</h2>
@@ -124,7 +129,11 @@ const Appeared = ({ assessment }) => {
                 // }
                 onClick={() =>
                   //  navigate(`/college/students/profile/${student._id}`)
-                  navigate(`/${isUni() ? "university/pr" : "college"}/students/profile/${student.studentId._id}`)
+                  navigate(
+                    `/${
+                      isUni() ? "university/pr" : "college"
+                    }/students/profile/${student.studentId._id}`
+                  )
                 }
               >
                 {" "}
@@ -132,7 +141,9 @@ const Appeared = ({ assessment }) => {
                 <div className="flex justify-center gap-2">
                   <div className=" min-w-[3rem] h-12 self-center">
                     <img
-                      src={student?.studentId?.avatar?.url || "/images/student.png"}
+                      src={
+                        student?.studentId?.avatar?.url || "/images/student.png"
+                      }
                       alt="icon"
                       className="h-10 w-10 rounded-full"
                     />
@@ -152,9 +163,12 @@ const Appeared = ({ assessment }) => {
                   </h2>
                 </div>
                 {/*  */}
-                <div className="flex justify-center" onClick={(e) => {
-                  e.stopPropagation();
-                }}>
+                <div
+                  className="flex justify-center"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
                   <div className=" self-center h-fit">
                     <span>
                       {isLoading[student?._id] ? (
@@ -168,7 +182,7 @@ const Appeared = ({ assessment }) => {
                               assessment?._id,
                               student?._id,
                               student
-                            )(e)
+                            )(e);
                           }}
                           value={student?.status}
                         >
@@ -184,16 +198,16 @@ const Appeared = ({ assessment }) => {
                 <div className="flex justify-center">
                   <div className=" self-center">
                     <span className="flex gap-2 items-center">
-                      <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                      <div className="min-w-[6rem] bg-opacity-5 rounded-md h-3 mx-auto bg-green-600">
                         <div
-                          className={`h-full rounded-lg`}
+                          className={`h-full rounded-md`}
                           style={{
                             width: `${student?.percentage}%`,
                             backgroundColor: colors[index],
                           }}
                         ></div>
                       </div>
-                      <h2 className="font-dmSans font-bold text-xs ">
+                      <h2 className="font-dmSans font-bold text-sm ">
                         {" "}
                         {student?.percentage?.toFixed(2)}%
                       </h2>
@@ -209,14 +223,19 @@ const Appeared = ({ assessment }) => {
                       if (isCompany()) {
                         navigate(
                           `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                        )
+                        );
                       } else {
                         navigate(
-                          `/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                        )
+                          `/${
+                            isUni() ? "university/pr" : "college"
+                          }/results/assessmentReview?studentId=${
+                            student.studentId._id
+                          }&assessmentId=${student.assessmentId}&responseId=${
+                            student._id
+                          }`
+                        );
                       }
-                    }
-                    }
+                    }}
                   >
                     <h2 className="font-dmSans text-sm text-blued ">
                       Assessment Review

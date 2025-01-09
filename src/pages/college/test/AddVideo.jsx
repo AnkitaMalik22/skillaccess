@@ -94,7 +94,10 @@ const AddVideo = () => {
 
         video.onloadedmetadata = () => {
           console.log("Dropped File:", droppedFile);
-          console.log("File Size (MB):", (droppedFile.size / (1024 * 1024)).toFixed(2));
+          console.log(
+            "File Size (MB):",
+            (droppedFile.size / (1024 * 1024)).toFixed(2)
+          );
           setVideoPreview(objectURL); // Use the object URL for the preview
           setFile(droppedFile);
         };
@@ -113,7 +116,6 @@ const AddVideo = () => {
         "Unsupported file format. Please upload a MOV, MP4, MPEG, MKV, WEBM, or GIF file."
       );
     }
-
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -230,7 +232,9 @@ const AddVideo = () => {
       // Navigate to the next step
 
       navigate(
-        `/${isUni() ? "university/pr" : "college"}/test/video/${id}/selectType?section=${searchParam.get(
+        `/${
+          isUni() ? "university/pr" : "college"
+        }/test/video/${id}/selectType?section=${searchParam.get(
           "topicId"
         )}&level=${level}`
       );
@@ -267,8 +271,9 @@ const AddVideo = () => {
             {!recording && (
               <div
                 {...getRootProps()}
-                className={`border rounded-lg border-dashed h-[238px] w-[685px] mt-8 flex flex-col items-center py-7 ${isDragActive ? "bg-gray-100" : ""
-                  }`}
+                className={`border rounded-md border-dashed h-[238px] w-[685px] mt-8 flex flex-col items-center py-7 ${
+                  isDragActive ? "bg-gray-100" : ""
+                }`}
               >
                 <input {...getInputProps()} />
 
@@ -295,7 +300,7 @@ const AddVideo = () => {
             <div className="flex gap-4 mt-10">
               {!recording && (
                 <button
-                  className="self-center justify-center flex items-center bg-accent w-[196px] h-[56px] px-4 rounded-2xl text-xs gap-2 text-white"
+                  className="self-center justify-center flex items-center bg-accent w-[196px] h-[56px] px-4 rounded-2xl text-sm gap-2 text-white"
                   {...getRootProps()}
                 >
                   <GrUploadOption className=" w-[22px] h-[22px] text-white" />
@@ -339,25 +344,27 @@ const AddVideo = () => {
 
                 <div className="  flex item-center mt-4">
                   <button
-                    className={`self-center justify-center items-center flex ${paused ? "bg-blue-500" : "bg-red-500"
-                      } text-blued  py-3 px-4 rounded-2xl text-xs gap-2`}
+                    className={`self-center justify-center items-center flex ${
+                      paused ? "bg-blue-500" : "bg-red-500"
+                    } text-blued  py-3 px-4 rounded-2xl text-sm gap-2`}
                     onClick={handlePauseResumeRecording}
                   >
                     {paused ? "Resume" : "Pause"}
                   </button>
 
                   <button
-                    className="self-center justify-center flex bg-accent py-3 px-4 rounded-2xl text-xs gap-2 text-white ml-4"
+                    className="self-center justify-center flex bg-accent py-3 px-4 rounded-2xl text-sm gap-2 text-white ml-4"
                     onClick={handleStopRecording}
                   >
                     Finish Recording
                   </button>
 
                   <p
-                    className={`text-center ml-4 rounded-2xl text-[#fff] py-3 px-4 font-bold pt-2 ${timer >= maxDurationInSeconds - warningTime
-                      ? "bg-red-500"
-                      : "bg-green-500"
-                      }`}
+                    className={`text-center ml-4 rounded-2xl text-[#fff] py-3 px-4 font-bold pt-2 ${
+                      timer >= maxDurationInSeconds - warningTime
+                        ? "bg-red-500"
+                        : "bg-green-500"
+                    }`}
                   >
                     {formatTime(timer)}
                   </p>
@@ -377,7 +384,7 @@ const AddVideo = () => {
 
           <div className="flex justify-between items-center mt-6">
             <button
-              className="self-center  justify-center flex bg-black py-3 px-4 rounded-2xl text-xs gap-2 text-white"
+              className="self-center  justify-center flex bg-black py-3 px-4 rounded-2xl text-sm gap-2 text-white"
               onClick={() => {
                 setFile(null);
 
@@ -390,7 +397,7 @@ const AddVideo = () => {
             </button>
 
             <button
-              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 "
               //  onClick={()=>{
 
               //   dispatch(addVideo({data:file}));

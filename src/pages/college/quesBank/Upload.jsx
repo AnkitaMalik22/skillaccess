@@ -24,13 +24,13 @@ const Upload = () => {
     <div>
       <div className="flex w-full mx-auto justify-between mb-2 font-dmSans">
         <button
-          className="  self-center  rounded-lg h-10 w-10 "
+          className="  self-center  rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
           <BackIcon />
         </button>
 
-        <button className="bg-accent text-white font-bold  self-center   text-sm 3xl:text-base rounded-lg py-3 px-6">
+        <button className="bg-accent text-white font-bold  self-center   text-sm 3xl:text-base rounded-md py-3 px-6">
           Upload New
         </button>
       </div>
@@ -41,18 +41,14 @@ const Upload = () => {
         onDrop={handleDrop}
       >
         <div className="self-center">
-          <img
-            src="/images/icons/folderBlack.png"
-            alt=""
-            className="mx-auto"
-          />
+          <img src="/images/icons/folderBlack.png" alt="" className="mx-auto" />
           <p className="text-4xl text-gray-400 text-center mt-2">
             Drag and drop to upload it
           </p>
           <p className="text-2xl text-center text-gray-300 mt-1">or </p>
           <div className="w-full flex justify-center">
             <label for="upload-file">
-              <div className="bg-accent text-white font-bold   text-sm 3xl:text-base rounded-lg py-3 px-6 mx-auto hover:cursor-pointer">
+              <div className="bg-accent text-white font-bold   text-sm 3xl:text-base rounded-md py-3 px-6 mx-auto hover:cursor-pointer">
                 Select a file from your computer
               </div>
             </label>

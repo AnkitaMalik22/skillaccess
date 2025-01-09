@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import resetCompanyTestDetails from "../../../util/resetCompanyTestDetails";
 import { getAllTests } from "../../../redux/company/test/thunks/test";
@@ -8,11 +8,10 @@ const Test = () => {
   const dispatch = useDispatch();
   const { assessments } = useSelector((state) => state.companyTest);
 
-  
-useEffect(()=>{
-resetCompanyTestDetails(dispatch);
-dispatch(getAllTests());
-},[])
+  useEffect(() => {
+    resetCompanyTestDetails(dispatch);
+    dispatch(getAllTests());
+  }, []);
 
   const renderAssessments = (level, title) => (
     <>
@@ -20,25 +19,24 @@ dispatch(getAllTests());
         {title} Assessments
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-6">
-        {assessments?.[level] && assessments?.[level].map((assessment) => (
-          <div className="bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1">
-            <h2 className="text-3xl font-semibold text-gray-900 mb-3">
-              {assessment.name}
-            </h2>
-            <p className="text-gray-700 mb-6">{assessment.description}</p>
-            {/* <Link to={`/company/pr/test/${assessment._id}`}>
-              <span className="inline-block bg-accent hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-200">
+        {assessments?.[level] &&
+          assessments?.[level].map((assessment) => (
+            <div className="bg-gray-200 rounded-md p-8 shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1">
+              <h2 className="text-3xl font-semibold text-gray-900 mb-3">
+                {assessment.name}
+              </h2>
+              <p className="text-gray-700 mb-6">{assessment.description}</p>
+              {/* <Link to={`/company/pr/test/${assessment._id}`}>
+              <span className="inline-block bg-accent hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-md transition-colors duration-200">
                 View Assessment
               </span>
             </Link> */}
-          </div>
-        ))}
+            </div>
+          ))}
       </div>
-      {
-        assessments?.[level]?.length === 0 && (
-          <p className="text-gray-700 text-center">No assessments found.</p>
-        )
-      }
+      {assessments?.[level]?.length === 0 && (
+        <p className="text-gray-700 text-center">No assessments found.</p>
+      )}
     </>
   );
 
@@ -78,9 +76,9 @@ dispatch(getAllTests());
         <h1 className="text-4xl font-bold text-center my-12">
           Your Assessments
         </h1>
-        {renderAssessments('beginner', 'Beginner')}
-        {renderAssessments('intermediate', 'Intermediate')}
-        {renderAssessments('advanced', 'Advanced')}
+        {renderAssessments("beginner", "Beginner")}
+        {renderAssessments("intermediate", "Intermediate")}
+        {renderAssessments("advanced", "Advanced")}
       </main>
     </div>
   );
@@ -90,11 +88,11 @@ export default Test;
 
 function Section({ title, description, linkHref, linkText }) {
   return (
-    <section className="bg-gray-200 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1">
+    <section className="bg-gray-200 rounded-md p-8 shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1">
       <h2 className="text-3xl font-semibold text-gray-900 mb-3">{title}</h2>
       <p className="text-gray-700 mb-6">{description}</p>
       <Link to={linkHref}>
-        <span className="inline-block bg-accent hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-200">
+        <span className="inline-block bg-accent hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-md transition-colors duration-200">
           {linkText}
         </span>
       </Link>

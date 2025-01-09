@@ -195,7 +195,7 @@ const Security = () => {
           <div className="">
             {selectedOption === "securityApp" && (
               <button
-                className="flex gap-2 text-xs font-bold px-6 py-2 text-[#fff]  rounded-[12px] bg-accent"
+                className="flex gap-2 text-sm font-bold px-6 py-2 text-[#fff]  rounded-[12px] bg-accent"
                 onClick={() => setShowQR(true)}
               >
                 Show Qr Code{" "}

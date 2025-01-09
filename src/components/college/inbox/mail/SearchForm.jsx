@@ -50,11 +50,11 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
     <form action="" className="p-3 font-dmSans">
       {/* 1 */}
       <div className="w-full flex flex-col">
-        <label className="pl-2 text-xs font-bold text-gray-400">SEARCH</label>
-        <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
+        <label className="pl-2 text-sm font-bold text-gray-400">SEARCH</label>
+        <Disclosure className="rounded-md bg-lGray bg-opacity-5 my-2 py-2">
           {({ open, close }) => (
             <div className="relative">
-              <Disclosure.Button className="flex w-full justify-between rounded-lg  px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+              <Disclosure.Button className="flex w-full justify-between rounded-md  px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                 <span className="text-sm font-bold">{filter.type}</span>
 
                 <FaSortDown className="text-gray-400 self-center" />
@@ -93,11 +93,11 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
 
       {/* 2*/}
       <div className="w-full flex flex-col">
-        <label className="pl-2 text-xs font-bold text-gray-400">FROM</label>
-        <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
+        <label className="pl-2 text-sm font-bold text-gray-400">FROM</label>
+        <Disclosure className="rounded-md bg-lGray bg-opacity-5 my-2 py-2">
           {({ open }) => (
             <div className="relative">
-              <Disclosure.Button className="flex w-full justify-between rounded-lg  px-4  text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+              <Disclosure.Button className="flex w-full justify-between rounded-md  px-4  text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                 {/* <span className="text-sm font-bold">example@hmail.com</span> */}
                 <input
                   onChange={handleChange}
@@ -118,11 +118,11 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
 
       {/* 3*/}
       <div className="w-full flex flex-col">
-        <label className="pl-2 text-xs font-bold text-gray-400">TO</label>
-        <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
+        <label className="pl-2 text-sm font-bold text-gray-400">TO</label>
+        <Disclosure className="rounded-md bg-lGray bg-opacity-5 my-2 py-2">
           {({ open }) => (
             <div className="relative">
-              <Disclosure.Button className="flex w-full justify-between rounded-lg  px-4  text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+              <Disclosure.Button className="flex w-full justify-between rounded-md  px-4  text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                 <input
                   value={filter.to}
                   onChange={handleChange}
@@ -143,13 +143,13 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
 
       {/* {4} */}
       <div className="w-full flex flex-col">
-        <label className="pl-2 text-xs  font-bold text-gray-400">
+        <label className="pl-2 text-sm  font-bold text-gray-400">
           HAS KEYWORDS
         </label>
-        <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
+        <Disclosure className="rounded-md bg-lGray bg-opacity-5 my-2 py-2">
           {({ open }) => (
             <div className="relative">
-              <Disclosure.Button className="flex w-full justify-between rounded-lg  px-4  text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+              <Disclosure.Button className="flex w-full justify-between rounded-md  px-4  text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                 <input
                   value={filter.keyword}
                   onChange={handleChange}
@@ -171,13 +171,13 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
       <div className="w-full flex justify-between gap-3">
         {/* 5.1 */}
         <div className="w-1/2 flex flex-col">
-          <label className="pl-2 text-xs font-bold text-gray-400">
+          <label className="pl-2 text-sm font-bold text-gray-400">
             DATE WITHIN
           </label>
-          <Disclosure className="rounded-lg bg-lGray bg-opacity-5 my-2 py-2">
+          <Disclosure className="rounded-md bg-lGray bg-opacity-5 my-2 py-2">
             {({ open, close }) => (
               <div className="relative">
-                <Disclosure.Button className="flex w-full justify-between rounded-lg  px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+                <Disclosure.Button className="flex w-full justify-between rounded-md  px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                   <span className="text-sm font-bold">
                     {filter.within}{" "}
                     {filter.within ? (filter.within > 1 ? "Days" : "Day") : ""}
@@ -217,22 +217,22 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
         </div>
         {/* 5.2 */}
         <div className="w-1/2 flex flex-col">
-          <label className="pl-2 text-xs font-bold text-gray-400">
+          <label className="pl-2 text-sm font-bold text-gray-400">
             Custom Date
           </label>
           <input
             name="date"
             type="date"
-            className="rounded-lg bg-lGray bg-opacity-5 my-2 py-4 border-none text-gray-400"
+            className="rounded-md bg-lGray bg-opacity-5 my-2 py-4 border-none text-gray-400"
             onChange={handleChange}
           />
         </div>
       </div>
 
       {/* {4} */}
-      <div className="w-full flex justify-between gap-2 text-xs font-bold">
+      <div className="w-full flex justify-between gap-2 text-sm font-bold">
         <button
-          className="rounded-lg bg-snow w-1/2 py-2"
+          className="rounded-md bg-snow w-1/2 py-2"
           onClick={(e) => {
             e.preventDefault();
             setToggle(true);
@@ -242,7 +242,7 @@ const SearchForm = ({ setToggle, refButton, show, setShow }) => {
           Cancel
         </button>
         <button
-          className="rounded-lg bg-accent w-1/2 py-2 text-white"
+          className="rounded-md bg-accent w-1/2 py-2 text-white"
           onClick={handleSave}
         >
           Save

@@ -185,7 +185,11 @@ const AddMcqToTopic = () => {
         setCountDetail(currentTopic?.questions?.length - 1);
         setLoader(true);
         dispatch(
-          addQuestionToTopicCompany({ data: question, id: id, type: type || "mcq" })
+          addQuestionToTopicCompany({
+            data: question,
+            id: id,
+            type: type || "mcq",
+          })
         ).then(() => {
           // if(!ADD_QUESTION_LOADING){
           //   navigate(-1);
@@ -199,12 +203,10 @@ const AddMcqToTopic = () => {
             Duration: 0,
             AnswerIndex: null,
           });
-          if(navBack === true){
+          if (navBack === true) {
             navigate(-1);
           }
         });
-
-       
       }
     }
   };
@@ -238,12 +240,14 @@ const AddMcqToTopic = () => {
   return (
     <div>
       <HeaderCompany
-      title={`Question No:  ${countDetail + 1} of ${currentTopic?.questions?.length}`}
+        title={`Question No:  ${countDetail + 1} of ${
+          currentTopic?.questions?.length
+        }`}
         question={question}
-        handleNext={()=>handleQuestionSave(true)}
+        handleNext={() => handleQuestionSave(true)}
         id={id}
         type={type}
-        handlePrev={()=>{
+        handlePrev={() => {
           navigate(`/company/pr/test/select?level=${level}`);
         }}
       />
@@ -259,7 +263,7 @@ const AddMcqToTopic = () => {
                 id=""
                 className={`${
                   level === "adaptive" ? " w-2/3" : "w-full"
-                } rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
+                } rounded-md bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400`}
               >
                 <option value={0}>Time to answer the question</option>
 
@@ -273,7 +277,7 @@ const AddMcqToTopic = () => {
                   name="QuestionLevel"
                   onChange={handleChanges}
                   value={question.QuestionLevel}
-                  className=" w-1/3 rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+                  className=" w-1/3 rounded-md bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
                 >
                   <option value="">Level</option>
 
@@ -291,7 +295,7 @@ const AddMcqToTopic = () => {
                   return { ...prev, Title: value };
                 })
               }
-              className="bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+              className="bg-gray-100 border-none focus:outline-none rounded-md focus:ring-0 placeholder-gray-400"
               placeholder="Enter Question Here"
               name="Title"
             />
@@ -326,12 +330,12 @@ const AddMcqToTopic = () => {
                         : ""
                     }
                     onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
+                    className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-gray-100"
                   />
 
                   {/*  */}
                   <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
+                    className="bg-gray-100 flex justify-center rounded-md "
                     onClick={() =>
                       setQuestion({
                         ...question,
@@ -371,12 +375,12 @@ const AddMcqToTopic = () => {
                         : ""
                     }
                     onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
+                    className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-gray-100"
                   />
 
                   {/*  */}
                   <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
+                    className="bg-gray-100 flex justify-center rounded-md "
                     onClick={() =>
                       setQuestion({
                         ...question,
@@ -416,12 +420,12 @@ const AddMcqToTopic = () => {
                         : ""
                     }
                     onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
+                    className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-gray-100"
                   />
 
                   {/*  */}
                   <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
+                    className="bg-gray-100 flex justify-center rounded-md "
                     onClick={() =>
                       setQuestion({
                         ...question,
@@ -461,12 +465,12 @@ const AddMcqToTopic = () => {
                         : ""
                     }
                     onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
+                    className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-gray-100"
                   />
 
                   {/*  */}
                   <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
+                    className="bg-gray-100 flex justify-center rounded-md "
                     onClick={() =>
                       setQuestion({
                         ...question,
@@ -497,11 +501,10 @@ const AddMcqToTopic = () => {
         <div className="flex justify-between gap-2">
           {" "}
           <div className=" flex gap-2">
-
             {/* TO DO */}
             {
               // <button
-              //   className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+              //   className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
               //     countDetail >= 0 ? "" : "hidden"
               //   }`}
               //   onClick={handlePrev}
@@ -512,7 +515,7 @@ const AddMcqToTopic = () => {
           </div>
           <div className=" flex">
             <button
-              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 "
               // onClick={addQuestion}
               onClick={handleQuestionSave}
             >

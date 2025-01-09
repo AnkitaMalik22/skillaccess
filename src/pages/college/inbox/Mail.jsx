@@ -77,7 +77,7 @@ const Mail = () => {
     <>
       <Header />
 
-      <div className="bg-lGray bg-opacity-5  p-4 rounded-lg max-w-[80vw]">
+      <div className="bg-lGray bg-opacity-5  p-4 rounded-md max-w-[80vw]">
         <div className="w-full bg-white flex mb-2 rounded-xl">
           <div className="w-1/4 h-[4.5rem] flex justify-between px-2">
             <select
@@ -114,12 +114,12 @@ const Mail = () => {
           </div>
         </div>
         <div className="min-h-[70vh] w-full flex gap-4">
-          <div className="w-1/4 bg-white p-2 overflow-y-scroll rounded-lg">
+          <div className="w-1/4 bg-white p-2 overflow-y-scroll rounded-md">
             {arr?.map((data, index) => (
               <Left data={data.mail} index={index} inboxType={inboxType} />
             ))}
           </div>
-          <div className="w-3/4 bg-white rounded-lg">
+          <div className="w-3/4 bg-white rounded-md">
             {type === "view" ? (
               <View index={index} filter={filter} inboxType={inboxType} />
             ) : (

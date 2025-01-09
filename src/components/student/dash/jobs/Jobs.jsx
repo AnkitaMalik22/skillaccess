@@ -26,7 +26,7 @@ const Jobs = () => {
     <div>
       <div className="flex w-full mx-auto justify-between mb-2">
         <button
-          className="  self-center  rounded-lg h-10 w-10 "
+          className="  self-center  rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
           <BackIcon />
@@ -42,7 +42,7 @@ const Jobs = () => {
           </span>
         </div>
 
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+        <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
         </button>
       </div>
@@ -56,11 +56,11 @@ const Jobs = () => {
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base">
                     Role
                   </h2>
-                  <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
+                  <h2 className="font-dmSans font-medium text-[.6rem] sm:text-sm inline">
                     {" "}
                     {job.JobTitle || "title"}
                   </h2>
-                  <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
+                  <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline">
                     {" "}
                     {job.CloseByDate || "date"}
                   </h2>
@@ -68,15 +68,15 @@ const Jobs = () => {
               </div>
               <div className="flex sm:gap-6 gap-1">
                 <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
-                <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
+                <h2 className="font-dmSans text-gray-400  font-medium text-sm self-center sm:text-sm inline">
                   {" "}
                   {job.JobLocation || "location"}
                 </h2>
-                <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
+                <h2 className="font-dmSans text-green-500  font-medium text-sm self-center sm:text-sm inline">
                   {" "}
                   {job.WorkplaceType || "WOrktype"}
                 </h2>
-                <button className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center ">
+                <button className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-md text-white text-[.5rem] sm:text-sm self-center ">
                   {job.EmploymentType || "employmentType"}
                 </button>
                 <FaArrowRight className="text-gray-400 self-center" />

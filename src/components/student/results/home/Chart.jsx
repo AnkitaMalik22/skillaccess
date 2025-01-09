@@ -77,7 +77,7 @@ const ChartComp = () => {
     ],
   });
   return (
-    <div className="sm:flex  mt-6 bg-gray-100 w-full rounded-lg gap-6 font-dmSans  justify-center relative">
+    <div className="sm:flex  mt-6 bg-gray-100 w-full rounded-md gap-6 font-dmSans  justify-center relative">
       {/* chart component */}
       <div className="w-full  rounded-s sm:px-6 mt-2">
         <div className="md:p-2 flex justify-between">
@@ -129,7 +129,7 @@ const ChartComp = () => {
         <div className="3xl:h-[507px] h-96">
           <Chart
             id="results"
-            className="bg-white shadow-md mt-2 rounded-lg "
+            className="bg-white shadow-md mt-2 rounded-md "
             options={settings.options}
             series={settings.series}
             type="line"
@@ -139,11 +139,11 @@ const ChartComp = () => {
           <div className="flex gap-4 my-4">
             <span className="flex gap-1">
               <FaCircle className="text-[#0052CC90]" />{" "}
-              <h2 className="font-bold text-xs">Total Students Appeared</h2>
+              <h2 className="font-bold text-sm">Total Students Appeared</h2>
             </span>
             <span className="flex gap-1">
               <FaCircle className="text-[#00875A90]" />{" "}
-              <h2 className="font-bold text-xs">Total Students Selected</h2>
+              <h2 className="font-bold text-sm">Total Students Selected</h2>
             </span>
           </div>
         </div>

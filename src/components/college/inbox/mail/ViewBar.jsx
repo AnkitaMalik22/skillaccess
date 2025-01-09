@@ -53,7 +53,7 @@ const ViewBar = ({ filter, index, inboxType }) => {
       <div className="w-full flex justify-between self-center">
         <div className="flex gap-2">
           {/* photo */}
-          <div className="h-10 w-10 rounded-lg">
+          <div className="h-10 w-10 rounded-md">
             <img
               src={
                 inboxType === "Sent"
@@ -106,7 +106,7 @@ const ViewBar = ({ filter, index, inboxType }) => {
           <FiCornerUpLeft className="text-lg self-center text-gray-400" />
           <FiCornerUpRight className="text-lg self-center text-gray-400" />
 
-          <p className="text-xs font-bold self-center">
+          <p className="text-sm font-bold self-center">
             {" "}
             {Email?.mail?.Date && convertDate(Email?.mail?.Date)}
           </p>

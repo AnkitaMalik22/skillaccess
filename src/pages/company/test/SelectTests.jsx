@@ -16,7 +16,11 @@ import {
   setTestSelectedTopics,
 } from "../../../redux/college/test/testSlice";
 import { getAllTopicsCompany } from "../../../redux/company/test/thunks/topic";
-import { setCurrentQuestionCountCompany, setCurrentTopicCompany, setTestSelectedTopicsCompany } from "../../../redux/company/test/testSlice";
+import {
+  setCurrentQuestionCountCompany,
+  setCurrentTopicCompany,
+  setTestSelectedTopicsCompany,
+} from "../../../redux/company/test/testSlice";
 
 const SelectTests = () => {
   //useTranslate();
@@ -67,10 +71,12 @@ const SelectTests = () => {
   const addSection = (section) => {
     if (
       parseInt(currentQuestionCount) + parseInt(totalQ) >
-      parseInt(totalQuestions) ||
+        parseInt(totalQuestions) ||
       totalQ > totalQuestions
     ) {
-      toast.error(`Number of question must be less than ${parseInt(totalQuestions) + 1}`);
+      toast.error(
+        `Number of question must be less than ${parseInt(totalQuestions) + 1}`
+      );
       return;
     }
     if (!questionType) {
@@ -149,7 +155,9 @@ const SelectTests = () => {
         //         sectionCopy[qType] = shuffleArray(sectionCopy[qType]).slice(0, totalQ);
         // >>>>>>> saveMain
         dispatch(
-          setCurrentQuestionCountCompany(currentQuestionCount + parseInt(totalQ))
+          setCurrentQuestionCountCompany(
+            currentQuestionCount + parseInt(totalQ)
+          )
         );
         setSelectedSections([...selectedSections, sectionCopy]);
         dispatch(setTestSelectedTopicsCompany(selectedSections));
@@ -211,7 +219,6 @@ const SelectTests = () => {
   };
 
   useEffect(() => {
-
     dispatch(getAllTopicsCompany({ level: level }));
 
     if (sections) {
@@ -222,7 +229,7 @@ const SelectTests = () => {
       topics = JSON.parse(localStorage.getItem("topics"));
 
       setSelectedSections(topics);
-    } catch (error) { }
+    } catch (error) {}
 
     // //console.log("hello tests",sections);
   }, []);
@@ -252,19 +259,24 @@ const SelectTests = () => {
           addSection={addSection}
           totalQ={totalQ}
           setTotalQ={setTotalQ}
-        // setTotalQuestions={setTotalQuestions}
-        // totalQuestions={totalQuestions}
+          // setTotalQuestions={setTotalQuestions}
+          // totalQuestions={totalQuestions}
         />
       )}
-      <HeaderCompany handleNext={() => {
-        if (sections.length === 0) {
-          toast.error("Please select atleast one topic to proceed");
-          return;
-        }
+      <HeaderCompany
+        handleNext={() => {
+          if (sections.length === 0) {
+            toast.error("Please select atleast one topic to proceed");
+            return;
+          }
 
-        Navigate(`/company/pr/test/questions?level=${level}`)
-      }} handlePrev={() => { Navigate(`/company/pr/test/name?level=${level}`) }} title={""} />
-
+          Navigate(`/company/pr/test/questions?level=${level}`);
+        }}
+        handlePrev={() => {
+          Navigate(`/company/pr/test/name?level=${level}`);
+        }}
+        title={""}
+      />
 
       <div className="w-4/5 mx-auto">
         <ProgressBar progress={2} />
@@ -272,16 +284,16 @@ const SelectTests = () => {
 
       {/* larger screens */}
 
-      <div className="min-h-[90vh] my-2 rounded-lg tracking-wide justify-between  ">
-        <h2 className=" text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-lg mb-10 sm:mb-1 ">
+      <div className="min-h-[90vh] my-2 rounded-md tracking-wide justify-between  ">
+        <h2 className=" text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-md mb-10 sm:mb-1 ">
           Your Assessment can include up to 5 Question topics, browse the below
           library to draft the Assessment.{" "}
         </h2>
 
-        <div className=" mx-auto  my-2 rounded-lg grid sm:grid-cols-5 grid-cols-2 gap-6">
+        <div className=" mx-auto  my-2 rounded-md grid sm:grid-cols-5 grid-cols-2 gap-6">
           {selectedSections?.map((section, index) => (
             <div
-              className="w-full h-32 border border-dashed rounded-lg border-blued col-span-1 flex justify-center "
+              className="w-full h-32 border border-dashed rounded-md border-blued col-span-1 flex justify-center "
               key={`${section._id + section.Type}`}
             >
               {/* {//console.log(section, "section")} */}
@@ -298,7 +310,7 @@ const SelectTests = () => {
                     className="self-center"
                   />
 
-                  <h2 className="font-bold text-xs text-gray-400 self-center ">
+                  <h2 className="font-bold text-sm text-gray-400 self-center ">
                     {section?.Type}
                   </h2>
                 </div>
@@ -312,7 +324,7 @@ const SelectTests = () => {
                       className="w-6 h-6 self-center"
                     />
 
-                    <h2 className="font-bold text-xs text-gray-400 self-center px-2">
+                    <h2 className="font-bold text-sm text-gray-400 self-center px-2">
                       {section?.Time}
                     </h2>
                   </div>
@@ -328,21 +340,21 @@ const SelectTests = () => {
 
           {selectedSections?.length < 5
             ? Array.from({ length: 5 - selectedSections.length }).map(
-              (_, index) => (
-                <div
-                  key={index}
-                  className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 flex justify-center p-2 md:p-5"
-                >
-                  <span className="self-center">
-                    <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
+                (_, index) => (
+                  <div
+                    key={index}
+                    className="w-full h-full border border-dashed rounded-md border-blued col-span-1 flex justify-center p-2 md:p-5"
+                  >
+                    <span className="self-center">
+                      <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
 
-                    <h2 className="font-semibold mt-1">
-                      Add section {selectedSections.length + index + 1}{" "}
-                    </h2>
-                  </span>
-                </div>
+                      <h2 className="font-semibold mt-1">
+                        Add section {selectedSections.length + index + 1}{" "}
+                      </h2>
+                    </span>
+                  </div>
+                )
               )
-            )
             : null}
         </div>
 
@@ -351,14 +363,14 @@ const SelectTests = () => {
           setQuestionType={setQuestionType}
           handleFilter={handleFilterSections}
           type={""}
-        // customSelect={[{value:"mcq",label:"Multiple Choice Questions"},{value:"compiler",label:"Code"}]}
+          // customSelect={[{value:"mcq",label:"Multiple Choice Questions"},{value:"compiler",label:"Code"}]}
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
-          <div className="w-full h-64 bg-gray-100 rounded-lg flex justify-center">
+          <div className="w-full h-64 bg-gray-100 rounded-md flex justify-center">
             <div className=" self-center w-fit h-fit ">
               <div
-                className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
+                className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-md mx-auto flex justify-center"
                 onClick={() => {
                   localStorage.removeItem("currentTopic");
                   Navigate(`/company/pr/test/createTopic?level=${level}`);
@@ -371,18 +383,18 @@ const SelectTests = () => {
                 Add New Topic
               </h2>
 
-              <h2 className="text-xs text-center text-gray-400">
+              <h2 className="text-sm text-center text-gray-400">
                 Create new Topic
               </h2>
             </div>
           </div>
           {GET_TOPICS_LOADING && (
-            <div className=" min-h-64 rounded-lg flex items-center  justify-center ">
+            <div className=" min-h-64 rounded-md flex items-center  justify-center ">
               <Loader size="md" />
             </div>
           )}
           {filteredSections?.map((section, index) => (
-            <div className="p-5 flex flex-col justify-between bg-gray-100  rounded-lg min-h-64 overflow-y-scroll">
+            <div className="p-5 flex flex-col justify-between bg-gray-100  rounded-md min-h-64 overflow-y-scroll">
               <div>
                 <h2 className="text-base text-[#171717] font-semibold mb-2 first-letter:uppercase">
                   {section?.Heading}
@@ -395,7 +407,7 @@ const SelectTests = () => {
               </div>
               <div className="flex justify-between gap-2">
                 <button
-                  className="py-2 px-4  bg-[#8F92A120] rounded-lg"
+                  className="py-2 px-4  bg-[#8F92A120] rounded-md"
                   onClick={() => {
                     if (!questionType) {
                       toast.error("Please select a question type first.");
@@ -426,7 +438,7 @@ const SelectTests = () => {
                   Details
                 </button>
                 <button
-                  className=" bg-[#00875A85] py-2 px-4 rounded-lg text-white "
+                  className=" bg-[#00875A85] py-2 px-4 rounded-md text-white "
                   onClick={() => {
                     if (!questionType) {
                       toast.error("Please select a question type first.");

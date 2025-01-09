@@ -14,9 +14,6 @@ import CircularLoader from "../../../components/CircularLoader";
 import useTranslate from "../../../hooks/useTranslate";
 import { setTotalTopicQuestions } from "../../../redux/college/test/thunks/topic";
 
-
-
-
 const AddEssay = () => {
   //useTranslate();
   const { id } = useParams();
@@ -180,7 +177,7 @@ const AddEssay = () => {
   }, [currentTopic]);
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "essay" ,level}));
+      dispatch(setTotalTopicQuestions({ id, type: "essay", level }));
     }
   }, [ADD_QUESTION_LOADING]);
 
@@ -206,7 +203,7 @@ const AddEssay = () => {
               onChange={handleChanges}
               value={question.Duration}
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              className="w-full rounded-md bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
             >
               <option value={0}>Time to answer the question</option>
 
@@ -218,7 +215,7 @@ const AddEssay = () => {
           </div>
 
           <textarea
-            className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0placeholder-gray-400"
+            className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-md focus:ring-0placeholder-gray-400"
             placeholder="Enter Question Here"
             name="Title"
             onChange={handleChanges}
@@ -231,7 +228,7 @@ const AddEssay = () => {
           <div className=" flex gap-2">
             {addType === "topic" ? (
               <button
-                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                   countDetail >= 0 ? "" : "hidden"
                 }`}
                 onClick={handlePrev}
@@ -240,7 +237,7 @@ const AddEssay = () => {
               </button>
             ) : (
               <button
-                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                   count >= 0 ? "" : "hidden"
                 }`}
                 onClick={handlePrev}
@@ -251,7 +248,7 @@ const AddEssay = () => {
           </div>
           <div className=" flex">
             <button
-              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 "
               onClick={() => {
                 if (!loading) handleSave();
               }}

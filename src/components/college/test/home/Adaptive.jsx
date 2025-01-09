@@ -50,7 +50,7 @@ const Adaptive = () => {
           <h2 className="text-center text-black text-base  mt-8 font-bold mb-4 w-20  md:w-60">
             Add New Assessment
           </h2>
-          <h2 className="text-center text-xs my-2 w-20 md:w-60">
+          <h2 className="text-center text-sm my-2 w-20 md:w-60">
             Create new Assessment
           </h2>
         </div>

@@ -40,8 +40,8 @@ const SwiperSlideLeft = () => {
       }}
     >
       <SwiperSlide>
-        <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
+        <div className=" bg-white  w-32 h-36 rounded-md p-2">
+          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-md">
             <img
               src="../intel.png"
               alt="img not loaded"
@@ -56,8 +56,8 @@ const SwiperSlideLeft = () => {
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
+        <div className=" bg-white  w-32 h-36 rounded-md p-2">
+          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-md">
             <img
               src="../company2.png"
               alt="img not loaded"
@@ -70,8 +70,8 @@ const SwiperSlideLeft = () => {
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
+        <div className=" bg-white  w-32 h-36 rounded-md p-2">
+          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-md">
             <img
               src="../intel.png"
               alt="img not loaded"
@@ -84,8 +84,8 @@ const SwiperSlideLeft = () => {
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" bg-white  w-32  h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
+        <div className=" bg-white  w-32  h-36 rounded-md p-2">
+          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-md">
             <img
               src="../intel.png"
               alt="img not loaded"
@@ -98,8 +98,8 @@ const SwiperSlideLeft = () => {
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
+        <div className=" bg-white  w-32 h-36 rounded-md p-2">
+          <figure className="bg-green-500 w-28 h-24 mx-auto rounded-md">
             <img
               src="../intel.png"
               alt="img not loaded"
@@ -117,8 +117,8 @@ const SwiperSlideLeft = () => {
       {/* {newCompanies &&
         newCompanies.map((company) => (
           <SwiperSlide key={company._id}>
-            <div className=" bg-white  w-32 h-36 rounded-lg p-2">
-              <figure className="bg-green-500 w-28 h-24 mx-auto rounded-lg">
+            <div className=" bg-white  w-32 h-36 rounded-md p-2">
+              <figure className="bg-green-500 w-28 h-24 mx-auto rounded-md">
                 {company.basic && company.basic.logo ? (
                   <img
                     src={company.basic.logo}

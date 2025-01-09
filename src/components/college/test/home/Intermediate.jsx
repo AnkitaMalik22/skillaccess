@@ -27,22 +27,20 @@ const Intermediate = () => {
     setShow(false);
   };
   const handleFunc = () => {
-
-    if(isUni()){
+    if (isUni()) {
       navigate("/university/pr/test/name?level=intermediate");
-    }else{
+    } else {
       if (credit?.balance?.credit) {
         navigate("/college/test/name?level=intermediate");
       } else {
         setShow(true);
       }
     }
-    
   };
 
   return (
     <div className="flex bg-[#F8F8F9] w-full gap-2 p-5">
-      <div className=" min-w-max h-64 bg-[#8F92A1] bg-opacity-5 rounded-2xl flex justify-center p-2">
+      <div className=" w-[242px] h-[312px] bg-[#8F92A1] bg-opacity-5 rounded-2xl flex justify-center p-2">
         <div className=" self-center w-fit h-fit ">
           <div
             className="bg-white sm:w-[64px] sm:h-[64px] w-10 h-10 rounded-2xl mx-auto flex justify-center cursor-pointer"
@@ -53,7 +51,7 @@ const Intermediate = () => {
           <h2 className="text-center text-black text-base  font-bold mb-4 mt-8 w-20  md:w-60">
             Add New Assessment
           </h2>
-          <h2 className="text-center text-xs my-2 w-20 md:w-60">
+          <h2 className="text-center text-sm my-2 w-20 md:w-60">
             Create new Assessment
           </h2>
         </div>

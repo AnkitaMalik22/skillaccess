@@ -4,13 +4,13 @@ import { FiPlus, FiUpload } from "react-icons/fi";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
-const Filter = ({handleFilter}) => {
+const Filter = ({ handleFilter }) => {
   const navigate = useNavigate();
   return (
     <div className="flex w-full mx-auto justify-between mb-2 font-dmSans">
       <span className="flex gap-4">
         <button
-          className=" self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-16"
+          className=" self-center ml-2 rounded-md h-10 w-10 sm:h-12 sm:w-16"
           onClick={() => navigate(-1)}
         >
           <img src="/images/icons/list.png" alt="" />
@@ -25,9 +25,9 @@ const Filter = ({handleFilter}) => {
           className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96 max-w-md mx-auto  "
         />
       </div>
-{/* 
+      {/* 
       <span className="flex gap-2">
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+        <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
           <img
             src="/images/icons/Filter.png"
             alt=""

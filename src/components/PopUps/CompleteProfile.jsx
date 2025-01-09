@@ -3,7 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 const CompleteProfile = ({ onCancel }) => {
   return (
     <div className="w-full  min-w-full h-screen  min-h-[100vh] bg-black absolute z-[9999] flex left-0 top-0 bg-opacity-30 ">
-      <div className="bg-white shadow-md w-[780px] h-96 mx-auto self-center   rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-4 relative">
+      <div className="bg-white shadow-md w-[780px] h-96 mx-auto self-center   rounded-md bg-opactiy-10  px-12 flex flex-col justify-center gap-4 relative">
         <p className="text-[28px] font-bold flex justify-center mt-6 text-blued  ">
           Complete your profile first
         </p>

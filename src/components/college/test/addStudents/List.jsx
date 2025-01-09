@@ -104,7 +104,7 @@ const List = ({ uploadedStudents, setStudents, students }) => {
         uploadedStudents?.map((student) => {
           return (
             <div
-              className="flex flex-col w-full mb-3 p-5 rounded-lg bg-white items-center"
+              className="flex flex-col w-full mb-3 p-5 rounded-md bg-white items-center"
               key={student._id}
             >
               {/* {//console.log(student)} */}
@@ -142,8 +142,6 @@ const List = ({ uploadedStudents, setStudents, students }) => {
                   {student.Email}
                 </h2>
               </div>
-
-            
             </div>
           );
         })}

@@ -11,11 +11,10 @@ const Header = ({ Q }) => {
   const [search, setSearch] = useSearchParams();
   const page = search.get("page");
   const level = search.get("level");
-  const entity = isUni() ?"university/pr" : "college";
+  const entity = isUni() ? "university/pr" : "college";
 
   // //console.log("page", level);
   const handleNext = () => {
-    
     if (page === "qb") {
       navigate(`/${entity}/quesBank/topic`);
     } else {
@@ -29,12 +28,12 @@ const Header = ({ Q }) => {
   return (
     <div className="flex  mx-auto justify-between mb-5">
       <div className="h-fit self-center">
-        <button className="flex self-center ml-2 rounded-lg  gap-2">
+        <button className="flex self-center ml-2 rounded-md  gap-2">
           <button
             onClick={() => {
               navigate(`/${entity}/test/select?level=${level}`);
             }}
-            className=" mr-3 self-center bg-white rounded-lg "
+            className=" mr-3 self-center bg-white rounded-md "
           >
             <FaChevronLeft className=" p-3  h-10 w-10 self-center " />
           </button>

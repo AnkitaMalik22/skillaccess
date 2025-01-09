@@ -35,18 +35,18 @@ const AssessmentList = ({ id }) => {
                 className="flex flex-col md:gap-8 bg-white px-2 pt-4 mb-4"
               >
                 <div className="flex gap-3 items-center ">
-                  <div className="min-w-[2.5rem] h-10  self-center rounded-lg">
+                  <div className="min-w-[2.5rem] h-10  self-center rounded-md">
                     <img
                       src="/images/teams.png"
                       alt=" user-icon"
-                      className=" rounded-lg w-11 h-11"
+                      className=" rounded-md w-11 h-11"
                     />
                   </div>
                   <div>
-                    <h2 className="text-xs  font-bold text-[#171717] first-letter:uppercase">
+                    <h2 className="text-sm  font-bold text-[#171717] first-letter:uppercase">
                       {assessment.assessment.name}
                     </h2>
-                    <h2 className="text-xs  font-normal first-letter:uppercase">
+                    <h2 className="text-sm  font-normal first-letter:uppercase">
                       {assessment.assessment.description}
                     </h2>
                   </div>
@@ -54,7 +54,7 @@ const AssessmentList = ({ id }) => {
                 <div className="flex  mb-5 gap-2 justify-between">
                   <div className="flex gap-2">
                     <button
-                      className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
+                      className="rounded-md bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
                       onClick={() => {
                         navigate(
                           `/college/results/overview?level=${assessment.assessment.level}&assessment=${assessment.assessment._id}`
@@ -64,7 +64,7 @@ const AssessmentList = ({ id }) => {
                       View
                     </button>
                     <button
-                      className="rounded-lg p-3  bg-[#8F92A1] bg-opacity-5 self-center"
+                      className="rounded-md p-3  bg-[#8F92A1] bg-opacity-5 self-center"
                       onClick={() =>
                         dispatch(removeFromRecent(assessment.assessment._id))
                       }
@@ -73,7 +73,7 @@ const AssessmentList = ({ id }) => {
                     </button>
                   </div>
 
-                  <p className="text-xs  font-normal text-[#8F92A1]">
+                  <p className="text-sm  font-normal text-[#8F92A1]">
                     {/* {assessment.assessment.endDate} */}
                     {calculateDaysAndWeeks(assessment.assessment.startDate)}
                   </p>

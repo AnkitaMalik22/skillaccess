@@ -10,7 +10,7 @@ import Loader from "../../../components/college/test/addVideo/Loader";
 import { FiUpload } from "react-icons/fi";
 import useTranslate from "../../../hooks/useTranslate";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { isUni ,isCompany} from "../../../util/isCompany";
+import { isUni, isCompany } from "../../../util/isCompany";
 
 const AddQuestionsSelect = () => {
   //useTranslate();
@@ -591,9 +591,9 @@ const AddQuestionsSelect = () => {
       )}
       <div className="flex  justify-between mb-2 mt-5">
         <div>
-          <button className="flex items-center ml-2 rounded-lg  gap-2">
+          <button className="flex items-center ml-2 rounded-md  gap-2">
             <button
-              className="bg-[#D9E1E7]  self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-14"
+              className="bg-[#D9E1E7]  self-center ml-2 rounded-md h-10 w-10 sm:h-12 sm:w-14"
               onClick={() => navigate(-1)}
             >
               <img src="/images/icons/back.png" alt="" srcset="" />
@@ -610,10 +610,16 @@ const AddQuestionsSelect = () => {
         <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
           <div className=" flex">
             <button
-              className="self-center justify-center flex bg-accent py-[5px] px-3 rounded-2xl text-xs gap-2 text-white"
-              onClick={() => navigate(
-                isUni() ? "/university/pr/quesbank/topic" : (isCompany() ? "/company/pr/quesbank/topic" : "/college/quesbank/topic")
-              )}
+              className="self-center justify-center flex bg-accent py-[5px] px-3 rounded-2xl text-sm gap-2 text-white"
+              onClick={() =>
+                navigate(
+                  isUni()
+                    ? "/university/pr/quesbank/topic"
+                    : isCompany()
+                    ? "/company/pr/quesbank/topic"
+                    : "/college/quesbank/topic"
+                )
+              }
             >
               View All
               <FaArrowRightLong className="self-center text-lg text-white ml-4" />
@@ -626,17 +632,17 @@ const AddQuestionsSelect = () => {
 
       <div className="w-11/12 mx-auto mt-20">
         {/* larger screens */}
-        <div className="   my-2 rounded-lg tracking-wide justify-between  ">
-          <h2 className="font-normal text-xs sm:text-sm text-gray-400  mt-8 tracking-wide ">
+        <div className="   my-2 rounded-md tracking-wide justify-between  ">
+          <h2 className="font-normal text-sm sm:text-sm text-gray-400  mt-8 tracking-wide ">
             Add up to 10 custom questions to your assessment (optional). You can
             use five question types: multiple-choice, essay and find answer.
           </h2>
         </div>
 
-        <div className="  sm:mt-5 rounded-lg tracking-wide  w-full ">
+        <div className="  sm:mt-5 rounded-md tracking-wide  w-full ">
           {/* mcq */}
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "mcq" && "border-blued "
             }`}
             onClick={() => setSelectQuestionType("mcq")}
@@ -677,7 +683,7 @@ const AddQuestionsSelect = () => {
           </div>
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "essay" && "border-blued "
             }`}
             onClick={() => setSelectQuestionType("essay")}
@@ -713,7 +719,7 @@ const AddQuestionsSelect = () => {
           </div>
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "findAnswer" && "border-blued "
             }`}
             onClick={() => setSelectQuestionType("findAnswer")}
@@ -754,7 +760,7 @@ const AddQuestionsSelect = () => {
       <div className=" w-11/12 mx-auto flex justify-end mt-14">
         <div className="flex gap-4">
           {/* <button
-            className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-xs gap-2 text-blued"
+            className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-sm gap-2 text-blued"
             onClick={NavHandler}
           >
             New Question
@@ -783,7 +789,7 @@ const AddQuestionsSelect = () => {
             Upload Questions
           </button>
 
-          {/* <button className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-xs gap-2 text-blued">
+          {/* <button className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-sm gap-2 text-blued">
             Copy question from another assessment
           </button> */}
         </div>

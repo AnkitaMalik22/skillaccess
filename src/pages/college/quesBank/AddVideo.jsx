@@ -12,7 +12,7 @@ import Loader from "../../../components/college/quesBank/addVideo/Loader";
 import toast from "react-hot-toast";
 import axios from "axios";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni ,isCompany} from "../../../util/isCompany";
+import { isUni, isCompany } from "../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -225,9 +225,17 @@ const AddVideo = () => {
       // Navigate to the next step
 
       navigate(
-      isUni() ?   `/university/pr/quesBank/video/${id}/selectType?section=${searchParam.get(
-        "topicId"
-      )}` :   (isCompany() ? `/company/pr/quesBank/video/${id}/selectType?section=${searchParam.get("topicId")}` : `/college/quesBank/video/${id}/selectType?section=${searchParam.get("topicId")}`)
+        isUni()
+          ? `/university/pr/quesBank/video/${id}/selectType?section=${searchParam.get(
+              "topicId"
+            )}`
+          : isCompany()
+          ? `/company/pr/quesBank/video/${id}/selectType?section=${searchParam.get(
+              "topicId"
+            )}`
+          : `/college/quesBank/video/${id}/selectType?section=${searchParam.get(
+              "topicId"
+            )}`
       );
     } catch (error) {
       console.error("Error uploading video:", error);
@@ -266,7 +274,7 @@ const AddVideo = () => {
             {!recording && (
               <div
                 {...getRootProps()}
-                className={`border rounded-lg border-dashed h-[238px] w-[685px] mt-8 flex flex-col items-center py-7 ${
+                className={`border rounded-md border-dashed h-[238px] w-[685px] mt-8 flex flex-col items-center py-7 ${
                   isDragActive ? "bg-gray-100" : ""
                 }`}
               >
@@ -295,7 +303,7 @@ const AddVideo = () => {
             <div className="flex gap-4 mt-10">
               {!recording && (
                 <button
-                  className="self-center justify-center flex items-center bg-accent w-[196px] h-[56px] px-4 rounded-2xl text-xs gap-2 text-white"
+                  className="self-center justify-center flex items-center bg-accent w-[196px] h-[56px] px-4 rounded-2xl text-sm gap-2 text-white"
                   {...getRootProps()}
                 >
                   <GrUploadOption className=" w-[22px] h-[22px] text-white text-sm" />
@@ -341,21 +349,21 @@ const AddVideo = () => {
                   <button
                     className={`self-center justify-center items-center flex ${
                       paused ? "bg-accent" : "bg-red-500"
-                    } text-white py-3 px-4 rounded-2xl text-xs gap-2`}
+                    } text-white py-3 px-4 rounded-2xl text-sm gap-2`}
                     onClick={handlePauseResumeRecording}
                   >
                     {paused ? "Resume" : "Pause"}
                   </button>
 
                   <button
-                    className="self-center justify-center flex bg-accent py-3 px-4 rounded-2xl text-xs gap-2 text-white"
+                    className="self-center justify-center flex bg-accent py-3 px-4 rounded-2xl text-sm gap-2 text-white"
                     onClick={handleStopRecording}
                   >
                     Finish Recording
                   </button>
 
                   <p
-                    className={`text-center text-xs rounded-2xl text-[#fff] py-3 px-4 font-bold ${
+                    className={`text-center text-sm rounded-2xl text-[#fff] py-3 px-4 font-bold ${
                       timer >= maxDurationInSeconds - warningTime
                         ? "bg-red-500"
                         : "bg-green-500"
@@ -382,7 +390,7 @@ const AddVideo = () => {
 
           <div className="flex justify-between items-center">
             <button
-              className="self-center  justify-center flex bg-black py-3 px-4 rounded-2xl text-xs gap-2 text-white"
+              className="self-center  justify-center flex bg-black py-3 px-4 rounded-2xl text-sm gap-2 text-white"
               onClick={() => {
                 setFile(null);
 
@@ -395,7 +403,7 @@ const AddVideo = () => {
             </button>
 
             <button
-              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 "
               //  onClick={()=>{
 
               //   dispatch(addVideo({data:file}));

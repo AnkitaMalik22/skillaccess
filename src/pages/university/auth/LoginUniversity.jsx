@@ -6,7 +6,12 @@ import { LuEye, LuEyeOff } from "react-icons/lu";
 import toast from "react-hot-toast";
 import CircularLoader from "../../../components/CircularLoader";
 import Layout from "../../university/auth/Layout";
-import { loginUniversity,selectLoginState,selectUniversityData } from "../../../redux/university/auth/universityAuthSlice";
+import {
+  loginUniversity,
+  selectLoginState,
+  selectUniversityData,
+} from "../../../redux/university/auth/universityAuthSlice";
+import InputField from "../../../components/InputField";
 const UniversityLoginPage = () => {
   const { error, loading } = useSelector(selectLoginState);
   const user = useSelector(selectUniversityData);
@@ -32,7 +37,6 @@ const UniversityLoginPage = () => {
 
     try {
       const res = await dispatch(loginUniversity(data)).unwrap();
-      
     } catch (err) {
       console.log(err);
       toast.error(err.message || "An error occurred during login.");
@@ -74,32 +78,32 @@ const UniversityLoginPage = () => {
               onSubmit={handleSubmit}
             >
               {/* Email Input */}
-              <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
-                <input
+              <div className="w-full mx-auto flex  relative max-w-sm mb-2">
+                <InputField
                   onChange={changeHandler}
                   value={credentials.Email}
                   name="Email"
                   type="email"
                   placeholder="Email Address"
-                  className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
                 />
               </div>
 
               {/* Password Input */}
               <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
-                <input
+                <InputField
                   name="Password"
                   onChange={changeHandler}
                   value={credentials.Password}
                   type={type}
                   placeholder="Password"
-                  className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
                 />
                 <button
                   className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
                   onClick={(e) => {
                     e.preventDefault();
-                    setType((prevType) => (prevType === "text" ? "password" : "text"));
+                    setType((prevType) =>
+                      prevType === "text" ? "password" : "text"
+                    );
                   }}
                   type="button"
                 >
@@ -112,16 +116,18 @@ const UniversityLoginPage = () => {
               </div>
 
               {/* Forgot Password */}
-              <div
-                className="flex gap-2 px-2 w-full max-w-sm mx-auto justify-end cursor-pointer mb-4 md:mb-8"
-                onClick={() => navigate("/forgotPassword")}
-              >
-                <h1 className="text-blue-700 font-bold">Forgot Password</h1>
+              <div className="flex gap-2 px-2 w-full max-w-sm mx-auto justify-end  mb-4 md:mb-8">
+                <h1
+                  className="text-blue-700 font-bold cursor-pointer"
+                  onClick={() => navigate("/forgotPassword")}
+                >
+                  Forgot Password
+                </h1>
               </div>
 
               {/* Login Button */}
               <button
-                className={`btn hover:bg-blued bg-blued rounded-2xl border-none focus:outline-none w-full max-w-sm mx-auto mb-2 text-white ${
+                className={`btn hover:bg-accent bg-accent rounded-md border-none focus:outline-none w-full max-w-xl mx-auto mb-2 shadow-sm focus:shadow-md hover:shadow-md ${
                   isLoginDisabled ? "bg-[#99baeb] cursor-not-allowed" : ""
                 }`}
                 type="submit"

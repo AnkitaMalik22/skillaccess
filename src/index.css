@@ -20,7 +20,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #0D9AAC;
+  background-color: #0d9aac;
 
   border-radius: 14px;
   border: 3px solid var(--primary);
@@ -58,18 +58,18 @@
 }
 
 .active-li {
-  @apply bg-white text-black rounded-lg;
+  @apply bg-white text-black rounded-md;
   /* Active state */
 }
 
 .hover-li:hover {
-  @apply bg-white bg-opacity-20 text-black rounded-lg;
+  @apply bg-white bg-opacity-20 text-black rounded-md;
   /* Hover state */
 }
 
 #\:0\.targetLanguage select:not(:first-child) {
   display: none;
 }
-[type = "checkbox"] {
-  color : #0AB8C8;
+[type="checkbox"] {
+  color: #0ab8c8;
 }

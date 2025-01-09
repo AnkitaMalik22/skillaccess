@@ -14,7 +14,14 @@ import Loader from "../test/addVideo/Loader";
 import { uploadStudents } from "../../../redux/college/student/studentSlice";
 import { IoIosSearch } from "react-icons/io";
 
-const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilterType}) => {
+const Header = ({
+  handleFilter,
+  year,
+  setYear,
+  setCreatedAt,
+  createdAt,
+  setFilterType,
+}) => {
   const { uploadedStudents } = useSelector((state) => state.collegeStudents);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -26,7 +33,6 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   // const [year, setYear] = useState('');
-
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
@@ -78,13 +84,15 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
       }
 
       const headers = jsonData[0];
-      const expectedHeaders = ["FirstName", "LastName", "Email","Batch"];
+      const expectedHeaders = ["FirstName", "LastName", "Email", "Batch"];
       const isValidFormat = expectedHeaders.every(
         (header, index) => headers[index] === header
       );
 
       if (!isValidFormat || headers.length !== 4) {
-        toast.error("Incorrect titles, titles must be FirstName, LastName, Email ,Batch"); 
+        toast.error(
+          "Incorrect titles, titles must be FirstName, LastName, Email ,Batch"
+        );
         setLoading(false);
         return;
       }
@@ -98,7 +106,7 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
           continue;
         }
 
-        const [firstName, lastName, email , batch] = row;
+        const [firstName, lastName, email, batch] = row;
 
         if (!firstName) {
           toast.error(`First Name is required at row ${i + 1}`);
@@ -113,7 +121,7 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
           continue;
         }
 
-        if(!batch){
+        if (!batch) {
           toast.error(`Batch is required at row ${i + 1}`);
           continue;
         }
@@ -122,19 +130,17 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
           FirstName: firstName,
           LastName: lastName,
           Email: email,
-          Batch:batch
+          Batch: batch,
         });
       }
 
       setVisible(false);
       if (students.length > 0) {
-       await dispatch(uploadStudents(students));
+        await dispatch(uploadStudents(students));
         // toast.success("Students uploaded successfully");
       } else {
         toast.warn("No valid student data to upload");
       }
-
-      
     } catch (error) {
       toast.error("An error occurred while processing the file");
       console.error("Error processing the file:", error);
@@ -157,7 +163,7 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
 
   const navigate = useNavigate();
   return (
-    <div className="flex w-full mx-auto justify-between mb-6" >
+    <div className="flex w-full mx-auto justify-between mb-6">
       {visible && (
         <PopUp
           visible={visible}
@@ -170,7 +176,7 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
       )}
 
       <span className="flex gap-2">
-        <button className="self-center object-center rounded-lg h-10 w-10">
+        <button className="self-center object-center rounded-md h-10 w-10">
           <img src="/images/icons/reports.png" alt="ico" />
         </button>
       </span>
@@ -185,7 +191,6 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
             className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
           />
         </span>
-     
       </div>
 
       <span className="flex gap-3">
@@ -215,83 +220,90 @@ const Header = ({ handleFilter, year ,setYear ,setCreatedAt ,createdAt ,setFilte
         </button>
 
         <div className="relative">
-      {/* Button to toggle popup */}
-      <button
-        onClick={togglePopup}
-        className={`self-center rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center transition-colors ${isPopupOpen ? 'bg-[#0d9aac] text-white' : 'bg-[#8f92a11a] hover:bg-blued hover:text-white'}`}
-      >
-        <PiSlidersHorizontalLight className="h-7 w-7" />
-      </button>
+          {/* Button to toggle popup */}
+          <button
+            onClick={togglePopup}
+            className={`self-center rounded-md h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center transition-colors ${
+              isPopupOpen
+                ? "bg-[#0d9aac] text-white"
+                : "bg-[#8f92a11a] hover:bg-blued hover:text-white"
+            }`}
+          >
+            <PiSlidersHorizontalLight className="h-7 w-7" />
+          </button>
 
-      {/* Popup */}
-      {isPopupOpen && (
-        <div className="absolute top-0 right-0 mt-12 w-64 p-4 bg-white shadow-2xl rounded-lg z-10 " onMouseLeave={togglePopup} >
-          <div className="flex flex-col space-y-4">
-            {/* Year Selection */}
-            <label className="text-sm font-semibold">Select Year</label>
-            <select
-              onChange={(e) => setYear(e.target.value || "")}
-              className="w-full px-4 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-accent"
+          {/* Popup */}
+          {isPopupOpen && (
+            <div
+              className="absolute top-0 right-0 mt-12 w-64 p-4 bg-white shadow-2xl rounded-md z-10 "
+              onMouseLeave={togglePopup}
             >
-              <option value="">Select Year</option>
-              {(() => {
-                const currentYear = new Date().getFullYear();
-                const years = Array.from({ length: 9 }, (_, i) => currentYear - 4 + i);
-                return years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ));
-              })()}
-            </select>
+              <div className="flex flex-col space-y-4">
+                {/* Year Selection */}
+                <label className="text-sm font-semibold">Select Year</label>
+                <select
+                  onChange={(e) => setYear(e.target.value || "")}
+                  className="w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  <option value="">Select Year</option>
+                  {(() => {
+                    const currentYear = new Date().getFullYear();
+                    const years = Array.from(
+                      { length: 9 },
+                      (_, i) => currentYear - 4 + i
+                    );
+                    return years.map((year) => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ));
+                  })()}
+                </select>
 
-            {/* Created At Input */}
-            <label className="text-sm font-semibold">Created At</label>
-            <input
-              type="date"
-              value={createdAt}
-              onChange={(e) => setCreatedAt(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-accent"
-            />
+                {/* Created At Input */}
+                <label className="text-sm font-semibold">Created At</label>
+                <input
+                  type="date"
+                  value={createdAt}
+                  onChange={(e) => setCreatedAt(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-accent"
+                />
 
-              {/* Filter Type Selection */}
-              <label className="text-sm font-semibold">Filter Type</label>
-            <select
-              onChange={(e) => setFilterType(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-accent"
-            >
-              <option value="all students">Select Filter</option>
-              <option value="pending students">Pending Students</option>
-              <option value="invited students">Invited Students</option>
-              <option value="approved students">Approved Students</option>
-            </select>
+                {/* Filter Type Selection */}
+                <label className="text-sm font-semibold">Filter Type</label>
+                <select
+                  onChange={(e) => setFilterType(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  <option value="all students">Select Filter</option>
+                  <option value="pending students">Pending Students</option>
+                  <option value="invited students">Invited Students</option>
+                  <option value="approved students">Approved Students</option>
+                </select>
 
-            {/* Submit Button */}
-            <div className="flex justify-between">
-            <button
-              onClick={togglePopup}
-              className="px-4 py-2 text-sm text-white bg-accent rounded-lg focus:outline-none"
-            >
-              Apply
-            </button>
-            <button
-              onClick={() => {
-                setYear("");
-                setCreatedAt("");
-                setFilterType("all students");
-              }}
-              className="px-4 py-2 text-sm text-white bg-accent rounded-lg focus:outline-none"
-            >
-              Clear
-            </button>
-          </div>
-
-  
-          </div>
+                {/* Submit Button */}
+                <div className="flex justify-between">
+                  <button
+                    onClick={togglePopup}
+                    className="px-4 py-2 text-sm text-white bg-accent rounded-md focus:outline-none"
+                  >
+                    Apply
+                  </button>
+                  <button
+                    onClick={() => {
+                      setYear("");
+                      setCreatedAt("");
+                      setFilterType("all students");
+                    }}
+                    className="px-4 py-2 text-sm text-white bg-accent rounded-md focus:outline-none"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      )}
-    </div>
-   
       </span>
     </div>
   );

@@ -28,13 +28,13 @@ const Video = ({ video, Number }) => {
         <>
           <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10 mb-4 ">
             {" "}
-            {/* <button className=" bg-blued rounded-lg bg-opacity-5 text-left text-blued flex"> */}{" "}
+            {/* <button className=" bg-blued rounded-md bg-opacity-5 text-left text-blued flex"> */}{" "}
             <div className=" bg-accent rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
               Q-{Number}
             </div>
             {/* </button> */}
             <Disclosure.Button className="w-full bg-gray-100 ">
-              <div className="flex w-full justify-between items-center gap-2 rounded-lg border-[#0D9AAC] border text-[#3E3E3E] py-3 text-left text-lg font-normal">
+              <div className="flex w-full justify-between items-center gap-2 rounded-md border-[#0D9AAC] border text-[#3E3E3E] py-3 text-left text-lg font-normal">
                 <div></div>
                 <h2 className="px-4 font-semibold  text-base text-center">
                   Click to Expand{" "}
@@ -62,7 +62,7 @@ const Video = ({ video, Number }) => {
 
           <Disclosure.Panel className="relative z-10">
             <div className="mb-4 ml-16">
-              <div className="flex w-full justify-between flex-col rounded-lg border-[#0D9AAC] border text-[#3E3E3E] py-3 text-left text-lg font-normal  ">
+              <div className="flex w-full justify-between flex-col rounded-md border-[#0D9AAC] border text-[#3E3E3E] py-3 text-left text-lg font-normal  ">
                 <div className="flex justify-between items-center w-full px-2">
                   {/* <h2 className="px-4 font-semibold pt-3 text-base"></h2> */}
                   <div className="px-5 pb-4 flex flex-col gap-4">

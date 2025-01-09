@@ -21,37 +21,37 @@ const Info = ({ user, assessment }) => {
             {assessment?.name || "SDSAD"}
           </h2>
 
-          <h2 className="text-xs mb-2">gOODLE iNC.</h2>
-          <h2 className="text-[#7D7D7D] text-xs">Available Jobs</h2>
+          <h2 className="text-sm mb-2">gOODLE iNC.</h2>
+          <h2 className="text-[#7D7D7D] text-sm">Available Jobs</h2>
         </div>
       </div>
       <div className="grid grid-cols-5 gap-14 text-center font-dmSans">
         <div className="self-center">
-          <h2 className="text-xs font-bold text-gray-400 mb-2">YOUR SCORE</h2>
+          <h2 className="text-sm font-bold text-gray-400 mb-2">YOUR SCORE</h2>
 
           <h2 className="text-sm font-bold ">-</h2>
         </div>
 
         <div className="self-center">
-          <h2 className="text-xs font-bold text-gray-400 mb-2">
+          <h2 className="text-sm font-bold text-gray-400 mb-2">
             AVERAGE SCORE
           </h2>
           <h2 className="text-sm font-bold ">-</h2>
         </div>
 
         <div className="self-center">
-          <h2 className="text-xs font-bold text-gray-400 mb-2">STATUS</h2>
+          <h2 className="text-sm font-bold text-gray-400 mb-2">STATUS</h2>
 
           <h2 className="text-sm font-bold text-amber-500 ">Under Review</h2>
         </div>
 
         <div className="self-center">
-          <h2 className="text-xs font-bold text-gray-400 mb-2">TIME</h2>
+          <h2 className="text-sm font-bold text-gray-400 mb-2">TIME</h2>
 
           <h2 className="text-sm font-bold ">2hrs</h2>
         </div>
         <div className="self-center">
-          <h2 className="text-xs font-bold text-gray-400 mb-2">DUE DATE</h2>
+          <h2 className="text-sm font-bold text-gray-400 mb-2">DUE DATE</h2>
 
           <h2 className="text-sm font-bold ">-</h2>
         </div>

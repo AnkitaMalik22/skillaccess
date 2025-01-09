@@ -41,7 +41,7 @@ const Companies = () => {
       <div className="flex w-full mx-auto justify-between mb-6">
         <div className="flex gap-3">
           <button
-            className="self-center object-center rounded-lg h-10 w-10 "
+            className="self-center object-center rounded-md h-10 w-10 "
             // onClick={() => navigate('college/companies')}
           >
             <img src="/images/icons/sales.jpg" alt="icon" />
@@ -72,57 +72,58 @@ const Companies = () => {
           <button className="self-center justify-center flex bg-accent px-5 py-3  rounded-2xl text-white  gap-2 text-md font-bold w-40">
             <FiUpload className="self-center text-lg " /> Upload New
           </button>
-          <button className="bg-[#8f92a11a]  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
+          <button className="bg-[#8f92a11a]  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center">
             <img src="/images/icons/Filter.png" className="w-7 h-7" />
           </button>
         </div> */}
       </div>
       <div className="flex flex-wrap gap-5 md:gap-10 md:gap-y-[30px] gap-y-4 ">
-      {filtered &&
-  filtered.map((company, index) => (
-    <div
-      className="relative card card-compact xl:w-80 md:w-60 w-40 bg-[#F8F8F9] rounded-b-2xl rounded-none"
-      key={index}
-    >
-      {/* Hiring Tag */}
-      {/* {company.hiring && (
+        {filtered &&
+          filtered.map((company, index) => (
+            <div
+              className="relative card card-compact xl:w-80 md:w-60 w-40 bg-[#F8F8F9] border rounded-md border-gray-200 hover:shadow-md"
+              key={index}
+            >
+              {/* Hiring Tag */}
+              {/* {company.hiring && (
         <div className="absolute top-2 right-2 bg-yellow-500 text-white text-sm font-semibold py-2 px-6 rounded-full">
           Hiring
         </div>
       )} */}
-      <figure>
-        <img
-          src={ company?.basic?.coverPhoto ||"/images/default.jpg"}
-          alt="company card"
-          className="object-cover xl:h-40 md:h-28 h-20 w-full"
-        />
-      </figure>
-      <div className="card-body gap-0 py">
-        <div className="w-12 h-12 -mt-10 rounded-xl bg-[#F8F8F9] p-2 mb-4">
-          <img
-            src={company.basic?.logo || "/images/defaultUser.jpg"}
-            alt=""
-            className="object-cover"
-          />
-        </div>
-        <h2 className="card-title text-lg font-dmSans font-bold mb-2">
-          {company.basic?.companyName || "Name"}
-        </h2>
-        <p className="line-clamp-5 text-sm opacity-[0.6] mb-5">
-          {company.about?.description || "Lorem ipsum dolor sit amet."}
-        </p>
-        <div className="card-actions justify-end">
-          <button
-            className="px-6 py-[10px] hover:bg-accent bg-accent text-xs font-dmSans font-bold rounded-2xl text-white"
-            onClick={() => navigate(`/college/companies/profile/${company._id}`)}
-          >
-            View Details
-          </button>
-        </div>
-      </div>
-    </div>
-  ))}
-
+              <figure>
+                <img
+                  src={company?.basic?.coverPhoto || "/images/default.jpg"}
+                  alt="company card"
+                  className="object-cover xl:h-40 md:h-28 h-20 w-full"
+                />
+              </figure>
+              <div className="card-body gap-0 py">
+                <div className="w-12 h-12 -mt-10 rounded-md bg-[#F8F8F9] p-2 mb-4">
+                  <img
+                    src={company.basic?.logo || "/images/defaultUser.jpg"}
+                    alt=""
+                    className="object-cover"
+                  />
+                </div>
+                <h2 className="card-title text-lg font-dmSans font-bold mb-2">
+                  {company.basic?.companyName || "Name"}
+                </h2>
+                <p className="line-clamp-5 text-sm opacity-[0.6] mb-5">
+                  {company.about?.description || "Lorem ipsum dolor sit amet."}
+                </p>
+                <div className="card-actions justify-end">
+                  <button
+                    className="px-4 py-2 hover:bg-accent bg-accent text-sm font-dmSans font-bold rounded-md text-white"
+                    onClick={() =>
+                      navigate(`/college/companies/profile/${company._id}`)
+                    }
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
       </div>
     </>
   );

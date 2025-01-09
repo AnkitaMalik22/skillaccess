@@ -55,7 +55,7 @@ const List = () => {
           <HiDotsVertical className="self-center text-sm  text-gray-400" />
         </div>
         <div className="flex gap-2 self-center">
-          <p className="text-gray-400 text-xs font-bold">1-50 of 4,792</p>
+          <p className="text-gray-400 text-sm font-bold">1-50 of 4,792</p>
           <FaChevronLeft />
           <FaChevronRight />
         </div>
@@ -66,7 +66,7 @@ const List = () => {
 
       {arr.map((el, i) => {
         return (
-          <div className="mb-4 bg-white rounded-lg flex justify-between py-4 w-[98%] mx-auto ">
+          <div className="mb-4 bg-white rounded-md flex justify-between py-4 w-[98%] mx-auto ">
             <div className="flex gap-4 ">
               {el.isChecked ? (
                 <div className=" border-l-blue-700 border-2 border-white"></div>

@@ -54,7 +54,7 @@ const List = () => {
 
       {/* list to be iterated */}
       {arr.map((assessment) => (
-        <div className=" grid-cols-6 rounded-lg my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full">
+        <div className=" grid-cols-6 rounded-md my-4 py-2 pl-2 text-center  mx-auto  font-dmSans  text-sm hidden md:grid w-full">
           {" "}
           {/* row-2 */}
           <div className={` flex justify-center `}>
@@ -81,10 +81,10 @@ const List = () => {
           <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
-                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
-                  <div className={`w-3/5 bg-green-700 h-full rounded-lg`}></div>
+                <div className="min-w-[6rem] bg-opacity-5 rounded-md h-3 mx-auto bg-green-600">
+                  <div className={`w-3/5 bg-green-700 h-full rounded-md`}></div>
                 </div>
-                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                <h2 className="font-dmSans font-bold text-sm sm:text-sm ">
                   {" "}
                   70%
                 </h2>

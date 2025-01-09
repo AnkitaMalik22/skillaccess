@@ -66,10 +66,10 @@ const Invite = () => {
     <>
       <div className="flex gap-3 mb-5">
         <button
-          className="self-center object-center rounded-lg h-10 w-10 "
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         {/* <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Create Assessment
@@ -81,23 +81,22 @@ const Invite = () => {
           <div
             name=""
             id=""
-            className="rounded-lg  focus:outline-none border-none mb-4 p-5 font-bold text-2xl"
+            className="rounded-md  focus:outline-none border-none mb-4 p-5 font-bold text-2xl"
           >
             {localStorage?.getItem("testName")}
           </div>
 
-        {/* {console.log(assessment?.endDate)} */}
-        <Footer students={students} endDate={assessment?.endDate} />
-
-    
+          {/* {console.log(assessment?.endDate)} */}
+          <Footer students={students} endDate={assessment?.endDate} />
         </div>
 
-        <div className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg p-5 focus:ring-0placeholder-gray-400 mb-6">
-          <Header handleFilter={handleFilterStudents}  
+        <div className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-md p-5 focus:ring-0placeholder-gray-400 mb-6">
+          <Header
+            handleFilter={handleFilterStudents}
             setStudents={setStudents}
             uploadedStudents={filteredStudents}
             students={students}
-            />
+          />
           <List
             setStudents={setStudents}
             uploadedStudents={filteredStudents}
@@ -105,8 +104,6 @@ const Invite = () => {
           />
         </div>
       </div>
-
-   
     </>
   );
 };

@@ -54,7 +54,7 @@ const CompanyProfile = () => {
         {/* comp */}
         <span className="flex gap-3">
           <button
-            className="bg-[#D9E1E7]  self-center object-center  rounded-lg p-3"
+            className="bg-[#D9E1E7]  self-center object-center  rounded-md p-3"
             onClick={() => navigate(-1)}
           >
             <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
@@ -87,9 +87,9 @@ const CompanyProfile = () => {
               alt="img"
               className="w-full h-full z-0 object-cover rounded-t-[32px]"
             />
-            <div className=" absolute -bottom-7  left-5 bg-white h-12 w-12 flex justify-center items-center rounded-lg">
+            <div className=" absolute -bottom-7  left-5 bg-white h-12 w-12 flex justify-center items-center rounded-md">
               <img
-                src={companyDetails?.basic?.logo || "/images/defaultUser.jpg" }
+                src={companyDetails?.basic?.logo || "/images/defaultUser.jpg"}
                 className="w-10 h-10 object-contain self-center"
                 alt="brand logo"
               />
@@ -100,10 +100,10 @@ const CompanyProfile = () => {
               <h2 className="font-bold text-lg">
                 {companyDetails?.basic?.companyName}
               </h2>
-              <h2 className="text-xs font-medium">
+              <h2 className="text-sm font-medium">
                 {companyDetails?.location?.state} Branch Office
               </h2>
-              <h2 className="text-xs font-medium text-[#8E91A0">
+              <h2 className="text-sm font-medium text-[#8E91A0">
                 Available Jobs
               </h2>
             </div>
@@ -156,15 +156,18 @@ const CompanyProfile = () => {
             ?.map((job, index) => {
               return (
                 <div
-                  className="flex justify-between mt-4 bg-gray-100 rounded-lg p-4"
+                  className="flex justify-between mt-4 bg-gray-100 rounded-md p-4"
                   key={index}
                 >
                   <>
                     <div className="sm:flex">
-                      <div className="  flex justify-center rounded-lg mr-2">
+                      <div className="  flex justify-center rounded-md mr-2">
                         <img
-                          src={companyDetails?.basic?.logo || "/images/defaultUser.jpg"}
-                          className="w-10 h-10 rounded-lg self-center"
+                          src={
+                            companyDetails?.basic?.logo ||
+                            "/images/defaultUser.jpg"
+                          }
+                          className="w-10 h-10 rounded-md self-center"
                           alt=""
                         />
                       </div>
@@ -172,15 +175,15 @@ const CompanyProfile = () => {
                         <h2 className="font-dmSans font-semibold text-sm sm:text-base">
                           {job.JobTitle || "title"}
                         </h2>
-                        <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline mr-2">
+                        <h2 className="font-dmSans font-medium text-[.6rem] sm:text-sm inline mr-2">
                           {" "}
                           {companyDetails?.basic?.companyName}
                         </h2>
-                        <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline mr-3">
+                        <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline mr-3">
                           {" "}
                           {job.JobLocation || "location"}
                         </h2>
-                        <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
+                        <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline">
                           {" "}
                           in{" "}
                           <em className="not-italic text-black">
@@ -191,7 +194,7 @@ const CompanyProfile = () => {
                     </div>
                     <div className="flex sm:gap-6 gap-1">
                       <button
-                        className=" h-8 p-1 w-20  hover:bg-blue-900 bg-accent  rounded-lg bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
+                        className=" h-8 p-1 w-20  hover:bg-blue-900 bg-accent  rounded-md bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
                         onClick={() =>
                           navigate(`/college/companies/jobOverview/${job._id}`)
                         }
