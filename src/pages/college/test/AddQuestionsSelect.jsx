@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import HeaderSelect from "../../../components/college/test/addquestions/HeaderSelect";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { getEntity } from "../../../util/isCompany";
+import CommonHeader from "../../../components/CommonHeader";
 
 const AddQuestionsSelect = () => {
   //useTranslate();
@@ -21,7 +20,7 @@ const AddQuestionsSelect = () => {
   // }, [selectQuestionType]);
 
   const NavHandler = () => {
-    let entity = isUni() ? "university/pr" : "college";
+    let entity = getEntity();
 
     switch (selectQuestionType) {
       case "mcq":
@@ -60,9 +59,17 @@ const AddQuestionsSelect = () => {
         break;
     }
   };
+
+  const handleNext = () => {
+    // //console.log("level", level);
+    level === "adaptive"
+      ? navigate(`/${getEntity()}/test/selectAdaptive?level=${level}`)
+      : navigate(`/${getEntity()}/test/select?level=${level}`);
+  };
   return (
     <>
-      <HeaderSelect Q={selectQuestionType} />
+      {/* <HeaderSelect Q={selectQuestionType} /> */}
+      <CommonHeader backPath={`${level === "adaptive" ? `/${getEntity()}/test/selectAdaptive` : `/${getEntity()}/test/select`}`} title="Add Questions" handleNext={handleNext} />
 
       <div className=" mx-auto mt-20">
         {/* larger screens */}
@@ -77,9 +84,8 @@ const AddQuestionsSelect = () => {
         <div className="  sm:mt-5 rounded-md tracking-wide  w-full ">
           {/* mcq */}
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
-            }`}
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
+              }`}
             onClick={() => setSelectQuestionType("mcq")}
           >
             {" "}
@@ -119,9 +125,8 @@ const AddQuestionsSelect = () => {
 
           {/* code */}
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "code" ? "border-blued" : "opacity-70"
-            }`}
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${selectQuestionType === "code" ? "border-blued" : "opacity-70"
+              }`}
             onClick={() => setSelectQuestionType("code")}
           >
             {" "}
@@ -159,9 +164,8 @@ const AddQuestionsSelect = () => {
           {/* Essay */}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "essay" ? "border-blued" : "opacity-70"
-            }`}
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${selectQuestionType === "essay" ? "border-blued" : "opacity-70"
+              }`}
             onClick={() => setSelectQuestionType("essay")}
           >
             {" "}
@@ -196,9 +200,8 @@ const AddQuestionsSelect = () => {
           {/*  */}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "video" ? "border-blued" : "opacity-70"
-            }`}
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${selectQuestionType === "video" ? "border-blued" : "opacity-70"
+              }`}
             onClick={() => setSelectQuestionType("video")}
           >
             {" "}
@@ -235,11 +238,10 @@ const AddQuestionsSelect = () => {
           {/* Find Answer*/}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "findAnswer"
-                ? "border-blued"
-                : "opacity-70"
-            }`}
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${selectQuestionType === "findAnswer"
+              ? "border-blued"
+              : "opacity-70"
+              }`}
             onClick={() => setSelectQuestionType("findAnswer")}
           >
             {" "}

@@ -25,4 +25,14 @@ export const getHeaders = (contentType = "application/json",additionalHeaders={}
     return headers;
   };
 
+
+  export const getEntity = ()=>{
+    if(isCompany()){
+      return "company/pr"
+    }else if(isUni()){
+      return "university/pr"
+    }else{
+      return "college"
+    }
+  }
 export default  isCompany;

@@ -13,7 +13,7 @@ import {
 } from "../../../redux/college/test/testSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { getEntity } from "../../../util/isCompany";
 
 const AddQuestions = () => {
   //useTranslate();
@@ -25,7 +25,7 @@ const AddQuestions = () => {
   // React.useEffect(() => {
   //   //console.log(topics, "topics");
   // }, [topics]);
-  const entity = isUni() ? "university/pr" : "college";
+  const entity = getEntity();
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");

@@ -55,9 +55,9 @@ const App = () => {
           <Route
             path="/college/*"
             element={
-              <ProtectedRoute isAuthenticated={isLoggedIn} redirectPath="/">
+              // <ProtectedRoute isAuthenticated={isLoggedIn} redirectPath="/">
                 <CollegeRoutes />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             }
           />
           <Route path="/company/*" element={<CompanyRoutes />} />

@@ -7,7 +7,7 @@ import Chart from "react-apexcharts";
 import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import Performance from "../../../components/college/results/overview/Performance";
-import { isUni } from "../../../util/isCompany";
+import { getEntity, isUni } from "../../../util/isCompany";
 
 const Assessment = () => {
   //useTranslate();
@@ -174,10 +174,8 @@ const Assessment = () => {
                   className="self-center justify-center bg-gray-200 p-2 rounded-md text-sm hover:bg-blue-500 hover:text-white text-[#171717]"
                   onClick={() =>
                     navigate(
-                      `/${
-                        isUni() ? "university/pr" : "college"
-                      }/test/details/${index}?question=${
-                        topic.Type
+                      `/${getEntity()
+                      }/test/details/${index}?question=${topic.Type
                       }&type=assessment&view=false`
                     )
                   }

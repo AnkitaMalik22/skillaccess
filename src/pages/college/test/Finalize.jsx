@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaChevronLeft } from "react-icons/fa";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { getEntity } from "../../../util/isCompany";
 
 const Finalize = () => {
   //useTranslate();
@@ -58,9 +58,7 @@ const Finalize = () => {
     // );
 
     navigate(
-      `/${
-        isUni() ? "university/pr" : "college"
-      }/test/invite?testId=${searchParams.get("testId")}`
+      `/${getEntity()}/test/invite?testId=${searchParams.get("testId")}`
     );
     // localStorage.removeItem("testDetails");
     // localStorage.removeItem("totalTime");

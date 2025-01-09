@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllTests } from "../../../../redux/college/test/thunks/test";
 import CreditPopUp from "../../../PopUps/CreditPopUp";
-import { isUni } from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 
 const Adaptive = () => {
   const navigate = useNavigate();
@@ -25,17 +25,17 @@ const Adaptive = () => {
     setShow(false);
   };
   const handleFunc = () => {
-
-    if(isUni()){
-      navigate("/university/pr/test/name?level=adaptive");
-    }else{
+    const entity = isUni() ? "university/pr" : isCompany() ? "company/pr" : "college";
+    if (!isUni() || isCompany()) {
+      navigate(`/${entity}/test/name?level=adaptive`);
+    } else {
       if (credit?.balance?.credit) {
         navigate("/college/test/name?level=adaptive");
       } else {
         setShow(true);
       }
     }
-  
+
   };
   return (
     <div className="flex bg-[#F8F8F9] w-full gap-2 p-5">

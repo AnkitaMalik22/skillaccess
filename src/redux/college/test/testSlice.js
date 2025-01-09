@@ -752,11 +752,16 @@ const testSlice = createSlice({
         //console.log("pending");
       })
       .addCase(getTopicById.fulfilled, (state, action) => {
-        state.currentTopic = action.payload;
-        localStorage.setItem(
-          "currentTopic",
-          JSON.stringify(action.payload)
-        );
+       
+
+        if(JSON.stringify(action.payload.section) !== localStorage.getItem("currentTopic")){
+          localStorage.setItem("currentTopic", JSON.stringify(action.payload.section));
+          state.currentTopic = action.payload.section;
+        }
+        // localStorage.setItem(
+        //   "currentTopic",
+        //   JSON.stringify(action.payload)
+        // );
         // //console.log(action.payload);
         //console.log("fullfilled");
       })
