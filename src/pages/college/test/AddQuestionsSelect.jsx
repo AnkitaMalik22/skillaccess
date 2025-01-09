@@ -21,11 +21,9 @@ const AddQuestionsSelect = () => {
   // }, [selectQuestionType]);
 
   const NavHandler = () => {
-
-    let entity = isUni() ?"university/pr" : "college";
+    let entity = isUni() ? "university/pr" : "college";
 
     switch (selectQuestionType) {
-
       case "mcq":
         navigate(
           `/${entity}/test/addMcqToTopic/${id}?type=mcq&addType=topic&level=${level}`
@@ -68,18 +66,18 @@ const AddQuestionsSelect = () => {
 
       <div className=" mx-auto mt-20">
         {/* larger screens */}
-        <div className="   my-2 rounded-lg tracking-wide justify-between  ">
-          <h2 className="font-normal text-xs sm:text-sm text-gray-400  mt-8 tracking-wide ">
+        <div className="   my-2 rounded-md tracking-wide justify-between  ">
+          <h2 className="font-normal text-sm sm:text-sm text-gray-400  mt-8 tracking-wide ">
             Add up to 10 custom questions to your assessment (optional). You can
             use five question types: multiple-choice, essay, video, code and
             find answer.
           </h2>
         </div>
 
-        <div className="  sm:mt-5 rounded-lg tracking-wide  w-full ">
+        <div className="  sm:mt-5 rounded-md tracking-wide  w-full ">
           {/* mcq */}
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("mcq")}
@@ -121,7 +119,7 @@ const AddQuestionsSelect = () => {
 
           {/* code */}
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "code" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("code")}
@@ -161,7 +159,7 @@ const AddQuestionsSelect = () => {
           {/* Essay */}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "essay" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("essay")}
@@ -198,7 +196,7 @@ const AddQuestionsSelect = () => {
           {/*  */}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "video" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("video")}
@@ -237,7 +235,7 @@ const AddQuestionsSelect = () => {
           {/* Find Answer*/}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "findAnswer"
                 ? "border-blued"
                 : "opacity-70"
@@ -280,12 +278,12 @@ const AddQuestionsSelect = () => {
       <div className=" w-11/12 mx-auto flex justify-end mt-14">
         <div className="flex gap-4">
           <button
-            className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-xs gap-2 text-blued"
+            className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-sm gap-2 text-blued"
             onClick={NavHandler}
           >
             New Question
           </button>
-          {/* <button className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-xs gap-2 text-blued">
+          {/* <button className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-sm gap-2 text-blued">
             Copy question from another assessment
           </button> */}
         </div>

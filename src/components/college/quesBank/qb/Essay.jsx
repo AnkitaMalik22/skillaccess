@@ -29,7 +29,7 @@ const Essay = ({ question, number }) => {
         <Disclosure className="relative z-10">
           {({ open }) => (
             <div className="mb-4">
-              <div className="flex w-full justify-between rounded-lg border-[#0D9AAC] border text-[#3E3E3E] py-3 text-left text-lg font-normal  ">
+              <div className="flex w-full justify-between rounded-md border-[#0D9AAC] border text-[#3E3E3E] py-3 text-left text-lg font-normal  ">
                 <div className="flex justify-between items-center w-full px-2">
                   <p
                     className="text-sm pl-4"
@@ -38,7 +38,7 @@ const Essay = ({ question, number }) => {
 
                   <div className="level flex items-center gap-2 ">
                     <PiPencilSimpleLineBold
-                      className=" w-6 h-6 p-1 rounded-lg  self-center cursor-pointer"
+                      className=" w-6 h-6 p-1 rounded-md  self-center cursor-pointer"
                       onClick={() => {
                         navigate(
                           `/college/quesBank/essay/${question._id}?type=essay&addType=edit`

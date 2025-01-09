@@ -54,7 +54,6 @@ const Header = ({
   // console.log(college);
 
   return (
-
     // {/* profile container */}
     <div className="bg-gray-50 rounded-xl p-5">
       {/* first section */}
@@ -62,10 +61,17 @@ const Header = ({
         {/* profile photo */}
         <div className="flex gap-2 px-3 py-1 mt-2">
           {editable ? (
-            <div className="w-14 h-14 bg-gray-200 self-center rounded-lg relative flex items-center justify-center">
-              <img src={avatar || college?.avatar?.url || "/images/defaultUser.jpg"} alt="" width="56px" className="rounded-lg " />
+            <div className="w-14 h-14 bg-gray-200 self-center rounded-md relative flex items-center justify-center">
+              <img
+                src={
+                  avatar || college?.avatar?.url || "/images/defaultUser.jpg"
+                }
+                alt=""
+                width="56px"
+                className="rounded-md "
+              />
 
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
+              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-md p-[.35rem] bg-accent bg-opacity-80">
                 <img
                   src="/images/icons/pen.png"
                   alt=""
@@ -83,7 +89,7 @@ const Header = ({
               />
             </div>
           ) : (
-            <div className="relative w-14 h-14 bg-gray-200 self-center rounded-lg flex justify-center items-center">
+            <div className="relative w-14 h-14 bg-gray-200 self-center rounded-md flex justify-center items-center">
               <img
                 src={
                   college && college?.avatar && college?.avatar?.url
@@ -92,7 +98,7 @@ const Header = ({
                 }
                 alt="avatar"
                 width="56px"
-                className="relative p-2 rounded-lg"
+                className="relative p-2 rounded-md"
               />
             </div>
           )}
@@ -103,19 +109,30 @@ const Header = ({
                 <input
                   type="text"
                   value={
-                    isUni() ? (college && college.name ? college.name : "")
-                      : (college && college.CollegeName ? college.CollegeName : "")
+                    isUni()
+                      ? college && college.name
+                        ? college.name
+                        : ""
+                      : college && college.CollegeName
+                      ? college.CollegeName
+                      : ""
                   }
                   onChange={(e) =>
-                    isUni() ? setCollege({ ...college, name: e.target.value }) : setCollege({ ...college, CollegeName: e.target.value })
+                    isUni()
+                      ? setCollege({ ...college, name: e.target.value })
+                      : setCollege({ ...college, CollegeName: e.target.value })
                   }
                   className="bg-transparent border-none focus:outline-none w-full min-w-[30vw]  text-[20px] font-extrabold   "
                 />
               ) : (
                 <p className="text-[20px] font-extrabold  py-1  ">
-                  {
-                    isUni() ? (college && college.name ? college.name : "") : (college && college.CollegeName ? college.CollegeName : "")
-                  }
+                  {isUni()
+                    ? college && college.name
+                      ? college.name
+                      : ""
+                    : college && college.CollegeName
+                    ? college.CollegeName
+                    : ""}
                 </p>
               )}
             </h2>
@@ -151,50 +168,65 @@ const Header = ({
       {/* second section */}
       <div className="border-b px-6  py-8 bg-gray-50 font-dmSans">
         <h1 className="text-lg font-bold">Overview</h1>
-        {
-          college ?
-            (
-              <div className="text-sm  font-medium mt-2">
-                {editable && college ? (
-                  <textarea
-                    className="mt-2 bg-transparent border-none focus:outline-none w-full max-w-[80vw]"
-                    type="text"
-                    value={
-                      isUni() ? (college && college.description ? college.description : "") : (college && college.Description ? college.Description : "")
-                    }
-                    onChange={(e) =>
-                      setCollege({ ...college, Description: e.target.value, description: e.target.value })
-                    }
-                  />
-                ) : college && (college.Description || college.description) ? (
-                  <p className="text-sm  font-medium mt-2 leading-loose text-gray-500">
-                    {college.Description || college.description}
-                  </p>
-                ) : (
-                  ""
-                )}
-              </div>
+        {college ? (
+          <div className="text-sm  font-medium mt-2">
+            {editable && college ? (
+              <textarea
+                className="mt-2 bg-transparent border-none focus:outline-none w-full max-w-[80vw]"
+                type="text"
+                value={
+                  isUni()
+                    ? college && college.description
+                      ? college.description
+                      : ""
+                    : college && college.Description
+                    ? college.Description
+                    : ""
+                }
+                onChange={(e) =>
+                  setCollege({
+                    ...college,
+                    Description: e.target.value,
+                    description: e.target.value,
+                  })
+                }
+              />
+            ) : college && (college.Description || college.description) ? (
+              <p className="text-sm  font-medium mt-2 leading-loose text-gray-500">
+                {college.Description || college.description}
+              </p>
             ) : (
-              <div className="text-sm  font-medium mt-2 text-gray-500  rounded-lg">
-                {editable && college ? (
-                  <textarea
-                    type="text"
-                    value={
-                      isUni() ? (college && college.description ? college.description : "") : (college && college.Description ? college.Description : "")
-                    }
-                    onChange={(e) =>
-                      isUni() ? setCollege({ ...college, description: e.target.value }) : setCollege({ ...college, Description: e.target.value })
-                    }
-                    className={`rounded-lg mt-2 border-none focus:outline-none w-full max-w-[80vw]  h-full min-h-[25vh]  text-gray-500 bg-[#f4f5f6]
+              ""
+            )}
+          </div>
+        ) : (
+          <div className="text-sm  font-medium mt-2 text-gray-500  rounded-md">
+            {editable && college ? (
+              <textarea
+                type="text"
+                value={
+                  isUni()
+                    ? college && college.description
+                      ? college.description
+                      : ""
+                    : college && college.Description
+                    ? college.Description
+                    : ""
+                }
+                onChange={(e) =>
+                  isUni()
+                    ? setCollege({ ...college, description: e.target.value })
+                    : setCollege({ ...college, Description: e.target.value })
+                }
+                className={`rounded-md mt-2 border-none focus:outline-none w-full max-w-[80vw]  h-full min-h-[25vh]  text-gray-500 bg-[#f4f5f6]
                 `}
-                    placeholder="Add Description"
-                  />
-                ) : (
-                  "No Description Available"
-                )}
-              </div>
-            )
-        }
+                placeholder="Add Description"
+              />
+            ) : (
+              "No Description Available"
+            )}
+          </div>
+        )}
       </div>
       <div className="px-6  py-8 bg-gray-50 font-dmSans flex sm:gap-16 text-sm font-medium ">
         <div className="flex gap-2 ">
@@ -207,20 +239,32 @@ const Header = ({
                 <input
                   type="text"
                   value={
-                    isUni() ? (college && college.email ? college.email : "") : (college && college.Email ? college.Email : "")
+                    isUni()
+                      ? college && college.email
+                        ? college.email
+                        : ""
+                      : college && college.Email
+                      ? college.Email
+                      : ""
                   }
                   onChange={(e) =>
-                    isUni() ? setCollege({ ...college, email: e.target.value }) : setCollege({ ...college, Email: e.target.value })
+                    isUni()
+                      ? setCollege({ ...college, email: e.target.value })
+                      : setCollege({ ...college, Email: e.target.value })
                   }
-                  className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6]  `}
+                  className={` rounded-md border-none focus:outline-none bg-[#f4f5f6]  `}
                   placeholder="Add Email"
                 />
               ) : (
                 <p className=" text-gray-500 bg-transparent text-sm">
                   {" "}
-                  {
-                    isUni() ? (college && college.email ? college.email : "") : (college && college.Email ? college.Email : "")
-                  }
+                  {isUni()
+                    ? college && college.email
+                      ? college.email
+                      : ""
+                    : college && college.Email
+                    ? college.Email
+                    : ""}
                 </p>
               )}
             </p>
@@ -244,15 +288,23 @@ const Header = ({
                 type="tel" // Set input type to "tel" for telephone number
                 maxLength={10} // Set maximum length to 10 digits
                 value={
-                  isUni() ? (college && college.phone ? college.phone : "") : (college && college.Phone ? college.Phone : "")
+                  isUni()
+                    ? college && college.phone
+                      ? college.phone
+                      : ""
+                    : college && college.Phone
+                    ? college.Phone
+                    : ""
                 }
                 onChange={(e) => {
                   // Ensure the entered value doesn't exceed 10 digits
                   if (e.target.value.length <= 10) {
-                    isUni() ? setCollege({ ...college, phone: e.target.value }) : setCollege({ ...college, Phone: e.target.value });
+                    isUni()
+                      ? setCollege({ ...college, phone: e.target.value })
+                      : setCollege({ ...college, Phone: e.target.value });
                   }
                 }}
-                className={` rounded-lg border-none focus:outline-none appearance-none bg-[#f4f5f6] text-sm `}
+                className={` rounded-md border-none focus:outline-none appearance-none bg-[#f4f5f6] text-sm `}
                 placeholder="Add Phone Number"
               />
             ) : college && college.phone ? (
@@ -282,26 +334,44 @@ const Header = ({
                 <input
                   type="text"
                   value={
-                    isUni() ? (college && college.website ? college.website : "") : (college && college.Website ? college.Website : "")
+                    isUni()
+                      ? college && college.website
+                        ? college.website
+                        : ""
+                      : college && college.Website
+                      ? college.Website
+                      : ""
                   }
                   onChange={(e) =>
-                    isUni() ? setCollege({ ...college, website: e.target.value }) : setCollege({ ...college, Website: e.target.value })
+                    isUni()
+                      ? setCollege({ ...college, website: e.target.value })
+                      : setCollege({ ...college, Website: e.target.value })
                   }
-                  className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6]`}
+                  className={` rounded-md border-none focus:outline-none bg-[#f4f5f6]`}
                   placeholder="Add College Website"
                 />
               ) : (
                 <a
                   className="self-center text-lightBlue underline bg-transparent font-medium"
                   href={
-                    isUni() ? (college && college.website ? college.website : "") : (college && college.Website ? college.Website : "")
+                    isUni()
+                      ? college && college.website
+                        ? college.website
+                        : ""
+                      : college && college.Website
+                      ? college.Website
+                      : ""
                   }
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {
-                    isUni() ? (college && college.website ? college.website : "") : (college && college.Website ? college.Website : "")
-                  }
+                  {isUni()
+                    ? college && college.website
+                      ? college.website
+                      : ""
+                    : college && college.Website
+                    ? college.Website
+                    : ""}
                 </a>
               )}
             </>
@@ -332,18 +402,31 @@ const Header = ({
               <input
                 type="text"
                 value={
-                  isUni() ? (college && college.address ? college.address : "") : (college && college.Address ? college.Address : "")
+                  isUni()
+                    ? college && college.address
+                      ? college.address
+                      : ""
+                    : college && college.Address
+                    ? college.Address
+                    : ""
                 }
                 onChange={(e) =>
-                  isUni() ? setCollege({ ...college, address: e.target.value }) : setCollege({ ...college, Address: e.target.value })
+                  isUni()
+                    ? setCollege({ ...college, address: e.target.value })
+                    : setCollege({ ...college, Address: e.target.value })
                 }
-                className={` rounded-lg border-none focus:outline-none bg-[#f4f5f6] break-words  w-full max-w-[416px]`}
+                className={` rounded-md border-none focus:outline-none bg-[#f4f5f6] break-words  w-full max-w-[416px]`}
                 placeholder="College Address"
               />
             ) : (
               <p className="break-words max-w-[316px] text-sm  font-dmSans font-medium self-center">
-
-                {isUni() ? (college && college.address ? college.address : "") : (college && college.Address ? college.Address : "")}
+                {isUni()
+                  ? college && college.address
+                    ? college.address
+                    : ""
+                  : college && college.Address
+                  ? college.Address
+                  : ""}
               </p>
             )}
           </>

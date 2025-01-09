@@ -28,12 +28,11 @@ const Info = ({ user, assessment }) => {
     // date with time
 
     const timeString = date.toLocaleTimeString(undefined, {
-      hour: '2-digit',
-      minute: '2-digit'
+      hour: "2-digit",
+      minute: "2-digit",
     });
-  
+
     return `${day}${daySuffix} ${month}`;
-  
   }
 
   const uniqueStudentResponses = new Set(
@@ -62,12 +61,12 @@ const Info = ({ user, assessment }) => {
             {assessment?.name}
           </h2>
 
-          {/* <h2 className="text-[#7D7D7D] text-xs ">Available Jobs</h2> */}
+          {/* <h2 className="text-[#7D7D7D] text-sm ">Available Jobs</h2> */}
         </div>
       </div>
       <div className="grid grid-cols-4 gap-10 text-center font-dmSans">
         <div className="self-center">
-          <h2 className="text-xs font-bold text-[#8E91A0] mb-1">Time Period</h2>
+          <h2 className="text-sm font-bold text-[#8E91A0] mb-1">Time Period</h2>
 
           <h2 className="text-sm font-bold text-[#171717]">
             {assessment?.totalTime} mins
@@ -75,7 +74,7 @@ const Info = ({ user, assessment }) => {
         </div>
 
         <div className="self-center">
-          <h2 className="text-xs font-bold text-[#8E91A0] mb-1">Timeline</h2>
+          <h2 className="text-sm font-bold text-[#8E91A0] mb-1">Timeline</h2>
           <h2 className="text-sm font-bold text-[#171717]">
             {assessment?.startDate && assessment?.endDate
               ? `${formatDate(startDate)} - ${formatDate(endDate)}`
@@ -84,20 +83,19 @@ const Info = ({ user, assessment }) => {
         </div>
 
         <div className="self-center">
-          <h2 className="text-xs font-bold text-[#8E91A0] mb-1">
+          <h2 className="text-sm font-bold text-[#8E91A0] mb-1">
             Students Appeared
           </h2>
 
           <h2 className="text-sm font-bold text-[#171717]">
-      
             {/* {totalUniqueStudentResponses} */}
             {/* {console.log(assessment.studentResponses)}*/}
-            {assessment?.studentResponses?.length} 
+            {assessment?.studentResponses?.length}
           </h2>
         </div>
 
         <div className="self-center">
-          <h2 className="text-xs font-bold text-[#8E91A0] mb-1">Attempts</h2>
+          <h2 className="text-sm font-bold text-[#8E91A0] mb-1">Attempts</h2>
 
           <h2 className="text-sm font-bold text-[#171717]">
             {assessment?.totalAttempts}

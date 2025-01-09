@@ -134,10 +134,10 @@ const Top = () => {
         <div className="mb-4 flex justify-between">
           <div className="text-2xl font-bold">Your Subscription</div>
           {/*   <div className="flex gap-4">
-            <button className="py-3 text-white rounded-2xl text-xs  bg-accent font-bold flex gap-2 px-7 ">
+            <button className="py-3 text-white rounded-2xl text-sm  bg-accent font-bold flex gap-2 px-7 ">
               <p>Change</p>
             </button>
-            <button className="py-3 border border-[#CD2121] rounded-2xl text-xs  bg-white text-[#CD2121] font-bold flex gap-2 px-7 ">
+            <button className="py-3 border border-[#CD2121] rounded-2xl text-sm  bg-white text-[#CD2121] font-bold flex gap-2 px-7 ">
               <p>Cancel</p>
             </button>
           </div>
@@ -204,7 +204,7 @@ const Top = () => {
           <div className="text-2xl font-bold">Payments</div>
           <div className="flex gap-4">
             <button
-              className="py-3 text-white rounded-2xl text-xs  bg-accent font-bold flex gap-2 px-7 "
+              className="py-3 text-white rounded-2xl text-sm  bg-accent font-bold flex gap-2 px-7 "
               onClick={handlePayment}
               type="button"
             >

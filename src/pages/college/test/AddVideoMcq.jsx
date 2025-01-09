@@ -241,7 +241,7 @@ const AddMcq = () => {
               // value={questions.Duration}
 
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              className="w-full rounded-md bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
             >
               <option value="D">Time to answer the question</option>
 
@@ -258,7 +258,7 @@ const AddMcq = () => {
               onChange={handleChanges}
               value={question.Duration}
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              className="w-full rounded-md bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
             >
               <option value={0}>Time to answer the question</option>
 
@@ -269,7 +269,7 @@ const AddMcq = () => {
             </select>
 
             {/* <textarea
-              className="resize-none w-full h-full bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+              className="resize-none w-full h-full bg-gray-100 border-none focus:outline-none rounded-md focus:ring-0 placeholder-gray-400"
               placeholder="Enter Question Here"
               name="Title"
               onChange={handleChanges}
@@ -283,7 +283,7 @@ const AddMcq = () => {
                   return { ...prev, Title: value };
                 })
               }
-              className="bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+              className="bg-gray-100 border-none focus:outline-none rounded-md focus:ring-0 placeholder-gray-400"
               placeholder="Enter Question Here"
               name="Title"
             />
@@ -324,13 +324,13 @@ const AddMcq = () => {
                         : ""
                     }
                     onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
+                    className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-gray-100"
                   />
 
                   {/*  */}
 
                   <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
+                    className="bg-gray-100 flex justify-center rounded-md "
                     onClick={() =>
                       setQuestion({
                         ...question,
@@ -375,13 +375,13 @@ const AddMcq = () => {
                         : ""
                     }
                     onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
+                    className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-gray-100"
                   />
 
                   {/*  */}
 
                   <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
+                    className="bg-gray-100 flex justify-center rounded-md "
                     onClick={() =>
                       setQuestion({
                         ...question,
@@ -426,13 +426,13 @@ const AddMcq = () => {
                         : ""
                     }
                     onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
+                    className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-gray-100"
                   />
 
                   {/*  */}
 
                   <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
+                    className="bg-gray-100 flex justify-center rounded-md "
                     onClick={() =>
                       setQuestion({
                         ...question,
@@ -477,13 +477,13 @@ const AddMcq = () => {
                         : ""
                     }
                     onChange={handleChanges}
-                    className="w-11/12 rounded-lg border-none outline-none focus:outline-none bg-gray-100"
+                    className="w-11/12 rounded-md border-none outline-none focus:outline-none bg-gray-100"
                   />
 
                   {/*  */}
 
                   <div
-                    className="bg-gray-100 flex justify-center rounded-lg "
+                    className="bg-gray-100 flex justify-center rounded-md "
                     onClick={() =>
                       setQuestion({
                         ...question,
@@ -524,7 +524,7 @@ const AddMcq = () => {
               <button
                 className={`self-center justify-center flex ${
                   step === 1 ? " bg-gray-200" : " bg-blue-200"
-                } p-2 rounded-lg text-sm font-bold gap-2 w-32`}
+                } p-2 rounded-md text-sm font-bold gap-2 w-32`}
                 onClick={handlePrev}
 
                 // onClick={() => navigate(-1)}
@@ -535,7 +535,7 @@ const AddMcq = () => {
           </div>
           <div className=" flex">
             <button
-              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 "
               // onClick={addQuestion}
 
               onClick={handleSave}

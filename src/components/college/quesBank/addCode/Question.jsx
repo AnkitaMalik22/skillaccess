@@ -29,7 +29,7 @@ const Question = ({
         value={question.codeLanguage || "Java"}
         onChange={handleChanges}
         id=""
-        className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4 mt-3 select text-gray-400"
+        className="w-full rounded-md bg-gray-100 focus:outline-none border-none mb-4 mt-3 select text-gray-400"
       >
         {/* <option value="">Select Language</option> */}
         <option value="Java">Java</option>
@@ -42,7 +42,7 @@ const Question = ({
         onChange={handleChanges}
         value={question.Duration}
         id=""
-        className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+        className="w-full rounded-md bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
       >
         <option value={0}>Time to answer the question</option>
         <option value={15}>15 minutes</option>
@@ -52,7 +52,7 @@ const Question = ({
       </select>
 
       <textarea
-        className="resize-none w-full h-[40px] bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+        className="resize-none w-full h-[40px] bg-gray-100 border-none focus:outline-none rounded-md focus:ring-0 placeholder-gray-400"
         placeholder="Enter Question Name"
         name="Title"
         value={question.Title}
@@ -67,7 +67,7 @@ const Question = ({
           })
         }
         // onChange={handleChanges}
-        className="resize-none w-full h-full  border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+        className="resize-none w-full h-full  border-none focus:outline-none rounded-md focus:ring-0 placeholder-gray-400"
         placeholder="Enter Question Here"
         name="codeQuestion"
       />

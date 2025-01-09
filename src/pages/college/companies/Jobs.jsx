@@ -56,7 +56,7 @@ const Jobs = () => {
     <>
       <div className="flex w-full mx-auto justify-between mb-2">
         <button
-          className="  self-center  rounded-lg h-10 w-10 "
+          className="  self-center  rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
           <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
@@ -73,7 +73,7 @@ const Jobs = () => {
           </span>
         </div>
 
-        {/* <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+        {/* <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
         </button> */}
       </div>
@@ -82,10 +82,10 @@ const Jobs = () => {
           return (
             <div className="flex justify-between w-[99%]" key={index}>
               <div className="sm:flex">
-                <div className="  flex justify-center rounded-lg mr-8">
+                <div className="  flex justify-center rounded-md mr-8">
                   <img
                     src={job?.company?.basic?.logo || "/images/defaultUser.jpg"}
-                    className="w-10 h-10 rounded-lg self-center"
+                    className="w-10 h-10 rounded-md self-center"
                     alt=""
                   />
                 </div>
@@ -93,11 +93,11 @@ const Jobs = () => {
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base">
                     {job.JobTitle || "title"}
                   </h2>
-                  <h2 className="font-dmSans font-bold text-[.6rem] sm:text-xs inline">
+                  <h2 className="font-dmSans font-bold text-[.6rem] sm:text-sm inline">
                     {" "}
                     {job?.company?.basic?.companyName}
                   </h2>
-                  <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
+                  <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline">
                     {" "}
                     {calculateDaysAgo(job.createdAt)}
                   </h2>
@@ -105,16 +105,16 @@ const Jobs = () => {
               </div>
               <div className="flex sm:gap-6 gap-1">
                 <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
-                <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
+                <h2 className="font-dmSans text-gray-400  font-medium text-sm self-center sm:text-sm inline">
                   {" "}
                   {job.JobLocation || "location"}
                 </h2>
-                <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
+                <h2 className="font-dmSans text-green-500  font-medium text-sm self-center sm:text-sm inline">
                   {" "}
                   {job.WorkplaceType || "WOrktype"}
                 </h2>
                 <button
-                  className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
+                  className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-md text-white text-[.5rem] sm:text-sm self-center "
                   onClick={() =>
                     navigate(`/college/companies/jobOverview/${job._id}`)
                   }

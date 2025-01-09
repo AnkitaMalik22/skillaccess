@@ -17,28 +17,31 @@ import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
 import Loader from "../../../components/loaders/Loader";
 import { isUni } from "../../../util/isCompany";
 
+const AddTopic = ({ Navigate, level }) => (
+  <div className="w-full max-w-64 h-64 bg-gray-100 rounded-md flex justify-center">
+    <div className=" self-center w-fit h-fit ">
+      <div
+        className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-md mx-auto flex justify-center"
+        onClick={() => {
+          localStorage.removeItem("currentTopic");
+          Navigate(
+            `/${
+              isUni() ? "university/pr" : "college"
+            }/test/createTopic?level=${level}`
+          );
+        }}
+      >
+        <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued cursor-pointer" />
+      </div>
 
-const AddTopic = ({ Navigate, level }) => <div className="w-full max-w-64 h-64 bg-gray-100 rounded-lg flex justify-center">
-  <div className=" self-center w-fit h-fit ">
-    <div
-      className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
-      onClick={() => {
-        localStorage.removeItem("currentTopic");
-        Navigate(`/${isUni() ? "university/pr" : "college"}/test/createTopic?level=${level}`);
-      }}
-    >
-      <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued cursor-pointer" />
+      <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60 ">
+        Add New Topic
+      </h2>
+
+      <h2 className="text-sm text-center text-gray-400">Create new Topics</h2>
     </div>
-
-    <h2 className="text-center text-black text-base  font-bold my-2 w-20  md:w-60 ">
-      Add New Topic
-    </h2>
-
-    <h2 className="text-xs text-center text-gray-400">
-      Create new Topics
-    </h2>
   </div>
-</div>
+);
 
 const SelectTests = () => {
   //useTranslate();
@@ -89,10 +92,12 @@ const SelectTests = () => {
   const addSection = (section) => {
     if (
       parseInt(currentQuestionCount) + parseInt(totalQ) >
-      parseInt(totalQuestions) ||
+        parseInt(totalQuestions) ||
       totalQ > totalQuestions
     ) {
-      toast.error(`Number of question must be less than or equal to ${totalQuestions}`);
+      toast.error(
+        `Number of question must be less than or equal to ${totalQuestions}`
+      );
       return;
     }
     if (!questionType) {
@@ -235,13 +240,15 @@ const SelectTests = () => {
   useEffect(() => {
     let test = JSON.parse(localStorage.getItem("testDetails"));
 
-
-    dispatch(getAllTopics({
-      level: level, category: test.category, accessibleDepartments: test.accessibleDepartments,
-      hasAccessToAllDepartments: test.hasAccessToAllDepartments,
-      hasAccessToAllCategories: test.hasAccessToAllCategories
-    }));
-
+    dispatch(
+      getAllTopics({
+        level: level,
+        category: test.category,
+        accessibleDepartments: test.accessibleDepartments,
+        hasAccessToAllDepartments: test.hasAccessToAllDepartments,
+        hasAccessToAllCategories: test.hasAccessToAllCategories,
+      })
+    );
 
     if (sections) {
       setFilteredSections(sections);
@@ -251,7 +258,7 @@ const SelectTests = () => {
       topics = JSON.parse(localStorage.getItem("topics"));
 
       setSelectedSections(topics);
-    } catch (error) { }
+    } catch (error) {}
 
     // //console.log("hello tests",sections);
   }, []);
@@ -283,8 +290,8 @@ const SelectTests = () => {
           addSection={addSection}
           totalQ={totalQ}
           setTotalQ={setTotalQ}
-        // setTotalQuestions={setTotalQuestions}
-        // totalQuestions={totalQuestions}
+          // setTotalQuestions={setTotalQuestions}
+          // totalQuestions={totalQuestions}
         />
       )}
       <Header />
@@ -295,16 +302,16 @@ const SelectTests = () => {
 
       {/* larger screens */}
 
-      <div className="min-h-[90vh] my-2 rounded-lg tracking-wide justify-between  ">
-        <h2 className=" text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-lg mb-10 sm:mb-1 ">
+      <div className="min-h-[90vh] my-2 rounded-md tracking-wide justify-between  ">
+        <h2 className=" text-gray-400 sm:h-10 py-2 sm:mt-12  mt-4 rounded-md mb-10 sm:mb-1 ">
           Your Assessment can include up to 5 Question topics, browse the below
           library to draft the Assessment.{" "}
         </h2>
 
-        <div className=" mx-auto  my-2 rounded-lg grid sm:grid-cols-5 grid-cols-2 gap-6">
+        <div className=" mx-auto  my-2 rounded-md grid sm:grid-cols-5 grid-cols-2 gap-6">
           {selectedSections?.map((section, index) => (
             <div
-              className="w-full h-32 border border-dashed rounded-lg border-blued col-span-1 flex justify-center "
+              className="w-full h-32 border border-dashed rounded-md border-blued col-span-1 flex justify-center "
               key={`${section._id + section.Type}`}
             >
               {/* {//console.log(section, "section")} */}
@@ -321,7 +328,7 @@ const SelectTests = () => {
                     className="self-center"
                   />
 
-                  <h2 className="font-bold text-xs text-gray-400 self-center ">
+                  <h2 className="font-bold text-sm text-gray-400 self-center ">
                     {section?.Type}
                   </h2>
                 </div>
@@ -335,7 +342,7 @@ const SelectTests = () => {
                       className="w-6 h-6 self-center"
                     />
 
-                    <h2 className="font-bold text-xs text-gray-400 self-center px-2">
+                    <h2 className="font-bold text-sm text-gray-400 self-center px-2">
                       {section?.Time}
                     </h2>
                   </div>
@@ -351,21 +358,21 @@ const SelectTests = () => {
 
           {selectedSections?.length < 5
             ? Array.from({ length: 5 - selectedSections.length }).map(
-              (_, index) => (
-                <div
-                  key={index}
-                  className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 flex justify-center p-2 md:p-5"
-                >
-                  <span className="self-center">
-                    <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
+                (_, index) => (
+                  <div
+                    key={index}
+                    className="w-full h-full border border-dashed rounded-md border-blued col-span-1 flex justify-center p-2 md:p-5"
+                  >
+                    <span className="self-center">
+                      <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
 
-                    <h2 className="font-semibold mt-1">
-                      Add section {selectedSections.length + index + 1}{" "}
-                    </h2>
-                  </span>
-                </div>
+                      <h2 className="font-semibold mt-1">
+                        Add section {selectedSections.length + index + 1}{" "}
+                      </h2>
+                    </span>
+                  </div>
+                )
               )
-            )
             : null}
         </div>
 
@@ -377,14 +384,16 @@ const SelectTests = () => {
         />
 
         <div className="grid grid-cols-4 gap-8 justify-center">
-          {filteredSections?.length > 0 && <AddTopic Navigate={Navigate} level={level} />}
+          {filteredSections?.length > 0 && (
+            <AddTopic Navigate={Navigate} level={level} />
+          )}
           {GET_TOPICS_LOADING && (
-            <div className=" min-h-64 rounded-lg flex items-center  justify-center ">
+            <div className=" min-h-64 rounded-md flex items-center  justify-center ">
               <Loader size="md" />
             </div>
           )}
           {filteredSections?.map((section, index) => (
-            <div className="p-5 flex flex-col justify-between bg-gray-100  rounded-lg min-h-64 overflow-y-scroll">
+            <div className="p-5 flex flex-col justify-between bg-gray-100  rounded-md min-h-64 overflow-y-scroll">
               <div>
                 <h2 className="text-base text-[#171717] font-semibold mb-2 first-letter:uppercase line-clamp-2 break-words min-h-12">
                   {section?.Heading}
@@ -397,7 +406,7 @@ const SelectTests = () => {
               </div>
               <div className="flex justify-between gap-2">
                 <button
-                  className="py-2 px-4  bg-[#8F92A120] rounded-lg"
+                  className="py-2 px-4  bg-[#8F92A120] rounded-md"
                   onClick={() => {
                     if (!questionType) {
                       toast.error("Please select a question type first.");
@@ -421,14 +430,16 @@ const SelectTests = () => {
                     );
 
                     Navigate(
-                      `/${isUni() ? "university/pr" : "college"}/test/details/${section._id}?type=topic&question=${questionType}&level=${level}&select=true`
+                      `/${isUni() ? "university/pr" : "college"}/test/details/${
+                        section._id
+                      }?type=topic&question=${questionType}&level=${level}&select=true`
                     );
                   }}
                 >
                   Details
                 </button>
                 <button
-                  className=" bg-[#00875A85] py-2 px-4 rounded-lg text-white "
+                  className=" bg-[#00875A85] py-2 px-4 rounded-md text-white "
                   onClick={() => {
                     if (!questionType) {
                       toast.error("Please select a question type first.");
@@ -451,10 +462,14 @@ const SelectTests = () => {
             </div>
           ))}
         </div>
-        {filteredSections?.length === 0 && <div className="flex flex-col justify-center items-center">
-          <div className="text-center text-gray-400 self-center mx-auto text-2xl my-10">No topics found</div>
-          <AddTopic Navigate={Navigate} level={level} />
-        </div>}
+        {filteredSections?.length === 0 && (
+          <div className="flex flex-col justify-center items-center">
+            <div className="text-center text-gray-400 self-center mx-auto text-2xl my-10">
+              No topics found
+            </div>
+            <AddTopic Navigate={Navigate} level={level} />
+          </div>
+        )}
       </div>
     </>
   );

@@ -13,16 +13,16 @@ const Header = ({ handleSubmit, loading }) => {
   return (
     <div className="flex  mx-auto justify-between mb-2 mt-5">
       <div>
-        <button className="flex items-center  rounded-lg  gap-2">
+        <button className="flex items-center  rounded-md  gap-2">
           <button onClick={() => navigate(-1)} className="mt-2 mr-3">
-            <FaChevronLeft className=" p-5 rounded-lg h-14 w-14 self-center bg-gray-200 text-gray-500" />
+            <FaChevronLeft className=" p-5 rounded-md h-14 w-14 self-center bg-gray-200 text-gray-500" />
           </button>
 
           <div className="flex flex-col items-start">
             <h2 className="sm:text-xl mt-2 text-left font-bold self-center text-3xl font-dmSans w-full ">
               Create Assessment
             </h2>
-            {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
+            {/* <div className="flex gap-2 text-[#567BF9] text-sm font-medium mt-3">
               <h3 className="mr-2">{name}</h3>
               <span>
                 <img
@@ -51,7 +51,7 @@ const Header = ({ handleSubmit, loading }) => {
       <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
         <div className=" flex">
           <button
-            className="self-center justify-center items-center flex bg-accent py-3 px-4 rounded-lg text-xs gap-2 text-white"
+            className="self-center justify-center items-center flex bg-accent py-3 px-4 rounded-md text-sm gap-2 text-white"
             onClick={() => {
               // //console.log("handle sub from headr");
               handleSubmit();

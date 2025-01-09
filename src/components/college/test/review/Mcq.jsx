@@ -9,9 +9,16 @@ import { addBookmark } from "../../../../redux/college/test/thunks/question";
 
 import toast from "react-hot-toast";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { editQuestionCompany, removeQuestionCompany, setCurrentQuestionCountCompany } from "../../../../redux/company/test/testSlice";
+import {
+  editQuestionCompany,
+  removeQuestionCompany,
+  setCurrentQuestionCountCompany,
+} from "../../../../redux/company/test/testSlice";
 import isCompany, { isUni } from "../../../../util/isCompany";
-import { editQuestion, removeQuestion } from "../../../../redux/college/test/testSlice";
+import {
+  editQuestion,
+  removeQuestion,
+} from "../../../../redux/college/test/testSlice";
 
 const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   const [search, setSearch] = useSearchParams();
@@ -47,10 +54,21 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   const handleDelete = () => {
     dispatch(setCurrentQuestionCountCompany(currentQuestionCount - 1));
 
-    (isCompany() ? dispatch(
-      removeQuestionCompany({ selfIndex: Number, topicIndex: id, questionType: "mcq" })
-    ) : dispatch(removeQuestion({ selfIndex: Number, topicIndex: id, questionType: "mcq" })))
-
+    isCompany()
+      ? dispatch(
+          removeQuestionCompany({
+            selfIndex: Number,
+            topicIndex: id,
+            questionType: "mcq",
+          })
+        )
+      : dispatch(
+          removeQuestion({
+            selfIndex: Number,
+            topicIndex: id,
+            questionType: "mcq",
+          })
+        );
   };
 
   const handleBookmark = () => {
@@ -105,15 +123,16 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
 
     // }
 
-    localStorage.setItem(
-      "qbQues",
-      JSON.stringify(question)
+    localStorage.setItem("qbQues", JSON.stringify(question));
+    navigate(
+      `/${isUni() ? "pr/university" : "college"}/quesBank/addMcqToTopic/${
+        question._id
+      }?type=mcq&addType=edit`
     );
-    navigate(`/${isUni() ? "pr/university" : "college"}/quesBank/addMcqToTopic/${question._id}?type=mcq&addType=edit`);
   };
 
   return (
-    <div className="flex bg-white rounded-lg justify-between mb-5">
+    <div className="flex bg-white rounded-md justify-between mb-5">
       <div className="p-5 flex flex-col gap-2">
         {/* {search.get(`${Number}`) !== "true" ? ( */}
         <h2 className="flex mb-2 gap-3 font-semibold  text-base first-letter:uppercase ">
@@ -126,14 +145,20 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
             <ReactQuill
               value={mcq.Title}
               onChange={(value) => setMcq({ ...mcq, Title: value })}
-              className="border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+              className="border-none focus:outline-none rounded-md focus:ring-0 placeholder-gray-400"
               placeholder="Enter Question Here"
               name="Title"
             />
           </div>
         )} */}
         <div className={`flex flex-col gap-4 mt-6 `}>
-          {question.image && (<img src={question.image} alt="question" className="w-full rounded-lg" />)}
+          {question.image && (
+            <img
+              src={question.image}
+              alt="question"
+              className="w-full rounded-md"
+            />
+          )}
 
           {mcq.Options.map((ques, index) => (
             <span className="flex gap-2 ">
@@ -152,7 +177,7 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
                 </label>
               ) : (
                 <input
-                  className="rounded-lg"
+                  className="rounded-md"
                   onChange={handleChange}
                   placeholder="enter new option"
                   name={index}
@@ -165,10 +190,7 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
       </div>
 
       <div className="flex gap-2 ">
-
-
         <div className=" flex flex-col gap-4 text-blued border-s-2 py-1 items-center justify-center px-4">
-
           <div className=" ">
             {question.QuestionLevel == "beginner" && (
               <p className="rounded-2xl  py-1.5 bg-cyan-500 text-white w-8 h-8 text-center font-extrabold  ">
@@ -186,41 +208,42 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
               </p>
             )}
           </div>
-          {type !== "topic" && view !== "false" && (<> <div>
-            <RxCross1
-              className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100 cursor-pointer"
-              onClick={handleDelete}
-            />
-          </div>
-            <div>
-              <CiBookmarkMinus
-                className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center cursor-pointer"
-                onClick={handleBookmark}
-              />
-            </div>
-
-
-            {/* search.get(`${Number}`) !== "true" ? (
+          {type !== "topic" && view !== "false" && (
+            <>
+              {" "}
+              <div>
+                <RxCross1
+                  className="text-red-500 w-6 h-6 p-1 rounded-md self-center bg-gray-100 cursor-pointer"
+                  onClick={handleDelete}
+                />
+              </div>
+              <div>
+                <CiBookmarkMinus
+                  className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center cursor-pointer"
+                  onClick={handleBookmark}
+                />
+              </div>
+              {/* search.get(`${Number}`) !== "true" ? (
             <PiPencilSimpleLineBold
-              className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center cursor-pointer"
+              className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center cursor-pointer"
               onClick={() => {
                 search.set(`${Number}`, "true");
                 setSearch(search);
               }}
             />
           ) : */}
-            {(
-              <div>
-                <PiPencilSimpleLineBold
-                  className=" w-6 h-6 p-1 rounded-lg bg-amber-600 self-center cursor-pointer"
-                  onClick={handleEdit}
-                />
-              </div>
-            )}</>)}
+              {
+                <div>
+                  <PiPencilSimpleLineBold
+                    className=" w-6 h-6 p-1 rounded-md bg-amber-600 self-center cursor-pointer"
+                    onClick={handleEdit}
+                  />
+                </div>
+              }
+            </>
+          )}
         </div>
-
       </div>
-
     </div>
   );
 };

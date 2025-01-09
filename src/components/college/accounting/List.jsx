@@ -20,7 +20,7 @@ const List = () => {
   };
 
   return (
-    <div className="w-full bg-[#F8F8F9] p-5 rounded-lg">
+    <div className="w-full bg-[#F8F8F9] p-5 rounded-md">
       {/* legend */}
       <div className=" grid-cols-6   w-full mx-auto mt-4 font-dmSans font-semibold text-base hidden md:grid ">
         <div className="bg-accent rounded-s-lg p-2 bg-opacity-5 ">
@@ -53,7 +53,7 @@ const List = () => {
         </div>
       )}
       {payments.map((payment) => (
-        <div className=" grid-cols-6 rounded-lg my-2 py-2 pl-2 text-center w-full mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
+        <div className=" grid-cols-6 rounded-md my-2 py-2 pl-2 text-center w-full mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-white">
           <div className="flex pl-1 ">
             <div className="  h-fit">
               <span>

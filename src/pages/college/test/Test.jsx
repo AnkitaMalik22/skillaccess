@@ -96,9 +96,13 @@ const Test = () => {
       {/* search bar */}
       <Header students={approvedStudents} />
 
-      <div className={`flex rounded-lg md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch ${isUni() ? "" : "h-screen"}`}>
+      <div
+        className={`flex rounded-md md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch ${
+          isUni() ? "" : "h-screen"
+        }`}
+      >
         {/* left block */}
-        <div className="w-3/4 rounded-lg flex flex-col">
+        <div className="w-3/4 rounded-md flex flex-col">
           <div className="w-full flex-grow overflow-y-auto">
             <div className="mx-auto w-full rounded-2xl bg-white">
               {arr.map((comp, i) => (
@@ -143,9 +147,11 @@ const Test = () => {
                             )}
                           </h2>
                           <Disclosure.Button>
-                            {
-                              open ? <FaCaretDown className="text-[#8F92A1] text-lg" /> : <FaCaretUp className="text-[#8F92A1] text-lg" />
-                            }
+                            {open ? (
+                              <FaCaretDown className="text-[#8F92A1] text-lg" />
+                            ) : (
+                              <FaCaretUp className="text-[#8F92A1] text-lg" />
+                            )}
                           </Disclosure.Button>
                         </div>
                       </div>
@@ -161,75 +167,77 @@ const Test = () => {
         </div>
 
         {/* right block */}
-        {!isUni() && <div className="w-1/4 p-4 bg-gray-100 rounded-3xl font-dmSans sm:block flex flex-col">
-          <div className="rounded-3xl bg-white h-full mx-auto flex flex-col">
-            <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
-              Recent Assessments Completed
-            </h2>
+        {!isUni() && (
+          <div className="w-1/4 p-4 bg-gray-100 rounded-md font-dmSans sm:block flex flex-col">
+            <div className="rounded-md bg-white h-full mx-auto flex flex-col">
+              <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
+                Recent Assessments Completed
+              </h2>
 
-            <div className="p-3 overflow-y-scroll !scrollbar-track-neutral-400 !scrollbar-thumb-slate-400">
-              <div>
-                {recentAssessments?.map((assessment, index) => (
-                  <div className="flex flex-col md:gap-8 mb-5" key={index}>
-                    <div className="flex gap-3 items-center">
-                      {/* <div className="min-w-[2.5rem] h-10 self-center rounded-lg">
+              <div className="p-3 overflow-y-scroll !scrollbar-track-neutral-400 !scrollbar-thumb-slate-400">
+                <div>
+                  {recentAssessments?.map((assessment, index) => (
+                    <div className="flex flex-col md:gap-8 mb-5" key={index}>
+                      <div className="flex gap-3 items-center">
+                        {/* <div className="min-w-[2.5rem] h-10 self-center rounded-md">
                         <img
                           src="/images/teams.png"
                           alt="user-icon"
-                          className="rounded-lg w-11 h-11"
+                          className="rounded-md w-11 h-11"
                         />
                       </div> */}
-                      <div>
-                        <h2 className="text-xs font-bold text-[#171717] first-letter:uppercase">
-                          {assessment.name}
-                        </h2>
-                        <h2 className="text-xs font-normal first-letter:uppercase">
-                          {assessment.description}
-                        </h2>
+                        <div>
+                          <h2 className="text-sm font-bold text-[#171717] first-letter:uppercase">
+                            {assessment.name}
+                          </h2>
+                          <h2 className="text-sm font-normal first-letter:uppercase">
+                            {assessment.description}
+                          </h2>
+                        </div>
+                      </div>
+                      <div className="flex mb-5 gap-2 justify-between items-center">
+                        <div className="flex gap-2">
+                          <button
+                            className="rounded-md bg-[#8F92A1] hover:border-[#8F92A1] bg-opacity-5 py-1 px-2 text-base font-dmSans border border-gray-200 transition-all hover:shadow-md"
+                            onClick={() => {
+                              navigate(
+                                `/college/results/overview?level=${assessment.level}&assessment=${assessment._id}`
+                              );
+                            }}
+                          >
+                            View
+                          </button>
+                          <button
+                            className="rounded-md bg-[#8F92A1] hover:border-[#8F92A1] bg-opacity-5 py-1 px-2 text-base font-dmSans border border-gray-200 transition-all hover:shadow-md"
+                            data-tip="Cick here to remove."
+                            onClick={() =>
+                              dispatch(removeFromRecent(assessment._id))
+                            }
+                          >
+                            <CgUnavailable className="text-[#8F92A1] text-lg" />
+                          </button>
+                        </div>
+                        <p className="text-sm font-normal text-[#8F92A1]">
+                          {calculateDaysAndWeeks(assessment.endDate)}
+                        </p>
                       </div>
                     </div>
-                    <div className="flex mb-5 gap-2 justify-between items-center">
-                      <div className="flex gap-2">
-                        <button
-                          className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
-                          onClick={() => {
-                            navigate(
-                              `/college/results/overview?level=${assessment.level}&assessment=${assessment._id}`
-                            );
-                          }}
-                        >
-                          View
-                        </button>
-                        <button
-                          className="rounded-lg p-3 bg-[#8F92A1] bg-opacity-5 self-center tooltip"
-                          data-tip="Cick here to remove."
-                          onClick={() =>
-                            dispatch(removeFromRecent(assessment._id))
-                          }
-                        >
-                          <CgUnavailable className="text-[#8F92A1] text-lg" />
-                        </button>
-                      </div>
-                      <p className="text-xs font-normal text-[#8F92A1]">
-                        {calculateDaysAndWeeks(assessment.endDate)}
-                      </p>
+                  ))}
+                  {hasMore && (
+                    <div className="bg-blued p-1 rounded-md w-fit h-fit">
+                      <button
+                        onClick={loadMore}
+                        className=" bg-blued text-secondary-foreground shadow-md  text-white  hover:shadow-inner-lg p-1 rounded-md"
+                      >
+                        load more
+                      </button>
                     </div>
-                  </div>
-                ))}
-                {hasMore && (
-                  <div className="bg-blued p-1 rounded-lg w-fit h-fit">
-                    <button
-                      onClick={loadMore}
-                      className=" bg-blued text-secondary-foreground shadow-md  text-white  hover:shadow-inner-lg p-1 rounded-lg"
-                    >
-                      load more
-                    </button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>}
+        )}
       </div>
     </div>
   );

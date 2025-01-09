@@ -17,10 +17,10 @@ const Header = () => {
       toast.error("Please select atleast one topic to proceed");
       return;
     }
-    if(isUni()){
+    if (isUni()) {
       navigate(`/university/pr/test/questions?level=${level}`);
-    }else{
-    navigate(`/college/test/questions?level=${level}`);
+    } else {
+      navigate(`/college/test/questions?level=${level}`);
     }
   };
 
@@ -28,23 +28,22 @@ const Header = () => {
     <div className="flex mx-auto justify-between my-5 items-center">
       <div className="flex gap-3 items-center">
         <button
-          className="self-center object-center rounded-lg h-10 w-10 "
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => {
-            
-            if(isUni()){
+            if (isUni()) {
               navigate(`/university/pr/test/name?level=${level}`);
-            }else{
-              navigate(`/college/test/name?level=${level}`)
+            } else {
+              navigate(`/college/test/name?level=${level}`);
             }
           }}
         >
-          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <div className="flex flex-col ">
           <h2 className="text-xl md:text-[28px] font-bold font-dmSans text-[#171717]">
             Create Question
           </h2>
-          {/* <div className="flex gap-3 items-center text-[#567BF9] text-xs font-medium">
+          {/* <div className="flex gap-3 items-center text-[#567BF9] text-sm font-medium">
             <h3>Untitiled Assessments</h3>
             <div className="flex gap-2">
               <img
@@ -68,7 +67,7 @@ const Header = () => {
 
       <div className="flex gap-3">
         <button
-          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
+          className="bg-accent self-center text-white rounded-md h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={handleSubmit}
         >
           Next

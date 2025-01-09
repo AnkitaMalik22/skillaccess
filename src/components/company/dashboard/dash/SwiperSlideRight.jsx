@@ -8,7 +8,7 @@ import "swiper/css";
 
 const SwiperSlideRight = () => {
   const dispatch = useDispatch();
-  const { jobs:newJobs, loading } = useSelector((state) => state.job);
+  const { jobs: newJobs, loading } = useSelector((state) => state.job);
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(getNewJobs());
@@ -48,7 +48,7 @@ const SwiperSlideRight = () => {
         <SwiperSlide>
           <div className=" bg-white  w-28 xl:w-[182px] h-[148px] rounded-2xl p-4">
             <figure
-              className="bg-white-500  mx-auto rounded-lg flex justify-center cursor-pointer mb-4"
+              className="bg-white-500  mx-auto rounded-md flex justify-center cursor-pointer mb-4"
               onClick={() =>
                 navigate(`/college/companies/jobOverview/${job._id}`)
               }
@@ -56,13 +56,13 @@ const SwiperSlideRight = () => {
               <img
                 src={job?.company?.basic?.logo}
                 alt="img not loaded"
-                className="w-[52px] h-[52px] self-center rounded-lg"
+                className="w-[52px] h-[52px] self-center rounded-md"
               />
             </figure>
-            <h3 className="text-xs  font-bold text-center break-words mb-2">
+            <h3 className="text-sm  font-bold text-center break-words mb-2">
               {job.JobTitle}
             </h3>
-            <p className="text-xs font-medium text-center break-words  ">
+            <p className="text-sm font-medium text-center break-words  ">
               {job?.company?.location?.address}{" "}
               <span className=" text-[#8F92A1]">{job.JobLocation}</span>
             </p>

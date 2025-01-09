@@ -31,12 +31,12 @@ const Footer = ({ setQues, question, handleSave }) => {
       <div className="absolute bottom-10 flex right-8 gap-2">
         {" "}
         <div className=" flex gap-2">
-          <button className="self-center justify-center flex bg-gray-200 p-2 rounded-lg text-sm font-bold gap-2 w-32">
+          <button className="self-center justify-center flex bg-gray-200 p-2 rounded-md text-sm font-bold gap-2 w-32">
             <FaChevronLeft className="self-center" /> Prev
           </button>
         </div>
         <div className=" flex">
-          <button className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ">
+          <button className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ">
             <FaPlus className="self-center" onClick={() => handleSave()} /> Add
             Next Question
           </button>

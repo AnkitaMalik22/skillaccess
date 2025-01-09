@@ -20,20 +20,24 @@ const Invite = () => {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [year, setYear] = useState("");
-  const [limit,setLimit] = useState(50);
+  const [limit, setLimit] = useState(50);
   const [page, setPage] = useState(1);
   const debounceRef = useRef(null); // Ref for debounce timer
 
   const { approvedStudents: uploadedStudents, loading } = useSelector(
     (state) => state.collegeStudents
   );
-  const { students: studentList, assessment, hasNextPageStudent } = useSelector(
-    (state) => state.test
-  );
+  const {
+    students: studentList,
+    assessment,
+    hasNextPageStudent,
+  } = useSelector((state) => state.test);
   const { user } = useSelector((state) => state.collegeAuth);
 
   useEffect(() => {
-    dispatch(getStudentsForTest({ testId, skip: 0, limit: limit, batch: year }))
+    dispatch(
+      getStudentsForTest({ testId, skip: 0, limit: limit, batch: year })
+    );
   }, []);
 
   useEffect(() => {
@@ -68,20 +72,22 @@ const Invite = () => {
       //   })
       // );
       setPage(1);
-      
+
       // Debounce dispatch action
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-    debounceRef.current = setTimeout(() => {
-      dispatch(getStudentsForTest({
-        testId,
-        skip: 0,
-        limit,
-        search: value,
-        batch: year,
-      }));
-    }, 300); // Adjust debounce time (300ms is common)
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+      debounceRef.current = setTimeout(() => {
+        dispatch(
+          getStudentsForTest({
+            testId,
+            skip: 0,
+            limit,
+            search: value,
+            batch: year,
+          })
+        );
+      }, 300); // Adjust debounce time (300ms is common)
       //console.log(filteredStudents, "filtered--", value);
     }
   };
@@ -89,27 +95,39 @@ const Invite = () => {
   let testName = localStorage.getItem("testName");
 
   const handleNext = () => {
-    dispatch(getStudentsForTest({ testId, skip: page * limit, limit: limit, batch: year }));
+    dispatch(
+      getStudentsForTest({
+        testId,
+        skip: page * limit,
+        limit: limit,
+        batch: year,
+      })
+    );
     setPage((prev) => prev + 1);
   };
 
   const handlePrev = () => {
-    dispatch(getStudentsForTest({ testId, skip: (page - 1) * limit, limit: limit, batch: year }));
+    dispatch(
+      getStudentsForTest({
+        testId,
+        skip: (page - 1) * limit,
+        limit: limit,
+        batch: year,
+      })
+    );
     setPage((prev) => prev - 1);
-    toast.error("prev")
-
-  }
-
+    toast.error("prev");
+  };
 
   // //console.log(uploadedStudents)
   return (
     <>
       <div className="flex gap-3 mb-5">
         <button
-          className="self-center object-center rounded-lg h-10 w-10 "
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         {/* <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Create Assessment
@@ -121,19 +139,18 @@ const Invite = () => {
           <div
             name=""
             id=""
-            className="rounded-lg  focus:outline-none border-none mb-4 p-5 font-bold text-2xl"
+            className="rounded-md  focus:outline-none border-none mb-4 p-5 font-bold text-2xl"
           >
             {localStorage?.getItem("testName")}
           </div>
 
           {/* {console.log(assessment?.endDate)} */}
           <Footer students={students} endDate={assessment?.endDate} />
-
-
         </div>
 
-        <div className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg p-5 focus:ring-0placeholder-gray-400 mb-6">
-          <Header handleFilter={handleFilterStudents}
+        <div className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-md p-5 focus:ring-0placeholder-gray-400 mb-6">
+          <Header
+            handleFilter={handleFilterStudents}
             setStudents={setStudents}
             uploadedStudents={filteredStudents}
             students={students}
@@ -144,7 +161,14 @@ const Invite = () => {
             handleChangeYear={(e) => {
               setPage(1);
               setYear(e.target.value || "");
-              dispatch(getStudentsForTest({ testId, skip: (page - 1) * limit, limit: limit, batch: e.target.value }))
+              dispatch(
+                getStudentsForTest({
+                  testId,
+                  skip: (page - 1) * limit,
+                  limit: limit,
+                  batch: e.target.value,
+                })
+              );
             }}
           />
 
@@ -155,8 +179,6 @@ const Invite = () => {
           />
         </div>
       </div>
-
-
     </>
   );
 };

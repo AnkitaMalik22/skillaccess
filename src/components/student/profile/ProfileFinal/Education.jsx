@@ -7,7 +7,7 @@ const Education = () => {
     <div className="font-dmSans">
       <span className="flex gap-2">
         <h2 className="text-2xl  font-bold  py-1  self-center">Education</h2>{" "}
-        <div className=" p-[.3rem] w-6 h-6 rounded-lg  bg-accent bg-opacity-80 self-center">
+        <div className=" p-[.3rem] w-6 h-6 rounded-md  bg-accent bg-opacity-80 self-center">
           <img
             src="/images/icons/pen.png"
             alt="pen"
@@ -21,7 +21,7 @@ const Education = () => {
         <div className="flex justify-between">
           {/* profile pic and details */}
           <div className="flex gap-2 py-1 mt-2">
-            <div className="min-w-[2.5rem] h-10 bg-amber-500 self-center rounded-lg"></div>
+            <div className="min-w-[2.5rem] h-10 bg-amber-500 self-center rounded-md"></div>
             <div className="ml-1 mt-1">
               <h2 className="  font-bold  py-1 ">ABC college</h2>
               <h2 className="font-normal  text-sm pb-2">
@@ -37,7 +37,7 @@ const Education = () => {
               <span className="flex gap-1 ">
                 {" "}
                 <LuClock3 className="self-center " />{" "}
-                <p className="self-center text-xs font-medium">
+                <p className="self-center text-sm font-medium">
                   August 12 2014 to July 8 2018
                 </p>
               </span>
@@ -47,7 +47,7 @@ const Education = () => {
               <span className="flex gap-1">
                 {" "}
                 <CgPinAlt className="self-center text-lg font-bold" />{" "}
-                <p className="self-center text-xs">Bhopal India</p>
+                <p className="self-center text-sm">Bhopal India</p>
               </span>
             </div>
             {/*  */}
@@ -65,13 +65,13 @@ const Education = () => {
       {/* end of user header */}
 
       {/*  Acheivements*/}
-      <section className="px-3 text-xs font-bold mt-5">
+      <section className="px-3 text-sm font-bold mt-5">
         <h2>Acheivements (1)</h2>
         <div className="flex flex-wrap mt-4 border-b-2 pb-5">
           <img
             src="/images/cert.png"
             alt=""
-            className="w-60 h-40 object-cover rounded-lg"
+            className="w-60 h-40 object-cover rounded-md"
           />
         </div>
       </section>

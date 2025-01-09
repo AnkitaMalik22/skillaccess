@@ -21,7 +21,7 @@ const Mail = () => {
     <>
       <Header />
 
-      <div className="bg-lGray bg-opacity-5  p-4 rounded-lg ">
+      <div className="bg-lGray bg-opacity-5  p-4 rounded-md ">
         <div className="w-full bg-white flex mb-2 rounded-xl">
           <div className="w-1/4 h-[4.5rem] flex justify-between px-2">
             <select
@@ -48,12 +48,12 @@ const Mail = () => {
           </div>
         </div>
         <div className="h-[70vh] w-full flex gap-4">
-          <div className="w-1/4 bg-white p-2 overflow-y-scroll rounded-lg">
+          <div className="w-1/4 bg-white p-2 overflow-y-scroll rounded-md">
             <Left />
             <Left />
             <Left />
           </div>
-          <div className="w-3/4 bg-white rounded-lg">
+          <div className="w-3/4 bg-white rounded-md">
             {type === ":view" ? <View /> : <Compose />}
           </div>
         </div>

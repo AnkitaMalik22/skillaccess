@@ -45,14 +45,14 @@ const Signature = ({
 
   return (
     <div>
-      <div className="bg-[#F8F8F9] mt-12 px-6 p-6 rounded-lg">
+      <div className="bg-[#F8F8F9] mt-12 px-6 p-6 rounded-md">
         <section className="grid grid-cols-2 gap-4">
           <div>
             {" "}
             <Disclosure>
               {({ open }) => (
                 <div className="mb-4 relative border  rounded-xl py-1">
-                  <div className="-top-3  left-3 text-xs font-medium text-blued absolute bg-[#F8F8F9] px-2">
+                  <div className="-top-3  left-3 text-sm font-medium text-blued absolute bg-[#F8F8F9] px-2">
                     Returns
                   </div>
 
@@ -148,7 +148,7 @@ const Signature = ({
               <Disclosure className="w-11/12 self-center">
                 {({ open }) => (
                   <div className="mb-4 relative border border-blued rounded-xl py-1">
-                    <div className="-top-3  left-3 text-xs font-medium text-blued absolute bg-[#F8F8F9] px-2">
+                    <div className="-top-3  left-3 text-sm font-medium text-blued absolute bg-[#F8F8F9] px-2">
                       Returns
                     </div>
 
@@ -195,7 +195,7 @@ const Signature = ({
 
         <div className="w-full relative h-12">
           <button
-            className="absolute right-0 bg-blued text-white rounded-lg px-5 flex gap-2 py-2"
+            className="absolute right-0 bg-blued text-white rounded-md px-5 flex gap-2 py-2"
             onClick={Add}
           >
             <FaPlus className="self-center " /> Add

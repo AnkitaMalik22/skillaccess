@@ -20,29 +20,53 @@ const AddQuestionsSelect = () => {
     switch (selectQuestionType) {
       case "mcq":
         navigate(
-          isUni() ? `/university/pr/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic` : (isCompany() ? `/company/pr/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic` : `/college/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic`)
-
+          isUni()
+            ? `/university/pr/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic`
+            : isCompany()
+            ? `/company/pr/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic`
+            : `/college/quesBank/addMcqToTopic/${id}?type=mcq&addType=topic`
         );
         break;
 
       case "code":
-        navigate(isUni() ? `/university/pr/quesBank/code/${id}?type=compiler&addType=topic` : (isCompany() ? `/company/pr/quesBank/code/${id}?type=compiler&addType=topic` : `/college/quesBank/code/${id}?type=compiler&addType=topic`));
+        navigate(
+          isUni()
+            ? `/university/pr/quesBank/code/${id}?type=compiler&addType=topic`
+            : isCompany()
+            ? `/company/pr/quesBank/code/${id}?type=compiler&addType=topic`
+            : `/college/quesBank/code/${id}?type=compiler&addType=topic`
+        );
         break;
 
       case "video":
-        navigate(isUni() ? `/university/pr/quesBank/video/${id}?type=video&addType=topic` : (isCompany() ? `/company/pr/quesBank/video/${id}?type=video&addType=topic` : `/college/quesBank/video/${id}?type=video&addType=topic`));
+        navigate(
+          isUni()
+            ? `/university/pr/quesBank/video/${id}?type=video&addType=topic`
+            : isCompany()
+            ? `/company/pr/quesBank/video/${id}?type=video&addType=topic`
+            : `/college/quesBank/video/${id}?type=video&addType=topic`
+        );
 
         break;
 
       case "findAnswer":
         navigate(
-          isUni() ? `/university/pr/quesBank/find-ans/${id}?type=findAnswer&addType=topic` : (isCompany() ? `/company/pr/quesBank/find-ans/${id}?type=findAnswer&addType=topic` : `/college/quesBank/find-ans/${id}?type=findAnswer&addType=topic`)
+          isUni()
+            ? `/university/pr/quesBank/find-ans/${id}?type=findAnswer&addType=topic`
+            : isCompany()
+            ? `/company/pr/quesBank/find-ans/${id}?type=findAnswer&addType=topic`
+            : `/college/quesBank/find-ans/${id}?type=findAnswer&addType=topic`
         );
         break;
 
       case "essay":
         navigate(
-          isUni() ? `/university/pr/quesBank/essay/${id}?type=essay&addType=topic` : (isCompany() ? `/company/pr/quesBank/essay/${id}?type=essay&addType=topic` : `/college/quesBank/essay/${id}?type=essay&addType=topic`))
+          isUni()
+            ? `/university/pr/quesBank/essay/${id}?type=essay&addType=topic`
+            : isCompany()
+            ? `/company/pr/quesBank/essay/${id}?type=essay&addType=topic`
+            : `/college/quesBank/essay/${id}?type=essay&addType=topic`
+        );
         break;
 
       default:
@@ -103,11 +127,7 @@ const AddQuestionsSelect = () => {
                   className="w-3 h-3 checked:bg-none checked:border checked:border-blue-700 border-blue-700 ring-transparent ring-2 checked:ring-blue-700 ring-offset-2"
                   onChange={() => setSelectQuestionType(item.type)}
                 />
-                <img
-                  src="/images/icons/exam.png"
-                  alt=""
-                  className="w-6 h-8"
-                />
+                <img src="/images/icons/exam.png" alt="" className="w-6 h-8" />
                 <h2 className="text-lg font-normal">{item.label}</h2>
               </div>
               <h2 className="text-lg font-normal flex-1">{item.description}</h2>
@@ -134,12 +154,12 @@ const AddQuestionsSelect = () => {
         <div className="flex justify-end">
           <div className="flex gap-4">
             <button
-              className="self-center justify-center flex bg-accent border  py-3 px-8 rounded-xl text-xs gap-2 text-white"
+              className="self-center justify-center flex bg-accent border  py-3 px-8 rounded-xl text-sm gap-2 text-white"
               onClick={NavHandler}
             >
               Add Question
             </button>
-            {/* <button className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-xs gap-2 text-blued">
+            {/* <button className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-sm gap-2 text-blued">
             Copy question from another assessment
           </button> */}
           </div>

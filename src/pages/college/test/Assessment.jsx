@@ -119,26 +119,26 @@ const Assessment = () => {
       <Header name={assessment?.name} />
       <div className="flex gap-2 mx-auto mb-5 ">
         <FaFolder className="text-blued w-5 h-5" />
-        <h2 className="text-xs">{assessment?.level} Level</h2>
+        <h2 className="text-sm">{assessment?.level} Level</h2>
       </div>
 
-      <h2 className="flex gap-2  mx-auto p-3 bg-gray-100 mb-5  rounded-lg tracking-wide">
+      <h2 className="flex gap-2  mx-auto p-3 bg-gray-100 mb-5  rounded-md tracking-wide">
         Create the first things for your platform
       </h2>
 
-      <div className="  mx-auto rounded-lg tracking-wide justify-between flex font-dmSans gap-5">
+      <div className="  mx-auto rounded-md tracking-wide justify-between flex font-dmSans gap-5">
         <div className="w-1/2 ">
           {assessment?.topics?.map((topic, index) => (
             <div className="w-full  mb-5 gap-x-10 gap-y-3 p-3 bg-gray-100 rounded-2xl border border-blued h-28">
               {" "}
               {/* heading */}
               <div className="flex justify-between mb-5">
-                <h2 className="self-center text-xs capitalize">
+                <h2 className="self-center text-sm capitalize">
                   {topic.Heading}
                 </h2>
                 <span className="flex gap-1">
                   <ImFileText className="text-blued self-center " />
-                  <p className="self-center text-xs text-gray-500   sm:text-sm">
+                  <p className="self-center text-sm text-gray-500   sm:text-sm">
                     {topic.Type === "mcq" && "Multiple Choice Questions"}
                     {topic.Type === "findAnswer" && "Comprehension"}
                     {topic.Type === "compiler" && "Code"}
@@ -148,7 +148,7 @@ const Assessment = () => {
                 </span>
                 <div className="flex gap-1 ">
                   <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
-                  <p className="text-gray-400 text-xs self-center">
+                  <p className="text-gray-400 text-sm self-center">
                     {
                       totalTime.find(
                         (timeObj) =>
@@ -166,15 +166,19 @@ const Assessment = () => {
                 <RxCross1 className="self-center text-red-600 w-5 h-5" />
               </div> */}
               {/* desc */}
-              <div className="flex justify-between text-xs font-normal text-gray-400 ">
+              <div className="flex justify-between text-sm font-normal text-gray-400 ">
                 <p className="line-clamp-2 first-letter:uppercase">
                   {topic.Description}
                 </p>
                 <button
-                  className="self-center justify-center bg-gray-200 p-2 rounded-lg text-xs hover:bg-blue-500 hover:text-white text-[#171717]"
+                  className="self-center justify-center bg-gray-200 p-2 rounded-md text-sm hover:bg-blue-500 hover:text-white text-[#171717]"
                   onClick={() =>
                     navigate(
-                      `/${isUni() ?"university/pr":"college"}/test/details/${index}?question=${topic.Type}&type=assessment&view=false`
+                      `/${
+                        isUni() ? "university/pr" : "college"
+                      }/test/details/${index}?question=${
+                        topic.Type
+                      }&type=assessment&view=false`
                     )
                   }
                 >
@@ -198,7 +202,7 @@ const Assessment = () => {
         </div>
 
         <div className="  hidden md:block w-1/2 ">
-          {/* <div className=" !rounded-lg  ">
+          {/* <div className=" !rounded-md  ">
             
             <div className="bg-gray-100 rounded-2xl p-2 mb-6">
               <div className="flex justify-between px-2 font-bold text-base ">
@@ -208,7 +212,7 @@ const Assessment = () => {
               <div className="flex">
                 <div className=" relative w-80 h-60">
                   <Chart
-                    className="bg-gray-100 rounded-lg"
+                    className="bg-gray-100 rounded-md"
                     options={settings.options}
                     series={settings.options.series}
                     type="donut"
@@ -232,19 +236,19 @@ const Assessment = () => {
                 <div className="self-center">
                   <div className="flex gap-1 ">
                     <div className="w-4 h-4 rounded-full bg-accent opacity-60"></div>{" "}
-                    <h2 className="text-xs font-bold text-[#7F7F7F]">
+                    <h2 className="text-sm font-bold text-[#7F7F7F]">
                       Total Students Applied
                     </h2>
                   </div>
                   <div className="flex gap-1 mt-2 ">
                     <div className="w-4 h-4 rounded-full bg-[#00875A] opacity-60"></div>{" "}
-                    <h2 className="text-xs font-bold text-[#7F7F7F]">
+                    <h2 className="text-sm font-bold text-[#7F7F7F]">
                       Shortlisted
                     </h2>
                   </div>
                   <div className="flex gap-1 mt-2">
                     <div className="w-4 h-4 rounded-full bg-[#DE350B] opacity-60"></div>{" "}
-                    <h2 className="text-xs font-bold text-[#7F7F7F]">
+                    <h2 className="text-sm font-bold text-[#7F7F7F]">
                       Attempted for Exam
                     </h2>
                   </div>
@@ -257,12 +261,12 @@ const Assessment = () => {
                 <h2>Total Attempts</h2>{" "}
                 <input
                   type="date"
-                  className="rounded-lg focus:outline-none  border-none text-blued "
+                  className="rounded-md focus:outline-none  border-none text-blued "
                 />
               </span>
               <div className="w-full h-60">
                 <Chart
-                  className="bg-gray-100 rounded-lg mt-2"
+                  className="bg-gray-100 rounded-md mt-2"
                   options={{
                     chart: {
                       type: "bar",
@@ -310,9 +314,8 @@ const Assessment = () => {
             </div>
        
           </div> */}
-            <Performance />
+          <Performance />
         </div>
-      
       </div>
 
       {/* larger screens */}

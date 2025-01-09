@@ -20,7 +20,7 @@ const ProfileEducation = () => {
           <div className="flex justify-between">
             {/* profile pic and details */}
             <div className="flex gap-2 py-1 mt-2">
-              <div className="min-w-[2.5rem] h-10 bg-amber-500 self-center rounded-lg"></div>
+              <div className="min-w-[2.5rem] h-10 bg-amber-500 self-center rounded-md"></div>
               <div className="ml-1 mt-1">
                 <h2 className="  font-bold  py-1 ">ABC college</h2>
                 <h2 className="font-normal  text-sm pb-2">
@@ -36,7 +36,7 @@ const ProfileEducation = () => {
                 <span className="flex gap-1 ">
                   {" "}
                   <LuClock3 className="self-center " />{" "}
-                  <p className="self-center text-xs font-medium">
+                  <p className="self-center text-sm font-medium">
                     August 12 2014 to July 8 2018
                   </p>
                 </span>
@@ -46,7 +46,7 @@ const ProfileEducation = () => {
                 <span className="flex gap-1">
                   {" "}
                   <CgPinAlt className="self-center text-lg font-bold" />{" "}
-                  <p className="self-center text-xs">Bhopal India</p>
+                  <p className="self-center text-sm">Bhopal India</p>
                 </span>
               </div>
               {/*  */}
@@ -64,13 +64,13 @@ const ProfileEducation = () => {
         {/* end of user header */}
 
         {/*  Acheivements*/}
-        <section className="px-3 text-xs font-bold mt-5">
+        <section className="px-3 text-sm font-bold mt-5">
           <h2>Acheivements (1)</h2>
           <div className="flex flex-wrap mt-4 border-b-2 pb-5">
             <img
               src="/images/cert.png"
               alt=""
-              className="w-60 h-40 object-cover rounded-lg"
+              className="w-60 h-40 object-cover rounded-md"
             />
           </div>
         </section>
@@ -129,7 +129,7 @@ const ProfileEducation = () => {
       <div className="flex flex-col w-[400px] pt-12">
         <label className="mb-4 text-lg font-bold">Media Upload</label>
 
-        <div className="flex justify-center bg-gray-200 bg-opacity-70   rounded-lg w-20 h-20">
+        <div className="flex justify-center bg-gray-200 bg-opacity-70   rounded-md w-20 h-20">
           <FiUpload className="self-center text-lg " />
         </div>
 

@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import SlideNextButton from "../buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useNavigate } from "react-router-dom";
-import { getCompany, getNewCompanies } from "../../../../redux/college/dashboard/dashboardSlice";
+import {
+  getCompany,
+  getNewCompanies,
+} from "../../../../redux/college/dashboard/dashboardSlice";
 import "swiper/css";
 
 const SwiperSlideLeft = () => {
   const dispatch = useDispatch();
-  const { companies:newCompanies, loading } = useSelector((state) => state.dashboard);
+  const { companies: newCompanies, loading } = useSelector(
+    (state) => state.dashboard
+  );
   const navigate = useNavigate();
   // useSelector((state) => //console.log("state : ", state.dashboard));
   const { user } = useSelector((state) => state.collegeAuth);
@@ -53,9 +58,9 @@ const SwiperSlideLeft = () => {
     >
       {newCompanies.map((company) => (
         <SwiperSlide className="flex ">
-          <div className="mr-4 bg-white roundex-xl w-28 xl:w-[128px] h-[148px] p-2 rounded-2xl">
-          <figure
-              className="bg-gray-100 w-[90%] h-20 mb-4 mx-auto cursor-pointer rounded-lg"
+          <div className="mr-4 bg-white roundex-xl w-28 xl:w-[128px] h-[148px] p-2 rounded-md shadow-sm focus:shadow-md hover:shadow-md">
+            <figure
+              className="bg-gray-100 w-[90%] h-20 mb-4 mx-auto cursor-pointer rounded-md"
               onClick={() =>
                 navigate(`/college/companies/profile/${company._id}`)
               }
@@ -68,12 +73,14 @@ const SwiperSlideLeft = () => {
                     : company?.basic?.logo
                 }
                 alt="Img"
-                className="w-full h-full rounded-lg"
+                className="w-full h-full rounded-md"
               />
             </figure>
             <div>
-              <h3 className="text-xs text-[#8F92A1] font-bold text-center break-words ">
-                {company?.basic?.companyName?. length > 20 ? company?.basic?.companyName?.slice(0, 20) + "..." : company?.basic?.companyName}
+              <h3 className="text-sm text-[#8F92A1] font-bold text-center break-words ">
+                {company?.basic?.companyName?.length > 20
+                  ? company?.basic?.companyName?.slice(0, 20) + "..."
+                  : company?.basic?.companyName}
               </h3>
             </div>
           </div>

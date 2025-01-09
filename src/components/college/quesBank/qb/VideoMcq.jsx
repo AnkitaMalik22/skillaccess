@@ -12,7 +12,7 @@ const VideoMcq = ({ Number, mcq, id, video }) => {
   const navigate = useNavigate();
   // //console.log(mcq);
   return (
-    <div className="mx-6 flex bg-white rounded-lg justify-between my-4">
+    <div className="mx-6 flex bg-white rounded-md justify-between my-4">
       {mcq.Title && (
         <div className="w-11/12 flex flex-col gap-2">
           <h2 className="flex gap-2 px-4 font-semibold pt-3 text-base">
@@ -22,7 +22,7 @@ const VideoMcq = ({ Number, mcq, id, video }) => {
               dangerouslySetInnerHTML={{ __html: mcq.Title }}
             />
             <PiPencilSimpleLineBold
-              className=" w-6 h-6 p-1 rounded-lg  self-center cursor-pointer"
+              className=" w-6 h-6 p-1 rounded-md  self-center cursor-pointer"
               onClick={() => {
                 navigate(
                   `/college/quesBank/video/${id}/addmcq?addType=edit&index=${Number}`
@@ -44,10 +44,7 @@ const VideoMcq = ({ Number, mcq, id, video }) => {
                         alt="greensel"
                       />
                     ) : (
-                      <img
-                        src="/images/icons/blueDot.png"
-                        alt="greensel"
-                      />
+                      <img src="/images/icons/blueDot.png" alt="greensel" />
                     )}
                   </div>
                   <label

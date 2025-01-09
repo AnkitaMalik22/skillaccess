@@ -1,4 +1,4 @@
-import React, { useEffect ,useState} from "react";
+import React, { useEffect, useState } from "react";
 import Folder from "./icon/Folder";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,12 +17,12 @@ const Topic = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");
   const { sections, GET_TOPICS_LOADING } = useSelector((state) => state.test);
-    const [query, setQuery] = useState({
-      category: '',
-      accessibleDepartments: [],
-      hasAccessToAllDepartments: false,
-      hasAccessToAllCategories: true
-    });
+  const [query, setQuery] = useState({
+    category: "",
+    accessibleDepartments: [],
+    hasAccessToAllDepartments: false,
+    hasAccessToAllCategories: true,
+  });
   let topics = localStorage.getItem("topics")
     ? JSON.parse(localStorage.getItem("topics"))
     : [];
@@ -77,8 +77,14 @@ const Topic = () => {
       <div className="flex justify-between md:mb-8 mb-5 items-center">
         <h2 className="font-bold text-xl text-[#171717]">Choose a Topic</h2>
         <button
-          className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
-          onClick={() => isUni() ? navigate("/university/pr/quesBank/topic") : (isCompany() ? navigate("/company/pr/quesBank/topic") : navigate("/college/quesBank/topic"))}
+          className="rounded-xl bg-accent text-sm font-bold text-white py-[5px] px-3"
+          onClick={() =>
+            isUni()
+              ? navigate("/university/pr/quesBank/topic")
+              : isCompany()
+              ? navigate("/company/pr/quesBank/topic")
+              : navigate("/college/quesBank/topic")
+          }
         >
           View All
         </button>
@@ -119,7 +125,9 @@ const Topic = () => {
                       navigate(
                         isUni()
                           ? `/university/pr/quesBank/topic/${section._id}`
-                          : (isCompany() ? `/company/pr/quesBank/topic/${section._id}` : `/college/quesBank/topic/${section._id}`)
+                          : isCompany()
+                          ? `/company/pr/quesBank/topic/${section._id}`
+                          : `/college/quesBank/topic/${section._id}`
                       );
                     }}
                   >

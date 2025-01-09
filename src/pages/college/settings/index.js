@@ -9,9 +9,9 @@ const Security = lazy(() => import("./Security.jsx"));
 // const SecurityAppPage = lazy(() => import("./SecurityAppPage.jsx"));
 const SecondFAPage = lazy(() => import("./SecondFAPage.jsx"));
 
-function SettingsRoute() {
+function SettingsRoute(entity) {
   return (
-    <Route path="college/settings">
+    <Route path={`${entity}settings`}>
       <Route path="" element={<Settings />} />
       <Route path="security" element={<Security />} />
       <Route path="security/secondFA" element={<SecondFAPage />} />

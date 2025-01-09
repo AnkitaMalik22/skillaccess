@@ -91,7 +91,7 @@ const VideoEssay = ({
   };
 
   return (
-    <div className="flex bg-white rounded-lg justify-between mb-5">
+    <div className="flex bg-white rounded-md justify-between mb-5">
       <div className="p-5 flex flex-col gap-2">
         {search.get(`${Number}`) !== "true" ? (
           <h2 className="px-4 font-semibold pt-3 text-base">
@@ -157,16 +157,16 @@ const VideoEssay = ({
       {/* {type !== "topic" && view !== "false" && (
         <div className="w-[5%] flex flex-col gap-4 text-blued border-s-2 py-1"> */}
       {/* <RxCross1
-            className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
+            className="text-red-500 w-6 h-6 p-1 rounded-md self-center bg-gray-100"
             onClick={handleDelete}
           /> */}
-      {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
-      {/* <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
-        <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
+      {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" /> */}
+      {/* <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" />
+        <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" /> */}
 
       {/* {search.get(`${Number}`) !== "true" ? (
             <PiPencilSimpleLineBold
-              className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center"
+              className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center"
               onClick={() => {
                 search.set(`${Number}`, "true");
                 setSearch(search);
@@ -174,7 +174,7 @@ const VideoEssay = ({
             />
           ) : (
             <PiPencilSimpleLineBold
-              className=" w-6 h-6 p-1 rounded-lg bg-amber-600 self-center"
+              className=" w-6 h-6 p-1 rounded-md bg-amber-600 self-center"
               onClick={() => {
                 search.set(`${Number}`, "false");
                 setSearch(search);

@@ -16,13 +16,13 @@ const EditHeader = ({
   return (
     <div className="flex justify-between mb-2">
       <div className="h-fit self-center">
-        <button className="flex self-center ml-2 rounded-lg  gap-2">
+        <button className="flex self-center ml-2 rounded-md  gap-2">
           <button
             onClick={() => {
               setEditable(false);
               localStorage.setItem("editable", false);
             }}
-            className=" mr-3 self-center bg-[#D9E1E7] w-12 h-12 2xl:w-14 2xl:h-14 p-2 rounded-lg flex justify-center"
+            className=" mr-3 self-center bg-[#D9E1E7] w-12 h-12 2xl:w-14 2xl:h-14 p-2 rounded-md flex justify-center"
           >
             <FaChevronLeft className="   h-3 w-3 2xl:h-4 2xl:w-4 self-center " />
           </button>

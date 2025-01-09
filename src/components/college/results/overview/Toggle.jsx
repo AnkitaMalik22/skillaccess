@@ -7,7 +7,7 @@ const Toggle = ({ assessment }) => {
   const [toggle, setToggle] = useState(2);
   return (
     <div className="bg-[#8F92A1] bg-opacity-5  p-5 rounded-2xl">
-      <div className="grid grid-cols-3 text-xs font-bold border-b border-spacing-0 border-gray-200 mb-4">
+      <div className="grid grid-cols-3 text-sm font-bold border-b border-spacing-0 border-gray-200 mb-4">
         <h2
           className={`${
             toggle === 1 ? "text-blued border-b-4 border-blued" : ""

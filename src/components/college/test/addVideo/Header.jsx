@@ -160,10 +160,10 @@ const Header = () => {
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div className="flex gap-3">
         <button
-          className="self-center object-center rounded-lg h-10 w-10 "
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Question No : {totalTopicQuestions + 1}
@@ -176,7 +176,7 @@ const Header = () => {
             // Show "Submit" button
 
             <button
-              className="self-center justify-center flex bg-accent py-3 px-8 rounded-2xl text-xs gap-2 text-white"
+              className="self-center justify-center flex bg-accent py-3 px-8 rounded-2xl text-sm gap-2 text-white"
               onClick={handleSave}
             >
               Submit
@@ -192,7 +192,7 @@ const Header = () => {
 
           //   <button
 
-          //     className="self-center justify-center flex bg-accent py-3 px-8 rounded-2xl text-xs gap-2 text-white"
+          //     className="self-center justify-center flex bg-accent py-3 px-8 rounded-2xl text-sm gap-2 text-white"
 
           //     onClick={() => navigate("/college/test/select")}
 

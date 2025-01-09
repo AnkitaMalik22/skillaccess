@@ -7,14 +7,14 @@ export const Progress = ({ level }) => {
         <div className="w-1/4 flex">
           <div className="relative">
             <figure
-              className={`3xl:w-28 text-xs font-bold  w-20   h-10 p-3 rounded-xl bg-accent z-50 text-white justify-center flex`}
+              className={`3xl:w-28 text-sm font-bold  w-20   h-10 p-3 rounded-xl bg-accent z-50 text-white justify-center flex`}
             >
               <div className="self-center">Personal</div>
             </figure>
           </div>
 
           <div
-            className={`w-full  rounded-lg h-1/4 self-center -ml-1 ${
+            className={`w-full  rounded-md h-1/4 self-center -ml-1 ${
               level !== 1 ? "bg-accent" : "bg-[#CCDCF5] "
             } `}
           ></div>
@@ -29,7 +29,7 @@ export const Progress = ({ level }) => {
           ></div>
           <div className="relative">
             <figure
-              className={`3xl:w-28 text-xs font-bold  w-20 flex justify-center h-10 p-3 rounded-xl ${
+              className={`3xl:w-28 text-sm font-bold  w-20 flex justify-center h-10 p-3 rounded-xl ${
                 level >= 2 ? "bg-accent text-white " : "bg-[#CCDCF5]   "
               }  z-50`}
             >
@@ -51,7 +51,7 @@ export const Progress = ({ level }) => {
           ></div>
           <div className="relative">
             <figure
-              className={`3xl:w-28 text-xs font-bold  w-20  h-10 p-3 rounded-xl flex justify-center ${
+              className={`3xl:w-28 text-sm font-bold  w-20  h-10 p-3 rounded-xl flex justify-center ${
                 level >= 3 ? "bg-accent text-white " : "bg-[#CCDCF5]  "
               } z-50`}
             >
@@ -78,7 +78,7 @@ export const Progress = ({ level }) => {
           ></div>
           <div className="relative">
             <figure
-              className={`3xl:w-28 text-xs font-bold  w-20  h-10 p-3 rounded-xl flex justify-center ${
+              className={`3xl:w-28 text-sm font-bold  w-20  h-10 p-3 rounded-xl flex justify-center ${
                 level >= 4 ? "bg-accent text-white" : "bg-[#CCDCF5]  "
               }  z-50`}
             >

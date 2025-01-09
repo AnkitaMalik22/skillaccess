@@ -52,7 +52,7 @@ const AddTeamPoP = ({ onClose }) => {
   return (
     <div>
       <div className="w-full  min-w-full  h-[100vh] bg-black absolute z-[9999] flex left-0 top-0 bg-opacity-30 ">
-        <div className="py-12 bg-white shadow-md w-[500px] h-auto  mx-auto self-center rounded-lg bg-opactiy-10  px-12 flex flex-col justify-center gap-2 relative">
+        <div className="py-12 bg-white shadow-md w-[500px] h-auto  mx-auto self-center rounded-md bg-opactiy-10  px-12 flex flex-col justify-center gap-2 relative">
           <h3 className="text-xl font-semibold mb-4">Add Team</h3>
           <input
             type="text"

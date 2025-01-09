@@ -120,26 +120,26 @@ const Performance = () => {
           <div className="self-center">
             <div className="flex gap-1 ">
               <div className="w-3 h-3 rounded-full bg-[#6394DD] "></div>{" "}
-              <h2 className="text-xs font-bold text-[#7F7F7F]">
+              <h2 className="text-sm font-bold text-[#7F7F7F]">
                 Candidates Appeared
               </h2>
             </div>
             <div className="flex gap-1 mt-2 ">
               <div className="w-3 h-3 rounded-full bg-[#63B499]"></div>{" "}
-              <h2 className="text-xs font-bold text-[#7F7F7F]">
+              <h2 className="text-sm font-bold text-[#7F7F7F]">
                 Approved Candidates
               </h2>
             </div>
 
             <div className="flex gap-1 mt-2">
               <div className="w-3 h-3 rounded-full bg-[#FCBF76]"></div>{" "}
-              <h2 className="text-xs font-bold text-[#7F7F7F]">
+              <h2 className="text-sm font-bold text-[#7F7F7F]">
                 Disapproved Candidates
               </h2>
             </div>
             <div className="flex gap-1 mt-2">
               <div className="w-3 h-3 rounded-full bg-[#E8836A]"></div>{" "}
-              <h2 className="text-xs font-bold text-[#7F7F7F]">Absent</h2>
+              <h2 className="text-sm font-bold text-[#7F7F7F]">Absent</h2>
             </div>
           </div>
         </div>

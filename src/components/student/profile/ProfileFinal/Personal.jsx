@@ -13,10 +13,10 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
         {/* profile photo */}
         <div className="flex gap-2 px-3 py-1 mt-2">
           {editable ? (
-            <div className="w-14 h-14 bg-blued self-center rounded-lg relative">
+            <div className="w-14 h-14 bg-blued self-center rounded-md relative">
               <img src={""} alt="" width="50px" />
 
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
+              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-md p-[.35rem] bg-accent bg-opacity-80">
                 <img
                   src="/images/icons/pen.png"
                   alt=""
@@ -34,7 +34,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
               />
             </div>
           ) : (
-            <div className="relative w-14 h-14 bg-blued self-center rounded-lg flex justify-center items-center">
+            <div className="relative w-14 h-14 bg-blued self-center rounded-md flex justify-center items-center">
               <img
                 src={
                   student && student.avatar && student.avatar.url
@@ -46,7 +46,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
                 className="relative top[-50%]  "
               />
               {editable && (
-                <div className="absolute bottom-2 -right-1 w-6 h-6 rounded-lg p-[.35rem] bg-accent bg-opacity-80">
+                <div className="absolute bottom-2 -right-1 w-6 h-6 rounded-md p-[.35rem] bg-accent bg-opacity-80">
                   <img
                     src="/images/icons/pen.png"
                     alt=""
@@ -100,7 +100,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
 
       <div className="px-6  py-8 bg-gray-50 font-dmSans flex sm:gap-32 text-sm font-medium">
         <div className="flex gap-2">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 flex justify-center">
+          <div className="w-10 h-10 rounded-md bg-gray-200 flex justify-center">
             <MdOutlineEmail className="self-center text-2xl" />
           </div>
           {student && student.Email ? (
@@ -131,7 +131,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
         </div>
 
         <div className="flex gap-2">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 flex justify-center">
+          <div className="w-10 h-10 rounded-md bg-gray-200 flex justify-center">
             <BsPhone className="self-center text-2xl" />
           </div>
 
@@ -163,7 +163,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
         </div>
 
         <div className="flex gap-2 font-dmSans">
-          <div className="w-10 h-10 rounded-lg bg-gray-200 flex justify-center">
+          <div className="w-10 h-10 rounded-md bg-gray-200 flex justify-center">
             {" "}
             <PiLinkSimple className="self-center text-2xl" />
           </div>
@@ -205,7 +205,7 @@ const Personal = ({ imgRef, editable, setEditable, student, setStudent }) => {
       </div>
 
       <div className="px-6 flex gap-2  pb-8">
-        <div className="w-10 h-10  rounded-lg bg-gray-200 flex justify-center">
+        <div className="w-10 h-10  rounded-md bg-gray-200 flex justify-center">
           {" "}
           <CgPinAlt className="self-center text-3xl" />
         </div>

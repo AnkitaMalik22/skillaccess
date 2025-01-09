@@ -11,22 +11,22 @@ import { FaPlus } from "react-icons/fa6";
 const Card = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-//   const deleteHandler = (id) => {
-//     dispatch(deleteTest(id)).then((res) => {
-//       if (res.meta.requestStatus === "fulfilled") {
-//         dispatch(getAllTests());
-//       }
-//     });
-//   };
+  //   const deleteHandler = (id) => {
+  //     dispatch(deleteTest(id)).then((res) => {
+  //       if (res.meta.requestStatus === "fulfilled") {
+  //         dispatch(getAllTests());
+  //       }
+  //     });
+  //   };
   return (
-    <div className="w-[242px] h-[312px] bg-white text-start font-bold text-black rounded-lg p-2 font-dmSans">
+    <div className=" h-[312px] bg-white text-start font-bold text-black rounded-md p-2 font-dmSans">
       <h2 className="mb-2 line-clamp-2 first-letter:uppercase ">
         {props.assessment?.name}
       </h2>
-      <p className="font-normal text-gray-400 text-xs line-clamp-4 sm:mb-2 mb-1 h-[48%]">
+      <p className="font-normal text-gray-400 text-sm line-clamp-4 sm:mb-2 mb-1 h-[48%]">
         {props.assessment?.description}
       </p>
-      <h2 className="text-gray-400  text-xs tracking-[1px] font-dmSans sm:mb-2">
+      <h2 className="text-gray-400  text-sm tracking-[1px] font-dmSans sm:mb-2">
         ATTEMPTS
       </h2>
       <div className="grid grid-cols-4 w-full px-2 gap-2 mb-4">
@@ -79,19 +79,19 @@ const Card = (props) => {
       <div className="flex justify-between ">
         <div
           className="flex cursor-pointer "
-        //   onClick={() => {
-        //     // localStorage.setItem("testDetails", {
-        //     //   testId: props.assessment._id,
-        //     //   name: props.assessment.name,
-        //     //   duration: props.assessment.totalTime,
-        //     //   attempts: props.assessment.totalAttempts,
-        //     //   total: props.assessment.totalQuestionsCount,
-        //     // });
-        //     localStorage.setItem("testId", props.assessment._id);
-        //     localStorage.setItem("testName", props.assessment?.name);
-        //     props?.assessment &&
-        //       navigate(`/college/test/invite?testId=${props?.assessment._id}`);
-        //   }}
+          //   onClick={() => {
+          //     // localStorage.setItem("testDetails", {
+          //     //   testId: props.assessment._id,
+          //     //   name: props.assessment.name,
+          //     //   duration: props.assessment.totalTime,
+          //     //   attempts: props.assessment.totalAttempts,
+          //     //   total: props.assessment.totalQuestionsCount,
+          //     // });
+          //     localStorage.setItem("testId", props.assessment._id);
+          //     localStorage.setItem("testName", props.assessment?.name);
+          //     props?.assessment &&
+          //       navigate(`/college/test/invite?testId=${props?.assessment._id}`);
+          //   }}
         >
           <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued mx-2" />
           {props.assessment?.invitedStudents.slice(0, 3).map((student) => (
@@ -100,7 +100,7 @@ const Card = (props) => {
             </>
           ))}
 
-          <div className="w-8  rounded  font-dmSans text-gray-400 font-normal self-center text-xs pl-2">
+          <div className="w-8  rounded  font-dmSans text-gray-400 font-normal self-center text-sm pl-2">
             {props.assessment?.invitedStudents.length - 3 > 0 &&
               props.assessment?.invitedStudents.length - 3}
             {props.assessment?.invitedStudents.length - 3 > 0 && "+"}

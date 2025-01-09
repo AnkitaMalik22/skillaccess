@@ -29,8 +29,9 @@ const Review = () => {
   const level = searchParams.get("level");
   const [visible, setVisible] = useState(false);
   // //console.log(questionType);
-  const { currentTopic, topics, test } = useSelector((state) => state.companyTest);
-
+  const { currentTopic, topics, test } = useSelector(
+    (state) => state.companyTest
+  );
 
   useEffect(() => {
     if (currentTopic) {
@@ -56,11 +57,13 @@ const Review = () => {
           );
           questionType === "mcq" &&
             setQuestions(
-              JSON.parse(localStorage.getItem("assessment")).topics[id].questions
+              JSON.parse(localStorage.getItem("assessment")).topics[id]
+                .questions
             );
           questionType === "findAnswer" &&
             setQuestions(
-              JSON.parse(localStorage.getItem("assessment")).topics[id].findAnswers
+              JSON.parse(localStorage.getItem("assessment")).topics[id]
+                .findAnswers
             );
           questionType === "essay" &&
             setQuestions(
@@ -180,14 +183,13 @@ const Review = () => {
   }, [questions]);
   const totalTime = handleCalculateTime();
 
-
-
   useEffect(() => {
     dispatch(getTest(id));
   }, []);
   return (
     <>
-      <ReviewHeader name={name}
+      <ReviewHeader
+        name={name}
         view={view}
         qt={questionType}
         id={
@@ -199,28 +201,28 @@ const Review = () => {
         setVisible={setVisible}
         type={type}
         topicId={searchParams.get("topicId")}
-        sectionId={localStorage.getItem("Details") ? currentTopic._id : ""} />
+        sectionId={localStorage.getItem("Details") ? currentTopic._id : ""}
+      />
       {/* Test Details */}
       <div className="flex justify-between">
         <h2 className="text-lg capitalize">{test?.name}</h2>
         {/* <div className="flex gap-2 items-center">
           <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
-          <p className="text-gray-400 text-xs self-center">{test?.totalTime} mins</p>
+          <p className="text-gray-400 text-sm self-center">{test?.totalTime} mins</p>
         </div> */}
       </div>
 
-
-
       <div
-        className={`mx-auto p-5 min-h-[80vh] my-2 rounded-lg   bg-gray-100  ${visible && "h-[80vh] overflow-hidden"
-          }`}
+        className={`mx-auto p-5 min-h-[80vh] my-2 rounded-md   bg-gray-100  ${
+          visible && "h-[80vh] overflow-hidden"
+        }`}
       >
         <div className="flex justify-between mb-5">
           <span className="flex gap-2 items-center">
             <h2 className="capitalize text-lg">{questionType}</h2>
             <div className="flex gap-1 items-center ">
               <LiaStopwatchSolid className="self-center text-gray-500 w-5 h-5" />
-              <p className="text-gray-400 text-xs self-center">
+              <p className="text-gray-400 text-sm self-center">
                 {totalTime} mins
               </p>
             </div>

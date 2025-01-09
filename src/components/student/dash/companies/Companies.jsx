@@ -23,7 +23,7 @@ const Companies = () => {
     <>
       <div className="flex w-full mx-auto justify-between mb-2">
         <button
-          className="  self-center  rounded-lg h-10 w-10 "
+          className="  self-center  rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
           <BackIcon />
@@ -39,7 +39,7 @@ const Companies = () => {
           </span>
         </div>
 
-        <button className="bg-gray-100  self-center  rounded-lg h-10 w-10 sm:h-12 sm:w-16">
+        <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
           <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
         </button>
       </div>
@@ -53,9 +53,7 @@ const Companies = () => {
               >
                 <figure>
                   <img
-                    src={
-                      company.basic?.coverPhoto || "/images/CompanyBg.png"
-                    }
+                    src={company.basic?.coverPhoto || "/images/CompanyBg.png"}
                     alt="cover photo"
                   />
                 </figure>
@@ -75,7 +73,7 @@ const Companies = () => {
                   </p>
                   <div className="card-actions justify-end">
                     <button
-                      className="px-4 py-2 hover:bg-blue-900 bg-accent text-xs font-dmSans font-bold rounded-xl text-white"
+                      className="px-4 py-2 hover:bg-blue-900 bg-accent text-sm font-dmSans font-bold rounded-xl text-white"
                       onClick={() => navigate("/college/companies/profile")}
                     >
                       View Details

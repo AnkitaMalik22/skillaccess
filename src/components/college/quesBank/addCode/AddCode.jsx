@@ -12,12 +12,15 @@ import {
   addCompiler,
   addCompilerToTopic,
 } from "../../../../redux/college/test/testSlice";
-import { addQuestionToTopic,setTotalTopicQuestions } from "../../../../redux/college/test/thunks/topic";
+import {
+  addQuestionToTopic,
+  setTotalTopicQuestions,
+} from "../../../../redux/college/test/thunks/topic";
 import {
   editBankQuestionById,
   editQuestionById,
 } from "../../../../redux/college/test/thunks/question";
-import { isUni,isCompany } from "../../../../util/isCompany";
+import { isUni, isCompany } from "../../../../util/isCompany";
 
 const codeTemplates = {
   Java: {
@@ -281,9 +284,12 @@ const AddCode = () => {
 
           resetQuestion();
           setToggle(1);
-         
-          isUni() ? navigate(`/university/pr/quesbank/topic/${id}`)
-          : (isCompany() ? navigate(`/company/pr/quesbank/topic/${id}`) : navigate(`/college/quesBank/topic/${id}`));
+
+          isUni()
+            ? navigate(`/university/pr/quesbank/topic/${id}`)
+            : isCompany()
+            ? navigate(`/company/pr/quesbank/topic/${id}`)
+            : navigate(`/college/quesBank/topic/${id}`);
         }
 
         if (component === "save") {
@@ -314,10 +320,9 @@ const AddCode = () => {
 
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "compiler" ,level : "all"}));
+      dispatch(setTotalTopicQuestions({ id, type: "compiler", level: "all" }));
     }
   }, [ADD_QUESTION_LOADING]);
-
 
   return (
     <div>
@@ -358,7 +363,7 @@ const AddCode = () => {
             <div className=" flex gap-2">
               {addType === "topic" ? (
                 <button
-                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                     countDetail >= 0 ? "" : "hidden"
                   }`}
                   onClick={handlePrev}
@@ -367,7 +372,7 @@ const AddCode = () => {
                 </button>
               ) : (
                 <button
-                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                     count >= 0 ? "" : "hidden"
                   }`}
                   onClick={handlePrev}

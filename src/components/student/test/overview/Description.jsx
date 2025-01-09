@@ -53,26 +53,26 @@ const Description = ({ topics }) => {
   };
 
   return (
-    <div className="bg-[#8F92A1] font-dmSans rounded-lg bg-opacity-5 p-6 ">
+    <div className="bg-[#8F92A1] font-dmSans rounded-md bg-opacity-5 p-6 ">
       <h2 className="font-bold mb-3">Test Description</h2>
       <div className="flex flex-row justify-between flex-wrap gap-4 mt-8">
         {topics?.map((topic) => (
           <div className="flex  flex-wrap gap-8">
             <div className="w-64 h-40 bg-white rounded-2xl p-4">
               <h2 className="font-bold mb-3">{topic.Heading}</h2>
-              <p className="text-xs text-gray-400 line-clamp-4 mb-4">
+              <p className="text-sm text-gray-400 line-clamp-4 mb-4">
                 {topic.Description}
               </p>
               <span className="flex justify-between">
                 <div className="text-gray-400 flex gap-1">
                   <CgStopwatch className="text-xl" />{" "}
-                  <p className="text-xs self-center">
+                  <p className="text-sm self-center">
                     {" "}
                     {handleCalculateTime(topic)}
                   </p>
                 </div>
 
-                <p className="text-xs self-center text-blued tracking-[-0.4px]">
+                <p className="text-sm self-center text-blued tracking-[-0.4px]">
                   {topic.Type}
                 </p>
               </span>

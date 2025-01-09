@@ -40,39 +40,43 @@ const StudentsProfile = () => {
                   <Details student={studentCV} />
                   {/* toggler */}
                   <div className="bg-gray-50 p-4">
-                    <span className="grid grid-cols-4 text-xs font-bold border-b border-spacing-0 border-gray-200">
+                    <span className="grid grid-cols-4 text-sm font-bold border-b border-spacing-0 border-gray-200">
                       <h2
-                        className={`${toggle === 1
-                          ? "text-blued border-b-4 border-blued"
-                          : ""
-                          } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
+                        className={`${
+                          toggle === 1
+                            ? "text-blued border-b-4 border-blued"
+                            : ""
+                        } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(1)}
                       >
                         Assessment Results
                       </h2>
                       <h2
-                        className={`${toggle === 2
-                          ? "text-blued border-b-4 border-blued"
-                          : ""
-                          } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
+                        className={`${
+                          toggle === 2
+                            ? "text-blued border-b-4 border-blued"
+                            : ""
+                        } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(2)}
                       >
                         Skills
                       </h2>
                       <h2
-                        className={`${toggle === 3
-                          ? "text-blued border-b-4 border-blued"
-                          : ""
-                          } w-fit px-12 pb-2 hover:cursor-pointer mx-auto`}
+                        className={`${
+                          toggle === 3
+                            ? "text-blued border-b-4 border-blued"
+                            : ""
+                        } w-fit px-12 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(3)}
                       >
                         Education
                       </h2>
                       <h2
-                        className={`${toggle === 4
-                          ? "text-blued border-b-4 border-blued"
-                          : ""
-                          } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
+                        className={`${
+                          toggle === 4
+                            ? "text-blued border-b-4 border-blued"
+                            : ""
+                        } w-fit px-20 pb-2 hover:cursor-pointer mx-auto`}
                         onClick={() => setToggle(4)}
                       >
                         Portfolio
@@ -89,7 +93,6 @@ const StudentsProfile = () => {
                         <Skills skills={studentCV?.Skills} />
                       ) : toggle === 3 ? (
                         <Education Education={studentCV?.Education} />
-
                       ) : (
                         <Portfolio Portfolio={studentCV?.Portfolio} />
                       )}
@@ -98,7 +101,7 @@ const StudentsProfile = () => {
                 </div>
 
                 {/* right side */}
-                <div className="col-start-10 col-span-3 w-10/12 ml-10 bg-gray-50 rounded-lg mt-3 pb-4 basis-full font-dmSans sm:block sm:basis-auto pt-2 overflow-hidden">
+                <div className="col-start-10 col-span-3 w-10/12 ml-10 bg-gray-50 rounded-md mt-3 pb-4 basis-full font-dmSans sm:block sm:basis-auto pt-2 overflow-hidden">
                   <AssessmentList id={id} />
                 </div>
               </div>

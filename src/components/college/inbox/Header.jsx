@@ -28,7 +28,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
       ></div>
       <div className="flex gap-4">
         <button
-          className=" self-center ml-2 rounded-lg "
+          className=" self-center ml-2 rounded-md "
           // onClick={() => navigate(-1)}
         >
           <img
@@ -91,7 +91,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
       </div>
 
       <button
-        className="bg-accent py-2 px-3 self-center mr-2 rounded-lg flex gap-2 text-white"
+        className="bg-accent py-2 px-3 self-center mr-2 rounded-md flex gap-2 text-white"
         onClick={() => {
           navigate(`/college/inbox/mail?type=compose&inboxType=${inboxType}`);
         }}

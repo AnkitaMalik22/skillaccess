@@ -13,6 +13,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Layout from "./Layout";
 import CircularLoader from "../../../components/CircularLoader";
+import InputField from "../../../components/InputField";
 // import 'react-phone-input-2/lib/bootstrap.css'
 const Register = () => {
   const navigate = useNavigate();
@@ -122,77 +123,58 @@ const Register = () => {
           <div className="card-body">
             {/* skill access group */}
             <div className="flex gap-2 justify-center mb-4 md:mb-8">
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="43"
-                height="32"
-                viewBox="0 0 43 32"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M16.4993 8.00009L16.4993 8.00012L12.4997 11.9997L21.4997 21.0006L30.4997 11.9997L26.4929 8.0001H16.4993V8.00009ZM21.4997 32.0004L21.499 31.9997L0.5 10.9998L12.5033 0H30.4997L42.5003 10.9998L21.5004 31.9997L21.4997 32.0004Z"
-                  fill="#0052CC"
-                />
-              </svg>
-              <h1 className="font-bold text-[22px]">Skill Access</h1> */}
-                  <img src="/images/logoFinal.png" alt="logo" className="w-60" />
+              <img src="/images/logoFinal.png" alt="logo" className="w-60" />
             </div>
 
-            <h2 className="font-bold text-2xl text-center text-[#171717] mb-2">
+            <h2 className="font-bold text-2xl text-center text-[#171717]">
               Sign Up to Skill Access
             </h2>
-            <h2 className="font-normal text-center text-[#8F92A1] text-sm mb-8">
+            <h2 className="font-normal text-center text-[#8F92A1] text-base mb-8">
               Create an account to continue!
             </h2>
 
             {/* name */}
-            <div className="max-w-xl w-full mx-auto flex gap-1 sm:gap-6">
-              <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
+            <div className="max-w-xl w-full mx-auto flex gap-1 sm:gap-5 mb-2">
+              <div className="w-full mx-auto flex  relative max-w-sm ">
                 {" "}
-                <input
-                  type="text"
-                  value={Credentials.FirstName}
+                <InputField
                   name="FirstName"
+                  value={Credentials.FirstName}
                   onChange={changeHandler}
                   placeholder="First Name"
-                  className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
+                  type="text" // You can set any type here, like text, email, etc.
                 />
               </div>
-              <div className="w-full mx-auto flex rounded-2xl relative max-w-sm mb-2">
-                <input
+              <div className="w-full mx-auto flex relative max-w-sm ">
+                <InputField
+                  name="LastName"
                   value={Credentials.LastName}
                   onChange={changeHandler}
-                  name="LastName"
-                  type="text"
                   placeholder="Last Name"
-                  className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
+                  type="text"
                 />
               </div>
             </div>
 
             {/* email */}
-            <div className="w-full mx-auto flex rounded-2xl relative max-w-xl mb-2">
-              <input
+            <div className="w-full mx-auto flex relative max-w-xl mb-2">
+              <InputField
                 onChange={changeHandler}
                 value={Credentials.Email}
                 name="Email"
                 type="email"
                 placeholder="Email Address"
-                className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
               />
             </div>
 
             {/* university */}
-            <div className="w-full mx-auto flex rounded-2xl relative max-w-xl mb-2">
-              <input
+            <div className="w-full mx-auto flex relative max-w-xl mb-2">
+              <InputField
                 name="University"
                 value={Credentials.University}
                 onChange={changeHandler}
                 type="text"
-                placeholder="Your Institute/University"
-                className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
+                placeholder="Your Institute/College Name"
               />
             </div>
 
@@ -224,39 +206,14 @@ const Register = () => {
               </span>
             </div>
 
-            {/* 
-          <div className="w-full max-w-xl  mx-auto flex md:mt-6 mt-4 ">
-            <span className="w-full flex gap-4 ">
-              <select
-                name="CountryCode"
-                value={Credentials.CountryCode}
-                onChange={changeHandler}
-                className="input rounded-xl border-none focus:outline-none input-md w-1/4 max-w-xs mx-auto bg-snow"
-              >
-                <option value="+1">+1</option>
-                <option value="+91">+91</option>
-                {/* Add more country codes here */}
-            {/* </select>
-              <input
-                name="Phone"
-                value={Credentials.Phone}
-                onChange={changeHandler}
-                type="number"
-                placeholder="Mobile Number"
-                className="input rounded-xl border-none focus:outline-none input-md w-3/4 max-w-xl mx-auto bg-snow"
-              />
-            </span>
-          </div>     */}
-
             {/* password */}
             <div className="w-full mx-auto flex rounded-2xl relative max-w-xl mb-2">
-              <input
+              <InputField
                 name="Password"
                 onChange={changeHandler}
                 value={Credentials.Password}
                 type={type}
                 placeholder="Password"
-                className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
               />
 
               <button
@@ -275,23 +232,6 @@ const Register = () => {
               </button>
             </div>
 
-            {/* dashed seperator line */}
-            <div className=" grid grid-cols-12 gap-2  p-2  w-full max-w-xl  mx-auto ">
-              {" "}
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-              <hr className="col span-1 border-2 border-lGray opacity-20" />
-            </div>
-
             {/* checkbox */}
             <label className=" flex items-center gap-2 cursor-pointer mb-4 mx-auto w-full max-w-xl">
               <input
@@ -300,7 +240,7 @@ const Register = () => {
                 checked={checked}
                 className="checkbox checkbox-primary bg-secondary opacity-20 w-6 h-6"
               />
-              <span className="text-[#8F92A1] font-medium text-xs ">
+              <span className="text-[#8F92A1] font-medium text-sm ">
                 By creating an account, you agree to our{" "}
                 <Link
                   className="text-blued"
@@ -313,10 +253,8 @@ const Register = () => {
               </span>
             </label>
 
-            {/* register button */}
-            <></>
             <button
-              className={`btn hover:bg-accent bg-accent rounded-2xl border-none focus:outline-none w-full max-w-xl mx-auto mb-2 text-white ${
+              className={`btn hover:bg-accent bg-accent rounded-md border-none focus:outline-none w-full max-w-xl mx-auto mb-2 shadow-sm focus:shadow-md hover:shadow-md text-white ${
                 isCreateAccountDisabled ? "bg-blued cursor-not-allowed" : ""
               }`}
               onClick={handleSubmit}
@@ -325,11 +263,11 @@ const Register = () => {
             >
               Register{loader && <CircularLoader />}
             </button>
-            <h3 className=" text-center text-[#8F92A1] font-bold text-xs mb-2">
+            <h3 className=" text-center text-[#8F92A1] font-bold text-sm mb-2">
               OR
             </h3>
             <button
-              className="btn btn-primary rounded-xl border-none  mt-2 focus:outline-none  w-full max-w-sm mb-2  mx-auto bg-[#F3F6F8] "
+              className="btn btn-primary rounded-md border-none  mt-2 focus:outline-none  w-full max-w-xl mb-2  mx-auto bg-[#F3F6F8] "
               // onClick={() => navigate("/college/dashboard")}
               onClick={login}
               type="button"

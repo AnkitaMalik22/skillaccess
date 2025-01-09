@@ -20,7 +20,9 @@ const Header = ({
   const dispatch = useDispatch();
   const { uploadImg } = useSelector((state) => state.companyAuth);
   const [avatarPreview, setAvatarPreview] = useState(avatar);
-  const [coverPreview, setCoverPreview] = useState(company?.basic?.coverPhoto || "default-cover.jpg");
+  const [coverPreview, setCoverPreview] = useState(
+    company?.basic?.coverPhoto || "default-cover.jpg"
+  );
   const imgRef = useRef(null);
   const coverRef = useRef(null);
   useEffect(() => {
@@ -29,12 +31,11 @@ const Header = ({
     }
   }, [uploadImg]);
 
-  useEffect(()=>{
-setCoverPreview(company?.basic.coverPhoto)
-  },[company])
+  useEffect(() => {
+    setCoverPreview(company?.basic.coverPhoto);
+  }, [company]);
 
   const handleCoverChange = (e) => {
-
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
@@ -64,12 +65,14 @@ setCoverPreview(company?.basic.coverPhoto)
     setCompany((prev) => {
       const newCompany = { ...prev };
       // Ensure you create a new array for awards to avoid direct mutation
-      const newAwards = [...newCompany.awards, { name: "", description: "", dateOfIssue: "", media: [] }];
-      newCompany.awards = newAwards;  // Assign the new array back to the company object
+      const newAwards = [
+        ...newCompany.awards,
+        { name: "", description: "", dateOfIssue: "", media: [] },
+      ];
+      newCompany.awards = newAwards; // Assign the new array back to the company object
       return newCompany;
     });
   };
-
 
   // Function to handle change in award input fields
   const handleAwardChange = (index, field, value) => {
@@ -89,7 +92,14 @@ setCoverPreview(company?.basic.coverPhoto)
     });
   };
 
-  const renderInputField = (label, value, keyPath, placeholder, isNotFullWidth, icon) => (
+  const renderInputField = (
+    label,
+    value,
+    keyPath,
+    placeholder,
+    isNotFullWidth,
+    icon
+  ) => (
     <div className={`${isNotFullWidth ? "w-fit" : "w-full"} mb-4`}>
       <label className="text-sm text-gray-500">{label}</label>
 
@@ -114,7 +124,9 @@ setCoverPreview(company?.basic.coverPhoto)
                 return newCompany;
               })
             }
-            className={`${isNotFullWidth ? "w-fit" : "w-full"} p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]`}
+            className={`${
+              isNotFullWidth ? "w-fit" : "w-full"
+            } p-2 rounded-md border-none focus:outline-none bg-[#f4f5f6]`}
             placeholder={placeholder}
           />
         ) : (
@@ -128,16 +140,17 @@ setCoverPreview(company?.basic.coverPhoto)
     <div className="bg-white rounded-xl p-6 shadow-md relative">
       {/* Header Section */}
 
-     
-
       {/* Cover Image Section */}
-      <div className="relative w-full h-32 bg-[#e0e0e0] rounded-lg mb-8">
-
-        {company?.basic?.coverPhoto ? <img
-          src={ editable ? coverPreview:company?.basic?.coverPhoto}
-          alt="Cover"
-          className="w-full h-full object-cover"
-        /> : <DefaultCoverPhoto />}
+      <div className="relative w-full h-32 bg-[#e0e0e0] rounded-md mb-8">
+        {company?.basic?.coverPhoto ? (
+          <img
+            src={editable ? coverPreview : company?.basic?.coverPhoto}
+            alt="Cover"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <DefaultCoverPhoto />
+        )}
 
         {editable && (
           <div className="absolute top-2 right-2">
@@ -145,7 +158,7 @@ setCoverPreview(company?.basic.coverPhoto)
               onClick={() => coverRef.current.click()}
               className="bg-accent text-white p-1 rounded-full"
             >
-            <FiUpload />
+              <FiUpload />
             </button>
             <input
               ref={coverRef}
@@ -157,8 +170,6 @@ setCoverPreview(company?.basic.coverPhoto)
             />
           </div>
         )}
-
-
 
         {/* Avatar Section */}
         <div className="absolute left-6 bottom-[-28px] z- w-20 h-20 rounded-full bg-white flex justify-center items-center  shadow-lg">
@@ -185,27 +196,22 @@ setCoverPreview(company?.basic.coverPhoto)
         </div>
       </div>
 
-
-
-
-
-
       {/* Basic Info Section */}
       <div className="mb-8">
+        <div className="flex w-full gap-6  ">
+          <h2 className="text-lg font-semibold  self-center">Basic Info</h2>
+          {!editable && (
+            <button
+              className="py-2   bg-accent text-white rounded-md shadow-lg flex items-center justify-center gap-2 w-6 h-6"
+              onClick={() => setEditable(true)}
+            >
+              <MdEdit />
+              {/* <span>Edit Profile</span> */}
+            </button>
+          )}
+        </div>
 
-        <div className="flex w-full gap-6  "><h2 className="text-lg font-semibold  self-center">Basic Info</h2>
-        {!editable && (
-        <button
-          className="py-2   bg-accent text-white rounded-lg shadow-lg flex items-center justify-center gap-2 w-6 h-6"
-          onClick={() => setEditable(true)}
-        >
-        <MdEdit />
-          {/* <span>Edit Profile</span> */}
-        </button>
-      )}</div>
-        
         <div className="flex flex-wrap gap-6">
-
           {renderInputField(
             "Company Name",
             company?.basic?.companyName,
@@ -214,7 +220,7 @@ setCoverPreview(company?.basic.coverPhoto)
             true,
             <FaRegBuilding />
           )}
-          
+
           {renderInputField(
             "Website",
             company?.basic?.website,
@@ -279,25 +285,30 @@ setCoverPreview(company?.basic.coverPhoto)
       {/* About Section */}
       <div className="mb-8">
         <h2 className="text-lg font-semibold mb-4">About</h2>
-        {editable ?  <textarea
-          className="w-full p-4 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
-          value={company?.about?.description || ""}
-          onChange={(e) =>
-            setCompany({
-              ...company,
-              about: { ...company.about, description: e.target.value },
-            })
-          }
-          placeholder="Add a description about the company"
-        />: <p className="text-gray-500">{company?.about?.description || "Add About Section"}</p>}
-       
+        {editable ? (
+          <textarea
+            className="w-full p-4 rounded-md border-none focus:outline-none bg-[#f4f5f6]"
+            value={company?.about?.description || ""}
+            onChange={(e) =>
+              setCompany({
+                ...company,
+                about: { ...company.about, description: e.target.value },
+              })
+            }
+            placeholder="Add a description about the company"
+          />
+        ) : (
+          <p className="text-gray-500">
+            {company?.about?.description || "Add About Section"}
+          </p>
+        )}
       </div>
 
       {/* Awards Section */}
       <div className="mb-8">
         <h2 className="text-lg font-semibold mb-4">Awards</h2>
         {company?.awards?.map((award, index) => (
-          <div key={index} className="mb-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+          <div key={index} className="mb-4 p-4 bg-gray-50 rounded-md shadow-sm">
             <div className="flex justify-between items-center">
               {/* <h3 className="text-md font-semibold">Award {index + 1}</h3> */}
               {editable && (
@@ -319,11 +330,13 @@ setCoverPreview(company?.basic.coverPhoto)
                     onChange={(e) =>
                       handleAwardChange(index, "name", e.target.value)
                     }
-                    className="w-full p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
+                    className="w-full p-2 rounded-md border-none focus:outline-none bg-[#f4f5f6]"
                     placeholder="Add Award Name"
                   />
                 ) : (
-                  <p className="text-gray-500">{award.name || "Add Award Name"}</p>
+                  <p className="text-gray-500">
+                    {award.name || "Add Award Name"}
+                  </p>
                 )}
               </div>
               <div>
@@ -334,11 +347,13 @@ setCoverPreview(company?.basic.coverPhoto)
                     onChange={(e) =>
                       handleAwardChange(index, "description", e.target.value)
                     }
-                    className="w-full p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
+                    className="w-full p-2 rounded-md border-none focus:outline-none bg-[#f4f5f6]"
                     placeholder="Add Award Description"
                   />
                 ) : (
-                  <p className="text-gray-500">{award.description || "Add Description"}</p>
+                  <p className="text-gray-500">
+                    {award.description || "Add Description"}
+                  </p>
                 )}
               </div>
               <div>
@@ -350,10 +365,12 @@ setCoverPreview(company?.basic.coverPhoto)
                     onChange={(e) =>
                       handleAwardChange(index, "dateOfIssue", e.target.value)
                     }
-                    className="w-full p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
+                    className="w-full p-2 rounded-md border-none focus:outline-none bg-[#f4f5f6]"
                   />
                 ) : (
-                  <p className="text-gray-500">{award.dateOfIssue || "Add Date"}</p>
+                  <p className="text-gray-500">
+                    {award.dateOfIssue || "Add Date"}
+                  </p>
                 )}
               </div>
               <div>
@@ -363,14 +380,20 @@ setCoverPreview(company?.basic.coverPhoto)
                     type="text"
                     value={award.media.join(", ") || ""}
                     onChange={(e) =>
-                      handleAwardChange(index, "media", e.target.value.split(", "))
+                      handleAwardChange(
+                        index,
+                        "media",
+                        e.target.value.split(", ")
+                      )
                     }
-                    className="w-full p-2 rounded-lg border-none focus:outline-none bg-[#f4f5f6]"
+                    className="w-full p-2 rounded-md border-none focus:outline-none bg-[#f4f5f6]"
                     placeholder="Add Award Media URLs (comma separated)"
                   />
                 ) : (
                   <p className="text-gray-500">
-                    {award.media.length > 0 ? award.media.join(", ") : "Add Media URLs"}
+                    {award.media.length > 0
+                      ? award.media.join(", ")
+                      : "Add Media URLs"}
                   </p>
                 )}
               </div>
@@ -380,7 +403,7 @@ setCoverPreview(company?.basic.coverPhoto)
         {editable && (
           <button
             onClick={handleAddAward}
-            className="mt-4 py-2 px-4 bg-neutral text-white rounded-lg shadow-lg"
+            className="mt-4 py-2 px-4 bg-neutral text-white rounded-md shadow-lg"
           >
             Add Award
           </button>

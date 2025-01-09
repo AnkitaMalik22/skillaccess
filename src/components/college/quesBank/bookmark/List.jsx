@@ -53,7 +53,7 @@ const List = ({ question, number }) => {
         <Disclosure className="relative z-10">
           {({ open }) => (
             <div className="mb-4">
-              <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
+              <div className="flex w-full justify-between rounded-md bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
                 <div className="flex justify-between items-center w-full">
                   <p
                     className="text-sm pl-4"
@@ -62,7 +62,7 @@ const List = ({ question, number }) => {
 
                   <div className="level flex items-center gap-2 ">
                     <PiPencilSimpleLineBold
-                      className=" w-6 h-6 p-1 rounded-lg  self-center cursor-pointer"
+                      className=" w-6 h-6 p-1 rounded-md  self-center cursor-pointer"
                       // onClick={handleEdit}
                     />
                     {question.QuestionLevel == "beginner" && (
@@ -96,7 +96,7 @@ const List = ({ question, number }) => {
 
               <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
                 {question.Options?.map((question, index) => (
-                  <div className="flex gap-2 z-10 relative rounded-lg p-3">
+                  <div className="flex gap-2 z-10 relative rounded-md p-3">
                     <div className="w-6">
                       {index === AnswerIndex ? (
                         <img
@@ -104,10 +104,7 @@ const List = ({ question, number }) => {
                           alt="greensel"
                         />
                       ) : (
-                        <img
-                          src="/images/icons/blueDot.png"
-                          alt="greensel"
-                        />
+                        <img src="/images/icons/blueDot.png" alt="greensel" />
                       )}
                     </div>
 
@@ -126,7 +123,7 @@ const List = ({ question, number }) => {
                 ))}
 
                 {question.questions?.map((question) => (
-                  <div className="flex gap-2  z-10 relative rounded-lg p-3">
+                  <div className="flex gap-2  z-10 relative rounded-md p-3">
                     <div className="w-6">
                       <input
                         type="radio"

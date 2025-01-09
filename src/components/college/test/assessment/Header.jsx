@@ -8,10 +8,10 @@ const Header = ({ name }) => {
   return (
     <div className="flex mx-auto justify-between mb-5">
       <button
-        className="flex self-center rounded-lg  gap-2"
+        className="flex self-center rounded-md  gap-2"
         onClick={() => navigate(-1)}
       >
-        <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
+        <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-gray-200" />
         <h2 className="sm:text-xl  font-bold self-center capitalize">{name}</h2>
       </button>
       {/* <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">

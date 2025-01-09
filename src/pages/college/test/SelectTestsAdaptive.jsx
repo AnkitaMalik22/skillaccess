@@ -256,9 +256,15 @@ const SelectTests = () => {
 
   useEffect(() => {
     let test = JSON.parse(localStorage.getItem("testDetails"));
-    dispatch(getAllTopics({ level: level , category : test.category, accessibleDepartments: test.accessibleDepartments,
+    dispatch(
+      getAllTopics({
+        level: level,
+        category: test.category,
+        accessibleDepartments: test.accessibleDepartments,
         hasAccessToAllDepartments: test.hasAccessToAllDepartments,
-        hasAccessToAllCategories: test.hasAccessToAllCategories}));
+        hasAccessToAllCategories: test.hasAccessToAllCategories,
+      })
+    );
 
     if (sections) {
       setFilteredSections(sections);
@@ -317,10 +323,10 @@ const SelectTests = () => {
           library to draft the Assessment.{" "}
         </h2>
 
-        <div className="mb-5 md:mb-10 rounded-lg grid sm:grid-cols-5 grid-cols-2 gap-5">
+        <div className="mb-5 md:mb-10 rounded-md grid sm:grid-cols-5 grid-cols-2 gap-5">
           {selectedSections?.map((section, index) => (
             <div
-              className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 p-2 md:p-5"
+              className="w-full h-full border border-dashed rounded-md border-blued col-span-1 p-2 md:p-5"
               key={`${section._id + section.Type}`}
             >
               {/* {//console.log(section, "section")} */}
@@ -337,7 +343,7 @@ const SelectTests = () => {
                     className="w-6 h-6 self-center"
                   />
 
-                  <h2 className="font-bold text-xs text-gray-400 self-center">
+                  <h2 className="font-bold text-sm text-gray-400 self-center">
                     {section?.Type}
                   </h2>
                 </div>
@@ -353,7 +359,7 @@ const SelectTests = () => {
                     <span className="self-center">
                       Count : {section?.questions?.length / 2}
                     </span>
-                    <h2 className="font-bold text-xs text-gray-400 self-center">
+                    <h2 className="font-bold text-sm text-gray-400 self-center">
                       {section?.Time}
                     </h2>
                   </div>
@@ -372,7 +378,7 @@ const SelectTests = () => {
                 (_, index) => (
                   <div
                     key={index}
-                    className="w-full h-full border border-dashed rounded-lg border-blued col-span-1 flex justify-center p-2 md:p-5"
+                    className="w-full h-full border border-dashed rounded-md border-blued col-span-1 flex justify-center p-2 md:p-5"
                   >
                     <div className="self-center">
                       <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
@@ -386,7 +392,7 @@ const SelectTests = () => {
               )
             : null}
 
-          {/* <div className="w-full h-32 border border-dashed rounded-lg border-blued col-span-1 flex justify-center ">
+          {/* <div className="w-full h-32 border border-dashed rounded-md border-blued col-span-1 flex justify-center ">
 
             <span className="self-center">
 
@@ -461,18 +467,17 @@ const SelectTests = () => {
         </div>
 
         <div className="grid grid-cols-4 gap-8 justify-center">
-          <div className="w-full bg-gray-100 rounded-lg flex justify-center p-5">
+          <div className="w-full bg-gray-100 rounded-md flex justify-center p-5">
             <div className=" self-center w-fit h-fit ">
               <div
-                className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-lg mx-auto flex justify-center"
+                className="bg-white sm:w-20 sm:h-20 w-10 h-10 rounded-md mx-auto flex justify-center"
                 onClick={() => {
                   localStorage.removeItem("currentTopic");
-                  if(isUni()){
+                  if (isUni()) {
                     Navigate("/university/pr/test/createTopic?level=adaptive");
-                  }else{
+                  } else {
                     Navigate("/college/test/createTopic?level=adaptive");
                   }
-                  
                 }}
               >
                 <FaPlus className="self-center w-4 h-4 sm:h-8 sm:w-8 text-blued" />
@@ -482,7 +487,7 @@ const SelectTests = () => {
                 Add New Topic
               </h2>
 
-              <h2 className="text-xs text-center text-gray-400">
+              <h2 className="text-sm text-center text-gray-400">
                 Create new Topic
               </h2>
             </div>
@@ -528,7 +533,7 @@ const SelectTests = () => {
 
             // </div>
 
-            <div className="w-full rounded-lg bg-gray-100  relative p-5">
+            <div className="w-full rounded-md bg-gray-100  relative p-5">
               <div className="overflow-y-auto">
                 <h2 className="text-xl font-bold mb-2 break-words">
                   {section?.Heading}
@@ -560,16 +565,15 @@ const SelectTests = () => {
                           Type: questionType || "mcq",
                         })
                       );
-                      if(isUni()){
+                      if (isUni()) {
                         Navigate(
                           `/university/pr/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
                         );
-                      }else{
+                      } else {
                         Navigate(
                           `/college/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
                         );
                       }
-                      
                     }}
                   >
                     Details

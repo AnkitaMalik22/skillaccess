@@ -37,7 +37,7 @@ const Portfolio = ({ Portfolio }) => {
       {Portfolio?.map((portfolio, index) => {
         return (
           <div
-            className=" grid grid-cols-4 text-center bg-white rounded-lg mx-auto"
+            className=" grid grid-cols-4 text-center bg-white rounded-md mx-auto"
             key={index}
           >
             <span className="w-full  px-10 py-2 text-sm font-dmSans grid ">

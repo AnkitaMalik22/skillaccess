@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -17,8 +17,8 @@ const AddVideoQuestionsPage = () => {
   const [searchParam, setSearchParam] = useSearchParams();
   const level = searchParam.get("level");
   const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
-  const entity = isUni() ? "university/pr": "college";
-  
+  const entity = isUni() ? "university/pr" : "college";
+
   const NavHandler = () => {
     switch (selectQuestionType) {
       case "mcq":
@@ -49,7 +49,7 @@ const AddVideoQuestionsPage = () => {
 
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "video" ,level}));
+      dispatch(setTotalTopicQuestions({ id, type: "video", level }));
     }
   }, [ADD_QUESTION_LOADING]);
 
@@ -60,18 +60,18 @@ const AddVideoQuestionsPage = () => {
       <div className="w-11/12 mx-auto mt-20">
         {/* larger screens */}
 
-        <div className="   my-2 rounded-lg tracking-wide justify-between  ">
-          <h2 className="font-normal text-xs sm:text-sm text-gray-400  mt-8 tracking-wide ">
+        <div className="   my-2 rounded-md tracking-wide justify-between  ">
+          <h2 className="font-normal text-sm sm:text-sm text-gray-400  mt-8 tracking-wide ">
             You can use three question types: multiple-choice, short and long
             answer.
           </h2>
         </div>
 
-        <div className="  sm:mt-5 rounded-lg tracking-wide  w-full ">
+        <div className="  sm:mt-5 rounded-md tracking-wide  w-full ">
           {/* mcq */}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("mcq")}
@@ -115,7 +115,7 @@ const AddVideoQuestionsPage = () => {
           {/* Essay */}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "short" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("short")}
@@ -151,7 +151,7 @@ const AddVideoQuestionsPage = () => {
           </div>
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-lg border  h-20 py-4 px-8  my-2  ${
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
               selectQuestionType === "long" ? "border-blued" : "opacity-70"
             }`}
             onClick={() => setSelectQuestionType("long")}
@@ -193,13 +193,13 @@ const AddVideoQuestionsPage = () => {
       <div className=" w-11/12 mx-auto flex justify-end mt-14">
         <div className="flex gap-4">
           <button
-            className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-xs gap-2 text-blued"
+            className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-sm gap-2 text-blued"
             onClick={NavHandler}
           >
             New Question
           </button>
-          {/* className="self-center justify-center flex bg-gray-100 py-3 px-8 rounded-xl text-xs gap-2 " */}
-          {/* <button className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-xs gap-2 text-blued">
+          {/* className="self-center justify-center flex bg-gray-100 py-3 px-8 rounded-xl text-sm gap-2 " */}
+          {/* <button className="self-center justify-center flex bg-white border border-blued py-3 px-8 rounded-xl text-sm gap-2 text-blued">
             Copy question from another assessment
           </button> */}
         </div>

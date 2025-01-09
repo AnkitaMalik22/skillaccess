@@ -4,9 +4,9 @@ import { Route, Routes } from "react-router-dom";
 const Accounting = lazy(() => import("./Accounting"));
 const Transactions = lazy(() => import("./Transactions"));
 
-function AccountRoute() {
+function AccountRoute(entity) {
   return (
-    <Route path="college/accounting">
+    <Route path={`${entity}accounting`}>
       <Route path="" element={<Accounting />} />
       <Route path="transactions" element={<Transactions />} />
     </Route>

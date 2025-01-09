@@ -97,7 +97,7 @@ const View = ({ index, filter, inboxType }) => {
         <div className="flex gap-4">
           {Email?.mail?.attachments?.map((item, i) => {
             return (
-              <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
+              <div className="bg-accent p-2 rounded-md bg-opacity-10 sm:w-60 flex justify-between">
                 <div className="flex gap-2">
                   {item.format !== "image" && (
                     <img src="/images/icons/fileBlue.png" alt="" />
@@ -107,7 +107,7 @@ const View = ({ index, filter, inboxType }) => {
                   )}
                   <div className="self-center">
                     <p className="text-sm font-bold">{item.name}</p>
-                    <p className="text-xs font-medium">{item.size / 1e6} MB</p>
+                    <p className="text-sm font-medium">{item.size / 1e6} MB</p>
                   </div>
                 </div>
                 <div className="self-center">
@@ -134,7 +134,7 @@ const View = ({ index, filter, inboxType }) => {
               <div className="flex gap-4">
                 {reply?.attachments?.map((item, i) => {
                   return (
-                    <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
+                    <div className="bg-accent p-2 rounded-md bg-opacity-10 sm:w-60 flex justify-between">
                       <div className="flex gap-2">
                         {item.format !== "image" && (
                           <img src="/images/icons/fileBlue.png" alt="" />
@@ -144,7 +144,7 @@ const View = ({ index, filter, inboxType }) => {
                         )}
                         <div className="self-center">
                           <p className="text-sm font-bold">{item.name}</p>
-                          <p className="text-xs font-medium">
+                          <p className="text-sm font-medium">
                             {item.size / 1e6} MB
                           </p>
                         </div>
@@ -164,12 +164,12 @@ const View = ({ index, filter, inboxType }) => {
         );
       })}
 
-      <div className="w-full bg-[#8F92A1] bg-opacity-5 p-4 mt-4 rounded-lg">
+      <div className="w-full bg-[#8F92A1] bg-opacity-5 p-4 mt-4 rounded-md">
         {/* Reply to */}
-        <div className=" bg-lGray bg-opacity-5 rounded-lg p-3 flex   justify-between">
+        <div className=" bg-lGray bg-opacity-5 rounded-md p-3 flex   justify-between">
           <div className="flex gap-2">
             {/* photo */}
-            <div className="h-10 w-10 rounded-lg ">
+            <div className="h-10 w-10 rounded-md ">
               <img
                 src={
                   inboxType === "Sent"
@@ -189,8 +189,8 @@ const View = ({ index, filter, inboxType }) => {
               <Disclosure>
                 {({ open }) => (
                   <>
-                    <Disclosure.Button className="flex w-full sm:w-96 justify-between rounded-lg bg-[#8F92A1] bg-opacity-20 px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
-                      <span className="text-xs font-bold text-[#8F92A1]">
+                    <Disclosure.Button className="flex w-full sm:w-96 justify-between rounded-md bg-[#8F92A1] bg-opacity-20 px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+                      <span className="text-sm font-bold text-[#8F92A1]">
                         {inboxType === "Sent"
                           ? Email?.mail?.to?.Email
                           : Email?.mail?.from?.Email}

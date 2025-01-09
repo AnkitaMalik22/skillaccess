@@ -28,7 +28,7 @@ const Header = () => {
       ></div>
       <span className="flex gap-4">
         <button
-          className=" self-center ml-2 rounded-lg "
+          className=" self-center ml-2 rounded-md "
           onClick={() => navigate(-1)}
         >
           <img

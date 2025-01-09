@@ -81,19 +81,38 @@ const Selected = () => {
       {SELECTED_STUDENTS_LOADING && <Skeleton />}
       {!SELECTED_STUDENTS_LOADING &&
         selectedStudents?.map((student, index) => (
-          <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12 hover:border-accent hover:cursor-pointer border-transparent border" onClick={(e) => {
-            if (isCompany()) {
-              navigate(`/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`)
-            } else {
-              navigate(`/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`)
-            }
-          }}>
+          <div
+            className=" grid-cols-5 rounded-md my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12 hover:border-accent hover:cursor-pointer border-transparent border"
+            onClick={(e) => {
+              if (isCompany()) {
+                navigate(
+                  `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+                );
+              } else {
+                navigate(
+                  `/${
+                    isUni() ? "university/pr" : "college"
+                  }/results/assessmentReview?studentId=${
+                    student.studentId._id
+                  }&assessmentId=${student.assessmentId}&responseId=${
+                    student._id
+                  }`
+                );
+              }
+            }}
+          >
             {" "}
             {/* row-2 */}
             <div className={` flex `}>
               <div className="flex self-center">
                 <div className=" min-w-[3rem] self-center  mr-2  ">
-                  <img alt="" src={student?.studentId?.avatar?.url || "/images/student.png"} className="w-10 h-10 rounded-full" />
+                  <img
+                    alt=""
+                    src={
+                      student?.studentId?.avatar?.url || "/images/student.png"
+                    }
+                    className="w-10 h-10 rounded-full"
+                  />
                 </div>
                 <span className="break-words min-w-24 pt-1 self-center">
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
@@ -122,16 +141,16 @@ const Selected = () => {
             <div className="flex justify-center">
               <div className=" self-center">
                 <span className="flex gap-2">
-                  <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                  <div className="min-w-[6rem] bg-opacity-5 rounded-md h-3 mx-auto bg-green-600">
                     <div
-                      className={`h-full rounded-lg`}
+                      className={`h-full rounded-md`}
                       style={{
                         width: `${student?.percentage}%`,
                         backgroundColor: colors[index],
                       }}
                     ></div>
                   </div>
-                  <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                  <h2 className="font-dmSans font-bold text-sm sm:text-sm ">
                     {" "}
                     {student?.percentage?.toFixed(2)}%
                   </h2>
@@ -147,14 +166,19 @@ const Selected = () => {
                   if (isCompany()) {
                     navigate(
                       `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                    )
+                    );
                   } else {
                     navigate(
-                      `/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                    )
+                      `/${
+                        isUni() ? "university/pr" : "college"
+                      }/results/assessmentReview?studentId=${
+                        student.studentId._id
+                      }&assessmentId=${student.assessmentId}&responseId=${
+                        student._id
+                      }`
+                    );
                   }
-                }
-                }
+                }}
               >
                 <h2 className="font-dmSans  text-sm sm:text-base text-blued ">
                   Assessment Review

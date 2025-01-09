@@ -247,7 +247,7 @@ const AddParagraph = () => {
               onChange={handleChanges}
               value={question.Duration}
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              className="w-full rounded-md bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
             >
               <option value={0}>Time to answer the question</option>
 
@@ -259,7 +259,7 @@ const AddParagraph = () => {
           </div>
 
           <textarea
-            className="resize-none w-full h-[247px] text-lg bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0placeholder-gray-400 mb-6"
+            className="resize-none w-full h-[247px] text-lg bg-gray-100 border-none focus:outline-none rounded-md focus:ring-0placeholder-gray-400 mb-6"
             placeholder="Enter Paragraph"
             name="Title"
             onChange={handleChanges}
@@ -269,7 +269,7 @@ const AddParagraph = () => {
           {question.questions.map((ques, index) => (
             <div key={index} className="mb-4">
               <textarea
-                className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none  mb-3 rounded-lg focus:ring-0placeholder-gray-400"
+                className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none  mb-3 rounded-md focus:ring-0placeholder-gray-400"
                 placeholder="Enter Question Here"
                 name="question"
                 value={question.questions[index].question}
@@ -278,7 +278,7 @@ const AddParagraph = () => {
             </div>
           ))}
 
-          {/* <button className="bg-[#F2F2F2] text-black px-4 py-2 rounded-lg focus:outline-none"
+          {/* <button className="bg-[#F2F2F2] text-black px-4 py-2 rounded-md focus:outline-none"
             onClick={() => 
             >
               Add more
@@ -317,7 +317,7 @@ const AddParagraph = () => {
             <div className=" flex gap-2">
               {addType === "topic" ? (
                 <button
-                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                     countDetail >= 0 ? "" : "hidden"
                   }`}
                   onClick={handlePrev}
@@ -326,7 +326,7 @@ const AddParagraph = () => {
                 </button>
               ) : (
                 <button
-                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                     count >= 0 ? "" : "hidden"
                   }`}
                   onClick={handlePrev}
@@ -337,7 +337,7 @@ const AddParagraph = () => {
             </div>
             <div className=" flex">
               <button
-                className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+                className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 "
                 onClick={() => handleSave()}
               >
                 {/* {loading ? (

@@ -6,15 +6,17 @@ const CompanyProfile = lazy(() => import("./CompanyProfile"));
 const CompanyJobOverview = lazy(() => import("./CompanyJobOverview"));
 const ViewInvitedStudents = lazy(() => import("./ViewInvitedStudents"));
 
-export default function CompaniesRoute() {
+export default function CompaniesRoute(entity) {
   return (
-    <Route path="college/companies">
+    <Route path={`${entity}companies`}>
       <Route path="" element={<Companies />} />
       <Route path="jobs" element={<Jobs />} />
       <Route path="profile/:id" element={<CompanyProfile />} />
       <Route path="jobOverview/:id" element={<CompanyJobOverview />} />
-      <Route path="jobOverview/:id/invitedStudents" element={<ViewInvitedStudents />} />
-
+      <Route
+        path="jobOverview/:id/invitedStudents"
+        element={<ViewInvitedStudents />}
+      />
     </Route>
   );
 }

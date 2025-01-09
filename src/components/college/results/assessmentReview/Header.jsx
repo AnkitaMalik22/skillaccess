@@ -10,7 +10,7 @@ const Header = ({ handleSubmit }) => {
   return (
     <div className="flex  mx-auto justify-between mb-2 mt-5">
       <div>
-        <button className="flex self-center  rounded-lg  gap-2">
+        <button className="flex self-center  rounded-md  gap-2">
           <button
             onClick={() =>
               level === "adaptive"
@@ -19,14 +19,14 @@ const Header = ({ handleSubmit }) => {
             }
             className="mt-2 mr-3"
           >
-            <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
+            <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-gray-200" />
           </button>
 
           <div className="">
             <h2 className="sm:text-xl  text-left font-bold self-center text-3xl font-dmSans ">
               Create Assessment
             </h2>
-            {/* <div className="flex gap-2 text-[#567BF9] text-xs font-medium mt-3">
+            {/* <div className="flex gap-2 text-[#567BF9] text-sm font-medium mt-3">
               <h3 className="mr-2">Untitiled Assessments</h3>
               <span>
                 <img
@@ -52,7 +52,7 @@ const Header = ({ handleSubmit }) => {
       <div className="bg-gray-100 rounded-xl mx-2   h-12 flex my-2 ">
         <div className=" flex">
           <button
-            className="self-center justify-center flex bg-blued py-3 px-4 rounded-lg text-xs gap-2 text-white"
+            className="self-center justify-center flex bg-blued py-3 px-4 rounded-md text-sm gap-2 text-white"
             onClick={() => {
               // //console.log("handle sub from headr");
               handleSubmit();

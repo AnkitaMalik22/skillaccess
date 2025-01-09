@@ -137,7 +137,7 @@ const ChartComp = () => {
         <div className="h-[25rem] w-full ">
           <Chart
             id="dash"
-            className="bg-white shadow-md rounded-lg text-[#8F92A1] "
+            className="bg-white shadow-md rounded-md text-[#8F92A1] "
             options={settings.options}
             series={settings.series}
             type="line"
@@ -154,11 +154,11 @@ const ChartComp = () => {
           <div className="flex gap-4 my-4">
             <span className="flex gap-1">
               <FaCircle className="text-[#11875A]" />{" "}
-              <h2 className="font-medium text-xs text-[#8F92A1]">Student</h2>
+              <h2 className="font-medium text-sm text-[#8F92A1]">Student</h2>
             </span>
             <span className="flex gap-1">
               <FaCircle className="text-[#5243AA]" />{" "}
-              <h2 className="font-medium text-xs text-[#8F92A1]">Placement</h2>
+              <h2 className="font-medium text-sm text-[#8F92A1]">Placement</h2>
             </span>
           </div>
         </div>
@@ -177,7 +177,7 @@ const ChartComp = () => {
           </h1>
         </span>
 
-        <div className="bg-white  overflow-y-scroll h-[27rem] mb-10 rounded-lg ">
+        <div className="bg-white  overflow-y-scroll h-[27rem] mb-10 rounded-md ">
           {placedStudents?.map((student) => {
             return (
               <div className="card card-side shadow-sm mb-1 h-auto p-5 gap-2">
@@ -188,11 +188,11 @@ const ChartComp = () => {
                   <p className="text-sm font-bold text-[#171717]">
                     {student.FirstName} {student.LastName}
                   </p>
-                  <p className="text-xs text-[#8F92A1]">
+                  <p className="text-sm text-[#8F92A1]">
                     {student?.CompanyPlaced?.basic?.companyName}
                   </p>
-                  <FaStar className="inline-block text-xs 2xl:text-sm text-amber-500" />
-                  <p className="inline-block pl-2 text-xs 2xl:text-sm text-[#171717] ">
+                  <FaStar className="inline-block text-sm 2xl:text-sm text-amber-500" />
+                  <p className="inline-block pl-2 text-sm 2xl:text-sm text-[#171717] ">
                     {student?.PlacedAt.substring(0, 9)}
                   </p>
                 </div>

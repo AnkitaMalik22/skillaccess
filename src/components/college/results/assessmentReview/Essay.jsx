@@ -28,7 +28,7 @@ const Essay = ({ question, number }) => {
         <Disclosure className="relative z-10">
           {({ open }) => (
             <div>
-              <div className=" flex w-full justify-between rounded-lg text-left text-sm font-medium border border-[#0D9AAC] p-3">
+              <div className=" flex w-full justify-between rounded-md text-left text-sm font-medium border border-[#0D9AAC] p-3">
                 <div>
                   <p className="text-sm">{question.Title}</p>
                 </div>
@@ -54,7 +54,7 @@ const Essay = ({ question, number }) => {
               > */}
               <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
                 {/* {question.Options?.map((question) => (
-                  <div className="flex gap-2 z-10 relative rounded-lg p-3">
+                  <div className="flex gap-2 z-10 relative rounded-md p-3">
                     <div className="w-6">
                       <input
                         type="radio"
@@ -75,7 +75,7 @@ const Essay = ({ question, number }) => {
                 ))}
 
                 {question.questions?.map((question) => (
-                  <div className="flex gap-2  z-10 relative rounded-lg p-3">
+                  <div className="flex gap-2  z-10 relative rounded-md p-3">
                     <label className="text-blacktext-sm">
                       {question
                         ? question.question
@@ -86,7 +86,7 @@ const Essay = ({ question, number }) => {
                   </div>
                 ))} */}
 
-                <div className="flex gap-2  z-10 relative rounded-lg p-3">
+                <div className="flex gap-2  z-10 relative rounded-md p-3">
                   <label className="text-blacktext-sm">
                     {question.studentAnswer}
                   </label>
