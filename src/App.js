@@ -46,6 +46,7 @@ import RegisterUniversity from "./pages/university/auth/RegisterUniversity";
 import UniversityLoginPage from "./pages/university/auth/LoginUniversity";
 import UniversityLayout from "./layout/University";
 import { isUni } from "./util/isCompany";
+import CampusDriveRouter from "./pages/company/campusDrive/CampusDriveRouter";
 
 const Register = lazy(() => import("./pages/college/auth/Register"));
 const Login = lazy(() => import("./pages/college/auth/Login"));
@@ -92,7 +93,7 @@ export default function App() {
         break; // Exit loop early if a match is found
       }
     }
-    if (shouldGetCollege ) {
+    if (shouldGetCollege) {
       dispatch(getCollege()).finally(() => {
         setLoader(false); // Ensure setLoader is defined or imported
       });
@@ -115,7 +116,12 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn && window.location.pathname === "/" && !company && !isUni()) {
+    if (
+      isLoggedIn &&
+      window.location.pathname === "/" &&
+      !company &&
+      !isUni()
+    ) {
       navigate("/college/dashboard");
     }
   }, [isLoggedIn, navigate]);
@@ -134,7 +140,7 @@ export default function App() {
   return isDesktop ? (
     <div className="app-content">
       <React.Fragment>
-        {isLoggedIn  ? (
+        {isLoggedIn ? (
           <CollegeLayout>
             <Suspense fallback={<Loader />}>
               <Routes>
@@ -170,8 +176,6 @@ export default function App() {
               <Route path="/password/reset/:id" element={<ResetPassword />} />
               <Route path="college/me/failed" element={<NotAuth />} />
 
-              {/* company routes */}
-
               <Route path="/company/">
                 <Route path="" element={<LoginCompany />} />
                 <Route path="register" element={<RegisterCompany />} />
@@ -182,6 +186,8 @@ export default function App() {
                   {/* {CompanyQuesRoute()} */}
                   {QuesRoute("")}
                   {CompanyTestHome()}
+                  {CampusDriveRouter()}
+                  {/*                  */}
                   <Route path="settings" element={<Settings />} />
                   {CompanyResultRoutes()}
                   <Route path="profile" element={<CompanyProfile />} />
@@ -210,7 +216,7 @@ export default function App() {
                   <Route path="settings" element={<Settings />} />
                   <Route path="profile" element={<Profile />} />
                   {TestRoute("")}
-                 {StudentRoute("")}
+                  {StudentRoute("")}
                   {QuesRoute("")}
                   {ResultsRoute("")}
                   <Route path="dashboard" element={<Dashboard />} />

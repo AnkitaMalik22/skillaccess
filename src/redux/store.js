@@ -19,6 +19,7 @@ import collegeJobsReducer from "./college/jobs/collegeJobSlice.js";
 import companyResultReducer from "./company/result/result.js"
 import universityAuthReducer from "./university/auth/universityAuthSlice.js";
 import categoryReducer from "./category/categorySlice.js";
+import campusDriveReducer from "./company/campusDrive/campusDriveSlice.js";
 
 
 const store = configureStore({
@@ -28,6 +29,7 @@ const store = configureStore({
     dashboard: dashboardReducer,
     side: sideReducer,
     company: companyReducer,
+    campusDrive : campusDriveReducer,
     collegeJobs : collegeJobsReducer,
     teamCollege: teamCollegeReducer,
     inbox: inboxSlice,
