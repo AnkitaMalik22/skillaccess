@@ -16,6 +16,7 @@ import Settings from "../pages/company/settings/Settings";
 import CompanyTestHome from "../pages/company/test/TestHome";
 import CompanyResultRoutes from "../pages/company/results";
 import QuesRoute from "../pages/college/quesBank";
+import CampusDriveRouter from "../pages/company/campusDrive/CampusDriveRouter";
 
 const CompanyRoutes = () => {
   return (
@@ -36,6 +37,7 @@ const CompanyRoutes = () => {
         {CompanyTestHome("")}
         {CompanyResultRoutes("")}
         {QuesRoute("")}
+        {CampusDriveRouter("")}
       </Route>
     </Routes>
   );
