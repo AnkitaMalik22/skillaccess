@@ -88,6 +88,13 @@ export const collegeSidebarItems = [
     ),
   },
   {
+    name : "Campus Drive",
+    path : "/college/campus-drive",
+    icon : (active) => (
+      <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />
+    ),
+  },
+  {
     name: "Students",
     path: "/college/students",
     icon: (active) => (

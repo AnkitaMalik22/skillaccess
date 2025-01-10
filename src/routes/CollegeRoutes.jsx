@@ -13,6 +13,7 @@ import InboxRoute from "../pages/college/inbox";
 import SettingsRoute from "../pages/college/settings";
 import TeamsRoute from "../pages/college/teams";
 import AccountRoute from "../pages/college/accounting/AccountRoutes";
+import CampusDriveRouter from "../pages/college/campusDrive/CollegeCampusDriveRoutes";
 
 const CollegeRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const CollegeRoutes = () => {
         {SettingsRoute("")}
         {TeamsRoute("")}
         {AccountRoute("")}
+        {CampusDriveRouter("")}
       </Route>
     </Routes>
   );

@@ -142,7 +142,7 @@ export default function CampusDriveDetails() {
 
       <button
         type="button"
-        className="btn btn-primary w-full bg-blue-600 hover:bg-lightBlue"
+        className="btn text-white w-full bg-blued hover:bg-lightBlue"
         onClick={handleSubmit}
       >
         {isSubmitting ? 'Creating...' : 'Create Campus Drive'}

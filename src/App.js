@@ -28,9 +28,9 @@ const App = () => {
   );
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
-  useEffect(() => {
-    dispatch(getCollege());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getCollege());
+  // }, [dispatch]);
 
   if (USER_LOADING) {
     return <Loader />;
@@ -55,9 +55,9 @@ const App = () => {
           <Route
             path="/college/*"
             element={
-              <ProtectedRoute isAuthenticated={isLoggedIn} redirectPath="/">
+              // <ProtectedRoute isAuthenticated={isLoggedIn} redirectPath="/">
                 <CollegeRoutes />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             }
           />
           <Route path="/company/*" element={<CompanyRoutes />} />

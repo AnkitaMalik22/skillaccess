@@ -69,7 +69,7 @@ export default function AssignTests() {
       
       {loading ? (
         <div className="flex justify-center items-center h-60">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blued"></div>
         </div>
       ) : (
         <>
@@ -102,7 +102,7 @@ export default function AssignTests() {
             </button>
             <button
               type="button"
-              className="btn btn-primary bg-blue-600 hover:bg-lightBlue"
+              className="btn btn-primary bg-blued hover:bg-lightBlue"
               onClick={handleSubmit}
               disabled={isSubmitting}
             >
