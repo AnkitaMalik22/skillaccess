@@ -12,7 +12,7 @@ import Card from "./common/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllTests } from "../../../../redux/college/test/thunks/test";
 import CreditPopUp from "../../../PopUps/CreditPopUp";
-import { isUni } from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 
 const Beginner = () => {
   const beginner = useSelector((state) => state.test.assessments.beginner);
@@ -33,17 +33,17 @@ const Beginner = () => {
     setShow(false);
   };
   const handleFunc = () => {
-
-    if(isUni()){
-      navigate("/university/pr/test/name?level=beginner");
-    }else{
+    const entity = isUni() ? "university/pr" : isCompany() ? "company/pr" : "college";
+    if (!isUni() || isCompany()) {
+      navigate(`/${entity}/test/name?level=beginner`);
+    } else {
       if (credit?.balance?.credit) {
         navigate("/college/test/name?level=beginner");
       } else {
         setShow(true);
       }
     }
-   
+
   };
   //   React.useEffect(() => {
   //  if(!testLoading){

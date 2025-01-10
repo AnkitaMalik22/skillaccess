@@ -14,7 +14,7 @@ import {
   addQuestionToTopic,
   getTopicById,
 } from "../../../../redux/college/test/thunks/topic";
-import { isUni } from "../../../../util/isCompany";
+import { getEntity, isUni } from "../../../../util/isCompany";
 
 const Header = ({
   name,
@@ -38,6 +38,8 @@ const Header = ({
   const { currentTopic, currentQuestionCount, totalQuestions } = useSelector(
     (state) => state.test
   );
+
+
   const handleFile = (e) => {
     const types = [
       "application/vnd.ms-excel",
@@ -201,9 +203,9 @@ const Header = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              colNum
+                            (rowNum + 1) +
+                            "col:" +
+                            colNum
                           );
                           setLoading(false);
                           return;
@@ -232,9 +234,9 @@ const Header = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              colNum
+                            (rowNum + 1) +
+                            "col:" +
+                            colNum
                           );
                           setLoading(false);
                           return;
@@ -389,11 +391,11 @@ const Header = ({
                             setError(true);
                             toast.error(
                               "Invalid value row:" +
-                                (rowNum + 1) +
-                                "col:" +
-                                (colNum + 1) +
-                                "-->" +
-                                row.v
+                              (rowNum + 1) +
+                              "col:" +
+                              (colNum + 1) +
+                              "-->" +
+                              row.v
                             );
                             setLoading(false);
                             return;
@@ -410,9 +412,9 @@ const Header = ({
                           setError(true);
                           toast.error(
                             "Invalid value! row:" +
-                              (rowNum + 1) +
-                              "col:" +
-                              colNum
+                            (rowNum + 1) +
+                            "col:" +
+                            colNum
                           );
                           setLoading(false);
                           return;
@@ -535,7 +537,7 @@ const Header = ({
                   }
                 }
               }
-            } catch (error) {}
+            } catch (error) { }
 
             setExcelJSON(jsonData.slice(1));
             await dispatch(
@@ -583,8 +585,7 @@ const Header = ({
       if (level === "adaptive") {
         if (currentQuestionCount > totalQuestions * 2) {
           return toast.error(
-            `Number of question must be less than or equal to ${
-              totalQuestions / 2
+            `Number of question must be less than or equal to ${totalQuestions / 2
             }`
           );
         }
@@ -625,34 +626,30 @@ const Header = ({
     } else {
       if (level === "adaptive") {
         navigate(
-          `/${
-            isUni() ? "university/pr" : "college"
+          `/${getEntity()
           }/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
         );
       } else {
         navigate(
-          `/${
-            isUni() ? "university/pr" : "college"
+          `/${getEntity()
           }/test/typeOfQuestions/${sectionId}?level=${level}`
         );
       }
     }
   };
 
-  const imageUrl = `/download/${
-    ques === "mcq"
-      ? "Mcq.xlsx"
-      : ques === "findAnswer"
+  const imageUrl = `/download/${ques === "mcq"
+    ? "Mcq.xlsx"
+    : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
-  }`;
-  const imageName = `${
-    ques === "mcq"
-      ? "Mcq.xlsx"
-      : ques === "findAnswer"
+    }`;
+  const imageName = `${ques === "mcq"
+    ? "Mcq.xlsx"
+    : ques === "findAnswer"
       ? "findAnswer.xlsx"
       : "essay.xlsx"
-  }`; // Replace with your desired image name
+    }`; // Replace with your desired image name
 
   return (
     <div className="flex  justify-between items-center mb-5">
@@ -675,22 +672,16 @@ const Header = ({
             onClick={() => {
               type === "section" &&
                 navigate(
-                  `/${
-                    isUni() ? "university/pr" : "college"
-                  }/test/questions?level=${level}`
+                  `/${getEntity()}/test/questions?level=${level}`
                 );
               type === "topic" &&
                 (level === "adaptive"
                   ? navigate(
-                      `/${
-                        isUni() ? "university/pr" : "college"
-                      }/test/selectAdaptive?level=${level}`
-                    )
+                    `/${getEntity()}/test/selectAdaptive?level=${level}`
+                  )
                   : navigate(
-                      `/${
-                        isUni() ? "university/pr" : "college"
-                      }/test/select?level=${level}`
-                    ));
+                    `/${getEntity()}/test/select?level=${level}`
+                  ));
               type === "assessment" && navigate(-1);
             }}
             className="mt-2 mr-3"

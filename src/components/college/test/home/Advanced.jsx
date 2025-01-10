@@ -9,7 +9,7 @@ import Card from "./common/Card";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CreditPopUp from "../../../PopUps/CreditPopUp";
-import { isUni } from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 
 const Advanced = () => {
   const [show, setShow] = useState(false);
@@ -22,8 +22,9 @@ const Advanced = () => {
     setShow(false);
   };
   const handleFunc = () => {
-    if (isUni()) {
-      navigate("/university/pr/test/name?level=advanced");
+    const entity = isUni() ? "university/pr" : isCompany() ? "company/pr" : "college";
+    if (!isUni() || isCompany()) {
+      navigate(`/${entity}/test/name?level=advanced`);
     } else {
       if (credit?.balance?.credit) {
         navigate("/college/test/name?level=advanced");
@@ -31,6 +32,7 @@ const Advanced = () => {
         setShow(true);
       }
     }
+
   };
   return (
     <div className="flex bg-[#F8F8F9] w-full gap-2 p-5">

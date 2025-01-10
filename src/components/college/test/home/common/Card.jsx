@@ -35,48 +35,44 @@ const Card = (props) => {
       </h2>
       <div className="grid grid-cols-4 w-full gap-2 mb-2">
         <div
-          className={`${
-            props.progress === 1
+          className={`${props.progress === 1
               ? "bg-red-500"
               : props.progress === 2
-              ? "bg-blue-600"
-              : props.progress === 3
-              ? "bg-amber-500"
-              : "bg-green-600"
-          } w-full h-1 rounded`}
+                ? "bg-blue-600"
+                : props.progress === 3
+                  ? "bg-amber-500"
+                  : "bg-green-600"
+            } w-full h-1 rounded`}
         ></div>
         <div
-          className={`${
-            props.progress === 1
+          className={`${props.progress === 1
               ? "bg-gray-200"
               : props.progress === 2
-              ? "bg-blue-600"
-              : props.progress === 3
-              ? "bg-amber-500"
-              : "bg-green-600"
-          } w-full h-1 rounded`}
+                ? "bg-blue-600"
+                : props.progress === 3
+                  ? "bg-amber-500"
+                  : "bg-green-600"
+            } w-full h-1 rounded`}
         ></div>
         <div
-          className={`${
-            props.progress === 1
+          className={`${props.progress === 1
               ? "bg-gray-200"
               : props.progress === 2
-              ? "bg-gray-200"
-              : props.progress === 3
-              ? "bg-amber-600"
-              : "bg-green-600"
-          } w-full h-1 rounded`}
+                ? "bg-gray-200"
+                : props.progress === 3
+                  ? "bg-amber-600"
+                  : "bg-green-600"
+            } w-full h-1 rounded`}
         ></div>
         <div
-          className={`${
-            props.progress === 1
+          className={`${props.progress === 1
               ? "bg-gray-200"
               : props.progress === 2
-              ? "bg-gray-200"
-              : props.progress === 3
-              ? "bg-gray-200"
-              : "bg-green-600"
-          } w-full h-1 rounded`}
+                ? "bg-gray-200"
+                : props.progress === 3
+                  ? "bg-gray-200"
+                  : "bg-green-600"
+            } w-full h-1 rounded`}
         ></div>
       </div>
 

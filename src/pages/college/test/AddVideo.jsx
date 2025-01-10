@@ -12,7 +12,7 @@ import Header from "../../../components/college/test/addVideo/Header";
 import Loader from "../../../components/college/test/addVideo/Loader";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { getEntity, isUni } from "../../../util/isCompany";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -232,9 +232,7 @@ const AddVideo = () => {
       // Navigate to the next step
 
       navigate(
-        `/${
-          isUni() ? "university/pr" : "college"
-        }/test/video/${id}/selectType?section=${searchParam.get(
+        `/${getEntity()}/test/video/${id}/selectType?section=${searchParam.get(
           "topicId"
         )}&level=${level}`
       );
@@ -271,9 +269,8 @@ const AddVideo = () => {
             {!recording && (
               <div
                 {...getRootProps()}
-                className={`border rounded-md border-dashed h-[238px] w-[685px] mt-8 flex flex-col items-center py-7 ${
-                  isDragActive ? "bg-gray-100" : ""
-                }`}
+                className={`border rounded-md border-dashed h-[238px] w-[685px] mt-8 flex flex-col items-center py-7 ${isDragActive ? "bg-gray-100" : ""
+                  }`}
               >
                 <input {...getInputProps()} />
 
@@ -344,9 +341,8 @@ const AddVideo = () => {
 
                 <div className="  flex item-center mt-4">
                   <button
-                    className={`self-center justify-center items-center flex ${
-                      paused ? "bg-blue-500" : "bg-red-500"
-                    } text-blued  py-3 px-4 rounded-2xl text-sm gap-2`}
+                    className={`self-center justify-center items-center flex ${paused ? "bg-blue-500" : "bg-red-500"
+                      } text-blued  py-3 px-4 rounded-2xl text-sm gap-2`}
                     onClick={handlePauseResumeRecording}
                   >
                     {paused ? "Resume" : "Pause"}
@@ -360,11 +356,10 @@ const AddVideo = () => {
                   </button>
 
                   <p
-                    className={`text-center ml-4 rounded-2xl text-[#fff] py-3 px-4 font-bold pt-2 ${
-                      timer >= maxDurationInSeconds - warningTime
-                        ? "bg-red-500"
-                        : "bg-green-500"
-                    }`}
+                    className={`text-center ml-4 rounded-2xl text-[#fff] py-3 px-4 font-bold pt-2 ${timer >= maxDurationInSeconds - warningTime
+                      ? "bg-red-500"
+                      : "bg-green-500"
+                      }`}
                   >
                     {formatTime(timer)}
                   </p>

@@ -15,7 +15,7 @@ const Header = ({ handleSubmit, loading }) => {
       <div>
         <button className="flex items-center  rounded-md  gap-2">
           <button onClick={() => navigate(-1)} className="mt-2 mr-3">
-            <FaChevronLeft className=" p-5 rounded-md h-14 w-14 self-center bg-gray-200 text-gray-500" />
+            <FaChevronLeft className=" p-5 rounded-md h-14 w-14 self-center text-gray-500" />
           </button>
 
           <div className="flex flex-col items-start">

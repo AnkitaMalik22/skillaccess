@@ -7,6 +7,7 @@ import { useMediaQuery } from "./hooks/useMediaQuery";
 import Loader from "./Loader";
 import DesktopOnly from "./pages/common/DesktopOnly";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { getEntity } from "./util/isCompany";
 
 // Lazy-loaded components
 const Login = lazy(() => import("./auth/Login"));
@@ -21,6 +22,7 @@ const CollegeRoutes = lazy(() => import("./routes/CollegeRoutes"));
 const CompanyRoutes = lazy(() => import("./routes/CompanyRoutes"));
 const UniversityRoutes = lazy(() => import("./routes/UniversityRoutes"));
 
+
 const App = () => {
   const dispatch = useDispatch();
   const { isLoggedIn, USER_LOADING } = useSelector(
@@ -28,9 +30,9 @@ const App = () => {
   );
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
-  // useEffect(() => {
-  //   dispatch(getCollege());
-  // }, [dispatch]);
+  useEffect(() => {
+   getEntity()==="college" && dispatch(getCollege());
+  }, [dispatch]);
 
   if (USER_LOADING) {
     return <Loader />;

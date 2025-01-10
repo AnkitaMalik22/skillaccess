@@ -13,7 +13,8 @@ import {
 } from "../../../redux/college/test/testSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { getEntity } from "../../../util/isCompany";
+import CommonHeader from "../../../components/CommonHeader";
 
 const AddQuestions = () => {
   //useTranslate();
@@ -25,7 +26,7 @@ const AddQuestions = () => {
   // React.useEffect(() => {
   //   //console.log(topics, "topics");
   // }, [topics]);
-  const entity = isUni() ? "university/pr" : "college";
+  const entity = getEntity();
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const level = searchParams.get("level");
@@ -135,7 +136,8 @@ const AddQuestions = () => {
   //console.log(totalTime);
   return (
     <>
-      <Header page={"submit"} />
+      {/* <Header page={"submit"} /> */}
+      <CommonHeader backPath={`/${getEntity()}/test/${level === "adpative" ? "selectAdaptive" : `select`}?level=${level}`} handleNext={() => { navigate(`/${getEntity()}/test/submit?level=${level}`) }} />
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>
