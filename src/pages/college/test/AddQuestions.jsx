@@ -14,6 +14,7 @@ import {
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import { getEntity } from "../../../util/isCompany";
+import CommonHeader from "../../../components/CommonHeader";
 
 const AddQuestions = () => {
   //useTranslate();
@@ -135,7 +136,8 @@ const AddQuestions = () => {
   //console.log(totalTime);
   return (
     <>
-      <Header page={"submit"} />
+      {/* <Header page={"submit"} /> */}
+      <CommonHeader backPath={`/${getEntity()}/test/${level === "adpative" ? "selectAdaptive" : `select`}?level=${level}`} handleNext={() => { navigate(`/${getEntity()}/test/submit?level=${level}`) }} />
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>

@@ -273,11 +273,8 @@ const SelectTests = () => {
       toast.error("Please select atleast one topic to proceed");
       return;
     }
-    if (isUni()) {
-      Navigate(`/university/pr/test/questions?level=${level}`);
-    } else {
-      Navigate(`/college/test/questions?level=${level}`);
-    }
+    Navigate(`/${getEntity()}/test/questions?level=${level}`);
+
   };
 
   useEffect(() => {

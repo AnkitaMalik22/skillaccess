@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { createTest } from "../../../redux/college/test/thunks/test";
 import { getCollege } from "../../../redux/college/auth/authSlice";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { getEntity, isUni } from "../../../util/isCompany";
 
 const Submit = () => {
   //useTranslate();
@@ -33,7 +33,7 @@ const Submit = () => {
   } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const testType = searchParams.get("level");
-  const entity = isUni() ? "university/pr" : "college";
+  const entity = getEntity();
   const [questions, setQuestions] = useState();
   let section1 = [];
   let section2 = [];
@@ -284,8 +284,7 @@ const Submit = () => {
       if (parseInt(totalQuestions) * 2 > questions.length) {
         //console.log(totalQuestions, questions.length);
         toast.error(
-          `Add ${
-            2 * totalQuestions - questions.length
+          `Add ${2 * totalQuestions - questions.length
           } more questions to complete the test`
         );
         return;
@@ -293,8 +292,7 @@ const Submit = () => {
       if (parseInt(totalQuestions) * 2 < questions.length) {
         //console.log(totalQuestions, questions.length);
         window.alert(
-          `Remove ${
-            questions.length - totalQuestions * 2
+          `Remove ${questions.length - totalQuestions * 2
           } questions to complete the test`
         );
 
@@ -304,8 +302,7 @@ const Submit = () => {
       if (totalQuestions > questions.length) {
         //console.log(totalQuestions, questions.length);
         toast.error(
-          `Add ${
-            totalQuestions - questions.length
+          `Add ${totalQuestions - questions.length
           } more questions to complete the test`
         );
         return;
@@ -313,8 +310,7 @@ const Submit = () => {
       if (totalQuestions < questions.length) {
         //console.log(totalQuestions, questions.length);
         window.alert(
-          `Remove ${
-            questions.length - totalQuestions
+          `Remove ${questions.length - totalQuestions
           } questions to complete the test`
         );
 
@@ -366,7 +362,7 @@ const Submit = () => {
       // dispatch(
       //   setTestBasicDetails({ name: "", description: "", totalAttempts: null ,totalQuestions:0})
       // );
-      if (!isUni()) dispatch(getCollege());
+      if (entity === "college") dispatch(getCollege());
       setLoading(false);
       //console.log(res);
 
@@ -439,11 +435,10 @@ const Submit = () => {
             hasQuestions && (
               <div
                 key={pageNumber}
-                className={`rounded-md h-10 w-10 flex justify-center ${
-                  selected === pageNumber
-                    ? "bg-accent text-white"
-                    : "bg-gray-100"
-                }`}
+                className={`rounded-md h-10 w-10 flex justify-center ${selected === pageNumber
+                  ? "bg-accent text-white"
+                  : "bg-gray-100"
+                  }`}
                 onClick={() => setSelected(pageNumber)}
               >
                 <p className="self-center">{pageNumber}</p>
@@ -454,9 +449,8 @@ const Submit = () => {
 
         <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropright
-            className={` text-lg self-center ${
-              selected === Math.ceil(max) && "disabled"
-            }`}
+            className={` text-lg self-center ${selected === Math.ceil(max) && "disabled"
+              }`}
             onClick={() =>
               selected !== Math.ceil(max) && setSelected(selected + 1)
             }
