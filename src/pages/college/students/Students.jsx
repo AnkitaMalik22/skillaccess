@@ -177,8 +177,7 @@ const Students = () => {
                     className="font-dmSans text-sm font-bold text-white bg-accent p-2 rounded-md cursor-pointer"
                     onClick={() =>
                       navigate(
-                        `/${
-                          isUni() ? "university/pr" : "college"
+                        `/${isUni() ? "university/pr" : "college"
                         }/students/profile/${student._id}`
                       )
                     }
@@ -224,8 +223,7 @@ const Students = () => {
                 onClick={() =>
                   //  navigate(`/college/students/profile/${student._id}`)
                   navigate(
-                    `/${
-                      isUni() ? "university/pr" : "college"
+                    `/${isUni() ? "university/pr" : "college"
                     }/students/profile/${student._id}`
                   )
                 }
@@ -260,8 +258,8 @@ const Students = () => {
                     <h2 className="font-dmSans font-normal text-sm text-[#171717]">
                       {student?.studentResponses?.length > 1
                         ? student?.studentResponses[
-                            student?.studentResponses?.length - 2
-                          ]?.assessmentId?.name
+                          student?.studentResponses?.length - 2
+                        ]?.assessmentId?.name
                         : "Not Available"}
                     </h2>
                   </div>
@@ -271,8 +269,8 @@ const Students = () => {
                     <h2 className="font-dmSans font-normal text-sm text-[#171717]">
                       {student?.studentResponses?.length > 0
                         ? student?.studentResponses[
-                            student?.studentResponses?.length - 1
-                          ]?.assessmentId?.name
+                          student?.studentResponses?.length - 1
+                        ]?.assessmentId?.name
                         : "Not Available"}
                     </h2>
                   </div>
@@ -349,11 +347,10 @@ const Students = () => {
                 <button
                   key={pageNum}
                   onClick={() => handlePageChange(pageNum)}
-                  className={`h-8 w-8 rounded-md transition-colors ${
-                    currentPage === pageNum
-                      ? "bg-accent text-white"
-                      : "hover:bg-gray-100"
-                  }`}
+                  className={`h-8 w-8 rounded-md transition-colors ${currentPage === pageNum
+                    ? "bg-accent text-white"
+                    : "hover:bg-gray-100"
+                    }`}
                 >
                   {pageNum}
                 </button>

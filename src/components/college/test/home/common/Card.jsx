@@ -8,7 +8,7 @@ import {
   getAllTests,
 } from "../../../../../redux/college/test/thunks/test";
 import { FaPlus } from "react-icons/fa6";
-import { isUni } from "../../../../../util/isCompany";
+import { getEntity, isUni } from "../../../../../util/isCompany";
 const Card = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Card = (props) => {
     });
   };
 
-  const entity = isUni() ? "university/pr" : "college";
+  const entity = getEntity();
 
   return (
     <div className=" h-[312px] bg-white text-start font-bold text-black rounded-md p-4 font-dmSans flex flex-col justify-between">
@@ -35,48 +35,44 @@ const Card = (props) => {
       </h2>
       <div className="grid grid-cols-4 w-full gap-2 mb-2">
         <div
-          className={`${
-            props.progress === 1
-              ? "bg-red-500"
-              : props.progress === 2
+          className={`${props.progress === 1
+            ? "bg-red-500"
+            : props.progress === 2
               ? "bg-blue-600"
               : props.progress === 3
-              ? "bg-amber-500"
-              : "bg-green-600"
-          } w-full h-1 rounded`}
+                ? "bg-amber-500"
+                : "bg-green-600"
+            } w-full h-1 rounded`}
         ></div>
         <div
-          className={`${
-            props.progress === 1
-              ? "bg-gray-200"
-              : props.progress === 2
+          className={`${props.progress === 1
+            ? "bg-gray-200"
+            : props.progress === 2
               ? "bg-blue-600"
               : props.progress === 3
-              ? "bg-amber-500"
-              : "bg-green-600"
-          } w-full h-1 rounded`}
+                ? "bg-amber-500"
+                : "bg-green-600"
+            } w-full h-1 rounded`}
         ></div>
         <div
-          className={`${
-            props.progress === 1
-              ? "bg-gray-200"
-              : props.progress === 2
+          className={`${props.progress === 1
+            ? "bg-gray-200"
+            : props.progress === 2
               ? "bg-gray-200"
               : props.progress === 3
-              ? "bg-amber-600"
-              : "bg-green-600"
-          } w-full h-1 rounded`}
+                ? "bg-amber-600"
+                : "bg-green-600"
+            } w-full h-1 rounded`}
         ></div>
         <div
-          className={`${
-            props.progress === 1
-              ? "bg-gray-200"
-              : props.progress === 2
+          className={`${props.progress === 1
+            ? "bg-gray-200"
+            : props.progress === 2
               ? "bg-gray-200"
               : props.progress === 3
-              ? "bg-gray-200"
-              : "bg-green-600"
-          } w-full h-1 rounded`}
+                ? "bg-gray-200"
+                : "bg-green-600"
+            } w-full h-1 rounded`}
         ></div>
       </div>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Header from "./Header";
+import Header from "../../../CommonHeader";
 import { Progress } from "./Progress";
 import { useSelector, useDispatch } from "react-redux";
 import InputField from "../../../../components/InputField";
@@ -11,7 +11,7 @@ import {
   setTestBasicDetails,
 } from "../../../../redux/college/test/testSlice";
 import toast from "react-hot-toast";
-import { isUni } from "../../../../util/isCompany";
+import isCompany, { isUni } from "../../../../util/isCompany";
 import { getCategories } from "../../../../redux/category/categorySlice";
 
 const Name = () => {
@@ -19,6 +19,7 @@ const Name = () => {
   const [search, setSearch] = useSearchParams();
   const level = search.get("level");
   const { categories } = useSelector((state) => state.category);
+  const entity = isUni() ? "university/pr" : isCompany() ? "company/pr" : "college";
 
   const {
     name,
@@ -248,9 +249,7 @@ const Name = () => {
     // If no errors, proceed with dispatch and navigation
     if (!hasError) {
       dispatch(setTestBasicDetails(testDetails));
-      const basePath = isUni()
-        ? "/university/pr/test/select"
-        : "/college/test/select";
+      const basePath = `/${entity}/test/select`
       navigate(
         `${basePath}${level === "adaptive" ? "Adaptive" : ""}?level=${level}`
       );
@@ -559,9 +558,8 @@ const Name = () => {
           {/* Description Textarea */}
           <div>
             <textarea
-              className={` ${
-                errors.description ? "border-red-500" : "border-gray-200"
-              } border-gray-300 focus:outline-none focus:ring-1 focus:ring-blued w-full text-base text-[#4B5563] py-3 px-5 rounded-md shadow-sm focus:shadow-md hover:shadow-md transition-all duration-300`}
+              className={` ${errors.description ? "border-red-500" : "border-gray-200"
+                } border-gray-300 focus:outline-none focus:ring-1 focus:ring-blued w-full text-base text-[#4B5563] py-3 px-5 rounded-md shadow-sm focus:shadow-md hover:shadow-md transition-all duration-300`}
               placeholder="Add Description*"
               name="description"
               value={testDetails.description}

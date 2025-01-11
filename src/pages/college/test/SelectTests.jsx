@@ -15,7 +15,10 @@ import {
 import { getAllTopics } from "../../../redux/college/test/thunks/topic";
 import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
 import Loader from "../../../components/loaders/Loader";
-import { isUni } from "../../../util/isCompany";
+import isCompany, { getEntity, isUni } from "../../../util/isCompany";
+import CommonHeader from "../../../components/CommonHeader";
+
+
 
 const AddTopic = ({ Navigate, level }) => (
   <div className="w-full max-w-64 h-64 bg-gray-100 rounded-md flex justify-center">
@@ -25,8 +28,7 @@ const AddTopic = ({ Navigate, level }) => (
         onClick={() => {
           localStorage.removeItem("currentTopic");
           Navigate(
-            `/${
-              isUni() ? "university/pr" : "college"
+            `/${isUni() ? "university/pr" : "college"
             }/test/createTopic?level=${level}`
           );
         }}
@@ -44,6 +46,8 @@ const AddTopic = ({ Navigate, level }) => (
 );
 
 const SelectTests = () => {
+
+
   //useTranslate();
   const [visible, setVisible] = useState(false);
   const [totalQ, setTotalQ] = useState(0);
@@ -59,6 +63,7 @@ const SelectTests = () => {
 
   const { sections, currentQuestionCount, totalQuestions, GET_TOPICS_LOADING } =
     useSelector((state) => state.test);
+  const entity = isUni() ? "university/pr" : isCompany() ? "company/pr" : "college";
   // for filter the sections
 
   const [filteredSections, setFilteredSections] = useState([]);
@@ -92,7 +97,7 @@ const SelectTests = () => {
   const addSection = (section) => {
     if (
       parseInt(currentQuestionCount) + parseInt(totalQ) >
-        parseInt(totalQuestions) ||
+      parseInt(totalQuestions) ||
       totalQ > totalQuestions
     ) {
       toast.error(
@@ -258,10 +263,19 @@ const SelectTests = () => {
       topics = JSON.parse(localStorage.getItem("topics"));
 
       setSelectedSections(topics);
-    } catch (error) {}
+    } catch (error) { }
 
     // //console.log("hello tests",sections);
   }, []);
+
+  const handleSubmit = () => {
+    if (topics.length === 0) {
+      toast.error("Please select atleast one topic to proceed");
+      return;
+    }
+    Navigate(`/${getEntity()}/test/questions?level=${level}`);
+
+  };
 
   useEffect(() => {
     if (sections) {
@@ -290,11 +304,11 @@ const SelectTests = () => {
           addSection={addSection}
           totalQ={totalQ}
           setTotalQ={setTotalQ}
-          // setTotalQuestions={setTotalQuestions}
-          // totalQuestions={totalQuestions}
+        // setTotalQuestions={setTotalQuestions}
+        // totalQuestions={totalQuestions}
         />
       )}
-      <Header />
+      <CommonHeader backPath={`/${getEntity()}/test/name?level=${level}`} title="Select Topics" handleNext={handleSubmit} />
 
       <div className="w-4/5 mx-auto">
         <Progress />
@@ -358,21 +372,21 @@ const SelectTests = () => {
 
           {selectedSections?.length < 5
             ? Array.from({ length: 5 - selectedSections.length }).map(
-                (_, index) => (
-                  <div
-                    key={index}
-                    className="w-full h-full border border-dashed rounded-md border-blued col-span-1 flex justify-center p-2 md:p-5"
-                  >
-                    <span className="self-center">
-                      <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
+              (_, index) => (
+                <div
+                  key={index}
+                  className="w-full h-full border border-dashed rounded-md border-blued col-span-1 flex justify-center p-2 md:p-5"
+                >
+                  <span className="self-center">
+                    <FiPlusCircle className="mx-auto sm:w-8 sm:h-8 text-gray-200" />
 
-                      <h2 className="font-semibold mt-1">
-                        Add section {selectedSections.length + index + 1}{" "}
-                      </h2>
-                    </span>
-                  </div>
-                )
+                    <h2 className="font-semibold mt-1">
+                      Add section {selectedSections.length + index + 1}{" "}
+                    </h2>
+                  </span>
+                </div>
               )
+            )
             : null}
         </div>
 
@@ -430,8 +444,7 @@ const SelectTests = () => {
                     );
 
                     Navigate(
-                      `/${isUni() ? "university/pr" : "college"}/test/details/${
-                        section._id
+                      `/${entity}/test/details/${section._id
                       }?type=topic&question=${questionType}&level=${level}&select=true`
                     );
                   }}

@@ -100,9 +100,8 @@ const Test = () => {
       <Header students={approvedStudents} />
 
       <div
-        className={`flex rounded-md md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch ${
-          isUni() ? "" : "h-screen"
-        }`}
+        className={`flex rounded-md md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch ${isUni() ? "" : "h-screen"
+          }`}
       >
         {/* left block */}
         <div className="w-full rounded-md flex flex-col">

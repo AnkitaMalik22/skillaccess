@@ -25,10 +25,10 @@ export const getTest = createAsyncThunk(
 
 export const getTestResultPage = createAsyncThunk(
   "test/getTestResultPage",
-  async (id, { rejectWithValue }) => {
+  async ({id,status="pending",page=1}, { rejectWithValue }) => {
     try {
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/studentDummy/get/test-details/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/studentDummy/get/test-details/${id}?status=${status}&page=${page}`,
 
         getHeaders()
       );
@@ -37,10 +37,50 @@ export const getTestResultPage = createAsyncThunk(
 
       //console.log(res);
 
-      return res.students;
+      return res;
     } catch (error) {
-      //console.log("catch", error.response.data);
+      console.log("catch", error);
 
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// Bulk selection thunk
+export const bulkSelectStudents = createAsyncThunk(
+  "test/bulkSelectStudents",
+  async ({ testId, studentIds, status }, { rejectWithValue }) => {
+    try {
+      const req = await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/college/test/${testId}/bulk-select`,
+        { studentIds, status },
+        getHeaders()
+      );
+
+      const res = req.data;
+      return res;
+    } catch (error) {
+      console.log("catch", error);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// Threshold-based selection thunk
+export const selectStudentsByThreshold = createAsyncThunk(
+  "test/selectByThreshold",
+  async ({ testId, threshold }, { rejectWithValue }) => {
+    try {
+      const req = await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/college/test/${testId}/select-by-threshold`,
+        { threshold },
+        getHeaders()
+      );
+
+      const res = req.data;
+      return res;
+    } catch (error) {
+      console.log("catch", error);
       return rejectWithValue(error.response.data);
     }
   }

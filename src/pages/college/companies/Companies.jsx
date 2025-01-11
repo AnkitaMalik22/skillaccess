@@ -40,7 +40,7 @@ const Companies = () => {
         <div className="flex gap-3">
           <button
             className="self-center object-center rounded-md h-10 w-10 "
-            // onClick={() => navigate('college/companies')}
+          // onClick={() => navigate('college/companies')}
           >
             <img src="/images/icons/sales.jpg" alt="icon" />
           </button>

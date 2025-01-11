@@ -8,7 +8,7 @@ const ViewInvitedStudents = lazy(() => import("./ViewInvitedStudents"));
 
 export default function CompaniesRoute(entity) {
   return (
-    <Route path={`${entity}companies`}>
+    <Route path={`${entity}companies`} >
       <Route path="" element={<Companies />} />
       <Route path="jobs" element={<Jobs />} />
       <Route path="profile/:id" element={<CompanyProfile />} />

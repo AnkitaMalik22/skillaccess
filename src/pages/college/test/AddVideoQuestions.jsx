@@ -6,7 +6,7 @@ import Header from "../../../components/college/test/addVideo/addSelect/Header";
 import toast from "react-hot-toast";
 import useTranslate from "../../../hooks/useTranslate";
 import { setTotalTopicQuestions } from "../../../redux/college/test/thunks/topic";
-import { isUni } from "../../../util/isCompany";
+import { getEntity } from "../../../util/isCompany";
 
 const AddVideoQuestionsPage = () => {
   //useTranslate();
@@ -17,7 +17,7 @@ const AddVideoQuestionsPage = () => {
   const [searchParam, setSearchParam] = useSearchParams();
   const level = searchParam.get("level");
   const { ADD_QUESTION_LOADING } = useSelector((state) => state.test);
-  const entity = isUni() ? "university/pr" : "college";
+  const entity = getEntity();
 
   const NavHandler = () => {
     switch (selectQuestionType) {
@@ -71,9 +71,8 @@ const AddVideoQuestionsPage = () => {
           {/* mcq */}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
-            }`}
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${selectQuestionType === "mcq" ? "border-blued" : "opacity-70"
+              }`}
             onClick={() => setSelectQuestionType("mcq")}
           >
             {" "}
@@ -115,9 +114,8 @@ const AddVideoQuestionsPage = () => {
           {/* Essay */}
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "short" ? "border-blued" : "opacity-70"
-            }`}
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${selectQuestionType === "short" ? "border-blued" : "opacity-70"
+              }`}
             onClick={() => setSelectQuestionType("short")}
           >
             {" "}
@@ -151,9 +149,8 @@ const AddVideoQuestionsPage = () => {
           </div>
 
           <div
-            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${
-              selectQuestionType === "long" ? "border-blued" : "opacity-70"
-            }`}
+            className={`w-full flex justify-between bg-gray-100 rounded-md border  h-20 py-4 px-8  my-2  ${selectQuestionType === "long" ? "border-blued" : "opacity-70"
+              }`}
             onClick={() => setSelectQuestionType("long")}
           >
             {" "}
