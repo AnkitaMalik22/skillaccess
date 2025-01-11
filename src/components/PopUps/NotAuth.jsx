@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../Loader";
+import Loader from "../../components/Loader";
 
 const NotAuth = ({ onCancel, onConfirm }) => {
   const navigate = useNavigate();

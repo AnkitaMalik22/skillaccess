@@ -6,11 +6,10 @@ import Education from "../../../components/college/students/profile/Education";
 import Skills from "../../../components/college/students/profile/Skills";
 import Results from "../../../components/college/students/profile/Results";
 import Portfolio from "../../../components/college/students/profile/Portfolio";
-import Loader from "../../../Loader";
+import Loader from "../../../components/Loader";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentCV } from "../../../redux/college/student/studentSlice";
-import useTranslate from "../../../hooks/useTranslate";
 
 const StudentsProfile = () => {
   //useTranslate();

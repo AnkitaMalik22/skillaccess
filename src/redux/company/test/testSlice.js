@@ -19,7 +19,6 @@ import {
   deleteTest,
   getAllTests,
   getTestCompany,
-  getTestResultPage,
   selectStudentTestCompany,
   getselectedStudentsCompany,
   getStudentsForTest,
@@ -31,7 +30,6 @@ import {
 
 import {
   addQuestionToTopicCompany,
-  getAllTopics,
   getTopicById,
   getAllTopicsQB,
   deleteTopics,
@@ -39,7 +37,6 @@ import {
   setTotalTopicQuestions,
   getAllTopicsCompany,
 } from "./thunks/topic";
-
 
 import {
   addBookmark,
@@ -203,8 +200,7 @@ const testState = {
   totalTopicQuestions: 0,
 };
 
-
-const testSliceCompany= createSlice({
+const testSliceCompany = createSlice({
   initialState: testState,
   name: "companyTest",
   reducers: {
@@ -585,8 +581,11 @@ const testSliceCompany= createSlice({
               action.payload.res.question;
             break;
           case "mcq":
-            state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
-              index === action.payload.index ? action.payload.res.question : question
+            state.currentTopic.questions = state.currentTopic.questions.map(
+              (question, index) =>
+                index === action.payload.index
+                  ? action.payload.res.question
+                  : question
             );
             break;
 
@@ -852,7 +851,7 @@ const testSliceCompany= createSlice({
       .addCase(inviteToTest.rejected, (state, action) => {
         state.status = "rejected";
         // toast.error("Your current plan limit is exceeded");
-          toast.error(action.payload?.message);
+        toast.error(action.payload?.message);
       })
       .addCase(getTopicByIdQB.pending, (state, action) => {
         state.status = "pending";
@@ -968,14 +967,12 @@ const testSliceCompany= createSlice({
       // JOB
       .addCase(addTestToJob.pending, (state) => {
         state.status = "loading";
-
-      }
-      )
+      })
       .addCase(addTestToJob.fulfilled, (state, action) => {
         state.status = "succeeded";
         toast.success("Test added to job successfully");
         window.location.replace("/company/pr/jobs/" + action.payload.job?._id);
-    
+
         //console.log(action.payload);
       })
       .addCase(addTestToJob.rejected, (state, action) => {

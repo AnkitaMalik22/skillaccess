@@ -2,11 +2,9 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getCompany } from "../../../redux/college/dashboard/dashboardSlice";
-import useTranslate from "../../../hooks/useTranslate";
 import { IoIosSearch } from "react-icons/io";
 
 const Companies = () => {
-  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { companies } = useSelector((state) => state.dashboard);
