@@ -39,10 +39,10 @@ export default function CampusDriveDetails() {
     setCampusDriveDetails((prev) => ({ ...prev, [name]: value }));
     }
 
-    const handleCoverPhotoChange = (e) => {
-    const coverPhoto = e.target.files[0];
-    setCampusDriveDetails((prev) => ({ ...prev, coverPhoto }));
-    }
+    // const handleCoverPhotoChange = (e) => {
+    // const coverPhoto = e.target.files[0];
+    // setCampusDriveDetails((prev) => ({ ...prev, coverPhoto }));
+    // }
     
 
   return (
@@ -95,7 +95,7 @@ export default function CampusDriveDetails() {
         </div>
       </div>
 
-      <div className="form-control mb-4">
+      {/* <div className="form-control mb-4">
         <label className="label">
           <span className="label-text font-medium">Cover Photo</span>
         </label>
@@ -125,7 +125,7 @@ export default function CampusDriveDetails() {
             </div>
           )}
         </label>
-      </div>
+      </div> */}
 
       <div className="form-control mb-6">
         <label className="label">

@@ -81,7 +81,7 @@ export const fetchCampusDriveDetails = createAsyncThunk(
     try {
       const response = await axios.get(
         `${REACT_APP_API_URL}/api/company/campus-drive/${driveId}`,
-        config
+       getHeaders()
       );
       return response.data;
     } catch (error) {
@@ -122,6 +122,22 @@ export const addCollegesToCampusDrive = createAsyncThunk(
   }
 );
 
+export const assignTestToColleges = createAsyncThunk(
+  "campusDrive/assignTest",
+  async ({ driveId, colleges, test }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${REACT_APP_API_URL}/api/company/campus-drive/v1/assignTest/${driveId}`,
+        { colleges, test },
+        config
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 // Slice
 const campusDriveSlice = createSlice({
   name: "campusDrive",
@@ -133,6 +149,8 @@ const campusDriveSlice = createSlice({
     resetState: (state) => {
       return initialState;
     },
+   
+
   },
   extraReducers: (builder) => {
     builder
@@ -168,7 +186,7 @@ const campusDriveSlice = createSlice({
       })
       .addCase(fetchCampusDriveDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.currentCampusDrive = action.payload;
+        state.currentCampusDrive = action.payload.campusDrive;
       })
       .addCase(fetchCampusDriveDetails.rejected, (state, action) => {
         state.loading = false;
@@ -214,9 +232,22 @@ const campusDriveSlice = createSlice({
         .addCase(addCollegesToCampusDrive.rejected, (state, action) => {
           state.loading = false;
           state.error = action.payload;
+        })
+        // Assign Test to Colleges
+        .addCase(assignTestToColleges.pending, (state) => {
+          state.loading = true;
+        })
+        .addCase(assignTestToColleges.fulfilled, (state, action) => {
+          state.loading = false;
+          state.error = null;
+        })
+        .addCase(assignTestToColleges.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.payload;
         });
   },
 });
 
 export const { clearError, resetState } = campusDriveSlice.actions;
+export const selectCollegesForDrive = (state) => state.campusDrive.data?.assignedColleges || [];
 export default campusDriveSlice.reducer;

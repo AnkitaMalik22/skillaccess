@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCollegesForDrive, addCollegesToCampusDrive } from '../../../redux/company/campusDrive/campusDriveSlice';
 import { toast } from 'react-hot-toast';
 import { FaChevronLeft } from 'react-icons/fa';
+import { FiArrowLeft } from 'react-icons/fi';
 
 export default function InviteColleges() {
   const { driveId } = useParams();
@@ -74,16 +75,18 @@ export default function InviteColleges() {
   };
 
   return (
-    <div className="flex flex-col gap-5 bg-gray-100 p-5 rounded-lg shadow-md">
+    <div className="flex flex-col gap-5  p-5 rounded-lg shadow-md">
       <div className="flex gap-3 mb-5">
-        <button
-          className="self-center rounded-md h-10 w-10 bg-[#D9E1E7]"
-          onClick={handleBack}
-        >
-          <FaChevronLeft className="h-6 w-6 text-gray-600" />
-        </button>
-        <h2 className="text-xl font-bold text-[#171717] self-center">Step 2: Invite Colleges</h2>
+     
+           <button
+                 onClick={handleBack}
+                className="mb-6 btn btn-ghost gap-2 hover:bg-gray-100"
+              >
+                <FiArrowLeft className="text-lg" />
+                Back to Campus Drive
+              </button>
       </div>
+      <h2 className="text-xl font-bold text-[#171717] self-center"> Invite Colleges</h2>
 
       <div className="bg-white rounded-md p-6">
         {loading || !colleges?.length ? (
@@ -164,7 +167,7 @@ export default function InviteColleges() {
       {
     assignedColleges.length > 0 && (
         <div className="bg-white rounded-md p-6 mt-6">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">Assigned Colleges</h2>
+            <h2 className="text-xl font-semibold mb-4 text-gray-700">Invited Colleges</h2>
             <div className="max-h-60 overflow-y-auto">
                 {assignedColleges.map((college) => (
                      <div key={college._id} className="flex items-center justify-between mb-3 bg-gray-50 p-3 rounded-md shadow-sm">
