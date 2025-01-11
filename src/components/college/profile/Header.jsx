@@ -114,8 +114,8 @@ const Header = ({
                         ? college.name
                         : ""
                       : college && college.CollegeName
-                      ? college.CollegeName
-                      : ""
+                        ? college.CollegeName
+                        : ""
                   }
                   onChange={(e) =>
                     isUni()
@@ -131,8 +131,8 @@ const Header = ({
                       ? college.name
                       : ""
                     : college && college.CollegeName
-                    ? college.CollegeName
-                    : ""}
+                      ? college.CollegeName
+                      : ""}
                 </p>
               )}
             </h2>
@@ -180,8 +180,8 @@ const Header = ({
                       ? college.description
                       : ""
                     : college && college.Description
-                    ? college.Description
-                    : ""
+                      ? college.Description
+                      : ""
                 }
                 onChange={(e) =>
                   setCollege({
@@ -210,8 +210,8 @@ const Header = ({
                       ? college.description
                       : ""
                     : college && college.Description
-                    ? college.Description
-                    : ""
+                      ? college.Description
+                      : ""
                 }
                 onChange={(e) =>
                   isUni()
@@ -244,8 +244,8 @@ const Header = ({
                         ? college.email
                         : ""
                       : college && college.Email
-                      ? college.Email
-                      : ""
+                        ? college.Email
+                        : ""
                   }
                   onChange={(e) =>
                     isUni()
@@ -263,8 +263,8 @@ const Header = ({
                       ? college.email
                       : ""
                     : college && college.Email
-                    ? college.Email
-                    : ""}
+                      ? college.Email
+                      : ""}
                 </p>
               )}
             </p>
@@ -293,8 +293,8 @@ const Header = ({
                       ? college.phone
                       : ""
                     : college && college.Phone
-                    ? college.Phone
-                    : ""
+                      ? college.Phone
+                      : ""
                 }
                 onChange={(e) => {
                   // Ensure the entered value doesn't exceed 10 digits
@@ -339,8 +339,8 @@ const Header = ({
                         ? college.website
                         : ""
                       : college && college.Website
-                      ? college.Website
-                      : ""
+                        ? college.Website
+                        : ""
                   }
                   onChange={(e) =>
                     isUni()
@@ -359,8 +359,8 @@ const Header = ({
                         ? college.website
                         : ""
                       : college && college.Website
-                      ? college.Website
-                      : ""
+                        ? college.Website
+                        : ""
                   }
                   target="_blank"
                   rel="noreferrer"
@@ -370,8 +370,8 @@ const Header = ({
                       ? college.website
                       : ""
                     : college && college.Website
-                    ? college.Website
-                    : ""}
+                      ? college.Website
+                      : ""}
                 </a>
               )}
             </>
@@ -407,8 +407,8 @@ const Header = ({
                       ? college.address
                       : ""
                     : college && college.Address
-                    ? college.Address
-                    : ""
+                      ? college.Address
+                      : ""
                 }
                 onChange={(e) =>
                   isUni()
@@ -425,8 +425,8 @@ const Header = ({
                     ? college.address
                     : ""
                   : college && college.Address
-                  ? college.Address
-                  : ""}
+                    ? college.Address
+                    : ""}
               </p>
             )}
           </>

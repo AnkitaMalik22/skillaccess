@@ -13,7 +13,7 @@ import InvitedStudentsForJob from "../pages/company/jobs/InvitedStudentsForJob";
 import AddTestToJob from "../pages/company/jobs/AddTestToJob";
 import EditJob from "../pages/company/jobs/EditJob";
 import Settings from "../pages/company/settings/Settings";
-import CompanyTestHome from "../pages/company/test/TestHome";
+
 import CompanyResultRoutes from "../pages/company/results";
 import QuesRoute from "../pages/college/quesBank";
 import CampusDriveRouter from "../pages/company/campusDrive/CampusDriveRouter";

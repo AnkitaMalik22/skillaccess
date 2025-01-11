@@ -223,11 +223,10 @@ const Header = ({
           {/* Button to toggle popup */}
           <button
             onClick={togglePopup}
-            className={`self-center rounded-md h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center transition-colors ${
-              isPopupOpen
+            className={`self-center rounded-md h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center transition-colors ${isPopupOpen
                 ? "bg-[#0d9aac] text-white"
                 : "bg-[#8f92a11a] hover:bg-blued hover:text-white"
-            }`}
+              }`}
           >
             <PiSlidersHorizontalLight className="h-7 w-7" />
           </button>
