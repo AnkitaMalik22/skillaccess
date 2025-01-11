@@ -58,7 +58,6 @@ const JobsPage = () => {
   const handleFilterJobs = (e) => {};
 
   useEffect(() => {
-    console.log(jobs, "jobs");
     dispatch(getAllJobs(user?._id));
   }, []);
 
@@ -93,7 +92,7 @@ const JobsPage = () => {
           jobs?.map((job) => (
             <div
               className=" w-[40%] 2xl:w-1/3 h-auto bg-[#f8f8f9] my-3 text-start font-bold text-black rounded-2xl  font-dmSans p-5 "
-              key={job.id}
+              key={job?._id}
             >
               <div className="logo flex ">
                 <div className="w-24 h-24 flex items-center ">
@@ -140,7 +139,7 @@ const JobsPage = () => {
 
                 <button
                   className="bg-blued text-white rounded-2xl text-sm font-bold flex gap-2 px-7 py-2 "
-                  onClick={() => navigate(`/college/job/overview/${job?._id}`)}
+                  onClick={() => navigate(`/college/jobs/overview/${job?._id}`)}
                 >
                   View Details
                 </button>

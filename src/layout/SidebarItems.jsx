@@ -35,6 +35,13 @@ export const companySidebarItems = [
     ),
   },
   {
+    name : "Jobs",
+    path : "/company/pr/jobs",
+    icon : (active) => (
+      <LuBriefcase {...iconProps} color={active ? "#171717" : "white"} />
+    ),
+  },
+  {
     name: "Results",
     path: "/company/pr/results",
     icon: (active) => (
@@ -122,6 +129,7 @@ export const collegeSidebarItems = [
       <LuUser {...iconProps} color={active ? "#171717" : "white"} />
     ),
   },
+
 ];
 
 export const universitySidebarItems = [

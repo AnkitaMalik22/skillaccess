@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
-import { CiLocationOn } from "react-icons/ci";
 import { FaAngleLeft, FaArrowRight } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ChartComp from "../../../components/college/companies/job/ChartComp";
 import {
   getJobById,
-  getTotalJobs,
 } from "../../../redux/college/dashboard/dashboardSlice";
 import calculateDaysAgo from "../../../util/calculateDaysAgo";
-import useTranslate from "../../../hooks/useTranslate";
-import Card from "../../../components/college/test/home/common/Card";
 import TestCard from "../../../components/college/companies/job/TestCard";
 // import { ChevronRight } from "react-feather";
 // import { AlertCircle } from "react-feather";

@@ -152,6 +152,7 @@ const jobSlice = createSlice({
             })
             .addCase(getJobs.fulfilled, (state, action) => {
                 state.loading = false;
+                // console.log(action.payload, "jobs")
                 state.jobs = [...state.jobs,...action.payload.jobs];
                 state.cursor=action.payload.nextCursor;
                 console.log(action.payload, "jobs")
