@@ -6,7 +6,7 @@ import Card from "./common/Card";
 import CreditPopUp from "../../../PopUps/CreditPopUp";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { isUni } from "../../../../util/isCompany";
+import { getEntity, isUni } from "../../../../util/isCompany";
 import "swiper/css";
 
 const AssessmentSwiper = ({ assessments, level, title }) => {
@@ -19,8 +19,11 @@ const AssessmentSwiper = ({ assessments, level, title }) => {
   };
 
   const handleClick = () => {
-    if (isUni()) {
-      navigate(`/university/pr/test/name?level=${level}`);
+
+    console.log(getEntity())
+
+    if (getEntity() !== "college") {
+      navigate(`/${getEntity()}/test/name?level=${level}`);
     } else {
       if (credit?.balance?.credit) {
         navigate(`/college/test/name?level=${level}`);
