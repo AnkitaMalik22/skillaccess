@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import Header from "../../../components/college/test/home/Header";
-import Beginner from "../../../components/college/test/home/Beginner";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { CgUnavailable } from "react-icons/cg";
-import Advanced from "../../../components/college/test/home/Advanced";
-import Intermediate from "../../../components/college/test/home/Intermediate";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { FaFolder } from "react-icons/fa";
@@ -20,12 +16,18 @@ import {
   getRecentTests,
   removeFromRecent,
 } from "../../../redux/college/test/thunks/test";
-import Adaptive from "../../../components/college/test/home/Adaptive";
 import calculateDaysAndWeeks from "../../../util/daysAndWeeks";
 import { getStudents } from "../../../redux/college/student/studentSlice";
 import InfiniteScroll from "react-infinite-scroller";
 import Loader from "../../../components/loaders/Loader";
 import { isUni } from "../../../util/isCompany";
+import AssessmentSwipers from "../../../components/college/test/home/AssessmentSwipers";
+import {
+  AdaptiveSwiper,
+  BeginnerSwiper,
+  IntermediateSwiper,
+  AdvancedSwiper,
+} from "../../../components/college/test/home/AssessmentSwipers";
 
 const Test = () => {
   //useTranslate();
@@ -86,11 +88,12 @@ const Test = () => {
   };
 
   const arr = [
-    <Adaptive key="adaptive" />,
-    <Beginner key="beginner" />,
-    <Intermediate key="intermediate" />,
-    <Advanced key="advanced" />,
+    <AdaptiveSwiper key="adaptive" />,
+    <BeginnerSwiper key="beginner" />,
+    <IntermediateSwiper key="intermediate" />,
+    <AdvancedSwiper key="advanced" />,
   ];
+
   return (
     <div>
       {/* search bar */}
@@ -102,14 +105,14 @@ const Test = () => {
         }`}
       >
         {/* left block */}
-        <div className="w-3/4 rounded-md flex flex-col">
+        <div className="w-full rounded-md flex flex-col">
           <div className="w-full flex-grow overflow-y-auto">
             <div className="mx-auto w-full rounded-2xl bg-white">
               {arr.map((comp, i) => (
                 <Disclosure defaultOpen key={i}>
                   {({ open }) => (
                     <div className="mb-4">
-                      <div className="flex w-full justify-between rounded-t-2xl border-b-2 border-opacity-50 border-gray-200 bg-[#F8F8F9] px-4 py-4 text-left text-sm font-mediumfocus:outline-none">
+                      <div className="flex w-full justify-between rounded-t-2xl border-b-2 border-opacity-50 border-gray-200 bg-[#F8F8F9] px-4 py-4 text-left text-sm font-medium focus:outline-none">
                         <div className="flex gap-2 w-full justify-between text-sm font-bold">
                           <h2 className="flex gap-3 text-[#171717] text-sm">
                             {i === 0 ? (
@@ -131,7 +134,7 @@ const Test = () => {
                             ) : i === 2 ? (
                               <>
                                 <FaFolder className="text-blued w-5 h-5" />
-                                For Intermediate{" "}
+                                Intermediate level{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{intermediate.length}&#41;
                                 </p>{" "}
@@ -139,7 +142,7 @@ const Test = () => {
                             ) : (
                               <>
                                 <FaFolder className="text-blued w-5 h-5" />
-                                For Advanced{" "}
+                                Advanced level{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{advanced.length}&#41;
                                 </p>{" "}
@@ -167,7 +170,7 @@ const Test = () => {
         </div>
 
         {/* right block */}
-        {!isUni() && (
+        {/* {!isUni() && (
           <div className="w-1/4 p-4 bg-gray-100 rounded-md font-dmSans sm:block flex flex-col">
             <div className="rounded-md bg-white h-full mx-auto flex flex-col">
               <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
@@ -179,13 +182,7 @@ const Test = () => {
                   {recentAssessments?.map((assessment, index) => (
                     <div className="flex flex-col md:gap-8 mb-5" key={index}>
                       <div className="flex gap-3 items-center">
-                        {/* <div className="min-w-[2.5rem] h-10 self-center rounded-md">
-                        <img
-                          src="/images/teams.png"
-                          alt="user-icon"
-                          className="rounded-md w-11 h-11"
-                        />
-                      </div> */}
+                       
                         <div>
                           <h2 className="text-sm font-bold text-[#171717] first-letter:uppercase">
                             {assessment.name}
@@ -237,7 +234,7 @@ const Test = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

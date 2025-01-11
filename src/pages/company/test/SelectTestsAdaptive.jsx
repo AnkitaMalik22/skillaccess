@@ -14,10 +14,8 @@ import {
 } from "../../../redux/college/test/testSlice";
 import { getAllTopics } from "../../../redux/college/test/thunks/topic";
 import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
-import useTranslate from "../../../hooks/useTranslate";
 import { Disclosure } from "@headlessui/react";
 const SelectTests = () => {
-  //useTranslate();
   const [questionType, setQuestionType] = useState("mcq");
   const [visible, setVisible] = useState(false);
   const [section, setSection] = useState({});

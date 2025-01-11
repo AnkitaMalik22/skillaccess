@@ -12,7 +12,6 @@ import { createTestCompany } from "../../../redux/company/test/thunks/test";
 import resetCompanyTestDetails from "../../../util/resetCompanyTestDetails";
 
 const Submit = () => {
-  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -23,7 +22,6 @@ const Submit = () => {
     topics,
     totalAttempts,
     totalQuestions,
-    totalDuration,
     duration_from,
     duration_to,
     isNegativeMarking,

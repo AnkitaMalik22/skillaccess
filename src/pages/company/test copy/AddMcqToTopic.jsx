@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../../components/college/test/addMcqToTopic/Header";
 import { FaX } from "react-icons/fa6";
-import { FaChevronLeft, FaPlus } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import ReactQuill from "react-quill"; // Import ReactQuill
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
@@ -9,12 +9,9 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { editQuestionById } from "../../../redux/college/test/thunks/question";
 import { addQuestionToTopic } from "../../../redux/college/test/thunks/topic";
-import CircularLoader from "../../../components/CircularLoader";
-import useTranslate from "../../../hooks/useTranslate";
 import { setTotalTopicQuestions } from "../../../redux/college/test/thunks/topic";
 
 const AddMcqToTopic = () => {
-  //useTranslate();
   const { currentTopic, ADD_QUESTION_LOADING } = useSelector(
     (state) => state.test
   );

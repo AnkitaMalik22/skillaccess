@@ -9,9 +9,7 @@ import Code from "../../../components/college/results/assessmentReview/Code";
 import Video from "../../../components/college/results/assessmentReview/Video";
 import Essay from "../../../components/college/results/assessmentReview/Essay";
 import HeaderMarks from "../../../components/college/results/assessmentReview/HeaderMarks";
-import { getStudentResponse } from "../../../redux/college/test/thunks/student";
-import useTranslate from "../../../hooks/useTranslate";
-import Loader from "../../../Loader";
+import Loader from "../../../components/Loader";
 import { getStudentResponseCompany } from "../../../redux/company/test/thunks/student";
 
 const AssessmentReview = () => {

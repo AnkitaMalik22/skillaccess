@@ -11,7 +11,7 @@ import Essay from "../../../components/college/results/assessmentReview/Essay";
 import HeaderMarks from "../../../components/college/results/assessmentReview/HeaderMarks";
 import { getStudentResponse } from "../../../redux/college/test/thunks/student";
 import useTranslate from "../../../hooks/useTranslate";
-import Loader from "../../../Loader";
+import Loader from "../../../components/Loader";
 
 const AssessmentReview = () => {
   //useTranslate();

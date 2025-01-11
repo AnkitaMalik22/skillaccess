@@ -4,11 +4,9 @@ import { getAllTransactions } from "../../../redux/college/account/paymentSlice"
 import { useNavigate } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
 import { capitalize, convertToReadable } from "../../../util/getDate";
-import useTranslate from "../../../hooks/useTranslate";
 import CircularLoader from "../../../components/CircularLoader";
 
 const Transactions = () => {
-  //useTranslate();
   const dispatch = useDispatch();
   const { transactions, fetch_loading } = useSelector((state) => state.payment);
   const navigate = useNavigate();
