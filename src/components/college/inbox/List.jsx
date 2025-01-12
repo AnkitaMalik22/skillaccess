@@ -206,7 +206,7 @@ const List = ({ show, inboxType, setInboxType }) => {
   // }, [queries]);
 
   return (
-    <div className="bg-[#8F92A1] bg-opacity-5 rounded-2xl">
+    <div className="bg-[#F9FAFB] rounded-md shadow-md p-4">
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
 
       {/* <dialog id="my_modal_3" className="modal">
@@ -270,7 +270,7 @@ const List = ({ show, inboxType, setInboxType }) => {
 
         {arr?.map((el, i) => {
           return (
-            <div className="mb-4 bg-white rounded-md flex justify-between p-4 ">
+            <div className="flex justify-between items-center bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow cursor-pointer mb-5">
               <div className="flex gap-4 items-center ">
                 {/* {el.isChecked ? (
                   <div className=" min-w-[3rem]  h-12 self-center  mr-2  flex items-center justify-center "> */}{" "}

@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../../../components/college/results/overview/Header";
-import About from "../../../components/college/results/overview/About";
 import Info from "../../../components/college/results/overview/Info";
 import Description from "../../../components/college/results/overview/Description";
 import Toggle from "../../../components/college/results/overview/Toggle";
@@ -13,16 +12,19 @@ import {
 } from "../../../redux/college/test/thunks/test";
 import { useDispatch } from "react-redux";
 import useTranslate from "../../../hooks/useTranslate";
-import { getTestCompany, getTestResultPageCompany } from "../../../redux/company/test/thunks/test";
+import {
+  getTestCompany,
+  getTestResultPageCompany,
+} from "../../../redux/company/test/thunks/test";
 import isCompany from "../../../util/isCompany";
 
 const ResultsOverview = () => {
   //useTranslate();;
-  const user = useSelector((state) =>{
-    if(isCompany()){
-      return  state.collegeAuth.user
-    }else{
-        return state.companyAuth.data
+  const user = useSelector((state) => {
+    if (isCompany()) {
+      return state.collegeAuth.user;
+    } else {
+      return state.companyAuth.data;
     }
   });
   const assessment = useSelector((state) => state.companyTest.test);
@@ -37,11 +39,9 @@ const ResultsOverview = () => {
   }, []);
 
   useEffect(() => {
-
     dispatch(getTestCompany(assessmentId));
     // dispatch(getTestResultPage(assessmentId));
     dispatch(getTestResultPageCompany(assessmentId));
-
   }, [dispatch, assessmentId]);
 
   // useEffect(() => {
@@ -56,11 +56,15 @@ const ResultsOverview = () => {
 
   return (
     <>
-      <Header  user={user}/>
+      <Header user={user} />
       <Info user={user} assessment={assessment} />
-
-      <About Description={assessment?.description} />
-      <Description topics={assessment?.topics} assessment={assessment}/>
+      <div className="bg-[#8F92A1] font-dmSans bg-opacity-5 p-5 my-1 shadow">
+        <h2 className="font-bold text-base mb-2">About Assessment</h2>
+        <p className="text-sm text-[7D7D7D] first-letter:capitalize">
+          {assessment?.description}
+        </p>
+      </div>
+      <Description topics={assessment?.topics} assessment={assessment} />
 
       <Toggle assessment={assessment} />
     </>

@@ -118,21 +118,21 @@ export const collegeSidebarItems = [
       <LuBookOpen {...iconProps} color={active ? "#171717" : "white"} />
     ),
   },
-  {
-    name: "Profile",
-    path: "/college/profile",
-    icon: (active) => (
-      <LuUser {...iconProps} color={active ? "#171717" : "white"} />
-    ),
-  },
+  // {
+  //   name: "Profile",
+  //   path: "/college/profile",
+  //   icon: (active) => (
+  //     <LuUser {...iconProps} color={active ? "#171717" : "white"} />
+  //   ),
+  // },
 
-  {
-    name: "Billing",
-    path: "/college/accounting",
-    icon: (active) => (
-      <LuFiles {...iconProps} color={active ? "#171717" : "white"} />
-    ),
-  },
+  // {
+  //   name: "Billing",
+  //   path: "/college/accounting",
+  //   icon: (active) => (
+  //     <LuFiles {...iconProps} color={active ? "#171717" : "white"} />
+  //   ),
+  // },
   // {
   //   name: "Settings",
   //   path: "/college/settings",

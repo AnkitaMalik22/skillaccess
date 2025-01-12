@@ -1,69 +1,103 @@
-// import Jobs from "../../../components/college/dashboard/jobs/Jobs";
-// import useTranslate from "../../../hooks/useTranslate";
-
-// const JobsPage = () => {
-//   //useTranslate();
-//   return <Jobs />;
-// };
-
-// export default JobsPage;
-
-import React, { useEffect } from "react";
-import { PiSlidersHorizontalLight } from "react-icons/pi";
-import { CiLocationOn } from "react-icons/ci";
-import { FaArrowRight } from "react-icons/fa6";
+import React, { useEffect, useState } from "react";
+import { FaAngleLeft } from "react-icons/fa";
+import { IoIosSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getTotalJobs } from "../../../redux/college/dashboard/dashboardSlice";
-import { IoIosSearch } from "react-icons/io";
 import calculateDaysAgo from "../../../util/calculateDaysAgo";
-import useTranslate from "../../../hooks/useTranslate";
-import { FaAngleLeft } from "react-icons/fa";
+import { Table } from "../../../components/ui/tables/Table";
 
 const Jobs = () => {
-  //useTranslate();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { jobs } = useSelector((state) => state.dashboard);
 
-  const [filtered, setFiltered] = React.useState([]);
+  const [filtered, setFiltered] = useState([]);
+
   useEffect(() => {
     dispatch(getTotalJobs());
   }, [dispatch]);
-  const handleFilterJobs = (e) => {
-    const value = e.target.value;
-    if (value === "" || value.trim() === "") {
-      //console.log("empty");
 
-      setFiltered(jobs);
-
-      return;
-    } else {
-      setFiltered(
-        jobs.filter((Jobs) => {
-          const regex = new RegExp(value, "i");
-          return regex.test(Jobs.JobTitle);
-        })
-      );
-    }
-  };
   useEffect(() => {
     setFiltered(jobs);
   }, [jobs]);
 
+  const handleFilterJobs = (e) => {
+    const value = e.target.value;
+    if (value.trim() === "") {
+      setFiltered(jobs);
+    } else {
+      setFiltered(
+        jobs.filter((job) => new RegExp(value, "i").test(job.JobTitle || ""))
+      );
+    }
+  };
+
+  const columns = [
+    {
+      header: "Logo",
+      accessor: (job) => (
+        <img
+          src={job?.company?.basic?.logo || "/images/defaultUser.jpg"}
+          alt="Company Logo"
+          className="w-10 h-10 rounded-md"
+        />
+      ),
+      className: "text-center",
+    },
+    {
+      header: "Job Title",
+      accessor: (job) => (
+        <div>
+          <h2 className="font-dmSans font-semibold">{job.JobTitle || "N/A"}</h2>
+          <h3 className="font-dmSans font-medium text-gray-600">
+            {job?.company?.basic?.companyName || "Company Name"}
+          </h3>
+        </div>
+      ),
+    },
+    {
+      header: "Posted",
+      accessor: (job) => calculateDaysAgo(job.createdAt),
+      className: "text-center",
+    },
+    {
+      header: "Location",
+      accessor: (job) => job.JobLocation || "N/A",
+      className: "text-center",
+    },
+    {
+      header: "Workplace Type",
+      accessor: (job) => job.WorkplaceType || "N/A",
+      className: "text-center text-green-500",
+    },
+    {
+      header: "Action",
+      accessor: (job) => (
+        <button
+          className="h-8 px-4 bg-blue-600 text-white text-sm rounded-md"
+          onClick={() => navigate(`/college/companies/jobOverview/${job._id}`)}
+        >
+          {job.EmploymentType || "View"}
+        </button>
+      ),
+      className: "text-center",
+    },
+  ];
+
   return (
     <>
-      <div className="flex w-full mx-auto justify-between mb-2">
+      <div className="flex w-full mx-auto justify-between mb-4">
         <button
-          className="  self-center  rounded-md h-10 w-10 "
+          className="self-center rounded-md h-10 w-10"
           onClick={() => navigate(-1)}
         >
           <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
         </button>
-        <div className=" rounded-xl mx-2 w-full sm:h-12 h-10 flex my-2 ">
+        <div className="rounded-xl mx-2 w-full sm:h-12 h-10 flex">
           <span className="w-fit mx-auto flex self-center">
-            <IoIosSearch className="self-center w-10 h-10 bg-gray-100 rounded-s-lg text-gray-400 py-2 " />
+            <IoIosSearch className="self-center w-10 h-10 bg-gray-100 rounded-s-lg text-gray-400 py-2" />
             <input
               type="text"
               placeholder="Search..."
@@ -72,61 +106,17 @@ const Jobs = () => {
             />
           </span>
         </div>
+      </div>
 
-        {/* <button className="bg-gray-100  self-center  rounded-md h-10 w-10 sm:h-12 sm:w-16">
-          <PiSlidersHorizontalLight className="mx-auto  h-6 w-6" />
-        </button> */}
-      </div>
-      <div className="flex flex-col gap-4  items-center  ">
-        {filtered?.map((job, index) => {
-          return (
-            <div className="flex justify-between w-[99%]" key={index}>
-              <div className="sm:flex">
-                <div className="  flex justify-center rounded-md mr-8">
-                  <img
-                    src={job?.company?.basic?.logo || "/images/defaultUser.jpg"}
-                    className="w-10 h-10 rounded-md self-center"
-                    alt=""
-                  />
-                </div>
-                <span className="">
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-                    {job.JobTitle || "title"}
-                  </h2>
-                  <h2 className="font-dmSans font-bold text-[.6rem] sm:text-sm inline">
-                    {" "}
-                    {job?.company?.basic?.companyName}
-                  </h2>
-                  <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline">
-                    {" "}
-                    {calculateDaysAgo(job.createdAt)}
-                  </h2>
-                </span>
-              </div>
-              <div className="flex sm:gap-6 gap-1">
-                <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
-                <h2 className="font-dmSans text-gray-400  font-medium text-sm self-center sm:text-sm inline">
-                  {" "}
-                  {job.JobLocation || "location"}
-                </h2>
-                <h2 className="font-dmSans text-green-500  font-medium text-sm self-center sm:text-sm inline">
-                  {" "}
-                  {job.WorkplaceType || "WOrktype"}
-                </h2>
-                <button
-                  className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-md text-white text-[.5rem] sm:text-sm self-center "
-                  onClick={() =>
-                    navigate(`/college/companies/jobOverview/${job._id}`)
-                  }
-                >
-                  {job.EmploymentType || "employmentType"}
-                </button>
-                <FaArrowRight className="text-gray-400 self-center" />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <Table
+        columns={columns}
+        data={filtered}
+        isLoading={!jobs.length}
+        onRowClick={(job) =>
+          navigate(`/college/companies/jobOverview/${job._id}`)
+        }
+        className="shadow-md rounded-lg"
+      />
     </>
   );
 };

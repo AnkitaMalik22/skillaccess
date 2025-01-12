@@ -84,7 +84,7 @@ const Topic = () => {
   const TopicCard = ({ section }) => (
     <div
       key={section.id}
-      className="xl:w-[285px] w-[24%] bg-white rounded-lg cursor-pointer shadow-md hover:shadow-lg transition-shadow"
+      className="xl:w-[285px] w-[24%] bg-white rounded-md cursor-pointer shadow-md hover:shadow-lg transition-shadow"
       onClick={() => handleTopicClick(section)}
     >
       <figure className="h-[155.5px] w-full object-cover overflow-hidden">
@@ -114,7 +114,7 @@ const Topic = () => {
       <div className="flex justify-between md:mb-8 mb-5 items-center">
         <h2 className="font-bold text-xl text-[#171717]">Choose a Topic</h2>
         <button
-          className="rounded-xl bg-accent text-sm font-bold text-white py-[5px] px-3"
+          className="rounded-md bg-accent text-sm font-bold text-white py-[5px] px-3"
           onClick={() =>
             navigate(
               isUni()

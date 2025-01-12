@@ -113,6 +113,9 @@ importers:
       react-apexcharts:
         specifier: ^1.4.1
         version: 1.7.0(apexcharts@3.54.1)(react@18.3.1)
+      react-country-state-city:
+        specifier: ^1.1.8
+        version: 1.1.9(react@18.3.1)
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
@@ -5676,6 +5679,11 @@ packages:
   react-app-polyfill@3.0.0:
     resolution: {integrity: sha512-sZ41cxiU5llIB003yxxQBYrARBqe0repqPTTYBTmMqTz9szeBbE37BehCE891NZsmdZqqP+xWKdT3eo3vOzN8w==}
     engines: {node: '>=14'}
+
+  react-country-state-city@1.1.9:
+    resolution: {integrity: sha512-f2skRkIsIstuPjN9WZ07FRME0LD6CZiE7rD2HvPhwPh6X85+ysiCmb0WBLzSSSZe+fMZECbPFrzPe8jkBlo0lg==}
+    peerDependencies:
+      react: '>=16'
 
   react-dev-utils@12.0.1:
     resolution: {integrity: sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ==}
@@ -13486,6 +13494,10 @@ snapshots:
       raf: 3.4.1
       regenerator-runtime: 0.13.11
       whatwg-fetch: 3.6.20
+
+  react-country-state-city@1.1.9(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   react-dev-utils@12.0.1(eslint@8.57.1)(typescript@4.9.5)(webpack@5.97.1):
     dependencies:

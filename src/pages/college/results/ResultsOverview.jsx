@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../../../components/college/results/overview/Header";
-import About from "../../../components/college/results/overview/About";
 import Info from "../../../components/college/results/overview/Info";
 import Description from "../../../components/college/results/overview/Description";
 import Toggle from "../../../components/college/results/overview/Toggle";
@@ -48,7 +47,15 @@ const ResultsOverview = () => {
       <Header />
       <Info user={user} assessment={assessment} />
 
-      <About Description={assessment?.description} />
+
+      
+
+      <div className="bg-[#8F92A1] font-dmSans bg-opacity-5 p-5 my-1 shadow">
+        <h2 className="font-bold text-base mb-2">About Assessment</h2>
+        <p className="text-sm text-[7D7D7D] first-letter:capitalize">
+          {assessment?.description}
+        </p>
+      </div>
       <Description topics={assessment?.topics} assessment={assessment} />
 
       <Toggle assessment={assessment} />
