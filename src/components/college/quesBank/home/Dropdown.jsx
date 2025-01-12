@@ -18,7 +18,10 @@ const Dropdown = ({ bookmark, index }) => {
             <div>
               <p className="text-sm flex">
                 <span>{index}. </span>
-                <span className=""   dangerouslySetInnerHTML={{ __html:bookmark.Title }}></span>
+                <span
+                  className=""
+                  dangerouslySetInnerHTML={{ __html: bookmark.Title }}
+                ></span>
               </p>
             </div>
             <div className="flex gap-2 self-center">
@@ -29,9 +32,7 @@ const Dropdown = ({ bookmark, index }) => {
 
               <Disclosure.Button className="flex gap-2 w-10/12 self-center">
                 <FaChevronDown
-                  className={`${
-                    open ? "rotate-180" : ""
-                  } h-5 w-5 text-blued  `}
+                  className={`${open ? "rotate-180" : ""} h-5 w-5 text-blued  `}
                 />
                 <h2></h2>{" "}
               </Disclosure.Button>
@@ -47,7 +48,7 @@ const Dropdown = ({ bookmark, index }) => {
             leaveTo="transform scale-95 opacity-0"
           >
             <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500">
-              {/* <div className="flex gap-2  rounded-lg p-3">
+              {/* <div className="flex gap-2  rounded-md p-3">
                 <div className="w-6">
                   <input
                     type="radio"
@@ -61,7 +62,7 @@ const Dropdown = ({ bookmark, index }) => {
               </div> */}
 
               {bookmark.Options.map((option, index) => (
-                <div className="flex gap-2  rounded-lg p-3">
+                <div className="flex gap-2  rounded-md p-3">
                   <div className="w-6">
                     <input
                       type="radio"

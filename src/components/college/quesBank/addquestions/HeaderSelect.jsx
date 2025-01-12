@@ -20,10 +20,10 @@ const Header = ({ Q }) => {
     <div className="flex w-full mx-auto justify-between mb-6">
       <div className="flex gap-3">
         <button
-          className="self-center object-center rounded-lg h-10 w-10 "
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-gray-200" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Create Assessment
@@ -32,7 +32,7 @@ const Header = ({ Q }) => {
 
       <div className="flex gap-3">
         <button
-          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
+          className="bg-accent self-center text-white rounded-md h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={() => handleNext()}
         >
           Next Step

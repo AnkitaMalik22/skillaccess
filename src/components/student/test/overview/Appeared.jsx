@@ -112,7 +112,7 @@ const Appeared = ({ assessment }) => {
       {/* list to be iterated */}
 
       {arr?.map((student, index) => (
-        <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
+        <div className=" grid-cols-5 rounded-md my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}
           <div className={` flex `}>
@@ -157,12 +157,12 @@ const Appeared = ({ assessment }) => {
           <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
-                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                <div className="min-w-[6rem] bg-opacity-5 rounded-md h-3 mx-auto bg-green-600">
                   <div
-                    className={`w-3/5 bg-[#DE350B] bg-opacity-70 h-full rounded-lg`}
+                    className={`w-3/5 bg-[#DE350B] bg-opacity-70 h-full rounded-md`}
                   ></div>
                 </div>
-                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                <h2 className="font-dmSans font-bold text-sm sm:text-sm ">
                   {" "}
                   {student?.response?.percentage?.toFixed(2)}%
                 </h2>

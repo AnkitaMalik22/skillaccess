@@ -28,13 +28,13 @@ const List = ({ question, level, number, isLoading }) => {
       <div className="w-full ">
         {isLoading ? (
           <div className="animate-pulse flex flex-col space-y-4">
-            <div className="flex justify-between bg-gray-200 rounded-lg p-3 h-10">
+            <div className="flex justify-between bg-gray-200 rounded-md p-3 h-10">
               <div className="w-3/4 bg-gray-300 rounded"></div>
               <div className="w-5 h-5 bg-gray-300 rounded-full"></div>
             </div>
             <div className="flex flex-col space-y-2">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="flex gap-2 rounded-lg p-3">
+                <div key={i} className="flex gap-2 rounded-md p-3">
                   <div className="w-6 h-6 bg-gray-300 rounded-full"></div>
                   <div className="flex-1 bg-gray-300 rounded h-6"></div>
                 </div>
@@ -50,7 +50,7 @@ const List = ({ question, level, number, isLoading }) => {
                     AnswerIndex === StudentAnswerIndex
                       ? "border-green-500"
                       : "border-red-500"
-                  } flex w-full justify-between rounded-lg text-left text-sm font-medium border border-[#0D9AAC] p-3`}
+                  } flex w-full justify-between rounded-md text-left text-sm font-medium border border-[#0D9AAC] p-3`}
                 >
                   <p
                     className="text-base font-normal #3E3E3E"
@@ -90,7 +90,7 @@ const List = ({ question, level, number, isLoading }) => {
                   {question.Options?.map((option, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-2 z-10 relative rounded-lg p-3"
+                      className="flex items-center gap-2 z-10 relative rounded-md p-3"
                     >
                       <div className="w-6">
                         {AnswerIndex === StudentAnswerIndex ? (
@@ -106,20 +106,11 @@ const List = ({ question, level, number, isLoading }) => {
                             />
                           )
                         ) : index === StudentAnswerIndex ? (
-                          <img
-                            src="/images/icons/redDot.png"
-                            alt="red"
-                          />
+                          <img src="/images/icons/redDot.png" alt="red" />
                         ) : index === AnswerIndex ? (
-                          <img
-                            src="/images/icons/greenDot.png"
-                            alt="green"
-                          />
+                          <img src="/images/icons/greenDot.png" alt="green" />
                         ) : (
-                          <img
-                            src="/images/icons/blueDot.png"
-                            alt="blue"
-                          />
+                          <img src="/images/icons/blueDot.png" alt="blue" />
                         )}
                       </div>
                       <label
@@ -138,7 +129,7 @@ const List = ({ question, level, number, isLoading }) => {
                   {question.questions?.map((subQuestion, idx) => (
                     <div
                       key={idx}
-                      className="flex gap-2 z-10 relative rounded-lg p-3"
+                      className="flex gap-2 z-10 relative rounded-md p-3"
                     >
                       <div className="w-6">
                         <input
@@ -151,8 +142,9 @@ const List = ({ question, level, number, isLoading }) => {
                         {subQuestion.question ? (
                           <>
                             <div>
-                              <h3
-                               className="font-bold">{subQuestion.question}</h3>
+                              <h3 className="font-bold">
+                                {subQuestion.question}
+                              </h3>
                               <p>{subQuestion.studentAnswer}</p>
                             </div>
                           </>

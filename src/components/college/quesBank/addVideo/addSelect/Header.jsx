@@ -130,7 +130,7 @@ const Header = ({ selectQuestionType }) => {
     <div className="flex justify-between mb-5 w-full">
       <div className="flex  mb-5 w-1/2">
         <button onClick={() => navigate(-1)} className="mr-3">
-          <FaChevronLeft className="p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
+          <FaChevronLeft className="p-3 rounded-md h-10 w-10 self-center bg-gray-200" />
         </button>
         <div className="flex justify-between w-full">
           <h2 className="sm:text-xl text-left font-bold self-center text-3xl font-dmSans">
@@ -152,7 +152,7 @@ const Header = ({ selectQuestionType }) => {
       <div className="bg-gray-100 rounded-xl mx-2 h-12 flex my-2">
         <div className="flex">
           <button
-            className="self-center justify-center flex bg-blued py-3 px-4 rounded-lg text-xs gap-2 text-white"
+            className="self-center justify-center flex bg-blued py-3 px-4 rounded-md text-sm gap-2 text-white"
             onClick={submit}
           >
             Next Step{" "}

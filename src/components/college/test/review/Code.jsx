@@ -49,8 +49,6 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
         Type: "code",
       })
     );
-
-    
   };
 
   const handleDelete = () => {
@@ -64,7 +62,7 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
     );
   };
   return (
-    <div className="flex bg-white rounded-lg justify-between mb-5">
+    <div className="flex bg-white rounded-md justify-between mb-5">
       <div className="p-5 flex flex-col gap-2">
         {search.get(`${Number}`) !== "true" ? (
           <h2 className="flex mb-2 gap-3 font-semibold  text-base ">
@@ -114,32 +112,32 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
       </div>
       {/* <div className="w-[5%] flex flex-col gap-4 text-blued justify-center border-s-2 py-1">
         <RxCross1
-          className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
+          className="text-red-500 w-6 h-6 p-1 rounded-md self-center bg-gray-100"
           onClick={handleDelete}
         />
-        <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
-        <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
-        <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
-        <PiPencilSimpleLineBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
+        <PiFileTextBold className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" />
+        <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" />
+        <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" />
+        <PiPencilSimpleLineBold className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" />
       </div> */}
 
       {type !== "topic" && view !== "false" && (
         <div className="w-[5%] flex flex-col gap-4 text-blued border-s-2 py-1">
           <RxCross1
-            className="text-red-500 w-6 h-6 p-1 rounded-lg self-center bg-gray-100"
+            className="text-red-500 w-6 h-6 p-1 rounded-md self-center bg-gray-100"
             onClick={handleDelete}
           />
           <CiBookmarkMinus
-            className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center"
+            className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center"
             onClick={handleBookmark}
           />
-          {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
-          {/* <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" />
-        <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center" /> */}
+          {/* <PiFileTextBold className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" /> */}
+          {/* <IoSwapVerticalSharp className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" />
+        <CiBookmarkMinus className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center" /> */}
 
           {search.get(`${Number}`) !== "true" ? (
             <PiPencilSimpleLineBold
-              className=" w-6 h-6 p-1 rounded-lg bg-gray-100 self-center"
+              className=" w-6 h-6 p-1 rounded-md bg-gray-100 self-center"
               onClick={() => {
                 search.set(`${Number}`, "true");
                 setSearch(search);
@@ -147,7 +145,7 @@ const Code = ({ Title, code, Number, id, question, type, view }) => {
             />
           ) : (
             <PiPencilSimpleLineBold
-              className=" w-6 h-6 p-1 rounded-lg bg-amber-600 self-center"
+              className=" w-6 h-6 p-1 rounded-md bg-amber-600 self-center"
               onClick={() => {
                 if (!compiler.codeQuestion) {
                   toast.error("Please enter the question");

@@ -82,14 +82,14 @@ const Activity = () => {
             <div className="self-center">
               {!user.token_deleted ? (
                 <button
-                  className="bg-[#DE350B33] bg-opacity-20 text-[#DE350B] py-1 px-2 rounded-lg text-sm font-medium"
+                  className="bg-[#DE350B33] bg-opacity-20 text-[#DE350B] py-1 px-2 rounded-md text-sm font-medium"
                   onClick={() => handleLogout(user.token_id)}
                 >
                   Logout
                 </button>
               ) : (
                 <button
-                  className="bg-lGray bg-opacity-20 text-gray-700 py-1 px-2 rounded-lg text-sm font-medium"
+                  className="bg-lGray bg-opacity-20 text-gray-700 py-1 px-2 rounded-md text-sm font-medium"
                   onClick={() => handleDelete(user.token_id)}
                 >
                   Delete

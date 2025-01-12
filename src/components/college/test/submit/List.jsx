@@ -32,7 +32,7 @@ const List = ({ question, number, level }) => {
         <Disclosure className="relative z-10">
           {({ open }) => (
             <div className="mb-4">
-              <div className="flex w-full justify-between rounded-lg bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
+              <div className="flex w-full justify-between rounded-md bg-gray-100 pl-4 py-3 text-left text-sm font-medium  hover:bg-slate-50 focus:outline-none  ">
                 <div>
                   <p
                     className="text-sm pl-4"
@@ -61,7 +61,7 @@ const List = ({ question, number, level }) => {
               > */}
               {/* <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
                 {question.Options?.map((question, index) => (
-                  <div className="flex gap-2 z-10 relative rounded-lg p-3">
+                  <div className="flex gap-2 z-10 relative rounded-md p-3">
                     <div className="w-6" key={index}>
                       <input
                         type="radio"
@@ -83,7 +83,7 @@ const List = ({ question, number, level }) => {
                 ))}
 
                 {question.questions?.map((question) => (
-                  <div className="flex gap-2  z-10 relative rounded-lg p-3">
+                  <div className="flex gap-2  z-10 relative rounded-md p-3">
                     <div className="w-6">
                       <input
                         type="radio"
@@ -105,7 +105,7 @@ const List = ({ question, number, level }) => {
               </Disclosure.Panel> */}
               <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500 z-10 relative">
                 {question.Options?.map((question, index) => (
-                  <div className="flex gap-2 z-10 relative rounded-lg p-3">
+                  <div className="flex gap-2 z-10 relative rounded-md p-3">
                     <div className="w-6">
                       {index === AnswerIndex ? (
                         <img
@@ -113,10 +113,7 @@ const List = ({ question, number, level }) => {
                           alt="greensel"
                         />
                       ) : (
-                        <img
-                          src="/images/icons/blueDot.png"
-                          alt="greensel"
-                        />
+                        <img src="/images/icons/blueDot.png" alt="greensel" />
                       )}
                     </div>
 
@@ -135,7 +132,7 @@ const List = ({ question, number, level }) => {
                 ))}
 
                 {question.questions?.map((question) => (
-                  <div className="flex gap-2  z-10 relative rounded-lg p-3">
+                  <div className="flex gap-2  z-10 relative rounded-md p-3">
                     <div className="w-6">
                       <input
                         type="radio"

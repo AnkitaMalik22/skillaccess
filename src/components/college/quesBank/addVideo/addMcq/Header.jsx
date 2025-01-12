@@ -45,11 +45,11 @@ const Header = ({ question, setQuestion, handleSave, addType }) => {
   return (
     <div className="flex  justify-between mb-5">
       <div className="h-fit self-center">
-        <button className="flex self-center rounded-lg  gap-2">
+        <button className="flex self-center rounded-md  gap-2">
           {addType !== "edit" && (
             <button
               onClick={() => navigate(-1)}
-              className=" mr-3 self-center bg-white rounded-lg "
+              className=" mr-3 self-center bg-white rounded-md "
             >
               <FaChevronLeft className=" p-3  h-10 w-10 self-center " />
             </button>

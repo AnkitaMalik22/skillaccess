@@ -37,7 +37,7 @@ const TipComponent = () => {
               . Only integers and strings are allowed.
             </p>
             <p className="my-1">For example:</p>
-            <div className="p-4 bg-white border rounded-lg shadow-md">
+            <div className="p-4 bg-white border rounded-md shadow-md">
               {/* Input example: if arr = [1, 2, 3, 4], write only [1, 2, 3, 4]. If str = "ssss", write only ssss */}
               <label
                 htmlFor="example-input"

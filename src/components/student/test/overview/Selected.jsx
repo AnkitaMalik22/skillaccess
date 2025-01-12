@@ -25,7 +25,7 @@ const Selected = () => {
 
       {/* list to be iterated */}
       {arr.map(() => (
-        <div className=" grid-cols-5 rounded-lg my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
+        <div className=" grid-cols-5 rounded-md my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12">
           {" "}
           {/* row-2 */}
           {/* <div className={` flex `}>
@@ -35,7 +35,7 @@ const Selected = () => {
                 <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
                   Role
                 </h2>
-                <h2 className="font-dmSans font-medium text-xs break-words text-gray-400">
+                <h2 className="font-dmSans font-medium text-sm break-words text-gray-400">
                   {" "}
                   CompanyName
                 </h2>
@@ -62,10 +62,10 @@ const Selected = () => {
           {/* <div className="flex justify-center">
             <div className=" self-center">
               <span className="flex gap-2">
-                <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
-                  <div className={`w-3/5 bg-green-700 h-full rounded-lg`}></div>
+                <div className="min-w-[6rem] bg-opacity-5 rounded-md h-3 mx-auto bg-green-600">
+                  <div className={`w-3/5 bg-green-700 h-full rounded-md`}></div>
                 </div>
-                <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                <h2 className="font-dmSans font-bold text-sm sm:text-sm ">
                   {" "}
                   70%
                 </h2>

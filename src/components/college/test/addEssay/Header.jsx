@@ -12,8 +12,6 @@ import { useSearchParams } from "react-router-dom";
 import Loader from "../../../loaders/Loader";
 import { setTotalTopicQuestions } from "../../../../redux/college/test/thunks/topic";
 
-
-
 const Header = ({
   question,
   setQuestion,
@@ -47,10 +45,10 @@ const Header = ({
     <div className="flex w-full mx-auto justify-between mb-5 ">
       <div className="flex gap-3">
         <button
-          className="self-center object-center rounded-lg h-10 w-10 "
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Question No : {totalTopicQuestions + 1}
@@ -59,7 +57,7 @@ const Header = ({
 
       <div className="flex gap-3">
         <button
-          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
+          className="bg-accent self-center text-white rounded-md h-10 w-10 sm:w-32 flex items-center justify-center"
           onClick={() => {
             navigate(-1);
           }}
@@ -67,8 +65,10 @@ const Header = ({
           Cancel
         </button>{" "}
         <button
-          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
-          onClick={() => { !ADD_QUESTION_LOADING && handleSave("save") }}
+          className="bg-accent self-center text-white rounded-md h-10 w-10 sm:w-32 flex items-center justify-center"
+          onClick={() => {
+            !ADD_QUESTION_LOADING && handleSave("save");
+          }}
         >
           {ADD_QUESTION_LOADING ? "Saving" : "Save"}
           {ADD_QUESTION_LOADING && <Loader size="sm" />}

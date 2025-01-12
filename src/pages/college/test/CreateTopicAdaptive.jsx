@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { createTopic } from "../../../redux/college/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { getEntity, isUni } from "../../../util/isCompany";
 
 const CreateTopicAdaptive = () => {
   //useTranslate();
@@ -52,7 +52,8 @@ const CreateTopicAdaptive = () => {
       if (res.payload._id) {
         //navigate(`/college/test/typeOfQuestions/${res.payload._id}`);
         navigate(
-          `/${isUni() ? "university/pr": "college"}/test/addMcqToTopic/${res.payload._id}?type=mcq&addType=topic&level=adaptive`
+          `/${getEntity()}/test/addMcqToTopic/${res.payload._id
+          }?type=mcq&addType=topic&level=adaptive`
         );
       } else {
         toast.error("Invalid or duplicate name.");
@@ -71,8 +72,8 @@ const CreateTopicAdaptive = () => {
     <>
       <Header next={handleNext} />
 
-      <div className="  w-full mx-auto h-[90vh] rounded-lg  justify-between  ">
-        <h2 className="w-full font-medium  text-[#3E3E3E] rounded-lg mb-5 text-base">
+      <div className="  w-full mx-auto h-[90vh] rounded-md  justify-between  ">
+        <h2 className="w-full font-medium  text-[#3E3E3E] rounded-md mb-5 text-base">
           Add questions to your assessment (optional). You can use five question
           types: multiple-choice, essay, video ,code and find answer.
         </h2>
@@ -82,9 +83,8 @@ const CreateTopicAdaptive = () => {
           name="Heading"
           value={topic.Heading}
           type="text"
-          className={`w-full bg-gray-100 mb-5 text-base font-bold p-2 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
-            isNameEmpty ? "border-red-500" : "border-none"
-          }`}
+          className={`w-full bg-gray-100 mb-5 text-base font-bold p-2 rounded-md focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${isNameEmpty ? "border-red-500" : "border-none"
+            }`}
           placeholder="Name of the Topic"
         />
         {isNameEmpty && (
@@ -96,9 +96,8 @@ const CreateTopicAdaptive = () => {
           name="Description"
           value={topic.Description}
           rows={5}
-          className={`w-full bg-gray-100 text-base text-[#3E3E3E] font-bold p-2 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${
-            isDescEmpty ? "border-red-500" : "border-none"
-          }`}
+          className={`w-full bg-gray-100 text-base text-[#3E3E3E] font-bold p-2 rounded-md focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${isDescEmpty ? "border-red-500" : "border-none"
+            }`}
           placeholder="Add Description"
         />
         {isDescEmpty && (

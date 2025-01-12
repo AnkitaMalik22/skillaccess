@@ -25,7 +25,7 @@ const Code = ({
       </h2>
 
       {/* toggler */}
-      <div className="p-2 mt-4 rounded-lg">
+      <div className="p-2 mt-4 rounded-md">
         <span className="grid grid-cols-3 text-lg mb-4">
           {/* <div>
             <h2
@@ -35,7 +35,7 @@ const Code = ({
               Function signature
             </h2>
             <div
-              className={`w-full h-1 rounded-lg ${
+              className={`w-full h-1 rounded-md ${
                 toggle === 1 ? "bg-accent" : ""
               } `}
             ></div>
@@ -49,7 +49,7 @@ const Code = ({
               Initial Code
             </h2>
             <div
-              className={`w-full h-1 rounded-lg ${
+              className={`w-full h-1 rounded-md ${
                 toggle === 1 ? "bg-accent" : ""
               } `}
             ></div>
@@ -63,7 +63,7 @@ const Code = ({
               Test Cases
             </h2>
             <div
-              className={`w-full h-1 rounded-lg ${
+              className={`w-full h-1 rounded-md ${
                 toggle === 2 ? "bg-accent" : ""
               } `}
             ></div>
@@ -77,7 +77,7 @@ const Code = ({
               Verification Code
             </h2>
             <div
-              className={`w-full h-1 rounded-lg ${
+              className={`w-full h-1 rounded-md ${
                 toggle === 3 ? "bg-accent" : ""
               } `}
             ></div>

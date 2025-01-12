@@ -158,7 +158,7 @@ const SlideUpDown = ({
               <button
                 className={`${
                   outputStatus === "Passed" ? "bg-green-500" : "bg-slate-500"
-                } text-white rounded-lg px-5 py-3 flex gap-2`}
+                } text-white rounded-md px-5 py-3 flex gap-2`}
                 onClick={() => {
                   outputStatus === "Passed"
                     ? addTestCase()

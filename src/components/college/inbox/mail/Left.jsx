@@ -29,7 +29,7 @@ const Left = ({ data, index, inboxType }) => {
   }, [user]);
   return (
     <div
-      className={`rounded-lg hover:bg-accent hover:bg-opacity-5 p-3`}
+      className={`rounded-md hover:bg-accent hover:bg-opacity-5 p-3`}
       onClick={async () => {
         await dispatch(markAsRead({ type: inboxType, id: data._id }));
         navigate(
@@ -39,7 +39,7 @@ const Left = ({ data, index, inboxType }) => {
     >
       <div className="flex justify-between">
         <div className="flex gap-2">
-          <div className="w-10 h-10 rounded-lg  self-center">
+          <div className="w-10 h-10 rounded-md  self-center">
             <img
               src={
                 inboxType === "Sent"
@@ -50,7 +50,7 @@ const Left = ({ data, index, inboxType }) => {
             />
           </div>
           <div className="self-center">
-            <p className="leading-[16px] text-xs font-medium text-gray-400">
+            <p className="leading-[16px] text-sm font-medium text-gray-400">
               {data?.from?.CollegeName}
             </p>
             <p className="leading-[16px] text-sm mt-2 max-w-20 font-bold line-clamp-1 break-words">
@@ -59,7 +59,7 @@ const Left = ({ data, index, inboxType }) => {
             </p>
           </div>
         </div>
-        <p className="leading-[16px] text-xs font-medium text-gray-400">
+        <p className="leading-[16px] text-sm font-medium text-gray-400">
           {data?.Date && convertDate(data?.Date)}
         </p>
       </div>
@@ -70,7 +70,7 @@ const Left = ({ data, index, inboxType }) => {
         </div>
 
         <p
-          className=" text-xs text-gray-400 line-clamp-2 "
+          className=" text-sm text-gray-400 line-clamp-2 "
           dangerouslySetInnerHTML={{ __html: data?.message }}
         ></p>
       </div>

@@ -82,7 +82,7 @@ const Compose = () => {
         name="Email"
         type="text"
         placeholder="example@mail.com"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
+        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
       />
       <input
         onChange={handleChange}
@@ -90,16 +90,16 @@ const Compose = () => {
         name="Subject"
         type="text"
         placeholder="Subject"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
+        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
       />
       {/* <input
       placeholder="Subject"
         type="text"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
+        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
       />
       <input
         type="text"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg"
+        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
       /> */}
       <ReactQuill
         name="Message"
@@ -109,7 +109,7 @@ const Compose = () => {
           })
         }
         value={email.Message}
-        className="w-full flex border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-lg min-h-[30vh] placeholder-gray-400"
+        className="w-full flex border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md min-h-[30vh] placeholder-gray-400"
         placeholder="Type Something ..."
         style={{ display: "inline-block" }}
       />
@@ -117,7 +117,7 @@ const Compose = () => {
       <div className="flex gap-4">
         {attachments?.map((item, i) => {
           return (
-            <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
+            <div className="bg-accent p-2 rounded-md bg-opacity-10 sm:w-60 flex justify-between">
               <div className="flex gap-2">
                 {item.format !== "image" && (
                   <img src="/images/icons/fileBlue.png" alt="" />
@@ -127,7 +127,7 @@ const Compose = () => {
                 )}
                 <div className="self-center">
                   <p className="text-sm font-bold">{item.name}</p>
-                  <p className="text-xs font-medium">{item.size / 1e6} MB</p>
+                  <p className="text-sm font-medium">{item.size / 1e6} MB</p>
                 </div>
               </div>
               <div className="self-center">

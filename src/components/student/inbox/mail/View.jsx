@@ -28,12 +28,12 @@ const View = () => {
       </p>
 
       <div className="flex gap-4">
-        <div className="bg-accent p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
+        <div className="bg-accent p-2 rounded-md bg-opacity-10 sm:w-60 flex justify-between">
           <div className="flex gap-2">
             <img src="/images/icons/fileBlue.png" alt="" />
             <div className="self-center">
               <p className="text-sm font-bold">Brief Details</p>
-              <p className="text-xs font-medium">50.3 Mb</p>
+              <p className="text-sm font-medium">50.3 Mb</p>
             </div>
           </div>
           <div className="self-center">
@@ -41,12 +41,12 @@ const View = () => {
           </div>
         </div>
 
-        <div className=" p-2 rounded-lg bg-opacity-10 sm:w-60 flex justify-between">
+        <div className=" p-2 rounded-md bg-opacity-10 sm:w-60 flex justify-between">
           <div className=" flex gap-2">
             <img src="/images/icons/image.png" alt="" />
             <div className="self-center">
               <p className="text-sm font-bold">WireFrames</p>
-              <p className="text-xs font-medium">50.3 Mb</p>
+              <p className="text-sm font-medium">50.3 Mb</p>
             </div>
           </div>
           <div className="self-center">
@@ -55,12 +55,12 @@ const View = () => {
         </div>
       </div>
 
-      <div className="w-full bg-[#8F92A1] bg-opacity-5 p-4 mt-4 rounded-lg">
+      <div className="w-full bg-[#8F92A1] bg-opacity-5 p-4 mt-4 rounded-md">
         {/* Reply to */}
-        <div className=" bg-lGray bg-opacity-5 rounded-lg p-3 flex   justify-between">
+        <div className=" bg-lGray bg-opacity-5 rounded-md p-3 flex   justify-between">
           <div className="flex gap-2">
             {/* photo */}
-            <div className="h-10 w-10 rounded-lg bg-blued"></div>
+            <div className="h-10 w-10 rounded-md bg-blued"></div>
             {/*  */}
 
             <div className="flex gap-1 self-center">
@@ -71,8 +71,8 @@ const View = () => {
               <Disclosure>
                 {({ open }) => (
                   <>
-                    <Disclosure.Button className="flex w-full sm:w-96 justify-between rounded-lg bg-[#8F92A1] bg-opacity-20 px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
-                      <span className="text-xs font-bold text-[#8F92A1]">
+                    <Disclosure.Button className="flex w-full sm:w-96 justify-between rounded-md bg-[#8F92A1] bg-opacity-20 px-4 py-2 text-left text-sm font-medium   focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+                      <span className="text-sm font-bold text-[#8F92A1]">
                         Barbara Buchanan (barbarabuchanan@carrotlabs.co
                       </span>
                       <FaX className={`w-4 h-4 text-gray-400`} />

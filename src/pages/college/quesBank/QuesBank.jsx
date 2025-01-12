@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "../../../components/college/quesBank/home/Dropdown";
 import { getAllBookmarks } from "../../../redux/college/test/thunks/question";
 import { LuBookmarkMinus } from "react-icons/lu";
-import isCompany, { isUni} from "../../../util/isCompany";
+import isCompany, { isUni } from "../../../util/isCompany";
 
 const QuesBank = () => {
   //useTranslate();
@@ -25,7 +25,7 @@ const QuesBank = () => {
     <>
       <div className="flex w-full mx-auto justify-between mb-6">
         <div className="flex gap-4">
-          <button className="  self-center object-center  rounded-lg h-10 w-10 ">
+          <button className="  self-center object-center  rounded-md h-10 w-10 ">
             <img src="/images/icons/reports.png" alt="icon" />
           </button>
           <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
@@ -36,7 +36,13 @@ const QuesBank = () => {
         <div className="flex gap-2">
           <button
             className="self-center justify-center flex bg-[#F8F8F9] py-3 px-5 rounded-xl  font-bold gap-2 "
-            onClick={() => isUni() ? navigate("/university/pr/quesbank/createTopic") :(isCompany() ? navigate("/company/pr/quesbank/createTopic") : navigate("/college/quesbank/createTopic")) }
+            onClick={() =>
+              isUni()
+                ? navigate("/university/pr/quesbank/createTopic")
+                : isCompany()
+                ? navigate("/company/pr/quesbank/createTopic")
+                : navigate("/college/quesbank/createTopic")
+            }
           >
             <FiPlus className="self-center text-lg " /> Add
           </button>
@@ -50,7 +56,7 @@ const QuesBank = () => {
           <Recent />
         </div>
         <div className="w-2/5">
-          <div className="w-full mx-auto bg-[#F8F8F9] md:px-8 md:py-6 py-5 px-5 rounded-3xl">
+          <div className="w-full mx-auto bg-[#F8F8F9] md:px-8 md:py-6 py-5 px-5 rounded-md">
             <div className="flex justify-between mb-6 items-center ">
               <div className="flex gap-2 self-center">
                 <LuBookmarkMinus className="self-center text-2xl text-blued " />
@@ -60,8 +66,14 @@ const QuesBank = () => {
               </div>
 
               <button
-                className="rounded-xl bg-accent text-xs font-bold text-white py-[5px] px-3"
-                onClick={() => isUni() ? navigate("/university/pr/quesbank/bookmarks") : (isCompany() ? navigate("/company/pr/quesbank/bookmarks") : navigate("/college/quesbank/bookmarks"))}
+                className="rounded-md bg-accent text-sm font-bold text-white py-[5px] px-3"
+                onClick={() =>
+                  isUni()
+                    ? navigate("/university/pr/quesbank/bookmarks")
+                    : isCompany()
+                    ? navigate("/company/pr/quesbank/bookmarks")
+                    : navigate("/college/quesbank/bookmarks")
+                }
               >
                 View All
               </button>
@@ -96,7 +108,7 @@ const QuesBank = () => {
             )}
 
             {!GET_BOOKMARKS_LOADING && bookmarks?.length === 0 && (
-              <div className="flex gap-2  rounded-lg">
+              <div className="flex gap-2  rounded-md">
                 <div className="w-full">
                   <h2 className="text-[#171717] text-base text-center">
                     No Bookmarks!

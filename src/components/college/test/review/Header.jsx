@@ -10,8 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "../addVideo/Loader";
 import toast, { Toaster } from "react-hot-toast";
-import { addQuestionToTopic, getTopicById } from "../../../../redux/college/test/thunks/topic";
-import { isUni } from "../../../../util/isCompany";
+import {
+  addQuestionToTopic,
+  getTopicById,
+} from "../../../../redux/college/test/thunks/topic";
+import { getEntity, isUni } from "../../../../util/isCompany";
 
 const Header = ({
   name,
@@ -35,6 +38,8 @@ const Header = ({
   const { currentTopic, currentQuestionCount, totalQuestions } = useSelector(
     (state) => state.test
   );
+
+
   const handleFile = (e) => {
     const types = [
       "application/vnd.ms-excel",
@@ -264,7 +269,6 @@ const Header = ({
             setExcelJSON(jsonData.slice(1));
 
             if (error === false) {
-
               console.log(jsonData.slice(1));
               await dispatch(
                 addQuestionToTopic({
@@ -581,7 +585,8 @@ const Header = ({
       if (level === "adaptive") {
         if (currentQuestionCount > totalQuestions * 2) {
           return toast.error(
-            `Number of question must be less than or equal to ${totalQuestions / 2}`
+            `Number of question must be less than or equal to ${totalQuestions / 2
+            }`
           );
         }
       } else {
@@ -592,9 +597,6 @@ const Header = ({
         }
       }
       {
-
-
-
         // navigate(
         //   `/${isUni() ?"university/pr" :"college"}/test/${
         //     qt === "mcq"
@@ -624,10 +626,14 @@ const Header = ({
     } else {
       if (level === "adaptive") {
         navigate(
-          `/${isUni() ? "university/pr" : "college"}/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
+          `/${getEntity()
+          }/test/AddMcqToTopic/${sectionId}?type=mcq&addType=topic&level=adaptive`
         );
       } else {
-        navigate(`/${isUni() ? "university/pr" : "college"}/test/typeOfQuestions/${sectionId}?level=${level}`);
+        navigate(
+          `/${getEntity()
+          }/test/typeOfQuestions/${sectionId}?level=${level}`
+        );
       }
     }
   };
@@ -661,20 +667,26 @@ const Header = ({
       <img src={imageUrl} alt="" srcset="" className="hidden" />
 
       <div>
-        <button className="flex self-center  rounded-lg  gap-2">
+        <button className="flex self-center  rounded-md  gap-2">
           <button
             onClick={() => {
               type === "section" &&
-                navigate(`/${isUni() ? "university/pr" : "college"}/test/questions?level=${level}`);
+                navigate(
+                  `/${getEntity()}/test/questions?level=${level}`
+                );
               type === "topic" &&
                 (level === "adaptive"
-                  ? navigate(`/${isUni() ? "university/pr" : "college"}/test/selectAdaptive?level=${level}`)
-                  : navigate(`/${isUni() ? "university/pr" : "college"}/test/select?level=${level}`));
+                  ? navigate(
+                    `/${getEntity()}/test/selectAdaptive?level=${level}`
+                  )
+                  : navigate(
+                    `/${getEntity()}/test/select?level=${level}`
+                  ));
               type === "assessment" && navigate(-1);
             }}
             className="mt-2 mr-3"
           >
-            <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-gray-200" />
+            <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-gray-200" />
           </button>
 
           <div className="flex self-center">
@@ -729,7 +741,7 @@ const Header = ({
                 </>
               )}
 
-            {/* <button className="bg-[#F8F8F9] self-center  rounded-lg  w-10 sm:h-11 sm:w-14">
+            {/* <button className="bg-[#F8F8F9] self-center  rounded-md  w-10 sm:h-11 sm:w-14">
               <PiSlidersHorizontalLight className="mx-auto sm:h-8 sm:w-8 h-6 w-6" />
             </button> */}
           </div>

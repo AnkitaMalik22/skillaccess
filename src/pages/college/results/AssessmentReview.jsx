@@ -11,7 +11,7 @@ import Essay from "../../../components/college/results/assessmentReview/Essay";
 import HeaderMarks from "../../../components/college/results/assessmentReview/HeaderMarks";
 import { getStudentResponse } from "../../../redux/college/test/thunks/student";
 import useTranslate from "../../../hooks/useTranslate";
-import Loader from "../../../Loader";
+import Loader from "../../../components/Loader";
 
 const AssessmentReview = () => {
   //useTranslate();
@@ -197,10 +197,10 @@ const AssessmentReview = () => {
           <div className="flex w-full mx-auto justify-between mb-5">
             <div className="flex gap-3">
               <button
-                className="self-center object-center rounded-lg h-10 w-10 "
+                className="self-center object-center rounded-md h-10 w-10 "
                 onClick={() => navigate(-1)}
               >
-                <FaChevronLeft className=" p-3 rounded-lg h-10 w-10 self-center bg-[#D9E1E7]" />
+                <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
               </button>
             </div>
           </div>
@@ -287,7 +287,7 @@ const AssessmentReview = () => {
             {/* iterate this list */}
           </div>
           <div className="flex gap-2 w-full justify-center">
-            <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+            <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
               <IoMdArrowDropleft
                 className={` text-lg self-center ${
                   selected === 1 && "disabled"
@@ -305,7 +305,7 @@ const AssessmentReview = () => {
                 hasQuestions && (
                   <div
                     key={pageNumber}
-                    className={`rounded-lg h-10 w-10 flex justify-center ${
+                    className={`rounded-md h-10 w-10 flex justify-center ${
                       selected === pageNumber
                         ? "bg-accent text-white"
                         : "bg-gray-100"
@@ -318,7 +318,7 @@ const AssessmentReview = () => {
               );
             })}
 
-            <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+            <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
               <IoMdArrowDropright
                 className={` text-lg self-center ${
                   selected === Math.ceil(max) && "disabled"

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-hot-toast";
 // import {
 //   googleRegisterUniversity,
 //   registerUniversity,
 // } from "../../../redux/university/auth/authSlice"; // Update Redux actions
 import { registerUniversity } from "../../../redux/university/auth/universityAuthSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { LuEye, LuEyeOff } from "react-icons/lu";
-import { FcGoogle } from "react-icons/fc";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Layout from "./Layout";
 import CircularLoader from "../../../components/CircularLoader";
+import InputField from "../../../components/InputField";
 
 const RegisterUniversity = () => {
   const navigate = useNavigate();
@@ -49,7 +48,7 @@ const RegisterUniversity = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
-    const { name, email, password, address, description, website } = Credentials;
+    const { name, email, password, address, website } = Credentials;
 
     if (phone.length < 10) {
       toast.error("Please enter a valid phone number");
@@ -101,7 +100,7 @@ const RegisterUniversity = () => {
 
   return (
     <Layout>
-      <form className="w-full" >
+      <form className="w-full">
         <div className="font-dmSans">
           <div className="card-body">
             <div className="flex gap-2 justify-center mb-4 md:mb-8">
@@ -117,26 +116,23 @@ const RegisterUniversity = () => {
 
             {/* Name */}
             <div className="w-full mx-auto flex rounded-2xl relative max-w-xl mb-2">
-              <input
+              <InputField
                 type="text"
                 value={Credentials.name}
                 name="name"
                 onChange={changeHandler}
                 placeholder="University Name"
-                className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
               />
             </div>
 
             {/* Email */}
             <div className="w-full mx-auto flex rounded-2xl relative max-w-xl mb-2">
-              <input
-              
+              <InputField
                 type="email"
                 value={Credentials.email}
                 name="email"
                 onChange={changeHandler}
                 placeholder="University Email"
-                className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
               />
             </div>
 
@@ -161,7 +157,7 @@ const RegisterUniversity = () => {
 
             {/* Address */}
             <div className="w-full mx-auto flex rounded-2xl relative max-w-xl mb-2">
-              <input
+              <InputField
                 type="text"
                 value={Credentials.address}
                 name="address"
@@ -185,25 +181,23 @@ const RegisterUniversity = () => {
 
             {/* Website */}
             <div className="w-full mx-auto flex rounded-2xl relative max-w-xl mb-2">
-              <input
+              <InputField
                 type="text"
                 value={Credentials.website}
                 name="website"
                 onChange={changeHandler}
                 placeholder="University Website"
-                className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
               />
             </div>
 
             {/* Password */}
             <div className="w-full mx-auto flex rounded-2xl relative max-w-xl mb-2">
-              <input
+              <InputField
                 type={type}
                 value={Credentials.password}
                 name="password"
                 onChange={changeHandler}
                 placeholder="Password"
-                className="input border-none focus:outline-none w-full bg-[#1717170d] text-sm text-[#8F92A1] py-2.5 px-5"
               />
               <button
                 className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
@@ -213,7 +207,11 @@ const RegisterUniversity = () => {
                 }}
                 type="button"
               >
-                {type === "text" ? <LuEye className="text-gray-400 text-2xl" /> : <LuEyeOff className="text-gray-400 text-2xl" />}
+                {type === "text" ? (
+                  <LuEye className="text-gray-400 text-2xl" />
+                ) : (
+                  <LuEyeOff className="text-gray-400 text-2xl" />
+                )}
               </button>
             </div>
 
@@ -225,9 +223,13 @@ const RegisterUniversity = () => {
                 checked={checked}
                 className="checkbox checkbox-primary bg-secondary opacity-20 w-6 h-6"
               />
-              <span className="text-[#8F92A1] font-medium text-xs">
+              <span className="text-[#8F92A1] font-medium text-sm">
                 By creating an account, you agree to our{" "}
-                <Link to="/terms&policies" className="text-blued" target="_blank">
+                <Link
+                  to="/terms&policies"
+                  className="text-blued"
+                  target="_blank"
+                >
                   Terms and Policies
                 </Link>
               </span>
@@ -235,7 +237,7 @@ const RegisterUniversity = () => {
 
             {/* Register Button */}
             <button
-              className={`btn hover:bg-accent bg-accent rounded-2xl border-none focus:outline-none w-full max-w-xl mx-auto mb-2 text-white ${
+              className={`btn hover:bg-accent bg-accent rounded-md border-none focus:outline-none w-full max-w-xl mx-auto mb-2 shadow-sm focus:shadow-md hover:shadow-md ${
                 isCreateAccountDisabled ? "bg-blued cursor-not-allowed" : ""
               }`}
               onClick={handleSubmit}
@@ -245,7 +247,7 @@ const RegisterUniversity = () => {
               Register {loader && <CircularLoader />}
             </button>
 
-            {/* <h3 className="text-center text-[#8F92A1] font-medium text-xs mb-2">
+            {/* <h3 className="text-center text-[#8F92A1] font-medium text-sm mb-2">
               or
             </h3> */}
 
@@ -263,7 +265,7 @@ const RegisterUniversity = () => {
             </button> */}
 
             <div className="text-center mt-5">
-              <span className="text-xs text-[#8F92A1]">
+              <span className="text-sm text-[#8F92A1]">
                 Already have an account?{" "}
                 <Link to="/university" className="text-blued font-semibold">
                   Login Now

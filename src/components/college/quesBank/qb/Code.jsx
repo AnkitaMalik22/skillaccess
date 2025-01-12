@@ -29,13 +29,13 @@ const List = ({ Title, number, code, question }) => {
         <Disclosure className="relative z-10">
           {({ open }) => (
             <div className="mb-4">
-              <div className="flex w-full justify-between rounded-lg border border-[#0D9AAC] text-[#3E3E3E] pl-4 py-3 text-left text-sm font-medium   focus:outline-none  ">
+              <div className="flex w-full justify-between rounded-md border border-[#0D9AAC] text-[#3E3E3E] pl-4 py-3 text-left text-sm font-medium   focus:outline-none  ">
                 <div className="flex justify-between items-center w-full">
                   <p>{question.Title}</p>
 
                   <div className="level flex items-center gap-2 ">
                     <PiPencilSimpleLineBold
-                      className=" w-6 h-6 p-1 rounded-lg  self-center cursor-pointer"
+                      className=" w-6 h-6 p-1 rounded-md  self-center cursor-pointer"
                       onClick={() => {
                         localStorage.setItem(
                           "qbQues",
@@ -83,7 +83,7 @@ const List = ({ Title, number, code, question }) => {
                 leaveTo="transform scale-95 opacity-0"
               >
                 <Disclosure.Panel className="bg-white rounded-b-lg pb-2 mb-2  text-sm text-gray-500">
-                  <div className="flex gap-2  rounded-lg p-3">
+                  <div className="flex gap-2  rounded-md p-3">
                     <div className="w-6"></div>
 
                     <label className="text-blacktext-sm">

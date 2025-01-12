@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 import isCompany from "../../../../util/isCompany";
 
 const ChartComp = () => {
-  const { year } = useSelector((state) => {if(isCompany()){
-    return state.companyResult.graph
-  }else{
-    return state.result.graph;
-  }});
+  const { year } = useSelector((state) => {
+    if (isCompany()) {
+      return state.companyResult.graph;
+    } else {
+      return state.result.graph;
+    }
+  });
   const [students, setStudents] = useState({ placed: [], appeared: [] });
   const [toggle, setToggle] = useState(5);
   const navigate = useNavigate();
@@ -96,7 +98,7 @@ const ChartComp = () => {
     }));
   }, [year]);
   return (
-    <div className="sm:flex  bg-gray-100 w-full rounded-lg gap-6 font-dmSans  justify-center relative">
+    <div className="sm:flex  bg-gray-100 w-full rounded-md gap-6 font-dmSans  justify-center relative">
       {/* chart component */}
       <div className="w-full  rounded-s p-5 mt-2">
         <div className="flex justify-between">
@@ -150,7 +152,7 @@ const ChartComp = () => {
             {year && (
               <Chart
                 id="results"
-                className="bg-white shadow-md mt-2 rounded-lg "
+                className="bg-white shadow-md mt-2 rounded-md "
                 options={settings.options}
                 series={[
                   {
@@ -171,11 +173,11 @@ const ChartComp = () => {
           <div className="flex gap-4">
             <span className="flex gap-1">
               <FaCircle className="text-[#0052CC90]" />{" "}
-              <h2 className="font-bold text-xs">Total Students Appeared</h2>
+              <h2 className="font-bold text-sm">Total Students Appeared</h2>
             </span>
             <span className="flex gap-1">
               <FaCircle className="text-[#00875A90]" />{" "}
-              <h2 className="font-bold text-xs">Total Students Selected</h2>
+              <h2 className="font-bold text-sm">Total Students Selected</h2>
             </span>
           </div>
         </div>

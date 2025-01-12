@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import Header from "../../../components/college/test/home/Header";
-import Beginner from "../../../components/college/test/home/Beginner";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { CgUnavailable } from "react-icons/cg";
-import Advanced from "../../../components/college/test/home/Advanced";
-import Intermediate from "../../../components/college/test/home/Intermediate";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { FaFolder } from "react-icons/fa";
@@ -20,12 +16,18 @@ import {
   getRecentTests,
   removeFromRecent,
 } from "../../../redux/college/test/thunks/test";
-import Adaptive from "../../../components/college/test/home/Adaptive";
 import calculateDaysAndWeeks from "../../../util/daysAndWeeks";
 import { getStudents } from "../../../redux/college/student/studentSlice";
 import InfiniteScroll from "react-infinite-scroller";
 import Loader from "../../../components/loaders/Loader";
 import { isUni } from "../../../util/isCompany";
+import AssessmentSwipers from "../../../components/college/test/home/AssessmentSwipers";
+import {
+  AdaptiveSwiper,
+  BeginnerSwiper,
+  IntermediateSwiper,
+  AdvancedSwiper,
+} from "../../../components/college/test/home/AssessmentSwipers";
 
 const Test = () => {
   //useTranslate();
@@ -86,26 +88,30 @@ const Test = () => {
   };
 
   const arr = [
-    <Adaptive key="adaptive" />,
-    <Beginner key="beginner" />,
-    <Intermediate key="intermediate" />,
-    <Advanced key="advanced" />,
+    <AdaptiveSwiper key="adaptive" />,
+    <BeginnerSwiper key="beginner" />,
+    <IntermediateSwiper key="intermediate" />,
+    <AdvancedSwiper key="advanced" />,
   ];
+
   return (
     <div>
       {/* search bar */}
       <Header students={approvedStudents} />
 
-      <div className={`flex rounded-lg md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch ${isUni() ? "" : "h-screen"}`}>
+      <div
+        className={`flex rounded-md md:flex-nowrap justify-center relative gap-3 md:gap-8 items-stretch ${isUni() ? "" : "h-screen"
+          }`}
+      >
         {/* left block */}
-        <div className="w-3/4 rounded-lg flex flex-col">
+        <div className="w-full rounded-md flex flex-col">
           <div className="w-full flex-grow overflow-y-auto">
             <div className="mx-auto w-full rounded-2xl bg-white">
               {arr.map((comp, i) => (
                 <Disclosure defaultOpen key={i}>
                   {({ open }) => (
                     <div className="mb-4">
-                      <div className="flex w-full justify-between rounded-t-2xl border-b-2 border-opacity-50 border-gray-200 bg-[#F8F8F9] px-4 py-4 text-left text-sm font-mediumfocus:outline-none">
+                      <div className="flex w-full justify-between rounded-t-2xl border-b-2 border-opacity-50 border-gray-200 bg-[#F8F8F9] px-4 py-4 text-left text-sm font-medium focus:outline-none">
                         <div className="flex gap-2 w-full justify-between text-sm font-bold">
                           <h2 className="flex gap-3 text-[#171717] text-sm">
                             {i === 0 ? (
@@ -127,7 +133,7 @@ const Test = () => {
                             ) : i === 2 ? (
                               <>
                                 <FaFolder className="text-blued w-5 h-5" />
-                                For Intermediate{" "}
+                                Intermediate level{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{intermediate.length}&#41;
                                 </p>{" "}
@@ -135,7 +141,7 @@ const Test = () => {
                             ) : (
                               <>
                                 <FaFolder className="text-blued w-5 h-5" />
-                                For Advanced{" "}
+                                Advanced level{" "}
                                 <p className="inline-block text-[#8F92A1]">
                                   &#40;{advanced.length}&#41;
                                 </p>{" "}
@@ -143,9 +149,11 @@ const Test = () => {
                             )}
                           </h2>
                           <Disclosure.Button>
-                            {
-                              open ? <FaCaretDown className="text-[#8F92A1] text-lg" /> : <FaCaretUp className="text-[#8F92A1] text-lg" />
-                            }
+                            {open ? (
+                              <FaCaretDown className="text-[#8F92A1] text-lg" />
+                            ) : (
+                              <FaCaretUp className="text-[#8F92A1] text-lg" />
+                            )}
                           </Disclosure.Button>
                         </div>
                       </div>
@@ -161,75 +169,71 @@ const Test = () => {
         </div>
 
         {/* right block */}
-        {!isUni() && <div className="w-1/4 p-4 bg-gray-100 rounded-3xl font-dmSans sm:block flex flex-col">
-          <div className="rounded-3xl bg-white h-full mx-auto flex flex-col">
-            <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
-              Recent Assessments Completed
-            </h2>
+        {/* {!isUni() && (
+          <div className="w-1/4 p-4 bg-gray-100 rounded-md font-dmSans sm:block flex flex-col">
+            <div className="rounded-md bg-white h-full mx-auto flex flex-col">
+              <h2 className="text-base border-b-2 border-gray-200 font-bold text-center pt-5 pb-3 text-[#171717]">
+                Recent Assessments Completed
+              </h2>
 
-            <div className="p-3 overflow-y-scroll !scrollbar-track-neutral-400 !scrollbar-thumb-slate-400">
-              <div>
-                {recentAssessments?.map((assessment, index) => (
-                  <div className="flex flex-col md:gap-8 mb-5" key={index}>
-                    <div className="flex gap-3 items-center">
-                      {/* <div className="min-w-[2.5rem] h-10 self-center rounded-lg">
-                        <img
-                          src="/images/teams.png"
-                          alt="user-icon"
-                          className="rounded-lg w-11 h-11"
-                        />
-                      </div> */}
-                      <div>
-                        <h2 className="text-xs font-bold text-[#171717] first-letter:uppercase">
-                          {assessment.name}
-                        </h2>
-                        <h2 className="text-xs font-normal first-letter:uppercase">
-                          {assessment.description}
-                        </h2>
+              <div className="p-3 overflow-y-scroll !scrollbar-track-neutral-400 !scrollbar-thumb-slate-400">
+                <div>
+                  {recentAssessments?.map((assessment, index) => (
+                    <div className="flex flex-col md:gap-8 mb-5" key={index}>
+                      <div className="flex gap-3 items-center">
+                       
+                        <div>
+                          <h2 className="text-sm font-bold text-[#171717] first-letter:uppercase">
+                            {assessment.name}
+                          </h2>
+                          <h2 className="text-sm font-normal first-letter:uppercase">
+                            {assessment.description}
+                          </h2>
+                        </div>
+                      </div>
+                      <div className="flex mb-5 gap-2 justify-between items-center">
+                        <div className="flex gap-2">
+                          <button
+                            className="rounded-md bg-[#8F92A1] hover:border-[#8F92A1] bg-opacity-5 py-1 px-2 text-base font-dmSans border border-gray-200 transition-all hover:shadow-md"
+                            onClick={() => {
+                              navigate(
+                                `/college/results/overview?level=${assessment.level}&assessment=${assessment._id}`
+                              );
+                            }}
+                          >
+                            View
+                          </button>
+                          <button
+                            className="rounded-md bg-[#8F92A1] hover:border-[#8F92A1] bg-opacity-5 py-1 px-2 text-base font-dmSans border border-gray-200 transition-all hover:shadow-md"
+                            data-tip="Cick here to remove."
+                            onClick={() =>
+                              dispatch(removeFromRecent(assessment._id))
+                            }
+                          >
+                            <CgUnavailable className="text-[#8F92A1] text-lg" />
+                          </button>
+                        </div>
+                        <p className="text-sm font-normal text-[#8F92A1]">
+                          {calculateDaysAndWeeks(assessment.endDate)}
+                        </p>
                       </div>
                     </div>
-                    <div className="flex mb-5 gap-2 justify-between items-center">
-                      <div className="flex gap-2">
-                        <button
-                          className="rounded-lg bg-[#8F92A1] bg-opacity-5 p-2 text-base font-dmSans font-base"
-                          onClick={() => {
-                            navigate(
-                              `/college/results/overview?level=${assessment.level}&assessment=${assessment._id}`
-                            );
-                          }}
-                        >
-                          View
-                        </button>
-                        <button
-                          className="rounded-lg p-3 bg-[#8F92A1] bg-opacity-5 self-center tooltip"
-                          data-tip="Cick here to remove."
-                          onClick={() =>
-                            dispatch(removeFromRecent(assessment._id))
-                          }
-                        >
-                          <CgUnavailable className="text-[#8F92A1] text-lg" />
-                        </button>
-                      </div>
-                      <p className="text-xs font-normal text-[#8F92A1]">
-                        {calculateDaysAndWeeks(assessment.endDate)}
-                      </p>
+                  ))}
+                  {hasMore && (
+                    <div className="bg-blued p-1 rounded-md w-fit h-fit">
+                      <button
+                        onClick={loadMore}
+                        className=" bg-blued text-secondary-foreground shadow-md  text-white  hover:shadow-inner-lg p-1 rounded-md"
+                      >
+                        load more
+                      </button>
                     </div>
-                  </div>
-                ))}
-                {hasMore && (
-                  <div className="bg-blued p-1 rounded-lg w-fit h-fit">
-                    <button
-                      onClick={loadMore}
-                      className=" bg-blued text-secondary-foreground shadow-md  text-white  hover:shadow-inner-lg p-1 rounded-lg"
-                    >
-                      load more
-                    </button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>}
+        )} */}
       </div>
     </div>
   );

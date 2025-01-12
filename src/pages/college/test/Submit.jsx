@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { createTest } from "../../../redux/college/test/thunks/test";
 import { getCollege } from "../../../redux/college/auth/authSlice";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { getEntity, isUni } from "../../../util/isCompany";
 
 const Submit = () => {
   //useTranslate();
@@ -33,7 +33,7 @@ const Submit = () => {
   } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const testType = searchParams.get("level");
-  const entity = isUni() ? "university/pr" : "college"
+  const entity = getEntity();
   const [questions, setQuestions] = useState();
   let section1 = [];
   let section2 = [];
@@ -362,7 +362,7 @@ const Submit = () => {
       // dispatch(
       //   setTestBasicDetails({ name: "", description: "", totalAttempts: null ,totalQuestions:0})
       // );
-      if (!isUni()) dispatch(getCollege());
+      if (entity === "college") dispatch(getCollege());
       setLoading(false);
       //console.log(res);
 
@@ -419,7 +419,7 @@ const Submit = () => {
       </div>
 
       <div className="absolute -bottom-8 flex gap-2 w-full justify-center">
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+        <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropleft
             className={` text-lg self-center ${selected === 1 && "disabled"}`}
             onClick={() => selected !== 1 && setSelected(selected - 1)}
@@ -435,7 +435,7 @@ const Submit = () => {
             hasQuestions && (
               <div
                 key={pageNumber}
-                className={`rounded-lg h-10 w-10 flex justify-center ${selected === pageNumber
+                className={`rounded-md h-10 w-10 flex justify-center ${selected === pageNumber
                   ? "bg-accent text-white"
                   : "bg-gray-100"
                   }`}
@@ -447,7 +447,7 @@ const Submit = () => {
           );
         })}
 
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+        <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropright
             className={` text-lg self-center ${selected === Math.ceil(max) && "disabled"
               }`}

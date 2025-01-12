@@ -220,7 +220,7 @@ const LongShortAnswer = () => {
               onChange={handleChanges}
               value={question?.Duration}
               id=""
-              className="w-full rounded-lg bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
+              className="w-full rounded-md bg-gray-100 focus:outline-none border-none mb-4  select text-gray-400"
             >
               <option value={0}>Time to answer the question</option>
 
@@ -232,7 +232,7 @@ const LongShortAnswer = () => {
           </div>
 
           <textarea
-            className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-lg focus:ring-0placeholder-gray-400"
+            className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-md focus:ring-0placeholder-gray-400"
             placeholder="Enter Question Here"
             name="Title"
             value={question.Title}
@@ -245,7 +245,7 @@ const LongShortAnswer = () => {
           <div className=" flex gap-2">
             {count >= 0 && (
               <button
-                className="self-center justify-center flex bg-gray-200 p-2 rounded-lg text-sm font-bold gap-2 w-32"
+                className="self-center justify-center flex bg-gray-200 p-2 rounded-md text-sm font-bold gap-2 w-32"
                 onClick={handlePrev}
               >
                 <FaChevronLeft className="self-center" /> Prev
@@ -255,7 +255,7 @@ const LongShortAnswer = () => {
           <div className=" flex">
             {addType !== "edit" && (
               <button
-                className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+                className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 "
                 onClick={handleSave}
               >
                 <FaPlus className="self-center" /> Add Next Question

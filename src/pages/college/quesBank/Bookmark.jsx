@@ -79,7 +79,7 @@ const Bookmarks = () => {
       </div>
 
       <div className="absolute bottom-2 mt-20 flex gap-2 w-full justify-center">
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+        <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropleft
             className={` text-lg self-center ${selected === 1 && "disabled"}`}
             onClick={() => selected !== 1 && setSelected(selected - 1)}
@@ -95,7 +95,7 @@ const Bookmarks = () => {
             hasbookmarks && (
               <div
                 key={pageNumber}
-                className={`rounded-lg h-10 w-10 flex justify-center ${
+                className={`rounded-md h-10 w-10 flex justify-center ${
                   selected === pageNumber
                     ? "bg-accent text-white"
                     : "bg-gray-100"
@@ -108,7 +108,7 @@ const Bookmarks = () => {
           );
         })}
 
-        <div className="rounded-lg bg-gray-100 h-10 w-10 flex justify-center">
+        <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropright
             className={` text-lg self-center ${
               selected === Math.ceil(max) && "disabled"

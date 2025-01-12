@@ -32,10 +32,10 @@
 //               alt=""
 //               className="w-full h-full rounded-t-3xl z-0 object-cover"
 //             />
-//             <div className=" absolute -bottom-7  left-5 bg-white w-14 h-14 flex justify-center rounded-lg">
+//             <div className=" absolute -bottom-7  left-5 bg-white w-14 h-14 flex justify-center rounded-md">
 //               <img
 //                 src="/images/companyLogo.png"
-//                 className="w-10 h-10 rounded-lg self-center"
+//                 className="w-10 h-10 rounded-md self-center"
 //                 alt=""
 //               />
 //             </div>
@@ -43,10 +43,10 @@
 //           <div className="w-full bg-gray-100 flex justify-between pt-14 pb-6 pr-10 pl-5">
 //             <div>
 //               <h2 className="font-bold text-lg">{companyDetails?.basic?.companyName}</h2>
-//               <h2 className="text-xs font-medium mt-1">
+//               <h2 className="text-sm font-medium mt-1">
 //               {companyDetails?.location?.locName},{companyDetails?.location?.country}
 //               </h2>
-//               <h2 className="text-xs font-medium mt-2 text-gray-400">
+//               <h2 className="text-sm font-medium mt-2 text-gray-400">
 //                 Available Jobs
 //               </h2>
 //             </div>
@@ -95,7 +95,7 @@
 //               See All
 //             </h2>
 //           </div>
-//           <div className="flex justify-between w-[98%] bg-gray-100 rounded-lg p-4">
+//           <div className="flex justify-between w-[98%] bg-gray-100 rounded-md p-4">
 //           {companyDetails?.jobs?.map((job, index) => {
 //                 return (
 //                   <>
@@ -105,15 +105,15 @@
 //                   <h2 className="font-dmSans font-semibold text-sm sm:text-base">
 //                    {job?.JobTitle}
 //                   </h2>
-//                   <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline mr-2">
+//                   <h2 className="font-dmSans font-medium text-[.6rem] sm:text-sm inline mr-2">
 //                     {" "}
 //                    {job?.CompanyName}
 //                   </h2>
-//                   <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline mr-3">
+//                   <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline mr-3">
 //                     {" "}
 //                    {job?.createdAt}
 //                   </h2>
-//                   <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
+//                   <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline">
 //                     {" "}
 //                     in <em className="not-italic text-black">{job.JobLocation}</em>
 //                   </h2>
@@ -121,16 +121,16 @@
 //             </div>
 //             <div className="flex sm:gap-6 gap-1">
 //               {/* <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
-//               <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
+//               <h2 className="font-dmSans text-gray-400  font-medium text-sm self-center sm:text-sm inline">
 //                 {" "}
 //                 location
 //               </h2>
-//               <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
+//               <h2 className="font-dmSans text-green-500  font-medium text-sm self-center sm:text-sm inline">
 //                 {" "}
 //                 Remote
 //               </h2> */}
 //               <button
-//                 className=" h-8 p-1 w-20  hover:bg-blue-900 bg-accent  rounded-lg bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
+//                 className=" h-8 p-1 w-20  hover:bg-blue-900 bg-accent  rounded-md bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
 //                 onClick={() => navigate("/college/companies/jobOverview")}
 //               >
 //                 <p className="text-blued  -ml-8 font-dmSans text-sm font-medium  ">
@@ -185,10 +185,10 @@ const CompanyProfile = () => {
               alt=""
               className="w-full h-full rounded-t-3xl z-0 object-cover"
             />
-            <div className=" absolute -bottom-7  left-5 bg-white w-14 h-14 flex justify-center rounded-lg">
+            <div className=" absolute -bottom-7  left-5 bg-white w-14 h-14 flex justify-center rounded-md">
               <img
                 src="/images/companyLogo.png"
-                className="w-10 h-10 rounded-lg self-center"
+                className="w-10 h-10 rounded-md self-center"
                 alt=""
               />
             </div>
@@ -196,10 +196,10 @@ const CompanyProfile = () => {
           <div className="w-full bg-gray-100 flex justify-between pt-14 pb-6 pr-10 pl-5">
             <div>
               <h2 className="font-bold text-lg">Google Inc.</h2>
-              <h2 className="text-xs font-medium mt-1">
+              <h2 className="text-sm font-medium mt-1">
                 Banglore Branch Office
               </h2>
-              <h2 className="text-xs font-medium mt-2 text-gray-400">
+              <h2 className="text-sm font-medium mt-2 text-gray-400">
                 Available Jobs
               </h2>
             </div>
@@ -249,7 +249,7 @@ const CompanyProfile = () => {
           </div>
 
           {Array.from({ length: 5 }, (_, i) => (
-            <div className="flex justify-between items-center w-[98%] bg-gray-100 rounded-lg p-4 mt-4">
+            <div className="flex justify-between items-center w-[98%] bg-gray-100 rounded-md p-4 mt-4">
               <div className="sm:flex items-center">
                 <div className="w-16 h-16 flex items-center mr-4 ">
                   <img
@@ -262,15 +262,15 @@ const CompanyProfile = () => {
                   <h2 className="font-dmSans font-semibold text-sm sm:text-base">
                     Role
                   </h2>
-                  <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
+                  <h2 className="font-dmSans font-medium text-[.6rem] sm:text-sm inline">
                     {" "}
                     CompanyName
                   </h2>
-                  <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
+                  <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline">
                     {" "}
                     date
                   </h2>
-                  <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
+                  <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline">
                     {" "}
                     in <em className="not-italic text-black">Banglore In.</em>
                   </h2>
@@ -278,16 +278,16 @@ const CompanyProfile = () => {
               </div>
               <div className="flex sm:gap-6 gap-1">
                 <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
-                <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
+                <h2 className="font-dmSans text-gray-400  font-medium text-sm self-center sm:text-sm inline">
                   {" "}
                   location
                 </h2>
-                <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
+                <h2 className="font-dmSans text-green-500  font-medium text-sm self-center sm:text-sm inline">
                   {" "}
                   Remote
                 </h2>
                 <button
-                  className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
+                  className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-md text-white text-[.5rem] sm:text-sm self-center "
                   onClick={() => navigate("/student/companies/jobOverview")}
                 >
                   full time

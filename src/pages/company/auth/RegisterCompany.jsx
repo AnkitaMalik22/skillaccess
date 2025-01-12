@@ -1,111 +1,133 @@
-import React, { useState } from 'react';
-import { IoCloudUploadOutline,IoAlert } from "react-icons/io5";
-import { useDispatch, useSelector } from 'react-redux';
-import { z } from 'zod';
-import { uploadPicture, RegisterCompany, selectRegisterState } from '../../../redux/company/auth/companyAuthSlice';
-import Loader from '../../../components/loaders/Loader';
+import React, { useState } from "react";
+import { IoCloudUploadOutline, IoAlert } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { z } from "zod";
+import {
+  uploadPicture,
+  RegisterCompany,
+  selectRegisterState,
+} from "../../../redux/company/auth/companyAuthSlice";
+import Loader from "../../../components/loaders/Loader";
 
 const currentYear = new Date().getFullYear();
 
-
-
-
-
 // Zod Schemas
 const step1Schema = z.object({
-  companyName: z.string().min(1, 'Company name is required'),
-  password: z.string().min(8, 'Password must be at least 8 characters')
-    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-    .regex(/[0-9]/, 'Password must contain at least one number')
-    .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character'),
-  email: z.string().email('Invalid email format'),
-  phone: z.string().regex(/^\+?[\d\s-]{10,}$/, 'Invalid phone number format'),
-  website: z.string().url('Invalid website URL'),
-  type: z.enum(['corporate', 'startup', 'enterprise'], {
-    errorMap: () => ({ message: 'Please select a company type' })
+  companyName: z.string().min(1, "Company name is required"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number")
+    .regex(
+      /[^A-Za-z0-9]/,
+      "Password must contain at least one special character"
+    ),
+  email: z.string().email("Invalid email format"),
+  phone: z.string().regex(/^\+?[\d\s-]{10,}$/, "Invalid phone number format"),
+  website: z.string().url("Invalid website URL"),
+  type: z.enum(["corporate", "startup", "enterprise"], {
+    errorMap: () => ({ message: "Please select a company type" }),
   }),
-  industry: z.enum(['technology', 'healthcare', 'finance', 'education'], {
-    errorMap: () => ({ message: 'Please select an industry' })
+  industry: z.enum(["technology", "healthcare", "finance", "education"], {
+    errorMap: () => ({ message: "Please select an industry" }),
   }),
-  description: z.string().min(1, 'Description is required'),
+  description: z.string().min(1, "Description is required"),
 });
 
 const step2Schema = z.object({
-  locationName: z.string().min(10, 'Location name is required'),
-  address: z.string().min(10, 'Address is required'),
-  town: z.string().min(3, 'Town is required'),
-  country: z.string().min(3, 'Country is required'),
-  postalCode: z.string().regex(/^[A-Za-z0-9\s-]{3,10}$/, 'Invalid postal code format'),
+  locationName: z.string().min(10, "Location name is required"),
+  address: z.string().min(10, "Address is required"),
+  town: z.string().min(3, "Town is required"),
+  country: z.string().min(3, "Country is required"),
+  postalCode: z
+    .string()
+    .regex(/^[A-Za-z0-9\s-]{3,10}$/, "Invalid postal code format"),
 });
 
-
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
 
 const step3Schema = z.object({
-  linkedIn: z.string().url('Invalid LinkedIn URL').optional().or(z.literal('')),
-  yearFounded: z.string()
-    .refine((val) => !val || (Number(val) >= 1800 && Number(val) <= currentYear), {
-      message: `Year must be between 1800 and ${currentYear}`,
-    })
+  linkedIn: z.string().url("Invalid LinkedIn URL").optional().or(z.literal("")),
+  yearFounded: z
+    .string()
+    .refine(
+      (val) => !val || (Number(val) >= 1800 && Number(val) <= currentYear),
+      {
+        message: `Year must be between 1800 and ${currentYear}`,
+      }
+    )
     .optional()
-    .or(z.literal('')),
-  mission: z.string().optional().or(z.literal('')),
-  baseLocation: z.string().optional().or(z.literal('')),
+    .or(z.literal("")),
+  mission: z.string().optional().or(z.literal("")),
+  baseLocation: z.string().optional().or(z.literal("")),
   isMultinational: z.boolean(),
-  executiveName: z.string().optional().or(z.literal('')),
-  executiveDesignation: z.string().optional().or(z.literal('')),
-  logo: z.any()
-    .refine((file) => !file || file.size <= MAX_FILE_SIZE, 'Max file size is 5MB.')
+  executiveName: z.string().optional().or(z.literal("")),
+  executiveDesignation: z.string().optional().or(z.literal("")),
+  logo: z
+    .any()
+    .refine(
+      (file) => !file || file.size <= MAX_FILE_SIZE,
+      "Max file size is 5MB."
+    )
     .refine(
       (file) => !file || ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      'Only .jpg, .jpeg, .png and .webp formats are supported.'
+      "Only .jpg, .jpeg, .png and .webp formats are supported."
     )
     .optional(),
-  cover: z.any()
-    .refine((file) => !file || file.size <= MAX_FILE_SIZE, 'Max file size is 5MB.')
+  cover: z
+    .any()
+    .refine(
+      (file) => !file || file.size <= MAX_FILE_SIZE,
+      "Max file size is 5MB."
+    )
     .refine(
       (file) => !file || ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      'Only .jpg, .jpeg, .png and .webp formats are supported.'
+      "Only .jpg, .jpeg, .png and .webp formats are supported."
     )
     .optional(),
 });
 
 export default function RegisterCompanyPage() {
-
   const [logoFile, setLogoFile] = useState();
   const [coverFile, setCoverFile] = useState();
-  const [logoPreview, setLogoPreview] = useState('');
-  const [coverPreview, setCoverPreview] = useState('');
+  const [logoPreview, setLogoPreview] = useState("");
+  const [coverPreview, setCoverPreview] = useState("");
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     // Step 1
-    companyName: '',
-    password: '',
-    email: '',
-    phone: '',
-    website: '',
-    type: '',
-    industry: '',
-    description: '',
+    companyName: "",
+    password: "",
+    email: "",
+    phone: "",
+    website: "",
+    type: "",
+    industry: "",
+    description: "",
     // Step 2
-    locationName: '',
-    address: '',
-    town: '',
-    country: '',
-    postalCode: '',
+    locationName: "",
+    address: "",
+    town: "",
+    country: "",
+    postalCode: "",
     // Step 3
-    linkedIn: '',
-    yearFounded: '',
-    mission: '',
-    baseLocation: '',
+    linkedIn: "",
+    yearFounded: "",
+    mission: "",
+    baseLocation: "",
     isMultinational: false,
-    executiveName: '',
-    executiveDesignation: '',
-    logo: '',
-    cover: '',
+    executiveName: "",
+    executiveDesignation: "",
+    logo: "",
+    cover: "",
     publicIdLogo: "",
     publicIdCover: "",
   });
@@ -162,18 +184,20 @@ export default function RegisterCompanyPage() {
       return false;
     }
   };
-  {/* Add this handler function */ }
+  {
+    /* Add this handler function */
+  }
   const handleImageChange = (e, type) => {
     const file = e.target.files?.[0];
     if (file) {
       // setFormData((prev) => ({ ...prev, [type]: file }));
       const reader = new FileReader();
       reader.onloadend = () => {
-        if (type === 'logo') {
+        if (type === "logo") {
           setLogoPreview(reader.result);
-          setLogoFile(file)
+          setLogoFile(file);
         } else {
-          setCoverFile(file)
+          setCoverFile(file);
           setCoverPreview(reader.result);
         }
       };
@@ -182,7 +206,7 @@ export default function RegisterCompanyPage() {
   };
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    const inputValue = type === 'checkbox' ? checked : value;
+    const inputValue = type === "checkbox" ? checked : value;
     setFormData((prev) => ({ ...prev, [name]: inputValue }));
   };
 
@@ -198,36 +222,40 @@ export default function RegisterCompanyPage() {
       return;
     }
 
-let logo,cover = "";
+    let logo,
+      cover = "";
     if (logoPreview) {
-
       try {
-
-         logo = await dispatch(uploadPicture({ type: "logo", image: logoFile })).unwrap()
-
+        logo = await dispatch(
+          uploadPicture({ type: "logo", image: logoFile })
+        ).unwrap();
       } catch (error) {
-
         //TODO : ERROR HANDLING
-     
       }
     }
 
     if (coverPreview) {
       try {
-    
-         cover = await dispatch(uploadPicture({ type: "cover", image: logoFile })).unwrap();
-       
-
+        cover = await dispatch(
+          uploadPicture({ type: "cover", image: logoFile })
+        ).unwrap();
       } catch (error) {
         //TODO : ERROR HANDLING
         console.log(error);
       }
     }
     console.log(formData);
-    const resultAction = await dispatch(RegisterCompany({...formData,cover: cover.data.secure_url, publicIdCover: cover.data.public_id,logo: logo.data.secure_url, publicIdLogo: logo.data.public_id}));
+    const resultAction = await dispatch(
+      RegisterCompany({
+        ...formData,
+        cover: cover.data.secure_url,
+        publicIdCover: cover.data.public_id,
+        logo: logo.data.secure_url,
+        publicIdLogo: logo.data.public_id,
+      })
+    );
 
     if (RegisterCompany.fulfilled.match(resultAction)) {
-
       // setFormData({
       //   // Step 1
       //   companyName: '',
@@ -252,7 +280,7 @@ let logo,cover = "";
       //   isMultinational: false,
       //   executiveName: '',
       //   executiveDesignation: '',
-      //   logo: '', 
+      //   logo: '',
       //   cover: '',
       //   publicIdLogo: "",
       //   publicIdCover: "",
@@ -262,14 +290,13 @@ let logo,cover = "";
     } else if (RegisterCompany.rejected.match(resultAction)) {
       // console.log(resultAction);
     } else {
-
     }
   };
 
-  const renderInput = (name, label, type = 'text', required = false) => (
+  const renderInput = (name, label, type = "text", required = false) => (
     <div className="mb-4">
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">
-        {label} {required && '*'}
+        {label} {required && "*"}
       </label>
       <input
         type={type}
@@ -277,11 +304,14 @@ let logo,cover = "";
         name={name}
         value={formData[name]}
         onChange={handleInputChange}
-        className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${errors[name] ? 'border-red-500' : ''
-          }`}
+        className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+          errors[name] ? "border-red-500" : ""
+        }`}
         required={required}
       />
-      {errors[name] && <p className="mt-1 text-sm text-red-500">{errors[name]}</p>}
+      {errors[name] && (
+        <p className="mt-1 text-sm text-red-500">{errors[name]}</p>
+      )}
     </div>
   );
 
@@ -294,8 +324,9 @@ let logo,cover = "";
               {[1, 2, 3].map((number) => (
                 <div
                   key={number}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= number ? 'bg-accent text-white' : 'bg-gray-200'
-                    }`}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    step >= number ? "bg-accent text-white" : "bg-gray-200"
+                  }`}
                 >
                   {number}
                 </div>
@@ -303,21 +334,26 @@ let logo,cover = "";
             </div>
           </div>
 
-          <form onSubmit={(e) => {
-            console.log(step);
-            handleSubmit(e);
-          }}>
+          <form
+            onSubmit={(e) => {
+              console.log(step);
+              handleSubmit(e);
+            }}
+          >
             {/* Step 1 */}
             {step === 1 && (
               <div className="space-y-4">
-                {renderInput('companyName', 'Company Name', 'text', true)}
-                {renderInput('password', 'Password', 'password', true)}
-                {renderInput('email', 'Email', 'email', true)}
-                {renderInput('phone', 'Phone', 'tel', true)}
-                {renderInput('website', 'Website', 'url', true)}
+                {renderInput("companyName", "Company Name", "text", true)}
+                {renderInput("password", "Password", "password", true)}
+                {renderInput("email", "Email", "email", true)}
+                {renderInput("phone", "Phone", "tel", true)}
+                {renderInput("website", "Website", "url", true)}
 
                 <div className="mb-4">
-                  <label htmlFor="type" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="type"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Type *
                   </label>
                   <select
@@ -325,8 +361,9 @@ let logo,cover = "";
                     name="type"
                     value={formData.type}
                     onChange={handleInputChange}
-                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${errors.type ? 'border-red-500' : ''
-                      }`}
+                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                      errors.type ? "border-red-500" : ""
+                    }`}
                     required
                   >
                     <option value="">Select type</option>
@@ -334,11 +371,16 @@ let logo,cover = "";
                     <option value="startup">Startup</option>
                     <option value="enterprise">Enterprise</option>
                   </select>
-                  {errors.type && <p className="mt-1 text-sm text-red-500">{errors.type}</p>}
+                  {errors.type && (
+                    <p className="mt-1 text-sm text-red-500">{errors.type}</p>
+                  )}
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="industry" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="industry"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Industry *
                   </label>
                   <select
@@ -346,8 +388,9 @@ let logo,cover = "";
                     name="industry"
                     value={formData.industry}
                     onChange={handleInputChange}
-                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${errors.industry ? 'border-red-500' : ''
-                      }`}
+                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                      errors.industry ? "border-red-500" : ""
+                    }`}
                     required
                   >
                     <option value="">Select industry</option>
@@ -356,11 +399,18 @@ let logo,cover = "";
                     <option value="finance">Finance</option>
                     <option value="education">Education</option>
                   </select>
-                  {errors.industry && <p className="mt-1 text-sm text-red-500">{errors.industry}</p>}
+                  {errors.industry && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {errors.industry}
+                    </p>
+                  )}
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="description"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Description *
                   </label>
                   <textarea
@@ -369,11 +419,16 @@ let logo,cover = "";
                     value={formData.description}
                     onChange={handleInputChange}
                     rows={4}
-                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${errors.description ? 'border-red-500' : ''
-                      }`}
+                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                      errors.description ? "border-red-500" : ""
+                    }`}
                     required
                   />
-                  {errors.description && <p className="mt-1 text-sm text-red-500">{errors.description}</p>}
+                  {errors.description && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {errors.description}
+                    </p>
+                  )}
                 </div>
               </div>
             )}
@@ -381,18 +436,17 @@ let logo,cover = "";
             {/* Step 2 */}
             {step === 2 && (
               <div className="space-y-4">
-                {renderInput('locationName', 'Location Name', 'text', true)}
-                {renderInput('address', 'Address', 'text', true)}
-                {renderInput('town', 'Town', 'text', true)}
-                {renderInput('country', 'Country', 'text', true)}
-                {renderInput('postalCode', 'Postal Code', 'text', true)}
+                {renderInput("locationName", "Location Name", "text", true)}
+                {renderInput("address", "Address", "text", true)}
+                {renderInput("town", "Town", "text", true)}
+                {renderInput("country", "Country", "text", true)}
+                {renderInput("postalCode", "Postal Code", "text", true)}
               </div>
             )}
 
             {/* Step 3 */}
             {step === 3 && (
               <div className="space-y-4">
-
                 {/* Image Upload Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Logo Upload */}
@@ -406,13 +460,13 @@ let logo,cover = "";
                           <img
                             src={logoPreview}
                             alt="Logo preview"
-                            className="w-full h-full object-contain rounded-lg"
+                            className="w-full h-full object-contain rounded-md"
                           />
                           <button
                             type="button"
                             onClick={() => {
-                              setLogoPreview('');
-                              setLogoFile('');
+                              setLogoPreview("");
+                              setLogoFile("");
                               setFormData((prev) => ({ ...prev, logo: null }));
                             }}
                             className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full transform translate-x-1/2 -translate-y-1/2"
@@ -421,9 +475,11 @@ let logo,cover = "";
                           </button>
                         </div>
                       ) : (
-                        <div className="flex flex-col items-center justify-center w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg">
+                        <div className="flex flex-col items-center justify-center w-40 h-40 border-2 border-dashed border-gray-300 rounded-md">
                           <IoCloudUploadOutline />
-                          <p className="mt-2 text-sm text-gray-500">Click to upload logo</p>
+                          <p className="mt-2 text-sm text-gray-500">
+                            Click to upload logo
+                          </p>
                         </div>
                       )}
                       <input
@@ -431,7 +487,7 @@ let logo,cover = "";
                         id="logo"
                         name="logo"
                         accept="image/*"
-                        onChange={(e) => handleImageChange(e, 'logo')}
+                        onChange={(e) => handleImageChange(e, "logo")}
                         className="hidden"
                       />
                       <label
@@ -457,24 +513,24 @@ let logo,cover = "";
                           <img
                             src={coverPreview}
                             alt="Cover preview"
-                            className="w-full h-full object-cover rounded-lg"
+                            className="w-full h-full object-cover rounded-md"
                           />
                           <button
                             type="button"
                             onClick={() => {
-                              setCoverPreview('');
-                              setCoverFile('');
+                              setCoverPreview("");
+                              setCoverFile("");
                               setFormData((prev) => ({ ...prev, cover: null }));
                             }}
                             className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full transform translate-x-1/2 -translate-y-1/2"
-                          >
-
-                          </button>
+                          ></button>
                         </div>
                       ) : (
-                        <div className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-lg">
+                        <div className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-md">
                           <IoCloudUploadOutline />
-                          <p className="mt-2 text-sm text-gray-500">Click to upload cover photo</p>
+                          <p className="mt-2 text-sm text-gray-500">
+                            Click to upload cover photo
+                          </p>
                         </div>
                       )}
                       <input
@@ -482,7 +538,7 @@ let logo,cover = "";
                         id="cover"
                         name="cover"
                         accept="image/*"
-                        onChange={(e) => handleImageChange(e, 'cover')}
+                        onChange={(e) => handleImageChange(e, "cover")}
                         className="hidden"
                       />
                       <label
@@ -498,10 +554,13 @@ let logo,cover = "";
                   </div>
                 </div>
 
-                {renderInput('linkedIn', 'LinkedIn Profile', 'url')}
-                {renderInput('yearFounded', 'Year Founded', 'number')}
+                {renderInput("linkedIn", "LinkedIn Profile", "url")}
+                {renderInput("yearFounded", "Year Founded", "number")}
                 <div className="mb-4">
-                  <label htmlFor="mission" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="mission"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Your Mission
                   </label>
                   <textarea
@@ -510,14 +569,19 @@ let logo,cover = "";
                     value={formData.mission}
                     onChange={handleInputChange}
                     rows={4}
-                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${errors.mission ? 'border-red-500' : ''
-                      }`}
+                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                      errors.mission ? "border-red-500" : ""
+                    }`}
                   />
-                  {errors.mission && <p className="mt-1 text-sm text-red-500">{errors.mission}</p>}
+                  {errors.mission && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {errors.mission}
+                    </p>
+                  )}
                 </div>
-                {renderInput('baseLocation', 'Base Location')}
-                {renderInput('executiveName', 'Executive Name')}
-                {renderInput('executiveDesignation', 'Executive Designation')}
+                {renderInput("baseLocation", "Base Location")}
+                {renderInput("executiveName", "Executive Name")}
+                {renderInput("executiveDesignation", "Executive Designation")}
 
                 <div className="flex items-center space-x-2">
                   <input
@@ -528,22 +592,30 @@ let logo,cover = "";
                     onChange={handleInputChange}
                     className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   />
-                  <label htmlFor="isMultinational" className="text-sm text-gray-700">
+                  <label
+                    htmlFor="isMultinational"
+                    className="text-sm text-gray-700"
+                  >
                     Is this a multinational company?
                   </label>
                 </div>
 
-              {  register?.error && <div
-      role="alert"
-      aria-live="assertive"
-      className="bg-red-50 border-l-4 border-red-500 p-4 my-4 rounded-r-md shadow-md"
-    >
-      <div className="flex items-center">
-        <IoAlert className="h-5 w-5 text-red-500 mr-2" aria-hidden="true" />
-        <span className="text-red-700 font-medium">Error</span>
-      </div>
-      <p className="text-red-600 mt-2">{register.error}</p>
-    </div>}
+                {register?.error && (
+                  <div
+                    role="alert"
+                    aria-live="assertive"
+                    className="bg-red-50 border-l-4 border-red-500 p-4 my-4 rounded-r-md shadow-md"
+                  >
+                    <div className="flex items-center">
+                      <IoAlert
+                        className="h-5 w-5 text-red-500 mr-2"
+                        aria-hidden="true"
+                      />
+                      <span className="text-red-700 font-medium">Error</span>
+                    </div>
+                    <p className="text-red-600 mt-2">{register.error}</p>
+                  </div>
+                )}
               </div>
             )}
 
@@ -556,24 +628,28 @@ let logo,cover = "";
               >
                 Cancel
               </button>
-              {step < 3 &&
+              {step < 3 && (
                 <button
                   type="button"
                   onClick={handleNext}
                   className="px-4 py-2 rounded-md bg-accent text-white hover:bg-indigo-700"
                 >
                   Next
-                </button>}
-              {step === 3 && (
-
-                !register.loading ?
+                </button>
+              )}
+              {step === 3 &&
+                (!register.loading ? (
                   <button
                     type="submit"
                     className="px-4 py-2 rounded-md bg-accent text-white hover:bg-indigo-700"
                   >
                     {"Submit"}
-                  </button> : <><Loader /></>
-              )}
+                  </button>
+                ) : (
+                  <>
+                    <Loader />
+                  </>
+                ))}
             </div>
           </form>
         </div>

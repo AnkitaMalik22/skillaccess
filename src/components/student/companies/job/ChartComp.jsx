@@ -44,7 +44,7 @@ const ChartComp = () => {
   return (
     <div className="relative">
       <Chart
-        className="bg-gray-100 rounded-lg"
+        className="bg-gray-100 rounded-md"
         options={settings.options}
         series={settings.options.series}
         type="donut"

@@ -54,16 +54,11 @@ const Navbar = (props) => {
 
       {/* right */}
       <div className="flex gap-4">
-        {/* <button className="border-2 border-[#D9E1E7]  text-[#D9E1E7] rounded-lg px-2 p-1 relative">
-          <FiBell className="text-lg" />{" "}
-          <div className="rounded-full h-2 w-2 bg-lightBlue absolute top-1 right-2"></div>
-        </button> */}
-
         <button
           onClick={() => {
             navigate("/college/accounting");
           }}
-          className="border border-[#D9E1E7] text-blued  rounded-lg px-3 p-1 relative flex items-center"
+          className="border border-[#D9E1E7] text-blued  rounded-md px-3 p-1 relative flex items-center"
         >
           <FaCoins />
           <h1 className="text-blued  px-2">
@@ -71,30 +66,16 @@ const Navbar = (props) => {
           </h1>
         </button>
 
-        {/* <div
-          className="border border-[#D9E1E7]  rounded-lg p-2 relative flex gap-3"
-          style={{ marginRight: "12rem" }}
-          onClick={goToProfile}
-        >
-          <img
-            src={userDetails?.user?.avatar?.url || "/images/defaultUser.png"}
-            alt="icon"
-            className="h-5 w-5"
-          />{" "}
-          <h2 className="text-sm font-bold self-center">
-            Hello {userDetails?.user?.FirstName}
-          </h2>
-        </div> */}
-         {/* Profile Dropdown */}
-       <Disclosure as="div" className="relative" >
-          {({ open ,close}) => (
+        <GoogleTranslate currentLanguage={currentLanguage} />
+
+        {/* Profile Dropdown */}
+        <Disclosure as="div" className="relative">
+          {({ open, close }) => (
             <>
-              <Disclosure.Button className="flex items-center border border-[#D9E1E7] rounded-lg p-2 gap-2">
+              <Disclosure.Button className="flex items-center border border-[#D9E1E7] rounded-md p-2 gap-2">
                 <img
                   src={
-                    userDetails?.user?.avatar?.url ||
-                    
-                    "/images/defaultUser.jpg"
+                    userDetails?.user?.avatar?.url || "/images/defaultUser.jpg"
                   }
                   alt="User Avatar"
                   className="h-5 w-5"
@@ -106,16 +87,19 @@ const Navbar = (props) => {
               </Disclosure.Button>
 
               {/* Dropdown Panel */}
-              <Disclosure.Panel className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10" onMouseLeave={()=>close()}>
+              <Disclosure.Panel
+                className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10"
+                onMouseLeave={() => close()}
+              >
                 <button
                   onClick={goToProfile}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 hover:bg-opacity-60 rounded-lg "
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 hover:bg-opacity-60 rounded-md "
                 >
                   Profile
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 rounded-lg "
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 rounded-md "
                 >
                   Logout
                 </button>
@@ -125,11 +109,7 @@ const Navbar = (props) => {
         </Disclosure>
 
         <div className="w-52"></div>
-
-        <GoogleTranslate currentLanguage={currentLanguage} />
       </div>
-      
-      
     </nav>
   );
 };

@@ -19,16 +19,15 @@ const Header = () => {
         }}
       ></div>
       <span className="flex gap-4 w-3/4 justify-between">
-     <div className="flex gap-2">
-     <button
-          className="bg-[#D9E1E7]  self-center ml-2 rounded-lg h-10 w-10 sm:h-12 sm:w-14"
-          onClick={() => navigate(-1)}
-        >
-          <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
-        </button>
-        <h2 className="text-xl font-bold self-center">Notifications</h2>
-
-     </div>
+        <div className="flex gap-2">
+          <button
+            className="bg-[#D9E1E7]  self-center ml-2 rounded-md h-10 w-10 sm:h-12 sm:w-14"
+            onClick={() => navigate(-1)}
+          >
+            <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
+          </button>
+          <h2 className="text-xl font-bold self-center">Notifications</h2>
+        </div>
 
         <Disclosure
           as={"div"}

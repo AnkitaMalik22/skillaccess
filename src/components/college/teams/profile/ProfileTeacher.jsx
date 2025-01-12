@@ -8,7 +8,7 @@ const ProfileTeacher = () => {
     <>
       {" "}
       <Header /> <Details />
-      <div className="bg-gray-50 rounded-lg p-6 mt-8">
+      <div className="bg-gray-50 rounded-md p-6 mt-8">
         <Lower />
       </div>
     </>

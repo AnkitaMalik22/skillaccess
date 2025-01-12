@@ -91,7 +91,7 @@ export default function Dashboard() {
 
         <div className=" gap-2  mx-auto  overflow-x-clip grid grid-cols-2">
           {/* 1st block */}
-          <div className="bg-gray-100 mt-3 sm:mt-5 rounded-lg   pb-4 mr-1 inline-block p-4">
+          <div className="bg-gray-100 mt-3 sm:mt-5 rounded-md   pb-4 mr-1 inline-block p-4">
             <span className="flex justify-between">
               <div className="w-1/2">
                 <h1 className="text-base font-bold  basis-full py-2 ">
@@ -110,7 +110,7 @@ export default function Dashboard() {
             <SwiperSlideLeft />
           </div>
           {/* 2nd block */}
-          <div className="bg-gray-100 mt-3 sm:mt-5 rounded-lg    pb-4 mr-1 inline-block p-4">
+          <div className="bg-gray-100 mt-3 sm:mt-5 rounded-md    pb-4 mr-1 inline-block p-4">
             <span className="flex justify-between">
               <div className="w-1/2">
                 <h1 className="text-base font-bold  basis-full py-2 ">

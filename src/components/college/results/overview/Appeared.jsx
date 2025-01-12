@@ -1,239 +1,340 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
-  getAllTests,
-  getTest,
-  selectStudentTest,
+  bulkSelectStudents,
+  getTestResultPage,
+  selectStudentsByThreshold,
 } from "../../../../redux/college/test/thunks/test";
-import { getTestResultPage } from "../../../../redux/college/test/thunks/test";
-import { getStudentResponse } from "../../../../redux/college/test/thunks/student";
-import CircularLoader from "../../../CircularLoader";
-import Skeleton from "../../../loaders/Skeleton";
-import { getTestCompany, getTestResultPageCompany, selectStudentTestCompany } from "../../../../redux/company/test/thunks/test";
+import { resetStudentList } from "../../../../redux/college/test/testSlice";
+import Pagination from "../../../Pagination";
+import PopUp from "../../../PopUps/PopUp";
+import Button from "../../../buttons/Button";
+import { Table } from "../../../ui/tables/Table";
 import isCompany, { isUni } from "../../../../util/isCompany";
+import { IoMdClose } from "react-icons/io";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Appeared = ({ assessment }) => {
   const [isLoading, setIsLoading] = useState({});
-  const navigate = useNavigate();
+  const [numberValue, setNumberValue] = useState("");
+  const [showEvaluateConfirm, setShowEvaluationConfirm] = useState(false);
+  const [searchParams] = useSearchParams();
+  const assessmentId = searchParams.get("assessment");
+
+  const [filters, setFilters] = useState({
+    name: "",
+    profileDate: "",
+    assessmentPerformance: "",
+  });
+
+  const [isInputOpen, setIsInputOpen] = useState({
+    name: false,
+    profileDate: false,
+    assessmentPerformance: false,
+  });
+
   const dispatch = useDispatch();
-
-  const handleStatusChange = (testId, responseId, student) => async (event) => {
-    console.log("student");
-    const status = event.target.value;
-    setIsLoading({ ...isLoading, [responseId]: true });
-    if (isCompany()) {
-
-      console.log(testId, responseId, student)
-      await dispatch(selectStudentTestCompany({ testId: student.assessmentId, responseId: student._id, status }));
-      dispatch(getTestCompany(student.assessmentId))
-      await dispatch(getTestResultPageCompany(student.assessmentId));
-
-    } else {
-      await dispatch(selectStudentTest({ testId, responseId, status }));
-      dispatch(getTest(testId));
-      await dispatch(getTestResultPage(assessment._id));
-
-    }
-
-    setIsLoading({ ...isLoading, [responseId]: false });
-  };
-
-  const { testDataResponse, response, TEST_DATA_RESPONSE_LOADING } =
-    useSelector((state) => {
-      if (isCompany()) {
-        return state.test
-      } else {
-        return state.companyTest
-      }
-    });
-
-  // //console.log(response);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    if (assessment?._id) {
-      if (isCompany()) {
-        dispatch(getTestResultPageCompany(assessment._id));
-
-      } else {
-        dispatch(getTestResultPage(assessment._id));
-
-      }
+    if (assessmentId) {
+      dispatch(resetStudentList());
+      dispatch(
+        getTestResultPage({ id: assessmentId, status: "pending", page: 1 })
+      );
     }
-  }, [dispatch, assessment?._id]);
+  }, [assessmentId, dispatch]);
 
-  const getResponse = (responseId) => {
-    dispatch(getStudentResponse(responseId));
+  const { testDataResponse, TEST_DATA_RESPONSE_LOADING } = useSelector(
+    (state) => (isCompany() ? state.test : state.companyTest)
+  );
+
+  const currentPage = testDataResponse?.currentPage || 1;
+  const totalPages = testDataResponse?.totalPages || 1;
+
+  const handleFilterChange = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
-  let arr = [assessment?.studentResponses];
-
-  let percentageData = [];
-  let colors = [];
-
-  if (testDataResponse?.length > 0) {
-    percentageData = testDataResponse.map((item) => item.percentage);
-
-    percentageData.forEach((percentage) => {
-      let color = "";
-      if (percentage <= 0) {
-        color = "transparent";
-      } else if (percentage > 0 && percentage < 33.33) {
-        color = "#F44336"; // Red color
-      } else if (percentage >= 33.33 && percentage < 66.66) {
-        color = "#FFC107"; // Orange color
-      } else {
-        color = "#4CAF50"; // Green color
-      }
-      colors.push(color);
-    });
-  }
-
-  const covertToDateFormat = (date) => {
-    const d = new Date(date);
-    return d.toDateString();
+  const toggleInputField = (field) => {
+    setIsInputOpen((prev) => ({ ...prev, [field]: !prev[field] }));
   };
+
+  const resetFilter = (field) => {
+    setFilters((prev) => ({ ...prev, [field]: "" }));
+    setIsInputOpen((prev) => ({ ...prev, [field]: false }));
+  };
+
+  const parsePerformanceFilter = (value, studentPerformance) => {
+    const trimmedValue = value.trim();
+    if (trimmedValue.startsWith(">")) {
+      return studentPerformance > parseFloat(trimmedValue.slice(1));
+    } else if (trimmedValue.startsWith("<")) {
+      return studentPerformance < parseFloat(trimmedValue.slice(1));
+    } else if (trimmedValue.startsWith("=")) {
+      return studentPerformance === parseFloat(trimmedValue.slice(1));
+    } else {
+      return true; // No valid operator, ignore the filter
+    }
+  };
+
+  const filteredData =
+    testDataResponse?.students?.filter((student, index) => {
+      const nameMatch =
+        !filters.name ||
+        student?.studentId?.FirstName?.toLowerCase().includes(
+          filters.name.toLowerCase()
+        );
+
+      const profileDateMatch =
+        !filters.profileDate ||
+        new Date(student?.createdAt)
+          .toDateString()
+          .includes(filters.profileDate);
+
+      const performanceMatch =
+        !filters.assessmentPerformance ||
+        parsePerformanceFilter(
+          filters.assessmentPerformance,
+          student?.percentage || 0
+        );
+
+      return nameMatch && profileDateMatch && performanceMatch;
+    }) || [];
+
+  const filteredAssessmentsWithIndex = filteredData.map(
+    (testDataResponse, index) => ({
+      ...testDataResponse,
+      index: index + 1, // Add index to each filtered assessment
+    })
+  );
+
+  const getColorByPercentage = (value) => {
+    if (value >= 90) return "bg-green-500";
+    if (value >= 80) return "bg-green-400";
+    if (value >= 70) return "bg-blue-500";
+    if (value >= 60) return "bg-yellow-500";
+    if (value >= 50) return "bg-orange-500";
+    return "bg-red-500";
+  };
+
+  const columns = [
+    {
+      header: "S. No.",
+      accessor: "index",
+    },
+    {
+      header: (
+        <div className="flex flex-col">
+          <div className="flex items-center gap-2">
+            <span>Name and Profile</span>
+            <button
+              onClick={() => toggleInputField("name")}
+              className="text-gray-500"
+            >
+              {isInputOpen.name ? (
+                <IoMdClose
+                  onClick={() => {
+                    resetFilter("name");
+                    toggleInputField("name");
+                  }}
+                />
+              ) : (
+                <RiArrowDropDownLine />
+              )}
+            </button>
+          </div>
+          {isInputOpen.name && (
+            <input
+              type="text"
+              placeholder="Filter by Name"
+              value={filters.name}
+              onChange={(e) => handleFilterChange("name", e.target.value)}
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blue-500 focus:ring-0"
+            />
+          )}
+        </div>
+      ),
+      accessor: (student) => (
+        <div className="flex items-center gap-2">
+          <img
+            src={student?.studentId?.avatar?.url || "/images/student.png"}
+            alt="Profile"
+            className="h-10 w-10 rounded-full"
+          />
+          <span>{student?.studentId?.FirstName}</span>
+        </div>
+      ),
+    },
+    {
+      header: (
+        <div className="flex flex-col">
+          <div className="flex items-center gap-2">
+            <span>Date</span>
+            <button
+              onClick={() => toggleInputField("profileDate")}
+              className="text-gray-500"
+            >
+              {isInputOpen.profileDate ? (
+                <IoMdClose
+                  onClick={() => {
+                    resetFilter("profileDate");
+                    toggleInputField("profileDate");
+                  }}
+                />
+              ) : (
+                <RiArrowDropDownLine />
+              )}
+            </button>
+          </div>
+          {isInputOpen.profileDate && (
+            <input
+              type="text"
+              placeholder="Filter by Date"
+              value={filters.profileDate}
+              onChange={(e) =>
+                handleFilterChange("profileDate", e.target.value)
+              }
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blue-500 focus:ring-0"
+            />
+          )}
+        </div>
+      ),
+      accessor: (student) => new Date(student?.createdAt).toDateString(),
+    },
+    {
+      header: "Status",
+      accessor: (student) => (
+        <span className="capitalize">{student?.status || "Pending"}</span>
+      ),
+    },
+    {
+      header: (
+        <div className="flex flex-col">
+          <div className="flex items-center gap-2">
+            <span>Assessment Performance</span>
+            <button
+              onClick={() => toggleInputField("assessmentPerformance")}
+              className="text-gray-500"
+            >
+              {isInputOpen.assessmentPerformance ? (
+                <IoMdClose
+                  onClick={() => {
+                    resetFilter("assessmentPerformance");
+                    toggleInputField("assessmentPerformance");
+                  }}
+                />
+              ) : (
+                <RiArrowDropDownLine />
+              )}
+            </button>
+          </div>
+          {isInputOpen.assessmentPerformance && (
+            <input
+              type="text"
+              placeholder="e.g., >50, <70, =80"
+              value={filters.assessmentPerformance}
+              onChange={(e) =>
+                handleFilterChange("assessmentPerformance", e.target.value)
+              }
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blue-500 focus:ring-0"
+            />
+          )}
+        </div>
+      ),
+      accessor: (student) => (
+        <div className="flex items-center gap-2">
+          <div className="h-3 w-24 bg-gray-200 rounded-md">
+            <div
+              className={`h-full rounded-md ${getColorByPercentage(
+                student?.percentage || 0
+              )}`}
+              style={{ width: `${student?.percentage || 0}%` }}
+            ></div>
+          </div>
+          <span>{(student?.percentage || 0).toFixed(2)}%</span>
+        </div>
+      ),
+    },
+    {
+      header: "Review",
+      accessor: (student) => (
+        <button
+          className="text-blue-500 underline"
+          onClick={(e) => {
+            e.stopPropagation();
+            const basePath = isCompany()
+              ? "/company/pr/results/assessmentReview"
+              : `/${
+                  isUni() ? "university/pr" : "college"
+                }/results/assessmentReview`;
+
+            navigate(
+              `${basePath}?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+            );
+          }}
+        >
+          Assessment Review
+        </button>
+      ),
+    },
+  ];
 
   return (
-    <div className="w-full mx-auto">
-      {/* legend */}
-      <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid bg-accent bg-opacity-5 rounded-lg p-4 mb-5">
-        <h2>Name and Profile</h2>
-        <h2>Date</h2>
-        <h2>Status</h2>
-        <h2>Assessment Performance</h2>
-        <h2>Review</h2>
+    <div className="w-full mx-auto ">
+      <div className="flex justify-between items-center mb-4 p-4 bg-white  rounded-md">
+        <label className="flex items-center gap-2">
+          Enter cut-off percentage
+          <input
+            type="number"
+            placeholder="75"
+            value={numberValue}
+            onChange={(e) => setNumberValue(e.target.value)}
+            className="border rounded px-2 py-1"
+          />
+        </label>
+        <Button
+          handleClick={() => setShowEvaluationConfirm(true)}
+          saveText="Auto Evaluate"
+          disabled={!numberValue}
+        />
       </div>
 
-      {/* list to be iterated */}
-      {TEST_DATA_RESPONSE_LOADING ? (
-        <Skeleton />
-      ) : (
-        <>
-          {" "}
-          {!TEST_DATA_RESPONSE_LOADING && testDataResponse?.length > 0 ? (
-            testDataResponse?.map((student, index) => (
-              <div
-                className="grid-cols-5 rounded-2xl my-4 py-2 pl-2 text-center mx-auto font-dmSans text-sm hidden md:grid w-full border border-transparent hover:border-accent hover:cursor-pointer transition-colors duration-300 bg-white"
-                // style={{ borderColor: "transparent", borderWidth: "2px" }}
-                // onMouseEnter={(e) =>
-                //   (e.currentTarget.style.borderColor = colors[index])
-                // }
-                // onMouseLeave={(e) =>
-                //   (e.currentTarget.style.borderColor = "transparent")
-                // }
-                onClick={() =>
-                  //  navigate(`/college/students/profile/${student._id}`)
-                  navigate(`/${isUni() ? "university/pr" : "college"}/students/profile/${student.studentId._id}`)
-                }
-              >
-                {" "}
-                {/* row-2 */}
-                <div className="flex justify-center gap-2">
-                  <div className=" min-w-[3rem] h-12 self-center">
-                    <img
-                      src={student?.studentId?.avatar?.url || "/images/student.png"}
-                      alt="icon"
-                      className="h-10 w-10 rounded-full"
-                    />
-                  </div>
-                  <span className="break-words min-w-24 self-center">
-                    <h2 className="font-dmSans font-semibold text-sm first-letter:capitalize  ">
-                      {student?.studentId?.FirstName}
-                    </h2>
-                  </span>
-                </div>
-                {/*  */}
-                <div className="flex justify-center items-center">
-                  <h2 className="font-dmSans text-sm ">
-                    {covertToDateFormat(student?.createdAt)}
-                    {/* -{" "}
-                    {covertToDateFormat(assessment?.endDate)} */}
-                  </h2>
-                </div>
-                {/*  */}
-                <div className="flex justify-center" onClick={(e) => {
-                  e.stopPropagation();
-                }}>
-                  <div className=" self-center h-fit">
-                    <span>
-                      {isLoading[student?._id] ? (
-                        <CircularLoader />
-                      ) : (
-                        <select
-                          className="font-dmSans border-none focus:border-none bg-transparent focus:ring-0 sm:text-sm"
-                          onChange={(e) => {
-                            e.stopPropagation();
-                            handleStatusChange(
-                              assessment?._id,
-                              student?._id,
-                              student
-                            )(e)
-                          }}
-                          value={student?.status}
-                        >
-                          <option value="">Pending</option>
-                          <option value="rejected">Rejected</option>
-                          <option value="selected">Selected</option>
-                        </select>
-                      )}
-                    </span>
-                  </div>
-                </div>
-                {/*  */}
-                <div className="flex justify-center">
-                  <div className=" self-center">
-                    <span className="flex gap-2 items-center">
-                      <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
-                        <div
-                          className={`h-full rounded-lg`}
-                          style={{
-                            width: `${student?.percentage}%`,
-                            backgroundColor: colors[index],
-                          }}
-                        ></div>
-                      </div>
-                      <h2 className="font-dmSans font-bold text-xs ">
-                        {" "}
-                        {student?.percentage?.toFixed(2)}%
-                      </h2>
-                    </span>
-                  </div>
-                </div>
-                {/*  */}
-                <div className="flex justify-center">
-                  <span
-                    className="self-center cursor-pointer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (isCompany()) {
-                        navigate(
-                          `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                        )
-                      } else {
-                        navigate(
-                          `/${isUni() ? "university/pr" : "college"}/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                        )
-                      }
-                    }
-                    }
-                  >
-                    <h2 className="font-dmSans text-sm text-blued ">
-                      Assessment Review
-                    </h2>
-                  </span>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="flex justify-center items-center h-96">
-              <h2 className="font-dmSans text-lg text-gray-500">
-                No students have appeared for this assessment
-              </h2>
-            </div>
-          )}
-        </>
+      {showEvaluateConfirm && (
+        <PopUp
+          message="Evaluate students based on threshold?"
+          saveText="Confirm"
+          handleSave={() => {
+            dispatch(
+              selectStudentsByThreshold({
+                testId: assessmentId,
+                threshold: numberValue,
+              })
+            );
+            setShowEvaluationConfirm(false);
+          }}
+          handleOverlay={() => setShowEvaluationConfirm(false)}
+        />
       )}
+
+      <Table
+        columns={columns}
+        data={filteredAssessmentsWithIndex}
+        isLoading={TEST_DATA_RESPONSE_LOADING}
+        className="mt-4"
+      />
+
+      <div className="pt-4">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) =>
+            dispatch(
+              getTestResultPage({ id: assessmentId, status: "pending", page })
+            )
+          }
+        />
+      </div>
     </div>
   );
 };

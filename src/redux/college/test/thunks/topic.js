@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import getCookie from "../../../../util/getToken";
-import isCompany, { getHeaders, isUni } from "../../../../util/isCompany";
+import { getHeaders } from "../../../../util/isCompany";
 export const addQuestionToTopic = createAsyncThunk(
   "test/addQuestionToTopic",
   async (data, { rejectWithValue, dispatch }) => {
@@ -40,20 +39,20 @@ export const addQuestionToTopic = createAsyncThunk(
 export const getAllTopics = createAsyncThunk(
   "test/getAllTopics",
   async (data, { rejectWithValue, getState }) => {
-    // console.log("data", data); 
+    // console.log("data", data);
     try {
       const req = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/college/topics/all`, 
-      {
-        params: {
-        level: data.level,
-        category: data.category,
-        accessibleDepartments: data.accessibleDepartments,
-        hasAccessToAllDepartments: data.hasAccessToAllDepartments,
-        hasAccessToAllCategories: data.hasAccessToAllCategories
-        },
-        ...getHeaders()
-      }
+        `${process.env.REACT_APP_API_URL}/api/college/topics/all`,
+        {
+          params: {
+            level: data.level,
+            category: data.category,
+            accessibleDepartments: data.accessibleDepartments,
+            hasAccessToAllDepartments: data.hasAccessToAllDepartments,
+            hasAccessToAllCategories: data.hasAccessToAllCategories,
+          },
+          ...getHeaders(),
+        }
       );
       const res = req.data;
       return res.topics;
@@ -71,15 +70,14 @@ export const getAllTopicsQB = createAsyncThunk(
         `${process.env.REACT_APP_API_URL}/api/qb/topics/all`,
         {
           params: {
-          level: data.level,
-          category: data.category,
-          accessibleDepartments: data.accessibleDepartments,
-          hasAccessToAllDepartments: data.hasAccessToAllDepartments,
-          hasAccessToAllCategories: data.hasAccessToAllCategories
+            level: data.level,
+            category: data.category,
+            accessibleDepartments: data.accessibleDepartments,
+            hasAccessToAllDepartments: data.hasAccessToAllDepartments,
+            hasAccessToAllCategories: data.hasAccessToAllCategories,
           },
-          ...getHeaders()
+          ...getHeaders(),
         }
-         
       );
       const res = req.data;
       return res.topics;
@@ -92,12 +90,12 @@ export const getAllTopicsQB = createAsyncThunk(
 
 export const getTopicById = createAsyncThunk(
   "test/getTopicById",
-  async ({id,level}, { rejectWithValue }) => {
+  async ({ id, level }, { rejectWithValue }) => {
     try {
-      console.log("header",getHeaders());
+      console.log("header", getHeaders());
       const req = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/admin/topic/${id}?level=${level}`,
-       getHeaders()
+        getHeaders()
       );
       const res = req.data;
       // //console.log("res", res);
@@ -116,7 +114,7 @@ export const deleteTopics = createAsyncThunk(
       const req = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/assessments/sections`,
         { data },
-       getHeaders()
+        getHeaders()
       );
       const res = req.data;
       // //console.log("res", res);
@@ -167,7 +165,7 @@ export const setTotalTopicQuestions = createAsyncThunk(
   async (arg, { dispatch, rejectWithValue }) => {
     try {
       // Dispatch the getTopicById thunk and wait for the result
-      const topic = await dispatch(getTopicById({id:arg.id})).unwrap();
+      const topic = await dispatch(getTopicById({ id: arg.id })).unwrap();
 
       // //console.log(topic, "topic");
 
@@ -288,20 +286,24 @@ export const setTotalTopicQuestions = createAsyncThunk(
   }
 );
 
+export const uploadQuestionImage = createAsyncThunk(
+  "test/uploadQuestionImage",
+  async (file, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", file); // 'image' is the file object
 
-export const uploadQuestionImage = createAsyncThunk("test/uploadQuestionImage", async (file, { rejectWithValue }) => {
-
-  try {
-    const formData = new FormData();
-  formData.append('image', file); // 'image' is the file object
-
-  const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/assessments/question/image`, formData, getHeaders('multipart/form-data'));
-  console.log(res,"thunk")
-return res.data.data;
-  } catch (error) {
-    return rejectWithValue(error.response.data.message || "something went wrong");
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/assessments/question/image`,
+        formData,
+        getHeaders("multipart/form-data")
+      );
+      console.log(res, "thunk");
+      return res.data.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response.data.message || "something went wrong"
+      );
+    }
   }
-})
-
-
-
+);

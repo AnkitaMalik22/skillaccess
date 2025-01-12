@@ -3,7 +3,7 @@ import React from "react";
 const Questions = () => {
   return (
     <>
-      <div className="mx-6 flex bg-[#F8F8F9] rounded-lg justify-between my-4">
+      <div className="mx-6 flex bg-[#F8F8F9] rounded-md justify-between my-4">
         <div className="w-11/12 flex flex-col gap-2">
           {/* {search.get(`${Number}`) !== "true" ? ( */}
           <h2 className="flex px-4 gap-3 font-semibold pt-3 text-base ">

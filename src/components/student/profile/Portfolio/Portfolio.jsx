@@ -27,7 +27,7 @@ const Portfolio = () => {
           <div className="mb-2 font-bold">Link</div>
           <input
             type="text"
-            className="bg-gray-100 rounded-lg  border-none text-blue-700 placeholder:text-gray-400 mb-4 w-full"
+            className="bg-gray-100 rounded-md  border-none text-blue-700 placeholder:text-gray-400 mb-4 w-full"
             placeholder="https://www.example.com"
           />
           <button className="self-center justify-center flex  py-3  rounded-xl w-32  gap-2 mx-auto">

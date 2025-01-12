@@ -13,7 +13,7 @@ export const Progress = () => {
             </h2>
           </div>
 
-          <div className="w-full bg-accent rounded-lg h-1/3 self-center -ml-1 z-20"></div>
+          <div className="w-full bg-accent rounded-md h-1/3 self-center -ml-1 z-20"></div>
         </div>
         <div className="w-1/3 flex">
           <div className="w-full  bg-accent h-1/3 self-center -ml-2"></div>

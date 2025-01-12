@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { createTopic } from "../../../redux/college/test/thunks/topic";
 import useTranslate from "../../../hooks/useTranslate";
-import { isUni } from "../../../util/isCompany";
+import { getEntity, isUni } from "../../../util/isCompany";
 
 const CreateTopic = () => {
   //useTranslate();
@@ -30,7 +30,7 @@ const CreateTopic = () => {
       : [],
     hasAccessToAllDepartments: localStorage.getItem("testDetails")
       ? JSON.parse(localStorage.getItem("testDetails"))
-          .hasAccessToAllDepartments
+        .hasAccessToAllDepartments
       : false,
     hasAccessToAllCategories: localStorage.getItem("testDetails")
       ? JSON.parse(localStorage.getItem("testDetails")).hasAccessToAllCategories
@@ -84,22 +84,17 @@ const CreateTopic = () => {
       if (res.payload._id) {
         if (level === "adaptive") {
           navigate(
-            `/${isUni() ? "university/pr" : "college"}/test/addMcqToTopic/${
-              res.payload._id
+            `/${getEntity()}/test/addMcqToTopic/${res.payload._id
             }?type=mcq&addType=topic&level=adaptive`
           );
           return;
         }
 
-        if (isUni()) {
-          navigate(
-            `/university/pr/test/typeOfQuestions/${res.payload._id}?level=${level}`
-          );
-        } else {
-          navigate(
-            `/college/test/typeOfQuestions/${res.payload._id}?level=${level}`
-          );
-        }
+
+        navigate(
+          `/${getEntity()}/test/typeOfQuestions/${res.payload._id}?level=${level}`
+        );
+
       } else {
         toast.error("Invalid or duplicate values");
         return;
@@ -117,11 +112,11 @@ const CreateTopic = () => {
           : "",
         accessibleDepartments: localStorage.getItem("testDetails")
           ? JSON.parse(localStorage.getItem("testDetails"))
-              .accessibleDepartments
+            .accessibleDepartments
           : [],
         hasAccessToAllDepartments: localStorage.getItem("testDetails")
           ? JSON.parse(localStorage.getItem("testDetails"))
-              .hasAccessToAllDepartments
+            .hasAccessToAllDepartments
           : false,
       });
     });
@@ -131,8 +126,8 @@ const CreateTopic = () => {
     <div>
       <Header next={handleNext} />
 
-      <div className="  w-full mx-auto h-[90vh] my-2 rounded-lg  justify-between  ">
-        <h2 className="w-full font-medium  text-[#3E3E3E] rounded-lg mb-5 text-base">
+      <div className="  w-full mx-auto h-[90vh] my-2 rounded-md  justify-between  ">
+        <h2 className="w-full font-medium  text-[#3E3E3E] rounded-md mb-5 text-base">
           Add up to 10 custom questions to your assessment (optional). You can
           use five question types: multiple-choice, essay, video ,code and find
           answer.
@@ -143,9 +138,8 @@ const CreateTopic = () => {
           name="Heading"
           value={topic.Heading}
           type="text"
-          className={`w-full bg-gray-100 mb-3 text-base font-bold px-3 py-6 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${
-            isNameEmpty ? "border-red-500" : "border-none"
-          }`}
+          className={`w-full bg-gray-100 mb-3 text-base font-bold px-3 py-6 rounded-md focus:outline-0 focus:ring-blued focus:ring-1 border placeholder-gray-400 ${isNameEmpty ? "border-red-500" : "border-none"
+            }`}
           placeholder="Name of the Topic"
         />
         {isNameEmpty && (
@@ -161,9 +155,8 @@ const CreateTopic = () => {
           onChange={changeHandler}
           name="Description"
           value={topic.Description}
-          className={`w-full bg-gray-100 h-48 px-6 text-base font-bold py-8 mt-4 rounded-lg focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${
-            isDescEmpty ? "border-red-500" : "border-none"
-          }`}
+          className={`w-full bg-gray-100 h-48 px-6 text-base font-bold py-8 mt-4 rounded-md focus:outline-0 focus:ring-blued focus:ring-1 resize-none border placeholder-gray-400 ${isDescEmpty ? "border-red-500" : "border-none"
+            }`}
           placeholder="Add Description"
         />
         {isDescEmpty && (

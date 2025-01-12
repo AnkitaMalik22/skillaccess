@@ -9,7 +9,7 @@ const Header = ({ students }) => {
       {/* comp */}
       <span className="flex gap-2">
         <button
-          className="  self-center object-center  rounded-lg h-10 w-10 "
+          className="  self-center object-center  rounded-md h-10 w-10 "
           // onClick={() => navigate('college/companies')}
         >
           <FiPieChart className=" sm:h-[32px] sm:w-[32px] h-10 w-10 self-center" />
@@ -47,7 +47,7 @@ const Header = ({ students }) => {
         })}
 
         {students.length - 5 > 0 && (
-          <div className="rounded-full bg-gray-200 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end text-xs font-bold flex justify-center">
+          <div className="rounded-full bg-gray-200 xl:w-8 xl:h-8 lg:w-5 lg:h-5 self-end text-sm font-bold flex justify-center">
             <p className="self-center text-gray-400">{students.length - 5}</p>
           </div>
         )}

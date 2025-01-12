@@ -14,10 +14,10 @@ const Skills = () => {
         <div>
           <span className="">Software Knowledge</span>
           <span className="flex gap-2 flex-wrap mt-3">
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " />
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " />
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " />
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-lg " />
+            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
             <select
               name=""
               id=""
@@ -33,7 +33,7 @@ const Skills = () => {
           <select
             name=""
             id=""
-            className="select bg-gray-100 rounded-lg !outline-none focus:!ring-0 focus:!border-none text-gray-400 w-1/2"
+            className="select bg-gray-100 rounded-md !outline-none focus:!ring-0 focus:!border-none text-gray-400 w-1/2"
           >
             <option value="">Add Software</option>
           </select>
@@ -44,7 +44,7 @@ const Skills = () => {
           <select
             name=""
             id=""
-            className="select bg-gray-100 rounded-lg !outline-none focus:!ring-0 focus:!border-none text-gray-400 w-1/2"
+            className="select bg-gray-100 rounded-md !outline-none focus:!ring-0 focus:!border-none text-gray-400 w-1/2"
           >
             <option value="">Add Software</option>
           </select>
@@ -55,7 +55,7 @@ const Skills = () => {
           <select
             name=""
             id=""
-            className="select bg-gray-100 rounded-lg !outline-none focus:!ring-0 focus:!border-none text-gray-400 w-1/2"
+            className="select bg-gray-100 rounded-md !outline-none focus:!ring-0 focus:!border-none text-gray-400 w-1/2"
           >
             <option value="">Add Software</option>
           </select>

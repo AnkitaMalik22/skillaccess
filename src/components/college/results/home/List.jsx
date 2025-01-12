@@ -10,14 +10,12 @@ import toast from "react-hot-toast";
 import isCompany, { isUni } from "../../../../util/isCompany";
 import getCookie from "../../../../util/getToken";
 
-
 const List = ({ FilterdStudents, isLoading }) => {
   // const arr = [2, 1, 1, 1, 1];
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const assessments = useSelector((state) => state.test.assessments);
   const beginner = useSelector((state) => state.test.assessments.beginner);
-
 
   // asessments ={beginner: Array(2), intermediate: Array(0), advanced: Array(0)} write in one array
 
@@ -73,12 +71,19 @@ const List = ({ FilterdStudents, isLoading }) => {
   const handleResultsDownload = async (assessmentId) => {
     try {
       // Replace the URL with your API endpoint
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/${isCompany() ? "company/test" : "assessments"}/download/${assessmentId}`, {
-        method: 'GET',
-        headers: {
-          "auth-token": isCompany() ? getCookie("token") : localStorage.getItem("auth-token"),
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/${
+          isCompany() ? "company/test" : "assessments"
+        }/download/${assessmentId}`,
+        {
+          method: "GET",
+          headers: {
+            "auth-token": isCompany()
+              ? getCookie("token")
+              : localStorage.getItem("auth-token"),
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -91,10 +96,10 @@ const List = ({ FilterdStudents, isLoading }) => {
       const url = window.URL.createObjectURL(blob);
 
       // Create a link element
-      const a = document.createElement('a');
-      a.style.display = 'none';
+      const a = document.createElement("a");
+      a.style.display = "none";
       a.href = url;
-      a.download = 'data.xlsx'; // Set the file name for download
+      a.download = "data.xlsx"; // Set the file name for download
 
       // Append the link to the body
       document.body.appendChild(a);
@@ -105,12 +110,12 @@ const List = ({ FilterdStudents, isLoading }) => {
       // Clean up and remove the link
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Download successful');
+      toast.success("Download successful");
     } catch (error) {
-      toast.error('Download failed');
-      console.error('Download failed:', error);
+      toast.error("Download failed");
+      console.error("Download failed:", error);
     }
-  }
+  };
 
   return (
     <div className="w-full mx-auto bg-[#8F92A1] bg-opacity-5 rounded-2xl p-8">
@@ -148,15 +153,19 @@ const List = ({ FilterdStudents, isLoading }) => {
             // }
             onClick={() => {
               if (isCompany()) {
-                navigate(`/company/pr/results/overview?level=beginner&assessment=${assessment._id}`)
+                navigate(
+                  `/company/pr/results/overview?level=beginner&assessment=${assessment._id}`
+                );
               } else {
                 navigate(
-                  `/${isUni() ? "university/pr" : "college"}/results/overview?level=beginner&assessment=${assessment._id}`
-                )
+                  `/${
+                    isUni() ? "university/pr" : "college"
+                  }/results/overview?level=beginner&assessment=${
+                    assessment._id
+                  }`
+                );
               }
-
-            }
-            }
+            }}
           >
             {" "}
             {/* row-2 */}
@@ -194,9 +203,9 @@ const List = ({ FilterdStudents, isLoading }) => {
             <div className="flex justify-center">
               <div className=" self-center">
                 <span className="flex gap-2">
-                  <div className="min-w-[6rem] bg-opacity-5 rounded-lg h-3 mx-auto bg-green-600">
+                  <div className="min-w-[6rem] bg-opacity-5 rounded-md h-3 mx-auto bg-green-600">
                     <div
-                      className="h-full rounded-lg"
+                      className="h-full rounded-md"
                       style={{
                         width:
                           assessment.avgPercentage < 0
@@ -206,14 +215,13 @@ const List = ({ FilterdStudents, isLoading }) => {
                       }}
                     ></div>
                   </div>
-                  <h2 className="font-dmSans font-bold text-xs sm:text-xs ">
+                  <h2 className="font-dmSans font-bold text-sm sm:text-sm ">
                     {" "}
                     {assessment?.avgPercentage?.toFixed(2)}%
                   </h2>
                 </span>
               </div>
             </div>
-
             <div className="flex  self-center gap-3 justify-center">
               {/* <div
                 className="self-center hover:cursor-pointer "
@@ -223,10 +231,11 @@ const List = ({ FilterdStudents, isLoading }) => {
                   View Details
                 </h2>
               </div> */}
-              <h2 className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer"
+              <h2
+                className="font-dmSans font-semibold text-sm sm:text-base self-center cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleResultsDownload(assessment?._id)
+                  handleResultsDownload(assessment?._id);
                 }}
               >
                 <TbFileDownload className="text-lightBlue h-6 w-6" />

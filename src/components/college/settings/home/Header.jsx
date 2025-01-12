@@ -22,7 +22,7 @@ const Header = () => {
       <div className="flex gap-4 justify-between md:mb-10 mb-5">
         <div className="flex gap-2">
           <button
-            className=" self-center ml-2 rounded-lg "
+            className=" self-center ml-2 rounded-md "
             // onClick={() => navigate(-1)}
           >
             {/* <img
@@ -36,7 +36,7 @@ const Header = () => {
             Settings
           </h2>
         </div>
-{/* 
+        {/* 
         <Disclosure
           as={"div"}
           className={`flex flex-col z-[999] ${

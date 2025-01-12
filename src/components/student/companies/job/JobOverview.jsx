@@ -23,8 +23,8 @@ const JobOverview = () => {
           <div className="w-full bg-gray-100 flex justify-between pt-14 pb-6 pr-10 pl-5">
             <div>
               <h2 className="font-bold text-lg">UX UI Designer</h2>
-              <h2 className="text-xs font-medium mt-1">Google, Bengaluru</h2>
-              <h2 className="text-xs font-medium mt-2 text-gray-400">
+              <h2 className="text-sm font-medium mt-1">Google, Bengaluru</h2>
+              <h2 className="text-sm font-medium mt-2 text-gray-400">
                 Posted 1 week ago
               </h2>
             </div>
@@ -36,7 +36,7 @@ const JobOverview = () => {
 
           {/* /Requirements */}
 
-          <div className="bg-gray-100 mt-2 px-6 grid grid-cols-4 text-xs font-bold text-center p-4 ">
+          <div className="bg-gray-100 mt-2 px-6 grid grid-cols-4 text-sm font-bold text-center p-4 ">
             <span>
               <h2 className="text-gray-400 my-1">EXPERIENCE</h2>
               <h2>3-5 Years</h2>
@@ -124,7 +124,7 @@ const JobOverview = () => {
         </div>
 
         <div className="sm:w-[50%] ">
-          {/* <div className=" w-full relative bg-gray-100 p-4 rounded-lg">
+          {/* <div className=" w-full relative bg-gray-100 p-4 rounded-md">
             <h2 className="font-bold my-4">Number of Students Placed</h2>
             <div className="w-10/12">
               {" "}
@@ -143,55 +143,51 @@ const JobOverview = () => {
               See All
             </h2>
           </div>
-          {
-  Array.from({length: 5}, (_, i) => (
-    <div className="flex justify-between items-center w-[98%] bg-gray-100 rounded-lg p-4 mt-4">
-    <div className="sm:flex items-center" >
-    <div className="w-16 h-16 flex items-center mr-4 ">
-    <img
-      src="/images/companyLogo.png"
-      alt=""
-      className=" rounded-2xl "
-    />
-  </div>
-      <span className="">
-        <h2 className="font-dmSans font-semibold text-sm sm:text-base">
-          Role
-        </h2>
-        <h2 className="font-dmSans font-medium text-[.6rem] sm:text-xs inline">
-          {" "}
-          CompanyName
-        </h2>
-        <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
-          {" "}
-          date
-        </h2>
-        <h2 className="font-dmSans text-gray-400  font-medium text-xs sm:text-xs inline">
-          {" "}
-          in <em className="not-italic text-black">Banglore In.</em>
-        </h2>
-      </span>
-    </div>
-    <div className="flex sm:gap-6 gap-1">
-      <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
-      <h2 className="font-dmSans text-gray-400  font-medium text-xs self-center sm:text-xs inline">
-        {" "}
-        location
-      </h2>
-      <h2 className="font-dmSans text-green-500  font-medium text-xs self-center sm:text-xs inline">
-        {" "}
-        Remote
-      </h2>
-      <button className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-lg text-white text-[.5rem] sm:text-sm self-center "
-     
-      >
-        full time
-      </button>
-      <FaArrowRight className="text-gray-400 self-center" />
-    </div>
-  </div>
-  ))
-}
+          {Array.from({ length: 5 }, (_, i) => (
+            <div className="flex justify-between items-center w-[98%] bg-gray-100 rounded-md p-4 mt-4">
+              <div className="sm:flex items-center">
+                <div className="w-16 h-16 flex items-center mr-4 ">
+                  <img
+                    src="/images/companyLogo.png"
+                    alt=""
+                    className=" rounded-2xl "
+                  />
+                </div>
+                <span className="">
+                  <h2 className="font-dmSans font-semibold text-sm sm:text-base">
+                    Role
+                  </h2>
+                  <h2 className="font-dmSans font-medium text-[.6rem] sm:text-sm inline">
+                    {" "}
+                    CompanyName
+                  </h2>
+                  <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline">
+                    {" "}
+                    date
+                  </h2>
+                  <h2 className="font-dmSans text-gray-400  font-medium text-sm sm:text-sm inline">
+                    {" "}
+                    in <em className="not-italic text-black">Banglore In.</em>
+                  </h2>
+                </span>
+              </div>
+              <div className="flex sm:gap-6 gap-1">
+                <CiLocationOn className="mx-auto sm:h-6 sm:w-6 h-4 w-4 self-center" />
+                <h2 className="font-dmSans text-gray-400  font-medium text-sm self-center sm:text-sm inline">
+                  {" "}
+                  location
+                </h2>
+                <h2 className="font-dmSans text-green-500  font-medium text-sm self-center sm:text-sm inline">
+                  {" "}
+                  Remote
+                </h2>
+                <button className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-md text-white text-[.5rem] sm:text-sm self-center ">
+                  full time
+                </button>
+                <FaArrowRight className="text-gray-400 self-center" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

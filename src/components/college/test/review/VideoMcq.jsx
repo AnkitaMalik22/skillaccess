@@ -110,7 +110,7 @@ const VideoMcq = ({
   };
 
   return (
-    <div className="flex bg-white rounded-lg justify-between mb-5">
+    <div className="flex bg-white rounded-md justify-between mb-5">
       <div className="p-5 flex flex-col gap-2">
         {search.get(`${Number}`) !== "true" ? (
           <h2 className="flex px-4 font-semibold pt-3 text-base ">
@@ -124,7 +124,7 @@ const VideoMcq = ({
           <ReactQuill
             value={mcq.Title}
             onChange={(value) => setMcq({ ...mcq, Title: value })}
-            className="border-none focus:outline-none rounded-lg focus:ring-0 placeholder-gray-400"
+            className="border-none focus:outline-none rounded-md focus:ring-0 placeholder-gray-400"
             placeholder="Enter Question Here"
             name="Title"
           />

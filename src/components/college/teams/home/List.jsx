@@ -54,7 +54,7 @@ const List = () => {
       {/* list to be iterated */}
       {approvedTeams &&
         approvedTeams?.map((team, index) => (
-          <div className=" grid-cols-7 rounded-lg my-2 py-2 pl-2 text-center w-full mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-snow">
+          <div className=" grid-cols-7 rounded-md my-2 py-2 pl-2 text-center w-full mx-auto  font-dmSans font-semibold text-base hidden md:grid bg-snow">
             {" "}
             {/* row-2 */}
             <div className={` flex `}>
@@ -81,7 +81,7 @@ const List = () => {
             <div className="flex justify-center ">
               <div className=" self-center h-fit">
                 <span className="self-center">
-                  <h2 className="font-dmSans font-medium text-xs sm:text-base inline text-blued">
+                  <h2 className="font-dmSans font-medium text-sm sm:text-base inline text-blued">
                     {" "}
                     {team?.Email}
                   </h2>

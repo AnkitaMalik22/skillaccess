@@ -23,14 +23,14 @@ const AddCode = () => {
   const { id } = useParams();
   const { topics, currentTopic } = useSelector((state) => state.test);
   const [isPrev, setIsPrev] = useState(false);
-const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(topics[id]?.compiler.length - 1);
 
   const [countDetail, setCountDetail] = useState(-1);
 
-  const isCompany = ()=>{
-   return /\/company.*/.test(window.location.pathname);
-  }
+  const isCompany = () => {
+    return /\/company.*/.test(window.location.pathname);
+  };
 
   const handlePrev = () => {
     if (addType === "topic") {
@@ -208,7 +208,7 @@ const [loading,setLoading] = useState(false)
       output: [""],
     });
   };
-  const handleSave =async  (component) => {
+  const handleSave = async (component) => {
     setLoading(true);
     if (addType === "topic") {
       if (
@@ -253,16 +253,16 @@ const [loading,setLoading] = useState(false)
             toast.error("Testcases required");
             return;
           }
-         
-          if(isCompany()){
-           await dispatch(
+
+          if (isCompany()) {
+            await dispatch(
               addQuestionToTopicCompany({
                 data: { ...question, codeLanguage: "" },
                 id: id,
                 type: type,
               })
             );
-          }else{
+          } else {
             await dispatch(
               addCompilerToTopic({
                 data: { ...question, codeLanguage: "" },
@@ -270,7 +270,7 @@ const [loading,setLoading] = useState(false)
                 type: type,
               })
             );
-           await  dispatch(
+            await dispatch(
               addQuestionToTopic({
                 data: { ...question, codeLanguage: "" },
                 id: id,
@@ -278,7 +278,7 @@ const [loading,setLoading] = useState(false)
               })
             );
           }
-          
+
           resetQuestion();
           setToggle(1);
         }
@@ -324,7 +324,7 @@ const [loading,setLoading] = useState(false)
           return;
         }
         if (isPrev) {
-        await  dispatch(
+          await dispatch(
             addCompiler({
               data: { ...question, codeLanguage: "" },
               id: id,
@@ -339,7 +339,7 @@ const [loading,setLoading] = useState(false)
             resetQuestion();
           });
         } else {
-         await dispatch(
+          await dispatch(
             addCompiler({
               data: { ...question, codeLanguage: "" },
               id: id,
@@ -361,7 +361,7 @@ const [loading,setLoading] = useState(false)
         toast.error("Please fill all the fields");
       }
     }
-    setLoading(false)
+    setLoading(false);
     // //console.log(question);
   };
   useEffect(() => {
@@ -377,14 +377,26 @@ const [loading,setLoading] = useState(false)
 
   return (
     <div>
-      {isCompany()?  <HeaderCompany hideNext={true} children ={<button
-          className="bg-accent self-center text-white rounded-lg h-10 w-10 sm:w-32 flex items-center justify-center"
-          onClick={()=>handleSave("save")}
-        >
-          {loading ? "Saving" : "Save"}
-          {loading && <Loader size="sm" />}
-        </button>} handlePrev={()=>{navigate(`/company/pr/test/select?level=${level}`)}}/>:   <Header handleSave={handleSave} />}
-    
+      {isCompany() ? (
+        <HeaderCompany
+          hideNext={true}
+          children={
+            <button
+              className="bg-accent self-center text-white rounded-md h-10 w-10 sm:w-32 flex items-center justify-center"
+              onClick={() => handleSave("save")}
+            >
+              {loading ? "Saving" : "Save"}
+              {loading && <Loader size="sm" />}
+            </button>
+          }
+          handlePrev={() => {
+            navigate(`/company/pr/test/select?level=${level}`);
+          }}
+        />
+      ) : (
+        <Header handleSave={handleSave} />
+      )}
+
       <div className="bg-white min-h-[90vh] mx-auto rounded-xl relative">
         <div className="flex flex-wrap gap-5 md:flex-nowrap mb-5 md:mb-10 ">
           <div className="w-1/2 ">
@@ -419,7 +431,7 @@ const [loading,setLoading] = useState(false)
           <div className=" flex gap-2">
             {addType === "topic" ? (
               <button
-                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                   countDetail >= 0 ? "" : "hidden"
                 }`}
                 onClick={handlePrev}
@@ -428,7 +440,7 @@ const [loading,setLoading] = useState(false)
               </button>
             ) : (
               <button
-                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 ${
+                className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
                   count >= 0 ? "" : "hidden"
                 }`}
                 onClick={handlePrev}
@@ -439,7 +451,7 @@ const [loading,setLoading] = useState(false)
           </div>
           <div className=" flex">
             <button
-              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-lg text-sm font-bold gap-2 "
+              className="self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 "
               onClick={() => handleSave("next")}
             >
               <FaPlus className="self-center" /> Add Next Question

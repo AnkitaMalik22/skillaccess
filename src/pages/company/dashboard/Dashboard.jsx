@@ -13,19 +13,15 @@ import { getJobs } from "../../../redux/company/jobs/jobSlice";
 import { getAllTests } from "../../../redux/company/test/thunks/test";
 import { getResultGraphCompany } from "../../../redux/company/result/thunks/graph";
 import toast from "react-hot-toast";
+import DashboardCard from "../../../components/cards/DashboardCard";
 
 const DashboardCompany = () => {
   //useTranslate();
   const dispatch = useDispatch();
   const { totalAssessments } = useSelector((state) => state.companyTest);
 
-
-
-
-
-
-const { data:user } = useSelector((state) => state.companyAuth);
-const { jobs } = useSelector((state) => state.job);
+  const { data: user } = useSelector((state) => state.companyAuth);
+  const { jobs } = useSelector((state) => state.job);
 
   useEffect(() => {
     if (user) {
@@ -33,120 +29,96 @@ const { jobs } = useSelector((state) => state.job);
     }
   }, [user]);
 
-
   useEffect(() => {
     if (user?._id) {
-      dispatch(getJobs({ companyId: user._id ,cursor:"" ,limit : 10 }));
+      dispatch(getJobs({ companyId: user._id, cursor: "", limit: 10 }));
     }
   }, [dispatch, user?._id]);
-
 
   useEffect(() => {
     dispatch(getCompany());
     dispatch(getAllTests());
-    dispatch(getResultGraphCompany())
+    dispatch(getResultGraphCompany());
     // dispatch(getCompanyJobTests());
   }, []);
 
+  const cardData = [
+    {
+      icon: CgClipboard,
+      iconColor: "#5243AA",
+      bgColor: "#f6f6fb",
+      count: jobs?.length || 0,
+      title: "Total Jobs",
+    },
+    {
+      icon: CgAwards,
+      iconColor: "green",
+      bgColor: "#f2f9f7",
+      count: 0, // Replace with dynamic count if available
+      title: "Students Hired",
+    },
+    {
+      icon: CgTrending,
+      iconColor: "#FF991F",
+      bgColor: "#fffaf4",
+      count: 0, // Replace with dynamic count if available
+      title: "Students Appeared",
+    },
+    {
+      icon: TbBriefcase2,
+      iconColor: "#1E90FF", // Example: Blue color for the briefcase icon
+      bgColor: "#fafbff",
+      count: 0, // Replace with dynamic count if available
+      title: "Institutes",
+      actionLabel: "View",
+      actionIcon: FaArrowRight,
+      onClick: () => navigate("/college/dashboard/jobs"),
+    },
+    {
+      icon: MdOutlinedFlag,
+      iconColor: "#1E90FF", // Blue for assessments icon
+      bgColor: "#fafbff",
+      count: totalAssessments || 0,
+      title: "Available Assessment",
+      actionLabel: "Create New",
+      actionIcon: FaArrowRight,
+      onClick: () => navigate("/company/pr/test"),
+    },
+  ];
 
   const navigate = useNavigate();
   return (
     <>
-      <div className="bg-[#F8F8F9]  rounded-3xl p-4 md:p-8 mb-5">
+      <div className="bg-[#F8F8F9]  rounded-2xl p-4 md:p-8 mb-5">
         <h1 className="text-base font-bold mb-4 md:mb-8 basis-full text-[#171717]">
           Overview
         </h1>
-        <div className="flex flex-wrap gap-6 xl:gap-8 2xl:gap-12 justify-between">
-          {/* 1st card */}
-          <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
-            <div className="rounded-lg bg-[#f6f6fb] w-10 h-10 flex justify-center mb-4">
-              <CgClipboard className="text-[#5243AA] self-center w-6 h-6 " />
-            </div>
-            <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-              {
-                jobs?.length || 0
-              }
-            </h2>
-            <h2 className="text-[#8F92A1] font-bold text-xs mb-4">Total Jobs</h2>
-            {/* <h2 className="text-[#00875A] font-medium text-[17px]">105.34%</h2> */}
-          </div>
-
-          <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
-            <div className="rounded-lg bg-[#f2f9f7] w-10 h-10 flex justify-center mb-4">
-              <CgAwards className="text-green-600 self-center w-6 h-6 " />
-            </div>
-            <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-              {0}
-            </h2>
-            <h2 className="text-[#8F92A1] font-bold text-xs mb-4">Students Hired</h2>
-            {/* <h2 className="text-[#DE350B] font-medium text-[17px]">25.34%</h2> */}
-          </div>
-
-          <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
-            <div className="rounded-lg bg-[#fffaf4] w-10 h-10 flex justify-center mb-4">
-              <CgTrending className="text-[#FF991F] self-center w-6 h-6 " />
-            </div>
-            <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-              {0}
-            </h2>
-            <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
-            Students Appeared
-            </h2>
-            {/* <h2 className="text-[#DE350B] font-medium text-[17px]">0%</h2> */}
-          </div>
-
-          <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
-            <div className="rounded-lg bg-[#fafbff] w-10 h-10 flex justify-center mb-4">
-              <TbBriefcase2 className="text-blued  self-center w-6 h-6 " />
-            </div>
-            <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-             {
-                0
-             }
-            </h2>
-            <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
-            Intitutes
-            </h2>
-            {/* <h2
-              className="text-[#DE350B] font-medium text-[17px] hover:cursor-pointer"
-              onClick={() => navigate("/college/dashboard/jobs")}
-            >
-              0%
-            </h2> */}
-          </div>
-
-          <div className="card w-[13%] md:w-[16%] lg:w-[17%] bg-[#fff] p-4 md:p-8 items-center text-center">
-            <div className="rounded-lg bg-[#fafbff] w-10 h-10 flex justify-center mb-4">
-              <MdOutlinedFlag className="text-blued  self-center w-6 h-6 " />
-            </div>
-            <h2 className="text-[30px] text-center font-bold mb-1 text-[#171717]">
-              {
-              totalAssessments || 0
-              }
-            </h2>
-            <h2 className="text-[#8F92A1] font-bold text-xs mb-4">
-              Available Assessment
-            </h2>
-            <span
-              className="flex gap-2 justify-center hover:cursor-pointer"
-              onClick={() => navigate("/company/pr/test")}
-            >
-              <h2 className="text-blued  font-bold text-center  text-base  ">
-                Create New
-              </h2>
-              <FaArrowRight className="text-blued  self-center" />
-            </span>
-          </div>
+        <div className="flex flex-wrap justify-between">
+          {cardData
+            .filter((card) => card.condition === undefined || card.condition) // Filter out cards based on the condition
+            .map((card, index) => (
+              <DashboardCard
+                key={index}
+                icon={card.icon}
+                iconColor={card.iconColor}
+                bgColor={card.bgColor}
+                count={card.count}
+                title={card.title}
+                onClick={card.onClick}
+                actionLabel={card.actionLabel}
+                actionIcon={card.actionIcon}
+              />
+            ))}
         </div>
       </div>
 
       <div className=" gap-5  mx-auto  overflow-x-clip grid grid-cols-1">
         {/* 1st block */}
-        <div className="bg-[#F8F8F9]  rounded-3xl p-4 md:p-8 mb-5">
+        <div className="bg-[#F8F8F9]  rounded-2xl p-4 md:p-8 mb-5">
           <span className="flex justify-between">
             <div className="w-3/4">
               <h1 className="text-base font-bold mb-4 md:mb-8 basis-full text-[#171717]">
-              New Jobs Created
+                New Jobs Created
               </h1>{" "}
             </div>
 
@@ -161,7 +133,7 @@ const { jobs } = useSelector((state) => state.job);
           <SwiperSlideLeft />
         </div>
         {/* 2nd block */}
-        {/* <div className="bg-[#F8F8F9]  rounded-3xl p-4 md:p-8 mb-5">
+        {/* <div className="bg-[#F8F8F9]  rounded-2xl p-4 md:p-8 mb-5">
           <span className="flex justify-between">
             <div className="w-3/4">
               <h1 className="text-base font-bold mb-4 md:mb-8 basis-full text-[#171717] ">
