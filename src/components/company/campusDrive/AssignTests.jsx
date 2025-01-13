@@ -15,7 +15,7 @@ export default function AssignTests() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTest, setSelectedTest] = useState(null);
-  const [selectedColleges, setSelectedColleges] = useState([]);
+  const [selectedCollege, setSelectedCollege] = useState(null); // Changed from array to single value
   const { assessments: tests, loading: loadingTests } = useSelector((state) => state.test);
   const { currentCampusDrive, loading: loadingCampusDrive } = useSelector((state) => state.campusDrive);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,9 +28,7 @@ export default function AssignTests() {
   }, [driveId, dispatch]);
 
   const handleCollegeSelection = (collegeId) => {
-    setSelectedColleges((prev) =>
-      prev.includes(collegeId) ? prev.filter((id) => id !== collegeId) : [...prev, collegeId]
-    );
+    setSelectedCollege(collegeId === selectedCollege ? null : collegeId);
   };
 
   const handleTestSelection = (testId) => {
@@ -42,8 +40,8 @@ export default function AssignTests() {
   };
 
   const handleSubmit = async () => {
-    if (!selectedTest || selectedColleges.length === 0) {
-      toast.error("Please select a test and at least one college");
+    if (!selectedTest || !selectedCollege) {
+      toast.error("Please select a test and a college");
       return;
     }
 
@@ -52,7 +50,7 @@ export default function AssignTests() {
       await dispatch(
         assignTestToColleges({
           driveId,
-          colleges: selectedColleges,
+          colleges: [selectedCollege], // Send as array with single value
           test: selectedTest,
         })
       ).unwrap();
@@ -67,7 +65,7 @@ export default function AssignTests() {
   };
 
   const handleClearSelection = () => {
-    setSelectedColleges([]);
+    setSelectedCollege(null);
     setSelectedTest(null);
   };
 
@@ -118,7 +116,7 @@ export default function AssignTests() {
               <div
                 key={college._id}
                 className={`p-4 rounded-lg ${
-                  selectedColleges.includes(college._id) ? "bg-blued text-white" : "bg-[#f8f8f8]"
+                  selectedCollege === college._id ? "bg-blued text-white" : "bg-[#f8f8f8]"
                 }  hover:shadow-lg transition-shadow duration-200 cursor-pointer`}
                 onClick={() => handleCollegeSelection(college._id)}
               >
@@ -134,16 +132,16 @@ export default function AssignTests() {
                     <p className="text-sm opacity-75">Phone: {college.Phone}</p>
                   </div>
                 </div>
-                {selectedColleges.includes(college._id) && (
+                {selectedCollege === college._id && (
                   <FiCheck className="absolute top-2 right-2 text-2xl" />
                 )}
               </div>
             ))}
         </div>
       )}
-      {selectedColleges.length > 0 && (
+      {selectedCollege && (
         <div className="mt-4 p-4 bg-gray-50 rounded-lg flex justify-between items-center">
-          <p className="font-medium text-[#043345]">{selectedColleges.length} college(s) selected</p>
+          <p className="font-medium text-[#043345]">1 college selected</p>
           <button
             onClick={handleScrollToTests}
             className="px-4 py-2 bg-blued text-white rounded-md hover:bg-[#043345] transition-colors duration-200"
@@ -156,7 +154,7 @@ export default function AssignTests() {
   );
 
   const renderTestList = (title, tests) => {
-    if (!selectedColleges.length) {
+    if (!selectedCollege) {
       return null;
     }
 
@@ -185,7 +183,7 @@ export default function AssignTests() {
                 {selectedTest === test._id && (
                   <div className="mt-2">
                     <p className="text-sm opacity-75 ">
-                      Selected Colleges ({selectedColleges.length})
+                      Selected Colleges (1)
                     </p>
                   </div>
                 )}
@@ -219,7 +217,7 @@ export default function AssignTests() {
             Back to Campus Drive
           </button>
           <h1 className="text-3xl font-bold text-[#043345]">Assign Tests to Colleges</h1>
-          {selectedColleges.length > 0 && (
+          {selectedCollege && (
             <button
               onClick={handleClearSelection}
               className="px-4 py-2 text-sm text-gray-600 bg-transparent hover:bg-gray-200 rounded-md"
@@ -231,16 +229,30 @@ export default function AssignTests() {
 
         {renderColleges()}
 
-        {selectedColleges.length > 0 && (
+        {selectedCollege && (
           <div className="bg-[#f8f8f8] rounded-lg p-6 shadow-md mt-8">
-             {renderStepHeader(2, "Assign Tests", "Choose one test to assign to the selected colleges")}
+            <div className="bg-blue-50 border-l-4 border-blued p-4 mb-6">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-blued" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-blued">
+                    Currently, we only support assigning one test to one college at a time.
+                  </p>
+                </div>
+              </div>
+            </div>
+            {renderStepHeader(2, "Assign Tests", "Choose one test to assign to the selected college")}
             {renderTestList("Beginner", tests.beginner || [])}
             {renderTestList("Intermediate", tests.intermediate || [])}
             {renderTestList("Advanced", tests.advanced || [])}
           </div>
         )}
 
-        {selectedColleges.length > 0 && selectedTest && (
+        {selectedCollege && selectedTest && (
           <div className="text-right mt-6">
             <button
               onClick={handleSubmit}
