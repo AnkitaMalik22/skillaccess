@@ -8,7 +8,7 @@ const JobCard = ({ job }) => {
   return (
     <div
       className="w-full h-auto bg-white  hover:shadow-md transition-shadow duration-300 my-3 text-start font-medium text-gray-800 rounded-md  p-6 border border-gray-200 capitalize font-dmSans"
-      key={job.id}
+      key={job._id}
     >
       {/* Company Info */}
       <div className="logo flex items-center gap-4 mb-4">
