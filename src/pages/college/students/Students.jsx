@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStudents } from "../../../redux/college/student/studentSlice";
 import Header from "../../../components/college/students/Header";
 import { isUni } from "../../../util/isCompany";
-import { Table } from "../../../components/ui/tables/Table"; // Assuming Table is extracted into a separate file
 import StudentsTable from "../../../components/ui/tables/StudentsTable";
 
 const Students = () => {

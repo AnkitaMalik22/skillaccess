@@ -1,4 +1,3 @@
-// CombinedLoginPage.jsx
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -6,12 +5,11 @@ import { LuEye, LuEyeOff } from "react-icons/lu";
 import toast from "react-hot-toast";
 import Layout from "./Layout";
 import InputField from "../components/InputField";
-
-// Import role-specific actions
 import { loginCollege } from "../redux/college/auth/authSlice";
 import { LoginCompany } from "../redux/company/auth/companyAuthSlice";
 import { loginUniversity } from "../redux/university/auth/universityAuthSlice";
 import CircularLoader from "../components/CircularLoader";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
   const location = useLocation();
@@ -73,8 +71,6 @@ const LoginPage = () => {
     }
   };
 
-  const isLoginDisabled = !credentials.Email || !credentials.Password;
-
   return (
     <Layout>
       <form className="w-full" onSubmit={handleSubmit}>
@@ -130,11 +126,11 @@ const LoginPage = () => {
                 )}
               </button>
             </div>
-            <div
-              className="flex gap-2 px-2 w-full max-w-sm mx-auto justify-end mb-4 md:mb-8"
-              onClick={() => navigate("/forgotPassword")}
-            >
-              <h1 className="text-blue-700 font-bold cursor-pointer">
+            <div className="flex gap-2 px-2 w-full max-w-sm mx-auto justify-end mb-4 md:mb-8">
+              <h1
+                className="text-blued font-bold cursor-pointer"
+                onClick={() => navigate("/forgotPassword")}
+              >
                 Forgot Password
               </h1>
             </div>
@@ -144,6 +140,25 @@ const LoginPage = () => {
             >
               Login {loading && <CircularLoader />}
             </button>
+            {/* <h3 className="text-lGray text-center text-bold text-xs mt-1">
+              OR
+            </h3>
+            <button
+              className="btn btn-primary rounded-md border-none  mt-2 focus:outline-none  w-full max-w-sm mb-2  mx-auto bg-[#F3F6F8] "
+              type="button"
+              lo
+            >
+              <FcGoogle className="text-lg mr-2" />
+              <h3
+                className="opacity-100 text-[#171717]"
+                onClick={login}
+
+                onClick={() => navigate("/collage/dashboard")}
+
+              >
+                Continue with google
+              </h3>
+            </button> */}
           </div>
         </div>
       </form>
