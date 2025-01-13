@@ -16,9 +16,7 @@ strong {
 }
 
 .google-div {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.6rem;
+  position: relative;
 }
 
 .goog-te-combo {
@@ -50,9 +48,12 @@ body {
 .goog-te-gadget .goog-te-combo {
   font-weight: 700;
   font-family: DM Sans;
-  font-style: italic;
   color: #161616;
   font-size: 0.9rem;
+}
+
+.goog-te-gadget .goog-te-combo:hover {
+  border-color: #0d9aac;
 }
 
 iframe {

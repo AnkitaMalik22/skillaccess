@@ -95,7 +95,7 @@ const Description = ({ topics, assessment }) => {
                   </p>
                 </div>
 
-                <p className="text-sm self-center text-[#2348C7] text-opacity-80 tracking-[-0.4px] uppercase">
+                <p className="text-sm self-center text-blued text-opacity-80 tracking-[-0.4px] uppercase">
                   {topic.Type}
                 </p>
               </span>

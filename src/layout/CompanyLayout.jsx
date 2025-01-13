@@ -1,13 +1,13 @@
 import React from "react";
 import SharedLayout from "./SharedLayout";
-import CompanyNavbar from "../components/navbar/CompanyNavbar";
 import { companySidebarItems } from "./SidebarItems";
 import { getCompany } from "../redux/company/auth/companyAuthSlice";
+import Navbar from "../components/navbar/Navbar";
 
 const CompanyLayout = () => {
   return (
     <SharedLayout
-      navbarComponent={CompanyNavbar}
+      navbarComponent={(props) => <Navbar userType="company" {...props} />}
       sidebarItems={companySidebarItems}
       getUser={getCompany}
     />

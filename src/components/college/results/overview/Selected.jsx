@@ -1,202 +1,196 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getselectedStudents } from "../../../../redux/college/test/thunks/test";
-import Skeleton from "../../../loaders/Skeleton";
 import { getselectedStudentsCompany } from "../../../../redux/company/test/thunks/test";
+import Pagination from "../../../Pagination";
+import { Table } from "../../../ui/tables/Table";
 import isCompany, { isUni } from "../../../../util/isCompany";
+import { IoMdClose } from "react-icons/io";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Selected = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const id = searchParams.get("assessment");
+  const [searchParams] = useSearchParams();
+  const assessmentId = searchParams.get("assessment");
 
-  // //console.log(id);
+  const [filters, setFilters] = useState({
+    name: "",
+    profileDate: "",
+    assessmentPerformance: "",
+  });
+
+  const [isInputOpen, setIsInputOpen] = useState({
+    name: false,
+    profileDate: false,
+    assessmentPerformance: false,
+  });
+
   useEffect(() => {
-    if (isCompany()) {
-      dispatch(getselectedStudentsCompany(id));
-    } else {
-      dispatch(getselectedStudents(id));
-    }
-  }, []);
-
-  const { selectedStudents, SELECTED_STUDENTS_LOADING } = useSelector(
-    (state) => {
+    if (assessmentId) {
       if (isCompany()) {
-        return state.companyTest;
+        dispatch(getselectedStudentsCompany(assessmentId));
       } else {
-        return state.test;
+        dispatch(getselectedStudents(assessmentId));
       }
     }
+  }, [assessmentId, dispatch]);
+
+  const { selectedStudents, SELECTED_STUDENTS_LOADING } = useSelector((state) =>
+    isCompany() ? state.companyTest : state.test
   );
 
-  let percentageData = [];
-  let colors = [];
-
-  if (selectedStudents?.length > 0) {
-    percentageData = selectedStudents.map((item) => item.percentage);
-
-    percentageData.forEach((percentage) => {
-      let color = "";
-      if (percentage <= 0) {
-        color = "transparent";
-      } else if (percentage > 0 && percentage < 33.33) {
-        color = "#F44336"; // Red color
-      } else if (percentage >= 33.33 && percentage < 66.66) {
-        color = "#FFC107"; // Orange color
-      } else {
-        color = "#4CAF50"; // Green color
-      }
-      colors.push(color);
-    });
-  }
-  const covertToDateFormat = (date) => {
-    const d = new Date(date);
-    return d.toDateString();
+  const handleFilterChange = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
+
+  const toggleInputField = (field) => {
+    setIsInputOpen((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
+
+  const resetFilter = (field) => {
+    setFilters((prev) => ({ ...prev, [field]: "" }));
+    setIsInputOpen((prev) => ({ ...prev, [field]: false }));
+  };
+
+  const filteredData =
+    selectedStudents?.filter((student) => {
+      const nameMatch =
+        !filters.name ||
+        student?.studentId?.FirstName?.toLowerCase().includes(
+          filters.name.toLowerCase()
+        );
+
+      const profileDateMatch =
+        !filters.profileDate ||
+        new Date(student?.createdAt)
+          .toDateString()
+          .includes(filters.profileDate);
+
+      const performanceMatch =
+        !filters.assessmentPerformance ||
+        parseFloat(student?.percentage || 0) ===
+          parseFloat(filters.assessmentPerformance);
+
+      return nameMatch && profileDateMatch && performanceMatch;
+    }) || [];
+
+  const getColorByPercentage = (value) => {
+    if (value >= 90) return "bg-green-500";
+    if (value >= 80) return "bg-green-400";
+    if (value >= 70) return "bg-blue-500";
+    if (value >= 60) return "bg-yellow-500";
+    if (value >= 50) return "bg-orange-500";
+    return "bg-red-500";
+  };
+
+  const columns = [
+    {
+      header: "S. No.",
+      accessor: (_, index) => index + 1,
+    },
+    {
+      header: (
+        <div className="flex flex-col">
+          <div className="flex items-center gap-2">
+            <span>Name and Profile</span>
+            <button
+              onClick={() => toggleInputField("name")}
+              className="text-gray-500"
+            >
+              {isInputOpen.name ? (
+                <IoMdClose
+                  onClick={() => {
+                    resetFilter("name");
+                    toggleInputField("name");
+                  }}
+                />
+              ) : (
+                <RiArrowDropDownLine />
+              )}
+            </button>
+          </div>
+          {isInputOpen.name && (
+            <input
+              type="text"
+              placeholder="Filter by Name"
+              value={filters.name}
+              onChange={(e) => handleFilterChange("name", e.target.value)}
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blued focus:ring-0"
+            />
+          )}
+        </div>
+      ),
+      accessor: (student) => (
+        <div className="flex items-center gap-2">
+          <img
+            src={student?.studentId?.avatar?.url || "/images/student.png"}
+            alt="Profile"
+            className="h-10 w-10 rounded-full"
+          />
+          <span>{student?.studentId?.FirstName}</span>
+        </div>
+      ),
+    },
+    {
+      header: "Date",
+      accessor: (student) => new Date(student?.createdAt).toDateString(),
+    },
+    {
+      header: "Status",
+      accessor: (student) => (
+        <span className="capitalize">{student?.status || "Pending"}</span>
+      ),
+    },
+    {
+      header: "Assessment Performance",
+      accessor: (student) => (
+        <div className="flex items-center gap-2">
+          <div className="h-3 w-24 bg-gray-200 rounded-md">
+            <div
+              className={`h-full rounded-md ${getColorByPercentage(
+                student?.percentage || 0
+              )}`}
+              style={{ width: `${student?.percentage || 0}%` }}
+            ></div>
+          </div>
+          <span>{(student?.percentage || 0).toFixed(2)}%</span>
+        </div>
+      ),
+    },
+    {
+      header: "Review",
+      accessor: (student) => (
+        <button
+          className="text-blued underline"
+          onClick={(e) => {
+            e.stopPropagation();
+            const basePath = isCompany()
+              ? "/company/pr/results/assessmentReview"
+              : `/${
+                  isUni() ? "university/pr" : "college"
+                }/results/assessmentReview`;
+
+            navigate(
+              `${basePath}?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
+            );
+          }}
+        >
+          Assessment Review
+        </button>
+      ),
+    },
+  ];
 
   return (
     <div className="w-full mx-auto">
-      {/* legend */}
-      <div className=" grid-cols-5  text-center  mx-auto  font-dmSans font-bold text-base hidden md:grid">
-        <div className="bg-accent bg-opacity-5 rounded-s-lg p-2 ">
-          <h2>Name and Profile</h2>
-        </div>
-        <div className="bg-accent bg-opacity-5 p-2">
-          <h2>Date</h2>
-        </div>
-        <div className="bg-accent bg-opacity-5 p-2">
-          <h2>Status</h2>{" "}
-        </div>
-        <div className="bg-accent  bg-opacity-5 p-2">
-          <h2>Assessment Performance(Mcq &Code)</h2>
-        </div>
-        <div className="bg-accent bg-opacity-5 p-2 rounded-e-lg">
-          <h2>Review</h2>
-        </div>
-      </div>
-
-      {/* list to be iterated */}
-      {SELECTED_STUDENTS_LOADING && <Skeleton />}
-      {!SELECTED_STUDENTS_LOADING &&
-        selectedStudents?.map((student, index) => (
-          <div
-            className=" grid-cols-5 rounded-md my-4 py-2 pl-2   mx-auto  font-dmSans  text-sm hidden md:grid w-11/12 hover:border-accent hover:cursor-pointer border-transparent border"
-            onClick={(e) => {
-              if (isCompany()) {
-                navigate(
-                  `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                );
-              } else {
-                navigate(
-                  `/${
-                    isUni() ? "university/pr" : "college"
-                  }/results/assessmentReview?studentId=${
-                    student.studentId._id
-                  }&assessmentId=${student.assessmentId}&responseId=${
-                    student._id
-                  }`
-                );
-              }
-            }}
-          >
-            {" "}
-            {/* row-2 */}
-            <div className={` flex `}>
-              <div className="flex self-center">
-                <div className=" min-w-[3rem] self-center  mr-2  ">
-                  <img
-                    alt=""
-                    src={
-                      student?.studentId?.avatar?.url || "/images/student.png"
-                    }
-                    className="w-10 h-10 rounded-full"
-                  />
-                </div>
-                <span className="break-words min-w-24 pt-1 self-center">
-                  <h2 className="font-dmSans font-semibold text-sm sm:text-base  ">
-                    {student?.studentId?.FirstName}
-                  </h2>
-                </span>
-              </div>
-            </div>
-            {/*  */}
-            <div className="flex justify-center mr-16 ">
-              <div className=" self-center h-fit ">
-                <span>
-                  <h2 className="font-dmSans  sm:text-sm ">
-                    {covertToDateFormat(student?.createdAt)}
-                  </h2>
-                </span>
-              </div>
-            </div>
-            {/*  */}
-            <div className="flex justify-center">
-              <div className=" self-center h-fit">
-                <span>{student.status}</span>
-              </div>
-            </div>
-            {/*  */}
-            <div className="flex justify-center">
-              <div className=" self-center">
-                <span className="flex gap-2">
-                  <div className="min-w-[6rem] bg-opacity-5 rounded-md h-3 mx-auto bg-green-600">
-                    <div
-                      className={`h-full rounded-md`}
-                      style={{
-                        width: `${student?.percentage}%`,
-                        backgroundColor: colors[index],
-                      }}
-                    ></div>
-                  </div>
-                  <h2 className="font-dmSans font-bold text-sm sm:text-sm ">
-                    {" "}
-                    {student?.percentage?.toFixed(2)}%
-                  </h2>
-                </span>
-              </div>
-            </div>
-            {/*  */}
-            <div className="flex justify-end mr-3">
-              <span
-                className="self-center cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (isCompany()) {
-                    navigate(
-                      `/company/pr/results/assessmentReview?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
-                    );
-                  } else {
-                    navigate(
-                      `/${
-                        isUni() ? "university/pr" : "college"
-                      }/results/assessmentReview?studentId=${
-                        student.studentId._id
-                      }&assessmentId=${student.assessmentId}&responseId=${
-                        student._id
-                      }`
-                    );
-                  }
-                }}
-              >
-                <h2 className="font-dmSans  text-sm sm:text-base text-blued ">
-                  Assessment Review
-                </h2>
-              </span>
-            </div>
-          </div>
-        ))}
-
-      {!SELECTED_STUDENTS_LOADING &&
-        selectedStudents &&
-        selectedStudents?.length === 0 && (
-          <div className="flex justify-center items-center h-96">
-            <h2 className="font-dmSans text-lg text-gray-500">
-              No students have selected for this assessment
-            </h2>
-          </div>
-        )}
+      <Table
+        columns={columns}
+        data={filteredData}
+        isLoading={SELECTED_STUDENTS_LOADING}
+        className="mt-4"
+      />
     </div>
   );
 };
