@@ -8,6 +8,9 @@ import {
   LuFileText,
   LuBookOpen,
   LuUser,
+  LuMail,
+  LuFiles,
+  LuSettings,
 } from "react-icons/lu";
 
 const iconProps = { size: 24 };
@@ -74,6 +77,13 @@ export const collegeSidebarItems = [
     ),
   },
   {
+    name: "Inbox",
+    path: "/college/inbox",
+    icon: (active) => (
+      <LuMail {...iconProps} color={active ? "#171717" : "white"} />
+    ),
+  },
+  {
     name: "Test",
     path: "/college/test",
     icon: (active) => (
@@ -122,14 +132,28 @@ export const collegeSidebarItems = [
       <LuBookOpen {...iconProps} color={active ? "#171717" : "white"} />
     ),
   },
-  {
-    name: "Profile",
-    path: "/college/profile",
-    icon: (active) => (
-      <LuUser {...iconProps} color={active ? "#171717" : "white"} />
-    ),
-  },
+  // {
+  //   name: "Profile",
+  //   path: "/college/profile",
+  //   icon: (active) => (
+  //     <LuUser {...iconProps} color={active ? "#171717" : "white"} />
+  //   ),
+  // },
 
+  // {
+  //   name: "Billing",
+  //   path: "/college/accounting",
+  //   icon: (active) => (
+  //     <LuFiles {...iconProps} color={active ? "#171717" : "white"} />
+  //   ),
+  // },
+  // {
+  //   name: "Settings",
+  //   path: "/college/settings",
+  //   icon: (active) => (
+  //     <LuSettings {...iconProps} color={active ? "#171717" : "white"} />
+  //   ),
+  // },
 ];
 
 export const universitySidebarItems = [

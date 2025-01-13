@@ -56,7 +56,7 @@ const QuesBank = () => {
           <Recent />
         </div>
         <div className="w-2/5">
-          <div className="w-full mx-auto bg-[#F8F8F9] md:px-8 md:py-6 py-5 px-5 rounded-3xl">
+          <div className="w-full mx-auto bg-[#F8F8F9] md:px-8 md:py-6 py-5 px-5 rounded-md">
             <div className="flex justify-between mb-6 items-center ">
               <div className="flex gap-2 self-center">
                 <LuBookmarkMinus className="self-center text-2xl text-blued " />
@@ -66,7 +66,7 @@ const QuesBank = () => {
               </div>
 
               <button
-                className="rounded-xl bg-accent text-sm font-bold text-white py-[5px] px-3"
+                className="rounded-md bg-accent text-sm font-bold text-white py-[5px] px-3"
                 onClick={() =>
                   isUni()
                     ? navigate("/university/pr/quesbank/bookmarks")

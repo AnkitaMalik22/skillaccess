@@ -22,7 +22,7 @@ import { getAllJobs } from "../../../redux/college/jobs/collegeJobSlice";
 import axios from "axios";
 import { getUniversity } from "../../../redux/university/auth/universityAuthSlice";
 import { isUni } from "../../../util/isCompany";
-import CollegeDashboardCard from "../../../components/cards/CollegeDashboardCard";
+import DashboardCard from "../../../components/cards/DashboardCard";
 
 const Dashboard = ({}) => {
   //useTranslate();
@@ -110,7 +110,7 @@ const Dashboard = ({}) => {
           {cardData
             .filter((card) => card.condition === undefined || card.condition) // Filter out cards based on the condition
             .map((card, index) => (
-              <CollegeDashboardCard
+              <DashboardCard
                 key={index}
                 icon={card.icon}
                 iconColor={card.iconColor}

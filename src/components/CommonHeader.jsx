@@ -3,7 +3,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import isCompany, { isUni } from "../util/isCompany";
-import Loader from "../Loader";
+import Loader from "./loaders/Loader";
 
 const Header = ({ handleNext, loading, backPath, title }) => {
   const navigate = useNavigate();

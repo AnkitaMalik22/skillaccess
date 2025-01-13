@@ -63,7 +63,14 @@ const testState = {
   studentResponse: [],
   selectedStudents: [],
   response: [],
-  testDataResponse: {},
+  testDataResponse: {
+    pagination: {
+      currentPage: 0,
+      totalPages: 0,
+      totalDocuments: 0,
+      limit: 10
+  }
+  },
   testName: "",
   testDescription: "",
   testAttempts: "",
@@ -240,6 +247,9 @@ const testSlice = createSlice({
   initialState: testState,
   name: "test",
   reducers: {
+    resetStudentList : (state,action)=>{
+      state.testDataResponse={}
+    },
     setInTest: (state, action) => {
       state.inTest = action.payload;
     },
@@ -742,7 +752,7 @@ const testSlice = createSlice({
         //console.log("fullfilled");
       })
       .addCase(getAllTopics.rejected, (state, action) => {
-        console.error("Error fetching topics:", action.payload);
+        // console.error("Error fetching topics:", action.payload);
         state.GET_TOPICS_LOADING = false;
         state.status = "failed";
         state.error = action.payload;
@@ -799,6 +809,9 @@ const testSlice = createSlice({
       })
       .addCase(getTestResultPage.pending, (state, action) => {
         state.status = "pending";
+        // state.testDataResponse.students=[];
+        // state.testDataResponse.selectedStudents=[];
+        // state.testDataResponse.rejectedStudents=[];
         state.TEST_DATA_RESPONSE_LOADING = true;
       })
       .addCase(getTestResultPage.fulfilled, (state, action) => {
@@ -1028,6 +1041,7 @@ const testSlice = createSlice({
 });
 
 export const {
+  resetStudentList,
   setInTest,
   setCurrentQuestionCount,
   setTotalSelectedQuestions,

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-hot-toast";
 // import {
 //   googleRegisterUniversity,
 //   registerUniversity,
 // } from "../../../redux/university/auth/authSlice"; // Update Redux actions
 import { registerUniversity } from "../../../redux/university/auth/universityAuthSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { LuEye, LuEyeOff } from "react-icons/lu";
-import { FcGoogle } from "react-icons/fc";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Layout from "./Layout";
@@ -50,8 +48,7 @@ const RegisterUniversity = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
-    const { name, email, password, address, description, website } =
-      Credentials;
+    const { name, email, password, address, website } = Credentials;
 
     if (phone.length < 10) {
       toast.error("Please enter a valid phone number");

@@ -274,7 +274,7 @@ const Topic = () => {
           </div>
         </div>
       )}
-      <div className="flex flex-wrap gap-4 w-full justify-center bg-gray-100 p-5 rounded-3xl">
+      <div className="flex flex-wrap gap-4 w-full justify-center bg-gray-100 p-5 rounded-md">
         <div className="w-full flex justify-between mb-5">
           <h2 className="font-bold text-xl">Choose a Topic</h2>
           <button className="flex gap-2 items-center">
@@ -306,15 +306,15 @@ const Topic = () => {
             )}
           </button>
         </div>
-        <div className="flex gap-5 flex-wrap">
+        <div className="flex gap-5 flex-wrap justify-between">
           {GET_TOPICS_LOADING
             ? Array.from({ length: 5 }).map((_, index) => (
                 <div
                   key={index}
-                  className="w-[17rem] mb-4 bg-gray-200 rounded-2xl animate-pulse"
+                  className="w-[285px] bg-gray-200 rounded-lg animate-pulse shadow-md"
                 >
-                  <div className="h-40 bg-gray-300 rounded-t-2xl"></div>
-                  <div className="card-body">
+                  <div className="h-40 bg-gray-300 rounded-t-lg"></div>
+                  <div className="p-4">
                     <div className="h-6 bg-gray-300 rounded-full w-3/4 mb-2"></div>
                     <div className="h-4 bg-gray-300 rounded-full w-1/2"></div>
                   </div>
@@ -323,23 +323,27 @@ const Topic = () => {
             : filteredSections &&
               filteredSections.map((section) => (
                 <div
-                  className={`w-[17rem] mb-4 bg-white rounded-2xl cursor-pointer ${
+                  key={section._id}
+                  className={`w-[285px] bg-white rounded-lg hover:shadow-lg shadow-md cursor-pointer ${
                     selectedSections.includes(section._id)
                       ? "border-2 border-[#0052CC]"
                       : ""
                   }`}
-                  key={section._id}
                   onClick={() => handleSelect(section._id)}
                 >
-                  <figure>
-                    <img src={randomImage()} alt="cover" />
+                  <figure className="h-[155px] w-full overflow-hidden rounded-t-lg">
+                    <img
+                      src={randomImage()}
+                      alt="Topic Cover"
+                      className="w-full h-full object-cover"
+                    />
                   </figure>
-                  <div className="card-body">
-                    <h2 className="font-bold text-xl first-letter:uppercase">
+                  <div className="p-4">
+                    <h2 className="text-lg font-bold mb-3 text-[#171717] capitalize">
                       {section?.Heading}
                     </h2>
                     <div
-                      className="flex gap-2"
+                      className="flex items-center gap-2"
                       onClick={() => {
                         dispatch(setCurrentTopic({ topic: section }));
                         localStorage.setItem(
@@ -364,6 +368,7 @@ const Topic = () => {
                 </div>
               ))}
         </div>
+
         {filteredSections?.length === 0 && (
           <div className="w-full flex justify-center items-center mb-4 bg-white rounded-2xl">
             <h2 className="text-xl font-bold text-center">No Topics Found</h2>

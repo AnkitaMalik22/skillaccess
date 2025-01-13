@@ -4,7 +4,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCollege } from "./redux/college/auth/authSlice";
 import { useMediaQuery } from "./hooks/useMediaQuery";
-import Loader from "./Loader";
+import Loader from "./components/Loader";
 import DesktopOnly from "./pages/common/DesktopOnly";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { getEntity } from "./util/isCompany";

@@ -1,43 +1,26 @@
-// import React from "react";
-// import Acounting from "../../../components/college/accounting/home/Acounting";
-// import useTranslate from "../../../hooks/useTranslate";
-
-// const AccountingPage = () => {
-//   //useTranslate();
-//   return <Acounting />;
-// };
-
-// export default AccountingPage;
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cancelAPlan,
   getAllPlans,
-  getSelectedPlans,
   selectAPlan,
 } from "../../../redux/college/account/paymentSlice";
 import { getCollege } from "../../../redux/college/auth/authSlice";
-import useTranslate from "../../../hooks/useTranslate";
-
+import { FaMoneyCheck } from "react-icons/fa";
+import { GrMoney } from "react-icons/gr";
 import axios from "axios";
 
 const Accounting = () => {
-  //useTranslate();
-  const { user, isLoggedIn, uploadImg } = useSelector(
-    (state) => state.collegeAuth
-  );
-
+  const { user } = useSelector((state) => state.collegeAuth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { plans, select_loading, selectPlan, cancel_loading } = useSelector(
+  const { plans, select_loading, cancel_loading } = useSelector(
     (state) => state.payment
   );
   const [requestStatus, setRequestStatus] = useState();
   const { credit } = useSelector((state) => state.collegeAuth);
   const selectedPlan = user?.selectedPlan;
-  // //console.log(requestStatus);
 
   useEffect(() => {
     if (user?._id) {
@@ -56,118 +39,150 @@ const Accounting = () => {
           },
         }
       );
-
-      // //console.log(response.data);
       setRequestStatus(response.data.selectedPlan);
-
       return response.data.selectedPlan;
     } catch (err) {
-      //console.log(err);
+      console.error(err);
     }
   }
 
   useEffect(() => {
     dispatch(getAllPlans());
-
-    // dispatch(getSelectedPlans());
   }, [dispatch, requestStatus]);
 
   return (
-    <>
-      <div className="w-full flex justify-between items-center mb-5 md:mb-10">
-        <p className="font-bold text-[#171717] text-md font-[Heebo]">
-          My Current Plan
-        </p>
+    <div className="bg-gray-50 p-6 rounded-2xl shadow-lg">
+      {/* Header */}
+      <div className="flex justify-between mb-8">
+        <div className="flex items-center gap-4">
+          <GrMoney className="text-blued h-10 w-10" />
+          <h2 className="text-2xl font-bold text-gray-800">My Current Plan</h2>
+        </div>
         <button
-          className="self-center justify-center flex bg-accent  rounded-2xl px-[18px] py-[10px] text-white text-[12px] font-bold"
+          className="flex items-center gap-2 bg-blued text-white py-2 px-4 rounded-lg font-medium hover:bg-blued transition"
           onClick={() => navigate("/college/accounting/transactions")}
         >
-          Transactions
+          <FaMoneyCheck className="text-lg" /> Transactions
         </button>
       </div>
-      {select_loading && (
-        <div className="fixed top-20 font-bold">Upgrading...</div>
-      )}
 
-      {
-        // !payments[0] && <div className="text-lg text-gray-400  font-bold my-2 py-2 pl-2"> No Transaction found </div>
-        plans?.map((plan) => (
-          <>
-            <div
-              key={plan._id}
-              className={`shadow-sm p-4 md:p-8  rounded-[20px] flex items-center gap-16 border border-[#E4E4E4] mb-5 md:mb-8 ${
-                plan._id == selectedPlan?._id ? "border-2 border-[#007AFF]" : ""
-              }`}
-            >
-              <div className="flex flex-col justify-center gap-5">
-                <div className="flex item-center gap-5">
-                  <img
-                    src="/images/aeroo.png"
-                    alt="aeroo"
-                    className="w-[64px] h-[64px]"
-                  />
-                  <div className="flex flex-col gap-6">
-                    <p className="text-2xl md:text-[32px] font-bold text-[#2d2d2d] font-[Heebo]">
-                      {plan.planName}
-                    </p>
-                    <p className="text-base  text-[#676562] font-[Heebo] font-normal">
-                      ${" "}
-                      <span className="text-xl md:text-[34px] text-[#2d2d2d] font-[Heebo] font-normal ">
-                        {plan.price}
-                      </span>{" "}
-                      per month
-                    </p>
-                    {requestStatus?.status === "" &&
-                      requestStatus?.planId === plan._id && (
-                        <p>Request Pending</p>
-                      )}
-                  </div>
-                </div>
-
-                <div>
-                  {plan._id == selectedPlan && credit.credit !== 0 ? (
-                    <button
-                      className="self-center  bg-secondary rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
-                      onClick={() => {
-                        dispatch(cancelAPlan({ planId: plan._id })).then(() => {
-                          //console.log(plan);
-                          dispatch(getCollege());
-                        });
-                      }}
-                    >
-                      Cancel Plan
-                    </button>
-                  ) : (
-                    <button
-                      className="self-center  bg-accent  rounded-xl px-10 md:px-20 py-3 text-white font-[Heebo] text-lg font-bold"
-                      onClick={() => {
-                        // //console.log(plan);
-                        dispatch(selectAPlan({ planId: plan._id })).then(() => {
-                          dispatch(getCollege());
-                          getSelected();
-                        });
-                      }}
-                    >
-                      Upgrade Plan
-                    </button>
-                  )}
-                </div>
-              </div>
-              <div className="max-w-[380px] flex flex-col gap-5 text-lg font-[Heebo]">
-                <p>Assessment Credit</p>
-                <p>Student invitation limit for one assessment</p>
-                <p>Charges for each student invitation after limit</p>
-              </div>
-              <div className=" flex flex-col gap-5 text-lg font-bold font-[Heebo]">
-                <p>{plan.credit}</p>
-                <p>{plan.limit}</p>
-                <p>{plan.charges}</p>
+      {/* Selected Plan Section */}
+      <div className="mb-10">
+        <h3 className="text-lg font-semibold text-gray-700 mb-4">
+          Selected Plan
+        </h3>
+        {selectedPlan ? (
+          <div className="shadow-md p-6 rounded-md border-2 border-blued bg-white">
+            <div className="flex items-center gap-4 mb-4">
+              <img
+                src="/images/aeroo.png"
+                alt="Plan Icon"
+                className="w-16 h-16 rounded-full"
+              />
+              <div>
+                <h3 className="text-xl font-bold text-gray-800">
+                  {selectedPlan?.planName}
+                </h3>
+                <p className="text-gray-500">
+                  ${" "}
+                  <span className="text-2xl font-bold">
+                    {selectedPlan?.price}
+                  </span>{" "}
+                  / month
+                </p>
               </div>
             </div>
-          </>
-        ))
-      }
-    </>
+            <div className="border-t border-gray-200 pt-4">
+              <p className="text-sm text-gray-500">
+                Assessment Credit: {selectedPlan?.credit}
+              </p>
+              <p className="text-sm text-gray-500">
+                Student Invitation Limit: {selectedPlan?.limit}
+              </p>
+              <p className="text-sm text-gray-500">
+                Extra Charges: {selectedPlan?.charges}
+              </p>
+            </div>
+            <div className="mt-4">
+              <button
+                className="w-full bg-red-500 text-white py-2 rounded-lg font-bold hover:bg-red-600 transition"
+                onClick={() => {
+                  dispatch(cancelAPlan({ planId: selectedPlan._id })).then(() =>
+                    dispatch(getCollege())
+                  );
+                }}
+                disabled={cancel_loading}
+              >
+                {cancel_loading ? "Cancelling..." : "Cancel Plan"}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <p className="text-gray-500">You do not have a selected plan.</p>
+        )}
+      </div>
+
+      {/* All Plans Section */}
+      <div>
+        <h3 className="text-lg font-semibold text-gray-700 mb-4">
+          Available Plans
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {plans.map((plan) => (
+            <div
+              key={plan._id}
+              className="shadow-md p-6 rounded-md bg-white border hover:shadow-lg transition-all duration-300 hover:border-blued"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <img
+                  src="/images/aeroo.png"
+                  alt="Plan Icon"
+                  className="w-16 h-16 rounded-full"
+                />
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800">
+                    {plan.planName}
+                  </h3>
+                  <p className="text-gray-500">
+                    $ <span className="text-2xl font-bold">{plan.price}</span> /
+                    month
+                  </p>
+                </div>
+              </div>
+              <div className="border-t border-gray-200 pt-4">
+                <p className="text-sm text-gray-500">
+                  Assessment Credit: {plan.credit}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Student Invitation Limit: {plan.limit}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Extra Charges: {plan.charges}
+                </p>
+              </div>
+              <div className="mt-4">
+                <button
+                  className={`w-full py-2 rounded-lg font-bold transition ${
+                    plan._id === selectedPlan
+                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      : "bg-blued text-white hover:bg-blued"
+                  }`}
+                  onClick={() => {
+                    dispatch(selectAPlan({ planId: plan._id })).then(() => {
+                      dispatch(getCollege());
+                      getSelected();
+                    });
+                  }}
+                  disabled={plan._id === selectedPlan}
+                >
+                  {plan._id === selectedPlan ? "Current Plan" : "Upgrade Plan"}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

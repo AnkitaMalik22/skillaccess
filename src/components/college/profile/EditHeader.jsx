@@ -4,6 +4,9 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../loaders/Loader";
 
+import InputField from "../../../components/InputField"
+
+
 const EditHeader = ({
   loading,
 
