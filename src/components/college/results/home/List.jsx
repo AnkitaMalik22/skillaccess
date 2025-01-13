@@ -40,7 +40,7 @@ const List = ({ FilterdStudents, isLoading }) => {
   //   } else if (percentage > 0 && percentage < 33.33) {
   //     return "bg-red-600"; // Red color
   //   } else if (percentage >= 33.33 && percentage < 66.66) {
-  //     return "bg-blue-600"; // Blue color
+  //     return "bg-blued"; // Blue color
   //   } else {
   //     return "bg-green-600"; // Green color
   //   }

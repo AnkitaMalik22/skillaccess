@@ -35,7 +35,7 @@ const Card = (props) => {
             props.progress === 1
               ? "bg-red-500"
               : props.progress === 2
-              ? "bg-blue-600"
+              ? "bg-blued"
               : props.progress === 3
               ? "bg-amber-500"
               : "bg-green-600"
@@ -46,7 +46,7 @@ const Card = (props) => {
             props.progress === 1
               ? "bg-gray-200"
               : props.progress === 2
-              ? "bg-blue-600"
+              ? "bg-blued"
               : props.progress === 3
               ? "bg-amber-500"
               : "bg-green-600"

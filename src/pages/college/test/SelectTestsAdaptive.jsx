@@ -415,7 +415,7 @@ const SelectTests = () => {
           <Disclosure defaultOpen className="w-full">
             {({ open }) => (
               <div className="w-full">
-                <Disclosure.Button className="w-full px-4 py-2 text-left text-lg font-semibold bg-blue-200 hover:bg-blue-300 rounded">
+                <Disclosure.Button className="w-full px-4 py-2 text-left text-lg font-semibold bg-blue-200 hover:bg-blued rounded">
                   {open ? "Hide Instructions" : "Show Instructions"}
                 </Disclosure.Button>
                 <Disclosure.Panel className="mt-4 w-full">

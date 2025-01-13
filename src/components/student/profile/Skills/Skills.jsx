@@ -14,10 +14,10 @@ const Skills = () => {
         <div>
           <span className="">Software Knowledge</span>
           <span className="flex gap-2 flex-wrap mt-3">
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
             <select
               name=""
               id=""

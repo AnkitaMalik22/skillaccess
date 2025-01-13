@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-hot-toast';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
 export default function AssignTests() {
   const { driveId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const [tests, setTests] = useState([]);
   const [selectedTests, setSelectedTests] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,10 +17,12 @@ export default function AssignTests() {
   useEffect(() => {
     const fetchTests = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/company/tests`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/company/tests`
+        );
         setTests(response.data);
       } catch (error) {
-        toast.error('Failed to fetch tests');
+        toast.error("Failed to fetch tests");
       } finally {
         setLoading(false);
       }
@@ -29,10 +31,10 @@ export default function AssignTests() {
   }, []);
 
   const handleTestSelection = (testId) => {
-    setSelectedTests(prev => {
-      const isSelected = prev.some(test => test.testId === testId);
+    setSelectedTests((prev) => {
+      const isSelected = prev.some((test) => test.testId === testId);
       if (isSelected) {
-        return prev.filter(test => test.testId !== testId);
+        return prev.filter((test) => test.testId !== testId);
       }
       return [...prev, { testId }];
     });
@@ -44,7 +46,7 @@ export default function AssignTests() {
 
   const handleSubmit = async () => {
     if (selectedTests.length === 0) {
-      toast.error('Please select at least one test');
+      toast.error("Please select at least one test");
       return;
     }
 
@@ -54,10 +56,10 @@ export default function AssignTests() {
         `${process.env.REACT_APP_API_URL}/api/company/campus-drive/${driveId}/tests`,
         { tests: selectedTests }
       );
-      toast.success('Tests assigned successfully');
-      navigate('/company/pr/dashboard');
+      toast.success("Tests assigned successfully");
+      navigate("/company/pr/dashboard");
     } catch (error) {
-      toast.error('Failed to assign tests');
+      toast.error("Failed to assign tests");
     } finally {
       setIsSubmitting(false);
     }
@@ -65,8 +67,10 @@ export default function AssignTests() {
 
   return (
     <div className="form-card bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-xl font-semibold mb-4 text-gray-700">Step 3: Assign Tests</h2>
-      
+      <h2 className="text-xl font-semibold mb-4 text-gray-700">
+        Step 3: Assign Tests
+      </h2>
+
       {loading ? (
         <div className="flex justify-center items-center h-60">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -102,11 +106,11 @@ export default function AssignTests() {
             </button>
             <button
               type="button"
-              className="btn btn-primary bg-blue-600 hover:bg-lightBlue"
+              className="btn btn-primary bg-blued hover:bg-lightBlue"
               onClick={handleSubmit}
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Assigning Tests...' : 'Finish'}
+              {isSubmitting ? "Assigning Tests..." : "Finish"}
             </button>
           </div>
         </>

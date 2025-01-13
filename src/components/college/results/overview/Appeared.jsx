@@ -150,7 +150,7 @@ const Appeared = ({ assessment }) => {
               placeholder="Filter by Name"
               value={filters.name}
               onChange={(e) => handleFilterChange("name", e.target.value)}
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blue-500 focus:ring-0"
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blued focus:ring-0"
             />
           )}
         </div>
@@ -195,7 +195,7 @@ const Appeared = ({ assessment }) => {
               onChange={(e) =>
                 handleFilterChange("profileDate", e.target.value)
               }
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blue-500 focus:ring-0"
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blued focus:ring-0"
             />
           )}
         </div>
@@ -237,7 +237,7 @@ const Appeared = ({ assessment }) => {
               onChange={(e) =>
                 handleFilterChange("assessmentPerformance", e.target.value)
               }
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blue-500 focus:ring-0"
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blued focus:ring-0"
             />
           )}
         </div>
@@ -260,7 +260,7 @@ const Appeared = ({ assessment }) => {
       header: "Review",
       accessor: (student) => (
         <button
-          className="text-blue-500 underline"
+          className="text-blued underline"
           onClick={(e) => {
             e.stopPropagation();
             const basePath = isCompany()

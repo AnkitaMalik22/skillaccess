@@ -57,7 +57,7 @@ const ViewInvitedStudents = () => {
           </div>
           <button
             onClick={() => window.history.back()}
-            className="text-sm text-blue-500 hover:underline"
+            className="text-sm text-blued hover:underline"
           >
             Go Back
           </button>

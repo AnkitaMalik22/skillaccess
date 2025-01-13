@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllCampusDrives } from '../../../redux/company/campusDrive/campusDriveSlice';
-import CampusDriveCard from '../../../components/company/campusDrive/Card';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCampusDrives } from "../../../redux/company/campusDrive/campusDriveSlice";
+import CampusDriveCard from "../../../components/company/campusDrive/Card";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const CampusDrive = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { campusDrives, loading, error } = useSelector((state) => state.campusDrive);
+  const { campusDrives, loading, error } = useSelector(
+    (state) => state.campusDrive
+  );
 
   useEffect(() => {
     dispatch(getAllCampusDrives());
   }, [dispatch]);
 
   const handleCreateDrive = () => {
-    console.log('Create new drive');
-    navigate('/company/pr/campus-drive/create');
+    console.log("Create new drive");
+    navigate("/company/pr/campus-drive/create");
   };
 
   return (
@@ -25,7 +27,7 @@ const CampusDrive = () => {
         <h1 className="text-2xl font-bold">Campus Drives</h1>
         <button
           onClick={handleCreateDrive}
-          className="btn btn-primary bg-blue-600 hover:bg-lightBlue"
+          className="btn btn-primary bg-blued hover:bg-lightBlue"
         >
           Create New Drive
         </button>
@@ -43,9 +45,10 @@ const CampusDrive = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {campusDrives && campusDrives?.map((drive) => (
-            <CampusDriveCard key={drive._id} drive={drive} />
-          ))}
+          {campusDrives &&
+            campusDrives?.map((drive) => (
+              <CampusDriveCard key={drive._id} drive={drive} />
+            ))}
         </div>
       )}
     </div>

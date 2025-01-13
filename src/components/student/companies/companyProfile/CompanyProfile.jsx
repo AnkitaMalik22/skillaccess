@@ -130,7 +130,7 @@
 //                 Remote
 //               </h2> */}
 //               <button
-//                 className=" h-8 p-1 w-20  hover:bg-blue-900 bg-accent  rounded-md bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
+//                 className=" h-8 p-1 w-20  hover:bg-blued bg-accent  rounded-md bg-opacity-20 text-white text-[.5rem] sm:text-sm self-center "
 //                 onClick={() => navigate("/college/companies/jobOverview")}
 //               >
 //                 <p className="text-blued  -ml-8 font-dmSans text-sm font-medium  ">
@@ -287,7 +287,7 @@ const CompanyProfile = () => {
                   Remote
                 </h2>
                 <button
-                  className=" h-8 p-1 w-20 hover:bg-blue-900 bg-blued rounded-md text-white text-[.5rem] sm:text-sm self-center "
+                  className=" h-8 p-1 w-20 hover:bg-blued bg-blued rounded-md text-white text-[.5rem] sm:text-sm self-center "
                   onClick={() => navigate("/student/companies/jobOverview")}
                 >
                   full time

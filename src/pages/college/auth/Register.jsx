@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -22,9 +21,8 @@ import {
   GetPhonecodes,
 } from "react-country-state-city";
 
-
-//to do 
-// form validation 
+//to do
+// form validation
 // handle location get error
 const Register = () => {
   const navigate = useNavigate();
@@ -36,7 +34,6 @@ const Register = () => {
     Password: "",
     Phone: null,
     University: "",
-
   });
   const [type, setType] = useState("password");
 
@@ -106,9 +103,9 @@ const Register = () => {
     setSelectedCity(null);
 
     try {
-      console.log(selectedCountry, state)
+      console.log(selectedCountry, state);
       const cities = await GetCity(selectedCountry.id, state.id);
-      console.log(cities)
+      console.log(cities);
       setCityList(cities, "citites");
     } catch (error) {
       console.error("Error fetching cities:", error);
@@ -157,7 +154,6 @@ const Register = () => {
       return;
     }
 
-
     const data = {
       Phone: phone,
       Email,
@@ -167,7 +163,7 @@ const Register = () => {
       State: selectedState?.name,
       City: selectedCity?.name,
       Region: region,
-      ZipCode: ZipCode
+      ZipCode: ZipCode,
     };
 
     try {
@@ -187,7 +183,6 @@ const Register = () => {
 
   return (
     <Layout>
-
       <div className="max-w-2xl mx-auto w-full">
         {/* Header Section */}
         <div className="flex gap-2 justify-center mb-4 md:mb-8">
@@ -216,10 +211,13 @@ const Register = () => {
           Create an account to continue!
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white" >
+        <form onSubmit={handleSubmit} className="space-y-6 bg-white">
           {/* College Name Field */}
           <div>
-            <label htmlFor="CollegeName" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="CollegeName"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               College Name
             </label>
             <input
@@ -267,7 +265,10 @@ const Register = () => {
 
           {/* Email Field */}
           <div>
-            <label htmlFor="Email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="Email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Email Address
             </label>
             <input
@@ -283,7 +284,10 @@ const Register = () => {
 
           {/* Website Link Field */}
           <div>
-            <label htmlFor="Website" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="Website"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Website Link
             </label>
             <input
@@ -299,7 +303,10 @@ const Register = () => {
 
           {/* Password Field */}
           <div>
-            <label htmlFor="Password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="Password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Password
             </label>
             <div className="relative">
@@ -314,10 +321,16 @@ const Register = () => {
               />
               <button
                 type="button"
-                onClick={() => setType(type === "password" ? "text" : "password")}
+                onClick={() =>
+                  setType(type === "password" ? "text" : "password")
+                }
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
               >
-                {type === "password" ? <LuEyeOff className="w-5 h-5" /> : <LuEye className="w-5 h-5" />}
+                {type === "password" ? (
+                  <LuEyeOff className="w-5 h-5" />
+                ) : (
+                  <LuEye className="w-5 h-5" />
+                )}
               </button>
             </div>
           </div>
@@ -325,7 +338,10 @@ const Register = () => {
           {/* Location Fields */}
           <div className="flex gap-2">
             <div className="w-1/2">
-              <label htmlFor="Region" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="Region"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Region
               </label>
               <select
@@ -344,21 +360,30 @@ const Register = () => {
 
             {/* zipcode */}
             <div className="w-1/2">
-              <label htmlFor="ZipCode" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="ZipCode"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Zip Code
               </label>
               <input
-                type="text" name="ZipCode" id="ZipCode"
+                type="text"
+                name="ZipCode"
+                id="ZipCode"
                 value={Credentials.ZipCode}
                 onChange={changeHandler}
                 placeholder="Enter your zip code"
-                className="block w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-accent focus:border-transparent transition-colors px-4 py-3" />
+                className="block w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-accent focus:border-transparent transition-colors px-4 py-3"
+              />
             </div>
           </div>
 
           <div className="flex gap-2">
             <div className="w-1/3">
-              <label htmlFor="Country" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="Country"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Country
               </label>
               <select
@@ -376,7 +401,10 @@ const Register = () => {
             </div>
 
             <div className="w-1/3">
-              <label htmlFor="State" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="State"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 State
               </label>
               <select
@@ -394,7 +422,10 @@ const Register = () => {
             </div>
 
             <div className="w-1/3">
-              <label htmlFor="City" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="City"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 City
               </label>
               <select
@@ -412,8 +443,6 @@ const Register = () => {
             </div>
           </div>
 
-
-
           {/* checkbox */}
           <label className=" flex items-center gap-2 cursor-pointer mx-auto w-full max-w-xl">
             <input
@@ -424,10 +453,7 @@ const Register = () => {
             />
             <span className="text-lGray font-bold text-xs">
               By creating an account, you agree to our{" "}
-              <Link
-                className="text-blue-600"
-                to="/terms&policies"
-              >
+              <Link className="text-blued" to="/terms&policies">
                 Terms & Policy
               </Link>
               {/* and, <Link>Notification Settings</Link> */}
@@ -442,10 +468,8 @@ const Register = () => {
             {loader ? <CircularLoader size="small" /> : "Sign Up"}
           </button>
         </form>
-
       </div>
-
-    </Layout >
+    </Layout>
   );
 };
 

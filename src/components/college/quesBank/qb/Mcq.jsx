@@ -49,7 +49,7 @@ const Mcq = ({ question, number }) => {
 
   return (
     <div className="flex justify-between gap-3 md:gap-5 font-dmSans relative z-10">
-      <button className=" bg-accent rounded-2xl text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
+      <button className=" bg-accent rounded-md text-white text-base font-bold flex justify-center items-center w-[70px] h-14">
         Q-{number}
       </button>
       <div className="w-full">
@@ -79,17 +79,17 @@ const Mcq = ({ question, number }) => {
                     </div>
                     <div className="level flex items-center gap-2 ">
                       {question.QuestionLevel == "beginner" && (
-                        <p className="rounded-2xl bg-cyan-500 text-white text-sm w-8 h-8 text-center font-medium flex items-center justify-center ">
+                        <p className="rounded-md bg-cyan-500 text-white text-sm w-8 h-8 text-center font-medium flex items-center justify-center ">
                           L1
                         </p>
                       )}
                       {question.QuestionLevel == "intermediate" && (
-                        <p className="rounded-2xl bg-green-500 text-white text-sm  w-8 h-8 text-center font-medium flex items-center justify-center ">
+                        <p className="rounded-md bg-green-500 text-white text-sm  w-8 h-8 text-center font-medium flex items-center justify-center ">
                           L2
                         </p>
                       )}
                       {question.QuestionLevel == "advanced" && (
-                        <p className="rounded-2xl bg-red-500 text-white text-sm  w-8 h-8 text-center font-medium flex justify-center items-center ">
+                        <p className="rounded-md bg-red-500 text-white text-sm  w-8 h-8 text-center font-medium flex justify-center items-center ">
                           L3
                         </p>
                       )}

@@ -40,7 +40,7 @@ const Notifications = () => {
               <span
                 className={`${
                   enabled
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />
@@ -66,7 +66,7 @@ const Notifications = () => {
               <span
                 className={`${
                   enabled4
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />
@@ -91,7 +91,7 @@ const Notifications = () => {
               <span
                 className={`${
                   enabled5
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />
@@ -128,7 +128,7 @@ const Notifications = () => {
               <span
                 className={`${
                   enabled1
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />
@@ -154,7 +154,7 @@ const Notifications = () => {
               <span
                 className={`${
                   enabled2
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />
@@ -179,7 +179,7 @@ const Notifications = () => {
               <span
                 className={`${
                   enabled3
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />
