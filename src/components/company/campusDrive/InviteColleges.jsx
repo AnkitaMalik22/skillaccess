@@ -73,7 +73,7 @@ export default function InviteColleges() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <div className="container mx-auto p-6">
         <div className="flex justify-between items-center mb-8">
           <button
@@ -86,7 +86,7 @@ export default function InviteColleges() {
           <h1 className="text-3xl font-bold text-[#043345]">Invite Colleges</h1>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-[#f8f8f8] rounded-lg shadow-md p-6">
           {loading || !colleges?.length ? (
             <div className="flex justify-center items-center h-60">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blued"></div>
@@ -112,8 +112,9 @@ export default function InviteColleges() {
                 {filteredColleges.map((college) => (
                   <div 
                     key={college._id} 
-                    className={`flex items-center justify-between mb-3 p-3 rounded-md shadow-sm transition-colors duration-200 ${
-                      selectedColleges.includes(college._id) ? 'bg-blued text-white' : 'bg-gray-50 hover:bg-gray-100'
+                    onClick={() => handleCollegeSelection(college._id)}
+                    className={`flex items-center justify-between mb-3 p-3 rounded-md shadow-sm transition-colors duration-200 cursor-pointer ${
+                      selectedColleges.includes(college._id) ? 'bg-blued text-white' : 'bg-[#f8f8f8] hover:bg-gray-100'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -129,10 +130,10 @@ export default function InviteColleges() {
                       </div>
                     </div>
                     <button
-                      onClick={() => handleCollegeSelection(college._id)}
+                  
                       className={`p-2 rounded-full transition-colors duration-200 ${
                         selectedColleges.includes(college._id)
-                          ? 'bg-white text-blued'
+                          ? 'bg-[#f8f8f8] text-blued'
                           : ' border border-gray-300 hover:bg-gray-200'
                       }`}
                     >
@@ -180,11 +181,11 @@ export default function InviteColleges() {
         </div>
 
         {assignedColleges.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-6 mt-6">
+          <div className="bg-[#f8f8f8] rounded-lg shadow-md p-6 mt-6">
             <h2 className="text-xl font-semibold mb-4 text-[#043345]">Invited Colleges</h2>
             <div className="max-h-96 overflow-y-auto">
               {assignedColleges.map((college) => (
-                <div key={college._id} className="flex items-center justify-between mb-3 bg-gray-50 p-3 rounded-md shadow-sm">
+                <div key={college._id} className="flex items-center justify-between mb-3 bg-[#f8f8f8] p-3 rounded-md shadow-sm">
                   <div className="flex items-center gap-3">
                     <img
                       src={college.avatar.url}

@@ -90,7 +90,7 @@ export default function AssignTests() {
   );
 
   const renderColleges = () => (
-    <div className="mb-12 bg-white rounded-lg p-6 shadow-md">
+    <div className="mb-12 bg-[#f8f8f8] rounded-lg p-6 shadow-md">
       {renderStepHeader(1, "Select Colleges", "Choose the colleges you want to assign the test to")}
       <div className="relative mb-4">
         <input
@@ -118,8 +118,8 @@ export default function AssignTests() {
               <div
                 key={college._id}
                 className={`p-4 rounded-lg ${
-                  selectedColleges.includes(college._id) ? "bg-blued text-white" : "bg-white"
-                } shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer`}
+                  selectedColleges.includes(college._id) ? "bg-blued text-white" : "bg-[#f8f8f8]"
+                }  hover:shadow-lg transition-shadow duration-200 cursor-pointer`}
                 onClick={() => handleCollegeSelection(college._id)}
               >
                 <div className="flex items-center gap-3">
@@ -169,14 +169,14 @@ export default function AssignTests() {
               <div
                 key={test._id}
                 className={`p-4 rounded-lg ${
-                  selectedTest === test._id ? "bg-[#043345] text-white" : "bg-white border border-gray-200"
+                  selectedTest === test._id ? "bg-[#043345] text-white" : "bg-[#f8f8f8] border border-gray-200"
                 } shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer`}
                 onClick={() => handleTestSelection(test._id)}
               >
                 <h3 className="font-bold mb-2">{test.name}</h3>
                 <div className="mb-2">
                   <span className={`text-xs px-2 py-1 rounded ${
-                    selectedTest === test._id ? 'bg-white text-[#043345]' : 'bg-blued text-white'
+                    selectedTest === test._id ? 'bg-[#f8f8f8] text-[#043345]' : 'bg-blued text-white'
                   }`}>
                     {test.level}
                   </span>
@@ -208,7 +208,7 @@ export default function AssignTests() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <div className="container mx-auto p-6">
         <div className="flex justify-between items-center mb-8">
           <button
@@ -232,7 +232,7 @@ export default function AssignTests() {
         {renderColleges()}
 
         {selectedColleges.length > 0 && (
-          <div className="bg-white rounded-lg p-6 shadow-md mt-8">
+          <div className="bg-[#f8f8f8] rounded-lg p-6 shadow-md mt-8">
              {renderStepHeader(2, "Assign Tests", "Choose one test to assign to the selected colleges")}
             {renderTestList("Beginner", tests.beginner || [])}
             {renderTestList("Intermediate", tests.intermediate || [])}

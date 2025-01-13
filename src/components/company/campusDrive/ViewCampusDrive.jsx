@@ -44,7 +44,7 @@ export default function ViewCampusDrive() {
               isCompanyUser ? "/company/pr/campus-drive" : "/college/campus-drive"
             )
           }
-          className="mb-6 btn btn-ghost gap-2 hover:bg-gray-100 text-blued"
+          className="mb-6 flex items-center gap-2 text-blued hover:text-[#043345] transition-colors duration-200"
         >
           <FiArrowLeft className="text-lg" />
           Back to {isCompanyUser ? "Campus Drives" : "Tests"}
@@ -57,65 +57,80 @@ export default function ViewCampusDrive() {
               <h1 className="text-3xl font-bold text-[#043345]">{currentCampusDrive?.name}</h1>
               <p className="text-gray-600 mt-2">{currentCampusDrive?.description}</p>
             </div>
-            <div className="flex gap-3">
-              {!isCompanyUser && (
-                <button
-                  onClick={() =>
-                    navigate(
-                      `/college/test/invite?testId=${currentCampusDrive?.tests[0]?.test._id}`
-                    )
-                  }
-                  className="btn bg-blued text-white hover:bg-[#043345]"
-                >
-                  Invite Students
-                </button>
-              )}
-              {isCompanyUser && (
-                <button
-                  disabled={true}
-                  className="btn btn-outline border-blued text-blued hover:bg-blued hover:text-white"
-                >
-                  <FiEdit2 className="mr-2" /> Edit
-                </button>
-              )}
-            </div>
+            {isCompanyUser && (
+              <button
+                disabled={true}
+                className="btn btn-outline border-blued text-blued hover:bg-blued hover:text-white"
+              >
+                <FiEdit2 className="mr-2" /> Edit
+              </button>
+            )}
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div className="bg-blue-50 p-4 rounded-lg shadow">
-              <div className="flex items-center gap-3">
-                <FiUsers className="text-2xl text-blued" />
-                <div>
-                  <p className="text-sm text-gray-600">Total Colleges</p>
-                  <p className="text-2xl font-bold text-[#043345]">
-                    {currentCampusDrive?.colleges?.length || 0}
-                  </p>
+          <div className="mt-8">
+            {!isCompanyUser && currentCampusDrive?.tests[0] && (
+              <div className="bg-[#f8f8f8] p-6 rounded-lg ">
+                <h2 className="text-xl font-bold mb-4 text-[#043345]">Test Details</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="bg-blue-50 p-4 rounded-lg shadow">
+                    <h3 className="text-sm text-gray-600">Test Name</h3>
+                    <p className="text-xl font-bold text-[#043345]">
+                      {currentCampusDrive.tests[0].test.name}
+                    </p>
+                  </div>
+                  <div className="bg-green-50 p-4 rounded-lg shadow">
+                    <h3 className="text-sm text-gray-600">Total Time</h3>
+                    <p className="text-xl font-bold text-[#043345]">
+                      {currentCampusDrive.tests[0].test.totalTime} mins
+                    </p>
+                  </div>
+                  <div className="bg-purple-50 p-4 rounded-lg shadow">
+                    <h3 className="text-sm text-gray-600">Total Marks</h3>
+                    <p className="text-xl font-bold text-[#043345]">
+                      {currentCampusDrive.tests[0].test.totalMarks}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="bg-green-50 p-4 rounded-lg shadow">
-              <div className="flex items-center gap-3">
-                <FiCheckCircle className="text-2xl text-green-600" />
-                <div>
-                  <p className="text-sm text-gray-600">Tests Assigned</p>
-                  <p className="text-2xl font-bold text-[#043345]">
-                    {currentCampusDrive?.tests?.length || 0}
-                  </p>
+            )}
+            {isCompanyUser && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-blue-50 p-4 rounded-lg shadow">
+                  <div className="flex items-center gap-3">
+                    <FiUsers className="text-2xl text-blued" />
+                    <div>
+                      <p className="text-sm text-gray-600">Total Colleges</p>
+                      <p className="text-2xl font-bold text-[#043345]">
+                        {currentCampusDrive?.colleges?.length || 0}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-green-50 p-4 rounded-lg shadow">
+                  <div className="flex items-center gap-3">
+                    <FiCheckCircle className="text-2xl text-green-600" />
+                    <div>
+                      <p className="text-sm text-gray-600">Tests Assigned</p>
+                      <p className="text-2xl font-bold text-[#043345]">
+                        {currentCampusDrive?.tests?.length || 0}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-purple-50 p-4 rounded-lg shadow">
+                  <div className="flex items-center gap-3">
+                    <FiCalendar className="text-2xl text-purple-600" />
+                    <div>
+                      <p className="text-sm text-gray-600">Drive Status</p>
+                      <p className="text-2xl font-bold text-[#043345] capitalize">
+                        {currentCampusDrive?.status}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="bg-purple-50 p-4 rounded-lg shadow">
-              <div className="flex items-center gap-3">
-                <FiCalendar className="text-2xl text-purple-600" />
-                <div>
-                  <p className="text-sm text-gray-600">Drive Status</p>
-                  <p className="text-2xl font-bold text-[#043345] capitalize">
-                    {currentCampusDrive?.status}
-                  </p>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
 
@@ -221,7 +236,6 @@ export default function ViewCampusDrive() {
                           )}
                         </div>
                       </div>
-                      {/* view result and invited students btn */}
                       <div className="flex justify-between mt-4">
                         <button
                           onClick={() =>
@@ -255,57 +269,22 @@ export default function ViewCampusDrive() {
         {/* College User Specific Sections */}
         {!isCompanyUser && (
           <>
-            {/* Test Details Section */}
-            <div className="bg-[#f8f8f8] rounded-lg shadow-lg p-6 mb-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h1 className="text-3xl font-bold text-[#043345]">
-                    {currentCampusDrive?.name}
-                  </h1>
-                  <p className="text-gray-600 mt-2">
-                    {currentCampusDrive?.description}
-                  </p>
-
-                  {/* Test Information */}
-                  {currentCampusDrive?.tests[0] && (
-                    <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="bg-blue-50 p-4 rounded-lg shadow">
-                        <h3 className="text-sm text-gray-600">Test Name</h3>
-                        <p className="text-xl font-bold text-[#043345]">
-                          {currentCampusDrive.tests[0].test.name}
-                        </p>
-                      </div>
-                      <div className="bg-green-50 p-4 rounded-lg shadow">
-                        <h3 className="text-sm text-gray-600">Total Time</h3>
-                        <p className="text-xl font-bold text-[#043345]">
-                          {currentCampusDrive.tests[0].test.totalTime} mins
-                        </p>
-                      </div>
-                      <div className="bg-purple-50 p-4 rounded-lg shadow">
-                        <h3 className="text-sm text-gray-600">Total Marks</h3>
-                        <p className="text-xl font-bold text-[#043345]">
-                          {currentCampusDrive.tests[0].test.totalMarks}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <button
-                  onClick={() =>
-                    navigate(
-                      `/college/test/invite?testId=${currentCampusDrive?.tests[0]?.test._id}`
-                    )
-                  }
-                  className="btn bg-blued text-white hover:bg-[#043345]"
-                >
-                  Invite Students
-                </button>
-              </div>
-            </div>
-
             {/* Invited Students Section */}
-            <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div className="bg-[#f8f8f8] rounded-lg shadow-lg p-6 mb-6">
+             
+              <div className="mt-4 flex justify-between items-center">
               <h2 className="text-xl font-bold mb-4 text-[#043345]">Invited Students</h2>
+              <button
+                onClick={() =>
+                  navigate(
+                    `/college/test/invite?testId=${currentCampusDrive?.tests[0]?.test._id}`
+                  )
+                }
+                className="btn bg-blued text-white hover:bg-[#043345]"
+              >
+                Invite Students
+              </button>
+            </div>
               {currentCampusDrive?.tests[0].test?.invitedStudents?.length === 0 ? (
                 <div className="text-center py-8">
                   <FiUsers className="mx-auto text-4xl text-gray-400 mb-3" />
@@ -350,7 +329,7 @@ export default function ViewCampusDrive() {
             </div>
 
             {/* Results Section */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-[#f8f8f8] rounded-lg shadow-lg p-6">
               <h2 className="text-xl font-bold mb-4 text-[#043345]">Results</h2>
               {currentCampusDrive?.tests[0].test?.studentResponses?.length === 0 ? (
                 <div className="text-center py-8">
@@ -379,6 +358,7 @@ export default function ViewCampusDrive() {
                 </div>
               )}
             </div>
+       
           </>
         )}
       </div>
