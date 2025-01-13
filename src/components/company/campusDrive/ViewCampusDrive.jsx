@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCampusDriveDetails } from "../../../redux/company/campusDrive/campusDriveSlice";
@@ -21,6 +21,7 @@ export default function ViewCampusDrive() {
     (state) => state.campusDrive
   );
   const isCompanyUser = isCompany();
+  const [selectedTestIndex, setSelectedTestIndex] = useState(0);
 
   useEffect(() => {
     dispatch(fetchCampusDriveDetails(driveId));
@@ -69,26 +70,40 @@ export default function ViewCampusDrive() {
 
           {/* Stats Cards */}
           <div className="mt-8">
-            {!isCompanyUser && currentCampusDrive?.tests[0] && (
-              <div className="bg-[#f8f8f8] p-6 rounded-lg ">
-                <h2 className="text-xl font-bold mb-4 text-[#043345]">Test Details</h2>
+            {!isCompanyUser && currentCampusDrive?.tests?.length > 0 && (
+              <div className="bg-[#f8f8f8] rounded-lg  p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-xl font-bold text-[#043345]">Test Details</h2>
+                  <select
+                    className="select select-bordered w-64"
+                    value={selectedTestIndex}
+                    onChange={(e) => setSelectedTestIndex(Number(e.target.value))}
+                  >
+                    {currentCampusDrive.tests.map((test, index) => (
+                      <option key={test._id} value={index}>
+                        {test.test.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-blue-50 p-4 rounded-lg shadow">
                     <h3 className="text-sm text-gray-600">Test Name</h3>
                     <p className="text-xl font-bold text-[#043345]">
-                      {currentCampusDrive.tests[0].test.name}
+                      {currentCampusDrive.tests[selectedTestIndex].test.name}
                     </p>
                   </div>
                   <div className="bg-green-50 p-4 rounded-lg shadow">
                     <h3 className="text-sm text-gray-600">Total Time</h3>
                     <p className="text-xl font-bold text-[#043345]">
-                      {currentCampusDrive.tests[0].test.totalTime} mins
+                      {currentCampusDrive.tests[selectedTestIndex].test.totalTime} mins
                     </p>
                   </div>
                   <div className="bg-purple-50 p-4 rounded-lg shadow">
                     <h3 className="text-sm text-gray-600">Total Marks</h3>
                     <p className="text-xl font-bold text-[#043345]">
-                      {currentCampusDrive.tests[0].test.totalMarks}
+                      {currentCampusDrive.tests[selectedTestIndex].test.totalMarks}
                     </p>
                   </div>
                 </div>
@@ -277,7 +292,7 @@ export default function ViewCampusDrive() {
               <button
                 onClick={() =>
                   navigate(
-                    `/college/test/invite?testId=${currentCampusDrive?.tests[0]?.test._id}`
+                    `/college/test/invite?testId=${currentCampusDrive?.tests[selectedTestIndex]?.test._id}`
                   )
                 }
                 className="btn bg-blued text-white hover:bg-[#043345]"
@@ -285,7 +300,7 @@ export default function ViewCampusDrive() {
                 Invite Students
               </button>
             </div>
-              {currentCampusDrive?.tests[0].test?.invitedStudents?.length === 0 ? (
+              {currentCampusDrive?.tests[selectedTestIndex].test?.invitedStudents?.length === 0 ? (
                 <div className="text-center py-8">
                   <FiUsers className="mx-auto text-4xl text-gray-400 mb-3" />
                   <p className="text-gray-600">
@@ -294,7 +309,7 @@ export default function ViewCampusDrive() {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {currentCampusDrive?.tests[0]?.test?.invitedStudents?.map(
+                  {currentCampusDrive?.tests[selectedTestIndex]?.test?.invitedStudents?.map(
                     (student) => (
                       <div
                         key={student._id}
@@ -331,7 +346,7 @@ export default function ViewCampusDrive() {
             {/* Results Section */}
             <div className="bg-[#f8f8f8] rounded-lg shadow-lg p-6">
               <h2 className="text-xl font-bold mb-4 text-[#043345]">Results</h2>
-              {currentCampusDrive?.tests[0].test?.studentResponses?.length === 0 ? (
+              {currentCampusDrive?.tests[selectedTestIndex].test?.studentResponses?.length === 0 ? (
                 <div className="text-center py-8">
                   <FiAward className="mx-auto text-4xl text-gray-400 mb-3" />
                   <p className="text-gray-600">No results available yet</p>
@@ -344,13 +359,13 @@ export default function ViewCampusDrive() {
                       <div
                         onClick={() =>
                           navigate(
-                            `/college/results/overview?assessment=${currentCampusDrive?.tests[0].test._id}`
+                            `/college/results/overview?assessment=${currentCampusDrive?.tests[selectedTestIndex].test._id}`
                           )
                         }
                       >
                         <p className="font-medium text-[#043345]">View Results</p>
                         <p className="text-sm text-gray-500">
-                          {currentCampusDrive?.tests[0].test?.studentResponses?.length} results available
+                          {currentCampusDrive?.tests[selectedTestIndex].test?.studentResponses?.length} results available
                         </p>
                       </div>
                     </div>
@@ -365,4 +380,3 @@ export default function ViewCampusDrive() {
     </div>
   );
 }
-
