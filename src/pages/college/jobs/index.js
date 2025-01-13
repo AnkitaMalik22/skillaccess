@@ -4,9 +4,10 @@ const Jobs = lazy(() => import("./Jobs"));
 const Invite = lazy(() => import("../test/Invite"));
 const Overview = lazy(() => import("../companies/CompanyJobOverview"));
 
-export default function (entity) {
-  return (
-    <Route path={`${entity}job`}>
+export default function jobRoute(entity) {
+
+    return (
+    <Route path={`${entity}jobs`}>
       <Route path="" element={<Jobs />} />
       <Route path="test/invite" element={<Invite />} />
       <Route path="overview/:id" element={<Overview />} />

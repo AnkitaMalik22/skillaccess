@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createCampusDrive } from "../../../redux/company/campusDrive/campusDriveSlice";
 import { toast } from "react-hot-toast";
+import { FaArrowLeft } from "react-icons/fa";
 
 export default function CampusDriveDetails() {
   const [campusDriveDetails, setCampusDriveDetails] = useState({
@@ -41,17 +42,27 @@ export default function CampusDriveDetails() {
     setCampusDriveDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCoverPhotoChange = (e) => {
-    const coverPhoto = e.target.files[0];
-    setCampusDriveDetails((prev) => ({ ...prev, coverPhoto }));
-  };
+  // const handleCoverPhotoChange = (e) => {
+  // const coverPhoto = e.target.files[0];
+  // setCampusDriveDetails((prev) => ({ ...prev, coverPhoto }));
+  // }
 
   return (
     <div className="w-full mx-auto mt-6">
       <div className="form-card bg-white rounded-lg shadow-lg p-6 w-full">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-          Create Campus Drive
-        </h1>
+        <div className="flex items-center justify-between mb-6 ">
+          <button
+            className="btn btn-outline btn-blued"
+            onClick={() => navigate(-1)}
+          >
+           <FaArrowLeft className="text-lg" />
+            Go Back
+          </button>
+          <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+            Create Campus Drive
+          </h1>
+        </div>
+
         <h2 className="text-xl font-semibold mb-4 text-gray-700">
           Step 1: Campus Drive Details
         </h2>
@@ -100,37 +111,37 @@ export default function CampusDriveDetails() {
           </div>
         </div>
 
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text font-medium">Cover Photo</span>
-          </label>
-          <label
-            htmlFor="cover-photo"
-            className="w-full cursor-pointer relative flex justify-center items-center border-2 border-dashed border-gray-300 p-4 rounded-lg"
-          >
-            {!campusDriveDetails.coverPhoto ? (
-              <span className="text-gray-500">Upload Cover Photo</span>
-            ) : (
-              <img
-                src={URL.createObjectURL(campusDriveDetails.coverPhoto)}
-                alt="Cover"
-                className="w-full h-40 object-cover rounded-lg shadow"
-              />
-            )}
-            <input
-              type="file"
-              id="cover-photo"
-              className="hidden"
-              onChange={handleCoverPhotoChange}
-              accept="image/*"
+        {/* <div className="form-control mb-4">
+        <label className="label">
+          <span className="label-text font-medium">Cover Photo</span>
+        </label>
+        <label
+          htmlFor="cover-photo"
+          className="w-full cursor-pointer relative flex justify-center items-center border-2 border-dashed border-gray-300 p-4 rounded-lg"
+        >
+          {!campusDriveDetails.coverPhoto ? (
+            <span className="text-gray-500">Upload Cover Photo</span>
+          ) : (
+            <img
+              src={URL.createObjectURL(campusDriveDetails.coverPhoto)}
+              alt="Cover"
+              className="w-full h-40 object-cover rounded-lg shadow"
             />
-            {!campusDriveDetails.coverPhoto && (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <i className="fa fa-upload text-xl text-gray-400"></i>
-              </div>
-            )}
-          </label>
-        </div>
+          )}
+          <input
+            type="file"
+            id="cover-photo"
+            className="hidden"
+            onChange={handleCoverPhotoChange}
+            accept="image/*"
+          />
+          {!campusDriveDetails.coverPhoto && (
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <i className="fa fa-upload text-xl text-gray-400"></i>
+            </div>
+          )}
+        </label>
+      </div> */}
 
         <div className="form-control mb-6">
           <label className="label">
@@ -147,7 +158,7 @@ export default function CampusDriveDetails() {
 
         <button
           type="button"
-          className="btn btn-primary w-full bg-blued hover:bg-lightBlue"
+          className="btn text-white w-full bg-blued hover:bg-lightBlue"
           onClick={handleSubmit}
         >
           {isSubmitting ? "Creating..." : "Create Campus Drive"}

@@ -39,7 +39,7 @@ const ResultsOverview = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getTestCompany(assessmentId));
+    dispatch(getTest(assessmentId));
     // dispatch(getTestResultPage(assessmentId));
     dispatch(getTestResultPageCompany(assessmentId));
   }, [dispatch, assessmentId]);
