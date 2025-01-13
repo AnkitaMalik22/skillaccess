@@ -54,7 +54,7 @@ export const TestSection = ({
             <button
               onClick={() =>
                 navigate(
-                  `/college/companies/jobOverview/${jobDetails._id}/invitedStudents`
+                  `/college/companies/overview/${jobDetails._id}/invitedStudents`
                 )
               }
               className="text-white hover:text-blue-100 font-medium underline underline-offset-2"

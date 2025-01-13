@@ -1,47 +1,45 @@
 'use client'
 
-import React, { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useParams, useNavigate } from "react-router-dom"
-import { toast } from "react-hot-toast"
-import { FiArrowLeft, FiSearch, FiCheck } from "react-icons/fi"
-import axios from "axios"
-import { assignTestToColleges } from "../../../redux/company/campusDrive/campusDriveSlice"
-import { fetchCampusDriveDetails } from "../../../redux/company/campusDrive/campusDriveSlice"
-import { getAllTests } from "../../../redux/college/test/thunks/test"
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { FiArrowLeft, FiSearch, FiCheck, FiUsers, FiClipboard } from "react-icons/fi";
+import { assignTestToColleges, fetchCampusDriveDetails } from "../../../redux/company/campusDrive/campusDriveSlice";
+import { getAllTests } from "../../../redux/college/test/thunks/test";
 
 export default function AssignTests() {
-  const { driveId } = useParams()
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const { driveId } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedTest, setSelectedTest] = useState(null);
   const [selectedColleges, setSelectedColleges] = useState([]);
-  const { assessments: tests, loading: loadingTests } = useSelector((state) => state.test)
-  const { currentCampusDrive, loading: loadingCampusDrive } = useSelector((state) => state.campusDrive)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { assessments: tests, loading: loadingTests } = useSelector((state) => state.test);
+  const { currentCampusDrive, loading: loadingCampusDrive } = useSelector((state) => state.campusDrive);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (driveId) {
-      dispatch(fetchCampusDriveDetails(driveId))
+      dispatch(fetchCampusDriveDetails(driveId));
     }
-    dispatch(getAllTests())
-  }, [driveId, dispatch])
+    dispatch(getAllTests());
+  }, [driveId, dispatch]);
 
   const handleCollegeSelection = (collegeId) => {
     setSelectedColleges((prev) =>
       prev.includes(collegeId) ? prev.filter((id) => id !== collegeId) : [...prev, collegeId]
-    )
-  }
+    );
+  };
 
   const handleTestSelection = (testId) => {
     setSelectedTest(testId === selectedTest ? null : testId);
   };
 
   const handleSearch = (e) => {
-    setSearchTerm(e.target.value)
-  }
+    setSearchTerm(e.target.value);
+  };
 
   const handleSubmit = async () => {
     if (!selectedTest || selectedColleges.length === 0) {
@@ -55,10 +53,10 @@ export default function AssignTests() {
         assignTestToColleges({
           driveId,
           colleges: selectedColleges,
-          test: selectedTest
+          test: selectedTest,
         })
       ).unwrap();
-      
+
       toast.success("Test assigned successfully");
       navigate("/company/pr/campus-drive/" + driveId);
     } catch (error) {
@@ -74,18 +72,18 @@ export default function AssignTests() {
   };
 
   const handleScrollToTests = () => {
-    document.getElementById('test-section')?.scrollIntoView({ 
-      behavior: 'smooth' 
+    document.getElementById("test-section")?.scrollIntoView({
+      behavior: "smooth",
     });
   };
 
   const renderStepHeader = (stepNumber, title, description) => (
-    <div className="mb-6 border-b pb-4">
+    <div className="mb-6 border-b border-gray-200 pb-4">
       <div className="flex items-center gap-3 mb-2">
-        <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">
+        <div className="w-8 h-8 rounded-full bg-blued text-white flex items-center justify-center font-bold">
           {stepNumber}
         </div>
-        <h2 className="text-2xl font-bold">{title}</h2>
+        <h2 className="text-2xl font-bold text-[#043345]">{title}</h2>
       </div>
       <p className="text-gray-600 ml-11">{description}</p>
     </div>
@@ -93,15 +91,11 @@ export default function AssignTests() {
 
   const renderColleges = () => (
     <div className="mb-12 bg-white rounded-lg p-6 shadow-md">
-      {renderStepHeader(
-        1, 
-        "Select Colleges",
-        "Choose the colleges you want to assign the test to"
-      )}
+      {renderStepHeader(1, "Select Colleges", "Choose the colleges you want to assign the test to")}
       <div className="relative mb-4">
         <input
           type="text"
-          className="input input-bordered w-full pl-10"
+          className="w-full p-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blued"
           placeholder="Search colleges..."
           value={searchTerm}
           onChange={handleSearch}
@@ -111,7 +105,7 @@ export default function AssignTests() {
       {loadingCampusDrive ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[...Array(6)].map((_, index) => (
-            <div key={index} className="skeleton h-24 w-full"></div>
+            <div key={index} className="h-24 w-full bg-gray-200 animate-pulse rounded-md"></div>
           ))}
         </div>
       ) : (
@@ -123,44 +117,36 @@ export default function AssignTests() {
             .map((college) => (
               <div
                 key={college._id}
-                className={`card ${
-                  selectedColleges.includes(college._id)
-                    ? "bg-primary text-primary-content"
-                    : "bg-base-100"
-                } shadow-lg hover:shadow-xl transition-shadow duration-200 cursor-pointer`}
+                className={`p-4 rounded-lg ${
+                  selectedColleges.includes(college._id) ? "bg-blued text-white" : "bg-white"
+                } shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer`}
                 onClick={() => handleCollegeSelection(college._id)}
               >
-                <div className="card-body">
-                  <div className="flex items-center gap-3">
-                       <img
-                         src={college.avatar.url}
-                         alt={`${college.CollegeName} Avatar`}
-                         className="w-10 h-10 rounded-full"
-                       />
-                       <div>
-                         <p className="font-medium text-gray-700">{college.CollegeName}</p>
-                         <p className="text-sm text-gray-500">{college.Email}</p>
-                         <p className="text-sm text-gray-500">Phone: {college.Phone}</p>
-                       </div>
-                     </div>
-                     
-                  {selectedColleges.includes(college._id) && (
-                    <FiCheck className="absolute top-2 right-2 text-2xl" />
-                  )}
+                <div className="flex items-center gap-3">
+                  <img
+                    src={college.avatar.url}
+                    alt={`${college.CollegeName} Avatar`}
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <div>
+                    <p className="font-medium">{college.CollegeName}</p>
+                    <p className="text-sm opacity-75">{college.Email}</p>
+                    <p className="text-sm opacity-75">Phone: {college.Phone}</p>
+                  </div>
                 </div>
+                {selectedColleges.includes(college._id) && (
+                  <FiCheck className="absolute top-2 right-2 text-2xl" />
+                )}
               </div>
-             
             ))}
         </div>
       )}
       {selectedColleges.length > 0 && (
         <div className="mt-4 p-4 bg-gray-50 rounded-lg flex justify-between items-center">
-          <p className="font-medium text-gray-700">
-            {selectedColleges.length} college(s) selected
-          </p>
-          <button 
+          <p className="font-medium text-[#043345]">{selectedColleges.length} college(s) selected</p>
+          <button
             onClick={handleScrollToTests}
-            className="btn btn-primary"
+            className="px-4 py-2 bg-blued text-white rounded-md hover:bg-[#043345] transition-colors duration-200"
           >
             Assign Test Now
           </button>
@@ -170,125 +156,102 @@ export default function AssignTests() {
   );
 
   const renderTestList = (title, tests) => {
-    // Only show test section if colleges are selected
     if (!selectedColleges.length) {
       return null;
     }
 
-    // If tests exist, show them
-    if (tests && tests.length > 0) {
-      return (
-        <div className="mb-8" id="test-section">
-          {renderStepHeader(2, `Select ${title} Test`, 
-            "Choose one test to assign to the selected colleges")}
+    return (
+      <div id="test-section">
+       
+        {tests && tests.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {tests.map((test) => (
               <div
                 key={test._id}
-                className={`card ${
-                  selectedTest === test._id 
-                    ? "bg-secondary text-secondary-content" 
-                    : "bg-base-100"
-                } shadow-lg hover:shadow-xl transition-shadow duration-200 cursor-pointer`}
+                className={`p-4 rounded-lg ${
+                  selectedTest === test._id ? "bg-[#043345] text-white" : "bg-white border border-gray-200"
+                } shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer`}
                 onClick={() => handleTestSelection(test._id)}
               >
-                <div className="card-body">
-                  <h3 className="card-title">{test.name}</h3>
-                  {selectedTest === test._id && (
-                    <div className="mt-2">
-                      <p className="text-sm">Selected Colleges ({selectedColleges.length})</p>
-                    </div>
-                  )}
+                <h3 className="font-bold mb-2">{test.name}</h3>
+                <div className="mb-2">
+                  <span className={`text-xs px-2 py-1 rounded ${
+                    selectedTest === test._id ? 'bg-white text-[#043345]' : 'bg-blued text-white'
+                  }`}>
+                    {test.level}
+                  </span>
                 </div>
+                <p className="text-sm opacity-75">{test.description?.slice(0, 100)}...</p>
+                {selectedTest === test._id && (
+                  <div className="mt-2">
+                    <p className="text-sm opacity-75 ">
+                      Selected Colleges ({selectedColleges.length})
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
-        </div>
-      );
-    }
-
-    // Show create test button only if no tests exist and colleges are selected
-    if (selectedColleges.length > 0) {
-      return (
-        <div className="text-center p-8 bg-gray-50 rounded-lg mb-8">
-          <p className="text-gray-600 mb-4">No tests available for {title}</p>
-          <button 
-            onClick={() => navigate('/company/pr/test')}
-            className="btn btn-primary"
-          >
-            Create New Test
-          </button>
-        </div>
-      );
-    }
-
-    return null;
-  };
-
-  // Add scroll effect when colleges are selected
-  // useEffect(() => {
-  //   if (selectedColleges.length > 1) {
-  //     document.getElementById('test-section')?.scrollIntoView({ 
-  //       behavior: 'smooth' 
-  //     });
-  //   }
-  // }, [selectedColleges.length]);
-
-  return (
-    <div className="container mx-auto p-6">
-      <div className="flex justify-between items-center mb-8">
-       <button
-             onClick={() => navigate('/company/pr/campus-drive/'+ driveId)}
-             className="mb-6 btn btn-ghost gap-2 hover:bg-gray-100"
-           >
-             <FiArrowLeft className="text-lg" />
-             Back to Campus Drive
-           </button>
-     
-        <h1 className="text-3xl font-bold">Assign Tests to Colleges</h1>
-        {selectedColleges.length > 0 && (
-          <button 
-            onClick={handleClearSelection}
-            className="btn btn-ghost text-gray-600"
-          >
-            Clear Selection
-          </button>
+        ) : (
+          <div className="text-center p-8 bg-gray-50 rounded-lg mb-8">
+            <p className="text-gray-600 mb-4">No tests available for {title}</p>
+            <button
+              onClick={() => navigate("/company/pr/test")}
+              className="px-4 py-2 bg-blued text-white rounded-md hover:bg-[#043345] transition-colors duration-200"
+            >
+              Create New Test
+            </button>
+          </div>
         )}
       </div>
+    );
+  };
 
-      {renderColleges()}
-      
-      {selectedColleges.length > 0 && (
-        <div className="bg-white rounded-lg p-6 shadow-md mt-8">
-          {renderTestList("Beginner", tests.beginner || [])}
-          {renderTestList("Intermediate", tests.intermediate || [])}
-          {renderTestList("Advanced", tests.advanced || [])}
-          {renderTestList("Adaptive", tests.adaptive || [])}
-        </div>
-      )}
-
-      {selectedColleges.length > 0 && selectedTest && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg">
-          <div className="container mx-auto flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <p>{selectedColleges.length} colleges selected</p>
-              <button 
-                onClick={handleClearSelection}
-                className="btn btn-ghost btn-sm"
-              >
-                Clear
-              </button>
-            </div>
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto p-6">
+        <div className="flex justify-between items-center mb-8">
+          <button
+            onClick={() => navigate("/company/pr/campus-drive/" + driveId)}
+            className="flex items-center gap-2 text-blued hover:text-[#043345] transition-colors duration-200"
+          >
+            <FiArrowLeft className="text-lg" />
+            Back to Campus Drive
+          </button>
+          <h1 className="text-3xl font-bold text-[#043345]">Assign Tests to Colleges</h1>
+          {selectedColleges.length > 0 && (
             <button
-              className={`btn btn-primary ${isSubmitting ? "loading" : ""}`}
+              onClick={handleClearSelection}
+              className="px-4 py-2 text-sm text-gray-600 bg-transparent hover:bg-gray-200 rounded-md"
+            >
+              Clear Selection
+            </button>
+          )}
+        </div>
+
+        {renderColleges()}
+
+        {selectedColleges.length > 0 && (
+          <div className="bg-white rounded-lg p-6 shadow-md mt-8">
+             {renderStepHeader(2, "Assign Tests", "Choose one test to assign to the selected colleges")}
+            {renderTestList("Beginner", tests.beginner || [])}
+            {renderTestList("Intermediate", tests.intermediate || [])}
+            {renderTestList("Advanced", tests.advanced || [])}
+          </div>
+        )}
+
+        {selectedColleges.length > 0 && selectedTest && (
+          <div className="text-right mt-6">
+            <button
               onClick={handleSubmit}
+              className="px-6 py-3 bg-blued text-white rounded-md hover:bg-[#043345] transition-colors duration-200"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Assigning..." : "Assign Test"}
             </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

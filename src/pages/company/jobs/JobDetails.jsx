@@ -245,7 +245,7 @@ const JobDetailsPage = () => {
             <button
               className="bg-blued text-white px-4 py-2 rounded"
               onClick={() => {
-                navigate(`/company/pr/job/students`);
+                navigate(`/company/pr/job/students?assessment=${jobDetails?.assessments[0]?.test?._id}`);
               }}
             >
               View All
