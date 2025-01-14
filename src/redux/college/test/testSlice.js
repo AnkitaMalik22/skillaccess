@@ -49,6 +49,7 @@ import {
   removeBookmark,
   getTopicByIdQB,
 } from "./thunks/question";
+import { config } from "process";
 
 const testState = {
   recentAssessments: [],
@@ -69,15 +70,15 @@ const testState = {
       totalPages: 0,
       totalDocuments: 0,
       limit: 10
-  }
+    }
   },
   testName: "",
   testDescription: "",
   testAttempts: "",
   testId: "",
-  category  : "",
-  categoryName : "",
-  hasAccessToAllCategories : true,
+  category: "",
+  categoryName: "",
+  hasAccessToAllCategories: true,
   accessibleDepartments: [],
   hasAccessToAllDepartments: false,
   testType: "",
@@ -89,7 +90,7 @@ const testState = {
     adaptive: [],
   },
 
- hasNextPageStudent:false,
+  hasNextPageStudent: false,
   //all topics
   sections: null,
   students: [],
@@ -111,6 +112,10 @@ const testState = {
   //     },
   //   ],
   // },
+
+  config: localStorage.getItem("testDetails")
+    ? JSON.parse(localStorage.getItem("testDetails")).config
+    : {},
   level: localStorage.getItem("testDetails")
     ? JSON.parse(localStorage.getItem("testDetails")).level
     : "",
@@ -152,52 +157,52 @@ const testState = {
   currentTopic: localStorage.getItem("currentTopic")
     ? JSON.parse(localStorage.getItem("currentTopic"))
     : {
-        _id: "",
-        Time: 0,
-        Heading: "",
-        Description: "",
-        duration_from: "",
-        duration_to: "",
-        CreatedByAdmin: false,
-        Student: [],
-        Timeline: "",
-        TotalQuestions: 0,
-        TotalStudentsAttempted: 0,
-        TotalStudentsCorrect: 0,
-        Type: "",
-        assessments: [],
-        college: "",
-        compiler: [],
-        createdByCollege: false,
-        createdByCompany: false,
-        essay: [],
-        findAnswers: [],
-        questions: [],
-        video: [],
-      }, //on edit
+      _id: "",
+      Time: 0,
+      Heading: "",
+      Description: "",
+      duration_from: "",
+      duration_to: "",
+      CreatedByAdmin: false,
+      Student: [],
+      Timeline: "",
+      TotalQuestions: 0,
+      TotalStudentsAttempted: 0,
+      TotalStudentsCorrect: 0,
+      Type: "",
+      assessments: [],
+      college: "",
+      compiler: [],
+      createdByCollege: false,
+      createdByCompany: false,
+      essay: [],
+      findAnswers: [],
+      questions: [],
+      video: [],
+    }, //on edit
   TopicToBeAdded: localStorage.getItem("TopicToBeAdded")
     ? JSON.parse(localStorage.getItem("TopicToBeAdded"))
     : {
-        id: "",
+      id: "",
+
+      questions: [],
+
+      findAnswers: [],
+
+      essay: [],
+
+      video: {
+        videoFile: "",
 
         questions: [],
 
-        findAnswers: [],
+        short: [],
 
-        essay: [],
-
-        video: {
-          videoFile: "",
-
-          questions: [],
-
-          short: [],
-
-          long: [],
-        },
-
-        compiler: [],
+        long: [],
       },
+
+      compiler: [],
+    },
 
   ADD_QUESTION_LOADING: false,
   GET_TOPICS_LOADING: false,
@@ -247,8 +252,8 @@ const testSlice = createSlice({
   initialState: testState,
   name: "test",
   reducers: {
-    resetStudentList : (state,action)=>{
-      state.testDataResponse={}
+    resetStudentList: (state, action) => {
+      state.testDataResponse = {}
     },
     setInTest: (state, action) => {
       state.inTest = action.payload;
@@ -519,44 +524,43 @@ const testSlice = createSlice({
     },
 
     setTestBasicDetails: (state, action) => {
-      state.name = action.payload.name;
-      state.description = action.payload.description;
-      state.totalAttempts = action.payload.totalAttempts;
-      state.totalQuestions = action.payload.totalQuestions;
-      state.totalDuration = action.payload.totalDuration;
-      state.level = action.payload.level;
-      state.duration_from = action.payload.duration_from;
-      state.duration_to = action.payload.duration_to;
-      state.isNegativeMarking = action.payload.isNegativeMarking;
-      state.accessibleDepartments = action.payload.accessibleDepartments;
-      state.hasAccessToAllDepartments = action.payload.hasAccessToAllDepartments;
-      state.hasAccessToAllCategories = action.payload.hasAccessToAllCategories;
-      state.category = action.payload.category;
-      state.categoryName = action.payload.categoryName;
-      
-      state.status = "active";
-      localStorage.setItem(
-        "testDetails",
-        JSON.stringify({
-          level: state.level,
-          name: state.name,
-          description: state.description,
-          totalAttempts: state.totalAttempts,
-          totalQuestions: state.totalQuestions,
-          totalDuration: state.totalDuration,
-          duration_to: state.duration_to,
-          duration_from: state.duration_from,
-          isNegativeMarking: state.isNegativeMarking,
-          accessibleDepartments: action.payload.accessibleDepartments,
-          hasAccessToAllDepartments: action.payload?.hasAccessToAllDepartments,
-          hasAccessToAllCategories: action.payload?.hasAccessToAllCategories,
-          category : action.payload?.category,
-          categoryName : action.payload?.categoryName
+      // Define the fields to be updated in both state and localStorage
+      const fieldsToUpdate = [
+        'name',
+        'description',
+        'totalAttempts',
+        'totalQuestions',
+        // 'totalDuration',
+        'level',
+        'duration_from',
+        'duration_to',
+        'isNegativeMarking',
+        'accessibleDepartments',
+        'hasAccessToAllDepartments',
+        'hasAccessToAllCategories',
+        'category',
+        'categoryName',
+        'config',
+      ];
 
-        })
-      );
-      //console.log(action.payload, "action.payload");
-      // //console.log(current(state));
+      // Update state
+      fieldsToUpdate.forEach(field => {
+        if (action.payload[field] !== undefined) {
+          state[field] = action.payload[field];
+        }
+      });
+
+      // Set status
+      state.status = "active";
+
+      // Create localStorage object with the same fields
+      const storageData = fieldsToUpdate.reduce((acc, field) => {
+        acc[field] = state[field];
+        return acc;
+      }, {});
+
+      // Store in localStorage
+      localStorage.setItem("testDetails", JSON.stringify(storageData));
     },
     setTestSelectedTopics: (state, action) => {
       state.topics = action.payload;
@@ -642,10 +646,10 @@ const testSlice = createSlice({
             break;
           case "mcq":
 
-              state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
-                index === action.payload.index ? action.payload.res.question : question
-              );
-              
+            state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
+              index === action.payload.index ? action.payload.res.question : question
+            );
+
             break;
 
           case "findAnswer":
@@ -762,9 +766,9 @@ const testSlice = createSlice({
         //console.log("pending");
       })
       .addCase(getTopicById.fulfilled, (state, action) => {
-       console.log(action.payload, "action.payload.section");
+        console.log(action.payload, "action.payload.section");
 
-        if( !localStorage.getItem("currentTopic") || JSON.stringify(action.payload) !== localStorage.getItem("currentTopic")){
+        if (!localStorage.getItem("currentTopic") || JSON.stringify(action.payload) !== localStorage.getItem("currentTopic")) {
           localStorage.setItem("currentTopic", JSON.stringify(action.payload));
           state.currentTopic = action.payload;
         }
@@ -964,7 +968,7 @@ const testSlice = createSlice({
           ...action.payload.assessment,
         ];
       })
-      .addCase(removeFromRecent.fulfilled, (state, action) => {})
+      .addCase(removeFromRecent.fulfilled, (state, action) => { })
       .addCase(deleteTopics.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         toast.error("Error Deleting Topic!");
@@ -1017,8 +1021,8 @@ const testSlice = createSlice({
       .addCase(getStudentsForTest.fulfilled, (state, action) => {
         state.students = action.payload.students;
         state.assessment = action.payload.assessment;
-       
-        state.hasNextPageStudent=  action.payload.hasNextPage;
+
+        state.hasNextPageStudent = action.payload.hasNextPage;
         state.GET_STUDENTS_LOADING = false;
       })
       .addCase(getStudentsForTest.rejected, (state, action) => {
@@ -1036,7 +1040,7 @@ const testSlice = createSlice({
         state.status = "failed";
         state.error = action.payload || action.error.message;
       })
-      
+
   },
 });
 

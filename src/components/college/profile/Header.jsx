@@ -4,6 +4,8 @@ import { ProfileInfo } from "./ProfileInfo";
 import { useCollegeProfile } from "../../../hooks/useCollegeProfile";
 import Loader from "../../loaders/Loader";
 import InputField from "../../InputField";
+import CollegeRegistrationForm from "../../../pages/college/profile/AdditionalDetailsForm";
+import CollegeDetails from "../../../pages/college/profile/Details";
 
 const Header = () => {
   const {
@@ -109,6 +111,8 @@ const Header = () => {
         setCollege={setCollege}
         isUni={isUni}
       />
+      {editable && <CollegeRegistrationForm data={college} />}
+      {!editable && <CollegeDetails collegeData={college} />}
     </>
   );
 };
