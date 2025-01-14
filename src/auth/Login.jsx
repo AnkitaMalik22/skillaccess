@@ -77,7 +77,7 @@ const LoginPage = () => {
         <div className="font-dmSans">
           <div className="card-body">
             <div className="flex gap-2 justify-center mb-4 md:mb-8">
-              <img src="/images/logoFinal.png" alt="logo" className="w-60" />
+              <img src="/quali.png" alt="logo" className="w-60" />
             </div>
             <h2 className="font-bold text-2xl text-center text-[#171717] mb-2">
               Getting Started

@@ -24,7 +24,7 @@ export const companySidebarItems = [
     ),
   },
   {
-    name: "Test",
+    name: "Assessment",
     path: "/company/pr/test",
     icon: (active) => (
       <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />
@@ -84,7 +84,7 @@ export const collegeSidebarItems = [
     ),
   },
   {
-    name: "Test",
+    name: "Assessment",
     path: "/college/test",
     icon: (active) => (
       <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />
@@ -165,7 +165,7 @@ export const universitySidebarItems = [
     ),
   },
   {
-    name: "Test",
+    name: "Assessment",
     path: "/university/pr/test",
     icon: (active) => (
       <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />

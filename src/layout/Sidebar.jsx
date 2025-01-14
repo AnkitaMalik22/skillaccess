@@ -42,7 +42,7 @@ const Sidebar = ({ open, selection, handleNavigation, items }) => {
         ))}
       </ul>
       <div className="mt-auto mb-5 text-center font-dmSans text-lg font-bold">
-        <h2 className="text-white">© {new Date().getFullYear()} Skillaccess</h2>
+        <h2 className="text-white">© {new Date().getFullYear()} Qualimatrix</h2>
       </div>
     </aside>
   );
