@@ -49,7 +49,7 @@ const Verification = ({
             <span
               className={`${
                 testCaseExpand
-                  ? "translate-x-6 bg-blue-600"
+                  ? "translate-x-6 bg-blued"
                   : "translate-x-1 bg-gray-400 "
               } inline-block h-4 w-4 transform rounded-full  transition`}
             />

@@ -29,7 +29,7 @@ export const CompanyDetails = ({ companyDetails }) => {
           <h2 className="text-sm font-medium text-gray-600">
             {companyDetails?.location?.state || "Location"} Branch Office
           </h2>
-          <h2 className="text-sm font-medium text-blue-600">Available Jobs</h2>
+          <h2 className="text-sm font-medium text-blued">Available Jobs</h2>
         </div>
         <div className="self-center text-center">
           <h2 className="text-gray-500 text-xs font-bold mb-1">EMPLOYEES</h2>
@@ -55,7 +55,7 @@ export const CompanyDetails = ({ companyDetails }) => {
               className="text-sm text-gray-600 mb-2 flex gap-3 items-center"
               key={index}
             >
-              <VscCircleFilled className="text-white border-4 w-4 h-4 rounded-full self-center border-blue-600 m-0" />
+              <VscCircleFilled className="text-white border-4 w-4 h-4 rounded-full self-center border-blued m-0" />
               <p>{award?.name || "Award Name"}</p>
             </div>
           ))

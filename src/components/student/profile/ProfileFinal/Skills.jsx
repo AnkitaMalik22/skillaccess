@@ -18,10 +18,10 @@ const Skills = () => {
         <div className="grid grid-cols-2">
           <span className="">Software Knowledge</span>
           <span className="flex gap-2 flex-wrap">
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
-            <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
+            <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
           </span>
         </div>
 

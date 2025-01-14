@@ -48,7 +48,7 @@ const Visibility = () => {
               <span
                 className={`${
                   enabled
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />
@@ -76,7 +76,7 @@ const Visibility = () => {
               <span
                 className={`${
                   enabled3
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />
@@ -119,7 +119,7 @@ const Visibility = () => {
               <span
                 className={`${
                   enabled1
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />
@@ -147,7 +147,7 @@ const Visibility = () => {
               <span
                 className={`${
                   enabled2
-                    ? "translate-x-6 bg-blue-600"
+                    ? "translate-x-6 bg-blued"
                     : "translate-x-1 bg-gray-400 "
                 } inline-block h-4 w-4 transform rounded-full  transition`}
               />

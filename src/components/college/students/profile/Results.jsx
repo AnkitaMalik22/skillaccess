@@ -141,7 +141,7 @@ const Results = ({ assessmentResult, id, pagination }) => {
       accessor: (item) => (
         <span
           onClick={() => handleTestNameClick(item)} // Add onClick event for navigation
-          className="text-blue-600 cursor-pointer"
+          className="text-blued cursor-pointer"
         >
           {truncateText(item?.assessmentId?.name || "N/A", 20)}
         </span>

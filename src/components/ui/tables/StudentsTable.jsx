@@ -26,8 +26,8 @@ const StudentsTable = ({
     return filterFields.every(({ accessor, filterKey }) => {
       const value = filters[filterKey];
       if (!value) return true; // No filter applied
-      const fieldValue = accessor(item).toString().toLowerCase();
-      return fieldValue.includes(value.toLowerCase());
+      const fieldValue = accessor(item)?.toString().toLowerCase();
+      return fieldValue?.includes(value?.toLowerCase());
     });
   });
 

@@ -38,6 +38,13 @@ export const companySidebarItems = [
     ),
   },
   {
+    name : "Jobs",
+    path : "/company/pr/jobs",
+    icon : (active) => (
+      <LuBriefcase {...iconProps} color={active ? "#171717" : "white"} />
+    ),
+  },
+  {
     name: "Results",
     path: "/company/pr/results",
     icon: (active) => (
@@ -95,6 +102,13 @@ export const collegeSidebarItems = [
     path: "/college/jobs",
     icon: (active) => (
       <LuBriefcase {...iconProps} color={active ? "#171717" : "white"} />
+    ),
+  },
+  {
+    name : "Campus Drive",
+    path : "/college/campus-drive",
+    icon : (active) => (
+      <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />
     ),
   },
   {

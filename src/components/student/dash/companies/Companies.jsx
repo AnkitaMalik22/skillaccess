@@ -73,7 +73,7 @@ const Companies = () => {
                   </p>
                   <div className="card-actions justify-end">
                     <button
-                      className="px-4 py-2 hover:bg-blue-900 bg-accent text-sm font-dmSans font-bold rounded-xl text-white"
+                      className="px-4 py-2 hover:bg-blued bg-accent text-sm font-dmSans font-bold rounded-xl text-white"
                       onClick={() => navigate("/college/companies/profile")}
                     >
                       View Details

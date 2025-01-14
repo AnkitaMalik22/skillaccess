@@ -121,10 +121,10 @@ const Details = ({ student }) => {
       <div className="border-b  flex justify-between text-sm font-bold text-center p-4 bg-gray-50 items-center ">
         <h2 className="self-center font-bold text-base">Software Knowledge</h2>
         <span className="flex gap-2 flex-wrap text-sm">
-          {/* <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " /> */}
-          {/* <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
-          <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " />
-          <SiAdobephotoshop className="text-3xl bg-blue-600 rounded-md " /> */}
+          {/* <SiAdobephotoshop className="text-3xl bg-blued rounded-md " /> */}
+          {/* <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
+          <SiAdobephotoshop className="text-3xl bg-blued rounded-md " />
+          <SiAdobephotoshop className="text-3xl bg-blued rounded-md " /> */}
           {student?.Skills?.SoftwareKnowledge.join(", ")}
         </span>
       </div>

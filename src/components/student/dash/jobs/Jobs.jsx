@@ -76,7 +76,7 @@ const Jobs = () => {
                   {" "}
                   {job.WorkplaceType || "WOrktype"}
                 </h2>
-                <button className=" h-8 p-1 hover:bg-blue-900 bg-blued rounded-md text-white text-[.5rem] sm:text-sm self-center ">
+                <button className=" h-8 p-1 hover:bg-blued bg-blued rounded-md text-white text-[.5rem] sm:text-sm self-center ">
                   {job.EmploymentType || "employmentType"}
                 </button>
                 <FaArrowRight className="text-gray-400 self-center" />

@@ -151,7 +151,7 @@ const CreateTopic = () => {
 
         <button
           onClick={handleNext}
-          className="flex items-center gap-2 bg-blued text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          className="flex items-center gap-2 bg-blued text-white px-4 py-2 rounded-md hover:bg-blued transition-colors"
         >
           Next Step
           <FaArrowRightLong className="h-4 w-4" />

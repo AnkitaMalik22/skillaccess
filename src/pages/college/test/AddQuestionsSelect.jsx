@@ -69,7 +69,7 @@ const AddQuestionsSelect = () => {
   return (
     <>
       {/* <HeaderSelect Q={selectQuestionType} /> */}
-      <CommonHeader backPath={`${level === "adaptive" ? `/${getEntity()}/test/selectAdaptive` : `/${getEntity()}/test/select`}`} title="Add Questions" handleNext={handleNext} />
+      <CommonHeader backPath={`${level === "adaptive" ? `/${getEntity()}/test/selectAdaptive` : `/${getEntity()}/test/select`}?level=${level}`} title="Add Questions" handleNext={handleNext} />
 
       <div className=" mx-auto mt-20">
         {/* larger screens */}

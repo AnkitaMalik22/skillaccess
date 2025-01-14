@@ -56,7 +56,8 @@ const SharedLayout = ({ navbarComponent: Navbar, sidebarItems, getUser }) => {
           saveText="Continue"
         />
       )}
-      <Navbar open={open} setOpen={setOpen} />
+      {/* <Navbar open={open} setOpen={setOpen} /> */}
+      <Navbar setOpen={setOpen} open={open} />
       <section className="flex h-screen justify-start pt-20 bg-secondary font-dmSans">
         <Sidebar
           open={open}

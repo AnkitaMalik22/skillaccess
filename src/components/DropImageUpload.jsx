@@ -25,7 +25,7 @@ const DropImageUpload = ({ setImage, image, setFile }) => {
           {...getRootProps()}
           className={`border-2 w-full border-dashed rounded-md p-6 cursor-pointer flex flex-col items-center justify-center ${
             isDragActive
-              ? "border-blue-500 bg-blue-100"
+              ? "border-blued bg-blue-100"
               : "border-gray-300 bg-gray-100"
           }`}
         >

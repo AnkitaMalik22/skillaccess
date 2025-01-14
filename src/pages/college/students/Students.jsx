@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStudents } from "../../../redux/college/student/studentSlice";
 import Header from "../../../components/college/students/Header";
 import { isUni } from "../../../util/isCompany";
-import { Table } from "../../../components/ui/tables/Table"; // Assuming Table is extracted into a separate file
 import StudentsTable from "../../../components/ui/tables/StudentsTable";
+import Pagination from "../../../components/Pagination"
 
 const Students = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [filteredStudents, setFilteredStudents] = useState([]);
-  const [filterType, setFilterType] = useState("all students");
+  const [filterType, setFilterType] = useState("approved-students");
   const [batch, setBatch] = useState("all");
   const [createdAt, setCreatedAt] = useState("");
   const [selectedList, setSelectedList] = useState("approvedStudents"); // Default to "approvedStudents"
@@ -21,6 +21,7 @@ const Students = () => {
     approvedStudents,
     pendingStudents,
     GET_STUDENT_LOADING,
+    pagination
   } = useSelector((state) => state.collegeStudents);
 
   const { user } = useSelector((state) => {
@@ -88,43 +89,49 @@ const Students = () => {
       <div className="w-full flex justify-start gap-5 mb-5 p-5 shadow-md">
         {/* Approved Students Button */}
         <button
-          onClick={() => setSelectedList("approvedStudents")}
-          className={`${
-            selectedList === "approvedStudents"
-              ? "bg-blued text-white"
-              : "bg-gray-200 text-black"
-          } px-4 py-2 rounded-md font-semibold hover:bg-lightBlue hover:text-white`}
+          onClick={() => {
+            setSelectedList("approvedStudents")
+            setFilterType("approved-students")
+          }}
+          className={`${selectedList === "approvedStudents"
+            ? "bg-blued text-white"
+            : "bg-gray-200 text-black"
+            } px-4 py-2 rounded-md font-semibold hover:bg-lightBlue hover:text-white`}
         >
           Approved Students
         </button>
 
         {/* Invited Students Button */}
         <button
-          onClick={() => setSelectedList("invitedStudents")}
-          className={`${
-            selectedList === "invitedStudents"
-              ? "bg-blued text-white"
-              : "bg-gray-200 text-black"
-          } px-4 py-2 rounded-md font-semibold hover:bg-lightBlue hover:text-white`}
+          onClick={() => {
+            setFilterType("invited-students")
+            setSelectedList("invitedStudents")
+          }}
+          className={`${selectedList === "invitedStudents"
+            ? "bg-blued text-white"
+            : "bg-gray-200 text-black"
+            } px-4 py-2 rounded-md font-semibold hover:bg-lightBlue hover:text-white`}
         >
           Invited Students
         </button>
 
         {/* Pending Requests Button */}
         <button
-          onClick={() => setSelectedList("pendingStudents")}
-          className={`${
-            selectedList === "pendingStudents"
-              ? "bg-blued text-white"
-              : "bg-gray-200 text-black"
-          } px-4 py-2 rounded-md font-semibold hover:bg-lightBlue hover:text-white`}
+          onClick={() => {
+            setFilterType("pending-students")
+            setSelectedList("pendingStudents")
+          }}
+          className={`${selectedList === "pendingStudents"
+            ? "bg-blued text-white"
+            : "bg-gray-200 text-black"
+            } px-4 py-2 rounded-md font-semibold hover:bg-lightBlue hover:text-white`}
         >
           Pending Requests
         </button>
       </div>
 
       {/* Full-Screen Table */}
-      <div className="w-full h-full overflow-hidden ">
+      <div className="w-full h-full  ">
         {selectedList === "approvedStudents" && (
           <StudentsTable
             data={approvedStudents}
@@ -148,6 +155,11 @@ const Students = () => {
                 header: "Performance",
                 accessor: (student) => student.performance || "Not Available",
                 filterKey: "performance",
+              },
+              {
+                header: "Department",
+                accessor: (student) => student.department || "N/A",
+                filterKey: "department",
               },
             ]}
           />
@@ -176,6 +188,7 @@ const Students = () => {
                 accessor: (student) => student.batch,
                 filterKey: "batch",
               },
+
             ]}
           />
         )}
@@ -203,9 +216,25 @@ const Students = () => {
                 accessor: (student) => student.Email,
                 filterKey: "email",
               },
+              {
+                header: "Department",
+                accessor: (student) => student.department || "N/A",
+                filterKey: "department",
+              },
             ]}
           />
         )}
+
+        <Pagination totalPages={pagination.totalPages} currentPage={pagination.currentPage} onPageChange={(page) => {
+          dispatch(getStudents({
+            id: user?._id,
+            batch,
+            filterType,
+            createdAt,
+            page: page,
+            limit: 10,
+          }))
+        }} />
       </div>
     </>
   );

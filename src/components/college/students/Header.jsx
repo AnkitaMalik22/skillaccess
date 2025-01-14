@@ -180,7 +180,7 @@ const Header = ({
           <img src="/images/icons/reports.png" alt="ico" />
         </button>
       </span>
-
+      {/* 
       <div className="rounded-xl w-full sm:h-12 h-10 flex justify-between">
         <span className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
           <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400" />
@@ -191,11 +191,11 @@ const Header = ({
             className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
           />
         </span>
-      </div>
+      </div> */}
 
       <span className="flex gap-3">
         <button
-          className="self-center justify-center flex bg-[#8f92a11a] px-7 py-3 rounded-2xl gap-2 text-sm text-[#171717] font-bold hover:bg-blued hover:text-white transition-colors"
+          className="self-center justify-center flex bg-[#8f92a11a] px-7 py-3 rounded-md gap-2 text-sm text-[#171717] font-bold hover:bg-blued hover:text-white transition-colors"
           onClick={handleAddTeamClick}
         >
           <FiPlus className="self-center text-lg" /> Add
@@ -204,7 +204,7 @@ const Header = ({
         {showPopup && <StudentPoP onClose={handleClosePopup} />}
 
         <button
-          className="self-center justify-center flex bg-accent px-5 py-3 rounded-2xl text-white gap-2 text-md font-bold w-40 "
+          className="self-center justify-center flex bg-accent px-5 py-3 rounded-md text-white gap-2 text-md font-bold w-40 "
           onClick={() => {
             upload.current.click();
           }}
@@ -224,8 +224,8 @@ const Header = ({
           <button
             onClick={togglePopup}
             className={`self-center rounded-md h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center transition-colors ${isPopupOpen
-                ? "bg-[#0d9aac] text-white"
-                : "bg-[#8f92a11a] hover:bg-blued hover:text-white"
+              ? "bg-[#0d9aac] text-white"
+              : "bg-[#8f92a11a] hover:bg-blued hover:text-white"
               }`}
           >
             <PiSlidersHorizontalLight className="h-7 w-7" />
@@ -269,16 +269,16 @@ const Header = ({
                 />
 
                 {/* Filter Type Selection */}
-                <label className="text-sm font-semibold">Filter Type</label>
+                {/* <label className="text-sm font-semibold">Filter Type</label>
                 <select
                   onChange={(e) => setFilterType(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  <option value="all students">Select Filter</option>
-                  <option value="pending students">Pending Students</option>
-                  <option value="invited students">Invited Students</option>
-                  <option value="approved students">Approved Students</option>
-                </select>
+                  <option value="all-students">Select Filter</option>
+                  <option value="pending-students">Pending Students</option>
+                  <option value="invited-students">Invited Students</option>
+                  <option value="approved-students">Approved Students</option>
+                </select> */}
 
                 {/* Submit Button */}
                 <div className="flex justify-between">
@@ -292,7 +292,6 @@ const Header = ({
                     onClick={() => {
                       setYear("");
                       setCreatedAt("");
-                      setFilterType("all students");
                     }}
                     className="px-4 py-2 text-sm text-white bg-accent rounded-md focus:outline-none"
                   >

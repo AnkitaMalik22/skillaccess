@@ -42,7 +42,18 @@ const Recent = () => {
     dispatch(deleteRecentUsedQuestion({ type, id }));
   };
 
+  const recentUsedQuestionsWithIndex = recentUsedQuestions.map(
+    (questions, index) => ({
+      ...questions,
+      index: index + 1, // Add index to each filtered assessment
+    })
+  );
+
   const columns = [
+    {
+      header: "S.No",
+      accessor: "index",
+    },
     {
       header: "Topic",
       accessor: (item) => (
@@ -108,7 +119,7 @@ const Recent = () => {
         </div>
         <Table
           columns={columns}
-          data={recentUsedQuestions || []}
+          data={recentUsedQuestionsWithIndex || []}
           isLoading={GET_RECENT_QUESTION_LOADING}
           className="rounded-lg"
         />

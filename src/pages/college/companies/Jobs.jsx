@@ -76,7 +76,7 @@ const Jobs = () => {
       header: "Action",
       accessor: (job) => (
         <button
-          className="h-8 px-4 bg-blue-600 text-white text-sm rounded-md"
+          className="h-8 px-4 bg-blued text-white text-sm rounded-md"
           onClick={() => navigate(`/college/companies/jobOverview/${job._id}`)}
         >
           {job.EmploymentType || "View"}

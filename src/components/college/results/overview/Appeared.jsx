@@ -16,7 +16,7 @@ import { IoMdClose } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Appeared = ({ assessment }) => {
-  const [isLoading, setIsLoading] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [numberValue, setNumberValue] = useState("");
   const [showEvaluateConfirm, setShowEvaluationConfirm] = useState(false);
   const [searchParams] = useSearchParams();
@@ -150,7 +150,7 @@ const Appeared = ({ assessment }) => {
               placeholder="Filter by Name"
               value={filters.name}
               onChange={(e) => handleFilterChange("name", e.target.value)}
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blue-500 focus:ring-0"
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blued focus:ring-0"
             />
           )}
         </div>
@@ -195,7 +195,7 @@ const Appeared = ({ assessment }) => {
               onChange={(e) =>
                 handleFilterChange("profileDate", e.target.value)
               }
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blue-500 focus:ring-0"
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blued focus:ring-0"
             />
           )}
         </div>
@@ -237,7 +237,7 @@ const Appeared = ({ assessment }) => {
               onChange={(e) =>
                 handleFilterChange("assessmentPerformance", e.target.value)
               }
-              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blue-500 focus:ring-0"
+              className="mt-1 p-2 text-sm border border-gray-300 rounded-md focus:border-blued focus:ring-0"
             />
           )}
         </div>
@@ -260,14 +260,13 @@ const Appeared = ({ assessment }) => {
       header: "Review",
       accessor: (student) => (
         <button
-          className="text-blue-500 underline"
+          className="text-blued underline"
           onClick={(e) => {
             e.stopPropagation();
             const basePath = isCompany()
               ? "/company/pr/results/assessmentReview"
-              : `/${
-                  isUni() ? "university/pr" : "college"
-                }/results/assessmentReview`;
+              : `/${isUni() ? "university/pr" : "college"
+              }/results/assessmentReview`;
 
             navigate(
               `${basePath}?studentId=${student.studentId._id}&assessmentId=${student.assessmentId}&responseId=${student._id}`
@@ -294,9 +293,11 @@ const Appeared = ({ assessment }) => {
           />
         </label>
         <Button
+          loading={isLoading}
           handleClick={() => setShowEvaluationConfirm(true)}
           saveText="Auto Evaluate"
-          disabled={!numberValue}
+          disabled={(!numberValue || numberValue < 0 || numberValue > 99)}
+          dataTip={(!numberValue || numberValue < 0 || numberValue > 99) ? "Enter a valid cut-off" : ""}
         />
       </div>
 
@@ -304,14 +305,27 @@ const Appeared = ({ assessment }) => {
         <PopUp
           message="Evaluate students based on threshold?"
           saveText="Confirm"
-          handleSave={() => {
-            dispatch(
-              selectStudentsByThreshold({
-                testId: assessmentId,
-                threshold: numberValue,
-              })
-            );
-            setShowEvaluationConfirm(false);
+          handleSave={async () => {
+            try {
+
+              setIsLoading(true)
+              await dispatch(
+                selectStudentsByThreshold({
+                  testId: assessmentId,
+                  threshold: numberValue,
+                })
+              );
+
+              dispatch(resetStudentList());
+              dispatch(
+                getTestResultPage({ id: assessmentId, status: "pending", page: 1 })
+              );
+              setShowEvaluationConfirm(false);
+            } catch (error) {
+
+            } finally {
+              setIsLoading(false)
+            }
           }}
           handleOverlay={() => setShowEvaluationConfirm(false)}
         />

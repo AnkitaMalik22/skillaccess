@@ -1,89 +1,141 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FiBell, FiSettings } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { FaCoins } from "react-icons/fa";
 import useTranslate from "../../hooks/useTranslate";
 import GoogleTranslate from "../GoogleTranslate";
 import { Disclosure } from "@headlessui/react";
+import { logoutCompany } from "../../redux/company/auth/companyAuthSlice";
 import { logoutCollege } from "../../redux/college/auth/authSlice";
 import { setAssessments } from "../../redux/college/test/testSlice";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { FaCoins } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { clearCookie } from "../../util/getToken";
 
-const Navbar = (props) => {
+const Navbar = ({ userType, setOpen, open }) => {
+  const dispatch = useDispatch();
   const currentLanguage = useTranslate();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const goToProfile = () => {
-    // Function to navigate to profile page
-    navigate("/college/profile"); // Use navigate function to navigate to desired URL
-  };
+
+  const companyAuth = useSelector((state) => state.companyAuth);
+  const universityAuth = useSelector((state) => state.universityAuth);
+  const collegeAuth = useSelector((state) => state.collegeAuth);
+
+  const userDetails =
+    userType === "company"
+      ? companyAuth.data
+      : userType === "university"
+      ? universityAuth.data
+      : collegeAuth.user;
+
   const handleLogout = async (e) => {
     e.preventDefault();
 
     try {
-      const ch = await dispatch(logoutCollege());
-      if (ch.meta.requestStatus === "fulfilled") {
-        toast.success("Logged out successfully");
-        dispatch(setAssessments());
-        navigate("/");
+      let result;
+      switch (userType) {
+        case "company":
+          result = await dispatch(logoutCompany());
+          if (result.meta.requestStatus === "fulfilled") {
+            toast.success("Logged out successfully");
+            navigate("/company");
+          } else {
+            throw new Error("Company logout failed");
+          }
+          break;
+        case "university":
+          clearCookie("uni-token");
+          toast.success("Logged out successfully");
+          navigate("/university");
+          break;
+        case "college":
+          result = await dispatch(logoutCollege());
+          if (result.meta.requestStatus === "fulfilled") {
+            toast.success("Logged out successfully");
+            dispatch(setAssessments());
+            navigate("/");
+          } else {
+            throw new Error("College logout failed");
+          }
+          break;
+        default:
+          throw new Error("Invalid user type");
       }
     } catch (error) {
-      toast.error("logging out failed");
+      console.error("Logout error:", error);
+      toast.error("Logging out failed");
     }
   };
-  const userDetails = useSelector((state) => state.collegeAuth);
+
+  const getProfilePath = () => {
+    switch (userType) {
+      case "company":
+        return "/company/pr/profile";
+      case "university":
+        return "/university/pr/profile";
+      case "college":
+        return "/college/profile";
+      default:
+        return "/";
+    }
+  };
 
   return (
     <nav className="navbar flex justify-between bg-white w-full z-[9999] fixed top-0 border-b-black border">
-      {/* left */}
-      <div>
-        {/* mobile only */}
+      {/* Left Side */}
+      <div className="flex items-center">
+        {/* Mobile Toggle Button */}
         <button
-          className="btn btn-primary sm:hidden  "
-          onClick={() => props.setOpen(!props.open)}
+          className="btn btn-primary sm:hidden"
+          onClick={() => setOpen(!open)}
         >
           hamb
         </button>
 
+        {/* Logo */}
         <div className="ml-3">
-          {" "}
-          <img src="/images/logoFinal.png" alt="" width="180px" />
+          <img src="/images/logoFinal.png" alt="Logo" width="180px" />
         </div>
       </div>
 
-      {/* right */}
-      <div className="flex gap-4">
-        <button
-          onClick={() => {
-            navigate("/college/accounting");
-          }}
-          className="border border-[#D9E1E7] text-blued  rounded-md px-3 p-1 relative flex items-center"
-        >
-          <FaCoins />
-          <h1 className="text-blued  px-2">
-            {userDetails?.balance?.credit ? userDetails?.balance?.credit : 0}
-          </h1>
-        </button>
-
+      {/* Right Side */}
+      <div className="flex items-center gap-4">
         <GoogleTranslate currentLanguage={currentLanguage} />
+
+        {userType === "college" && (
+          <button
+            onClick={() => navigate("/college/accounting")}
+            className="border border-[#D9E1E7] text-blued hover:border-blued rounded-md px-3 h-[38px] relative flex items-center"
+          >
+            <FaCoins />
+            <h1 className="text-blued px-2">
+              {collegeAuth?.balance?.credit || 0}
+            </h1>
+          </button>
+        )}
 
         {/* Profile Dropdown */}
         <Disclosure as="div" className="relative">
           {({ open, close }) => (
             <>
-              <Disclosure.Button className="flex items-center border border-[#D9E1E7] rounded-md p-2 gap-2">
+              <Disclosure.Button className="flex items-center border border-[#D9E1E7] hover:border-blued rounded-md p-2 gap-2">
                 <img
                   src={
-                    userDetails?.user?.avatar?.url || "/images/defaultUser.jpg"
+                    userDetails?.avatar?.url ||
+                    userDetails?.user?.basic?.logo ||
+                    "/images/defaultUser.png"
                   }
                   alt="User Avatar"
-                  className="h-5 w-5"
+                  className="h-5 w-5 rounded-full p-[2px] bg-blue-100"
                 />
                 <h2 className="text-sm font-bold">
-                  Hello {userDetails?.user?.FirstName}
+                  Hello{" "}
+                  {userDetails?.basic?.companyName ||
+                    userDetails?.FirstName ||
+                    ""}
                 </h2>
-                <FiSettings className="text-lg text-accent" /> {/* Gear icon */}
+
+                <RiArrowDropDownLine />
               </Disclosure.Button>
 
               {/* Dropdown Panel */}
@@ -92,14 +144,14 @@ const Navbar = (props) => {
                 onMouseLeave={() => close()}
               >
                 <button
-                  onClick={goToProfile}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 hover:bg-opacity-60 rounded-md "
+                  onClick={() => navigate(getProfilePath())}
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-md hover:text-white"
                 >
                   Profile
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 rounded-md "
+                  className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:bg-opacity-60 rounded-md hover:text-white"
                 >
                   Logout
                 </button>
@@ -107,8 +159,6 @@ const Navbar = (props) => {
             </>
           )}
         </Disclosure>
-
-        <div className="w-52"></div>
       </div>
     </nav>
   );

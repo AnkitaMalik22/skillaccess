@@ -177,7 +177,7 @@ const Security = () => {
 
           <button
             // onClick={() => handleUpdatePassword(password)}
-            className="bg-blue-600 text-white py-3 px-8 rounded-xl"
+            className="bg-blued text-white py-3 px-8 rounded-xl"
           >
             Update Password
           </button>

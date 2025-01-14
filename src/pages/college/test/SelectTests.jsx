@@ -206,6 +206,32 @@ const SelectTests = () => {
     // //console.log(updatedSections);
   };
   //console.log(selectedSections?.length);
+  const getSectionName = (name) => {
+    let Qt = "name";
+    switch (name) {
+
+      case "mcq":
+        Qt = "Multiple Choice Questions";
+        break;
+      case "essay":
+        Qt = "essay";
+        break;
+      case "findAnswer":
+        Qt = "findAnswers";
+        break;
+      case "video":
+        Qt = "video";
+        break;
+      case "compiler":
+        Qt = "compiler";
+        break;
+      default:
+        break;
+
+        return Qt
+    }
+  }
+
   const removeSection = (section, index) => {
     let Qt;
     //console.log(selectedSections[index].Type);
@@ -343,7 +369,7 @@ const SelectTests = () => {
                   />
 
                   <h2 className="font-bold text-sm text-gray-400 self-center ">
-                    {section?.Type}
+                    {getSectionName(section?.Type)}
                   </h2>
                 </div>
 

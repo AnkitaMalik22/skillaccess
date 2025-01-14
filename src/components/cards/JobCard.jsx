@@ -8,7 +8,7 @@ const JobCard = ({ job }) => {
   return (
     <div
       className="w-full h-auto bg-white  hover:shadow-md transition-shadow duration-300 my-3 text-start font-medium text-gray-800 rounded-md  p-6 border border-gray-200 capitalize font-dmSans"
-      key={job.id}
+      key={job?._id}
     >
       {/* Company Info */}
       <div className="logo flex items-center gap-4 mb-4">
@@ -63,7 +63,7 @@ const JobCard = ({ job }) => {
 
         <button
           className="bg-blued  text-white rounded-md text-sm font-semibold px-6 py-2 transition-all duration-200 shadow-sm hover:shadow-md"
-          onClick={() => navigate(`/college/job/overview/${job?._id}`)}
+          onClick={() => navigate(`/college/jobs/overview/${job?._id}`)}
         >
           View Details
         </button>
