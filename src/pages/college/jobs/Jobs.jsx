@@ -43,7 +43,7 @@ const JobsPage = () => {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-5">
-        {jobs && jobs.map((job) => <JobCard job={job} key={job.id} />)}
+        {jobs && jobs.map((job) => <JobCard job={job} key={job._id} />)}
       </div>
     </>
   );
