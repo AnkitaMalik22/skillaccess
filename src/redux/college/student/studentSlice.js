@@ -149,6 +149,9 @@ export const studentSlice = createSlice({
         // state.invitedStudents = action.payload.invitedStudents;
         state.approvedStudents = action.payload.approvedStudents;
         state.pendingStudents = action.payload.pendingStudents;
+       
+        state.pagination.currentPage=action.payload.pagination.currentPage;
+        state.pagination.totalPages = action.payload.pagination.totalPages;
         state.GET_STUDENT_LOADING = false;
       })
       .addCase(getStudents.rejected, (state) => {

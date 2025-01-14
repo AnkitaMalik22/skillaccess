@@ -3,6 +3,7 @@ import { CgStopwatch } from "react-icons/cg";
 import axios from "axios";
 import Loader from "../../../../components/loaders/Loader";
 import toast from "react-hot-toast";
+import { getHeaders } from "../../../../util/isCompany";
 
 const Description = ({ topics, assessment }) => {
   const handleCalculateTime = (topic) => {
@@ -57,18 +58,19 @@ const Description = ({ topics, assessment }) => {
         Test Description
       </h2>
 
-      {!assessment?.isReportGenerated && (
+      {(
         <button
           className="py-3 text-white rounded-md text-sm bg-accent font-semibold flex gap-2 px-7 my-4 transition-all transform hover:bg-opacity-90  hover:shadow-lg"
           onClick={async () => {
             try {
               setLoading(true);
               await axios.get(
-                `${process.env.REACT_APP_API_URL}/api/assessments/publish-report/${assessment._id}`
+                `${process.env.REACT_APP_API_URL}/api/assessments/publish-report/${assessment._id}`,
+                getHeaders()
               );
               setLoading(false);
               toast.success("Result has been published");
-            } catch (error) {}
+            } catch (error) { }
           }}
           type="button"
         >

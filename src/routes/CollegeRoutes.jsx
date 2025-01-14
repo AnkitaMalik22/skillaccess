@@ -13,6 +13,7 @@ import InboxRoute from "../pages/college/inbox";
 import SettingsRoute from "../pages/college/settings";
 import TeamsRoute from "../pages/college/teams";
 import AccountRoute from "../pages/college/accounting/AccountRoutes";
+import AdditionalDetailsForm from "../pages/college/profile/AdditionalDetailsForm";
 import CampusDriveRouter from "../pages/college/campusDrive/CollegeCampusDriveRoutes";
 import jobRoute from "../pages/college/jobs";
 
@@ -22,6 +23,7 @@ const CollegeRoutes = () => {
       <Route element={<CollegeLayout />}>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="profile/details" element={<AdditionalDetailsForm />} />
         {/* <Route path="jobs" element={<Jobs />} /> */}
         {jobRoute("")}
         {TestRoute("")}

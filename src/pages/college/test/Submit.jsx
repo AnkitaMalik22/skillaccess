@@ -30,6 +30,7 @@ const Submit = () => {
     duration_from,
     duration_to,
     isNegativeMarking,
+    config
   } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const testType = searchParams.get("level");
@@ -354,6 +355,7 @@ const Submit = () => {
         totalDuration: totalTimeCal,
         startDate: duration_from,
         endDate: duration_to,
+        config,
         // totalDuration,
         topics,
         isNegativeMarking: isNegativeMarking,

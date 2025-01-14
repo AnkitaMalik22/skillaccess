@@ -11,7 +11,7 @@ import {
   setTestBasicDetails,
 } from "../../../../redux/college/test/testSlice";
 import toast from "react-hot-toast";
-import isCompany, { isUni } from "../../../../util/isCompany";
+import isCompany, { getEntity, isUni } from "../../../../util/isCompany";
 import { getCategories } from "../../../../redux/category/categorySlice";
 
 const Name = () => {
@@ -37,6 +37,7 @@ const Name = () => {
     accessibleBranches,
     accessibleDepartments,
     isNegativeMarking,
+    config
   } = useSelector((state) => state.test);
   // const {} = useSelector((state) =>//console.log(state.test));
   const navigate = useNavigate();
@@ -56,6 +57,13 @@ const Name = () => {
     hasAccessToAllDepartments: hasAccessToAllDepartments || false,
     accessibleBranches: accessibleBranches || [],
     accessibleDepartments: accessibleDepartments || [],
+    config: {
+      instructions: [],
+      // totalTime: "",
+      isCameraRequired: true,
+      maxTabSwitches: "",
+      // maxAudioLimitExceedCount: 3,
+    },
   });
 
   useEffect(() => {
@@ -75,6 +83,13 @@ const Name = () => {
       hasAccessToAllDepartments: hasAccessToAllDepartments || false,
       accessibleBranches: accessibleBranches || [],
       accessibleDepartments: accessibleDepartments || [],
+      config: config || {
+        instructions: [],
+        totalTime: "",
+        isCameraRequired: true,
+        maxTabSwitches: "",
+        // maxAudioLimitExceedCount: 0,
+      },
     });
   }, [dispatch]);
 
@@ -91,10 +106,25 @@ const Name = () => {
     description: "",
     duration: "",
     category: "",
+    totalTime: "",
+    instructions: "",
   });
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
+
+    // Handle nested config fields
+    if (name.startsWith("config.")) {
+      const configField = name.split(".")[1];
+      setTestDetails((prev) => ({
+        ...prev,
+        config: {
+          ...prev.config,
+          [configField]: type === "checkbox" ? checked : value,
+        },
+      }));
+      return;
+    }
 
     // Handle checkboxes for all access
     if (
@@ -194,6 +224,12 @@ const Name = () => {
     if (!testDetails.duration_to)
       setError("duration", "Please Enter Duration To");
     if (!testDetails.category) setError("category", "Please Select Category");
+    // if (!testDetails.config.totalTime) {
+    //   setError("totalTime", "Please enter total time");
+    // }
+    if (testDetails.config.instructions.length === 0) {
+      setError("instructions", "Please add at least one instruction");
+    }
 
     // Validation for numeric ranges
     if (testDetails.totalAttempts < 1 || testDetails.totalAttempts > 10) {
@@ -264,7 +300,7 @@ const Name = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      <Header handleNext={handleSubmit} />
+      <Header handleNext={handleSubmit} backPath={`/${getEntity()}/test`} />
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>
@@ -424,6 +460,132 @@ const Name = () => {
             </label>
           </div>
 
+          {/* Configuration Section */}
+          <div className="space-y-6 border rounded-md p-6">
+            <h3 className="text-lg font-medium text-gray-900">Test Configuration</h3>
+
+            {/* Total Time */}
+            {/* <div>
+              <InputField
+                type="number"
+                name="config.totalTime"
+                value={testDetails.config.totalTime}
+                onChange={handleChange}
+                placeholder="Total Time (in minutes)*"
+                className={`${errors.totalTime ? "border-red-500" : ""}`}
+                min="1"
+              />
+              {errors.totalTime && (
+                <p className="mt-2 text-sm text-red-600">{errors.totalTime}</p>
+              )}
+            </div> */}
+
+            {/* Instructions */}
+            <div className="space-y-4">
+              <label className="block text-sm font-medium text-gray-700">Instructions</label>
+              {testDetails?.config?.instructions?.map((instruction, index) => (
+                <div key={index} className="grid grid-cols-1 gap-4">
+                  <InputField
+                    type="text"
+                    placeholder="Instruction Title"
+                    value={instruction.title}
+                    onChange={(e) => {
+                      const newInstructions = [...testDetails.config.instructions];
+                      newInstructions[index].title = e.target.value;
+                      setTestDetails({
+                        ...testDetails,
+                        config: { ...testDetails.config, instructions: newInstructions },
+                      });
+                    }}
+                  />
+                  <textarea
+                    placeholder="Instruction Description"
+                    value={instruction.description}
+                    onChange={(e) => {
+                      const newInstructions = [...testDetails.config.instructions];
+                      newInstructions[index].description = e.target.value;
+                      setTestDetails({
+                        ...testDetails,
+                        config: { ...testDetails.config, instructions: newInstructions },
+                      });
+                    }}
+                    className="border-gray-300 focus:ring-blued rounded-md"
+                    rows={2}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newInstructions = testDetails.config.instructions.filter((_, i) => i !== index);
+                      setTestDetails({
+                        ...testDetails,
+                        config: { ...testDetails.config, instructions: newInstructions },
+                      });
+                    }}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    Remove Instruction
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => {
+                  setTestDetails({
+                    ...testDetails,
+                    config: {
+                      ...testDetails.config,
+                      instructions: [
+                        ...testDetails.config.instructions,
+                        { title: "", description: "" },
+                      ],
+                    },
+                  });
+                }}
+                className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+              >
+                Add Instruction
+              </button>
+            </div>
+
+            {/* Camera Required */}
+            <div className="flex items-center">
+              <label className="flex items-center space-x-3 text-gray-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="config.isCameraRequired"
+                  checked={testDetails.config.isCameraRequired}
+                  onChange={handleChange}
+                  className="w-5 h-5 rounded border-gray-300 text-blued focus:ring-blued"
+                />
+                <span>Require Camera</span>
+              </label>
+            </div>
+
+            {/* Tab Switches */}
+            <div>
+              <InputField
+                type="number"
+                name="config.maxTabSwitches"
+                value={testDetails.config.maxTabSwitches}
+                onChange={handleChange}
+                placeholder="Maximum Tab Switches Allowed"
+                min="0"
+              />
+            </div>
+
+            {/* Audio Limit */}
+            {/* <div>
+              <InputField
+                type="number"
+                name="config.maxAudioLimitExceedCount"
+                value={testDetails.config.maxAudioLimitExceedCount}
+                onChange={handleChange}
+                placeholder="Maximum Audio Limit Exceed Count"
+                min="0"
+              />
+            </div> */}
+          </div>
+
           {testDetails.category && (
             <>
               {/* Department Access Controls */}
@@ -579,3 +741,29 @@ const Name = () => {
 };
 
 export default Name;
+
+
+// config: {
+//   instructions:
+//     [
+//       {
+//         title: String,
+//         description: String
+//       }
+//     ]
+//   ,
+//   totalTime: Number,
+//   isCameraRequired: {
+//     type: Boolean,
+//     default: true,
+//   },
+//   maxTabSwitches: {
+//     type: Number,
+//     default: 3
+//   },
+//   maxAudioLimitExceedCount: {
+//     type: Number,
+//     default: 3
+//   }
+// }
+
