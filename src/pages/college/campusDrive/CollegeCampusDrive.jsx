@@ -15,7 +15,7 @@ const CollegeCampusDrive = () => {
     dispatch(fetchCampusDrivesOfCollege(user?._id));
   }, []);
   return (
-    <div className="p-6">
+    <>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Campus Drives</h1>
       </div>
@@ -39,7 +39,7 @@ const CollegeCampusDrive = () => {
             ))}
         </div>
       )}
-    </div>
+    </>
   );
 };
 

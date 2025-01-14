@@ -1,39 +1,59 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Assuming you're using React Router for navigation
-import isCompany from '../../../util/isCompany';
+import React from "react";
+import { Link } from "react-router-dom";
+import isCompany from "../../../util/isCompany";
 
 const CampusDriveCard = ({ drive }) => {
   return (
-    <div className="w-full h-auto bg-[#f8f8f9] hover:shadow-md transition-shadow duration-300 my-3 text-start font-medium text-gray-800 rounded-md p-6 border border-gray-200 capitalize font-dmSans">
+    <div className="w-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden border border-gray-100 font-dmSans">
       {/* Cover Photo */}
-      <div className="mb-4">
+      <div className="relative h-48 bg-gray-200">
         <img
-          src={drive?.coverPhoto || 'https://via.placeholder.com/150'}
+          src={drive?.coverPhoto || "https://via.placeholder.com/300x150"}
           alt="Cover"
-          className="w-full h-40 object-cover rounded-md mb-4"
+          className="w-full h-full object-cover"
         />
+        <div className="absolute top-2 left-2 bg-blued text-white text-sm px-3 py-1 rounded-full shadow-md">
+          Campus Drive
+        </div>
       </div>
 
-      {/* Drive Name */}
-      <h3 className="text-2xl font-semibold text-gray-800 mb-2">{drive?.name}</h3>
+      {/* Card Content */}
+      <div className="p-5">
+        {/* Drive Name */}
+        <h3 className="text-xl font-bold text-gray-800 truncate mb-2">
+          {drive?.name || "Drive Name"}
+        </h3>
 
-      {/* Start and End Dates */}
-      <div className="flex items-start gap-2 justify-between mb-3">
-        <p className="text-lg text-gray-600">
-          Start Date: {new Date(drive.startDate).toLocaleDateString()}
-        </p>
-        <p className="text-lg text-gray-600">
-          End Date: {new Date(drive.endDate).toLocaleDateString()}
-        </p>
-      </div>
+        {/* Date Section */}
+        <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
+          <div>
+            <span className="font-semibold text-gray-700">Start:</span>{" "}
+            {new Date(drive.startDate).toLocaleDateString()}
+          </div>
+          <div>
+            <span className="font-semibold text-gray-700">End:</span>{" "}
+            {new Date(drive.endDate).toLocaleDateString()}
+          </div>
+        </div>
 
-      {/* Link to the details page */}
-      <Link
-        to={isCompany() ? `/company/pr/campus-drive/${drive._id}` : `/college/campus-drive/${drive._id}?testId=${drive.tests[0]._id}`}
-        className="bg-blued  text-white rounded-md text-sm font-semibold px-6 py-2 transition-all duration-200 shadow-sm hover:shadow-md"
+        {/* Description */}
+        <p className="text-gray-500 text-sm line-clamp-2 mb-4">
+          {drive?.description ||
+            "A brief description about the campus drive goes here. Keep it short and precise."}
+        </p>
+
+        {/* View Details Button */}
+        <Link
+          to={
+            isCompany()
+              ? `/company/pr/campus-drive/${drive._id}`
+              : `/college/campus-drive/${drive._id}?testId=${drive.tests[0]._id}`
+          }
+          className="block w-full bg-blued hover:bg-blued text-white text-center text-sm font-medium py-2 rounded-lg transition-colors duration-200"
         >
-        View Details
-      </Link>
+          View Details
+        </Link>
+      </div>
     </div>
   );
 };
