@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaChevronLeft } from "react-icons/fa";
@@ -6,133 +6,161 @@ import useTranslate from "../../../hooks/useTranslate";
 import { getEntity } from "../../../util/isCompany";
 
 const Finalize = () => {
-  //useTranslate();
   const navigate = useNavigate();
-  // const {
-  //   name,
-  //   description,
-  //   totalQuestions,
-  //   testAttempts,
-  //   topics,
-  //   totalDuration,
-  // } = useSelector((state) => state.test);
   const testDetails = JSON.parse(localStorage.getItem("testDetails"));
-
   const totalTime = localStorage.getItem("totalTime");
-
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [testConfig, setTestConfig] = useState(null);
+
   useEffect(() => {
-    //  //console.log(test);
+    // Get test details from localStorage
+    const storedTest = localStorage.getItem('testDetails');
+    if (storedTest) {
+      const parsedTest = JSON.parse(storedTest);
+      setTestConfig(parsedTest.config);
+      console.log('Test Config:', parsedTest.config);
+    }
   }, []);
 
-  // const totalTime = topics?.reduce((acc, topic) => acc + topic.Time, 0);
-
-  // const totalQuestions = topics?.reduce((acc, topic) => {
-  //   return (
-  //     acc +
-  //     (topic.questions?.length || 0) +
-  //     (topic.findAnswers?.length || 0) +
-  //     (topic.video?.length || 0) +
-  //     (topic.compiler?.length || 0) +
-  //     (topic.essay?.length || 0)
-  //   );
-
-  // }, 0);
-
   const handleSubmit = () => {
-    // dispatch(setTest({
-    //   totalTime,
-    //   totalQuestions,
-    //   totalAttempts
-    // }
-
-    // dispatch(
-    //   createTest({
-    //     name: testDetails?.name,
-    //     description: testDetails?.description,
-    //     totalAttempts: testDetails?.totalQuestions,
-
-    //     topics,
-    //   })
-    // );
-
     navigate(
       `/${getEntity()}/test/invite?testId=${searchParams.get("testId")}`
     );
-    // localStorage.removeItem("testDetails");
-    // localStorage.removeItem("totalTime");
+    
   };
 
   return (
-    <>
-      <div className="flex gap-3 mb-5">
+    <div className="container mx-auto px-6 py-6">
+      {/* Header with Back and Invite Button */}
+      <div className="flex justify-between items-center mb-6">
         <button
-          className="self-center object-center rounded-md h-10 w-10 "
+          className="rounded-md p-2 bg-[#D9E1E7] hover:bg-gray-300 transition-colors"
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaChevronLeft className="h-5 w-5 text-gray-600" />
         </button>
-        {/* <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Create Assessment
-        </h2> */}
+        <button
+          className="px-6 py-2 bg-blued text-white rounded-md hover:bg-[#043345] transition-colors flex items-center gap-2"
+          onClick={handleSubmit}
+        >
+          <img src="/images/icons/student.png" alt="" className="w-5 h-5" />
+          <span>Invite Students</span>
+        </button>
       </div>
-      <div className="bg-white min-h-[90vh] mx-auto rounded-xl font-dmSans">
-        <div className=" mx-auto ">
-          <div className="w-full">
-            <div
-              name=""
-              id=""
-              className="w-full rounded-md bg-gray-100 focus:outline-none border-none mb-4 py-3 px-5 font-bold text-2xl capitalize"
-            >
+
+      {/* Content Container */}
+      <div className="max-w-full mx-auto space-y-6">
+        {/* Basic Details */}
+        <div className="bg-white border rounded-lg">
+          <div className="px-8 py-6 border-b">
+            <h2 className="text-2xl font-bold text-[#043345]">
               {testDetails?.name}
+            </h2>
+            <p className="mt-2 text-gray-600">
+              {testDetails?.description}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x">
+            <div className="px-8 py-6">
+              <p className="text-sm text-gray-500">Total Questions</p>
+              <p className="text-2xl font-bold text-[#043345]">{testDetails?.totalQuestions}</p>
             </div>
-          </div>
-
-          <p className="resize-none w-full h-full text-lg bg-gray-100 border-none focus:outline-none rounded-md  px-5 pt-3 pb-8 focus:ring-0placeholder-gray-400 mb-6">
-            {testDetails?.description}
-          </p>
-          {/* Need to all these details below from sections */}
-          <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-md flex justify-between px-5 py-4">
-            <p>Total time to complete</p>
-            <p className="text-blued   font-bold">
-              {/* {testDetails?.totalDuration}mins */}
-              {totalTime} mins
-            </p>
-            {/* {totalTime}  */}
-          </div>
-
-          <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-md flex justify-between px-5 py-4">
-            <p>Total number of questions</p>
-            <p className="text-blued   font-bold">
-              {testDetails?.totalQuestions}
-            </p>
-          </div>
-
-          <div className=" w-full h-full text-lg bg-gray-100   mb-3 rounded-md flex justify-between px-5 py-4">
-            <p>Total attempts allowed</p>
-            <p className="text-blued   font-bold">
-              {testDetails?.totalAttempts}
-            </p>
+            <div className="px-8 py-6">
+              <p className="text-sm text-gray-500">Total Attempts</p>
+              <p className="text-2xl font-bold text-[#043345]">{testDetails?.totalAttempts}</p>
+            </div>
+            <div className="px-8 py-6">
+              <p className="text-sm text-gray-500">Duration</p>
+              <div className="flex flex-col gap-1">
+                <p className="text-base font-medium text-[#043345]">
+                  From: {new Date(testDetails?.duration_from).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </p>
+                <p className="text-base font-medium text-[#043345]">
+                  To: {new Date(testDetails?.duration_to).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="pt-1 relative pb-20">
-          <div className=" absolute right-7">
-            {" "}
-            <div className=" flex gap-2">
-              <button
-                className="self-center justify-center flex bg-accent rounded-md text-sm font-bold gap-2 px-4 py-3"
-                onClick={() => handleSubmit()}
-              >
-                <img src="/images/icons/student.png" alt="" />{" "}
-                <p className="self-center text-white">Invite Students</p>
-              </button>
+        {/* Test Configuration */}
+        <div className="bg-white border rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-[#043345] mb-4">Test Configuration</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-[#f8f8f8] p-4 rounded-lg border">
+              <div className="flex items-center gap-3">
+              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                <div>
+                  <p className="font-medium text-[#043345]">Camera Required</p>
+                  <p className="text-sm text-gray-500">{testConfig?.isCameraRequired ? 'Yes' : 'No'}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[#f8f8f8] p-4 rounded-lg border">
+              <div className="flex items-center gap-3">
+              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                <div>
+                  <p className="font-medium text-[#043345]">Tab Switches</p>
+                  <p className="text-sm text-gray-500">{testConfig?.maxTabSwitches || 'Not specified'}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Instructions */}
+        <div className="bg-white border rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-[#043345] mb-4">Instructions</h3>
+          <div className="space-y-4">
+            {testDetails?.config?.instructions?.map((instruction, index) => (
+              <div key={index} className="bg-[#f8f8f8] p-4 rounded-lg border">
+                <h4 className="font-medium text-[#043345] mb-2">{instruction.title}</h4>
+                <p className="text-gray-600">{instruction.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Additional Settings */}
+        <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
+          <h3 className="text-lg font-semibold text-gray-900">
+            Additional Settings
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="font-medium">Negative Marking</p>
+              <p className="text-sm text-gray-500">
+                {testDetails?.isNegativeMarking ? "Enabled" : "Disabled"}
+              </p>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="font-medium">Category</p>
+              <p className="text-sm text-gray-500">
+                {testDetails?.categoryName}
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
