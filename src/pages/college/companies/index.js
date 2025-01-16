@@ -13,10 +13,12 @@ export default function CompaniesRoute(entity) {
       <Route path="jobs" element={<Jobs />} />
       <Route path="profile/:id" element={<CompanyProfile />} />
       <Route path="overview/:id" element={<CompanyJobOverview />} />
-      <Route
+      {/* <Route
         path="overview/:id/invitedStudents"
         element={<ViewInvitedStudents />}
-      />
+      /> */}
+
+      
     
     </Route>
   );

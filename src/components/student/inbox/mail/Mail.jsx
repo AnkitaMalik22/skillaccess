@@ -27,7 +27,7 @@ const Mail = () => {
             <select
               name=""
               id=""
-              className="w-1/2 self-center select text-sm font-bold"
+              className="w-full self-center select text-sm font-bold"
             >
               <option value="Primary">Primary</option>
             </select>

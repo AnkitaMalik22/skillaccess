@@ -185,7 +185,11 @@ export const sendMail = createAsyncThunk(
       return res;
     } catch (error) {
       //console.log(error);
-      return rejectWithValue(error.response.data.message);
+      if (error.response.status === 404) {
+        return rejectWithValue("User not registered on the platform");
+      }
+      const errorMessage = error.response.data.message || "An error occurred while sending mail";
+      return rejectWithValue(errorMessage);
     }
   }
 );
@@ -640,7 +644,8 @@ const collegeAuthSlice = createSlice({
       })
       .addCase(sendMail.rejected, (state, action) => {
         state.sendMailLoading = false;
-        toast.error("Error sending mail");
+        console.log(action.payload);
+        toast.error(action.payload || "Failed to send mail");
       })
       .addCase(selectAuth.fulfilled, (state, action) => {
         switch (action.payload.college.authType) {

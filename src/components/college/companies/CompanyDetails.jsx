@@ -1,7 +1,9 @@
 import React from "react";
 import { VscCircleFilled } from "react-icons/vsc";
+import { useNavigate } from "react-router-dom";
 
 export const CompanyDetails = ({ companyDetails }) => {
+  const navigate = useNavigate();
   return (
     <div className="w-1/2">
       {/* Cover Photo Section */}
@@ -11,7 +13,7 @@ export const CompanyDetails = ({ companyDetails }) => {
           alt="Company cover"
           className="w-full h-full object-cover rounded-t-md"
         />
-        <div className="absolute -bottom-7 left-5 bg-white h-16 w-16 flex justify-center items-center rounded-lg shadow-md border border-gray-200">
+        <div className="absolute -bottom-7 left-5 bg-white h-16 w-16 flex justify-center items-center rounded-lg shadow-md border border-gray-200 z-10">
           <img
             src={companyDetails?.basic?.logo || "/images/defaultUser.jpg"}
             className="w-14 h-14 object-contain rounded-md"
@@ -29,7 +31,9 @@ export const CompanyDetails = ({ companyDetails }) => {
           <h2 className="text-sm font-medium text-gray-600">
             {companyDetails?.location?.state || "Location"} Branch Office
           </h2>
-          <h2 className="text-sm font-medium text-blued">Available Jobs</h2>
+          <h2 className="text-sm font-medium text-blued cursor-pointer"
+          onClick={() => navigate(`/college/companies/jobs`)}
+          >Available Jobs</h2>
         </div>
         <div className="self-center text-center">
           <h2 className="text-gray-500 text-xs font-bold mb-1">EMPLOYEES</h2>
