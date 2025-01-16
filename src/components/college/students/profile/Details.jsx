@@ -159,7 +159,7 @@ const Details = ({ student }) => {
           <button className="py-3  rounded-xl px-3 bg-[#8f92a11d] font-bold">
             View Certificates
           </button>
-          {!student?.approved && (
+          {/* {!student?.approved && ( */}
             <button
               className="py-2 text-white rounded-xl px-4 bg-accent font-bold flex items-center gap-2"
               onClick={() => {
@@ -175,7 +175,7 @@ const Details = ({ student }) => {
                 "Approve Request"
               )}
             </button>
-          )}
+          {/* )} */}
         </span>
       </div>
     </section>

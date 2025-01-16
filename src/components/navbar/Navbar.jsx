@@ -94,7 +94,7 @@ const Navbar = ({ userType, setOpen, open }) => {
 
         {/* Logo */}
         <div className="ml-3">
-          <img src="/quali.png" alt="Logo" width="180px" />
+          <img src="/images/logoFinal.png" alt="Logo" width="180px" />
         </div>
       </div>
 

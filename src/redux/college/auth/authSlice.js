@@ -387,6 +387,8 @@ export const getCollege = createAsyncThunk(
   }
 );
 
+
+
 export const updateAvatar = createAsyncThunk(
   "collegeAuth/updateAvatar",
   async (data, { rejectWithValue }) => {
