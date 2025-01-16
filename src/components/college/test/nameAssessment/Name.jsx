@@ -60,7 +60,7 @@ const Name = () => {
     config: {
       instructions: [],
       isCameraRequired: true,
-      maxTabSwitches: 0,
+      maxTabSwitches: 1,
     },
   });
 
