@@ -371,21 +371,38 @@ export const updateCollege = createAsyncThunk(
   }
 );
 
+// export const getCollege = createAsyncThunk(
+//   "collegeAuth/getCollege",
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.get(
+//         `${REACT_APP_API_URL}/api/college/me`,
+//         getHeaders()
+//       );
+
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
+
 export const getCollege = createAsyncThunk(
-  "collegeAuth/getCollege",
+  "college/getCollege",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        `${REACT_APP_API_URL}/api/college/me`,
-        getHeaders()
-      );
-
+      const response = await axios.get(`${REACT_APP_API_URL}/api/college/me`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Add the token here
+        },
+      });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );
+
 
 export const updateAvatar = createAsyncThunk(
   "collegeAuth/updateAvatar",

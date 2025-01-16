@@ -98,7 +98,7 @@ const ResetPassword = () => {
       <form onSubmit={handleSubmit} className="w-full max-w-sm mx-auto">
         <div className="font-dmSans">
           <div className="card-body">
-            <img src="/quali.png" alt="logo" className="w-60 mx-auto mb-8" />
+            <img src="/images/logoFinal.png" alt="logo" className="w-60 mx-auto mb-8" />
             <h2 className="font-bold text-2xl text-center text-[#171717] mb-8">
               Reset Password
             </h2>
