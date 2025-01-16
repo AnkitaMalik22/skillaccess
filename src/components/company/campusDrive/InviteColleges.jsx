@@ -83,7 +83,7 @@ export default function InviteColleges() {
             <FiArrowLeft className="text-lg" />
             Back to Campus Drive
           </button>
-          <h1 className="text-3xl font-bold text-[#043345]">Invite Colleges</h1>
+          <h1 className="text-xl font-bold text-[#043345]">Invite Colleges</h1>
         </div>
 
         <div className="bg-[#f8f8f8] rounded-lg shadow-md p-6">
