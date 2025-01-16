@@ -47,7 +47,7 @@ const CampusDriveCard = ({ drive }) => {
           to={
             isCompany()
               ? `/company/pr/campus-drive/${drive._id}`
-              : `/college/campus-drive/${drive._id}?testId=${drive.tests[0]._id}`
+              : `/college/campus-drive/${drive._id}`
           }
           className="block w-full bg-blued hover:bg-blued text-white text-center text-sm font-medium py-2 rounded-lg transition-colors duration-200"
         >

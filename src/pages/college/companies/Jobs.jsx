@@ -73,13 +73,18 @@ const Jobs = () => {
       className: "text-center text-green-500",
     },
     {
+      header: "Employment Type",
+      accessor: (job) => job.EmploymentType || "N/A",
+      className: "text-center",
+    },
+    {
       header: "Action",
       accessor: (job) => (
         <button
           className="h-8 px-4 bg-blued text-white text-sm rounded-md"
-          onClick={() => navigate(`/college/companies/jobOverview/${job._id}`)}
+          onClick={() => navigate(`/college/jobs/overview/${job._id}`)}
         >
-          {job.EmploymentType || "View"}
+          { "View"}
         </button>
       ),
       className: "text-center",
@@ -113,7 +118,7 @@ const Jobs = () => {
         data={filtered}
         isLoading={!jobs.length}
         onRowClick={(job) =>
-          navigate(`/college/companies/jobOverview/${job._id}`)
+          navigate(`/college/jobs/overview/${job._id}`)
         }
         className="shadow-md rounded-lg"
       />

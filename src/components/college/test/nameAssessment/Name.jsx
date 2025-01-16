@@ -59,12 +59,20 @@ const Name = () => {
     accessibleDepartments: accessibleDepartments || [],
     config: {
       instructions: [],
-      // totalTime: "",
       isCameraRequired: true,
-      maxTabSwitches: "",
-      // maxAudioLimitExceedCount: 3,
+      maxTabSwitches: 1,
     },
   });
+
+  const [showInstructions, setShowInstructions] = useState(true);
+  const [collapsedInstructions, setCollapsedInstructions] = useState({});
+
+  const toggleInstruction = (index) => {
+    setCollapsedInstructions(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   useEffect(() => {
     setTestDetails({
@@ -87,7 +95,7 @@ const Name = () => {
         instructions: [],
         totalTime: "",
         isCameraRequired: true,
-        maxTabSwitches: "",
+        maxTabSwitches: 1,
         // maxAudioLimitExceedCount: 0,
       },
     });
@@ -224,11 +232,18 @@ const Name = () => {
     if (!testDetails.duration_to)
       setError("duration", "Please Enter Duration To");
     if (!testDetails.category) setError("category", "Please Select Category");
-    // if (!testDetails.config.totalTime) {
-    //   setError("totalTime", "Please enter total time");
-    // }
-    if (testDetails.config.instructions.length === 0) {
+    if (!testDetails.config?.instructions?.length) {
       setError("instructions", "Please add at least one instruction");
+      return;
+    }
+
+    const hasEmptyInstructions = testDetails.config.instructions.some(
+      instruction => !instruction.title || !instruction.description
+    );
+
+    if (hasEmptyInstructions) {
+      setError("instructions", "All instruction fields are required");
+      return;
     }
 
     // Validation for numeric ranges
@@ -297,6 +312,44 @@ const Name = () => {
   // Add this state for collapse controls
   const [showBranchControls, setShowBranchControls] = useState(false);
   const [showDepartmentControls, setShowDepartmentControls] = useState(false);
+
+  const addInstruction = () => {
+    setTestDetails(prev => ({
+      ...prev,
+      config: {
+        ...prev.config,
+        instructions: [
+          ...(prev.config?.instructions || []),
+          { title: '', description: '' }
+        ]
+      }
+    }));
+  };
+
+  const removeInstruction = (indexToRemove) => {
+    setTestDetails(prev => ({
+      ...prev,
+      config: {
+        ...prev.config,
+        instructions: prev.config.instructions.filter((_, index) => index !== indexToRemove)
+      }
+    }));
+  };
+
+  const updateInstruction = (index, field, value) => {
+    setTestDetails(prev => ({
+      ...prev,
+      config: {
+        ...prev.config,
+        instructions: prev.config.instructions.map((instruction, i) => 
+          i === index ? { ...instruction, [field]: value } : instruction
+        )
+      }
+    }));
+  };
+
+  // Add state for configuration collapse
+  const [showConfig, setShowConfig] = useState(true);
 
   return (
     <div className="bg-white min-h-screen">
@@ -445,148 +498,7 @@ const Name = () => {
           {errors.category && (
             <p className="mt-2 text-sm text-red-600">{errors.category}</p>
           )}
-
-          {/* Negative Marking Checkbox */}
-          <div className="flex items-center">
-            <label className="flex items-center space-x-3 text-gray-700 cursor-pointer">
-              <input
-                type="checkbox"
-                name="isNegativeMarking"
-                checked={testDetails.isNegativeMarking}
-                onChange={handleChange}
-                className="w-5 h-5 rounded border-gray-300 text-blued focus:ring-blued"
-              />
-              <span>Is there negative marking?</span>
-            </label>
-          </div>
-
-          {/* Configuration Section */}
-          <div className="space-y-6 border rounded-md p-6">
-            <h3 className="text-lg font-medium text-gray-900">Test Configuration</h3>
-
-            {/* Total Time */}
-            {/* <div>
-              <InputField
-                type="number"
-                name="config.totalTime"
-                value={testDetails.config.totalTime}
-                onChange={handleChange}
-                placeholder="Total Time (in minutes)*"
-                className={`${errors.totalTime ? "border-red-500" : ""}`}
-                min="1"
-              />
-              {errors.totalTime && (
-                <p className="mt-2 text-sm text-red-600">{errors.totalTime}</p>
-              )}
-            </div> */}
-
-            {/* Instructions */}
-            <div className="space-y-4">
-              <label className="block text-sm font-medium text-gray-700">Instructions</label>
-              {testDetails?.config?.instructions?.map((instruction, index) => (
-                <div key={index} className="grid grid-cols-1 gap-4">
-                  <InputField
-                    type="text"
-                    placeholder="Instruction Title"
-                    value={instruction.title}
-                    onChange={(e) => {
-                      const newInstructions = [...testDetails.config.instructions];
-                      newInstructions[index].title = e.target.value;
-                      setTestDetails({
-                        ...testDetails,
-                        config: { ...testDetails.config, instructions: newInstructions },
-                      });
-                    }}
-                  />
-                  <textarea
-                    placeholder="Instruction Description"
-                    value={instruction.description}
-                    onChange={(e) => {
-                      const newInstructions = [...testDetails.config.instructions];
-                      newInstructions[index].description = e.target.value;
-                      setTestDetails({
-                        ...testDetails,
-                        config: { ...testDetails.config, instructions: newInstructions },
-                      });
-                    }}
-                    className="border-gray-300 focus:ring-blued rounded-md"
-                    rows={2}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const newInstructions = testDetails.config.instructions.filter((_, i) => i !== index);
-                      setTestDetails({
-                        ...testDetails,
-                        config: { ...testDetails.config, instructions: newInstructions },
-                      });
-                    }}
-                    className="text-red-600 hover:text-red-800"
-                  >
-                    Remove Instruction
-                  </button>
-                </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => {
-                  setTestDetails({
-                    ...testDetails,
-                    config: {
-                      ...testDetails.config,
-                      instructions: [
-                        ...testDetails.config.instructions,
-                        { title: "", description: "" },
-                      ],
-                    },
-                  });
-                }}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-              >
-                Add Instruction
-              </button>
-            </div>
-
-            {/* Camera Required */}
-            <div className="flex items-center">
-              <label className="flex items-center space-x-3 text-gray-700 cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="config.isCameraRequired"
-                  checked={testDetails.config.isCameraRequired}
-                  onChange={handleChange}
-                  className="w-5 h-5 rounded border-gray-300 text-blued focus:ring-blued"
-                />
-                <span>Require Camera</span>
-              </label>
-            </div>
-
-            {/* Tab Switches */}
-            <div>
-              <InputField
-                type="number"
-                name="config.maxTabSwitches"
-                value={testDetails.config.maxTabSwitches}
-                onChange={handleChange}
-                placeholder="Maximum Tab Switches Allowed"
-                min="0"
-              />
-            </div>
-
-            {/* Audio Limit */}
-            {/* <div>
-              <InputField
-                type="number"
-                name="config.maxAudioLimitExceedCount"
-                value={testDetails.config.maxAudioLimitExceedCount}
-                onChange={handleChange}
-                placeholder="Maximum Audio Limit Exceed Count"
-                min="0"
-              />
-            </div> */}
-          </div>
-
-          {testDetails.category && (
+    {testDetails.category && (
             <>
               {/* Department Access Controls */}
               <div className="border rounded-md p-4 ">
@@ -717,6 +629,217 @@ const Name = () => {
             </>
           )}
 
+          {/* Negative Marking Checkbox */}
+          <div className="flex items-center">
+            <label className="flex items-center space-x-3 text-gray-700 cursor-pointer">
+              <input
+                type="checkbox"
+                name="isNegativeMarking"
+                checked={testDetails.isNegativeMarking}
+                onChange={handleChange}
+                className="w-5 h-5 rounded border-gray-300 text-blued focus:ring-blued"
+              />
+              <span>Is there negative marking?</span>
+            </label>
+          </div>
+
+          {/* Configuration Section */}
+          <div className="space-y-6 border rounded-md p-6">
+            <div 
+              className="flex justify-between items-center cursor-pointer"
+              onClick={() => setShowConfig(!showConfig)}
+            >
+              <div className="flex items-center gap-3">
+                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <h3 className="text-lg font-medium text-gray-900">Test Configuration</h3>
+              </div>
+              <svg
+                className={`w-6 h-6 transform transition-transform ${showConfig ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+
+            <div className={`space-y-6 transition-all duration-300 ${
+              showConfig ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'
+            }`}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Camera Required */}
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-900">Camera Access</label>
+                        <p className="text-xs text-gray-500">Require camera during test</p>
+                      </div>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="config.isCameraRequired"
+                        checked={testDetails.config?.isCameraRequired}
+                        onChange={handleChange}
+                        className="sr-only peer"
+                      />
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blued"></div>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Tab Switches */}
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <div className="flex items-center gap-3 mb-2">
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-900">Tab Switches</label>
+                      <p className="text-xs text-gray-500">Maximum allowed tab switches</p>
+                    </div>
+                  </div>
+                  <input
+                    type="number"
+                    name="config.maxTabSwitches"
+                    value={testDetails.config?.maxTabSwitches}
+                    onChange={handleChange}
+                    min="0"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blued focus:ring-blued sm:text-sm"
+                    placeholder="Enter number of switches"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-6 border rounded-md p-6 mt-4">
+            <div 
+              className="flex justify-between items-center cursor-pointer"
+              onClick={() => setShowInstructions(!showInstructions)}
+            >
+              <h3 className="text-lg font-medium text-gray-900">Instructions*</h3>
+              <div className="flex items-center gap-4">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addInstruction();
+                  }}
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-blued hover:bg-blue-50 rounded-md"
+                >
+                  + Add New Instruction
+                </button>
+                <svg
+                  className={`w-6 h-6 transform transition-transform ${
+                    showInstructions ? 'rotate-180' : ''
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            {errors.instructions && (
+              <p className="text-sm text-red-600">{errors.instructions}</p>
+            )}
+
+            <div className={`space-y-4 transition-all duration-300 ${
+              showInstructions ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'
+            }`}>
+              {(!testDetails.config?.instructions || testDetails.config.instructions.length === 0) && (
+                <div className="text-center py-8 bg-gray-50 rounded-lg">
+                  <p className="text-gray-500">No instructions added yet. Click the button above to add one.</p>
+                </div>
+              )}
+
+              {testDetails.config?.instructions?.map((instruction, index) => (
+                <div key={index} className="bg-gray-50 rounded-lg border border-gray-200">
+                  <div 
+                    className="p-4 flex justify-between items-center cursor-pointer"
+                    onClick={() => toggleInstruction(index)}
+                  >
+                    <h4 className="font-medium text-gray-700">
+                      Instruction #{index + 1}
+                    </h4>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeInstruction(index);
+                        }}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                      <svg
+                        className={`w-5 h-5 transform transition-transform ${
+                          collapsedInstructions[index] ? '' : 'rotate-180'
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className={`overflow-hidden transition-all duration-300 ${
+                    collapsedInstructions[index] ? 'h-0' : 'p-4 border-t'
+                  }`}>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Title*
+                        </label>
+                        <input
+                          type="text"
+                          value={instruction.title || ''}
+                          onChange={(e) => updateInstruction(index, 'title', e.target.value)}
+                          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blued"
+                          placeholder="Enter instruction title"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Description*
+                        </label>
+                        <textarea
+                          value={instruction.description || ''}
+                          onChange={(e) => updateInstruction(index, 'description', e.target.value)}
+                          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blued"
+                          rows={3}
+                          placeholder="Enter instruction description"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+      
           {/* Description Textarea */}
           <div>
             <textarea
@@ -766,4 +889,3 @@ export default Name;
 //     default: 3
 //   }
 // }
-

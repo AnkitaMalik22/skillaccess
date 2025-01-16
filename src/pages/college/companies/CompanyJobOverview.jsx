@@ -16,6 +16,7 @@ const CompanyJobOverview = () => {
     jobDetails?.isOpenForApply ||
     new Date(jobDetails?.CloseByDate) >= new Date();
 
+
   useEffect(() => {
     if (user?._id) {
       dispatch(
@@ -31,7 +32,7 @@ const CompanyJobOverview = () => {
     if (!isJobOpen) return;
     localStorage.setItem("testId", jobDetails?.assessments[0]?.test?._id);
     localStorage.setItem("testName", jobDetails?.assessments[0]?.test?.name);
-    window.location.href = `/college/job/test/invite?testId=${jobDetails?.assessments[0]?.test?._id}`;
+    window.location.href = `/college/jobs/test/invite?testId=${jobDetails?.assessments[0]?.test?._id}`;
   };
 
   return (

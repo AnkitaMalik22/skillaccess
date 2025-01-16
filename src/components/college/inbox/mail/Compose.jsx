@@ -30,15 +30,55 @@ const Compose = () => {
 
   const [files, setFiles] = useState([]);
   const [email, setEmail] = useState({ Email: "", Message: "", Subject: "" });
+  const [errors, setErrors] = useState({
+    Email: '',
+    Subject: '',
+    Message: ''
+  });
+
   const handleChange = (e) => {
     setEmail((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+
   const handleEmojiClick = (event, emoji) => {
     setEmail((prev) => {
       return { ...prev, Message: `${prev.Message}  ${event.emoji}` };
     });
+  };
+
+  const validateEmail = () => {
+    let isValid = true;
+    const newErrors = {
+      Email: '',
+      Subject: '',
+      Message: ''
+    };
+
+    // Email validation
+    if (!email.Email.trim()) {
+      newErrors.Email = 'Email is required';
+      isValid = false;
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email.Email)) {
+      newErrors.Email = 'Invalid email address';
+      isValid = false;
+    }
+
+    // Subject validation
+    if (!email.Subject.trim()) {
+      newErrors.Subject = 'Subject is required';
+      isValid = false;
+    }
+
+    // Message validation
+    if (!email.Message.trim()) {
+      newErrors.Message = 'Message is required';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
   };
 
   useEffect(() => {
@@ -52,27 +92,36 @@ const Compose = () => {
     });
   }, []);
 
-  // <<<<<<< bug-fix-test
-
-  const handleSubmit = () => {
-    if (!loading) {
-      setLoader(true);
-      dispatch(sendMail({ ...email, attachments }))
-        .then(() => {
-          socket.emit("joinRoom", email.Email);
-          socket.emit("message", email.Email, "new Mail");
-          setLoader(false);
-        })
-        .catch(() => {
-          setLoader(false);
-        });
-    } else {
-      toast.error("please wait! uploading files...");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (loading || loader) {
+      return;
     }
-    setEmail({ Email: "", Message: "", Subject: "" });
+  
+    if (!validateEmail()) {
+      toast.error('Please fix the validation errors');
+      return;
+    }
+  
+    try {
+      setLoader(true);
+      await dispatch(sendMail({
+        ...email,
+        attachments: files
+      })).unwrap();
+  
+      toast.success('Email sent successfully');
+      setEmail({ Email: '', Message: '', Subject: '' });
+      setFiles([]);
+      
+    } catch (error) {
+      console.log(error);
+      // toast.error(error.message || 'Failed to send email');
+    } finally {
+      setLoader(false);
+    }
   };
-  // =======
-  // >>>>>>> saveMain
 
   return (
     <div className="p-4 flex flex-col gap-3">
@@ -82,25 +131,18 @@ const Compose = () => {
         name="Email"
         type="text"
         placeholder="example@mail.com"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
+        className={`w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md ${errors.Email ? 'border-red-500' : 'border-gray-300'}`}
       />
+      {errors.Email && <p className="text-red-500 text-sm mt-1">{errors.Email}</p>}
       <input
         onChange={handleChange}
         value={email.Subject}
         name="Subject"
         type="text"
         placeholder="Subject"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
+        className={`w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md ${errors.Subject ? 'border-red-500' : 'border-gray-300'}`}
       />
-      {/* <input
-      placeholder="Subject"
-        type="text"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
-      />
-      <input
-        type="text"
-        className="w-full border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md"
-      /> */}
+      {errors.Subject && <p className="text-red-500 text-sm mt-1">{errors.Subject}</p>}
       <ReactQuill
         name="Message"
         onChange={(value) =>
@@ -109,10 +151,11 @@ const Compose = () => {
           })
         }
         value={email.Message}
-        className="w-full flex border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md min-h-[30vh] placeholder-gray-400"
+        className={`w-full flex border-none focus:ring-0 bg-lGray bg-opacity-5 px-3 py-5 rounded-md min-h-[30vh] placeholder-gray-400 ${errors.Message ? 'border-red-500' : ''}`}
         placeholder="Type Something ..."
         style={{ display: "inline-block" }}
       />
+      {errors.Message && <p className="text-red-500 text-sm mt-1">{errors.Message}</p>}
 
       <div className="flex gap-4">
         {attachments?.map((item, i) => {

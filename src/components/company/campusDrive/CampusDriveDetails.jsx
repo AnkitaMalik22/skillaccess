@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { createCampusDrive } from "../../../redux/company/campusDrive/campusDriveSlice";
 import { toast } from "react-hot-toast";
 import { FaArrowLeft } from "react-icons/fa";
+import BackIcon from "../../buttons/BackIcon";
 
 export default function CampusDriveDetails() {
   const [campusDriveDetails, setCampusDriveDetails] = useState({
@@ -51,16 +52,16 @@ export default function CampusDriveDetails() {
     <div className="w-full mx-auto mt-6">
       <div className="form-card bg-white rounded-lg shadow-lg p-6 w-full">
         <div className="flex items-center justify-between mb-6 ">
-          <button
-            className="btn btn-outline btn-blued"
-            onClick={() => navigate(-1)}
-          >
-           <FaArrowLeft className="text-lg" />
-            Go Back
-          </button>
-          <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        <button
+          className="  self-center  rounded-md h-10 w-10 "
+          onClick={() => navigate(-1)}
+        >
+          <BackIcon />
+        </button>
+          <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
             Create Campus Drive
           </h1>
+
         </div>
 
         <h2 className="text-xl font-semibold mb-4 text-gray-700">
@@ -156,13 +157,15 @@ export default function CampusDriveDetails() {
           />
         </div>
 
+        <div className="w-full flex justify-end items-center">
         <button
           type="button"
-          className="btn text-white w-full bg-blued hover:bg-lightBlue"
+          className="btn text-white bg-blued hover:bg-lightBlue"
           onClick={handleSubmit}
         >
           {isSubmitting ? "Creating..." : "Create Campus Drive"}
         </button>
+        </div>
       </div>
     </div>
   );
