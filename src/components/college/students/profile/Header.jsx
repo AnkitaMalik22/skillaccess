@@ -9,10 +9,10 @@ const Header = () => {
     <div className="flex w-full mx-auto justify-between mb-5">
       <div className="flex gap-3">
         <button
-          className="self-center object-center rounded-md h-10 w-10 "
+          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaAngleLeft className="h-5 w-5" />
         </button>
       </div>
     </div>

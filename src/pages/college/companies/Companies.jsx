@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getCompany } from "../../../redux/college/dashboard/dashboardSlice";
 import { IoIosSearch } from "react-icons/io";
+import { GoOrganization } from "react-icons/go";
 
 const Companies = () => {
   const navigate = useNavigate();
@@ -39,10 +40,11 @@ const Companies = () => {
       <div className="flex w-full mx-auto justify-between mb-6">
         <div className="flex gap-3">
           <button
-            className="self-center object-center rounded-md h-10 w-10 "
+            className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
+
             // onClick={() => navigate('college/companies')}
           >
-            <img src="/images/icons/sales.jpg" alt="icon" />
+            <GoOrganization className="h-8 w-8" />
           </button>
           <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
             Companies
@@ -50,14 +52,14 @@ const Companies = () => {
         </div>
 
         {/* search */}
-        <div className=" rounded-xl w-full sm:h-12 h-10 flex">
-          <span className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
-            <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400 " />
+        <div className=" mx-2 w-full sm:h-12 h-10 flex">
+          <span className="w-fit mx-auto flex self-center border rounded-md">
+            <IoIosSearch className="self-center w-10 h-10 rounded-s-lg text-gray-400 py-2" />
             <input
               type="text"
               placeholder="Search..."
               onChange={handleFilterCompanies}
-              className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
+              className="placeholder p-0 border-none self-center  focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
             />
           </span>
         </div>

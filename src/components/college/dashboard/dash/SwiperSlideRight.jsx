@@ -61,7 +61,7 @@ const SwiperSlideRight = () => {
                 className="w-[52px] h-[52px] self-center rounded-md"
               />
             </figure>
-            <h3 className="text-sm  font-bold text-center break-words mb-2">
+            <h3 className="text-sm  font-bold text-center break-words">
               {job.JobTitle}
             </h3>
             <p className="text-sm font-medium text-center break-words  ">
