@@ -23,6 +23,9 @@ const Invite = () => {
   const [limit, setLimit] = useState(50);
   const [page, setPage] = useState(1);
   const debounceRef = useRef(null); // Ref for debounce timer
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const MINIMUM_SEARCH_LENGTH = 3;
 
   const { approvedStudents: uploadedStudents, loading } = useSelector(
     (state) => state.collegeStudents
@@ -54,42 +57,35 @@ const Invite = () => {
 
   const handleFilterStudents = (e) => {
     const value = e.target.value;
-    if (value === "" || value.trim() === "") {
-      //console.log("empty");
+    setSearchTerm(value);
 
-      setFilteredStudents(studentList);
+    // Clear existing timeout
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
 
-      return;
-    } else {
-      // setFilteredStudents(
-      //   studentList.filter((student) => {
-      //     const regex = new RegExp(value, "i");
-      //     return (
-      //       regex.test(student.FirstName) ||
-      //       regex.test(student.LastName) ||
-      //       regex.test(student.Email)
-      //     );
-      //   })
-      // );
-      setPage(1);
+    // Reset to page 1
+    setPage(1);
+    setIsSearching(true);
 
-      // Debounce dispatch action
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current);
-      }
-      debounceRef.current = setTimeout(() => {
-        dispatch(
+    debounceRef.current = setTimeout(async () => {
+      try {
+        await dispatch(
           getStudentsForTest({
             testId,
             skip: 0,
             limit,
-            search: value,
+            search: value.trim(), // Use trimmed value
             batch: year,
+            all: !value.trim() // Set all:true when empty search
           })
         );
-      }, 300); // Adjust debounce time (300ms is common)
-      //console.log(filteredStudents, "filtered--", value);
-    }
+      } catch (error) {
+        toast.error('Failed to fetch students');
+      } finally {
+        setIsSearching(false);
+      }
+    }, 500);
   };
 
   let testName = localStorage.getItem("testName");
