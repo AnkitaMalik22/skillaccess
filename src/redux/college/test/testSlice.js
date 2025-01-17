@@ -156,52 +156,52 @@ const testState = {
   currentTopic: localStorage.getItem("currentTopic")
     ? JSON.parse(localStorage.getItem("currentTopic"))
     : {
-        _id: "",
-        Time: 0,
-        Heading: "",
-        Description: "",
-        duration_from: "",
-        duration_to: "",
-        CreatedByAdmin: false,
-        Student: [],
-        Timeline: "",
-        TotalQuestions: 0,
-        TotalStudentsAttempted: 0,
-        TotalStudentsCorrect: 0,
-        Type: "",
-        assessments: [],
-        college: "",
-        compiler: [],
-        createdByCollege: false,
-        createdByCompany: false,
-        essay: [],
-        findAnswers: [],
-        questions: [],
-        video: [],
-      }, //on edit
+      _id: "",
+      Time: 0,
+      Heading: "",
+      Description: "",
+      duration_from: "",
+      duration_to: "",
+      CreatedByAdmin: false,
+      Student: [],
+      Timeline: "",
+      TotalQuestions: 0,
+      TotalStudentsAttempted: 0,
+      TotalStudentsCorrect: 0,
+      Type: "",
+      assessments: [],
+      college: "",
+      compiler: [],
+      createdByCollege: false,
+      createdByCompany: false,
+      essay: [],
+      findAnswers: [],
+      questions: [],
+      video: [],
+    }, //on edit
   TopicToBeAdded: localStorage.getItem("TopicToBeAdded")
     ? JSON.parse(localStorage.getItem("TopicToBeAdded"))
     : {
-        id: "",
+      id: "",
+
+      questions: [],
+
+      findAnswers: [],
+
+      essay: [],
+
+      video: {
+        videoFile: "",
 
         questions: [],
 
-        findAnswers: [],
+        short: [],
 
-        essay: [],
-
-        video: {
-          videoFile: "",
-
-          questions: [],
-
-          short: [],
-
-          long: [],
-        },
-
-        compiler: [],
+        long: [],
       },
+
+      compiler: [],
+    },
 
   ADD_QUESTION_LOADING: false,
   GET_TOPICS_LOADING: false,
@@ -775,7 +775,7 @@ const testSlice = createSlice({
         if (
           !localStorage.getItem("currentTopic") ||
           JSON.stringify(action.payload) !==
-            localStorage.getItem("currentTopic")
+          localStorage.getItem("currentTopic")
         ) {
           localStorage.setItem("currentTopic", JSON.stringify(action.payload));
           state.currentTopic = action.payload;
@@ -828,6 +828,7 @@ const testSlice = createSlice({
         state.TEST_DATA_RESPONSE_LOADING = true;
       })
       .addCase(getTestResultPage.fulfilled, (state, action) => {
+        console.log(action.payload)
         state.testDataResponse = action.payload;
         state.TEST_DATA_RESPONSE_LOADING = false;
       })
@@ -977,7 +978,7 @@ const testSlice = createSlice({
           ...action.payload.assessment,
         ];
       })
-      .addCase(removeFromRecent.fulfilled, (state, action) => {})
+      .addCase(removeFromRecent.fulfilled, (state, action) => { })
       .addCase(deleteTopics.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         toast.error("Error Deleting Topic!");
