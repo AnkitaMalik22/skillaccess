@@ -59,7 +59,7 @@ export const getAllCampusDrives = createAsyncThunk(
         `${REACT_APP_API_URL}/api/company/campus-drive/get`,
         getHeaders()
       );
-      
+
       return response.data.campusDrives;
     } catch (error) {
       console.log(error.response.data);
@@ -70,10 +70,12 @@ export const getAllCampusDrives = createAsyncThunk(
 
 export const fetchAllCollegesForDrive = createAsyncThunk(
   "campusDrive/fetchAllColleges",
-  async ({ driveId, page = 1, limit = 10 }, { rejectWithValue }) => {
+  async ({ driveId, page, limit  ,
+    search,
+  }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${REACT_APP_API_URL}/api/company/campus-drive/${driveId}/colleges?page=${page}&limit=${limit}`,
+        `${REACT_APP_API_URL}/api/company/campus-drive/${driveId}/colleges?page=${page}&limit=${limit}&search=${search}`,
         getHeaders()
       );
       return response.data.data;
