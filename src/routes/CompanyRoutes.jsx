@@ -13,11 +13,11 @@ import InvitedStudentsForJob from "../pages/company/jobs/InvitedStudentsForJob";
 import AddTestToJob from "../pages/company/jobs/AddTestToJob";
 import EditJob from "../pages/company/jobs/EditJob";
 import Settings from "../pages/company/settings/Settings";
-
-import CompanyResultRoutes from "../pages/company/results";
 import QuesRoute from "../pages/college/quesBank";
 import CampusDriveRouter from "../pages/company/campusDrive/CampusDriveRouter";
 import TestRoute from "../pages/college/test/TestHome";
+import ResultsRoute from "../pages/college/results";
+import StudentRoute from "../pages/college/students";
 
 const CompanyRoutes = () => {
   return (
@@ -36,7 +36,8 @@ const CompanyRoutes = () => {
         <Route path="job/edit/:jobId" element={<EditJob />} />
         <Route path="settings" element={<Settings />} />
         {/* {CompanyTestHome("")} */}
-        {CompanyResultRoutes("")}
+        {StudentRoute("")}
+        {ResultsRoute("")}
         {QuesRoute("")}
         {CampusDriveRouter("")}
         {TestRoute("")}

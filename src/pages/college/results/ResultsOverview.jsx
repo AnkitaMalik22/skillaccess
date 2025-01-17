@@ -24,7 +24,7 @@ const ResultsOverview = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllTests());
+    // dispatch(getAllTests());
   }, []);
 
   useEffect(() => {

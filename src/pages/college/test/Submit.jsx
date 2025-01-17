@@ -366,6 +366,7 @@ const Submit = () => {
       // );
       if (entity === "college") dispatch(getCollege());
       setLoading(false);
+      
       //console.log(res);
 
       if (res.type === "test/createTest/fulfilled") {

@@ -28,13 +28,19 @@ export function Table({ columns, data, isLoading, onRowClick, className }) {
         <tbody>
           {isLoading ? (
             <tr>
-              <td colSpan={columns.length} className="p-4 text-center text-gray-500">
+              <td
+                colSpan={columns.length}
+                className="p-4 text-center text-gray-500"
+              >
                 Loading...
               </td>
             </tr>
           ) : data.length === 0 ? (
             <tr>
-              <td colSpan={columns.length} className="p-4 text-center text-gray-500">
+              <td
+                colSpan={columns.length}
+                className="p-4 text-center text-gray-500"
+              >
                 No data found
               </td>
             </tr>
@@ -67,6 +73,5 @@ export function Table({ columns, data, isLoading, onRowClick, className }) {
         </tbody>
       </table>
     </div>
-
   );
 }

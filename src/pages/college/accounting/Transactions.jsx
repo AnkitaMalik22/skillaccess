@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTransactions } from "../../../redux/college/account/paymentSlice";
 import { useNavigate } from "react-router-dom";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaAngleLeft, FaChevronLeft } from "react-icons/fa";
 import { capitalize, convertToReadable } from "../../../util/getDate";
 import CircularLoader from "../../../components/CircularLoader";
 import { Table } from "../../../components/ui/tables/Table"; // Import reusable Table component
@@ -49,10 +49,10 @@ const Transactions = () => {
     <>
       <div className="flex w-full mx-auto justify-between mb-6">
         <button
-          className="self-center object-center rounded-md h-10 w-10"
+          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className="p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaAngleLeft className="h-5 w-5" />
         </button>
       </div>
       <div className="transactions flex flex-col w-full">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { IoIosSearch } from "react-icons/io";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaAngleLeft, FaChevronLeft } from "react-icons/fa";
 import Folder from "../../../components/college/quesBank/home/icon/Folder";
 import DeletePoP from "../../../components/PopUps/DeleetPoP";
 import {
@@ -139,22 +139,22 @@ const Topic = () => {
       <div className="flex w-full mx-auto justify-between mb-6">
         <div className="flex gap-3">
           <button
-            className="self-center object-center rounded-md h-10 w-10"
+            className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
             onClick={() => navigate(-1)}
           >
-            <FaChevronLeft className="p-3 rounded-md h-10 w-10 self-center bg-gray-200" />
+            <FaAngleLeft className="h-5 w-5" />
           </button>
         </div>
-        <div className="rounded-xl w-full sm:h-12 h-10 flex">
-          <div className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
-            <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400" />
+        <div className=" mx-2 w-full sm:h-12 h-10 flex">
+          <span className="w-fit mx-auto flex self-center border rounded-md">
+            <IoIosSearch className="self-center w-10 h-10 rounded-s-lg text-gray-400 py-2" />
             <input
               type="text"
               placeholder="Search..."
               onChange={handleFilterSections}
-              className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
+              className="placeholder p-0 border-none self-center  focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
             />
-          </div>
+          </span>
         </div>
         <div className="flex gap-3 ">
           <div

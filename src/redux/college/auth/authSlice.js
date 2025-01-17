@@ -185,7 +185,12 @@ export const sendMail = createAsyncThunk(
       return res;
     } catch (error) {
       //console.log(error);
-      return rejectWithValue(error.response.data.message);
+      if (error.response.status === 404) {
+        return rejectWithValue("User not registered on the platform");
+      }
+      const errorMessage =
+        error.response.data.message || "An error occurred while sending mail";
+      return rejectWithValue(errorMessage);
     }
   }
 );
@@ -640,7 +645,8 @@ const collegeAuthSlice = createSlice({
       })
       .addCase(sendMail.rejected, (state, action) => {
         state.sendMailLoading = false;
-        toast.error("Error sending mail");
+        console.log(action.payload);
+        toast.error(action.payload || "Failed to send mail");
       })
       .addCase(selectAuth.fulfilled, (state, action) => {
         switch (action.payload.college.authType) {
@@ -667,10 +673,8 @@ const collegeAuthSlice = createSlice({
         state.qr.secret = action.payload.secret.ascii;
         state.qr.code = action.payload.qr;
       })
-      
-      .addCase(forgotPassword.fulfilled, (state, action) => {
-        
-      })
+
+      .addCase(forgotPassword.fulfilled, (state, action) => {})
       .addCase(registerCollege.pending, (state, action) => {
         state.status = "loading";
 
@@ -776,7 +780,7 @@ const collegeAuthSlice = createSlice({
         }
 
         //console.log(action.payload.message);
-        toast.error(action.payload.message);
+        // toast.error(action.payload.message);
         // window.location.href = "/";
         // window.alert(action.payload);
       })

@@ -7,7 +7,7 @@ import { collegeSidebarItems } from "./SidebarItems";
 const CollegeLayout = () => {
   return (
     <SharedLayout
-      navbarComponent={Navbar}
+      navbarComponent={(props) => <Navbar userType="college" {...props} />}
       sidebarItems={collegeSidebarItems}
       getUser={getCollege}
     />

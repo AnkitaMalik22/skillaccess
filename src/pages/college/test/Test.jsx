@@ -62,6 +62,7 @@ const Test = () => {
     dispatch(setTestSelectedTopics([]));
     dispatch(setCurrentQuestionCount(0));
     dispatch(getAllTests());
+    localStorage.removeItem("testDetails");
   }, []);
 
   const loadMore = () => {

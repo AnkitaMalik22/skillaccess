@@ -5,17 +5,9 @@ import Description from "../../../components/college/results/overview/Descriptio
 import Toggle from "../../../components/college/results/overview/Toggle";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  getAllTests,
-  getTest,
-  getTestResultPage,
-} from "../../../redux/college/test/thunks/test";
+import { getAllTests, getTest } from "../../../redux/college/test/thunks/test";
 import { useDispatch } from "react-redux";
-import useTranslate from "../../../hooks/useTranslate";
-import {
-  getTestCompany,
-  getTestResultPageCompany,
-} from "../../../redux/company/test/thunks/test";
+import { getTestResultPageCompany } from "../../../redux/company/test/thunks/test";
 import isCompany from "../../../util/isCompany";
 
 const ResultsOverview = () => {
@@ -39,7 +31,7 @@ const ResultsOverview = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getTestCompany(assessmentId));
+    dispatch(getTest(assessmentId));
     // dispatch(getTestResultPage(assessmentId));
     dispatch(getTestResultPageCompany(assessmentId));
   }, [dispatch, assessmentId]);

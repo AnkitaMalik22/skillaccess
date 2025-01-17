@@ -3,7 +3,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addQuestionToTopic } from "../../../../redux/college/test/thunks/topic";
 import { setTotalTopicQuestions } from "../../../../redux/college/test/thunks/topic";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaAngleLeft, FaChevronLeft } from "react-icons/fa";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -160,10 +160,10 @@ const Header = () => {
     <div className="flex w-11/12 mx-auto justify-between mb-2 mt-5">
       <div className="flex gap-3">
         <button
-          className="self-center object-center rounded-md h-10 w-10 "
+          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaAngleLeft className="h-5 w-5" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Question No : {totalTopicQuestions + 1}

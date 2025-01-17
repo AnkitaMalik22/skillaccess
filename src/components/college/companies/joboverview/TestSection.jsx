@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import TestCard from "../job/TestCard";
+import toast from "react-hot-toast";
 
 export const TestSection = ({
   jobDetails,
@@ -10,10 +11,18 @@ export const TestSection = ({
   const navigate = useNavigate();
 
   const InviteButton = () => {
-    if (isJobOpen) {
+
+    if (isJobOpen ) {
       return (
         <button
-          onClick={handleInviteStudents}
+       
+          onClick={
+            jobDetails?.assessments?.length > 0
+              ? handleInviteStudents
+              : () => {
+                toast.error("No tests assigned yet");
+              }
+          }
           className="flex items-center gap-2 text-blued hover:text-secondary font-medium transition-colors"
         >
           Invite Students
@@ -54,7 +63,7 @@ export const TestSection = ({
             <button
               onClick={() =>
                 navigate(
-                  `/college/companies/jobOverview/${jobDetails._id}/invitedStudents`
+                  `/college/jobs/overview/${jobDetails._id}/invitedStudents`
                 )
               }
               className="text-white hover:text-blue-100 font-medium underline underline-offset-2"

@@ -6,7 +6,7 @@ export const JobList = ({ jobs, companyLogo, companyName }) => {
   const navigate = useNavigate();
 
   const openJobs = jobs.filter(
-    (job) => job.isOpenForApply && new Date(job.CloseByDate) >= new Date()
+    (job) => job.isOpenForApply || new Date(job.CloseByDate) >= new Date()
   );
 
   return (
@@ -24,6 +24,7 @@ export const JobList = ({ jobs, companyLogo, companyName }) => {
         openJobs.map((job, index) => (
           <div
             key={index}
+            onClick={() => navigate(`/college/jobs/overview/${job._id}`)}
             className="flex justify-between items-center bg-white rounded-lg shadow-md p-4 mb-4 border hover:shadow-lg hover:border-blued transition-all duration-300"
           >
             {/* Job Details Section */}
@@ -57,7 +58,7 @@ export const JobList = ({ jobs, companyLogo, companyName }) => {
               <button
                 className="h-10 px-4 bg-blue-100 text-blued rounded-lg text-sm font-medium hover:bg-blued hover:text-white transition-all duration-300"
                 onClick={() =>
-                  navigate(`/college/companies/jobOverview/${job._id}`)
+                  navigate(`/college/jobs/overview/${job._id}`)
                 }
               >
                 {job.EmploymentType || "Employment Type"}
