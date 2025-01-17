@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCampusDrives } from "../../../redux/company/campusDrive/campusDriveSlice";
 import CampusDriveCard from "../../../components/company/campusDrive/Card";
 import { useNavigate } from "react-router-dom";
+import { getCompany } from "../../../redux/company/auth/companyAuthSlice";
 import { toast } from "react-hot-toast";
 
 const CampusDrive = () => {
@@ -12,9 +13,19 @@ const CampusDrive = () => {
     (state) => state.campusDrive
   );
 
+  const { data: user } = useSelector((state) => state.companyAuth);
+
   useEffect(() => {
-    dispatch(getAllCampusDrives());
-  }, []);
+ if(user?._id){
+  console.log(user)
+    dispatch(getAllCampusDrives(user?._id));
+  }else{
+    dispatch(getCompany());
+    console.log(user)
+  }
+  }, [ "",user]);
+
+
 
   const handleCreateDrive = () => {
     console.log("Create new drive");
