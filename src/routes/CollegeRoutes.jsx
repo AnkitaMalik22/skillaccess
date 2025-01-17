@@ -4,7 +4,6 @@ import CollegeLayout from "../layout/CollegeLayout";
 import TestRoute from "../pages/college/test/TestHome";
 import Dashboard from "../pages/college/dashboard/Dashboard";
 import Profile from "../pages/college/profile/Profile";
-import Jobs from "../pages/college/jobs/Jobs";
 import StudentRoute from "../pages/college/students";
 import QuesRoute from "../pages/college/quesBank";
 import CompaniesRoute from "../pages/college/companies";

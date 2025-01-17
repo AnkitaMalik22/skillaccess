@@ -49,7 +49,6 @@ import {
   removeBookmark,
   getTopicByIdQB,
 } from "./thunks/question";
-import { config } from "process";
 
 const testState = {
   recentAssessments: [],
@@ -69,8 +68,8 @@ const testState = {
       currentPage: 0,
       totalPages: 0,
       totalDocuments: 0,
-      limit: 10
-    }
+      limit: 10,
+    },
   },
   testName: "",
   testDescription: "",
@@ -157,52 +156,52 @@ const testState = {
   currentTopic: localStorage.getItem("currentTopic")
     ? JSON.parse(localStorage.getItem("currentTopic"))
     : {
-      _id: "",
-      Time: 0,
-      Heading: "",
-      Description: "",
-      duration_from: "",
-      duration_to: "",
-      CreatedByAdmin: false,
-      Student: [],
-      Timeline: "",
-      TotalQuestions: 0,
-      TotalStudentsAttempted: 0,
-      TotalStudentsCorrect: 0,
-      Type: "",
-      assessments: [],
-      college: "",
-      compiler: [],
-      createdByCollege: false,
-      createdByCompany: false,
-      essay: [],
-      findAnswers: [],
-      questions: [],
-      video: [],
-    }, //on edit
+        _id: "",
+        Time: 0,
+        Heading: "",
+        Description: "",
+        duration_from: "",
+        duration_to: "",
+        CreatedByAdmin: false,
+        Student: [],
+        Timeline: "",
+        TotalQuestions: 0,
+        TotalStudentsAttempted: 0,
+        TotalStudentsCorrect: 0,
+        Type: "",
+        assessments: [],
+        college: "",
+        compiler: [],
+        createdByCollege: false,
+        createdByCompany: false,
+        essay: [],
+        findAnswers: [],
+        questions: [],
+        video: [],
+      }, //on edit
   TopicToBeAdded: localStorage.getItem("TopicToBeAdded")
     ? JSON.parse(localStorage.getItem("TopicToBeAdded"))
     : {
-      id: "",
-
-      questions: [],
-
-      findAnswers: [],
-
-      essay: [],
-
-      video: {
-        videoFile: "",
+        id: "",
 
         questions: [],
 
-        short: [],
+        findAnswers: [],
 
-        long: [],
+        essay: [],
+
+        video: {
+          videoFile: "",
+
+          questions: [],
+
+          short: [],
+
+          long: [],
+        },
+
+        compiler: [],
       },
-
-      compiler: [],
-    },
 
   ADD_QUESTION_LOADING: false,
   GET_TOPICS_LOADING: false,
@@ -253,7 +252,7 @@ const testSlice = createSlice({
   name: "test",
   reducers: {
     resetStudentList: (state, action) => {
-      state.testDataResponse = {}
+      state.testDataResponse = {};
     },
     setInTest: (state, action) => {
       state.inTest = action.payload;
@@ -526,25 +525,25 @@ const testSlice = createSlice({
     setTestBasicDetails: (state, action) => {
       // Define the fields to be updated in both state and localStorage
       const fieldsToUpdate = [
-        'name',
-        'description',
-        'totalAttempts',
-        'totalQuestions',
+        "name",
+        "description",
+        "totalAttempts",
+        "totalQuestions",
         // 'totalDuration',
-        'level',
-        'duration_from',
-        'duration_to',
-        'isNegativeMarking',
-        'accessibleDepartments',
-        'hasAccessToAllDepartments',
-        'hasAccessToAllCategories',
-        'category',
-        'categoryName',
-        'config',
+        "level",
+        "duration_from",
+        "duration_to",
+        "isNegativeMarking",
+        "accessibleDepartments",
+        "hasAccessToAllDepartments",
+        "hasAccessToAllCategories",
+        "category",
+        "categoryName",
+        "config",
       ];
 
       // Update state
-      fieldsToUpdate.forEach(field => {
+      fieldsToUpdate.forEach((field) => {
         if (action.payload[field] !== undefined) {
           state[field] = action.payload[field];
         }
@@ -616,8 +615,11 @@ const testSlice = createSlice({
               action.payload.res.question;
             break;
           case "mcq":
-            state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
-              index === action.payload.index ? action.payload.res.question : question
+            state.currentTopic.questions = state.currentTopic.questions.map(
+              (question, index) =>
+                index === action.payload.index
+                  ? action.payload.res.question
+                  : question
             );
             break;
 
@@ -645,9 +647,11 @@ const testSlice = createSlice({
               action.payload.res.question;
             break;
           case "mcq":
-
-            state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
-              index === action.payload.index ? action.payload.res.question : question
+            state.currentTopic.questions = state.currentTopic.questions.map(
+              (question, index) =>
+                index === action.payload.index
+                  ? action.payload.res.question
+                  : question
             );
 
             break;
@@ -768,7 +772,11 @@ const testSlice = createSlice({
       .addCase(getTopicById.fulfilled, (state, action) => {
         console.log(action.payload, "action.payload.section");
 
-        if (!localStorage.getItem("currentTopic") || JSON.stringify(action.payload) !== localStorage.getItem("currentTopic")) {
+        if (
+          !localStorage.getItem("currentTopic") ||
+          JSON.stringify(action.payload) !==
+            localStorage.getItem("currentTopic")
+        ) {
           localStorage.setItem("currentTopic", JSON.stringify(action.payload));
           state.currentTopic = action.payload;
         }
@@ -969,7 +977,7 @@ const testSlice = createSlice({
           ...action.payload.assessment,
         ];
       })
-      .addCase(removeFromRecent.fulfilled, (state, action) => { })
+      .addCase(removeFromRecent.fulfilled, (state, action) => {})
       .addCase(deleteTopics.rejected, (state, action) => {
         console.error("Error fetching test results:", action.payload);
         toast.error("Error Deleting Topic!");
@@ -1040,8 +1048,7 @@ const testSlice = createSlice({
       .addCase(setTotalTopicQuestions.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
-      })
-
+      });
   },
 });
 

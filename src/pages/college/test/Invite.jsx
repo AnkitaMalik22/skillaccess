@@ -5,7 +5,7 @@ import List from "../../../components/college/test/addStudents/List";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentsForTest } from "../../../redux/college/test/thunks/test";
 import { useSearchParams } from "react-router-dom";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaAngleLeft, FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import toast from "react-hot-toast";
@@ -120,10 +120,10 @@ const Invite = () => {
     <>
       <div className="flex gap-3 mb-5">
         <button
-          className="self-center object-center rounded-md h-10 w-10 "
+          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
           onClick={() => navigate(-1)}
         >
-          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
+          <FaAngleLeft className="h-5 w-5" />
         </button>
         {/* <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Create Assessment

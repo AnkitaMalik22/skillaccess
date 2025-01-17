@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobById } from "../../../redux/college/dashboard/dashboardSlice";
-import {JobHeader} from "../../../components/college/companies/joboverview/JobHeader";
-import {JobInformation} from "../../../components/college/companies/joboverview/JobInformation";
-import {TestSection} from "../../../components/college/companies/joboverview/TestSection";
+import { JobHeader } from "../../../components/college/companies/joboverview/JobHeader";
+import { JobInformation } from "../../../components/college/companies/joboverview/JobInformation";
+import { TestSection } from "../../../components/college/companies/joboverview/TestSection";
 
 const CompanyJobOverview = () => {
   const { id } = useParams();
@@ -15,7 +15,6 @@ const CompanyJobOverview = () => {
   const isJobOpen =
     jobDetails?.isOpenForApply ||
     new Date(jobDetails?.CloseByDate) >= new Date();
-
 
   useEffect(() => {
     if (user?._id) {
@@ -41,7 +40,7 @@ const CompanyJobOverview = () => {
         jobTitle={jobDetails?.JobTitle}
         companyName={jobDetails?.company?.basic?.companyName}
       />
-      <div className="flex flex-col lg:flex-row gap-6 mx-auto max-w-7xl px-4 py-6">
+      <div className="flex flex-col lg:flex-row gap-6">
         <JobInformation jobDetails={jobDetails} isJobOpen={isJobOpen} />
         <TestSection
           jobDetails={jobDetails}

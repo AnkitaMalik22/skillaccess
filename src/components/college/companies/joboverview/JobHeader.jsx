@@ -8,10 +8,10 @@ export const JobHeader = ({ jobTitle, companyName }) => {
   return (
     <div className="flex gap-2 items-center mb-5">
       <button
-        className="bg-gray-200 self-center rounded-md h-10 w-10 sm:h-12 sm:w-16"
+        className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
         onClick={() => navigate(-1)}
       >
-        <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
+        <FaAngleLeft className="h-5 w-5" />
       </button>
       <h2 className="text-xl font-bold self-center">
         {jobTitle}, {companyName}

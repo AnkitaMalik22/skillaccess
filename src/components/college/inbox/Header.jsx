@@ -11,6 +11,7 @@ import { FaSortDown } from "react-icons/fa6";
 import { PiSlidersHorizontalLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import SearchForm from "./mail/SearchForm";
+import { CiInboxIn } from "react-icons/ci";
 
 const Header = ({ show, setShow, inboxType, setInboxType }) => {
   const refButton = useRef(null);
@@ -27,24 +28,16 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
         }}
       ></div>
       <div className="flex gap-4">
-        <button
-          className=" self-center ml-2 rounded-md "
-          // onClick={() => navigate(-1)}
-        >
-          <img
-            src="/images/icons/inbox.png"
-            className="mx-auto sm:h-6 sm:w-6 h-4 w-4"
-          />
+        <button className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500">
+          <CiInboxIn className=" h-8 w-8" />
         </button>
-        <h2 className="text-xl  font-bold self-center font-dmSans text-[#171717]">
+        <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Inbox
         </h2>
 
         <Disclosure
           as={"div"}
-          className={`flex flex-col z-[999] ${
-            toggle ? "bg-white rounded-t-xl " : "bg-gray-100 rounded-xl "
-          }`}
+          className={`flex flex-col z-[999] bg-white border rounded-md`}
         >
           {({ open }) => (
             <div className="relative">
@@ -54,9 +47,7 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
                   <input
                     type="text"
                     placeholder="Search in mail"
-                    className={`input border-none self-center focus:outline-none input-md sm:w-96 max-w-md mx-auto ${
-                      open ? "bg-white" : "bg-gray-100"
-                    } `}
+                    className={`input border-none self-center focus:outline-none input-md sm:w-96 max-w-md mx-auto `}
                   />
                   <Disclosure.Button
                     ref={refButton}
@@ -91,12 +82,12 @@ const Header = ({ show, setShow, inboxType, setInboxType }) => {
       </div>
 
       <button
-        className="bg-accent py-2 px-3 self-center mr-2 rounded-md flex gap-2 text-white"
+        className="bg-blued py-2 px-3 self-center  rounded-md flex gap-2 text-white"
         onClick={() => {
           navigate(`/college/inbox/mail?type=compose&inboxType=${inboxType}`);
         }}
       >
-        <FaPlus className="self-center" />{" "}
+        <FaPlus className="self-center text-lg" />{" "}
         <p className="self-center text-sm font-bold">Compose</p>
       </button>
     </div>

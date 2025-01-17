@@ -9,10 +9,10 @@ const Header = ({ Role, jobId }) => {
     <div className="flex w-full mx-auto justify-between mb-2 font-dmSans">
       <span className="flex gap-4">
         <button
-          className="bg-gray-200  self-center ml-2 rounded-md h-10 w-10 sm:h-12 sm:w-16"
+          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
           onClick={() => navigate(-1)}
         >
-          <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
+          <FaAngleLeft className="h-5 w-5" />
         </button>
         <h2 className="text-xl font-bold self-center">{Role}</h2>
       </span>

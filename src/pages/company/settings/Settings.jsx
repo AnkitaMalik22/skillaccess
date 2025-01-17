@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import Header from "../../../components/college/settings/home/Header";
-import { FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {logoutCompany} from "../../../redux/company/auth/companyAuthSlice";
+import { logoutCompany } from "../../../redux/company/auth/companyAuthSlice";
 // import { setAssessments } from "../../../redux/college/test/testSlice";
 import toast from "react-hot-toast";
 import LogoutPoP from "../../../components/PopUps/LogoutPoP";
-import useTranslate from "../../../hooks/useTranslate";
 
 const Settings = () => {
   //useTranslate();
@@ -21,14 +19,13 @@ const Settings = () => {
       const ch = await dispatch(logoutCompany());
       if (ch.meta.requestStatus === "fulfilled") {
         toast.success("Logged out successfully");
-     
+
         navigate("/");
       }
     } catch (error) {
       toast.error("logging out failed");
     }
   };
-  const Navigate = useNavigate();
   return (
     <div>
       <Header />
