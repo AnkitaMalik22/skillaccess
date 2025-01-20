@@ -134,10 +134,12 @@ const AddQuestions = () => {
 
   const totalTime = handleCalculateTime();
   //console.log(totalTime);
+
   return (
     <>
       {/* <Header page={"submit"} /> */}
-      <CommonHeader backPath={`/${getEntity()}/test/${level === "adpative" ? "selectAdaptive" : `select`}?level=${level}`} handleNext={() => { navigate(`/${getEntity()}/test/submit?level=${level}`) }} />
+      
+      <CommonHeader backPath={`/${getEntity()}/test/${level === "adaptive" ? "selectAdaptive" : `select`}?level=${level}`} handleNext={() => { navigate(`/${getEntity()}/test/submit?level=${level}`) }} />
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>
