@@ -4,7 +4,9 @@ import { FaAngleLeft, FaAngleRight, FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { isUni } from "../../../../util/isCompany";
+import { getEntity,isUni } from "../../../../util/isCompany";
+import CommonHeader from "../../../CommonHeader";
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,64 +19,22 @@ const Header = () => {
       toast.error("Please select atleast one topic to proceed");
       return;
     }
-    if (isUni()) {
-      navigate(`/university/pr/test/questions?level=${level}`);
-    } else {
-      navigate(`/college/test/questions?level=${level}`);
-    }
+    // if (isUni()) {
+    //   navigate(`/university/pr/test/questions?level=${level}`);
+    // } else {
+    //   navigate(`/college/test/questions?level=${level}`);
+    // }
+
+    navigate(`/${getEntity()}/test/questions?level=${level}`);
   };
 
   return (
-    <div className="flex mx-auto justify-between my-5 items-center">
-      <div className="flex gap-3 items-center">
-        <button
-          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
-          onClick={() => {
-            if (isUni()) {
-              navigate(`/university/pr/test/name?level=${level}`);
-            } else {
-              navigate(`/college/test/name?level=${level}`);
-            }
-          }}
-        >
-          <FaAngleLeft className="h-5 w-5" />
-        </button>
-        <div className="flex flex-col ">
-          <h2 className="text-xl md:text-[28px] font-bold font-dmSans text-[#171717]">
-            Create Question
-          </h2>
-          {/* <div className="flex gap-3 items-center text-[#567BF9] text-sm font-medium">
-            <h3>Untitiled Assessments</h3>
-            <div className="flex gap-2">
-              <img
-                src="/images/icons/test.png"
-                alt="test"
-                className="w-4 h-4"
-              />
-              <h3>0 Tests</h3>{" "}
-            </div>
-            <div className="flex gap-2">
-              <img
-                src="/images/icons/hourglass.png"
-                alt="test"
-                className="w-4 h-4 object-contain"
-              />
-              <h3>21 MINS</h3>
-            </div>
-          </div> */}
-        </div>
-      </div>
+   
+        <CommonHeader 
+          // backPath={`${getEntity()}/test/name?level=${level}`}
+          handleNext={handleSubmit} 
+        />
 
-      <div className="flex gap-3">
-        <button
-          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
-          onClick={handleSubmit}
-        >
-          Next
-          <FaAngleRight className="h-5 w-5" />
-        </button>{" "}
-      </div>
-    </div>
   );
 };
 

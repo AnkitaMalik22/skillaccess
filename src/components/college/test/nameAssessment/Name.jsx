@@ -297,6 +297,8 @@ const Name = () => {
       hasError = true;
     }
 
+  
+
     // If no errors, proceed with dispatch and navigation
     if (!hasError) {
       dispatch(setTestBasicDetails(testDetails));
@@ -711,7 +713,7 @@ const Name = () => {
                     name="config.maxTabSwitches"
                     value={testDetails.config?.maxTabSwitches}
                     onChange={handleChange}
-                    min="0"
+                    min="1"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blued focus:ring-blued sm:text-sm"
                     placeholder="Enter number of switches"
                   />
