@@ -14,16 +14,20 @@ const StudentPoP = ({ onClose }) => {
     LastName: "",
     Email: "",
     Batch: "",
+    approved: false
   });
   const { user } = useSelector((state) => state.collegeAuth);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    // //console.log(e.target.value, "pop");
     setStudent((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      return {
+        ...prev,
+        [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value,
+      };
     });
   };
+
 
   const handleSaveInvite = async () => {
     if (!student.FirstName) {
@@ -123,6 +127,19 @@ const StudentPoP = ({ onClose }) => {
             placeholder="Batch*"
             className="bg-[#8F92A1] bg-opacity-5 rounded-md w-full  p-3 border-none text-[#8F92A1] text-sm"
           />
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              name="approved"
+              onChange={handleChange}
+              className="sr-only peer"
+            />
+            <div className="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-accent transition-colors"></div>
+            <span className="absolute top-0.5 left-[2px] w-5 h-5 bg-white rounded-full transition-transform peer-checked:translate-x-5 shadow-sm"></span>
+            <span className="ml-3 text-gray-700 text-sm">{student.approved ? "Approved" : "Pending"}</span>
+          </label>
+
+
           {/* <input
               type="tel"
               t

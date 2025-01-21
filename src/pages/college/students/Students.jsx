@@ -17,7 +17,7 @@ const Students = () => {
   const [batch, setBatch] = useState("all");
   const [createdAt, setCreatedAt] = useState("");
   const [selectedList, setSelectedList] = useState("approvedStudents");
-  
+
   // Default to "approvedStudents"
 
   const [queryParams] = useSearchParams();
@@ -54,11 +54,11 @@ const Students = () => {
   }, [dispatch, user, batch, filterType, createdAt]);
 
   useEffect(() => {
-   if(tab === "approvedStudents") {
-     setSelectedList("approvedStudents")
-   } else if(tab === "invitedStudents") {
+    if (tab === "approvedStudents") {
+      setSelectedList("approvedStudents")
+    } else if (tab === "invitedStudents") {
       setSelectedList("invitedStudents")
-    } else if(tab === "pendingStudents") {
+    } else if (tab === "pendingStudents") {
       setSelectedList("pendingStudents")
     }
   }, [tab, uploadedStudents]);
@@ -109,7 +109,7 @@ const Students = () => {
           onClick={() => {
             setSelectedList("approvedStudents")
             setFilterType("approved-students")
-            
+
           }}
           className={`${selectedList === "approvedStudents"
             ? "bg-blued text-white"
@@ -187,8 +187,8 @@ const Students = () => {
           <StudentsTable
             data={uploadedStudents}
             isLoading={GET_STUDENT_LOADING}
-            onRowClick={(student) =>
-              navigate(`/college/students/profile/${student._id}`)
+            onRowClick={(student) => { }
+              // navigate(`/college/students/profile/${student._id}`)
             }
             filterFields={[
               {
