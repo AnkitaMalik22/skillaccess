@@ -117,7 +117,7 @@ const Jobs = () => {
         columns={columns}
         data={filtered}
         isLoading={!jobs.length}
-        onRowClick={(job) => navigate(`/college/jobs/overview/${job._id}`)}
+        onRowClick={(job) => navigate(`/college/jobs/overview/${job._id}`)} //fixed typo
         className="shadow-md rounded-lg"
       />
     </>
