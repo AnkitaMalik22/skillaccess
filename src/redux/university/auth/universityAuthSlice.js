@@ -105,7 +105,7 @@ const universityAuthSlice = createSlice({
         localStorage.setItem("uniId",action.payload.user._id);
         state.loading = false;
         document.cookie = `uni-token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
-
+        localStorage.setItem("userType", "university");
         toast.success("Registration successful.");
         if(action.payload.status === "pending") {
             window.location.href = "/university/approval";
@@ -130,7 +130,7 @@ const universityAuthSlice = createSlice({
             localStorage.setItem("uniId",action.payload.user._id);
             state.loading = false;
             document.cookie = `uni-token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
-            
+            localStorage.setItem("userType", "university");
             toast.success("Login successful.");
 
             if(action.payload.status === "pending") {

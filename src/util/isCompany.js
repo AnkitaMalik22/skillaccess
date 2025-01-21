@@ -14,11 +14,13 @@ export const getHeaders = (contentType = "application/json",additionalHeaders={}
       "Content-Type": contentType,
       ...additionalHeaders
     }};
-    if (isCompany()) {
+    const userType = localStorage.getItem("userType");
+    
+    if (isCompany() && userType === "company") {
       headers.headers["company-token"] = getCookie("token");
-    } else if (isUni()) {
-      headers.headers["uni-token"] =getCookie("uni-token")
-    }else{
+    } else if (isUni() && userType === "university") {
+      headers.headers["uni-token"] = getCookie("uni-token");
+    } else if (userType === "college") {
       headers.headers["auth-token"] = localStorage.getItem("auth-token");
     }
   

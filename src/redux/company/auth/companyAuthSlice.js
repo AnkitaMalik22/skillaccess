@@ -216,6 +216,7 @@ const companyAuthSlice = createSlice({
         state.register.error = null;
       })
       .addCase(RegisterCompany.fulfilled, (state, action) => {
+        localStorage.setItem("userType", "company");
         state.register.loading = false;
         state.data = action.payload.user;
         state.isCompanyLogin = true;
@@ -233,6 +234,7 @@ const companyAuthSlice = createSlice({
         state.login.loading = false;
         state.data = action.payload.user;
         state.isCompanyLogin = true;
+        localStorage.setItem("userType", "company");
         document.cookie = `token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
       })
       .addCase(LoginCompany.rejected, (state, action) => {
