@@ -384,12 +384,12 @@ export const getCollege = createAsyncThunk(
       if (user) {
         const role = user.role;
         // company
-        if (role === "company" && location.pathname.split("/")[1] !== "company")
+        if (role === "company" && window.location.pathname.split("/")[1] !== "company")
           return;
         // university
         if (
           role === "university" &&
-          location.pathname.split("/")[1] !== "university"
+          window.location.pathname.split("/")[1] !== "university"
         )
           return;
       } else throw new Error("You are not logged in");

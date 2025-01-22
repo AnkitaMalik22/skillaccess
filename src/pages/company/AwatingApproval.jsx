@@ -10,12 +10,12 @@ export default function AwaitingApproval({ user }) {
   const dispatch = useDispatch();
 
   if (!user) {
-    location.href = "/";
+    window.location.href = "/";
   } else if (
     user &&
     (user.status === "approved" || user.verificationStatus === "approved")
   ) {
-    location.href = "/";
+    window.location.href = "/";
   }
 
   const handleLogout = async (e) => {
@@ -49,7 +49,8 @@ export default function AwaitingApproval({ user }) {
           if (result.meta.requestStatus === "fulfilled") {
             toast.success("Logged out successfully");
             dispatch(setAssessments());
-            navigate("/");
+            // navigate("/");
+            window.location.href = "/";
           } else {
             throw new Error("College logout failed");
           }
