@@ -20,8 +20,7 @@ const Filter = ({ handleFilter }) => {
         <FaSearch className="self-center w-5 h-5 ml-1 text-gray-400" />
         <input
           type="text"
-          // Search with test name
-          placeholder="Search by Test Name"
+          placeholder="Search..."
           onChange={handleFilter}
           className="input border-none self-center bg-gray-100 focus:outline-none input-md sm:w-96 max-w-md mx-auto  "
         />

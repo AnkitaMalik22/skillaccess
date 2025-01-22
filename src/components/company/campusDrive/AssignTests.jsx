@@ -216,7 +216,7 @@ export default function AssignTests() {
             <FiArrowLeft className="text-lg" />
             Back to Campus Drive
           </button>
-          <h1 className="text-xl font-bold text-[#043345]">Assign Tests to Colleges</h1>
+          <h1 className="text-3xl font-bold text-[#043345]">Assign Tests to Colleges</h1>
           {selectedCollege && (
             <button
               onClick={handleClearSelection}

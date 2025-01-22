@@ -14,7 +14,7 @@ const DynamicHeader = ({
       <div className="flex gap-3">
         {icon && (
           <button
-            className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
+            className="self-center object-center rounded-md h-10 w-10"
             onClick={onIconClick}
           >
             <img src={icon} alt="icon" />

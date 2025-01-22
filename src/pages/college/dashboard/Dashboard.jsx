@@ -32,7 +32,7 @@ const Dashboard = ({}) => {
   const { user } = useSelector((state) => state.collegeAuth);
 
   useEffect(() => {
-    if (user) {
+    if (user?._Id) {
       if (!isUni()) {
         dispatch(getAllJobs(user?._id));
         dispatch(getCompany({ collegeId: user?._id }));
@@ -40,15 +40,16 @@ const Dashboard = ({}) => {
 
       dispatch(getResultGraph());
     }
-  }, [user]);
+  }, [user?._id]);
 
   useEffect(() => {
+    if (!user?._Id) return;
     dispatch(getStudent());
     // dispatch(getCompany());
     dispatch(getAssessment());
     dispatch(getTotalJobs());
-    dispatch(getPlacedStudents());
-  }, [dispatch]);
+    dispatch(getPlacedStudents(user?._id));
+  }, [user?._id]);
 
   useEffect(() => {
     isUni() ? dispatch(getUniversity()) : dispatch(getCollege());

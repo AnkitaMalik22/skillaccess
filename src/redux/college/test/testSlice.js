@@ -49,6 +49,7 @@ import {
   removeBookmark,
   getTopicByIdQB,
 } from "./thunks/question";
+import { config } from "process";
 
 const testState = {
   recentAssessments: [],
@@ -68,8 +69,8 @@ const testState = {
       currentPage: 0,
       totalPages: 0,
       totalDocuments: 0,
-      limit: 10,
-    },
+      limit: 10
+    }
   },
   testName: "",
   testDescription: "",
@@ -252,7 +253,7 @@ const testSlice = createSlice({
   name: "test",
   reducers: {
     resetStudentList: (state, action) => {
-      state.testDataResponse = {};
+      state.testDataResponse = {}
     },
     setInTest: (state, action) => {
       state.inTest = action.payload;
@@ -525,25 +526,25 @@ const testSlice = createSlice({
     setTestBasicDetails: (state, action) => {
       // Define the fields to be updated in both state and localStorage
       const fieldsToUpdate = [
-        "name",
-        "description",
-        "totalAttempts",
-        "totalQuestions",
+        'name',
+        'description',
+        'totalAttempts',
+        'totalQuestions',
         // 'totalDuration',
-        "level",
-        "duration_from",
-        "duration_to",
-        "isNegativeMarking",
-        "accessibleDepartments",
-        "hasAccessToAllDepartments",
-        "hasAccessToAllCategories",
-        "category",
-        "categoryName",
-        "config",
+        'level',
+        'duration_from',
+        'duration_to',
+        'isNegativeMarking',
+        'accessibleDepartments',
+        'hasAccessToAllDepartments',
+        'hasAccessToAllCategories',
+        'category',
+        'categoryName',
+        'config',
       ];
 
       // Update state
-      fieldsToUpdate.forEach((field) => {
+      fieldsToUpdate.forEach(field => {
         if (action.payload[field] !== undefined) {
           state[field] = action.payload[field];
         }
@@ -615,11 +616,8 @@ const testSlice = createSlice({
               action.payload.res.question;
             break;
           case "mcq":
-            state.currentTopic.questions = state.currentTopic.questions.map(
-              (question, index) =>
-                index === action.payload.index
-                  ? action.payload.res.question
-                  : question
+            state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
+              index === action.payload.index ? action.payload.res.question : question
             );
             break;
 
@@ -647,11 +645,9 @@ const testSlice = createSlice({
               action.payload.res.question;
             break;
           case "mcq":
-            state.currentTopic.questions = state.currentTopic.questions.map(
-              (question, index) =>
-                index === action.payload.index
-                  ? action.payload.res.question
-                  : question
+
+            state.currentTopic.questions = state.currentTopic.questions.map((question, index) =>
+              index === action.payload.index ? action.payload.res.question : question
             );
 
             break;
@@ -772,11 +768,7 @@ const testSlice = createSlice({
       .addCase(getTopicById.fulfilled, (state, action) => {
         console.log(action.payload, "action.payload.section");
 
-        if (
-          !localStorage.getItem("currentTopic") ||
-          JSON.stringify(action.payload) !==
-          localStorage.getItem("currentTopic")
-        ) {
+        if (!localStorage.getItem("currentTopic") || JSON.stringify(action.payload) !== localStorage.getItem("currentTopic")) {
           localStorage.setItem("currentTopic", JSON.stringify(action.payload));
           state.currentTopic = action.payload;
         }
@@ -803,7 +795,6 @@ const testSlice = createSlice({
       .addCase(createTopic.rejected, (state, action) => {
         // return action.payload;
         state.ADD_tOPIC_LOADING = false;
-        toast.error(action.payload);
       })
 
       .addCase(getStudentResponse.pending, (state, action) => {
@@ -828,7 +819,6 @@ const testSlice = createSlice({
         state.TEST_DATA_RESPONSE_LOADING = true;
       })
       .addCase(getTestResultPage.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.testDataResponse = action.payload;
         state.TEST_DATA_RESPONSE_LOADING = false;
       })
@@ -1049,7 +1039,8 @@ const testSlice = createSlice({
       .addCase(setTotalTopicQuestions.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || action.error.message;
-      });
+      })
+
   },
 });
 

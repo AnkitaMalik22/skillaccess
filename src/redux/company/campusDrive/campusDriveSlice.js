@@ -36,13 +36,7 @@ export const createCampusDrive = createAsyncThunk(
       const response = await axios.post(
         `${REACT_APP_API_URL}/api/company/campus-drive/create`,
         driveData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": getCookie("token"),
-          },
-        }
-        
+        config
       );
       return response.data.campusDrive;
     } catch (error) {
@@ -57,12 +51,10 @@ export const getAllCampusDrives = createAsyncThunk(
     try {
       const response = await axios.get(
         `${REACT_APP_API_URL}/api/company/campus-drive/get`,
-        getHeaders()
+        config
       );
-
       return response.data.campusDrives;
     } catch (error) {
-      console.log(error.response.data);
       return rejectWithValue(error.response.data);
     }
   }
@@ -70,13 +62,11 @@ export const getAllCampusDrives = createAsyncThunk(
 
 export const fetchAllCollegesForDrive = createAsyncThunk(
   "campusDrive/fetchAllColleges",
-  async ({ driveId, page, limit  ,
-    search,
-  }, { rejectWithValue }) => {
+  async ({ driveId, page = 1, limit = 10 }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${REACT_APP_API_URL}/api/company/campus-drive/${driveId}/colleges?page=${page}&limit=${limit}&search=${search}`,
-        getHeaders()
+        `${REACT_APP_API_URL}/api/company/campus-drive/${driveId}/colleges?page=${page}&limit=${limit}`,
+        config
       );
       return response.data.data;
     } catch (error) {

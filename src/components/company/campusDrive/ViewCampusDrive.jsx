@@ -12,7 +12,6 @@ import {
   FiAward,
 } from "react-icons/fi";
 import isCompany from "../../../util/isCompany";
-import { FaAngleLeft } from "react-icons/fa";
 
 export default function ViewCampusDrive() {
   const { driveId } = useParams();
@@ -39,35 +38,25 @@ export default function ViewCampusDrive() {
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto p-6">
-        {/* Ba
-        ck Button */}
-
-        <span className="flex gap-4 mb-5">
-          <button
-            className="bg-white flex border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
-            onClick={() =>
-              navigate(
-                isCompanyUser
-                  ? "/company/pr/campus-drive"
-                  : "/college/campus-drive"
-              )
-            }
-          >
-            <FaAngleLeft className="h-5 w-5" />
-          </button>
-          <h2 className="text-xl font-bold self-center">Campus Drive</h2>
-        </span>
+        {/* Back Button */}
+        <button
+          onClick={() =>
+            navigate(
+              isCompanyUser ? "/company/pr/campus-drive" : "/college/campus-drive"
+            )
+          }
+          className="mb-6 flex items-center gap-2 text-blued hover:text-[#043345] transition-colors duration-200"
+        >
+          <FiArrowLeft className="text-lg" />
+          Back to {isCompanyUser ? "Campus Drives" : "Tests"}
+        </button>
 
         {/* Header Section */}
         <div className="bg-[#f8f8f8] rounded-lg shadow-lg p-6 mb-6">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-bold text-[#043345]">
-                {currentCampusDrive?.name}
-              </h1>
-              <p className="text-gray-600 mt-2">
-                {currentCampusDrive?.description}
-              </p>
+              <h1 className="text-3xl font-bold text-[#043345]">{currentCampusDrive?.name}</h1>
+              <p className="text-gray-600 mt-2">{currentCampusDrive?.description}</p>
             </div>
             {isCompanyUser && (
               <button
@@ -84,15 +73,11 @@ export default function ViewCampusDrive() {
             {!isCompanyUser && currentCampusDrive?.tests?.length > 0 && (
               <div className="bg-[#f8f8f8] rounded-lg  p-6">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-bold text-[#043345]">
-                    Test Details
-                  </h2>
+                  <h2 className="text-xl font-bold text-[#043345]">Test Details</h2>
                   <select
                     className="select select-bordered w-64"
                     value={selectedTestIndex}
-                    onChange={(e) =>
-                      setSelectedTestIndex(Number(e.target.value))
-                    }
+                    onChange={(e) => setSelectedTestIndex(Number(e.target.value))}
                   >
                     {currentCampusDrive.tests.map((test, index) => (
                       <option key={test._id} value={index}>
@@ -112,20 +97,13 @@ export default function ViewCampusDrive() {
                   <div className="bg-green-50 p-4 rounded-lg shadow">
                     <h3 className="text-sm text-gray-600">Total Time</h3>
                     <p className="text-xl font-bold text-[#043345]">
-                      {
-                        currentCampusDrive.tests[selectedTestIndex].test
-                          .totalTime
-                      }{" "}
-                      mins
+                      {currentCampusDrive.tests[selectedTestIndex].test.totalTime} mins
                     </p>
                   </div>
                   <div className="bg-purple-50 p-4 rounded-lg shadow">
                     <h3 className="text-sm text-gray-600">Total Marks</h3>
                     <p className="text-xl font-bold text-[#043345]">
-                      {
-                        currentCampusDrive.tests[selectedTestIndex].test
-                          .totalMarks
-                      }
+                      {currentCampusDrive.tests[selectedTestIndex].test.totalMarks}
                     </p>
                   </div>
                 </div>
@@ -177,9 +155,7 @@ export default function ViewCampusDrive() {
             {/* Invited Colleges Section */}
             <div className="bg-[#f8f8f8] rounded-lg shadow-lg p-6 mb-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-[#043345]">
-                  Invited Colleges
-                </h2>
+                <h2 className="text-xl font-bold text-[#043345]">Invited Colleges</h2>
                 <button
                   onClick={() =>
                     navigate(`/company/pr/campus-drive/${driveId}/invite`)
@@ -208,13 +184,8 @@ export default function ViewCampusDrive() {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {currentCampusDrive?.colleges?.map((college) => (
-                    <div
-                      key={college._id}
-                      className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
-                    >
-                      <h3 className="font-medium text-[#043345]">
-                        {college.CollegeName}
-                      </h3>
+                    <div key={college._id} className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                      <h3 className="font-medium text-[#043345]">{college.CollegeName}</h3>
                       <p className="text-sm text-gray-600">{college.Email}</p>
                     </div>
                   ))}
@@ -225,9 +196,7 @@ export default function ViewCampusDrive() {
             {/* Tests Section */}
             <div className="bg-[#f8f8f8] rounded-lg shadow-lg p-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-[#043345]">
-                  Test Assignments
-                </h2>
+                <h2 className="text-xl font-bold text-[#043345]">Test Assignments</h2>
                 <button
                   onClick={() =>
                     navigate(`/company/pr/campus-drive/${driveId}/tests`)
@@ -255,17 +224,10 @@ export default function ViewCampusDrive() {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {currentCampusDrive?.tests?.map((test) => (
-                    <div
-                      key={test._id}
-                      className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
-                    >
-                      <h3 className="font-medium text-[#043345]">
-                        {test.test?.name}
-                      </h3>
+                    <div key={test._id} className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                      <h3 className="font-medium text-[#043345]">{test.test?.name}</h3>
                       <div className="mt-3">
-                        <p className="text-sm text-gray-600 mb-2">
-                          Assigned to:
-                        </p>
+                        <p className="text-sm text-gray-600 mb-2">Assigned to:</p>
                         <div className="flex -space-x-2 overflow-hidden">
                           {test.assignedTo.map((college) => (
                             <div key={college._id} className="relative group">
@@ -324,23 +286,21 @@ export default function ViewCampusDrive() {
           <>
             {/* Invited Students Section */}
             <div className="bg-[#f8f8f8] rounded-lg shadow-lg p-6 mb-6">
+             
               <div className="mt-4 flex justify-between items-center">
-                <h2 className="text-xl font-bold mb-4 text-[#043345]">
-                  Invited Students
-                </h2>
-                <button
-                  onClick={() =>
-                    navigate(
-                      `/college/test/invite?testId=${currentCampusDrive?.tests[selectedTestIndex]?.test._id}`
-                    )
-                  }
-                  className="btn bg-blued text-white hover:bg-[#043345]"
-                >
-                  Invite Students
-                </button>
-              </div>
-              {currentCampusDrive?.tests[selectedTestIndex].test
-                ?.invitedStudents?.length === 0 ? (
+              <h2 className="text-xl font-bold mb-4 text-[#043345]">Invited Students</h2>
+              <button
+                onClick={() =>
+                  navigate(
+                    `/college/test/invite?testId=${currentCampusDrive?.tests[selectedTestIndex]?.test._id}`
+                  )
+                }
+                className="btn bg-blued text-white hover:bg-[#043345]"
+              >
+                Invite Students
+              </button>
+            </div>
+              {currentCampusDrive?.tests[selectedTestIndex].test?.invitedStudents?.length === 0 ? (
                 <div className="text-center py-8">
                   <FiUsers className="mx-auto text-4xl text-gray-400 mb-3" />
                   <p className="text-gray-600">
@@ -349,36 +309,36 @@ export default function ViewCampusDrive() {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {currentCampusDrive?.tests[
-                    selectedTestIndex
-                  ]?.test?.invitedStudents?.map((student) => (
-                    <div
-                      key={student._id}
-                      className="border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow duration-300"
-                      onClick={() =>
-                        navigate(`/college/students/profile/${student._id}`)
-                      }
-                    >
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={
-                            student.avatar?.url ||
-                            "https://via.placeholder.com/40"
-                          }
-                          alt={student.FirstName}
-                          className="w-10 h-10 rounded-full"
-                        />
-                        <div>
-                          <p className="font-medium text-[#043345]">
-                            {student.FirstName} {student.LastName}
-                          </p>
-                          <p className="text-sm text-gray-500">
-                            {student.Email}
-                          </p>
+                  {currentCampusDrive?.tests[selectedTestIndex]?.test?.invitedStudents?.map(
+                    (student) => (
+                      <div
+                        key={student._id}
+                        className="border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow duration-300"
+                        onClick={() =>
+                          navigate(`/college/students/profile/${student._id}`)
+                        }
+                      >
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={
+                              student.avatar?.url ||
+                              "https://via.placeholder.com/40"
+                            }
+                            alt={student.FirstName}
+                            className="w-10 h-10 rounded-full"
+                          />
+                          <div>
+                            <p className="font-medium text-[#043345]">
+                              {student.FirstName} {student.LastName}
+                            </p>
+                            <p className="text-sm text-gray-500">
+                              {student.Email}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               )}
             </div>
@@ -386,8 +346,7 @@ export default function ViewCampusDrive() {
             {/* Results Section */}
             <div className="bg-[#f8f8f8] rounded-lg shadow-lg p-6">
               <h2 className="text-xl font-bold mb-4 text-[#043345]">Results</h2>
-              {currentCampusDrive?.tests[selectedTestIndex].test
-                ?.studentResponses?.length === 0 ? (
+              {currentCampusDrive?.tests[selectedTestIndex].test?.studentResponses?.length === 0 ? (
                 <div className="text-center py-8">
                   <FiAward className="mx-auto text-4xl text-gray-400 mb-3" />
                   <p className="text-gray-600">No results available yet</p>
@@ -404,15 +363,9 @@ export default function ViewCampusDrive() {
                           )
                         }
                       >
-                        <p className="font-medium text-[#043345]">
-                          View Results
-                        </p>
+                        <p className="font-medium text-[#043345]">View Results</p>
                         <p className="text-sm text-gray-500">
-                          {
-                            currentCampusDrive?.tests[selectedTestIndex].test
-                              ?.studentResponses?.length
-                          }{" "}
-                          results available
+                          {currentCampusDrive?.tests[selectedTestIndex].test?.studentResponses?.length} results available
                         </p>
                       </div>
                     </div>
@@ -420,6 +373,7 @@ export default function ViewCampusDrive() {
                 </div>
               )}
             </div>
+       
           </>
         )}
       </div>

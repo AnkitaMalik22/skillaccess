@@ -25,7 +25,7 @@ const ViewInvitedStudents = () => {
 
   if (!students?.length) {
     return (
-      <div className="min-h-64 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="w-full max-w-2xl bg-white rounded-md shadow-md">
           <div className="p-6">
             <div className="text-center text-gray-500">

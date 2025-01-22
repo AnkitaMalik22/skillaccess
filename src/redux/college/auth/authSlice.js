@@ -185,12 +185,7 @@ export const sendMail = createAsyncThunk(
       return res;
     } catch (error) {
       //console.log(error);
-      if (error.response.status === 404) {
-        return rejectWithValue("User not registered on the platform");
-      }
-      const errorMessage =
-        error.response.data.message || "An error occurred while sending mail";
-      return rejectWithValue(errorMessage);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -380,6 +375,25 @@ export const getCollege = createAsyncThunk(
   "collegeAuth/getCollege",
   async (_, { rejectWithValue }) => {
     try {
+      // get access
+      const { data } = await axios.get(
+        `${REACT_APP_API_URL}/api/auth/access`,
+        getHeaders()
+      );
+      const user = data?.payload?.user;
+      if (user) {
+        const role = user.role;
+        // company
+        if (role === "company" && location.pathname.split("/")[1] !== "company")
+          return;
+        // university
+        if (
+          role === "university" &&
+          location.pathname.split("/")[1] !== "university"
+        )
+          return;
+      } else throw new Error("You are not logged in");
+
       const response = await axios.get(
         `${REACT_APP_API_URL}/api/college/me`,
         getHeaders()
@@ -416,7 +430,6 @@ export const logoutCollege = createAsyncThunk(
   "collegeAuth/logoutCollege",
   async (_, { rejectWithValue }) => {
     try {
-      //console.log("logout");
       const req = await axios.get(`${REACT_APP_API_URL}/api/college/logout`, {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
@@ -645,8 +658,7 @@ const collegeAuthSlice = createSlice({
       })
       .addCase(sendMail.rejected, (state, action) => {
         state.sendMailLoading = false;
-        console.log(action.payload);
-        toast.error(action.payload || "Failed to send mail");
+        toast.error("Error sending mail");
       })
       .addCase(selectAuth.fulfilled, (state, action) => {
         switch (action.payload.college.authType) {
@@ -715,7 +727,7 @@ const collegeAuthSlice = createSlice({
           default:
             state.status = "done";
             state.isLoggedIn = true;
-            // window.location.href = "/college/dashboard";
+            window.location.href = "/";
             break;
         }
 
@@ -750,7 +762,6 @@ const collegeAuthSlice = createSlice({
       .addCase(getCollege.fulfilled, (state, action) => {
         state.isLoggedIn = action.payload.user.role === "college";
         state.user = action.payload.user;
-        console.log(action.payload.user);
         state.credit = {
           credit: action.payload?.credit[0]?.credit,
           limit: action.payload?.credit[0]?.limit,
@@ -816,6 +827,8 @@ const collegeAuthSlice = createSlice({
         state.isLoggedIn = false;
         localStorage.clear();
         localStorage.setItem("editable", false);
+        toast.success("User loggedout successfully");
+        window.location.href = "/";
         // Add any fetched posts to the array
         //console.log("fullfilled");
       })

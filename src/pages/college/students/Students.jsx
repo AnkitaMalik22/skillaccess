@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudents } from "../../../redux/college/student/studentSlice";
 import Header from "../../../components/college/students/Header";
 import { isUni } from "../../../util/isCompany";
 import StudentsTable from "../../../components/ui/tables/StudentsTable";
-import Pagination from "../../../components/Pagination";
-
+import Pagination from "../../../components/Pagination"
 
 const Students = () => {
   const navigate = useNavigate();
@@ -16,13 +14,8 @@ const Students = () => {
   const [filterType, setFilterType] = useState("approved-students");
   const [batch, setBatch] = useState("all");
   const [createdAt, setCreatedAt] = useState("");
-  const [selectedList, setSelectedList] = useState("approvedStudents");
+  const [selectedList, setSelectedList] = useState("approvedStudents"); // Default to "approvedStudents"
 
-  // Default to "approvedStudents"
-
-  const [queryParams] = useSearchParams();
-
-  const tab = queryParams.get("tab");
   const {
     uploadedStudents,
     approvedStudents,
@@ -52,16 +45,6 @@ const Students = () => {
     };
     fetchData();
   }, [dispatch, user, batch, filterType, createdAt]);
-
-  useEffect(() => {
-    if (tab === "approvedStudents") {
-      setSelectedList("approvedStudents")
-    } else if (tab === "invitedStudents") {
-      setSelectedList("invitedStudents")
-    } else if (tab === "pendingStudents") {
-      setSelectedList("pendingStudents")
-    }
-  }, [tab, uploadedStudents]);
 
   useEffect(() => {
     setFilteredStudents(uploadedStudents);
@@ -109,7 +92,6 @@ const Students = () => {
           onClick={() => {
             setSelectedList("approvedStudents")
             setFilterType("approved-students")
-
           }}
           className={`${selectedList === "approvedStudents"
             ? "bg-blued text-white"
@@ -187,8 +169,8 @@ const Students = () => {
           <StudentsTable
             data={uploadedStudents}
             isLoading={GET_STUDENT_LOADING}
-            onRowClick={(student) => { }
-              // navigate(`/college/students/profile/${student._id}`)
+            onRowClick={(student) =>
+              navigate(`/college/students/profile/${student._id}`)
             }
             filterFields={[
               {

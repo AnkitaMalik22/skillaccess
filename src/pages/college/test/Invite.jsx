@@ -5,7 +5,7 @@ import List from "../../../components/college/test/addStudents/List";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentsForTest } from "../../../redux/college/test/thunks/test";
 import { useSearchParams } from "react-router-dom";
-import { FaAngleLeft, FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import toast from "react-hot-toast";
@@ -23,9 +23,6 @@ const Invite = () => {
   const [limit, setLimit] = useState(50);
   const [page, setPage] = useState(1);
   const debounceRef = useRef(null); // Ref for debounce timer
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const MINIMUM_SEARCH_LENGTH = 3;
 
   const { approvedStudents: uploadedStudents, loading } = useSelector(
     (state) => state.collegeStudents
@@ -57,35 +54,42 @@ const Invite = () => {
 
   const handleFilterStudents = (e) => {
     const value = e.target.value;
-    setSearchTerm(value);
+    if (value === "" || value.trim() === "") {
+      //console.log("empty");
 
-    // Clear existing timeout
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
+      setFilteredStudents(studentList);
 
-    // Reset to page 1
-    setPage(1);
-    setIsSearching(true);
+      return;
+    } else {
+      // setFilteredStudents(
+      //   studentList.filter((student) => {
+      //     const regex = new RegExp(value, "i");
+      //     return (
+      //       regex.test(student.FirstName) ||
+      //       regex.test(student.LastName) ||
+      //       regex.test(student.Email)
+      //     );
+      //   })
+      // );
+      setPage(1);
 
-    debounceRef.current = setTimeout(async () => {
-      try {
-        await dispatch(
+      // Debounce dispatch action
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+      debounceRef.current = setTimeout(() => {
+        dispatch(
           getStudentsForTest({
             testId,
             skip: 0,
             limit,
-            search: value.trim(), // Use trimmed value
+            search: value,
             batch: year,
-            all: !value.trim() // Set all:true when empty search
           })
         );
-      } catch (error) {
-        toast.error('Failed to fetch students');
-      } finally {
-        setIsSearching(false);
-      }
-    }, 500);
+      }, 300); // Adjust debounce time (300ms is common)
+      //console.log(filteredStudents, "filtered--", value);
+    }
   };
 
   let testName = localStorage.getItem("testName");
@@ -120,10 +124,10 @@ const Invite = () => {
     <>
       <div className="flex gap-3 mb-5">
         <button
-          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaAngleLeft className="h-5 w-5" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
         {/* <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Create Assessment

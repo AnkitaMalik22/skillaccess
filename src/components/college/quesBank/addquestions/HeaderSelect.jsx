@@ -1,5 +1,5 @@
 import React from "react";
-import { FaAngleLeft, FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
@@ -20,10 +20,10 @@ const Header = ({ Q }) => {
     <div className="flex w-full mx-auto justify-between mb-6">
       <div className="flex gap-3">
         <button
-          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaAngleLeft className="h-5 w-5" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-gray-200" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
           Create Assessment

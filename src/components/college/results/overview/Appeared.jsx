@@ -49,7 +49,8 @@ const Appeared = ({ assessment }) => {
     (state) => (isCompany() ? state.test : state.companyTest)
   );
 
-
+  const currentPage = testDataResponse?.currentPage || 1;
+  const totalPages = testDataResponse?.totalPages || 1;
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -337,17 +338,17 @@ const Appeared = ({ assessment }) => {
         className="mt-4"
       />
 
-      {!TEST_DATA_RESPONSE_LOADING && <div className="pt-4">
+      <div className="pt-4">
         <Pagination
-          currentPage={testDataResponse?.pagination?.currentPage || 1}
-          totalPages={testDataResponse?.pagination?.totalPages || 1}
+          currentPage={currentPage}
+          totalPages={totalPages}
           onPageChange={(page) =>
             dispatch(
               getTestResultPage({ id: assessmentId, status: "pending", page })
             )
           }
         />
-      </div>}
+      </div>
     </div>
   );
 };

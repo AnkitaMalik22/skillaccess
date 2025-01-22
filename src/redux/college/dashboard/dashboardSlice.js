@@ -274,13 +274,10 @@ const dashboardSlice = createSlice({
       })
       .addCase(getJobById.pending, (state, action) => {
         state.status = "loading";
-        console.log("loading");
       })
       .addCase(getJobById.fulfilled, (state, action) => {
-    
         state.jobDetails = action.payload;
-        state.invitedStudents = action.payload?.assessments[0]?.test?.invitedStudents;
-
+        state.invitedStudents = action.payload.assessments[0].test.invitedStudents;
       })
       .addCase(getJobById.rejected, (state, action) => {
         state.status = "failed";
