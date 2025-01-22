@@ -339,8 +339,8 @@ const Appeared = ({ assessment }) => {
 
       {!TEST_DATA_RESPONSE_LOADING && <div className="pt-4">
         <Pagination
-          currentPage={testDataResponse?.pagination.currentPage || 1}
-          totalPages={testDataResponse?.pagination.totalPages || 1}
+          currentPage={testDataResponse?.pagination?.currentPage || 1}
+          totalPages={testDataResponse?.pagination?.totalPages || 1}
           onPageChange={(page) =>
             dispatch(
               getTestResultPage({ id: assessmentId, status: "pending", page })

@@ -84,12 +84,12 @@ const Header = ({
       }
 
       const headers = jsonData[0];
-      const expectedHeaders = ["FirstName", "LastName", "Email", "Batch"];
+      const expectedHeaders = ["FirstName", "LastName", "Email", "Batch", "Approved"];
       const isValidFormat = expectedHeaders.every(
         (header, index) => headers[index] === header
       );
 
-      if (!isValidFormat || headers.length !== 4) {
+      if (!isValidFormat || headers.length !== expectedHeaders.length) {
         toast.error(
           "Incorrect titles, titles must be FirstName, LastName, Email ,Batch"
         );
@@ -106,31 +106,38 @@ const Header = ({
           continue;
         }
 
-        const [firstName, lastName, email, batch] = row;
+        const [firstName, lastName, email, batch, approved] = row;
 
-        if (!firstName) {
-          toast.error(`First Name is required at row ${i + 1}`);
-          continue;
+        if (!firstName || firstName.length < 4) {
+          toast.error(`Row ${i + 1}: The first name must be at least 4 characters long.`);
+          return;
         }
-        if (!lastName) {
-          toast.error(`Last Name is required at row ${i + 1}`);
-          continue;
+        if (!lastName || lastName.length < 4) {
+          toast.error(`Row ${i + 1}: The last name must be at least 4 characters long.`);
+          return;
         }
         if (!email) {
-          toast.error(`Email is required at row ${i + 1}`);
-          continue;
+          toast.error(`Row ${i + 1}: Email address is required.`);
+          return;
         }
-
         if (!batch) {
-          toast.error(`Batch is required at row ${i + 1}`);
-          continue;
+          toast.error(`Row ${i + 1}: Batch information is required.`);
+          return;
         }
+        if (approved === null || approved === undefined) {
+          toast.error(`Row ${i + 1}: Approval status must be provided.`);
+          return;
+        }
+        const parsedApproved = typeof approved === "string"
+          ? approved.trim().toLowerCase() === "true"
+          : Boolean(approved);
 
         students.push({
           FirstName: firstName,
           LastName: lastName,
           Email: email,
           Batch: batch,
+          approved: parsedApproved
         });
       }
 
