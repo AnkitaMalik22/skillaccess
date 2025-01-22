@@ -24,40 +24,22 @@ import { isUni, isCompany } from "../../../../util/isCompany";
 
 const codeTemplates = {
   Java: {
-    defaultCode: `import java.io.*;
-  
-  public class Main {
-    public static void main(String[] args) {
-      // Insert your Java initial code here
-    }
-  }`,
-    solutionCode: `import java.io.*;
-  
-  public class Main {
-    public static void main(String[] args) {
+    defaultCode: ``,
+    solutionCode: `
       // Insert your Java solution code here
-    }
-  }`,
+   `,
   },
   Python: {
-    defaultCode: `def main():
-      # Insert your Python initial code here
-  
-  if __name__ == "__main__":
-      main()`,
-    solutionCode: `def main():
-      # Insert your Python solution code here
-  
-  if __name__ == "__main__":
-      main()`,
+    defaultCode: ``,
+    solutionCode: `# Insert your Python solution code here`,
   },
   Cpp: {
-    defaultCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ initial code here\n    return 0;\n}`,
-    solutionCode: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Insert your C++ solution code here\n    return 0;\n}`,
+    defaultCode: ``,
+    solutionCode: `//Insert your C++ solution code here`,
   },
   C: {
-    defaultCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C initial code here\n    return 0;\n}`,
-    solutionCode: `#include <stdio.h>\n\nint main() {\n    // Insert your C solution code here\n    return 0;\n}`,
+    defaultCode: ``,
+    solutionCode: `// Insert your C solution code here`,
   },
 };
 let ID;
@@ -224,7 +206,7 @@ const AddCode = () => {
           type: "String",
         },
       ],
-      testcase: [{ input: "", expectedOutput: "", isHidden: true }],
+      testcase: [],
       output: [""],
     });
   };
@@ -241,65 +223,75 @@ const AddCode = () => {
     }
   }, []);
   const handleSave = async (component) => {
+
+
+    if (question.code != "") {
+      if (question.code === "") {
+        toast.error("Please fill the code");
+
+        return;
+      }
+
+      if (question.Duration == 0) {
+        toast.error("Please fill the duration");
+
+        return;
+      }
+      if (question.codeQuestion === "") {
+        toast.error("Please fill the question");
+
+        return;
+      }
+
+      if (question.testcase.length === 0) {
+        toast.error("Please add testcases first");
+        return;
+      }
+
+
+
+    } else {
+      toast.error("Please fill all the fields");
+    }
+
     if (addType === "topic") {
-      if (question.code != "") {
-        if (question.code === "") {
-          toast.error("Please fill the code");
+      if (isPrev) {
+        dispatch(
+          editQuestionById({
+            index: countDetail + 1,
+            type: "code",
+            id: question._id,
+            question: question,
+          })
+        );
+        setCountDetail(currentTopic.compiler.length - 1);
 
-          return;
-        }
-
-        if (question.Duration == 0) {
-          toast.error("Please fill the duration");
-
-          return;
-        }
-        if (question.codeQuestion === "") {
-          toast.error("Please fill the question");
-
-          return;
-        }
-
-        if (isPrev) {
-          dispatch(
-            editQuestionById({
-              index: countDetail + 1,
-              type: "code",
-              id: question._id,
-              question: question,
-            })
-          );
-          setCountDetail(currentTopic.compiler.length - 1);
-
-          setIsPrev(false);
-          resetQuestion();
-          setToggle(1);
-        } else {
-          await dispatch(
-            addCompilerToTopic({ data: question, id: id, type: type })
-          );
-          await dispatch(
-            addQuestionToTopic({ data: question, id: id, type: type })
-          );
-
-          resetQuestion();
-          setToggle(1);
-
-          isUni()
-            ? navigate(`/university/pr/quesbank/topic/${id}`)
-            : isCompany()
-            ? navigate(`/company/pr/quesbank/topic/${id}`)
-            : navigate(`/college/quesBank/topic/${id}`);
-        }
-
-        if (component === "save") {
-          navigate(-1);
-        }
-
+        setIsPrev(false);
+        resetQuestion();
         setToggle(1);
       } else {
-        toast.error("Please fill all the fields");
+        await dispatch(
+          addCompilerToTopic({ data: question, id: id, type: type })
+        );
+        await dispatch(
+          addQuestionToTopic({ data: question, id: id, type: type })
+        );
+
+        resetQuestion();
+        setToggle(1);
+
+        isUni()
+          ? navigate(`/university/pr/quesbank/topic/${id}`)
+          : isCompany()
+            ? navigate(`/company/pr/quesbank/topic/${id}`)
+            : navigate(`/college/quesBank/topic/${id}`);
       }
+
+      if (component === "save") {
+        navigate(-1);
+      }
+
+      setToggle(1);
     } else {
       dispatch(
         editBankQuestionById({
@@ -363,18 +355,16 @@ const AddCode = () => {
             <div className=" flex gap-2">
               {addType === "topic" ? (
                 <button
-                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
-                    countDetail >= 0 ? "" : "hidden"
-                  }`}
+                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${countDetail >= 0 ? "" : "hidden"
+                    }`}
                   onClick={handlePrev}
                 >
                   <FaChevronLeft className="self-center" /> Prev
                 </button>
               ) : (
                 <button
-                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${
-                    count >= 0 ? "" : "hidden"
-                  }`}
+                  className={`self-center justify-center flex bg-accent text-white py-2 px-4 rounded-md text-sm font-bold gap-2 ${count >= 0 ? "" : "hidden"
+                    }`}
                   onClick={handlePrev}
                 >
                   <FaChevronLeft className="self-center" /> Prev
