@@ -20,9 +20,9 @@ import { COMPANY_PATH, UNIVERSITY_PATH } from "../constants/routes";
 
 const CollegeRoutes = ({ user }) => {
   if (user?.role === "company") {
-    location.href = COMPANY_PATH;
+    window.location.href = COMPANY_PATH;
   } else if (user?.role === "university") {
-    location.href = UNIVERSITY_PATH;
+    window.location.href = UNIVERSITY_PATH;
   }
   return (
     <Routes>
