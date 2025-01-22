@@ -1,9 +1,6 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import CompanyLayout from "../layout/CompanyLayout";
-import LoginCompany from "../auth/Login";
-import RegisterCompany from "../pages/company/auth/RegisterCompany";
-import AwaitingApproval from "../pages/company/AwatingApproval";
 import DashboardCompany from "../pages/company/dashboard/Dashboard";
 import CompanyProfile from "../pages/company/profile/Profile";
 import Job from "../pages/company/jobs/Job";
@@ -20,13 +17,17 @@ import CampusDriveRouter from "../pages/company/campusDrive/CampusDriveRouter";
 import TestRoute from "../pages/college/test/TestHome";
 import ResultsRoute from "../pages/college/results";
 import StudentRoute from "../pages/college/students";
+import { COLLEGE_PATH, UNIVERSITY_PATH } from "../constants/routes";
 
-const CompanyRoutes = () => {
+const CompanyRoutes = ({ user }) => {
+  if (user?.role === "college") {
+    location.href = COLLEGE_PATH;
+  } else if (user?.role === "university") {
+    location.href = UNIVERSITY_PATH;
+  }
+
   return (
     <Routes>
-      <Route path="/" element={<LoginCompany />} />
-      <Route path="register" element={<RegisterCompany />} />
-      <Route path="approval" element={<AwaitingApproval />} />
       <Route path="pr" element={<CompanyLayout />}>
         <Route path="dashboard" element={<DashboardCompany />} />
         <Route path="profile" element={<CompanyProfile />} />
@@ -44,6 +45,10 @@ const CompanyRoutes = () => {
         {CampusDriveRouter("")}
         {TestRoute("")}
       </Route>
+      <Route
+        path="*"
+        element={<Navigate to="/company/pr/dashboard" replace />}
+      />
     </Routes>
   );
 };

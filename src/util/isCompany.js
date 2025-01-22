@@ -1,38 +1,34 @@
 import getCookie from "./getToken";
 
-export const isCompany = ()=>{
-    return /^\/company.*/.test(window.location.pathname);
-   };
+export const isCompany = () => {
+  return /^\/company.*/.test(window.location.pathname);
+};
 
-export const isUni = ()=>{
-    return /^\/university.*/.test(window.location.pathname);
-}
+export const isUni = () => {
+  return /^\/university.*/.test(window.location.pathname);
+};
 
-
-export const getHeaders = (contentType = "application/json",additionalHeaders={}) => {
-    const headers = {headers:{
+export const getHeaders = (
+  contentType = "application/json",
+  additionalHeaders = {}
+) => {
+  const headers = {
+    headers: {
       "Content-Type": contentType,
-      ...additionalHeaders
-    }};
-    if (isCompany()) {
-      headers.headers["company-token"] = getCookie("token");
-    } else if (isUni()) {
-      headers.headers["uni-token"] =getCookie("uni-token")
-    }else{
-      headers.headers["auth-token"] = localStorage.getItem("auth-token");
-    }
-  
-    return headers;
+      ...additionalHeaders,
+    },
   };
+  headers.headers["auth-token"] = localStorage.getItem("auth-token");
+  return headers;
+};
 
-
-  export const getEntity = ()=>{
-    if(isCompany()){
-      return "company/pr"
-    }else if(isUni()){
-      return "university/pr"
-    }else{
-      return "college"
-    }
+export const getEntity = () => {
+  if (isCompany()) {
+    return "company/pr";
+  } else if (isUni()) {
+    return "university/pr";
+  } else {
+    return "college";
   }
-export default  isCompany;
+};
+export default isCompany;

@@ -12,8 +12,8 @@ const JobsPage = () => {
   const handleFilterJobs = (e) => {};
 
   useEffect(() => {
-    dispatch(getAllJobs(user?._id));
-  }, []);
+    if (user?._id) dispatch(getAllJobs(user?._id));
+  }, [user?._id]);
 
   return (
     <>
