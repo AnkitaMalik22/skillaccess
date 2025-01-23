@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import * as XLSX from "xlsx";
 import PopUp from "../../PopUps/PopUp";
 import Loader from "../test/addVideo/Loader";
-import { uploadStudents } from "../../../redux/college/student/studentSlice";
+import { getStudents, uploadStudents } from "../../../redux/college/student/studentSlice";
 import { IoIosSearch } from "react-icons/io";
 
 const Header = ({
@@ -21,6 +21,9 @@ const Header = ({
   setCreatedAt,
   createdAt,
   setFilterType,
+  filterType,
+  batch,
+  user
 }) => {
   const { uploadedStudents } = useSelector((state) => state.collegeStudents);
   const [loading, setLoading] = useState(false);
@@ -153,7 +156,20 @@ const Header = ({
       console.error("Error processing the file:", error);
     } finally {
       setLoading(false);
-      // dispatch(getAllStudents());
+
+      if (filterType === "invited-students") {
+        await dispatch(getStudents({
+          id: user?._id,
+          batch,
+          filterType,
+          createdAt,
+          page: 1,
+          limit: 10,
+        }))
+      } else {
+        setFilterType("invited-students")
+      }
+
     }
   };
 

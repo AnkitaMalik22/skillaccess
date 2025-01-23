@@ -21,10 +21,10 @@ import ChartComp from "../../../components/college/results/home/Chart";
 import { getAllJobs } from "../../../redux/college/jobs/collegeJobSlice";
 import axios from "axios";
 import { getUniversity } from "../../../redux/university/auth/universityAuthSlice";
-import { isUni } from "../../../util/isCompany";
+import { getEntity, isUni } from "../../../util/isCompany";
 import DashboardCard from "../../../components/cards/DashboardCard";
 
-const Dashboard = ({}) => {
+const Dashboard = ({ }) => {
   //useTranslate();
   const dispatch = useDispatch();
   const { students, companies, assessments, jobs, placedStudents } =
@@ -94,7 +94,7 @@ const Dashboard = ({}) => {
       title: "Available Assessment",
       actionLabel: "Create New",
       actionIcon: FaArrowRight,
-      onClick: () => navigate(`/${isUni() ? "university/pr" : "college"}/test`),
+      onClick: () => navigate(`/${getEntity()}/test`),
     },
   ];
 

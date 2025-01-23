@@ -14,6 +14,7 @@ import { getAllTests } from "../../../redux/company/test/thunks/test";
 import { getResultGraphCompany } from "../../../redux/company/result/thunks/graph";
 import toast from "react-hot-toast";
 import DashboardCard from "../../../components/cards/DashboardCard";
+import { getEntity } from "../../../util/isCompany";
 
 const DashboardCompany = () => {
   //useTranslate();
@@ -72,7 +73,7 @@ const DashboardCompany = () => {
       title: "Institutes",
       actionLabel: "View",
       actionIcon: FaArrowRight,
-      onClick: () => navigate("/college/dashboard/jobs"),
+      onClick: () => navigate(`/${getEntity()}/jobs`),
     },
     {
       icon: MdOutlinedFlag,
@@ -82,7 +83,7 @@ const DashboardCompany = () => {
       title: "Available Assessment",
       actionLabel: "Create New",
       actionIcon: FaArrowRight,
-      onClick: () => navigate("/company/pr/test"),
+      onClick: () => navigate(`/${getEntity()}/test`),
     },
   ];
 

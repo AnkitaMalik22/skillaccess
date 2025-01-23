@@ -60,10 +60,9 @@ const Header = ({
   };
 
   // Function to handle adding a new award
-  // Function to handle adding a new award
   const handleAddAward = () => {
     setCompany((prev) => {
-      const newCompany = { ...prev };
+      const newCompany = JSON.parse(JSON.stringify(prev));
       // Ensure you create a new array for awards to avoid direct mutation
       const newAwards = [
         ...newCompany.awards,
@@ -77,7 +76,8 @@ const Header = ({
   // Function to handle change in award input fields
   const handleAwardChange = (index, field, value) => {
     setCompany((prev) => {
-      const newCompany = { ...prev };
+      const newCompany = JSON.parse(JSON.stringify(prev));
+      // console.log(newCompany)
       newCompany.awards[index][field] = value;
       return newCompany;
     });
@@ -86,7 +86,8 @@ const Header = ({
   // Function to remove an award
   const handleRemoveAward = (index) => {
     setCompany((prev) => {
-      const newCompany = { ...prev };
+      const newCompany = JSON.parse(JSON.stringify(prev));
+      // const newCompany = { ...prev };
       newCompany.awards.splice(index, 1);
       return newCompany;
     });
@@ -124,9 +125,8 @@ const Header = ({
                 return newCompany;
               })
             }
-            className={`${
-              isNotFullWidth ? "w-fit" : "w-full"
-            } p-2 rounded-md border-none focus:outline-none bg-[#f4f5f6]`}
+            className={`${isNotFullWidth ? "w-fit" : "w-full"
+              } p-2 rounded-md border-none focus:outline-none bg-[#f4f5f6]`}
             placeholder={placeholder}
           />
         ) : (

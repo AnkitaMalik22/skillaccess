@@ -113,6 +113,7 @@ const SelectTests = () => {
       for (let i = 0; i < selectedSections.length; i++) {
         if (selectedSections[i]._id === section._id) {
           if (selectedSections[i].Type === questionType) {
+            toast.error("Topic already selected, please remove topic first to continue");
             return;
           }
         }
@@ -183,9 +184,11 @@ const SelectTests = () => {
         dispatch(
           setCurrentQuestionCount(currentQuestionCount + parseInt(totalQ))
         );
+        console.log(sectionCopy, "sc")
         setSelectedSections([...selectedSections, sectionCopy]);
         dispatch(setTestSelectedTopics(selectedSections));
       }
+      console.log("s")
       // setSelectedSections([...selectedSections, sectionCopy]);
 
       //   dispatch(

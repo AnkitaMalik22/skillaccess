@@ -51,7 +51,7 @@ const Students = () => {
       }
     };
     fetchData();
-  }, [dispatch, user, batch, filterType, createdAt]);
+  }, [user, batch, filterType, createdAt]);
 
   useEffect(() => {
     if (tab === "approvedStudents") {
@@ -100,6 +100,8 @@ const Students = () => {
         createdAt={createdAt}
         filterType={filterType}
         setFilterType={setFilterType}
+        batch={batch}
+        user={user}
       />
 
       {/* Checkbox Row for Selecting the List */}

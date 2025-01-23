@@ -17,12 +17,15 @@ const StudentsTable = ({
   };
 
   const resetFilter = (field) => {
-    setFilters((prev) => ({ ...prev, [field]: "" }));
+    setFilters((prev) => {
+
+      return { ...prev, [field]: "" }
+    });
     setIsInputOpen((prev) => ({ ...prev, [field]: false }));
   };
 
   // Apply filters dynamically
-  const filteredData = data.filter((item, index) => {
+  const filteredData = data?.filter((item, index) => {
     return filterFields.every(({ accessor, filterKey }) => {
       const value = filters[filterKey];
       if (!value) return true; // No filter applied

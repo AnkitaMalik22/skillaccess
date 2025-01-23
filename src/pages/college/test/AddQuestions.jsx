@@ -15,10 +15,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import useTranslate from "../../../hooks/useTranslate";
 import { getEntity } from "../../../util/isCompany";
 import CommonHeader from "../../../components/CommonHeader";
+import toast from "react-hot-toast"
 
 const AddQuestions = () => {
   //useTranslate();
-  const { topics, currentQuestionCount } = useSelector((state) => state.test);
+  const { topics, currentQuestionCount, totalQuestions } = useSelector((state) => state.test);
 
   const navigate = useNavigate();
   // question of the topic
@@ -122,22 +123,19 @@ const AddQuestions = () => {
     return topicTimes;
   };
 
-  //     return {
-  //       type: topic.Type,
-  //       Heading:topic.Heading,
-  //       total: totalMcq + totalEssay + totalVideo + totalCompiler + totalFindAnswer,
-  //     };
-  //   });
-
-  //   return topicTimes;
-  // };
-
+  const handleNext = () => {
+    if (currentQuestionCount < totalQuestions) {
+      toast.error(`Select ${totalQuestions - currentQuestionCount} more questions`);
+      return
+    }
+    navigate(`/${getEntity()}/test/submit?level=${level}`);
+  }
   const totalTime = handleCalculateTime();
-  //console.log(totalTime);
+
   return (
     <>
       {/* <Header page={"submit"} /> */}
-      <CommonHeader backPath={`/${getEntity()}/test/${level === "adpative" ? "selectAdaptive" : `select`}?level=${level}`} handleNext={() => { navigate(`/${getEntity()}/test/submit?level=${level}`) }} />
+      <CommonHeader backPath={`/${getEntity()}/test/${level === "adpative" ? "selectAdaptive" : `select`}?level=${level}`} handleNext={handleNext} />
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>

@@ -18,6 +18,7 @@ import isCompany, { isUni } from "../../../../util/isCompany";
 import {
   editQuestion,
   removeQuestion,
+  setCurrentQuestionCount,
 } from "../../../../redux/college/test/testSlice";
 
 const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
@@ -28,7 +29,7 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   // //console.log(question);
   const dispatch = useDispatch();
 
-  // //console.log(question);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,23 +53,15 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
   };
 
   const handleDelete = () => {
-    dispatch(setCurrentQuestionCountCompany(currentQuestionCount - 1));
 
-    isCompany()
-      ? dispatch(
-          removeQuestionCompany({
-            selfIndex: Number,
-            topicIndex: id,
-            questionType: "mcq",
-          })
-        )
-      : dispatch(
-          removeQuestion({
-            selfIndex: Number,
-            topicIndex: id,
-            questionType: "mcq",
-          })
-        );
+    dispatch(
+      removeQuestion({
+        selfIndex: Number,
+        topicIndex: id,
+        questionType: "mcq",
+      })
+    );
+    dispatch(setCurrentQuestionCount(currentQuestionCount - 1));
   };
 
   const handleBookmark = () => {
@@ -125,8 +118,7 @@ const Mcq = ({ Title, Options, Number, id, type, view, question }) => {
 
     localStorage.setItem("qbQues", JSON.stringify(question));
     navigate(
-      `/${isUni() ? "pr/university" : "college"}/quesBank/addMcqToTopic/${
-        question._id
+      `/${isUni() ? "pr/university" : "college"}/quesBank/addMcqToTopic/${question._id
       }?type=mcq&addType=edit`
     );
   };

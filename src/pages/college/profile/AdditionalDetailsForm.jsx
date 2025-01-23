@@ -1,28 +1,38 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
+import { useState } from "react"
 import axios from "axios"
-import { getHeaders } from '../../../util/isCompany'
+import { getHeaders } from "../../../util/isCompany"
 
 export default function CollegeRegistrationForm({ data }) {
-    const [step, setStep] = useState(1)
-    const [formData, setFormData] = useState(data ? JSON.parse(JSON.stringify(data)) : {
-        accreditations: [],
-        collegeType: '',
-        coursesOffered: [],
-        topCompanies: [],
-        mous: [],
-        industryTieUps: [],
-        campusArea: '', // Infrastructure field
-        laboratoryDetails: '', // Infrastructure field
-        hostelFacility: '', // Infrastructure field
-        bankingDetails: {
-            panCard: '',
-            bankName: '',
-            accountNumber: '',
-            ifscCode: '',
-        },
-    })
+    const [step, setStep] = useState(1);
+    const parsedData = JSON.parse(JSON.stringify(data));
+    const [formData, setFormData] = useState(
+        {
+            accreditations: parsedData?.accreditation || [],
+            collegeType: parsedData?.collegeType || "",
+            coursesOffered: parsedData?.coursesOffered || [],
+            topCompanies: parsedData?.topCompanies || [],
+            mous: parsedData?.mous || [],
+            industryTieUps: parsedData?.industryTieUps || [],
+            campusArea: parsedData?.campusArea || "", // Infrastructure field
+            laboratoryDetails: parsedData?.laboratoryDetails || "", // Infrastructure field
+            hostelFacility: parsedData?.hostelFacility || "", // Infrastructure field
+            bankingDetails: {
+                panCard: parsedData?.bankingDetails?.panCard || "",
+                bankName: parsedData?.bankingDetails?.bankName || "",
+                accountNumber: parsedData?.bankingDetails?.accountNumber || "",
+                ifscCode: parsedData?.bankingDetails?.ifscCode || "",
+            },
+            placementOfficer: parsedData?.placementOfficer || {},
+            placementStatistics: parsedData?.placementStatistics || {},
+            studentStrength: parsedData?.studentStrength || {},
+            genderRatio: parsedData?.genderRatio || {},
+            infrastructure: parsedData?.infrastructure || {},
+            additionalInfo: parsedData?.additionalInfo || {},
+        }
+    );
+
 
     const totalSteps = 6
     const stepTitles = [
@@ -31,25 +41,32 @@ export default function CollegeRegistrationForm({ data }) {
         "Placement Information",
         "Student Data",
         "Infrastructure",
-        "Additional Information"
+        "Additional Information",
     ]
 
     const addAccreditation = () => {
-        setFormData(prev => ({
-            ...prev,
-            accreditations: [...prev.accreditations, { body: '', grade: '', validityPeriod: '', accreditationCertificate: null }]
-        }))
+        setFormData((prev) => {
+
+            return {
+                ...prev,
+
+                accreditations: [
+                    ...prev.accreditations,
+                    { body: "", grade: "", validityPeriod: "", accreditationCertificate: null },
+                ],
+            }
+        })
     }
 
     const removeAccreditation = (index) => {
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
-            accreditations: prev.accreditations.filter((_, i) => i !== index)
+            accreditations: prev.accreditations.filter((_, i) => i !== index),
         }))
     }
 
     const updateAccreditation = (index, field, value) => {
-        setFormData(prev => {
+        setFormData((prev) => {
             const newAccreditations = [...prev.accreditations]
             newAccreditations[index][field] = value
             return { ...prev, accreditations: newAccreditations }
@@ -57,39 +74,39 @@ export default function CollegeRegistrationForm({ data }) {
     }
 
     const addCourse = () => {
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
-            coursesOffered: [...prev.coursesOffered, { program: '', specializations: [], intakeCapacity: 0 }]
+            coursesOffered: [...prev.coursesOffered, { program: "", specializations: [], intakeCapacity: 0 }],
         }))
     }
 
     const removeCourse = (index) => {
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
-            coursesOffered: prev.coursesOffered.filter((_, i) => i !== index)
+            coursesOffered: prev.coursesOffered.filter((_, i) => i !== index),
         }))
     }
 
     const addCompany = () => {
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
-            topCompanies: [...prev.topCompanies, '']
+            topCompanies: [...prev.topCompanies, ""],
         }))
     }
 
     const removeCompany = (index) => {
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
-            topCompanies: prev.topCompanies.filter((_, i) => i !== index)
+            topCompanies: prev.topCompanies.filter((_, i) => i !== index),
         }))
     }
 
     const nextStep = () => {
-        setStep(prev => Math.min(prev + 1, totalSteps))
+        setStep((prev) => Math.min(prev + 1, totalSteps))
     }
 
     const prevStep = () => {
-        setStep(prev => Math.max(prev - 1, 1))
+        setStep((prev) => Math.max(prev - 1, 1))
     }
 
     const handleSubmit = async (e) => {
@@ -104,40 +121,42 @@ export default function CollegeRegistrationForm({ data }) {
             const formDataToSend = new FormData()
 
             // Append all form data
-            Object.keys(formData).forEach(key => {
-                if (key === 'accreditations') {
+            Object.keys(formData ?? {}).forEach((key) => {
+                if (key === "accreditations") {
                     // Handle accreditation certificates
-                    formData.accreditations.forEach((acc, index) => {
+                    formData.accreditations?.forEach((acc, index) => {
                         if (acc.accreditationCertificate) {
                             formDataToSend.append(`accreditationCertificate_${index}`, acc.accreditationCertificate)
                         }
                     })
-                    formDataToSend.append('accreditations', JSON.stringify(formData.accreditations))
+                    formDataToSend.append("accreditations", JSON.stringify(formData.accreditations))
                 } else {
                     formDataToSend.append(key, JSON.stringify(formData[key]))
                 }
             })
 
-            const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/college/update/details`, formDataToSend,
-                getHeaders('multipart/form-data')
+            const response = await axios.put(
+                `${process.env.REACT_APP_API_URL ?? ""}/api/college/update/details`,
+                formDataToSend,
+                getHeaders("multipart/form-data"),
             )
 
-            if (response.data.success) {
-                alert('College details updated successfully!')
+            if (response?.data?.success) {
+                alert("College details updated successfully!")
             }
         } catch (error) {
-            console.error('Error updating college:', error)
-            alert('Error updating college details')
+            console.error("Error updating college:", error)
+            alert("Error updating college details")
         }
     }
 
     const ProgressBar = () => (
         <div className="mb-8">
             <div className="flex justify-between mb-2">
-                {stepTitles.map((title, index) => (
+                {stepTitles?.map((title, index) => (
                     <div
                         key={index}
-                        className={`flex-1 text-center text-sm ${step > index + 1 ? 'text-blued' : step === index + 1 ? 'text-gray-900' : 'text-gray-400'
+                        className={`flex-1 text-center text-sm ${step > index + 1 ? "text-blued" : step === index + 1 ? "text-gray-900" : "text-gray-400"
                             }`}
                     >
                         {title}
@@ -148,13 +167,8 @@ export default function CollegeRegistrationForm({ data }) {
                 {Array.from({ length: totalSteps }).map((_, index) => (
                     <div
                         key={index}
-                        className={`flex-1 ${step > index + 1
-                            ? 'bg-blued'
-                            : step === index + 1
-                                ? 'bg-blued'
-                                : 'bg-gray-200'
-                            } ${index === 0 ? 'rounded-l-full' : ''} ${index === totalSteps - 1 ? 'rounded-r-full' : ''
-                            }`}
+                        className={`flex-1 ${step > index + 1 ? "bg-blued" : step === index + 1 ? "bg-blued" : "bg-gray-200"
+                            } ${index === 0 ? "rounded-l-full" : ""} ${index === totalSteps - 1 ? "rounded-r-full" : ""}`}
                     />
                 ))}
             </div>
@@ -168,9 +182,7 @@ export default function CollegeRegistrationForm({ data }) {
                     <div className="space-y-6">
                         <div className="space-y-6 sm:space-y-5">
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    College Type
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">College Type</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                                     <select
                                         value={formData.collegeType}
@@ -188,11 +200,11 @@ export default function CollegeRegistrationForm({ data }) {
                             <div>
                                 <h4 className="text-sm font-medium text-gray-900">Accreditations</h4>
                                 <div className="mt-4 space-y-4">
-                                    {formData.accreditations.map((accreditation, index) => (
+                                    {formData.accreditations?.map((accreditation, index) => (
                                         <div key={index} className="border rounded-lg p-4 space-y-4">
                                             <select
                                                 value={accreditation.body}
-                                                onChange={(e) => updateAccreditation(index, 'body', e.target.value)}
+                                                onChange={(e) => updateAccreditation(index, "body", e.target.value)}
                                                 className="block w-full shadow-sm focus:ring-accent focus:border-accent sm:text-sm border-gray-300 rounded-md"
                                             >
                                                 <option value="">Select Accreditation Body</option>
@@ -204,7 +216,7 @@ export default function CollegeRegistrationForm({ data }) {
 
                                             <select
                                                 value={accreditation.grade}
-                                                onChange={(e) => updateAccreditation(index, 'grade', e.target.value)}
+                                                onChange={(e) => updateAccreditation(index, "grade", e.target.value)}
                                                 className="block w-full shadow-sm focus:ring-accent focus:border-accent sm:text-sm border-gray-300 rounded-md"
                                             >
                                                 <option value="">Select Grade</option>
@@ -221,19 +233,19 @@ export default function CollegeRegistrationForm({ data }) {
                                             <input
                                                 type="date"
                                                 value={accreditation.validityPeriod}
-                                                onChange={(e) => updateAccreditation(index, 'validityPeriod', e.target.value)}
+                                                onChange={(e) => updateAccreditation(index, "validityPeriod", e.target.value)}
                                                 className="block w-full shadow-sm focus:ring-accent focus:border-accent sm:text-sm border-gray-300 rounded-md"
                                             />
 
                                             <input
                                                 type="file"
-                                                onChange={(e) => updateAccreditation(index, 'accreditationCertificate', e.target.files[0])}
+                                                onChange={(e) => updateAccreditation(index, "accreditationCertificate", e.target.files[0])}
                                                 className="block w-full shadow-sm focus:ring-accent focus:border-accent sm:text-sm border-gray-300"
                                             />
 
                                             <button
                                                 type="button"
-                                                onClick={() => removeAccreditation(index)}
+                                                onClick={() => removeAccreditation?.(index)}
                                                 className="text-red-600 hover:text-red-800"
                                             >
                                                 Remove
@@ -259,7 +271,7 @@ export default function CollegeRegistrationForm({ data }) {
                         <div>
                             <h4 className="text-sm font-medium text-gray-900">Courses Offered</h4>
                             <div className="mt-4 space-y-4">
-                                {formData.coursesOffered.map((course, index) => (
+                                {formData.coursesOffered?.map((course, index) => (
                                     <div key={index} className="border rounded-lg p-4 space-y-4">
                                         <input
                                             type="text"
@@ -274,7 +286,7 @@ export default function CollegeRegistrationForm({ data }) {
                                         />
 
                                         <div className="space-y-2">
-                                            {course.specializations.map((spec, specIndex) => (
+                                            {course.specializations?.map((spec, specIndex) => (
                                                 <div key={specIndex} className="flex items-center space-x-2">
                                                     <span className="flex-grow">{spec}</span>
                                                     <button
@@ -282,7 +294,7 @@ export default function CollegeRegistrationForm({ data }) {
                                                         onClick={() => {
                                                             const newCourses = [...formData.coursesOffered]
                                                             newCourses[index].specializations = course.specializations.filter(
-                                                                (_, i) => i !== specIndex
+                                                                (_, i) => i !== specIndex,
                                                             )
                                                             setFormData({ ...formData, coursesOffered: newCourses })
                                                         }}
@@ -297,12 +309,12 @@ export default function CollegeRegistrationForm({ data }) {
                                                 placeholder="Add specialization"
                                                 className="block w-full shadow-sm focus:ring-accent focus:border-accent sm:text-sm border-gray-300 rounded-md"
                                                 onKeyPress={(e) => {
-                                                    if (e.key === 'Enter') {
+                                                    if (e.key === "Enter") {
                                                         e.preventDefault()
                                                         const newCourses = [...formData.coursesOffered]
                                                         newCourses[index].specializations.push(e.target.value)
                                                         setFormData({ ...formData, coursesOffered: newCourses })
-                                                        e.target.value = ''
+                                                        e.target.value = ""
                                                     }
                                                 }}
                                             />
@@ -313,7 +325,7 @@ export default function CollegeRegistrationForm({ data }) {
                                             value={course.intakeCapacity}
                                             onChange={(e) => {
                                                 const newCourses = [...formData.coursesOffered]
-                                                newCourses[index].intakeCapacity = parseInt(e.target.value)
+                                                newCourses[index].intakeCapacity = Number.parseInt(e.target.value)
                                                 setFormData({ ...formData, coursesOffered: newCourses })
                                             }}
                                             placeholder="Intake capacity"
@@ -322,7 +334,7 @@ export default function CollegeRegistrationForm({ data }) {
 
                                         <button
                                             type="button"
-                                            onClick={() => removeCourse(index)}
+                                            onClick={() => removeCourse?.(index)}
                                             className="text-red-600 hover:text-red-800"
                                         >
                                             Remove Course
@@ -352,7 +364,7 @@ export default function CollegeRegistrationForm({ data }) {
                                     <input
                                         type="text"
                                         placeholder="Full Name"
-                                        value={formData.placementOfficer?.name || ''}
+                                        value={formData.placementOfficer?.name ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -367,7 +379,7 @@ export default function CollegeRegistrationForm({ data }) {
                                     <input
                                         type="email"
                                         placeholder="Email"
-                                        value={formData.placementOfficer?.email || ''}
+                                        value={formData.placementOfficer?.email ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -382,7 +394,7 @@ export default function CollegeRegistrationForm({ data }) {
                                     <input
                                         type="tel"
                                         placeholder="Phone Number"
-                                        value={formData.placementOfficer?.phone || ''}
+                                        value={formData.placementOfficer?.phone ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -398,14 +410,12 @@ export default function CollegeRegistrationForm({ data }) {
                             </div>
 
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Placement Statistics
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Placement Statistics</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2 space-y-2">
                                     <input
                                         type="number"
                                         placeholder="Average Placement Percentage"
-                                        value={formData.placementStatistics?.average || ''}
+                                        value={formData.placementStatistics?.average ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -420,7 +430,7 @@ export default function CollegeRegistrationForm({ data }) {
                                     <input
                                         type="number"
                                         placeholder="Highest Package (INR)"
-                                        value={formData.placementStatistics?.highest || ''}
+                                        value={formData.placementStatistics?.highest ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -435,7 +445,7 @@ export default function CollegeRegistrationForm({ data }) {
                                     <input
                                         type="number"
                                         placeholder="Average Package (INR)"
-                                        value={formData.placementStatistics?.averagePackage || ''}
+                                        value={formData.placementStatistics?.averagePackage ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -453,7 +463,7 @@ export default function CollegeRegistrationForm({ data }) {
                             <div>
                                 <h4 className="text-sm font-medium text-gray-900">Top Companies</h4>
                                 <div className="mt-4 space-y-2">
-                                    {formData.topCompanies.map((company, index) => (
+                                    {formData.topCompanies?.map((company, index) => (
                                         <div key={index} className="flex items-center space-x-2">
                                             <input
                                                 type="text"
@@ -468,7 +478,7 @@ export default function CollegeRegistrationForm({ data }) {
                                             />
                                             <button
                                                 type="button"
-                                                onClick={() => removeCompany(index)}
+                                                onClick={() => removeCompany?.(index)}
                                                 className="text-red-600 hover:text-red-800"
                                             >
                                                 Remove
@@ -488,20 +498,17 @@ export default function CollegeRegistrationForm({ data }) {
                     </div>
                 )
 
-
             case 4:
                 return (
                     <div className="space-y-6">
                         <div className="space-y-6 sm:space-y-5">
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Student Strength
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Student Strength</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2 space-y-2">
                                     <input
                                         type="number"
                                         placeholder="Total Student Strength"
-                                        value={formData.studentStrength?.total || ''}
+                                        value={formData.studentStrength?.total ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -516,7 +523,7 @@ export default function CollegeRegistrationForm({ data }) {
                                     <input
                                         type="number"
                                         placeholder="Final Year Student Strength"
-                                        value={formData.studentStrength?.finalYear || ''}
+                                        value={formData.studentStrength?.finalYear ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -532,15 +539,13 @@ export default function CollegeRegistrationForm({ data }) {
                             </div>
 
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Gender Ratio
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Gender Ratio</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                                     <div className="grid grid-cols-2 gap-4">
                                         <input
                                             type="number"
                                             placeholder="Male %"
-                                            value={formData.genderRatio?.male || ''}
+                                            value={formData.genderRatio?.male ?? ""}
                                             onChange={(e) =>
                                                 setFormData({
                                                     ...formData,
@@ -555,7 +560,7 @@ export default function CollegeRegistrationForm({ data }) {
                                         <input
                                             type="number"
                                             placeholder="Female %"
-                                            value={formData.genderRatio?.female || ''}
+                                            value={formData.genderRatio?.female ?? ""}
                                             onChange={(e) =>
                                                 setFormData({
                                                     ...formData,
@@ -587,7 +592,7 @@ export default function CollegeRegistrationForm({ data }) {
                                     <input
                                         type="number"
                                         placeholder="Enter area in acres"
-                                        value={formData.infrastructure?.campusArea || ''}
+                                        value={formData.infrastructure?.campusArea ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -604,14 +609,12 @@ export default function CollegeRegistrationForm({ data }) {
 
                             {/* Laboratory Details */}
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Laboratory Details
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Laboratory Details</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                                     <textarea
                                         rows={4}
                                         placeholder="Describe laboratory facilities and equipment"
-                                        value={formData.infrastructure?.laboratoryDetails || ''}
+                                        value={formData.infrastructure?.laboratoryDetails ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -628,12 +631,10 @@ export default function CollegeRegistrationForm({ data }) {
 
                             {/* Hostel Facility */}
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Hostel Facility
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Hostel Facility</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                                     <select
-                                        value={formData.infrastructure?.hostelFacility || ''}
+                                        value={formData.infrastructure?.hostelFacility ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -654,14 +655,12 @@ export default function CollegeRegistrationForm({ data }) {
 
                             {/* Library Facilities */}
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Library Facilities
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Library Facilities</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                                     <textarea
                                         rows={3}
                                         placeholder="Describe library facilities"
-                                        value={formData.infrastructure?.libraryFacilities || ''}
+                                        value={formData.infrastructure?.libraryFacilities ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -678,14 +677,12 @@ export default function CollegeRegistrationForm({ data }) {
 
                             {/* Sports Facilities */}
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Sports Facilities
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Sports Facilities</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                                     <textarea
                                         rows={3}
                                         placeholder="Describe sports facilities"
-                                        value={formData.infrastructure?.sportsFacilities || ''}
+                                        value={formData.infrastructure?.sportsFacilities ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -702,17 +699,15 @@ export default function CollegeRegistrationForm({ data }) {
 
                             {/* Transport Facilities */}
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Transport Facilities
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Transport Facilities</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                                     <textarea
                                         rows={3}
                                         placeholder="Describe transport facilities (e.g., buses)"
-                                        value={formData.infrastructure?.transportFacilities || ''}
+                                        value={formData.infrastructure?.transportFacilities ?? ""}
                                         onChange={(e) =>
                                             setFormData({
-                                                ...JSON.parse(JSON.stringify(formData)),
+                                                ...formData,
                                                 infrastructure: {
                                                     ...formData.infrastructure,
                                                     transportFacilities: e.target.value,
@@ -727,20 +722,17 @@ export default function CollegeRegistrationForm({ data }) {
                     </div>
                 )
 
-
             case 6:
                 return (
                     <div className="space-y-6">
                         <div className="space-y-6 sm:space-y-5">
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    MOUs with Companies
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">MOUs with Companies</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                                     <textarea
                                         rows={4}
                                         placeholder="Details of Memorandums of Understanding with companies"
-                                        value={formData.additionalInfo?.mous || ''}
+                                        value={formData.additionalInfo?.mous ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -756,14 +748,12 @@ export default function CollegeRegistrationForm({ data }) {
                             </div>
 
                             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Industry Tie-Ups
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Industry Tie-Ups</label>
                                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                                     <textarea
                                         rows={4}
                                         placeholder="Details of partnerships with industries"
-                                        value={formData.additionalInfo?.industryTieUps || ''}
+                                        value={formData.additionalInfo?.industryTieUps ?? ""}
                                         onChange={(e) =>
                                             setFormData({
                                                 ...formData,
@@ -793,9 +783,7 @@ export default function CollegeRegistrationForm({ data }) {
                     <ProgressBar />
 
                     <div className="bg-white shadow sm:rounded-md sm:overflow-hidden">
-                        <div className="px-4 py-5 space-y-6 sm:p-6">
-                            {renderStep()}
-                        </div>
+                        <div className="px-4 py-5 space-y-6 sm:p-6">{renderStep()}</div>
 
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                             <div className="flex justify-between">
@@ -812,7 +800,7 @@ export default function CollegeRegistrationForm({ data }) {
                                     type="submit"
                                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blued hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
                                 >
-                                    {step === totalSteps ? 'Submit' : 'Next'}
+                                    {step === totalSteps ? "Submit" : "Next"}
                                 </button>
                             </div>
                         </div>
