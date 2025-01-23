@@ -21,8 +21,8 @@ const JobsPage = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllJobs(user?._id));
-  }, [dispatch, user]);
+    if (user?._id) dispatch(getAllJobs(user?._id));
+  }, [user?._id]);
 
   // Sort jobs to show open jobs first, closed ones at the end
   const sortedJobs = [...(filteredJobs.length ? filteredJobs : jobs)].sort(

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import CollegeLayout from "../layout/CollegeLayout";
 import TestRoute from "../pages/college/test/TestHome";
 import Dashboard from "../pages/college/dashboard/Dashboard";
@@ -15,8 +15,14 @@ import AccountRoute from "../pages/college/accounting/AccountRoutes";
 import AdditionalDetailsForm from "../pages/college/profile/AdditionalDetailsForm";
 import CampusDriveRouter from "../pages/college/campusDrive/CollegeCampusDriveRoutes";
 import jobRoute from "../pages/college/jobs";
+import { COMPANY_PATH, UNIVERSITY_PATH } from "../constants/routes";
 
-const CollegeRoutes = () => {
+const CollegeRoutes = ({ user }) => {
+  if (user?.role === "company") {
+    window.location.href = COMPANY_PATH;
+  } else if (user?.role === "university") {
+    window.location.href = UNIVERSITY_PATH;
+  }
   return (
     <Routes>
       <Route element={<CollegeLayout />}>
@@ -35,6 +41,10 @@ const CollegeRoutes = () => {
         {TeamsRoute("")}
         {AccountRoute("")}
         {CampusDriveRouter("")}
+        <Route
+          path="*"
+          element={<Navigate to="/college/dashboard" replace />}
+        />
       </Route>
     </Routes>
   );

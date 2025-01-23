@@ -11,6 +11,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaCoins } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { clearCookie } from "../../util/getToken";
+import { logoutUniversity } from "../../redux/university/auth/universityAuthSlice";
 
 const Navbar = ({ userType, setOpen, open }) => {
   const dispatch = useDispatch();
@@ -20,12 +21,11 @@ const Navbar = ({ userType, setOpen, open }) => {
   const companyAuth = useSelector((state) => state.companyAuth);
   const universityAuth = useSelector((state) => state.universityAuth);
   const collegeAuth = useSelector((state) => state.collegeAuth);
-
   const userDetails =
     userType === "company"
       ? companyAuth.data
       : userType === "university"
-      ? universityAuth.data
+      ? universityAuth.user
       : collegeAuth.user;
 
   const handleLogout = async (e) => {
@@ -38,15 +38,20 @@ const Navbar = ({ userType, setOpen, open }) => {
           result = await dispatch(logoutCompany());
           if (result.meta.requestStatus === "fulfilled") {
             toast.success("Logged out successfully");
-            navigate("/company");
+            window.location.href = "/company";
           } else {
             throw new Error("Company logout failed");
           }
           break;
         case "university":
-          clearCookie("uni-token");
-          toast.success("Logged out successfully");
-          navigate("/university");
+          result = await dispatch(logoutUniversity());
+          if (result.meta.requestStatus === "fulfilled") {
+            clearCookie("token");
+            toast.success("Logged out successfully");
+            window.location.href = "/university";
+          } else {
+            throw new Error("University logout failed");
+          }
           break;
         case "college":
           result = await dispatch(logoutCollege());
@@ -132,6 +137,7 @@ const Navbar = ({ userType, setOpen, open }) => {
                   Hello{" "}
                   {userDetails?.basic?.companyName ||
                     userDetails?.FirstName ||
+                    userDetails?.name ||
                     ""}
                 </h2>
 

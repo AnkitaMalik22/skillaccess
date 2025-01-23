@@ -160,7 +160,8 @@ export const logoutCompany = createAsyncThunk(
         {},
         {
           headers: {
-            "auth-token": getCookie("token"),
+            "auth-token":
+              getCookie("token") || localStorage.getItem("auth-token"),
           },
         }
       );
@@ -221,6 +222,8 @@ const companyAuthSlice = createSlice({
         state.data = action.payload.user;
         state.isCompanyLogin = true;
         document.cookie = `token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
+        localStorage.setItem("auth-token", action.payload.token);
+        window.location.href = "/";
       })
       .addCase(RegisterCompany.rejected, (state, action) => {
         state.login.loading = false;
@@ -236,6 +239,8 @@ const companyAuthSlice = createSlice({
         state.isCompanyLogin = true;
         localStorage.setItem("userType", "company");
         document.cookie = `token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
+        localStorage.setItem("auth-token", action.payload.token);
+        window.location.href = "/";
       })
       .addCase(LoginCompany.rejected, (state, action) => {
         state.login.loading = false;
@@ -307,7 +312,6 @@ const companyAuthSlice = createSlice({
           emailsSent: user?.emailsSent || [],
         };
         state.isCompanyLogin = true;
-        console.log(action.payload);
       })
       .addCase(getCompany.rejected, (state, action) => {
         alert(action.payload);
@@ -344,7 +348,8 @@ const companyAuthSlice = createSlice({
         state.data = null;
         state.isCompanyLogin = false;
         document.cookie = "token=; path=/; max-age=0;  SameSite=Strict";
-        window.location.href = "/company";
+        // window.location.href = "/company";
+        localStorage.removeItem("auth-token");
       })
       .addCase(logoutCompany.rejected, (state, action) => {
         state.loading = false;
