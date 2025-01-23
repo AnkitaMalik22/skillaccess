@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import CompanyLayout from "../layout/CompanyLayout";
 import LoginCompany from "../auth/Login";
 import RegisterCompany from "../pages/company/auth/RegisterCompany";
@@ -19,7 +19,15 @@ import TestRoute from "../pages/college/test/TestHome";
 import ResultsRoute from "../pages/college/results";
 import StudentRoute from "../pages/college/students";
 
-const CompanyRoutes = () => {
+import { COLLEGE_PATH, UNIVERSITY_PATH } from "../constants/routes";
+
+const CompanyRoutes = ({user}) => {
+  if (user?.role === "college") {
+    window.location.href = COLLEGE_PATH;
+  } else if (user?.role === "university") {
+    window.location.href = UNIVERSITY_PATH;
+  }
+
   return (
     <Routes>
       <Route path="/" element={<LoginCompany />} />
@@ -41,6 +49,11 @@ const CompanyRoutes = () => {
         {QuesRoute("")}
         {CampusDriveRouter("")}
         {TestRoute("")}
+
+        <Route
+          path="*"
+          element={<Navigate to="/company/pr/dashboard" replace />}
+        />
       </Route>
     </Routes>
   );

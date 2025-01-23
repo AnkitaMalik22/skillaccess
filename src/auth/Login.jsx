@@ -46,24 +46,15 @@ const LoginPage = () => {
 
     try {
       let action;
-      let dashboardPath;
       if (role === "college") {
         action = loginCollege;
-        dashboardPath = "/college/dashboard"; // Explicitly set the dashboard path
       } else if (role === "company") {
         action = LoginCompany;
-        dashboardPath = "/company/pr/dashboard";
       } else if (role === "university") {
         action = loginUniversity;
-        dashboardPath = "/university/pr/dashboard";
       }
 
       const res = await dispatch(action(credentials)).unwrap();
-
-      if (res) {
-        toast.success("Login successful!");
-        navigate(dashboardPath); // Navigate to the correct dashboard
-      }
     } catch (err) {
       toast.error("Invalid credentials!");
     } finally {

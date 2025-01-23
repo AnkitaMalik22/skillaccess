@@ -380,6 +380,28 @@ export const getCollege = createAsyncThunk(
   "collegeAuth/getCollege",
   async (_, { rejectWithValue }) => {
     try {
+      // get access
+      const { data } = await axios.get(
+        `${REACT_APP_API_URL}/api/auth/access`,
+        getHeaders()
+      );
+      const user = data?.payload?.user;
+      if (user) {
+        const role = user.role;
+        // company
+        if (
+          role === "company" &&
+          window.location.pathname.split("/")[1] !== "company"
+        )
+          return;
+        // university
+        if (
+          role === "university" &&
+          window.location.pathname.split("/")[1] !== "university"
+        )
+          return;
+      } else throw new Error("You are not logged in");
+
       const response = await axios.get(
         `${REACT_APP_API_URL}/api/college/me`,
         getHeaders()
@@ -716,7 +738,7 @@ const collegeAuthSlice = createSlice({
           default:
             state.status = "done";
             state.isLoggedIn = true;
-            // window.location.href = "/college/dashboard";
+            window.location.href = "/";
             break;
         }
 
@@ -751,7 +773,6 @@ const collegeAuthSlice = createSlice({
       .addCase(getCollege.fulfilled, (state, action) => {
         state.isLoggedIn = action.payload.user.role === "college";
         state.user = action.payload.user;
-        console.log(action.payload.user);
         state.credit = {
           credit: action.payload?.credit[0]?.credit,
           limit: action.payload?.credit[0]?.limit,
@@ -817,6 +838,8 @@ const collegeAuthSlice = createSlice({
         state.isLoggedIn = false;
         localStorage.clear();
         localStorage.setItem("editable", false);
+        toast.success("User loggedout successfully");
+        window.location.href = "/";
         // Add any fetched posts to the array
         //console.log("fullfilled");
       })

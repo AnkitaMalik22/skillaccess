@@ -36,14 +36,15 @@ export default function Dashboard() {
   const { user } = useSelector((state) => state.collegeAuth);
 
   useEffect(() => {
+    if (!user?._id) return;
     dispatch(getStudent());
     dispatch(getCompany());
     dispatch(getAssessment());
     dispatch(getTotalJobs());
-    dispatch(getPlacedStudents());
+    dispatch(getPlacedStudents(user?._id));
 
     // //console.log("students : ",students);
-  }, [dispatch]);
+  }, [user?._id]);
 
   // const [companies, setcompanies] = useState([
   //   {

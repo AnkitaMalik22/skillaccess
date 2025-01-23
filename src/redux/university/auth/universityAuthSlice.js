@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"; // Assuming axios is used for API calls
 import toast from "react-hot-toast";
-import { clearCookie } from "../../../util/getToken";
+import getCookie, { clearCookie } from "../../../util/getToken";
 import { getHeaders } from "../../../util/isCompany";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 const initialState = {
   isAuthenticated: false,
   user: {
-    _id:localStorage.getItem("uniId") || null
+    _id: localStorage.getItem("uniId") || null,
   },
   loading: false,
   error: null,
@@ -20,7 +20,7 @@ export const getUniversity = createAsyncThunk(
     try {
       const response = await axios.get(`${REACT_APP_API_URL}/api/college/me`, {
         withCredentials: true,
-         headers:getHeaders().headers,
+        headers: getHeaders().headers,
       });
       return response.data;
     } catch (error) {
@@ -29,13 +29,15 @@ export const getUniversity = createAsyncThunk(
   }
 );
 
-
 // Thunk for university registration
 export const registerUniversity = createAsyncThunk(
   "universityAuth/registerUniversity",
   async (data, thunkAPI) => {
     try {
-      const response = await axios.post(`${REACT_APP_API_URL}/api/university/register`, data);
+      const response = await axios.post(
+        `${REACT_APP_API_URL}/api/university/register`,
+        data
+      );
       return response.data; // Assuming the response contains user data
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -44,17 +46,19 @@ export const registerUniversity = createAsyncThunk(
 );
 
 export const loginUniversity = createAsyncThunk(
-    "universityAuth/loginUniversity",
-    async (data, thunkAPI) => {
-        try {
-            const response = await axios.post(`${REACT_APP_API_URL}/api/university/login`, data);
-            console.log(response.data);
+  "universityAuth/loginUniversity",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        `${REACT_APP_API_URL}/api/university/login`,
+        data
+      );
 
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
-        }
-        }
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
 );
 
 // Thunk for forgot password (if needed)
@@ -62,10 +66,36 @@ export const forgotPassword = createAsyncThunk(
   "universityAuth/forgotPassword",
   async (data, thunkAPI) => {
     try {
-      const response = await axios.post(`${REACT_APP_API_URL}/api/university/forgot-password`, data);
+      const response = await axios.post(
+        `${REACT_APP_API_URL}/api/university/forgot-password`,
+        data
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const logoutUniversity = createAsyncThunk(
+  "universityAuth/logout",
+  async (_, { rejectWithValue }) => {
+    const token = getCookie("token") || localStorage.getItem("auth-token");
+    try {
+      const req = await axios.post(
+        `${REACT_APP_API_URL}/api/university/logout`,
+        {},
+        {
+          headers: {
+            "auth-token": token,
+          },
+        }
+      );
+      return req.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "An error occurred"
+      );
     }
   }
 );
@@ -84,16 +114,15 @@ const universityAuthSlice = createSlice({
       state.loading = false;
       state.error = null;
       localStorage.removeItem("uniId");
-      clearCookie("uni-token");
-
+      clearCookie("token");
     },
   },
   extraReducers: (builder) => {
     builder
 
-    .addCase(getUniversity.fulfilled ,(state,action)=>{
-      state.user = action.payload.university;
-    })
+      .addCase(getUniversity.fulfilled, (state, action) => {
+        state.user = action.payload.university;
+      })
       .addCase(registerUniversity.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -102,15 +131,15 @@ const universityAuthSlice = createSlice({
       .addCase(registerUniversity.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.user = action.payload.user;
-        localStorage.setItem("uniId",action.payload.user._id);
+        localStorage.setItem("uniId", action.payload.user._id);
         state.loading = false;
-        document.cookie = `uni-token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
+        document.cookie = `token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
         localStorage.setItem("userType", "university");
         toast.success("Registration successful.");
-        if(action.payload.status === "pending") {
-            window.location.href = "/university/approval";
-        }else{
-            window.location.href = "/university/pr/dashboard";
+        if (action.payload.status === "pending") {
+          window.location.href = "/university/approval";
+        } else {
+          window.location.href = "/university/pr/dashboard";
         }
       })
       .addCase(registerUniversity.rejected, (state, action) => {
@@ -119,43 +148,60 @@ const universityAuthSlice = createSlice({
 
         toast.error(action.payload?.message || "Registration failed.");
       })
-        .addCase(loginUniversity.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-            // toast.loading("Logging in...");
-        })
-        .addCase(loginUniversity.fulfilled, (state, action) => {
-            state.isAuthenticated = true;
-            state.user = action.payload.user;
-            localStorage.setItem("uniId",action.payload.user._id);
-            state.loading = false;
-            document.cookie = `uni-token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
-            localStorage.setItem("userType", "university");
-            toast.success("Login successful.");
+      .addCase(loginUniversity.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        // toast.loading("Logging in...");
+      })
+      .addCase(loginUniversity.fulfilled, (state, action) => {
+        state.isAuthenticated = true;
+        state.user = action.payload.user;
+        localStorage.setItem("uniId", action.payload.user._id);
+        state.loading = false;
+        document.cookie = `token=${action.payload.token}; path=/; max-age=86400;  SameSite=Strict`;
+        localStorage.setItem("userType", "university");
+        localStorage.setItem("auth-token", action.payload.token);
+        toast.success("Login successful.", {
+          id: "university-login",
+        });
 
-            if(action.payload.status === "pending") {
-                window.location.href = "/university/approval";
-            }else{
-                window.location.href = "/university/pr/dashboard";
-            }
-            // window.location.href = "/university/dashboard";
-        })
-        .addCase(loginUniversity.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload || "Login failed.";
-            toast.error(action.payload.message || "Login failed.");
-        })
-        .addCase(forgotPassword.pending, (state) => {
-            state.loading = true;
-          })
-          .addCase(forgotPassword.fulfilled, (state) => {
-            state.loading = false;
-            state.error = null; // Handle success if necessary
-          })
-          .addCase(forgotPassword.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload || "Failed to reset password.";
-          });
+        // if(action.payload.status === "pending") {
+        //     window.location.href = "/university/approval";
+        // }else{
+        //     window.location.href = "/university/pr/dashboard";
+        // }
+        window.location.href = "/university/dashboard";
+      })
+      .addCase(loginUniversity.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Login failed.";
+        toast.error(action.payload.message || "Login failed.");
+      })
+      .addCase(forgotPassword.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(forgotPassword.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null; // Handle success if necessary
+      })
+      .addCase(forgotPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to reset password.";
+      })
+      .addCase(logoutUniversity.fulfilled, (state, action) => {
+        // state.status = action.payload
+        state.user = null;
+        state.isLoggedIn = false;
+        localStorage.clear();
+        localStorage.setItem("editable", false);
+        clearCookie("token");
+        // Add any fetched posts to the array
+        //console.log("fullfilled");
+      })
+      .addCase(logoutUniversity.rejected, (state, action) => {
+        //console.log(action.payload);
+        // window.alert(action.payload);
+      });
   },
 });
 
