@@ -84,7 +84,7 @@ const Mail = () => {
               name=""
               value={inboxType}
               id=""
-              className="w-full self-center select text-sm font-bold"
+              className="w-1/2 self-center select text-sm font-bold"
               onChange={(e) => {
                 setInboxType(e.target.value);
               }}

@@ -6,14 +6,18 @@ export const CompanyHeader = ({ companyName }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex gap-2 items-center mb-5">
-      <button
-        className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
-        onClick={() => navigate(-1)}
-      >
-        <FaAngleLeft className="h-5 w-5" />
-      </button>
-      <h2 className="text-xl font-bold self-center">{companyName}</h2>
+    <div className="flex w-full mx-auto justify-between mb-6 items-center">
+      <span className="flex gap-3">
+        <button
+          className="bg-[#D9E1E7] self-center rounded-md p-3"
+          onClick={() => navigate(-1)}
+        >
+          <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
+        </button>
+        <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717] first-letter:uppercase">
+          {companyName}
+        </h2>
+      </span>
     </div>
   );
 };

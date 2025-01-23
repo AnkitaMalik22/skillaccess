@@ -176,17 +176,26 @@ const Header = ({
       )}
 
       <span className="flex gap-2">
-        <button
-          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
-          onClick={() => navigate(-1)}
-        >
-          <FaAngleLeft className="h-5 w-5" />
+        <button className="self-center object-center rounded-md h-10 w-10">
+          <img src="/images/icons/reports.png" alt="ico" />
         </button>
       </span>
+      {/* 
+      <div className="rounded-xl w-full sm:h-12 h-10 flex justify-between">
+        <span className="w-fit mx-auto flex self-center bg-[#F8F8F9] rounded-xl px-5 py-3 gap-3">
+          <IoIosSearch className="self-center w-6 h-6 bg-gray-100 rounded-s-lg text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={handleFilter}
+            className="placeholder p-0 border-none self-center bg-gray-100 focus:outline-none focus:ring-0 rounded-e-lg sm:w-80 w-fit"
+          />
+        </span>
+      </div> */}
 
       <span className="flex gap-3">
         <button
-          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500 flex"
+          className="self-center justify-center flex bg-[#8f92a11a] px-7 py-3 rounded-md gap-2 text-sm text-[#171717] font-bold hover:bg-blued hover:text-white transition-colors"
           onClick={handleAddTeamClick}
         >
           <FiPlus className="self-center text-lg" /> Add
@@ -195,7 +204,7 @@ const Header = ({
         {showPopup && <StudentPoP onClose={handleClosePopup} />}
 
         <button
-          className="bg-blued border flex self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-blued text-white"
+          className="self-center justify-center flex bg-accent px-5 py-3 rounded-md text-white gap-2 text-md font-bold w-40 "
           onClick={() => {
             upload.current.click();
           }}
@@ -214,9 +223,12 @@ const Header = ({
           {/* Button to toggle popup */}
           <button
             onClick={togglePopup}
-            className={`bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500  `}
+            className={`self-center rounded-md h-10 w-10 sm:h-12 sm:w-16 flex items-center justify-center transition-colors ${isPopupOpen
+              ? "bg-[#0d9aac] text-white"
+              : "bg-[#8f92a11a] hover:bg-blued hover:text-white"
+              }`}
           >
-            <PiSlidersHorizontalLight className="self-center text-lg h-6" />
+            <PiSlidersHorizontalLight className="h-7 w-7" />
           </button>
 
           {/* Popup */}
@@ -256,6 +268,19 @@ const Header = ({
                   className="w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-accent"
                 />
 
+                {/* Filter Type Selection */}
+                {/* <label className="text-sm font-semibold">Filter Type</label>
+                <select
+                  onChange={(e) => setFilterType(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  <option value="all-students">Select Filter</option>
+                  <option value="pending-students">Pending Students</option>
+                  <option value="invited-students">Invited Students</option>
+                  <option value="approved-students">Approved Students</option>
+                </select> */}
+
+                {/* Submit Button */}
                 <div className="flex justify-between">
                   <button
                     onClick={togglePopup}

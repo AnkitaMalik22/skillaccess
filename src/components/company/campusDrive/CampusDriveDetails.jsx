@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { createCampusDrive } from "../../../redux/company/campusDrive/campusDriveSlice";
 import { toast } from "react-hot-toast";
 import { FaArrowLeft } from "react-icons/fa";
-import BackIcon from "../../buttons/BackIcon";
 
 export default function CampusDriveDetails() {
   const [campusDriveDetails, setCampusDriveDetails] = useState({
@@ -15,59 +14,12 @@ export default function CampusDriveDetails() {
     description: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({
-    name: '',
-    description: '',
-    startDate: '',
-    endDate: ''
-  });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const validateForm = () => {
-    const newErrors = {};
-    const now = new Date();
-    const start = new Date(campusDriveDetails.startDate);
-    const end = new Date(campusDriveDetails.endDate);
-
-    // Name validation
-    if (!campusDriveDetails.name.trim()) {
-      newErrors.name = 'Drive name is required';
-    } else if (campusDriveDetails.name.length < 3) {
-      newErrors.name = 'Name must be at least 3 characters';
-    }
-
-    // Description validation
-    if (!campusDriveDetails.description.trim()) {
-      newErrors.description = 'Description is required';
-    } else if (campusDriveDetails.description.length < 20) {
-      newErrors.description = 'Description must be at least 20 characters';
-    }
-
-    // Date validations
-    if (!campusDriveDetails.startDate) {
-      newErrors.startDate = 'Start date is required';
-    } else if (start < now) {
-      newErrors.startDate = 'Start date cannot be in the past';
-    }
-
-    if (!campusDriveDetails.endDate) {
-      newErrors.endDate = 'End date is required';
-    } else if (end <= start) {
-      newErrors.endDate = 'End date must be after start date';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
+  // Copy all handlers and form UI from Form.jsx renderStep1()
   const handleSubmit = async () => {
-    if (!validateForm()) {
-      toast.error('Please fix the validation errors');
-      return;
-    }
-
     try {
       setIsSubmitting(true);
       const resultAction = await dispatch(
@@ -99,16 +51,16 @@ export default function CampusDriveDetails() {
     <div className="w-full mx-auto mt-6">
       <div className="form-card bg-white rounded-lg shadow-lg p-6 w-full">
         <div className="flex items-center justify-between mb-6 ">
-        <button
-          className="  self-center  rounded-md h-10 w-10 "
-          onClick={() => navigate(-1)}
-        >
-          <BackIcon />
-        </button>
-          <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          <button
+            className="btn btn-outline btn-blued"
+            onClick={() => navigate(-1)}
+          >
+           <FaArrowLeft className="text-lg" />
+            Go Back
+          </button>
+          <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
             Create Campus Drive
           </h1>
-
         </div>
 
         <h2 className="text-xl font-semibold mb-4 text-gray-700">
@@ -121,14 +73,13 @@ export default function CampusDriveDetails() {
           </label>
           <input
             type="text"
-            className={`input input-bordered input-focus focus:ring-2 focus:ring-blue-600 ${errors.name ? 'border-red-500' : ''}`}
+            className="input input-bordered input-focus focus:ring-2 focus:ring-blue-600"
             name="name"
             value={campusDriveDetails.name}
             onChange={handleChange}
             placeholder="Enter Campus Drive Name"
             required
           />
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
         </div>
 
         <div className="grid grid-cols-2 gap-4 mb-4">
@@ -138,13 +89,12 @@ export default function CampusDriveDetails() {
             </label>
             <input
               type="date"
-              className={`input input-bordered input-focus focus:ring-2 focus:ring-blue-600 ${errors.startDate ? 'border-red-500' : ''}`}
+              className="input input-bordered input-focus focus:ring-2 focus:ring-blue-600"
               name="startDate"
               value={campusDriveDetails.startDate}
               onChange={handleChange}
               required
             />
-            {errors.startDate && <p className="text-red-500 text-sm mt-1">{errors.startDate}</p>}
           </div>
           <div className="form-control">
             <label className="label">
@@ -152,13 +102,12 @@ export default function CampusDriveDetails() {
             </label>
             <input
               type="date"
-              className={`input input-bordered input-focus focus:ring-2 focus:ring-blue-600 ${errors.endDate ? 'border-red-500' : ''}`}
+              className="input input-bordered input-focus focus:ring-2 focus:ring-blue-600"
               name="endDate"
               value={campusDriveDetails.endDate}
               onChange={handleChange}
               required
             />
-            {errors.endDate && <p className="text-red-500 text-sm mt-1">{errors.endDate}</p>}
           </div>
         </div>
 
@@ -200,23 +149,20 @@ export default function CampusDriveDetails() {
           </label>
           <textarea
             name="description"
-            className={`textarea textarea-bordered textarea-focus h-24 focus:ring-2 focus:ring-blue-600 ${errors.description ? 'border-red-500' : ''}`}
+            className="textarea textarea-bordered textarea-focus h-24 focus:ring-2 focus:ring-blue-600"
             value={campusDriveDetails.description}
             onChange={handleChange}
             placeholder="Provide additional information about the campus drive"
           />
-          {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
         </div>
 
-        <div className="w-full flex justify-end items-center">
         <button
           type="button"
-          className="btn text-white bg-blued hover:bg-lightBlue"
+          className="btn text-white w-full bg-blued hover:bg-lightBlue"
           onClick={handleSubmit}
         >
           {isSubmitting ? "Creating..." : "Create Campus Drive"}
         </button>
-        </div>
       </div>
     </div>
   );

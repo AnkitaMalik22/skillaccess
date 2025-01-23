@@ -1,5 +1,5 @@
 import React from "react";
-import { FaAngleLeft, FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -8,10 +8,10 @@ const Header = () => {
     <div className="flex w-full mx-auto justify-between items-start ">
       <div className="flex gap-3">
         <button
-          className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
+          className="self-center object-center rounded-md h-10 w-10 "
           onClick={() => navigate(-1)}
         >
-          <FaAngleLeft className="h-5 w-5" />
+          <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
         </button>
       </div>
       <div className="object-fill rounded-2xl ">

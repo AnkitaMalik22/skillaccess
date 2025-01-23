@@ -101,7 +101,7 @@ function AssessmentTable({ assessments, isLoading, onRowClick, onDownload }) {
                 onChange={(e) => handleFilterChange("name", e.target.value)}
               />
               <span className="ml-2 text-gray-500">
-                Total : {filteredAssessments.length}
+                {filteredAssessments.length}
               </span>
             </div>
           )}

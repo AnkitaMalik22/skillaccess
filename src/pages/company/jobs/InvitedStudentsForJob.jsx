@@ -4,7 +4,7 @@ import Header from "../../../components/company/invitation/Header";
 import Footer from "../../../components/company/invitation/Footer.jsx";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FaAngleLeft, FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 import { getTest } from "../../../redux/college/test/thunks/test.js";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
@@ -15,6 +15,7 @@ const InvitedStudentsForJob = () => {
   const [filteredStudents, setStudents] = React.useState(students);
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
+
 
   const testId = searchParams.get("assessment");
   // console.log(testId);
@@ -48,10 +49,10 @@ const InvitedStudentsForJob = () => {
       <div className="w-full flex justify-between">
         <div className="flex gap-3 px-4">
           <button
-            className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
+            className="self-center object-center rounded-md h-10 w-10 "
             onClick={() => navigate(-1)}
           >
-            <FaAngleLeft className="h-5 w-5" />
+            <FaChevronLeft className=" p-3 rounded-md h-10 w-10 self-center bg-[#D9E1E7]" />
           </button>
         </div>
         <div

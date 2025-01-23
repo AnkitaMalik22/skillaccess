@@ -5,13 +5,14 @@ import List from "../../../components/college/results/home/List";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getResultGraphCompany } from "../../../redux/company/result/thunks/graph";
+import useTranslate from "../../../hooks/useTranslate";
 import { getAllTests } from "../../../redux/company/test/thunks/test";
 
 const Results = () => {
   //useTranslate();
   const dispatch = useDispatch();
   const assessments = useSelector((state) => state.companyTest.assessments);
-  const { GET_TEST_LOADING } = useSelector((state) => state.companyTest);
+  const {GET_TEST_LOADING} = useSelector((state) => state.companyTest);
 
   const [filtered, setFiltered] = React.useState([]);
 
@@ -28,11 +29,9 @@ const Results = () => {
   const handleFilterStudents = (e) => {
     const value = e.target.value;
     if (value === "" || value.trim() === "") {
-      setFiltered(
-        arr.filter((assessment) => {
-          return !!assessment.job;
-        })
-      );
+      setFiltered(arr.filter(assessment=>{
+        return !!assessment.job;
+      }));
       return;
     } else {
       setFiltered(
@@ -44,11 +43,9 @@ const Results = () => {
     }
   };
   useEffect(() => {
-    setFiltered(
-      arr.filter((assessment) => {
-        return !!assessment.job;
-      })
-    );
+    setFiltered(arr.filter(assessment=>{
+      return !!assessment.job;
+    }));
   }, [assessments]);
   return (
     <>

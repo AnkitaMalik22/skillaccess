@@ -90,8 +90,8 @@ const ChartComp = () => {
   const { user } = useSelector((state) => state.collegeAuth);
   // //console.log(user);
   useEffect(() => {
-    dispatch(getPlacedStudents(user?._id));
-  }, []);
+    if (user?._id) dispatch(getPlacedStudents(user?._id));
+  }, [user?._id]);
   return (
     <div className="sm:flex bg-gray-100 w-full gap-1 justify-between relative rounded-3xl p-4 md:p-8 mb-5">
       {/* chart component */}

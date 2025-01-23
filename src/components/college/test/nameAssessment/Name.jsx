@@ -60,7 +60,7 @@ const Name = () => {
     config: {
       instructions: [],
       isCameraRequired: true,
-      maxTabSwitches: 1,
+      maxTabSwitches: 0,
     },
   });
 
@@ -296,8 +296,6 @@ const Name = () => {
       toast.error("Duplicate name in advanced assessments");
       hasError = true;
     }
-
-  
 
     // If no errors, proceed with dispatch and navigation
     if (!hasError) {
@@ -713,7 +711,7 @@ const Name = () => {
                     name="config.maxTabSwitches"
                     value={testDetails.config?.maxTabSwitches}
                     onChange={handleChange}
-                    min="1"
+                    min="0"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blued focus:ring-blued sm:text-sm"
                     placeholder="Enter number of switches"
                   />

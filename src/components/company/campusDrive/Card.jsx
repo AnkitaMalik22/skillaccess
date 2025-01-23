@@ -37,7 +37,7 @@ const CampusDriveCard = ({ drive }) => {
         </div>
 
         {/* Description */}
-        <p className="text-gray-500 text-sm line-clamp-2 mb-4 min-h-[40px]">
+        <p className="text-gray-500 text-sm line-clamp-2 mb-4">
           {drive?.description ||
             "A brief description about the campus drive goes here. Keep it short and precise."}
         </p>
@@ -47,7 +47,7 @@ const CampusDriveCard = ({ drive }) => {
           to={
             isCompany()
               ? `/company/pr/campus-drive/${drive._id}`
-              : `/college/campus-drive/${drive._id}`
+              : `/college/campus-drive/${drive._id}?testId=${drive.tests[0]._id}`
           }
           className="block w-full bg-blued hover:bg-blued text-white text-center text-sm font-medium py-2 rounded-lg transition-colors duration-200"
         >

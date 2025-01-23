@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobById } from "../../../redux/college/dashboard/dashboardSlice";
-import { JobHeader } from "../../../components/college/companies/joboverview/JobHeader";
-import { JobInformation } from "../../../components/college/companies/joboverview/JobInformation";
-import { TestSection } from "../../../components/college/companies/joboverview/TestSection";
+import {JobHeader} from "../../../components/college/companies/joboverview/JobHeader";
+import {JobInformation} from "../../../components/college/companies/joboverview/JobInformation";
+import {TestSection} from "../../../components/college/companies/joboverview/TestSection";
 
 const CompanyJobOverview = () => {
   const { id } = useParams();
@@ -31,7 +31,7 @@ const CompanyJobOverview = () => {
     if (!isJobOpen) return;
     localStorage.setItem("testId", jobDetails?.assessments[0]?.test?._id);
     localStorage.setItem("testName", jobDetails?.assessments[0]?.test?.name);
-    window.location.href = `/college/jobs/test/invite?testId=${jobDetails?.assessments[0]?.test?._id}`;
+    window.location.href = `/college/job/test/invite?testId=${jobDetails?.assessments[0]?.test?._id}`;
   };
 
   return (
@@ -40,7 +40,7 @@ const CompanyJobOverview = () => {
         jobTitle={jobDetails?.JobTitle}
         companyName={jobDetails?.company?.basic?.companyName}
       />
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-6 mx-auto max-w-7xl px-4 py-6">
         <JobInformation jobDetails={jobDetails} isJobOpen={isJobOpen} />
         <TestSection
           jobDetails={jobDetails}

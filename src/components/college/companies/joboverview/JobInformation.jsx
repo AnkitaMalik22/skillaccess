@@ -22,21 +22,23 @@ export const JobInformation = ({ jobDetails, isJobOpen }) => {
   ];
 
   return (
-    <div className="w-1/2">
-      <div className="w-full bg-[#F8F8F9] rounded-t-md h-40 md:h-[240px] relative shadow-md overflow-hidden">
-        <img
-          src={jobDetails?.company?.basic?.coverPhoto || "/images/default.jpg"}
-          alt="Company cover"
-          className="w-full h-full object-cover rounded-t-md"
-        />
-        {!isJobOpen && (
-          <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-            Closed
-          </div>
-        )}
-      </div>
+    <div className="lg:w-1/2 space-y-4">
+      <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div className="h-56 relative">
+          <img
+            src={
+              jobDetails?.company?.basic?.coverPhoto || "/images/CompanyBg.png"
+            }
+            alt="Company Background"
+            className="w-full h-full object-cover"
+          />
+          {!isJobOpen && (
+            <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+              Closed
+            </div>
+          )}
+        </div>
 
-      <div className="w-full bg-[#F8F8F9] border-gray-200 rounded-md rounded-t-md h-40 md:h-[240px] relative shadow-md overflow-hidden">
         <div className="p-6 flex justify-between items-start border-b border-gray-100">
           <div className="space-y-2">
             <h1 className="text-xl font-bold text-gray-900">

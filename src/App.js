@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCollege } from "./redux/college/auth/authSlice";
@@ -8,8 +8,12 @@ import Loader from "./components/Loader";
 import DesktopOnly from "./pages/common/DesktopOnly";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { getEntity } from "./util/isCompany";
-import { getCompany } from "./redux/company/auth/companyAuthSlice";
-import { getUniversity } from "./redux/university/auth/universityAuthSlice";
+import PublicRoute from "./routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
+import useAccess from "./hooks/useAccess";
+import AwaitingApproval from "./pages/company/AwatingApproval";
+import RegisterCompany from "./pages/company/auth/RegisterCompany";
+import RegisterUniversity from "./pages/university/auth/RegisterUniversity";
 
 // Lazy-loaded components
 const Login = lazy(() => import("./auth/Login"));
@@ -26,55 +30,17 @@ const UniversityRoutes = lazy(() => import("./routes/UniversityRoutes"));
 
 const App = () => {
   const dispatch = useDispatch();
-  const { isLoggedIn, USER_LOADING } = useSelector(
-    (state) => state.collegeAuth
-  );
+
+  const { loader, user, isAuthenticated, redirectUrl } = useAccess();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
+  // console.log({ loader, user, isAuthenticated, redirectUrl });
+
   useEffect(() => {
-    const userType = localStorage.getItem("userType");
-    const currentPath = window.location.pathname;
-
-    if (
-      userType === "college" &&
-      (currentPath.includes("/company/") ||
-        currentPath.includes("/university/"))
-    ) {
-      window.location.href = "/";
-    } else if (
-      userType === "company" &&
-      (currentPath.includes("/college/") ||
-        currentPath.includes("/university/"))
-    ) {
-      window.location.href = "/";
-    } else if (
-      userType === "university" &&
-      (currentPath.includes("/company/") || currentPath.includes("/college/"))
-    ) {
-      window.location.href = "/";
-    }
-
-    if (userType === "college") {
-      dispatch(getCollege());
-    } else if (userType === "company") {
-      dispatch(getCompany());
-    } else if (userType === "university") {
-      dispatch(getUniversity());
-    } else if (
-      currentPath !== "/" &&
-      currentPath !== "/company" &&
-      currentPath !== "/university" &&
-      currentPath !== "/forgotPassword" &&
-      currentPath !== "/terms&policies" &&
-      !currentPath.startsWith("/password/reset/")
-    ) {
-      window.location.href = "/";
-    } else {
-      console.log(currentPath, "currentPath");
-    }
+    getEntity() === "college" && dispatch(getCollege());
   }, [dispatch]);
 
-  if (USER_LOADING) {
+  if (loader) {
     return <Loader />;
   }
 
@@ -82,28 +48,66 @@ const App = () => {
     return <DesktopOnly />;
   }
 
-  console.log("isLoggedIn:", isLoggedIn);
-
   return (
     <div className="app-content">
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/terms&policies" element={<TermsPolicies />} />
-          <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/password/reset/:id" element={<ResetPassword />} />
-          <Route path="/college/me/failed" element={<NotAuth />} />
           <Route
-            path="/college/*"
             element={
-              // <ProtectedRoute isAuthenticated={isLoggedIn} redirectPath="/">
-              <CollegeRoutes />
-              // </ProtectedRoute>
+              <PublicRoute
+                isAuthenticated={isAuthenticated}
+                redirectUrl={redirectUrl}
+              />
             }
+          >
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/terms&policies" element={<TermsPolicies />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/password/reset/:id" element={<ResetPassword />} />
+            <Route path="/college/me/failed" element={<NotAuth />} />
+            {/* public company routes */}
+            <Route path="/company" element={<Login />} />
+            <Route path="/company/register" element={<RegisterCompany />} />
+            {/* public university routes */}
+            <Route path="/university" element={<Login />} />
+            <Route
+              path="/university/register"
+              element={<RegisterUniversity />}
+            />
+          </Route>
+
+          <Route
+            element={
+              <PrivateRoute
+                isAuthenticated={
+                  isAuthenticated &&
+                  (user?.status === "approved" ||
+                    user?.verificationStatus === "approved")
+                }
+                redirectUrl={redirectUrl}
+              />
+            }
+          >
+            <Route path="/college/*" element={<CollegeRoutes user={user} />} />
+            <Route path="/company/*" element={<CompanyRoutes user={user} />} />
+            <Route
+              path="/university/*"
+              element={<UniversityRoutes user={user} />}
+            />
+          </Route>
+          <Route
+            path="/university/approval"
+            element={<AwaitingApproval user={user} />}
           />
-          <Route path="/company/*" element={<CompanyRoutes />} />
-          <Route path="/university/*" element={<UniversityRoutes />} />
+          <Route
+            path="/company/approval"
+            element={<AwaitingApproval user={user} />}
+          />
+          <Route
+            path="/college/approval"
+            element={<AwaitingApproval user={user} />}
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
@@ -112,5 +116,3 @@ const App = () => {
 };
 
 export default App;
-
-

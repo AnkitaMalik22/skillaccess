@@ -16,7 +16,7 @@ import { getAllTopics } from "../../../redux/college/test/thunks/topic";
 import PopUpAdaptive from "../../../components/PopUps/PopUpAdaptive";
 import useTranslate from "../../../hooks/useTranslate";
 import { Disclosure } from "@headlessui/react";
-import { getEntity, isUni } from "../../../util/isCompany";
+import { isUni } from "../../../util/isCompany";
 const SelectTests = () => {
   //useTranslate();
   const [questionType, setQuestionType] = useState("mcq");
@@ -565,9 +565,15 @@ const SelectTests = () => {
                           Type: questionType || "mcq",
                         })
                       );
-
-                      Navigate(`/${getEntity()}/test/details/${index}?type=topic&question=${questionType}&level=adaptive`);
-                     
+                      if (isUni()) {
+                        Navigate(
+                          `/university/pr/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
+                        );
+                      } else {
+                        Navigate(
+                          `/college/test/details/${index}?type=topic&question=${questionType}&level=adaptive`
+                        );
+                      }
                     }}
                   >
                     Details

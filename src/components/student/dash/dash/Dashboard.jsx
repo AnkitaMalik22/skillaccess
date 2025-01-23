@@ -40,10 +40,10 @@ export default function Dashboard() {
     dispatch(getCompany());
     dispatch(getAssessment());
     dispatch(getTotalJobs());
-    dispatch(getPlacedStudents());
+    dispatch(getPlacedStudents(user?._id));
 
     // //console.log("students : ",students);
-  }, [dispatch]);
+  }, [user?._id]);
 
   // const [companies, setcompanies] = useState([
   //   {

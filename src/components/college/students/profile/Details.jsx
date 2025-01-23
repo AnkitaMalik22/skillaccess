@@ -5,15 +5,12 @@ import { FaStar } from "react-icons/fa";
 import PopUp from "./PopUp";
 import PopUpReject from "./PopUpReject";
 import Loader from "../../../loaders/Loader";
-import toast from "react-hot-toast";
 
 const Details = ({ student }) => {
   const handleViewCV = () => {
     window.open(student.Cv.url, "_blank");
   };
-  const handleApprove = (studentId) => {
-    console.log("Approve", studentId);
-  };
+  const handleApprove = (studentId) => {};
   const [visible, setVisible] = React.useState(false);
   const [show, setShow] = React.useState(false);
   const [sId, setSId] = React.useState(null);
@@ -26,7 +23,7 @@ const Details = ({ student }) => {
       {visible && (
         <PopUp
           visible={visible}
-          // handleSave={handleApprove}
+          handleSave={handleApprove}
           studentId={sId}
           handleOverlay={() => {
             setVisible(false);
@@ -159,17 +156,10 @@ const Details = ({ student }) => {
               )}
             </button>
           )}
-          <button
-            className="py-3  rounded-xl px-3 bg-[#8f92a11d] font-bold"
-            onClick={() => {
-              student?.certificates?.length > 0
-                ? window.open(student?.certificates[0]?.url, "_blank")
-                : toast.error("No certificates found");
-            }}
-          >
+          <button className="py-3  rounded-xl px-3 bg-[#8f92a11d] font-bold">
             View Certificates
           </button>
-          {!student?.approved && (
+          {/* {!student?.approved && ( */}
             <button
               className="py-2 text-white rounded-xl px-4 bg-accent font-bold flex items-center gap-2"
               onClick={() => {
@@ -185,7 +175,7 @@ const Details = ({ student }) => {
                 "Approve Request"
               )}
             </button>
-          )}
+          {/* )} */}
         </span>
       </div>
     </section>

@@ -156,7 +156,7 @@ export const createTopic = createAsyncThunk(
     } catch (error) {
       //console.log("catch", error.response.data);
 
-      return rejectWithValue(error.response.data?.message || "Unable to create topic");
+      return rejectWithValue(error.response.data);
     }
   }
 );

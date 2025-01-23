@@ -105,10 +105,10 @@ const Recent = () => {
       {/* Header */}
       <div className="flex justify-between mx-auto mb-2 font-dmSans">
         <button
-          className="bg-white flex border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500"
+          className="bg-[#D9E1E7] rounded-md h-10 w-10 sm:h-12 sm:w-14"
           onClick={() => navigate(-1)}
         >
-          <FaAngleLeft className="h-5 w-5" />
+          <FaAngleLeft className="mx-auto sm:h-6 sm:w-6 h-4 w-4" />
         </button>
       </div>
 
