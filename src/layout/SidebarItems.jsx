@@ -30,13 +30,13 @@ export const companySidebarItems = [
       <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />
     ),
   },
-  {
-    name: "Campus Drive",
-    path: "/company/pr/campus-drive",
-    icon: (active) => (
-      <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />
-    ),
-  },
+  // {
+  //   name: "Campus Drive",
+  //   path: "/company/pr/campus-drive",
+  //   icon: (active) => (
+  //     <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />
+  //   ),
+  // },
   {
     name : "Jobs",
     path : "/company/pr/jobs",
@@ -104,13 +104,13 @@ export const collegeSidebarItems = [
       <LuBriefcase {...iconProps} color={active ? "#171717" : "white"} />
     ),
   },
-  {
-    name : "Campus Drive",
-    path : "/college/campus-drive",
-    icon : (active) => (
-      <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />
-    ),
-  },
+  // {
+  //   name : "Campus Drive",
+  //   path : "/college/campus-drive",
+  //   icon : (active) => (
+  //     <LuClipboardList {...iconProps} color={active ? "#171717" : "white"} />
+  //   ),
+  // },
   {
     name: "Students",
     path: "/college/students",
