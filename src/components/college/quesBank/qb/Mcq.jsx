@@ -7,6 +7,7 @@ import { PiPencilSimpleLineBold } from "react-icons/pi";
 import toast from "react-hot-toast";
 import { editBankQuestionById } from "../../../../redux/college/test/thunks/question";
 import { useNavigate } from "react-router-dom";
+import { getEntity } from "../../../../util/isCompany";
 const Mcq = ({ question, number }) => {
   const [type, setType] = useState();
   const [AnswerIndex, setAnswerIndex] = useState(question.AnswerIndex);
@@ -68,7 +69,7 @@ const Mcq = ({ question, number }) => {
                         className="w-6 h-6 p-1 rounded-md self-center cursor-pointer"
                         onClick={() => {
                           navigate(
-                            `/college/quesBank/addMcqToTopic/${question._id}?type=mcq&addType=edit`
+                            `/${getEntity()}/quesBank/addMcqToTopic/${question._id}?type=mcq&addType=edit`
                           );
                           localStorage.setItem(
                             "qbQues",
@@ -97,9 +98,8 @@ const Mcq = ({ question, number }) => {
                     <div className="flex gap-2 self-center">
                       <Disclosure.Button className="flex gap-2 self-center">
                         <FaCaretDown
-                          className={`${
-                            open ? "rotate-180" : ""
-                          } h-5 w-5 text-gray-400 `}
+                          className={`${open ? "rotate-180" : ""
+                            } h-5 w-5 text-gray-400 `}
                         />
                       </Disclosure.Button>
                     </div>
@@ -129,9 +129,8 @@ const Mcq = ({ question, number }) => {
                     </div>
 
                     <label
-                      className={` text-sm ${
-                        AnswerIndex === index ? "text-green" : "text-[#3E3E3E]"
-                      }`}
+                      className={` text-sm ${AnswerIndex === index ? "text-green" : "text-[#3E3E3E]"
+                        }`}
                     >
                       {question
                         ? question.question

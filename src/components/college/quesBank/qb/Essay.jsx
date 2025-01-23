@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { removeQuestionById } from "../../../../redux/college/test/testSlice";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import { getEntity } from "../../../../util/isCompany";
 const Essay = ({ question, number }) => {
   const [type, setType] = useState();
   // //console.log(question);
@@ -41,7 +42,7 @@ const Essay = ({ question, number }) => {
                       className=" w-6 h-6 p-1 rounded-md  self-center cursor-pointer"
                       onClick={() => {
                         navigate(
-                          `/college/quesBank/essay/${question._id}?type=essay&addType=edit`
+                          `/${getEntity()}/quesBank/essay/${question._id}?type=essay&addType=edit`
                         );
                         localStorage.setItem(
                           "qbQues",
@@ -71,9 +72,8 @@ const Essay = ({ question, number }) => {
                 <div className="flex gap-2 self-center">
                   <Disclosure.Button className="flex gap-2 w-10/12 self-center">
                     <FaCaretDown
-                      className={`${
-                        open ? "rotate-180" : ""
-                      } h-5 w-5 text-gray-400 `}
+                      className={`${open ? "rotate-180" : ""
+                        } h-5 w-5 text-gray-400 `}
                     />
                     <h2></h2>{" "}
                   </Disclosure.Button>

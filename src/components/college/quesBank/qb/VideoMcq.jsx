@@ -7,6 +7,7 @@ import { IoSwapVerticalSharp } from "react-icons/io5";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { CiBookmarkMinus } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import { getEntity } from "../../../../util/isCompany";
 const VideoMcq = ({ Number, mcq, id, video }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const VideoMcq = ({ Number, mcq, id, video }) => {
               className=" w-6 h-6 p-1 rounded-md  self-center cursor-pointer"
               onClick={() => {
                 navigate(
-                  `/college/quesBank/video/${id}/addmcq?addType=edit&index=${Number}`
+                  `/${getEntity()}/quesBank/video/${id}/addmcq?addType=edit&index=${Number}`
                 );
                 localStorage.setItem("qbQues", JSON.stringify(video));
               }}
@@ -48,11 +49,10 @@ const VideoMcq = ({ Number, mcq, id, video }) => {
                     )}
                   </div>
                   <label
-                    className={` text-sm ${
-                      mcq?.AnswerIndex === index
+                    className={` text-sm ${mcq?.AnswerIndex === index
                         ? "text-green"
                         : "text-[#3E3E3E]"
-                    }`}
+                      }`}
                   >
                     {" "}
                     {option}

@@ -1,6 +1,7 @@
 import React from "react";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import { getEntity } from "../../../../util/isCompany";
 
 const VideoEssayShort = ({ Number, Title, id, video }) => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const VideoEssayShort = ({ Number, Title, id, video }) => {
             className=" w-6 h-6 p-1 rounded-md  self-center cursor-pointer"
             onClick={() => {
               navigate(
-                `/college/quesBank/video/shortlong/${id}?length=short&addType=edit&index=${Number}`
+                `/${getEntity()}/quesBank/video/shortlong/${id}?length=short&addType=edit&index=${Number}`
               );
               localStorage.setItem("qbQues", JSON.stringify(video));
             }}

@@ -101,7 +101,7 @@ function AssessmentTable({ assessments, isLoading, onRowClick, onDownload }) {
                 onChange={(e) => handleFilterChange("name", e.target.value)}
               />
               <span className="ml-2 text-gray-500">
-                Total : {filteredAssessments.length}
+                {/* Total : {filteredAssessments.length} */}
               </span>
             </div>
           )}
@@ -145,7 +145,7 @@ function AssessmentTable({ assessments, isLoading, onRowClick, onDownload }) {
                 }
               />{" "}
               <span className="ml-2 text-gray-500">
-                {filteredAssessments.length}
+                {/* {filteredAssessments.length} */}
               </span>
             </div>
           )}
@@ -188,7 +188,7 @@ function AssessmentTable({ assessments, isLoading, onRowClick, onDownload }) {
                 }
               />{" "}
               <span className="ml-2 text-gray-500">
-                {filteredAssessments.length}
+                {/* {filteredAssessments.length} */}
               </span>
             </div>
           )}
@@ -231,7 +231,7 @@ function AssessmentTable({ assessments, isLoading, onRowClick, onDownload }) {
                 }
               />{" "}
               <span className="ml-2 text-gray-500">
-                {filteredAssessments.length}
+                {/* {filteredAssessments.length} */}
               </span>
             </div>
           )}
@@ -243,9 +243,8 @@ function AssessmentTable({ assessments, isLoading, onRowClick, onDownload }) {
             <div
               className="h-full rounded-md"
               style={{
-                width: `${
-                  assessment.avgPercentage < 0 ? 0 : assessment.avgPercentage
-                }%`,
+                width: `${assessment.avgPercentage < 0 ? 0 : assessment.avgPercentage
+                  }%`,
                 backgroundColor: getProgressBarColor(assessment.avgPercentage),
               }}
             ></div>
