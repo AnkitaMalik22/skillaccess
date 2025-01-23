@@ -96,7 +96,7 @@ const CreateTopic = () => {
         );
 
       } else {
-        toast.error("Invalid or duplicate values");
+        
         return;
       }
       setTopic({

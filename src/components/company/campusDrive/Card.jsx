@@ -37,7 +37,7 @@ const CampusDriveCard = ({ drive }) => {
         </div>
 
         {/* Description */}
-        <p className="text-gray-500 text-sm line-clamp-2 mb-4">
+        <p className="text-gray-500 text-sm line-clamp-2 mb-4 min-h-[40px]">
           {drive?.description ||
             "A brief description about the campus drive goes here. Keep it short and precise."}
         </p>

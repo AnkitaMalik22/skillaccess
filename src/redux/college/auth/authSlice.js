@@ -684,6 +684,7 @@ const collegeAuthSlice = createSlice({
         // state.status = action.payload
         state.isLoggedIn = true;
         state.user = action.payload;
+        localStorage.setItem("userType", "colleeg");
         // Add any fetched posts to the array
         //console.log("fullfilled");
       })
@@ -703,7 +704,7 @@ const collegeAuthSlice = createSlice({
       .addCase(loginCollege.fulfilled, (state, action) => {
         // state.status = action.payload
         const { user, token } = action.payload;
-
+        localStorage.setItem("userType", "college");
         switch (user.authType) {
           case "qr":
             window.location.href = "/college/settings/security/securityApp";

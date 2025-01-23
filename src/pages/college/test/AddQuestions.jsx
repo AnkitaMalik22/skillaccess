@@ -135,7 +135,8 @@ const AddQuestions = () => {
   return (
     <>
       {/* <Header page={"submit"} /> */}
-      <CommonHeader backPath={`/${getEntity()}/test/${level === "adpative" ? "selectAdaptive" : `select`}?level=${level}`} handleNext={handleNext} />
+
+      <CommonHeader backPath={`/${getEntity()}/test/${level === "adaptive" ? "selectAdaptive" : `select`}?level=${level}`} handleNext={() => { navigate(`/${getEntity()}/test/submit?level=${level}`) }} />
       <div className="w-4/5 mx-auto">
         <Progress />
       </div>

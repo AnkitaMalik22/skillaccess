@@ -56,7 +56,7 @@ const CreateTopicAdaptive = () => {
           }?type=mcq&addType=topic&level=adaptive`
         );
       } else {
-        toast.error("Invalid or duplicate name.");
+        // toast.error("Invalid or duplicate name.");
         return;
       }
       setTopic({

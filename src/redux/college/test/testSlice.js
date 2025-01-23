@@ -803,6 +803,7 @@ const testSlice = createSlice({
       .addCase(createTopic.rejected, (state, action) => {
         // return action.payload;
         state.ADD_tOPIC_LOADING = false;
+        toast.error(action.payload);
       })
 
       .addCase(getStudentResponse.pending, (state, action) => {

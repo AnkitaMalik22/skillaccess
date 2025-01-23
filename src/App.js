@@ -8,6 +8,8 @@ import Loader from "./components/Loader";
 import DesktopOnly from "./pages/common/DesktopOnly";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { getEntity } from "./util/isCompany";
+import { getCompany } from "./redux/company/auth/companyAuthSlice";
+import { getUniversity } from "./redux/university/auth/universityAuthSlice";
 
 // Lazy-loaded components
 const Login = lazy(() => import("./auth/Login"));
@@ -22,7 +24,6 @@ const CollegeRoutes = lazy(() => import("./routes/CollegeRoutes"));
 const CompanyRoutes = lazy(() => import("./routes/CompanyRoutes"));
 const UniversityRoutes = lazy(() => import("./routes/UniversityRoutes"));
 
-
 const App = () => {
   const dispatch = useDispatch();
   const { isLoggedIn, USER_LOADING } = useSelector(
@@ -31,7 +32,46 @@ const App = () => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   useEffect(() => {
-   getEntity()==="college" && dispatch(getCollege());
+    const userType = localStorage.getItem("userType");
+    const currentPath = window.location.pathname;
+
+    if (
+      userType === "college" &&
+      (currentPath.includes("/company/") ||
+        currentPath.includes("/university/"))
+    ) {
+      window.location.href = "/";
+    } else if (
+      userType === "company" &&
+      (currentPath.includes("/college/") ||
+        currentPath.includes("/university/"))
+    ) {
+      window.location.href = "/";
+    } else if (
+      userType === "university" &&
+      (currentPath.includes("/company/") || currentPath.includes("/college/"))
+    ) {
+      window.location.href = "/";
+    }
+
+    if (userType === "college") {
+      dispatch(getCollege());
+    } else if (userType === "company") {
+      dispatch(getCompany());
+    } else if (userType === "university") {
+      dispatch(getUniversity());
+    } else if (
+      currentPath !== "/" &&
+      currentPath !== "/company" &&
+      currentPath !== "/university" &&
+      currentPath !== "/forgotPassword" &&
+      currentPath !== "/terms&policies" &&
+      !currentPath.startsWith("/password/reset/")
+    ) {
+      window.location.href = "/";
+    } else {
+      console.log(currentPath, "currentPath");
+    }
   }, [dispatch]);
 
   if (USER_LOADING) {
@@ -58,7 +98,7 @@ const App = () => {
             path="/college/*"
             element={
               // <ProtectedRoute isAuthenticated={isLoggedIn} redirectPath="/">
-                <CollegeRoutes />
+              <CollegeRoutes />
               // </ProtectedRoute>
             }
           />

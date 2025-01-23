@@ -125,7 +125,7 @@ const CreateTopic = () => {
         );
         toast.success("Topic Created Successfully");
       } else {
-        toast.error("Invalid or duplicate values");
+        // toast.error("Invalid or duplicate values");
       }
     });
   };
