@@ -23,7 +23,8 @@ const Header = ({
   setFilterType,
   filterType,
   batch,
-  user
+  user,
+  setSelectedList
 }) => {
   const { uploadedStudents } = useSelector((state) => state.collegeStudents);
   const [loading, setLoading] = useState(false);
@@ -167,6 +168,7 @@ const Header = ({
           limit: 10,
         }))
       } else {
+        setSelectedList('invitedStudents')
         setFilterType("invited-students")
       }
 
@@ -215,7 +217,7 @@ const Header = ({
           <FiPlus className="self-center text-lg" /> Add
         </button>
 
-        {showPopup && <StudentPoP onClose={handleClosePopup} />}
+        {showPopup && <StudentPoP onClose={handleClosePopup} filterType={filterType} setFilterType={setFilterType} setSelectedList={setSelectedList} />}
 
         <button
           className="bg-blued border flex self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-blued text-white"

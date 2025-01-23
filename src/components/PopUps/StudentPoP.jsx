@@ -7,7 +7,7 @@ import {
 } from "../../redux/college/student/studentSlice";
 import toast from "react-hot-toast";
 import Loader from "../college/test/addVideo/Loader";
-const StudentPoP = ({ onClose }) => {
+const StudentPoP = ({ onClose, filterType, setFilterType, setSelectedList }) => {
   const [loading, setLoading] = useState(false);
   const [student, setStudent] = useState({
     FirstName: "",
@@ -76,10 +76,16 @@ const StudentPoP = ({ onClose }) => {
     // maxLength: [30, "Name cannot exceed 30 characters"],
     // minLength: [2, "Name should have more than 2 characters"],
     else {
+
       // //console.log(student, "pop");
       setLoading(true);
       await dispatch(uploadStudents([student])).then(() => {
-        dispatch(getStudents({ id: user?._id }));
+        if (filterType !== "invited-students") {
+          setFilterType('invited-students')
+          setSelectedList("invitedStudents")
+        } else {
+          dispatch(getStudents({ id: user?._id, filterType: 'invited-students' }));
+        }
       });
       // toast.success("Students Uploaded Successfully");
       setLoading(false);

@@ -102,6 +102,7 @@ const Students = () => {
         setFilterType={setFilterType}
         batch={batch}
         user={user}
+        setSelectedList={setSelectedList}
       />
 
       {/* Checkbox Row for Selecting the List */}

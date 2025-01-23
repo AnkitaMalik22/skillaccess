@@ -8,6 +8,16 @@ const Education = ({ Education }) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat("en-US", options).format(date);
   };
+
+
+  if (!Education || Education.length === 0) {
+    return (
+      <div className="mt-5 text-center rounded-md mx-auto p-4 min-h-40">
+        <p className="text-gray-500">No education found.</p>
+      </div>
+    )
+  }
+  // console.log(Educatoin)
   return (
     <div className=" min-h-40  text-center">
       {Education?.map((education, index) => {
@@ -75,11 +85,7 @@ const Education = ({ Education }) => {
             </section>
           </div>
         );
-      }) || (
-        <div className="flex justify-center h-36  items-center">
-          <p>No education found</p>
-        </div>
-      )}
+      })}
     </div>
   );
 };

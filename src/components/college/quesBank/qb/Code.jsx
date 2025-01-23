@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { removeQuestionById } from "../../../../redux/college/test/testSlice";
 import { useNavigate } from "react-router-dom";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
+import { getEntity } from "../../../../util/isCompany";
 
 const List = ({ Title, number, code, question }) => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const List = ({ Title, number, code, question }) => {
                           JSON.stringify(question)
                         );
                         navigate(
-                          `/college/quesBank/code/${question._id}?type=code&addType=edit`
+                          `/${getEntity()}/quesBank/code/${question._id}?type=code&addType=edit`
                         );
                       }}
                     />
@@ -66,9 +67,8 @@ const List = ({ Title, number, code, question }) => {
                 <div className="flex gap-2 self-center">
                   <Disclosure.Button className="flex gap-2 w-10/12 self-center">
                     <FaCaretDown
-                      className={`${
-                        open ? "rotate-180" : ""
-                      } h-5 w-5 text-gray-400 `}
+                      className={`${open ? "rotate-180" : ""
+                        } h-5 w-5 text-gray-400 `}
                     />
                     <h2></h2>{" "}
                   </Disclosure.Button>
