@@ -3,7 +3,7 @@ import { SiAdobephotoshop } from "react-icons/si";
 
 const Skills = ({ skills }) => {
   return (
-    <div className="grid grid-rows-4 px-4 text-base font-bold gap-8 mt-2 font-dmSans">
+    <div className="grid grid-rows-4 px-4 text-base font-bold gap-8 mt-2 font-dmSans py-8 ">
       <div className="grid grid-cols-2">
         <span>Software Knowledge</span>
         <span className="w-2/3 font-normal font-dmSans">
