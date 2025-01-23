@@ -10,7 +10,7 @@ export function Table({ columns, data, isLoading, onRowClick, className }) {
       <table className="w-full border-collapse bg-white shadow-lg rounded-lg">
         <thead>
           <tr className="bg-accent bg-opacity-10 shadow-md">
-            {columns.map((column, index) => (
+            {columns?.map((column, index) => (
               <th
                 key={index}
                 className={classNames(
@@ -35,7 +35,7 @@ export function Table({ columns, data, isLoading, onRowClick, className }) {
                 Loading...
               </td>
             </tr>
-          ) : data.length === 0 ? (
+          ) : data?.length === 0 ? (
             <tr>
               <td
                 colSpan={columns.length}
@@ -45,7 +45,7 @@ export function Table({ columns, data, isLoading, onRowClick, className }) {
               </td>
             </tr>
           ) : (
-            data.map((item, rowIndex) => (
+            data?.map((item, rowIndex) => (
               <tr
                 key={rowIndex}
                 className={classNames(
@@ -54,7 +54,7 @@ export function Table({ columns, data, isLoading, onRowClick, className }) {
                 )}
                 onClick={() => onRowClick && onRowClick(item)}
               >
-                {columns.map((column, cellIndex) => (
+                {columns?.map((column, cellIndex) => (
                   <td
                     key={cellIndex}
                     className={classNames(

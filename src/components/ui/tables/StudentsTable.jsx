@@ -35,7 +35,7 @@ const StudentsTable = ({
   });
 
   // Add Serial Numbers
-  const filteredDataWithIndex = filteredData.map((item, index) => ({
+  const filteredDataWithIndex = filteredData?.map((item, index) => ({
     ...item,
     index: index + 1,
   }));
