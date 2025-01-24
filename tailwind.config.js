@@ -1,3 +1,5 @@
+
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
@@ -24,6 +26,9 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      boxShadow: {
+        "inner-lg": "inset 2px 2px 0px 0px rgba(1, 10, 1,0.3)",
+      },
       transitionProperty: {
         width: "width",
         height: "height",
@@ -36,26 +41,37 @@ module.exports = {
         lGray: "#8F92A1",
         snow: "#F3F6F8",
         aqua: "#247ba0",
-        blued: "#95ACFA",
+        blued: "#0D9AAC",
+        lightBlue: "#0AB8C8",
         "gray-100": "#F8F8F9",
       },
       fontFamily: {
-        dmSans: ["DM Sans", "sans-serif"],
+        dmSans: ["DM Sans"],
       },
     },
   },
   daisyui: {
     themes: [
       {
+//Skillaccess Final Colors -
+// #043345
+// #0D9AAC
+// #0AB8C8
         mytheme: {
           primary: "#FFFFFF",
-          secondary: "#95ACFA",
-          accent: "#37cdbe",
-          neutral: "#3d4451",
+          secondary: "#043345",
+          accent: "#0D9AAC",
+          neutral: "#0AB8C8",
           "base-100": "#FFFFFF",
+         
+   
         },
       },
     ],
   },
-  plugins: [require("daisyui"), require("@tailwindcss/forms")],
+  plugins: [
+    require("daisyui"),
+    require("@tailwindcss/forms"),
+    require("tailwind-scrollbar"),
+  ],
 };

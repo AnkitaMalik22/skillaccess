@@ -1,126 +1,118 @@
 import "./App.css";
-import React, { Suspense, lazy } from "react";
-import { useEffect } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCollege, logoutCollage } from "./redux/collage/auth/authSlice";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { getCollege } from "./redux/college/auth/authSlice";
+import { useMediaQuery } from "./hooks/useMediaQuery";
+import Loader from "./components/Loader";
+import DesktopOnly from "./pages/common/DesktopOnly";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { getEntity } from "./util/isCompany";
+import PublicRoute from "./routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
+import useAccess from "./hooks/useAccess";
+import AwaitingApproval from "./pages/company/AwatingApproval";
+import RegisterCompany from "./pages/company/auth/RegisterCompany";
+import RegisterUniversity from "./pages/university/auth/RegisterUniversity";
 
-//----------------------------------------------collage pages----------------------------------------------------------------------------//
+// Lazy-loaded components
+const Login = lazy(() => import("./auth/Login"));
+const Register = lazy(() => import("./pages/college/auth/Register"));
+const TermsPolicies = lazy(() => import("./pages/college/auth/TermsPolicies"));
+const ForgotPassword = lazy(() => import("./auth/ForgotPassword"));
+const ResetPassword = lazy(() => import("./auth/ResetPassword"));
+const NotAuth = lazy(() => import("./components/PopUps/NotAuth"));
 
-//-----------------------------------------dash
-import Rote from "./pages/collage/home/DashRoutes";
+// Route components
+const CollegeRoutes = lazy(() => import("./routes/CollegeRoutes"));
+const CompanyRoutes = lazy(() => import("./routes/CompanyRoutes"));
+const UniversityRoutes = lazy(() => import("./routes/UniversityRoutes"));
 
-//-----------------------------------------------auth
-
-//-----------------------------------------------test
-import TestRoute from "./pages/collage/test/Index";
-
-//-----------------------------------------------------------results
-import ResultsRoute from "./pages/collage/results";
-
-//----------------------------------------------------------Q-Bank
-import QuesRoute from "./pages/collage/quesBank";
-
-//--------------------------------------------------------------companies
-
-//---------------------------------------------------------------students
-import StudentRoute from "./pages/collage/students";
-
-//---------------------------------------------------------------inbox
-import InboxRoute from "./pages/collage/inbox/index";
-
-//---------------------------------------------------------------settings
-
-import SettingsRoute from "./pages/collage/settings/index";
-
-//---------------------------------------------------------------teams
-
-import TeamsRoute from "./pages/collage/teams";
-
-//----------------------------------------------------------------------------------------------------------------------------------------//
-
-import AccountingPage from "./pages/collage/accounting/AccountingPage";
-
-import ProfilePage from "./pages/collage/profile/ProfilePage";
-
-import CompaniesRoute from "./pages/collage/companies";
-import Loader from "./Loader";
-import ForgotPassword from "./pages/collage/auth/ForgotPassword";
-import ResetPassword from "./pages/collage/auth/ResetPassword";
-
-const Register = lazy(() => import("./pages/collage/auth/Register"));
-const Login = lazy(() => import("./pages/collage/auth/Login"));
-const TermsPolicies = lazy(() => import("./pages/collage/auth/TermsPolicies"));
-
-
-export default function App() {
-  //  AnkitaMalik22-ankita-dev
+const App = () => {
   const dispatch = useDispatch();
 
-  // =======
-  //   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     dispatch(getCollege());
-  //   }, [dispatch]);
-  // >>>>>>> saveMain
+  const { loader, user, isAuthenticated, redirectUrl } = useAccess();
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
-  const { user, isLoggedIn } = useSelector((state) => state.collageAuth);
+  // console.log({ loader, user, isAuthenticated, redirectUrl });
 
   useEffect(() => {
-    dispatch(getCollege());
-  }, []);
+    getEntity() === "college" && dispatch(getCollege());
+  }, [dispatch]);
+
+  if (loader) {
+    return <Loader />;
+  }
+
+  if (!isDesktop) {
+    return <DesktopOnly />;
+  }
 
   return (
-    <BrowserRouter>
+    <div className="app-content">
       <Suspense fallback={<Loader />}>
         <Routes>
-          {/* ----------------------------------------collage-------------------------------------------------------------- */}
-          <Route path="" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/terms&policies" element={<TermsPolicies/>}/>
-          <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route path="/password/reset/:id" element={<ResetPassword />} />
-          {/* <Route path="loader" element={<Loader />} /> */}
-
-          {isLoggedIn ? (
-            <>
-              {Rote()}
-              {TestRoute()}
-              {StudentRoute()}
-              {QuesRoute()}
-              {CompaniesRoute()}
-              {ResultsRoute()}
-              {InboxRoute()}
-              {SettingsRoute()}
-              {TeamsRoute()}
-            </>
-          ) : (
-            <Route path="*" element={<Loader />} />
-          )}
-          {/* 
-          {Rote()}
-          {TestRoute()}
-          {StudentRoute()}
-          {QuesRoute()}
-          {CompaniesRoute()}
-          {ResultsRoute()}
-          {InboxRoute()}
-          {SettingsRoute()}
-          {TeamsRoute()} */}
-
-          <Route path="collage/accounting">
-            <Route path="" element={<AccountingPage />} />
+          <Route
+            element={
+              <PublicRoute
+                isAuthenticated={isAuthenticated}
+                redirectUrl={redirectUrl}
+              />
+            }
+          >
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/terms&policies" element={<TermsPolicies />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/password/reset/:id" element={<ResetPassword />} />
+            <Route path="/college/me/failed" element={<NotAuth />} />
+            {/* public company routes */}
+            <Route path="/company" element={<Login />} />
+            <Route path="/company/register" element={<RegisterCompany />} />
+            {/* public university routes */}
+            <Route path="/university" element={<Login />} />
+            <Route
+              path="/university/register"
+              element={<RegisterUniversity />}
+            />
           </Route>
 
-          {isLoggedIn && (
-            <Route path="collage/profile">
-              <Route path="" element={<ProfilePage />} />
-            </Route>
-          )}
-
-          {/* .......................................................................................................................... */}
+          <Route
+            element={
+              <PrivateRoute
+                isAuthenticated={
+                  isAuthenticated &&
+                  (user?.status === "approved" ||
+                    user?.verificationStatus === "approved")
+                }
+                redirectUrl={redirectUrl}
+              />
+            }
+          >
+            <Route path="/college/*" element={<CollegeRoutes user={user} />} />
+            <Route path="/company/*" element={<CompanyRoutes user={user} />} />
+            <Route
+              path="/university/*"
+              element={<UniversityRoutes user={user} />}
+            />
+          </Route>
+          <Route
+            path="/university/approval"
+            element={<AwaitingApproval user={user} />}
+          />
+          <Route
+            path="/company/approval"
+            element={<AwaitingApproval user={user} />}
+          />
+          <Route
+            path="/college/approval"
+            element={<AwaitingApproval user={user} />}
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </div>
   );
-}
+};
+
+export default App;
