@@ -84,7 +84,7 @@ const StudentPoP = ({ onClose, filterType, setFilterType, setSelectedList }) => 
           setFilterType('invited-students')
           setSelectedList("invitedStudents")
         } else {
-          dispatch(getStudents({ id: user?._id, filterType: 'invited-students' }));
+          dispatch(getStudents({ id: user?._id, filterType: 'invited-students', page: 1, limit: 10, batch: "all" }));
         }
       });
       // toast.success("Students Uploaded Successfully");
