@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { LuEye } from "react-icons/lu";
+import { LuEye ,LuEyeOff} from "react-icons/lu";
 import toast from "react-hot-toast";
 import Layout from "../pages/college/auth/Layout";
 import { resetPassword } from "../redux/college/auth/authSlice";
@@ -116,7 +116,9 @@ const ResetPassword = () => {
                 className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
                 onClick={() => togglePasswordVisibility("password")}
               >
-                <LuEye className="text-[#8F92A1] text-2xl" />
+              {
+                passwordType === "password" ? <LuEye className="text-[#8F92A1] text-2xl" /> : <LuEyeOff className="text-[#8F92A1] text-2xl" />
+              }
               </button>
             </div>
 
@@ -133,7 +135,9 @@ const ResetPassword = () => {
                 className="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
                 onClick={() => togglePasswordVisibility("confirmPassword")}
               >
-                <LuEye className="text-[#8F92A1] text-2xl" />
+            {
+                confirmPasswordType === "password" ? <LuEye className="text-[#8F92A1] text-2xl" /> : <LuEyeOff className="text-[#8F92A1] text-2xl" />
+            }
               </button>
             </div>
 
