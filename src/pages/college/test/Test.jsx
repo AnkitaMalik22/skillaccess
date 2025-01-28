@@ -55,6 +55,13 @@ const Test = () => {
         description: "",
         totalAttempts: null,
         totalQuestions: null,
+        config: {
+          isCameraRequired: false,
+          maxTabSwitches: 0,
+        },
+        duration_from: "", // New fields for duration
+        duration_to: "",
+
       })
     );
     dispatch(getStudents({ id: user?._id }));
