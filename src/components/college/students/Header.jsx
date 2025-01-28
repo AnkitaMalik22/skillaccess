@@ -112,12 +112,12 @@ const Header = ({
 
         const [firstName, lastName, email, batch, approved] = row;
 
-        if (!firstName || firstName.length < 4) {
-          toast.error(`Row ${i + 1}: The first name must be at least 4 characters long.`);
+        if (!firstName || firstName.length < 1) {
+          toast.error(`Row ${i + 1}: The first name must be at least 1 character long.`);
           return;
         }
-        if (!lastName || lastName.length < 4) {
-          toast.error(`Row ${i + 1}: The last name must be at least 4 characters long.`);
+        if (!lastName || lastName.length < 1) {
+          toast.error(`Row ${i + 1}: The last name must be at least 1 character long.`);
           return;
         }
         if (!email) {
