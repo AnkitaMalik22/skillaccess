@@ -30,8 +30,9 @@ const Header = ({
 
   useEffect(() => {
     if (id) {
+      let topic = JSON.parse(localStorage.getItem("currentTopic"));
       dispatch(
-        setTotalTopicQuestions({ id, type: "findAnswer", level: "all" })
+        setTotalTopicQuestions({ id :topic?._id, type: "findAnswer", level: "all" })
       );
     }
   }, [id, ""]);
@@ -84,7 +85,9 @@ const Header = ({
           <FaAngleLeft className="h-5 w-5" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Question No : {totalTopicQuestions + 1}
+        {
+            addType === "topic" ?  `Question No : ${totalTopicQuestions + 1 }`: `Edit Question`
+          }
         </h2>
       </div>
 

@@ -88,12 +88,12 @@ export const selectStudentsByThreshold = createAsyncThunk(
 
 export const getAllTests = createAsyncThunk(
   "test/getAllTests",
-  async (_, { rejectWithValue, getState }) => {
+  async (type, { rejectWithValue, getState }) => {
     try {
       //console.log(`get tests`);
       
       const req = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/assessments`,
+        `${process.env.REACT_APP_API_URL}/api/assessments?type=${type}`,
         getHeaders()
       );
 

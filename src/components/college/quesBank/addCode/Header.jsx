@@ -20,7 +20,8 @@ const Header = ({ handleSave, addType }) => {
 
   useEffect(() => {
     if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "compiler", level: "all" }));
+      let topic = JSON.parse(localStorage.getItem("currentTopic"))
+      dispatch(setTotalTopicQuestions({ id :topic?._id, type: "compiler", level: "all" }));
     }
   }, [id, ""]);
 
@@ -34,7 +35,9 @@ const Header = ({ handleSave, addType }) => {
           <FaAngleLeft className="h-5 w-5" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Question No : {totalTopicQuestions + 1}
+        {
+            addType === "topic" ?  `Question No : ${totalTopicQuestions + 1 }`: `Edit Question`
+          }
         </h2>
       </div>
 

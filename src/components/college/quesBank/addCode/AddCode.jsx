@@ -312,13 +312,14 @@ const AddCode = () => {
 
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "compiler", level: "all" }));
+      let topic = JSON.parse(localStorage.getItem("currentTopic"));
+      dispatch(setTotalTopicQuestions({ id :topic?._id, type: "compiler", level: "all" }));
     }
   }, [ADD_QUESTION_LOADING]);
 
   return (
     <div>
-      <Header handleSave={handleSave} />
+      <Header handleSave={handleSave} addType={addType}/>
       <div className="bg-white min-h-[90vh] mx-auto rounded-xl relative">
         <div className="flex flex-wrap gap-2 md:flex-nowrap ">
           <span className="w-1/2">

@@ -170,7 +170,8 @@ const AddEssay = () => {
 
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "essay", level: "all" }));
+       let topic = JSON.parse(localStorage.getItem("currentTopic"))
+      dispatch(setTotalTopicQuestions({ id :topic?._id, type: "essay", level: "all" }));
     }
   }, [ADD_QUESTION_LOADING]);
 

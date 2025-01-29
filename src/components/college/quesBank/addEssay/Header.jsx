@@ -39,7 +39,8 @@ const Header = ({
   };
   useEffect(() => {
     if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "essay", level: "all" }));
+      let topic = JSON.parse(localStorage.getItem("currentTopic"))
+      dispatch(setTotalTopicQuestions({ id :topic?._id, type: "essay", level: "all" }));
     }
   }, [id, ""]);
 
