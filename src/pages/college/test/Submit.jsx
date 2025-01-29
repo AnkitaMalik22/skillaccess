@@ -30,7 +30,13 @@ const Submit = () => {
     duration_from,
     duration_to,
     isNegativeMarking,
-    config
+    config,
+    category,
+    categoryName,
+    hasAccessToAllBranches,
+    hasAccessToAllDepartments,
+    accessibleBranches,
+    accessibleDepartments,
   } = useSelector((state) => state.test);
   const [searchParams, setSearchParams] = useSearchParams();
   const testType = searchParams.get("level");
@@ -285,7 +291,8 @@ const Submit = () => {
       if (parseInt(totalQuestions) * 2 > questions.length) {
         //console.log(totalQuestions, questions.length);
         toast.error(
-          `Add ${2 * totalQuestions - questions.length
+          `Add ${
+            2 * totalQuestions - questions.length
           } more questions to complete the test`
         );
         return;
@@ -293,7 +300,8 @@ const Submit = () => {
       if (parseInt(totalQuestions) * 2 < questions.length) {
         //console.log(totalQuestions, questions.length);
         window.alert(
-          `Remove ${questions.length - totalQuestions * 2
+          `Remove ${
+            questions.length - totalQuestions * 2
           } questions to complete the test`
         );
 
@@ -303,7 +311,8 @@ const Submit = () => {
       if (totalQuestions > questions.length) {
         //console.log(totalQuestions, questions.length);
         toast.error(
-          `Add ${totalQuestions - questions.length
+          `Add ${
+            totalQuestions - questions.length
           } more questions to complete the test`
         );
         return;
@@ -311,7 +320,8 @@ const Submit = () => {
       if (totalQuestions < questions.length) {
         //console.log(totalQuestions, questions.length);
         window.alert(
-          `Remove ${questions.length - totalQuestions
+          `Remove ${
+            questions.length - totalQuestions
           } questions to complete the test`
         );
 
@@ -359,6 +369,12 @@ const Submit = () => {
         // totalDuration,
         topics,
         isNegativeMarking: isNegativeMarking,
+        category,
+        categoryName,
+        hasAccessToAllBranches,
+        hasAccessToAllDepartments,
+        accessibleBranches,
+        accessibleDepartments,
       })
     ).then((res) => {
       // dispatch(
@@ -366,7 +382,7 @@ const Submit = () => {
       // );
       if (entity === "college") dispatch(getCollege());
       setLoading(false);
-      
+
       //console.log(res);
 
       if (res.type === "test/createTest/fulfilled") {
@@ -438,10 +454,11 @@ const Submit = () => {
             hasQuestions && (
               <div
                 key={pageNumber}
-                className={`rounded-md h-10 w-10 flex justify-center ${selected === pageNumber
-                  ? "bg-accent text-white"
-                  : "bg-gray-100"
-                  }`}
+                className={`rounded-md h-10 w-10 flex justify-center ${
+                  selected === pageNumber
+                    ? "bg-accent text-white"
+                    : "bg-gray-100"
+                }`}
                 onClick={() => setSelected(pageNumber)}
               >
                 <p className="self-center">{pageNumber}</p>
@@ -452,8 +469,9 @@ const Submit = () => {
 
         <div className="rounded-md bg-gray-100 h-10 w-10 flex justify-center">
           <IoMdArrowDropright
-            className={` text-lg self-center ${selected === Math.ceil(max) && "disabled"
-              }`}
+            className={` text-lg self-center ${
+              selected === Math.ceil(max) && "disabled"
+            }`}
             onClick={() =>
               selected !== Math.ceil(max) && setSelected(selected + 1)
             }
