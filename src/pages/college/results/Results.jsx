@@ -19,7 +19,7 @@ const Results = () => {
 
   useEffect(() => {
     dispatch(getResultGraph());
-    dispatch(getAllTests());
+    dispatch(getAllTests("all"));
   }, [dispatch]);
 
   const allAssessments = assessments.beginner.concat(
