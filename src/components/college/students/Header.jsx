@@ -11,7 +11,10 @@ import { useSearchParams } from "react-router-dom";
 import * as XLSX from "xlsx";
 import PopUp from "../../PopUps/PopUp";
 import Loader from "../test/addVideo/Loader";
-import { getStudents, uploadStudents } from "../../../redux/college/student/studentSlice";
+import {
+  getStudents,
+  uploadStudents,
+} from "../../../redux/college/student/studentSlice";
 import { IoIosSearch } from "react-icons/io";
 
 const Header = ({
@@ -24,8 +27,9 @@ const Header = ({
   filterType,
   batch,
   user,
-  setSelectedList
+  setSelectedList,
 }) => {
+  const navigate = useNavigate();
   const { uploadedStudents } = useSelector((state) => state.collegeStudents);
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -88,7 +92,13 @@ const Header = ({
       }
 
       const headers = jsonData[0];
-      const expectedHeaders = ["FirstName", "LastName", "Email", "Batch", "Approved"];
+      const expectedHeaders = [
+        "FirstName",
+        "LastName",
+        "Email",
+        "Batch",
+        "Approved",
+      ];
       const isValidFormat = expectedHeaders.every(
         (header, index) => headers[index] === header
       );
@@ -112,12 +122,16 @@ const Header = ({
 
         const [firstName, lastName, email, batch, approved] = row;
 
-        if (!firstName || firstName.length < 4) {
-          toast.error(`Row ${i + 1}: The first name must be at least 4 characters long.`);
+        if (!firstName || firstName.length < 1) {
+          toast.error(
+            `Row ${i + 1}: The first name must be at least 1 character long.`
+          );
           return;
         }
-        if (!lastName || lastName.length < 4) {
-          toast.error(`Row ${i + 1}: The last name must be at least 4 characters long.`);
+        if (!lastName || lastName.length < 1) {
+          toast.error(
+            `Row ${i + 1}: The last name must be at least 1 character long.`
+          );
           return;
         }
         if (!email) {
@@ -132,16 +146,17 @@ const Header = ({
           toast.error(`Row ${i + 1}: Approval status must be provided.`);
           return;
         }
-        const parsedApproved = typeof approved === "string"
-          ? approved.trim().toLowerCase() === "true"
-          : Boolean(approved);
+        const parsedApproved =
+          typeof approved === "string"
+            ? approved.trim().toLowerCase() === "true"
+            : Boolean(approved);
 
         students.push({
           FirstName: firstName,
           LastName: lastName,
           Email: email,
           Batch: batch,
-          approved: parsedApproved
+          approved: parsedApproved,
         });
       }
 
@@ -159,19 +174,20 @@ const Header = ({
       setLoading(false);
 
       if (filterType === "invited-students") {
-        await dispatch(getStudents({
-          id: user?._id,
-          batch,
-          filterType,
-          createdAt,
-          page: 1,
-          limit: 10,
-        }))
+        await dispatch(
+          getStudents({
+            id: user?._id,
+            batch,
+            filterType,
+            createdAt,
+            page: 1,
+            limit: 10,
+          })
+        );
       } else {
-        setSelectedList('invitedStudents')
-        setFilterType("invited-students")
+        setSelectedList("invitedStudents");
+        setFilterType("invited-students");
       }
-
     }
   };
 
@@ -186,7 +202,6 @@ const Header = ({
   // handleStudentUpload();
   //   }
 
-  const navigate = useNavigate();
   return (
     <div className="flex w-full mx-auto justify-between mb-6">
       {visible && (
@@ -217,7 +232,14 @@ const Header = ({
           <FiPlus className="self-center text-lg" /> Add
         </button>
 
-        {showPopup && <StudentPoP onClose={handleClosePopup} filterType={filterType} setFilterType={setFilterType} setSelectedList={setSelectedList} />}
+        {showPopup && (
+          <StudentPoP
+            onClose={handleClosePopup}
+            filterType={filterType}
+            setFilterType={setFilterType}
+            setSelectedList={setSelectedList}
+          />
+        )}
 
         <button
           className="bg-blued border flex self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-blued text-white"
@@ -231,9 +253,22 @@ const Header = ({
             className="hidden"
             onChange={handleFile}
           />
-          {loading ? <Loader /> : <FiUpload className="self-center text-lg" />}{" "}
-          Upload New
+          {loading ? (
+            <Loader />
+          ) : (
+            <FiUpload className="self-center text-lg mr-1" />
+          )}
+          Upload Students
         </button>
+        <span className="flex gap-2">
+          <a
+            download={`students_template.xlsx`}
+            href="/download/students_template.xlsx"
+            className="bg-white border self-center rounded-md p-2 hover:shadow-md transition-shadow duration-300 hover:border-gray-500 cursor-pointer "
+          >
+            Download Template
+          </a>
+        </span>
 
         <div className="relative">
           {/* Button to toggle popup */}
