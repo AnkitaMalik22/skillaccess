@@ -159,7 +159,8 @@ const Header = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "video", level: "all" }));
+      let topic = JSON.parse(localStorage.getItem("currentTopic"));
+      dispatch(setTotalTopicQuestions({ id : topic?._id, type: "video", level: "all" }));
     }
   }, [id, ""]);
 
@@ -174,7 +175,9 @@ const Header = () => {
         </button>
 
         <h2 className="text-xl md:text-[28px] font-bold font-dmSans text-[#171717]">
-          Question No : {totalTopicQuestions + 1}
+        {
+            addType === "topic" ?  `Question No : ${totalTopicQuestions + 1 }`: `Edit Question`
+          }
         </h2>
       </div>
     </div>

@@ -165,7 +165,8 @@ export const setTotalTopicQuestions = createAsyncThunk(
   async (arg, { dispatch, rejectWithValue }) => {
     try {
       // Dispatch the getTopicById thunk and wait for the result
-      const topic = await dispatch(getTopicById({ id: arg.id })).unwrap();
+      // console.log(arg.id, "arg");
+      const topic = await dispatch(getTopicById({ id: arg.id ,level : "" })).unwrap();
 
       // //console.log(topic, "topic");
 

@@ -14,7 +14,7 @@ import {
 import { editBankQuestionById } from "../../../../redux/college/test/thunks/question";
 import isCompany, { isUni } from "../../../../util/isCompany";
 
-const Header = ({ question, setQuestion, id, type, addType, image, file }) => {
+const Header = ({ question, setQuestion, id, type, addType, image, file ,quesNo }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { test, ADD_QUESTION_LOADING, totalTopicQuestions } = useSelector(
@@ -23,6 +23,7 @@ const Header = ({ question, setQuestion, id, type, addType, image, file }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const level = searchParams.get("level");
+
   // //console.log(question);
   const handleSave = async () => {
     let res = "";
@@ -112,8 +113,10 @@ const Header = ({ question, setQuestion, id, type, addType, image, file }) => {
   };
 
   useEffect(() => {
-    if (id) {
-      dispatch(setTotalTopicQuestions({ id, type: "mcq", level: "all" }));
+    if (id  && addType === "topic") {
+      let topic = JSON.parse(localStorage.getItem("currentTopic"))
+      dispatch(setTotalTopicQuestions({ id : topic?._id, type: "mcq", level: "all" }));
+      // console.log(topicId, "id");
     }
   }, [id, ""]);
   return (
@@ -126,7 +129,9 @@ const Header = ({ question, setQuestion, id, type, addType, image, file }) => {
           <FaAngleLeft className="h-5 w-5" />
         </button>
         <h2 className="text-xl md:text-[28px] font-bold self-center font-dmSans text-[#171717]">
-          Question No : {totalTopicQuestions + 1}
+         {
+            addType === "topic" ?  `Question No : ${totalTopicQuestions + 1 }`: `Edit Question`
+          }
         </h2>
       </div>
 

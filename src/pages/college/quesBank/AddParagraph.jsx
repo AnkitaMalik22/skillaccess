@@ -202,9 +202,9 @@ const AddParagraph = () => {
   }, [currentTopic]);
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(
-        setTotalTopicQuestions({ id, type: "findAnswer", level: "all" })
-      );
+      let topic = JSON.parse(localStorage.getItem("currentTopic"));
+  
+      dispatch(setTotalTopicQuestions({id :topic?._id, type: "findAnswer", level: "all" }) );
     }
   }, [ADD_QUESTION_LOADING]);
 

@@ -279,7 +279,9 @@ const AddMcqToTopic = () => {
   }, [currentTopic]);
   useEffect(() => {
     if (!ADD_QUESTION_LOADING) {
-      dispatch(setTotalTopicQuestions({ id, type: "mcq", level: "all" }));
+       let topic = JSON.parse(localStorage.getItem("currentTopic"))
+  
+      dispatch(setTotalTopicQuestions({ id :topic?._id, type: "mcq", level: "all" }));
     }
   }, [ADD_QUESTION_LOADING]);
 
@@ -293,6 +295,7 @@ const AddMcqToTopic = () => {
         id={id}
         type={type}
         addType={addType}
+       
       />
 
       <div className="bg-white min-h-[90vh] mx-auto rounded-xl">
