@@ -59,8 +59,8 @@ const Name = () => {
     accessibleDepartments: accessibleDepartments || [],
     config: {
       instructions: [],
-      isCameraRequired: true,
-      maxTabSwitches: 1,
+      isCameraRequired: false,
+      maxTabSwitches: 0,
     },
   });
 
@@ -94,8 +94,8 @@ const Name = () => {
       config: config || {
         instructions: [],
         totalTime: "",
-        isCameraRequired: true,
-        maxTabSwitches: 1,
+        isCameraRequired: false,
+        maxTabSwitches: 0,
         // maxAudioLimitExceedCount: 0,
       },
     });
@@ -236,7 +236,10 @@ const Name = () => {
       setError("instructions", "Please add at least one instruction");
       return;
     }
-
+    if (testDetails.config?.maxTabSwitches < 1) {
+      toast.error("config maximum tab switches must be greater than 0");
+      return;
+    }
     const hasEmptyInstructions = testDetails.config.instructions.some(
       instruction => !instruction.title || !instruction.description
     );
@@ -297,7 +300,7 @@ const Name = () => {
       hasError = true;
     }
 
-  
+
 
     // If no errors, proceed with dispatch and navigation
     if (!hasError) {
@@ -343,7 +346,7 @@ const Name = () => {
       ...prev,
       config: {
         ...prev.config,
-        instructions: prev.config.instructions.map((instruction, i) => 
+        instructions: prev.config.instructions.map((instruction, i) =>
           i === index ? { ...instruction, [field]: value } : instruction
         )
       }
@@ -500,7 +503,7 @@ const Name = () => {
           {errors.category && (
             <p className="mt-2 text-sm text-red-600">{errors.category}</p>
           )}
-    {testDetails.category && (
+          {testDetails.category && (
             <>
               {/* Department Access Controls */}
               <div className="border rounded-md p-4 ">
@@ -647,7 +650,7 @@ const Name = () => {
 
           {/* Configuration Section */}
           <div className="space-y-6 border rounded-md p-6">
-            <div 
+            <div
               className="flex justify-between items-center cursor-pointer"
               onClick={() => setShowConfig(!showConfig)}
             >
@@ -668,9 +671,8 @@ const Name = () => {
               </svg>
             </div>
 
-            <div className={`space-y-6 transition-all duration-300 ${
-              showConfig ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'
-            }`}>
+            <div className={`space-y-6 transition-all duration-300 ${showConfig ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'
+              }`}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Camera Required */}
                 <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
@@ -723,7 +725,7 @@ const Name = () => {
           </div>
 
           <div className="space-y-6 border rounded-md p-6 mt-4">
-            <div 
+            <div
               className="flex justify-between items-center cursor-pointer"
               onClick={() => setShowInstructions(!showInstructions)}
             >
@@ -740,9 +742,8 @@ const Name = () => {
                   + Add New Instruction
                 </button>
                 <svg
-                  className={`w-6 h-6 transform transition-transform ${
-                    showInstructions ? 'rotate-180' : ''
-                  }`}
+                  className={`w-6 h-6 transform transition-transform ${showInstructions ? 'rotate-180' : ''
+                    }`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -761,9 +762,8 @@ const Name = () => {
               <p className="text-sm text-red-600">{errors.instructions}</p>
             )}
 
-            <div className={`space-y-4 transition-all duration-300 ${
-              showInstructions ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'
-            }`}>
+            <div className={`space-y-4 transition-all duration-300 ${showInstructions ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'
+              }`}>
               {(!testDetails.config?.instructions || testDetails.config.instructions.length === 0) && (
                 <div className="text-center py-8 bg-gray-50 rounded-lg">
                   <p className="text-gray-500">No instructions added yet. Click the button above to add one.</p>
@@ -772,7 +772,7 @@ const Name = () => {
 
               {testDetails.config?.instructions?.map((instruction, index) => (
                 <div key={index} className="bg-gray-50 rounded-lg border border-gray-200">
-                  <div 
+                  <div
                     className="p-4 flex justify-between items-center cursor-pointer"
                     onClick={() => toggleInstruction(index)}
                   >
@@ -793,9 +793,8 @@ const Name = () => {
                         </svg>
                       </button>
                       <svg
-                        className={`w-5 h-5 transform transition-transform ${
-                          collapsedInstructions[index] ? '' : 'rotate-180'
-                        }`}
+                        className={`w-5 h-5 transform transition-transform ${collapsedInstructions[index] ? '' : 'rotate-180'
+                          }`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -805,9 +804,8 @@ const Name = () => {
                     </div>
                   </div>
 
-                  <div className={`overflow-hidden transition-all duration-300 ${
-                    collapsedInstructions[index] ? 'h-0' : 'p-4 border-t'
-                  }`}>
+                  <div className={`overflow-hidden transition-all duration-300 ${collapsedInstructions[index] ? 'h-0' : 'p-4 border-t'
+                    }`}>
                     <div className="space-y-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -841,7 +839,7 @@ const Name = () => {
             </div>
           </div>
 
-      
+
           {/* Description Textarea */}
           <div>
             <textarea
