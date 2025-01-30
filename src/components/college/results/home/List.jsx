@@ -154,13 +154,13 @@ const List = ({ FilterdStudents, isLoading }) => {
             onClick={() => {
               if (isCompany()) {
                 navigate(
-                  `/company/pr/results/overview?level=beginner&assessment=${assessment._id}`
+                  `/company/pr/results/overview?assessment=${assessment._id}`
                 );
               } else {
                 navigate(
                   `/${
                     isUni() ? "university/pr" : "college"
-                  }/results/overview?level=beginner&assessment=${
+                  }/results/overview?assessment=${
                     assessment._id
                   }`
                 );

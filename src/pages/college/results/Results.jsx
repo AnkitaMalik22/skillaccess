@@ -49,13 +49,14 @@ const Results = () => {
   const handleRowClick = (assessmentId) => {
     if (isCompany()) {
       navigate(
-        `/company/pr/results/overview?level=beginner&assessment=${assessmentId}`
+        `/company/pr/results/overview?assessment=${assessmentId}`
       );
     } else {
+    
       navigate(
         `/${
           isUni() ? "university/pr" : "college"
-        }/results/overview?level=beginner&assessment=${assessmentId}`
+        }/results/overview?assessment=${assessmentId}`
       );
     }
     console.log(`Row clicked for assessment ID: ${assessmentId}`);
