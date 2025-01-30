@@ -112,7 +112,7 @@ const Invite = () => {
       })
     );
     setPage((prev) => prev - 1);
-    toast.error("prev");
+    // toast.error("prev");
   };
 
   // //console.log(uploadedStudents)
