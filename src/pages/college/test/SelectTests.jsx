@@ -28,8 +28,7 @@ const AddTopic = ({ Navigate, level }) => (
         onClick={() => {
           localStorage.removeItem("currentTopic");
           Navigate(
-            `/${isUni() ? "university/pr" : "college"
-            }/test/createTopic?level=${level}`
+            `/${getEntity()}/test/createTopic?level=${level}`
           );
         }}
       >

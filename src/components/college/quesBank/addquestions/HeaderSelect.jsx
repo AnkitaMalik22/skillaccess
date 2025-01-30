@@ -1,19 +1,21 @@
 import React from "react";
 import { FaAngleLeft, FaChevronLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { getEntity } from "../../../../util/isCompany";
 
 const Header = ({ Q }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useSearchParams();
   const page = search.get("page");
   const level = search.get("level");
+  const { id } = useParams();
 
   // //console.log("page", page);
   const handleNext = () => {
-    navigate(`/college/quesBank/topic`);
+    navigate(`/${getEntity()}/quesBank/topic`);
   };
 
   return (

@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaChevronLeft } from "react-icons/fa";
 import useTranslate from "../../../hooks/useTranslate";
-import { getEntity } from "../../../util/isCompany";
+import isCompany, { getEntity } from "../../../util/isCompany";
 
 const Finalize = () => {
   const navigate = useNavigate();
@@ -24,9 +24,9 @@ const Finalize = () => {
   }, []);
 
   const handleSubmit = () => {
-    navigate(
-      `/${getEntity()}/test/invite?testId=${searchParams.get("testId")}`
-    );
+   isCompany() ? navigate('/company/pr/test') :  navigate(
+    `/${getEntity()}/test/invite?testId=${searchParams.get("testId")}`
+  );
     
   };
 
@@ -44,8 +44,9 @@ const Finalize = () => {
           className="px-6 py-2 bg-blued text-white rounded-md hover:bg-[#043345] transition-colors flex items-center gap-2"
           onClick={handleSubmit}
         >
+          { isCompany() ?  "Back to Home" :<>
           <img src="/images/icons/student.png" alt="" className="w-5 h-5" />
-          <span>Invite Students</span>
+          <span> Invite Student</span></> }
         </button>
       </div>
 
