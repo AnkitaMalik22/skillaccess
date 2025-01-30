@@ -118,7 +118,7 @@ const CreateJob = () => {
           data: { ...validatedData, company: company?._id },
         })
       );
-      toast.success("Job created successfully!");
+      // toast.success("Job created successfully!");
       navigate("/company/pr/jobs");
     } catch (err) {
       console.log(err)
